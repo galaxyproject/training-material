@@ -1,23 +1,46 @@
 ---
 layout: tutorial_hands_on
-
-title: 'Remove contamination and host reads'
+title: Remove contamination and host reads
 zenodo_link: https://zenodo.org/records/17829290
+level: Introductory
 questions:
 - What preprocessing steps are required to obtain cleaned reads for downstream analysis?
-- How can we identify and remove contaminant or host-derived reads from raw sequencing data?
+- How can we identify and remove contaminant or host-derived reads from raw sequencing
+  data?
 objectives:
 - Identify reads originating from contaminants or host genomes.
-- Remove those reads to produce high-quality, clean metagenomic data suitable for downstream analyses.
+- Remove those reads to produce high-quality, clean metagenomic data suitable for
+  downstream analyses.
 time_estimation: 1H
 key_points:
-- Identifying and removing contaminant and host reads is a critical preprocessing step in metagenomic workflows.
-- Clean reads improve the accuracy of downstream assembly, binning, and taxonomic profiling.
+- Identifying and removing contaminant and host reads is a critical preprocessing
+  step in metagenomic workflows.
+- Clean reads improve the accuracy of downstream assembly, binning, and taxonomic
+  profiling.
 contributions:
   authorship:
-    - minamehr    
-    - bebatut
+  - minamehr
+  - bebatut
+subtopic: metagenomics
+tags:
+- host-removal
+- preprocessing
+- metagenomics
+- microgalaxy
+recordings:
+- youtube_id: DNO3ZG-EOBo
+  length: 23M
+  galaxy_version: 26.0.1.dev1
+  date: '2026-05-06'
+  speakers:
+  - minamehr
+  captioners:
+  - minamehr
+  bot-timestamp: 1778066484
+
+
 ---
+
 
 
 Metagenomic sequencing captures all DNA present in a sample, including the **microbial community**, **host DNA**, and potential **environmental or external contaminants** (such as human DNA introduced during sample handling or sequencing).  

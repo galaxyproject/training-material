@@ -4,7 +4,8 @@ title: How do I create an account on a public Galaxy instance?
 area: account
 layout: faq
 box_type: tip
-contributors: [jennaj, bernandez, samanthaanjei, wm75]
+contributions:
+  authorship: [jennaj, bernandez, samanthaanjei, wm75]
 ---
 
 1. To create an account at any public Galaxy instance, choose your server from the available [list of Galaxy Platforms](https://galaxyproject.org/use/).

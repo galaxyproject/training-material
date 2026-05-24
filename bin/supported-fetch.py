@@ -37,7 +37,10 @@ def fetch_and_extract_individual_server_tools(server):
 
     found_tools = set()
     for tool in response_json:
-        found_tools.add(tool['id'])
+        try:
+            found_tools.add(tool['id'])
+        except:
+            pass
 
     return server['name'], {
         'url': server['url'],

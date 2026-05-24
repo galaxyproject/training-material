@@ -14,6 +14,7 @@ objectives:
 time_estimation: 0h45m
 key_points:
 - OpenRefine is a powerful tool, with many functionalities to check, clean and enrich your data
+level: Introductory
 contributions:
     authorship:
         - yvanlebras
@@ -26,7 +27,8 @@ contributions:
         - pndb
 tags:
   - biodiversity
-subtopic: ecologymetadatamgt
+  - data cleaning
+subtopic: ecologypreprocess
 ---
 
 

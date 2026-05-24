@@ -24,6 +24,8 @@ contributions:
     - Sch-Da
   reviewing:
     - Sch-Da
+  testing:
+    - dadrasarmin
   funding:
     - nfdi4culture
 requirements:
@@ -33,8 +35,8 @@ requirements:
       - introduction_to_dh
 answer_histories:
   - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/armin.dadras/h/visualise-amount-of-objects-in-museum-collection
-    date: 2025-09-19
+    history: https://usegalaxy.eu/u/armin.dadras/h/gta2026-openrefine-tutorial-for-researching-cultural-data
+    date: 2026-04-27
 ---
 This tutorial shows how to use **OpenRefine** in Galaxy to clean and visualize data from the **humanities and social sciences**. It has two parts:
 - **Introduction to OpenRefine**, based on {% cite Hooland_2013 %} and adapted for Galaxy.

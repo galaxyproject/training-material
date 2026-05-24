@@ -15,6 +15,8 @@ time_estimation: 2h
 key_points:
 - Clean raw ab1 sequences and compare filtered sequences to NCBI nucleotidic database
 - Submit cleaned and unique sequences to European Nucleotide Archive (ENA) resource
+tags:
+  - biodiversity
 contributions:
     authorship:
         - Najatamk

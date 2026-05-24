@@ -18,12 +18,12 @@ key_points:
 - Creating metadata as FAIR as possible is a must
 - Be carefull of the format and standard of metadata used only EML metadata will work
 tags:
-  - Metadata
+  - metadata
   - EML
-  - Ecology
-  - Biodiversity
+  - ecology
+  - biodiversity
   - FAIR
-  - Data Paper
+  - data paper
 contributions:
     authorship:
         - yvanlebras
@@ -171,7 +171,7 @@ Then you can add final elements as:
 > 
 >  API key format to enter is something like: 
 > ```
-> api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
+> apiKey 205b1e521f2eaf0ad4a361c438b638a68348bea313caeae310839f919629525d
 > ```
 > 
 > <p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>

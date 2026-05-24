@@ -7,9 +7,9 @@ layout: faq
 contributors: [wm75]
 ---
 
-On most Galaxy servers you will find two {% icon tool %} **Concatenate datasets** tools installed:
+On most Galaxy servers you will find two {% icon tool %} **Concatenate** tools installed:
 
-1. **Concatenate datasets** tail-to-head
+1. **Concatenate multiple datasets or collections** (or **Concatenate datasets** tail-to-head on previous Galaxy versions)
 2. **Concatenate datasets** tail-to-head (cat)
 
 {% if include.toolspec %}
@@ -17,11 +17,11 @@ On most Galaxy servers you will find two {% icon tool %} **Concatenate datasets*
 {% endif %}
 
 The two tools have nearly identical interfaces, but behave differently in certain situations, specifically:
-- The second tool, the one with "(cat)" in its name, simply concatenates everything you give to it into a single output dataset.
+- The second tool, "**Concatenate datasets** tail-to-head (cat)", simply concatenates everything you give to it into a single output dataset.
 
   Whether you give it multiple datasets or a collection as the first parameter, or some datasets as the first and some others as the second parameter, it will always concatenate them all.
   In fact, the only reason for having multiple parameters for this tool is that by providing inputs through multiple parameters, you can make sure they are concatenated in the order you pass them in.
-- The first tool, on the other hand, will only ever concatenate inputs provided through *different* parameters.
+- The first tool (**Concatenate multiple datasets or collections**), on the other hand, will only ever concatenate inputs provided through *different* parameters.
 
   This tool allows you to specify an arbitrary number of {% icon param-file %} single datasets, but if you also want to use {% icon param-files %} multiple datasets or {% icon param-collection %} a collection for some of the Dataset parameters, then all of these need to be of the same type (multiple datasets *or* collections) and have the same number of inputs.
 

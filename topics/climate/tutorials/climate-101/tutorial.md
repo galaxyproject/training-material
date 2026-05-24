@@ -372,10 +372,10 @@ At the moment, there are [55 ECVs](https://gcos.wmo.int/en/essential-climate-var
 > We will look at the [Water Vapor Essential Climate Variable ](https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/):
 > *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity of air near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.*
 >
-> 1. Import the file from [Zenodo](https://zenodo.org/record/15349982/rh_mean_july_1980_2018.nc) or from the shared data library
+> 1. Import the file from [Zenodo](https://zenodo.org/records/15349982/files/rh_mean_july_1980_2018.nc?download=1) or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/15349982/rh_mean_july_1980_2018.nc
+>    https://zenodo.org/records/15349982/files/rh_mean_july_1980_2018.nc?download=1
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

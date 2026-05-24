@@ -14,18 +14,18 @@ date_start: 2026-10-12
 date_end: 2026-10-16
 
 
-cost: 850-900 euros (To be confirmed)
+cost: 700 EUR
 audience: |
     This course is designed for **data scientists, advanced Galaxy users, and team leaders** who need to scale up their data analysis workflows for **batch processing, automation, or production-level applications**. Whether you're looking to optimize workflows, integrate external tools, or enhance reproducibility and scalability, this training will provide the skills to leverage Galaxy effectively. The sessions will be conducted in **French**, while the training materials (slides) will be in **English**.
-contact_email: berenice.batut@france-bioinformatique.fr
+contact_email: contact-formation@groupes.france-bioinformatique.fr
 
 # async: false
 mode: onsite
 
 registration:
-  link: 
-  deadline: 2026-05-31
-  open: false
+  link: https://framaforms.org/pre-registration-for-ifb-training-galaxy-beyond-basics-2026-1772622577
+  deadline: 2026-06-05
+  open: true
 
 tags:
 - galaxy-interface
@@ -45,11 +45,11 @@ contributions:
         - clsiguret
         - rlibouba
         - fmareuil
+        - lkhamvongsa
     instructors:
         - abretaud
         - bebatut
         - lecorguille
-        - scorreard
         - Marie59
         - lleroi
         - rlibouba
@@ -57,6 +57,7 @@ contributions:
     #testing:
     funding:
         - ifb
+        - pasteur
 
 location:
   name: Institut Pasteur
@@ -71,14 +72,12 @@ location:
 infrastructure:
   tiaas: false
   servers:
-    - server: https://usegalaxy.eu
-      name: Galaxy EU
     - server: https://usegalaxy.fr
       name: Galaxy FR
 
 
 program:
-  - section: "Monday: Introduction & Workflow development" 
+  - section: "Monday: Introduction & Workflow development"
     description: |
       This half-day session starts with a **welcome, icebreaker, and participant introductions** to set a collaborative tone. It continues with a **brief overview of Galaxy** and its workflow capabilities, followed by an **introduction to workflow development**. Participants will **design clean, efficient workflows**, **customize them using parameters**, and **generate user-friendly workflow reports**—blending theory with hands-on practice.
     tutorials:
@@ -195,7 +194,7 @@ program:
       - type: custom
         name: End of the day
         time: "17:00"
-        
+
   - section: "Thursday: Bring Your Own Work (BYOW)"
     description: |
       The fourth day is dedicated to **"Bring Your Own Work"**, offering participants hands-on time to **apply the skills and tools** learned throughout the training to their own projects. With guidance from trainers, attendees will **refine their workflows**, **troubleshoot challenges**, and **implement solutions** using their personal data. The session encourages collaboration and peer support, allowing participants to **document their progress**, optimize their workflows, and showcase their results—ensuring they leave with practical, actionable outcomes for their research.
@@ -326,10 +325,16 @@ At the end of the workshop, you will be able to:
 - Prior knowledge and experience using Galaxy
 - Prior knowledge and experience using command line
 - Fluent in French (materials will be in English and discussions will happen in French)
+- Your own computer
+- Optional but encouraged: your own workflow and dataset for the Bring Your Own Work (BYOW) session. The workflow and the dataset must be shareable and non-sensitive (i.e., they must not contain any patient-related information or confidential data). The dataset size must be small.
 
 ## Registration
 
-This **in-person-only workshop** is limited to **20 participants** to ensure personalized attention and hands-on support. The course will proceed with a **minimum of 10 registrations**. Registration will open in **April 2026**—stay tuned for updates!
+Pre-registration is now open for this in-person workshop.
+https://framaforms.org/pre-registration-for-ifb-training-galaxy-beyond-basics-2026-1772622577
+
+The course is limited to 20 participants to ensure high-quality interaction and personalized support. A minimum of 16 participants is required for the course to take place. We encourage early pre-registration to secure your spot.
+
 
 
 

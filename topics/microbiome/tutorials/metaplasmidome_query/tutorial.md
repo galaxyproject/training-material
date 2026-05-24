@@ -641,7 +641,7 @@ We can now merge both files.
 
 > <hands-on-title>Concatenate the annotated and hypothetical protein gene files</hands-on-title>
 >
-> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 1. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: output of **Add Header** {% icon tool %}
 >    - In *Dataset*:
 >      - {% icon param-file %} *"Select"*: output of last **Replace Text** {% icon tool %}

@@ -182,11 +182,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >
 >    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
-> 3. Rename the datasets as follow: 
->    - Rename `SRR7126301_1.fastq.gz` as `Hi-C forward reads`
->    - Rename `SRR7126301_2.fastq.gz` as `Hi-C reverse reads`
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -198,11 +194,14 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly, your history will look like shown in Fig. 4 below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes a collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection" that you can find below Fig. 4.
+If everything goes smoothly, your history will look like shown in Fig. 4 below. The three {HiFi} fasta files and the two Hi-C files are better represented as collections: {collection}. Paired data such as Hi-C reads are represented by a specific type of collection called paired collection: {paired-collection}
+Also, importantly, the workflows we will be using for the analysis of our data takes collections as inputs (they do not access individual datasets). So let's create collections using steps outlines in the Tips {% icon tip %} that you can find below Fig. 4.
 
-![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
+![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and Hi-C data (left). The creation of lists (collections) combines datasets into two items called 'HiFi data' and 'Hi-C data'(right). See below for instruction on how to make these collections.")
 
-{% snippet faqs/galaxy/collections_build_list.md %}
+{% snippet faqs/galaxy/collections_build_list.md n=3 %}
+
+{% snippet faqs/galaxy/collections_build_list_paired.md n=2%}
 
 > <details-title>Other ways to upload the data</details-title>
 > You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
@@ -215,7 +214,7 @@ Once we have imported the datasets, the next step is to import the workflows nec
 
 # Importing workflows
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows. **Alternatively, for each section of the tutorial, there will be a "Launch [workflow] (View on Dockstore)" link at the beginning, which you can use to launch the workflow.**
+All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [IWC VGP workflows page](https://iwc.galaxyproject.org/?filter=Vertebrate+Genome+Project/) and click on the workflows for details and links to import them. **Alternatively, for each section of the tutorial, there will be a "Launch [workflow] (View on Dockstore)" link at the beginning, which you can use to launch the workflow.**
 
 # Performing the assembly
 
@@ -227,7 +226,7 @@ Before the assembly can be run, we need to collect metrics on the properties of 
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.7" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.9" %}
 
 > <hands-on-title> Running <i>K</i>-mer profile analysis workflow </hands-on-title>
 >
@@ -235,15 +234,19 @@ Before the assembly can be run, we need to collect metrics on the properties of 
 >
 >    The profiling workflow takes the following inputs:
 >   
->    1. {HiFi} reads as a collection
->    2. *K*-mer length
->    3. Ploidy
+>    1. Species Name (Not used in the analysis, for documentation purpose only)
+>    2. Assembly Name  (For documentation purpose only)
+>    3. {HiFi} reads as a collection
+>    4. *K*-mer length
+>    5. Ploidy
 >
 > 2. **Launch *k*-mer profiling workflow**
 >
 >    1. Click on the **Workflow** menu, located in the top bar
 >    2. Click on the {% icon workflow-run %} **Run workflow** buttom corresponding to `kmer-profiling-hifi-VGP1`
 >    3. In the **Workflow: kmer-profiling-hifi-VGP1** menu:
+>        - *Species Name*: `Saccharomyces_cerevisiae`
+>        - *Assembly Name*: `gta26`
 >        - {% icon param-collection %} "*Collection of Pacbio Data*": `HiFi data` collection
 >        - "*K-mer length*": `31`
 >        - "*Ploidy*": `2`
@@ -260,7 +263,7 @@ Before the assembly can be run, we need to collect metrics on the properties of 
 >
 > 3. **Refill your coffee**
 >
->    Assembly is not exactly an instantaneous type of analysis - this workflow will take approximately 15 minutes to complete. The same is true for all analyses in tutorial.
+>    Assembly is not exactly an instantaneous type of analysis - this workflow will take approximately 15 minutes to complete. The same is true for all the analyses in this tutorial.
 >
 {: .hands_on}
 
@@ -272,7 +275,32 @@ Once the workflow has finished, we can evaluate the transformed linear plot gene
 
 This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors, and are indicated by the red line. Genomescope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the *Saccharomyces* genome size. We are using the transformed linear plot because it shows the ploidy better by reducing low ccoverage peaks (like *k*-mers containing errors) and increasing higher coverage peaks ({% cite Ranallo_Benavidez_2020 %}). 
 
-It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates. 
+It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates.
+
+The workflow also generate a variety of quality control for your reads:
+
+- A heatmap generated by Mash Dist. This map shows the distance between your samples. This is a sanity check to verify all the read files belong to the same species. The tool developers({% cite ondov2016mash %}) identified the following distance breaks:
+  - Same Species: <0.05
+  - Same Genus: 0.05 to 0.34
+  - Different Genus: >0.34
+- A Rdeval report including statistics on reads, such as length, quality and base composition.
+
+
+> <question-title>Heatmap</question-title>
+>
+> 1. Look at the heatmap output. What is the highest Mash distance between our read libraries?
+> 2. Do all our libraries belong to the same species?
+>
+> > <solution-title></solution-title>
+> > 
+> > ![Genomescope plot described further in caption](../../images/vgp_assembly/masmap_heatmap.png "Mash Dist Heatmap. Each square is colored according to the distance between two set of reads. The diagonal is brown since the distance of one set with itself is 0. The closets sets are `01` and `03` in light blue (distance ~0.03), and `02` is a bit more distant with a distance of ~0.04 (dark teal)")
+> > 
+> > 1. The highest Mash distance between our read libraries is about 0.04 (see color scale legend).
+> > 2. Our libraries belong to the same species, since the threshold is 0.05.
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Assembly (contiging) with `hifiasm` (WF4)
 
@@ -280,7 +308,7 @@ To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" version="v0.2.1" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" version="v0.6" %}
 
 > <hands-on-title> Launching assembly (contiging) workflow </hands-on-title>
 >
@@ -289,22 +317,27 @@ To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123
 >    The assembly workflow takes the following inputs:
 >
 >    1. {HiFi} reads as a collection
->    2. Forward Hi-C reads
->    3. Reverse Hi-C reads
->    4. `Genomescope` Model Parameters generated by previous (*k*-mer profiling) workflow
->    5. `Genomescope` Summary generated by previous (*k*-mer profiling) workflow
->    6. Meryl *k*-mer database generated by previous (*k*-mer profiling) workflow
->    7. Busco Database
->    8. Busco lineage
+>    2. Whether we want to trim the Hi-C reads or not (Sometimes necessary with Arima Hi-C)
+>    3. Hi-C reads as a paired collection
+>    4. `Genomescope` Summary generated by previous (*k*-mer profiling) workflow
+>    5. Meryl *k*-mer database generated by previous (*k*-mer profiling) workflow
+>    6. Busco Database
+>    7. Busco lineage
+>    8. Name for Haplotype 1 (Used to generate QC files)
+>    9. Name for Haplotype 2
+>    10. Bits for bloom filter: Parameter impacting memory usage. Modify for large genomes.
+>    11. Homozygous Read Coverage. Optional: set if you are unsatisfied with the Genomescope model.
+>    12. `Genomescope` Model Parameters generated by previous (*k*-mer profiling) workflow
 >
 > 2. **Launch the workflow**
 >
 >    1. Click on the **Workflow** menu, located in the top bar
 >    2. Click on the {% icon workflow-run %} **Run workflow** button corresponding to `Assembly-Hifi-HiC-phasing-VGP4`
 >    3. In the **Workflow: Assembly-Hifi-HiC-phasing-VGP4** menu fill the following parameters:
->        - {% icon param-collection %} "*Pacbio Reads Collection*": `HiFi data` collection
->        - {% icon param-file %} "*HiC forward reads*": `Hi-C forward reads`
->        - {% icon param-file %} "*HiC reverse reads*": `Hi-C reverse reads`
+>        - *Species Name*: `Saccharomyces_cerevisiae`
+>        - *Assembly Name*: `gta26`
+>        - {% icon param-collection %} "*Pacbio Reads*": `HiFi data` collection
+>        - {% icon param-file %} "*Hi-C reads*": `Hi-C data`
 >        - {% icon param-file %} "*GenomeScope Summary*": `GenomeScope on data X Summary` (contains tag "`GenomeScopeSummary`")
 >        - {% icon param-file %} "*Meryl database*": `Meryl on data X: read-db.mertyldb`: the Meryl *k*-mer database (contains tag "`MerylDatabase`")
 >        - "*Database for Busco Lineage*": `Busco v5 Lineage Datasets` (or the latest version available in the instance)
@@ -333,20 +366,16 @@ Let's have a look at the stats generated by **gfastats**. This output summarizes
 >| Statistic | Hap 1 | Hap 2 |
 >|-----------|----------:|------:|
 >| # contigs | 16 | 17 |
->| Total contig length | 11,304,507 | 12,160,985 |
->| Average contig length | 706,531.69  | 715,352.06 |
+>| Total contig length | 11,304,582 | 12,160,988 |
+>| Average contig length | 706,536.38  | 715,352.24 |
 >| Contig N50 |  922,430 | 923,452 |
->| Contig N50 | 922,430 | 923,452 |
->| Contig auN | 895,018.82  | 904,515.40 |
->| Contig L50 | 5 | 6 |
+>| Contig auN | 895,015.76  | 904,515.33 |
 >| Contig L50 | 5 | 6 |
 >| Contig NG50 | 813,311 | 923,452 |
->| Contig NG50 | 813,311 | 923,452 |
->| Contig auNG | 861,278.90 | 936,364.06 |
->| Contig LG50 | 6 | 6 |
+>| Contig auNG | 861,281.68 | 936,364.22 |
 >| Contig LG50 | 6 | 6 |
 >| Largest contig | 1,532,843 | 1,531,728 |
->| Smallest contig | 185,154 | 85,850 |
+>| Smallest contig | 185,224 | 85,850 |
 {: .matrix}
 
 According to the report, both assemblies are quite similar; the hap1 assembly includes 16 {contigs}, whose cumulative length is around 11.3 Mbp. The hap2 assembly includes 17 contigs, whose total length is 12.1Mbp. Both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies, and this lowers the chance of false duplications that can inflate assembly size.
@@ -369,25 +398,30 @@ According to the report, both assemblies are quite similar; the hap1 assembly in
 >
 {: .question}
 
-Next, we are going to evaluate the outputs generated by **BUSCO**. This tool provides qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
-
-<br>
-
-![BUSCO assessment](../../images/vgp_assembly/busco_after_contiging.svg "A composite of BUSCO completeness summaries for hap1 (left) and hap2 (right)")
-
-<br>
-
-As we can see in the report, the results are simplified into four categories: *complete and single-copy*, *complete and duplicated*, *fragmented* and *missing*.
+Next, we are going to evaluate the outputs generated by **Compleasm**. This tool uses BUSCO to provides qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+The results are classified into five categories: *complete and single-copy* (S), *complete and duplicated*(D), *fragmented*(F), *incomplete*(I) and *missing*(M).
 
 > <question-title></question-title>
 >
-> 1. How many complete BUSCO genes have been identified in the hap1 assembly?
-> 2. How many BUSCOs genes are absent in the hap1 assembly?
+> 1. How many BUSCO complete genes have been identified in the hap1 assembly?
+> 2. How many BUSCO genes are absent in the hap1 assembly?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. According to the report, our assembly contains the 1,436 complete BUSCO genes -- this includes ones that are single-copy and ones that are duplicated.
-> > 2. 208 BUSCO genes are missing.
+> > See the Compleasm Summary:
+> >
+> > ```
+> > ## lineage: ascomycota_odb10
+> > S:86.75%, 1480
+> > D:2.70%, 46
+> > F:1.29%, 22
+> > I:0.00%, 0
+> > M:9.26%, 158
+> > N:1706
+> > ```
+> >
+> > 1. According to the summary, our assembly contains 1,526 complete BUSCO genes -- this includes ones that are single-copy (S:86.75%, 1480) and ones that are duplicated (D:2.70%, 46).
+> > 2. 158 BUSCO genes are missing.
 > >
 > {: .solution}
 >
@@ -412,7 +446,7 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, wh
 > Contiging (VGP4) works with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on the hap1 assembly only. You can run the same analysis on the second haplotype by replacing hap1 with hap2. 
 {: .warning}
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v0.2.7" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v3.5" %}
 
 > <hands-on-title> Launching Hi-C scaffolding workflow </hands-on-title>
 >

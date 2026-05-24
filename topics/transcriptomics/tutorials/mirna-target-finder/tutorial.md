@@ -691,7 +691,7 @@ To predict which miRNAs target which mRNAs, first we need their transcriptomic s
 >    - *"Criteria for filtering on the headers"*: `List of IDs`
 >        - {% icon param-file %} *"List of IDs to extract sequences for"*: `Upregulated miRNA ids`
 >        - *"Match IDs by"*: `Default: ID is expected at the beginning: >ID`
-> 5. {% tool [Concatenate datasets](cat1) %} tail-to-head (Galaxy Version 1.0.0) with the following parameters:
+> 5. {% tool [Concatenate multiple datasets or collections](cat1) %} tail-to-head (Galaxy Version 1.0.0) with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: output of **Filter FASTA** {% icon tool %} on `mature_miRNA_AT.fasta`
 >    - + Insert Dataset
 >        - {% icon param-file %} *"Select"*: output of **Filter FASTA** {% icon tool %} on `star_miRNA_seq.fasta`

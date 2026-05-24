@@ -1103,10 +1103,18 @@ blockquote {
 
 
 /* WCAG Contrast. These aim to pass AAA level for normal sized text. */
+
 a {
     color: var(--hyperlink);
     border-bottom: 1px dotted var(--hyperlink);
 
+    img {
+      border-bottom: 0px;
+    }
+
+    &:has(img) {
+        border-bottom: 0px;
+    }
     &:hover,
     &:focus,
     &:focus-visible,
@@ -1114,8 +1122,11 @@ a {
         color: var(--hyperlink-hover);
         border-bottom: 1px solid var(--hyperlink-hover);
         text-decoration: none;
-    }
+        &:has(img) {
+            border-bottom: 0px;
+        }
 
+    }
     &.btn-info {
 	color: black;
     }

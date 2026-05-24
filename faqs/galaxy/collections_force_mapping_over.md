@@ -3,7 +3,7 @@ title: Force a tool to process collection jobs one by one instead of using the c
 area: collections
 box_type: tip
 layout: faq
-contributors: [paulzierep, Smkingsize]
+contributors: [paulzierep, Smkingsize, scottcain]
 ---
 
 ## To map over or not to map over
@@ -35,11 +35,11 @@ Because the tool form does not offer an option to switch this behavior, you can 
 Convert your original collection into a **collection of collections** (`list:list:`).
 This forces any tool - including ones that normally process the whole collection - to run on **each subcollection individually**.
 
-### Solution for Galaxy Server with Version > 25.1: Create a nested collection using Nest collection
+### Solution for Galaxy Server with Version > 25.1: Create a nested collection using Nest collection (where available)
 
 Use the {% tool [Nest collection](__NEST__) %}  tool to convert your original collection into a **collection of collections**.
 
-### Solution for Galaxy Server with Version < 25.1: Create a nested collection using APPLY_RULES
+### Solution for Galaxy Server with Version < 25.1 or if nest collection isn't available: Create a nested collection using APPLY_RULES
 
 Use the {% tool [Apply rules](__APPLY_RULES__) %}  tool to convert your original collection into a **collection of collections**.
 

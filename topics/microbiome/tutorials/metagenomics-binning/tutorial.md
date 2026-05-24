@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Binning of metagenomic sequencing data
-zenodo_link: https://zenodo.org/records/17660820
+zenodo_link: https://zenodo.org/records/17661262
 level: Intermediate
 questions:
 - What is metagenomic binning refers to?
@@ -34,10 +34,10 @@ contributions:
   editing:
   - bebatut
 requirements:
-  - type: internal
-    topic_name: microbiome
-    tutorials:
-      - metagenomics-assembly
+- type: internal
+  topic_name: microbiome
+  tutorials:
+  - metagenomics-assembly
 subtopic: metagenomics
 tags:
 - binning
@@ -58,9 +58,19 @@ recordings:
   captioners:
   - npechl
   bot-timestamp: 1725013820
+- youtube_id: https://youtu.be/RjsWjuBzCd4
+  length: 34M
+  galaxy_version: 25.1.2.dev0
+  date: '2026-03-25'
+  speakers:
+  - paulzierep
+  captioners:
+  - paulzierep
+  bot-timestamp: 1774437607
 
 
 ---
+
 
 Metagenomics is the study of genetic material recovered directly from environmental samples, such as soil, water, or gut contents, without the need for isolating or cultivating individual organisms. Metagenomics binning is a process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
 
@@ -384,6 +394,7 @@ We can now refine the bins with Binette.
 >    - {% icon param-file %} *"Input contig table"*: `output` (output of **Build list** {% icon tool %})
 >    - {% icon param-collection %} *"Input contig file"*: `output` (Input dataset collection)
 >    - *"Select if database should be used either via file or cached database"*: `cached database`
+>    - *"Set minimus completeness"*: `0`
 >
 {: .hands_on}
 
@@ -454,42 +465,39 @@ To keep it simple, we will check the bin statistics to investigate the performan
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Let's combine the stat:
+> > 1. Let's combine the stats:
 > >
-> >    Binner | Bin ID | Marker lineage | # genomes | # markers | # marker sets | 0  | 1  | 2 | 3 | 4 | 5+ | Completeness | Contamination | Strain heterogeneity
-> >    --- | --- | --- | --- | --- | --- | --- | --- | ---| --- | --- | --- | --- | --- | ---
-> >    **MetaBAT2** | 1 | k__Bacteria (UID203) | 5449 | 103 | 58 | 89 | 14 | 0  | 0  | 0  | 0  | 15.67 | 0.00  0.00
-> >    **SemiBin** |  SemiBin_0 | k__Bacteria (UID203) | 5449 | 103 | 58 | 89 | 14 | 0 | 0 | 0 | 0 | 15.67 | 0.00 | 0.00
-> >    **MaxBin** | 001 | k__Bacteria (UID203) | 5449 | 103 | 58 | 92 | 11 | 0 | 0 | 0 | 0 | 10.50 | 0.00 | 0.00
-> >    **MaxBin** | 002 | k__Bacteria (UID203) | 5449  | 103 | 58 | 99 | 4 | 0 | 0 | 0 | 0 | 6.90| 0.00 | 0.00
-> >    **CONCOCT** | 0 | root (UID1) | 5656 | 56     | 24 | 56 | 0  | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 1 | root (UID1) | 5656 | 56        | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 2 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 3 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 4 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 5 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00 
-> >    **CONCOCT** | 6 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 7 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 8 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
-> >    **CONCOCT** | 9 | k__Bacteria (UID203) |5449 | 103 | 58 | 89 | 14 | 0 | 0 | 0 | 0 | 15.67 | 0.00 | 0.00
-> >    **MetaBAT2** and **SemiBin** generated the best‐performing bins in this dataset, each recovering one bin with ~15.7% completeness and no detectable contamination. 
+> > | Binner        | Bin ID     | Marker lineage        | # genomes | # markers | # marker sets | 0  | 1  | 2 | 3 | 4 | 5+ | Completeness | Contamination | Strain heterogeneity |
+> > |---------------|------------|------------------------|-----------|------------|----------------|----|----|----|----|----|----|--------------|---------------|-----------------------|
+> > | **MetaBAT2**  | 1          | k__Bacteria (UID203)   | 5449      | 103        | 58             | 89 | 14 | 0  | 0  | 0  | 0  | 15.67        | 0.00          | 0.00                  |
+> > | **SemiBin**   | SemiBin_0  | k__Bacteria (UID203)   | 5449      | 103        | 58             | 89 | 14 | 0  | 0  | 0  | 0  | 15.67        | 0.00          | 0.00                  |
+> > | **MaxBin**    | 001        | k__Bacteria (UID203)   | 5449      | 103        | 58             | 92 | 11 | 0  | 0  | 0  | 0  | 10.50        | 0.00          | 0.00                  |
+> > | **MaxBin**    | 002        | k__Bacteria (UID203)   | 5449      | 103        | 58             | 99 | 4  | 0  | 0  | 0  | 0  | 6.90         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 0          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 1          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 2          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 3          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 4          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 5          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 6          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 7          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 8          | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
+> > | **CONCOCT**   | 9          | k__Bacteria (UID203)   | 5449      | 103        | 58             | 89 | 14 | 0  | 0  | 0  | 0  | 15.67        | 0.00          | 0.00                  |
 > >
-> >    **MaxBin** produced bins of lower completeness (10.5% and 6.9%), but still without contamination. 
+> > **MetaBAT2** and **SemiBin** generated the best-performing bins in this dataset, each recovering one bin with ~15.7% completeness and no detectable contamination.  
 > >
-> >    **CONCOCT** largely failed to recover meaningful bins in this dataset: most bins show 0% completeness. This often occurs with CONCOCT on small assemblies or uneven coverage, because its Gaussian clustering model struggles when the number of contigs is low or the variation in coverage is insufficient.
-> > **Binette**
+> > **MaxBin** produced bins of lower completeness (10.5% and 6.9%), but still without contamination.  
+> >
+> > **CONCOCT** largely failed to recover meaningful bins in this dataset: most bins show 0% completeness. This often occurs with CONCOCT on small assemblies or uneven coverage, as its Gaussian clustering model struggles when the number of contigs is low or coverage variation is insufficient.
+> >
+> > 2. Let's look at **Binette** stats:
 > >
 > > | Bin ID        | Marker lineage        | # genomes | # markers | # marker sets | 0  | 1  | 2 | 3 | 4 | 5+ | Completeness | Contamination | Strain heterogeneity |
 > > |---------------|------------------------|-----------|------------|----------------|----|----|----|----|----|----|--------------|---------------|-----------------------|
 > > | binette_bin1  | k__Bacteria (UID203)   | 5449      | 103        | 58             | 89 | 14 | 0  | 0  | 0  | 0  | 15.67        | 0.00          | 0.00                  |
-> > 2. Let's look at **Binette** stats:
-> >    Bin ID | Marker lineage | # genomes | # markers | # marker sets | 0 | 1 | 2 | 3 | 4 | 5+ | Completeness | Contamination | Strain heterogeneity
-> >    --- | --- | --- | --- | --- | --- | --- | ---| --- | --- | --- | --- | --- | ---
-> >    binette_bin1 | k__Bacteria (UID203) | 5449    | 103 | 58 | 89 | 14 | 0 | 0 | 0 | 0 | 15.67 | 0.00 | 0.00
-> >    binette_bin2 | root (UID1) | 5656 | 56 | 24 | 56 | 0 | 0 | 0 | 0 | 0 | 0.00 | 0.00 | 0.00
+> > | binette_bin2  | root (UID1)            | 5656      | 56         | 24             | 56 | 0  | 0  | 0  | 0  | 0  | 0.00         | 0.00          | 0.00                  |
 > >
-> > **Binette** produced one bin essentially identical in quality to the MetaBAT2/SemiBin bins (~15.7% completeness), plus a root-level bin with no completeness. Binette could recover the most completely successful bin. The additional
-loq quality bin, would have normally been filtered by Binette if the `Set minimus completeness` parameter were set to a reasonable value, often > 75 % for true biological data.
+> > **Binette** produced one bin essentially identical in quality to the MetaBAT2/SemiBin bins (~15.7% completeness), along with a low-quality root-level bin with no completeness. The latter would typically be filtered out if the *minimum completeness* parameter were set to a more realistic threshold (e.g. >75% for real biological datasets).
 > {: .solution}
 >
 {: .question}

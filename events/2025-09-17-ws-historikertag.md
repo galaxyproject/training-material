@@ -20,6 +20,7 @@ contributions:
     - nfdi4plants
 
 location:
+  name: Universität Bonn
   city: Bonn
   country: Germany
 

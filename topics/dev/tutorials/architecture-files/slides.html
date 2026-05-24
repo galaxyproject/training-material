@@ -1,0 +1,143 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Architecture 04 - Galaxy Files and Directory Structure"
+questions:
+  - "How is the Galaxy codebase organized?"
+  - "Where do I find different components?"
+  - "What is the difference between `lib` and `packages`?"
+objectives:
+  - "Navigate the Galaxy repository structure"
+  - "Understand the `lib` vs `packages` organization"
+  - "Locate key files and directories"
+time_estimation: "10m"
+key_points:
+  - "Project documentation in root (README, CONTRIBUTING, CODE_OF_CONDUCT)"
+  - "Code in `lib` (monolithic) and `packages` (modular)"
+  - "Tests in `test` and `lib/galaxy_test`"
+  - "CI configuration in `.github`"
+  - "Packages are published to PyPI"
+subtopic: architecture
+contributors:
+  - jmchilton
+
+
+---
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 04 - Galaxy Files and Directory Structure
+
+*The physical architecture of the Galaxy code.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+class: center
+
+### Project Docs
+
+![Project Files](../../images/core_files_project_docs.mindmap.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Code
+
+![Code](../../images/core_files_code.mindmap.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Scripts
+
+![Scripts](../../images/core_files_scripts.mindmap.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Test Sources
+
+![Test Source Files](../../images/core_files_test.mindmap.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Continuous Integration
+
+![Continuous Integration Files](../../images/core_files_ci.mindmap.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### One Repository, Two Views of a Project
+
+![Two Views of Galaxy Python Project](../../images/core_files_code_python_2_views.mindmap.plantuml.svg)
+
+`lib` contains a single monolithic view of the `galaxy` namespace.
+
+Each sub-directory of `packages` contains a logical subset of this `galaxy` namespace. Directory symbolic links are used to ensure the same files are used.
+
+???
+
+TODO: a slide before this one describing Python modules and how they map to files
+using galaxy.util, galaxy.model.mapping, and galaxy.web.framework.
+
+
+---
+
+
+class: center
+
+### Package Structure
+
+![package structure](../../images/core_packages.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### PyPI
+
+![galaxy-tool-util on PyPI](../../images/core_tool_util_pypi.png)
+
+
+---
+
+
+class: center
+
+![Package Files](../../images/core_files_code_package.mindmap.plantuml.svg)
+
+.footnote[Previous: [Galaxy Architecture Principles]({% link topics/dev/tutorials/architecture-principles/slides.html %}) | Next: [Galaxy Web Frameworks]({% link topics/dev/tutorials/architecture-frameworks/slides.html %})]

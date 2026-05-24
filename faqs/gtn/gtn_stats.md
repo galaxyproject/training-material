@@ -11,7 +11,7 @@ description: Statistics over the GTN
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.draft != true" %}
 {% assign faqs = site.pages | where:"layout", "faq" %}
 {% assign topics = site | list_topics_by_category: "science-technical" | to_keys %}
-{% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
+{% assign contributors = site.data['contributors'] | where_exp: "item", "item.gtn-halloffame != 'no'" | sort: "joined" %}
 {% assign learning_pathways = site.pages | where:"layout", "learning-pathway" | where_exp:"item","item.draft != true"  %}
 {% assign news = site.posts | where:"layout", "news" %}
 {% assign events = site.pages | where:"layout", "event" %}
@@ -153,7 +153,7 @@ description: Statistics over the GTN
 
 <div class="col-md-3">
  <div class="gtn-card color-rainbow-violet h-100">
-   <div class="card-title">{{ orgs | size }}</div>
+   <div class="card-title">{{ orgs | where_exp: "org", "org.gtn-halloffame != 'no'" | size }}</div>
    <div class="card-text">Supporting Organisations</div>
  </div>
 </div>

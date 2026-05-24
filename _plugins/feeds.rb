@@ -182,6 +182,18 @@ def generate_topic_feeds(site, topic, bucket)
               end
             end
           end
+
+          if page.data.key?('contributions')
+            page.data['contributions'].each do |role, ids|
+              Array(ids).each do |id|
+                xml.category(term: "contributions:#{role}:#{id}")
+              end
+            end
+          elsif page.data.key?('contributors')
+            Array(page.data['contributors']).each do |id|
+              xml.category(term: "contributions:authorship:#{id}")
+            end
+          end
         end
       end
     end
@@ -349,6 +361,18 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                     if c !~ / /
                       xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
                     end
+                  end
+                end
+
+                if page.data.key?('contributions')
+                  page.data['contributions'].each do |role, ids|
+                    Array(ids).each do |id|
+                      xml.category(term: "contributions:#{role}:#{id}")
+                    end
+                  end
+                elsif page.data.key?('contributors')
+                  Array(page.data['contributors']).each do |id|
+                    xml.category(term: "contributions:authorship:#{id}")
                   end
                 end
 
@@ -573,6 +597,18 @@ def generate_event_feeds(site)
             xml.contributor do
               xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+            end
+          end
+
+          if page.data.key?('contributions')
+            page.data['contributions'].each do |role, ids|
+              Array(ids).each do |id|
+                xml.category(term: "contributions:#{role}:#{id}")
+              end
+            end
+          elsif page.data.key?('contributors')
+            Array(page.data['contributors']).each do |id|
+              xml.category(term: "contributions:authorship:#{id}")
             end
           end
         end

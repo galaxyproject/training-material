@@ -302,7 +302,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="header" format="tabular" %}
 >    See this [Screenshot](https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20134800.png)
 >
-> 3. {% tool [Concatenate datasets](cat1) %} to add this header line to the **Annotate** output:
+> 3. {% tool [Concatenate multiple datasets or collections](cat1) %} to add this header line to the **Annotate** output:
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*

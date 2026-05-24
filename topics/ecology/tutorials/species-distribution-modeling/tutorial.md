@@ -20,10 +20,13 @@ tags:
 key_points:
     - "Use 'classical' Galaxy tools in combination with Interactive tools"
     - "Identify general steps of a species distribution modeling aproach"
-contributors:
+contributions:
+  authorship:
     - emichn
     - yvanlebras
     - bebatut
+  funding:
+    - mnhn
 
 subtopic: ecologyanalysis
 ---

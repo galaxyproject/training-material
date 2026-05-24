@@ -9,8 +9,9 @@ slack_channel: gta_python
 
 contributions:
     organisers:
-        - teresa-m
+        - meltemktn
     instructors:
+        - teresa-m
         - annasyme
         - bgruening
         - delphine-l

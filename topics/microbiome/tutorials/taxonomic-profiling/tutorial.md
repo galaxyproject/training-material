@@ -326,7 +326,7 @@ A "simple and worthwile addition to Kraken for better abundance estimates" ({% c
 
 > <hands-on-title>Estimate species abundance with Bracken</hands-on-title>
 >
-> 1. {% tool [Braken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >     - *"Select a kmer distribution"*: `PlusPF`, same as for Kraken
 >

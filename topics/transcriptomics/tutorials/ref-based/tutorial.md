@@ -12,6 +12,9 @@ tags:
     - drosophila
     - QC
     - cyoa
+    - deutsch
+    - español
+    - italiano
 level: Introductory
 zenodo_link: "https://zenodo.org/record/6457007"
 questions:
@@ -95,6 +98,11 @@ answer_histories:
   - label: "UseGalaxy.eu - results part 2"
     history: https://usegalaxy.eu/u/delislel/h/answers-gtn-refbased-20251118-part2
     date: 2025-11-18
+lang: en
+translations:
+  - de
+  - es
+  - it
 ---
 
 
@@ -1283,7 +1291,6 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {{ page.zenodo_link }}/files/GSM461181_treat_paired_featureCounts.counts
 >    {{ page.zenodo_link }}/files/GSM461182_untreat_single_featureCounts.counts
 >    ```
->
 {: .hands_on}
 
 You might think we can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
@@ -1931,7 +1938,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="header" format="tabular" %}
 >
-> 2. {% tool [Concatenate datasets](cat1) %} to add this header line to the **Annotate** output:
+> 2. {% tool [Concatenate multiple datasets or collections](cat1) %} to add this header line to the **Annotate** output:
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*

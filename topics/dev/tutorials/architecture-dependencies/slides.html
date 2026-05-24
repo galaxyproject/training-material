@@ -1,0 +1,69 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Architecture 13 - Galaxy Dependencies Management"
+questions:
+  - "How does Galaxy manage dependencies?"
+  - "What is the virtualenv used for?"
+  - "Where do JavaScript dependencies come from?"
+objectives:
+  - "Understand Python dependency management"
+  - "Understand JavaScript dependency management"
+  - "Learn about the wheels server"
+time_estimation: "5m"
+key_points:
+  - "Python: virtualenv with pip and wheels from galaxyproject.org"
+  - "JavaScript: npm/yarn with package.json"
+  - "No compilation required by default"
+  - "Binary wheels for fast installation"
+subtopic: architecture
+contributors:
+  - jmchilton
+
+
+---
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 13 - Galaxy Dependencies Management
+
+*The architecture of Galaxy's dependencies.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+### Dependencies - Python
+
+`script/common_startup.sh` sets up a `virtualenv` with required dependencies in `$GALAXY_ROOT/.venv` (or `$GALAXY_VIRTUAL_ENV` if set).
+
+- Check for existing virtual environment, if it doesn't exist check for `virtualenv`.
+- If `virtualenv` exists, use it. Otherwise download it as a script and setup a virtual environment using it.
+- `. "$GALAXY_VIRTUAL_ENV/bin/activate"`
+- Upgrade to latest `pip` to allow use of binary wheels.
+- `pip install -r requirements.txt --index-url https://wheels.galaxyproject.org/simple`
+- Install dozens of dependencies.
+
+
+---
+
+
+### Dependencies - JavaScript
+
+- Dependencies are defined in `client/package.json`.
+- These are fetched from npm and compiled into bundles as part of `make client` and related `Makefile` targets.
+
+.footnote[Previous: [Galaxy Client Architecture]({% link topics/dev/tutorials/architecture-client/slides.html %}) | Next: [Galaxy Startup Process]({% link topics/dev/tutorials/architecture-startup/slides.html %})]

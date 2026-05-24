@@ -66,13 +66,20 @@ recordings:
   length: 37M
   galaxy_version: 24.2.3.dev0
   date: '2025-03-18'
-  speakers: 
+  speakers:
   - tflowers15
-  captioners: 
+  captioners:
   - tflowers15
   bot-timestamp: 1742268940
-
-
+lang: en
+tags:
+  - deutsch
+  - español
+  - italiano
+translations:
+  - de
+  - es
+  - it
 ---
 
 
@@ -203,10 +210,19 @@ After that, you should have a look at the reads and inspect the BAM file where t
 The BAM file includes a lot of information about each read, particularly the quality of mapping.
 
 > <hands-on-title>Summary of mapping quality</hands-on-title>
-> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters
+> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.8) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Locally cached/Use a built-in genome`
+>    - *"Use reference sequence"*: `Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
+>
+>    > <tip-title> No options for reference sequence? </tip-title>
+>    > If you do not see a list of options for the reference sequence, double-check that you selected a reference genome during the previous step (Bowtie2).
+>    >
+>    > You can also set the **"Database/build"** attribute on the input file manually (see below). Make sure to set it to *Mouse (Mus musculus): mm10 Full*
+>    >
+>    > {% snippet faqs/galaxy/datasets_change_dbkey.md %}
+>    >
+>    {: .tip}
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
 >

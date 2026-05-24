@@ -25,7 +25,7 @@ contributions:
     - elixir-europe
     - deNBI
     - uni-freiburg
-    - sfb992
+    - crc992
     - unimelb
     - melbournebioinformatics
     - AustralianBioCommons
