@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ac8605223b192f94ecea461906055ceab8b125bb",
+		release: "galaxy-training-network@ae04faef9fdd6d425035b5c7be44efa65218c5ea",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="RNA-Seq data analysis, clustering and visualisation tutorial">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-04-13 10:27:54 +0000">
+<meta name="DC.date" content="2026-05-29 11:05:08 +0000">
 <meta name="DC.creator" content="Peter-Bram 't Hoen">
 <meta name="DC.creator" content="Casper de Visser">
 <meta name="DC.creator" content="Charlotte Adang"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
@@ -184,7 +184,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Draft",
-  "dateModified": "2026-04-13 10:27:54 +0000",
+  "dateModified": "2026-05-29 11:05:08 +0000",
   "datePublished": "2025-05-28 12:51:29 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -240,7 +240,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "RNA-Seq data analysis, clustering and visualisation tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-clustering-viz/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT6H",
   "teaches": "- To learn the principles of the analysis and visualisation of a multidimensional data analysis. We will use RNA-seq data as an example of a multidimensional -omics dataset.",
   "keywords": [
@@ -1217,7 +1217,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 28, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 13, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 29, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1237,7 +1237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -1332,7 +1332,7 @@ https://raw.githubusercontent.com/pacthoen/BMW2_RNA_clust_vis/refs/heads/main/da
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>1.By clicking on the dataset you can see the attributes of the dataset. There are 6,882 lines and a comment line. Thus, there are 6,882 detectable mRNAs in the dataset</p>
+          <p>1.By clicking on the dataset you can see the attributes of the dataset. There are 6,882 lines and a comment line in the files containing the count data. Thus, there are 6,882 detectable mRNAs in the dataset</p>
 
         </blockquote>
       </blockquote>
@@ -1564,7 +1564,7 @@ We will now assign each sample to the right group</p>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0" title="Annotate DESeq2/DEXSeq output tables tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Annotate DESeq2/DEXSeq output tables</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular output of DESeq2/edgeR/limma/DEXSeq”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular output of DESeq2/edgeR/limma/DEXSeq”</em>: the filtered and sorted <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Input file type”</em>: <code class="language-plaintext highlighter-rouge">DESeq2/edgeR/limma</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation in GFF/GTF format”</em>: imported gtf <code class="language-plaintext highlighter-rouge">Annotation file</code></li>
         <li>See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20132922.png">Screenshot</a></li>
@@ -1652,7 +1652,7 @@ See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/scree
     <li>Select the tool <strong>Volcano Plot</strong>
 In a Volcano plot, the 2logFC (x-axis) is plotted against the -log10(P-value).
       <ul>
-        <li>Choose the right column numbers. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20162602.png">Screenshot</a>. Change the significant threshold to 0.05 and LogFC 2 as as thresholds to colour.</li>
+        <li>Choose the right column numbers. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20162602.png">Screenshot</a>. Change the significant threshold to 0.05 and LogFC 2 as thresholds to colour.</li>
         <li>Put in correct titles under <em>Plot options</em>.</li>
       </ul>
     </li>
@@ -1709,7 +1709,7 @@ In a Volcano plot, the 2logFC (x-axis) is plotted against the -log10(P-value).
         <li><em>“Analysis to perform”</em>: <code class="language-plaintext highlighter-rouge">gene lengths only</code></li>
       </ul>
     </li>
-    <li>Merge the gene length and the annotated DESeq2 ouput file <strong>DESeq2 result file</strong> with primary factor Treatment using the <strong>Join two datasets side by side</strong> tool. In <em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">No</code>. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20214135.png">Screenshot</a></li>
+    <li>Merge the gene length and the annotated DESeq2 result file <strong>DESeq2 result file</strong> with primary factor Treatment using the <strong>Join two files</strong> tool. In <em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">No</code>. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20214135.png">Screenshot</a></li>
     <li>Use the <strong>Compute on rows</strong> tool to create a column with TRUE and FALSE using the following expression: <code class="language-plaintext highlighter-rouge">bool(float(c3)&gt;2)</code>. In the <em>“Error handling”</em> choose in <em>“Autodetect column types”</em> <code class="language-plaintext highlighter-rouge">No</code> and <em>“Fail on references to non-existent columns”</em> <code class="language-plaintext highlighter-rouge">No</code> and <em>“If an expression cannot be computed for a row”</em> choose <code class="language-plaintext highlighter-rouge">Fill in a replacement value</code> and Replacement value <code class="language-plaintext highlighter-rouge">False</code>. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20222441.png">screenshot</a></li>
     <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
@@ -1871,12 +1871,13 @@ In a Volcano plot, the 2logFC (x-axis) is plotted against the -log10(P-value).
         </li>
       </ul>
     </li>
-    <li>Use the <strong>Join two files</strong> tool to merge the normalised count data with the standard deviation and mean datasets (two steps)
+    <li>Use the <strong>Join two files</strong> tool to merge the normalised count data with the standard deviation and mean datasets (in two subsequent steps).
       <ul>
         <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>You may want to give names to the new columns added to indicate which column contains the standard deviation and which the mean using the <strong>Table rename column</strong> tool.</li>
       </ul>
     </li>
-    <li>Use the <strong>Compute on row</strong> tool to calculate the CV. Expression <code class="language-plaintext highlighter-rouge">c14/c15</code>. Label the new row as <code class="language-plaintext highlighter-rouge">CV</code></li>
+    <li>Use the <strong>Compute on row</strong> tool to calculate the CV, which is defined as the standard deviation divided by the mean. Check carefully which columns you need for this. Label the new column as <code class="language-plaintext highlighter-rouge">CV</code> using the <strong>Table rename column</strong> tool.</li>
     <li>Use the <strong>Sort</strong> tool to sort the genes based on CV in descending order. See this <a href="https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-23%20104444.png">Screenshot</a>
       <ul>
         <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -2432,7 +2433,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ac8605223b192f94ecea461906055ceab8b125bb">ac86052</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ae04faef9fdd6d425035b5c7be44efa65218c5ea">ae04fae</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
