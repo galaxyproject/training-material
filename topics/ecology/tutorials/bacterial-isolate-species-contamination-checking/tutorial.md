@@ -28,8 +28,12 @@ contributions:
   - bebatut
   editing:
   - clsiguret
+  - tflowers15
   funding:
   - abromics
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
  
 subtopic: ecologypreprocess
 ---
@@ -81,6 +85,9 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
+> 4. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
@@ -94,10 +101,9 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 
 > <hands-on-title> Assign taxonomic labels with Kraken2</hands-on-title>
 >
-> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
+> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy2) %} with the following parameters:
 >    - *"Single or paired reads"*: `Paired`
->        - {% icon param-file %} *"Forward strand"*: `DRR187559_after_fastp_1`
->        - {% icon param-file %} *"Reverse strand"*: `DRR187559_after_fastp_2`
+>        - {% icon param-collection %} *"Collection of paired reads"*: `Paired Reads`
 >    - *"Minimum Base Quality"*: `10`
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
@@ -246,7 +252,7 @@ To explore **Kraken** report and specially to detect more reliably minority orga
 > <hands-on-title> Identify contamination </hands-on-title>
 >
 > 1. {% tool [Recentrifuge](toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select taxonomy file tabular formated"*: report of **Kraken2** {% icon tool %}
+>    - {% icon param-collection %} *"Select taxonomy file tabular formated"*: **Classification** output of **Kraken2** {% icon tool %}
 >    - *"Type of input file (Centrifuge, CLARK, Generic, Kraken, LMAT)"*: `Kraken`
 >    - In *"Database type"*:
 >        - *"Cached database whith taxa ID"*: latest

@@ -58,7 +58,7 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     official_extension = f['type']
 
     link = f['links']['self'].sub(%r{/content$}, '')
-    unofficial_extension = link.split('.')[-2..].join('.')
+    unofficial_extension = link.split('.')[-1]
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
 
     # Example:
@@ -141,16 +141,16 @@ def data_library_for_tutorial(path)
 end
 
 def parse_tutorial_for_zenodo_link(path)
-  parse_zenodo_id_formats(YAML.load_file(path)['zenodo_link'])
-rescue StandardError
-  nil
+  parse_zenodo_id_formats(YAML.load_file(path, permitted_classes: [Date])['zenodo_link'])
+rescue => exception
+  warn "error: #{exception}"
 end
 
 def parse_metadata(path)
   parts = path.to_s.split('/')
   topic_id = parts[1]
-  topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"))
-  tutorial_metadata = YAML.load_file(path)
+  topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"), permitted_classes: [Date])
+  tutorial_metadata = YAML.load_file(path, permitted_classes: [Date])
   topic = { 'name' => topic_metadata['title'], 'description' => topic_metadata['summary'] }
   tutorial = { 'name' => tutorial_metadata['title'] }
   [topic, tutorial]

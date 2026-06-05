@@ -7,7 +7,7 @@ title: "RAD-Seq to construct genetic maps"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
 tags:
   - RAD-seq
-  - Genetic composition EBV class
+  - genetic composition EBV class
   - EBV dataset
   - EBV workflowz
   - biodiversity
@@ -168,7 +168,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 {: .hands_on}
 
-### Matches files
+## Matches files
 
 Here are `sample1.snps` (left) and `sample2.snps` (right)
 
@@ -221,19 +221,19 @@ We can then see that Stack_ID 330 for female corresponds to the 39 for male:
 >
 {: .hands_on}
 
-### Genotypes.tsv files
+## Genotypes.tsv files
 
 One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
 
 ![Genotypes.tsv file overview](../../images/RAD2_Genetic_Map/genotypes_tsv.png)
 
-### Genotypes.txt files
+## Genotypes.txt files
 
 One line by individual, and for each individual, for each catalog locus, genotype:
 
 ![Genotypes.txt file overview](../../images/RAD2_Genetic_Map/genotypes_txt.png)
 
-### Haplotypes.tsv files
+## Haplotypes.tsv files
 
 One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
 

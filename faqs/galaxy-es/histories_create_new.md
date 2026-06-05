@@ -4,7 +4,22 @@ description: Los historiales son una parte importante de Galaxy, la mayoría de 
 area: historias
 box_type: tip
 layout: faq
-contributors: [nomadscientist]
+contributions:
+  authorship:
+    - bebatut
+    - wm75
+    - shiltemann
+    - hexylena
+    - nomadscientist
+    - nsoranzo
+    - nekrut
+  translation:
+    - hvelab
+    - unode
+  funding:
+    - biont
 ---
 
 Haz click sobre el icono {% icon new-history %} en la parte superior del panel de historiales.
+
+![Interfaz de usuario para crear un nuevo historial]({% link shared/images/history_create_new.svg %})

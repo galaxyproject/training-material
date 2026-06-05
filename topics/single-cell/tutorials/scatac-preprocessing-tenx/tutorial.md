@@ -41,6 +41,15 @@ contributions:
   authorship:
   - pavanvidem
 
+answer_histories:
+  - label: UseGalaxy.eu - scATAC-seq FASTQ to Count Matrix
+    history: https://usegalaxy.eu/u/videmp/h/scatac-seq-fastq-to-count-matrix
+    date: 2025-10-15
+  - label: UseGalaxy.eu - scATAC-seq Count Matrix Filtering
+    history: https://usegalaxy.eu/u/videmp/h/scatac-seq-count-matrix-filtering
+    date: 2025-10-15
+
+
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
@@ -242,6 +251,7 @@ An ATAC-seq fragment file is a BED file with Tn5 integration sites, the cell bar
 >    - *"Regular expression used to extract cell barcode from read name"*: `[^:]*` (matches all characters up to the first colon)
 >    - *"Number of bases to shift Tn5 insertion position by on the forward strand"*: `4`
 >    - *"Number of bases to shift Tn5 insertion position by on the reverse strand"*: `-5`
+>    - *"Take cell barcode into account when collapsing duplicate fragments"*: `Yes`
 >
 > 1. {% tool [bedtools SortBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2) %} with the following parameters:
 >    - *"Sort the following BED/bedGraph/GFF/VCF/EncodePeak file *"*: `fragments BED` (output of **Sinto fragments** {% icon tool%})`
@@ -313,7 +323,7 @@ For count matrix creation, we will use **Build count matrix** from **EpiScanpy**
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. There were initially 1064 regions in the `narrow Peaks` file. Now there are 891 regions after deduplication. More than 15% (173) of regions have the same peak boundaries.
+> > > 1. There were initially 1229 regions in the `narrow Peaks` file. Now there are 1046 regions after deduplication. Around 15% (184) of regions have the same peak boundaries.
 > > >
 > > {: .solution}
 > >
@@ -360,7 +370,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > <question-title></question-title>
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 18426 × 891
+>    > AnnData object with n_obs × n_vars = 27388 × 1046
 >    > ```
 >    >
 >    > 1. How many observations are there? What do they represent?
@@ -368,8 +378,8 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. There are 18,426 observations, representing the cells.
->    > > 2. There are 891 variables, representing the peaks.
+>    > > 1. There are 27,388 observations, representing the cells.
+>    > > 2. There are 1046 variables, representing the peaks.
 >    > >
 >    > {: .solution}
 >    >
@@ -385,7 +395,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    >
 >    >      ```
 >    >      [n_obs x n_vars]
->    >      -    18426 x 891
+>    >      -    27388 x 1046
 >    >      ```
 >    > * For more specific queries, {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} is required.
 >    {: .comment}
@@ -411,7 +421,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > The file is a table with 18,426 lines (observations or cells) and 891 columns (variables or peaks): the count matrix for each of the 891 peaks and 18,426 cells. The 1st row contains the peak location as an annotation of the columns and the 1st column the barcodes of the cells as an annotation of the rows.
+>    > > The file is a table with 27,388 lines (observations or cells) and 1046 columns (variables or peaks): the count matrix for each of the 1046 peaks and 27,388 cells. The 1st row contains the peak location as an annotation of the columns and the 1st column the barcodes of the cells as an annotation of the rows.
 >    > >
 >    > {: .solution}
 >    >
@@ -516,7 +526,7 @@ First remove any potential empty features or barcodes. A non-empty cell should h
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > The resulting matrix has dimensions of 1815 x 67766, i.e., more than 99.5% of the cells and less than 4% of features were filtered out. This indicates the high sparsity of the count matrix.  
+> > > The resulting matrix has dimensions of 1815 x 67766, i.e., more than 99.5% of the cells and less than 4% of features were filtered out. This indicates the high sparsity of the count matrix.
 > > >
 > > {: .solution}
 > >
@@ -620,7 +630,7 @@ To determine decent filtering thresholds, we will further look at some histogram
 > > > 1. The plots show a histogram of the number of cells sharing a feature. As we initially pooled the data from all the cells to detect the peaks, it is expected to see only a small number of cells have more than 10000 peaks in common.
 > > > 2. The red vertical line of our 5 cells threshold is nearly at the left end of the histogram representing the majority of the features have at least 5 cells in common.
 > > > From the log scale plot it is also clear that there is a sharp increase in the feature commonness from at least 10 cells (x-axis 1.0).
-> > > So our threshold of 5 is a decent cutoff for filtering out the features. From the plots, only a very few non-informative features are left to be filtered out.   
+> > > So our threshold of 5 is a decent cutoff for filtering out the features. From the plots, only a very few non-informative features are left to be filtered out.
 > > >
 > > {: .solution}
 > >

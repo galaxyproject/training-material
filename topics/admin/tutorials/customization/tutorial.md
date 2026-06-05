@@ -65,8 +65,8 @@ It is an easy way to set your instance apart, and make it more identifiable.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,9 @@ galaxy_job_config:
->     
+>    @@ -35,6 +35,9 @@ galaxy_job_config:
+>
 >     galaxy_config:
 >       galaxy:
 >    +    # Branding
@@ -103,7 +103,7 @@ The Galaxy Help Site (https://help.galaxyproject.org) receives a lot of user sup
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -35,6 +35,9 @@ galaxy_config:
+>    @@ -38,6 +38,9 @@ galaxy_config:
 >         # Branding
 >         brand: Mars 🚀
 >         logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
@@ -136,17 +136,17 @@ This page can be used to communicate what your instance is about, and share news
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -96,6 +96,10 @@ galaxy_config:
+>    @@ -99,6 +99,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
->     
+>
 >    +galaxy_config_files_public:
 >    +  - src: files/galaxy/welcome.html
 >    +    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >    +
 >     galaxy_extra_dirs:
 >       - /data
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add welcome url to the config"}
@@ -188,11 +188,11 @@ This page can be used to communicate what your instance is about, and share news
 >     	# automatically copied around. The welcome page is one of them. In
 >     	# production, this step is skipped, so we will manually alias that.
 >     	location /static/welcome.html {
->    -		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    -		alias {{ galaxy_server_dir }}/static/welcome.sample.html;
 >    +		alias {{ galaxy_mutable_config_dir }}/welcome.html;
 >     		expires 24h;
 >     	}
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Fix the nginx routes for the welcome page"}
@@ -238,7 +238,7 @@ You can even offer several options, to allow users to switch to the default if t
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -35,6 +35,7 @@ galaxy_config:
+>    @@ -38,6 +38,7 @@ galaxy_config:
 >         # Branding
 >         brand: Mars 🚀
 >         logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
@@ -246,17 +246,17 @@ You can even offer several options, to allow users to switch to the default if t
 >         # Support
 >         support_url: "https://example.org/support"
 >         terms_url: "https://example.org/terms-of-service"
->    @@ -100,6 +101,10 @@ galaxy_config_files_public:
+>    @@ -103,6 +104,10 @@ galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->     
+>
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/themes.yml
 >    +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +
 >     galaxy_extra_dirs:
 >       - /data
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add brand"}

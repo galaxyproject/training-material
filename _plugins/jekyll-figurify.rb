@@ -105,9 +105,7 @@ module Jekyll
           end
 
           %(
-          <a href="#{url}" rel="noopener noreferrer">
-            <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
-          </a>
+          <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
           ).split("\n").map(&:strip).join
         end
       end

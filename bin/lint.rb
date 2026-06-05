@@ -1006,6 +1006,7 @@ module Gtn
             .gsub(/\s+/, ' ') # Collapse multiple whitespace for simplicity
             .gsub(/_includes\/cyoa-choices.html/, '').gsub(/%}$/, '') # Strip start/end
             .strip
+            .gsub(/"$/, '')
             .split('" ') # Split on the end of an option to get the individual option groups
             .map{|p| p.gsub(/="/, '=').split('=')}.to_h} # convert it into a convenient hash
       # NOTE: Errors on this line usually mean that folks have used ' instead of " in their CYOA.
@@ -1073,7 +1074,7 @@ module Gtn
               match_start: 0,
               match_end: 1,
               replacement: nil,
-              message: "We did not see a corresponding option# for the default: «#{branch['default']}», but this could have been written before we automatically slugified the options. If you like, please consider making your default option match the option text exactly.",
+              message: "The default could be replaced with an unslugified version, that is no longer necessary «#{branch['default']}»",
               code: 'GTN:043',
               fn: __method__.to_s,
             )
@@ -1606,7 +1607,7 @@ module Gtn
       enumerate_type(/:/).each do |path|
         format_reviewdog_output(
           ReviewDogEmitter.file_error(path: path,
-                                      message: 'There are colons in this filename, that is forbidden.', 
+                                      message: 'There are colons in this filename, that is forbidden.',
                                       code: 'GTN:014',
                                       fn: __method__.to_s,
                                      )
@@ -1616,7 +1617,7 @@ module Gtn
       enumerate_symlinks.each do |path|
         if !File.exist?(Pathname.new(path).realpath)
           format_reviewdog_output(
-            ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', 
+            ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink',
                                         code: 'GTN:013',
                                         fn: __method__.to_s)
           )

@@ -14,8 +14,8 @@ tags:
   - GIS
   - Geographical Information System
   - WFS
-  - Spatial data
-  - Maps
+  - spatial data
+  - maps
   - OGC
   - biodiversity
 contributions:

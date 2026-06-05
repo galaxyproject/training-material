@@ -19,23 +19,23 @@ jobs:
           - 5002:5002
     steps:
       # Shallow should be fine for video
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 5000
           persist-credentials: false
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '22'
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             vendor/bundle
@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config libpixman-1-dev libcairo2-dev libpango1.0-dev mesa-utils xvfb # for node
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config libpixman-1-dev libcairo2-dev libpango1.0-dev mesa-utils xvfb imagemagick # for node
           rm Gemfile.lock
           gem install bundler
           bundle config path vendor/bundle

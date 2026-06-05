@@ -1,11 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: Ocean's variables study
+title: Nitrate DMQC for autonomous platforms such as Argo floats
 subtopic: analysing
 questions:
 - How to access Argo data?
-- What is a QCV analysis?
+- What hat is a DMQC analysis /  QCV analysis?
 - How to qualify and calibrate nitrate in the ocean?
 objectives:
 - Learn how to do a QCV analysis on the nitrate variable of the ocean ?
@@ -21,17 +21,21 @@ tags:
 contributions:
   authorship:
     - Marie59
+    - pokapok-vracape
   funding:
     - fairease
     - eurosciencegateway
-draft: true
 ---
 
-This tutorial explains how to qualify and calibrate the nitrate sensor mounted on the argo float 4903881 by building its own Galaxy workflow. This tutorial is accompanied by screenshots to help guide you. If you have any difficulties, or suggestions for improvement, please contact us (link to the contact page). For your information, timing for running tools depends on the number of files, their size and/or the number of people working on Galaxy.
+The next sections explain how to qualify and calibrate the nitrate sensor mounted on the Argo float **4903881** either tool by tool or by running a pre-defined Galaxy workflow.
+This requires two preliminary steps to prepare the environment.
+
+For your information, execution time for running tools depends on the number of files, their size and/or the number of people working on Galaxy.
 
 > <warning-title>Do not change file name</warning-title>
-> DO NOT change file names to ensure that any changes you make with ODV will be carried over. However, it is possible to change the name of galaxy collections to make them easier to find.
+> DO NOT change file names to ensure that any changes you make with ODV will be carried over. However, it is possible to change the name of Galaxy collections to make them easier to find.
 {: .warning}
+
 
 > <agenda-title></agenda-title>
 >
@@ -42,308 +46,521 @@ This tutorial explains how to qualify and calibrate the nitrate sensor mounted o
 >
 {: .agenda}
 
-> <details-title>Short introduction on how Galaxy works</details-title>
->
-> You can come back to where you left off the tutorial anytime by clicking {% icon level %}.
->
-> > <hands-on-title>Log in to Galaxy</hands-on-title>
-> > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
-> > 2. Browse to your [Galaxy instance](https://earth-system.usegalaxy.eu/)
-> > 3. On the top panel go to **Login or Register**
-> >
-> {: .hands_on}
->
-> The Galaxy homepage is divided into three panels:
-> * Tools on the left
-> * Viewing panel in the middle
-> * History of analysis and files on the right
->
-> ![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.]({% link shared/images/galaxy_interface.png %} "Galaxy interface explanation")
->
-> The first time you use Galaxy, there will be no files in your history panel.
+# Prerequisites
+
+## Galaxy
+> <details-title>Galaxy account</details-title>
+> Create or login to your [Galaxy Europe account](https://earth-system.usegalaxy.eu/login/start).
 {: .details}
 
-# Manage your data 
+> <details-title>Galaxy tips and tricks</details-title>
+> Once you are logged in, Galaxy is divided into 4 vertical panels:
+> - Far left: **Galaxy action list** (Upload, Tools, Interactive Tools…)
+> - Center: **Main panel**
+> - Far right: **History** section
+>
+> ![Galaxy organisation](../../images/bgc_calib/interface_1.png)
+>
+> All symbols have a tooltip when you hover them. These names will be indicated with *{}* in this tutorial.
+>
+> The history section stores all your job results with the following color code:
+> - Grey = cancelled
+> - Orange = running
+> - Green = finished with success
+> - Red = failed
+>
+> It is possible to organise your history with sub-directories:
+> - **New history**: click on **+** at the top-right of history, edit the name with the pencil, save
+> - **Switch history**: click on the **⇄** icon and select a history
+> - **Copy datasets**: click on **Operations** → *Copy datasets* and choose source/destination histories
+>
+> ![Galaxy operation symbol](../../images/bgc_calib/interface_2.png)
+{: .details}
 
-> <hands-on-title>Get data</hands-on-title>
-> Upload the argo data files (meta, core and BGC) of the float 4903881 from the S3 service. 
-> - 2a. Click on “Upload” on the vertical panel on the left. A pop-up is launched
-> - 2b. Click on “Choose from repository” at the bottom of the popup
+> <details-title>Galaxy execution constraints</details-title>
+> - **Quota per user account**: check [your quota](https://galaxyproject.org/support/account-quotas/).
+> Free space by clicking the database icon in the history panel and “Review and clear” GB.
+> (Note: deleting a dataset in the history does not free quota until you purge it.)
 >
-> ![Image of how to uploade remote data files](../../images/bgc_calib/bgc_2a.png)
+> ![Galaxy quota info](../../images/bgc_calib/galaxy_storage_handling.png)
 >
-> - 2c. Search “argo” in the top search bar. “Argo marine floats data and metadata from Global Data Assembly Centre (Argo GDAC)” appears in the label column just below
-> - 2d. Select it then “pub/dac/coriolis/4903881” then tick “4903881_meta.nc” + “profiles/”
-> - 2e. Click on “Select” on the bottom right of the pop-up. the list of the file to download is displayed
-> - 2f. Remove the Synthetic files (not useful for qualification & calibration actions)  by clicking on the corresponding garbage can on the right
-> - 2g. Click on “start” on the bottom of the pop-up. Once the download is complete (green color), files are stored in your history on the right.
+> - **Time limit for interactive tools**: 24h. After that, ODV closes automatically.
+> - **Avoid weekends**: upgrades are performed and can stop tools/workflows.
+> - **Max interactive tools simultaneously**: 2.
+{: .details}
+
+## Nitrate calibration
+
+> <comment-title>Oxygen prerequisite</comment-title>
+> Because oxygen concentration is implied in the estimation of the *nitrate adjustment from neural network method*,
+> platforms to be calibrated must have **good-quality oxygen** (adjusted in real time or delayed mode for Argo floats or gliders).
+{: .comment}
+
+> <details-title>World Ocean Atlas reference</details-title>
+> Nitrate calibration needs a potential reference dataset such as the **WOA annual climatology**.
+> You can [download it here](https://www.ncei.noaa.gov/thredds-ocean/catalog/woa23/DATA/nitrate/netcdf/all/1.00/catalog.html?dataset=woa23/DATA/nitrate/netcdf/all/1.00/woa23_all_n00_01.nc) and upload it into Galaxy.
+{: .details}
+
+# Manage your data
+
+## Get your data
+
+> <hands-on-title>Get your data from the S3 server</hands-on-title>
+> - Click on **Upload** in the vertical panel on the left
+> - In the pop-up window, click on **Choose from repository**
+> - In the top search bar, search for `argo`
+> - In the result list, select **Argo marine floats data and metadata from Global Data Assembly Centre (Argo GDAC)**
+> - Navigate to `pub/dac/coriolis/4903881`
+> - Tick the following:
+>   - `4903881_meta.nc`
+>   - All files under `profiles/`
+> - Click on **Select** (bottom-right)
+> - Remove the synthetic files `SR4903881_*.nc` (by clicking the trash icon)
+> - Click on **Start**
+> - Wait until all files are stored in your history on the right (green color)
 >
-> ![Image of the loading of the data files](../../images/bgc_calib/bgc_2f.png)
+> ![S3 upload interface](../../images/bgc_calib/s3_upload.png)
 {: .hands_on}
 
-> <hands-on-title>Organize your data</hands-on-title>
-> Create a dataset list/collection of the argo float 4903881 by clicking on
-> - 3a. “Select item” 
-> - 3b.  “Select all” (appears just after 3a and at the same level on the right)
-> - 3c.  “All ## selected”
-> - 3d.  “Auto build list” >> a pop-up is launched
-> - 3e.  Enter the name of the data collection : 4903881
-> - 3f.   turn off “Remove the file extension”
-> - 3g.  Click on “Build” on the bottom right of the pop-up
+> <tip-title>Do it your way: uploading from your computer</tip-title>
+> > <hands-on-title>Get your data from your computer</hands-on-title>
+> > - Click on **Upload** in the vertical panel on the left
+> > - In the pop-up, click on **Choose local file**
+> > - Select the files on your system (Argo float or WOA)
+> > - Click on **Open** then **Start**
+> > - Wait until all files are stored in your history (green color)
+> >
+> > ![Local upload interface](../../images/bgc_calib/local_upload.png)
+> {: .hands_on}
+{: .tip}
+
+## Organize your data
+
+{% snippet faqs/galaxy/collections_autobuild_list.md box_type="hands-on" datasets_description="n files of interest" name="4903881" %}
+
+> <hands-on-title>Change file extension (for WOA file)</hands-on-title>
 >
-> ![Image of how to build a collection from multiple netcdf files](../../images/bgc_calib/bgc_3a.png)
-> 
+> 1. Change the datatype of the WOA file to `NetCDF`
 >
-> Once the collection is ready, everything is green in the history panel. It is possible to limit the history to useful files or collections by clicking on the eyes above the files list in the history.
+> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="NetCDF" %}
+>
+>
+> ![Change extension](../../images/bgc_calib/change_ext.png)
 {: .hands_on}
 
 
 
 {% include _includes/cyoa-choices.html option1="Tools" option2="Workflow" default="Tools" disambiguation="tutorialstyle"
-       text="Do you want to run the workflow or to discover the tools one by one ?" %}
+       text="Do you want to run a workflow 'human in the loop' or to discover the tools one by one?" %}
+
 
 <div class="Workflow" markdown="1">
 
-> <hands-on-title> Run a predefined workflow </hands-on-title>
-> 4a. Click on “Workflows” on the vertical panel on the left. A pop-up is launched
-> 4b. Search “Argo-Glider Nitrate QCV” in the top search bar for run the workflow of one float
-> 
-> ![Image on how to get the right workflow](../../images/bgc_calib/bgc_workflow.png)
-> 
-> # Workflow human in the loop
-> 
-> Now you've got your workflow running, however this workflow is composed of both interactive and non interactive tools. Thus, for the interactive tools we need you !
-> 
-> > <tip-title>Copy pasting between computer and ODV</tip-title>
-> > You can expand the ODV left panel (where there are 3 dots, vertically) to access the "clipboard" menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.
+# Run a predefined workflow
+
+> <hands-on-title>Run a public workflow</hands-on-title>
+>
+> {% snippet faqs/galaxy/workflows_run.md box_type="none" workflows_run="Public Workflows" name="Argo-Glider Nitrate QCV" %}
+>
+>
+> - When you click **Run**, a panel asks you for the input files:
+>   - Select the Argo files and climatology uploaded during the [data management phase](#manage-your-data)
+>   - Once filled in, click **Run** again
+>
+> ![Select workflow](../../images/bgc_calib/bgc_workflow.png)
+>
+> > <tip-title>Manually uploading the workflow</tip-title>
+> > Is the workflow not available on your Galaxy instance? You can upload [the workflow](./workflows/Galaxy-Workflow-Argo-Glider_Nitrate_QCV.ga) yourself as follows:
 > >
-> > ![Image showing in transparent on the left of the ODV interface the clipboard](../../images/coastal_water_dyn/clipboard.png)
+> > {% snippet faqs/galaxy/workflows_import.md  %}
+> >
 > {: .tip}
-> 
-> > <tip-title>ODV - Disconnected</tip-title>
-> > If at one point your ODV interface becomes grey with a red panel on the top "X ODV - Disconnected", do NOT panic ;) you just need to reload your tab (circular arrow top left)
-> {: .tip}
+>
 {: .hands_on}
+
+## Workflow human in the loop
+
+Now that your workflow is running, remember it contains both non-interactive and interactive steps. For the interactive tools (ODV), user action is required.
+
+- When the workflow arrives at the **ODV interactive step for qualification**:
+  - Open ODV
+  - Apply QC following
+  - Export history
+
+- Once the qualification step is finished and the history exported, close ODV. The workflow will then continue automatically.
+
+- When the workflow arrives at the **ODV interactive step for validation**:
+  - Open ODV again
+  - Follow the validation phase as described in
+
+> <tip-title>Copy pasting between computer and ODV</tip-title>
+> Expand the ODV left panel (3 vertical dots) to access the clipboard. Paste text into ODV forms via this clipboard. Click outside the panel to collapse it.
+>
+> ![ODV clipboard](../../images/coastal_water_dyn/clipboard.png)
+{: .tip}
+
+> <tip-title>ODV - Disconnected</tip-title>
+> If ODV becomes grey with the red banner *ODV - Disconnected*, refresh the tab.
+{: .tip}
+
+> <warning-title>ODV execution limit</warning-title>
+> ODV has a 24h time limit. If you launch a workflow and wait longer than 1 day before opening ODV, the workflow will continue automatically without your qualification step.
+{: .warning}
+
+## Available public workflows
+
+> <details-title>Argo-Glider Nitrate QCV</details-title>
+> Workflow to perform **Qualification**, **Nitrate Calibration**, and **Validation** of one Argo float or one Glider.
+> Uses Neural Network + Climatology.
+> Copy it before running and adjust calibration parametrizations if necessary.
+{: .details}
+
 </div>
 
 <div class="Tools" markdown="1">
-  
-# Follow the steps one by one 
 
-## Harmonize, aggregate, and convert the data 
+# Tool by tool
 
-> <hands-on-title>Harmonize and aggregate the data</hands-on-title>
-> Running “QCV harmonizer” (link toward tool explanation) for creating the working file
-> - 4a. Click on “Tool” just below “Upload” on the vertical panel on the left. A new vertical panel appears. 
-> - 4b. Search “QCV harmonizer” in the top search bar
-> - 4c. Select the tool. Its configuration page appears on the center
-> - {% tool [QCV harmonizer](toolshed.g2.bx.psu.edu/repos/ecology/harmonize_insitu_to_netcdf/harmonize_insitu_to_netcdf/3.0+galaxy1) %} with the following parameters:
->    - *"Input the NetCDF data files"*: 
-> 	- 4d. Select “Dataset collection” 
-> 	- 4e. Select "Switch to column select” then the `4903881` dataset collection (the collection move from the left to the the right column) OR click on “Selected value” above and add 4903881 dataset collection
-> - 4f. Run the tool by clicking on the corresponding button below. At the end of the process, tool delivers an harmonized file, ###_harm.nc (since version 3.0 of the tool), ready for analysis.
+> <warning-title>Before starting</warning-title>
+> Before running the QCV procedure tool by tool, be sure that your environment (see Prerequisites and Manage your data) is ready!
+{: .warning}
+
+## Harmonize your data
+
+The original files must be pre-processed in order to use the same tools regardless of their origin. This is performed by the tool `QCV harmonizer`.
+
+> <details-title>QCV harmonizer details</details-title>
 >
-> ![Image of specific options when building the collection to keep the extension of the files](../../images/bgc_calib/bgc_4d.png)
+> This tool:
+> - harmonizes vocabulary and format
+> - aggregates multiple files from the same platform into one single file
+>
+> Its outputs:
+> - a single NetCDF file named `###_harm.nc` (since version 3.0)
+>
+> This tool is currently operational for Argo floats, World Ocean Atlas, and Gliders.
+> It should be run as many times as there are datasets/platforms.
+{: .details}
+
+> <hands-on-title>Run QCV harmonizer</hands-on-title>
+> 1. Finding your tool
+>    - Click on **Tools** just below **Upload** on the left panel
+>    - Search for **QCV harmonizer** in the search bar
+>    - Select the tool. Its configuration page opens.
+>
+> 2. {% tool [QCV harmonizer](toolshed.g2.bx.psu.edu/repos/ecology/harmonize_insitu_to_netcdf/harmonize_insitu_to_netcdf/3.0+galaxy1) %} with the following parameters:
+>    - In *Input the NetCDF data files*:
+>      - If using a dataset collection (e.g. 4903881):
+>        Select **Dataset collection** → click on *Select Value* → choose *4903881*
+>      - If using WOA:
+>        Select **Single dataset** → click on *Select Value* → choose *woa###.nc*
+>    - Click **Run**
+>
+> ![QCV harmonizer tool](../../images/bgc_calib/qcv_harmonizer.png)
 {: .hands_on}
 
-> <hands-on-title>Convert the data</hands-on-title>
-> Running “ODV collection manager” for creating Ocean Data View (ODV) spreadsheet collection and qualifying the dataset.
-> - 5a. Click on “Tool” just below “Upload” on the vertical panel on the left. A new vertical panel appears. 
-> - 5b. Search “ODV collection manager” in the top search bar
-> - 5c. Select the tool. Its configuration page appears on the center
-> - {% tool [ODV collection manager](toolshed.g2.bx.psu.edu/repos/ecology/tool_odv/tool_odv/1.3+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Input raw data"*:
-> 	- 5d. Select “Multiple Datasets”
-> 	- 5e. If the dataset is not yet selected, select "Switch to column select” then the `4903881` dataset collection (the collection move from the left to the the right column) OR click on “Selected value” above and add `4903881` dataset harmonized collection.
+> <details-title>Tip: drag and drop</details-title>
+> If your file is not listed in the selection window, you can **drag and drop** it from the history panel into the *Select value* box.
+{: .details}
+
+## Qualify your data
+
+### Create the ODV collection
+
+The visualization tools for the qualification, the validation and the extraction or reporting of the user actions include **ODV software**, the **ODV collection manager** and the **ODV history manager**.
+
+> <details-title>ODV collection manager details</details-title>
 >
-> > <details-tilte>Multiple datasets<details-title/>
-> > Multiple datasets could be selected for merging them in a unique ODV collection and working on multiple platforms at the same time.
-> .{: .details}
+> This tool creates:
+> - ODV spreadsheet collections from harmonized file(s)
+> - ODV view for nitrate qualification
 >
-> - 5f. (optional) : It is possible to change the default configuration by selecting to do so:
->    - {% icon param-select %} *“Select if you want to write your own configuration file or not.”*: `Yes, I to write my own configuration file`
->       - *"Enter operator name"*: `operator name` (optional)
->       - {% icon param-select %} *"Enter QC convention for the ODV collection output (default: ARGO)"*: `QC convention  for the output file` (default : ARGO QC flag scale, https://archimer.ifremer.fr/doc/00228/33951/32470.pdf - reference table 2)
->       - *"Enter subsetting (default: 1)"*: `1` (optionnal)
->	- *"Enter plt (default: 0 for QV, 1 for demo)"*: `0` (optionnal)
->	These last 2 configuration inputs are here in case a reference file is added to the collection such as WOA for comparison. WOA should be harmonized with the “QCV harmonizer” tool beforehand. 
-> - 5g. Run the tool by clicking on the corresponding button below. At the end of the process, the tool delivers an ODV spreadsheet collection, named “odv_collection.txt” and an ODV view, named “qualification_startingPoint_nitrate.xview”, ready for launching the ODV interactive tool. Both files are available in the history panel under the galaxy collection “ODV tool collection”. The odv_collection.txt is available more quickly in history with the name “ODV tool output” as well. “ODV tool collection” also includes YYYY-MM-DDTHHMM_galaxy_odv-coll-manager_QV.log explaining all actions performed by this one. 
+> Capabilities:
+> - maps input QC flags with expected output QC flag scale
+> - subsets reference datasets (option: 1=subset, 0=no, -1=inverse)
 >
-> ![Image on how to properly fill in the inputs of the QCV harmonizer tool](../../images/bgc_calib/bgc_5d.png)
+> Default parameters:
+> - operator name = anonymous
+> - QC convention = ARGO QC flag scale
+> - Subsetting = 1 (yes, even if no reference data)
+> - plt = 0 (no plot)
+>
+> Outputs:
+> - `odv_collection.txt`
+> - `qualification_startingPoint_nitrate.xview`
+> - log file (`YYYY-MM-DDTHHMM_galaxy_odv-coll-manager_QV.log`)
+{: .details}
+
+> <hands-on-title>Run ODV collection manager</hands-on-title>
+> 1. Finding your tool
+>    - Click on **Tools** in the left panel
+>    - Search for **ODV collection manager**
+>    - Select the tool. Its configuration page opens
+>
+> 2. {% tool [ODV collection manager](toolshed.g2.bx.psu.edu/repos/ecology/tool_odv/tool_odv/1.3+galaxy2) %} with the following parameters:
+>    - For *Input raw data*:
+>      - Select **Multiple Datasets** → click *Select Value* → choose *4903881_harm.nc*
+>    - (Optional) Add a harmonized WOA reference dataset
+>    - (Optional) Change default parameters: operator name, QC convention, subsetting, plt
+>    - Click **Run**
+>
+> Outputs:
+> - ODV spreadsheet collection `odv_collection.txt`
+> - View `qualification_startingPoint_nitrate.xview`
+> - Log file with actions
+>
+> ![ODV collection manager](../../images/bgc_calib/odv_coll.png)
+{: .hands_on}
+
+### Launch ODV automatically
+
+> <details-title>ODV</details-title>
+>
+> ODV is a software for visualizing and/or qualifying scientific data.
+> It can be used locally or directly on the Galaxy {% tool [Ocean Data View](interactive_tool_odv) %}.
+{: .details}
+
+> <hands-on-title>Run ODV interactive tool</hands-on-title>
+> 1. Finding your interactive tool
+>    - Click on **Tools** or **Interactive Tools** in the left panel
+>    - Search **ODV** interactive tool
+>    - Select the tool. Its configuration page opens
+>
+> 2. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
+>    - Ensure the tool version is **v5.8_1** (change via the 3 cubes on the left if needed)
+>    - Set parameters:
+>      - *Load data automatically*: **Yes**
+>      - *NetCDF or tabular text file*: select `ODV collection manager output` or drag and drop `odv_collection.txt`
+>      - *Do you have a view?*: **Yes** → drag and drop `qualification_startingPoint_nitrate.xview`
+>    - Click **Run**
+>
+> ![ODV launch](../../images/bgc_calib/odv_launch.png)
+{: .hands_on}
+
+> <details-title>How to open ODV</details-title>
+> - When ODV is ready, a red dot appears on **Interactive Tools**
+> - Click it → open the ODV panel → click the expand symbol
+> - ODV opens in a new window with your selected view
+>
+> ![ODV interactive tool](../../images/bgc_calib/odv_launch_2.png)
+> ![ODV nitrate view](../../images/bgc_calib/odv_view.png)
+{: .details}
+
+> <tip-title>ODV inactive</tip-title>
+> After some inactivity, the ODV window may close. Just refresh the browser tab.
+{: .tip}
+
+> <tip-title>Copy/paste in ODV</tip-title>
+> Open the clipboard (3 dots on the left panel) to copy-paste text.
+> ![Clipboard in ODV](../../images/coastal_water_dyn/clipboard.png)
+{: .tip}
+
+### Qualify the dataset with ODV
+
+Use ODV features to apply QC flags and edits as needed. Refer to the [ODV guide](https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_guide.pdf).
+
+### Export history
+
+> <hands-on-title>Export history</hands-on-title>
+> 1. Export to your Galaxy history
+>    - In ODV: **Export** > **History**
+>    - Save as default name `history_from_odv_collection.txt` in `working/Documents/ODV/galaxy/outputs`
+>    - Do not change the default filename
+>    - Close ODV (**File** > **Exit**)
+>
+> Outputs:
+> - Galaxy collection *ODV all outputs* (zip, history, odv_collection)
+> - File *ODV history extracted*
+{: .hands_on}
+
+### (optional) Report QC & Data changes
+
+Run **ODV history manager** to report QC flags and/or data changes into the harmonized dataset before calibrating the nitrate sensor.
+
+> <details-title>ODV history manager details</details-title>
+>
+> This tool extracts QC changes (EDITFLAGS) and data edits (EDITDATA) from the ODV history and reports them into the harmonized file(s).
+>
+> It manages 2 types of ODV history files:
+> - *synthetic* (manual export)
+> - *extended* (automatic export, not yet available in Galaxy)
+>
+> Default parameters:
+> - QC convention = ARGO QC flag scale
+> - ODV convention changes: EDITFLAGS, EDITDATA
+>
+> Outputs:
+> - `###_harm_qced.nc` (extended NetCDF files including changes)
+> - `###_harm_history.csv` (summary of user changes)
+> - log file (`YYYY-MM-DDTHHMM_galaxy_odv-history-manager_history.log`)
+{: .details}
+
+> <hands-on-title>Run ODV history manager</hands-on-title>
+> 1. Find your tool
+>    - Click on **Tools** just below **Upload** on the left panel
+>    - Search **ODV history manager** in the search bar
+>    - Select the tool
+>    - Its configuration page opens in the center panel
+>
+> 2. {% tool [ODV history manager](toolshed.g2.bx.psu.edu/repos/ecology/tool_odv_history/tool_odv_history/1.2+galaxy2) %} with the following parameters:
+>
+>    Depending on your ODV spreadsheet file, select the appropriate inputs:
+>
+>    **Case 1: using ODV collection manager output**
+>    - *Input NetCDF data*: harmonized file(s) `###_harm.nc` created by QCV harmonizer
+>    - *Input history text file*: `ODV history extracted` (txt file exported from ODV after changes in **Export history**)
+>    - *Input ODV file*: `ODV collection manager output` (the ODV spreadsheet collection created by ODV collection manager)
+>
+>    **Case 2: using odv_collection.txt**
+>    - *Input NetCDF data*: harmonized file(s) `###_harm.nc` created by QCV harmonizer
+>    - *Input history text file*: `history_from_odv_collection.txt` (txt file inside *ODV all outputs*)
+>    - *Input ODV file*: `odv_collection.txt` (spreadsheet collection created by ODV collection manager and opened in ODV for QC changes)
+>
+>    (Optional) In **Tool Parameters**, you may change the default configuration:
+>    - *QC convention for the ODV output file*: select one of the [QC flag scales understood by ODV](https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_quality_flag_sets.pdf)
+>    - *ODV convention regarding changes performed on the ODV collection*:
+>      - **EDITFLAGS** = report QC flag changes from history to the data collection
+>      - **EDITDATA** = report data edits from history to the data collection
+>
+> ![ODV history manager parametrization](../../images/bgc_calib/odv_history.png)
 >
 {: .hands_on}
 
-## Qualification and calibration
+> <tip-title>ODV edits parametrization</tip-title>
+> You can unselect either *EDITFLAGS* or *EDITDATA* if you want to report only QC changes or only data changes.
+> However, you cannot unselect both. If you do, the backend will actually apply **both** edit types.
+{: .tip}
 
-> <hands-on-title>Qualify the dataset with the ODV interactive tool. </hands-on-title>
-> For more information on using ODV, please refer to the ODV user `<guide https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_guide.pdf>`
+> <warning-title>Check the logs</warning-title>
+> At the end of the process, Galaxy distributes the tool outputs into 3 collections:
+> - **ODV history manager netcdf collection** (extended harmonized NetCDFs, `###_harm_qced.nc`)
+> - **ODV history manager csv collection** (CSV summaries, `###_harm_history.csv`)
+> - **ODV history manager log files** (with `YYYY-MM-DDTHHMM_galaxy_odv-history-manager_history.log`)
 >
-> - 6a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears. 
-> - 6b. Search “ODV”interactive tool in the top search bar
-> - 6c. Select the {% tool [Ocean Data View](interactive_tool_odv) %} . Its configuration page appears on the center
-> - 6d. Before selecting the ODV collection, change the version of tool by selecting v5.8_1 with the 3 cubes available on the left in the first grey headband on the top of the central panel
->
-> ![Image on how to properly fill in the inputs of the ODV collection manager tool](../../images/bgc_calib/bgc_6d.png)
->
-> - {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
->    - 6e. {% icon param-select %} *"Do you want your data to be automatically load when ODV is launched ?"*: `Yes, I want my data to be loaded directly` (This is useful to open directly the collection and with a specific xview if this last one is available.)
->    - 6f. {% icon param-select %} *"Select if you are using a ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are Netcdf or tabular text file`
->    	- {% icon param-file %} *"Netcdf or tabular text file. For text file, odv format is recommanded."*:  `ODV tool output`
->    - 6g. {% icon param-select %} *"Do you have a view ?"*: `Yes, I have my own view”`
->    - 6h. {% icon param-file %} *"Data view for ODV"*: `qualification_startingPoint_nitrate.xview` 
->      For that, click on “ODV tool collection” in the history panel and “drag and drop” the xview in the Data view selected area.
->    - 6i. Run the tool
-> 
-> ![Image on how switch version](../../images/bgc_calib/bgc_6ebis.png)
->
-> - 6j. When the ODV interactive tool is ready, a red dot with the number “1” appears on the “Interactive tool” button in the vertical panel on the left. Click it. A new vertical panel appears. 
-> - 6k. Launch the ODV interactive tool by clicking the “expended” symbol (when it appears) close to the ODV name. ODV opens in a new window automatically with the selected view (lien vers une explication de la vue).
->
->
-> ![Image of how to access the interactive tool](../../images/bgc_calib/bgc_6k.png)
-> 
-> ![Image of what is int the ODV interactive tool when you open it](../../images/bgc_calib/odv_view.png)
->
-> {% snippet faqs/galaxy/interactive_tools_open.md tool="ODV" %}
->
-> > <tip-title>ODV - Disconnected</tip-title>
-> > If at one point your ODV interface becomes grey with a red panel on the top "X ODV - Disconnected", do NOT panic ;) you just need to reload your tab (circular arrow top left)
-> {: .tip}
-> 
-> > <tip-title>Copy pasting between computer and ODV</tip-title>
-> > You can expand the ODV left panel (where there are 3 dots, vertically) to access the "clipboard" menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.
-> > 
-> > ![Image showing in transparent on the left of the ODV interface the clipboard](../../images/coastal_water_dyn/clipboard.png)
-> {: .tip}
-> 
-> 
-> If you missed “step 6e”, ODV opens with its home page. To import data set, click on the top left : 
->   - file > New  
->   - The “Create New collection” popup window opens;  Give a name to your collection > OK
->   - The “Creating collection” popup window opens; Select “Use .txt, .odv, .var or other file as template” > OK 
->   - The “Select template file” popup window opens; Change “Files of Types” by selected “All Files(*)”. 
->   - Select “working/Documents/ODV/galaxy/data/ODV tool output” > open 
->   - The “Meta variables” popup window opens. Select all meta variable (ctrl a) > OK	
->   - The “Data variables” popup window opens. Select all data variable (ctrl a) > OK		
->   - The “collection properties” popup window opens; Change, if you want, “Data Field”, and “Data type”. Be sure that “Primary Variable” is “pressure [decibar] > Ok
->   - ODV collection is created with the right template and opens on an empty global map.
->   - Click on the top left  : Import> ODV spreadsheet
->   - The “Select spreadsheet file(s)” popup window opens; Change “Files of Types” by selected “All Files(*)” and Select working “/Documents/ODV/galaxy/data/ODV tool output”
->   - The “Meta variable association” popup window opens. all meta variable are already selected > OK
->   - The “Data variable association” popup window opens. all data variable are already selected > OK
->   - Data set is now imported into the new collection
->
-> - 6l. Qualify the dataset if necessary. Go to the `<ODV user guide https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_guide.pdf>` for ODV description or follow the link to video.
-{: .hands_on}
+> Always check the log file (click the {% icon galaxy-eye %} icon) to ensure that changes were correctly reported.
+> If issues persist, make sure filenames match the step **Export history** conventions.
+{: .warning}
 
-> <hands-on-title>Export history once qualification is finished</hands-on-title>
-> WARNING : Be sure that all filters or zoom windows are relaxed.
->
-> 7a. To export history information, click on the top left : 
->   - Export > History
->   - the “Export station history” opens; Select “working/Documents/ODV/galaxy/outputs
->   - Change the name of the history if you want > Save > OK > OK
->   - close ODV : File > exit
->
-> 7b. Once the ODV interactive tool closed, 2 useful outputs are available (green) in the history panel
->   - “ODV history extracted” with the history txt files.
->   - “ODV all outputs” (including ODV collection and history if you want working locally, i.e. on your computer,  or again on this collection)
-{: .hands_on}
+All these outputs will appear in your **History** (green status). They are now ready for the next step: **Biogeochemical Calibration**.
 
+## Calibrate your data
 
-> <hands-on-title>(optional) Running “ODV history manager”</hands-on-title>
-> For reporting you QC flags changes into harmonized dataset before calibrating the nitrate sensor
-> - 8a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears. 
-> - 8b. Search “ODV history manager” in the top search bar
-> - 8c. Select the tool. Its configuration page appears on the center
-> - {% tool [ODV history manager](toolshed.g2.bx.psu.edu/repos/ecology/tool_odv_history/tool_odv_history/1.2+galaxy2) %} with the following parameters:
-> - 8d. In “Tool Parameters” section, select for each input “Multiple Datasets” : 
->    - {% icon param-file %} *"Input netcdf data*" : Select the harmonized NetCDF file(s) created by step 4.
->    - {% icon param-file %} *"Input history text file"* : history txt file extracted from ODV after changes
->    - {% icon param-file %} *"Input odv file"* : the ODV spreadsheet txt collection created by step 5
-> - 8f. (optional) : It is possible to change the default configuration:
->    - {% icon param-select %} *"Select if you want to write your own configuration file or not."*: `Yes, I to write my own configuration file`
->    	- {% icon param-select %} *"Enter QC convention for the ODV collection output (default: ARGO)"*: `QC convention  for the output file` (default : ARGO QC flag scale, https://archimer.ifremer.fr/doc/00228/33951/32470.pdf - reference table 2)
->    	- {% icon param-select %} *"Enter the ODV convention regarding the changes performed on the odv collection."*: `ODV convention to be reported “EDITFLAGS” (QC changes) “EDITDATA” (Data changes)`, both are selected by default.
-> - 8g. Run the tool by clicking on the corresponding button below. At the end of the process, the tool delivers an extended NetCDF files, names “###_qced.nc”  and a csv file summaring reporting in the NetCDF file, names “###_history”, ready for running “Biogechemical Calibration” tool. Both files are available in the history panel under the galaxy collection “ODV history manager netcdf collection” and “ODV history manager csv collection” respectively. “ODV history manager log files collection” includes YYYY-MM-DDTHHMM_galaxy_odv-history-manager_history.log detailing the status of each QC reports and action performed by this one. 
-{: .hands_on}
+### Nitrate
 
 > <hands-on-title>(optional) Choose Reference dataset</hands-on-title>
-> The nitrate calibration needs a potential reference data set such as the nitrate WOA annual climatology. For that, upload the nitrate WOA annual climatology with NetCDF format (https://www.ncei.noaa.gov/thredds-ocean/catalog/woa23/DATA/nitrate/netcdf/all/1.00/catalog.html?dataset=woa23/DATA/nitrate/netcdf/all/1.00/woa23_all_n00_01.nc) directly from your computer.
-> - 9a. Click on “Upload” on the vertical panel on the left. A pop-up is launched
-> - 9b. Click on “Choose local file” at the bottom of the popup
-> - 9c. Select the dataset and click on “start”
-> - 9d. Once the dataset ready, repeat step 4 for getting the harmonized dataset ready for calibration
+> - Upload WOA nitrate climatology (NetCDF) from your computer
+> - Harmonize it with QCV harmonizer as in the step **Export history**
 {: .hands_on}
 
-> <hands-on-title>Run “Biogeochemical calibration”</hands-on-title>
-> Run “Biogeochemical calibration” for calibrating the nitrate sensor
-> - 10a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears. 
-> - 10b. Search “Biogeochemical calibration” in the top search bar
-> - 10c. Select the tool. Its configuration page appears on the center
-> - {% tool [BioGeoChemical calibration](toolshed.g2.bx.psu.edu/repos/ecology/tool_biogeochemical_calibration/tool_biogeochemical_calibration/2.1+galaxy2) %} with the following parameters:
-> - 10d. In “Tool Parameters” section, select for each input “Multiple Datasets” : 
->       - {% icon param-file %} *"Input  harmonized netcdf data"*: `4903881 harmonized NetCDF file(s)` with QC report created by step 8, named ###_qced.nc. The selection is easier by clicking on the 3 dots “Browse or Upload datasets”
->       - {% icon param-file %} *"Input reference data"* (optional): `WOA harmonized data` created by step 9 if you want to estimate the reference nitrate from climatology
-> - 10e. (optional) - Change the QC configuration if : 
->       - you work with platforms that do not follow the argo flag scale convention
->       - you want to fix adjusted value at QC flag 2 (potentially good) 
+Currently, the tool **Biogeochemical calibration** is operational for **nitrate**.
+
+> <hands-on-title>Run Biogeochemical calibration</hands-on-title>
+> 1. Find your tool
+>   - Click on **Tools** → search **Biogeochemical calibration**
 >
-> ![Image on how to fill in the input of the Biogechemical calibration tool](../../images/bgc_calib/bgc_10d.png)
+> 2. {% tool [BioGeoChemical calibration](toolshed.g2.bx.psu.edu/repos/ecology/tool_biogeochemical_calibration/tool_biogeochemical_calibration/2.1+galaxy2) %} with the following parameters:
+>    - *Input harmonized netcdf data*: `###_harm_qced.nc` (created by QCV harmonizer + ODV history manager)
+>    - *Input reference data* (optional): WOA harmonized NetCDF file if you want to estimate reference nitrate from climatology
+>    - (Optional) Change default QC flag configuration (ARGO QC flag scale by default)
+>    - (Optional) Add calibration parametrizations:
+>      - Single regression
+>      - CanyonB (default)
+>      - Climatology / WOA
+>      - Custom P value with user-defined breakpoints
+>    - Run the tool
 >
-> - 10f. (optional) By default, the tool estimates Nitrate from canyonB by estimating reference pressure automatically and the correction as a linear regression. BUT, you can add many calibration methods to be tested as you want by changing `No, I don’t want to, I’ll use the default one` below the 2nd grey headband on the central panel by {% icon param-select %} `Yes, I want to write my own configuration file`. Then: 
->   - Click on the “Insert Configurations” button to add calibration methods as many time as needed
->       - for reproducing the default one change the following item `Enter multiple linear regression` by `Single linear regression`
->       - for adding a new method fully automatics with canyon B - don’t change default item value
->       - for adding a new method using your own choices, changes each item by your selection : 
->           - {% icon param-select %} *"Bypass"*: `The user defines P` 
->		- *"Enter P_value"*: `1000` dbar
->           - {% icon param-select %} *"Enter multiple linear regression"*: `N` corresponds to the number of breakpoints.
->           - {% icon param-select %} *"Reference method"* :  `Climatology`
->	    - {% icon param-select %} *"Reference"*: `WOA`
->           - {% icon param-select %} *"Resolution"*: `Annual`
->           (be sure you have added WOA harmonized climatology in “Tool parameters/input reference data” section)
->
-> Now more than one calibration method are ready to be tested.
->
-> ![Image on how to fill in the input to add a configuration to the Biogechemical calibration tool](../../images/bgc_calib/bgc_calibtool_config.png)
->
-> - 10g. (optional for argo floats) The tool gives the possibility to fill directly original argo nc files with DM information (coefficient, equation, comment, dm operator …) using DM filler tools from C. Schmechtig. For that, do the following:
->   - {% icon param-select %} *“Do you want to use DMfiller option”*: `Yes, I want to use it`
->   - {% icon param-file %} *“Input original raw netcdf data”*: `dataset collection 4903881` built at the beginning of the work (step 3). This collection includes indeed all original argo nc files useful to report DM information
->   - {% icon param-file %} *“Input csv files”*: `csv file` created by step 8 and the “odv history manager” tool.
->   - for the next sections, report all information that are mandatories regarding the:
->   	- institution managing your argo data set
->       - BGC contact point 
->       - BGC DM operator for this action
-> If one of the last information are missing or not compatible with the information already available in the nc files (as contact point), the tool does not add DM information in the original files. 
-> - 10h. Click on Run tool
-> For each calibration method, tool delivers : 
->   - BGC calibration netcdf collection
->   - BGC calibration figure collection
->   - (optional if DM filler is used) BGC calibration tar.gz collection
-> with the following label : 
-> 	"input harmonized netcdf data file name"_C"number of calibration"-nitrate
-> For each calibration, tool delivers the following figures : 
->   - ##_Zvar_ref_detailed.png and ##_Zvar_ref_results.png showing the referenced level estimated by the tool and why. Both figures are done even if the user bypass this section.
->   - ##_Raw-Ref_Analysis_ref#01_LinearModel.png an ##_Raw-Ref_Analysis_ref#01_Rsquared.png (if necessary) showing the multi linear regression results
-> If DM filler option is tick, tar.gz includes all BDfiles to be sent back to DAC after choosing the best calibration coefficients.
-> 
+> ![Calibration tool](../../images/bgc_calib/bgc_calibration.png)
 {: .hands_on}
 
-> <hands-on-title>Calibration validation with ODV visualization</hands-on-title>
-> For the validation step, run again : 
->   - step 5 by adding all the netcdf files available in “BGC calibration netcdf collection”for creating the odv collection
->   - step 6 for the visualization
+> <details-title>Default calibration details</details-title>
+> By default, the tool calibrates nitrate using:
+> - Automatic evaluation of reference pressure
+> - CanyonB as reference method
+> - Linear regression for correction
+> - ARGO QC flag convention
+>
+> Default QC flag mapping:
+> - Bad Data QC = 4
+> - Raw QC value to replace = 3
+> - Replacement QC value = 1 (adjusted value)
+>
+> Possible configurations:
+> - User-defined reference pressure
+> - Canyon-med or WOA as reference method
+> - Multi-linear regression with automatic or user-defined breakpoints
+>
+> Outputs per platform/configuration:
+> - NetCDF file(s): `###_C{param}-nitrate.nc`
+> - Diagnostic figures (up to 4):
+>   - `###_..._LinearModel.png`
+>   - `###_..._Rsquared.png`
+>   - `###_..._Zvar_ref_detailed.png`
+>   - `###_..._Zvar_ref_results.png`
+> - Log file: `YYYY-MM-DDTHHMM_galaxy_odv-calibration-methods_nitrate_c.log`
+{: .details}
+
+> <details-title>Examples of parametrization</details-title>
+> - Reproduce default method: set **Multiple linear regression** → *Single linear regression*
+> - Add canyon B automatic: leave default
+> - Add custom method:
+>   - *Bypass*: user defines P → enter 1000 dbar
+>   - *Multiple linear regression*: N = number of breakpoints
+>   - *Reference method*: Climatology / WOA / Annual
+> (Ensure WOA harmonized climatology is included in inputs)
+{: .details}
+
+> <details-title>DMfiller option</details-title>
+> If activated, the tool also updates original Argo NetCDF files with DM information and produces BD Argo files.
+> - Requires:
+>   - Original raw NetCDF data (dataset collection 4903881)
+>   - CSV file from ODV history manager
+>   - Institution, BGC contact point, DM operator info
+> - If info is missing or inconsistent with original files, BD files are not delivered.
+>
+> Outputs:
+> - `###_C{param}-nitrate.tar.gz` (all BD files ready for DAC)
+{: .details}
+
+## Validate your data
+
+Compare adjusted values with ODV:
+
+> <hands-on-title>Validation with ODV</hands-on-title>
+> 1. Re-run **ODV collection manager** including all calibrated NetCDFs from the step **(optional) Report QC & Data changes**
+>
+>    {% snippet faqs/galaxy/tools_rerun.md %}
+>
+> 2. Launch **ODV interactive tool** again for visualization
+> 3. Inspect calibrated vs. raw/reference values
 {: .hands_on}
 
-# Conclusion
+You may validate in two ways:
 
+**Case 1: without external datasets**
+- Create ODV collection with calibrated NetCDFs
+- Launch ODV without a view
+- ODV opens with new collection ready for validation
 
+**Case 2: with external datasets**
+- Add an external dataset (ODV spreadsheet, ODV collection, or NetCDF supported by ODV)
+- Create ODV collection with calibrated + external data
+- Launch ODV without automatic load and without view
+- Import datasets manually via *File > New*
+- Map metadata and variables when prompted
+- Repeat for each external dataset
+- ODV is now ready for side-by-side comparison
+
+> <tip-title>Advice</tip-title>
+> Import first the ODV spreadsheet collection created by **ODV collection manager**.
+> Then import external datasets such as [webODV Glodap](https://explore.webodv.awi.de/ocean/hydrography/glodap/).
+{: .tip}
+
+</div>
 
 # Extra information
 
 Coming up soon even more tutorials on and other Earth-System related trainings. Keep an {% icon galaxy-eye %} open if you are interested!
+
 
 
 

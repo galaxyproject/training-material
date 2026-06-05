@@ -8,9 +8,10 @@ slack_channel: gta_variant_analysis
 
 contributions:
     organisers:
+        - scottcain
+    instructors:
         - poterlowicz-lab
         - khaled196
-    instructors:
         - annasyme
         - nekrut
         - delphine-l

@@ -365,6 +365,8 @@ module Jekyll
 
           if m.key?('time')
             found['time'] = m['time']
+          else
+            found['time'] = nil
           end
           found
          elsif m.key?('type') && m['type'] == 'faq'

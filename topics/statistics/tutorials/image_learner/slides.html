@@ -1,0 +1,211 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Gleam Image Learner - Validating Skin Lesion Classification on HAM10000"
+zenodo_link: "https://zenodo.org/records/17114688"
+
+questions:
+  - "How do we validate GLEAM's Image Learner against a published benchmark on HAM10000?"
+  - "How do we set up a balanced train/validation/test split for multi-class image classification?"
+  - "How do we interpret accuracy, weighted precision/recall, and weighted F1 for imbalanced medical imaging datasets?"
+
+objectives:
+  - "Prepare a balanced HAM10000 subset and perform a stratified 70/10/20 train/validation/test split."
+  - "Train an Image Learner model using a pretrained CaFormer S18 384 backbone."
+  - "Evaluate performance using accuracy and weighted precision/recall/F1, and inspect confusion patterns."
+
+contributors:
+  - khaivandangusf2210
+  - paulocilasjr
+  - qchiujunhao
+  - jgoecks
+---
+
+# Introduction to GLEAM Image Learner and Galaxy
+
+- **Galaxy**: A web-based platform for data-intensive biomedical research, enabling users to run tools and workflows without coding.
+- **GLEAM Image Learner**: A no-code deep learning tool for image classification in Galaxy that automates model training and evaluation.
+- **Goal**: Validate Image Learner on the HAM10000 benchmark with a balanced split and clear, reproducible metrics.
+
+???
+
+GLEAM Image Learner simplifies deep learning by automating tasks like data preprocessing, model training with transfer learning, and comprehensive evaluation. In this tutorial, we will explore how Image Learner can be used within Galaxy to build reliable image classifiers, using the HAM10000 skin lesion dataset as a case study.
+
+---
+
+# Use Case: Skin Lesion Classification with HAM10000
+
+- **Dataset Source**: HAM10000 (Human Against Machine with 10,000 training images).
+- **Tutorial Dataset**: Preprocessed, balanced subset following Shetty et al. (2022).
+- **Objective**: Train and evaluate a multi-class classifier across seven lesion types.
+
+![Workflow overview for HAM10000 classification](./../../images/skin_tutorial/image_learner_workflow_diagram.png)
+
+---
+
+# Dataset Preprocessing (Balanced Subset)
+
+- **Step 1: Selection**: 100 images per class from the original HAM10000 dataset.
+- **Step 2: Resizing**: All images resized to 96×96 pixels and stored as PNG.
+- **Step 3: Augmentation**: Horizontal flips to double each class to 200 images.
+- **Result**: 1,400 total images (200 × 7 classes), balanced across classes.
+
+---
+
+# Balanced Dataset Composition
+
+| Lesion Type | Count | Percentage |
+|---|---|---|
+| Melanocytic nevus (nv) | 200 | 14.3% |
+| Melanoma (mel) | 200 | 14.3% |
+| Basal cell carcinoma (bcc) | 200 | 14.3% |
+| Actinic keratosis (akiec) | 200 | 14.3% |
+| Benign keratosis (bkl) | 200 | 14.3% |
+| Dermatofibroma (df) | 200 | 14.3% |
+| Vascular lesion (vasc) | 200 | 14.3% |
+| **Total** | **1,400** | **100%** |
+
+---
+
+# Data Augmentation Strategy
+
+- **Horizontal Flip Augmentation**:
+  - Creates additional training samples by flipping images
+  - Helps model learn orientation-invariant features
+  - Effectively doubles training set size
+  - Applied during preprocessing to build a balanced dataset
+
+![Example of horizontal flip augmentation](./../../images/skin_tutorial/horizontal_flip_augmentation.png)
+
+*Adapted from Shetty et al., 2022 ([Scientific Reports 12, 18134](https://www.nature.com/articles/s41598-022-22644-9))*
+
+---
+
+# Transfer Learning with Image Learner
+
+- **Pre-trained Models**: Leverage models trained on ImageNet
+- **Fine-tuning**: Adapt pre-trained features to skin lesion classification
+- **Benefits**:
+  - Requires fewer training samples
+  - Trains faster than from scratch
+  - Achieves better performance
+  - Especially effective for medical imaging
+
+---
+
+# Image Learner in Galaxy
+
+- **GLEAM Image Learner Tool**:
+  - Available on Galaxy: [Galaxy Main](https://usegalaxy.org/) and [https://cancer.usegalaxy.org](https://cancer.usegalaxy.org)
+  - Automates training and evaluation of deep learning models
+  - Outputs trained model and comprehensive performance report
+- **Key Features**:
+  - Automatic image preprocessing (resizing, normalization)
+  - Transfer learning with multiple model architectures
+  - Data augmentation options
+  - Detailed evaluation metrics and visualizations
+
+---
+
+# Model Configuration
+
+| Parameter | Value | Rationale |
+|---|---|---|
+| Task Type | Multi-class classification | Seven lesion classes |
+| Model | CAFormer S18 384 | Efficient transformer-based architecture |
+| Epochs | 30 | Sufficient for convergence |
+| Batch Size | 32 | Balances memory and stability |
+| Data Split | Stratified 70/10/20 | Train/validation/test |
+
+---
+
+# Running Image Learner
+
+1. **Upload Data**:
+   - images_96.zip (1,400 images - 200 per class) from Zenodo
+   - image_metadata_new.csv (class labels and metadata)
+   - [Zenodo link](https://zenodo.org/records/17114688)
+
+2. **Run Image Learner**:
+   - Input images: images_96.zip
+   - Input metadata: image_metadata_new.csv
+   - Task: Classification
+   - Model: CAFormer S18 384
+   - Configure parameters as shown
+
+3. **Evaluate Model**:
+   - Use Image Learner's report to assess performance
+   - Analyze ROC-AUC curves and confusion matrix
+
+---
+
+# Image Learner Model Report
+
+- **Interactive HTML Report**:
+  - **Config & Overview**: Dataset composition, metrics, and configuration
+  - **Training & Validation**: Learning curves and validation diagnostics
+  - **Test Results**: Final metrics, confusion matrix, ROC/PR curves
+
+![Model and training summary](./../../images/skin_tutorial/training_config.png)
+
+---
+
+# Training Performance
+
+![Test performance summary showing training progression](./../../images/skin_tutorial/test_metrics.png)
+
+- Monitor training and validation metrics
+- Identify potential overfitting
+- Assess convergence
+
+---
+
+# Test Results and Diagnostics
+
+- **Test Performance Summary**: Accuracy and weighted precision/recall/F1 on the balanced split.
+- **Classification Diagnostics**: Confusion matrix, ROC/PR curves, and confidence distributions.
+- **Per-class Metrics**: Heatmap view of precision, recall, F1, and related scores by lesion type.
+
+![Per-class metrics heatmap by lesion class](./../../images/skin_tutorial/per_class_metrics.png)
+
+---
+
+# Confusion Matrix
+
+![Confusion matrix showing classification results](./../../images/skin_tutorial/confusion_matrix.png)
+
+- **Diagonal**: Correct predictions
+- **Off-diagonal**: Misclassifications
+- Identifies which classes are confused with each other
+- Useful for understanding model limitations
+
+---
+
+# Comparison with Shetty et al. (2022)
+
+Reference: Shetty et al., 2022 ([Scientific Reports 12, 18134](https://www.nature.com/articles/s41598-022-22644-9))
+
+| Metric | Shetty et al., 2022 (CNN) | Image Learner (this tutorial) |
+|---|---:|---:|
+| Accuracy | 0.94 (94%) | 0.87 (87%) |
+| Weighted Precision | 0.88 (88%) | 0.87 (87%) |
+| Weighted Recall | 0.85 (85%) | 0.87 (87%) |
+| Weighted F1-Score | 0.86 (86%) | 0.87 (87%) |
+
+- Image Learner shows slightly lower accuracy but higher weighted precision/recall/F1.
+- Differences can reflect model architecture and training/evaluation details.
+
+---
+
+# Conclusion
+
+- **Key Takeaways**:
+  - Prepared a balanced HAM10000 subset with horizontal-flip augmentation.
+  - Trained a CaFormer-based Image Learner model with a 70/10/20 split.
+  - Evaluated performance using accuracy and weighted precision/recall/F1 plus diagnostics.
+
+- **Why Image Learner?**
+  - No coding required - accessible to all researchers
+  - Automates preprocessing, training, and evaluation
+  - Produces publication-ready results and visualizations
+  - Enables rapid experimentation with different models

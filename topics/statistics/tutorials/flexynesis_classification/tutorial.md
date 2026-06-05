@@ -23,6 +23,18 @@ answer_histories:
     - label: "usegalaxy.eu"
       history: https://usegalaxy.eu/u/nilchia/h/final-modeling-breast-cancer-subtypes-tabpfn-3
       date: 2025-08-01
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/nilchia/h/gta2026-modeling-breast-cancer-subtypes-with-flexynesis
+      date: 2026-05-18
+recordings:
+- captioners:
+  - Nilchia
+  date: '2026-05-18'
+  galaxy_version: '26.0'
+  length: 22M
+  youtube_id: Z8JhJARdRv8
+  speakers:
+  - Nilchia
 ---
 
 Flexynesis represents a state-of-the-art deep learning framework specifically designed for multi-modal data integration in biological research ({% cite Uyar2024 %}). What sets Flexynesis apart is its comprehensive suite of deep learning architectures that can handle various data integration scenarios while providing robust feature selection and hyperparameter optimization.
@@ -118,10 +130,10 @@ Flexynesis automatically handles key preprocessing steps such as:
 
 * Distinguish numerical and categorical variables in the clinical data file. For categorical variables, create a numerical encoding of the labels for training data. Use the same encoders to map the test samples to the same numerical encodings.
 
->    > <comment-title> No manual preprocessing is required </comment-title>
->    >
->    > Flexynesis performs all data cleaning internally as part of its pipeline.
->    {: .comment}
+> <comment-title> No manual preprocessing is required </comment-title>
+>
+> Flexynesis performs all data cleaning internally as part of its pipeline.
+{: .comment}
 
 Now it's time to train model using Flexynesis:
 * We choose whether we want to concatenate the data matrices (early integration) or not (intermediate integration) before running them through the neural networks.
@@ -139,12 +151,12 @@ It is possible to set early stopping criteria in Flexynesis, which is basically 
 
 > <hands-on-title> Flexynesis </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
->        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Training omics data"*: `train_gex_brca.tabular`
+>        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Test omics data"*: `test_gex_brca.tabular`
 >        - *"What type of assay is your input?"*: `gex`
 >        - In *"Multiple omics layers?"*:
@@ -155,13 +167,14 @@ It is possible to set early stopping criteria in Flexynesis, which is basically 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `1`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
@@ -244,7 +257,7 @@ And finally the UMAP plot.
 
 > <hands-on-title> UMAP plot </hands-on-title>
 >
-> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Flexynesis plot"*: `Dimensionality reduction`
 >        - {% icon param-file %} *"Predicted labels"*: `table` (output of **Sort** {% icon tool %})
@@ -275,12 +288,12 @@ In reality, hyperparameter optimization should run for multiple steps so that th
 
 > <hands-on-title> Flexynesis </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
->        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Training omics data"*: `train_gex_brca.tabular`
+>        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Test omics data"*: `test_gex_brca.tabular`
 >        - *"What type of assay is your input?"*: `gex`
 >        - In *"Multiple omics layers?"*:
@@ -291,13 +304,14 @@ In reality, hyperparameter optimization should run for multiple steps so that th
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
@@ -355,7 +369,7 @@ And finally the UMAP plot.
 
 > <hands-on-title> UMAP plot </hands-on-title>
 >
-> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Flexynesis plot"*: `Dimensionality reduction`
 >        - {% icon param-file %} *"Predicted labels"*: `table` (output of **Sort** {% icon tool %})
@@ -415,16 +429,15 @@ Since TabPFN does not support data integration, we should try gene expression an
 
 First, let's filter the cna data by variance.
 
+Here we will:
+* Calculate the variance of each gene in train matrix
+* Add the variance back to the matrix
+* Sort the matrix by variance in descending order
+* Filter the matrix by top 500 genes
+* Sort the matrix by gene name
+
+
 > <hands-on-title> Prepare CNA data </hands-on-title>
->
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Calculate the variance of each gene in train matrix
-> > * Add the variance back to the matrix
-> > * Sort the matrix by variance in descending order
-> > * Filter the matrix by top 500 genes
-> > * Sort the matrix by gene name
->    {: .comment}
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -472,29 +485,29 @@ First, let's filter the cna data by variance.
 >
 > 7. Rename the output file to `train_cna_brca_500gene.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract the list of genes from the train matrix
-> > * Filter the test data by extracted genes
-> > * Sort the matrix by gene name
-> > * Transpose both train and test data
+>    > <comment-title> Short explanation of steps: </comment-title>
+>    > Here we will:
+>    > * Extract the list of genes from the train matrix
+>    > * Filter the test data by extracted genes
+>    > * Sort the matrix by gene name
+>    > * Transpose both train and test data
 >    {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_cna_brca_500gene.tabular` (output of **Advanced Cut** {% icon tool %})
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`
 >
-> 2. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+> 9. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `table` (output of **Advanced Cut** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `test_cna_brca.tabular`
 >    - *"Column to use from 2nd file"*: `Column: 1`
 >    - *"First line is a header line"*: `Yes`
 >
-> 3. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
+> 10. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
 >    - *"Number of header lines"*: `1`
 >    - In *"Column selections"*:
@@ -502,94 +515,93 @@ First, let's filter the cna data by variance.
 >            - *"on column"*: `Column: 1`
 >            - *"Flavor"*: `Alphabetical sort `
 >
-> 4. Rename the output file to `test_cna_brca_500gene.tabular`
+> 11. Rename the output file to `test_cna_brca_500gene.tabular`
 >
-> 5. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 12. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `train_cna_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `train_cna_brca_500gene_transposed.tabular`
+> 13. Rename the output file to `train_cna_brca_500gene_transposed.tabular`
 >
-> 6. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 14. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `test_cna_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `test_cna_brca_500gene_transposed.tabular`
+> 15. Rename the output file to `test_cna_brca_500gene_transposed.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
-> > * Add the subtype to the train and test matrix
-> > * And finally remove the `sample_id` from the matrices.
->    {: .comment}
+>     > <comment-title> Short explanation of steps: </comment-title>
+>     > Here we will:
+>     > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
+>     > * Add the subtype to the train and test matrix
+>     > * And finally remove the `sample_id` from the matrices.
+>     {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 16. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Train annotation`
+> 17. Rename the output to `Train annotation`
 >
-> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 18. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Test annotation`
+> 19. Rename the output to `Test annotation`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `train_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 20. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `train_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated train matrix cna`
+> 21. Rename the output to `Annotated train matrix cna`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `test_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 22. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `test_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated test matrix`
+> 23. Rename the output to `Annotated test matrix`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 24. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready train data - CNA`
+> 25. Rename the output to `TabPFN ready train data - CNA`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 26. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready test data - CNA`
+> 27. Rename the output to `TabPFN ready test data - CNA`
 {: .hands_on}
 
 Now the CNA data is ready for TabPFN. Let's do the same for GEX!
 
 ## GEX data
 
+Here we will:
+* Calculate the variance of each gene in train matrix
+* Add the variance back to the matrix
+* Sort the matrix by variance in descending order
+* Filter the matrix by top 500 genes
+* Sort the matrix by gene name
+
+
 > <hands-on-title> Prepare GEX data </hands-on-title>
->
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Calculate the variance of each gene in train matrix
-> > * Add the variance back to the matrix
-> > * Sort the matrix by variance in descending order
-> > * Filter the matrix by top 500 genes
-> > * Sort the matrix by gene name
->    {: .comment}
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -637,108 +649,108 @@ Now the CNA data is ready for TabPFN. Let's do the same for GEX!
 >
 > 7. Rename the output file to `train_gex_brca_500gene.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract the list of genes from the train matrix
-> > * Filter the test data by extracted genes
-> > * Sort the matrix by gene name
-> > * Transpose both train and test data
+>    > <comment-title> Short explanation of steps: </comment-title>
+>    > Here we will:
+>    > * Extract the list of genes from the train matrix
+>    > * Filter the test data by extracted genes
+>    > * Sort the matrix by gene name
+>    > * Transpose both train and test data
 >    {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_gex_brca_500gene.tabular` (output of **Advanced Cut** {% icon tool %})
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`
 >
-> 2. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+> 9. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `table` (output of **Advanced Cut** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `test_gex_brca.tabular`
 >    - *"Column to use from 2nd file"*: `Column: 1`
 >    - *"First line is a header line"*: `Yes`
 >
-> 3. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
->    - *"Number of header lines"*: `1`
->    - In *"Column selections"*:
->        - {% icon param-repeat %} *"Insert Column selections"*
->            - *"on column"*: `Column: 1`
->            - *"Flavor"*: `Alphabetical sort `
+> 10. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
+>     - *"Number of header lines"*: `1`
+>     - In *"Column selections"*:
+>       - {% icon param-repeat %} *"Insert Column selections"*
+>         - *"on column"*: `Column: 1`
+>           - *"Flavor"*: `Alphabetical sort `
 >
-> 4. Rename the output file to `test_gex_brca_500gene.tabular`
+> 11. Rename the output file to `test_gex_brca_500gene.tabular`
 >
-> 5. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `train_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
+> 12. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+>     - {% icon param-file %} *"Input tabular dataset"*: `train_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `train_gex_brca_500gene_transposed.tabular`
+> 13. Rename the output file to `train_gex_brca_500gene_transposed.tabular`
 >
-> 6. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 14. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `test_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `test_gex_brca_500gene_transposed.tabular`
+> 15. Rename the output file to `test_gex_brca_500gene_transposed.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
-> > * Add the subtype to the train and test matrix
-> > * And finally remove the `sample_id` from the matrices.
->    {: .comment}
+>     > <comment-title> Short explanation of steps: </comment-title>
+>     > Here we will:
+>     > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
+>     > * Add the subtype to the train and test matrix
+>     > * And finally remove the `sample_id` from the matrices.
+>     {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
->    - *"Operation"*: `Keep`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`, `Column: 16`
+> 16. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
+>     - *"Operation"*: `Keep`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Train annotation`
+> 17. Rename the output to `Train annotation`
 >
-> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
->    - *"Operation"*: `Keep`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`, `Column: 16`
+> 18. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
+>     - *"Operation"*: `Keep`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Test annotation`
+> 19. Rename the output to `Test annotation`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `train_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 20. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `train_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated train matrix - gex`
+> 21. Rename the output to `Annotated train matrix - gex`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `test_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 22. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `test_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated test matrix - gex`
+> 23. Rename the output to `Annotated test matrix - gex`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 24. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
 >    - *"Operation"*: `Discard`
 >    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+>      - *"Is there a header for the data's columns ?"*: `Yes`
+>        - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready train data - GEX`
+> 25. Rename the output to `TabPFN ready train data - GEX`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 26. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready test data - GEX`
+> 27. Rename the output to `TabPFN ready test data - GEX`
 {: .hands_on}
 
 Now it is time to run TabPFN for CNA and GEX data.
@@ -775,7 +787,7 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 
 > <hands-on-title> Flexynesis on CNA </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
@@ -786,19 +798,20 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
 > <hands-on-title> Flexynesis on GEX </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
@@ -809,13 +822,14 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 

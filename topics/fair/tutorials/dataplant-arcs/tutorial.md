@@ -73,7 +73,7 @@ Interoperable, Reusable) manner.
 
 For this tutorial you need three things:
  1. An account on [DataHUB](https://git.nfdi4plants.org)
- 2. The [ARCitect](https://www.nfdi4plants.de/nfdi4plants.knowledgebase/docs/ARCitect-Manual/index.html) tool installed
+ 2. The [ARCitect](https://nfdi4plants.github.io/nfdi4plants.knowledgebase/arcitect/) tool installed
  3. Example data to fill your ARC with
 
 Below we will walk you through each of these 3 setup steps.
@@ -125,9 +125,9 @@ Now we will install the ARCitect tool. This tool will help you create and fill y
 > <hands-on-title> Install the ARCitect tool on Linux  </hands-on-title>
 >
 > 1. Follow the installation instructions on the [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/) for your OS:
->    - [Windows Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_windows.html)
->    - [macOS Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_macos.html)
->    - [Linux Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_linux.html)
+>    - [Windows Installation Instructions](https://nfdi4plants.github.io/nfdi4plants.knowledgebase/arcitect/installation/#tab-21)
+>    - [macOS Installation Instructions](https://nfdi4plants.github.io/nfdi4plants.knowledgebase/arcitect/installation/#tab-22)
+>    - [Linux Installation Instructions](https://nfdi4plants.github.io/nfdi4plants.knowledgebase/arcitect/installation/#tab-23)
 >
 >    > <comment-title> ARCitect version </comment-title>
 >    >

@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: End-to-End Tissue Microarray Image Analysis with Galaxy-ME
+level: Intermediate
+subtopic: analyses
 zenodo_link: https://doi.org/10.5281/zenodo.7622545
 questions:
 - What tools are available for pre-processing multiplex tissue images in Galaxy?
@@ -26,6 +28,9 @@ contributions:
   reviewing:
     - kostrykin
     - beatrizserrano
+tags:
+  - Image segmentation
+  - Tissue imaging
 ---
 
 
@@ -60,18 +65,18 @@ Multiplex tissue images come in a variety of forms and file-types depending on t
 >    the shared data library (`GTN - Material` -> `{{page.topic_name}}`
 >     -> `{{page.title}}`):
 >    ```
->    https://zenodo.org/record/7622545/files/markers.csv
->    https://zenodo.org/record/7622545/files/exemplar_002_phenotypes.csv
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-01.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-02.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-03.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-04.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-05.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-06.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-07.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-08.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-09.ome.tiff
->    https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
+>    {{ page.zenodo_link }}/files/markers.csv
+>    {{ page.zenodo_link }}/files/exemplar_002_phenotypes.csv
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-01.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-02.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-03.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-04.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-05.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-06.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-07.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-08.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-09.ome.tiff
+>    {{ page.zenodo_link }}/files/exemplar-002-cycle-10.ome.tiff
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >

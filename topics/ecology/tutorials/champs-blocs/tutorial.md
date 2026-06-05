@@ -15,10 +15,10 @@ key_points:
 - Champs Blocs
 - Boulder Fields
 tags:
-  - Ecosystem EBV class
+  - ecosystem EBV class
   - EBV dataset
   - EBV workflow
-  - Marine ecosystems
+  - marine ecosystems
   - biodiversity
 contributions:
   authorship:
@@ -91,7 +91,7 @@ Now let's focus on our workflow on boulder field ecological state
 
 <div class="No" markdown="1">
 
-1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
+1. Download your data on ESTAMP [estamp.ofb.fr](https://estamp.ofb.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
 2. Unzip your folder. In the folder three files .csv will interest us :
 
    - champbloc_ivr.csv

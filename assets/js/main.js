@@ -33,7 +33,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 // collapse some box types by default
 // LEGACY
- $(".solution>h3,.details>h3,.tip>h3").each(function() {
+ $(".solution>h3,.details>h3,.tip>h3:not(.nobox)").each(function() {
     $(">*:not(h3)", $(this.parent)).toggle("box-collapsed");
     $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
 });
@@ -72,9 +72,22 @@ function cyoaChoice(text, cyoaId){
 
 		nonMatchingOptions.forEach(value => {
 			document.querySelectorAll(`.${value}`).forEach(el => el.classList.add("gtn-cyoa-hidden"));
+			document.querySelectorAll(`.${value} h1,.${value} h2,.${value}`).forEach(el => el.setAttribute("data-toc-skip",""));
+
 		})
 
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+		document.querySelectorAll(`.${text} h1,.${text} h2,.${text}`).forEach(el => {
+			if (el.getAttributeNode("data-toc-skip")) {
+				el.removeAttributeNode(el.getAttributeNode("data-toc-skip"));
+			}
+		});
+
+		var $myNav = $("#toc");
+		$myNav.empty();
+		Toc.init({
+			$nav: $("#toc")
+		});
 
 		// Just in case we mark it as checked (e.g. if default/from URL)
 		var input_el = document.querySelector(`input[value="${text}"]`)
@@ -154,23 +167,6 @@ function cyoaDefault(defaultOption, cyoaId){
 })(window, document);
 
 
-function fixDiffPresentation(codeBlock){
-	codeBlock.childNodes.forEach(x => {
-		if(x.nodeName == '#text'){
-			x.textContent = x.textContent.split('\n').map(q => { return q.startsWith(" ") ? q.slice(1) : q }).join('\n')
-		} else {
-			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
-				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-				$(x).text(fixed);
-			}
-		}
-	})
-}
-
-// For admin training
-document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-
 // Redirects
 //if(window.location.hostname === "galaxyproject.github.io") {
 //	// Redirect
@@ -203,3 +199,5 @@ document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
 	let bq_author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
 	bq.insertAdjacentHTML("beforeend", `<footer>${bq_author}${bq_url}</footer>`)
 })
+
+

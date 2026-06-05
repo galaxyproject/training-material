@@ -98,9 +98,9 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
+> 5. Make sure the Database/Build (dbkey) is set to `Mouse Dec. 2011 (GRCm38/mm10)(mm10)`
 >
->    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Mouse Dec. 2011 (GRCm38/mm10)(mm10)"%}
 >
 > 6. **Note**: If you are running the workflow taken from the **GTN**, then make sure the tool "**Tabular-to-FASTA**" (tool number 26)
 >    has Title Column labeled as "1" and Sequence Column as "2".
@@ -233,7 +233,7 @@ data manager to create these annotations to make them available for users.
 >
 > 1. {% tool [CustomProDB](toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0) %} with the following parameters:
 >    - *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
->      - *"Using reference genome"*: `Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)`
+>      - *"Using reference genome"*: `Mouse (Ensemble 89 mmusculus) (mm10/GRm38.p5)`
 >      - {% icon param-file %} *"BAM file"*: `HISAT_Output.BAM`
 >      - {% icon param-file %} *"VCF file"*: `Freebayes.vcf`
 >    - *"Create a variant FASTA for short insertions and deletions"*: `Yes`
@@ -320,7 +320,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 
 > <hands-on-title>compare assembled transcripts against a reference annotation</hands-on-title>
 >
-> 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
+> 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.10+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
 >    - *"Use Reference Annotation"*: `yes`
 >      - *"Choose the source for the reference annotation"*: `History`

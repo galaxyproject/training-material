@@ -32,10 +32,6 @@ requirements:
     title: "Basic knowledge of Python and JavaScript"
   - type: none
     title: "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
-  - type: "internal"
-    topic_name: dev
-    tutorials:
-      - architecture
 subtopic: core
 
 ---
@@ -96,7 +92,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    > ```
 >    {: .code-in}
 >
->    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
+>    {% icon warning %} Make sure you are using a [supported Python version](https://galaxyproject.org/admin/python/) (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
 >
 > 4. Activate your new virtual environment:
 >

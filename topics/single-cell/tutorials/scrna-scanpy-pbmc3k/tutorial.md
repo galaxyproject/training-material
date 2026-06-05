@@ -1289,6 +1289,39 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 > {: .solution}
 {: .question}
 
+The static plots above give us a first overview of the data, but it can be difficult to explore all dimensions at once. [Vitessce](http://vitessce.io) is an interactive visualization framework for single-cell data that allows you to explore multiple linked views simultaneously — for example, selecting cells in a UMAP and seeing their gene expression highlighted in a heatmap at the same time.
+
+We can generate a Vitessce configuration file directly from Scanpy plot by enabling the *"Make an interactive plot?"* option.
+
+> <hands-on-title>Explore marker genes interactively with Vitessce</hands-on-title>
+>
+> 1. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>    - *"Make an interactive plot?"*: `Yes`
+>    - *"Keys for annotations of observations/cells or variables/genes"*: `CST3, NKG7, PPBP`
+>
+> 2. Rename the `vitessce.json` output to `Vitessce config  - marker genes`
+>
+> 3. Click on the {% icon galaxy-eye %} (**View data**) icon of the `Vitessce config - marker genes` dataset to explore the marker genes interactively in Vitessce
+>
+>    ![Vitessce interactive visualization of marker genes](../../images/scrna-scanpy-pbmc3k/marker-genes-vitessce.gif "Vitessce showing CST3, NKG7 and PPBP expression in UMAP space.")
+>
+>    > <question-title></question-title>
+>    >
+>    > Explore the marker genes in Vitessce. Can you see differences in expression between cells? How does this compare to the static plot above?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > In Vitessce you can hover over individual cells to see their exact expression values, and select groups of cells to highlight them across views. The expression patterns of CST3, NKG7 and PPBP should match the static UMAP above, but now you can interactively explore which cells express each gene and compare them simultaneously.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+
 ## Clustering of the neighborhood graph
 
 Given the first visualization, we can now cluster the cells within a neighborhood graph.
@@ -1356,6 +1389,7 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 > >    * PPBP for cluster 7
 > {: .solution}
 {: .question}
+
 
 # Finding marker genes
 
@@ -1705,6 +1739,11 @@ In the next steps, we are mostly interested in the marker genes for each cluster
 
 Obtaining clusters of cells is quite straightforward. Determining what biological state is represented by each of those clusters is likely the most challenging task in scRNA-Seq data analysis. To do so, we need to bridge the gap between our current dataset and prior biological knowledge.
 
+{% include _includes/cyoa-choices.html option1="Manual" option2="CellTypist" default="Manual"
+       text="There are two approaches for cell type annotation. Choose the one that suits you best!" %}
+
+<div class="Manual" markdown="1">
+
 This biological knowledge is not always available in a consistent and quantitative manner. For example, the concept of "cell type" is not clearly defined. The interpretation of scRNA-seq data is often then quite manual.
 
 Fortunately in the case of our dataset, we can use canonical markers to known cell types:
@@ -1901,6 +1940,76 @@ With the annotated cell types, we can also visualize the expression of their can
 > >
 > {: .solution}
 {: .question}
+
+</div>
+
+<div class="CellTypist" markdown="1">
+
+The automated approach uses CellTypist, a tool that applies pre-trained logistic classifiers to predict cell identities directly from the normalized expression data, without requiring prior knowledge of canonical marker genes.
+
+> <comment-title></comment-title>
+>
+> CellTypist requires a log1p-normalized expression matrix (normalized to 10,000 counts per cell), which is already stored in the `raw` attribute of our AnnData object from the preprocessing steps above.
+>
+{: .comment}
+
+> <hands-on-title>Automated cell type annotation with CellTypist</hands-on-title>
+>
+> 1. {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input AnnData file"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
+>    - *"Select model from"*: `Cached`
+>      - *"Choose CellTypist model"*: `immune sub-populations combined from 20 tissues of 18 studies (v2)`
+>    - *"Refine the predicted labels by running the majority voting classifier after over-clustering"*: `Yes`
+>    - *"Annotation mode"*: `Choose the cell type with the largest score/probability as the final prediction`
+>    - *"Probability threshold"*: `0.5`
+>    - *"Generate a dotplot of the predicted cell types"*: `Yes`
+>      - *"Reference column in AnnData.obs for dotplot"*: `louvain`
+>      - *"Prediction label in AnnData.obs for dotplot"*: `predicted_labels`
+>      - *"Dotplot format"*: `png`
+>
+> 2. Rename the generated output `3k PBMC CellTypist annotated`
+>
+> 3. Inspect the dotplot output
+>
+>    ![CellTypist cached model dotplot](../../images/scrna-scanpy-pbmc3k/celltypist_dotplot_cached.png "CellTypist label transfer dotplot using the cached immune model, showing predicted cell type labels against the Louvain clusters.")
+>
+{: .hands_on}
+
+> <tip-title>Training a custom CellTypist model</tip-title>
+>
+> If you are working with a dataset from a tissue or organism not covered by the available CellTypist models, you can train a custom model using your own annotated AnnData. To do so, select *"Select model from"*: `History` → *"Train a model on an existing AnnData and use it"*, and provide your AnnData file along with the column name in `.obs` that contains your cell type labels (e.g. `louvain`). This is particularly useful when studying tissues with unique or poorly characterized cell populations.
+>
+{: .tip}
+
+> <hands-on-title>Explore CellTypist annotations interactively with Vitessce</hands-on-title>
+>
+> 1. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC CellTypist annotated`
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>      - *"Make an interactive plot?"*: `Yes`
+>      - *"Keys for annotations of observations/cells or variables/genes"*: `louvain`
+>
+> 2. Rename the `vitessce.json` output to `Vitessce config - CellTypist`
+>
+> 3. Click on the {% icon galaxy-eye %} (**View data**) icon of the `Vitessce config - CellTypist` dataset to explore the annotations interactively
+>
+>    ![Vitessce interactive visualization of CellTypist annotations](../../images/scrna-scanpy-pbmc3k/vitessce_animated.gif "Vitessce showing the UMAP with CellTypist-annotated cell types and Cell Sets panel.")
+>
+>    > <question-title></question-title>
+>    >
+>    > Compare this Vitessce view with the one generated before cell type annotation. What has changed?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > The Cell Sets panel now shows the annotated cell type names (B, CD14+, CD4+ T, CD8+ T, Dendritic, FCGR3A+, Megakaryocytes, NK) with their cell counts, instead of the numbered Louvain clusters. This allows you to interactively explore the biological identity of each cell population.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+</div>
 
 # Conclusion
 {% icon congratulations %} Well done, you’ve made it to the end! In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
