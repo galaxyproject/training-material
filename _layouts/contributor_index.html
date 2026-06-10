@@ -87,8 +87,28 @@ layout: base
 					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
                 </p>
+
+<div style="width: 30em;aspect-ratio: 3/1; display: flex; flex-direction: row; border: 1px solid grey;  border: 1px solid var(--border);  box-shadow: 5px 5px 0 var(--color-primary);">
+	<div style="width: 10em">
+		{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+	</div>
+	<div style="width: 20em">
+		<div style="font-size:1.5rem; margin:0.1rem">
+			{% if entity.orcid %}
+			{% icon orcid %}
+			{% endif %}
+			{{ entity.short_name | default: entity.name }}
+		</div>
+
+		<div>
+			Contributed to
+			{{ page.counts_fmt }}
+			<i>since {{ entity.joined }}</i>
+		</div>
+	</div>
+</div>
 				{% if page.editor_count > 0 %}
-				<h3>Editorial Roles</h3>
+				<h3>{{ page.editor_count }} Editorial Role{% if page.editor_count > 1%}s{% endif %}</h3>
 				<p>This contributor has taken on additional responsibilities as an editor for the following topics. They are responsible for ensuring that the content is up to date, accurate, and follows GTN best practices.</p>
 				<ul>
 				{% for res in page.editors %}
@@ -104,7 +124,7 @@ layout: base
 				{% endif %}
 
 				{% if page.tutorials_count > 0 %}
-				<h3>Tutorials</h3>
+				<h3>{{ page.tutorials_count }} Tutorial{% if page.tutorials_count > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.tutorials %}
 					{% assign stats_filters = stats_filters | push: res[0].url %}
@@ -130,7 +150,7 @@ layout: base
 				{% endif %}
 
 				{% if page.slides_count > 0 %}
-				<h3>Slides</h3>
+				<h3>{{ page.slides_count  }} Slide{% if page.slides_count  > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.slides %}
 					{% assign stats_filters = stats_filters | push: res[0].url %}
@@ -156,7 +176,7 @@ layout: base
 				{% endif %}
 
 				{% if page.learning_pathways_count > 0 %}
-				<h3>Learning Pathways</h3>
+				<h3>{{ page.learning_pathways_count  }}  Learning Pathway{% if page.learning_pathways_count  > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.learning_pathways %}
 					{% assign stats_filters = stats_filters | push: res[0].url %}
@@ -176,7 +196,7 @@ layout: base
 				{% endif %}
 
 				{% if page.faqs_count > 0 %}
-				<h3>FAQs</h3>
+				<h3>{{ page.faqs_count }} FAQ{% if page.faqs_count > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.faqs %}
 					{% assign stats_filters = stats_filters | push: res[0].url %}
@@ -196,7 +216,7 @@ layout: base
 				{% endif %}
 
 				{% if page.videos_count > 0 %}
-				<h3>Video Recordings</h3>
+				<h3>{{ page.videos_count }} Video Recording{% if page.videos_count > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.videos %}
 					<li>
@@ -221,7 +241,7 @@ layout: base
 				{% endif %}
 
 				{% if page.events_count > 0 %}
-				<h3>Events</h3>
+				<h3>{{ page.events_count }} Event{% if page.events_count > 1%}s{% endif %}</h3>
 				<ul>
 				{% for res in page.events %}
 					{% assign stats_filters = stats_filters | push: res[0].url %}
@@ -318,6 +338,10 @@ layout: base
 			<div class="col-md-3">
 				<div>
 					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+				</div>
+
+				<div class="contact-items text-muted">
+					<i>GTN contributor since {{ entity.joined }}</i>
 				</div>
 
 				<h2>External Links</h2>
