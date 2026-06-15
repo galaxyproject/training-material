@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Quantitative Analysis of Histological Staining Using Color Deconvolution / Quantitative Analysis of Histological Staining Using Color Deconvolution / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@25a745147e0fbf6ca4630783214802b03232d870",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Quantitative Analysis of Histological Staining Using Color Deconvolution">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-06-15 10:30:49 +0000">
+<meta name="DC.creator" content="Diana Chiang Jurado"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Quantitative Analysis of Histological Staining Using Color Deconvolution / Hands-on: Quantitative Analysis of Histological Staining Using Color Deconvolution">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Quantitative Analysis of Histological Staining Using Color Deconvolution",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-06-15 10:30:49 +0000",
+  "datePublished": "2026-06-15 10:30:49 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "501864659",
+      "url": "https://gepris-extern.dfg.de/gepris/projekt/501864659?language=en",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "NFDI4Bioimage",
+        "description": "[NFDI4BIOIMAGE](https://nfdi4bioimage.de/) is a nationwide community of researchers, imaging specialists and data experts who work with biological image data. We support anyone who generates,\nanalyses or manages microscopy and bioimaging data. Our aim is to make imaging data easier to find, access, reuse and share by providing practical tools,\nclear guidance and hands on training. We collaborate closely with laboratories and research communities across Germany to understand their needs and develop solutions\nthat help with real everyday challenges. Whether you are building new workflows, exploring advanced analysis methods or improving your data management,\n[NFDI4BIOIMAGE](https://nfdi4bioimage.de/) offers support, expertise and a welcoming network.\n",
+        "url": "https://nfdi4bioimage.de",
+        "logo": "/training-material/shared/images/nfdi4bioimage.jpeg"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "Manually scoring histological staining across dozens of images is time-consuming and subjective. Two researchers looking at the same slide may reach different conclusions about how much staining is present. Computational automatize quantification solves this problem: it applies the same criteria to every image, produces a numeric result, and scales to large datasets without additional effort.",
+  "learningResourceType": "e-learning",
+  "name": "Quantitative Analysis of Histological Staining Using Color Deconvolution",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Apply color deconvolution to separate stain channels in histological images\n- Extract and isolate the stain channel of interest (e.g. DAB)\n- Apply automatic thresholding to distinguish stained from unstained regions\n- Calculate the percentage of positively stained area relative to total tissue area\n- Interpret quantitative staining results across multiple images",
+  "keywords": [
+    "Imaging",
+    "Microscopy",
+    "Bioimaging",
+    "Histology",
+    "pathology"
+  ],
+  "description": "## Abstract\n\nManually scoring histological staining across dozens of images is time-consuming and subjective. Two researchers looking at the same slide may reach different conclusions about how much staining is present. Computational automatize quantification solves this problem: it applies the same criteria to every image, produces a numeric result, and scales to large datasets without additional effort.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can I quantify the percentage of stained area in histological images?\n - How does color deconvolution separate individual stain components from brightfield microscopy images?\n - How can I apply this workflow to IHC stained tissue sections?\n\n\n## Learning Objectives\n\n- Apply color deconvolution to separate stain channels in histological images\n- Extract and isolate the stain channel of interest (e.g. DAB)\n- Apply automatic thresholding to distinguish stained from unstained regions\n- Calculate the percentage of positively stained area relative to total tissue area\n- Interpret quantitative staining results across multiple images\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "@id": "https://orcid.org/0000-0002-5857-1477"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "@id": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/imagej",
+      "name": "ImageJ2"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/20629365",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Quantitative Analysis of Histological Staining Using Color Deconvolution</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-badge-small contributor-kostrykin"><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I quantify the percentage of stained area in histological images?</p>
+</li>
+        
+        <li><p>How does color deconvolution separate individual stain components from brightfield microscopy images?</p>
+</li>
+        
+        <li><p>How can I apply this workflow to IHC stained tissue sections?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Apply color deconvolution to separate stain channels in histological images</p>
+</li>
+        
+        <li><p>Extract and isolate the stain channel of interest (e.g. DAB)</p>
+</li>
+        
+        <li><p>Apply automatic thresholding to distinguish stained from unstained regions</p>
+</li>
+        
+        <li><p>Calculate the percentage of positively stained area relative to total tissue area</p>
+</li>
+        
+        <li><p>Interpret quantitative staining results across multiple images</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/20629365">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/workflows/" title="Quantitative Analysis of Histological Staining Using Color Deconvolution workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 15, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 15, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Manually scoring histological staining across dozens of images is time-consuming and subjective. Two researchers looking at the same slide may reach different conclusions about how much staining is present. Computational automatize quantification solves this problem: it applies the same criteria to every image, produces a numeric result, and scales to large datasets without additional effort.</p>
+
+<p>This tutorial walks you through a Galaxy workflow that quantifies stained area in brightfield histological images, from raw microscopy image to a final table of percentages ready for statistical analysis. The workflow also includes an optional step that detects individual stained regions and exports them as polygon ROIs, which can be uploaded to image management platforms like <a href="https://www.openmicroscopy.org/omero/">OMERO</a> for visual validation, annotation, and collaborative review.</p>
+
+<p>The approach is built around color deconvolution, a technique that mathematically separates overlapping stain signals so you can measure each one independently.</p>
+
+<p>In this tutorial you will work with <strong>IHC (Immunohistochemistry)</strong>, detecting CD11b-positive myeloid cells using a DAB chromogen.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-workflow-applicability"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Workflow applicability</div>
+
+  <p>This tutorial uses IHC (CD11b/DAB) images as the working example. The same workflow applies directly to <strong>Masson’s Trichrome (MT)</strong> staining for collagen quantification.The only difference is selecting channel index that correspondes to the aniline blue instead DAB in Step 2. MT support will be added as an extended version of this tutorial in the future.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#background-what-is-color-deconvolution-and-why-do-we-need-it" id="markdown-toc-background-what-is-color-deconvolution-and-why-do-we-need-it">Background: What Is Color Deconvolution and Why Do We Need It?</a></li>
+  <li><a href="#the-dataset-cardiac-tissue-after-myocardial-infarction" id="markdown-toc-the-dataset-cardiac-tissue-after-myocardial-infarction">The Dataset: Cardiac Tissue After Myocardial Infarction</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data Upload</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-1--normalization" id="markdown-toc-step-1--normalization">Step 1 — Normalization</a></li>
+  <li><a href="#step-2--color-deconvolution" id="markdown-toc-step-2--color-deconvolution">Step 2 — Color Deconvolution</a></li>
+  <li><a href="#step-3--split-channels-and-extract-the-stain-of-interest" id="markdown-toc-step-3--split-channels-and-extract-the-stain-of-interest">Step 3 — Split Channels and Extract the Stain of Interest</a></li>
+  <li><a href="#step-4--capture-total-image-area" id="markdown-toc-step-4--capture-total-image-area">Step 4 — Capture Total Image Area</a></li>
+  <li><a href="#step-5--threshold-the-stain-channel" id="markdown-toc-step-5--threshold-the-stain-channel">Step 5 — Threshold the Stain Channel</a></li>
+  <li><a href="#step-6--generate-rois-for-visual-validation" id="markdown-toc-step-6--generate-rois-for-visual-validation">Step 6 — Generate ROIs for Visual Validation</a></li>
+  <li><a href="#step-7--extract-quantitative-features" id="markdown-toc-step-7--extract-quantitative-features">Step 7 — Extract Quantitative Features</a></li>
+  <li><a href="#step-8--compile-results-and-calculate-percent-stained-area" id="markdown-toc-step-8--compile-results-and-calculate-percent-stained-area">Step 8 — Compile Results and Calculate Percent Stained Area</a>    <ol>
+      <li><a href="#merge-the-feature-results" id="markdown-toc-merge-the-feature-results">Merge the Feature Results</a></li>
+      <li><a href="#add-the-total-area-column" id="markdown-toc-add-the-total-area-column">Add the Total Area Column</a></li>
+      <li><a href="#calculate-percent-stained-area" id="markdown-toc-calculate-percent-stained-area">Calculate Percent Stained Area</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="background-what-is-color-deconvolution-and-why-do-we-need-it">Background: What Is Color Deconvolution and Why Do We Need It?</h1>
+
+<p>When two stains are applied to the same tissue section, for example, hematoxylin (blue) and DAB (brown) in IHC, their colors overlap in the RGB image. This means that one cannot simply threshold on “brownness” or “blueness” because the RGB channels mix all stain signals together.</p>
+
+<p><strong>Color deconvolution</strong> solves this by using a <strong>stain matrix</strong>: a set of vectors that describe how much each stain absorbs light in the red, green, and blue channels. The algorithm inverts this matrix to compute the optical density of each stain independently at every pixel, producing one grayscale image per stain component. Higher pixel values in the output correspond to stronger staining.</p>
+
+<p>In this tutorial, we use the <strong>H-E-DAB (HED)</strong> preset:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Channel</th>
+      <th>Index</th>
+      <th>IHC interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Channel 1</td>
+      <td>0</td>
+      <td>Hematoxylin (nuclei, counterstain)</td>
+    </tr>
+    <tr>
+      <td>Channel 2</td>
+      <td>1</td>
+      <td><strong>DAB — stain of interest</strong></td>
+    </tr>
+    <tr>
+      <td>Channel 3</td>
+      <td>2</td>
+      <td>Residual</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-is-a-stain-vector"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-a-stain-vector" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: What is a stain vector?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>A stain vector describes how much a given stain absorbs light in each of the three RGB color channels. For example, DAB absorbs strongly in the blue channel and weakly in the red channel, while hematoxylin absorbs more in the red and green channels. These values are determined empirically from pure stain reference images or taken from published standards. The color deconvolution algorithm uses these vectors to solve a system of linear equations and separate the mixed stain signals pixel by pixel.</p>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-when-to-consider-non-negative-matrix-factorization-nmf-instead"><button class="gtn-boxify-button details" type="button" aria-controls="details-when-to-consider-non-negative-matrix-factorization-nmf-instead" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: When to consider Non-negative Matrix Factorization (NMF) instead</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>For most standard IHC images with a clean DAB + hematoxylin combination, the HED preset is sufficient. However, when staining is uneven, the signal is weak, or there is significant spectral overlap, a data-driven approach may give better results.</p>
+
+  <p><strong>Non-negative Matrix Factorization (NMF)</strong> learns the stain components directly from the image data, without relying on predefined stain vectors. This makes it more flexible when staining deviates from standard reference spectra, for example, due to differences in staining protocols, tissue processing, or scanner calibration. To use NMF, select <code class="language-plaintext highlighter-rouge">Non-negative matrix factorization</code> as the transformation type. Since NMF components are not labeled by stain name, you will need to visually inspect the output channels to identify which one corresponds to your stain of interest.</p>
+
+</blockquote>
+
+<h1 id="the-dataset-cardiac-tissue-after-myocardial-infarction">The Dataset: Cardiac Tissue After Myocardial Infarction</h1>
+
+<p>The images in this tutorial come from a study (<span class="citation"><a href="#Rettkowski2025">Rettkowski <i>et al.</i> 2025</a></span>) investigating the role of 4-oxo retinoic acid (4-oxo RA) in maintaining hematopoietic stem cell dormancy after myocardial infarction (MI). Understanding this biological context helps interpret what the numbers mean.</p>
+
+<p><strong>The experimental model:</strong> Mouse hearts were subjected to LAD coronary artery ligation to induce MI. Animals were treated with 4-oxo RA or with the vehicle solution (DSMO) after MI. Serial cardiac sections were stained to assess the post-infarction immune response.</p>
+
+<p><strong>IHC for CD11b</strong> detects myeloid leukocytes (monocytes, macrophages, neutrophils), a readout of local inflammation. Higher CD11b-positive area = more immune cell infiltration after MI.</p>
+
+<p>The hypothesis in the study is that 4-oxo RA reduces immune cell mobilization from bone marrow, leading to less inflammatory infiltration (reduced presence of CD11b+ cells positive stained regions) that would lead to less fibrosis and prevent adverse cardiac remodeling concluding on preserved cardiac function.</p>
+
+<p><strong>What you are working with:</strong> In the original study, regions of interest (ROIs) were manually selected from whole-slide images to focus on specific anatomical zones (Infarct, Border, Remote) and exclude tissue artifacts. For this tutorial, we will keep it simple and focus on analyzing the whole-slide image and process the data as a list of collection allowing you to focus entirely in understanding the analysis and quantification workflow.</p>
+
+<p>Here is an example of what the raw input images look like:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/example_IHC_input.png" alt="Example IHC image showing CD11b staining in brown (DAB) with hematoxylin counterstain in blue. The brown signal marks myeloid cell infiltration in cardiac tissue post-MI." width="657" height="548" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/example_IHC_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> whole-slide image IHC</figcaption></figure>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/example_MT_input.png" alt="Example Masson's Trichrome image showing collagen in blue (aniline blue), muscle in red (Biebrich scarlet), and nuclei in dark purple. Blue area reflects fibrotic remodeling." width="657" height="548" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/example_MT_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Example input: Masson's Trichrome staining in cardiac tissue after myocardial infarction.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-sample-data-vs-full-dataset"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Sample data vs. full dataset</div>
+
+  <p>The images provided here are a representative subset of the full dataset from <span class="citation"><a href="#Rettkowski2025">Rettkowski <i>et al.</i> 2025</a></span>. In practice, workflows like this one are run across large image batches spanning multiple experiments, animals, conditions, and anatomical zones. The workflow you will run here is similar to what was applied at scale in the original study. The Masson’s Trichrome image is shown for reference. MT quantification follows the same workflow and will be covered in a future version of this tutorial.</p>
+
+</blockquote>
+
+<h2 id="data-upload">Data Upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-your-images"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Upload your images</div>
+
+  <ol>
+    <li>Create a new history and name it something meaningful, e.g. <code class="language-plaintext highlighter-rouge">Histology Stain Quantification</code></li>
+    <li>Import the images from <a href="https://zenodo.org/records/20629365">Zenodo</a> or from the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> → <code class="language-plaintext highlighter-rouge">imaging</code> → <code class="language-plaintext highlighter-rouge">Quantitative Analysis of Histological Staining Using Color Deconvolution</code>):
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Tx</code> (treated)</li>
+        <li><code class="language-plaintext highlighter-rouge">Vehicle</code> (DMSO or untreated)</li>
+      </ul>
+
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20629365/files/Tx_Sample1.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample2.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample3.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample4.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample5.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample6.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample7.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample8.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample9.tiff
+https://zenodo.org/records/20629365/files/Tx_Sample10.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample1.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample2.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample3.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample4.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample5.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample6.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample7.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample8.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample9.tiff
+https://zenodo.org/records/20629365/files/Vehicle_Sample10.tiff
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Rename the datasets with descriptive names if needed (e.g. <code class="language-plaintext highlighter-rouge">IHC_TXsample1.tiff</code> or <code class="language-plaintext highlighter-rouge">IHC_Vehiclesample1.tiff</code>). In total, there should be 20 tiff images, 10 for each group.</li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tiff</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tiff</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Organize your images into a <strong>dataset collection</strong>. Collections allow the workflow to process all images in a single run.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Advanced Build List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>     <p>You are in collection building wizard. Choose <strong>Flat List</strong> and click ‘Next’ button at the right bottom corner.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_selector.png" alt="collection building wizard flat list" width="15%" /></p>   </li>   <li>     <p>Double clcik on the file names to edit. For example, remove file extensions or common prefix/suffixes to cleanup the names.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_edit.png" alt="edit and build a list collection" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Build</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-image-requirements"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Image requirements</div>
+
+    <p>Images must be brightfield RGB microscopy images in TIFF format. Fluorescence images are not compatible with color deconvolution. Avoid images with strong artifacts, out-of-focus regions, or uneven illumination, as these reduce quantification accuracy. Therefore, it is strongly recommended that you insepct your images one-by-one before proceeding to the pre-processing steps.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The workflow associated with this tutorial requires a dataset collection as input. The steps described below are explained individually for clarity, but in Galaxy all images are processed together in a single batch run. For this reason, make sure your images are named descriptively before building the collection — the final results table will use those names to identify each sample.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Advanced Build List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>     <p>You are in collection building wizard. Choose <strong>Flat List</strong> and click ‘Next’ button at the right bottom corner.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_selector.png" alt="collection building wizard flat list" width="15%" /></p>   </li>   <li>     <p>Double clcik on the file names to edit. For example, remove file extensions or common prefix/suffixes to cleanup the names.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_edit.png" alt="edit and build a list collection" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Build</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="step-1--normalization">Step 1 — Normalization</h1>
+
+<p>Variations in staining intensity across images due to differences in staining batches, slide preparation, or scanner settings, can affect the consistency of downstream quantification. To reduce this variability, we apply histogram equalization as a preprocessing step before color deconvolution.</p>
+
+<p>We use <strong>CLAHE (Contrast Limited Adaptive Histogram Equalization)</strong>, which enhances local contrast without amplifying noise, making stain signals more consistent across the image batch.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-about-stain-normalization"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: About stain normalization</div>
+
+  <p>More advanced stain normalization methods such as Macenko or Reinhard normalization can standardize color appearance across slides by transferring the stain profile of a reference image to all others. These methods are not currently available as Galaxy tools, but we are working on adding them. If you have access to them in the meantime (e.g. via Python or QuPath), applying them before this workflow may further improve consistency across batches.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-apply-histogram-equalization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Apply histogram equalization</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/histogram_equalization/ip_histogram_equalization/0.25.2+galaxy0" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.25.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input image”</em>: your image collection</li>
+        <li><em>“Histogram equalization algorithm”</em>: <code class="language-plaintext highlighter-rouge">CLAHE</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Your normalized output should look similar to this example. Notice how the contrast is more balanced compared to the raw input, with stain signals appearing more uniform 
+across the tissue:</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/example_normalized_output.png" alt="Example output after CLAHE histogram equalization. " width="2464" height="2056" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/example_normalized_output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Example output after CLAHE normalization.</figcaption></figure>
+
+<h1 id="step-2--color-deconvolution">Step 2 — Color Deconvolution</h1>
+
+<p>This step separates the mixed stain signals in your brightfield image into individual channels. We use the H-E-DAB (HED) color space for this dataset. Note that the staining in these images does not follow a typical H-DAB pattern, using the H-DAB option would yield inaccurate results. If your own images present standard H-DAB coloring, you can use the H-DAB deconvolution option instead.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-color-deconvolution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run color deconvolution</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/color_deconvolution/ip_color_deconvolution/0.9+galaxy0" title="Perform color deconvolution or transformation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform color deconvolution or transformation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.9+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input image”</em>: your image collection</li>
+        <li><em>“Transformation type”</em>: <code class="language-plaintext highlighter-rouge">Deconvolve RGB into Hematoxylin + Eosin + DAB</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-output"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Output</div>
+
+        <p>Each input image produces one multi-channel TIFF. Each channel is a grayscale image where brighter pixels indicate higher optical density (stronger staining) for that component. You will extract the relevant channel in the next step.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The figure below shows what to expect after deconvolution for an IHC image. The DAB channel (right) clearly isolates the brown signal from the blue hematoxylin counterstain:</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/deconvolution_output_IHC.png" alt="Color deconvolution output for IHC. " width="2464" height="2056" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/deconvolution_output_IHC.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Color deconvolution output for IHC (CD11b/DAB).</figcaption></figure>
+
+<h1 id="step-3--split-channels-and-extract-the-stain-of-interest">Step 3 — Split Channels and Extract the Stain of Interest</h1>
+
+<p>The deconvolution output is a multi-channel TIFF containing one channel per stain component. You need to split it into individual single-channel images and then select the one that corresponds to your stain of interest.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-split-the-multi-channel-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Split the multi-channel image</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy0" title="Split image along axes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split image along axes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.5+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Image to split”</em>: output of <strong>Perform color deconvolution or transformation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This produces a collection of three single-channel grayscale images — one per stain component. Now extract the DAB channel:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-dab-channel-ihc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract the DAB channel (IHC)</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: output of <strong>Split image along axes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by index</code></li>
+        <li><em>“Element index”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-why-index-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why index 1?</div>
+
+        <p>The split collection is zero-indexed. In the HED preset, Channel 2 (DAB) corresponds to index <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/isolated_DAB_channel.png" alt="Isolated DAB channel after splitting the deconvolution output. The grayscale image shows the CD11b/DAB signal separated from the other stain components." width="2464" height="2056" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/isolated_DAB_channel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Isolated DAB channel (index 1) after color deconvolution and split.</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does a high pixel intensity value mean in the deconvolved DAB channel?</li>
+    <li>What index would you use to extract the hematoxylin channel from an HED deconvolution?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Higher pixel values in the deconvolved channel represent stronger staining (higher optical density of that dye at that location). Darker brown regions in the original IHC image become bright pixels in the DAB channel.</li>
+      <li>Hematoxylin is Channel 1, so you would use index <code class="language-plaintext highlighter-rouge">0</code>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="step-4--capture-total-image-area">Step 4 — Capture Total Image Area</h1>
+
+<p>To calculate the percentage of stained area, you need two numbers: how many pixels are stained, and how many pixels make up the whole tissue image. The stained pixels will be measured later from the thresholded image. The workflow performs this step automatically, but here we will go through it together to understand what information is being extracted and why image dimensions matter for computing the total area.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-image-dimensions-from-the-original-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get image dimensions from the original image</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1" title="Show image info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Show image info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.7.1+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Image”</em>: your original image collection (the same collection you provided as input to color deconvolution)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-why-use-the-original-image-here"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why use the original image here?</div>
+
+        <p>We extract dimensions from the raw input image (not the deconvolved output) because the original image faithfully represents the full tissue area captured by the microscope. This ensures the total area denominator is correct regardless of any processing applied downstream.</p>
+
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span> to extract the image width:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: output of <strong>Show image info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">Width =</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span> to extract the image height:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: output of <strong>Show image info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">Height =</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3" title="Text transformation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text transformation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> to isolate the width value:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: output of <strong>Select</strong> (Width) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/.*= //</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-does-this-expression-do"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What does this expression do?</div>
+
+        <p>The image info tool returns lines like <code class="language-plaintext highlighter-rouge">Width = 1024</code>. The sed expression <code class="language-plaintext highlighter-rouge">s/.*= //</code> strips everything up to and including <code class="language-plaintext highlighter-rouge">= </code>, leaving just the number. This is necessary so it can be used in arithmetic downstream.</p>
+
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3" title="Text transformation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text transformation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> to isolate the height value:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: output of <strong>Select</strong> (Height) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/.*= //</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> to combine width and height side by side:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Paste”</em>: output of <strong>Text transformation</strong> (width) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“and”</em>: output of <strong>Text transformation</strong> (height) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0" title="Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1+galaxy0)</span> to calculate total pixel area (width × height):
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: output of <strong>Paste</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>In <em>“Expressions”</em> → <em>“Insert Expressions”</em>:
+          <ul>
+            <li><em>“Add expression”</em>: <code class="language-plaintext highlighter-rouge">c1 * c2</code></li>
+          </ul>
+        </li>
+        <li><em>“If an expression cannot be computed for a row”</em>: <code class="language-plaintext highlighter-rouge">Fail the entire tool run</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>An image is 1024 × 768 pixels. What is the total pixel area, and why does it matter?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Total pixel area = 1024 × 768 = 786,432 pixels. This is the denominator in the percentage formula: (stained pixels / total pixels) × 100. Without it you can count stained pixels in absolute terms but cannot compare meaningfully across images of different sizes.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="step-5--threshold-the-stain-channel">Step 5 — Threshold the Stain Channel</h1>
+
+<p>Now you will convert the extracted grayscale channel into a binary mask: pixels are classified as either stained (value = 1) or unstained (value = 0). This is the foundation for measuring stained area, and a very important step.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-apply-otsu-thresholding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Apply Otsu thresholding</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0" title="Threshold image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Threshold image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.25.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input image”</em>: output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (your extracted stain channel)</li>
+        <li><em>“Thresholding method”</em>: <code class="language-plaintext highlighter-rouge">Globally adaptive / Otsu</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Otsu’s method automatically finds the threshold that best separates the two pixel populations (stained and unstained) by minimizing the variance within each group. Because it adapts to each image’s intensity distribution, you do not need to set a manual value per image, making the results more consistent across a large batch. Other thresholding methods are also available in the tool, so feel free to select the one that best fits your images. Additionally, if you would like to restrict the threshold for positive pixel detection, you can adjust the offset value slightly. A value between 0.0 and 0.01 is a good starting point.</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/threshold_output_IHC.png" alt="Thresholding output for IHC. Binary Otsu mask where white pixels represent DAB-positive area." width="2464" height="2056" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/threshold_output_IHC.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Otsu thresholding output for IHC (CD11b/DAB).</figcaption></figure>
+
+<h1 id="step-6--generate-rois-for-visual-validation">Step 6 — Generate ROIs for Visual Validation</h1>
+
+<p>Before moving to quantification, it is good practice to visually verify that the thresholded mask captures what you expect. This step detects stained regions in the binary mask and generates polygon ROIs around them. In IHC images like ours, the CD11b-positive cells are small and scattered across the tissue, so the resulting ROIs appear as small point-like outlines that can be difficult to spot in the Galaxy image viewer at full scale. Zooming in on the outline image will help you inspect them more clearly. For a richer validation experience, the ROI files can be uploaded to OMERO and overlaid directly on the original images. At full scale (left), the yellow outlines mark the overall distribution of detected DAB-positive regions. Zooming in (right) makes individual ROIs much easier to identify, as shown below.</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/OMERO_ROI_overlay.png" alt="IHC image with detected ROI polygons overlaid in yellow in OMERO. Left: full image scale showing the overall distribution of CD11b-positive detections. Right: zoomed view showing individual ROIs corresponding to small DAB-positive cells scattered across the cardiac tissue." width="1109" height="560" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/OMERO_ROI_overlay.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> ROI overlay in OMERO at full scale and zoomed view for visual validation of detected stained regions.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-detect-stained-regions-and-generate-rois"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Detect stained regions and generate ROIs</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/imagej2_analyze_particles_binary/imagej2_analyze_particles_binary/20240614+galaxy0" title="Analyze particles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Analyze particles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 20240614+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select image”</em>: output of <strong>Threshold image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Black background”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Size (pixel^2)”</em>: <code class="language-plaintext highlighter-rouge">2-Infinity</code></li>
+        <li><em>“Show”</em>: <code class="language-plaintext highlighter-rouge">Outlines</code></li>
+        <li><em>“Export particles outlines coordinates”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-does-the-size-filter-do"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What does the size filter do?</div>
+
+        <p>Setting a minimum particle size of 2 pixels excludes very small specks that are likely noise or staining artifacts rather than real signal. Adjust this value depending on the scale and resolution of your images.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This produces two outputs per image: an outline image showing detected particles, and a tabular file with ROI coordinates. The table lists each detected region as a polygon with its corresponding pixel coordinates, label, and timepoint/z-slice index, as shown below.</p>
+
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/ROI_table.png" alt="Example ROI coordinate table output from Analyze Particles, showing polygon shapes with pixel coordinates for each detected stained region." width="1910" height="1176" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/ROI_table.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> ROI coordinate table output from Analyze Particles.</figcaption></figure>
+
+<p>Use the outline image to quickly check whether the detected regions match the staining you see in the original image before proceeding to quantification.</p>
+
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/ROI_outline.png" alt="Outline image showing detected DAB-positive particles drawn over the binary mask." width="2464" height="2056" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/ROI_outline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Outline image showing detected particles from Analyze Particles.</figcaption></figure>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-uploading-rois-to-omero-for-validation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uploading-rois-to-omero-for-validation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Uploading ROIs to OMERO for validation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If your facility uses OMERO for image management, the ROI files generated here can be uploaded alongside the original whole-slide images to overlay and visually validate your threshold results at scale. For a full walkthrough of how to work with OMERO in Galaxy, see the <a href="/training-material/topics/imaging/tutorials/omero-suite/tutorial.html">Overview of the Galaxy OMERO-suite tutorial</a>.</p>
+
+</blockquote>
+
+<h1 id="step-7--extract-quantitative-features">Step 7 — Extract Quantitative Features</h1>
+
+<p>With a validated binary mask, you can now measure the stained area. The feature extraction tool measures properties of the labeled regions in the mask, using the grayscale stain channel for intensity information.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-measure-stained-pixel-area-and-intensity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Measure stained pixel area and intensity</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1" title="Extract image features tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract image features</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.25.2+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Label map”</em>: output of <strong>Threshold image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Features to compute”</em>: <code class="language-plaintext highlighter-rouge">Use the intensity image to compute additional features</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Intensity image”</em>: output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“Available features”</em>: <code class="language-plaintext highlighter-rouge">Label from the label map</code>, <code class="language-plaintext highlighter-rouge">Area</code>, <code class="language-plaintext highlighter-rouge">Filled area</code>, <code class="language-plaintext highlighter-rouge">Mean intensity</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-do-these-features-mean"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What do these features mean?</div>
+
+        <ul>
+          <li><strong>Label from the label map</strong> — the pixel class (1 = stained region)</li>
+          <li><strong>Area</strong> — the number of stained pixels (this is what you will use for the percentage)</li>
+          <li><strong>Filled area</strong> — area including any internal holes in the stained region</li>
+          <li><strong>Mean intensity</strong> — average pixel intensity within the stained region, which can complement the area measurement as a proxy for staining strength</li>
+        </ul>
+
+        <p>Additional features such as perimeter, centroid, or eccentricity are also available and can be selected depending on your analysis needs.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-8--compile-results-and-calculate-percent-stained-area">Step 8 — Compile Results and Calculate Percent Stained Area</h1>
+
+<p>You now have, for each image: the stained pixel area (from feature extraction) and the total pixel area (from image dimensions). This final section merges all per-sample results into a single table and calculates the percentage.</p>
+
+<h2 id="merge-the-feature-results">Merge the Feature Results</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-collapse-per-image-results-into-one-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Collapse per-image results into one table</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> to get the first dataset from the feature collection (used to extract the header row):
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: output of <strong>Extract image features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">The first dataset</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Show beginning1" title="Select first tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select first</strong></span> to isolate the header row:
+      <ul>
+        <li><em>“Select first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“from”</em>: output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Show tail1" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong></span> to extract the data row from each image’s feature file:
+      <ul>
+        <li><em>“Select last”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“from”</em>: output of <strong>Extract image features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> to get sample file names:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: output of <strong>Extract image features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> to merge all data rows into one file:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em>: output of <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3" title="Create text file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create text file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> to create a <code class="language-plaintext highlighter-rouge">sample_id</code> column header:
+      <ul>
+        <li><em>“Line”</em>: <code class="language-plaintext highlighter-rouge">sample_id</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> to combine the sample_id header with the feature header:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: output of <strong>Create text file</strong> (sample_id) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: output of <strong>Select first</strong> (feature header) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> to combine sample names with their corresponding data rows:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: output of <strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="cat1" title="Concatenate multiple datasets or collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate multiple datasets or collections</strong></span> to build the full table with header:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: output of <strong>Paste</strong> (header row) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Dataset”</em> → <em>“Insert Dataset”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of <strong>Paste</strong> (data rows) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="add-the-total-area-column">Add the Total Area Column</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-merge-the-total-area-values"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Merge the total area values</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> to extract the total area column (column 3) from the computed area file:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Compute</strong> (width × height) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> to merge the total area values across samples:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3" title="Create text file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create text file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> to create a <code class="language-plaintext highlighter-rouge">total_area</code> column header.
+      <ul>
+        <li><em>“Line”</em>: <code class="language-plaintext highlighter-rouge">total_area</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.5+galaxy3" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> to prepend the header to the total area values:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: output of <strong>Create text file</strong> (total_area) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Dataset”</em> → <em>“Insert Dataset”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of <strong>Collapse Collection</strong> (total area) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> to join the feature results table with the total area column:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: output of <strong>Concatenate multiple datasets or collections</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="calculate-percent-stained-area">Calculate Percent Stained Area</h2>
+
+<p>You now have a single table with all the values you need. The final step divides stained area by total area and multiplies by 100.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compute-percent-stained-area"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Compute percent stained area</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0" title="Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>Paste</strong> (full table) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Expressions”</em> → <em>“Insert Expressions”</em>:
+          <ul>
+            <li><em>“Add expression”</em>: <code class="language-plaintext highlighter-rouge">c4 / c6 * 100</code></li>
+            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">percent_area</code></li>
+          </ul>
+        </li>
+        <li><em>“If an expression cannot be computed for a row”</em>: <code class="language-plaintext highlighter-rouge">Fail the entire tool run</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-understanding-the-formula"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Understanding the formula</div>
+
+        <p><code class="language-plaintext highlighter-rouge">c4</code> = stained pixel area (from feature extraction); <code class="language-plaintext highlighter-rouge">c6</code> = total pixel area (width × height). Dividing and multiplying by 100 expresses the result as a percentage. If your column order differs, verify the column numbers by inspecting the merged table before running this step.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Your final output is a TSV table with one row per sample, containing: <code class="language-plaintext highlighter-rouge">sample_id</code>, <code class="language-plaintext highlighter-rouge">label</code>, <code class="language-plaintext highlighter-rouge">area</code>, <code class="language-plaintext highlighter-rouge">area_filled</code>, <code class="language-plaintext highlighter-rouge">mean_intensity</code>, <code class="language-plaintext highlighter-rouge">total_area</code>, and <code class="language-plaintext highlighter-rouge">percent_area</code>. This file is ready for downstream statistical analysis:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>sample_id</th>
+      <th>label</th>
+      <th>mean_intensity</th>
+      <th>area</th>
+      <th>area_filled</th>
+      <th>total_area</th>
+      <th>percent_area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tx_Sample1</td>
+      <td>255</td>
+      <td>0.682</td>
+      <td>3653.0</td>
+      <td>3686.0</td>
+      <td>5065984</td>
+      <td>0.072</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample2</td>
+      <td>255</td>
+      <td>0.734</td>
+      <td>6574.0</td>
+      <td>6593.0</td>
+      <td>5065984</td>
+      <td>0.130</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample3</td>
+      <td>255</td>
+      <td>0.768</td>
+      <td>1396.0</td>
+      <td>1398.0</td>
+      <td>5065984</td>
+      <td>0.028</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample4</td>
+      <td>255</td>
+      <td>0.688</td>
+      <td>7184.0</td>
+      <td>7228.0</td>
+      <td>5065984</td>
+      <td>0.142</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample5</td>
+      <td>255</td>
+      <td>0.678</td>
+      <td>18245.0</td>
+      <td>18371.0</td>
+      <td>5065984</td>
+      <td>0.360</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample6</td>
+      <td>255</td>
+      <td>0.610</td>
+      <td>31943.0</td>
+      <td>32352.0</td>
+      <td>5065984</td>
+      <td>0.631</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample7</td>
+      <td>255</td>
+      <td>0.639</td>
+      <td>34089.0</td>
+      <td>34435.0</td>
+      <td>5065984</td>
+      <td>0.673</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample8</td>
+      <td>255</td>
+      <td>0.755</td>
+      <td>5271.0</td>
+      <td>5282.0</td>
+      <td>5065984</td>
+      <td>0.104</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample9</td>
+      <td>255</td>
+      <td>0.763</td>
+      <td>2350.0</td>
+      <td>2356.0</td>
+      <td>5065984</td>
+      <td>0.046</td>
+    </tr>
+    <tr>
+      <td>Tx_Sample10</td>
+      <td>255</td>
+      <td>0.763</td>
+      <td>2099.0</td>
+      <td>2100.0</td>
+      <td>5065984</td>
+      <td>0.041</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample1</td>
+      <td>255</td>
+      <td>0.637</td>
+      <td>55764.0</td>
+      <td>58010.0</td>
+      <td>5065984</td>
+      <td>1.101</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample2</td>
+      <td>255</td>
+      <td>0.621</td>
+      <td>28170.0</td>
+      <td>28328.0</td>
+      <td>5065984</td>
+      <td>0.556</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample3</td>
+      <td>255</td>
+      <td>0.643</td>
+      <td>107793.0</td>
+      <td>110878.0</td>
+      <td>5065984</td>
+      <td>2.128</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample4</td>
+      <td>255</td>
+      <td>0.652</td>
+      <td>40870.0</td>
+      <td>41626.0</td>
+      <td>5065984</td>
+      <td>0.807</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample5</td>
+      <td>255</td>
+      <td>0.534</td>
+      <td>40760.0</td>
+      <td>41651.0</td>
+      <td>5065984</td>
+      <td>0.805</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample6</td>
+      <td>255</td>
+      <td>0.575</td>
+      <td>26149.0</td>
+      <td>26844.0</td>
+      <td>5065984</td>
+      <td>0.516</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample7</td>
+      <td>255</td>
+      <td>0.642</td>
+      <td>2571.0</td>
+      <td>2582.0</td>
+      <td>5065984</td>
+      <td>0.051</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample8</td>
+      <td>255</td>
+      <td>0.650</td>
+      <td>16919.0</td>
+      <td>17185.0</td>
+      <td>5065984</td>
+      <td>0.334</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample9</td>
+      <td>255</td>
+      <td>0.674</td>
+      <td>29399.0</td>
+      <td>29698.0</td>
+      <td>5065984</td>
+      <td>0.580</td>
+    </tr>
+    <tr>
+      <td>Vehicle_Sample10</td>
+      <td>255</td>
+      <td>0.708</td>
+      <td>27675.0</td>
+      <td>28060.0</td>
+      <td>5065984</td>
+      <td>0.546</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Looking at the table, what is the percent stained area for Tx_Sample6, and how do you calculate it from the values provided?</li>
+    <li>Looking at the results table, which group shows higher CD11b-positive area — Tx or Vehicle? What does this suggest biologically?</li>
+    <li>Vehicle_Sample3 has a notably higher percent area (2.128%) compared to the other Vehicle samples. How might this affect the interpretation of the group comparison?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>Tx_Sample6 has an area of 31,943 pixels and a total area of 5,065,984 pixels. The calculation is: (31,943 / 5,065,984) × 100 ≈ <strong>0.631%</strong>. This is the highest value in the Tx group, but still well below most Vehicle samples, which range from 0.334% to 2.128%.</p>
+      </li>
+      <li>
+        <p>The Vehicle (DMSO) group shows consistently higher CD11b-positive area, with a mean of ~0.74% compared to ~0.22% in the Tx group. This suggests that 4-oxo RA treatment reduced myeloid cell infiltration into the infarcted myocardium, consistent with the hypothesis in <span class="citation"><a href="#Rettkowski2025">Rettkowski <i>et al.</i> 2025</a></span> that the treatment suppresses immune cell mobilization from bone marrow after MI. Importantly, it is not possible to know only through histology which of this myeloid cells are infiltrated ones and which are local as both are present after infarction but we can clearly see that there is a reduced percentage stain are in the treated group.</p>
+      </li>
+      <li>
+        <p>Vehicle_Sample3 is an outlier at 2.128%, more than double the next highest Vehicle value. While the overall trend still holds. All but one Vehicle sample exceeds the Tx group mean, this variability reflects the biological heterogeneity typical of in vivo infarction models. It is important to test for outliers of the final data results and report variability transparently and consider robust statistical tests when comparing groups with unequal variance, such as the Welch t-test.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You have now built and run a complete image analysis workflow that takes raw histological images and produces a quantitative, reproducible measure of staining coverage. Here is a summary of what each step contributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>What it does</th>
+      <th>Why it matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Normalization</td>
+      <td>Applies CLAHE histogram equalization to each image</td>
+      <td>Reduces variability in staining intensity across the batch</td>
+    </tr>
+    <tr>
+      <td>Color deconvolution</td>
+      <td>Separates mixed stain signals into individual channels</td>
+      <td>Isolates DAB from the hematoxylin counterstain</td>
+    </tr>
+    <tr>
+      <td>Channel extraction</td>
+      <td>Selects the DAB channel (index 1)</td>
+      <td>Targets the CD11b signal of interest</td>
+    </tr>
+    <tr>
+      <td>Image dimensions</td>
+      <td>Captures total pixel area from the original image</td>
+      <td>Provides the denominator for the percentage</td>
+    </tr>
+    <tr>
+      <td>Otsu thresholding</td>
+      <td>Converts the stain channel into a binary stained/unstained mask</td>
+      <td>Automated, consistent across images</td>
+    </tr>
+    <tr>
+      <td>Analyze particles</td>
+      <td>Generates ROIs around detected stained regions</td>
+      <td>Enables visual validation of the threshold</td>
+    </tr>
+    <tr>
+      <td>Feature extraction</td>
+      <td>Measures area and intensity of stained pixels</td>
+      <td>Produces the numerator for the percentage</td>
+    </tr>
+    <tr>
+      <td>Final table + compute</td>
+      <td>Merges results and calculates percent stained area</td>
+      <td>Delivers a ready-to-analyze summary</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The CD11b-positive area quantified from IHC images reflects myeloid cell infiltration in infarcted cardiac tissue — an objective, reproducible measure that can be compared across experimental groups and applied consistently at scale, as demonstrated in <span class="citation"><a href="#Rettkowski2025">Rettkowski <i>et al.</i> 2025</a></span>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-extending-this-workflow-to-other-staining-types"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Extending this workflow to other staining types</div>
+
+  <p>The same workflow applies to <strong>Masson’s Trichrome</strong> and other HED-compatible stains. To quantify collagen with MT, simply change the channel index in Step 2 from <code class="language-plaintext highlighter-rouge">1</code> (DAB) to <code class="language-plaintext highlighter-rouge">2</code> (aniline blue). No other steps need to change.</p>
+
+</blockquote>
+
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/stain-quantification-color-deconvolution/workflow_overview.png" alt="Overview of the complete stain quantification workflow from raw image to percent stained area table." width="2576" height="1000" loading="lazy" /><a target="_blank" href="../../images/stain-quantification-color-deconvolution/workflow_overview.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Workflow overview: from raw histological image to percent stained area.</figcaption></figure>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Color deconvolution mathematically separates RGB images into individual stain components based on known absorption spectra</p>
+</li>
+                        
+                        <li><p>The H-E-DAB (HED) preset is used for IHC; channel selection determines the stain of interest</p>
+</li>
+                        
+                        <li><p>Otsu thresholding provides an automated, reproducible way to distinguish stained from unstained pixels</p>
+</li>
+                        
+                        <li><p>The percent stained area is calculated as (stained pixels / total tissue pixels) × 100</p>
+</li>
+                        
+                        <li><p>This workflow accepts a collection of images for batch quantification across multiple samples</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Rettkowski2025">Rettkowski, J., M. C. Romero-Mulero, I. Singh, C. Wadle, J. Wrobel <i>et al.</i>, 2025 <b>Modulation of bone marrow haematopoietic stem cell activity as a therapeutic strategy after myocardial infarction: a preclinical study</b>. Nature Cell Biology 27: 591–604. <a href="https://doi.org/10.1038/s41556-025-01639-4">10.1038/s41556-025-01639-4</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/stain-quantification-color-deconvolution"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/stain-quantification-color-deconvolution">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Diana Chiang Jurado,  <b>Quantitative Analysis of Histological Staining Using Color Deconvolution (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-stain-quantification-color-deconvolution,
+author = "Diana Chiang Jurado",
+	title = "Quantitative Analysis of Histological Staining Using Color Deconvolution (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/nfdi4bioimage/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/nfdi4bioimage.jpeg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">NFDI4Bioimage</div>
+			<div class="description">
+			NFDI4BIOIMAGE is a nationwide community of researchers, imaging specialists and data experts who work with biological image data. We support anyone who generates,
+analyses or manages microscopy and bioimaging data. Our aim is to make imaging data easier to find, access, reuse and share by providing practical tools,
+clear guidance and hands on training. We collaborate closely with laboratories and research communities across Germany to understand their needs and develop solutions
+that help with real everyday challenges. Whether you are building new workflows, exploring advanced analysis methods or improving your data management,
+NFDI4BIOIMAGE offers support, expertise and a welcoming network.
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/uni-freiburg/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">UFR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: ab83aa685821
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: ab83aa685821
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: ab83aa685821
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: column_maker
+  owner: devteam
+  revisions: 61f9ddbc63ca
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_auto_threshold
+  owner: imgteam
+  revisions: 2ee04d2ebdcf
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_feature_extraction
+  owner: imgteam
+  revisions: 519fad2c552a
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_histogram_equalization
+  owner: imgteam
+  revisions: 99e0ef91ea5e
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: color_deconvolution
+  owner: imgteam
+  revisions: 0cbdf78fee14
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: image_info
+  owner: imgteam
+  revisions: f8b4eada923c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: image_info
+  owner: imgteam
+  revisions: e28851b24032
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: imagej2_analyze_particles_binary
+  owner: imgteam
+  revisions: 862af85a50ec
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: imagej2_analyze_particles_binary
+  owner: imgteam
+  revisions: 0601a9056642
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: split_image
+  owner: imgteam
+  revisions: 390943df8a35
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: split_image
+  owner: imgteam
+  revisions: 7191fd16988f
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collection_element_identifiers
+  owner: iuc
+  revisions: d3c07d270a50
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collection_element_identifiers
+  owner: iuc
+  revisions: 3e27acfa4830
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/25a745147e0fbf6ca4630783214802b03232d870">25a7451</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
