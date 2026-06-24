@@ -25,6 +25,17 @@ We aim for WCAG 2.0 AA compliance (AAA where possible), under the default theme 
 - SRT files and a transcript are provided of the slides.
 - No other sounds are used anywhere on the site.
 
+##### Help Improve Our Video Captions
+
+You can contribute directly to the accessibility of our training videos by editing and adding captions! This is especially helpful during collaborative events like the Smörgåsbord. The steps are simple:
+
+1. Open the [shared folder of captioned videos](https://drive.google.com/drive/u/2/folders/1TVYWaoyFNpsnk59seoiGo_5mLkJqHGX0).
+2. Pick a video and open its auto-generated captions document.
+3. Watch the video and fix any mistakes: add punctuation, correct technical terms, and make the text match the spoken words perfectly.
+4. Add your name at the top of the document so we can give you credit on the event webpage.
+
+Your help makes our training accessible to many more people – thank you! Whether you have a few minutes or a few hours, every improvement counts.
+
 #### Mobility
 
 - None
