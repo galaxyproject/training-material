@@ -29,7 +29,7 @@ This tutorial shows how a sequence of preserved ancient lunar observations can b
 candidate **absolute calendar dates** for an ancient ruler. The worked example follows the
 chronology of the Egyptian Middle Kingdom (12th Dynasty) and the reign of pharaoh
 **Senwosret III**, based on the lunar dates from the temple archive of el-Lahun (Illahun)
-{% cite Gautschy2011 %}.
+(see {% cite Gautschy2011 %}).
 
 ## The astronomical background
 
