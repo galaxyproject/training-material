@@ -24,7 +24,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             vendor/bundle
@@ -48,7 +48,7 @@ jobs:
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
           github.event_name != 'pull_request'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           title: Add missing data-library.yaml files
           branch-suffix: timestamp

@@ -20,6 +20,10 @@ contributions:
   editing:
     - hexylena
     - natefoo
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 requirements:
   - type: "internal"
     topic_name: admin

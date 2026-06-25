@@ -17,10 +17,14 @@ key_points:
 tags:
 - ecology
 - taxonomic data
+- phylodiversity
+- biodiversity
 contributions:
   authorship:
     - Morphy427
     - yvanlebras
+  funding:
+    - pndb
 
 subtopic: ecologyanalysis
 ---

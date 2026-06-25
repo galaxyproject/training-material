@@ -26,6 +26,9 @@ contributions:
     - mira-miracoli
   funding:
     - eurosciencegateway
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 subtopic: jobs
 tags:
   - ansible

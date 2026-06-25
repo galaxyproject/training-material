@@ -1,0 +1,505 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Architecture 01 - Galaxy Ecosystem and Projects"
+questions:
+  - "What projects make up the Galaxy ecosystem?"
+  - "How do different Galaxy projects interact?"
+  - "What tools are available for developers vs administrators?"
+objectives:
+  - "Identify the major projects in the Galaxy ecosystem"
+  - "Understand the difference between user-facing and developer tools"
+  - "Learn about Galaxy communication channels"
+time_estimation: "25m"
+key_points:
+  - "Multiple user-facing applications (Galaxy, Training Material)"
+  - "Developer libraries for plugin developers"
+  - "Admin tools for deployment"
+  - "Active community on Matrix (via Element client)"
+subtopic: architecture
+contributors:
+  - jmchilton
+  - bgruening
+
+redirect_from:
+  - /topics/dev/tutorials/architecture/slides
+
+---
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 01 - Galaxy Ecosystem and Projects
+
+*The architecture of the ecosystem.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+### Please Interrupt!
+
+We're here to answer your questions about Galaxy architecture!
+
+
+---
+
+
+class: enlarge200
+
+**Chat:** [galaxyproject Lobby](https://matrix.to/#/#galaxyproject_Lobby:gitter.im) (via Element)
+
+**GitHub:** [github.com/galaxyproject ](https://github.com/galaxyproject)
+
+**Bluesky:** [bsky.app/profile/galaxyproject.bsky.social](https://bsky.app/profile/galaxyproject.bsky.social)
+
+**Mastodon:** [@galaxyproject](https://mstdn.science/@galaxyproject)
+
+**LinkedIn:** [Galaxy Project](https://www.linkedin.com/groups/4907635/)
+
+
+---
+
+
+### The **/galaxyproject** projects
+
+*The architecture of the ecosystem.*
+
+???
+
+Too many to cover all but we'll cover some of the big ones in a few big
+categories. User-facing applications, projects for Galaxy plugin developers,
+and projects for Galaxy administrators.
+
+
+---
+
+
+### Matrix Community with Element
+
+![galaxyproject Matrix Element community](../../images/element_galaxyproject.png)
+
+Access via Element client or any Matrix client at https://matrix.to/#/#galaxyproject_Lobby:gitter.im
+
+
+---
+
+
+class: center
+
+More links we'll mention as we go through the slides:
+
+- https://matrix.to/#/#galaxyproject_Lobby:gitter.im
+- https://matrix.to/#/#galaxyproject_dev:gitter.im
+- https://matrix.to/#/#galaxyproject_admins:gitter.im
+- https://matrix.to/#/#galaxyproject_FederatedGalaxy:gitter.im
+- https://matrix.to/#/#galaxyproject_bioblend:gitter.im
+- https://matrix.to/#/#galaxyproject_ephemeris:gitter.im
+- https://matrix.to/#/#usegalaxy-eu_Lobby:gitter.im
+- https://matrix.to/#/#galaxy-iuc_iuc:gitter.im
+- https://matrix.to/#/#bgruening_docker-galaxy-stable:gitter.im
+- https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im
+- https://matrix.to/#/#biocontainers_Lobby:gitter.im
+- https://matrix.to/#/#bioconda_Lobby:gitter.im
+
+Working group chats linked at https://galaxyproject.org/community/wg/.
+
+
+---
+
+
+class: enlarge200
+
+**User-Facing Applications**
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**galaxy** ](https://github.com/galaxyproject/galaxy)
+
+The main Galaxy application.
+
+Web interface, database model, job running, etc...
+
+Also includes other web applications including the **ToolShed**.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**training-material** ](https://github.com/galaxyproject/training-material)
+
+![logo]({{ site.baseurl }}/assets/images/GTNLogo1000.png)
+
+Galaxy training material for scientists, developers, and admins. Powers *https://training.galaxyproject.org/*.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**hub** ](https://github.com/galaxyproject/galaxy-hub)
+
+The Galaxy Hub is the community and documentation hub for the Galaxy Project. It is maintained by the community through this GitHub repository. It is a static website built using the metalsmith static site generator.
+
+Powers *https://galaxyproject.org/*.
+
+
+---
+
+
+class: enlarge150
+
+[**usegalaxy-eu/galaxy-social** ](https://github.com/usegalaxy-eu/galaxy-social)
+
+Content distribution system for publishing to multiple social media platforms. Post once, share across Mastodon, Bluesky, Matrix, Slack, and LinkedIn with automatic formatting.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**galaxy_codex** ](https://github.com/galaxyproject/galaxy_codex)
+
+Community resource repository for Galaxy users and contributors. Provides access to the Galaxy Community Catalog featuring tools, training materials, and workflows. Galaxy Labs for creating customized community subdomain pages.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**bioblend** ](https://github.com/galaxyproject/bioblend)
+
+Official Python client for the Galaxy, ToolShed, and CloudMan APIs.
+
+Best documented path to scripting the Galaxy API.
+
+
+---
+
+
+A standalone client library for the Galaxy API, built using the type definitions from the main Galaxy client.
+
+https://www.npmjs.com/package/@galaxyproject/galaxy-api-client
+
+
+---
+
+
+- [galaxyproject/**blend4php**](https://github.com/galaxyproject/blend4php)
+- [galaxyproject/**blend4j**](https://github.com/galaxyproject/blend4j)
+- [**chapmanb/clj-blend**](https://github.com/chapmanb/clj-blend)
+
+Galaxy API bindings for other languages, less actively maintained.
+
+
+---
+
+
+class: enlarge150
+
+[**bgruening/docker-galaxy-stable** ](https://github.com/bgruening/docker-galaxy-stable)
+
+High quality Docker containers for stable Galaxy environments.
+
+Releases corresponding to each new version of Galaxy.
+
+Many flavors available.
+
+
+---
+
+
+class: white
+
+![Docker](../../images/docker-chart.png)
+
+
+---
+
+
+class: enlarge200
+
+**For Plugin Developers**
+
+
+---
+
+
+class: center
+
+[galaxyproject/**tools-iuc** ](https://github.com/galaxyproject/tools-iuc)
+
+Galaxy tools maintained by the *IUC* ("Intergalactic Utilities Commission").
+
+A variety of tools, generally of high quality including many of the core tools for Galaxy main.
+
+Demonstrates *current tool development best practices* - development on
+github and then deployed to test/main ToolSheds
+
+[galaxyproject/**tools-devteam** ](https://github.com/galaxyproject/tools-devteam)
+
+Many older tools appearing on usegalaxy.org.
+
+
+---
+
+
+class: center
+
+### Tools Aside - More Repositories
+
+Other repositories with high quality tools:
+
+ * [Björn Grüning's repo](https://github.com/bgruening/galaxytools)
+ * Peter Cock's repos:
+   * [blast repo](https://github.com/peterjc/galaxy_blast)
+   * [pico repo](https://github.com/peterjc/pico_galaxy)
+   * [mira repo](https://github.com/peterjc/galaxy_mira)
+ * [ENCODE tools](https://github.com/modENCODE-DCC/Galaxy)
+ * [Biopython repo](https://github.com/biopython/galaxy_packages)
+ * [Galaxy Proteomics repo](https://github.com/galaxyproteomics/tools-galaxyp)
+ * [Greg von Kuster's repo](https://github.com/gregvonkuster/galaxy-csg)
+ * [TGAC repo](https://github.com/TGAC/tgac-galaxytools)
+ * [AAFC-MBB Canada repo](https://github.com/AAFC-MBB/Galaxy/tree/master/wrappers)
+ * [Mark Einon's repo](https://gitlab.com/einonm/galaxy-tools)
+
+
+---
+
+
+[galaxyproject/**iwc** ](https://github.com/galaxyproject/iwc)
+
+Intergalactic Workflow Commission. Hosting workflows and defining best practices for publishing workflows.
+
+https://matrix.to/#/#galaxyproject_iwc:gitter.im
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**planemo** ](https://github.com/galaxyproject/planemo)
+
+Command-line utilities to assist in the development of Galaxy tools and workflows.
+Linting, testing, deploying to ToolSheds...
+
+*The best practice approach for Galaxy tool development!*
+
+[galaxyproject/**planemo-machine** ](https://github.com/galaxyproject/planemo-machine)
+
+Builds Galaxy environments for Galaxy tool development including Docker
+container, virtual machines, Google compute images
+
+
+---
+
+
+[galaxyproject/**galaxy-language-server** ](https://github.com/galaxyproject/galaxy-language-server)
+
+![Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server/raw/assets/snippets.gif)
+
+Language server implementation for Galaxy tools. Visual Studio Code extension for tool development.
+
+Test execution, code completion, best practices, documentation tooltips, etc..
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**starforge** ](https://github.com/galaxyproject/starforge)
+
+![StarForge logo](https://raw.githubusercontent.com/galaxyproject/starforge/master/docs/starforge_logo.png)
+
+Build Galaxy framework dependencies as Python wheels when needed.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**cargo-port** ](https://github.com/galaxyproject/cargo-port)
+
+![Cargo Port Logo](https://raw.githubusercontent.com/galaxyproject/cargo-port/master/media/cpc-plain-small.png)
+
+Provides stable URLs and caching for application links, etc.. An important layer for reproducibility but largely transparent.
+
+
+---
+
+
+class: enlarge200
+
+**For Deployers and Admins**
+
+
+---
+
+
+class: enlarge150
+
+galaxyproject/**{ansible-\*, \*-playbook}**<br>
+usegalaxy-eu/**{ansible-\*, \*-playbook}**
+
+[Ansible](https://www.ansible.com/) components to automate almost every aspect of Galaxy installation and maintenance.
+
+Ansible is an advanced configuration management system
+
+These playbooks are used to maintain Galaxy main, cloud and Docker images, virtual machines, ...
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**gravity** ](https://github.com/galaxyproject/gravity)
+
+A process manager (supervisor) and management tools for Galaxy servers.
+
+`galaxyctl` which is used to manage the starting, stopping, and logging of Galaxy's various processes.
+
+`galaxy` which can be used to run a Galaxy server in the foreground.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**galaxy-helm** ](https://github.com/galaxyproject/galaxy-helm)
+
+Kubernetes helm chart for deploying Galaxy. Leveraged by cloudlaunch and CloudMan but usable standalone.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**pulsar** ](https://github.com/galaxyproject/pulsar)
+
+![Pulsar Logo](https://galaxyproject.org/images/galaxy-logos/pulsar_transparent.png)
+
+Distributed job execution engine for Galaxy.
+
+Stages data, scripts, configuration.
+
+Can run jobs on Windows machines.
+
+Can act as its own queuing system or access an existing cluster DRM.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**ephemeris** ](https://github.com/galaxyproject/ephemeris)
+
+Library and CLI for managing Galaxy plugins - tools, index data, and workflows.
+
+Layer on top of BioBlend building useful utilities for working with the Galaxy API from an administrator perspective.
+
+
+---
+
+
+class: enlarge150
+
+[galaxyproject/**gxadmin** ](https://github.com/galaxyproject/gxadmin)
+
+Handy command-line utility for Galaxy administrators.
+
+
+---
+
+
+class: enlarge150
+
+### ephemeris vs gxadmin
+
+Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmin talks directly to the Galaxy database and relevant files.
+
+
+---
+
+
+[galaxyproject/**total-perspective-vortex** ](https://github.com/galaxyproject/total-perspective-vortex)
+
+![TPV Logo](https://raw.githubusercontent.com/galaxyproject/total-perspective-vortex/main/docs/images/tpv-logo-wide.png)
+
+TotalPerspectiveVortex (TPV) provides an installable set of dynamic rules for the Galaxy application that can route entities (Tools, Users, Roles) to appropriate job destinations based on a configurable yaml file.
+
+
+---
+
+
+class: enlarge150
+
+[**usegalaxy-eu/tiaas2 **](https://github.com/usegalaxy-eu/tiaas2)
+
+![TIAAS Logo](https://raw.githubusercontent.com/usegalaxy-eu/tiaas2/master/images/tiaas-logo.png)
+
+Django-based infrastructure for creating pools of users, etc.. for training events and connecting them to Galaxy.
+
+
+---
+
+
+### Some (out of many) friends of the project
+
+![Bioconda](../../../../shared/images/conda_logo.png)
+
+![Biocontainers](../../images/biocontainers.png)
+
+Check out dev training materials "Tool Dependencies and Conda" and "Tool Dependencies and Containers"
+for more context.
+
+
+---
+
+
+### Putting it all together
+
+![Large graphic showing different domains and where different portions of the Galaxy community can be found from Biology, Dev, Packaging, Deployment, Documentation, Training, and Support.](../../images/galaxy_main_scheme.png)
+
+???
+
+TODO: cover gxformat2
+
+
+---
+
+
+class: enlarge200
+
+[galaxyproject/**galaxy** ](https://github.com/galaxyproject/galaxy)
+
+The rest of the slides will focus on the core repository.
+
+.footnote[Next: [Galaxy Project Management and Contribution]({% link topics/dev/tutorials/architecture-project-management/slides.html %})]

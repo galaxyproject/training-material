@@ -15,10 +15,10 @@ key_points:
 - Champs Blocs
 - Boulder Fields
 tags:
-  - Ecosystem EBV class
+  - ecosystem EBV class
   - EBV dataset
   - EBV workflow
-  - Marine ecosystems
+  - marine ecosystems
   - biodiversity
 contributions:
   authorship:

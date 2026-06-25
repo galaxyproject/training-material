@@ -23,8 +23,8 @@ key_points:
 - Learn about and interpret common tests to evaluate the quality of your GL(M)M
 - Use an Essential Biodiversity Variables workflow
 tags:
-  - Species population EBV class
-  - Community composition EBV class
+  - species population EBV class
+  - community composition EBV class
   - EBV dataset
   - EBV workflow
   - modeling

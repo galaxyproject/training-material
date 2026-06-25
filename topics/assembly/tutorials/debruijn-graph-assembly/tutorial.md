@@ -17,10 +17,17 @@ key_points:
   - "We learned about the strategies that assemblers use to make reference genomes"
   - "We performed a number of assemblies with Velvet and SPAdes."
   - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
-contributors:
-  - slugger70
-  - hexylena
-  - shiltemann
+contributions:
+  authorship:
+    - slugger70
+    - hexylena
+    - shiltemann
+  editing:
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
@@ -63,7 +70,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >
 > 3. Rename the files {% icon galaxy-pencil %}
 >    - The name of the files are the full URL, let's make the names a little clearer
->    - Change the names to just the last part, `Mutant_R1.fastq`, `Mutant_R2.fastq`  respectively
+>    - Change the names to just the last part, `Mutant_R1.fastq`, `Mutant_R2.fastq`, respectively
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -73,6 +80,14 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    {: .question}
 >
+> 4. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
+>    - We will need to use both the individual datasets (`Mutant_R1.fastq` and `Mutant_R2.fastq`) and the paired end collection (`Paired Reads`), so toggle off the `Hide original elements` option when creating the collection.
+>    - Alternatively, you can un-hide the datasets by selecting the {% icon galaxy-show-hidden %} icon on the hidden dataset in your history.
+>
+>    {% snippet faqs/galaxy/datasets_unhidden.md %}
 >
 {: .hands_on}
 
@@ -82,13 +97,15 @@ We will perform an assembly with the Velvet Optimiser, which automatically runs 
 
 > <hands-on-title>Assemble with the Velvet Optimiser</hands-on-title>
 >
->  1. **Velvet Optimiser** {% icon tool %}: Optimise your assembly with the following parameters:
+>  1. {% tool [Velvet Optimiser](toolshed.g2.bx.psu.edu/repos/simon-gladman/velvetoptimiser/velvetoptimiser/2.2.6) %}: Optimise your assembly with the following parameters:
 >    - *"Start k-mer size"*: `45`
 >    - *"End k-mer size"*: `73`
->    - *"Input file type"*: `Fastq`
->    - *"Single or paired end reads"*: `Paired`
->    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
->    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
+>    - *"Input Files"*:
+>        - `1: Input Files`
+>            - *"Input file type"*: `Fastq`
+>            - *"Single or paired end reads"*: `Paired`
+>            - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
+>            - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
 >
 {: .hands_on}
 
@@ -104,7 +121,7 @@ Have a look at each file.
 
 > <hands-on-title>Get contig statistics for Velvet Optimiser contigs</hands-on-title>
 >
-> 1. **Fasta Statistics** {% icon tool %}: Produce a summary of the velvet optimiser contigs:
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}: Produce a summary of the velvet optimiser contigs:
 >    - {% icon param-file %} *"fasta or multifasta file"*: Select your velvet optimiser contigs file
 >
 > 2. View the output
@@ -139,7 +156,7 @@ Currently VelvetOptimiser does not include the LastGraph output, so we will manu
 >
 > 1. Locate the output called "VelvetOptimiser: Contigs" in your history
 >
-> 2. Click the (i) information icon
+> 2. Click the {% icon dataset-info %} information icon
 >
 > 3. Check the tool `stderr` in the information page for the optimised k-mer value
 {: .hands_on}
@@ -155,24 +172,21 @@ With this information in hand, let's run velvet:
 
 > <hands-on-title>Manually running velvetg/h</hands-on-title>
 >
-> 1. **velveth** {% icon tool %}: Prepare a dataset for the Velvet velvetg Assembler
+> 1. {% tool [velveth](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velveth/1.2.10.3) %}: Prepare a dataset for the Velvet `velvetg` Assembler
 >    - *"Hash length"*: `55`
->    - *"Insert Input Files"*:
->      - 1: Input Files
->        - *"file format"*: `fastq`
+>    - *"Input Files"*:
+>      - `+ Insert Input Files`
+>      - `1: Input Files`
+>        - *"Choose the input type"*: `separate paired reads`
 >        - *"read type"*: `shortPaired reads`
->        - *"Dataset"*: `mutant_R1.fastq`
->    - *"Insert Input Files"*:
->      - 2: Input Files
->        - *"file format"*: `fastq`
->        - *"read type"*: `shortPaired reads`
->        - *"Dataset"*: `mutant_R2.fastq`
+>        - *"Dataset"*: `mutant_R1.fastq` (forward reads)
+>        - *"Dataset"*: `mutant_R2.fastq` (reverse reads)
 >
-> 2. **velvetg** {% icon tool %}: Velvet sequence assembler for very short reads
+> 2. {% tool [velvetg](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velvetg/1.2.10.2) %}: Velvet sequence assembler for very short reads
 >    - *"Velvet dataset"*: output from **velveth** {% icon tool %}
->    - *"Generate velvet LastGraph file"*: `Yes`
 >    - *"Coverage cutoff"*: `Specify Cutoff Value`
 >      - *"Remove nodes with coverage below"*: `1.44`
+>    - *"Additional outputs"*: `Generate velvet LastGraph file`
 >    - *"Using Paired Reads"*: `Yes`
 >
 {: .hands_on}
@@ -181,9 +195,9 @@ The LastGraph contains a detailed representation of the De Bruijn graph, which c
 
 > <hands-on-title>Bandage</hands-on-title>
 >
-> 1. **Bandage Image** {% icon tool %}: visualize de novo assembly graphs
+> 1. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4) %}: visualize de novo assembly graphs
 >    - *"Graphical Fragment Assembly"*: The "LastGraph" output of **velvetg** {% icon tool %}
->    - *"Produce jpg, png or svg file?"*: `.svg`
+>    - *"Produce jpg, png or svg file?"*: `.png`
 >
 > 2. Execute
 > 3. View the output file
@@ -208,21 +222,21 @@ The next thing to be aware of is that there can be multiple valid interpretation
 
 > For a simple case, imagine a bacterial genome that contains a single repeated element in two separate places in the chromosome:
 >
-> ![Simple example 1](https://camo.githubusercontent.com/03628b49f50ccf7a9c565d7712bfc70c7764cbeb/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f312e706e67)
+> ![Simple example 1]({% link topics/assembly/images/debruijn_assembly/bandage1.png %})
 >
 > A researcher (who does not yet know the structure of the genome) sequences it, and the resulting 100 bp reads are assembled with a de novo assembler:
 >
-> ![Simple example 2](https://camo.githubusercontent.com/a51f384b83fbb97590ce86b8ec14d4ebd1bb60d1/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f322e706e67)
+> ![Simple example 2]({% link topics/assembly/images/debruijn_assembly/bandage2.png %})
 >
 > Because the repeated element is longer than the sequencing reads, the assembler was not able to reproduce the original genome as a single contig. Rather, three contigs are produced: one for the repeated sequence (even though it occurs twice) and one for each sequence between the repeated elements.
 >
 > Given only the contigs, the relationship between these sequences is not clear. However, the assembly graph contains additional information which is made apparent in Bandage:
 >
-> ![Simple example 3](https://camo.githubusercontent.com/406648509cf478ac0b2ab9f2447aec4e7575b7dd/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f332e706e67)
+> ![Simple example 3]({% link topics/assembly/images/debruijn_assembly/bandage3.png %})
 >
 > There are two principal underlying sequences compatible with this graph: two separate circular sequences that share a region in common, or a single larger circular sequence with an element that occurs twice:
 >
-> ![Simple example 4](https://camo.githubusercontent.com/58d0aa7eff4cfd3d36c9210e9f6a2f0265396715/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f342e706e67)
+> ![Simple example 4]({% link topics/assembly/images/debruijn_assembly/bandage4.png %})
 >
 > Additional knowledge, such as information on the approximate size of the bacterial chromosome, can help the researcher to rule out the first alternative. In this way, Bandage has assisted in turning a fragmented assembly of three contigs into a completed genome of one sequence.
 {: .quote cite="https://github.com/rrwick/Bandage/wiki/Simple-example"}
@@ -233,14 +247,14 @@ We will now perform an assembly with the much more modern SPAdes assembler ({% c
 
 > <hands-on-title>Assemble with SPAdes</hands-on-title>
 >
-> 1. **SPAdes** {% icon tool %}: Assemble the reads:
->
->    - *"Run only assembly"*: `yes`
->    - *"K-mers to use separated by commas"*: `33,55,91` [note: no spaces!]
->    - *"Coverage cutoff"*: `auto`
->    - {% icon param-file %} *"Files -> forward reads"*: `mutant_R1.fastq`
->    - {% icon param-file %} *"Files -> reverse reads"*: `mutant_R2.fastq`
->    - *"Output final assembly graph with scaffolds?"*: `Yes`
+> 1. {% tool [SPAdes](toolshed.g2.bx.psu.edu/repos/nml/spades/spades/4.2.0+galaxy0) %}: Assemble the reads:
+>    - *"Operation mode"*: `Only assembler (--only_assembler)`
+>    - *"Single-end or paired-end short-reads"*: `Paired-end: list of dataset pairs`
+>      - *"FASTA/FASTQ file(s): collection"*: `Paired Reads`
+>    - *"Set coverage cutoff option"*: `auto`
+>    - *"Select k-mer detection option"*: `User specific`
+>      - *"K-mer size values"*: `33,55,91` [note: no spaces!]
+>    - *"Select optional output file(s)"*: `Assembly graph`, `Assembly graph with scaffold`, `Contigs`, `Scaffolds`, `Log`
 >
 {: .hands_on}
 
@@ -264,8 +278,9 @@ Examine each file, especially the stats files.
 
 > <hands-on-title>Visualize assembly with Bandage</hands-on-title>
 >
-> 1. **Bandage** {% icon tool %} with the following parameters:
+> 1. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4) %} with the following parameters:
 >    - *"Graphical Fragment Assembly"*: `assembly graph with scaffolds` output from **SPAdes** {% icon tool %}
+>    - *"Produce jpg, png or svg file?"*: `.png`
 >
 > 2. Examine the output image {% icon galaxy-eye %}
 >
@@ -286,7 +301,7 @@ The visualized assembly should look something like this:
 
 > <hands-on-title>Get contig statistics for SPAdes contigs</hands-on-title>
 >
-> 1. **Fasta Statistics** {% icon tool %}: Produce a summary of the SPAdes contigs:
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}: Produce a summary of the SPAdes contigs:
 >    - {% icon param-file %} *"fasta or multifasta file"*: Select your velvet optimiser contigs file
 >
 > 2. Look at the output file.

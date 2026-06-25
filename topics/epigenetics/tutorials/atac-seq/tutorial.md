@@ -15,10 +15,17 @@ key_points:
 - ATAC-Seq can be used to identify accessible gene promoters and enhancers
 - Several filters are applied to the reads, such as removing those mapped to mitochondria
 - Fragment distribution can help determine whether an ATAC-Seq experiment has worked well
-contributors:
-- lldelisle
-- mblue9
-- heylf
+contributions:
+  authorship:
+    - lldelisle
+    - mblue9
+    - heylf
+  editing:
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 
 
 recordings:
@@ -92,6 +99,10 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 > 4. Check that the datatype of the 2 FASTQ files is `fastqsanger.gz` and the peak file (ENCFF933NTR.bed.gz) is `encodepeak`. If they are not then change the datatype as described below.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+> 5. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
@@ -183,9 +194,15 @@ The first step is to check the quality of the reads and the presence of the Next
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
-> 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
+> 1. Run {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - *"Input collection"*: `Paired Reads`
+>   
+> 2. Rename the flatten collection: `Flat Collection`
+>   
+> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+>    - *"Raw read data from your current history"*: `Flat Collection` (Flattened paired end read dataset collection)
+>
+> 4. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
 > > <question-title></question-title>
 > >
@@ -236,30 +253,31 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1`
->        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2`
->        - In *"Read 1 Options"*:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.1+galaxy0) %} with the following parameters:
+>    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
+>        - {% icon param-collection %} *"Paired Collection"*: `Paired Reads`
+>        - In *"Read 1 Adapters"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
 >                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
 >                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
->        - In *"Read 2 Options"*:
+>        - In *"Read 2 Adapters"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
 >                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
 >                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
->    - In *"Filter Options"*:
->        - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `20`
->    - In *"Output Options"*:
->        - *"Report"*: `Yes`
+>    - In *"Other Read Trimming Options"*:
+>        - *"Quality cutoff(s) (R1)"*: `20` (will be applied to both forward and reverse reads)
+>    - In *"Read Filtering Options"*:
+>        - *"Minimum length (R1)"*: `20` (will be applied to both forward and reverse reads)
+>    - In *"Additional outputs to generate"*:
+>        - Select `Report: Cutadapt's per-adapter statistics. You can use this file with MultiQC. `
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+> 2. Rename the Cutadapt output `Reads` collection: `Adapter Trimmed Reads`
+> 
+> 3. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
 > <comment-title>Cutadapt Results</comment-title>
@@ -284,10 +302,15 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > <hands-on-title>Check Adapter Removal with FastQC</hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->       - *"Short read data from your current history"*: select the output of **Cutadapt** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
+> 1. Run {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - *"Input collection"*: `Adapter Trimmed Reads`
+>   
+> 2. Rename the flatten collection: `Flat Trimmed Reads`
+>   
+> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+>    - *"Raw read data from your current history"*: `Flat Trimmed Reads`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+> 4. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
 > <comment-title>FastQC Results</comment-title>
@@ -316,10 +339,9 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 
 > <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Cutadapt** {% icon tool %} *"Read 1 Output"*
->        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Cutadapt** {% icon tool %} *"Read 2 Output"*
+>        - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Adapter Trimmed Reads`
 >        - *"Do you want to set paired-end options?"*: `Yes`
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`

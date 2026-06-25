@@ -1,47 +1,45 @@
 ---
 layout: tutorial_hands_on
-
-title: "Assembly of metagenomic sequencing data"
-zenodo_link: "https://zenodo.org/record/7818827"
+title: Assembly of metagenomic sequencing data
+zenodo_link: https://zenodo.org/record/7818827
 level: Introductory
 questions:
-  - "Why metagenomic data should be assembled?"
-  - "What is the difference between co-assembly and individual assembly?"
-  - "What is the difference between reads, contigs and scaffolds?"
-  - "How tools based on De Bruijn graph work?"
-  - "How to assess the quality of metagenomic data assembly?"
+- Why metagenomic data should be assembled?
+- What is the difference between co-assembly and individual assembly?
+- What is the difference between reads, contigs and scaffolds?
+- How tools based on De Bruijn graph work?
+- How to assess the quality of metagenomic data assembly?
 objectives:
-  - "Describe what an assembly is."
-  - "Explain the difference between co-assembly and individual assembly."
-  - "Explain the difference between reads, contigs and scaffolds."
-  - "Explain how tools based on de Bruijn graph work."
-  - "Evaluate the quality of the Assembly with QUAST, Bowtie2, and CoverM-Contig."
-  - "Construct and apply simple assembly pipelines on short read data."
-time_estimation: "2H"
+- Describe what an assembly is.
+- Explain the difference between co-assembly and individual assembly.
+- Explain the difference between reads, contigs and scaffolds.
+- Explain how tools based on de Bruijn graph work.
+- Evaluate the quality of the Assembly with QUAST, Bowtie2, and CoverM-Contig.
+- Construct and apply simple assembly pipelines on short read data.
+time_estimation: 2H
 key_points:
-  - "Assembly groups reads into contigs and scaffolds."
-  - "de Brujin Graphs use k-mers to assembly reads."
-  - "MetaSPAdes and MEGAHIT are short-read assemblers."
-  - "MetaQUAST is a tool to assess metagenomic assembly quality."
+- Assembly groups reads into contigs and scaffolds.
+- de Brujin Graphs use k-mers to assembly reads.
+- MetaSPAdes and MEGAHIT are short-read assemblers.
+- MetaQUAST is a tool to assess metagenomic assembly quality.
 edam_ontology:
-  - topic_3174 # Metagenomics
-  - topic_0196 # Sequence assembly
+- topic_3174
+- topic_0196
 contributions:
   authorship:
-    - plushz
-    - bebatut
-    - vinisalazar
-    - paulzierep
+  - plushz
+  - bebatut
+  - vinisalazar
+  - paulzierep
   funding:
-    - gallantries
+  - gallantries
 subtopic: metagenomics
 tags:
-  - assembly
-  - metagenomics
-  - microgalaxy
+- assembly
+- metagenomics
+- microgalaxy
 redirect_from:
-  - /topics/metagenomics/tutorials/metagenomics-assembly/tutorial
-
+- "/topics/metagenomics/tutorials/metagenomics-assembly/tutorial"
 recordings:
 - youtube_id: 1ZYGy85Im7w
   date: '2023-05-02'
@@ -52,8 +50,18 @@ recordings:
   captioners:
   - bebatut
   - sophia120199
+- youtube_id: KzqLR4btsic
+  length: 1H15M
+  galaxy_version: 25.1.2.dev0
+  date: '2026-03-26'
+  speakers:
+    - gdefazio
+  captioners:
+    - gdefazio
+    - natalie-wa
 
 ---
+
 
 Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.
 
@@ -294,18 +302,18 @@ Both tools are available in Galaxy. But currently, only **MEGAHIT** can be used 
 > <details-title>Co-assembly with MetaSPAdes</details-title>
 > MetaSPAdes supports co-assembly by passing a list of paired-end read files.
 >
-> <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
-> 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0) %} with the following parameters:
+> > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
+> > 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0) %} with the following parameters:
 >     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
->       - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
->
->       > <comment-title>Tip</comment-title>
->       > To run **individual assembly** instead, follow the previous FAQ to create a **nested list of samples**.
->       {: .comment}
->
->     - *"Select k-mer detection option"*: `User specific`
->       - *"K-mer size values"*: `21,33,55,77`
-{: .hands_on}
+> >      - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
+> >
+> >    > <comment-title>Tip</comment-title>
+> >    > To run **individual assembly** instead, follow the previous FAQ to create a **nested list of samples**.
+> >     {: .comment}
+> >
+> >   - *"Select k-mer detection option"*: `User specific`
+> >    - *"K-mer size values"*: `21,33,55,77`
+> {: .hands_on}
 {: .details}
 
 # Quality control of assembly
@@ -334,23 +342,14 @@ Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the met
 > ![Screenshot of QUAST HTML report](./images/quast_html_report.png)
 {: .hands_on}
 
-> <hands-on-title>Import MetaQUAST results</hands-on-title>
->
-> 1. Since the QUAST process would take times we are just going to import the results from [Zenodo]({{ page.zenodo_link }}):
->
->    ```text
->    {{ page.zenodo_link }}/files/quast_ERR2231567.html
->    {{ page.zenodo_link }}/files/quast_ERR2231568.html
->    {{ page.zenodo_link }}/files/quast_ERR2231569.html
->    {{ page.zenodo_link }}/files/quast_ERR2231570.html
->    {{ page.zenodo_link }}/files/quast_ERR2231571.html
->    {{ page.zenodo_link }}/files/quast_ERR2231572.html
->    ```
->
-> {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
-{: .hands_on}
 
+> <tip-title>Preview MetaQUAST results</tip-title>
+>
+> 1. Since the QUAST process takes some time, we also provide an example history here:
+>
+>    - [Galaxy EU](https://usegalaxy.eu/histories/view?id=11ac94870d0bb33aeff2ed936aab8446)
+>
+{: .tip}
 
 QUAST main output are HTML reports which aggregate different metrics.
 
@@ -493,7 +492,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
         1. the 2 mappings are separated by an unmapped region of at least 1 kbp
         2. they map on the same chromosome with a shared mapping area of at least 1 kbp
 
-        ![Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.](./images/relocation.svg "Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a>"){:width="80%"}
+        ![Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.](./images/relocation.svg "Source: <a href="https:///blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a>"){:width="80%"}
 
         > <question-title></question-title>
         >

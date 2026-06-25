@@ -627,7 +627,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 
 > <hands-on-title>Checking the website generation locally</hands-on-title>
 >
-> 1. Run a local Jekyll server with `make serve-quick`
+> 1. Run a local Jekyll server with `make serve-quick` (if you use a Macbook, try `make serve-quick HOST=127.0.0.1` for forcing Jekyll to use the standard local loopback address.)
 > 2. Visualize at [http://localhost:4000/training-material/ ](http://localhost:4000/training-material/)
 > 3. Edit one of the tutorials:
 >    - For example, open `topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md` in a text editor of your choice.

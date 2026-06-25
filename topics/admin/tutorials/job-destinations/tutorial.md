@@ -26,7 +26,9 @@ contributions:
   editing: # And reviewing
     - hexylena
     - afgane
-  funding: []
+  funding:
+    - unimelb
+    - AustralianBioCommons
   testing:
     - cat-bro
     - edmontosaurus

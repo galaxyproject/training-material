@@ -16,12 +16,11 @@ key_points:
 - Inspect and view EBV cube netCDF data with Panoply
 - Interact with Galaxy to save your plots
 tags:
-- interactive-tools
+- interactive tools
 - EBV cube
-- Data visualization
+- data visualization
 contributions:
   authorship:
-  - pndb
   - yvanlebras
   - colineroyaux
   - Marie59

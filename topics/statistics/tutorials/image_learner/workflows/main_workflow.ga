@@ -1,0 +1,230 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "color": "none",
+            "data": {
+                "line": [
+                    [
+                        0.2,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "thickness": 5
+            },
+            "id": 0,
+            "position": [
+                166.07943306143818,
+                413.307447988009
+            ],
+            "size": [
+                0.2,
+                0
+            ],
+            "type": "freehand"
+        },
+        {
+            "color": "none",
+            "data": {
+                "line": [
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "thickness": 5
+            },
+            "id": 1,
+            "position": [
+                275.0794330614382,
+                413.707447988009
+            ],
+            "size": [
+                0,
+                0
+            ],
+            "type": "freehand"
+        },
+        {
+            "color": "none",
+            "data": {
+                "line": [
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "thickness": 5
+            },
+            "id": 2,
+            "position": [
+                269.4794330614382,
+                413.00744798800906
+            ],
+            "size": [
+                0,
+                0
+            ],
+            "type": "freehand"
+        }
+    ],
+    "creator":[
+      {
+         "class":"Person",
+         "identifier":"https://orcid.org/0009-0007-1912-8644",
+         "name":"Khai Dang"
+      },
+      {
+         "class":"Person",
+         "identifier":"https://orcid.org/0000-0002-4403-6684",
+         "name":"Paulo Cilas Morais Lyra Junior"
+      },
+      {
+         "class":"Person",
+         "identifier":"https://orcid.org/0009-0005-4322-3401",
+         "name":"Junhao Qiu"
+      },
+      {
+         "class":"Person",
+         "identifier":"https://orcid.org/0000-0002-4583-5226",
+         "name":"Jeremy Goecks"
+      }
+   ],    "format-version": "0.1",
+    "license": "AGPL-3.0-or-later",
+    "name": "Image Learner - HAM10000",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "| Column | Description |\n| `lesion_id` | Lesion identifier used to group original and augmented images from the same lesion. |\n| `image_id` | Image identifier from the source dataset (shared by original and flipped versions). |\n| `dx` | Diagnosis label (target class). |\n| `dx_type` | Diagnosis confirmation method (for example, `histo`). |\n| `age` | Patient age in years. |\n| `sex` | Patient sex (`male`/`female`/`unknown`). |\n| `localization` | Anatomical site of the lesion. |\n| `image_path` | Image filename within the image ZIP. |",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "| Column | Description |\n| `lesion_id` | Lesion identifier used to group original and augmented images from the same lesion. |\n| `image_id` | Image identifier from the source dataset (shared by original and flipped versions). |\n| `dx` | Diagnosis label (target class). |\n| `dx_type` | Diagnosis confirmation method (for example, `histo`). |\n| `age` | Patient age in years. |\n| `sex` | Patient sex (`male`/`female`/`unknown`). |\n| `localization` | Anatomical site of the lesion. |\n| `image_path` | Image filename within the image ZIP. |",
+                    "name": "selected_HAM10000_img_metadata_aug.csv"
+                }
+            ],
+            "label": "selected_HAM10000_img_metadata_aug.csv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"csv\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6c2bd197-c7fa-4b55-b1ca-57be7ffae4ae",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "- Total dataset: 1,400 images\n- Generated 200 images per class\n- Resized all images to 96\u00d796 pixels\n- Standardized format as PNG for consistent processing\n\n\n",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "- Total dataset: 1,400 images\n- Generated 200 images per class\n- Resized all images to 96\u00d796 pixels\n- Standardized format as PNG for consistent processing\n\n\n",
+                    "name": "selected_HAM10000_img_96_size.zip"
+                }
+            ],
+            "label": "selected_HAM10000_img_96_size.zip",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.510345458984375,
+                "top": 133.0425567626953
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"zip\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "7f9a41fd-c1d0-4f30-be9a-f9cdc865fda0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/image_learner/image_learner/0.1.5",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "image_zip": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_csv": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Image Learner",
+                    "name": "image_zip"
+                },
+                {
+                    "description": "runtime parameter for tool Image Learner",
+                    "name": "input_csv"
+                }
+            ],
+            "label": null,
+            "name": "Image Learner",
+            "outputs": [
+                {
+                    "name": "output_pred_csv",
+                    "type": "input"
+                },
+                {
+                    "name": "output_model",
+                    "type": "ludwig_model"
+                },
+                {
+                    "name": "output_report",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 429.8177795410156,
+                "top": 70.70747375488281
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/image_learner/image_learner/0.1.5",
+            "tool_shed_repository": {
+                "changeset_revision": "d5c582cf74bc",
+                "name": "image_learner",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_settings\": {\"customize_defaults\": \"true\", \"__current_case__\": 0, \"epochs\": \"30\", \"early_stop\": \"30\", \"learning_rate_condition\": {\"learning_rate_define\": \"false\", \"__current_case__\": 1}, \"batch_size_condition\": {\"batch_size_define\": \"false\", \"__current_case__\": 1}, \"train_split\": \"0.7\", \"val_split\": \"0.1\", \"test_split\": \"0.2\", \"threshold\": \"0.5\"}, \"augmentation\": [\"random_horizontal_flip\", \"random_vertical_flip\", \"random_rotate\", \"random_blur\", \"random_brightness\", \"random_contrast\"], \"column_override\": {\"override_columns\": \"true\", \"__current_case__\": 0, \"target_column\": \"3\", \"image_column\": \"8\"}, \"image_resize\": \"original\", \"image_zip\": {\"__class__\": \"RuntimeValue\"}, \"input_csv\": {\"__class__\": \"RuntimeValue\"}, \"model_name\": \"caformer_s36_384\", \"random_seed\": \"42\", \"sample_id_column\": null, \"scratch_fine_tune\": {\"use_pretrained\": \"true\", \"__current_case__\": 0, \"fine_tune\": \"true\"}, \"task_selection\": {\"task\": \"classification\", \"__current_case__\": 1, \"validation_metric_multiclass\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.5",
+            "type": "tool",
+            "uuid": "f928b66a-95c6-4fb2-8b3b-f41abc3e9c4e",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags":[
+	"HAM10000",
+	"Image_Classification",
+	"Skin_Lesion",
+	"Deep_Learning",
+	"Image_Learner",
+	"GLEAM"
+    ],
+    "uuid": "33c0f1fc-d6b7-4248-beca-2b63ad471977",
+    "version": 2
+}

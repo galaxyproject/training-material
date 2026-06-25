@@ -130,7 +130,7 @@ Introduction
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 1. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - In *"Dataset"*:
 >        - {% icon param-repeat %} *"Insert Dataset"*

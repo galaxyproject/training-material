@@ -46,6 +46,7 @@ tags:
   - Object feature extraction
   - Image thresholding
   - High-throughput screening
+  - Overlay
   - Fluorescence microscopy
 
 ---

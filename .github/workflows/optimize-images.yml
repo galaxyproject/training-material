@@ -32,16 +32,17 @@ jobs:
         id: calibre
         uses: calibreapp/image-actions@main
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # For non-Pull Requests, run in compressOnly mode and we'll PR after.
           ##compressOnly: ${{ github.event_name != 'pull_request' }}
           minPctChange: '10'
+          compressOnly: true
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
           github.event_name != 'pull_request' &&
           steps.calibre.outputs.markdown != ''
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           title: Auto Compress Images
           branch: action_compress_images

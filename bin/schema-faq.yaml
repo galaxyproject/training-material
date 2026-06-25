@@ -50,7 +50,6 @@ mapping:
             The type of box that should be used when rendering this FAQ. Use `none` if it should not be in a box, but just plain text.
     contributors:
         type: seq
-        required: true
         description: |
             Who contributed to this FAQ
         _examples:
@@ -62,6 +61,102 @@ mapping:
               enum:
               - CONTRIBUTORS
               - ORGANISATIONS
+    contributions:
+        description: |
+            List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        _examples: |
+            contributions:
+                authorship:
+                    - shiltemann
+                    - bebatut
+                editing:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                translation:
+                    - shiltemann
+                funding:
+                    - gallantries
+        type: map
+        mapping:
+            authorship:
+                description: These entities wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            editing:
+                type: seq
+                description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            testing:
+                type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            ux:
+                type: seq
+                description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            infrastructure:
+                type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
+            reviewing:
+                type: seq
+                description: This person reviewed this material for accuracy and correctness
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            funding:
+                type: seq
+                description: These entities provided funding support for the development of this resource
+                sequence:
+                - type: str
+                  enum:
+                  - ORGANISATIONS
+                  - GRANTS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            data:
+                type: seq
+                description: These entities provided data for this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
+
     redirect_from:
         type: seq
         sequence:

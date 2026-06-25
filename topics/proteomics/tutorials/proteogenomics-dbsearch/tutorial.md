@@ -123,7 +123,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        - *"X!Tandem: Maximum Valid Expectation Value, refinement"* : `100`
 >
 >
-> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/4.0.41+galaxy1) %} with the following parameters:
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/4.0.41+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Identification Parameters file"*: `Identification Parameters: PAR file`
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
 >
@@ -191,11 +191,9 @@ outputs.
 
 > <hands-on-title>PeptideShaker</hands-on-title>
 >
-> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/2.0.33+galaxy1) %} with the following parameters:
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/2.0.33+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: The `Search GUI` archive file
 >    - *"Include the protein sequences in mzIdentML"*: `No`
->    - *"Contact Information"*: `Specify Contact Information`
->      - Enter your own informations
 >    - *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >
 >     > <comment-title>Certificate of Analysis</comment-title>

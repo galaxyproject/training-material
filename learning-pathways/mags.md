@@ -60,19 +60,19 @@ pathway:
       - name: quality-control
         topic: sequence-analysis
 
-#  - section: "Module 2: Contamination and Host Reads Removal – Purifying Your Metagenomic Dataset"
-#    description: |
-#        Metagenomic datasets frequently contain **non-microbial sequences**, such as **host DNA** (e.g., from honey bees) or **external contaminants** (e.g., human DNA introduced during sample handling or sequencing). These sequences can distort downstream analyses, leading to **misassemblies, incorrect taxonomic assignments, and biased functional interpretations**.
-#
-#        In this module, you will:
-#        - Recognize the **sources and impacts** of contamination in metagenomic datasets.
-#        - Learn how to **identify and filter out host and contaminant sequences** using Galaxy tools.
-#        - Ensure your dataset is **enriched for microbial reads**, improving the accuracy of MAG reconstruction and enabling more reliable biological insights.
-#
-#        By the end of this module, you'll be able to confidently clean your metagenomic data, setting the stage for high-quality MAG assembly and analysis.
-#    tutorials:
-#      - name: 
-#        topic: microbiome
+  - section: "Module 2: Contamination and Host Reads Removal – Purifying Your Metagenomic Dataset"
+    description: |
+        Metagenomic datasets frequently contain **non-microbial sequences**, such as **host DNA** (e.g., from honey bees) or **external contaminants** (e.g., human DNA introduced during sample handling or sequencing). These sequences can distort downstream analyses, leading to **misassemblies, incorrect taxonomic assignments, and biased functional interpretations**.
+
+        In this module, you will:
+        - Recognize the **sources and impacts** of contamination in metagenomic datasets.
+        - Learn how to **identify and filter out host and contaminant sequences** using Galaxy tools.
+        - Ensure your dataset is **enriched for microbial reads**, improving the accuracy of MAG reconstruction and enabling more reliable biological insights.
+
+        By the end of this module, you'll be able to confidently clean your metagenomic data, setting the stage for high-quality MAG assembly and analysis.
+    tutorials:
+      - name: host-removal
+        topic: microbiome
 
   - section: "Module 3: Assembly – Reconstructing and Assessing Contigs from Metagenomic Reads"
     description: |
@@ -139,6 +139,14 @@ pathway:
         topic: genome-annotation
       - name: amr-gene-detection
         topic: genome-annotation
+
+
+  - section: "Recommended follow-up tutorial"
+    description: |
+        While this learning pathway goes into detail about all steps required for MAGs generation, a full end-to-end training was developed, which executes all workflows for MAGs generation and annotation instead of running individual steps. This tutorial can be used as a guide to execute the workflows on your own data. It explains how you can perform quality control, remove host contamination, and run the main MAGs workflow to obtain quality-controlled, taxonomically and functionally annotated MAGs. 
+    tutorials:
+      - name: mags-building
+        topic: microbiome
 ---
 
 

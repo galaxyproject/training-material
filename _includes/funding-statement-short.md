@@ -11,7 +11,7 @@
 		</div>
 		<div>
 		{% if site.data.contributors[id].funding_id %}
-		{{ site.data.contributors[id].funding_id }}
+		{{ site.data.contributors[id].funding_id_display | default: site.data.contributors[id].funding_id }}
 		{% endif %}
 		</div>
 	</div>

@@ -25,6 +25,8 @@ contributions:
   - pndb
 tags:
   - biodiversity
+  - ecoregions
+  - life traits
 subtopic: ecologyanalysis
 ---
 

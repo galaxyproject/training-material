@@ -10,7 +10,7 @@ contributors: [yvanlebras,shiltemann]
 When you have finished your R analysis, it's time to stop RStudio.
 
 1. First, save your work into Galaxy, to ensure reproducibility:
-    1. You can use `gx_put(filename)` to save individual files by supplying the filename
+    1. You can use `gx_put("example.csv")` to save individual files by supplying the filename
     2. You can use `gx_save()` to save the entire analysis transcript and any data objects loaded into your environment.
 
 2. Once you have saved your data, you can proceed in 2 different ways:

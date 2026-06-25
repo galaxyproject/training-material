@@ -16,10 +16,20 @@ key_points:
   - "Quality control and cleaning of your data is a crucial step in order to obtain optimal results"
   - "Adding a mock community to serve as a control sample can help you asses the error rate of your experimental setup"
   - "We can explore alpha and beta diversities using Krona and Phinch for dynamic visualizations"
-contributors:
-  - shiltemann
-  - bebatut
-  - tnabtaf
+contributions:
+  authorship:
+    - shiltemann
+    - bebatut
+    - tnabtaf
+  editing:
+    - tflowers15
+    - mthang
+    - annasyme
+    - igormakunin
+  funding:
+    - AustralianBioCommons
+    - unimelb
+    - melbournebioinformatics
 subtopic: metabarcoding
 tags:
   - metabarcoding

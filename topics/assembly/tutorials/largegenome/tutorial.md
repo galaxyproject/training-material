@@ -25,8 +25,13 @@ key_points:
   - "We can assemble long reads from plant or animal species into large contigs"
   - "These contigs can be polished with both long and short reads"
   - "We can assess the quality of this assembly with various tools"
-contributors:
-  - annasyme
+contributions:
+  authorship:
+    - annasyme
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 
 recordings:
 - youtube_id: BM70nvwWjOY

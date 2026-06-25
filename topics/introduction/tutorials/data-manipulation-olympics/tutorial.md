@@ -100,7 +100,7 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
 | Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
 | Join two Datasets      | side by side on a specified field  | {% tool [Join two Datasets]({{version_join}}) %} |
-| Concatenate datasets   | one after the other                | {% tool [Concatenate datasets]({{version_cat}}) %} |
+| Concatenate datasets   | one after the other                | {% tool [Concatenate multiple datasets or collections]({{version_cat}}) %} |
 | Remove Beginning       | Good for removing header lines     | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} |
 | Select First lines     | Good for finding top 10s or saving header lines | {% tool [Select first lines]({{version_select_first}}) %} |
 | Cut Columns            | By header name                     | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
@@ -1783,7 +1783,7 @@ Since this new dataset has the exact same structure (number and order of columns
 >
 >    Now we can perform the concatenation:
 >
-> 2. {% tool [Concatenate datasets tail-to-head]({{version_cat}}) %} with the following parameters:
+> 2. {% tool [Concatenate multiple datasets or collections]({{version_cat}}) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Datasets"*: `olympics.tsv` (this file will be first)
 >    - {% icon param-repeat%} *"Insert Dataset"*:
 >      - {% icon param-file %}*"Dataset"*: `output from step 1` (2022 data without the header)

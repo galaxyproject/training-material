@@ -162,8 +162,8 @@ You are now all set to use your obis data in order to do a diversity analysis.
 > 1. {% tool [Ocean biodiversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1) %} with the following parameters:
 >    - *"Input table"*: The result tabular of the Advanced Cut tool
 >    - *"What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)"*: `Tabulator (\t)`
->    - *"Select column containing the decimal value of the longitude "*: `c2`
->    - *"Select column containing the decimal value of the latitude "*: `c3`
+>    - *"Select column containing the decimal value of the longitude "*: `c3`
+>    - *"Select column containing the decimal value of the latitude "*: `c2`
 >    - *"Select column containing the species "*: `c4`
 >    - *"Select column containing the number of records"*: `c5`
 >    - *"Type of projection for the map : select your coordinate reference system (CRS)"*: Robinson Projection

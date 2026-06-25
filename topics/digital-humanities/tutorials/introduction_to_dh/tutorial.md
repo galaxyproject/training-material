@@ -24,10 +24,12 @@ contributions:
     - RZ9082
   funding:
     - deKCD
+    - mwk
+    - deNBI
 answer_histories:
   - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/schnda/h/introduction-to-dh-in-galaxy-answer-key-history
-    date: 2025-11-20
+    history: https://usegalaxy.eu/u/schnda/h/answer-key-history-introduction-to-dh-in-galaxy
+    date: 2026-05-04
 ---
 
 Loosely building on {% cite Richardson2003 %}, this tutorial compares two editions of the poem "The Sorrows of Yamba".[^1]
@@ -274,7 +276,7 @@ Regular Expressions (RegEx) allow you to search for particular patterns in your 
 
 > <hands-on-title> Remove Punctuation in Poem One </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Cheap_Repo.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
@@ -297,7 +299,7 @@ Also in text two, we search for the pattern `[[:punct:]]` and omit a replacement
 
 > <hands-on-title> Remove Punctuation in Poem Two </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Univ_Mag.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
@@ -313,61 +315,29 @@ To get an idea of how the two cleaned texts compare, we check out their metadata
 
 # Different ways to compare the texts
 
-## Compare quantitatively
+There are various ways to compare two texts. 
+You could, for example, compare them quantitatively with the tool {% tool Line/Word/Character count %}. 
+The output of the tool would show, that the texts have different lengths. 
+While both files are only two lines long, the poem from the cheap repository is 1139 words long, more than double the amount of the second poem. 
 
-The tool {% tool [Line/Word/Character count](wc_gnu) %} allows us to get a quick overview of a text. We want to determine if the cleaned versions differ from one another.
+Another option for comparing the texts is by visualising their content. 
+We will use a word cloud next to do just that. 
 
-> <hands-on-title> Count the Characters of Poem One </hands-on-title>
->
-> 1. Run {% icon workflow-run %} {% tool [Line/Word/Character count](wc_gnu) %} with the following parameters:
->    - {% icon param-file %} *"Text file"*: `SoY_Cheap_Repo_cleaned.txt`
->
-> 2. **Rename** {% icon galaxy-pencil %} the output of this step to `Line/Word/Character count Cheap Repo`.
->
-{: .hands_on}
-
-
-
-Once the dataset has finished running and appears green, click on the eye {% icon galaxy-eye %} symbol. You can see how many lines, words and characters the text consists of.
-And again, we run {% icon workflow-run %} the tool on the second poem.
-
-> <hands-on-title> Count the Characters of Poem Two </hands-on-title>
->
-> 1. Run {% icon workflow-run %} {% tool [Line/Word/Character count](wc_gnu) %} with the following parameters:
->    - {% icon param-file %} *"Text file"*: `SoY_Univ_Mag_cleaned.txt`
->
-> 2. **Rename** {% icon galaxy-pencil%} this output to `Line/Word/Character count Universal` for easier distinction.
->
-{: .hands_on}
-
-
-> <question-title>How do the texts compare</question-title>
->
-> 1. How many lines do the poems have?
-> 2. Which of the two texts contains more words, and how many?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Both texts consist of only two lines.
-> > 2. The poem version from the cheap repository is longer, containing 1139 words, more than double the amount of the second poem.
-> >
-> {: .solution}
->
-{: .question}
-
-The differences between the two texts are quantifiable, but do these also affect the content?
 
 ## Compare visually
 
-A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts. Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about. Please refrain from using the latest outputs this time, as they contain only metadata and not the texts we want to compare. Select the cleaned poem versions for a more meaningful word cloud output.
+A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts. 
+Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about. 
 
 > <hands-on-title> Visualize the Content of Poem One </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `SoY_Cheap_Repo_cleaned.txt` (output of **Replace Text** {% icon tool %})
 >    - *"Do you want to select a special font?"*: `Use the default DroidSansMono font`
 >    - *"Color option"*: `Colormap`
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.8`
+>
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `Wordcloud Poem One`.
 >
 >    > <comment-title> Adapting the Word Cloud </comment-title>
 >    >
@@ -376,18 +346,20 @@ A picture says more than 1000 words! Accordingly, we aim to delve deeper into th
 >
 {: .hands_on}
 
-We also rerun {%icon dataset-rerun %} the word cloud with the second poem.
-
-The word cloud for the second text is created in the same way. We suggest rerunning the tool with the second text, using the same parameters as those for creating the first word cloud image for better comparability. That makes both comparable.
+The word cloud for the second text is created in the same way. 
+We suggest using the rerun {%icon dataset-rerun %} button on `Wordcloud Poem One`, to reun the tool with `SoY_Univ_Mag_cleaned.txt` as an input and create a wordcloud for it. That way we can make sure to use identical input parameters (e.g. font, color option, etc.) which helps for easy comparison.
+This should look as follows:
 
 > <hands-on-title> Visualize the Content of Poem Two </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `SoY_Univ_Mag_cleaned.txt` (output of **Replace Text** {% icon tool %})
 >    - *"Do you want to select a special font?"*: `Use the default DroidSansMono font`
 >    - *"Color option"*: `Colormap`
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.8`
 >
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `Wordcloud Poem Two`.
+
 >    > <comment-title> Uniqueness of the Word Cloud </comment-title>
 >    >
 >    > The word cloud from this tool looks a little different each time you run it. The layout may vary even when you redo it with the exact same text and inputs.
@@ -422,19 +394,25 @@ The visualisation suggests that the text's metrics, which we checked with the li
 
 With this text's length and just two poems, this is, of course, something you can find out by reading both texts. However, this distant reading approach can give you important preliminary insights to guide your close reading, particularly with bigger corpora.
 
-Of course, the word cloud insights are just a first glance and do not allow a proper analysis; we need to compare both texts properly. But what is a good way to do this? We suggest comparing them side by side and line by line. For that, we adapt the layout once more.
+Of course, the word cloud insights are just a first glance and do not allow a proper analysis; 
+we need to compare both texts properly. 
 
+## Compare texts side by side
 
-## Replace spaces with line breaks to prepare side-by-side comparison
+But what is a good way to compare those texts in depth? 
+We suggest comparing them side by side and line by line. 
+For that, we adapt the layout once more.
 
-We used the tool to replace text before. We are not deleting something this time, as we did with the punctuation, but we are replacing some characters. To get a convenient layout that shows one word per line, we replace the spaces (\s) with line breaks (\n). That way, each word gets displayed in a different line, which prepares the detailed comparison in the next step.
+### Replace spaces with line breaks to prepare side-by-side comparison
 
-Regular Expressions help again by changing all spaces with line breaks with just one command.
-
+We used {% tool Replace text in entire line %} to remove the punctuation earlier. 
+This time, we use the same tool to replace characters in our files. 
+To get a convenient layout that shows one word per line, we use Regular Expressions to replace the spaces (\s) with line breaks (\n). 
+That way, each word gets displayed in a different line, which prepares the detailed comparison in the next step.
 
 > <hands-on-title> Changing Layout of Poem One </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Cheap_Repo_cleaned.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
@@ -444,21 +422,19 @@ Regular Expressions help again by changing all spaces with line breaks with just
 >
 >    > <comment-title> How do I understand the RegEx commands? </comment-title>
 >    >
->    > Don't worry, if you have never used regular expressions. Several websites help you find out what patterns to detect and how to catch the passages you need. For now, you can just add the symbols that stand for the space (\s) and the line break (\n).
+>    > Don't worry, if you have never used Regular Expressions. Several websites help you find out what patterns to detect and how to catch the passages you need. For now, you can just add the symbols that stand for the space `\s` and the line break `\n`.
 >    {: .comment}
 >
 > 2. **Rename** {% icon galaxy-pencil %} this text `SoY_Cheap_Repo_word_per_line.txt`.
 >
 {: .hands_on}
 
-
-
-When you click on the eye {% icon galaxy-eye %} icon of the data set in the history now, when the dataset turns green, you can see that it now contains one word per line. To match this, we repeat the step with the same parameters also for the second poem.
-
+When you click on the eye {% icon galaxy-eye %} icon of the data set in the history, when the dataset turns green, you can see that it now contains one word per line. 
+To match this, we rerun {%icon dataset-rerun %} the step with the same parameters also for the second poem.
 
 > <hands-on-title> Changing Layout of Poem Two </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Univ_Mag_cleaned.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
@@ -477,15 +453,17 @@ When you click on the eye {% icon galaxy-eye %} icon of the data set in the hist
 >
 > > <solution-title>  </solution-title>
 > >
-> > 1. When you click on the two names of the two new datasets you just worked on, you see that one is now 539, the other 1139 lines long. The number of lines now matches the word number we detected with the tool `Line/Word/Character count`.
+> > 1. When you click on the two names of the two new datasets you just worked on, you see that one is now 539, the other 1139 lines long. The number of lines matches the amount of words you might have detected with the tool `Line/Word/Character count`.
 > >
 > {: .solution}
 >
 {: .question}
 
-Now, both poems show one word per line, which is the perfect setup to compare them side by side. Use a tool called `diff` to visualise this. To get the same order as the tutorial, make sure to select the version from the Cheap Repository as the first input file and the one from the Universal Magazine as the second input file.
+Now, both poems show one word per line, which is the perfect setup to compare them side by side. 
+Use a tool called `diff` to visualise this. 
+To reproduce the setup from this tutorial, make sure to select the version from the Cheap Repository as the first input file and the one from the Universal Magazine as the second input file.
 
-## Compare side-by-side with *diff*
+### Using *diff* to compare texts side by side
 
 > <hands-on-title> Compare the Poems </hands-on-title>
 >
@@ -517,15 +495,27 @@ We get two new files as a result. The HTML report and the raw output it is based
 {: .question}
 
 In the HTML report, you can quickly identify deletions (in red) and additions (in green) between both texts.
-You can also see smaller details, which you might quickly miss manually. Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected. You can furthermore see how the perspective was changed between the poems. While line 359-361 in the cheap repository text states "they sell us", the other text states "they sell them" (l. 298-300), suggesting the reader is (no longer) among the group which is sold. You can go through it and detect further changes in language and length.
+You can also see smaller details, which you might quickly miss manually. 
+Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected. 
+You can furthermore see how the perspective was changed between the poems. 
+While line 359-361 in the cheap repository text states "they sell us", the other text states "they sell them" (l. 298-300), suggesting the reader is (no longer) among the group which is sold. 
+You can go through the HTML file and detect further changes in language and length.
 
-Seeing this, you might want to go into detail with the respective themes once more. As "death" was central in both texts, we will extract sentences containing this word so you can analyze them more closely. The cleaned texts without punctuation and one word per line are not the easiest form for this. Instead, we use an earlier version from our history.
+Seeing this, you might want to go into detail with the respective themes once more. As "death" was central in both word clouds, we will extract sentences containing this word so you can analyze them further. 
+The recent files without punctuation and one word per line are not the easiest form for this. 
+Instead, we use an earlier version from our history.
 
 # Extract specific sentences
 
 ## Breaking text into sentences
 
-We return to Regular Expressions a third time, but this time we use a different tool with further functionalities. We use it to divide the text into more lines, to make it easier to extract those containing the word "death." Here, punctuation is a helpful stop point. We use full stops to indicate a sentence, which will not be perfectly accurate but sufficient for this case. We then add a line break after the full stops to get complete sentences. Of course, you could spend more time on this and make it neater. Make sure to use not the last input but the poems without a hyperlink, but including punctuation. It will not work if the text contains no more full stops.
+We return to Regular Expressions a third time, but this time we use a different tool with further functionalities. 
+The tools helps us to divide the text into more lines, to make it easier to extract sentences containing the word "death".
+
+Full stops  help us to indicate a sentence, which will not be perfectly accurate but sufficient for this case. 
+Of course, you could spend more time on this and make it neater. 
+Make sure to use not the last input but the poems without a hyperlink, but including punctuation. 
+This will not work if the text contains no more full stops.
 
 > <hands-on-title> Rearrange Poem One </hands-on-title>
 >
@@ -541,7 +531,7 @@ We return to Regular Expressions a third time, but this time we use a different 
 >
 >    > <comment-title> What do those inputs mean? </comment-title>
 >    >
->    > A full stop (.) has its own meaning in regular expressions. It stands for all elements. To show that we do not mean all characters but actually a full stop, we need to escape it in RegEx by putting `\.` instead of `.` if we mean a full stop. We want to add a line break afterwards, which we already learned is indicated as `\n`. The replacement pattern, therefore, is `\.\n`.
+>    > A full stop `.` has its own meaning in Regular Expressions. It stands for all elements. To show that we do not mean all characters but actually a full stop, we need to escape it in RegEx by putting `\.` instead of `.` if we mean a full stop. We want to add a line break afterwards, which we already learned is indicated as `\n`. The replacement pattern, therefore, is `\.\n`. As a result, the text will now be split in multiple lines.
 >    {: .comment}
 >
 > 2. **Rename** {% icon galaxy-pencil %} your resulting file to `SoY_Cheap_Repo_sent_per_line.txt`.
@@ -550,7 +540,7 @@ We return to Regular Expressions a third time, but this time we use a different 
 
 
 
-Remember to redo this step for the second poem when you have finished this step.
+when you have finished this step, remember to rerun {%icon dataset-rerun %} this tool for the second poem 
 
 > <hands-on-title> Rearrange Poem Two </hands-on-title>
 >
@@ -573,7 +563,7 @@ As a result, you get two files, each split at full stops. How can you now extrac
 
 ## Extract sentences containing 'death'
 
-Use {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} to select all lines containing the word "death".
+Use {% tool Search in textfiles %} to select all lines containing the word "death".
 
 > <hands-on-title> Extract particular sentences </hands-on-title>
 >
@@ -583,7 +573,7 @@ Use {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_pr
 >
 >    > <comment-title> Further Functionalities </comment-title>
 >    >
->    > You can see that the tool has many parameters you can tweak.  The ones not mentioned here are kept at the default input, like `Match` and `Perl,` which is the kind of RegEx applied. But you could also select all lines that do not contain death by selecting `Do not match` or extracting lines before or after the line containing the content you chose.
+>    > You can see that the tool has many parameters you can tweak.  The ones not mentioned here are kept at the default input, like `Match` and `Perl,` which is the kind of RegEx applied. But you could also select all lines that do not contain "death" by selecting `Do not match` or extracting lines before or after the line containing the content you chose.
 >    {: .comment}
 >
 > 2. **Rename** {% icon galaxy-pencil %} your output `SoY_Cheap_Repo_death.txt`
@@ -592,7 +582,7 @@ Use {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_pr
 
 
 
-And for the last time, we redo this step for the second poem.
+And for the last time, we rerun {%icon dataset-rerun %} this step for the second poem.
 
 > <hands-on-title> Extract particular sentences from Poem Two </hands-on-title>
 >
@@ -605,7 +595,7 @@ And for the last time, we redo this step for the second poem.
 {: .hands_on}
 
 
-When you enable the window manager at the top bar, you can click on the eye {% icon galaxy-eye %} symbols of your last two outputs and visualize them side by side in two different windows. Six and seven lines from the poem contain the term, respectively. You could analyze them in detail now to see where they differ. While the first lines are nearly identical, the last ones are completely different in both versions of the poem. An intriguing insight for further analysis. No wonder the poems and their many editions have sparked the interest of many researchers.
+When you enable the window manager at the top bar, you can click on the eye {% icon galaxy-eye %} symbols of your last two outputs and visualize them side by side in two different windows. Six and seven lines from the poems contain the term, respectively. You could analyze them in detail now to see where they differ. While the first lines are nearly identical, the last ones are completely different in both versions of the poem. An intriguing insight for further analysis. No wonder the poems and their many editions have sparked the interest of many researchers.
 
 If you only analyze those two poems, you might find it easier to do those steps manually. But particularly, if you create a workflow out of this, you can reproduce this process with only a few clicks, saving you considerable work.
 

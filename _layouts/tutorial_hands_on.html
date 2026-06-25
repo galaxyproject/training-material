@@ -100,6 +100,10 @@ We should ONLY be using new_material (if at all possible.)
             {% assign tuto_has_docker = true %}
         {% endif %}
 
+        {% if page.translations %}
+        <div><strong>{% icon language aria=false %} {{ locale['translations'] | default: "Translations" }}:</strong> {% for lang in page.translations %}<a href="./tutorial{% if lang != 'en' %}_{{lang | upcase}}{% endif %}.html"> {% icon language aria=false %} {{ site.other_languages[lang] }} </a>{% endfor %}</div>
+        {% endif %}
+
         {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
             {% assign tuto_has_zenodo = true %}
         {% endif %}
@@ -193,7 +197,7 @@ We should ONLY be using new_material (if at all possible.)
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-2 hide-when-printing">
-                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
                  {% if own_material.notebook %}
@@ -512,7 +516,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 </blockquote>
                 {% endif %}
 
-		{% if own_material.tools %}
+		{% if own_material.tools != empty %}
                 <blockquote class="details follow-up" id="admins-install-missing-tools">
                   <div id="admin-missing-tools" class="box-title">
                     <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
@@ -596,3 +600,16 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 <br/>
 <br/>
 <br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+

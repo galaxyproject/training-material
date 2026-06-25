@@ -26,10 +26,6 @@ requirements:
     title: "Basic knowledge of Python and JavaScript"
   - type: none
     title: "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
-  - type: "internal"
-    topic_name: dev
-    tutorials:
-      - architecture
 subtopic: core
 ---
 
@@ -37,7 +33,7 @@ The Galaxy code base contains thousands of tests that include tests of different
 
 A good way to start learning about Galaxy's testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see [Writing Tests for Galaxy](https://docs.galaxyproject.org/en/master/dev/writing_tests.html)).
 
-In addition to reading the documentation, it is essential to have a reasonable understanding of Galaxy's code organization. The best documentation resource for that is the [Galaxy Code Architecture slides]({% link topics/dev/tutorials/architecture/slides.html %}). In addition, we recommend the [Contributing a New Feature to Galaxy Core]({% link topics/dev/tutorials/core-contributing/tutorial.md %}) tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.
+In addition to reading the documentation, it is essential to have a reasonable understanding of Galaxy's code organization. The best documentation resource for that is the [Galaxy Code Architecture slides]({% link topics/dev/ %}#st-architecture). In addition, we recommend the [Contributing a New Feature to Galaxy Core]({% link topics/dev/tutorials/core-contributing/tutorial.md %}) tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.
 
 The most detailed and up-to-date documentation on running Galaxy tests is located at the top of the `run_tests.sh` script in Galaxy's root directory.
 
@@ -120,7 +116,7 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 
 # API tests
 
-We turn to API tests when we need to test some feature that requires a running Galaxy instance and, in many cases, the Galaxy database. These tests use the Galaxy API to drive the test. 
+We turn to API tests when we need to test some feature that requires a running Galaxy instance and, in many cases, the Galaxy database. These tests use the Galaxy API to drive the test.
 
 In a way, these tests may be the simplest to write. While the required setup of an API test is, certainly, more involved than that of a basic unit test, Galaxy's testing infrastructure takes care of all the heavy lifting, such as creating a test database, configuring and starting up a Galaxy instance, and tearing down the setup upon test completion. The testing infrastructure also provides a wealth of convenient abstractions that simplify pre-populating the database with the necessary state for each test, interacting with the API, as well as expressing expectations about the outcomes of a test. Thus, writing an API test boils down to calling the appropriate API endpoint and verifying the result.
 
@@ -213,7 +209,7 @@ def test_create_role_WRONG(self):
     assert len(data) == ROLE_COUNT + 1
 ```
 
-Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, ***this is the wrong approach***. Try running this together with the previous version of the test - you'll get an assertion error: there's an extra role in the database! 
+Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, ***this is the wrong approach***. Try running this together with the previous version of the test - you'll get an assertion error: there's an extra role in the database!
 
 ```
 FAILED lib/galaxy_test/api/test_mytutorial.py::TestMyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
@@ -221,17 +217,17 @@ FAILED lib/galaxy_test/api/test_mytutorial.py::TestMyTutorialApiTestCase::test_c
 
 The reason for that is that we are using the same database for both tests, so whatever artifacts are created in one test will affect the following test if we make any kind of assumptions about the state of the database.
 
-How do we rewrite this test without making assumptions about database state? We can't retrieve the roles and use their initial quantity as our baseline: that's a perfect recipe for a race condition (if some other test creates a role after we have counted the existing roles but before we have created our new role, our test will fail). Instead, we can use the role's name (which is unique across all roles) to verify that our object has been added. 
+How do we rewrite this test without making assumptions about database state? We can't retrieve the roles and use their initial quantity as our baseline: that's a perfect recipe for a race condition (if some other test creates a role after we have counted the existing roles but before we have created our new role, our test will fail). Instead, we can use the role's name (which is unique across all roles) to verify that our object has been added.
 
 We could generate our own unique name, but we can also simply use an existing method used across Galaxy's tests: ``get_random_name()`` (we need to add an import and override the ``setUp`` method for that: see the solution code). Now we have a test we can safely run together with our old test (or with any number of other tests that create role objects).
 
 {% include topics/dev/tutorials/writing_tests/api3.md %}
 
-Can't we destroy and create or re-populate the database for each test? We can, and there is infrastructure for that in `test/unit/data/model/db`. However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible. 
+Can't we destroy and create or re-populate the database for each test? We can, and there is infrastructure for that in `test/unit/data/model/db`. However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible.
 
 ## Use Galaxy's populators for setting up database state
 
-As our last example, we'll look at how to take advantage of some of the many abstractions provided by Galaxy's testing infrastructure. Supposing you'd like to test the "datasets-filter-by-history" functionality exposed via the ``api/datasets`` endpoint (see `lib/galaxy/webapps/galaxy/api/datasets.py`). The test design is straightforward: 
+As our last example, we'll look at how to take advantage of some of the many abstractions provided by Galaxy's testing infrastructure. Supposing you'd like to test the "datasets-filter-by-history" functionality exposed via the ``api/datasets`` endpoint (see `lib/galaxy/webapps/galaxy/api/datasets.py`). The test design is straightforward:
 - Create 2 history objects h1 and h2.
 - Create n and m datasets associated with h1 and h2 respectively.
 - Retrieve datasets filtering by h1. Verify there are n results.
@@ -285,7 +281,7 @@ Let's move on to the `to_unit` method of the `ByteSize`class. Just like you did 
 
 Run the tests to verify they pass.
 
-Our tests are looking good for the most part, although code duplication is starting to creep in. It's time to refactor! 
+Our tests are looking good for the most part, although code duplication is starting to creep in. It's time to refactor!
 
 Let's start by factoring out the ByteSize object creation into a fixture (see [https://docs.pytest.org/en/8.2.x/how-to/fixtures.html](https://docs.pytest.org/en/8.2.x/how-to/fixtures.html)). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy's testing code.
 

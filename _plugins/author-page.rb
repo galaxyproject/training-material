@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require './_plugins/gtn/mod'
+require './_plugins/colour-tags'
 require './_plugins/gtn'
+require './_plugins/util'
 
 module Jekyll
   module Generators
@@ -125,6 +127,10 @@ module Jekyll
           page2.data['title'] = "GTN Contributor: #{name}"
           page2.data['layout'] = 'contributor_index'
 
+          if contributor != contributor.downcase
+              page2.data['redirect_from'] = "hall-of-fame/#{contributor.downcase}"
+          end
+
           page2.data['tutorials'] = tutorials_by_author[contributor].group_by{|x| x[0] }.map{|k, v| [k, v.map{|vv| vv[1]}.compact]}
           page2.data['slides'] = slides_by_author[contributor].group_by{|x| x[0] }.map{|k, v| [k, v.map{|vv| vv[1]}.compact]}
           page2.data['news'] = news_by_author[contributor]
@@ -150,6 +156,22 @@ module Jekyll
           end
           page2.data['editor_count'] = page2.data['editors'].length
 
+          page2.data['counts_fmt'] = page2.data
+            .select{|k| k =~ /_count/}
+            .select{|_, v| v > 0}
+            .sort_by{|_, v| -v}
+            .map{|k, v|
+              k_fixed = k.gsub(/_count/,'').gsub(/_/, ' ').gsub(/faqs/i, 'FAQs')
+              k_fixed[/^\W*\w/] = k_fixed[/^\W*\w/].upcase
+
+              style = Gtn::HashedColours.colour_tag(k)
+              if k == "editor_count"
+                %Q(<span class="label" style="#{style}">Editorial Board</span>)
+              else
+                %Q(<span class="label" style="#{style}">#{v} #{k_fixed}</span>)
+              end
+            }.join(' ') # ·
+
           page2.data['has_philosophy'] = has_philosophy[contributor]
 
           countable_reviews = reviews_by_author[contributor]
@@ -166,6 +188,15 @@ module Jekyll
             .map{|x| x[0]}
 
           site.pages << page2
+
+          # and their hovercard
+          page3 = PageWithoutAFile.new(site, '', File.join(dir, contributor), 'card.html')
+          page3.content = nil
+          page3.data = page2.data.clone
+          page3.data['layout'] = 'contributor_card'
+          site.pages << page3
+
+
         end
       end
     end

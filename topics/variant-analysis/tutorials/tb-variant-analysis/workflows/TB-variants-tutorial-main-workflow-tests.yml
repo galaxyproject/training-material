@@ -1,0 +1,49 @@
+- doc: Test outline for TB-variants-tutorial-main-workflow
+  job:
+    Mycobacterium_tuberculosis_ancestral_reference.gbk:
+      class: File
+      location: https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
+      filetype: genbank
+    Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3:
+      class: File
+      location: https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
+      filetype: gff3
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: 004-2
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
+  outputs:
+    report_output:
+      element_tests:
+        004-2:
+          asserts:
+            has_text:
+              text: 'unclassified'
+    snpvcf:
+      element_tests:
+        004-2:
+          asserts:
+            has_text:
+              text: '13460'
+    variants_report_html:
+      element_tests:
+        004-2:
+          asserts:
+            has_text:
+              text: 'Leu161Leu'
+    drug_resistance_report_html:
+      element_tests:
+        004-2:
+          asserts:
+            has_text:
+              text: 'Ser315Thr'
