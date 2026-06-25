@@ -47,9 +47,9 @@ schematic: three seasons (*akhet*, *peret*, *shemou*) of four 30-day months each
 epagomenal days, giving 365 days every year with no leap day. In this table a civil date is written
 as `<month 1–4> <season> <day>`, e.g. `1 peret    5` for "month I of peret, day 5".
 
-The table can be retrieved as a text file (`Thebenletzte.txt`) from
-<https://www.gautschy.ch/~rita/archast/mond/mondeng.html#download> and converted into the
-tab-separated `Thebenletzte.tsv` used here with [OpenRefine](https://openrefine.org/).
+The table can be retrieved as a text file (`Thebenletzte.txt`) from Rita Gautschy's collection of
+lunar data {% cite Gautschy-mond %} and converted into the tab-separated `Thebenletzte.tsv` used here
+with [OpenRefine](https://openrefine.org/).
 
 ## From a preserved date to an absolute date
 
@@ -60,7 +60,7 @@ the old crescent, the **last visibility falls two days earlier** than the report
 
 > If a first lunar day is reported on I peret 7, one has to seek in the table of the last
 > visibilities for the date I peret 5.
-{: .quote cite="https://www.gautschy.ch/~rita/archast/mond/mondeng.html"}
+{: .quote cite="{% cite_url Gautschy-mond %}"}
 
 So a reported feast date is converted into a **search term = reported date − 2 days**, which is then
 searched in the last-visibility table. Every matching row is a **candidate absolute date**. A single
