@@ -3,78 +3,84 @@ layout: tutorial_hands_on
 
 title: How to turn ancient calendar sources into absolute dates
 zenodo_link: ''
-questions:  
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+questions:
+- How can a sequence of preserved lunar observations be turned into candidate absolute dates for an ancient Egyptian ruler?
+- Why is the *last* visibility of the lunar crescent the relevant event for the ancient Egyptian calendar?
+- How can a chain of generic Galaxy text-manipulation tools implement a chronology pipeline?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Restrict a four-millennia table of computed lunar visibilities to the historically plausible window of one ruler.
+- Convert a lunar feast date reported in the Egyptian civil calendar into a search term for the last-visibility table using the −2-day rule.
+- Combine the searches for several preserved lunar dates and read the chronologically sorted output as a list of viable dating options.
+time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- A reported first lunar day (`psḏntyw`) is sought in the last-visibility table two days earlier (the −2-day rule).
+- ΔT (column 3) decreases monotonically with time, so sorting on it orders the candidate dates chronologically.
+- Each preserved lunar date yields several candidate absolute dates; intersecting several of them pins down a single chronology (here: year 1 of Senwosret III ≈ 1872 BCE).
 contributors:
-- contributor1
-- contributor2
+- Rita Gautschy
+- Johannes Nussbaum
 
 ---
 
 
 # Introduction
 
-This workflow extracts possible absolute dates of preserved ancient lunar observations 
-(first / last sighting of the Moon).
+This tutorial shows how a sequence of preserved ancient lunar observations can be turned into
+candidate **absolute calendar dates** for an ancient ruler. The worked example follows the
+chronology of the Egyptian Middle Kingdom (12th Dynasty) and the reign of pharaoh
+**Senwosret III**, based on the lunar dates from the temple archive of el-Lahun (Illahun)
+{% cite Gautschy2011 %}.
 
-This workflow can be used for the analysis of a sequence of preserved lunar data, 
-namely first or last visibilities of the Moon after or before New Moon. 
-In many cultures this event announced the beginning of a new (lunar) month. 
-Sequences of preserved lunar data can help to retrieve absolute dates for ancient rulers, e.g. Egyptian pharaohs.
+## The astronomical background
 
-The input data - calculations of first or last visibility of the Moon - must be in tabular format. 
-Since the original file contains four millennia, 
-cutting it down to the historically reasonable time range for a ruler may be useful. 
-To achieve that, a number of lines are removed from the beginning (Tool: Remove beginning of a file) 
-and the end (Tool: Select first lines from a dataset) of the input file.
+In many cultures, the first or last visibility of the Moon close to New Moon announced the
+beginning of a new lunar month. Ancient Egypt was unusual: there, the new lunar month began with
+the **invisibility of the old crescent** — the day called *psḏntyw*. For that reason the relevant
+table for Egypt is the one of **last visibilities** of the waning crescent before New Moon
+(`Thebenletzte` = *Theben, letzte Sichtbarkeit*, "Thebes, last visibility").
 
-Then the successive search for the preserved lunar dates can begin (Tool: Search in textfiles (grep)). 
-As a next step the results of the individual searches need to be concatenated 
-(Tool: Concatenate multiple datasets or collections).
-To eliminate duplicates, the output of the previous step needs to be cleaned and only unique values kept 
-(Tool: Unique occurrences of each record).
+The input data are precomputed last visibilities of the Moon at Thebes, one row per lunar month,
+covering the four millennia from 2000 BCE to 2000 CE. Each row gives the date in the Julian
+calendar, the time, ΔT (the difference between dynamical and universal time), and — crucially — the
+corresponding date in the **Egyptian civil calendar**. The Egyptian civil year was strictly
+schematic: three seasons (*akhet*, *peret*, *shemou*) of four 30-day months each, plus five
+epagomenal days, giving 365 days every year with no leap day. In this table a civil date is written
+as `<month 1–4> <season> <day>`, e.g. `1 peret    5` for "month I of peret, day 5".
 
-Finally, the data need to be sorted chronologically (Tool: Sort data in ascending or descending order).
+The table can be retrieved as a text file (`Thebenletzte.txt`) from
+<https://www.gautschy.ch/~rita/archast/mond/mondeng.html#download> and converted into the
+tab-separated `Thebenletzte.tsv` used here with [OpenRefine](https://openrefine.org/).
 
-The result is a text file containing all remaining viable dating options 
-for the preserved lunar dates in other calendars (Egyptian civil calendar in the original example).
+## From a preserved date to an absolute date
 
+A preserved lunar feast date (a *psḏntyw*, the start of a lunar month) is recorded in the Egyptian
+civil calendar, but its **absolute** (Julian) date is unknown — that is exactly what we want to
+recover. Because the Egyptian day began at dawn and the lunar month began with the invisibility of
+the old crescent, the **last visibility falls two days earlier** than the reported first lunar day:
 
-<!-- This is a comment. -->
+> If a first lunar day is reported on I peret 7, one has to seek in the table of the last
+> visibilities for the date I peret 5.
+{: .quote cite="https://www.gautschy.ch/~rita/archast/mond/mondeng.html"}
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+So a reported feast date is converted into a **search term = reported date − 2 days**, which is then
+searched in the last-visibility table. Every matching row is a **candidate absolute date**. A single
+preserved date yields several candidates (because the civil calendar drifts through the seasons over
+the centuries); combining the searches for **several** preserved dates and keeping only chronologies
+consistent with the known regnal years pins the sequence down to one absolute chronology.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+## The pipeline
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+1. Because the original file spans four millennia, it is first cut down to the historically
+   reasonable window for the ruler: lines are removed from the beginning
+   (**Remove beginning of a file**) and the end (**Select first lines from a dataset**).
+2. The window is then searched for each preserved lunar date (**Search in textfiles (grep)**).
+3. The individual search results are concatenated
+   (**Concatenate multiple datasets or collections**).
+4. Duplicate rows are removed (**Unique occurrences of each record**).
+5. Finally the rows are sorted chronologically (**Sort data in ascending or descending order**).
 
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+The result is a text file listing every remaining viable dating option for the preserved lunar
+dates, given simultaneously in the Julian and the Egyptian civil calendar.
 
 > <agenda-title></agenda-title>
 >
@@ -85,336 +91,213 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
 ## Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import `Thebenletzte.tsv` (the precomputed last visibilities of the Moon at Thebes) from
+>    [Zenodo]({{ page.zenodo_link }}) or from the shared data library (`GTN - Material` ->
+>    `{{ page.topic_name }}` -> `{{ page.title }}`):
 >
 >    ```
->    
+>    Thebenletzte.tsv
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the dataset to `Thebenletzte.tsv` if needed
+> 4. Check that the datatype is set to `tabular`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
+> <comment-title> The structure of the input file </comment-title>
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> Each row is one computed last visibility of the lunar crescent at Thebes. The columns are:
+> `date | best time | deltat[s] | sigma | Egyptian date | TSun | TMoon | q | code | new moon date | new moon time`.
+> Two columns matter for this tutorial:
+> - **column 5 — Egyptian date**, written as `<month 1–4> <season> <day>` (e.g. `1 peret    5`),
+>   which we search for; and
+> - **column 3 — ΔT** (seconds), which decreases monotonically with time and is therefore used to
+>   sort the results chronologically.
 >
-{: .details}
+> The file covers 2000 BCE to 2000 CE, so the year in column 1 is negative for BCE dates
+> (e.g. `-1872` ≈ 1872 BCE).
+{: .comment}
 
-A big step can have several subsections or sub steps:
+# Restrict the table to the ruler's window
 
+The input table spans four millennia. Searching all of it would return matches from every epoch,
+most of them historically meaningless. We therefore first cut the table down to the window in which
+the chosen ruler could plausibly have reigned.
 
-## Sub-step with **Remove beginning**
+For this example we focus on **Senwosret III** of the 12th Dynasty. The el-Lahun lunar dates are
+usually placed in the 19th–18th centuries BCE; Gautschy's best-fitting solution puts **year 1 of
+Senwosret III around 1872 BCE** {% cite Gautschy2011 %}. To be safe we keep a generous window of
+roughly **1900 BCE to 1748 BCE**, which comfortably brackets Senwosret III and his successor
+Amenemhat III.
 
-> <hands-on-title> Task description </hands-on-title>
+The two cuts below are tuned to this file: in `Thebenletzte.tsv`, line 1240 is the first row of
+1900 BCE, and the next 1900 rows reach down to about 1748 BCE.
+
+## Remove the lines before the window
+
+> <hands-on-title> Cut off the early millennia </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1240`
 >    - {% icon param-file %} *"from"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    This drops everything before about 1900 BCE.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we remove lines by *count* (1240) rather than by date?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The tools used here (**Remove beginning** / **Select first**) are generic text tools that
+> >    operate on line numbers, not on calendar values. Because the file has exactly one row per
+> >    lunar month in chronological order, a line count is a reliable proxy for a date: line 1240 is
+> >    the first row of 1900 BCE.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Select first**
+## Keep only the window
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Cut off everything after the window </hands-on-title>
 >
 > 1. {% tool [Select first](Show beginning1) %} with the following parameters:
 >    - *"Select first"*: `1900`
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Remove beginning** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    Keeping the first 1900 of the remaining rows reaches down to about 1748 BCE, leaving a
+>    ~150-year window around the reign of Senwosret III.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Search for the preserved lunar dates
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+We now search the ~150-year window for each preserved lunar date. Recall the **−2-day rule**: a
+*psḏntyw* reported on a given civil date is sought in the last-visibility table **two days earlier**.
 
-## Sub-step with **Search in textfiles**
+Each search term is written as a small regular expression, because the **Search in textfiles** tool
+in this workflow runs `grep` with the `-i` (case-insensitive) and `-P` (Perl regex) options:
 
-> <hands-on-title> Task description </hands-on-title>
+- `\s+` matches the variable alignment spaces between the season name and the day in column 5;
+- `\b` after the day stops a search for day `5` from also matching `15`, `25` or `50`.
+
+So a reported `psḏntyw` on **I peret 7** becomes the search term `1 peret\s+5\b` (I peret 7 − 2 days
+= I peret 5). We keep **0** preceding and **0** trailing lines, because every matching row is itself
+one candidate date — context lines would only pollute the result.
+
+> <comment-title> Where the search terms come from </comment-title>
+>
+> The first term below is the worked example documented by {% cite Gautschy2011 %}. The other two
+> are illustrative *psḏntyw* dates chosen to demonstrate the method; they are verified to occur in
+> `Thebenletzte.tsv` but are **not** transcribed from a specific papyrus. When adapting this tutorial
+> to real research, replace them with the exact attested lunar dates of the ruler you are studying.
+{: .comment}
+
+## First lunar date — `I peret 5`
+
+> <hands-on-title> Search for the first preserved date </hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select first** {% icon tool %})
->    - *"Regular Expression"*: `{'id': 1, 'output_name': 'output'}`
->    - *"Show lines preceding the matched line"*: `{'id': 2, 'output_name': 'output'}`
->    - *"Show lines trailing the matched line"*: `{'id': 3, 'output_name': 'output'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Regular Expression"*: `1 peret\s+5\b`
+>    - *"Show lines preceding the matched line"*: `0`
+>    - *"Show lines trailing the matched line"*: `0`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many candidate dates does this search return, and what are they?
+> 2. Why does one civil date match several different years?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Six rows, in the years −1896, −1835, −1821, −1810, −1796 and −1771 (i.e. 1896–1771 BCE).
+> > 2. The Egyptian civil year has a fixed length of 365 days and ignores the ~365.25-day solar
+> >    year, so it slowly drifts through the seasons. A given civil date therefore coincides with the
+> >    last visibility of the crescent only in particular years, recurring at intervals as the
+> >    calendar drifts. The regnal year recorded with the papyrus, together with the other lunar
+> >    dates, selects which of these candidates is the historical one.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Search in textfiles**
+## Second lunar date — `II shemou 18`
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Search for the second preserved date </hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select first** {% icon tool %})
->    - *"Regular Expression"*: `{'id': 4, 'output_name': 'output'}`
->    - *"Show lines preceding the matched line"*: `{'id': 5, 'output_name': 'output'}`
->    - *"Show lines trailing the matched line"*: `{'id': 6, 'output_name': 'output'}`
+>    - *"Regular Expression"*: `2 shemou\s+18\b`
+>    - *"Show lines preceding the matched line"*: `0`
+>    - *"Show lines trailing the matched line"*: `0`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    This corresponds to a reported `psḏntyw` on II shemou 20 (− 2 days). It returns four candidate
+>    years: −1878, −1853, −1828 and −1803.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Third lunar date — `I shemou 7`
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Search in textfiles**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Search for the third preserved date </hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select first** {% icon tool %})
->    - *"Regular Expression"*: `{'id': 7, 'output_name': 'output'}`
->    - *"Show lines preceding the matched line"*: `{'id': 8, 'output_name': 'output'}`
->    - *"Show lines trailing the matched line"*: `{'id': 9, 'output_name': 'output'}`
+>    - *"Regular Expression"*: `1 shemou\s+7\b`
+>    - *"Show lines preceding the matched line"*: `0`
+>    - *"Show lines trailing the matched line"*: `0`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    This corresponds to a reported `psḏntyw` on I shemou 9 (− 2 days). It returns five candidate
+>    years: −1877, −1863, −1852, −1838 and −1752.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Combine, deduplicate and sort the candidates
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Concatenate the three searches
 
-## Sub-step with **Concatenate multiple datasets or collections**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Merge the search results into one table </hands-on-title>
 >
 > 1. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
->    - {% icon param-file %} *"Concatenate Dataset"*: `output` (output of **Search in textfiles** {% icon tool %})
+>    - {% icon param-file %} *"Concatenate Dataset"*: `output` (output of the **second** search, `II shemou 18`)
 >    - In *"Dataset"*:
 >        - {% icon param-repeat %} *"Insert Dataset"*
->            - {% icon param-file %} *"Select"*: `output` (output of **Search in textfiles** {% icon tool %})
+>            - {% icon param-file %} *"Select"*: `output` (output of the **first** search, `I peret 5`)
 >        - {% icon param-repeat %} *"Insert Dataset"*
->            - {% icon param-file %} *"Select"*: `output` (output of **Search in textfiles** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>            - {% icon param-file %} *"Select"*: `output` (output of the **third** search, `I shemou 7`)
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Remove duplicate rows
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Unique**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Keep only unique candidate dates </hands-on-title>
 >
 > 1. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to scan for unique values"*: `out_file1` (output of **Concatenate multiple datasets or collections** {% icon tool %})
 >    - *"Advanced Options"*: `Hide Advanced Options`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    Identical rows that happen to be returned by more than one search are collapsed into one.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Sort the candidates chronologically
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Sort**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Order the candidate dates by time </hands-on-title>
 >
 > 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: `outfile` (output of **Unique** {% icon tool %})
@@ -423,42 +306,60 @@ A big step can have several subsections or sub steps:
 >            - *"on column"*: `c3`
 >            - *"in"*: `Descending order`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. The data are sorted on **column 3 (ΔT)** in *descending* order. Why does that order the
+>    candidate dates chronologically, from oldest to youngest?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. ΔT (the difference between dynamical time and universal time, in seconds) shrinks steadily as
+> >    we approach the present — from roughly 46,000 s around 2000 BCE to about 64 s in 2000 CE. It is
+> >    therefore a monotonic proxy for absolute time. Sorting on it in *descending* order puts the
+> >    largest ΔT (the oldest date) first, giving a clean chronological list without having to parse
+> >    the calendar dates themselves.
 > >
 > {: .solution}
 >
 {: .question}
 
+# Reading the result
 
-## Re-arrange
+The final dataset is the deduplicated union of the three searches, ordered chronologically — 15
+candidate dates spanning 1896–1752 BCE. Each row gives the candidate's Julian date (column 1) and its
+Egyptian civil date (column 5):
 
-To create the template, each step of the workflow had its own subsection.
+```
+13. 4.-1896   ...   1 peret    5
+19. 9.-1878   ...   2 shemou  18
+ 9. 8.-1877   ...   1 shemou   7
+ 5. 8.-1863   ...   1 shemou   7
+13. 9.-1853   ...   2 shemou  18
+ 2. 8.-1852   ...   1 shemou   7
+30. 7.-1838   ...   1 shemou   7
+29. 3.-1835   ...   1 peret    5
+ 6. 9.-1828   ...   2 shemou  18
+26. 3.-1821   ...   1 peret    5
+23. 3.-1810   ...   1 peret    5
+31. 8.-1803   ...   2 shemou  18
+19. 3.-1796   ...   1 peret    5
+13. 3.-1771   ...   1 peret    5
+ 8. 7.-1752   ...   1 shemou   7
+```
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+This list is the workflow's contribution to the chronological problem: every astronomically possible
+absolute date for each preserved lunar observation. Choosing the historically correct one is the
+historian's step — only one combination of these candidates is mutually consistent with the regnal
+years recorded on the papyri and with the known reign length of the ruler. For Senwosret III, that
+consistent solution places his year 1 around 1872 BCE {% cite Gautschy2011 %}.
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Starting from a four-millennia table of computed last visibilities of the Moon, we restricted it to a
+ruler's plausible window, searched it for several preserved lunar feast dates (each converted with
+the −2-day rule), and combined the results into a single chronologically sorted list of candidate
+absolute dates. The same pipeline of generic Galaxy text tools can be reused for any sequence of
+preserved lunar observations and any ruler, simply by adjusting the window (the two line cuts) and
+the search terms.
