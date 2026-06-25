@@ -17,8 +17,8 @@ key_points:
 - ΔT (column 3) decreases monotonically with time, so sorting on it orders the candidate dates chronologically.
 - Each preserved lunar date yields several candidate absolute dates; intersecting several of them pins down a single chronology (here: year 1 of Senwosret III ≈ 1872 BCE).
 contributors:
-- Rita Gautschy
-- Johannes Nussbaum
+- jnussbaum
+- gautschr
 
 ---
 
