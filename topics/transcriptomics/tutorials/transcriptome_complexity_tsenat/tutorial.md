@@ -84,9 +84,9 @@ A gene may show **little change in total abundance** while dramatically **reshuf
 
 Recent evidence demonstrates that transcriptome complexity constitutes a measurable biological phenomenon:
 
-- **Tarabichi et al. (2013)**: Cancer cells show "increased entropy of signaling and gene interaction networks" as cancer progresses, contributing to cellular heterogeneity and evolvability
-- **Nijman (2020)**: Cancer-associated perturbations increase network entropy, driving phenotypic heterogeneity through disruption of gene regulatory networks
-- **Cao et al. (2017)**: Single-cell transcriptomics reveals that transcript-level complexity varies systematically across cell types and developmental states
+- **Tarabichi et al. (2013)**: {% cite tarabichi2013systems %} Cancer cells show "increased entropy of signaling and gene interaction networks" as cancer progresses, contributing to cellular heterogeneity and evolvability
+- **Nijman (2020)**: {% cite nijman2020perturbation %} Cancer-associated perturbations increase network entropy, driving phenotypic heterogeneity through disruption of gene regulatory networks
+- **Cao et al. (2017)**: {% cite cao2017comprehensive %} Single-cell transcriptomics reveals that transcript-level complexity varies systematically across cell types and developmental states
 
 **The biological principle**: Changes in isoform organization—not just abundance—are valid biological signals worth measuring.
 
@@ -129,9 +129,9 @@ Shannon entropy treats all outcomes equally, regardless of frequency:
 ### Generalized Entropy Families
 
 To address this limitation, mathematicians developed parametric entropy families:
-- **Rényi entropy** (1961): Introduced a tunable parameter α
-- **Tsallis entropy** (1988): Alternative generalization with parameter q
-- **Hill numbers** (2010): Modern ecological reinterpretation unifying all approaches
+- **Rényi entropy** (1961): Introduced a tunable parameter α {% cite van2014renyi %}
+- **Tsallis entropy** (1988): Alternative generalization with parameter q {% cite tsallis2017foundations %}
+- **Hill numbers** (2010): Modern ecological reinterpretation unifying all approaches {% cite chao2010phylogenetic %}
 
 #### Remarkable fact
 
