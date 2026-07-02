@@ -1272,17 +1272,18 @@ Let's add the relative abundance values.
 Taxonomic assignment using **GTDB-Tk** provides a **robust and standardized** approach to classifying MAGs, enabling researchers to **explore microbial diversity, compare communities, and interpret ecological roles**. By leveraging the **Genome Taxonomy Database**, GTDB-Tk ensures that taxonomic classifications are **accurate, reproducible, and up-to-date**, making it an indispensable tool in metagenomic analysis.
 Accurate taxonomic classification of MAGs is essential for understanding the microbial diversity and functional potential within your metagenomic samples. By assigning taxonomic labels to your MAGs, we can explore their evolutionary relationships, ecological roles, and potential functions.
 
-<optional-title>Optional: taxonomic assignment with ***kMetaShot***<optional-title>
-> Taxonomic assignment of MAGs can be also performed by usign other tools such as **kMetaShot** ({% cite defazio2025 %}). This is an alignment-free and k-mer/minimizer based tool relying on NCBI taxonomy. Comparison of results from different tools can improve the reliability of MAGs taxonomic assignment
+> <details-title>Optional: Taxonomic assignment with kMetaShot</details-title>
 >
->> <hands-on-title>kMetaShot assignment</hands-on-title>
->> 1. {% tool [kMetaShot](toolshed.g2.bx.psu.edu/repos/bgruening/kmetashot/kmetashot/2.0+galaxy2) %} with following parameters:
->>    - *"Input type"*: select `bin(s)/MAG(s)`
->>    - {% icon param-collection %} *"Bin(s)/MAG(s) FASTA file(s)"*: collection of .fasta or .fasta.gz files
->>    - *"Select a reference database"*: it is suggested to select the latest
->>    - *"Set ass2ref parameter"*: float from 0 to 1
+> Taxonomic assignment of MAGs can also be performed by using other tools such as **kMetaShot** ({% cite defazio2025 %}). This is an alignment-free, k-mer/minimizer-based tool relying on NCBI taxonomy. Comparison of results from different tools can improve the reliability of MAGs taxonomic assignment
+>
+> > <hands-on-title>kMetaShot assignment</hands-on-title>
+> > 1. {% tool [kMetaShot](toolshed.g2.bx.psu.edu/repos/bgruening/kmetashot/kmetashot/2.0+galaxy2) %} with following parameters:
+> >    - *"Input type"*: `bin(s)/MAG(s)`
+> >    - {% icon param-collection %} *"Bin(s)/MAG(s) FASTA file(s)"*: collection of .fasta or .fasta.gz files
+> >    - *"Select a reference database"*: the latest
+> >    - *"Set ass2ref parameter"*: float from 0 to 1
 > {: .hands_on}
-{: .optional}
+{: .details}
 
 ## Functional Annotation of MAGs
 

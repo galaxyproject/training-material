@@ -38,91 +38,95 @@ tags:
 - variant-analysis
 - climate
 - humanities
+- ecology
 
 contributions:
     organisers:
         - delphine-l
-        - teresa-m
         - scottcain
         - natalie-wa
         - shiltemann
+    instructors:
+        - ahmedhamidawan
+        - annasyme
+        - annefou
+        - anuprulez
+        - abretaud
+        - nekrut
+        - dadrasarmin
+        - Nilchia
+        - bebatut
+        - bgruening
+        - clsiguret
+        - Sch-Da
+        - dannon
         - dianichj
-
-#    instructors:
-#        - ahmedhamidawan
-#        - annasyme
-#        - annefou
-#        - anuprulez
-#        - abretaud
-#        - nekrut
-#        - dadrasarmin
-#        - Nilchia
-#        - bebatut
-#        - bgruening
-#        - clsiguret
-#        - Sch-Da
-#        - dannon
-#        - dianichj
-#        - deeptivarshney
-#        - delphine-l
-#        - elifsu-simula
-#        - elichad
-#        - EngyNasr
-#        - emmaustin20
-#        - evenmm
-#        - GarethPrice-Aus
-#        - hrhotz
-#        - hvelab
-#        - igormakunin
-#        - khaled196
-#        - jdavcs
-#        - j34ni
-#        - jennaj
-#        - jhahnfeld
-#        - jochenblom
-#        - lisanna
-#        - lfenske-93
-#        - bernt-matthias
-#        - PfisterMaxJLU
-#        - foellmelanie
-#        - meltemktn
-#        - mschatz
-#        - hujambo-dunia
-#        - mirandaembl
-#        - natalie-wa
-#        - natefoo
-#        - Oliver_Rupp
-#        - oschwengers
-#        - pauldg
-#        - paulzierep
-#        - pavanvidem
-#        - plushz
-#        - poterlowicz-lab
-#        - pratikdjagtap
-#        - RZ9082
-#        - rlibouba
-#        - reytakop
-#        - SaimMomin12
-#        - sanjaysrikakulam
-#        - scottcain
-#        - silviadg87
-#        - stephanierobin
-#        - subinamehta
-#        - teresa-m
-#        - timothygriffin
-#        - tcollins2011
-#        - nomadscientist
-#        - wm75
-#    funding:
-#        - eurosciencegateway
-#        - biont
-#        - nfdi4plants
-#        - deNBI
-#        - elixir-europe
-#        - mwk
-#        - abromics
-#        - ifb
-#        - FAIR2Adapt
+        - deeptivarshney
+        - delphine-l
+        - elifsu-simula
+        - elichad
+        - EngyNasr
+        - emmaustin20
+        - evenmm
+        - GarethPrice-Aus
+        - hrhotz
+        - hvelab
+        - igormakunin
+        - khaled196
+        - jdavcs
+        - j34ni
+        - jennaj
+        - jhahnfeld
+        - jochenblom
+        - lisanna
+        - lfenske-93
+        - meltemktn
+        - bernt-matthias
+        - PfisterMaxJLU
+        - foellmelanie
+        - meltemktn
+        - mschatz
+        - hujambo-dunia
+        - mirandaembl
+        - natalie-wa
+        - natefoo
+        - Oliver_Rupp
+        - oschwengers
+        - pauldg
+        - PaulineSGN
+        - paulzierep
+        - pavanvidem
+        - plushz
+        - poterlowicz-lab
+        - pratikdjagtap
+        - RZ9082
+        - rlibouba
+        - reyhaneh-tavakoli
+        - SaimMomin12
+        - sanjaysrikakulam
+        - scottcain
+        - silviadg87
+        - stephanierobin
+        - subinamehta
+        - teresa-m
+        - timothygriffin
+        - tcollins2011
+        - nomadscientist
+        - wm75
+        - yvanlebras
+    funding:
+        - eurosciencegateway
+        - biont
+        - nfdi4plants
+        - deNBI
+        - elixir-europe
+        - mwk
+        - abromics
+        - ifb
+        - FAIR2Adapt
+        - pndb
+        - dataterra
+        - gaiadata
 
 location:
   name: online
@@ -154,7 +158,7 @@ program:
       - type: custom
         name: Daily Icebreaker
         description: |
-          Whenever you start each day, start by answering the daily ice breaker! Post your answers in the Slack  [#social](https://gtnsmrgsbord.slack.com/channels/social) channel. (**Mandatory for a certificate**)
+          Whenever you start each day, start by answering the daily ice breaker! Post your answers in the Slack  [#social](https://gtnsmrgsbord.slack.com/channels/social) channel.
 
           **Monday:** Introduce yourself and let us know what you are hoping to learn this week!
 
@@ -253,6 +257,8 @@ program:
         link: events/tracks/gta2026-climate.md
       - title: Digital Humanities
         link: events/tracks/gta2026-dh.md
+      - title: Ecology
+        link: events/tracks/gta2026-ecology.md
       - title: From Zero to Hero with Python
         link: events/tracks/gta2026-bioNT.md
       - title: Machine Learning
@@ -314,10 +320,16 @@ You will not be alone! If you ever need help, you can contact one of our many tr
 
 **Certificates**
 
-You will be able to obtain a certificate by the end of the event. To ensure you have all the time you need to learn at your own pace, you will be able to claim a certificate for a few weeks after the end of the official event. More information  will be provided as we get closer to the event.
+You can get a certificate for each track you completed. Here are the steps to get your certificate:
+- In any order:
+  -  Fill the anonymous feedback survey for the Galaxy Training Academy: [Feedback Survey](https://gta-feedback.galaxyproject.org/). You will get a unique token that will be use to claim your certificates. Save it preciously, you won't be able to find it again once you close the page. If you loose the token. fill the survey again. 
+  - Fill the form(s) for the track(s) you completed.
+- Claim the certificates with your email adress and your token: [Claim Certificates](https://gta-feedback.galaxyproject.org/claim-certificates). You can claim the certificates as many times as you want.
 
-## Do you want to join the GTA as a trainer?
+You will be able to claim your certificates until June 21st. 
+
+<!-- ## Do you want to join the GTA as a trainer?
 Please fill out our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdyNhUhWtk2W6nxDwpxao4aRgV9921_PGGyQpGIaRbZynHnAQ/viewform?usp=header) to indicate in what capacity you would like to help.
 
 
-
+ -->

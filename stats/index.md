@@ -15,7 +15,7 @@ description: Some useful statistics about the GTN. We're a growing community!
 {% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}
 
 <!-- contributors stats -->
-{% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
+{% assign contributors = site.data['contributors'] | where_exp: "item", "item.gtn-halloffame != 'no'" | sort: "joined" %}
 {% assign contributors_by_month = contributors | group_by: "joined" %}
 {% assign contributors_over_time = "" | split: ',' %}
 {% assign contributors_over_time_labels = "" | split: ',' %}

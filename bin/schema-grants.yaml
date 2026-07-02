@@ -106,9 +106,15 @@ mapping:
             funding_id:
                 type: str
                 required: true
-                description: The short identifier for your grant.
+                description: The short identifier for your grant. This will be used to construct the URL to your project page on the funding body's website.
                 _examples:
                     - 2020-1-NL01-KA203-064717
+            funding_id_display:
+                type: str
+                required: false
+                description: The short identifier for your grant. Only needed if the funding_id cannot be used to construct a url for to your project page. For example for ANR. Then put the id that should be shown to the user here.
+                _examples:
+                    - 21-ESRE-0010
             url:
                 type: str
                 description: associated webpage
@@ -123,6 +129,7 @@ mapping:
                     - ukri
                     - highergov
                     - dfg
+                    - anr
             funder_name:
                 type: str
                 description: A name for the agency providing the funding.

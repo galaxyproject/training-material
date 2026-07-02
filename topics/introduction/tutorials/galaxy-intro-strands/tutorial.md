@@ -168,24 +168,24 @@ This will take you to the UCSC Table Browser:
 
 The [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) provides access to all the data that is shown in the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (see box below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.
 
-The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want:
+The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want. In particular, the human genome at version hg38 is already preselected. If the human genome was not what we are interested in, or if we were interested in a different version of it, we could click on `Select dataset` near the top of the screen to change the default, but for our purpose we only have to verify that what is selected is:
 
-* **clade:** `Mammal`
-* **genome:** `Human`
-* **assembly:** `Dec. 2013 (GRCh38/hg38)`
-* **group:** `Genes and Gene Predictions`
-* **track:** `GENCODE v41`
+* **Assembly:** `Dec. 2013 (GRCh38/hg38)`
+* **Group:** `Genes and Gene Predictions`
+* **Track:** `GENCODE V49`
+* **Table:** `knownGene`
 
-**clade** and **genome** seem pretty clear.  **assembly** asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also the most recent.)  **group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
+Here, **Assembly** asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also an up to date one.)  **Group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
 
-**track** has a bewildering list of options. UCSC suggests `GENCODE v41`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
-
-> <warning-title>ALL GENCODE is different from GENCODE</warning-title>
-> **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong.
-{: .warning}
+**Track** has a bewildering list of options. UCSC suggests `GENCODE V49`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
 >The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence...
 {: .quote}
+
+> <warning-title>ALL GENCODE is different from GENCODE</warning-title>
+> **Warning** Any recent GENCODE version, V49 or higher, will do for this tutorial though exact numbers calculated in some of the steps will depend on the exact version of the track. Do not, however, select any ALL GENCODE version or you will end up with entirely wrong input data!
+{: .warning}
+
 
 Time for a few more definitions.
 
@@ -206,7 +206,7 @@ Time for a few more definitions.
 
 The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
 
-GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V41`.
+GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V49` or whatever version is the latest GENCODE when you are doing this tutorial.
 
 So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
 
@@ -220,7 +220,7 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 >
 > 2. *Click* the **get output** button.
 >
->    And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want.
+>    And, that doesn't actually get us the output. It sends us to a second UCSC page that asks us exactly what we want.
 >
 >    ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
@@ -229,10 +229,10 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 > 4. *Click* the **Send query to Galaxy** button at the bottom of the form.
 {: .hands_on}
 
-This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with.  Except that we now have an item in our history, the dataset from UCSC.
+This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with (if that doesn't happen, hit the *Back* button of your browser several/probably three times until you're back at the regular view of Galaxy). An item should now appear in your history, the dataset from UCSC.
 
 
-### History Item Status
+### History item status
 
 Watch your new history item.  It will go through three statuses before it's done.
 
@@ -471,12 +471,12 @@ However, before we rush off to publish our conclusions, let's
 
 What tool can we use to combine the two datasets into one?  Try *searching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
 
-It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
+It turns out that **Lift-Over** and **Collection Operations** are not what we want. (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
 
 > <hands-on-title>Concatenate two datasets</hands-on-title>
 >
 > 1. *Open* the **Text Manipulation** toolbox.
-> 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
+> 2. Near the top of the toolbox is **Concatenate multiple datasets or collections**. *Click* on it. Lets try that tool.
 > 3. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
 >   - {% icon param-files %} *"Concatenate Dataset"*: `Overlapping reverse genes`.
 >   - *"Dataset*"
@@ -484,7 +484,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >
 >         This adds a second dataset pull-down menu to the form.
 >
->      - In *"1: Dataset"*
+>      - In *"1: Dataset"*:
 >         - {% icon param-files %} *"Select"*: `Overlapping forward genes` as the second dataset.
 > 4. *Click* **Run Tool**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
@@ -492,19 +492,49 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 
 Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.
 
+As the name of the tool suggests, it has simply taken the second input and glued it to the end of the first input to form the new dataset. Now all reverse-strand genes are listed before the forward-strand genes, independent of their genomic location. While that's not necessarily a problem, it may be nicer to sort the genes back into the position-based order we originally obtained them in.
+
+> <hands-on-title>Sort the overlapping genes by genomic position</hands-on-title>
+>
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3) %} data in ascending or descending order with the following parameters:
+>   - {% icon param-file %} *"Sort Query"*: `Overlapping genes`.
+>   - {% icon param-repeat %} *"Column selections"*:
+>      - In *"1: Column selections"*:
+>         - *"Sort on column"*: `Column 1`
+>         - *"in"*: `Ascending order`
+>         - *"using sort flavor"*: `Natural/Version sort (-V)`
+>
+>      - Click on {% icon param-repeat %} *"Insert Column selections"*
+>      - In *"2: Column selections"*:
+>         - *"Sort on column"*: `Column 2`
+>         - *"in"*: `Ascending order`
+>         - *"using sort flavor"*: `Fast numeric sort (-n)`
+>
+>      - Click on {% icon param-repeat %} *"Insert Column selections"*
+>      - In *"3: Column selections"*:
+>         - *"Sort on column"*: `Column 3`
+>         - *"in"*: `Ascending order`
+>         - *"using sort flavor"*: `Fast numeric sort (-n)`
+>
+> 2. *Click* **Run Tool**
+> 3. *Rename* the resulting dataset to, for example, `Overlapping genes sorted`
+{: .hands_on}
+
+We now have a new dataset with the genes sorted first by chromosome (which is not strictly necessary in our case because we know all genes are from the same chromosome chr22, but is important, of course, in the general case), then by start position on the chromosome and, finally, by end position (in case that's needed to break ties).
+
 ## Visualize the overlapping genes
 
 Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let's visualize the data at UCSC, using the UCSC *Genome* Browser.
 
 > <hands-on-title>Display data in Genome Browser</hands-on-title>
 >
-> 1. Click on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
+> 1. Click on your `Overlapping genes sorted` dataset in your history panel. This will show the dataset preview in the history panel.
 > 2. Click to expand the dataset, if it isn't already, so that you can see the dataset metadata and additional actions like Visualize.
 > 3. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 > 4. Click on the **display at UCSC (main)** link that appears in the blue box at the top of the screen.
 >    ![visualisation options are shown in Galaxy's middle panel]({% link topics/introduction/images/101_displayucsc.png %})
 >
-> This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
+> Possibly after some delay, this will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
 >
 >   ![UCSC Genome Browser](../../images/ucsc_gb_genes_strands_overlapping.png)
 {: .hands_on}
@@ -577,7 +607,7 @@ We want to run the same analysis, but this time only look for overlaps that happ
 
 > <hands-on-title>Create a new history that contains some data from current history</hands-on-title>
 >
-> 1. *Click* on the **gear icon** at the top of the current history.
+> 1. *Click* on {% icon galaxy-history-options %} **History options** at the top of the history panel.
 > 2. *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
 > 3. Under **Source History:**, *select* the dataset(s) you want to copy to the new history.
 >    - In our case, we only want the `Genes chr22` dataset.
@@ -587,14 +617,14 @@ We want to run the same analysis, but this time only look for overlaps that happ
 > 5. *Click* the **Copy History Items** button to create your new history.
 >    - This creates a new history (with the copied dataset) and throws up a green box saying:
 >      "1 dataset copied to 1 history: `name you gave your new history`."
-> 6. The history name is a link.  *Click* on it.
+> 6. The history name is a link. *Click* on it.
 {: .hands_on}
 
 ## Get the exon data
 
-And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
+And your new history appears in the history panel with the copied *genes* dataset. What we need is *exons*. How can we get the exon information? There are two relatively easy ways to get this information, one of which will be very familiar.
 
-The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v41, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
+The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v41, and just `chr22`. The second form is what changes. Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
 
 The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
 

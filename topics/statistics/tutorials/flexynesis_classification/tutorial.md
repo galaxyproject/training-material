@@ -24,15 +24,15 @@ answer_histories:
       history: https://usegalaxy.eu/u/nilchia/h/final-modeling-breast-cancer-subtypes-tabpfn-3
       date: 2025-08-01
     - label: "usegalaxy.eu"
-      history: https://usegalaxy.eu/u/nilchia/h/modeling-breast-cancer-subtypes-with-flexynesis
-      date: 2026-05-15
+      history: https://usegalaxy.eu/u/nilchia/h/gta2026-modeling-breast-cancer-subtypes-with-flexynesis
+      date: 2026-05-18
 recordings:
 - captioners:
   - Nilchia
-  date: '2026-05-15'
+  date: '2026-05-18'
   galaxy_version: '26.0'
-  length: 20M
-  youtube_id: I8CtAab-4c4
+  length: 22M
+  youtube_id: Z8JhJARdRv8
   speakers:
   - Nilchia
 ---

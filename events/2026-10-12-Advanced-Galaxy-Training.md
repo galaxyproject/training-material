@@ -24,7 +24,7 @@ mode: onsite
 
 registration:
   link: https://framaforms.org/pre-registration-for-ifb-training-galaxy-beyond-basics-2026-1772622577
-  deadline: 2026-06-05
+  deadline: 2026-06-25
   open: true
 
 tags:

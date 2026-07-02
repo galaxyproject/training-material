@@ -25,7 +25,7 @@ contributions:
         - meltemktn
         - pavanvidem
         - rlibouba
-        - reytakop
+        - reyhaneh-tavakoli
         - SaimMomin12
         - scottcain
         - stephanierobin

@@ -9,8 +9,8 @@ slack_channel: gta_assembly
 contributions:
     organisers:
         - delphine-l
-        - SaimMomin12
     instructors:
+        - SaimMomin12
         - annasyme
         - nekrut
         - bgruening
@@ -61,8 +61,7 @@ program:
     tutorials:
       - name: mitochondrion-assembly
         topic: assembly
-      - name: chloroplast-assembly
-        topic: assembly
+
 
 ---
 
