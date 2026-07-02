@@ -53,17 +53,20 @@ For more information also read the publication of the labs {% cite giag041 %}.
 
 The Galaxy Labs documentation provides additional details about architecture and configuration.
 
------
+# How to generate a lab?
 
 Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine (developped by the AU team) or using the CoDex (maintained by the Galaxy community).
 
-Which method to use and where to store the files necessary to display a lab? 
+Which method should I use and where to store the files necessary to display a lab? 
 - If your lab is associated to an identified Galaxy Community (SIG), we recommend building your lab using the CoDex code for homogeneity with other community related labs. You can store the lab files in the CoDex repository (default with the tutorial below).
 - If your lab is project bound, you can use any of the tutorial below to generate the necessary files, but they must be stored outside of the CoDex repository (local GitLab for example).
 
-{% include _includes/cyoa-choices.html option1="With Galaxy Lab engine" option2="With CoDex" default="With CoDex"
+{% include _includes/cyoa-choices.html option1="LabEngine" option2="CoDex" default="CoDex"
        text="Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine or using the CoDex." %}
-<div class="With Galaxy Lab engine" markdown="1">
+
+<div class="LabEngine" markdown="1">
+
+# Creating Labs with the Lab Engine
 
 The Galaxy Labs Engine is an endpoint used to generate "exported" Galaxy Lab landing pages from remote content hosted on GitHub. You can use this endpoint to rapidly create your own Galaxy Lab pages by pointing to your own remote content. 
 
@@ -71,7 +74,7 @@ For all the information and steps, check the [Galaxy Lab engine page](https://la
 
 </div>
 
-<div class="With CoDex" markdown="1">
+<div class="CoDex" markdown="1">
 
 # Creating Labs with CoDex
 
@@ -87,7 +90,7 @@ However, **CoDex extends this workflow by automating the generation of Lab YAML 
 {: .comment}
 
 
-# Create the lab specific files (automatic)
+## Create the lab specific files (automatic)
 
 The labs are composed of various files, some that are specific to your community and some that are common between all the labs.
 To automatically create the necessary files from a set of templates, a script is provided (`sources/bin/populate_labs.sh`).
@@ -140,7 +143,7 @@ The files are created and updated automatically using GitHub actions, you just n
 After that, your commit will be reviewed (and approved) by admins.
 On the following Sunday (or upon request), this action will be launched and will create the new files in the appropriate community folder (`communities/<your community>/lab/`).
 
-# Modify the generated files to personalize your community lab
+## Modify the generated files to personalize your community lab
 
 Once the files are created, you should update them as some contain template text that are not community specific. 
 
@@ -163,7 +166,7 @@ The following files require no changes:
 The files in the section folders contain the code for each table visible in the lab.
 You can check different labs for inspiration, such as the [microgalaxy lab](https://microbiology.usegalaxy.eu).
 
-# Create community specific sections to personalize your community lab
+## Create community specific sections to personalize your community lab
 
 If you want additional sections, for example, the "Microbial isolates" and "Microbiome" sections in the [microgalaxy lab](https://microbiology.usegalaxy.eu/).
 
