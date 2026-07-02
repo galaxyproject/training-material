@@ -31,6 +31,9 @@ contributions:
   - tflowers15
   - nickzoic
   - afrubin
+  funding:
+  - elixir-europe
+  - uni-freiburg
 ---
 
 Multiplexed assays of variant effect (MAVEs), including deep mutational scanning (DMS)
@@ -184,7 +187,7 @@ CountESS save nodes into an output collection.
 
 > <hands-on-title>Calculate CHEK2 RCS scores with CountESS</hands-on-title>
 >
-> 1. Run {% tool [CountESS](toolshed.g2.bx.psu.edu/repos/iuc/countess/countess/0.1.21+galaxy0) %} with the following parameters:
+> 1. Run {% tool [CountESS](toolshed.g2.bx.psu.edu/repos/iuc/countess/countess/0.1.26+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-file %} *"CountESS configuration file"*: `chek2_rcs_countess.ini`
 >
