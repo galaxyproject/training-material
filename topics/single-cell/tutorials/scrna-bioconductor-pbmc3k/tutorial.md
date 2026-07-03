@@ -160,3 +160,27 @@ The beginning of the file should look like this:
 {: .question}
 
 Representing the matrix with these three files is convenient for sharing the data, but not for processing them. Different single cell analysis packages have attempted to solve the problem of storage and analysis by inventing their own formats, which has led to the proliferation of many different 'standards' in the scRNA-seq package ecosystem.
+
+## SingleCellExperiment objects
+
+
+
+```{r}
+sce <- DropletUtils::read10xCounts(
+    samples = "data",
+    row.names = "symbol"
+)
+sce
+```
+
+For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) can be used.
+
+Notes:
+
+- This tool produces an `rdata` file.
+  RData objects are deemed insecure as discussed in this [GitHub issue](https://github.com/galaxyproject/tools-iuc/issues/3921).
+  The tool should be updated to produce a `loom` file containing a `LoomExperiment` object.
+- This tool does not offer the option to use gene symbols as rownames.
+  The default Ensembl gene identifiers complicates the interpretation of results later in the workflow.
+  The tool should be updated to offer the possibility of using gene symbols.
+  
