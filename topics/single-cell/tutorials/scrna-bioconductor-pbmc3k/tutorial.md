@@ -88,3 +88,18 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 - `matrix.mtx`: a condensed version of the count matrix (including the non-zero values only)
 
     The count matrix is represented by its non-zero values - we don't need to store all of those zeroes as long as we know where our non-zero values are in the matrix. Each non-zero value is represented by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives the total number of rows (genes), columns (cells) and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [in this documentation](https://math.nist.gov/MatrixMarket/formats.html)
+
+# Libraries
+
+This tutorial showcases the following Bioconductor packages:
+
+- [bluster](https://bioconductor.org/packages/bluster/) provides clustering algorithms
+- [DropletUtils](https://bioconductor.org/packages/DropletUtils/) provides utilities for handling single-cell droplet data
+- [scater](https://bioconductor.org/packages/scater/) provides a toolkit for the analysis of single-cell gene expression data
+- [scran](https://bioconductor.org/packages/scran/) provides additional methods for single-cell RNA-Seq data analysis
+- [scuttle](https://bioconductor.org/packages/scuttle/) provides additional utility functions for performing single-cell analyses.
+
+We also use the following R packages from the CRAN repository:
+
+- [cowplot](https://cran.r-project.org/package=cowplot) provides various features that help with creating publication-quality figures with [ggplot2](https://cran.r-project.org/package=ggplot2)
+
