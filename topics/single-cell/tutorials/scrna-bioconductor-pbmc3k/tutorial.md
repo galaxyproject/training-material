@@ -103,3 +103,60 @@ We also use the following R packages from the CRAN repository:
 
 - [cowplot](https://cran.r-project.org/package=cowplot) provides various features that help with creating publication-quality figures with [ggplot2](https://cran.r-project.org/package=ggplot2)
 
+## Data upload
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+>
+> 2. Import the `genes.tsv`, `barcodes.tsv` and `matrix.mtx` from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
+>
+>    ```
+>    {{ page.zenodo_link }}/files/genes.tsv
+>    {{ page.zenodo_link }}/files/barcodes.tsv
+>    {{ page.zenodo_link }}/files/matrix.mtx
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets as `genes`, `barcodes`, and `matrix` if necessary
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 4. Check the datatypes are correct - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx file
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>
+> 5. Inspect the `matrix` file by clicking on the {% icon galaxy-eye %} icon
+>
+>    {% snippet faqs/galaxy/histories_dataset_item.md %}
+>
+{: .hands_on}
+
+The beginning of the file should look like this:
+
+> <question-title></question-title>
+>
+> ```
+> 32738	2700	2286884
+> 32709	1	4
+> 32707	1	1
+> 32706	1	10
+> 32704	1	1
+> ```
+>
+> 1. How many non-zero values are in the matrix?
+> 2. How many counts were found for the 32,706th gene in the 1st cell?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The first row tells us there are 2,286,884 non-zero values for the 32,738 genes (rows) and 2,700 cells (columns) - so only 2.6% of the 88,392,600 potential values we could have in this matrix are non-zero. Getting rid of all those zeros has made the matrix much more compact.
+> > 2. 10 counts were found for the 32,706th row (gene) and 1st column (cell), so we collected 10 RNAs that the first cell had produced from this particular gene.
+> >
+> {: .solution}
+>
+{: .question}
+
+Representing the matrix with these three files is convenient for sharing the data, but not for processing them. Different single cell analysis packages have attempted to solve the problem of storage and analysis by inventing their own formats, which has led to the proliferation of many different 'standards' in the scRNA-seq package ecosystem.
