@@ -35,28 +35,17 @@ tags:
 contributions:
   authorship:
   - kevinrue
-recordings:
-- youtube_id: -tIOSBXeXPs
-  length: 2H11M
-  galaxy_version: 24.2.4.dev0
-  date: '2025-04-15'
-  speakers:
-  - MarisaJL
-  captioners:
-  - MarisaJL
-  bot-timestamp: 1744754154
-
-
 ---
 
 
-Single cell RNA-seq analysis enables us to explore differences in gene expression between cells. It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes. Single cell omics is a relatively young field, but there are a few commonly-used analysis pipelines that you will often see in the literature. In this tutorial, we will use one of these pipelines, Seurat, to cluster single cell data from a 10X Genomics experiment ({% cite seurat2023v5 %}). You can follow the same analysis using the Scanpy pipeline in the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial.
+Single cell RNA-seq analysis enables us to explore differences in gene expression between cells.
+It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes.
 
-Clustering is typically the first type of analysis we will perform on a single cell dataset. It groups together cells that are expressing similar genes, which makes the data easier to understand and often helps us to identify specific cell types.
+In this tutorial, we showcase packages from the Bioconductor repository.
 
 > <comment-title></comment-title>
 >
-> This tutorial is based on the [Seurat - Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial). The SCTransform sections also draw from the [Using sctransform in Seurat](https://satijalab.org/seurat/articles/sctransform_vignette.html) tutorial.
+> This tutorial is significantly based on ["Orchestrating Single-Cell Analysis with Bioconductor"](https://bioconductor.org/books/release/OSCA/) {% cite amezquita2019orchestrating %} and draws from the [Clustering 3K PBMCs with Seurat](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html) and [Clustering 3K PBMCs with Scanpy](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html) tutorials.
 >
 {: .comment}
 
@@ -68,14 +57,6 @@ Clustering is typically the first type of analysis we will perform on a single c
 > {:toc}
 >
 {: .agenda}
-
-# Important tips for easier analysis
-
-{% snippet topics/single-cell/faqs/single_cell_omics.md %}
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
-
-{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 # Data
 
