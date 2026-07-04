@@ -40,8 +40,10 @@ contributions:
 
 Single cell RNA-seq analysis enables us to explore differences in gene expression between cells.
 It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes.
+(TODO: elaborate)
 
 In this tutorial, we showcase packages from the Bioconductor repository.
+(TODO: elaborate)
 
 > <comment-title></comment-title>
 >
@@ -144,14 +146,15 @@ Representing the matrix with these three files is convenient for sharing the dat
 
 ## SingleCellExperiment objects
 
+The common data structure adopted by Bioconductor packages to store the matrix as well as gene and cell annotations is called `SingleCellExperiment`.
 
+We can import the matrix and annotations of genes and cells into an `SingleCellExperiment` object using the function `read10xCounts()` of the package [DropletUtils](https://bioconductor.org/packages/DropletUtils/):
 
 ```{r}
 sce <- DropletUtils::read10xCounts(
     samples = "data",
     row.names = "symbol"
 )
-sce
 ```
 
 For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) can be used.
@@ -164,4 +167,8 @@ Notes:
 - This tool does not offer the option to use gene symbols as rownames.
   The default Ensembl gene identifiers complicates the interpretation of results later in the workflow.
   The tool should be updated to offer the possibility of using gene symbols.
-  
+
+Next:
+
+- print the object using `sce`
+- save the object to a loom file using `LoomExperiment`
