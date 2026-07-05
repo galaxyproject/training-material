@@ -58,18 +58,6 @@ In this tutorial, we showcase packages from the Bioconductor repository, combine
 >
 {: .agenda}
 
-# Data
-
-For this tutorial, we will analyze a dataset of Peripheral Blood Mononuclear Cells (PBMC) extracted from a healthy donor, which is freely available from 10X Genomics. The dataset contains 2700 single cells sequenced using Illumina NextSeq 500. The raw sequences have been processed by the [**cellranger**](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X to extract a unique molecular identifier (UMI) count matrix, in a similar way to that explained in the [Pre-processing of 10X Single-Cell RNA Datasets]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
-
-In this matrix, the values represent the number of each feature (i.e. gene; row) detected in each cell (column). Single cell matrices can be quite large: here there are 2700 columns with 32,738 rows, so for each of our 2700 cells we know how many times we found RNAs matching each of the 32,738 genes. Since most of these genes weren't detected in most of the cells, the matrix is largely filled with zeros, i.e. it is an extremely sparse matrix. To optimize the storage of such a table and the information about the genes and cells, **cellranger** creates 3 files:
-
-- `genes.tsv`: a tabular file with information about the 32,738 genes in 2 columns (Ensembl gene id and the gene symbol)
-- `barcodes.tsv`: a tabular file with the barcode for each of the 2700 cells
-- `matrix.mtx`: a condensed version of the count matrix (including the non-zero values only)
-
-    The count matrix is represented by its non-zero values - we don't need to store all of those zeroes as long as we know where our non-zero values are in the matrix. Each non-zero value is represented by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives the total number of rows (genes), columns (cells) and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [in this documentation](https://math.nist.gov/MatrixMarket/formats.html)
-
 # Libraries
 
 This tutorial showcases the following Bioconductor packages:
@@ -85,7 +73,19 @@ We also use the following R packages from the CRAN repository:
 
 - [cowplot](https://cran.r-project.org/package=cowplot) provides various features that help with creating publication-quality figures with [ggplot2](https://cran.r-project.org/package=ggplot2).
 
+# Data
+
+To create a parallel tutorial to the tutorial [Clustering 3K PBMCs with Seurat]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}), input data files are downloaded from these Zenodo links:
+
+```
+https://zenodo.org/record/3581213/files/genes.tsv
+https://zenodo.org/record/3581213/files/barcodes.tsv
+https://zenodo.org/record/3581213/files/matrix.mtx
+```
+
 ## Data upload
+
+This section was copied from the tutorial [Clustering 3K PBMCs with Seurat]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}) to set up input files in the same way.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -147,18 +147,35 @@ Representing the matrix with these three files is convenient for sharing the dat
 
 The common data structure adopted by Bioconductor packages to store the matrix as well as gene and cell annotations is called `SingleCellExperiment`.
 
-We can import the matrix and annotations of genes and cells into an `SingleCellExperiment` object using the function `read10xCounts()` of the package [DropletUtils](https://bioconductor.org/packages/DropletUtils/):
+We can import the matrix and annotations of genes and cells into an `SingleCellExperiment` object using the function `read10xCounts()` of the package [DropletUtils](https://bioconductor.org/packages/DropletUtils/).
+
+We set the `samples=` argument to the directory that contains the three 10x files.
+Changing `row.names=` from the default `"id"` to `"symbol"` ensures that human-readable gene symbols are used instead of the database-friendlier Ensembl gene identifiers.
+Either way, both Ensembl gene identifiers and gene symbols will be stored in the `rowData()` component of the `SingleCellExperiment` and available at all times.
+
+In the context of a Galaxy workflow, we want to save the R object to a file that can be re-used by downstream tasks.
+R objects are traditionally saved to `.RData` or `.rds` files.
+However those file formats are specific to R and [deemed insecure](https://github.com/galaxyproject/tools-iuc/issues/3921).
+
+To be saved to the safer `loom` file format, `SingleCellExperiment` objects must be converted to the `SingleCellLoomExperiment` class before they can be saved to disk using the `export()` function from the `BiocIO` package.
+
+Altogether, the first tool in our Galaxy workflow should execute the following code:
 
 ```{r}
 sce <- DropletUtils::read10xCounts(
-    samples = "data",
-    row.names = "symbol"
+	samples = "data/",
+	row.names = "symbol"
 )
+dir.create("outputs")
+scle <- as(sce, "SingleCellLoomExperiment")
+if (!file.exists("outputs/sce.loom")) {
+	export(object = scle, con = "outputs/sce.loom", format = "loom")
+}
 ```
 
 For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) can be used.
 
-Notes:
+However:
 
 - This tool produces an `rdata` file.
   RData objects are deemed insecure as discussed in this [GitHub issue](https://github.com/galaxyproject/tools-iuc/issues/3921).
@@ -168,31 +185,15 @@ Notes:
   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
   It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
 
-A summary view of the `SingleCellExperiment` object can be printed as follows:
+#### Inspect the `SingleCellExperiment` object.
+
+Given that R sessions do not persist between steps of a Galaxy workflow, a Galaxy tool would need to execute the following code to re-import the `SingleCellLoomExperiment` from the file written in the previous step before displaying a summary view of it.
+
+In the context of a Galaxy workflow, the output would then be saved to a `.txt` file that the user could inspect after the job completes.
 
 ```{r}
-sce
+sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
+print(sce)
 ```
 
-```
-class: SingleCellExperiment 
-dim: 32738 2700 
-metadata(1): Samples
-assays(1): counts
-rownames(32738): MIR1302-10 FAM138A ... AC002321.2 AC002321.1
-rowData names(2): ID Symbol
-colnames: NULL
-colData names(2): Sample Barcode
-reducedDimNames(0):
-mainExpName: NULL
-altExpNames(0):
-```
-
-Notes:
-
-- The tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) prints a view of the object in the standard output, which can be inspected in the `Details` tab of the Job Information page for the output dataset in the history.
-
-Next:
-
-
-- save the object to a loom file using `LoomExperiment`
+For this task, a tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed.
