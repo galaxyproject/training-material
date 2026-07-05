@@ -40,14 +40,12 @@ contributions:
 
 Single cell RNA-seq analysis enables us to explore differences in gene expression between cells.
 It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes.
-(TODO: elaborate)
 
-In this tutorial, we showcase packages from the Bioconductor repository.
-(TODO: elaborate)
+In this tutorial, we showcase packages from the Bioconductor repository, combined into a workflow from data import to the identification of cell clusters and associated marker genes.
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on ["Orchestrating Single-Cell Analysis with Bioconductor"](https://bioconductor.org/books/release/OSCA/) {% cite amezquita2019orchestrating %} and draws from the [Clustering 3K PBMCs with Seurat](% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}) and [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorials.
+> This tutorial is significantly based on ["Orchestrating Single-Cell Analysis with Bioconductor"](https://bioconductor.org/books/release/OSCA/) {% cite amezquita2019orchestrating %} and draws from the [Clustering 3K PBMCs with Seurat]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}) and [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorials.
 >
 {: .comment}
 
@@ -76,15 +74,16 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 
 This tutorial showcases the following Bioconductor packages:
 
-- [bluster](https://bioconductor.org/packages/bluster/) provides clustering algorithms
-- [DropletUtils](https://bioconductor.org/packages/DropletUtils/) provides utilities for handling single-cell droplet data
-- [scater](https://bioconductor.org/packages/scater/) provides a toolkit for the analysis of single-cell gene expression data
-- [scran](https://bioconductor.org/packages/scran/) provides additional methods for single-cell RNA-Seq data analysis
+- [bluster](https://bioconductor.org/packages/bluster/) provides clustering algorithms.
+- [DropletUtils](https://bioconductor.org/packages/DropletUtils/) provides utilities for handling single-cell droplet data.
+- [LoomExperiment](https://bioconductor.org/packages/LoomExperiment/) provides a means to easily convert the Bioconductor "Experiment" classes to loom files.
+- [scater](https://bioconductor.org/packages/scater/) provides a toolkit for the analysis of single-cell gene expression data.
+- [scran](https://bioconductor.org/packages/scran/) provides additional methods for single-cell RNA-Seq data analysis.
 - [scuttle](https://bioconductor.org/packages/scuttle/) provides additional utility functions for performing single-cell analyses.
 
 We also use the following R packages from the CRAN repository:
 
-- [cowplot](https://cran.r-project.org/package=cowplot) provides various features that help with creating publication-quality figures with [ggplot2](https://cran.r-project.org/package=ggplot2)
+- [cowplot](https://cran.r-project.org/package=cowplot) provides various features that help with creating publication-quality figures with [ggplot2](https://cran.r-project.org/package=ggplot2).
 
 ## Data upload
 
@@ -164,11 +163,36 @@ Notes:
 - This tool produces an `rdata` file.
   RData objects are deemed insecure as discussed in this [GitHub issue](https://github.com/galaxyproject/tools-iuc/issues/3921).
   The tool should be updated to produce a `loom` file containing a `LoomExperiment` object.
-- This tool does not offer the option to use gene symbols as rownames.
-  The default Ensembl gene identifiers complicates the interpretation of results later in the workflow.
-  The tool should be updated to offer the possibility of using gene symbols.
+- This tool does not offer the option to use gene symbols as `rownames`.
+  The default Ensembl gene identifiers are not immediately interpretable and complicate the interpretation of results later in the workflow (e.g., list of highly variable genes, cluster marker genes).
+  The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
+  It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
+
+A summary view of the `SingleCellExperiment` object can be printed as follows:
+
+```{r}
+sce
+```
+
+```
+class: SingleCellExperiment 
+dim: 32738 2700 
+metadata(1): Samples
+assays(1): counts
+rownames(32738): MIR1302-10 FAM138A ... AC002321.2 AC002321.1
+rowData names(2): ID Symbol
+colnames: NULL
+colData names(2): Sample Barcode
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+```
+
+Notes:
+
+- The tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) prints a view of the object in the standard output, which can be inspected in the `Details` tab of the Job Information page for the output dataset in the history.
 
 Next:
 
-- print the object using `sce`
+
 - save the object to a loom file using `LoomExperiment`
