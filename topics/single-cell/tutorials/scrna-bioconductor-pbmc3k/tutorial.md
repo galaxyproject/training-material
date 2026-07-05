@@ -185,7 +185,7 @@ However:
   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
   It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
 
-#### Inspect the `SingleCellExperiment` object.
+### Inspect the `SingleCellExperiment` object.
 
 Given that R sessions do not persist between steps of a Galaxy workflow, a Galaxy tool would need to execute the following code to re-import the `SingleCellLoomExperiment` from the file written in the previous step before displaying a summary view of it.
 
