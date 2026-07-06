@@ -41,7 +41,7 @@ contributions:
 Single cell RNA-seq analysis enables us to explore differences in gene expression between cells.
 It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes.
 
-In this tutorial, we showcase packages from the Bioconductor repository, combined into a workflow from data import to the identification of cell clusters and associated marker genes.
+In this tutorial, we showcase packages from the Bioconductor repository, combined into a workflow guiding users from data import to the identification of cell clusters and associated marker genes.
 
 > <comment-title></comment-title>
 >
@@ -162,25 +162,23 @@ To be saved to the safer `loom` file format, `SingleCellExperiment` objects must
 Altogether, the first tool in our Galaxy workflow should execute the following code:
 
 ```{r}
+library(DropletUtils)
+library(LoomExperiment)
 sce <- DropletUtils::read10xCounts(
 	samples = "data/",
 	row.names = "symbol"
 )
 dir.create("outputs")
 scle <- as(sce, "SingleCellLoomExperiment")
-if (!file.exists("outputs/sce.loom")) {
-	export(object = scle, con = "outputs/sce.loom", format = "loom")
-}
+export(object = scle, con = "outputs/sce.loom", format = "loom")
 ```
 
-For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) can be used.
+For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) exists, but:
 
-However:
-
-- This tool produces an `rdata` file.
+- It produces an `rdata` file.
   RData objects are deemed insecure as discussed in this [GitHub issue](https://github.com/galaxyproject/tools-iuc/issues/3921).
   The tool should be updated to produce a `loom` file containing a `LoomExperiment` object.
-- This tool does not offer the option to use gene symbols as `rownames`.
+- It does not offer the option to use gene symbols as `rownames`.
   The default Ensembl gene identifiers are not immediately interpretable and complicate the interpretation of results later in the workflow (e.g., list of highly variable genes, cluster marker genes).
   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
   It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
@@ -192,8 +190,69 @@ Given that R sessions do not persist between steps of a Galaxy workflow, a Galax
 In the context of a Galaxy workflow, the output would then be saved to a `.txt` file that the user could inspect after the job completes.
 
 ```{r}
+library(LoomExperiment)
 sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
 print(sce)
 ```
 
+In this instance, the summary view of the object looks as follows:
+
+```
+class: SingleCellLoomExperiment 
+dim: 32738 2700 
+metadata(5): CreatedWith LOOM_SPEC_VERSION LoomExperiment-class MatrixName Samples
+assays(1): counts
+rownames(32738): MIR1302-10 FAM138A ... AC002321.2 AC002321.1
+rowData names(2): ID Symbol
+colnames: NULL
+colData names(2): Barcode Sample
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowGraphs(0): NULL
+colGraphs(0): NULL
+```
+
 For this task, a tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed.
+
+## Preprocessing
+
+### Computation of QC metrics
+
+#### Identify mitochondrial genes.
+
+In preparation for the calculation of quality control metrics, we need to identify mitochondrial genes in our dataset.
+
+Conveniently, human genes that are encoded in the mitochondrial DNA (rather than in the cell nucleus) have names beginning with `MT-`.
+
+The following code identifies all the rownames that match this pattern in our dataset and writes them to a `.txt` file.
+
+```{r}
+library(LoomExperiment)
+sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
+mt_gene_ids <- rownames(sce)[grep('^MT-', rownames(sce))]
+cat(mt_gene_ids, file = "outputs/mt_gene_ids.txt", sep = "\n")
+```
+
+In this instance, the file listing rownames corresponding to mitochondrial genes looks as follows:
+
+```
+MT-ND1
+MT-ND2
+MT-CO1
+MT-CO2
+MT-ATP8
+MT-ATP6
+MT-CO3
+MT-ND3
+MT-ND4L
+MT-ND4
+MT-ND5
+MT-ND6
+MT-CYB
+```
+
+For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) exists, but:
+
+- It requires the expression matrix in tabular format.
+  The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
