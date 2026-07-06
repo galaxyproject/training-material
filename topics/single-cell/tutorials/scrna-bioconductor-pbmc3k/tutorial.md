@@ -276,6 +276,8 @@ MT-CYB
 > For this task, it seems like a new tool could be added to the `SingleCellLoomExperiment Data Management` tool suite proposed above.
 {: .comment}
 
+It is worth mentioning that the tutorial [Single-cell quality control with scater]({% link topics/single-cell/tutorials/scrna-scater-qc/tutorial.md %}) provides a precomputed file of mitochondrial genes, which could be a convenient workaround that could be used here to save a step in a workflow and a new tool wrapper in Galaxy.
+
 #### Calculate the Proportion of Mitochondrial Reads
 
 Equipped with a `SingleCellLoomExperiment` object and a file that contains the list of rownames that correspond to the mitochondrial genes, we can use the `addPerCellQCMetrics()` function from the [scuttle](https://bioconductor.org/packages/scuttle/) package to compute some generic quality control metrics alongside metrics focusing on mitochondrial genes.
