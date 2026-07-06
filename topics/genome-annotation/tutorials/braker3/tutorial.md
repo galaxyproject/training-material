@@ -185,7 +185,7 @@ So first generate these sequences:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: output of {% tool [Braker](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0) %}
 >    - In *"Reference Genome"* select: `From your history` (Input dataset)
 >    - *"Genome Reference Fasta"*: `genome.fasta` (Input dataset)
->    - In *"Select fasta outputs"* select: `fasta file with spliced exons for each GFF transcript (-y)`
+>    - In *"Select fasta outputs"* select: `protein fasta file with the translation of CDS for each record (-y)`
 >    - *"full GFF attribute preservation (all attributes are shown)"*: `Yes`
 >    - *"decode url encoded characters within attributes"*: `Yes`
 >    - *"warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records"*: `Yes`
