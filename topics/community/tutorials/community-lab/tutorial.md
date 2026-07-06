@@ -30,10 +30,8 @@ contributions:
 The **Community lab**, a centralised webpage that enables communities to rapidly aggregate, curate, integrate, display, and launch relevant tools, workflows, and training on different Galaxy servers. This user-friendly interface, built on the Galaxy framework, provides community members with data analysis capacity without requiring programming expertise. Users can run individual tools or create complex workflows, with full provenance tracking to ensure reproducibility, designed specifically for the community research (Nasr et al., 2024).
   *For example, [the microgalaxy lab (Europe)](https://microbiology.usegalaxy.eu).*
 
+The aim of this tutorial is to explain what the lab is and how to create the files necessary to display the labs via the CoDex and how to deploy the rendered lab in each Galaxy instance.
 
-The aim of this tutorial is to create the files necessary to display the labs in each Galaxy instance.
-
-You can also use the [Galaxy Labs engine](https://labs.usegalaxy.org.au).
 
 > <agenda-title></agenda-title>
 >
@@ -43,6 +41,32 @@ You can also use the [Galaxy Labs engine](https://labs.usegalaxy.org.au).
 > {:toc}
 >
 {: .agenda}
+
+# What is a Lab, technically?
+
+A Lab is essentially a community-created version of Galaxy’s middle panel view.
+
+At its core, a Lab can be any HTML page. Historically, communities created these HTML pages manually. To make creating and maintaining Labs easier, more consistent, visually appealing, and independent of Galaxy server deployments, the [Galaxy Labs engine](https://labs.usegalaxy.org.au) was developed.
+
+The Galaxy Labs engine generates HTML content from **YAML specifications** hosted in repositories such as GitHub or GitLab. By simply providing the repository path to the engine, the Lab content is automatically rendered.
+
+For more information also read the publication of the labs {% cite giag041 %}.
+
+The Galaxy Labs documentation provides additional details about architecture and configuration.
+
+# Creating Labs with CoDex
+
+Using the Galaxy Labs engine alone is sufficient to create and host your own custom Galaxy Lab.
+
+However, **CoDex extends this workflow by automating the generation of Lab YAML files**, which is the focus of this tutorial.
+
+> <comment-title>Limitations of CoDex</comment-title>
+>
+> CoDex supports generating **Galaxy Community Labs only**.
+> If you want to create a Lab for another purpose—such as a specific project, event, or custom use case—you can still create and host the YAML specification independently and render it through the Galaxy Labs engine.
+>
+{: .comment}
+
 
 # Create the lab specific files (automatic)
 

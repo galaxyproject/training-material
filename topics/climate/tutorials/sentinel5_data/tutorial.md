@@ -85,7 +85,7 @@ Interactive tools are working differently than classical tools as it allows the 
 
 > <hands-on-title> Launch the interactive tool </hands-on-title>
 >
-> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus) %} with the following parameters:
+> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - *"Include data into the environment - optional "*: You don't need anything
 > 2. Click on **Run Tool**
