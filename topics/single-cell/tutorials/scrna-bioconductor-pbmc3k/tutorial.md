@@ -253,7 +253,7 @@ MT-ND6
 MT-CYB
 ```
 
-For this task, it seems like a new tool could be added to the tool suite `SingleCellLoomExperiment Data Management` proposed above.
+For this task, it seems like a new tool could be added to the `SingleCellLoomExperiment Data Management` tool suite proposed above.
 
 #### Calculate the Proportion of Mitochondrial Reads
 
