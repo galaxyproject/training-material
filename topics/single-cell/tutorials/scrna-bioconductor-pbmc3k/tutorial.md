@@ -161,7 +161,7 @@ To be saved to the safer `loom` file format, `SingleCellExperiment` objects must
 
 > <hands-on-title>R code</hands-on-title>
 >
-> Altogether, the first tool in our Galaxy workflow should execute the following code:
+> For this task, a Galaxy tool should execute the following code:
 >
 > ```{r}
 > library(DropletUtils)
@@ -170,7 +170,6 @@ To be saved to the safer `loom` file format, `SingleCellExperiment` objects must
 > 	samples = "data/",
 > 	row.names = "symbol"
 > )
-> dir.create("outputs")
 > scle <- as(sce, "SingleCellLoomExperiment")
 > export(object = scle, con = "outputs/sce.loom", format = "loom")
 > ```
@@ -184,10 +183,9 @@ To be saved to the safer `loom` file format, `SingleCellExperiment` objects must
 >   RData objects are deemed insecure as discussed in this [GitHub issue](https://github.com/galaxyproject/tools-iuc/issues/3921).
 >   The tool should be updated to produce a `loom` file containing a `LoomExperiment` object.
 > - It does not offer the option to use gene symbols as `rownames`.
->   The default Ensembl gene identifiers are not immediately interpretable and complicate the interpretation of results later in the workflow (e.g., list of highly variable genes, cluster marker genes).
->   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
->   It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
->
+>   The Ensembl gene identifiers used by default are not immediately interpretable to human eyes and complicate the interpretation of results later in the workflow (e.g., list of highly variable genes, cluster marker genes).
+>   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment` object.
+>   It is worth pointing out that both Ensembl gene identifiers and gene symbols are automatically stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available for conversion and interpretation throughout the analysis.
 {: .comment}
 
 ### Inspect the SingleCellLoomExperiment object.
@@ -198,7 +196,7 @@ In the context of a Galaxy workflow, the output would then be saved to a `.txt` 
 
 > <hands-on-title>R code</hands-on-title>
 >
-> As a result, the corresponding tool in our Galaxy workflow should execute the following code:
+> For this task, a Galaxy tool should execute the following code:
 >
 > ```{r}
 > library(LoomExperiment)
@@ -209,11 +207,11 @@ In the context of a Galaxy workflow, the output would then be saved to a `.txt` 
 
 > <comment-title></comment-title>
 >
-> For this task, a tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed.
-> It seems worth starting a `SingleCellLoomExperiment Data Management` tool suite with that sort of utilities.
-> 
-In this instance, the summary view of the object looks as follows:
+> For this task, a new tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed.
+> It seems worth starting a `SingleCellLoomExperiment Data Management` tool suite with that sort of miscellaneous utilities.
 {: .comment}
+
+In this instance, the summary view of the object looks as follows:
 
 ```
 class: SingleCellLoomExperiment 
@@ -241,16 +239,21 @@ In preparation for the calculation of quality control metrics, we need to identi
 
 Conveniently, human genes that are encoded in the mitochondrial DNA (rather than in the cell nucleus) have names beginning with `MT-`.
 
-The following code identifies all the rownames that match this pattern in our dataset and writes them to a `.txt` file.
+In the context of a Galaxy workflow, that list of rownames should be stored in a `.txt` file that can be passed as input to downstream tools.
 
-```{r}
-library(LoomExperiment)
-sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
-mt_gene_ids <- rownames(sce)[grep('^MT-', rownames(sce))]
-cat(mt_gene_ids, file = "outputs/mt_gene_ids.txt", sep = "\n")
-```
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
+> mt_gene_ids <- rownames(sce)[grep('^MT-', rownames(sce))]
+> cat(mt_gene_ids, file = "outputs/mt_gene_ids.txt", sep = "\n")
+> ```
+{: .hands_on}
 
-In this instance, the file listing rownames corresponding to mitochondrial genes looks as follows:
+In this instance, the output file - listing rownames corresponding to mitochondrial genes - looks as follows:
 
 ```
 MT-ND1
@@ -268,30 +271,41 @@ MT-ND6
 MT-CYB
 ```
 
-For this task, it seems like a new tool could be added to the `SingleCellLoomExperiment Data Management` tool suite proposed above.
+> <comment-title></comment-title>
+>
+> For this task, it seems like a new tool could be added to the `SingleCellLoomExperiment Data Management` tool suite proposed above.
+{: .comment}
 
 #### Calculate the Proportion of Mitochondrial Reads
 
-Equipped with a `SingleCellLoomExperiment` object and a file that contains the list of rownames that correspond to the mitochondrial genes, we can use the `addPerCellQCMetrics()` function from the `scuttle` package to compute some generic quality control metrics alongside metrics focusing on mitochondrial genes.
+Equipped with a `SingleCellLoomExperiment` object and a file that contains the list of rownames that correspond to the mitochondrial genes, we can use the `addPerCellQCMetrics()` function from the [scuttle](https://bioconductor.org/packages/scuttle/) package to compute some generic quality control metrics alongside metrics focusing on mitochondrial genes.
 
 In particular, the percentage of UMI assigned to mitochondrial genes is frequently used as a measure of cell integrity allowing us to remove droplets that contain damaged or otherwise suspicious cells.
 
 A Galaxy tool wrapper would need to execute the following code:
 
-```{r}
-library(LoomExperiment)
-library(scuttle)
-sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
-mt_gene_ids <- scan("outputs/mt_gene_ids.txt", what = "character", quiet = TRUE)
-gene_subsets <- list()
-gene_subsets[["MT"]] <- mt_gene_ids
-sce <- scuttle::addPerCellQCMetrics(
-	x = sce,
-	subsets = gene_subsets
-)
-```
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scuttle)
+> sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
+> mt_gene_ids <- scan("outputs/mt_gene_ids.txt", what = "character", quiet = TRUE)
+> gene_subsets <- list()
+> gene_subsets[["MT"]] <- mt_gene_ids
+> sce <- scuttle::addPerCellQCMetrics(
+> 	x = sce,
+> 	subsets = gene_subsets
+> )
+> ```
+{: .hands_on}
 
-For this task, the tool [Scater: calculate QC metrics](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_create_qcmetric_ready_sce%2Fscater_create_qcmetric_ready_sce%2F1.22.0&version=latest) exists, but:
-
-- It requires the expression matrix in tabular format.
-  The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
+> <comment-title></comment-title>
+>
+> For this task, the tool [Scater: calculate QC metrics](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_create_qcmetric_ready_sce%2Fscater_create_qcmetric_ready_sce%2F1.22.0&version=latest) exists, but:
+> 
+> - It requires the expression matrix in tabular format.
+>   The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
+{: .comment}
