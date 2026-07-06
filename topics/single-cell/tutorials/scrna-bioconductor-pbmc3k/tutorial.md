@@ -151,13 +151,13 @@ We can import the matrix and annotations of genes and cells into an `SingleCellE
 
 We set the `samples=` argument to the directory that contains the three 10x files.
 Changing `row.names=` from the default `"id"` to `"symbol"` ensures that human-readable gene symbols are used instead of the database-friendlier Ensembl gene identifiers.
-Either way, both Ensembl gene identifiers and gene symbols will be stored in the `rowData()` component of the `SingleCellExperiment` and available at all times.
+Either way, both Ensembl gene identifiers and gene symbols will be stored in the `rowData` component of the `SingleCellExperiment` object and available at all times.
 
 In the context of a Galaxy workflow, we want to save the R object to a file that can be re-used by downstream tasks.
 R objects are traditionally saved to `.RData` or `.rds` files.
 However those file formats are specific to R and [deemed insecure](https://github.com/galaxyproject/tools-iuc/issues/3921).
 
-To be saved to the safer `loom` file format, `SingleCellExperiment` objects must be converted to the `SingleCellLoomExperiment` class before they can be saved to disk using the `export()` function from the `BiocIO` package.
+To be saved to the safer `loom` file format, `SingleCellExperiment` objects must be converted to `SingleCellLoomExperiment` before they can be saved to disk using the `export()` function from the [BiocIO](https://bioconductor.org/packages/BiocIO/) package.
 
 Altogether, the first tool in our Galaxy workflow should execute the following code:
 
@@ -183,9 +183,9 @@ For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=too
   The tool should be updated to offer the possibility of using gene symbols as `rownames` for the `SingleCellExperiment`.
   It is worth pointing out that both Ensembl gene identifiers and gene symbols are stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available throughout the analysis
 
-### Inspect the `SingleCellExperiment` object.
+### Inspect the SingleCellLoomExperiment object.
 
-Given that R sessions do not persist between steps of a Galaxy workflow, a Galaxy tool would need to execute the following code to re-import the `SingleCellLoomExperiment` from the file written in the previous step before displaying a summary view of it.
+Having saved the `SingleCellLoomExperiment` object to a `loom` file, a Galaxy tool would need to execute the following code to re-import the `SingleCellLoomExperiment` and display a summary view of it.
 
 In the context of a Galaxy workflow, the output would then be saved to a `.txt` file that the user could inspect after the job completes.
 
@@ -214,6 +214,7 @@ colGraphs(0): NULL
 ```
 
 For this task, a tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed.
+It seems worth starting a `SingleCellLoomExperiment Data Management` tool suite with that sort of utilities.
 
 ## Preprocessing
 
@@ -252,7 +253,30 @@ MT-ND6
 MT-CYB
 ```
 
-For this task, the tool [DropletUtils Read10x](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0&version=latest) exists, but:
+For this task, it seems like a new tool could be added to the tool suite `SingleCellLoomExperiment Data Management` proposed above.
+
+#### Calculate the Proportion of Mitochondrial Reads
+
+Equipped with a `SingleCellLoomExperiment` object and a file that contains the list of rownames that correspond to the mitochondrial genes, we can use the `addPerCellQCMetrics()` function from the `scuttle` package to compute some generic quality control metrics alongside metrics focusing on mitochondrial genes.
+
+In particular, the percentage of UMI assigned to mitochondrial genes is frequently used as a measure of cell integrity allowing us to remove droplets that contain damaged or otherwise suspicious cells.
+
+A Galaxy tool wrapper would need to execute the following code:
+
+```{r}
+library(LoomExperiment)
+library(scuttle)
+sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
+mt_gene_ids <- scan("outputs/mt_gene_ids.txt", what = "character", quiet = TRUE)
+gene_subsets <- list()
+gene_subsets[["MT"]] <- mt_gene_ids
+sce <- scuttle::addPerCellQCMetrics(
+	x = sce,
+	subsets = gene_subsets
+)
+```
+
+For this task, the tool [Scater: calculate QC metrics](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_create_qcmetric_ready_sce%2Fscater_create_qcmetric_ready_sce%2F1.22.0&version=latest) exists, but:
 
 - It requires the expression matrix in tabular format.
   The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
