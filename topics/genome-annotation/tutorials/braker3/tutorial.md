@@ -99,7 +99,6 @@ To annotate our genome using Braker3, we will use the following files:
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
