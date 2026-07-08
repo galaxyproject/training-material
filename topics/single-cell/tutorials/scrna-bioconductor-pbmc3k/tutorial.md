@@ -188,7 +188,7 @@ To be saved to the safer `loom` file format, `SingleCellExperiment` objects must
 >   It is worth pointing out that both Ensembl gene identifiers and gene symbols are automatically stored in the `rowData` component of the `SingleCellExperiment` object, meaning they remain available for conversion and interpretation throughout the analysis.
 {: .comment}
 
-### Inspect the SingleCellLoomExperiment object.
+### Inspect the SingleCellLoomExperiment object
 
 Having saved the `SingleCellLoomExperiment` object to a `loom` file, a Galaxy tool would need to execute the following code to re-import the `SingleCellLoomExperiment` and display a summary view of it.
 
@@ -284,8 +284,6 @@ Equipped with a `SingleCellLoomExperiment` object and a file that contains the l
 
 In particular, the percentage of UMI assigned to mitochondrial genes is frequently used as a measure of cell integrity allowing us to remove droplets that contain damaged or otherwise suspicious cells.
 
-A Galaxy tool wrapper would need to execute the following code:
-
 > <hands-on-title>R code</hands-on-title>
 >
 > For this task, a Galaxy tool should execute the following code:
@@ -310,4 +308,86 @@ A Galaxy tool wrapper would need to execute the following code:
 > 
 > - It requires the expression matrix in tabular format.
 >   The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
+{: .comment}
+
+### Inspect the quality control metrics
+
+The newly computed per-cell quality control metrics are stored in the `colData` component of the object.
+This a tabular `DataFrame` structure which can be inspected by re-importing the `SingleCellLoomExperiment` object and printing the `colData()` component.
+
+In the context of a Galaxy workflow, the output would then be saved to a `.txt` file that the user could inspect after the job completes.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> print(colData(sce))
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> For this task, a new tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed (as mentioned earlier), with the option to display only the `colData` component of the object.
+{: .comment}
+
+In this instance, the summary view of the object looks as follows:
+
+```
+DataFrame with 2700 rows and 8 columns
+              Barcode      Sample  detected subsets_MT_detected subsets_MT_percent subsets_MT_sum       sum     total
+          <character> <character> <numeric>           <numeric>          <numeric>      <numeric> <numeric> <numeric>
+1    AAACATACAACCAC-1       data/       781                  10           3.015283             73      2421      2421
+2    AAACATTGAGCTAC-1       data/      1352                  10           3.793596            186      4903      4903
+3    AAACATTGATCAGC-1       data/      1131                   8           0.889171             28      3149      3149
+4    AAACCGTGCTTCCG-1       data/       960                  10           1.743085             46      2639      2639
+5    AAACCGTGTATGCG-1       data/       522                   5           1.223242             12       981       981
+...               ...         ...       ...                 ...                ...            ...       ...       ...
+2696 TTTCGAACTCTCAT-1       data/      1155                   7           2.109217             73      3461      3461
+2697 TTTCTACTGAGGCA-1       data/      1227                   8           0.928343             32      3447      3447
+2698 TTTCTACTTCCTCG-1       data/       622                   7           2.197150             37      1684      1684
+2699 TTTGCATGAGAGGC-1       data/       454                   7           2.050781             21      1024      1024
+2700 TTTGCATGCCTCAC-1       data/       724                   6           0.806045             16      1985      1985
+```
+
+### Filtering of low-quality cells
+
+#### Visualise QC Metrics.
+
+Having computed the quality control metrics and stored them in the `colData` component of the `SingleCellLoomExperiment` object, we can reload that object and use the `plotColData()` function of the [scater](https://bioconductor.org/packages/scater) package to visualise the quality control metrics to determine appropriate thresholds for filtering out low-quality cells.
+
+Which metrics are available can be determined by inspecting the `colData()` component of the object as shown above.
+
+Given that `plotColData()` can only plot one QC metric at a time, we use the `cowplot` package to combine them into a single figure.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scater)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> plot_list <- list()
+> plot_list[["detected"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "detected"
+> )
+> plot_list[["sum"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "sum"
+> )
+> plot_list[["subsets_MT_percent"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "subsets_MT_percent"
+> )
+> cowplot::plot_grid(plotlist = plot_list, nrow = 1)
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> For this task, a new tool similar to the [scanpy plot](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscanpy_plot%2Fscanpy_plot%2F1.11.5%2Bgalaxy0&version=latest) tool in the `scanpy` [tool suite](https://github.com/galaxyproject/tools-iuc/blob/main/tools/scanpy/.shed.yml#L17) is needed, with the `plotColData()` function being one of multiple choices available through the tool.
 {: .comment}
