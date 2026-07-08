@@ -394,6 +394,8 @@ Given that `plotColData()` can only plot one QC metric at a time on the y-axis, 
 > The use of the [cowplot](https://cran.r-project.org/package=cowplot) package to combine multiple plots will also require additional parameters (e.g., number of rows and columns in the plotting grid, pixel dimensions of the output image file).
 {: .comment}
 
+![Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for all cells.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-violin.png "Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for all cells.")
+
 The `plotColData()` function can also plot one QC metric on the y-axis against another QC metric on the x-axis.
 This can be additional insights into the relationship between QC metrics and help determine appropriate thresholds for filtering out low-quality cells.
 
@@ -424,3 +426,5 @@ This can be additional insights into the relationship between QC metrics and hel
 >
 > Continuing from the comment above, this use case requires an optional parameter for the QC metric to be plotted on the x-axis.
 {: .comment}
+
+![Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-scatter.png "Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).")
