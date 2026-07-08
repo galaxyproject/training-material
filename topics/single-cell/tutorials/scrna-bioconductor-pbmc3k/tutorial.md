@@ -389,9 +389,9 @@ Given that `plotColData()` can only plot one QC metric at a time on the y-axis, 
 
 > <comment-title></comment-title>
 >
-> For this task, a new tool similar to the [scanpy plot](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscanpy_plot%2Fscanpy_plot%2F1.11.5%2Bgalaxy0&version=latest) tool in the `scanpy` [tool suite](https://github.com/galaxyproject/tools-iuc/blob/main/tools/scanpy/.shed.yml#L17) is needed, with the `plotColData()` function being one of multiple choices available through the tool.
+> For this task, a new tool similar to the tools [Seurat Visualize](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_plot%2Fseurat_plot%2F5.4.0%2Bgalaxy2&version=latest) or [scanpy plot](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscanpy_plot%2Fscanpy_plot%2F1.11.5%2Bgalaxy0&version=latest) is needed, with the `plotColData()` function being one of multiple choices available through the tool.
 > The `plotColData()` function is quite versatile and will need careful wrapping to manage required and optional parameters.
-> The use of the [cowplot](https://cran.r-project.org/package=cowplot) package to combine multiple plots will also require additional parameters (e.g., number of rows and columns in the plotting grid, pixel dimensions of the output image file).
+> In this case, taking inspiration from the [Seurat Visualize](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_plot%2Fseurat_plot%2F5.4.0%2Bgalaxy2&version=latest) or [scanpy plot](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscanpy_plot%2Fscanpy_plot%2F1.11.5%2Bgalaxy0&version=latest) tool, users could provide a comma-separated list of columns names in `colData`, and the tool wrapper would call `scater::plotColData()` for each column before using [cowplot](https://cran.r-project.org/package=cowplot) package to combine the multiple plots into a single image.
 {: .comment}
 
 ![Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for all cells.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-violin.png "Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for all cells.")
@@ -401,30 +401,34 @@ This can be additional insights into the relationship between QC metrics and hel
 
 > <hands-on-title>R code</hands-on-title>
 >
-> For this task, a Galaxy tool should execute the following code:
+> For this task, a Galaxy tool should execute the following code (once for each combination of features):
 >
 > ```{r}
 > library(LoomExperiment)
 > library(scater)
 > sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
-> plot_list <- list()
-> plot_list[["detected"]] <- scater::plotColData(
+> scater::plotColData(
 > 	object = sce,
 > 	y = "detected",
 > 	x = "sum"
-> )
-> plot_list[["subsets_MT_percent"]] <- scater::plotColData(
+> ```
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scater)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> scater::plotColData(
 > 	object = sce,
 > 	y = "subsets_MT_percent",
 > 	x = "sum"
 > )
-> cowplot::plot_grid(plotlist = plot_list, nrow = 1)
 > ```
 {: .hands_on}
 
 > <comment-title></comment-title>
 >
-> Continuing from the comment above, this use case requires an optional parameter for the QC metric to be plotted on the x-axis.
+> In contrast to the 'violin plot' use case above, where users can give a list of column names that the wrapper can simply loop over, this 'scatter plot' use case requires two features per plot - one of the y-axis and one for the x-axis - which immediately complicates the idea of producing multiple plots for multiple combinations of features on the X-Y axes.
+> Again, taking inspiration from the [Seurat Visualize](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_plot%2Fseurat_plot%2F5.4.0%2Bgalaxy2&version=latest), the tool should only allow users to specify one feature for the x-axis and one feature for the y-axis, forcing them to call the tool once per combination of features on the X-Y axes.
 {: .comment}
 
 ![Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-scatter.png "Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).")
