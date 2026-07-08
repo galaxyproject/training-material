@@ -360,7 +360,7 @@ Having computed the quality control metrics and stored them in the `colData` com
 
 Which metrics are available can be determined by inspecting the `colData()` component of the object as shown above.
 
-Given that `plotColData()` can only plot one QC metric at a time, we use the `cowplot` package to combine them into a single figure.
+Given that `plotColData()` can only plot one QC metric at a time on the y-axis, we use the `cowplot` package to combine them into a single figure.
 
 > <hands-on-title>R code</hands-on-title>
 >
@@ -390,4 +390,37 @@ Given that `plotColData()` can only plot one QC metric at a time, we use the `co
 > <comment-title></comment-title>
 >
 > For this task, a new tool similar to the [scanpy plot](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscanpy_plot%2Fscanpy_plot%2F1.11.5%2Bgalaxy0&version=latest) tool in the `scanpy` [tool suite](https://github.com/galaxyproject/tools-iuc/blob/main/tools/scanpy/.shed.yml#L17) is needed, with the `plotColData()` function being one of multiple choices available through the tool.
+> The `plotColData()` function is quite versatile and will need careful wrapping to manage required and optional parameters.
+> The use of the [cowplot](https://cran.r-project.org/package=cowplot) package to combine multiple plots will also require additional parameters (e.g., number of rows and columns in the plotting grid, pixel dimensions of the output image file).
+{: .comment}
+
+The `plotColData()` function can also plot one QC metric on the y-axis against another QC metric on the x-axis.
+This can be additional insights into the relationship between QC metrics and help determine appropriate thresholds for filtering out low-quality cells.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scater)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> plot_list <- list()
+> plot_list[["detected"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "detected",
+> 	x = "sum"
+> )
+> plot_list[["subsets_MT_percent"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "subsets_MT_percent",
+> 	x = "sum"
+> )
+> cowplot::plot_grid(plotlist = plot_list, nrow = 1)
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> Continuing from the comment above, this use case requires an optional parameter for the QC metric to be plotted on the x-axis.
 {: .comment}
