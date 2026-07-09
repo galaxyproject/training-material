@@ -1,0 +1,2916 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Batch Correction and Integration with Seurat or Scanpy / Batch Correction and Integration with Seurat or Scanpy / Single Cell</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@aba07fe37e2fbb3fc7e99f7c8ba557b265433ce9",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Batch Correction and Integration with Seurat or Scanpy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-07-09 13:34:38 +0000">
+<meta name="DC.creator" content="Marisa Loach"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Single Cell / Batch Correction and Integration with Seurat or Scanpy / Hands-on: Batch Correction and Integration with Seurat or Scanpy">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/single-cell/tutorials/scrna_batch_correction/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Batch Correction and Integration with Seurat or Scanpy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-07-09 13:34:38 +0000",
+  "datePublished": "2026-07-09 13:34:38 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+      "name": "BioFAIR",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://biofair.uk/"
+    }
+  ],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!).\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "abstract": "Single cell analyses can be complex. We may have data from different experimental batches, perhaps because we ran our experiments at different times, in different labs, or using different sequencing platforms. Sometimes we might want to combine multiple datasets, for example if we want to compare our own experimental data to a similar public dataset.",
+  "learningResourceType": "e-learning",
+  "name": "Batch Correction and Integration with Seurat or Scanpy",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Understand what batch correction and integration are and how they are different\n- Know when to perform batch correction or integration on single cell data\n- Perform batch correction or integration using either the Scanpy or Seurat pipelines",
+  "keywords": [
+    "Single Cell",
+    "10x"
+  ],
+  "description": "## Abstract\n\nSingle cell analyses can be complex. We may have data from different experimental batches, perhaps because we ran our experiments at different times, in different labs, or using different sequencing platforms. Sometimes we might want to combine multiple datasets, for example if we want to compare our own experimental data to a similar public dataset.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What is the difference between batch correction and integration?\n - How can we perform batch correction or integration using the Scanpy and Seurat pipelines?\n\n\n## Learning Objectives\n\n- Understand what batch correction and integration are and how they are different\n- Know when to perform batch correction or integration on single cell data\n- Perform batch correction or integration using either the Scanpy or Seurat pipelines\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/slides.html",
+      "name": "Clustering 3K PBMCs with Scanpy",
+      "description": "Slides for 'Clustering 3K PBMCs with Scanpy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html",
+      "name": "Clustering 3K PBMCs with Scanpy",
+      "description": "Hands-on for 'Clustering 3K PBMCs with Scanpy' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html",
+      "name": "Clustering 3K PBMCs with Seurat",
+      "description": "Hands-on for 'Clustering 3K PBMCs with Seurat' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/",
+      "name": "Marisa Loach",
+      "image": "https://avatars.githubusercontent.com/MarisaJL",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ou/",
+          "name": "The Open University",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.open.ac.uk"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6979-6930",
+      "@id": "https://orcid.org/0000-0001-6979-6930"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Senior Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ou/",
+          "name": "The Open University",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.open.ac.uk"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "@id": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "@id": "https://orcid.org/0000-0002-5857-1477"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!).\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/20574474",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna_batch_correction/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Batch Correction and Integration with Seurat or Scanpy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/MarisaJL?s=36" alt="Marisa Loach avatar" width="36" class="avatar" />
+    Marisa Loach</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is the difference between batch correction and integration?</p>
+</li>
+        
+        <li><p>How can we perform batch correction or integration using the Scanpy and Seurat pipelines?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand what batch correction and integration are and how they are different</p>
+</li>
+        
+        <li><p>Know when to perform batch correction or integration on single cell data</p>
+</li>
+        
+        <li><p>Perform batch correction or integration using either the Scanpy or Seurat pipelines</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Clustering 3K PBMCs with Scanpy</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Clustering 3K PBMCs with Scanpy</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Clustering 3K PBMCs with Seurat</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/20574474">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna_batch_correction/workflows/" title="Batch Correction and Integration with Seurat or Scanpy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/u/marisa_jl/h/batch-correction--integration-with-seurat---answer-key">
+              Using Seurat
+              
+              <br/><span class="text-muted">2025-01-21</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main)
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 9, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Single cell analyses can be complex. We may have data from different experimental batches, perhaps because we ran our experiments at different times, in different labs, or using different sequencing platforms. Sometimes we might want to combine multiple datasets, for example if we want to compare our own experimental data to a similar public dataset.</p>
+
+<p>Running different batches or combined datasets through a clustering pipeline like Scanpy or Seurat without any pre-processing may not yield useful results. This is because clustering works by identifying genes with the largest differences in expression and grouping cells that share similar expression patterns. When data comes from multiple experimental batches or studies, however, the largest sources of variation often reflect technical differences between batches rather than the biology of interest like cell type. As a result, clusters may end up capturing batch or dataset identity rather than anything biologically meaningful.</p>
+
+<p>To look beyond these technical differences, we can perform batch correction or integration. Both Scanpy and Seurat include tools for correcting differences between experimental batches and integrating datasets, and in practice we use the same tools for both. In this tutorial, you will learn how to use these tools in either pipeline. The choice of Scanpy or Seurat is yours.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>This tutorial is based on the <a href="https://satijalab.org/seurat/articles/integration_introduction">Introduction to scRNA-seq integration</a> and <a href="https://satijalab.org/seurat/articles/seurat5_integration">Integrative analysis in Seurat v5</a> tutorials.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#important-tips-for-easier-analysis" id="markdown-toc-important-tips-for-easier-analysis">Important tips for easier analysis</a></li>
+  <li><a href="#batch-correction-or-integration" id="markdown-toc-batch-correction-or-integration">Batch Correction or Integration?</a></li>
+  <li><a href="#scanpy-or-seurat" id="markdown-toc-scanpy-or-seurat">Scanpy or Seurat?</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#clustering-without-batch-correction" id="markdown-toc-clustering-without-batch-correction">Clustering without Batch Correction</a></li>
+  <li><a href="#clustering-with-batch-correction" id="markdown-toc-clustering-with-batch-correction">Clustering with Batch Correction</a></li>
+  <li><a href="#comparing-the-results" id="markdown-toc-comparing-the-results">Comparing the Results</a></li>
+  <li><a href="#checking-the-clusters-are-biologically-meaningful" id="markdown-toc-checking-the-clusters-are-biologically-meaningful">Checking the Clusters are Biologically Meaningful</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-use-our-single-cell-omics-lab"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-our-single-cell-omics-lab" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Use our Single Cell Omics Lab</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Did you know we have a unique Single Cell Omics Lab with all our single cell tools highlighted to make it easier to use on Galaxy? We recommend this site for all your single cell analysis needs, particularly for newer users.</p>   <p>The Single Cell Omics Lab is a different view of the underlying Galaxy server that organises tools and resources better for single-cell users! It also provides a platform for communities to engage and connect; distribute more targeted news and events; and highlight community-specific funding sources.</p>   <p>Try it out!</p>   <ul>   <li><i class="fa fa-tv" aria-hidden="true"></i><span class="visually-hidden">subdomain</span> <a href="https://singlecell.usegalaxy.eu">Europe: Single Cell Omics Lab</a></li>   <li><i class="fa fa-tv" aria-hidden="true"></i><span class="visually-hidden">subdomain</span> <a href="https://singlecell.usegalaxy.org">USA: Single Cell Omics Lab</a></li>   <li><i class="fa fa-tv" aria-hidden="true"></i><span class="visually-hidden">subdomain</span> <a href="https://singlecell.usegalaxy.org.au">Australia: Single Cell Omics Lab</a></li> </ul> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using tutorial mode</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-troubleshooting-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-troubleshooting-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Troubleshooting errors</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When something goes wrong in Galaxy, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your Galaxy errors.</p>   <ol>   <li><strong>Expand</strong> the red history dataset by clicking on it.     <ul>       <li>Sometimes you can already see an error message here</li>     </ul>   </li>   <li>     <p><strong>View the error message</strong> by clicking on the <strong>bug icon</strong> <i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span></p>   </li>   <li><strong>Check the logs.</strong> Output (stdout) and error logs (stderr) of the tool are available:     <ul>       <li>Expand the history item</li>       <li>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon</li>       <li>Scroll down to the <strong>Job Information</strong> section to view the 2 logs:         <ul>           <li>Tool Standard Output</li>           <li>Tool Standard Error</li>         </ul>       </li>       <li>For more information about specific tool errors, please see the <a href="/training-material/faqs/galaxy/index.html#troubleshooting">Troubleshooting section</a></li>     </ul>   </li>   <li><strong>Submit a bug report!</strong> If you are still unsure what the problem is.     <ul>       <li>Click on the bug icon <i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span></li>       <li>Write down any information you think might help solve the problem         <ul>           <li>See <a href="/training-material/faqs/galaxy/analysis_troubleshooting_reporting.html">this FAQ</a> on how to write good bug reports</li>         </ul>       </li>       <li>Click <strong><i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span> Report</strong> button</li>     </ul>   </li>   <li><strong>Ask for help!</strong>     <ul>       <li>Where?         <ul>           <li>In the <a href="http://gxy.io/gtn-slack">User community chatspace in Slack</a> in our <a href="https://gtnsmrgsbord.slack.com/archives/C06PBRR40D7">#single-cell-users</a> channel</li>           <li>In the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Channel</a></li>           <li>In the <a href="https://gitter.im/galaxyproject/Lobby">Galaxy Matrix Channel</a></li>           <li>Browse the <a href="https://help.galaxyproject.org/">Galaxy Help Forum</a> to see if others have encountered the same problem before (or post your question).</li>         </ul>       </li>       <li>When asking for help, it is useful to <a href="/training-material/faqs/galaxy/histories_sharing.html">share a link to your history</a></li>     </ul>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="batch-correction-or-integration">Batch Correction or Integration?</h1>
+
+<p>We will often need to perform batch correction or integration when working with different experimental batches, donors, conditions, or datasets. We need to look beyond the technical differences between them and batch correction or integration are the techniques we use to do this. Both work by identifying cell subpopulations that are shared across groups, effectively matching cells of similar types or states.</p>
+
+<p>The terms batch correction and integration are closely related and are often used interchangeably, since they refer to the same underlying process and use the same tools in the same way. The distinction is mainly one of context: batch correction typically refers to removing unwanted technical variation between groups from a single study, such as different experimental batches, while integration refers to aligning cell populations across separate datasets from multiple studies.</p>
+
+<p>In this tutorial, you can choose whether you want to use the Scanpy or Seurat pipelines for clustering and batch correction. Scanpy and Seurat’s integration tools will create a dimensional reduction that captures the shared sources of variation across the batches or datasets. The dimensional reduction can be used to find clusters or produce visualisations such as UMAP.</p>
+
+<h1 id="scanpy-or-seurat">Scanpy or Seurat?</h1>
+
+<p>Scanpy and Seurat are two of the most commonly used pipelines for analysing single cell data. Both include tools for preprocessing, dimensional reduction (such as PCA), neighbourhood graph construction, and clustering. Clustering is often a key goal in single cell analysis, as it groups cells with similar expression profiles. These groups frequently correspond to specific cell types or states, making the data easier to interpret and understand.</p>
+
+<p>Although both pipelines follow the same basic steps, small differences in how those steps are implemented mean results can vary slightly depending on your choice. Broadly speaking, though, you should reach the same conclusions either way.</p>
+
+<p>The main difference between these two pipelines is that Scanpy is written for Python while Seurat is written for R. If we were working in a Python or R environment, then we would need to choose the appropriate pipeline. However, since we’re working on Galaxy, we’re free to choose either set of tools.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Choose the single cell pipeline you want to use.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Scanpy" onclick="cyoaChoice('Scanpy', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Scanpy</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Seurat" onclick="cyoaChoice('Seurat', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Seurat</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Scanpy", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Scanpy">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Data Upload</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial</p>
+      </li>
+      <li>
+        <p>Import the files from <a href="https://zenodo.org/records/20574474">Zenodo</a> or from the shared data library</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20574474/files/Input_Anndata.h5ad
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Seurat">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Data Upload</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial</p>
+      </li>
+      <li>
+        <p>Import the files from <a href="https://zenodo.org/records/20574474">Zenodo</a> or from the shared data library</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20574474/files/Input_SeuratObject%20.rds
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">rds</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<p>You should now have either an AnnData or SeuratObject dataset in your history. Both datasets contain the same information, but in the different formats required by the Scanpy and Seurat pipelines.</p>
+
+<p>We are using a single cell dataset of human Peripheral Blood Mononuclear Cells (PBMCs) that was also used in Seurat’s <a href="https://satijalab.org/seurat/articles/seurat5_integration">Integrative analysis in Seurat v5</a> tutorial. The original study compared the results from seven different single cell and single nuclear techniques <span class="citation"><a href="#Ding2020">Ding <i>et al.</i> 2020</a></span>.</p>
+
+<p>Let’s take a look at our data before we begin the analysis to see whether we might need to perform batch correction or integration. While batches or combined datasets often do require correction, we should examine the data first to check whether it is necessary.</p>
+
+<p>Correcting batch effects is important, but we also need to be careful not to overcorrect. Applying batch correction or integration when it isn’t needed, or overcorrecting when it is, risks removing the very biological differences we are interested in. Either way, it is important to interpret results carefully to determine whether they reflect true biological variation or technical artefacts.</p>
+
+<div class="Scanpy">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspect the Data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.11.4+galaxy3)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many cells and genes are in this dataset?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>If we click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the new output in our history, we can see that this dataset contains information about the expression of 33,694 vars (genes) in 10,434 obs (cells).</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Now we’ll take a closer look at the metadata describing how the dataset was produced. It can tell us whether the dataset is made up of different batches that might require correction.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-the-cell-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspect the Cell Metadata</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.11.4+galaxy3)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="Count1" title="Count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">obs</code> (output of <strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">c['11']</code></li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+</div>
+
+<div class="Seurat">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-the-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspect the Data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0" title="Seurat Data Management tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Data Management</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Inspect Seurat Object</code>
+            <ul>
+              <li><em>“Display information about”</em>: <code class="language-plaintext highlighter-rouge">General</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many cells and genes are in this dataset?</li>
+      <li>How many layers are in this dataset?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>If we click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the new output in our history, we can see that this dataset contains information about the expression of 33,694 features (genes) in 10,434 samples (cells).</li>
+        <li>Data in SeuratObjects are stored in layers. In this case, we only have one layer called <code class="language-plaintext highlighter-rouge">counts</code>. The <code class="language-plaintext highlighter-rouge">counts</code> layer is the raw data that we’ll be using in this tutorial.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Now we’ll take a closer look at the metadata describing how the dataset was produced. It can tell us whether the dataset is made up of different batches that might require correction.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-the-cell-metadata-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspect the Cell Metadata</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0" title="Seurat Data Management tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Data Management</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Inspect Seurat Object</code>
+            <ul>
+              <li><em>“Display information about”</em>: <code class="language-plaintext highlighter-rouge">Cell Metadata</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">c11</code> This is the 11th column in your table, which contains the <code class="language-plaintext highlighter-rouge">Method</code> metadata</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+</div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the <code class="language-plaintext highlighter-rouge">Method</code> column represent in the cell metadata?</li>
+    <li>Do you think batch correction or integration is needed for this analysis?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The dataset that we’re using comes from a study that compared different single cell techniques. The <code class="language-plaintext highlighter-rouge">Method</code> column tells us which technique was used on each cell. Use the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to look at both outputs. The first one shows the metadata for all cells, with <code class="language-plaintext highlighter-rouge">Method</code> in column 11. The second output shows how many times each method appeared in this column. We can see there are nine different <code class="language-plaintext highlighter-rouge">Method</code> batches (as well as the <code class="language-plaintext highlighter-rouge">Method</code> heading which the tool has counted too!). Three of the batches used the same 10X Chromium (v2) method, but they appear to have been processed separately as they have been placed in different batches. We have nine entires in the <code class="language-plaintext highlighter-rouge">Method</code> column that represent nine batches using seven different experimental techniuques.</li>
+      <li>Each experimental technique can be considered as its own experimental batch, as can the three different batches using the 10X Chromium (v2) method. Each of these batches was processed independently, which by itself can be enough to require batch correction, even if the same experimental protocol is used. Batches can vary simply because they were processed at different times or by different people in the same lab! In this case, we have an even stronger reason to believe that these batches will differ - we know that these batches were produced using different techniques. It seems likely that we’ll need to perform batch correction, but we’ll check what happen when we cluster without correction first. Batches often require correction, but we should always examine the data first to be sure. If we decide that correction is needed, we would consider this to be batch correction rather than integration because these data all came from the same original study.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>The cell metadata is any information about the cells that the original authors have included with the dataset. As well as the cell barcode or identifier for each individual cell, the metadata will usually include information such as which donor or sample the cell came from, or which experimental group it was in. Sometimes, this metadata will include a lot of useful details, such as demographic information about human donors. This information can help us to better understand our results.</p>
+</blockquote>
+
+<h1 id="clustering-without-batch-correction">Clustering without Batch Correction</h1>
+
+<p>We suspect that batch correction will be needed because of the different technologies used to construct this dataset, but we’ll try clustering without any correction first. It is considered good practice to perform this uncorrected clustering to confirm whether batch correction is truly needed. We don’t want to perform a correction unless there are technical differences between batches that need to be removed, otherwise we risk overcorrecting our data and eliminating the biological differences we’re interested in. We will check whether we need to correct on the basis of <code class="language-plaintext highlighter-rouge">Method</code>. Comparing the results we get now with those we’ll get after batch correction should also help us to understand what batch correction is doing to our single cell data.</p>
+
+<p>Since our focus is batch correction/integration, we won’t go into too much detail on the clustering process. We just want to see how the integration steps fit into the main clustering pipeline and understand the impact it has on our data. If you aren’t already familiar with this process, then you can learn more about clustering using the <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">Scanpy</a> or <a href="/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html">Seurat</a> pipelines from the other single cell tutorials available on the GTN.</p>
+
+<div class="Scanpy">
+
+  <p>We’ll follow the default Scanpy pipeline here, except that we’ll use <code class="language-plaintext highlighter-rouge">30</code> PCs to build the neighborhood graph and cluster with a resolution of <code class="language-plaintext highlighter-rouge">2</code> as these were the parameters used in <a href="https://satijalab.org/seurat/articles/seurat5_integration">the original Seurat version of this tutorial</a>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-cluster-without-batch-correction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Cluster without Batch Correction</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0" title="Scanpy normalize tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy normalize</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          <li><em>“Method used for normalization”</em>: <code class="language-plaintext highlighter-rouge">Normalize counts per cell, using 'pp.normalize_total'</code>
+            <ul>
+              <li><em>“Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>We will use the output from <code class="language-plaintext highlighter-rouge">Scanpy normalize</code> in the  following section when we perform batch correction.</p>
+
+          <p>If you’re already familiar with the Scanpy clustering pipeline and you just want to try using the  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Scanpy remove confounders</strong> tools, then you can skip ahead to the <strong>Clustering after Integration</strong> step now. In a real analysis, it would be best to complete the clustering without batch correction first to check if it is needed.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0" title="Scanpy Inspect and manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Inspect and manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy normalize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Logarithmize the data matrix, using 'pp.log1p'</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0" title="Scanpy filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'</code>
+            <ul>
+              <li><em>“Choose the flavor for identifying highly variable genes”</em>: <code class="language-plaintext highlighter-rouge">Seurat</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0" title="Scanpy Inspect and manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Inspect and manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Scale data to unit variance and zero mean, using 'pp.scale'</code>
+            <ul>
+              <li><em>“Maximum value”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'</code>
+            <ul>
+              <li><em>“Type of PCA?”</em>: <code class="language-plaintext highlighter-rouge">Full PCA</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0" title="Scanpy Inspect and manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Inspect and manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Compute a neighborhood graph of observations, using 'pp.neighbors'</code>
+            <ul>
+              <li><em>“Number of PCs to use”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Cluster cells into subgroups, using 'tl.louvain'</code>
+            <ul>
+              <li><em>“Flavor for the clustering”</em>: <code class="language-plaintext highlighter-rouge">vtraag (much more powerful than igraph)</code>
+                <ul>
+                  <li><em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">2.0</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Embed the neighborhood graph using UMAP, using 'tl.umap'</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now let’s take a look at our results. We’ll plot one version of the UMAP showing the clusters we’ve just identified and another coloured by <code class="language-plaintext highlighter-rouge">Method</code> to see if that might be influencing our results.</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-interactive-visualisations"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-interactive-visualisations" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Interactive Visualisations</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>Select <code class="language-plaintext highlighter-rouge">Yes</code> for <code class="language-plaintext highlighter-rouge">Make an interactive plot?</code> if you want to explore the data further. You’ll be able to colour the interactive plot by <code class="language-plaintext highlighter-rouge">Method</code> or any of the other metadata categories.</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-the-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Visualise the Results</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0" title="Scanpy plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
+            <ul>
+              <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">louvain,Method</code></li>
+              <li><em>“Show edges?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/UMAP_before_Scanpy.png" alt="Two UMAP plots showing many small and fragmented clusters of cells. The first UMAP is coloured into 47 clusters. The second UMAP shows many clusters as a single colour of cells analysed with the same method." width="1565" height="467" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/UMAP_before_Scanpy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> UMAPs before batch correction integration coloured by A. louvain (cluster) and B. Method</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many clusters did we identify?</li>
+      <li>Are the batches well mixed?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The first plot is coloured by cluster. We can see there are 47 clusters (Scanpy numbers the clusters starting from 0). That’s a lot - this is partly because we used a relatively high clustering resolution, but these fragmented clusters could also be a sign that something has gone wrong with our analysis.</li>
+        <li>The second plot shows the UMAP coloured by <code class="language-plaintext highlighter-rouge">Method</code>. Each colour here represents cells that were sequenced by a different experimental technique. We can see lots of clusters and patches of cells that are only made up of one colour - this suggests that our cells are grouping together by batch rather than a biologically relevant characteristic such as cell type. This is a problem as it means we’re not learning anything new about our cells since we already knew which batches they were in! If we want to find out something more interesting, we’ll need to get rid of the technical differences between the batches.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<div class="Seurat">
+
+  <p>In the Seurat pipeline, we will split each of our batches into its own ‘layer’ within the SeuratObject before we begin the analysis. We could do the same with each dataset if we were integrating multiple datasets together. Splitting will affect some aspects of preprocessing but it also sets up the dataset for the integration tools, which expect each batch or dataset to be in its own layer.</p>
+
+  <p>Splitting our data into layers means that the Seurat preprocessing tools can work on each layer separately. Seurat can treat each layer as if it were a separate dataset during preprocessing. Each layer (in this case, each of our batches) will be normalised independently. We’ll also identify the highly variable genes within each batch, rather than across the whole dataset. Seurat will then create a single consensus list of highly variable genes to use for the whole dataset.</p>
+
+  <p>The other tools in the Seurat pipeline, such as <code class="language-plaintext highlighter-rouge">RunPCA</code> and <code class="language-plaintext highlighter-rouge">FindClusters</code> will still work on the entire dataset.</p>
+
+  <p>Splitting the batches into separate layers within our SeuratObject can act as a very mild form of batch correction. The separate preprocessing of each layer can reduce some of the technical differences between the batches. We have to wait for the results to see if this has been enough to eliminate these differences or if full batch correction is still needed.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-split-the-batches-into-layers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Split the Batches into Layers</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0" title="Seurat Integrate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Integrate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Split data into layers using 'split'</code>
+            <ul>
+              <li><em>“Factor or group to use to split data”</em>: <code class="language-plaintext highlighter-rouge">Method</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>We are splitting our data on <code class="language-plaintext highlighter-rouge">Method</code> as this is the column in our metadata that represents our batches. Each of the methods listed in this column will be split into its own layer.</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Let’s take a look to see what we’ve done to our data.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-the-data-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspect the Data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0" title="Seurat Data Management tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Data Management</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Integrate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Inspect Seurat Object</code>
+            <ul>
+              <li><em>“Display information about”</em>: <code class="language-plaintext highlighter-rouge">General</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many layers do we now have in our dataset?</li>
+      <li>What do these layers represent?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>We can see that there are now 9 layers in our SeuratObject.</li>
+        <li>We started out with one layer of raw data, called <code class="language-plaintext highlighter-rouge">counts</code>. That layer has now been split up according to <code class="language-plaintext highlighter-rouge">Method</code>. We now have nine <code class="language-plaintext highlighter-rouge">counts</code> layers. Each layer represents one of the batches named in the <code class="language-plaintext highlighter-rouge">Method</code> column of the cell metadata. We can see the names of the methods in the layer names. For example, the <code class="language-plaintext highlighter-rouge">counts.Drop-seq</code> layer contains the raw counts produced using the Drop-seq technique. Seven different methods were used in this study, but one of them was applied to three different batches - you should be able to see three layers with <code class="language-plaintext highlighter-rouge">Chromium_v2</code> in their names.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Now that we have split our data so that each batch is in its own layer, we will cluster it. We won’t perform any batch correction, so we’ll see if the differences in <code class="language-plaintext highlighter-rouge">Method</code> are causing any problems that might require correction.</p>
+
+  <p>We’ll follow the default Seurat pipeline here, except that we’ll use <code class="language-plaintext highlighter-rouge">30</code> PCs to build the neighborhood graph and cluster with a resolution of <code class="language-plaintext highlighter-rouge">2</code> as these were the parameters used in <a href="https://satijalab.org/seurat/articles/seurat5_integration">the original Seurat version of this tutorial</a>. We’ll also give our clusters and UMAP more recognisable names as we’ll be running these tools again later, after batch correction.</p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+    <p>Seurat has another option for preprocessing - rather than use the three separate functions we’re using in this tutorial, you can use a single function called <code class="language-plaintext highlighter-rouge">SCTransform</code> to preform normalisation, identification of variable genes, and scaling all in one go. You will find this option on Galaxy’s <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Seurat Preprocessing</strong> tool.</p>
+
+    <p>If you use <code class="language-plaintext highlighter-rouge">SCTransform</code> for preprocessing, then you’ll need to choose <code class="language-plaintext highlighter-rouge">Yes</code> for <code class="language-plaintext highlighter-rouge">Use SCT as Normalization Method</code> when you run <code class="language-plaintext highlighter-rouge">IntegrateLayers</code>. The <code class="language-plaintext highlighter-rouge">SCTransform</code> normalises the data in its own way, so we just need to let the tool know what to expect!</p>
+
+    <p>The next step after identifying clusters would usually be to look for marker genes that are differentially expressed between clusters. If you perform integration/batch correction after using <code class="language-plaintext highlighter-rouge">SCTransform</code>, then you will need to run the <code class="language-plaintext highlighter-rouge">PrepSCTFindMarkers</code> function before using tools such as <code class="language-plaintext highlighter-rouge">FindMarkers</code>. You’ll find this in the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Seurat Integrate</strong> tool.</p>
+
+    <p>The rest of the workflow will be the same as shown in this tutorial, but you will end up with slightly different results because <code class="language-plaintext highlighter-rouge">SCTransform</code> handles preprocessing in a different way than the three separate tools. If you want to learn more about these differences then you can follow the SCTransform route in the <a href="/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html">Clustering 3k PBMCs with Seurat</a> tutorial.</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-cluster-without-batch-correction-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Cluster without Batch Correction</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0" title="Seurat Preprocessing tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Preprocessing</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Integrate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Normalize with 'NormalizeData'</code>
+            <ul>
+              <li><em>“Method for normalization”</em>: <code class="language-plaintext highlighter-rouge">LogNormalize</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0" title="Seurat Preprocessing tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Preprocessing</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Identify highly variable genes with 'FindVariableFeatures'</code>
+            <ul>
+              <li><em>“Method to select variable features”</em>: <code class="language-plaintext highlighter-rouge">vst</code></li>
+              <li><em>“Output list of most variable features”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0" title="Seurat Preprocessing tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Preprocessing</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Scale and regress with 'ScaleData'</code>
+            <ul>
+              <li><em>“Regress out a variable”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              <li><em>“Features to scale”</em>: <code class="language-plaintext highlighter-rouge">Variable Features</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0" title="Seurat Run Dimensional Reduction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Run Dimensional Reduction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Run a PCA dimensionality reduction using 'RunPCA'</code></li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>We will use the output from <code class="language-plaintext highlighter-rouge">RunPCA</code> in the  following section when we perform batch correction.</p>
+
+          <p>If you’re already familiar with the Seurat clustering pipeline and you just want to try using the  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Seurat Integrate</strong> tools, then you can skip ahead to the <strong>Clustering after Integration</strong> step now. In a real analysis, it would be best to complete the clustering without batch correction first to check if it is needed.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0" title="Seurat Find Clusters tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Find Clusters</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Compute nearest neighbors with 'FindNeighbors'</code>
+            <ul>
+              <li><em>“Number of dimensions from reduction to use as input”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0" title="Seurat Find Clusters tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Find Clusters</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Find Clusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Identify cell clusters with 'FindClusters'</code>
+            <ul>
+              <li><em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">2.0</code></li>
+              <li><em>“Algorithm for modularity optimization”</em>: <code class="language-plaintext highlighter-rouge">1. Original Louvain</code></li>
+              <li><em>“Name for output clusters”</em>: <code class="language-plaintext highlighter-rouge">unintegrated_clusters</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="warning">
+          <div class="box-title warning-title" id="warning"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning</div>
+
+          <p>Make sure that you change the default name for the clusters to <code class="language-plaintext highlighter-rouge">unintegrated_clusters</code>!</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0" title="Seurat Run Dimensional Reduction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Run Dimensional Reduction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Find Clusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Run a UMAP dimensional reduction using 'RunUMAP'</code>
+            <ul>
+              <li><em>“UMAP implementation to run”</em>: <code class="language-plaintext highlighter-rouge">uwot</code></li>
+              <li><em>“Run UMAP on dimensions, features, graph or KNN output”</em>: <code class="language-plaintext highlighter-rouge">dims</code>
+                <ul>
+                  <li><em>“Number of dimensions from reduction to use as input”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+                </ul>
+              </li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Name for dimensional reduction”</em>: <code class="language-plaintext highlighter-rouge">umap.unintegrated</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="warning">
+          <div class="box-title warning-title" id="warning-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning</div>
+
+          <p>Make sure that you change the default name for the UMAP results to <code class="language-plaintext highlighter-rouge">umap.unintegrated</code>!</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now let’s take a look at our results. We’ll first plot a UMAP showing the clusters we’ve just identified. Then, we will colour this plot in by <code class="language-plaintext highlighter-rouge">Method</code> to see if that might be influencing our results.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-the-results-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Visualise the Results</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0" title="Seurat Visualize tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Visualize</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Visualize Dimensional Reduction with 'DimPlot'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">umap.unintegrated</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0" title="Seurat Visualize tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Visualize</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Visualize Dimensional Reduction with 'DimPlot'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">umap.unintegrated</code></li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Factor to group cells by”</em>: <code class="language-plaintext highlighter-rouge">Method</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/UMAP_Before_Seurat.png" alt="Two UMAP plots showing many small and fragmented clusters of cells. Image A is coloured into 48 clusters. Image B shows many clusters as a single colour of cells analysed with the same method." width="4584" height="2368" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/UMAP_Before_Seurat.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> UMAP before batch correction integration coloured by A: cluster, and B: Method</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many clusters did we identify?</li>
+      <li>Are the batches well mixed?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The first plot is coloured by cluster. We can see there are 48 clusters (Seurat numbers the clusters starting from 0). That’s a lot - this is partly because we used a relatively high clustering resolution, but these fragmented clusters could also be a sign that something has gone wrong with our analysis.</li>
+        <li>The second plot shows the UMAP coloured by <code class="language-plaintext highlighter-rouge">Method</code>. Each colour here represents cells that were sequenced by a different experimental technique. We can see lots of clusters and patches of cells that are only made up of one colour - this suggests that our cells are grouping together by batch rather than a biologically relevant characteristic such as cell type. This is a problem as it means we’re not learning anything new about our cells since we already knew which batches they were in! If we want to find out something more interesting, we’ll need to get rid of the technical differences between the batches.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<h1 id="clustering-with-batch-correction">Clustering with Batch Correction</h1>
+
+<p>It looks like we do need to perform batch correction on our dataset. The Scanpy and Seurat pipelines both provide tools that can reduce the technical differences between batches. If we were combining multiple datasets, we could use the same tools in the same way to perform integration (i.e. to correct for technical differences between the datasets).</p>
+
+<div class="Scanpy">
+
+  <p>Two simple changes will enable us to perform batch corrections within the Scanpy pipeline.</p>
+
+  <p>First, we will go back to the step where we identified Highly Variable Genes (HVGs). This time, we will add in <code class="language-plaintext highlighter-rouge">Method</code> as the batch key. Now, the tool will select the most variable genes within each batch before merging them into a shared list. Doing this can prevent selection of batch-specific genes and acts as a lightweight form of batch correction.</p>
+
+  <p>Secondly, we will add in one more step using a tool called Harmony. We will use Harmony in between performing the PCA and constructing the neighborhood graph. Harmony will take the principal components and adjust them to remove batch effects. It will create a corrected low-dimensional representation that we can use instead of the uncorrected PCA reduction. We will then use <code class="language-plaintext highlighter-rouge">X_pca_harmony</code> instead of the PCA when we construct the neighbourhood graph.</p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+    <p><span><strong>Scanpy remove confounders</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> inclludes several methods for batch correction/integration, which all work in different ways. You might want to experiment by using different methods to see how they affect the results. When you are working on your own data, it can be a good idea to try a few different integration methods to see which one produces the best results. The best integration or batch correction would be the one that eliminates the most of the technical differences between datasets or batches while producing biologically meaningful results. If we end up with completely unexpected results rather than clusters that match up well with known cell types, then we know that something has gone wrong!</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-recluster-with-batch-correction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Recluster with Batch Correction</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0" title="Scanpy filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'</code>
+            <ul>
+              <li><em>“Choose the flavor for identifying highly variable genes”</em>: <code class="language-plaintext highlighter-rouge">Seurat</code></li>
+              <li><em>“Specify the batch key”</em>: <code class="language-plaintext highlighter-rouge">Method</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-description"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  short description</div>
+
+          <p>We will specify <code class="language-plaintext highlighter-rouge">Method</code> as the batch key. This means that Highly Variable Genes will be identified within each batch and then combined.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0" title="Scanpy Inspect and manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Inspect and manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Scale data to unit variance and zero mean, using 'pp.scale'</code>
+            <ul>
+              <li><em>“Maximum value”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'</code>
+            <ul>
+              <li><em>“Type of PCA?”</em>: <code class="language-plaintext highlighter-rouge">Full PCA</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0" title="Scanpy remove confounders tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy remove confounders</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Integrate multiple single-cell experiments with Harmony, using 'external.pp.harmony_integrate'</code>
+            <ul>
+              <li><em>“The name of the column in adata.obs that differentiates among experiments/batches”</em>: <code class="language-plaintext highlighter-rouge">Method</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0" title="Scanpy Inspect and manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Inspect and manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy remove confounders</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Compute a neighborhood graph of observations, using 'pp.neighbors'</code>
+            <ul>
+              <li><em>“Number of PCs to use”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+              <li><em>“Use the indicated representation”</em>: <code class="language-plaintext highlighter-rouge">X_pca_harmony</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>We will use the corrected embedding, ‘X_pca_harmony’ to calculate the neighborhood graph. Make sure to enter this as the representation to use.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Cluster cells into subgroups, using 'tl.louvain'</code>
+            <ul>
+              <li><em>“Flavor for the clustering”</em>: <code class="language-plaintext highlighter-rouge">vtraag (much more powerful than igraph)</code>
+                <ul>
+                  <li><em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">2.0</code></li>
+                </ul>
+              </li>
+              <li><em>“Key under which to add the cluster labels”</em>: <code class="language-plaintext highlighter-rouge">louvain_integrated</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-8"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>We’ll use a different name for this clustering so that we don’t get confused. Enter ‘louvain_integrated’ as the key to add the cluster labels under. We’ll use this when we plot our integrated clusters.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0" title="Scanpy cluster, embed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy cluster, embed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Embed the neighborhood graph using UMAP, using 'tl.umap'</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now let’s visualise the results again to see if the batch correction has worked. As before, we’ll make one plot coloured by cluster and another coloured by batch (<code class="language-plaintext highlighter-rouge">Method</code>). We’re hoping that the batches in that second plot will be more mixed together instead of forming separate groups like they did before batch correction.</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-interactive-visualisations-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-interactive-visualisations-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Interactive Visualisations</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>Select <code class="language-plaintext highlighter-rouge">Yes</code> for <code class="language-plaintext highlighter-rouge">Make an interactive plot?</code> if you want to explore the data further. You’ll be able to colour the interactive plot by <code class="language-plaintext highlighter-rouge">Method</code> or any of the other metadata categories.</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-the-results-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Visualise the Results</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0" title="Scanpy plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11.5+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Scanpy cluster, embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
+            <ul>
+              <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">louvain_integrated,Method</code></li>
+              <li><em>“Show edges?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-description-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  short description</div>
+
+          <p>Make sure to use ‘louvain_integrated’ rather than ‘louvain’ for the cluster annotation to plot. This is the name we used for our integrated clusters.</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/UMAP_after_Scanpy.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. The first UMAP is coloured as 25 clusters. The second UMAP shows a mix of colours across all the clusters." width="1480" height="477" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/UMAP_after_Scanpy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> UMAP after batch correction coloured by A. louvain_integrated (cluster) and B. Method</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many clusters did we identify?</li>
+      <li>How well mixed are the batches?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The first plot shows 25 clusters (remember that Scanpy starts from cluster 0!). Although the high resolution means we still have plenty of clusters, the batch correction has reduced the number. The clusters also look less fragmented than they did before. The reduced number of clusters doesn’t necessarily mean the analysis is better, but removing the batch-specific structure has allowed biologically similar cells from different batches to cluster together.</li>
+        <li>When we colour in the plot by <code class="language-plaintext highlighter-rouge">Method</code>, we can see that all the colours are mixed together across all of the clusters. We don’t have any clusters that contain only one colour. The batch correction has successfully removed the differences between the batches so that they’re no longer dominating the results.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<div class="Seurat">
+
+  <p>We will now run Seurat’s batch correction tool - it’s called <code class="language-plaintext highlighter-rouge">IntegrateLayers</code>, but despite the name we can use the same tool to address differences between batches as we would for integrating datasets.</p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-9"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+    <p><span><strong>Seurat Integrate</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> provides several integration methods, which all perform the integration or batch correction in their own way. You might want to experiment by using different methods to see how they affect the results. When you are working on your own data, it can be a good idea to try a few different integration methods to see which one produces the best results. The best integration or batch correction would be the one that eliminates the most of the technical differences between datasets or batches while producing biologically meaningful results. If we end up with completely unexpected results rather than clusters that match up well with known cell types, then we know that something has gone wrong!</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0" title="Seurat Integrate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Integrate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Apply integration methods with 'IntegrateLayers'</code>
+            <ul>
+              <li><em>“Integration method to use”</em>: <code class="language-plaintext highlighter-rouge">CCA Integration</code></li>
+              <li><em>“Name for new dimensional reduction”</em>: <code class="language-plaintext highlighter-rouge">integrated.cca</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-remember-the-name"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Remember the name</div>
+
+          <p>Make sure you remember the name you’ve used for the new dimensional reduction - we’ll be using this later instead of the PCA we produced previously.</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>It’s good practice to rejoin our layers now, so that those separate layers/batches will end up together. We don’t actually need to do this now (as it won’t affect the clustering results), but it is important if we want to perform downstream analyses such as Differential Expression analysis.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0" title="Seurat Integrate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Integrate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Integrate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Join layers with 'JoinLayers'</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many layers are now in our dataset?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>
+          <p>You might think that we should only have one layer in our dataset now, because we split it into nine layers that we have now rejoined. However, if you use <span><strong>Seurat Data Management</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> to check, you’ll see that we actually have three layers now! This is because the preprocessing functions we ran (normalisation and scaling) created their own layers of data. We still have the original raw <code class="language-plaintext highlighter-rouge">counts</code> layer, but we now have a normalised layer called <code class="language-plaintext highlighter-rouge">data</code> and a scaled one called <code class="language-plaintext highlighter-rouge">scale.data</code> as well.</p>
+
+          <p>In fact, if you run <span><strong>Seurat Data Management</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> on the previous dataset in your history, from before we rejoined the layers, you’ll see that it actually had 19 layers in it - each of the nine <code class="language-plaintext highlighter-rouge">counts</code> layers we split the dataset was normalised into its own <code class="language-plaintext highlighter-rouge">data</code> layer. We then had the <code class="language-plaintext highlighter-rouge">scale.data</code> layer too.</p>
+        </li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Now let’s try clustering our integrated data. We’ll repeat the steps we performed earlier, but this time we’ll be using the dimensional reduction produced by <code class="language-plaintext highlighter-rouge">Integrate Layers</code> instead of the PCA. The clustering will be based on the integrated embedding rather than the original PCA embedding. Let’s also give our clusters and UMAP results some new names to differentiate them from the uncorrected results.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0" title="Seurat Find Clusters tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Find Clusters</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Integrate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Compute nearest neighbors with 'FindNeighbors'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">integrated.cca</code></li>
+              <li><em>“Number of dimensions from reduction to use as input”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-10"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>Make sure to use <code class="language-plaintext highlighter-rouge">integrated.cca</code> as the reduction, not the <code class="language-plaintext highlighter-rouge">pca</code> we made previously.</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0" title="Seurat Find Clusters tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Find Clusters</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Find Clusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Identify cell clusters with 'FindClusters'</code>
+            <ul>
+              <li><em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">2.0</code></li>
+              <li><em>“Algorithm for modularity optimization”</em>: <code class="language-plaintext highlighter-rouge">1. Original Louvain</code></li>
+              <li><em>“Name for output clusters”</em>: <code class="language-plaintext highlighter-rouge">cca_clusters</code></li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-11"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>Make sure that you know what name you used for your clusters as we’ll use this for the UMAP!</p>
+        </blockquote>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0" title="Seurat Run Dimensional Reduction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Run Dimensional Reduction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Find Clusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Run a UMAP dimensional reduction using 'RunUMAP'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">integrated.cca</code></li>
+              <li><em>“UMAP implementation to run”</em>: <code class="language-plaintext highlighter-rouge">uwot</code></li>
+              <li><em>“Run UMAP on dimensions, features, graph or KNN output”</em>: <code class="language-plaintext highlighter-rouge">dims</code>
+                <ul>
+                  <li><em>“Number of dimensions from reduction to use as input”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+                </ul>
+              </li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Name for dimensional reduction”</em>: <code class="language-plaintext highlighter-rouge">umap.cca</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-12"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+          <p>Make sure that you know what name you used for your UMAP results as we’ll use this for the plots!</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Let’s see how the batch correction has changed our results. As before, we’ll make one plot coloured by cluster and then another coloured by batch (<code class="language-plaintext highlighter-rouge">Method</code>). We’re hoping that the batches in that second plot will be more mixed together instead of forming separate groups like they did before batch correction.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-the-results-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Visualise the Results</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0" title="Seurat Visualize tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Visualize</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Visualize Dimensional Reduction with 'DimPlot'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">umap.cca</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0" title="Seurat Visualize tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Visualize</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with the Seurat object”</em>: <code class="language-plaintext highlighter-rouge">rds_out</code> (output of <strong>Seurat Run Dimensional Reduction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Visualize Dimensional Reduction with 'DimPlot'</code>
+            <ul>
+              <li><em>“Name of reduction to use”</em>: <code class="language-plaintext highlighter-rouge">umap.cca</code></li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Factor to group cells by”</em>: <code class="language-plaintext highlighter-rouge">Method</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/UMAP_After_Seurat.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. Image A is coloured as 25 clusters. Image B shows a mix of colours across all the clusters." width="4584" height="2368" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/UMAP_After_Seurat.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> UMAP after batch correction coloured by A. cluster B. Method</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many clusters did we identify?</li>
+      <li>How well mixed are the batches?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The first plot shows 25 clusters (remember that Seurat starts from cluster 0!). Although the high resolution means we still have plenty of clusters, the batch correction has reduced the number. The clusters also look less fragmented than they did before. The reduced number of clusters doesn’t necessarily mean the analysis is better, but removing the batch-specific structure has allowed biologically similar cells from different batches to cluster together.</li>
+        <li>When we colour in the plot by <code class="language-plaintext highlighter-rouge">Method</code>, we can see that all the colours are mixed together across all of the clusters. We don’t have any clusters that contain only one colour. The batch correction has successfully removed the differences between the batches so that they’re no longer dominating the results.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<h1 id="comparing-the-results">Comparing the Results</h1>
+
+<p>Let’s take another look at our UMAPs coloured by <code class="language-plaintext highlighter-rouge">Method</code> to see what the batch correction process has done to our data. In the ‘before’ picture, we can see that the different batches are forming their own clusters or patches in the UMAP plot, with very little mixing between colours. The differences between batches or methods are having a big impact on the clustering, which means that the biological differences we’re interested in are being missed. In the ‘after’ picture, we can see that the colours are all mixed up and the clusters are no longer separating out based on method. We have removed the technical differences between batches, so hopefully these clusters are now based on the biological differences we’re interested in.</p>
+
+<div class="Scanpy">
+
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/Scanpy_before_after.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. Each UMAP is coloured in based on Method. The first shows patches and clusters that are all the same colour or method, with little mixing between colours. The second UMAP shows the colours are well mixed and all clusters include a mixture of multiple colours. " width="1480" height="477" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/Scanpy_before_after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> UMAP coloured by Method A. before and B. after batch correction</figcaption></figure>
+
+</div>
+
+<div class="Seurat">
+
+  <figure id="figure-6" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/Seurat_before_after.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. Each UMAP is coloured in based on Method. The first shows patches and clusters that are all the same colour or method, with little mixing between colours. The second UMAP shows the colours are well mixed and all clusters include a mixture of multiple colours. " width="4584" height="2251" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/Seurat_before_after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> UMAP coloured by Method A. before and B. after batch correction</figcaption></figure>
+
+</div>
+
+<h1 id="checking-the-clusters-are-biologically-meaningful">Checking the Clusters are Biologically Meaningful</h1>
+
+<p>Our plots suggest that the batch correction has successfully brought the different methods together, but this alone is not enough to confirm that it has worked. As always in single cell analysis, we also need to verify that the clusters we have found are biologically meaningful. Scanpy and Seurat will always produce clusters, but it is up to us to evaluate whether those results actually make sense.</p>
+
+<p>In order to do this, we would usually take a closer look at the clusters to work out what they represent, for example by looking for clusters expressing genes that are known to be present in specific cell types. If you’ve worked through the <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">Scanpy</a> or <a href="/training-material/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html">Seurat</a> clustering tutorials then you’ll already have seen how this can be done using the top differentially expressed genes or known markers of gene types. If you haven’t already completed these tutorials then they can tell you more about identifying cell types.</p>
+
+<p>We don’t need to go through this process again now, because we have the annotations provided by the researchers who created this dataset. If you look back at the cell metadata table we created at the beginning of this tutorial, you’ll see there is an annotation called <code class="language-plaintext highlighter-rouge">CellType</code>. We can colour in our UMAPs using this annotation instead of the <code class="language-plaintext highlighter-rouge">Method</code>. If our clusters make biological sense, we should see that these cell types are clumped together because cells of the same type should be close to each other. If the cell types are all blended together across the entire UMAP (as with the methods in our integrated plots) then this would be a sign that something has gone wrong - we want the different methods to be mixed up together, but we’d like the biologically meaningful differences between cell types to be preserved. When we are performing batch correction or integration, there is a risk that we could over-integrate the data, eliminating the biological differences we’re interested in alongside the technical differences we wanted to remove.</p>
+
+<p>You can rerun the UMAP plots yourself if you like, or just take a look at the plots below to see how the integration has grouped together the cells in a biologically meaningful way. The <code class="language-plaintext highlighter-rouge">CellType</code> annotation won’t match up exactly with our clusters (remember we used a high resolution to make lots of clusters!) but they certainly shouldn’t be scattered across the whole plot.</p>
+
+<div class="Scanpy">
+
+  <figure id="figure-7" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/CellType_Scanpy.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. Each UMAP is coloured in based on cell types. The first shows patches of the same cell types appearing in different parts of the plot. The second UMAP shows each colour or cell type is centred in just one cluster or area of the plot. " width="1570" height="456" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/CellType_Scanpy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> UMAP coloured by cell type A. before and B. after batch correction</figcaption></figure>
+
+</div>
+
+<div class="Seurat">
+
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/scrna_batch_correction/CellType_Seurat.png" alt="Two UMAP plots showing three large groups of cells, each made up of multiple clusters. Each UMAP is coloured in based on cell types. The first shows patches of the same cell types appearing in different parts of the plot. The second UMAP shows each colour or cell type is centred in just one cluster or area of the plot. " width="4381" height="2152" loading="lazy" /><a target="_blank" href="../../images/scrna_batch_correction/CellType_Seurat.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> UMAP coloured by cell type A. before and B. after batch correction</figcaption></figure>
+
+</div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Well done, you’ve successfully performed batch correction to remove technical effects while clustering single cell data with Scanpy or Seurat. You might want to check your results against the example histories for the <a href="https://singlecell.usegalaxy.eu/u/marisa_jl/h/batch-correction-integration-with-scanpy-answer-key">Scanpy</a> or <a href="https://singlecell.usegalaxy.eu/u/marisa_jl/h/batch-correction--integration-with-seurat---answer-key">Seurat</a> pipelines. You can also take a look at the whole workflow for <a href="https://singlecell.usegalaxy.eu/u/marisa_jl/w/batch-correction-scanpy">Scanpy</a> or <a href="https://singlecell.usegalaxy.eu/u/marisa_jl/w/batch-correction---seurat">Seurat</a>.</p>
+
+<p>In this tutorial, we’ve learned how to perform batch correction or integration when analysing single cell data with either the Scanpy or Seurat pipelines. If you want to learn more about these pipelines then you might want to try analysing a slightly trickier dataset in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Scanpy</a> or <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">Seurat</a> case study tutorials.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Batch correction can remove some of the technical differences between experimental groups</p>
+</li>
+                        
+                        <li><p>Integration enables us to combine different datasets</p>
+</li>
+                        
+                        <li><p>Both the Scanpy and Seurat pipelines include tools that can be used for batch correction or integration</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/single-cell/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Ding2020">Ding, J., X. Adiconis, S. K. Simmons, M. S. Kowalczyk, C. C. Hession <i>et al.</i>, 2020 <b>Systematic comparison of single-cell and single-nucleus RNA-sequencing methods</b>. Nature Biotechnology 38: 737–746. <a href="https://doi.org/10.1038/s41587-020-0465-8">10.1038/s41587-020-0465-8</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=single-cell/scrna_batch_correction"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=single-cell/scrna_batch_correction">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marisa Loach,  <b>Batch Correction and Integration with Seurat or Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scrna_batch_correction,
+author = "Marisa Loach",
+	title = "Batch Correction and Integration with Seurat or Scanpy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/biofair/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/biofair.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">BioFAIR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna_batch_correction/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: anndata_inspect
+  owner: iuc
+  revisions: b26b87f5a13c
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_cluster_reduce_dimension
+  owner: iuc
+  revisions: 795751257d82
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_filter
+  owner: iuc
+  revisions: 2e6029e47eb5
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_inspect
+  owner: iuc
+  revisions: a8d291df615d
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_normalize
+  owner: iuc
+  revisions: 2b6498d4c8c6
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_plot
+  owner: iuc
+  revisions: 7f478b3258ec
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_remove_confounders
+  owner: iuc
+  revisions: 80fe16f87825
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_clustering
+  owner: iuc
+  revisions: 51eb02d9b17a
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_data
+  owner: iuc
+  revisions: 4ec52a83ec82
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_integrate
+  owner: iuc
+  revisions: 74fa68f4e579
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_plot
+  owner: iuc
+  revisions: fee4b4eb0ef5
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_preprocessing
+  owner: iuc
+  revisions: 6bccf5f85f92
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_reduce_dimension
+  owner: iuc
+  revisions: 46ed93e8da30
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna_batch_correction/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/single-cell/tutorials/scrna_batch_correction/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aba07fe37e2fbb3fc7e99f7c8ba557b265433ce9">aba07fe</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
