@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aba07fe37e2fbb3fc7e99f7c8ba557b265433ce9",
+		release: "galaxy-training-network@c35f73dc301d86cb6736387363a80827b8f9ca1c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Reference Data with CVMFS without Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-01-23 10:25:43 +0000">
+<meta name="DC.date" content="2026-07-12 12:48:21 +0000">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-01-23 10:25:43 +0000",
+  "dateModified": "2026-07-12 12:48:21 +0000",
   "datePublished": "2020-06-17 17:37:46 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -274,7 +274,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Reference Data with CVMFS without Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT1H",
   "teaches": "- Have an understanding of what CVMFS is and how it works\n- Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n- Configure your Galaxy to use these reference genomes and indices",
   "keywords": [
@@ -1245,7 +1245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 17, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 12, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1263,7 +1263,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -1377,6 +1377,11 @@ CVMFS_USE_GEOAPI=yes
 </code></pre></div>      </div>
 
       <p>This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to. You can use the <code class="language-plaintext highlighter-rouge">cvmfs_quota_limit</code> role variable to control this setting.</p>
+
+      <p>If you also want to mount the BRC Analytics pathogen data and Vertebrate Genomes Project repositories, include them in <code class="language-plaintext highlighter-rouge">CVMFS_REPOSITORIES</code>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_REPOSITORIES="data.galaxyproject.org,brc.galaxyproject.org,vgp.galaxyproject.org"
+</code></pre></div>      </div>
     </li>
   </ol>
 
@@ -1389,13 +1394,19 @@ CVMFS_USE_GEOAPI=yes
     <li>
       <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/domain.d/galaxyproject.org.conf</code> file with the following contents:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
 </code></pre></div>      </div>
 
       <p>This is a list of the available stratum 1 servers that have this repo.</p>
     </li>
     <li>
-      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/keys/data.galaxyproject.org.pub</code> file with the following contents:</p>
+      <p>Create the key directory:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p /etc/cvmfs/keys/galaxyproject.org
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/keys/galaxyproject.org/data.galaxyproject.org.pub</code> file with the following contents:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5LHQuKWzcX5iBbCGsXGt
@@ -1407,6 +1418,22 @@ NVNhhcb66OJHah5ppI1N3cZehdaKyr1XcF9eedwLFTvuiwTn6qMmttT/tHX7rcxT
 owIDAQAB
 -----END PUBLIC KEY-----
 </code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/keys/galaxyproject.org/galaxyproject.org.pub</code> file with the following contents:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuJZTWTY3/dBfspFKifv8
+TWuuT2Zzoo1cAskKpKu5gsUAyDFbZfYBEy91qbLPC3TuUm2zdPNsjCQbbq1Liufk
+uNPZJ8Ubn5PR6kndwrdD13NVHZpXVml1+ooTSF5CL3x/KUkYiyRz94sAr9trVoSx
+THW2buV7ADUYivX7ofCvBu5T6YngbPZNIxDB4mh7cEal/UDtxV683A/5RL4wIYvt
+S5SVemmu6Yb8GkGwLGmMVLYXutuaHdMFyKzWm+qFlG5JRz4okUWERvtJ2QAJPOzL
+mAG1ceyBFowj/r3iJTa+Jcif2uAmZxg+cHkZG5KzATykF82UH1ojUzREMMDcPJi2
+dQIDAQAB
+-----END PUBLIC KEY-----
+</code></pre></div>      </div>
+
+      <p>The BRC Analytics and VGP repositories use this common Galaxy Project key. The <code class="language-plaintext highlighter-rouge">singularity.galaxyproject.org</code> repository also uses it, and the data repository is expected to transition to it eventually.</p>
     </li>
     <li>
       <p>Make a directory for the cache files</p>
@@ -1500,7 +1527,6 @@ AutoFS only mounts the files when they’re accessed, so it appears like there i
 <h2 id="look-at-the-repository">Look at the repository</h2>
 
 <p>Now to configure Galaxy to use the CVMFS references we have just installed, see <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html#configuring-galaxy-to-use-the-cvmfs-references">the Ansible tutorial.</a></p>
-
 
                 </section>
 
@@ -1840,7 +1866,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aba07fe37e2fbb3fc7e99f7c8ba557b265433ce9">aba07fe</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c35f73dc301d86cb6736387363a80827b8f9ca1c">c35f73d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
