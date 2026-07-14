@@ -432,3 +432,38 @@ This can be additional insights into the relationship between QC metrics and hel
 {: .comment}
 
 ![Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-scatter.png "Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent).")
+
+#### Filter Out Low Quality Cells
+
+Having visualised the quality control metrics, we can now filter out low-quality cells based on thresholds for the number of detected genes and the percentage of mitochondrial reads.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code (once for each combination of features):
+>
+> ```{r}
+> library(LoomExperiment)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> keep_cells <- sce$detected >= 200 & sce$detected <= 2500 & sce$subsets_MT_percent <= 5
+> sce <- sce[, keep_cells]
+> sce
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> Not every user will want to apply filters on all the same metrics.
+> Taking inspiration from the [Seurat Create](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_create%2Fseurat_create%2F5.4.0%2Bgalaxy3&version=latest) tool, the tool should offer two fields for each possible metric - one for the minimum, one for the maximum values allowed - and the logic of the tool should only apply filters where values were given by the user, skipping over the others.
+> The resulting script should look something like this:
+>
+> ```{r}
+> keep_cells <- rep(TRUE, ncol(sce))
+> if (!is.null(detected_min)) {
+>   keep_cells <- keep_cells & sce$detected <= detected_max
+> }
+> if (!is.null(detected_max)) {
+>   keep_cells <- keep_cells & sce$detected >= detected_max
+> }
+> sce
+> ```
+{: .comment}
