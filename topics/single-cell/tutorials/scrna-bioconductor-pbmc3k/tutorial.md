@@ -467,3 +467,34 @@ Having visualised the quality control metrics, we can now filter out low-quality
 > sce
 > ```
 {: .comment}
+
+We can then produce the same plots as earlier to visualise the new distribution of quality control metrics in our data.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> Same code as earlier, using the filtered `SingleCellLoomExperiment` object.
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scater)
+> sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
+> plot_list <- list()
+> plot_list[["detected"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "detected"
+> )
+> plot_list[["sum"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "sum"
+> )
+> plot_list[["subsets_MT_percent"]] <- scater::plotColData(
+> 	object = sce,
+> 	y = "subsets_MT_percent"
+> )
+> cowplot::plot_grid(plotlist = plot_list, nrow = 1)
+> ```
+{: .hands_on}
+
+![Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for cells that remain after filtering.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-violin-filtered.png "Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for cells that remain after filtering")
+
+![Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent) after filtering.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-scatter-filtered.png "Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent) after filtering.")
