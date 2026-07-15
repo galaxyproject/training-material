@@ -201,7 +201,7 @@ In the context of a Galaxy workflow, the output would then be saved to a `.txt` 
 > ```{r}
 > library(LoomExperiment)
 > sce <- import('outputs/sce.loom', format = "loom", type = "SingleCellLoomExperiment")
-> print(sce)
+> capture.output(print(sce), file = "outputs/sce_summary.txt")
 > ```
 {: .hands_on}
 
@@ -299,6 +299,7 @@ In particular, the percentage of UMI assigned to mitochondrial genes is frequent
 > 	x = sce,
 > 	subsets = gene_subsets
 > )
+> export(object = sce, con = "outputs/sce_after_qc.loom", format = "loom")
 > ```
 {: .hands_on}
 
@@ -307,7 +308,8 @@ In particular, the percentage of UMI assigned to mitochondrial genes is frequent
 > For this task, the tool [Scater: calculate QC metrics](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_create_qcmetric_ready_sce%2Fscater_create_qcmetric_ready_sce%2F1.22.0&version=latest) exists, but:
 > 
 > - It requires the expression matrix in tabular format.
->   The tool should be updated to take a `loom` file containing a `SingleCellLoomExperiment` object.
+> - It masks the fact that [scater](https://bioconductor.org/packages/scater/) simply re-exports a functionality that is actually implemented in [scuttle](https://bioconductor.org/packages/scuttle/).
+> - A new tool 'scuttle addPerCellQCMetrics' should be created as a replacement that takes a `loom` file containing a `SingleCellLoomExperiment` object and produces a new, updated object.
 {: .comment}
 
 ### Inspect the quality control metrics
@@ -324,7 +326,9 @@ In the context of a Galaxy workflow, the output would then be saved to a `.txt` 
 > ```{r}
 > library(LoomExperiment)
 > sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
-> print(colData(sce))
+> write.table(
+>	as.data.frame(colData(sce)), file = "outputs/sce_coldata.tsv", sep = "\t", 
+>    quote = FALSE, row.names = FALSE)
 > ```
 {: .hands_on}
 
@@ -333,23 +337,18 @@ In the context of a Galaxy workflow, the output would then be saved to a `.txt` 
 > For this task, a new tool similar to the [Seurat Data Management](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseurat_data%2Fseurat_data%2F5.4.0%2Bgalaxy2&version=latest) tool method "Inspect Seurat Object" is needed (as mentioned earlier), with the option to display only the `colData` component of the object.
 {: .comment}
 
-In this instance, the summary view of the object looks as follows:
+In this instance, the first few lines of the output file would look as follows:
 
 ```
-DataFrame with 2700 rows and 8 columns
-              Barcode      Sample  detected subsets_MT_detected subsets_MT_percent subsets_MT_sum       sum     total
-          <character> <character> <numeric>           <numeric>          <numeric>      <numeric> <numeric> <numeric>
-1    AAACATACAACCAC-1       data/       781                  10           3.015283             73      2421      2421
-2    AAACATTGAGCTAC-1       data/      1352                  10           3.793596            186      4903      4903
-3    AAACATTGATCAGC-1       data/      1131                   8           0.889171             28      3149      3149
-4    AAACCGTGCTTCCG-1       data/       960                  10           1.743085             46      2639      2639
-5    AAACCGTGTATGCG-1       data/       522                   5           1.223242             12       981       981
-...               ...         ...       ...                 ...                ...            ...       ...       ...
-2696 TTTCGAACTCTCAT-1       data/      1155                   7           2.109217             73      3461      3461
-2697 TTTCTACTGAGGCA-1       data/      1227                   8           0.928343             32      3447      3447
-2698 TTTCTACTTCCTCG-1       data/       622                   7           2.197150             37      1684      1684
-2699 TTTGCATGAGAGGC-1       data/       454                   7           2.050781             21      1024      1024
-2700 TTTGCATGCCTCAC-1       data/       724                   6           0.806045             16      1985      1985
+Barcode	Sample	detected	subsets_MT_detected	subsets_MT_percent	subsets_MT_sum	sum	total
+AAACATACAACCAC-1	data/	781	10	3.0152829409335	73	2421	2421
+AAACATTGAGCTAC-1	data/	1352	10	3.79359575769937	186	4903	4903
+AAACATTGATCAGC-1	data/	1131	8	0.889171165449349	28	3149	3149
+AAACCGTGCTTCCG-1	data/	960	10	1.74308450170519	46	2639	2639
+AAACCGTGTATGCG-1	data/	522	5	1.22324159021407	12	981	981
+AAACGCACTGGTAC-1	data/	782	7	1.66358595194085	36	2164	2164
+AAACGCTGACCAGT-1	data/	783	10	3.81433823529412	83	2176	2176
+AAACGCTGGTTCTT-1	data/	790	9	3.09734513274336	70	2260	2260
 ```
 
 ### Filtering of low-quality cells
@@ -446,7 +445,7 @@ Having visualised the quality control metrics, we can now filter out low-quality
 > sce <- import('outputs/sce_after_qc.loom', format = "loom", type = "SingleCellLoomExperiment")
 > keep_cells <- sce$detected >= 200 & sce$detected <= 2500 & sce$subsets_MT_percent <= 5
 > sce <- sce[, keep_cells]
-> sce
+> export(object = sce, con = "outputs/sce_after_qc_filter.loom", format = "loom")
 > ```
 {: .hands_on}
 
@@ -464,7 +463,7 @@ Having visualised the quality control metrics, we can now filter out low-quality
 > if (!is.null(detected_max)) {
 >   keep_cells <- keep_cells & sce$detected >= detected_max
 > }
-> sce
+> sce_filtered <- sce[, keep_cells]
 > ```
 {: .comment}
 
@@ -498,3 +497,32 @@ We can then produce the same plots as earlier to visualise the new distribution 
 ![Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for cells that remain after filtering.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-violin-filtered.png "Violin Plots showing the unique features (detected), total counts (sum) and the proportion of reads coming from mitochondial genes (subsets_MT_percent) for cells that remain after filtering")
 
 ![Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent) after filtering.](../../images/scrna-bioconductor-pbmc3k/scater-plotcoldata-qc-scatter-filtered.png "Scatter plots showing the relationships between the total counts (sum) and A. the number of unique features (detected) and B. the proportion of mitochondrial reads (subsets_MT_percent) after filtering.")
+
+### Further Preprocessing
+
+#### Log-normalisation
+
+Having filtered droplets that do not pass our chosen quality control filters, the next step in a standard single-cell RNA-sequencing analysis workflow is normalisation.
+
+In Bioconductor, the simple log-normalisation method is implemented in the function `logNormCounts()` of the package [scuttle](https://bioconductor.org/packages/scuttle/).
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code (once for each combination of features):
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scuttle)
+> sce <- import('outputs/sce_after_qc_filter.loom', format = "loom", type = "SingleCellLoomExperiment")
+> sce <- scuttle::logNormCounts(x = sce)
+> export(object = sce, con = "outputs/sce_after_lognorm.loom", format = "loom")
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> The [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) does not seem to contain any tool offering access to this functionality.
+> It seems that a whole new tool is needed.
+> It is worth identifying the full set of [scuttle](https://bioconductor.org/packages/scuttle/) functions needed for this tutorial to decide how to design this new tool,
+> as we may host all those functions in the same tool suite.
+{: .comment}
