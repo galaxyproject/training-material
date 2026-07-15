@@ -521,8 +521,47 @@ In Bioconductor, the simple log-normalisation method is implemented in the funct
 
 > <comment-title></comment-title>
 >
-> The [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) does not seem to contain any tool offering access to this functionality.
-> It seems that a whole new tool is needed.
-> It is worth identifying the full set of [scuttle](https://bioconductor.org/packages/scuttle/) functions needed for this tutorial to decide how to design this new tool,
-> as we may host all those functions in the same tool suite.
+> The [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) does not seem to contain any tool offering access to this `scuttle::logNormCounts()`.
 {: .comment}
+
+#### Model gene variance
+
+We can then model gene variance using the matrix normalised of normalised counts using the `modelGeneVar()` function of the [scran](https://bioconductor.org/packages/scran/) package.
+
+> <hands-on-title>R code</hands-on-title>
+>
+> For this task, a Galaxy tool should execute the following code:
+>
+> ```{r}
+> library(LoomExperiment)
+> library(scran)
+> sce <- import('outputs/sce_after_lognorm.loom', format = "loom", type = "SingleCellLoomExperiment")
+> allf <- scran::modelGeneVar(x = sce, assay.type = "logcounts")
+> allf <- as.data.frame(allf)
+> allf <- data.frame(gene = rownames(allf), allf, row.names = NULL, check.names = FALSE)
+> write.table(
+> 	allf, file = "outputs/scuttle_model_gene_var.tsv", sep = "\t",
+>     quote = FALSE, row.names = FALSE, col.names = TRUE
+> )
+> ```
+{: .hands_on}
+
+> <comment-title></comment-title>
+>
+> The [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) does not seem to contain any tool offering access to `scran::modelGeneVar()`.
+>
+> The code above highlights the need to move the rownames used in R to an actual column for ease of use by downstream tools that require column names to be aligned with data (base R is forgiving and assumes the presence of rownames when the number of column names is one less than the number of columns).
+{: .comment}
+
+In this instance, the first few lines of the output file would look as follows:
+
+```
+gene	mean	total	tech	bio	p.value	FDR
+MIR1302-10	0	0	0	0	NA	NA
+FAM138A	0	0	0	0	NA	NA
+OR4F5	0	0	0	0	NA	NA
+RP11-34P13.7	0	0	0	0	NA	NA
+RP11-34P13.8	0	0	0	0	NA	NA
+AL627309.1	0.00325363885312568	0.00317808214379422	0.00335131910208272	-0.000173236958288492	0.624728811635846	0.771851547107362
+RP11-34P13.14	0	0	0	0	NA	NA
+```
