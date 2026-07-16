@@ -157,7 +157,7 @@ If you want to work with multiple articles at once, we suggest uploading all of 
 
 When does it make sense for you to create a collection?
 
-{% snippet faqs/galaxy/datasets-versus-collections.md %}
+{% snippet faqs/galaxy/histories_datasets_vs_collections.md box_type="none"%}
 
 How can you create collections from single datasets?
 
