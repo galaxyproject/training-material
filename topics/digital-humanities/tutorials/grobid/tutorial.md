@@ -121,12 +121,7 @@ For this tutorial, we suggest you use a scientific article of your choice. Make 
 >    ![the Galaxy upload dialogue, the 'regular' tab is active with a large textarea to paste subsequent URL]({% link topics/introduction/images/upload-box.png %})
 >
 > 3. Click **Paste/Fetch data**
-> 4. Paste in the address of both files in the Zenodo folder:
->    ```
->    https://zenodo.org/records/17053220/files/SoY_Cheap_Repo_Source.txt
->    https://zenodo.org/records/17053220/files/SoY_Univ_Mag_Source.txt
->    ```
->
+> 4. Paste in the address of the files you want to upload in here.
 > 5. Click **Start**
 > 6. Click **Close**
 {: .hands_on}
