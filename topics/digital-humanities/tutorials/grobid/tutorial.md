@@ -37,6 +37,8 @@ The first couple of steps derive from [A short introduction to Galaxy]({% link t
 {: .agenda}
 
 # What is GROBID?
+GROBID stands for **G**ene**R**ation of **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata.
+
 
 # Get started in Galaxy
 
@@ -161,12 +163,16 @@ When does it make sense for you to create a collection?
 
 How can you create collections from single datasets?
 
-{% snippet faqs/galaxy/creating-a-dataset-collection-with-autobuild.md %}
+{% snippet faqs/galaxy/collections_autobuild_list.md %}
 
 Your articles are now on Galaxy, great!
 The next steps now depend on your article: was it born-digital? Then you can jump ahead to using GROBID.
+
 Is it a scanned text? In that case, your text will not be machine-readable or searchable.
 In this case, you need to first perform optical character recognition (OCR) to properly use GROBID with your article.
+This is possible in Galaxy in various ways, you could, for example, use {% tool [Tesseract](toolshed.g2.bx.psu.edu/repos/iuc/tesseract/tesseract/5.5.2+galaxy4) %} on Galaxy an make your PDF machine readable.
+
+Once your article is ready, we can run GROBID on it.
 
 
 
