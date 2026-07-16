@@ -161,7 +161,7 @@ When does it make sense for you to create a collection?
 
 How can you create collections from single datasets?
 
-{% snippet faqs/galaxy/#creating-a-dataset-collection-with-autobuild.md %}
+{% snippet faqs/galaxy/creating-a-dataset-collection-with-autobuild.md %}
 
 Your articles are now on Galaxy, great!
 The next steps now depend on your article: was it born-digital? Then you can jump ahead to using GROBID.
