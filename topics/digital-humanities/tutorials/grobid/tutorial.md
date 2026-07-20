@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Text mining articles with GROBID
+title: Text-Mining articles with GROBID
 level: Introductory
 questions:
-  - What is GROBID
+  - What is GROBID?
   - How to get started with GROBID in Galaxy?
 objectives:
   - Log in to Galaxy
@@ -37,18 +37,19 @@ The first couple of steps derive from [A short introduction to Galaxy]({% link t
 {: .agenda}
 
 # What is GROBID?
-GROBID stands for **G**ene**R**ation of **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata.
+GROBID stands for **G**ene**R**ation **O**f **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata.
 
 # Why use GROBID on Galaxy?
 Galaxy is an open-source data analysis platform. 
-Using GROBID on Galaxy gives you access to 4000+ further tools to work with from within - all without programming skills. 
+Using GROBID on Galaxy gives you access to 4000+ tools to work with - all without programming skills. 
 Moreover, Galaxy allows you to leverage high-performance computing (HPC) resources from within your browser.
 This is particularly useful, if you are working on large amounts of texts.
 
-If your texts are not machine-readable, you could use Tesseract directly from within Galaxy or perform other tasks after having run GROBID without leaving the platform. 
+If your texts are not machine-readable, you could use Tesseract directly from within Galaxy or perform further text-mining tasks or visualise your results after having run GROBID. All directly on Galaxy. 
+You can chain different tools into [workflows](https://gxy.io/GTN:T00151) that you can easily rerun, allowing you to easily automate your analysis steps.
 
 Additionally, [FAIR](https://galaxyproject.org/fair/) and reproducible research are at the core of what we do. 
-Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) through all steps of the research data life-cycle and makes reproducibility a built-in default.
+Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) through all steps of the research data life-cycle and makes reproducibility a built-in default to support your research. 
 
 # Get started in Galaxy
 
@@ -175,7 +176,7 @@ The next steps now depend on your article: was it born-digital? Then you can jum
 
 Is it a scanned text? In that case, your text will not be machine-readable or searchable.
 In this case, you need to first perform optical character recognition (OCR) to properly use GROBID with your article.
-This is possible in Galaxy in various ways, you could, for example, use {% tool [Tesseract](toolshed.g2.bx.psu.edu/repos/iuc/tesseract/tesseract/5.5.2+galaxy4) %} on Galaxy an make your PDF machine readable.
+This is possible in Galaxy in various ways, you could, for example, use {% tool [Tesseract](toolshed.g2.bx.psu.edu/repos/iuc/tesseract/tesseract/5.5.2+galaxy4) %} on Galaxy and make your PDF machine readable.
 
 Once your article is ready, we can run GROBID on it.
 
