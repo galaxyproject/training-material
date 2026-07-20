@@ -152,7 +152,7 @@ The contents of the file will be displayed in the central Galaxy panel. If the d
 > <hands-on-title>View the text files content</hands-on-title>
 > 1. Click the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
 >
->    ![galaxy history view showing a single dataset. Display link is being hovered.](../../images/History-view.png){:width="520px"}
+>    ![galaxy history view showing a single dataset. Display link is being hovered.]({% link topics/digital-humanities/images/History-view.png %})
 >
 > 2. Check the datatype - is it **PDF**? Then you are all set. Otherwise, adapt the datatype.
 >
