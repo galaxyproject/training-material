@@ -39,6 +39,16 @@ The first couple of steps derive from [A short introduction to Galaxy]({% link t
 # What is GROBID?
 GROBID stands for **G**ene**R**ation of **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata.
 
+# Why use GROBID on Galaxy?
+Galaxy is an open-source data analysis platform. 
+Using GROBID on Galaxy gives you access to 4000+ further tools to work with from within - all without programming skills. 
+Moreover, Galaxy allows you to leverage high-performance computing (HPC) resources from within your browser.
+This is particularly useful, if you are working on large amounts of texts.
+
+If your texts are not machine-readable, you could use Tesseract directly from within Galaxy or perform other tasks after having run GROBID without leaving the platform. 
+
+Additionally, [FAIR](https://galaxyproject.org/fair/) and reproducible research are at the core of what we do. 
+Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) through all steps of the research data life-cycle and makes reproducibility a built-in default.
 
 # Get started in Galaxy
 
