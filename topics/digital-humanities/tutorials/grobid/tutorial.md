@@ -9,10 +9,10 @@ questions:
 objectives:
   - Log in to Galaxy
   - Upload files to the platform
-  - Use GROBID
+  - Use GROBID to extract information from publications
 time_estimation: 1H
 key_points:
-  - You can use GROBID from within Galaxy
+  - You can use GROBID from within Galaxy to mine text.
 tags:
 - text mining
 contributions:
@@ -37,16 +37,16 @@ The first couple of steps derive from [A short introduction to Galaxy]({% link t
 {: .agenda}
 
 # What is GROBID?
-GROBID stands for **G**ene**R**ation **O**f **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata.
+[GROBID](https://github.com/grobidOrg/grobid) stands for **G**ene**R**ation **O**f **BI**bliographic **D**ata. It is a text mining library for large-scale extraction of bibliographical metadata and now available on Galaxy.
 
-# Why use GROBID on Galaxy?
-Galaxy is an open-source data analysis platform. 
+# Why use GROBID in Galaxy?
+[Galaxy](https://galaxyproject.org/) is an open-source data analysis platform. 
 Using GROBID on Galaxy gives you access to 4000+ tools to work with - all without programming skills. 
 Moreover, Galaxy allows you to leverage high-performance computing (HPC) resources from within your browser.
 This is particularly useful, if you are working on large amounts of texts.
 
-If your texts are not machine-readable, you could use Tesseract directly from within Galaxy or perform further text-mining tasks or visualise your results after having run GROBID. All directly on Galaxy. 
-You can chain different tools into [workflows](https://gxy.io/GTN:T00151) that you can easily rerun, allowing you to easily automate your analysis steps.
+If your texts are not machine-readable, you could use Tesseract directly from within Galaxy or perform further text-mining tasks or visualise your results after having run GROBID. All directly in Galaxy. 
+You can chain different tools into [workflows](https://gxy.io/GTN:T00151) that you can easily rerun, allowing you to easily automate your analysis steps and make your tasks sharable.
 
 Additionally, [FAIR](https://galaxyproject.org/fair/) and reproducible research are at the core of what we do. 
 Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) through all steps of the research data life-cycle and makes reproducibility a built-in default to support your research. 
@@ -58,7 +58,7 @@ To use Galaxy's full potential, you must register and create an account. You can
 
 {% snippet faqs/galaxy/account_create.md %}
 
-Alternatively, you can log in using a single sign-on of your choice, for example, from [IAM4NFDI](https://iam.services.base4nfdi.de/faq_ENG/) on [Galaxy Europe](https://usegalaxy.eu/).
+Alternatively, you can access Galaxy using a single sign-on of your choice, for example, from [IAM4NFDI](https://iam.services.base4nfdi.de/faq_ENG/) on [Galaxy Europe](https://usegalaxy.eu/). The interface could look like this:
 
  ![Screenshot of Galaxy Europe register window with the IAM4NFDI login button highlighted](../../images/iam4nfdi.png)
 
@@ -152,7 +152,7 @@ The contents of the file will be displayed in the central Galaxy panel. If the d
 > <hands-on-title>View the text files content</hands-on-title>
 > 1. Click the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
 >
->    ![galaxy history view showing a single dataset mutant_r1.fastq. Display link is being hovered.](../../images/eye-icon.png){:width="520px"}
+>    ![galaxy history view showing a single dataset. Display link is being hovered.](../../images/History-view.png){:width="520px"}
 >
 > 2. Check the datatype - is it **PDF**? Then you are all set. Otherwise, adapt the datatype.
 >
@@ -165,7 +165,7 @@ If you want to work with multiple articles at once, we suggest uploading all of 
 
 When does it make sense for you to create a collection?
 
-{% snippet faqs/galaxy/histories_datasets_vs_collections.md box_type="none"%}
+{% snippet faqs/galaxy/histories_datasets_vs_collections.md %}
 
 How can you create collections from single datasets?
 
