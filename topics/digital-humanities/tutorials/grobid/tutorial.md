@@ -150,7 +150,7 @@ When the file has been uploaded to Galaxy, it will turn green.
 The contents of the file will be displayed in the central Galaxy panel. If the dataset is large, you will see a warning message which explains that only the first megabyte is shown.
 
 > <hands-on-title>View the text files content</hands-on-title>
-> 1. Click the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
+> 1. Click the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content.
 >
 >    ![galaxy history view showing a single dataset. Display link is being hovered.]({% link topics/digital-humanities/images/History-view.png %})
 >
@@ -180,5 +180,71 @@ This is possible in Galaxy in various ways, you could, for example, use {% tool 
 
 Once your article is ready, we can run GROBID on it.
 
+# Run GROBID on Galaxy
 
+Navigate to the activity bar on the left-hand side and click on {% icon tool %} tools. Enter **GROBID** in the search bar.
+Click on the search result {% tool [GROBID extract](toolshed.g2.bx.psu.edu/repos/iuc/grobid_grobid/grobid_grobid/0.9.0+galaxy0) %} (or this link) to see the tool.
 
+Now, you can select how to process your PDF or PDFs. 
+
+> <hands-on-title>Processing files with GROBID</hands-on-title>
+> 1. Click on the dropdown menu to select **Scientific article PDF to TEI**
+>
+> 2. Scientific article PDF: Select the article or articles you want to process. You can select single datasets, multiple datasets and a Dataset collection.
+>     You can use the dropdown menu or drag and drop them from your history on the right-hand side.
+>     ![Screenshot of GROBID with tool parameters filled]({% link topics/digital-humanities/images/grobid.png %})
+>
+> 3. Optionally, you can click on **Advanced options** to further specify your output.
+>    
+>
+> 4. Once you are done, click on the {% icon workflow-run %} **Run Tool** button at the top or bottom of the tool to run it.
+>
+{: .hands_on}
+
+The job is now running. 
+It will create a new dataset in your history, on top of your upload. 
+The dataset will go through the grey (preparing/queued) and yellow (running) states to become green (success). 
+
+Once it is green, you can click on the  {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content.
+In this example, we chose to convert the article to TEI.
+
+> <comment-title>What is TEI?</comment-title>
+> TEI, or the **T**ext **E**ncoding **I**nitiative is an international project to develop guidelines for "machine-actionable cultural heritage texts."
+> For more details and guidelines, visit the [TEI website](https://tei-c.org/).
+>
+{: .comment}
+
+The output of your file is an annotated TEI file.
+
+Should you notice, that you made a mistake, selected the wrong input file or output format, do not worry.
+It is easy to re-run jobs in Galaxy:
+
+{% snippet faqs/galaxy/tools_rerun.md %}
+
+This allows you to see exactly what oarameters you used when you ran the job before and enables you to adapt those, if needed.
+Make your changes and click on **Run Tool**.
+This creates a new dataset with updated parameters.
+
+In the next step, we want to extract datasets mentioned in the scientific articles. 
+We will use GROBID DataStet to achieve this:
+Navigate to the activity bar on the left-hand side once more and click on {% icon tool %} tools. Enter **GROBID** in the search bar.
+Click on the search result {% tool [GROBID DataStet](toolshed.g2.bx.psu.edu/repos/iuc/grobid_dataset_annotate/grobid_dataset_annotate/0.8.1+galaxy0) %} (or this link).
+
+> <hands-on-title>Using GROBID DataStet</hands-on-title>
+> 1. Scientific article PDF or TEI XML: Select the TEI output you created earlier. 
+>    If you have not renamed it, it will be calles **GROBID on dataset** or something similar.
+>
+> 2. Output format: Select **Enriched TEI XML** in the dropdown menu.
+>     ![Screenshot of GROBID  Datastet with tool parameters filled]({% link topics/digital-humanities/images/datastet.png %}) 
+>
+> 3. Click on the {% icon workflow-run %} **Run Tool** button at the top or bottom of the tool to run it.
+>
+{: .hands_on}
+
+**Beware**: If you want a JSON output, you need to run it on the whole PDF. 
+In this case, inputting TEI and selecting JSON will run into an error.
+For more information on this, see the tool help.
+
+{% snippet faqs/galaxy/tools_help.md %}
+
+The job starts running. Once it turns green, it is ready for you to inspect.
