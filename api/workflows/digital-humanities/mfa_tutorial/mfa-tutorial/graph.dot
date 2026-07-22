@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nthe_fox_and_the_grapes.zip"]
+  1[label="MFA Find OOVs"]
+  0 -> 1 [label="output"]
+  k35f0781007c3450db9154aeeea9bb916[color=lightseagreen,label="Output\nArchive containing unknown words"]
+  1 -> k35f0781007c3450db9154aeeea9bb916
+  2[label="Unzip the file to get the list of unknown words oovs_found"]
+  1 -> 2 [label="output_archive"]
+  k49853025c3ca4719af1109c503061660[color=lightseagreen,label="Output\nList of unknown words"]
+  2 -> k49853025c3ca4719af1109c503061660
+  3[label="MFA G2P"]
+  2 -> 3 [label="unzipped_single"]
+  k8bb6818729f94606a0c5ef8db83b0f59[color=lightseagreen,label="Output\ndictionary of generated pronunciations for OOVs"]
+  3 -> k8bb6818729f94606a0c5ef8db83b0f59
+  4[label="MFA Merge"]
+  3 -> 4 [label="output_dictionary"]
+  k1a78dddcf54a401c8ff07b49e3324761[color=lightseagreen,label="Output\nUpdated dictionary including OOVs"]
+  4 -> k1a78dddcf54a401c8ff07b49e3324761
+  5[label="Run the aligner"]
+  0 -> 5 [label="output"]
+  4 -> 5 [label="merged_dict"]
+  kc080e198cc0f44ff85a0752d4781ca7b[color=lightseagreen,label="Output\nAligned TextGrid"]
+  5 -> kc080e198cc0f44ff85a0752d4781ca7b
+}

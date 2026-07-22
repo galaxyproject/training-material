@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ff8d0e0b31303a98d5ab7e9ac139634dc11f13cd",
+		release: "galaxy-training-network@f09c60e527eb57913612c113a1104d2201b65b58",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -246,8 +246,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       ],
       "status": "active",
       "foundingDate": "2015-06-29"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
     }
-  ]
+  ],
+  "identifier": "https://orcid.org/0009-0009-5001-4180",
+  "@id": "https://orcid.org/0009-0009-5001-4180"
 }
 </script>
 
@@ -276,6 +290,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 				
 				
+				<h2>Affiliations</h2>
+				<div class="contributors-line">
+					<a href="/training-material/hall-of-fame/uni-freiburg/" class="contributor-badge contributor-uni-freiburg"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg avatar" width="36" class="avatar" />
+    UFR</a>
+				</div>
+				
 
 				
 				
@@ -297,6 +317,33 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   				
 
+				
+				<h3 id="tutorials">1 Tutorial</h3>
+				<ul>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/digital-humanities">
+							Digital Humanities
+						</a>
+						/
+						<a href="/training-material//topics/digital-humanities/tutorials/mfa_tutorial/tutorial.html">
+						Montreal Forced Aligner
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+				</ul>
 				
 
 				
@@ -323,11 +370,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </div>
     <div class="col-md-8" style="padding-left: 0;">
       <div class="card-body">
-        <h5 class="card-title"> Jessica Wallace</h5>
+        <h5 class="card-title"><a href="https://orcid.org/0009-0009-5001-4180" style="color: white"><i class="fab fa-orcid" aria-hidden="true"></i><span class="visually-hidden">orcid</span></a> Jessica Wallace</h5>
         
         
         
-        <p class="card-text"></p>
+        <p class="card-text"><span class="label" style="--color-primary: #eee500; --color-darker: #d4cb00; --color-dimmed: #e1d800;">1 Tutorials</span></p>
         <p class="card-text"><small class="text-muted">GTN contributor since 2026-07</small></p>
         <img src="/training-material/assets/images/GTN-60px.png" style="width: 2em; position: absolute; bottom: 0; right: 0.5em;" alt="GTN logo"/>
       </div>
@@ -376,7 +423,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				
 
 				
+				<div class="contact-items">
+					<a title="E-mail" href="mailto:jessica_wallace@anglistik.uni-freiburg.de">
+						<i class="far fa-envelope" aria-hidden="true"></i><span class="visually-hidden">email</span> jessica_wallace@anglistik.uni-freiburg.de
+					</a>
+				</div>
+				
 
+				
+				<div class="contact-items">
+					<a title="matrix" href="https://matrix.to/#/@jessicawallacede:matrix.org">
+						<i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> jessicawallacede:matrix.org
+					</a>
+				</div>
 				
 
 				
@@ -387,6 +446,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 				
 
+				
+				<div class="contact-items">
+					<a title="ORCID" href="https://orcid.org/0009-0009-5001-4180">
+						<i class="fab fa-orcid" aria-hidden="true"></i><span class="visually-hidden">orcid</span> 0009-0009-5001-4180
+					</a>
+				</div>
 				
 
 				
@@ -416,10 +481,16 @@ var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
 
 var topics = [
 
+	
+	
+	"Digital Humanities",
+
 
 ];
 
 var slidesVsTutos = [
+
+	"Tutorials",
 
 
 
@@ -495,7 +566,7 @@ var chart2 = new Chart(ctx2, {
 
 
 <h3>Stats for materials contributed to by Jessica Wallace</h3>
-<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E&embed=true&theme=system&background=transparent&period=12mo" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E/topics/digital-humanities/tutorials/mfa_tutorial/tutorial.html&embed=true&theme=system&background=transparent&period=12mo" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
 
         </div>
         <footer>
@@ -556,7 +627,7 @@ var chart2 = new Chart(ctx2, {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ff8d0e0b31303a98d5ab7e9ac139634dc11f13cd">ff8d0e0</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f09c60e527eb57913612c113a1104d2201b65b58">f09c60e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
