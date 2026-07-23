@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f09c60e527eb57913612c113a1104d2201b65b58",
+		release: "galaxy-training-network@330aeac8f7e13d399a80b02a4a28276c55b0f4f9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Predicting EI+ mass spectra with QCxMS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-01 20:12:43 +0000">
+<meta name="DC.date" content="2026-07-23 08:55:13 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Helge Hecht"><meta name="description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-01 20:12:43 +0000",
+  "dateModified": "2026-07-23 08:55:13 +0000",
   "datePublished": "2024-10-01 20:12:43 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -237,11 +237,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Predicting EI+ mass spectra with QCxMS",
   "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT1H",
   "teaches": "- To prepare structure-data format (SDF) files for further operations analysis, starting from chemical structure descriptors in simplified molecular-input line-entry system (SMILES) format.\n- To generate 3D conformers and optimise them using semi-empirical quantum mechanical (SQM) methods.\n- To produce simulated mass spectra for a given molecule in MSP (text based) format.",
   "keywords": [
-    "Metabolomics"
+    "Metabolomics",
+    "metabolomics",
+    "exposomics",
+    "gc-ms",
+    "computational-chemistry",
+    "quantum-chemistry"
   ],
   "description": "## Abstract\n\nMass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compound identifications. Even though nowadays MS is a standard and popular method, there are many compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [,]. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Can I predict QC-based mass spectra starting from SMILES?\n - How can I run those computationally heavy predictions?\n - Can I take into account different conformers?\n\n\n## Learning Objectives\n\n- To prepare structure-data format (SDF) files for further operations analysis, starting from chemical structure descriptors in simplified molecular-input line-entry system (SMILES) format.\n- To generate 3D conformers and optimise them using semi-empirical quantum mechanical (SQM) methods.\n- To produce simulated mass spectra for a given molecule in MSP (text based) format.\n\n",
   "inLanguage": {
@@ -1025,8 +1030,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
-                
-                    
                         
                             <li>
                               <a href="/training-material/topics/metabolomics/tutorials/lcms-preprocessing/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Mass spectrometry: LC-MS preprocessing with XCMS</a>
@@ -1045,7 +1048,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -1060,8 +1067,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
                     
                 
                     
@@ -1224,7 +1229,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 1, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 1, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1242,7 +1247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -2406,7 +2411,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f09c60e527eb57913612c113a1104d2201b65b58">f09c60e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/330aeac8f7e13d399a80b02a4a28276c55b0f4f9">330aeac</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
