@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: AI pipeline for annotating marine species (Project Moorev - Marine) / AI pipeline for annotating marine species (Project Moorev - Marine) / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@b593e216408f173fe4213aca325aee8d7da7d2b3",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="AI pipeline for annotating marine species (Project Moorev - Marine)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-07-24 12:48:41 +0000">
+<meta name="DC.creator" content="Arthur Barreau">
+<meta name="DC.creator" content="Yvan Le Bras">
+<meta name="DC.creator" content="Nadine Le Bris"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / AI pipeline for annotating marine species (Project Moorev - Marine) / Hands-on: AI pipeline for annotating marine species (Project Moorev - Marine)">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "AI pipeline for annotating marine species (Project Moorev - Marine)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-07-24 12:48:41 +0000",
+  "datePublished": "2026-07-24 12:48:41 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/sorbonneuniv/",
+      "name": "Sorbonne Université",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.sorbonne-universite.fr/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ISYEB/",
+      "name": "Institut de Systématique, Évolution, Biodiversité",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://isyeb.mnhn.fr/fr"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+      "name": "Muséum national d'Histoire naturelle",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.mnhn.fr/fr"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+      "name": "Pôle National de Données de Biodiversité",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.pndb.fr/"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "WB-2022-42799",
+      "url": "WB-2022-42799",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "MOOREV",
+        "description": "An organization supporting the Galaxy Training Network",
+        "url": "https://moorev.fr/",
+        "logo": "/training-material/shared/images/LogoMOOREVsept2025.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "In this tutorial, we will explore a complete pipeline for annotating images and videos of marine species. As an example, we will use a video from the [Moorev](https://moorev.fr/) project, cut into a short clip and available on Zenodo.",
+  "learningResourceType": "e-learning",
+  "name": "AI pipeline for annotating marine species (Project Moorev - Marine)",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT30M",
+  "teaches": "- Use SAM3 to automatically detect marine species from a simple keyword\n- Correct generated annotations with Edit COCO Annotation",
+  "keywords": [
+    "Imaging",
+    "Marine ecosystems",
+    "biodiversity",
+    "AI segmentation",
+    "YOLO",
+    "deep learning",
+    "object detection"
+  ],
+  "description": "## Abstract\n\nIn this tutorial, we will explore a complete pipeline for annotating images and videos of marine species. As an example, we will use a video from the [Moorev](https://moorev.fr/) project, cut into a short clip and available on Zenodo.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can we use artificial intelligence to annotate images of marine species?\n - How can we check and correct these annotations?\n\n\n## Learning Objectives\n\n- Use SAM3 to automatically detect marine species from a simple keyword\n- Correct generated annotations with Edit COCO Annotation\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/TuturBaba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/TuturBaba/",
+      "name": "Arthur Barreau",
+      "image": "https://avatars.githubusercontent.com/TuturBaba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ISYEB/",
+          "name": "Institut de Systématique, Évolution, Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://isyeb.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moorev/",
+          "name": "MOOREV",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://moorev.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+          "name": "Muséum national d'Histoire naturelle",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/sorbonneuniv/",
+          "name": "Sorbonne Université",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.sorbonne-universite.fr/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+          "name": "Muséum national d'Histoire naturelle",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/dataterra/",
+          "name": "DATA TERRA",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.data-terra.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moorev/",
+          "name": "MOOREV",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://moorev.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fnso2019/",
+          "name": "OpenMetaPaper",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ouvrirlascience.fr/national-fund-for-open-science/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "@id": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/NadineLeBris/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/NadineLeBris/",
+      "name": "Nadine Le Bris",
+      "image": "https://avatars.githubusercontent.com/NadineLeBris",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moorev/",
+          "name": "MOOREV",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://moorev.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/sorbonneuniv/",
+          "name": "Sorbonne Université",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.sorbonne-universite.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ISYEB/",
+          "name": "Institut de Systématique, Évolution, Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://isyeb.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+          "name": "Muséum national d'Histoire naturelle",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.mnhn.fr/fr"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0142-4847",
+      "@id": "https://orcid.org/0000-0002-0142-4847"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.20639741",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>AI pipeline for annotating marine species (Project Moorev - Marine)</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/TuturBaba/" class="contributor-badge contributor-TuturBaba"><img src="https://avatars.githubusercontent.com/TuturBaba?s=36" alt="Arthur Barreau avatar" width="36" class="avatar" />
+    Arthur Barreau</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
+    Yvan Le Bras</a><a href="/training-material/hall-of-fame/NadineLeBris/" class="contributor-badge contributor-NadineLeBris"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/NadineLeBris?s=36" alt="Nadine Le Bris avatar" width="36" class="avatar" />
+    Nadine Le Bris</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can we use artificial intelligence to annotate images of marine species?</p>
+</li>
+        
+        <li><p>How can we check and correct these annotations?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Use SAM3 to automatically detect marine species from a simple keyword</p>
+</li>
+        
+        <li><p>Correct generated annotations with Edit COCO Annotation</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+
+        
+        <div><strong><i class="fas fa-language" aria-hidden="true"></i> Translations:</strong> <a href="./tutorial_FR.html"> <i class="fas fa-language" aria-hidden="true"></i> Français </a></div>
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.20639741">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 24, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 24, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In this tutorial, we will explore a complete pipeline for annotating images and videos of marine species. As an example, we will use a video from the <a href="https://moorev.fr/">Moorev</a> project, cut into a short clip and available on Zenodo.</p>
+
+<p>This pipeline has two main steps:</p>
+<ol>
+  <li><strong>Automatic annotation</strong> using a text prompt with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/sam3_semantic_segmentation/sam3_semantic_segmentation/1.0.1+galaxy6" title="SAM3 Semantic Segmentation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SAM3 Semantic Segmentation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1+galaxy6)</span></li>
+  <li><strong>Correction and validation</strong> of the annotations with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/edit_coco_annotation/edit_coco_annotation/1.0.0+galaxy0" title="Edit COCO Annotation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Edit COCO Annotation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0+galaxy0)</span></li>
+</ol>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-learn-more-about-the-moorev-project"><button class="gtn-boxify-button details" type="button" aria-controls="details-learn-more-about-the-moorev-project" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Learn more about the MOOREV project</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p><strong>MOOREV</strong>: Microclimates and observation tools for the responses of marine life on the seafloor</p>
+
+  <p><strong>Observing interactions between marine species facing microclimatic gradients on the shore</strong></p>
+
+  <p>The MOOREV project is led by Nadine Le Bris (Sorbonne University, Concarneau Marine Station),
+with support from the National Museum of Natural History, the CNRS, and the Fondation de France.
+It started in 2022. Its goal is to better understand, and help others understand, the effects of
+climate disturbance on coastal biodiversity.</p>
+
+  <p>The project uses underwater imaging methods to observe benthic species at the individual level,
+across different shore habitats. Groups of school students repeat data collection at their study
+sites, which are labelled by the Educational Marine Areas program of the French Biodiversity
+Office, across tide cycles, seasons, and years.</p>
+
+  <p>The project brings together researchers and environmental education professionals. It is
+co-built with school classes and their teachers, using the shore as a natural laboratory. In the
+long term, it aims to support protection and conservation measures, taking into account the links
+between climate change and marine socio-ecosystems.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-in-this-tutorial-we-will-cover">Agenda: In this tutorial, we will cover:</div>
+
+<ol id="markdown-toc">
+  <li><a href="#loading-the-data" id="markdown-toc-loading-the-data">Loading the data</a></li>
+  <li><a href="#automatic-annotation-with-sam3" id="markdown-toc-automatic-annotation-with-sam3">Automatic annotation with SAM3</a></li>
+  <li><a href="#correcting-and-validating-the-annotations" id="markdown-toc-correcting-and-validating-the-annotations">Correcting and validating the annotations</a>    <ol>
+      <li><a href="#correcting-with-edit-coco-annotation" id="markdown-toc-correcting-with-edit-coco-annotation">Correcting with Edit COCO Annotation</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="loading-the-data">Loading the data</h1>
+
+<p>The video used in this tutorial is a short clip taken directly from the Moorev project, available on Zenodo. This clip was chosen because it shows most of the features of the tools presented here.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-load-the-video-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Load the video into Galaxy</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial (for example: “Annotation Moorev”)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the file from <a href="https://doi.org/10.5281/zenodo.20639741">Zenodo</a>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20639741/files/Lieujaune-PorzBreign-GOPR5167_Edited.mp4?download=1
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the file is shown in <strong>green</strong> in the history before you continue</p>
+    </li>
+    <li>
+      <p>Check the datatype</p>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-check-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Check the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>Galaxy assigns the datatype automatically. Since most tools use it to filter their inputs, it is important to make sure it is correct. In our case, check that the type is <code class="language-plaintext highlighter-rouge">mp4</code>. If it is not, the import may have had an error, and you can change the type manually.</p>
+
+        <p><img src="../../images/Annotation_AI_Pipeline/Check_data.png" alt="Check the datatype. " style="width:75%; display:block; margin:auto;" width="1069" height="455" loading="lazy" /></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">mp4</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="automatic-annotation-with-sam3">Automatic annotation with SAM3</h1>
+
+<p>SAM3 is a text-guided segmentation model. It automatically detects and segments objects that match your prompt, with no need for previous annotations.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-a-dedicated-sam3-tutorial-exists"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-dedicated-sam3-tutorial-exists" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: A dedicated SAM3 tutorial exists</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If you want to learn more about SAM3 and its parameters, check out the dedicated tutorial:
+<a href="/training-material/topics/ecology/tutorials/SAM3/tutorial.html">SAM3 Tutorial</a></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-sam3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Setting up SAM3</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/sam3_semantic_segmentation/sam3_semantic_segmentation/1.0.1+galaxy6" title="SAM3 Semantic Segmentation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SAM3 Semantic Segmentation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1+galaxy6)</span> with these parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Model data”</em>: <code class="language-plaintext highlighter-rouge">Segment Anything Model 3 (SAM 3)</code> (default)</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Input type”</em>: <code class="language-plaintext highlighter-rouge">One video</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input video file”</em>: <code class="language-plaintext highlighter-rouge">1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Video quality”</em>: <code class="language-plaintext highlighter-rouge">Original quality (lossless)</code> (default)</li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Additional output formats”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Export individual frames”</em>: <code class="language-plaintext highlighter-rouge">Both annoted and raw frames</code></li>
+          </ul>
+        </li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Text prompt”</em>: <code class="language-plaintext highlighter-rouge">fish</code></li>
+        <li><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> <em>“Confidence threshold”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+        <li><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> <em>“Video frame stride”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>“Show bounding boxes on annotated output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span>  <em>“Inference image size”</em>: <code class="language-plaintext highlighter-rouge">644 (default, balanced)</code> (default)</li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>“Normalize outputs?”</em>: <code class="language-plaintext highlighter-rouge">No</code> (default)</li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>“Normalize outputs?”</em>: <code class="language-plaintext highlighter-rouge">No</code> (default)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Run Tool</strong></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-processing-time"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Processing time</div>
+
+        <p>Processing can take several minutes, depending on the length of the video and the server resources. Wait until the outputs turn green in the history.</p>
+
+      </blockquote>
+    </li>
+    <li>Once it is finished, you will have these items in your history:
+      <ul>
+        <li><strong>5: Annotation COCO</strong>: <code class="language-plaintext highlighter-rouge">annotations.json</code> — the segmentation masks in COCO format</li>
+        <li><strong>4: Annotated Frames</strong>: the collection of extracted images (annotated)</li>
+        <li><strong>3: Raw Frames</strong>: the collection of extracted images (not annotated)</li>
+        <li><strong>2: COCO Extracted Frames</strong>: the annotated video, for visual checking</li>
+      </ul>
+    </li>
+    <li>
+      <p>Check the results visually by clicking <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on <strong>Annotated Outputs</strong></p>
+
+      <p><img src="../../images/Annotation_AI_Pipeline/Visualize_output_SAM3-ezgif.com-video-to-gif-converter.gif" alt="SAM3 segmentation result on the video. " style="width:75%; display:block; margin:auto;" width="1280" height="800" loading="lazy" /></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-limits-of-sam3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Limits of SAM3</div>
+
+        <p>As you can see, not all annotations are perfect. False positives are the most common problem. This is why the next step, correction and validation, is essential.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="correcting-and-validating-the-annotations">Correcting and validating the annotations</h1>
+
+<p>We will now see how to correct the annotations with <strong>Edit COCO Annotation</strong>, and then check the result with <strong>COCO Annotation Visualizer</strong>.</p>
+
+<h2 id="correcting-with-edit-coco-annotation">Correcting with Edit COCO Annotation</h2>
+
+<p>The <strong>Edit COCO Annotation</strong> tool lets you modify COCO annotations without opening the images. It has three modes:</p>
+
+<ul>
+  <li><strong>Keep</strong>: keep only the listed IDs (remove all the others) — useful when only a few IDs need to be kept; it can also rename them</li>
+  <li><strong>Remove</strong>: remove only the listed IDs</li>
+  <li><strong>Rename</strong>: rename the listed IDs without removing any others</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-remove-or-rename-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep, remove, or rename annotations</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/edit_coco_annotation/edit_coco_annotation/1.0.0+galaxy0" title="Edit COCO Annotation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Edit COCO Annotation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0+galaxy0)</span> with these parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“COCO annotation file”</em>: <code class="language-plaintext highlighter-rouge">5: Annotation COCO </code>
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Track to keep”</em>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Track IDs”</em>: <code class="language-plaintext highlighter-rouge">0,4-6</code></li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Rename”</em>: <code class="language-plaintext highlighter-rouge">Gobiusculus flavescens</code></li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Frame min”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Frame max”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“2: Track to keep”</em>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Track IDs”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Rename”</em>: <code class="language-plaintext highlighter-rouge">Crenilabre</code></li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Frame min”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Frame max”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+              </ul>
+            </li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Frame max”</em>: <code class="language-plaintext highlighter-rouge">Empty</code> (default)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-the-same-result-in-two-steps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The same result in two steps</div>
+
+        <p>You can also get the same result in two steps: use <strong>Remove</strong> to remove IDs 1 and 3, then use <strong>Rename</strong> to rename the remaining groups.</p>
+
+        <p>Note: SAM3 can sometimes give the same Track ID to two different objects at different moments in the video. This is why the <strong>Frame min</strong> and <strong>Frame max</strong> parameters were added.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Once it is finished, you will have this item in your history:</p>
+      <ul>
+        <li><strong>54: Edited COCO annotations</strong>: the JSON file in COCO format, modified with the parameters set above</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="visualizing-the-annotations-with-coco-annotation-visualizer">Visualizing the annotations with COCO Annotation Visualizer</h3>
+
+<p>This tool lets you easily visualize a JSON file in COCO format, shown on top of a video or images. Here we use it to check our annotations after correction.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-coco-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualize the COCO annotations</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/coco_annotation_visualizer/coco_annotation_visualizer/1.0.0" title="COCO Annotation Visualizer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>COCO Annotation Visualizer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with these parameters:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- &lt;i class="far fa-file" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-file&lt;/span&gt; *"Input video file"*: `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
+- &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Frame stride"*: `5` - &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Frame stride"*: `5` - &lt;i class="far fa-file" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-file&lt;/span&gt; *"COCO annotation file"*: `54: Edited COCO annotations` - &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-text&lt;/span&gt; *"Filter categories"*: `Empty` (default) - In *"Display options"*:
+- &lt;i class="fas fa-toggle-on" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-toggle&lt;/span&gt; *"Show bounding boxes"*: `No`
+- &lt;i class="fas fa-toggle-on" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-toggle&lt;/span&gt; *"Show segmentation masks"*: `Yes` (default)
+- &lt;i class="fas fa-toggle-on" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-toggle&lt;/span&gt; *"Show category labels"*: `Yes` (default)
+- &lt;i class="fas fa-toggle-on" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-toggle&lt;/span&gt; *"Show annotation count"*: `No` (default)
+- &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Mask opacity"*: `0.4` (default)
+- &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Bounding box thickness"*: `2` (default)
+- &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Label font scale"*: `0.6` (default)
+- &lt;i class="fas fa-filter" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-select&lt;/span&gt; *"Color mode"*: `Per instance (different color for each annotation)`
+- &lt;i class="fas fa-filter" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-select&lt;/span&gt; *"Output image format"*: `PNG (lossless)` (default)
+- &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Video frame rate (FPS)"*: `5.0` - &lt;i class="fas fa-code-commit" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;version&lt;/span&gt; *"Video frame rate (FPS)"*: `5.0` - &lt;i class="fas fa-toggle-on" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;param-toggle&lt;/span&gt; *"Annotated frames only"*: `Yes` (default)
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Once it is finished, you will have these items in your history:</p>
+      <ul>
+        <li><strong>56: Annoted video</strong>: the annotated video</li>
+        <li><strong>55: Annotated images</strong>: each annotated frame</li>
+      </ul>
+
+      <figure id="figure-1" style="max-width: 90%;"><img src="../../images/Annotation_AI_Pipeline/Visualize_output_Coco_Visualizer.gif" alt="Annotated video with the COCO segmentation masks. " style="width:65%; display:block; margin:auto;" width="800" height="450" loading="lazy" /><a target="_blank" href="../../images/Annotation_AI_Pipeline/Visualize_output_Coco_Visualizer.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 56: Annoted video</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You now know how to use this complete pipeline to annotate videos of marine species:</p>
+
+<ul>
+  <li><strong>SAM3</strong> automatically generates annotations from a simple text prompt</li>
+  <li><strong>Edit COCO</strong> lets you quickly clean up annotations by keeping, removing, or renaming track IDs</li>
+  <li><strong>COCO Annotation Visualizer</strong> lets you visually check the results at each step</li>
+</ul>
+
+<p>This pipeline can be reused for other species or other marine imaging projects — you just need to adapt the prompt and the SAM3 confidence settings.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've finished the tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>AI does most of the annotation work, but a human eye is still needed to check and correct it.</p>
+</li>
+                        
+                        <li><p>Once set up, this pipeline can be reused for other species or other projects.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/Annotation_AI_Pipeline:en"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/Annotation_AI_Pipeline:en">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Arthur Barreau, Yvan Le Bras, Nadine Le Bris,  <b>AI pipeline for annotating marine species (Project Moorev - Marine) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-Annotation_AI_Pipeline,
+author = "Arthur Barreau and Yvan Le Bras and Nadine Le Bris",
+	title = "AI pipeline for annotating marine species (Project Moorev - Marine) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">References</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/moorev/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/LogoMOOREVsept2025.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">MOOREV</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/sorbonneuniv/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/SU.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">SU</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/ISYEB/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logo_isyeb.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ISYEB</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/mnhn/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/MNHN-logo.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">MNHN</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/pndb/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/PNDB_sub.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">PNDB</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: coco_annotation_visualizer
+  owner: bgruening
+  revisions: 7b390f574967
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: edit_coco_annotation
+  owner: bgruening
+  revisions: b702f65d511e
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sam3_semantic_segmentation
+  owner: ecology
+  revisions: e938172541c4
+  tool_panel_section_label: Computer Vision
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/Annotation_AI_Pipeline/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b593e216408f173fe4213aca325aee8d7da7d2b3">b593e21</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
