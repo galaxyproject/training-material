@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@716512bffa006a73a9780ccf62a68fcfd58cb909",
+		release: "galaxy-training-network@e692d85822a0a522953bcd6133eacbc8f5d76869",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hybrid genome assembly - Nanopore and Illumina">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-06 07:46:12 +0000">
+<meta name="DC.date" content="2026-07-24 01:19:27 +0000">
 <meta name="DC.creator" content="Grace Hall">
 <meta name="DC.creator" content="Tristan Reynolds"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-06 07:46:12 +0000",
+  "dateModified": "2026-07-24 01:19:27 +0000",
   "datePublished": "2025-11-03 09:40:11 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -276,7 +276,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Hybrid genome assembly - Nanopore and Illumina",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT2H",
   "teaches": "- Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly\n- Become familiar with genome assembly and polishing programs\n- Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent\n- Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!",
   "keywords": [
@@ -1044,6 +1044,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
                         
                             <li>
                               <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Quality Control</a>
@@ -1056,18 +1068,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
                     
                 
                     
@@ -1239,7 +1239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 3, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 24, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1259,7 +1259,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1423,9 +1423,10 @@ In this tutorial, we know our organism is within the ‘Bacillales’ order.</p>
   <div class="box-title hands-on-title" id="hands-on-run-busco"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy1)</span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy2)</span>:
       <ul>
         <li><em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code></li>
+        <li><em>“Cached database with lineage”</em>: <code class="language-plaintext highlighter-rouge">All odb10 2026-03-19-213122</code></li>
         <li><em>“Mode”</em>:
           <ul>
             <li><em>“Select a gene predictor”</em>: <code class="language-plaintext highlighter-rouge">Augustus</code></li>
@@ -1471,6 +1472,15 @@ In this tutorial, we know our organism is within the ‘Bacillales’ order.</p>
 
 </blockquote>
 
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-busco-databases"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: BUSCO Databases</div>
+  <ul>
+    <li>The available lineages and number of BUSCO genes that will be compared in a chosen lineage will depend on the selected BUSCO database.</li>
+    <li>For example, for the <code class="language-plaintext highlighter-rouge">Bacillales</code> lineage used in this tutorial, the <code class="language-plaintext highlighter-rouge">All odb10 2026-03-19-213122</code> database contains 450 BUSCO genes, while the <code class="language-plaintext highlighter-rouge">All odb12 2026-03-20-145944</code> database contains 429 BUSCO genes. The <code class="language-plaintext highlighter-rouge">Busco v5 Lineage Datasets</code> database does not include BUSCO genes for the <code class="language-plaintext highlighter-rouge">Bacillales</code> lineage.</li>
+    <li>Care should always be taken to select a BUSCO database that contains the lineage of interest and use a consistent database when comparing BUSCO results.</li>
+  </ul>
+</blockquote>
+
 <h2 id="draft-assembly-with-flye--nanopore-reads">Draft assembly with Flye + Nanopore reads</h2>
 
 <p>Our first assembly will use the long-read data to create a draft genome, then the short-read data to “polish” (improve) the draft into a better assembly.</p>
@@ -1510,9 +1520,10 @@ In this tutorial, we know our organism is within the ‘Bacillales’ order.</p>
   <div class="box-title hands-on-title" id="hands-on-run-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy1)</span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy2)</span>:
       <ul>
         <li><em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+        <li><em>“Cached database with lineage”</em>: <code class="language-plaintext highlighter-rouge">All odb10 2026-03-19-213122</code></li>
         <li><em>“Mode”</em>:
           <ul>
             <li><em>“Select a gene predictor”</em>: <code class="language-plaintext highlighter-rouge">Augustus</code></li>
@@ -2372,6 +2383,11 @@ tools:
   revisions: 4e70d88adf2f
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: busco
+  owner: iuc
+  revisions: c5a90fa4b8dd
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: multiqc
   owner: iuc
   revisions: e4dd4c0622f6
@@ -2513,7 +2529,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/716512bffa006a73a9780ccf62a68fcfd58cb909">716512b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e692d85822a0a522953bcd6133eacbc8f5d76869">e692d85</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
