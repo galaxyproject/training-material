@@ -23,6 +23,8 @@ contributions:
     - annefou
   funding:
     - uni-freiburg
+tags:
+- galaxy-intro
 ---
 
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.
