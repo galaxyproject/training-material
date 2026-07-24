@@ -1,0 +1,23 @@
+- doc: Test the Image Learner workflow for GTEx tissue classification with prepared tutorial inputs
+  job:
+    'selected_gtex_v11_tpm_image_tissue_labels':
+      location: https://zenodo.org/records/19963477/files/selected_gtex_v11_tpm_image_tissue_labels.csv
+      class: File
+      filetype: csv
+    'selected_gtex_v11_tpm_image_tissue_dataset':
+      location: https://zenodo.org/records/19963477/files/selected_gtex_v11_tpm_image_tissue_dataset.zip
+      class: File
+      filetype: zip
+  outputs:
+    report:
+      asserts:
+        has_text:
+          text: "Image Classification Report"
+    model:
+      asserts:
+        has_text:
+          text: "model"
+    predictions:
+      asserts:
+        has_n_columns:
+          n: 8

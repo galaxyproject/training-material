@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: GTEx Tissue Modeling with Galaxy Image Learner / GTEx Tissue Modeling with Galaxy Image Learner / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@33f916e51b4dde6c469dc2a53585635a45603fb1",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="GTEx Tissue Modeling with Galaxy Image Learner">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-07-24 08:59:56 +0000">
+<meta name="DC.creator" content="Paulo Cilas Morais Lyra Junior">
+<meta name="DC.creator" content="Allissa Dillman">
+<meta name="DC.creator" content="Natalie Kucher">
+<meta name="DC.creator" content="Alyssa Pybus">
+<meta name="DC.creator" content="Junhao Qiu">
+<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / GTEx Tissue Modeling with Galaxy Image Learner / Hands-on: GTEx Tissue Modeling with Galaxy Image Learner">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "GTEx Tissue Modeling with Galaxy Image Learner",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-07-24 08:59:56 +0000",
+  "datePublished": "2026-07-24 08:59:56 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "Convolutional neural networks can learn hierarchical features directly from image pixels, making them powerful tools for image classification. This capability has motivated researchers to encode genomic and other non-image data as image-like representations that can be analyzed with image-based deep learning models. In particular, RNA-seq gene expression profiles have been transformed into two-dimensional images and classified by fine-tuning pretrained convolutional neural networks. Galaxy's Image Learner makes this general strategy accessible through a web interface in which users provide images, labels, and training settings.",
+  "learningResourceType": "e-learning",
+  "name": "GTEx Tissue Modeling with Galaxy Image Learner",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Import a prepared GTEx v11 Image Learner metadata table and image ZIP archive.\n- Optionally rebuild the prepared files from GTEx v11 gene TPM and sample annotation files.\n- Train and evaluate a multi-class tissue classifier in Galaxy.",
+  "keywords": [
+    "Statistics and machine learning",
+    "GTEx",
+    "Tissue Classification",
+    "Gene Expression",
+    "Image Learner",
+    "Deep Learning"
+  ],
+  "description": "## Abstract\n\nConvolutional neural networks can learn hierarchical features directly from image pixels, making them powerful tools for image classification. This capability has motivated researchers to encode genomic and other non-image data as image-like representations that can be analyzed with image-based deep learning models. In particular, RNA-seq gene expression profiles have been transformed into two-dimensional images and classified by fine-tuning pretrained convolutional neural networks. Galaxy's Image Learner makes this general strategy accessible through a web interface in which users provide images, labels, and training settings.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can GTEx gene expression profiles be transformed into image-like inputs for Image Learner?\n - How do GTEx sample annotations provide tissue labels for supervised classification?\n - How can this workflow be run on any Galaxy server with Image Learner installed?\n\n\n## Learning Objectives\n\n- Import a prepared GTEx v11 Image Learner metadata table and image ZIP archive.\n- Optionally rebuild the prepared files from GTEx v11 gene TPM and sample annotation files.\n- Train and evaluate a multi-class tissue classifier in Galaxy.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "name": "Paulo Cilas Morais Lyra Junior",
+      "image": "https://avatars.githubusercontent.com/paulocilasjr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4403-6684",
+      "@id": "https://orcid.org/0000-0002-4403-6684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allissadillman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allissadillman/",
+      "name": "Allissa Dillman",
+      "image": "https://avatars.githubusercontent.com/allissadillman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/",
+      "name": "Natalie Kucher",
+      "image": "https://avatars.githubusercontent.com/nakucher",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/afpybus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/afpybus/",
+      "name": "Alyssa Pybus",
+      "image": "https://avatars.githubusercontent.com/afpybus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9722-3977",
+      "@id": "https://orcid.org/0000-0002-9722-3977"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "name": "Junhao Qiu",
+      "image": "https://avatars.githubusercontent.com/qchiujunhao",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0005-4322-3401",
+      "@id": "https://orcid.org/0009-0005-4322-3401"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "name": "Jeremy Goecks",
+      "image": "https://avatars.githubusercontent.com/jgoecks",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4583-5226",
+      "@id": "https://orcid.org/0000-0002-4583-5226"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>GTEx Tissue Modeling with Galaxy Image Learner</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/paulocilasjr/" class="contributor-badge contributor-paulocilasjr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulocilasjr?s=36" alt="Paulo Cilas Morais Lyra Junior avatar" width="36" class="avatar" />
+    Paulo Cilas Morais Lyra Junior</a><a href="/training-material/hall-of-fame/allissadillman/" class="contributor-badge contributor-allissadillman"><img src="https://avatars.githubusercontent.com/allissadillman?s=36" alt="Allissa Dillman avatar" width="36" class="avatar" />
+    Allissa Dillman</a><a href="/training-material/hall-of-fame/nakucher/" class="contributor-badge contributor-nakucher"><img src="https://avatars.githubusercontent.com/nakucher?s=36" alt="Natalie Kucher avatar" width="36" class="avatar" />
+    Natalie Kucher</a><a href="/training-material/hall-of-fame/afpybus/" class="contributor-badge contributor-afpybus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/afpybus?s=36" alt="Alyssa Pybus avatar" width="36" class="avatar" />
+    Alyssa Pybus</a><a href="/training-material/hall-of-fame/qchiujunhao/" class="contributor-badge contributor-qchiujunhao"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/qchiujunhao?s=36" alt="Junhao Qiu avatar" width="36" class="avatar" />
+    Junhao Qiu</a><a href="/training-material/hall-of-fame/jgoecks/" class="contributor-badge contributor-jgoecks"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jgoecks?s=36" alt="Jeremy Goecks avatar" width="36" class="avatar" />
+    Jeremy Goecks</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can GTEx gene expression profiles be transformed into image-like inputs for Image Learner?</p>
+</li>
+        
+        <li><p>How do GTEx sample annotations provide tissue labels for supervised classification?</p>
+</li>
+        
+        <li><p>How can this workflow be run on any Galaxy server with Image Learner installed?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Import a prepared GTEx v11 Image Learner metadata table and image ZIP archive.</p>
+</li>
+        
+        <li><p>Optionally rebuild the prepared files from GTEx v11 gene TPM and sample annotation files.</p>
+</li>
+        
+        <li><p>Train and evaluate a multi-class tissue classifier in Galaxy.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/workflows/" title="GTEx Tissue Modeling with Galaxy Image Learner workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 24, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 24, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Convolutional neural networks can learn hierarchical features directly from image pixels, making them powerful tools for image classification. This capability has motivated researchers to encode genomic and other non-image data as image-like representations that can be analyzed with image-based deep learning models <span class="citation"><a href="#Sharma2019">Sharma <i>et al.</i> 2019</a></span> <span class="citation"><a href="#Zhang2024">Zhang <i>et al.</i> 2024</a></span>. In particular, RNA-seq gene expression profiles have been transformed into two-dimensional images and classified by fine-tuning pretrained convolutional neural networks <span class="citation"><a href="#Alharbi2020">Alharbi <i>et al.</i> 2020</a></span>. Galaxy’s Image Learner makes this general strategy accessible through a web interface in which users provide images, labels, and training settings.</p>
+
+<p>In this tutorial, we apply that strategy to GTEx gene expression data, which are normally represented as tables containing thousands of gene-level TPM values for each sample. We log-transform each sample’s expression vector, place the values into a fixed-order square array, save the array as a grayscale image, and train Image Learner to predict the tissue of origin. This simple transformation is intended as a teaching example: unlike methods that arrange related features near one another <span class="citation"><a href="#Sharma2019">Sharma <i>et al.</i> 2019</a></span>, the spatial relationships in these images are determined by gene order and should not be interpreted as biological proximity.</p>
+
+<p>The main tutorial uses prepared files from Zenodo so that you can focus on configuring Image Learner, training the tissue classifier, and interpreting its outputs. An optional section explains how to generate the images and labels from the raw GTEx v11 files, allowing you to rebuild the dataset, select different tissues, change the number of samples per tissue, or explore alternative preprocessing choices.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#gtex-dataset" id="markdown-toc-gtex-dataset">GTEx Dataset</a>    <ol>
+      <li><a href="#gtex-dataset-transformation" id="markdown-toc-gtex-dataset-transformation">GTEx dataset transformation</a></li>
+    </ol>
+  </li>
+  <li><a href="#workflow" id="markdown-toc-workflow">Workflow</a>    <ol>
+      <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
+      <li><a href="#environment-and-data-upload" id="markdown-toc-environment-and-data-upload">Environment and Data Upload</a></li>
+      <li><a href="#train-the-tissue-classifier" id="markdown-toc-train-the-tissue-classifier">Train the Tissue Classifier</a></li>
+      <li><a href="#interpret-the-outputs" id="markdown-toc-interpret-the-outputs">Interpret the Outputs</a></li>
+      <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+    </ol>
+  </li>
+  <li><a href="#limitations" id="markdown-toc-limitations">Limitations</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="gtex-dataset">GTEx Dataset</h1>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-background"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background</div>
+
+  <p>GTEx is a large reference resource for studying human gene expression across tissues <span class="citation"><a href="#GTEx2020">GTEx Consortium 2020</a></span>. The modeling idea used here treats each sample’s vector of gene TPM values as a structured image: values are log-transformed, padded to a square, and saved as a grayscale image. A tissue classifier can then learn tissue-specific expression patterns using Galaxy Image Learner.</p>
+
+</blockquote>
+
+<p>The raw data used to create this tutorial dataset were downloaded from the <a href="https://gtexportal.org/">GTEx Portal</a>. The GTEx Portal provides multiple GTEx releases and many file types, including expression matrices, metadata, eQTL files, histology resources, and other analysis outputs. For this image-classification workflow, we need two specific pieces of information:</p>
+
+<ul>
+  <li>A gene-level expression matrix, so each sample can be represented by a vector of expression values.</li>
+  <li>Sample metadata, so each sample can be assigned a tissue label for supervised learning.</li>
+</ul>
+
+<p>The GTEx v11 gene TPM file and v11 sample attributes file provide exactly those inputs. TPM values are normalized expression measurements that are appropriate for comparing gene expression profiles across samples in this tutorial context. The sample attributes file links each sample ID to tissue metadata, including the detailed tissue label (<code class="language-plaintext highlighter-rouge">SMTSD</code>) used as the class label.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Direct URL</th>
+      <th>Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_tpm.gct.gz</code></td>
+      <td><a href="https://storage.googleapis.com/adult-gtex/bulk-gex/v11/rna-seq/GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_tpm.gct.gz">GTEx v11 gene TPM GCT</a></td>
+      <td>Gene TPM matrix</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GTEx_Analysis_v11_Annotations_SampleAttributesDS.txt</code></td>
+      <td><a href="https://storage.googleapis.com/adult-gtex/annotations/v11/metadata-files/GTEx_Analysis_v11_Annotations_SampleAttributesDS.txt">GTEx v11 sample attributes</a></td>
+      <td>Sample labels and QC metadata</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The raw GCT expression matrix has genes as rows and samples as columns. The sample attributes file includes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SAMPID</code></td>
+      <td>GTEx sample identifier. This must match expression matrix sample columns.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SMTS</code></td>
+      <td>Broad tissue category.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SMTSD</code></td>
+      <td>Detailed tissue label used as the classification target in this tutorial.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The raw expression matrix is large: it contains many genes and many GTEx samples, so loading the full table into memory can be expensive. Each sample column contains the expression profile for one biospecimen. Each row corresponds to a gene, and the values summarize RNA-seq abundance as TPM. The annotation table contains technical and biological metadata for the samples, including identifiers, tissue categories, and quality-related fields.</p>
+
+<p>This structure makes GTEx useful for many machine learning tasks. In this tutorial, the task is tissue classification: given the expression pattern of a sample, can a model identify the tissue it came from? Because different tissues express different sets of genes at different levels, GTEx provides a strong biological signal for this type of classification problem.</p>
+
+<h2 id="gtex-dataset-transformation">GTEx dataset transformation</h2>
+
+<p>We will train the model with Image Learner, a Galaxy tool available on Galaxy servers such as <a href="https://usegalaxy.org/">usegalaxy.org</a> when the tool is installed. Image Learner expects image-based training data in a specific format:</p>
+
+<ul>
+  <li>A metadata table with one row per image.</li>
+  <li>An <code class="language-plaintext highlighter-rouge">image_path</code> column that names the image file inside the ZIP archive.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">label</code> column that contains the class to predict.</li>
+  <li>A ZIP archive containing all image files referenced by the metadata table.</li>
+</ul>
+
+<p>To convert tabular gene expression data into images, we treat each sample’s gene expression values as a long list of numbers. First, the values are log-transformed to reduce the effect of very large expression values. Then the vector is padded with zeros until it can fill a square. Finally, the square array is saved as a grayscale image, where darker and lighter pixels represent lower and higher transformed expression values. The image is not a photograph or a biological tissue picture; it is a structured representation of the sample’s expression profile that an image model can process.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-how-expression-values-become-image-inputs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-expression-values-become-image-inputs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: How expression values become image inputs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>We have already made the generated Image Learner inputs available on Zenodo, and those prepared files are the recommended starting point for this tutorial. However, you can also generate the files inside Galaxy with the JupyterLab Interactive Tool, or run the same script locally if your computer has Python, the required Python packages, enough memory to process the GTEx expression matrix, and enough disk space for the downloaded GTEx files and generated images. By changing parameters such as <code class="language-plaintext highlighter-rouge">SELECTED_TISSUES</code> and <code class="language-plaintext highlighter-rouge">SAMPLES_PER_TISSUE</code>, you can create different tissue-classification tasks and test how the model behaves.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-optional-generate-gtex-expression-images-in-galaxy-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Optional: Generate GTEx expression images in Galaxy JupyterLab</div>
+
+    <ol>
+      <li>
+        <p>Create or switch to the Galaxy history where you want the rebuilt files to appear.</p>
+      </li>
+      <li>
+        <p>In the Galaxy tool panel, open <strong>Interactive Tools</strong> and select <strong>JupyterLab Notebook</strong>.</p>
+      </li>
+      <li>
+        <p>Use the default JupyterLab environment. Click <strong>Run Tool</strong> to start the JupyterLab Interactive Tool.</p>
+
+        <p>The JupyterLab job will appear in your Galaxy history. Wait until it is running, then open it from the history dataset or from <strong>User</strong> &gt; <strong>Active Interactive Tools</strong>.</p>
+      </li>
+      <li>
+        <p>In JupyterLab, open a terminal with <strong>Others</strong> &gt; <strong>Terminal</strong>.</p>
+      </li>
+      <li>
+        <p>Check that the Python packages needed by the script are available:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-c</span> <span class="s2">"import numpy, pandas, matplotlib, psutil; print('Python environment is ready')"</span>
+</code></pre></div>        </div>
+
+        <p>If this command reports a missing package, install the missing dependencies in the JupyterLab environment:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--user</span> numpy pandas matplotlib psutil
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Download the GTEx v11 expression matrix and sample annotation file directly from the GTEx links:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-L</span> <span class="nt">-o</span> GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_tpm.gct.gz https://storage.googleapis.com/adult-gtex/bulk-gex/v11/rna-seq/GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_tpm.gct.gz
+curl <span class="nt">-L</span> <span class="nt">-o</span> GTEx_Analysis_v11_Annotations_SampleAttributesDS.txt https://storage.googleapis.com/adult-gtex/annotations/v11/metadata-files/GTEx_Analysis_v11_Annotations_SampleAttributesDS.txt
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Create the Python script in JupyterLab:</p>
+
+        <ul>
+          <li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Python File</strong>.</li>
+          <li>Paste the script below into the editor.</li>
+          <li>Save the file, then rename it in the JupyterLab file browser to <code class="language-plaintext highlighter-rouge">gtex_v11_to_images_adaptive.py</code>.</li>
+          <li>Keep it in the same folder as the two downloaded GTEx files.</li>
+        </ul>
+      </li>
+      <li>
+        <p>Before running the script, edit the variables near the top if you want to change the dataset:</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">SELECTED_TISSUES</code>: choose which GTEx tissue labels to model. The names must match <code class="language-plaintext highlighter-rouge">SMTSD</code> values in the GTEx annotation file.</li>
+          <li><code class="language-plaintext highlighter-rouge">SAMPLES_PER_TISSUE</code>: choose how many samples to use per tissue. Use a small value first if the Galaxy server has limited memory.</li>
+          <li><code class="language-plaintext highlighter-rouge">RANDOM_SEED</code>: keep this fixed for reproducible sampling, or change it to select a different random subset.</li>
+          <li><code class="language-plaintext highlighter-rouge">NORMALIZATION_METHOD</code>: use <code class="language-plaintext highlighter-rouge">log</code> for the recommended default, or test <code class="language-plaintext highlighter-rouge">minmax</code>, <code class="language-plaintext highlighter-rouge">zscore</code>, or <code class="language-plaintext highlighter-rouge">none</code>.</li>
+          <li><code class="language-plaintext highlighter-rouge">LUDWIG_OUTPUT</code> and <code class="language-plaintext highlighter-rouge">ZIP_OUTPUT</code>: change these only if you want different output filenames.</li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-choosing-tissues-and-sample-counts"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-tissues-and-sample-counts" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Choosing tissues and sample counts</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p><code class="language-plaintext highlighter-rouge">SELECTED_TISSUES</code> and <code class="language-plaintext highlighter-rouge">SAMPLES_PER_TISSUE</code> are intentionally explicit. Start with a small balanced task so the tutorial runs quickly, then expand the tissue list or increase the sample count once the workflow is working on your Galaxy server.</p>
+
+        </blockquote>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># gtex_v11_to_images_adaptive.py
+#
+# Memory-adaptive GTEx V11 image pipeline for Galaxy JupyterLab.
+#
+# What this script does:
+#   1. Checks available CPU and RAM.
+#   2. Chooses safer/faster settings based on the computer.
+#   3. Loads GTEx annotation metadata.
+#   4. Selects samples from selected tissues.
+#   5. Reads the large TPM matrix in chunks.
+#   6. Creates one grayscale JPG image per sample.
+#   7. Creates ludwig_input.csv.
+#   8. Zips all images for Galaxy upload.
+</span>
+<span class="kn">import</span> <span class="n">math</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">zipfile</span>
+<span class="kn">from</span> <span class="n">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="n">matplotlib</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">matplotlib</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="sh">"</span><span class="s">Agg</span><span class="sh">"</span><span class="p">)</span>
+<span class="kn">from</span> <span class="n">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+
+<span class="n">TPM_FILE</span> <span class="o">=</span> <span class="sh">"</span><span class="s">GTEx_Analysis_2025-08-22_v11_RNASeQCv2.4.3_gene_tpm.gct.gz</span><span class="sh">"</span>
+<span class="n">ANNOTATION_FILE</span> <span class="o">=</span> <span class="sh">"</span><span class="s">GTEx_Analysis_v11_Annotations_SampleAttributesDS.txt</span><span class="sh">"</span>
+
+<span class="n">SELECTED_TISSUES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sh">"</span><span class="s">Brain - Cortex</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Heart - Left Ventricle</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Liver</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Lung</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Muscle - Skeletal</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Adipose - Subcutaneous</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Skin - Sun Exposed (Lower leg)</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">SAMPLES_PER_TISSUE</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">NORMALIZATION_METHOD</span> <span class="o">=</span> <span class="sh">"</span><span class="s">log</span><span class="sh">"</span>
+<span class="n">IMAGE_DIR</span> <span class="o">=</span> <span class="sh">"</span><span class="s">output_images</span><span class="sh">"</span>
+<span class="n">METADATA_OUTPUT</span> <span class="o">=</span> <span class="sh">"</span><span class="s">metadata_base.csv</span><span class="sh">"</span>
+<span class="n">LUDWIG_OUTPUT</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ludwig_input.csv</span><span class="sh">"</span>
+<span class="n">ZIP_OUTPUT</span> <span class="o">=</span> <span class="sh">"</span><span class="s">output_images.zip</span><span class="sh">"</span>
+
+
+<span class="k">def</span> <span class="nf">get_available_ram_gb</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="n">psutil</span>
+
+        <span class="k">return</span> <span class="n">psutil</span><span class="p">.</span><span class="nf">virtual_memory</span><span class="p">().</span><span class="n">available</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">ImportError</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">psutil is not installed. Using conservative memory settings.</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">4.0</span>
+
+
+<span class="k">def</span> <span class="nf">get_cpu_count</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">.</span><span class="nf">cpu_count</span><span class="p">()</span> <span class="ow">or</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">choose_runtime_settings</span><span class="p">():</span>
+    <span class="n">ram_gb</span> <span class="o">=</span> <span class="nf">get_available_ram_gb</span><span class="p">()</span>
+    <span class="n">cpu_count</span> <span class="o">=</span> <span class="nf">get_cpu_count</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">ram_gb</span> <span class="o">&gt;=</span> <span class="mi">32</span><span class="p">:</span>
+        <span class="n">profile</span> <span class="o">=</span> <span class="sh">"</span><span class="s">high-resource</span><span class="sh">"</span>
+        <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="k">elif</span> <span class="n">ram_gb</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="n">profile</span> <span class="o">=</span> <span class="sh">"</span><span class="s">medium-resource</span><span class="sh">"</span>
+        <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">2500</span>
+    <span class="k">elif</span> <span class="n">ram_gb</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">profile</span> <span class="o">=</span> <span class="sh">"</span><span class="s">low-resource</span><span class="sh">"</span>
+        <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">profile</span> <span class="o">=</span> <span class="sh">"</span><span class="s">very-low-resource</span><span class="sh">"</span>
+        <span class="n">chunksize</span> <span class="o">=</span> <span class="mi">250</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Computer resource profile:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  Available RAM: </span><span class="si">{</span><span class="n">ram_gb</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> GB</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  CPU cores: </span><span class="si">{</span><span class="n">cpu_count</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  Selected profile: </span><span class="si">{</span><span class="n">profile</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  TPM read chunksize: </span><span class="si">{</span><span class="n">chunksize</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="sh">"</span><span class="s">ram_gb</span><span class="sh">"</span><span class="p">:</span> <span class="n">ram_gb</span><span class="p">,</span> <span class="sh">"</span><span class="s">cpu_count</span><span class="sh">"</span><span class="p">:</span> <span class="n">cpu_count</span><span class="p">,</span> <span class="sh">"</span><span class="s">profile</span><span class="sh">"</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span> <span class="sh">"</span><span class="s">chunksize</span><span class="sh">"</span><span class="p">:</span> <span class="n">chunksize</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">load_and_select_metadata</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Loading annotation file...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">annot</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="n">ANNOTATION_FILE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">required</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">SAMPID</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">SMTSD</span><span class="sh">"</span><span class="p">}</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">required</span> <span class="o">-</span> <span class="nf">set</span><span class="p">(</span><span class="n">annot</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Missing required annotation columns: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">annot</span> <span class="o">=</span> <span class="n">annot</span><span class="p">[</span><span class="n">annot</span><span class="p">[</span><span class="sh">"</span><span class="s">SMTSD</span><span class="sh">"</span><span class="p">].</span><span class="nf">isin</span><span class="p">(</span><span class="n">SELECTED_TISSUES</span><span class="p">)].</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="n">annot</span> <span class="o">=</span> <span class="n">annot</span><span class="p">.</span><span class="nf">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">SAMPID</span><span class="sh">"</span><span class="p">])</span>
+
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tissue</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">"</span><span class="s">SMTSD</span><span class="sh">"</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">SAMPLES_PER_TISSUE</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+        <span class="n">selected</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">group</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">No samples found for SELECTED_TISSUES.</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="n">selected</span><span class="p">).</span><span class="nf">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[[</span><span class="sh">"</span><span class="s">SAMPID</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">SMTSD</span><span class="sh">"</span><span class="p">]].</span><span class="nf">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">SAMPID</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">sample_id</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">SMTSD</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">label</span><span class="sh">"</span><span class="p">})</span>
+    <span class="n">labels</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="n">METADATA_OUTPUT</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Selected samples per tissue:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">label</span><span class="sh">"</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">().</span><span class="nf">sort_index</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">labels</span>
+
+
+<span class="k">def</span> <span class="nf">get_available_selected_samples</span><span class="p">(</span><span class="n">selected_sample_ids</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Reading GCT header...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="n">TPM_FILE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="sh">"</span><span class="s">gzip</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="n">available_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_id</span> <span class="k">for</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="n">selected_sample_ids</span> <span class="k">if</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="n">header</span><span class="p">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">selected_sample_ids</span><span class="p">)</span> <span class="o">-</span> <span class="nf">set</span><span class="p">(</span><span class="n">available_samples</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Warning: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s"> selected samples were not found in TPM matrix.</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">available_samples</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">None of the selected samples were found in the TPM matrix.</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Samples found in TPM matrix: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">available_samples</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">available_samples</span>
+
+
+<span class="k">def</span> <span class="nf">read_selected_expression</span><span class="p">(</span><span class="n">sample_ids</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Reading selected TPM expression values in chunks...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">sample_vectors</span> <span class="o">=</span> <span class="p">{</span><span class="n">sample_id</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="n">sample_ids</span><span class="p">}</span>
+    <span class="n">total_genes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">usecols</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">Name</span><span class="sh">"</span><span class="p">]</span> <span class="o">+</span> <span class="n">sample_ids</span>
+
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span>
+        <span class="n">TPM_FILE</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">compression</span><span class="o">=</span><span class="sh">"</span><span class="s">gzip</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">usecols</span><span class="o">=</span><span class="n">usecols</span><span class="p">,</span>
+        <span class="n">chunksize</span><span class="o">=</span><span class="n">chunksize</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">chunk_index</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">chunk_values</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">sample_ids</span><span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="n">sample_ids</span><span class="p">:</span>
+            <span class="n">sample_vectors</span><span class="p">[</span><span class="n">sample_id</span><span class="p">].</span><span class="nf">extend</span><span class="p">(</span><span class="n">chunk_values</span><span class="p">[</span><span class="n">sample_id</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">())</span>
+        <span class="n">total_genes</span> <span class="o">+=</span> <span class="nf">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">chunk_index</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Processed </span><span class="si">{</span><span class="n">total_genes</span><span class="si">}</span><span class="s"> genes...</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Finished reading </span><span class="si">{</span><span class="n">total_genes</span><span class="si">}</span><span class="s"> genes.</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sample_vectors</span><span class="p">,</span> <span class="n">total_genes</span>
+
+
+<span class="k">def</span> <span class="nf">normalize_values</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="sh">"</span><span class="s">log</span><span class="sh">"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">log1p</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="sh">"</span><span class="s">minmax</span><span class="sh">"</span><span class="p">:</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="sh">"</span><span class="s">zscore</span><span class="sh">"</span><span class="p">:</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">values</span>
+    <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Unknown normalization method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">vector_to_image</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">total_genes</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="nf">normalize_values</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">NORMALIZATION_METHOD</span><span class="p">)</span>
+    <span class="n">image_size</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">ceil</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">total_genes</span><span class="p">))</span>
+
+    <span class="n">padded</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">image_size</span> <span class="o">*</span> <span class="n">image_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">padded</span><span class="p">[:</span><span class="n">total_genes</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+    <span class="k">return</span> <span class="n">padded</span><span class="p">.</span><span class="nf">reshape</span><span class="p">((</span><span class="n">image_size</span><span class="p">,</span> <span class="n">image_size</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">save_images</span><span class="p">(</span><span class="n">sample_vectors</span><span class="p">,</span> <span class="n">total_genes</span><span class="p">):</span>
+    <span class="nc">Path</span><span class="p">(</span><span class="n">IMAGE_DIR</span><span class="p">).</span><span class="nf">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">total_samples</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">sample_vectors</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">sample_vectors</span><span class="p">.</span><span class="nf">items</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="nf">vector_to_image</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">total_genes</span><span class="p">)</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span><span class="n">IMAGE_DIR</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s">.jpg</span><span class="sh">"</span>
+        <span class="n">plt</span><span class="p">.</span><span class="nf">imsave</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="sh">"</span><span class="s">gray</span><span class="sh">"</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="sh">"</span><span class="s">jpg</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">(</span><span class="sh">"</span><span class="s">all</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">total_samples</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Saved </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">total_samples</span><span class="si">}</span><span class="s"> images.</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">create_ludwig_csv</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">available_samples</span><span class="p">):</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">sample_id</span><span class="sh">"</span><span class="p">].</span><span class="nf">isin</span><span class="p">(</span><span class="n">available_samples</span><span class="p">)].</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">image_path</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">sample_id</span><span class="sh">"</span><span class="p">]</span> <span class="o">+</span> <span class="sh">"</span><span class="s">.jpg</span><span class="sh">"</span>
+    <span class="n">labels</span><span class="p">[[</span><span class="sh">"</span><span class="s">image_path</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">label</span><span class="sh">"</span><span class="p">]].</span><span class="nf">to_csv</span><span class="p">(</span><span class="n">LUDWIG_OUTPUT</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Created </span><span class="si">{</span><span class="n">LUDWIG_OUTPUT</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">zip_images</span><span class="p">():</span>
+    <span class="n">jpg_files</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">filename</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="n">IMAGE_DIR</span><span class="p">)</span> <span class="k">if</span> <span class="n">filename</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">"</span><span class="s">.jpg</span><span class="sh">"</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">jpg_files</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">No JPG images found in </span><span class="si">{</span><span class="n">IMAGE_DIR</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">zipfile</span><span class="p">.</span><span class="nc">ZipFile</span><span class="p">(</span><span class="n">ZIP_OUTPUT</span><span class="p">,</span> <span class="sh">"</span><span class="s">w</span><span class="sh">"</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="n">zipfile</span><span class="p">.</span><span class="n">ZIP_DEFLATED</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">jpg_files</span><span class="p">:</span>
+            <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="nc">Path</span><span class="p">(</span><span class="n">IMAGE_DIR</span><span class="p">)</span> <span class="o">/</span> <span class="n">filename</span><span class="p">,</span> <span class="n">arcname</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Created </span><span class="si">{</span><span class="n">ZIP_OUTPUT</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="nf">choose_runtime_settings</span><span class="p">()</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="nf">load_and_select_metadata</span><span class="p">()</span>
+    <span class="n">selected_sample_ids</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">sample_id</span><span class="sh">"</span><span class="p">].</span><span class="nf">tolist</span><span class="p">()</span>
+    <span class="n">available_samples</span> <span class="o">=</span> <span class="nf">get_available_selected_samples</span><span class="p">(</span><span class="n">selected_sample_ids</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="sh">"</span><span class="s">sample_id</span><span class="sh">"</span><span class="p">].</span><span class="nf">isin</span><span class="p">(</span><span class="n">available_samples</span><span class="p">)].</span><span class="nf">copy</span><span class="p">()</span>
+
+    <span class="n">sample_vectors</span><span class="p">,</span> <span class="n">total_genes</span> <span class="o">=</span> <span class="nf">read_selected_expression</span><span class="p">(</span>
+        <span class="n">sample_ids</span><span class="o">=</span><span class="n">available_samples</span><span class="p">,</span>
+        <span class="n">chunksize</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="sh">"</span><span class="s">chunksize</span><span class="sh">"</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="nf">save_images</span><span class="p">(</span><span class="n">sample_vectors</span><span class="o">=</span><span class="n">sample_vectors</span><span class="p">,</span> <span class="n">total_genes</span><span class="o">=</span><span class="n">total_genes</span><span class="p">)</span>
+    <span class="nf">create_ludwig_csv</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">available_samples</span><span class="o">=</span><span class="n">available_samples</span><span class="p">)</span>
+    <span class="nf">zip_images</span><span class="p">()</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Done.</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Images folder: </span><span class="si">{</span><span class="n">IMAGE_DIR</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Ludwig CSV: </span><span class="si">{</span><span class="n">LUDWIG_OUTPUT</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Images ZIP: </span><span class="si">{</span><span class="n">ZIP_OUTPUT</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nf">main</span><span class="p">()</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Run the script in the JupyterLab terminal.</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gtex_v11_to_images_adaptive.py
+</code></pre></div>        </div>
+
+        <p>The script prints the detected memory profile, selected samples per tissue, progress while reading the TPM matrix, and progress while saving images.</p>
+      </li>
+      <li>
+        <p>Confirm that the expected output files were created:</p>
+      </li>
+    </ol>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nb">ls</span> <span class="nt">-lh</span> metadata_base.csv ludwig_input.csv output_images.zip
+</code></pre></div>    </div>
+
+    <p>The script creates:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">metadata_base.csv</code>: selected sample IDs and labels</li>
+      <li><code class="language-plaintext highlighter-rouge">ludwig_input.csv</code>: Image Learner metadata table with <code class="language-plaintext highlighter-rouge">image_path</code> and <code class="language-plaintext highlighter-rouge">label</code></li>
+      <li><code class="language-plaintext highlighter-rouge">output_images.zip</code>: grayscale expression image ZIP archive</li>
+    </ul>
+
+    <ol>
+      <li>Push the two Image Learner inputs back to your Galaxy history.</li>
+    </ol>
+
+    <p>Open the Python notebook in JupyterLab by double-clicking the file named <code class="language-plaintext highlighter-rouge">ipython_galaxy_notebook.ipynb</code>, or open a new one with <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Notebook</strong>. Choose the Python kernel, then run the following commands.
+   The <code class="language-plaintext highlighter-rouge">put()</code> function is available in Galaxy JupyterLab and exports files from the JupyterLab workspace into the Galaxy history. Copy and paste the following commands into a Jupyter notebook cell:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">ludwig_input.csv</span><span class="sh">"</span><span class="p">)</span>
+   <span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">output_images.zip</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>Look for the play icon at the top of the window and click it to execute the commands.
+   The files will appear as new datasets in the Galaxy history that launched JupyterLab. Wait for both datasets to turn green before using them in Image Learner.</p>
+
+    <ol>
+      <li>Return to Galaxy and use <code class="language-plaintext highlighter-rouge">ludwig_input.csv</code> as the metadata table and <code class="language-plaintext highlighter-rouge">output_images.zip</code> as the image ZIP.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="workflow">Workflow</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The hands-on workflow uses the following steps:</p>
+
+<ol>
+  <li>Import the previously prepared metadata CSV and image ZIP from Zenodo.</li>
+  <li>Configure Image Learner with <code class="language-plaintext highlighter-rouge">label</code> as the target column and <code class="language-plaintext highlighter-rouge">image_path</code> as the image column.</li>
+  <li>Configure the hyperparameters.</li>
+  <li>Run the tool to train Image Learner to predict tissue label from the generated expression image.</li>
+  <li>Review the model report, test metrics, and confusion matrix.</li>
+</ol>
+
+<p>The tutorial is written for any Galaxy instance that has Image Learner installed, or where an administrator can install Image Learner from the ToolShed.</p>
+
+<h2 id="environment-and-data-upload">Environment and Data Upload</h2>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-image-learner-tool-requirement"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-image-learner-tool-requirement" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Image Learner tool requirement</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Image Learner expects, by default, a metadata table and an image ZIP archive. The metadata table must include one row per image and at least two columns:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Column</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">image_path</code></td>
+        <td>Image filename inside the ZIP archive.</td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">label</code></td>
+        <td>Tissue label, derived from <code class="language-plaintext highlighter-rouge">SMTSD</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The prepared Zenodo metadata CSV already contains these columns.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-environment-and-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Environment and Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>GTEx v11 Tissue Modeling</em>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the prepared files from Zenodo or from the shared data library:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/19963477/files/selected_gtex_v11_tpm_image_tissue_labels.csv
+https://zenodo.org/records/19963477/files/selected_gtex_v11_tpm_image_tissue_dataset.zip
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-data-type"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-data-type" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Data Type</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Leave the <code class="language-plaintext highlighter-rouge">Type</code> field as <code class="language-plaintext highlighter-rouge">Auto-Detect</code> when uploading the metadata CSV. For the image archive, set or confirm the datatype as <code class="language-plaintext highlighter-rouge">zip</code>.</p>
+
+      </blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the data formats are assigned correctly:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">selected_gtex_v11_tpm_image_tissue_labels.csv</code>: <code class="language-plaintext highlighter-rouge">csv</code> or <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li><code class="language-plaintext highlighter-rouge">selected_gtex_v11_tpm_image_tissue_dataset.zip</code>: <code class="language-plaintext highlighter-rouge">zip</code></li>
+      </ul>
+
+      <p>If they are not, follow the Changing the datatype tip.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add a tag (<code class="language-plaintext highlighter-rouge">GTEx v11 tissue model dataset</code>) to both datasets. This is important to trace back which dataset the model was built on.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-locally-rebuilt-files-instead"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-locally-rebuilt-files-instead" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using locally rebuilt files instead</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If you ran the optional script, upload <code class="language-plaintext highlighter-rouge">ludwig_input.csv</code> and <code class="language-plaintext highlighter-rouge">output_images.zip</code> instead of the Zenodo files. The Image Learner settings are the same: label column <code class="language-plaintext highlighter-rouge">c2: label</code> and image column <code class="language-plaintext highlighter-rouge">c1: image_path</code>.</p>
+
+</blockquote>
+
+<h2 id="train-the-tissue-classifier">Train the Tissue Classifier</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-image-learner"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Image Learner</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/image_learner/image_learner/0.1.5" title="Image Learner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Image Learner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5)</span> with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>The metadata csv containing image_path column, label column</em>: <code class="language-plaintext highlighter-rouge">selected_gtex_v11_tpm_image_tissue_labels.csv</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Image zip</em>: <code class="language-plaintext highlighter-rouge">selected_gtex_v11_tpm_image_tissue_dataset.zip</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Task Type</em>: <code class="language-plaintext highlighter-rouge">Multi-class Classification</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Select a model for your experiment</em>: <code class="language-plaintext highlighter-rouge">CAFormer S18 384</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Customize Default Settings</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Epochs</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Early Stop</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Execute the tool.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-recommended-configuration"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-recommended-configuration" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Recommended configuration</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Task type</td>
+        <td>Multi-class classification</td>
+        <td>Each image belongs to one GTEx tissue label.</td>
+      </tr>
+      <tr>
+        <td>Label column</td>
+        <td><code class="language-plaintext highlighter-rouge">label</code></td>
+        <td>Derived from <code class="language-plaintext highlighter-rouge">SMTSD</code> in GTEx sample attributes.</td>
+      </tr>
+      <tr>
+        <td>Image column</td>
+        <td><code class="language-plaintext highlighter-rouge">image_path</code></td>
+        <td>Filename inside the image ZIP archive.</td>
+      </tr>
+      <tr>
+        <td>Model</td>
+        <td><code class="language-plaintext highlighter-rouge">CAFormer S18 384</code></td>
+        <td>Strong general-purpose image backbone available in Image Learner.</td>
+      </tr>
+      <tr>
+        <td>Epochs</td>
+        <td><code class="language-plaintext highlighter-rouge">30</code></td>
+        <td>Maximum number of training passes over the dataset. More epochs can improve learning, but too many can overfit.</td>
+      </tr>
+      <tr>
+        <td>Early Stop</td>
+        <td><code class="language-plaintext highlighter-rouge">30</code></td>
+        <td>Stop training if the validation metric does not improve for this many epochs. This helps avoid wasting time and can reduce overfitting.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</blockquote>
+
+<h2 id="interpret-the-outputs">Interpret the Outputs</h2>
+
+<p>Image Learner creates an interactive report with three tabs. Read them from left to right: first check the data and settings, then examine how the model learned, and finally evaluate it on the test set.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-what-to-look-for-when-reading-the-report"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-to-look-for-when-reading-the-report" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What to look for when reading the report</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Keep three questions in mind:</p>
+
+  <ol>
+    <li>Do the training and validation curves follow a similar pattern?</li>
+    <li>Does performance remain high on data that were not used for training?</li>
+    <li>Which tissue classes are confused with one another?</li>
+  </ol>
+
+</blockquote>
+
+<p>To open the report, click the <strong>eye icon</strong> next to the report dataset in your Galaxy history.</p>
+
+<p><img src="figures/open_report.png" alt="Open image learner report. " width="2335" height="513" loading="lazy" /></p>
+
+<h3 id="config-and-overall-performance-summary">Config and Overall Performance Summary</h3>
+
+<p>Start with the <strong>Config and Overall Performance Summary</strong> tab. It contains the dataset split, training settings, and a first comparison of training, validation, and test performance. The figures below show selected parts of this tab; scroll through the report to inspect the complete configuration.</p>
+
+<h4 id="dataset-overview">Dataset Overview</h4>
+
+<p><img src="figures/dataset_overview.png" alt="Dataset Overview. " width="1165" height="410" loading="lazy" /></p>
+
+<p>The samples were divided into training, validation, and test sets using a stratified 70/10/20 split. Stratification preserves similar tissue proportions in each set. Some tissues have more samples than others, so per-class results remain important.</p>
+
+<h4 id="training-configuration">Training Configuration</h4>
+
+<p><img src="figures/training_config.png" alt="Training configuration. " width="1181" height="708" loading="lazy" /></p>
+
+<p>The configuration records the settings needed to understand and reproduce the run. Here, Image Learner fine-tunes a pretrained CAFormer model for 30 epochs using Adam. Accuracy is the validation metric used to monitor the model, while cross-entropy loss guides updates to its weights.</p>
+
+<p>For this tutorial, both <strong>Epochs</strong> and <strong>Early Stop</strong> are set to 30 so that training can continue for the full 30 epochs. Although performance reaches its maximum early, the additional epochs make the later plateau visible in the learning curves. In future experiments, use <strong>Epochs</strong> to set the maximum training length and lower <strong>Early Stop</strong> to end training sooner when the validation metric stops improving.</p>
+
+<h4 id="overall-performance-overview">Overall Performance Overview</h4>
+
+<p>The summary uses several metrics. <strong>Accuracy</strong> is the proportion of samples assigned the correct tissue. <strong>Micro accuracy</strong> combines results across all classes, so larger classes contribute more. <strong>Hits at K</strong> checks whether the correct tissue is among the top K predictions; here, the default is K = 3. <strong>Loss</strong> measures prediction error, and <strong>ROC-AUC</strong> measures how well the model separates the classes.</p>
+
+<p><img src="figures/model_performance_summary.png" alt="Model Performance Summary. " width="973" height="335" loading="lazy" /></p>
+
+<p>What do the results show?</p>
+
+<ul>
+  <li>Training and validation scores are perfect to the displayed precision.</li>
+  <li>Test accuracy remains high at 0.9890, with a small loss of 0.0473.</li>
+  <li>Test Hits at K and ROC-AUC are 1.0000, indicating strong top-three predictions and class separation.</li>
+</ul>
+
+<p>The test set provides the most useful estimate of performance on unseen samples. These results are excellent for this dataset, but an external dataset is still needed to test broader generalization.</p>
+
+<h3 id="training-and-validation-results">Training and Validation Results</h3>
+
+<p>Next, open the <strong>Training and Validation Results</strong> tab. An epoch is one complete pass through the training data. This tab shows how loss, accuracy, and ROC-AUC change across epochs, compares training with validation, and reports the best validation epoch. Hover over the report’s interactive plots to see exact values.</p>
+
+<h4 id="accuracy-across-epochs">Accuracy Across Epochs</h4>
+
+<p><img src="figures/accuracy_epochs.png" alt="Accuracy across epochs. " width="1178" height="559" loading="lazy" /></p>
+
+<p>Training and validation accuracy rise quickly and reach 1.0 within the first ten epochs. The curves remain close, showing that performance improves similarly on data used to fit the model and data used to monitor it. A growing gap or falling validation accuracy would instead suggest overfitting.</p>
+
+<h4 id="roc-auc-across-epochs">ROC-AUC Across Epochs</h4>
+
+<p><img src="figures/rocauc_epochs.png" alt="ROC-AUC across epochs. " width="1179" height="559" loading="lazy" /></p>
+
+<p>ROC-AUC approaches 1.0 within the first few epochs and then remains stable for both splits. This indicates that the model learns to separate the tissue classes early in training.</p>
+
+<h4 id="overfitting-gap">Overfitting Gap</h4>
+
+<p><img src="figures/overffiting_gap.png" alt="Overfitting gap: ROC-AUC across epochs. " width="1180" height="569" loading="lazy" /></p>
+
+<p>This plot shows the difference between training and validation ROC-AUC. The gap quickly approaches zero and stays there, so the two curves agree closely. There is no widening gap in this metric during training.</p>
+
+<h3 id="test-results">Test Results</h3>
+
+<p>Finally, open the <strong>Test Results</strong> tab. The test set was not used to fit the model and therefore provides the clearest check of final performance. The tab includes overall and per-class metrics, a confusion matrix, prediction confidence, and Grad-CAM heatmaps. The tutorial shows selected outputs; explore the full tab for class-level details.</p>
+
+<p><img src="figures/test_metrics.png" alt="Test Performance Summary. " width="1191" height="766" loading="lazy" /></p>
+
+<p>How to read the metrics:</p>
+
+<ul>
+  <li><strong>Accuracy:</strong> proportion of correct predictions.</li>
+  <li><strong>Precision:</strong> proportion of predictions for a tissue that are correct.</li>
+  <li><strong>Recall:</strong> proportion of samples from a tissue that are identified correctly.</li>
+  <li><strong>F1-score:</strong> balance between precision and recall.</li>
+  <li><strong>Macro / micro / weighted:</strong> treat classes equally / combine all predictions / account for class size.</li>
+  <li><strong>Hits at K / ROC-AUC:</strong> whether the correct label is in the top three / how well classes are separated.</li>
+</ul>
+
+<p>Key observations:</p>
+
+<ul>
+  <li>All precision, recall, and F1-scores are at least 0.9890, indicating very few classification errors.</li>
+  <li>Micro and weighted scores are 0.9915; these summarize all samples or account for class size.</li>
+  <li>Macro scores are slightly lower because they give every tissue equal weight, making errors in smaller classes more visible.</li>
+  <li>Hits at K and ROC-AUC are 1.0000, showing that the correct tissue is always among the top three predictions and that the classes are well separated.</li>
+</ul>
+
+<p><img src="figures/test_confusion_matrix.png" alt="Test Confusion Matrix. " width="600" height="600" loading="lazy" /></p>
+
+<ul>
+  <li>Rows are observed tissues and columns are predicted tissues; correct predictions fall on the diagonal.</li>
+  <li>The only visible error is one <strong>Heart - Left Ventricle</strong> sample predicted as <strong>Skin - Sun Exposed (Lower leg)</strong>.</li>
+  <li>All other tissue classes are classified correctly in this test set.</li>
+</ul>
+
+<h4 id="grad-cam-heatmaps">Grad-CAM Heatmaps</h4>
+
+<p><img src="figures/gradcam.png" alt="Grad-CAM heatmaps. " width="596" height="1050" loading="lazy" /></p>
+
+<p>Grad-CAM highlights regions that influenced a prediction: warmer colors indicate greater influence. The heatmaps show that the model focuses on selected regions rather than using every pixel equally.</p>
+
+<p>These are expression-derived images, not photographs or spatial tissue maps. Pixel positions follow gene order, so nearby highlighted pixels are not necessarily biologically related. Grad-CAM shows where the model focused, but it does not identify causal genes. Mapping highlighted pixels back to genes would be a separate follow-up analysis.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Overall, the model demonstrates <strong>excellent performance</strong>, achieving near-perfect results on both training and validation datasets and maintaining <strong>very high accuracy and ROC-AUC on the test set</strong>. This suggests that the model has learned strong and meaningful patterns from the data and is able to generalize well to unseen samples.</p>
+
+<p>However, the near-perfect scores—especially on training and validation—should be interpreted with caution. They may indicate that:</p>
+<ul>
+  <li>The dataset is highly clean and well-separated, or</li>
+  <li>The model may be slightly overfitting, particularly if the dataset is small or lacks diversity</li>
+</ul>
+
+<p>By examining the detailed metrics, training curves, and Grad-CAM visualizations, we can confirm whether the model is:</p>
+<ul>
+  <li>Learning relevant features</li>
+  <li>Generalizing appropriately</li>
+  <li>Reliable for downstream analysis</li>
+</ul>
+
+<p>In this case, the results suggest a <strong>high-performing model with strong predictive capability</strong>, but further validation on additional or more diverse data may still be beneficial to ensure robustness.</p>
+
+<h1 id="limitations">Limitations</h1>
+
+<p>This workflow is designed as a teaching example and a convenient Image Learner benchmark. It does not imply that gene expression profiles are inherently image-like data.</p>
+
+<p>The transformation from expression vectors to images depends on gene ordering, meaning spatial relationships in the images are engineered rather than biologically meaningful. As a result, model performance reflects the ability to learn patterns in this representation, not necessarily true spatial biological structure.</p>
+
+<p>Additionally, the near-perfect performance observed in this tutorial may be influenced by dataset characteristics such as class separability or limited variability. For research applications, results should be validated using additional datasets, alternative representations, and appropriate statistical controls.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, you used prepared GTEx v11 expression-derived images and metadata to train a Galaxy Image Learner model for tissue classification. The model achieved strong performance across training, validation, and test datasets, demonstrating that tissue-specific expression patterns can be effectively learned using this image-based representation.</p>
+
+<p>At the same time, the near-perfect evaluation metrics highlight the importance of careful interpretation and validation. While the results suggest strong predictive capability, additional testing on more diverse datasets would help confirm robustness and real-world applicability.</p>
+
+<p>Overall, this workflow demonstrates how high-dimensional biological data can be transformed and modeled using deep learning tools in Galaxy, providing both a practical pipeline and a foundation for further experimentation.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>GTEx v11 gene TPM profiles can be represented as fixed-size grayscale images, one image per sample.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">SMTSD</code> from the GTEx sample attributes file is used as the tissue label.</p>
+</li>
+                        
+                        <li><p>This tutorial can be run on any Galaxy instance where Image Learner is available or installable.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Sharma2019">Sharma, A., E. Vans, D. Shigemizu, K. A. Boroevich, and T. Tsunoda, 2019 <b>DeepInsight: A methodology to transform a non-image data to an image for convolution neural network architecture</b>. Scientific Reports 9: 11399. <a href="https://doi.org/10.1038/s41598-019-47765-6">10.1038/s41598-019-47765-6</a></li>
+<li id="Alharbi2020">Alharbi, F., M. K. Elbashir, M. Mohammed, and M. E. Mustafa, 2020 <b>Fine-Tuning Pre-Trained Convolutional Neural Networks for Women Common Cancer Classification using RNA-Seq Gene Expression</b>. International Journal of Advanced Computer Science and Applications 11: 676–683. <a href="https://doi.org/10.14569/IJACSA.2020.0111182">10.14569/IJACSA.2020.0111182</a></li>
+<li id="GTEx2020">GTEx Consortium, 2020 <b>The GTEx Consortium atlas of genetic regulatory effects across human tissues</b>. Science 369: <a href="https://doi.org/10.1126/science.aaz1776">10.1126/science.aaz1776</a></li>
+<li id="Zhang2024">Zhang, K., N. R. Zemke, E. J. Armand, and B. Ren, 2024 <b>A fast,  scalable and versatile tool for analysis of single-cell omics data</b>. Nature Methods 21: 217–227. <a href="https://doi.org/10.1038/s41592-023-02139-9">10.1038/s41592-023-02139-9</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/GTEx_Tissue_modeling"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/GTEx_Tissue_modeling">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Paulo Cilas Morais Lyra Junior, Allissa Dillman, Natalie Kucher, Alyssa Pybus, Junhao Qiu, Jeremy Goecks,  <b>GTEx Tissue Modeling with Galaxy Image Learner (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-GTEx_Tissue_modeling,
+author = "Paulo Cilas Morais Lyra Junior and Allissa Dillman and Natalie Kucher and Alyssa Pybus and Junhao Qiu and Jeremy Goecks",
+	title = "GTEx Tissue Modeling with Galaxy Image Learner (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: image_learner
+  owner: goeckslab
+  revisions: 328ff3a13078
+  tool_panel_section_label: Machine Learning
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/GTEx_Tissue_modeling/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/33f916e51b4dde6c469dc2a53585635a45603fb1">33f916e</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
