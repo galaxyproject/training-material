@@ -181,6 +181,7 @@ The **Edit COCO Annotation** tool lets you modify COCO annotations without openi
 > 1. {% tool [Edit COCO Annotation](toolshed.g2.bx.psu.edu/repos/bgruening/edit_coco_annotation/edit_coco_annotation/1.0.0+galaxy0) %} with these parameters:
 >
 >    - {% icon param-file %} *"COCO annotation file"*: `5: Annotation COCO `
+>    - {% icon param-select %} *"Mode"* : `Keep - keep only listed IDs (remove all others)`
 >        - {% icon param-repeat %} *"1: Track to keep"*
 >            - {% icon param-text %} *"Track IDs"*: `0,4-6`
 >            - {% icon param-text %} *"Rename"*: `Gobiusculus flavescens`
@@ -214,24 +215,22 @@ This tool lets you easily visualize a JSON file in COCO format, shown on top of 
 >
 > 1. {% tool [COCO Annotation Visualizer](toolshed.g2.bx.psu.edu/repos/bgruening/coco_annotation_visualizer/coco_annotation_visualizer/1.0.0) %} with these parameters:
 >
-> 
->      - {% icon param-file %} *"Input video file"*: `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
->      - {% icon version %} *"Frame stride"*: `5`
->    - {% icon version %} *"Frame stride"*: `5`
->    - {% icon param-file %} *"COCO annotation file"*: `54: Edited COCO annotations`
->    - {% icon param-text %} *"Filter categories"*: `Empty` (default)
->    - In *"Display options"*:
->        - {% icon param-toggle %} *"Show bounding boxes"*: `No`
->        - {% icon param-toggle %} *"Show segmentation masks"*: `Yes` (default)
->        - {% icon param-toggle %} *"Show category labels"*: `Yes` (default)
->        - {% icon param-toggle %} *"Show annotation count"*: `No` (default)
->        - {% icon version %} *"Mask opacity"*: `0.4` (default)
->        - {% icon version %} *"Bounding box thickness"*: `2` (default)
->        - {% icon version %} *"Label font scale"*: `0.6` (default)
->        - {% icon param-select %} *"Color mode"*: `Per instance (different color for each annotation)`
->        - {% icon param-select %} *"Output image format"*: `PNG (lossless)` (default)
+>    - {% icon param-file %} *"Input video file"* : `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
+>    - {% icon version %} *"Frame stride"* : `5`
+>    - {% icon param-file %} *"COCO annotation file"* : `54: Edited COCO annotations`
+>    - {% icon param-text %} *"Filter categories"* : `Empty` (par défaut)
+>    - Dans *"Display options"* :
+>        - {% icon param-toggle %} *"Show bounding boxes"* : `No`
+>        - {% icon param-toggle %} *"Show segmentation masks"* : `Yes` (par défaut)
+>        - {% icon param-toggle %} *"Show category labels"* : `Yes` (par défaut)
+>        - {% icon param-toggle %} *"Show annotation count"* : `No` (par défaut)
+>        - {% icon version %} *"Mask opacity"* : `0.4` (par défaut)
+>        - {% icon version %} *"Bounding box thickness"* : `2` (par défaut)
+>        - {% icon version %} *"Label font scale"* : `0.6` (par défaut)
+>        - {% icon param-select %} *"Color mode"* : `Per instance (different color for each annotation)`
+>        - {% icon param-select %} *"Output image format"* : `PNG (lossless)` (par défaut)
+>    - {% icon param-select %} *"Output mode"* : `Both (frames and video)`
 >        - {% icon version %} *"Video frame rate (FPS)"*: `5.0`
->    - {% icon version %} *"Video frame rate (FPS)"*: `5.0`
 >    - {% icon param-toggle %} *"Annotated frames only"*: `Yes` (default)
 >
 > 2. Once it is finished, you will have these items in your history:
