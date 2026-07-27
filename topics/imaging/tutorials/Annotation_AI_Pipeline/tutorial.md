@@ -215,8 +215,8 @@ This tool lets you easily visualize a JSON file in COCO format, shown on top of 
 >
 > 1. {% tool [COCO Annotation Visualizer](toolshed.g2.bx.psu.edu/repos/bgruening/coco_annotation_visualizer/coco_annotation_visualizer/1.0.0) %} with these parameters:
 >
->        - {% icon param-file %} *"Input video file"*: `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
->        - {% icon version %} *"Frame stride"*: `5`
+>      - {% icon param-file %} *"Input video file"*: `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
+>      - {% icon version %} *"Frame stride"*: `5`
 >    - {% icon param-file %} *"COCO annotation file"*: `54: Edited COCO annotations`
 >    - {% icon param-text %} *"Filter categories"*: `Empty` (default)
 >    - In *"Display options"*:
