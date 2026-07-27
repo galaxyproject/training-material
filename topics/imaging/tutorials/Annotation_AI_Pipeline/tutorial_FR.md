@@ -25,6 +25,8 @@ contributions:
     - TuturBaba
     - yvanlebras
     - NadineLeBris
+  testing: 
+    - kpayet26
   funding:
     - moorev
     - sorbonneuniv
