@@ -25,6 +25,8 @@ contributions:
     - TuturBaba
     - yvanlebras
     - NadineLeBris
+  testing: 
+    - kpayet26
   funding:
     - moorev
     - sorbonneuniv
@@ -180,6 +182,7 @@ L'outil **Edit COCO Annotation** permet de modifier les annotations COCO sans av
 > 1. {% tool [Edit COCO Annotation](toolshed.g2.bx.psu.edu/repos/bgruening/edit_coco_annotation/edit_coco_annotation/1.0.0+galaxy0) %} avec ces paramètres :
 >
 >    - {% icon param-file %} *"COCO annotation file"* : `5: Annotation COCO `
+>    - {% icon param-select %} *"Mode"* : `Keep - keep only listed IDs (remove all others)`
 >        - {% icon param-repeat %} *"1: Track to keep"*
 >            - {% icon param-text %} *"Track IDs"* : `0,4-6`
 >            - {% icon param-text %} *"Rename"* : `Gobiusculus flavescens`
@@ -214,8 +217,7 @@ Cet outil permet de visualiser facilement un fichier JSON au format COCO superpo
 > 1. {% tool [COCO Annotation Visualizer](toolshed.g2.bx.psu.edu/repos/bgruening/coco_annotation_visualizer/coco_annotation_visualizer/1.0.0) %} avec ces paramètres :
 > 
 >
->        - {% icon param-file %} *"Input video file"* : `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
->        - {% icon version %} *"Frame stride"* : `5`
+>    - {% icon param-file %} *"Input video file"* : `1: Lieujaune-PorzBreign-GOPR5167_Edited.mp4`
 >    - {% icon version %} *"Frame stride"* : `5`
 >    - {% icon param-file %} *"COCO annotation file"* : `54: Edited COCO annotations`
 >    - {% icon param-text %} *"Filter categories"* : `Empty` (par défaut)
@@ -229,9 +231,9 @@ Cet outil permet de visualiser facilement un fichier JSON au format COCO superpo
 >        - {% icon version %} *"Label font scale"* : `0.6` (par défaut)
 >        - {% icon param-select %} *"Color mode"* : `Per instance (different color for each annotation)`
 >        - {% icon param-select %} *"Output image format"* : `PNG (lossless)` (par défaut)
->        - {% icon version %} *"Video frame rate (FPS)"* : `5.0`
->    - {% icon version %} *"Video frame rate (FPS)"* : `5.0`
->    - {% icon param-toggle %} *"Annotated frames only"* : `Yes` (par défaut)
+>    - {% icon param-select %} *"Output mode"* : `Both (frames and video)`
+>        - {% icon version %} *"Video frame rate (FPS)"*: `5.0`
+>    - {% icon param-toggle %} *"Annotated frames only"*: `Yes` (default)
 >
 > 2. Une fois terminé, vous obtenez dans votre historique :
 >    - **56: Annoted video** : la vidéo annotée
