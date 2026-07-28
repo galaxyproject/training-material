@@ -1130,7 +1130,7 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"From"*: output of **Add column** {% icon tool %}
 >
-> 4. {% tool [Concatenate datasets](cat1) %} tail-to-head with the following parameters:
+> 4. {% tool [Concatenate multiple datasets or collections](cat1) %} tail-to-head with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"

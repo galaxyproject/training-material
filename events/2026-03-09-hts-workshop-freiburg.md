@@ -91,9 +91,12 @@ program:
   - section: "Friday: Metagenomics"
     description:  We will take at least one coffee break in the morning, one in the afternoon, and 1h lunch break around noon.
     tutorials:
-      - name: pathogen-detection-from-nanopore-foodborne-data
+      - name: dada-16S
         topic: microbiome
-        time: "09:15-16:00"
+        time: "09:15-12:00"
+      - name: mags-building
+        topic: microbiome
+        time: "13:00-16:00"
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications

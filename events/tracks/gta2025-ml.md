@@ -19,7 +19,7 @@ contributions:
         - meltemktn
         - hujambo-dunia
         - paulocilasjr
-        - reytakop
+        - reyhaneh-tavakoli
 
 
 program:

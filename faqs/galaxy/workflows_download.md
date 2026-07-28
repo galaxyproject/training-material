@@ -3,10 +3,11 @@ title: Downloading workflows
 area: workflows
 box_type: tip
 layout: faq
-contributors: [lecorguille]
+contributors: [lecorguille, shiltemann]
 ---
 
 
-1. Click on {% icon galaxy-workflows-activity %} *Workflows* in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows
-2. Click on the {% icon dropdown %} button of the workflow you would like to download
-3. {%icon download %}
+1. Click on **Workflows**  {% icon galaxy-workflows-activity %} in the Galaxy **Activity Bar**.
+2. You will see a list of all your workflows
+3. Click on the **Download** {% icon download %} button of the workflow you would like to download
+

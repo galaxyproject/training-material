@@ -117,7 +117,7 @@ mapping:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     cover-image:
         type: str
-        pattern: /^\/.*(.png|.jpg|.jpeg)/
+        pattern: /^.*(.png|.jpg|.jpeg)/
         description: |
             link to a picture that will be used as the cover for the article
         _examples:
@@ -140,6 +140,17 @@ mapping:
             When the event ends
         _examples:
             - 2024-04-01
+    tags:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            A free form list of tags that are relevant for your event.
+        _examples:
+            - microbiome
+            - beginner friendly
+
     location:
         required: false
         description: |
@@ -166,7 +177,7 @@ mapping:
           region:
             type: str
           postcode:
-            type: str
+            type: any
           geo:
             type: map
             mapping:

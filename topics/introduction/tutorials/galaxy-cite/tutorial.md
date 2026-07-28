@@ -53,8 +53,8 @@ Citing Galaxy comes in two main actions:
 ## Citing Galaxy Project
 Please cite Galaxy Project’s primary publication: 
 
-- ***The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update***
-  - Nucleic Acids Research, Volume 52, Issue W1, 5 July 2024, Pages W83–W94, [https://doi.org/10.1093/nar/gkae410](https://doi.org/10.1093/nar/gkae410)
+- ***Galaxy for accessible, reproducible, and collaborative data analyses: 2026 update***
+  - Nucleic Acids Research, Volume 54, Issue W1, 7 July 2026, Pages W105–W116, [https://doi.org/10.1093/nar/gkag469](https://doi.org/10.1093/nar/gkag469)
 
 This is also found on the Galaxy Project Hub with more specific examples of how to cite individual aspects of Galaxy Project - [https://galaxyproject.org/citing-galaxy/](https://galaxyproject.org/citing-galaxy/)
 
@@ -167,6 +167,10 @@ Two repository options that we recommend for publishing your Workflows are:
 
 - WorkflowHub ([https://workflowhub.eu/](https://workflowhub.eu/))
 - Dockstore ([https://dockstore.org/](https://dockstore.org/)) 
+
+## Citing Public Workflows
+
+If you used a workflow that was published on Galaxy, in Galaxy's workflow library, [the IWC](https://iwc.galaxyproject.org/)], or a repository such as WorkflowHub, then we recommend you cite the original workflow. You can cite a workflow as you would any other software. If the information is available, we recommend including the creator’s name, the date of creation, the name of the repository, and the workflow’s DOI or URL.
 
 ## Citing Public Data
 

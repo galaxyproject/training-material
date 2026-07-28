@@ -6,7 +6,7 @@ layout: faq
 contributors: [shiltemann,hexylena,wm75, Marie59,katherine-d21,bebatut]
 ---
 
-1. Click on **Workflows** on the vertical panel on the left of the **Galaxy action list**.
+1. Click on **Workflows** on the **Activity Bar** on the left.
 2. At the top of the resulting page you will have the option to switch between the *My workflows*, *Workflows shared with me* and *Public workflows* tabs.
 3. {% if include.tab %}Select the tab `{{ include.tab }}`{% else %}Select the tab you want to see all workflows in that category{% endif %}
 4. {% if include.name %}Search workflows `{{ include.name }}`{% else %}Search for your desired workflow{% endif %}.

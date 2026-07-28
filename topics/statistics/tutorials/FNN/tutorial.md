@@ -405,11 +405,11 @@ batch_size decides the size of this subset (which we set to 50). The model build
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
->        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Does the dataset contain header:"*: `Yes`
+>        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
->        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Does the dataset contain header:"*: `Yes`
+>        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Run Tool"*
 >
 >
@@ -423,12 +423,11 @@ The training step generates 2 datasets. 1) accuracy of the trained model, 2) the
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.10.0) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
->    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
->    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Does the dataset contain header:"*: `Yes`
+>    - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Run Tool"*
 >
 {: .hands_on}

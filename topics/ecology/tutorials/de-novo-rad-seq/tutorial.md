@@ -15,8 +15,8 @@ time_estimation: "8h"
 key_points:
 tags:
   - RAD-seq
-  - Genetic composition EBV class
-  - Species populations EBV class
+  - genetic composition EBV class
+  - species populations EBV class
   - EBV dataset
   - EBV workflow
   - biodiversity

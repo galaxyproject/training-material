@@ -31,6 +31,7 @@ tags:
  - single-cell
  - introductory
 
+cost: free
 mode: "online"
 async: false
 

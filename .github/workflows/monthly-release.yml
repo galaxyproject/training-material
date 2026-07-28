@@ -31,14 +31,14 @@ jobs:
           persist-credentials: false
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '19'
       - uses: actions/cache@v5
@@ -84,7 +84,7 @@ jobs:
           GTN_FORK: ${{ github.repository_owner }}
 
       - name: Configure AWS credentials from GTN account
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

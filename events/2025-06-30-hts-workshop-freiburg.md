@@ -20,7 +20,7 @@ registration:
 
 contributions:
   organisers: [Sch-Da, teresa-m]
-  instructors: [pavanvidem, teresa-m, dianichj, EngyNasr, paulzierep, Minamehr]
+  instructors: [pavanvidem, teresa-m, dianichj, EngyNasr, paulzierep, minamehr]
   funding: [eurosciencegateway, deNBI, nfdi4plants]
 
 location:

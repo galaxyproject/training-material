@@ -1,0 +1,279 @@
+- doc: Test outline for Histological-Staining-Area-Quantification
+  job:
+    ROI image for staining analysis:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: control_1
+        location: https://zenodo.org/records/20271100/files/Vehicle-66-rechts_10x_IZ-1.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: c0d3673b9d669dbe37c709193ef6fa06
+      - class: File
+        identifier: control_2
+        location: https://zenodo.org/records/20271100/files/Vehicle-66-rechts_10x_IZ-2.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: bce59ac68459e90a76e97fd2bb53b560
+      - class: File
+        identifier: control_3
+        location: https://zenodo.org/records/20271100/files/Vehicle-66-links_10x_IZ-2.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: ac9b9a0fd2763ca7aac840e3c0b4d90d
+      - class: File
+        identifier: treatment_1
+        location: https://zenodo.org/records/20157596/files/Treatment1-11-links_10x_IZ-1.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: 7d44a013a2f37113ee8b2537a4bbf70d
+      - class: File
+        identifier: treatment_2
+        location: https://zenodo.org/records/20157596/files/Treatment1-11-links_10x_IZ-2.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: 5c48873c877a561b097c002b62e14928
+      - class: File
+        identifier: treatment_3
+        location: https://zenodo.org/records/20157596/files/Treatment1-11-rechts_10x_IZ-1.tif
+        filetype: tiff
+        hashes:
+        - hash_function: MD5
+          hash_value: 010cdd8a4a2c20eb4f803421222c9b4c
+  outputs:
+    'Tabular File: Staining Feature Results':
+      asserts:
+        - has_n_columns:
+            n: 7
+        - has_n_lines:
+            n: 7
+        - has_line:
+            line: 'sample_id	label	mean_intensity	area	area_filled	total_area	percent_area'
+        - has_text_matching:
+            expression: 'control_1\t255\t0\.527[0-9]+\t1817\.0\t1850\.0\t360000\t0\.504[0-9]+'
+        - has_text_matching:
+            expression: 'treatment_3\t255\t0\.001441[0-9]+\t5156\.0\t5156\.0\t360000\t1\.432[0-9]+'
+    Selected Stain Channel:
+      element_tests:
+        control_1:
+          asserts:
+            has_size:
+              min: 1
+        control_2:
+          asserts:
+            has_size:
+              min: 1
+        control_3:
+          asserts:
+            has_size:
+              min: 1
+        treatment_1:
+          asserts:
+            has_size:
+              min: 1
+        treatment_2:
+          asserts:
+            has_size:
+              min: 1
+        treatment_3:
+          asserts:
+            has_size:
+              min: 1
+    'Collection of Tabular: Staining Quantification Results':
+      element_tests:
+        control_1:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+            has_text_matching:
+              expression: '255\t0\.527[0-9]+\t1817\.0\t1850\.0'
+        control_2:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+        control_3:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+        treatment_1:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+        treatment_2:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+        treatment_3:
+          asserts:
+            has_n_columns:
+              n: 4
+            has_n_lines:
+              n: 2
+            has_line:
+              line: 'label	mean_intensity	area	area_filled'
+            has_text_matching:
+              expression: '255\t0\.001[0-9]+\t5156\.0\t5156\.0'
+    'Collection: Individual Deconvolved Channels':
+      element_tests:
+        control_1:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+        control_2:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+        control_3:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+        treatment_1:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+        treatment_2:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+        treatment_3:
+          elements:
+            1.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            2.tiff:
+              asserts:
+                has_size:
+                  min: 1
+            3.tiff:
+              asserts:
+                has_size:
+                  min: 1
+    Deconvolved Image:
+      element_tests:
+        control_1:
+          asserts:
+            has_size:
+              min: 1
+        control_2:
+          asserts:
+            has_size:
+              min: 1
+        control_3:
+          asserts:
+            has_size:
+              min: 1
+        treatment_1:
+          asserts:
+            has_size:
+              min: 1
+        treatment_2:
+          asserts:
+            has_size:
+              min: 1
+        treatment_3:
+          asserts:
+            has_size:
+              min: 1
+    Selected Stain Channel Thresholded:
+      element_tests:
+        control_1:
+          asserts:
+            has_size:
+              min: 1
+        control_2:
+          asserts:
+            has_size:
+              min: 1
+        control_3:
+          asserts:
+            has_size:
+              min: 1
+        treatment_1:
+          asserts:
+            has_size:
+              min: 1
+        treatment_2:
+          asserts:
+            has_size:
+              min: 1
+        treatment_3:
+          asserts:
+            has_size:
+              min: 1

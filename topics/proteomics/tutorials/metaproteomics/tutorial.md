@@ -384,7 +384,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 
 > <hands-on-title>Unipept</hands-on-title>
 >
-> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/6.2.4+galaxy1) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2lca: lowest common ancestor`
 >    - **Peptides input format**: `tabular`
@@ -554,7 +554,7 @@ for each protein.
 
 > <hands-on-title>Unipept</hands-on-title>
 >
-> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/6.2.4+galaxy1) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2prot: UniProt entries containing a given tryptic peptide`
 >    - **retrieve extra information**: `Yes`

@@ -57,6 +57,15 @@ recordings:
   - teresa-m
   bot-timestamp: 1762179139
 
+lang: en
+tags:
+  - deutsch
+  - español
+  - italiano
+translations:
+  - de
+  - es
+  - it
 
 ---
 
@@ -128,7 +137,7 @@ Let's start with a fresh history.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
+> 1. Download the list of peak regions (the file [GSE37268_mof3.out.hpeak.txt.gz](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left of the interface
 >
 >    ![Upload data icon](../../../galaxy-interface/images/upload_button.png)
@@ -215,7 +224,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 > 3. Set the following options:
 >     - *"Clade"*: `Mammal`
->     - *"Genome"*: `Mouse`
+>     - *"Genome"*: Search for `mm9` and select `Mouse (mm9)`
 >     - *"Assembly"*: `July 2007 (NCBI37/mm9)`
 >     - *"Group"*: `Genes and Gene Predictions`
 >     - *"Track"*: `RefSeq Genes`
@@ -276,6 +285,10 @@ Let's have a look at our files to see what we actually have here.
 >
 {: .hands_on}
 
+To view both the files side by side for comparision, enable the window manager.
+
+{% snippet faqs/galaxy/features_scratchbook.md %}
+
 > <question-title></question-title>
 >
 > While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
@@ -331,7 +344,7 @@ In order to convert the chromosome names we have therefore two things to do:
 > <hands-on-title>Adjust chromosome names</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} in a specific column with the following settings:
->     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
+>     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz` ({% icon warning %} careful! select the initial peaks file)
 >     - *"in column"*: `Column: 1`
 >     - *"Find pattern"*: `[0-9]+`
 >
@@ -345,11 +358,12 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %}  : Let's rerun the tool with two more replacements
 >    - *"File to process"*: the output from the last run, `chr prefix added`
->    - *"in column"*: `Column: 1`
 >    - {% icon param-repeat %} Replacement
+>      - *"in column"*: `Column: 1`
 >      - *"Find pattern"*: `chr20`
 >      - *"Replace with"*: `chrX`
 >    - {% icon param-repeat %} Insert Replacement
+>      - *"in column"*: `Column: 1`
 >      - *"Find pattern"*: `chr21`
 >      - *"Replace with"*: `chrY`
 >
@@ -451,8 +465,8 @@ We will group the table by chromosome and count the number of genes with peaks o
 > <hands-on-title>Count genes on different chromosomes</hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns, with the following settings:
->     - *"Select data"* to the result of the intersection
->     - *"Group by column"*:`Column: 1`
+>     - *"Select data"*: the result of the intersection
+>     - *"Group by column"*: `Column: 1`
 >     - Press **Insert Operation** and choose:
 >         - *"Type"*: `Count`
 >         - *"On column"*: `Column: 1`
@@ -502,8 +516,8 @@ Great, we are ready to plot things!
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Sort** tool
 > 2. Select `Bar, Line and Scatter` from the main panel
 > 3. Click on the **<<** in the upper right corner
-> 4. Choose a title below **Title**, e.g. `Gene counts per chromosome`
-> 5. Switch to the **Settings** tab and change the axis labels
+> 4. Switch to the **Settings** tab and change the axis labels
+> 5. Choose a title below **Title**, e.g. `Gene counts per chromosome`
 > 6. Play around with the settings in the **Tracks** tab
 > 7. When you are happy, click the {% icon cloud-upload %} icon to **Save** visualization in the top right of the *main panel*
 >
@@ -545,7 +559,7 @@ Galaxy makes this very simple with the `Extract Workflow` option. This means tha
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 6. Click on **Workflow** in the left menu of Galaxy
+> 6. Click on **Workflows** in the left menu of Galaxy
 >
 >    Here you have a list of all your workflows
 >
@@ -575,7 +589,8 @@ Galaxy makes this very simple with the `Extract Workflow` option. This means tha
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown).
 >    {: .tip}
->
+> 12. Return to the Galaxy home page by clicking the Galaxy icon in the top-left corner of the page.
+> 
 {: .hands_on}
 
 Now it's time to reuse our workflow for a more sophisticated approach.
@@ -681,7 +696,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 It's time to reuse the workflow we created earlier.
 
 > <hands-on-title>Run a workflow</hands-on-title>
-> 1. Open the workflow menu (left menu bar)
+> 1. Open the **Workflows** menu (left menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run** {% icon workflow-run %}
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click **Run workflow**
@@ -710,10 +725,13 @@ Congratulations! You should have a file with all the unique gene names and a cou
 
 > <question-title></question-title>
 >
-> The list of unique genes is not sorted or you workflow included a sorting step but for the gene names. Try to sort it on your own!
+> Which gene has the most number of peaks? 
 >
 > > <solution-title></solution-title>
-> > You can use the tool "{% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} data in ascending or descending order" or rerun to sort tool of your workflow. Sort on column 2 and "fast numeric sort".
+> > *Kcnma1*
+> > 
+> > The list of unique genes is not sorted or you workflow included a sorting step but for the gene names. Try to sort it on your own!
+> > You can use the tool "{% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} data in ascending or descending order" or rerun to sort tool of your workflow. Sort on colum `Column: 2` in `Descending order` with `Fast numeric sort (-n)` flavor.
 > {: .solution }
 {: .question}
 
@@ -750,6 +768,5 @@ To share a history, click on the {%  icon galaxy-history-options %} history opti
 {: .hands_on}
 
 # Conclusion
-
 
 {% icon trophy %} You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

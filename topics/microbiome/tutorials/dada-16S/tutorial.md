@@ -908,7 +908,7 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="header" format="tabular" %}
 >
-> 5. {% tool [Concatenate datasets](cat1) %} to add this header line to the **Replace Text** output:
+> 5. {% tool [Concatenate multiple datasets or collections](cat1) %} to add this header line to the **Replace Text** output:
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - {% icon param-repeat %} *"Insert Dataset"*

@@ -55,6 +55,7 @@ SemiBin is increasingly popular for metagenomic binning due to:
 >
 > 1. How many bins where produced by SemiBin for our sample?
 > 2. How many contigs are in the bin with most contigs? 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. There is only one bin for this sample.

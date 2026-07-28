@@ -169,10 +169,20 @@ We would like now to keep information about this function
 >    # Gives the current date
 >    ```
 >
+>    Any lines starting with a `#` will be treated as comments, and not executed
+>
 > 2. Select both lines
 > 3. Execute them
 > 4. Check the output
 {: .hands_on}
+
+You should obtain something like:
+
+```R
+> # Gives the current date
+> date()
+[1] "Tue Mar 26 15:12:24 2019"
+```
 
 The comment line is displayed in the console but not executed.
 
@@ -319,14 +329,14 @@ A list of potential interesting function related to "chi-Squared test" are liste
 > Search the R functions for the following statistical
 > functions
 >
-> 1. Student-t test
+> 1. Student t-test
 > 2. mixed linear model
 >
 > > <solution-title></solution-title>
 > >
 > > While your search results may return several tests, we list a few you might
 > > find:
-> > 1. Student-t test: `stats::TDist`
+> > 1. Student's t-Test: `stats::t.test`
 > > 2. mixed linear model: `stats::lm.glm`
 > >
 > {: .solution}

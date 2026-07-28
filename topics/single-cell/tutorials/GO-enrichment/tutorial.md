@@ -32,7 +32,7 @@ follow_up_training:
         - pseudobulk-analysis
 
 tags:
-- single cell
+- single-cell
 - GO enrichment
 
 time_estimation: 3H

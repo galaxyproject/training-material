@@ -1,13 +1,19 @@
 ---
-title:  Importación por medio de enlaces
+title: Importación por medio de enlaces
 area: data upload
 box_type: tip
 layout: faq
-contributors: [nomadscientist]
+contributions:
+  authorship:
+    - nomadscientist
+  translation:
+    - hvelab
+  funding:
+    - biont
 ---
 
 * Copia los enlaces
-* Abre el manejador de carga de datos de Galaxy ({% icon galaxy-upload %} en la parte superior derecha del panel de herramientas)
+* Abre el manejador de carga de datos de Galaxy ({% icon galaxy-upload %} (**Upload**) en la parte superior derecha del panel de herramientas)
 {% if include.reset_form %}
 * Selecciona **Reset** butón en la parte inferior del forma. Si el butón es gris, muevete a la próxima instrucción.
 {% endif %}
@@ -52,5 +58,4 @@ contributors: [nomadscientist]
 {% endif %}
 {% if include.renaming == undefined or include.renaming == true %}
 * Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos.
-the window
 {% endif %}

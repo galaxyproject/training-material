@@ -33,6 +33,7 @@ contributions:
     - yvanlebras
     - Marie59
     - Rassine
+    - perrinejegousse
   funding:
     - pndb
     - ASOC
@@ -340,7 +341,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 > <hands-on-title> Add "_" at the end of the family column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on order column** {% icon tool %})
+>    - {% icon param-file %} *"Select cells from"*: `out_file3` (output of **Column Regex Find And Replace on order column** {% icon tool %})
 >    - *"using column"*: `c7`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
@@ -353,7 +354,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 > <hands-on-title> Add "_" at the end of the genus column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on family column** {% icon tool %})
+>    - {% icon param-file %} *"Select cells from"*: `out_file4` (output of **Column Regex Find And Replace on family column** {% icon tool %})
 >    - *"using column"*: `c8`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
