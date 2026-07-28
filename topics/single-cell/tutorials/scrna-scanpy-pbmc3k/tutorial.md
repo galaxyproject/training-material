@@ -1384,8 +1384,8 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 > >
 > > 1. 8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.
 > > 2. We expect that:
-> >    * CST3 should be representative of clusters 1, 3, 4, 6
-> >    * NKG7 for clusters 0, 3 and 5
+> >    * CST3 should be representative of clusters 1, 4, 6 and 7
+> >    * NKG7 for clusters 3 and 5
 > >    * PPBP for cluster 7
 > {: .solution}
 {: .question}
@@ -1477,8 +1477,8 @@ RPS25 | S100A9 | HLA-DRB1 | CST7 | FTH1 | GNLY | HLA-DRB1 | NRGN
 >
 > > <solution-title></solution-title>
 > >
-> > * CST3 is a marker gene for clusters 1, 4, 6 (not 3 as guessed previously)
-> > * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
+> > * CST3 is a marker gene for clusters 1, 6 (not 4 and 7 as guessed previously)
+> > * NKG7 for clusters 3 and 5 as guessed previously
 > > * PPBP for cluster 7, as guessed previously
 > >
 > {: .solution}
@@ -1532,8 +1532,6 @@ RPS12 | S100A9 | CD79A | NKG7 | FCER1G | GZMB | HLA-DPB1 | GNG11
 RPS25 | S100A8 | HLA-DRA | CST7 | AIF1 | PRF1 | HLA-DRB1 | SDPR
 RPS27 | TYROBP | CD79B | CTSW | COTL1 | GNLY | HLA-DRA | PPBP
 RPS6 | FTL | HLA-DPB1 | B2M | FCGR3A | CTSW | CD74 | NRGN
-RPS3 | CST3 | HLA-DQA1 | GZMA | IFITM2 | GZMA | CST3 | SPARC
-CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 
 > <question-title></question-title>
 > 1. Are the 5 top ranked genes different than the one for the *t*-test?
@@ -1543,8 +1541,8 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > >
 > > 1. The 5 top ranked genes are slightly different, at least in their order.
 > > 2. We see that:
-> >    * CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed previously)
-> >    * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
+> >    * CST3 is not in top ranked genes of any cluster. If you check the table further, it can be found in rank 6 for clusters 1 and 6.
+> >    * NKG7 for clusters 3 and 5.
 > >    * PPBP for cluster 7, as we guessed previously.
 > >
 > {: .solution}

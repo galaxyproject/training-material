@@ -25,10 +25,17 @@ key_points:
 - Many QC steps can be performed to help check the quality of the data
 - MultiQC can be used to create a nice summary report of QC information
 - The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier
-contributors:
-- mblue9
-- bphipson
-- hdashnow
+contributions:
+  authorship:
+    - mblue9
+    - bphipson
+    - hdashnow
+  editing:
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 requirements:
   -
     type: "internal"
@@ -305,21 +312,21 @@ The Cutadapt tool Help section provides the sequence we can use to trim this sta
 
 > <hands-on-title>Trim reads with <b>Cutadapt</b></hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %}
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2) %}
 >    - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Single-end`
 >        - {% icon param-collection %} *"FASTQ/A file"*: `fastqs` (Input dataset collection)
->        - In *"Read 1 Options"*:
+>        - In *"Read 1 Adapters"*:
 >            - In *"3' (End) Adapters"*:
 >                - Click on *"Insert 3' (End) Adapters"*:
 >                - In *"1: 3' (End) Adapters"*:
 >                    - {% icon param-select %} *"Source"*: `Enter custom sequence`
 >                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Illumina`
 >                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`
->    - In *"Filter Options"*:
+>    - In *"Other Read Trimming Options"*:
+>        - {% icon param-text %} *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*:
 >        - {% icon param-text %} *"Minimum length (R1)"*: `20`
->    - In *"Read Modification Options"*:
->        - {% icon param-text %} *"Quality cutoff"*: `20`
->    - {% icon param-check %} *"Outputs selector"*: `Report`
+>    - {% icon param-check %} *"Additional outputs to generate"*: `Report`
 >
 {: .hands_on}
 
