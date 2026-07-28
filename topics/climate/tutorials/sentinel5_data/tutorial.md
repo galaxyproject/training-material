@@ -20,6 +20,7 @@ key_points:
 - Study volcano activity 
 tags:
   - earth-system
+  - atmosphere
   - volcano
   - satellite data
 contributions:
