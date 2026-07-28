@@ -193,7 +193,7 @@ CountESS save nodes into an output collection.
 >
 >    - In *"Input file mapping"*:
 >      - *"CountESS input node name"*: `Load CHEK2 frequencies`
->      - {% icon param-file %} *"Galaxy input dataset"*: `chek2_frequency_summary.csv`
+>      - {% icon param-file %} *"Input dataset"*: `chek2_frequency_summary.csv`
 >
 >    - *"Log level"*: `INFO`
 >
@@ -244,11 +244,11 @@ most variants are close to neutral, depleted, or enriched after selection.
 >
 >    - *"Cut columns"*: `c6`
 >    - *"Delimited by"*: `Comma`
->    - {% icon param-file %} *"From"*: `chek2_rcs_scores.csv` from the CountESS output collection
+>    - {% icon param-collection %} *"From"*: `chek2_rcs_scores.csv` from the CountESS output collection
 >
 > 2. Run {% tool [Histogram with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.5.1+galaxy1) %} with the following parameters:
 >
->    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: output of **Cut columns from a table** {% icon tool %}
+>    - {% icon param-collection %} *"Input should have column headers - these will be the columns that are plotted"*: output of **Cut columns from a table** {% icon tool %}
 >    - *"Label for x axis"*: `RAD53 Complementation Score`
 >    - *"Label for y axis"*: `Number of variants`
 >    - *"Bin width for plotting"*: `0.5`
@@ -335,7 +335,7 @@ should fall on a 1:1 diagonal.
 >
 > 9. Run {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.5.1+galaxy2) %} with the following parameters:
 >
->    - {% icon param-file %} *"Input tabular dataset"*: `MaveDB and CountESS RCS comparison`
+>    - {% icon param-file %} *"Input in tabular format"*: `MaveDB and CountESS RCS comparison`
 >    - *"Column to plot on x-axis"*: `c8: RCS_this_SNV`
 >    - *"Column to plot on y-axis"*: `c30: RCS_this_SNV`
 >    - *"Plot title"*: `MaveDB and CountESS CHEK2 RCS values`
