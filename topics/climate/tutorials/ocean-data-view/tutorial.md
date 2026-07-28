@@ -18,7 +18,7 @@ key_points:
 tags:
   - earth-system
   - ocean
-  - gis
+  - GIS
   - netcdf
 contributions:
   authorship:
