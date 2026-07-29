@@ -34,6 +34,9 @@ contributions:
   funding:
   - elixir-europe
   - uni-freiburg
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 ---
 
 Multiplexed assays of variant effect (MAVEs), including deep mutational scanning (DMS)
