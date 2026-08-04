@@ -96,7 +96,7 @@ This Galaxy tutorial is complementary to, rather than a reproduction of, HisHRST
 
 The analysis uses two different definitions of neighbourhood:
 
-1. A **transcriptomic neighbour graph**, built from PCA coordinates, connects spots with similar expression profiles. Scanpy uses this graph for UMAP and Leiden clustering.
+1. A **transcriptomic neighbour graph**, built from PCA coordinates, connects spots with similar expression profiles. Scanpy uses this graph for Leiden clustering and UMAP visualization.
 2. A **spatial neighbour graph**, built from physical spot coordinates, connects observations that are close in the tissue. Squidpy uses this graph for spatial statistics.
 
 A Leiden cluster is therefore first an expression-defined group. It becomes a convincing **candidate spatial transcriptional domain** only when it also has coherent tissue localisation, interpretable positive markers, reasonable QC characteristics, and support from spatial statistics or morphology.
