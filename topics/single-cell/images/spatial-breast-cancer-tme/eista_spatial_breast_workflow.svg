@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="620" viewBox="0 0 1400 620" role="img" aria-labelledby="title desc">
+<title id="title">EISTA Galaxy spatial breast cancer workflow overview</title>
+<desc id="desc">Original schematic showing Visium inputs converted to SpatialData, processed as AnnData, analysed with Scanpy and Squidpy, annotated with CellTypist and LIANA, then imported back to SpatialData.</desc>
+<style>
+  .bg{fill:#fbfbf8}.panel{fill:#fff;stroke:#333;stroke-width:1.8;rx:18}.small{font:20px Arial, sans-serif;fill:#222}.tiny{font:16px Arial, sans-serif;fill:#333}.title{font:bold 24px Arial, sans-serif;fill:#111}.arrow{stroke:#333;stroke-width:3;fill:none;marker-end:url(#arrow)}.spot{fill:#4477aa;opacity:.72;stroke:#fff;stroke-width:2}.tumour{fill:#d98880;opacity:.72}.stroma{fill:#b8d7a3;opacity:.72}.immune{fill:#8fb9d9;opacity:.72}.adipose{fill:#f2d58a;opacity:.72}.accent{fill:#efefef;stroke:#666;stroke-width:1.2}.node{fill:#fff;stroke:#444;stroke-width:1.5}.edge{stroke:#777;stroke-width:1.4;opacity:.9}
+</style>
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 z" fill="#333"/></marker></defs>
+<rect class="bg" width="1400" height="620"/>
+<text x="52" y="52" class="title">Biological workflow: breast cancer Visium section to interpretable spatial TME hypotheses</text>
+<rect x="50" y="92" width="240" height="400" class="panel"/>
+<text x="80" y="132" class="title">Input data</text>
+<rect x="82" y="160" width="176" height="130" fill="#f7e6de" stroke="#333" stroke-width="1.2"/>
+<path d="M95,252 C130,182 180,300 245,185 L245,290 L95,290 Z" class="tumour"/>
+<path d="M88,160 C150,150 180,210 258,175 L258,160 Z" class="stroma"/>
+<circle cx="120" cy="210" r="9" class="spot"/><circle cx="150" cy="198" r="9" class="spot"/><circle cx="181" cy="224" r="9" class="spot"/><circle cx="212" cy="205" r="9" class="spot"/><circle cx="235" cy="246" r="9" class="spot"/><circle cx="132" cy="258" r="9" class="spot"/><circle cx="174" cy="267" r="9" class="spot"/>
+<text x="78" y="330" class="small">10x Visium files</text>
+<text x="78" y="360" class="tiny">• count matrix (.h5)</text><text x="78" y="384" class="tiny">• H&amp;E tissue image</text><text x="78" y="408" class="tiny">• spot positions</text><text x="78" y="432" class="tiny">• scale factors</text>
+<path class="arrow" d="M300 292 L385 292"/>
+<rect x="390" y="92" width="250" height="400" class="panel"/>
+<text x="425" y="132" class="title">SpatialData</text>
+<rect x="428" y="160" width="170" height="54" class="accent"/><text x="459" y="193" class="small">Images</text>
+<rect x="428" y="232" width="170" height="54" class="accent"/><text x="459" y="265" class="small">Shapes / spots</text>
+<rect x="428" y="304" width="170" height="54" class="accent"/><text x="459" y="337" class="small">Tables</text>
+<rect x="428" y="376" width="170" height="54" class="accent"/><text x="445" y="409" class="small">Transformations</text>
+<text x="410" y="462" class="tiny">Coordinates stay linked to expression</text>
+<path class="arrow" d="M645 292 L730 292"/>
+<rect x="735" y="92" width="265" height="400" class="panel"/>
+<text x="774" y="132" class="title">AnnData + Scanpy</text>
+<rect x="770" y="162" width="195" height="48" class="accent"/><text x="811" y="193" class="small">QC metrics</text>
+<rect x="770" y="228" width="195" height="48" class="accent"/><text x="818" y="259" class="small">Filtering</text>
+<rect x="770" y="294" width="195" height="48" class="accent"/><text x="800" y="325" class="small">Normalization</text>
+<rect x="770" y="360" width="195" height="48" class="accent"/><text x="814" y="391" class="small">PCA / UMAP</text>
+<rect x="770" y="426" width="195" height="48" class="accent"/><text x="801" y="457" class="small">Leiden clusters</text>
+<path class="arrow" d="M1005 292 L1090 292"/>
+<rect x="1095" y="92" width="255" height="400" class="panel"/>
+<text x="1138" y="132" class="title">Spatial biology</text>
+<circle cx="1160" cy="230" r="19" class="node"/><circle cx="1230" cy="190" r="19" class="node"/><circle cx="1278" cy="246" r="19" class="node"/><circle cx="1196" cy="304" r="19" class="node"/><circle cx="1270" cy="340" r="19" class="node"/>
+<line x1="1160" y1="230" x2="1230" y2="190" class="edge"/><line x1="1230" y1="190" x2="1278" y2="246" class="edge"/><line x1="1278" y1="246" x2="1196" y2="304" class="edge"/><line x1="1196" y1="304" x2="1160" y2="230" class="edge"/><line x1="1196" y1="304" x2="1270" y2="340" class="edge"/>
+<text x="1128" y="394" class="small">Squidpy graph metrics</text><text x="1128" y="424" class="small">CellTypist labels</text><text x="1128" y="454" class="small">LIANA interactions</text>
+<path class="arrow" d="M1220 500 C1060 585 540 585 510 502"/>
+<text x="592" y="570" class="tiny">Processed annotations are imported back into the SpatialData table for reusable spatial interpretation</text>
+</svg>
