@@ -1,0 +1,82 @@
+- doc: Test outline for SpatialData-QC-to-Communication-Pipeline
+  job:
+    spatialdata:
+      class: File
+      path: test-data/spatialdata.spatialdata.zip
+      filetype: spatialdata.zip
+    Resolution:
+      class: File
+      path: test-data/Resolution.txt
+      filetype: txt
+    table association: labels
+    Image element name: morphology_focus
+    Channels element name: DAPI
+    Label element name: cell_labels
+    Shapes element name: null
+    Points element name: null
+    coordinate system: global
+    Proportion of top genes for QC: 10,25,50,100
+    Filter data by cell volume?: true
+    Key in spatialdata object specifying the volume/area: cell_area
+    Minimum cell volume: '50.0'
+    Maximum cell volume: '600'
+    minimum number of genes for a cell to pass: '5'
+    minimum number of counts for a cell to pass: '3'
+    minimum number of cells for a gene to pass: '5'
+    minimum number of counts for a gene to pass: '10'
+    maximum number of counts for a cell to pass: '1000'
+    maximum number of genes for a cell to pass: '200'
+    Use seurat flavor for highly variable gene selection: false
+    n_top_genes: '200'
+    batch_key: null
+    Regress out volume and total_counts?: false
+    Perform scaling?: false
+    number of expected clusters: '3'
+    Subsample the AnnData?: false
+    Fraction of cells to subsample: '0.1'
+    select celltypist model: Cells_Adult_Breast_v1
+  outputs:
+    initial Anndata table:
+      path: test-data/initial Anndata table.h5ad
+    QC plots:
+      path: test-data/QC plots.png
+    spatial scatter plots:
+      path: test-data/spatial scatter plots.png
+    spatial scatter plots filtered:
+      path: test-data/spatial scatter plots filtered.png
+    QC plots filtered:
+      path: test-data/QC plots filtered.png
+    Filtered AnnData table:
+      path: test-data/Filtered AnnData table.h5ad
+    Final table info of cells and genes during filtering:
+      path: test-data/Final table info of cells and genes during filtering.tabular
+    umap plot - general:
+      path: test-data/umap plot - general.png
+    umap plot - leiden res:
+      path: test-data/umap plot - leiden res.png
+    scanpy ranked genes plot:
+      path: test-data/scanpy ranked genes plot.png
+    squidpy plot nhood_enrichment:
+      path: test-data/squidpy plot nhood_enrichment.png
+    celltypist dotplot:
+      path: test-data/celltypist dotplot.png
+    Final Anndata:
+      path: test-data/Final Anndata.h5ad
+    spatial scatter plots filtered volume:
+      path: test-data/spatial scatter plots filtered volume.png
+    PCA plot:
+      path: test-data/PCA plot.png
+    QC plots filtered volume:
+      path: test-data/QC plots filtered volume.png
+    HVG plot:
+      path: test-data/HVG plot.png
+    umap plot - leiden res - interactive:
+      path: test-data/umap plot - leiden res - interactive.vitessce.json
+    selected resolution:
+      path: test-data/selected resolution.tabular
+    ranked_genes table:
+      path: test-data/ranked_genes table.tabular
+    squidpy plot centrality_score:
+      path: test-data/squidpy plot centrality_score.png
+    spatialdata_output_processed:
+      path: test-data/spatialdata_output_processed.spatialdata.zip

@@ -1,3 +1,4 @@
+---
 layout: tutorial_hands_on
 title: Spatial transcriptomics of the breast cancer tumour microenvironment using EISTA Galaxy
 subtopic: spatial
@@ -52,11 +53,10 @@ abbreviations:
   LR: ligand-receptor
 ---
 
-# Introduction
 
-Breast cancers are spatially heterogeneous tissues containing malignant epithelial cells, fibroblasts, immune populations, vascular cells, adipose tissue, and extracellular matrix {% cite Mehraj2021BreastTME Croizer2024SpatialCAF %}. The abundance, state, and spatial organisation of these components can influence tumour growth, immune infiltration, invasion, and treatment response {% cite Mehraj2021BreastTME Croizer2024SpatialCAF %}. Spatial transcriptomics measures gene expression while preserving the position of each observation, allowing molecular programmes to be examined in relation to neighbouring tissue structures and histological morphology rather than being collapsed into a bulk average {% cite Stahl2016SpatialTranscriptomics Rao2021TissueArchitecture %}.
+Breast cancers are spatially heterogeneous tissues containing malignant epithelial cells, fibroblasts, immune populations, vascular cells, adipose tissue, and extracellular matrix {% cite Mehraj2021BreastTME %} {% cite Croizer2024SpatialCAF %}. The abundance, state, and spatial organisation of these components can influence tumour growth, immune infiltration, invasion, and treatment response {% cite Mehraj2021BreastTME %} {% cite Croizer2024SpatialCAF %}. Spatial transcriptomics measures gene expression while preserving the position of each observation, allowing molecular programmes to be examined in relation to neighbouring tissue structures and histological morphology rather than being collapsed into a bulk average {% cite Stahl2016SpatialTranscriptomics %} {% cite Rao2021TissueArchitecture %}.
 
-This tutorial uses the public 10x Genomics **Human Breast Cancer, Block A Section 1** Visium dataset, distributed in the `BreastCancer1.zip` archive on Zenodo {% cite TenXBreastCancerBlockA Zenodo15129356 %}. The source sample is described as fresh-frozen invasive ductal carcinoma, AJCC/UICC Stage Group IIA, ER positive, PR negative, and HER2 positive. The imported expression matrix contains **3,813 Visium capture spots and 33,538 genes**.
+This tutorial uses the public 10x Genomics **Human Breast Cancer, Block A Section 1** Visium dataset, distributed in the `BreastCancer1.zip` archive on Zenodo {% cite TenXBreastCancerBlockA %} {% cite Zenodo15129356 %}. The source sample is described as fresh-frozen invasive ductal carcinoma, AJCC/UICC Stage Group IIA, ER positive, PR negative, and HER2 positive. The imported expression matrix contains **3,813 Visium capture spots and 33,538 genes**.
 
 ## Relationship to the HisHRST paper
 
@@ -970,7 +970,7 @@ A one-ring, six-neighbour graph corresponds to the immediate neighbourhood of th
 
 # CellTypist dominant breast cell-type signatures
 
-CellTypist compares observations with a trained reference model {% cite Xu2023CellTypist CellTypistDocs %}. Since a Visium spot can contain several cells, report the output as a **dominant predicted cell-type signature**, not a pure cell identity.
+CellTypist compares observations with a trained reference model {% cite Xu2023CellTypist %} {% cite CellTypistDocs %}. Since a Visium spot can contain several cells, report the output as a **dominant predicted cell-type signature**, not a pure cell identity.
 
 > <hands-on-title>Annotate spots with CellTypist</hands-on-title>
 >
@@ -1010,7 +1010,7 @@ CellTypist compares observations with a trained reference model {% cite Xu2023Ce
 
 # LIANA candidate ligand-receptor relationships
 
-LIANA integrates several scoring approaches and curated ligand-receptor resources {% cite Dimitrov2022Liana Dimitrov2024LianaPlus %}. In this analysis the selected Leiden domains, rather than individual cell types, are the source and target groups.
+LIANA integrates several scoring approaches and curated ligand-receptor resources {% cite Dimitrov2022Liana %} {% cite Dimitrov2024LianaPlus %}. In this analysis the selected Leiden domains, rather than individual cell types, are the source and target groups.
 
 > <hands-on-title>Rank domain-to-domain ligand-receptor hypotheses</hands-on-title>
 >
