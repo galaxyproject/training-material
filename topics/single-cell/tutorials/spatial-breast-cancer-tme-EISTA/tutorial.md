@@ -108,7 +108,7 @@ A Leiden cluster is therefore first an expression-defined group. It becomes a co
 | SpatialData input | Link expression, spot shapes, images, and coordinate systems. | SpatialData archive and AnnData table. |
 | Scanpy filtering and HVG selection | Audit data quality, filter low-information spots and genes, normalise, log-transform, and identify variable genes. | QC metrics, filtered matrix, counts layer, and HVG annotation. |
 | Scanpy clustering | Reduce dimensionality and construct the expression-neighbour graph. | PCA, neighbours, and UMAP. |
-| Leiden and automatic selection | Compare clustering granularities and choose the tested result nearest to the target count. | Seven Leiden solutions and selected key. |
+| Leiden and automatic selection | Compare clustering granularities and choose the tested result nearest to the target count. | Seven Leiden resolutions and selected key. |
 | Squidpy | Analyse physical tissue neighbourhoods and spatially patterned genes. | Spatial graph, centrality, enrichment, and Moran's I. |
 | CellTypist | Compare spot expression with an adult human breast reference. | Predicted labels, majority voting, and confidence scores. |
 | LIANA | Rank putative ligand-receptor relationships between domains. | Candidate domain-to-domain LR interactions. |
