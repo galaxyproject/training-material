@@ -1,4 +1,3 @@
----
 layout: tutorial_hands_on
 title: Spatial transcriptomics of the breast cancer tumour microenvironment using EISTA Galaxy
 subtopic: spatial
