@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@03827c84a7a6a3a428c5297b9cea2230c856fd4d",
+		release: "galaxy-training-network@fcdee58467d63d50849431138e169b6274db180b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of the labs in the different Galaxy instances for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-06-26 14:28:35 +0000">
+<meta name="DC.date" content="2026-08-05 14:15:20 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Solenne Correard">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-06-26 14:28:35 +0000",
+  "dateModified": "2026-08-05 14:15:20 +0000",
   "datePublished": "2025-10-04 17:50:22 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of the labs in the different Galaxy instances for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/community/tutorials/community-lab/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT1H",
   "teaches": "- Create labs for Galaxy communities",
   "keywords": [
@@ -1353,7 +1353,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 4, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 26, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 5, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1371,7 +1371,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1389,7 +1389,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <p>The <strong>Community lab</strong>, a centralised webpage that enables communities to rapidly aggregate, curate, integrate, display, and launch relevant tools, workflows, and training on different Galaxy servers. This user-friendly interface, built on the Galaxy framework, provides community members with data analysis capacity without requiring programming expertise. Users can run individual tools or create complex workflows, with full provenance tracking to ensure reproducibility, designed specifically for the community research (Nasr et al., 2024).
   <em>For example, <a href="https://microbiology.usegalaxy.eu">the microgalaxy lab (Europe)</a>.</em></p>
 
-<p>The aim of this tutorial is to explain what the lab is and how to create the files necessary to display the labs via the CoDex and how to deploy the rendered lab in each Galaxy instance.</p>
+<p>The aim of this tutorial is to explain what the labs are and how to create the files necessary to display the labs via the CoDex and how to deploy the rendered lab in each Galaxy instance.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1398,10 +1398,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ol id="markdown-toc">
   <li><a href="#what-is-a-lab-technically" id="markdown-toc-what-is-a-lab-technically">What is a Lab, technically?</a></li>
-  <li><a href="#creating-labs-with-codex" id="markdown-toc-creating-labs-with-codex">Creating Labs with CoDex</a></li>
-  <li><a href="#create-the-lab-specific-files-automatic" id="markdown-toc-create-the-lab-specific-files-automatic">Create the lab specific files (automatic)</a></li>
-  <li><a href="#modify-the-generated-files-to-personalize-your-community-lab" id="markdown-toc-modify-the-generated-files-to-personalize-your-community-lab">Modify the generated files to personalize your community lab</a></li>
-  <li><a href="#create-community-specific-sections-to-personalize-your-community-lab" id="markdown-toc-create-community-specific-sections-to-personalize-your-community-lab">Create community specific sections to personalize your community lab</a></li>
+  <li><a href="#how-to-generate-a-lab" id="markdown-toc-how-to-generate-a-lab">How to generate a lab?</a></li>
+  <li><a href="#creating-labs-with-the-lab-engine" id="markdown-toc-creating-labs-with-the-lab-engine">Creating Labs with the Lab Engine</a></li>
+  <li><a href="#creating-labs-with-codex" id="markdown-toc-creating-labs-with-codex">Creating Labs with CoDex</a>    <ol>
+      <li><a href="#create-the-lab-specific-files-automatic" id="markdown-toc-create-the-lab-specific-files-automatic">Create the lab specific files (automatic)</a></li>
+      <li><a href="#modify-the-generated-files-to-personalize-your-community-lab" id="markdown-toc-modify-the-generated-files-to-personalize-your-community-lab">Modify the generated files to personalize your community lab</a></li>
+      <li><a href="#create-community-specific-sections-to-personalize-your-community-lab" id="markdown-toc-create-community-specific-sections-to-personalize-your-community-lab">Create community specific sections to personalize your community lab</a></li>
+    </ol>
+  </li>
   <li><a href="#include-the-labs-in-the-different-instances" id="markdown-toc-include-the-labs-in-the-different-instances">Include the labs in the different instances</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -1420,27 +1424,95 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The Galaxy Labs documentation provides additional details about architecture and configuration.</p>
 
-<h1 id="creating-labs-with-codex">Creating Labs with CoDex</h1>
+<h1 id="how-to-generate-a-lab">How to generate a lab?</h1>
 
-<p>Using the Galaxy Labs engine alone is sufficient to create and host your own custom Galaxy Lab.</p>
+<p>Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine (developed by the AU team) or using the CoDex (maintained by the Galaxy community).</p>
 
-<p>However, <strong>CoDex extends this workflow by automating the generation of Lab YAML files</strong>, which is the focus of this tutorial.</p>
+<p>Which method should I use and where to store the files necessary to display a lab?</p>
+<ul>
+  <li>If your lab is associated to an identified Galaxy Community (SIG), we recommend building your lab using the CoDex code for homogeneity with other community related labs. You can store the lab files in the CoDex repository (default with the tutorial below).</li>
+  <li>If your lab is project bound, you can use any of the tutorial below to generate the necessary files, but they must be stored outside of the CoDex repository (local GitLab for example).</li>
+</ul>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-limitations-of-codex"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Limitations of CoDex</div>
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine or using the CoDex.</p>
 
-  <p>CoDex supports generating <strong>Galaxy Community Labs only</strong>.
-If you want to create a Lab for another purpose—such as a specific project, event, or custom use case—you can still create and host the YAML specification independently and render it through the Galaxy Labs engine.</p>
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="LabEngine" onclick="cyoaChoice('LabEngine', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">LabEngine</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="CoDex" onclick="cyoaChoice('CoDex', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">CoDex</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("CoDex", "gtn-cyoa");
+		})
+	</script>
+	
 </blockquote>
 
-<h1 id="create-the-lab-specific-files-automatic">Create the lab specific files (automatic)</h1>
+<div class="LabEngine">
 
-<p>The labs are composed of various files, some that are specific to your community and some that are common between all the labs.
+  <h1 id="creating-labs-with-the-lab-engine">Creating Labs with the Lab Engine</h1>
+
+  <p>The Galaxy Labs Engine is an endpoint used to generate “exported” Galaxy Lab landing pages from remote content hosted on GitHub. You can use this endpoint to rapidly create your own Galaxy Lab pages by pointing to your own remote content.</p>
+
+  <p>For all the information and steps, check the <a href="https://labs.usegalaxy.org.au/">Galaxy Lab engine page</a>.</p>
+
+</div>
+
+<div class="CoDex">
+
+  <h1 id="creating-labs-with-codex">Creating Labs with CoDex</h1>
+
+  <p>Using the Galaxy Labs engine alone is sufficient to create and host your own custom Galaxy Lab.</p>
+
+  <p>However, <strong>CoDex extends this workflow by automating the generation of Lab YAML files</strong>, which is the focus of this tutorial.</p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-limitations-of-codex"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Limitations of CoDex</div>
+
+    <p>CoDex supports generating <strong>Galaxy Community Labs only</strong>.
+If you want to create a Lab for another purpose—such as a specific project, event, or custom use case—you can still create and host the YAML specification independently and render it through the Galaxy Labs engine.</p>
+
+  </blockquote>
+
+  <h2 id="create-the-lab-specific-files-automatic">Create the lab specific files (automatic)</h2>
+
+  <p>The labs are composed of various files, some that are specific to your community and some that are common between all the labs.
 To automatically create the necessary files from a set of templates, a script is provided (<code class="language-plaintext highlighter-rouge">sources/bin/populate_labs.sh</code>).</p>
 
-<p>This script will create the following structure and files:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>communities/
+  <p>This script will create the following structure and files:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>communities/
 └── &lt;your community&gt;/
     └── lab/
         ├── CONTRIBUTORS
@@ -1458,116 +1530,118 @@ To automatically create the necessary files from a set of templates, a script is
             ├── 4_tutorials.yml
             ├── 5_support_and_help.yml
             └── 6_community.yml
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<p>The files are created and updated automatically using GitHub actions, you just need to add a bit of code to point to your community folder.</p>
+  <p>The files are created and updated automatically using GitHub actions, you just need to add a bit of code to point to your community folder.</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using GitHub Actions</div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using GitHub Actions</div>
 
-  <ol>
-    <li>Go to the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
-    <li>Go to the file <code class="language-plaintext highlighter-rouge">.github/workflows/fetch_filter_resources.yaml</code></li>
-    <li>On the right, click on the pen to “Edit this file”</li>
-    <li>Scroll down</li>
-    <li>
-      <p>Duplicate the section called “Populate <community-name> Lab"</community-name></p>
+    <ol>
+      <li>Go to the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
+      <li>Go to the file <code class="language-plaintext highlighter-rouge">.github/workflows/fetch_filter_resources.yaml</code></li>
+      <li>On the right, click on the pen to “Edit this file”</li>
+      <li>Scroll down</li>
+      <li>
+        <p>Duplicate the section called “Populate <community-name> Lab"</community-name></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - name: Populate &lt;community-name&gt; Lab
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - name: Populate &lt;community-name&gt; Lab
     run: |
       bash sources/bin/populate_labs.sh
     env: 
       COMMUNITY: &lt;community-name&gt;
-</code></pre></div>      </div>
-    </li>
-    <li>Replace <code class="language-plaintext highlighter-rouge">&lt;community-name&gt;</code> by the name of your community</li>
-    <li>Commit changes the changes to a new branch that you name “new lab for [Community-name]”</li>
-  </ol>
+</code></pre></div>        </div>
+      </li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">&lt;community-name&gt;</code> by the name of your community</li>
+      <li>Commit changes the changes to a new branch that you name “new lab for [Community-name]”</li>
+    </ol>
 
-</blockquote>
+  </blockquote>
 
-<p>After that, your commit will be reviewed (and approved) by admins.
+  <p>After that, your commit will be reviewed (and approved) by admins.
 On the following Sunday (or upon request), this action will be launched and will create the new files in the appropriate community folder (<code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/</code>).</p>
 
-<h1 id="modify-the-generated-files-to-personalize-your-community-lab">Modify the generated files to personalize your community lab</h1>
+  <h2 id="modify-the-generated-files-to-personalize-your-community-lab">Modify the generated files to personalize your community lab</h2>
 
-<p>Once the files are created, you should update them as some contain template text that are not community specific.</p>
+  <p>Once the files are created, you should update them as some contain template text that are not community specific.</p>
 
-<p>Files to update :</p>
+  <p>Files to update :</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>File</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/CONTRIBUTORS</code></td>
-      <td>Add the handles of all contributors</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/README.md</code></td>
-      <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></td>
-      <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/intro.html</code></td>
-      <td>Add a description of your community</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/CONTRIBUTORS</code></td>
+        <td>Add the handles of all contributors</td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/README.md</code></td>
+        <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></td>
+        <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/intro.html</code></td>
+        <td>Add a description of your community</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>The following files require no changes:</p>
+  <p>The following files require no changes:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>File</th>
-      <th>Note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/conclusion.html</code></td>
-      <td>Pre-filled, no edit needed</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/sections_templates/*</code></td>
-      <td>Pre-filled, no edit needed</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/conclusion.html</code></td>
+        <td>Pre-filled, no edit needed</td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/sections_templates/*</code></td>
+        <td>Pre-filled, no edit needed</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>The files in the section folders contain the code for each table visible in the lab.
+  <p>The files in the section folders contain the code for each table visible in the lab.
 You can check different labs for inspiration, such as the <a href="https://microbiology.usegalaxy.eu">microgalaxy lab</a>.</p>
 
-<h1 id="create-community-specific-sections-to-personalize-your-community-lab">Create community specific sections to personalize your community lab</h1>
+  <h2 id="create-community-specific-sections-to-personalize-your-community-lab">Create community specific sections to personalize your community lab</h2>
 
-<p>If you want additional sections, for example, the “Microbial isolates” and “Microbiome” sections in the <a href="https://microbiology.usegalaxy.eu/">microgalaxy lab</a>.</p>
+  <p>If you want additional sections, for example, the “Microbial isolates” and “Microbiome” sections in the <a href="https://microbiology.usegalaxy.eu/">microgalaxy lab</a>.</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-community-specific-sections"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add community specific sections</div>
-  <ol>
-    <li>Find an appropriate template. You can use other files in your section folder, or browse other labs, such as <a href="https://github.com/galaxyproject/galaxy_codex/tree/main/communities/microgalaxy/lab">microgalaxy lab code</a>, and copy the raw code as a template.</li>
-    <li>Create the file in your section folder. Name it with a digit (numerical order) and a descriptive name (i.e. “7_microbial_isolate”).</li>
-    <li>Copy the raw code in this newly created file.</li>
-    <li>Update the code to display what you want.</li>
-    <li>Save the file.</li>
-    <li>Open <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
-    <li>Add the previously created file to the sections (see <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/base.yml">microgalaxy base file</a> for example)</li>
-    <li>Save <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
-    <li>Pre-visualize the rendering of the community lab using the following path (make sure to change the variables indicated with &lt;&gt; in the path) : <code class="language-plaintext highlighter-rouge">https://labs.usegalaxy.org.au/?content_root=https://&lt;your-repo&gt;/galaxy_codex/blob/&lt;your-branch&gt;/communities/&lt;community-name&gt;/lab/base.yml</code></li>
-    <li>Update the files until you obtain the lab you want.</li>
-    <li>Commit the changes, create the pull request (if not done previously)</li>
-  </ol>
-</blockquote>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-add-community-specific-sections"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add community specific sections</div>
+    <ol>
+      <li>Find an appropriate template. You can use other files in your section folder, or browse other labs, such as <a href="https://github.com/galaxyproject/galaxy_codex/tree/main/communities/microgalaxy/lab">microgalaxy lab code</a>, and copy the raw code as a template.</li>
+      <li>Create the file in your section folder. Name it with a digit (numerical order) and a descriptive name (i.e. “7_microbial_isolate”).</li>
+      <li>Copy the raw code in this newly created file.</li>
+      <li>Update the code to display what you want.</li>
+      <li>Save the file.</li>
+      <li>Open <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
+      <li>Add the previously created file to the sections (see <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/base.yml">microgalaxy base file</a> for example)</li>
+      <li>Save <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
+      <li>Pre-visualize the rendering of the community lab using the following path (make sure to change the variables indicated with &lt;&gt; in the path) : <code class="language-plaintext highlighter-rouge">https://labs.usegalaxy.org.au/?content_root=https://&lt;your-repo&gt;/galaxy_codex/blob/&lt;your-branch&gt;/communities/&lt;community-name&gt;/lab/base.yml</code></li>
+      <li>Update the files until you obtain the lab you want.</li>
+      <li>Commit the changes, create the pull request (if not done previously)</li>
+    </ol>
+  </blockquote>
 
-<p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
+  <p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
+
+</div>
 
 <h1 id="include-the-labs-in-the-different-instances">Include the labs in the different instances</h1>
 
@@ -1874,7 +1948,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/03827c84a7a6a3a428c5297b9cea2230c856fd4d">03827c8</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fcdee58467d63d50849431138e169b6274db180b">fcdee58</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
