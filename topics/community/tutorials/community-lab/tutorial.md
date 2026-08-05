@@ -55,7 +55,7 @@ The Galaxy Labs documentation provides additional details about architecture and
 
 # How to generate a lab?
 
-Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine (developped by the AU team) or using the CoDex (maintained by the Galaxy community).
+Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine (developed by the AU team) or using the CoDex (maintained by the Galaxy community).
 
 Which method should I use and where to store the files necessary to display a lab? 
 - If your lab is associated to an identified Galaxy Community (SIG), we recommend building your lab using the CoDex code for homogeneity with other community related labs. You can store the lab files in the CoDex repository (default with the tutorial below).
