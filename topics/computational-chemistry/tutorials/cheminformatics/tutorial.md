@@ -18,7 +18,8 @@ key_points:
 - The ChemicalToolbox contains many tools for cheminformatics analysis
 contributors:
 - simonbray
-
+tags:
+- computational-chemistry
 ---
 
 

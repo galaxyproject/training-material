@@ -54,7 +54,7 @@ Citing Galaxy comes in two main actions:
 Please cite Galaxy Project’s primary publication: 
 
 - ***Galaxy for accessible, reproducible, and collaborative data analyses: 2026 update***
-  - Nucleic Acids Research, gkag469, [https://doi.org/10.1093/nar/gkag469](https://doi.org/10.1093/nar/gkag469)
+  - Nucleic Acids Research, Volume 54, Issue W1, 7 July 2026, Pages W105–W116, [https://doi.org/10.1093/nar/gkag469](https://doi.org/10.1093/nar/gkag469)
 
 This is also found on the Galaxy Project Hub with more specific examples of how to cite individual aspects of Galaxy Project - [https://galaxyproject.org/citing-galaxy/](https://galaxyproject.org/citing-galaxy/)
 
