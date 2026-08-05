@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Using SamestrGal to identify shared strains in FMT-treated rCDI samples
 level: Intermediate
 zenodo_link: https://zenodo.org/records/20745835
@@ -13,7 +12,7 @@ objectives:
 - Explain the role of each tool in the SameStr workflow
 - Interpret the shared strain outputs produced by SameStr Summarize
 - Distinguish between strain engraftment and persistence in FMT-treated samples based on SamestrGal's output
-time_estimation: 2H
+time_estimation: 3H
 key_points:
 - SamestrGal enables shared strain detection between metagenomic samples
 - SamestrGal can be run as a complete workflow or tool by tool to understand each analysis step
@@ -24,12 +23,29 @@ contributions:
   authorship:
     - xens25
 
+subtopic: metagenomics
+tags:
+- metagenomics
+- microbiome
+- microgalaxy
+edam_ontology:
+- topic_3174
+- topic_3697
+- topic_0637
+requirements:
+- type: internal
+  topic_name: introduction
+  tutorials:
+  - galaxy-intro-101
+- type: internal
+  topic_name: galaxy-interface
+  tutorials:
+  - collections
+- type: internal
+  topic_name: microbiome
+  tutorials:
+  - general-tutorial
 ---
-
-
-# Introduction
-
-<!-- This is a comment. -->
 
 *Clostridium difficile* is a pathogen found in the gut that can proliferate once antibiotics remove its competing bacteria, leading to recurrent *Clostridium difficile* infection (rCDI) {% cite cdifficile %}. Fecal microbiota transplantation (FMT) treats rCDI by restoring a donor's balanced gut microbiota in the patient {% cite zanellaterrier2014recurrent %}. Since bacterial strains within the same species can behave differently, confirming that a bacterium detected in the patient after treatment is the same strain that came from the donor, rather than a different strain of the same species that was already present, requires strain-level resolution rather than species-level identification alone {% cite smillie2018strainfinder %}.
 
@@ -82,12 +98,12 @@ The following steps use metagenomic shotgun sequencing data from FMT-treated rCD
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/records/20745835/files/28C_R1.fastq.gz/content
->    https://zenodo.org/api/records/20745835/files/28C_R2.fastq.gz/content
->    https://zenodo.org/api/records/20745835/files/28A_R1.fastq.gz/content
->    https://zenodo.org/api/records/20745835/files/28B_R2.fastq.gz/content
->    https://zenodo.org/api/records/20745835/files/28A_R2.fastq.gz/content
->    https://zenodo.org/api/records/20745835/files/28B_R1.fastq.gz/content
+>    https://zenodo.org/records/20745835/files/28C_R1.fastq.gz
+>    https://zenodo.org/records/20745835/files/28C_R2.fastq.gz
+>    https://zenodo.org/records/20745835/files/28A_R1.fastq.gz
+>    https://zenodo.org/records/20745835/files/28B_R2.fastq.gz
+>    https://zenodo.org/records/20745835/files/28A_R2.fastq.gz
+>    https://zenodo.org/records/20745835/files/28B_R1.fastq.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -178,7 +194,7 @@ This section goes through each tool used by SamestrGal individually, explaining 
 
 ## Pre-processing of reads with **KneadData**
 
-KneadData trims reads based on quality parameters and performs host-read removal on the raw sequencing reads {% cite kneaddata_website %}. This step is performed to ensure that no sequencing-quality errors are introduced into the shared strain analysis. KneadData has several tools internally, which can be seen as different sections in the tool. 
+KneadData trims reads based on quality parameters and performs host-read removal on the raw sequencing reads {% cite kneaddata_website %}. This step is performed to ensure that no sequencing-quality errors are introduced into the shared strain analysis. KneadData has several tools internally, which can be seen as different sections in the tool.
 
 Trimmomatic is the internal tool that performs quality-based trimming and removes adapters. Adapters are short synthetic DNA sequences attached to each read during library preparation so that it can bind to the sequencer. These are not part of the original biological sample, so they must be removed before alignment. Tandem Repeat Finder (TRF) is another of the internal tools, which removes repetitive DNA sequences, which are short sequences repeated consecutively along the genome that can otherwise align to multiple locations and introduce ambiguous mappings. FastQC reports is another of the internal tools that can be enabled to obtain additional outputs of quality metrics of the sequencing reads. Host removal is done because raw metagenomic reads can contain both microbial and human DNA, and only the microbial DNA is relevant for the shared strain analysis. TRF and FastQC are optional and are skipped in this tutorial, matching how KneadData was configured in the original SameStr publication {% cite samestr_podlesny %}.
 
@@ -282,7 +298,7 @@ MetaPhlAn performs both the taxonomic profiling and the marker-based alignment u
 SameStr is not a single tool but a chain of command-line tools, each carrying out one step of the shared-strain detection process. The chain starts with the marker alignments, which are converted into per-clade SNV profiles. These profiles are then merged across samples and filtered to remove low-quality positions, before the samples are compared to identify shared strains between them. The following subsections go through each of these tools in the order they are run.
 
 
-### **SameStr Convert**
+### SameStr Convert
 
 
 SameStr Convert takes the aligned reads and the taxonomic profile from MetaPhlAn and produces one SNV profile per detected clade, describing the nucleotides observed at each covered position of that clade's marker genes.
@@ -357,7 +373,7 @@ The Flatten collection tool joins each identifier with an underscore, which adds
 >
 {: .comment}
 
-### **SameStr Merge**
+### SameStr Merge
 
 SameStr Merge combines the per-sample SNV profiles for the same clade into a single multi-sample profile. For each clade, it produces one merged npz profile combining the data from every sample that contains it, along with a sample name file listing which samples are included.
 
@@ -376,13 +392,13 @@ SameStr Merge combines the per-sample SNV profiles for the same clade into a sin
 >
 > > <solution-title></solution-title>
 > >
-> > 1. SameStr Merge combines the per-sample profiles for the same clade into a single profile, so any clade detected in more than one sample is merged into one entry instead of being counted once per sample. 
+> > 1. SameStr Merge combines the per-sample profiles for the same clade into a single profile, so any clade detected in more than one sample is merged into one entry instead of being counted once per sample.
 > >
 > {: .solution}
 >
 {: .question}
 
-### **SameStr Filter**
+### SameStr Filter
 
 SameStr Filter removes clades, samples, and positions that do not meet a set of coverage and quality thresholds, before the profiles are used to detect shared strains.
 
@@ -444,7 +460,7 @@ The resulting collections contain some empty datasets. In order to use the colle
 
 
 
-### **SameStr Stats**
+### SameStr Stats
 
 SameStr Stats produces one of the final outputs of the workflow, since its results are not required by any subsequent tool. It calculates statistics on the coverage and nucleotide diversity of the filtered SNV profiles.
 
@@ -467,9 +483,9 @@ SameStr Stats produces one of the final outputs of the workflow, since its resul
 
 
 
-### **SameStr Compare**
+### SameStr Compare
 
-SameStr Compare calculates pairwise similarity between samples for each clade, using the filtered SNV profiles to determine whether samples share the same strain. SameStr Compare generates 3 output matrices for each clade: an overlap matrix giving the number of shared covered positions between each pair of samples, a fraction matrix giving the Maximum Variant Profile Similarity (MVS) between each pair, and a closest matrix identifying each sample's most similar match. 
+SameStr Compare calculates pairwise similarity between samples for each clade, using the filtered SNV profiles to determine whether samples share the same strain. SameStr Compare generates 3 output matrices for each clade: an overlap matrix giving the number of shared covered positions between each pair of samples, a fraction matrix giving the Maximum Variant Profile Similarity (MVS) between each pair, and a closest matrix identifying each sample's most similar match.
 
 > <hands-on-title> Compare Samples for Each Clade </hands-on-title>
 >
@@ -488,7 +504,7 @@ SameStr Compare calculates pairwise similarity between samples for each clade, u
 {: .details}
 
 
-### **SameStr Summarize**
+### SameStr Summarize
 
 SameStr Summarize is the last tool in the workflow, which produces the shared-strain results. It combines the overlap and similarity matrices from SameStr Compare with the taxonomic profiles from MetaPhlAn, and generates three summary tables: a taxon count table listing the clades detected per sample, a co-occurrence table showing which clades are shared between sample pairs, and a strain events table reporting, for each shared clade, whether the two samples count as sharing the same strain.
 
@@ -549,7 +565,7 @@ This table is the fastest way to check whether clades are shared at all between 
 
 ![Strain events table from SameStr Summarize](../../images/samestr-strain-events.png "Per-clade pairwise comparisons showing overlap, similarity, and the resulting shared-strain classification.")
 
-This table shows the exact clades analyzed between each pair of samples, which is what the co-occurrence table's totals are built from. Each clade is given one of three events: 
+This table shows the exact clades analyzed between each pair of samples, which is what the co-occurrence table's totals are built from. Each clade is given one of three events:
 
 - *shared_strain*: when both the overlap and similarity thresholds are met
 - *other_strain*: when the overlap threshold is met but similarity falls below 0.999
