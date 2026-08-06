@@ -5,6 +5,7 @@ title: Data Manipulation Olympics
 zenodo_link: 'https://zenodo.org/record/6803028'
 tags:
 - cyoa
+- galaxy-intro
 questions:
 - How can I do basic data manipulation in Galaxy?
 - Which tools are available to convert, reformat, filter, sort etc my text-based data?

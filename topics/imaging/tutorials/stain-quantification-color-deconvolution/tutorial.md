@@ -36,17 +36,17 @@ contributions:
     - uni-freiburg
 ---
 
-Manually scoring histological staining across dozens of images is time-consuming and subjective. Two researchers looking at the same slide may reach different conclusions about how much staining is present. Computational automatize quantification solves this problem: it applies the same criteria to every image, produces a numeric result, and scales to large datasets without additional effort.
+Manually scoring histological staining across dozens of images is time-consuming and subjective. Two researchers looking at the same slide may reach different conclusions about the amount of staining. Computational automated quantification solves this problem: it applies the same criteria to every image, produces a numeric result, and scales to large datasets without additional effort.
 
-This tutorial walks you through a Galaxy workflow that quantifies stained area in brightfield histological images, from raw microscopy image to a final table of percentages ready for statistical analysis. The workflow also includes an optional step that detects individual stained regions and exports them as polygon ROIs, which can be uploaded to image management platforms like [OMERO](https://www.openmicroscopy.org/omero/) for visual validation, annotation, and collaborative review.
+This tutorial walks you through a Galaxy workflow that quantifies stained area in brightfield histological images, from a raw microscopy image to a final table of percentages ready for statistical analysis. The workflow also includes an optional step that detects individual stained regions and exports them as polygon ROIs, which can be uploaded to image management platforms like [OMERO](https://www.openmicroscopy.org/omero/) for visual validation, annotation, and collaborative review.
 
 The approach is built around color deconvolution, a technique that mathematically separates overlapping stain signals so you can measure each one independently.
 
-In this tutorial you will work with **IHC (Immunohistochemistry)**, detecting CD11b-positive myeloid cells using a DAB chromogen.
+In this tutorial, you will work with **IHC (Immunohistochemistry)**, detecting CD11b-positive myeloid cells using a DAB chromogen.
 
 > <comment-title>Workflow applicability</comment-title>
 >
-> This tutorial uses IHC (CD11b/DAB) images as the working example. The same workflow applies directly to **Masson's Trichrome (MT)** staining for collagen quantification.The only difference is selecting channel index that correspondes to the aniline blue instead DAB in Step 2. MT support will be added as an extended version of this tutorial in the future.
+> This tutorial uses IHC (CD11b/DAB) images as the working example. The same workflow applies directly to **Masson's Trichrome (MT)** staining for collagen quantification. The only difference is selecting the channel index that corresponds to the aniline blue instead of DAB in Step 2. MT support will be added as an extended version of this tutorial in the future.
 >
 {: .comment}
 
@@ -147,7 +147,7 @@ Here is an example of what the raw input images look like:
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets with descriptive names if needed (e.g. `IHC_TXsample1.tiff` or `IHC_Vehiclesample1.tiff`). In total, there should be 20 tiff images, 10 for each group.
+> 3. Rename the datasets with descriptive names if needed (e.g. `IHC_TXsample1.tiff` or `IHC_Vehiclesample1.tiff`). In total, there should be 20 TIFF images, 10 for each group.
 > 4. Check that the datatype is `tiff`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tiff" %}
@@ -158,13 +158,13 @@ Here is an example of what the raw input images look like:
 >
 > > <comment-title>Image requirements</comment-title>
 > >
-> > Images must be brightfield RGB microscopy images in TIFF format. Fluorescence images are not compatible with color deconvolution. Avoid images with strong artifacts, out-of-focus regions, or uneven illumination, as these reduce quantification accuracy. Therefore, it is strongly recommended that you insepct your images one-by-one before proceeding to the pre-processing steps. 
+> > Images must be brightfield RGB microscopy images in TIFF format. Fluorescence images are not compatible with color deconvolution. Avoid images with strong artifacts, out-of-focus regions, or uneven illumination, as these reduce quantification accuracy. Therefore, it is strongly recommended that you inspect your images one-by-one before proceeding to the pre-processing steps. 
 > >
 > {: .comment}
 >
 {: .hands_on}
 
-The workflow associated with this tutorial requires a dataset collection as input. The steps described below are explained individually for clarity, but in Galaxy all images are processed together in a single batch run. For this reason, make sure your images are named descriptively before building the collection — the final results table will use those names to identify each sample.
+The workflow associated with this tutorial requires a dataset collection as input. The steps described below are explained individually for clarity, but in Galaxy, all images are processed together in a single batch run. For this reason, make sure your images are named descriptively before building the collection — the final results table will use those names to identify each sample.
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
@@ -176,7 +176,7 @@ We use **CLAHE (Contrast Limited Adaptive Histogram Equalization)**, which enhan
 
 > <comment-title>About stain normalization</comment-title>
 >
-> More advanced stain normalization methods such as Macenko or Reinhard normalization can standardize color appearance across slides by transferring the stain profile of a reference image to all others. These methods are not currently available as Galaxy tools, but we are working on adding them. If you have access to them in the meantime (e.g. via Python or QuPath), applying them before this workflow may further improve consistency across batches.
+> More advanced stain normalization methods, such as Macenko or Reinhard normalization, can standardize color appearance across slides by transferring the stain profile of a reference image to all others. These methods are not currently available as Galaxy tools, but we are working on adding them. If you have access to them in the meantime (e.g. via Python or QuPath), applying them before this workflow may further improve consistency across batches.
 >
 {: .comment}
 
@@ -471,7 +471,7 @@ You now have, for each image: the stained pixel area (from feature extraction) a
 
 ## Calculate Percent Stained Area
 
-You now have a single table with all the values you need. The final step divides stained area by total area and multiplies by 100.
+You now have a single table with all the values you need. The final step divides the stained area by the total area and multiplies by 100.
 
 > <hands-on-title>Compute percent stained area</hands-on-title>
 >
@@ -519,14 +519,14 @@ Your final output is a TSV table with one row per sample, containing: `sample_id
 > <question-title></question-title>
 >
 > 1. Looking at the table, what is the percent stained area for Tx_Sample6, and how do you calculate it from the values provided?
-> 2. Looking at the results table, which group shows higher CD11b-positive area — Tx or Vehicle? What does this suggest biologically?
+> 2. Looking at the results table, which group shows a higher CD11b-positive area — Tx or Vehicle? What does this suggest biologically?
 > 3. Vehicle_Sample3 has a notably higher percent area (2.128%) compared to the other Vehicle samples. How might this affect the interpretation of the group comparison?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Tx_Sample6 has an area of 31,943 pixels and a total area of 5,065,984 pixels. The calculation is: (31,943 / 5,065,984) × 100 ≈ **0.631%**. This is the highest value in the Tx group, but still well below most Vehicle samples, which range from 0.334% to 2.128%.
 > >
-> > 2. The Vehicle (DMSO) group shows consistently higher CD11b-positive area, with a mean of ~0.74% compared to ~0.22% in the Tx group. This suggests that 4-oxo RA treatment reduced myeloid cell infiltration into the infarcted myocardium, consistent with the hypothesis in {% cite Rettkowski2025 %} that the treatment suppresses immune cell mobilization from bone marrow after MI. Importantly, it is not possible to know only through histology which of this myeloid cells are infiltrated ones and which are local as both are present after infarction but we can clearly see that there is a reduced percentage stain are in the treated group. 
+> > 2. The Vehicle (DMSO) group shows consistently higher CD11b-positive area, with a mean of ~0.74% compared to ~0.22% in the Tx group. This suggests that 4-oxo RA treatment reduced myeloid cell infiltration into the infarcted myocardium, consistent with the hypothesis in {% cite Rettkowski2025 %} that the treatment suppresses immune cell mobilization from bone marrow after MI. Importantly, it is not possible to know only through histology which of these myeloid cells are infiltrated ones and which are local, as both are present after infarction, but we can clearly see that there is a reduced percentage of stain in the treated group. 
 > >
 > > 3. Vehicle_Sample3 is an outlier at 2.128%, more than double the next highest Vehicle value. While the overall trend still holds. All but one Vehicle sample exceeds the Tx group mean, this variability reflects the biological heterogeneity typical of in vivo infarction models. It is important to test for outliers of the final data results and report variability transparently and consider robust statistical tests when comparing groups with unequal variance, such as the Welch t-test.
 > >
