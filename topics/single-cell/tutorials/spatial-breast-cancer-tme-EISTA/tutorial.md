@@ -15,7 +15,7 @@ objectives:
 - Compare the 9, 10, and 13 Leiden groups produced at resolutions 0.4, 0.8, and 1.2.
 - Examine ranked genes and Squidpy results before assigning a biological description to a Leiden group.
 - Report CellTypist annotations and LIANA rankings as reference-based and expression-based results that require further validation.
-time_estimation: 6H
+time_estimation: 3H
 key_points:
 - The training input is a processed SpatialData archive derived from the 10x Genomics Human Breast Cancer, Block A Section 1 dataset.
 - The source dataset contains 3,798 capture spots under tissue; use Inspect AnnData to record the dimensions after each filtering stage.
