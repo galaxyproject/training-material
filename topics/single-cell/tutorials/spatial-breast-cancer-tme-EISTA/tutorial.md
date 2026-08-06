@@ -470,13 +470,11 @@ Scanpy normalises the expression values in each spot to a total of 10,000, appli
 >
 > 1. What does the displayed plot show about how the selected HVGs differ from other genes with similar mean expression?
 > 2. Does selecting 3,000 HVGs mean the other genes are biologically unimportant?
-> 3. Why is no batch key supplied?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The selected genes show stronger variability than expected for genes at a similar average expression level, making them useful for modelling structure in this dataset.
 > > 2. No. HVG selection chooses genes that are most useful for modelling variation and neighbourhood structure; non-HVG genes remain available for marker interpretation and other analyses.
-> > 3. This tutorial analyses one tissue section and no batch annotation is supplied. A batch key is only appropriate when meaningful batch groups exist.
 > >
 > {: .solution}
 >
