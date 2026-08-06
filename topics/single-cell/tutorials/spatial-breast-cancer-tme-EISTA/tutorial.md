@@ -84,14 +84,13 @@ A **Leiden group** is the set of spots assigned the same Leiden label. A group c
 
 | Analysis group | Purpose | Main output |
 | --- | --- | --- |
-| SpatialData input | Keep the expression table, capture-spot shapes, tissue images, and coordinate system together, then export the expression table for Scanpy. | Prepared SpatialData archive and exported AnnData table. |
-| Scanpy preprocessing | Calculate QC metrics, filter observations and genes, normalise counts, log-transform, and select variable genes. | Filtered and log-normalised AnnData with an HVG annotation. |
-| Scanpy clustering | Calculate PCA, build an expression-neighbour graph, generate UMAP, and run Leiden at three resolutions. | AnnData containing PCA coordinates, the neighbour graph, UMAP coordinates, and three Leiden observation keys. |
-| Ranked genes | Rank genes associated with each selected Leiden group and export the results for inspection. | AnnData containing ranked-gene results and a tabular ranked-gene output. |
-| Squidpy | Build a spatial-neighbour graph from the capture-spot coordinates and calculate group-level and gene-level spatial statistics. | Spatial connectivity and distance matrices, centrality scores, neighbourhood enrichment, and Moran's I results. |
-| CellTypist | Compare each spot expression profile with an adult human breast single-cell reference and refine the assignments by majority voting. | `predicted_labels`, `majority_voting`, and `conf_score` annotations. |
-| LIANA | Rank candidate ligand–receptor relationships between `leiden_res_0.8` groups from their expression profiles. | Candidate source-group-to-target-group ligand–receptor rankings. |
-| SpatialData output | Add the processed AnnData table back to the original spatial object. | SpatialData archive containing `table_processed` together with the original images, capture-spot shapes, and coordinate system. |
+| Scanpy preprocessing | Examine data quality, filter spots and genes, normalise and log-transform expression, and identify highly variable genes. | Filtered and processed AnnData table. |
+| Scanpy clustering | Calculate PCA, construct an expression-neighbour graph, generate UMAP, and compare three Leiden resolutions. | PCA, UMAP, and Leiden group assignments. |
+| Ranked genes | Identify genes associated with each selected Leiden group. | Ranked-gene results for every group. |
+| Squidpy | Construct the spatial-neighbour graph and examine spatial organisation and gene-expression patterns. | Centrality, neighbourhood enrichment, and Moran's I results. |
+| CellTypist | Compare each spot profile with an adult human breast single-cell reference. | Reference-based spot annotations and confidence scores. |
+| LIANA | Rank candidate ligand–receptor relationships between Leiden groups. | Candidate group-to-group ligand–receptor relationships. |
+| SpatialData output | Add the processed AnnData table back to the original spatial object. | SpatialData archive containing the processed table, images, shapes, and coordinates. |
 
 > <question-title></question-title>
 >
