@@ -54,6 +54,8 @@ abbreviations:
   LR: ligand-receptor
 ---
 
+https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast
+
 Breast tumours contain epithelial, stromal, vascular, and immune components whose abundance and position can vary across a tissue section {% cite Mehraj2021BreastTME %} {% cite Croizer2024SpatialCAF %}. Spatial transcriptomics measures gene expression together with the position of each observation, so expression patterns can be compared with the tissue image and with neighbouring capture spots {% cite Stahl2016SpatialTranscriptomics %} {% cite Rao2021TissueArchitecture %}.
 
 The data in this tutorial come from the 10x Genomics **Human Breast Cancer, Block A Section 1** Visium dataset {% cite TenXBreastCancerBlockA %}. 10x Genomics describes the sample as a fresh-frozen invasive ductal carcinoma section containing ductal carcinoma in situ, lobular carcinoma in situ, and invasive carcinoma. The Space Ranger 1.1.0 summary reports 3,798 spots under tissue and a median of 6,026 detected genes per spot.
@@ -487,17 +489,34 @@ Scanpy normalises the expression values in each spot to a total of 10,000, appli
 
 PCA compresses correlated gene-expression patterns into orthogonal components. The k-nearest-neighbour graph then links spots with similar PCA coordinates. UMAP provides a two-dimensional visualisation of this graph; it is useful for exploration but should not be interpreted as a physical tissue map {% cite Wolf2018Scanpy %}.
 
-> <hands-on-title>Generate PCA and inspect technical covariates</hands-on-title>
+> <hands-on-title>Generate PCA, inspect count depth, and regress total counts</hands-on-title>
 >
 > 1. Run {% tool [Scanpy cluster, embed and infer trajectories](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer AnnData with HVGs`
 >    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
 >
->    Rename the output `Breast cancer PCA`.
->
+>    Rename the output `Breast cancer PCA before regression`.
 >
 > 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer PCA`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer PCA before regression`
+>    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
+>    - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
+>
+> 3. Run {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer AnnData with HVGs`
+>    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
+>    - *"Keys for observation annotation on which to regress on"*: `total_counts`
+>
+>    Rename the output `Breast cancer AnnData regressed for total counts`.
+>
+> 4. Run {% tool [Scanpy cluster, embed and infer trajectories](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer AnnData regressed for total counts`
+>    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
+>
+>    Rename the output `Breast cancer PCA after regression`.
+>
+> 5. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer PCA after regression`
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
 >    - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
 >
@@ -506,7 +525,7 @@ PCA compresses correlated gene-expression patterns into orthogonal components. T
 > <hands-on-title>Build the transcriptomic graph and UMAP</hands-on-title>
 >
 > 1. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer PCA`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Breast cancer PCA after regression`
 >    - *"Method used for inspecting"*: `Compute a neighborhood graph of observations, using 'pp.neighbors'`
 >
 >    Rename the output `Breast cancer transcriptomic neighbours`.
