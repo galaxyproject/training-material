@@ -60,6 +60,8 @@ recordings:
   - ahmedhamidawan
   bot-timestamp: 1725682847
 
+tags:
+  - history
 
 ---
 

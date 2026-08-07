@@ -12,9 +12,10 @@ objectives:
 - Use follow mode to monitor collaborator activities.
 - Add annotations and comments to provide context, ask questions, or share insights.
 time_estimation: 30M
-contributors:
-- elifsu-simula
-- annefou
+contributions:
+  authorship:
+    - elifsu-simula
+    - annefou
 recordings:
 - youtube_id: l3U6c_VOgnU
   length: 7M
