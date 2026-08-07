@@ -31,9 +31,9 @@ follow_up_training:
 contributions:
   authorship:
     - thomaswollmann
-    - shiltemann
     - kostrykin
     - annefou
+    - shiltemann
   funding:
     - elixir-europe
     - oscars
