@@ -155,12 +155,12 @@ Now, we can extract metadata from an image.
 >    > <question-title></question-title>
 >    >
 >    > 1. What is the datatype?
->    > 2. What are the pixel dimentions?
+>    > 2. What are the pixel dimensions?
 >    > 3. How many bits per pixel are used?
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. TIFF
->    > > 2. 1344x1024 (bioimaging path) or 1000x1000 (Earth observation path)
+>    > > 2. 1344×1024 (bioimaging data) or 1000×1000 (Earth observation data)
 >    > > 3. 16
 >    > {: .solution }
 >    {: .question}
@@ -193,7 +193,7 @@ Your image should look something like this:
 > You can observe that the image content is barely visible. Why?
 >
 > > <solution-title></solution-title>
-> > The image is 16-bit, but its intensity values occupy only a small fraction of the range that 16 bits can represent (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
+> > The image is 16-bit, but its intensity values cover only a small fraction of the range that 16 bits can represent (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
 > {: .solution }
 {: .question}
 
@@ -213,13 +213,15 @@ Your image should now look something like this:
 
 <div class="Bioimaging" markdown="1">
 ![viz_normalized output image](../../images/imaging-introduction/viz_normalized.png){: width="75%"}
+
+We can now clearly make out the stained nuclei. Next we will automatically detect these features and segment the image.
 </div>
 
 <div class="Earth-observation" markdown="1">
 ![normalised melt-pond water index](../../images/imaging-introduction/melt_ponds_normalized.png){: width="75%"}
-</div>
 
-We can now clearly make out the objects of interest (the stained nuclei, or the melt ponds). Next we will automatically detect these features and segment the image.
+We can now clearly make out the melt ponds. Next we will automatically detect these features and segment the image.
+</div>
 
 # Image Filtering
 
@@ -287,10 +289,10 @@ Objects of interest like melt ponds can be segmented by using a smoothed image a
 >    > >
 >    > >    The information contained in the original image has now become visible to the human eye.
 >    > >
->    > >    Bioimaging path:
+>    > >    **Bioimaging data:**
 >    > >    ![normalized viz_segmented file](../../images/imaging-introduction/viz_segmented.png)
 >    > >
->    > >    Earth observation path:
+>    > >    **Earth observation data:**
 >    > >    ![normalized melt-pond label map](../../images/imaging-introduction/melt_ponds_segmented.png)
 >    > >
 >    > {: .solution }
@@ -315,8 +317,8 @@ Objects of interest like melt ponds can be segmented by using a smoothed image a
 >    >
 >    > > <solution-title></solution-title>
 >    > >  The {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} tool counted:
->    > >  - **Bioimaging path:** 425 nuclei.
->    > >  - **Earth observation path:** 13 melt ponds—the major supraglacial lakes. A single Gaussian-smoothing + Otsu pass detects the large lakes; the full workflow in the [example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo) (median denoising and the literature water-index threshold) resolves the smaller ponds too, about 90 in this scene.
+>    > >  - **Bioimaging data:** 425 nuclei.
+>    > >  - **Earth observation data:** 13 melt ponds, that are the major supraglacial lakes. A single Gaussian-smoothing + Otsu pass detects the large lakes; the full workflow in the [example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo) (median denoising and the literature water-index threshold) resolves the smaller ponds too, about 90 in this scene.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
