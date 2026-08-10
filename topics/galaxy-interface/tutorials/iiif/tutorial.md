@@ -57,7 +57,7 @@ Galaxy integrates IIIF through its File Sources (Remote Files) framework, enabli
 
 After saving, your new entry appears in **My Repositories**.
 
-![My Repositories] {% link topics/galaxy-interface/tutorials/iiif/bodleian.png %}
+ ![Screenshot of My Repositories in Galaxy UI](topics/galaxy-interface/tutorials/iiif/bodleian.png)
 
 Once you have added your IIIF Manifest, you can access its content and load images into your history for further processing.
 
