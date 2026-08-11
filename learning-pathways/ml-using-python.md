@@ -13,61 +13,54 @@ description: |
 tags: [elixir, ai, ml]
 
 pathway:
-- 
+-
     section: "Module 0: Python warm-up"
     description: Python warm-up for statistics and Machine Learning
     tutorials:
-    - 
+    -
         name: python-basics
         topic: data-science
-    - 
+    -
         name: python-warmup-stat-ml
         topic: data-science
-- 
+-
     section: "Module 1: Foundational Aspects of Machine Learning"
     description: Foundational Aspects of Machine Learning
     tutorials:
-    - 
+    -
         name: intro-to-ml-with-python
         topic: statistics
-- 
-    section: "Module 2: Neural networks"
-    description: Neural networks
+-
+    section: "Module 2: Practical deep learning with PyTorch"
+    description: This tutorial provides a hands-on introduction to building and training neural networks using PyTorch. You'll learn fundamental PyTorch concepts through practical examples with the breast cancer classification dataset, progressing from tensors and data handling to building and training multi-layer neural networks.
     tutorials:
-    - 
-        name: neural-networks-with-python
+    -
+        name: practical-deep-learning-with-pytorch
         topic: statistics
-- 
-    section: "Module 3: Deep Learning (without Generative Artificial Intelligence)"
-    description: Deep Learning (without Generative Artificial Intelligence)
-    tutorials:
-    - 
-        name: deep-learning-without-gai-with-python
-        topic: statistics
-- 
-    section: "Module 4: Generative Artificial Intelligence and Large Langage Model for Genomics using Python"
+-
+    section: "Module 3: Generative Artificial Intelligence and Large Langage Model for Genomics using Python"
     description: This tutorial series provides a comprehensive guide to leveraging large language models for genomics, covering pretraining, fine-tuning, mutation impact prediction, sequence generation, and optimization.
     tutorials:
-    - 
+    -
         name: genomic-llm-pretraining
         topic: statistics
-    - 
+    -
         name: genomic-llm-finetuning
         topic: statistics
-    - 
+    -
         name: genomic-llm-zeroshot-prediction
         topic: statistics
-    - 
+    -
         name: genomic-llm-sequence-generation
         topic: statistics
-    - 
+    -
         name: genomic-llm-sequence-optimization
         topic: statistics
-- 
-    section: "Module 5: Regulations/standards for AI using DOME"
+-
+    section: "Module 4: Regulations/standards for AI using DOME"
     description: Regulations/standards for AI using DOME
     tutorials:
-    - 
+    -
         name: dome
         topic: statistics
 ---
