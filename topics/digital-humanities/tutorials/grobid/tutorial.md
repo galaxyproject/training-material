@@ -49,7 +49,7 @@ If your texts are not machine-readable, you could use Tesseract directly from wi
 You can chain different tools into [workflows](https://gxy.io/GTN:T00151) that you can easily rerun, allowing you to easily automate your analysis steps and make your tasks sharable.
 
 Additionally, [FAIR](https://galaxyproject.org/fair/) and reproducible research are at the core of what we do. 
-Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) through all steps of the research data life-cycle and makes reproducibility a built-in default to support your research. 
+Galaxy supports best practices in [Research Data Management](https://gxy.io/GTN:T00575) (RDM) through all steps of the research data life-cycle and makes reproducibility a built-in default to support your research. Learn more on Galaxy in our [Introduction to Digital Humanities](https://gxy.io/GTN:T00557) and more on the platform's RDM features in the [Introduction to Galaxy as an RDM platform](https://gxy.io/GTN:T00575). 
 
 # Get started in Galaxy
 
@@ -221,7 +221,7 @@ It is easy to re-run jobs in Galaxy:
 
 {% snippet faqs/galaxy/tools_rerun.md %}
 
-This allows you to see exactly what oarameters you used when you ran the job before and enables you to adapt those, if needed.
+This allows you to see exactly what parameters you used when you ran the job before and enables you to adapt those, if needed.
 Make your changes and click on **Run Tool**.
 This creates a new dataset with updated parameters.
 
