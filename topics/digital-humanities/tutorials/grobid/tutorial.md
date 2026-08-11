@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Text-Mining articles with GROBID
 level: Introductory
+draft: true
 questions:
   - What is GROBID?
   - How to get started with GROBID in Galaxy?
@@ -248,3 +249,9 @@ For more information on this, see the tool help.
 {% snippet faqs/galaxy/tools_help.md %}
 
 The job starts running. Once it turns green, it is ready for you to inspect.
+Click on the the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the new file's content.
+The result is an enriched TEI XML file.
+Depending on your needs, you are already finished or you want to use further tools to achieve your goals.
+You could now extract specific lines from this (and all the other created TEI files) by using {% tool [Select lines that match an expression](Grep1) %} or use different tools to achieve your goal.
+
+Give it a try and see how Grobid can help you mine your articles!
