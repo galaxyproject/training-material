@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@07451a60d78156950840c06c5a17f39cff972805",
+		release: "galaxy-training-network@2df43d06dad1ba71e49ef8dd81d54f7ea0ea1c2e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of a Galaxy tutorial table for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-10-28 14:14:42 +0000">
+<meta name="DC.date" content="2026-08-12 14:06:25 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Solenne Correard">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-10-28 14:14:42 +0000",
+  "dateModified": "2026-08-12 14:06:25 +0000",
   "datePublished": "2025-09-17 10:10:23 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of a Galaxy tutorial table for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/community/tutorials/community-tutorial-table/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT1H",
   "teaches": "- Create a community reviewed table for Galaxy tutorials within a specific scientific domain\n- Embed the tutorial table in a community page",
   "keywords": [
@@ -1158,7 +1158,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 17, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 12, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1176,7 +1176,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1209,7 +1209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ol id="markdown-toc">
   <li><a href="#add-your-community-to-the-galaxy-codex" id="markdown-toc-add-your-community-to-the-galaxy-codex">Add your community to the Galaxy CoDex</a></li>
   <li><a href="#pull-list-of-tags-relevant-to-your-community" id="markdown-toc-pull-list-of-tags-relevant-to-your-community">Pull list of tags relevant to your community</a></li>
-  <li><a href="#add-the-list-relevant-tags-for-your-community-in-the-tutorial_tags-file" id="markdown-toc-add-the-list-relevant-tags-for-your-community-in-the-tutorial_tags-file">Add the list relevant tags for your community in the <code class="language-plaintext highlighter-rouge">tutorial_tags</code> file</a></li>
+  <li><a href="#add-the-list-of-relevant-tags-for-your-community-in-the-tutorial_tags-file" id="markdown-toc-add-the-list-of-relevant-tags-for-your-community-in-the-tutorial_tags-file">Add the list of relevant tags for your community in the <code class="language-plaintext highlighter-rouge">tutorial_tags</code> file</a></li>
   <li><a href="#embed-the-table-in-your-community-page-on-the-hub" id="markdown-toc-embed-the-table-in-your-community-page-on-the-hub">Embed the table in your community page on the Hub</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -1243,7 +1243,7 @@ This will create a folder for your community, a new folder for your community ca
 
 <h1 id="pull-list-of-tags-relevant-to-your-community">Pull list of tags relevant to your community</h1>
 
-<p>To add tutorials in your community tutorial table, you will need to indicate a list of tags relevant to your community, and tutorials associated with this tag will be automatically pulled from the <a href="https://training.galaxyproject.org/">Galaxy Training Network</a> one a week. Only tutorials with the selected tags will be added to the filtered table.
+<p>To add tutorials in your community tutorial table, you will need to indicate a list of tags relevant to your community, and tutorials associated with this tag will be automatically pulled from the <a href="https://training.galaxyproject.org/">Galaxy Training Network</a> once a week. Only tutorials with the selected tags will be added to the filtered table.
 You will then be able to remove tutorials that are not relevant to your community or deprecated.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1260,7 +1260,7 @@ You will then be able to remove tutorials that are not relevant to your communit
   <p>You can also create a tag (for example, your community name) and tag all relevant tutorials with it. Then, you only need to use this tag to pull all the relevant tutorials.</p>
 </blockquote>
 
-<h1 id="add-the-list-relevant-tags-for-your-community-in-the-tutorial_tags-file">Add the list relevant tags for your community in the <code class="language-plaintext highlighter-rouge">tutorial_tags</code> file</h1>
+<h1 id="add-the-list-of-relevant-tags-for-your-community-in-the-tutorial_tags-file">Add the list of relevant tags for your community in the <code class="language-plaintext highlighter-rouge">tutorial_tags</code> file</h1>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-add-the-relevant-tags-to-the-tutorial-tags-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add the relevant tags to the tutorial_tags file</div>
@@ -1293,7 +1293,7 @@ Metagenomics
 
 <p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
 
-<p>On the sunday following the Pull Request merge, a table with all tutorial will be created in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/resources/tutorials.tsv</code></p>
+<p>On the sunday following the Pull Request merge, a table with all tutorials will be created in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/resources/tutorials.tsv</code></p>
 
 <p>Here is an overview of the files :</p>
 
@@ -1643,7 +1643,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/07451a60d78156950840c06c5a17f39cff972805">07451a6</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2df43d06dad1ba71e49ef8dd81d54f7ea0ea1c2e">2df43d0</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
