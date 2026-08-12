@@ -332,14 +332,18 @@ The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with
 >
 > 1. {% tool [Apply rules](__APPLY_RULES__) %} with the following parameters:
 >    - {% icon param-collection %} *"Input Collection"*: the flattened SNV profile collection produced by **Flatten collection** {% icon tool %}
->    - In the Rule Builder:
->        1. Click *"Add Column"* > *"Using a Regular Expression"*
->        2. In *"From Column"*, select *"Create column from expression replacement"*
->        3. Fill in *"Regular Expression"*: `^[^_]+_(.*)$`
->        4. Fill in *"Replacement Expression"*: `\1`
->        5. Click *"Apply"*
->        6. Go to *"Add/Modify Column Definitions"*
->        7. Click *"List Identifier(s)"* and select `B`
+>    - Under *"Rules"* click "*{% icon galaxy-wf-edit %} Edit*" to open the **Rule Builder**
+>        1. Click *"{% icon plus %} Column"* -> *"Using a Regular Expression"*
+>           - In *"From Column"*, choose `A` from the dropdown
+>           - Select *"Create column from expression replacement"*
+>           - Fill in *"Regular Expression"*: `^[^_]+_(.*)$`
+>           - Fill in *"Replacement Expression"*: `\1`
+>           - Click *"Apply"*
+>        2. Click *"{% icon plus%} Rules"* -> *"Add/Modify Column Definitions"*
+>           - Click *"List Identifier(s)"* and select `B`
+>           - Click *"Apply"*
+>        3. Click *"Save"*
+
 >
 {: .hands_on}
 
