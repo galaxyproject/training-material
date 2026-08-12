@@ -35,7 +35,7 @@ contributions:
   funding:
   - swissuniversities
   infrastructure:
-  - galaxy-swiss
+  - GALAXY-CH
   - dasch-swiss
 ---
 
