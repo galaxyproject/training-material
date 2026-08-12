@@ -1,0 +1,411 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow allows to identify consecutive groups of a number of solar eclipses within a given time span.",
+    "comments": [],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "logo_url": "https://iiif.dasch.swiss:443/0810/7WumAIYuJsQ-CroJQljo3CV.jp2/full/2227,836/0/default.jpg",
+    "name": "Workflow for the analysis of solar eclipse frequency at pre-calculated locations",
+    "readme": "This workflow allows to identify consecutive groups of a number of solar eclipses within a given time span. This may be relevant for chronological investigations, e.g. if the question arises whether a series of solar eclipses may have perceived as bad omen for a ruler and caused political upheaval or disturbances such as changes of dynasties.\n\nThe input files for this workflow are available on DaSCH's repository DSP, and they can be directly fetched by copying the link of the file and choosing \"Paste/Fetch data\" in the upload section. Data exists for different locations relevant in classical antiquity for the time between 2500BCE and 1000CE. Here is the link to the data in DSP: https://app.dasch.swiss/project/Ooez-W-1Q5i4rg54GAwGpw/data/SolarEclipses/EclipseList\n\nPre-calculated solar eclipse lists in the repository exist for several places with magnitude threshold values of 0.5, 0.6, 0.7, 0.8, 0.9 and 1.0. A magnitude of 1.0 means a total solar eclipse. Be sure to pick the right file - if you are interested in a potential sequence of eclipses with threshold magnitude larger than 0.85 you must pick one of the following versions: magnitude threshold values of 0.5, 0.6, 0.7, or 0.8.\n\nThe workflow needs three input values:\n- magnitude threshold: meaningful values range between 0.5 and 1.0\n- number of consecutive eclipses one is looking for, e.g. 3\n- number of years within the number of consecutive eclipses shall take place, e.g. 10",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "This step retrieves the input file from a repository or allows to upload the file from a local computer.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "This step retrieves the input file from a repository or allows to upload the file from a local computer.",
+                    "name": "Solar eclipse data (.txt)"
+                }
+            ],
+            "label": "Solar eclipse data (.txt)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 1.3125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9c215497-46d1-4f2e-b3f8-7b03ebe3eaf0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Magnitude threshold given by the user. Meaningful values range between 0.5 and 1.0.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Magnitude threshold given by the user. Meaningful values range between 0.5 and 1.0.",
+                    "name": "Magnitude threshold"
+                }
+            ],
+            "label": "Magnitude threshold",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 628.0859375,
+                "top": 207.4765625
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "fbd2dc02-aa98-4bf5-b9fc-6fbff64f2aef",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Define the number of eclipses above the magnitude threshold within a certain year range, e.g. 3",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Define the number of eclipses above the magnitude threshold within a certain year range, e.g. 3",
+                    "name": "Number of eclipses"
+                }
+            ],
+            "label": "Number of eclipses",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1226.1834183728952,
+                "top": 403.6225694742335
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "d2b59a6d-9ce0-4f62-ae5b-0bba170b2a39",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Define the maximum interval in years, e.g. 10",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Define the maximum interval in years, e.g. 10",
+                    "name": "Maximum interval in years"
+                }
+            ],
+            "label": "Maximum interval in years",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1225.8866585295846,
+                "top": 515.1637718401157
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "6ff6dbc6-12f0-45a9-9428-97badec4c36f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "The original file is a .txt file which has to be converted to a .tsv format for further processing on the Galaxy Platform.",
+            "content_id": "Convert characters1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Convert file format: .txt -> .tsv",
+            "name": "Convert",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 322.921875,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "Convert characters1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"strip\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "22f09dd3-6ffe-4f96-8929-6bfa33f29520",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "This step splits two magnitude values within one column by the delimiter \"/\". The first magnitude (mag1) denotes the actually observable maximal magnitude of the eclipse at a certain location. This is the relevant number. The second value (mag2) gives the theoretical maximum magnitude, but the Sun may be below the horizon when it is reached.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 628.5695535713141,
+                "top": 37.462748428975516
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"code\": \"BEGIN { OFS=\\\"\\\\t\\\" }\\nNR == 1 {\\n    print $1,$2,$3,$4,$5,\\\"mag1\\\",\\\"mag2\\\",$7,$8\\n    next\\n}\\n{\\n    split($6,m,\\\"/\\\");\\n    print $1,$2,$3,$4,$5,m[1],m[2],$7,$8\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "283f24a4-1195-4314-a0f8-9ed7dbd70fb8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "Select all eclipses above a minimum magnitude threshold. Meaningful values are between 0.5 and 1.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile"
+                },
+                "variables_0|value": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Select eclipses above a threshold",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 934.1569052432053,
+                "top": 73.63312290848393
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN {\\n    OFS=\\\"\\\\t\\\"\\n    threshold = VAR1 + 0\\n}\\n\\nNR == 1 {\\n    print\\n    next\\n}\\n\\n$6 >= threshold {\\n    print\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "4b51e786-c6d2-4a91-8b18-e1ae8896fadd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "This step sorts the remaining values chronologically in ascending order.",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Sort chronologically",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1228.4576925842073,
+                "top": 258.09994204901386
+            },
+            "post_job_actions": {},
+            "tool_id": "sort1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"column\": \"1\", \"column_set\": [{\"__index__\": 0, \"other_column\": \"2\", \"other_style\": \"num\", \"other_order\": \"ASC\"}, {\"__index__\": 1, \"other_column\": \"3\", \"other_style\": \"num\", \"other_order\": \"ASC\"}], \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"ASC\", \"style\": \"num\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "0e25421a-0537-43c0-bf23-5a239e9dd27f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "This step finds every consecutive group of N eclipses where the time span between the 1st and Nth eclipse is smaller or equal to a number of years. N and years are input parameters of this workflow.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                },
+                "variables_0|value": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "variables_1|value": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Select groups of eclipses",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1563.847198530958,
+                "top": 293.33694277511097
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN {\\n    OFS=\\\"\\\\t\\\"\\n    n = VAR1\\n    years = VAR2\\n}\\n\\nNR == 1 {\\n    next\\n}\\n\\n{\\n    year[NR-1] = $1\\n    line[NR-1] = $0\\n    count = NR-1\\n}\\n\\nEND {\\n    for (i=1; i<=count-n+1; i++) {\\n        if (year[i+n-1] - year[i] <= years) {\\n            for (j=i; j<=i+n-1; j++) {\\n                print line[j]\\n            }\\n        }\\n    }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"value\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "ed87b661-817d-4311-8e9f-d82869aefe80",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "Remove duplicate rows, the first occurrence of each row is kept.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Remove duplicates",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1868.1068046001665,
+                "top": 402.9426294444399
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"code\": \"NR == 1 {\\n    print\\n    next\\n}\\n\\n!seen[$0]++\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "c69e37a6-168a-4ffc-a7ea-2fefbe27b5c6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "Sort the final list of consecutive eclipse groups chronologically.",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Sort the final result",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2168.553646663855,
+                "top": 465.59207072007615
+            },
+            "post_job_actions": {},
+            "tool_id": "sort1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"column\": \"1\", \"column_set\": [{\"__index__\": 0, \"other_column\": \"2\", \"other_style\": \"num\", \"other_order\": \"ASC\"}, {\"__index__\": 1, \"other_column\": \"3\", \"other_style\": \"num\", \"other_order\": \"ASC\"}], \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"ASC\", \"style\": \"num\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "619d26c6-b613-4446-afdf-8f042a5589c7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "output_name": "out_file1",
+                    "label": "qualifying_eclipses"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "DaSCH",
+        "chronology",
+        "solar_eclipses",
+        "Astronomy",
+        "humanities"
+    ],
+    "uuid": "d0134f75-1754-4f56-9b5c-f939934c57b3",
+    "version": 16
+}
