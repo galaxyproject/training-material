@@ -7,11 +7,6 @@ questions:
   - How can you add existing IIIF repositories to Galaxy?
 objectives:
   - Import datasets to Galaxy using the IIIF integration in Galaxy
-requirements:
-  - type: "internal"
-    topic_name: digital-humanities
-    tutorials:
-      - introduction_to_dh
 time_estimation: 15M
 key_points:
   - With the IIIF integration in Galaxy, you can directly browse IIIF from within Galaxy, eliminating manual download cycles.
