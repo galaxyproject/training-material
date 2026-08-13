@@ -13,22 +13,29 @@ requirements:
         - workflow-editor
 questions:
 - How to segment and track objects in fluorescence time-lapse microscopy images?
+- Can the same workflow be reused on data from another discipline, such as Earth observation (tracking atmospheric rivers)?
 objectives:
 - Segment fluorescent objects using CellProfiler in Galaxy
 - Track objects over multiple frames using CellProfiler in Galaxy
+- Reuse the same CellProfiler tracking pipeline on an Earth-observation time series (cross-discipline reuse)
 time_estimation: 1H
 key_points:
 - CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images
+- The same Galaxy CellProfiler pipeline can track objects across scientific domains — here a nucleus-tracking pipeline is reused, with only its parameters retargeted, to track atmospheric rivers in climate reanalysis data
 
 contributions:
   authorship:
     - sunyi000
     - beatrizserrano
     - jkh1
+    - annefou
+  funding:
+    - oscars
 
 tags:
   - Isolated object tracking
   - Multi-channel image
+  - Earth observation
 ---
 
 
@@ -68,14 +75,30 @@ Tracking is done by first segmenting objects then linking objects between consec
 {: .agenda}
 
 
+The **same** CellProfiler tracking pipeline can be applied to time series from very different scientific domains. This tutorial can be followed with a **bioimaging** dataset (dividing cell nuclei in a fluorescence microscopy recording) or an **Earth-observation** dataset (atmospheric rivers in a climate-reanalysis time series). The pipeline is the same in both paths — you build it once, exactly the same way; only the input data and a few names (the object name and the file-name marker) change. Choose the path that interests you most.
+
+{% include _includes/cyoa-choices.html option1="Bioimaging" option2="Earth" default="Bioimaging" text="Pick a dataset: a fluorescence-microscopy recording of dividing cell nuclei, or a climate-reanalysis time series of atmospheric rivers. You build and run the *same* CellProfiler pipeline either way." %}
+
+<div class="Earth" markdown="1">
+
+> <comment-title> Tracking atmospheric rivers with a cell-tracking pipeline </comment-title>
+>
+> In the Earth-observation path we reuse this **same** CellProfiler object-tracking pipeline — built to follow dividing nuclei — to detect and track **atmospheric rivers**: long, narrow filaments of intense water-vapour transport in the atmosphere (the "rivers in the sky" that deliver much of the world's extreme rainfall). This is a cross-discipline experiment from the [OSCARS-FIESTA](https://fiesta.eu) project. Why does it work? An atmospheric river is a **bright, elongated filament on a dark background** in a map of vertically integrated vapour transport (IVT) — morphologically much like the bright nuclei the pipeline was built for. A river that intensifies, drifts and splits over time is the climate-science analogue of a dividing nucleus, so the same *segment-then-link-by-overlap* approach tracks it. The preprocessing notebooks, the full Galaxy run provenance, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-cellprofiler-eo).
+{: .comment}
+
+</div>
+
+
 # Get data
+
+<div class="Bioimaging" markdown="1">
 
 This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early _Drosophila_ embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
 The images are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.
 
 ![Dividing nuclei](../../images/object-tracking-using-cell-profiler/Dividing_nuclei.gif "Time lapse recording of anaphase nuclei in a Drosophila embryo.")
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Data upload — bioimaging</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 >    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
@@ -96,6 +119,40 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >
 {: .hands_on}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+This path uses a time series of **atmospheric-river** activity over the North Pacific during an early-February 2017 event. Each frame is a map of the vertically integrated water-vapour transport (IVT) magnitude from the ERA5 climate reanalysis, rendered so that the atmospheric river appears as a bright filament on a dark background — one frame every 6 hours. The frames are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.
+
+![An atmospheric river in an ERA5 IVT field](../../images/object-tracking-using-cell-profiler/input_atmospheric_river_eo.png "One frame of the ERA5 IVT magnitude over the North Pacific: a bright atmospheric-river filament transporting water vapour towards North America, on a dark background.")
+
+> <hands-on-title>Data upload — Earth observation</hands-on-title>
+>
+> 1. Create a new history for this tutorial.
+>    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import {% icon galaxy-upload %} the atmospheric-river IVT frames from Zenodo.
+>    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
+>
+>    ```
+>    https://zenodo.org/records/20813832/files/npacific_ivt_frames.zip
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename {% icon galaxy-pencil %} the file to npacific_ivt_frames.zip
+>
+{: .hands_on}
+
+> <comment-title> How the atmospheric-river frames were prepared </comment-title>
+> The frames come from the ERA5 reanalysis {% cite Hersbach2020 %} accessed through the public, anonymous ARCO-ERA5 archive. For each 6-hourly time step we took the eastward and northward vertically integrated vapour-transport components and combined them into the IVT magnitude, IVT = √(u² + v²), over the North Pacific (2 – 11 February 2017). Each field was rescaled to an 8-bit image (bright river on dark background) and written as a three-channel PNG named `NPacific_IVT_0000.png`, `NPacific_IVT_0001.png`, … so the filename carries the time index — exactly the structure the *Metadata* step below expects. These frames are archived on Zenodo {% cite fouilloux2026npacificivt %}; the preprocessing notebooks, the full Galaxy run provenance, and a citable software archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-cellprofiler-eo).
+{: .comment}
+
+</div>
+
 
 # Create a CellProfiler pipeline in Galaxy
 
@@ -103,8 +160,8 @@ In this section, we will build a CellProfiler pipeline from scratch in Galaxy.
 We need to:
   - Read the images and the metadata
   - Convert the colour images to grayscale
-  - Segment the nuclei
-  - Extract features from the segmented nuclei
+  - Segment the objects (nuclei / atmospheric rivers)
+  - Extract features from the segmented objects
   - Perform tracking
   - Produce some useful output files
 
@@ -116,12 +173,32 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 > <details-title>More details about the pipeline steps</details-title>
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
 >    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.
->    - Segmentation means identifying the nuclei in each image. In CellProfiler, this is done by thresholding the intensity level in each image.
+>    - Segmentation means identifying the objects in each image. In CellProfiler, this is done by thresholding the intensity level in each image.
 >    - When we perform tracking we're usually interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore, for each segmented object, we compute some features, i.e. numerical descriptors of some properties of the object.
 >    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series.
 >
 >
 {: .details}
+
+The pipeline you build is the **same** for both paths. Only two pieces of text differ, depending on which dataset you chose:
+
+<div class="Bioimaging" markdown="1">
+
+> <comment-title> Names to use in the bioimaging path </comment-title>
+> - The **file-name marker** used to recognise and order the images is `GFPHistone`.
+> - The **object name** we give the segmented objects is `Nuclei` (and the tracked image is `TrackedNuclei`).
+{: .comment}
+
+</div>
+
+<div class="Earth" markdown="1">
+
+> <comment-title> Names to use in the Earth-observation path </comment-title>
+> - The **file-name marker** used to recognise and order the images is `IVT`.
+> - The **object name** we give the segmented objects is `Rivers` (and the tracked image is `TrackedRivers`).
+{: .comment}
+
+</div>
 
 
 ## Create a new workflow
@@ -161,7 +238,9 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >  * Groups
 {: .comment}
 
-> <hands-on-title>Getting metadata</hands-on-title>
+<div class="Bioimaging" markdown="1">
+
+> <hands-on-title>Getting metadata — bioimaging</hands-on-title>
 >
 > 1. {% tool [Starting modules](toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
 >
@@ -222,13 +301,80 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >
 {: .question}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+> <hands-on-title>Getting metadata — Earth observation</hands-on-title>
+>
+> 1. {% tool [Starting modules](toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
+>
+>     - Images
+>        - *"Do you want to filter only the images?"*: `Select the images only`
+>
+>     - Metadata
+>        - *"Do you want to extract the metadata?"*: `Yes, specify metadata`
+>
+>          - {% icon param-repeat %} Insert new metadata
+>            - *"Metadata extraction method"*: `Extract from file/folder names`
+>            - *"Metadata source"*: `File name`
+>            - *"Select the pattern to extract metadata from the file name"*: `field1_field2_field3`
+>            - *"Extract metadata from"*: `Images matching a rule`
+>
+>              - *"Match the following rules"*: `All`
+>              - {% icon param-repeat %} Insert filtering rules:
+>                - *"Select the filtering criteria"*: `File`
+>                - *""operator*: `Does`
+>                - *"contain"*: `Contain regular expression`
+>                - *"match_value"*: `IVT`
+>
+>     - NamesAndTypes
+>       - *"Process 3D"*: `No, do not process 3D data`
+>       - *"Assign a name to"*: `Give images one of several names depending on the metadata`
+>         - {% icon param-repeat %} Insert another image:
+>           - *"Match the following rules"*: `All`
+>           - {% icon param-repeat %} Insert rule:
+>
+>             - *"Select rule criteria"*: `File`
+>
+>               - *"operator"*: `Does`
+>               - *"contain"*: `Contain regular expression`
+>               - *"match_value"*: `IVT`
+>
+>           - *"Select the image type"*: `Color image`
+>           - *"Name to assign these images"*: `OrigColor`
+>           - *"Set intensity range from"*: `Image metadata`
+>
+>       - *"Image matching method"*: `Metadata`
+>
+>     - Groups
+>       - *"Do you want to group your images?"*: `Yes, group the images`
+>       - *"Metadata category"*: `field1`
+>
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> How are we capturing metadata and what type of metadata are we getting?
+>
+> > <solution-title></solution-title>
+> >
+> > Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is "NPacific", "IVT" and numbers with leading zeros. These three fields represent respectively the region identifier, the variable visualized in the image (the integrated vapour transport) and the index in the time series.
+> >
+> {: .solution}
+>
+{: .question}
+
+</div>
+
 > <question-title></question-title>
 >
 > How will CellProfiler form a temporal sequence?
 >
 > > <solution-title></solution-title>
 > >
-> > Images will be grouped based on field1 which here is the sample identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
+> > Images will be grouped based on field1 which here is the sample/region identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
 > >
 > {: .solution}
 >
@@ -255,7 +401,9 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 
 ## Segmentation
 
-The first step to track nuclei starts with the identification of those objects on the images.
+The first step to track objects starts with the identification of those objects on the images.
+
+<div class="Bioimaging" markdown="1">
 
 > <hands-on-title>Nuclei segmentation</hands-on-title>
 >
@@ -286,10 +434,47 @@ The first step to track nuclei starts with the identification of those objects o
 >
 {: .hands_on}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+> <hands-on-title>Atmospheric-river segmentation</hands-on-title>
+>
+> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **ColorToGray** {% icon tool %}
+>    - *"Use advanced settings?"*: `Yes, use advanced settings`
+>        - *"Enter the name of the input image (from NamesAndTypes)"*: `OrigGray`
+>        - *"Enter the name of the primary objects to be identified"*: `Rivers`
+>        - *"Typical minimum diameter of objects, in pixel units (Min)"*: `30`
+>        - *"Typical maximum diameter of objects, in pixel units (Max)"*: `9999`
+>        - *"Discard objects outside diameter range?"*: `Yes`
+>        - *"Discard objects touching the border of the image?"*: `Yes`
+>        - *"Threshold strategy"*: `Global`
+>            - *"Thresholding method"*: `Otsu`
+>                - *"Two-class or three-class thresholding?"*: `Three classes`
+>                    - *"Assign pixels in the middle intensity class to the foreground or the background?"*: `Background`
+>                - *Threshold smoothing scale"*: `1.3488`
+>                - *Threshold correction factor"*: `1`
+>                - *Lower bound on threshold"*: `0.01`
+>                - *Upper bound on threshold"*: `1`
+>        - *"Method to distinguish clumped objects"*: `Intensity`
+>            - *"Method to draw dividing lines between clumped objects"*: `Intensity`
+>                - *"Automatically calculate size of smoothing filter for declumping?"*: `Yes`
+>                - *"Automatically calculate minimum allowed distance between local maxima?"*: `Yes`
+>                - *"Speed up by using lower-resolution mage to find local maxima?"*: `Yes`
+>        - *"Fill holes in identified objects"*: `After both thresholding and declumping`
+>        - *"Handling of objects if excessive number of objects identified"*: `Continue`
+>
+{: .hands_on}
+
+</div>
+
 
 ## Feature extraction
 
-Once the objects of interest (nuclei) are identified, we extract features, i.e. numerical descriptors of object properties. We do this because we may be interested in analysing the evolution of these properties over time or want to use them in the tracking procedure to match objects over time.
+Once the objects of interest are identified, we extract features, i.e. numerical descriptors of object properties. We do this because we may be interested in analysing the evolution of these properties over time or want to use them in the tracking procedure to match objects over time.
+
+<div class="Bioimaging" markdown="1">
 
 > <hands-on-title>Shape features</hands-on-title>
 >
@@ -315,10 +500,43 @@ Once the objects of interest (nuclei) are identified, we extract features, i.e. 
 >
 {: .hands_on}
 
+</div>
 
-## Track nuclei
+<div class="Earth" markdown="1">
 
-With the nuclei and the relevant features measured, we are now ready to start the tracking step!
+> <hands-on-title>Shape features</hands-on-title>
+>
+> 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **IdentifyPrimaryObjects** {% icon tool %}
+>    - In *"new object"*:
+>        - {% icon param-repeat %} *"Insert new object"*
+>            - *"Enter the name of the object to measure"*: `Rivers`
+>    - *"Calculate the Zernike features?"*: `No`
+>
+{: .hands_on}
+
+> <hands-on-title>Intensity features</hands-on-title>
+>
+> 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectSizeShape** {% icon tool %}
+>    - In *"new image"*:
+>        - {% icon param-repeat %} *"Insert new image"*
+>            - *"Enter the name of an image to measure"*: `OrigGray`
+>    - In *"new object"*:
+>        - {% icon param-repeat %} *"Insert new object"*
+>            - *"Enter the name of the objects to measure"*: `Rivers`
+>
+{: .hands_on}
+
+</div>
+
+
+## Track the objects
+
+With the objects and the relevant features measured, we are now ready to start the tracking step!
+
+<div class="Bioimaging" markdown="1">
+
 > <hands-on-title>Object tracking</hands-on-title>
 >
 > 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
@@ -333,10 +551,33 @@ With the nuclei and the relevant features measured, we are now ready to start th
 >
 {: .hands_on}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+> <hands-on-title>Object tracking</hands-on-title>
+>
+> 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectIntensity** {% icon tool %}
+>    - *"Enter the name of the objects to track"*: `Rivers`
+>    - *"Choose a tracking method"*: `Overlap`
+>        - *"Maximum pixel distance to consider matches"*: `50`
+>        - *"Filter objects by lifetime?"*: `No`
+>        - *"Select display option?"*: `Color and Number`
+>        - *"Save color-coded image?"*: `Yes`
+>            - *"Name the output image"*: `TrackedRivers`
+>
+{: .hands_on}
+
+</div>
+
 
 ## Visualize results
 
 To make sure that the tracking has gone as expected, we will have a look at the original images together with the results of the segmentation step. And we will visualize them together (in tiles) for easier comparison.
+
+<div class="Bioimaging" markdown="1">
+
 > <hands-on-title>Visualize segmentation outcome</hands-on-title>
 >
 > 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
@@ -374,6 +615,49 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 >
 {: .hands_on}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+> <hands-on-title>Visualize segmentation outcome</hands-on-title>
+>
+> 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **TrackObjects** {% icon tool %}
+>    - *"Display outlines on a blank image?"*: `No`
+>        - *"Enter the name of image on which to display outlines"*: `OrigGray`
+>        - *"Outline display mode"*: `Color`
+>            - In *"Outline"*:
+>                - {% icon param-repeat %} *"Insert Outline"*
+>                    - *"Enter the name of the objects to display"*: `Rivers`
+>                    - *"Select outline color"*: {% color_picker #ff0000 %} (red)
+>    - *"Name the output image"*: `OutlineImage`
+>    - *"How to outline"*: `Inner`
+>
+{: .hands_on}
+
+> <hands-on-title>Tiling images</hands-on-title>
+>
+> 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **OverlayOutlines** {% icon tool %}
+>    - *"Enter the name of an input image"*: `OrigColor`
+>    - *"Name the output image"*: `TiledImages`
+>    - *"Tile assembly method"*: `Within cycles`
+>        - *"Automatically calculate number of rows?"*: `No`
+>            - *"Final number of rows"*: `1`
+>        - *"Automatically calculate number of columns?"*: `Yes`
+>        - *"Image corner to begin tiling"*: `top left`
+>        - *"Direction to begin tiling"*: `row`
+>        - *"Use meander mode?"*: `No`
+>        - In *"Another image"*:
+>            - {% icon param-repeat %} *"Insert Another image"*
+>                - *"Enter the name of an additional image to tile"*: `OutlineImage`
+>            - {% icon param-repeat %} *"Insert Another image"*
+>                - *"Enter the name of an additional image to tile"*: `TrackedRivers`
+>
+{: .hands_on}
+
+</div>
+
 
 ## Save the images and features
 
@@ -395,19 +679,6 @@ The tiled images and the features computed in previous steps are now exported to
 >
 >
 {: .hands_on}
-
-> <question-title></question-title>
->
-> What will be the file names of the output images?
->
-> > <solution-title></solution-title>
-> >
-> > The files will be named DrosophilaEmbryo_GFPHistone_0000_tile.png,
-> > DrosophilaEmbryo_GFPHistone_0001_tile.png ...
-> {: .solution}
->
-{: .question}
-
 
 > <hands-on-title>Export tabular data to character-delimited text files</hands-on-title>
 >
@@ -456,8 +727,9 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 {: .hands_on}
 
 
-![Sample output](../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png "Sample of images produced by the pipeline.")
+<div class="Bioimaging" markdown="1">
 
+![Sample output](../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png "Sample of images produced by the pipeline.")
 
 > <question-title></question-title>
 >
@@ -470,7 +742,6 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 >
 {: .question}
 
-
 > <question-title></question-title>
 >
 > How could we get rid of tracks that don't correspond to nuclei?
@@ -482,6 +753,7 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 > {: .solution}
 >
 {: .question}
+
 > <question-title></question-title>
 >
 > Where is the data needed to plot change in nuclei eccentricity over time?
@@ -493,8 +765,35 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 >
 {: .question}
 
+</div>
+
+<div class="Earth" markdown="1">
+
+![Atmospheric-river tracking output](../../images/object-tracking-using-cell-profiler/output_atmospheric_river_tracking_eo.png "Sample output for the Earth-observation path, for one frame: the input IVT field (left), the identified atmospheric rivers outlined in red (middle), and the tracked rivers colour-coded and numbered (right). Each colour/number is followed across the time series.")
+
+The pipeline outlines the atmospheric-river filaments and links them across the 6-hourly frames, assigning each a track number — exactly as it links dividing nuclei across microscopy frames.
+
+> <question-title></question-title>
+>
+> Where is the data needed to plot how an atmospheric river's length changes over time?
+>
+> > <solution-title></solution-title>
+> > The data is in the csv file called Rivers in the CellProfiler pipeline output data set: each row is one river in one frame, with its shape measurements (e.g. major axis length) and its TrackObjects label, so you can follow a single track over time.
+> >
+> {: .solution}
+>
+{: .question}
+
+> <comment-title> Is this a scientifically valid atmospheric-river tracker? </comment-title>
+> This tutorial shows that the *method* transfers: the same segment-then-link-by-overlap pipeline detects and tracks atmospheric rivers. It uses CellProfiler's generic intensity thresholding, **not** the established meteorological criteria {% cite Guan2015 %} (e.g. an IVT threshold plus a length > 2000 km and length-to-width > 2 geometry test). In the [OSCARS-FIESTA study](https://github.com/annefou/fiesta-galaxy-cellprofiler-eo), the same overlap-tracking approach with those criteria applied recovered five distinct atmospheric-river tracks over this ten-day window and followed one persistent river for about five and a half days. That repository (with a citable archive and a full provenance trail) is the place to go for a quantitative atmospheric-river analysis.
+{: .comment}
+
+</div>
+
 
 # Conclusion
 
 
-We've run a CellProfiler pipeline on Galaxy to segment and track dividing nuclei in a Drosophila embryo. We've exported images to visually inspect the outcome and saved tables of computed object features in comma-separated text files for future analysis.
+We've run a CellProfiler pipeline on Galaxy to segment and track objects in a time series, exported images to visually inspect the outcome, and saved tables of computed object features in comma-separated text files for future analysis.
+
+You also saw that the **same pipeline** can be applied to data from a completely different discipline: a pipeline built to track dividing nuclei in fluorescence microscopy was reused — only its object name and file-name marker retargeted — to detect and track atmospheric rivers in a climate-reanalysis time series. A "bright objects that move, merge and split on a dark background" problem looks the same to CellProfiler whether the objects are nuclei under a microscope or rivers of water vapour seen from space. This kind of cross-discipline reuse is exactly what FAIR, well-described Galaxy workflows make possible.
