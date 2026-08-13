@@ -21,6 +21,7 @@ key_points:
 contributions:
   authorship:
     - slugger70
+    - B0r1sD
   funding:
     - unimelb
     - melbournebioinformatics
@@ -61,12 +62,118 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
-## Some notes on Galaxy versioning and releases.
+> <hands-on-title>Upgrade checklist</hands-on-title>
+> The general checklist below can serve as inspiration or guideline when upgrading a Galaxy instance. It is a list of best practices pooled from various Galaxy administrators that can help you with planning an upgrade and avoid common pitfalls. 
+>
+> The list is divided into three main categories: before the upgrade, the upgrade itself, and after the upgrade. Ideally, you would test your upgrade on a test Galaxy instance with near identical set-up to the production environment.
+>
+> ## Pre-upgrade
+> ### General preparations
+> From the moment an upgrade is released in the main Galaxy codebase, you can start preparing your upgrade.
+> - Review release notes for new features, deprecations, and breaking changes 
+> - Assess the upgrade's impact on workflows, tools, data formats, and integrations
+> - Evaluate changes in resource requirements and dependencies:
+>   - Python version 
+>   - libraries/containers
+>   - Database server's minimum version (PostgreSQL) 
+>   - VM size and computational powers
+>   - Others depending on set-up 
+> - Assess expected alerts from monitoring during the production upgrade
+> - Select a maintenance window for the production upgrade with minimal user impact and buffer time afterwards for unforeseen issues. 
+> - Assess if the data policy of your instance requires updating after upgrading
+>
+> ### Backup and regression strategy
+> In case of unforeseen problems, this will help you go back to a working instance and give you time to debug and discuss the issue at hand. 
+> - Assess if current (automatic) backup system needs to be suspended or updated
+> - Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
+> - Verify that backups are complete and functional by reinstating backups in a duplicate setup  
+> - Make a regression plan on how to roll back to the original, pre-upgrading state in case the upgrade fails (e.g. making a snapshot of the VM)
+>   - Verify, test and update this plan ahead of upgrading
+>
+> ### Communication plan
+> Start preparing the communication plan to the user, which ideally is send out in advance. 
+> - Draft notifications about the planned upgrade, schedule, and anticipated downtime (e.g. a banner on the frontpage, email,...)
+> - Draft communication about what changes and features the new upgrade brings to the users (e.g. a news item, email), with instructions on how to report unexpected behavior
+>
+> ## Upgrade
+> ### Performing upgrade
+> Perform the actual upgrade on a test instance before you upgrade the live production one. 
+> - Adapt the Ansible playbook and have all changes made under version control 
+>   - make enough commits with clear, conventional commit messages
+>   - Ideally, have one pull request that reflects all changes made to infrastructure, documentation, frontpage, etc. and add appropriate labels
+>   - If possible, assign at least one technical and/or peer reviewer to verify your changes
+> - Execute the playbook 
+> - If applicable, migrate the database to the new schema using the `manage_db.sh` script
+> - Restart the instance (gracefully). 
+> 
+> ### Testing upgrade
+> The following checklist should be performed after upgrading the test instance and after upgrading the production instance. 
+> - Check status of Galaxy services (job handlers, gunicorn, celery,...)
+> - Verify all login and authentication methods 
+> - Test Email notifications
+>   - Test the 'Forgot password' option and check that activation link works
+> - Try submitting an error report
+> - Make a new history 
+> - Upload data 
+> - Run a regular tool 
+>   - Ideally, run a list of top used tools (e.g. automated using Bioblend), leverage IUC's tool tests, run tool wrapper's tests with Ephemeris,...
+> - Run a data source tool 
+> - Run a tool that makes use of extra user preferences
+> - Run an interactive tool
+> - Run a workflow (list of top used workflows)
+>   - Ideally, run a list of top used workflows
+> - test all data, history, workflow export options
+> - Deleting and purging datasets 
+> - Deleting and purging histories
+> - Run a job via Pulsar 
+> - Test Bring Your Own Storage options
+> - Test Bring Your Own Compute options
+> 
+> If any major functionality is broken or missing, and cannot be readily fixed, roll-back upgrade to last working state using the regression plan.
+>
+> ## Post-upgrade
+> ### Finish communication plan
+> Adapt pre-upgrade communications where necessary and let the users know what changed. 
+> - Send out communication after testing was successful
+>   - Remove any pre-upgrade announcement banner and announce completion
+>   - share any new features or changes with user base (link to release notes) via e.g. a news item, an email,... 
+> - Make sure that configuration, dependency or infrastructure changes have been documented and are under version control 
+>   - Update (internal) documentation where needed
+>
+> ### Continuous improvement
+> After the upgrade cycle is completed, see what can be improved for the next upgrade. 
+> - Review lessons learned from the upgrade process
+> - Update the upgrade checklist and procedures accordingly
+> - Begin preparing for the next Galaxy release
+> - Monitor CVEs and patches from Galaxy upstream
+>
+> An example of such a regression plan, when using an Ansible playbook:
+> 
+> - Revert the `galaxy_commit_id` back to the previous version 
+> Note: if this is the final version also set `galaxy_build_client` to true
+> - Run the playbook again
+> - If applicable, regress the postgres DB back to the previous version as well
+> - If this is the final version, update and gracefully restart the galaxy service
+> - If this all fails, revert to last VM snapshot
+> 
+> Note: like upgrading, it's important to not skip any Galaxy versions while downgrading
+{: .hands_on}
 
-* As at June 2021, Galaxy has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - `YY.MM`. i.e. January 2021's Galaxy release is version *21.01*.
-* Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) as `vYY.MM`. e.g. *v21.01*
-* Each version also has an official branch in the GitHub repo named `release_YY.MM`. e.g. *release_21.01*
+
+## The Galaxy Release Process
+
+The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. In short: 
+
+- Long Term Support (LTS) releases happen annually, in the first quarter (e.g. 25.0).
+- Minor Releases: usually 2-3 times a year, generally in the early summer and fall (e.g. 25.1).
+- Point Releases: as needed (e.g. 24.1.1)
+
+Please note that the release dates can vary based on the development process and testing results.
+
+* Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) e.g. *v24.1*
+* Each version also has an official branch in the GitHub repo named `release_YY.N`. e.g. *release_24.1*
 * Galaxy versions will be supported with security fixes, bug patches and other improvements for [one year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md#supported-versions) from the time of release at which time they will become "End of Life" and will no longer be supported.
+
 
 > <agenda-title></agenda-title>
 >
@@ -77,7 +184,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 
 ## This tutorial assumes that:
 
-- You have a VM or machine where you you have Galaxy installed.
+- You have a VM or machine where you have Galaxy installed.
 - You have completed at least the "Galaxy Installation with Ansible" tutorial.
 - You have command line and sudo access to the VM/computer where it is installed.
 
@@ -115,8 +222,8 @@ Once we know what our current version is, we can compare it with the latest avai
 >    > <code-out-title>Browser window</code-out-title>
 >    > ```JSON
 >    > {
->    >   "version_major": "20.09",
->    >   "extra": {}
+>    >   "version_major": "25.1",
+>    >   "version_minor":"rc1"
 >    > }
 >    > ```
 >    {: .code-out}
@@ -127,21 +234,19 @@ Once we know what our current version is, we can compare it with the latest avai
 
 # Finding the latest release version
 
-So, we have found out which version we are running on our server. But what is the current latest version of Galaxy that is available? There are quite a few ways of finding out.
+So, we have found out which version we are running on our server. But what is the current latest version of Galaxy that is available? There are quite a few ways of finding out. 
 
-* Galaxy is released 3 times per year. If the time of year is around January/February, April/May or September/October there may be a new release about to be announced.
 * You can check the Galaxy Project Newsletter and home page [https://galaxyproject.org](https://galaxyproject.org)
-
-Probably the easiest way of finding the version number of the latest release is via the extensive Galaxy Documentation Website located at: [https://docs.galaxyproject.org](https://docs.galaxyproject.org).
+* Probably the easiest way of finding the version number of the latest release is via the extensive Galaxy Documentation Website located at: [https://docs.galaxyproject.org](https://docs.galaxyproject.org).
 
 This site shows all of the release notes of all the available Galaxy versions and always has the latest release at the top of the list.
 
 ![Screenshot of the Galaxy documentation webpage showing the release versions](../../images/galaxy_doc_releases.png "Screenshot of the Galaxy documentation webpage (<a href="https://docs.galaxyproject.org">https://docs.galaxyproject.org</a>) showing the release versions. The latest version is at the top of the 'Releases' list.")
 
-We can see from this page that the latest release version of Galaxy is *21.01* (at the time of writing.)
+We can see from this page that the latest release version of Galaxy is *25.1* (at the time of writing.)
 
 > <question-title>What is the current latest version?</question-title>
-> As previously mentioned, the current latest release of Galaxy may not be *21.01*. What version is the latest that you can see?
+> As previously mentioned, the current latest release of Galaxy may not be *25.1*. What version is the latest that you can see?
 {: .question}
 
 ## The importance of the release notes
@@ -254,11 +359,11 @@ Once you've made sure of these things, it's time to do it!
 
 You should see in the Ansible output that Galaxy had to rebuild the client, update the database, rebuild its virtual environment and restart. If you weren't using Ansible, these steps would all be manual and important not to get wrong. Ansible makes the entire process super simple for us.
 
-Congratulations, you're Galaxy server should now be updated to the latest version. You can check this by going to the Admin UI page or by using the API as described above.
+Congratulations, your Galaxy server should now be updated to the latest version. You can check this by going to the Admin UI page or by using the API as described above.
 
 # Ongoing maintenance
 
-The Galaxy development community continually support release versions of Galaxy [for 1 year.](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md#supported-versions) They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
+The Galaxy development community continually support release versions of Galaxy [for 1 year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md#supported-versions). They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
 
 The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to Galaxy since the last time you ran it and automatically keep everything up to date. The large **usegalaxy.\*** servers all re-run the playbook on a regular schedule for this purpose.
 
