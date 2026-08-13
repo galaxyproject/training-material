@@ -33,7 +33,15 @@ requirements :
     tutorials: 
       - lcms-preprocessing
       - gc_ms_with_xcms
+tags:
+  - metabolomics
+  - exposomics
+  - gc-ms
+  - computational-chemistry
+  - quantum-chemistry
 
+edam_ontology:
+  - topic_3172
 ---
 
 Mass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compound identifications. Even though nowadays MS is a standard and popular method, there are many compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [{% cite Zhu2023 %}, {% cite Allen2016Computational %}]. 

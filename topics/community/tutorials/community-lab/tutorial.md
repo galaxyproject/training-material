@@ -30,8 +30,7 @@ contributions:
 The **Community lab**, a centralised webpage that enables communities to rapidly aggregate, curate, integrate, display, and launch relevant tools, workflows, and training on different Galaxy servers. This user-friendly interface, built on the Galaxy framework, provides community members with data analysis capacity without requiring programming expertise. Users can run individual tools or create complex workflows, with full provenance tracking to ensure reproducibility, designed specifically for the community research (Nasr et al., 2024).
   *For example, [the microgalaxy lab (Europe)](https://microbiology.usegalaxy.eu).*
 
-The aim of this tutorial is to explain what the lab is and how to create the files necessary to display the labs via the CoDex and how to deploy the rendered lab in each Galaxy instance.
-
+The aim of this tutorial is to explain what the labs are and how to create the files necessary to display the labs via the CoDex and how to deploy the rendered lab in each Galaxy instance.
 
 > <agenda-title></agenda-title>
 >
@@ -54,6 +53,29 @@ For more information also read the publication of the labs {% cite giag041 %}.
 
 The Galaxy Labs documentation provides additional details about architecture and configuration.
 
+# How to generate a lab?
+
+Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine (developed by the AU team) or using the CoDex (maintained by the Galaxy community).
+
+Which method should I use and where to store the files necessary to display a lab? 
+- If your lab is associated to an identified Galaxy Community (SIG), we recommend building your lab using the CoDex code for homogeneity with other community related labs. You can store the lab files in the CoDex repository (default with the tutorial below).
+- If your lab is project bound, you can use any of the tutorial below to generate the necessary files, but they must be stored outside of the CoDex repository (local GitLab for example).
+
+{% include _includes/cyoa-choices.html option1="LabEngine" option2="CoDex" default="CoDex"
+       text="Nowadays, there are two main ways to generate labs : Using the Galaxy Lab engine or using the CoDex." %}
+
+<div class="LabEngine" markdown="1">
+
+# Creating Labs with the Lab Engine
+
+The Galaxy Labs Engine is an endpoint used to generate "exported" Galaxy Lab landing pages from remote content hosted on GitHub. You can use this endpoint to rapidly create your own Galaxy Lab pages by pointing to your own remote content. 
+
+For all the information and steps, check the [Galaxy Lab engine page](https://labs.usegalaxy.org.au/).
+
+</div>
+
+<div class="CoDex" markdown="1">
+
 # Creating Labs with CoDex
 
 Using the Galaxy Labs engine alone is sufficient to create and host your own custom Galaxy Lab.
@@ -68,7 +90,7 @@ However, **CoDex extends this workflow by automating the generation of Lab YAML 
 {: .comment}
 
 
-# Create the lab specific files (automatic)
+## Create the lab specific files (automatic)
 
 The labs are composed of various files, some that are specific to your community and some that are common between all the labs.
 To automatically create the necessary files from a set of templates, a script is provided (`sources/bin/populate_labs.sh`).
@@ -121,7 +143,7 @@ The files are created and updated automatically using GitHub actions, you just n
 After that, your commit will be reviewed (and approved) by admins.
 On the following Sunday (or upon request), this action will be launched and will create the new files in the appropriate community folder (`communities/<your community>/lab/`).
 
-# Modify the generated files to personalize your community lab
+## Modify the generated files to personalize your community lab
 
 Once the files are created, you should update them as some contain template text that are not community specific. 
 
@@ -144,7 +166,7 @@ The following files require no changes:
 The files in the section folders contain the code for each table visible in the lab.
 You can check different labs for inspiration, such as the [microgalaxy lab](https://microbiology.usegalaxy.eu).
 
-# Create community specific sections to personalize your community lab
+## Create community specific sections to personalize your community lab
 
 If you want additional sections, for example, the "Microbial isolates" and "Microbiome" sections in the [microgalaxy lab](https://microbiology.usegalaxy.eu/).
 
@@ -163,6 +185,8 @@ If you want additional sections, for example, the "Microbial isolates" and "Micr
 {: .hands_on}
 
 The Pull Request will be reviewed. Make sure to respond to any feedback.
+
+</div>
 
 # Include the labs in the different instances
 

@@ -49,7 +49,6 @@ subtopic: gai-llm
 priority: 1
 notebook:
   language: python
-  pyolite: true
 ---
 
 **Generative Artificial Intelligence** (AI) represents a cutting-edge domain within machine learning, focused on creating new, synthetic yet realistic data. This includes generating text, images, music, and even biological sequences. At the heart of many generative AI applications are **Large Language Models** (LLMs), which have revolutionized natural language processing and beyond.
