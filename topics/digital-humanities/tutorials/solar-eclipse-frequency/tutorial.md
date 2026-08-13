@@ -39,6 +39,20 @@ contributions:
   - dasch-swiss
 ---
 
+# Introduction
+Ancient sources contain numerous astronomical observations that can be used to establish absolute dates. Solar eclipses are particularly important in this context. In antiquity, eclipses were often perceived as a threat and bad omen, causing fear and potentially political disturbances. By far not every partial solar eclipse has been noticed by an unprepared observer. Changes in ambient illumination remain relatively inconspicuous until a large part of the solar disk is covered. Even when about three quarters of the Sun's area is obscured, the reduction in daylight may still pass largely unnoticed with the most dramatic changes in illumination occuring only during the very deep partial phases close to totality. Historical visibility must be understood primarily in terms of the conspicuous environmental effects of a deep eclipse—diminished and altered daylight, unusual shadows, and, near totality, a pronounced twilight-like appearance. These facts make eclipses of high magnitude particularly relevant when considering events that could have attracted widespread attention without advance knowledge of the phenomenon. A series of such high magnitude solar eclipses at a certain location within a limited number of years is a rare phenomenon. Such eclipse series have been interpreted to being the cause of political disturbances.
+
+This tutorial will show you how to identify such sequences of notable eclipses step-by-step based on pre-calculated tables which are available for the following locations relevant for classicale antiquity: Alexandria, Amarna, Assur, Athens, Babylon, Jerusalem, Knossos, Mari, Memphis, Rome, and Thebes. The data are deposited in DaSCH's repository DSP (`{% cite GautschyDaSCHData %}`). The dataset contains calculations of notable solar eclipses for the period between 2500 BCE and 1000 CE. It is a solar eclipse canon with identifications of the eclipses recorded in historical sources. `{% cite Gautschy2012 %}` discusses two examples of the solar eclipse canon's application. If you want to know more about the basics of eclipses, `{% cite GautschyDaSCHDocu %}` provides an introduction to eclipse geometry and the underlying calculations.
+
+<agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 # Analysing Solar Eclipse Frequency with a Galaxy Workflow
 
 Solar eclipses can be relevant to historical and chronological
@@ -68,16 +82,16 @@ downloaded there and uploaded from the local computer.
 
 The original text file contains the following columns:
 
-  Column     Meaning
-  ---------- ---------------------------------------
-  `Y`        Year
-  `M`        Month
-  `D`        Day
-  `Type`     Eclipse type
-  `deltaT`   Delta T
-  `mag`      Two magnitude values separated by `/`
-  `Tmax`     Two time of maximum eclipse values separated by `/`
-  `Tend`     End time
+ | Column | Meaning | 
+ | ------ | --------------------------------------------------- |
+ | Y | Year |
+ | M | Month |
+ | D | Day |
+ | Type | Eclipse type |
+ | deltaT | Delta T |
+ | mag | Two magnitude values separated by `/` |
+ | Tmax | Two times of maximum eclipse values separated by `/` |
+ | Tend | End time |
 
 The `mag` and `Tmax` fields contain two values. This workflow separates the two `mag` values into:
 
@@ -116,19 +130,11 @@ The analysis consists of eight processing stages:
 
 Three values are supplied by the user at runtime:
 
-  ------------------------------------------------------------------------
-  Workflow parameter                         Example Meaning
-  --------------------- ---------------------------- ---------------------
-  Minimum magnitude                            `0.8` Minimum observable
-                                                     magnitude (`mag1`)
-
-  Number of eclipses                             `3` Number of consecutive
-                                                     eclipses, N
-
-  Maximum interval in                           `10` Maximum span between
-  years                                              the first and Nth
-                                                     eclipse, X
-  ------------------------------------------------------------------------
+ | Workflow parameter | Example | Meaning |
+ | ------------------------- | ------- | ------------------------------------------------- |
+ | Minimum magnitude | 0.8 | Minimum observable magnitude (`mag1`) |
+ | Number of eclipses | 3 | Number of consecutive eclipses, N |
+ | Maximum interval in years | 10 | Maximum span between the first and Nth eclipse, X |
 
 
 # Step 1: Input dataset
@@ -180,28 +186,40 @@ The original `mag` and `Tmax` columns contain two values separated by `/`. A **T
 reformatting with awk** step splits the `mag` field and creates the columns
 `mag1` and `mag2`. The two `Tmax` values correspond to the two `mag` values. Since
 `Tmax` is not needed to perform operations in the following, it is not separated into
-two columns.
+two columns. The following step preserves the header and replaces the original `mag` field with two columns.
 
-> ### {% icon hands_on %} Split the magnitude column
+ > <hands-on-title> Split the magnitude column </hands-on-title>
+ >
+ > 1. {% tool [Text
+reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3)
+%} with the following parameters:
+ >    - {% icon param-file %} *"File to process"*: `out_file1` (output
+of **Convert** {% icon tool %})
+ >    - *"AWK Program"*: `BEGIN { OFS=\t }
+NR == 1 {
+     print $1,$2,$3,$4,$5,mag1,mag2,$7,$8
+     next
+}
+{
+     split($6,m,/);
+     print $1,$2,$3,$4,$5,m[1],m[2],$7,$8
+}`
+ >
+{: .hands_on}
+
+> <question-title></question-title>
 >
-> **Tool:** `Text reformatting` (AWK), version `9.5+galaxy3`
+> 1. What has to change in the AWK expression if the an import file has no header?
+> 2. What has to change in the AWK expression if column 5 would contain the magnitudes and not column 6?
 >
-> Use:
+> > <solution-title></solution-title>
+> >
+> > 1. NR == 0
+> > 2. split($5,m,/);
+> >
+> {: .solution}
 >
-> ``` awk
-> BEGIN { OFS="\t" }
-> NR == 1 {
->     print $1,$2,$3,$4,$5,"mag1","mag2",$7,$8
->     next
-> }
-> {
->     split($6,m,"/");
->     print $1,$2,$3,$4,$5,m[1],m[2],$7,$8
-> }
-> ```
->
-> This preserves the header and replaces the original `mag` field with
-> two columns.
+{: .question}
 
 The resulting table has the structure:
 
@@ -385,11 +403,11 @@ group.
 
 A useful first test is:
 
-  Parameter                     Value
-  --------------------------- -------
-  Minimum magnitude             `0.8`
-  Number of eclipses              `3`
-  Maximum interval in years      `10`
+  |  Parameter | Value | 
+  |  ------------------------- | ------- | 
+  |  Minimum magnitude | 0.8 | 
+  |  Number of eclipses | 3 | 
+  |  Maximum interval in years | 10 | 
 
 > ### {% icon hands_on %} Run
 >
