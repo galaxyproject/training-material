@@ -69,7 +69,7 @@ workflow to answer a configurable question:
 > threshold belong to a group of N consecutive eclipses occurring within
 > at most X years?**
 
-The workflow is deliberately parameterised. Instead of fixing a
+The published workflow is deliberately parameterised. Instead of fixing a
 particular threshold, number of eclipses, or time interval in the
 workflow, the person running it supplies these values at runtime.
 
@@ -79,6 +79,19 @@ The source data are pre-calculated lists of solar eclipses for locations
 relevant to classical antiquity, covering 2500 BCE to 1000 CE available
 in DaSCH's DSP repository. Files can be fetched from DSP or first
 downloaded there and uploaded from the local computer.
+
+Examples of suitable input files are:
+
+- Amarna: https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
+- Athens: https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original
+- Babylon: https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original
+- Jerusalem: https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original
+- Rome: https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original
+- Thebes: https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original
+
+Input files are expected to have the following structure:
+
+`Y  M  D  Type  deltaT  mag  Tmax  Tend`
 
 The original text file contains the following columns:
 
@@ -102,32 +115,11 @@ The `mag` and `Tmax` fields contain two values. This workflow separates the two 
 
 For this analysis, **mag1 is the relevant magnitude**.
 
-# Import the eclipse data
-
-You can upload data in various ways. Here are some examples:
-
-> <hands-on-title> Data Upload </hands-on-title>
->
-> 1. Create a new history for this tutorial
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
->
->    ```
->    [https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original]
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->    
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
-{: .hands_on}
-
-If using the DaSCH dataset collection, choose a source file whose pre-calculated lower magnitude limit does not exclude eclipses you
-want to investigate. For example, a study threshold of `0.85` requires a source list calculated with a threshold of `0.8` or lower.
-
-Once you click start, your upload should begin. It will first turn orange while in progress, then turn green once it is successfully uploaded. After this step you should have one file in your History.
+Relevant columns for the workflow are:
+- Column 1: `Y`(year; years are in astronomical notation including a historically non-existent year 0, year -1919 corresponds to 1920 BCE)
+- Column 2: `M` (month)
+- Column 3: `D` (day)
+- Column 6: `mag` (maximum magnitude of the solar eclipse)
 
 # Workflow overview
 
@@ -143,7 +135,9 @@ The workflow analysis consists of eight processing stages:
 7.  Remove duplicate eclipse rows while retaining one occurrence.
 8.  Sort the final result chronologically.
 
-If you run the published workflow rather than following the tutorial step-by-step on your own, you need to supply the following three values at runtime:
+![Visulisation of the workflow](Visualisierung_Solec_GalaxyWorkflow.png "Visulisation of the workflow")
+
+If you run the published workflow rather than following the tutorial step-by-step on your own, you need upload a file with the source data and to supply the following three values at runtime:
 
  | Workflow parameter | Example | Meaning |
  | ------------------------- | ------- | ------------------------------------------------- |
@@ -151,32 +145,33 @@ If you run the published workflow rather than following the tutorial step-by-ste
  | Number of eclipses | 3 | Number of consecutive eclipses, N |
  | Maximum interval in years | 10 | Maximum span between the first and Nth eclipse, X |
 
+# Step 1: Import the eclipse data
 
-# Step 1: Input dataset
+You can upload data in various ways. Here are some examples:
 
-The workflow begins with an **Input dataset** step labelled **Solar
-eclipse data (.txt)**.
+> <hands-on-title> Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
+>
+>    ```
+>    https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
 
-When the workflow is run, either select the imported eclipse dataset which you
-have uploaded already to your Galaxy History, or you upload or fetch it now. 
-Input files are expected to have the following structure:
+Be sure to choose a source file whose pre-calculated lower magnitude limit does not exclude eclipses you
+want to investigate. For example, a study threshold of `0.85` requires a source list calculated with a threshold of `0.8` or lower.
 
-`Y  M  D  Type  deltaT  mag  Tmax  Tend`
+Once you click start, your upload should begin. It will first turn orange while in progress, then turn green once it is successfully uploaded. After this step you should have one file in your History.
 
-Relevant columns for the workflow are:
-- Column 1: `Y`(year; years are in astronomical notation including a historically non-existent year 0, year -1919 corresponds to 1920 BCE)
-- Column 2: `M` (month)
-- Column 3: `D` (day)
-- Column 6: `mag` (maximum magnitude of the solar eclipse)
-
-Suitable input files are available in the DaSCH repository, examples are:
-
-- Amarna: https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
-- Athens: https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original
-- Babylon: https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original
-- Jerusalem: https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original
-- Rome: https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original
-- Thebes: https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original
 
 
 # Step 2: Convert the text file to tabular data
@@ -413,10 +408,6 @@ than chronological position, the result is sorted once more.
 The final dataset is therefore a chronological list of eclipses that
 satisfy the magnitude threshold and belong to at least one qualifying
 group.
-
-# Visualisation of the workflow
-![Visulisation of the workflow](Visualisierung_Solec_GalaxyWorkflow.png "Visulisation of the workflow")
-
 
 # Run the workflow
 
