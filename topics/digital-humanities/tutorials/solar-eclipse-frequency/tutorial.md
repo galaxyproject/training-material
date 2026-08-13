@@ -102,21 +102,36 @@ The `mag` and `Tmax` fields contain two values. This workflow separates the two 
 
 For this analysis, **mag1 is the relevant magnitude**.
 
-> ### {% icon hands_on %} Import the eclipse data
+# Import the eclipse data
+
+You can upload data in various ways. Here are some examples:
+
+> <hands-on-title> Data Upload </hands-on-title>
 >
-> 1.  Open Galaxy.
-> 2.  Upload the desired `.txt` eclipse file from your local computer, or use Galaxy's
->     **Paste/Fetch data** functionality to retrieve it from the DaSCH repository URL.
-> 3.  Make sure the imported dataset is available in your History.
+> 1. Create a new history for this tutorial
 >
-> If using the DaSCH dataset collection, choose a source file whose
-> pre-calculated lower magnitude limit does not exclude eclipses you
-> want to investigate. For example, a study threshold of `0.85` requires
-> a source list calculated with a threshold of `0.8` or lower.
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
+>
+>    ```
+>    [https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original]
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
+If using the DaSCH dataset collection, choose a source file whose pre-calculated lower magnitude limit does not exclude eclipses you
+want to investigate. For example, a study threshold of `0.85` requires a source list calculated with a threshold of `0.8` or lower.
+
+Once you click start, your upload should begin. It will first turn orange while in progress, then turn green once it is successfully uploaded. After this step you should have one file in your History.
 
 # Workflow overview
 
-The analysis consists of eight processing stages:
+The workflow analysis consists of eight processing stages:
 
 1.  Upload / import the eclipse data.
 2.  Convert the original text file to tab-separated data.
@@ -128,7 +143,7 @@ The analysis consists of eight processing stages:
 7.  Remove duplicate eclipse rows while retaining one occurrence.
 8.  Sort the final result chronologically.
 
-Three values are supplied by the user at runtime:
+If you run the published workflow rather than following the tutorial step-by-step on your own, you need to supply the following three values at runtime:
 
  | Workflow parameter | Example | Meaning |
  | ------------------------- | ------- | ------------------------------------------------- |
@@ -398,6 +413,10 @@ than chronological position, the result is sorted once more.
 The final dataset is therefore a chronological list of eclipses that
 satisfy the magnitude threshold and belong to at least one qualifying
 group.
+
+# Visualisation of the workflow
+![Visulisation of the workflow](Visualisierung_Solec_GalaxyWorkflow.png "Visulisation of the workflow")
+
 
 # Run the workflow
 
