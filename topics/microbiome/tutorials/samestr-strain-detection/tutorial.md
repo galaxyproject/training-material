@@ -179,9 +179,9 @@ TRF and FastQC are optional and are skipped in this tutorial, matching how Knead
 >    - In *"Tandem Repeat Finder (TRF)"*:
 >        - *"Specify if you want to include the TRF step in the workflow."*: `Skip TRF Step`
 >
->    > <warning-title> If TRF is enabled </warning-title>
+>    > <warning-title> Understanding KneadData's outputs </warning-title>
 >    >
->    > Enabling TRF adds two extra output collections containing only the reads affected by repeat removal. These can be useful for checking how many reads remain after TRF, but are not meant to be carried to the next step. `Paired output reads` and `Unmatched reads` are still the correct outputs to use in the next step.
+>    > KneadData runs quality and adapter trimming (Trimmomatic) and host-DNA removal (Bowtie2) as two sequential steps, and reports the result after each step. `Trimmed paired reads` and `Unmatched trimmed reads` are the intermediate result right after trimming only, before host-DNA removal. `Paired output reads` and `Unmatched reads` are the final result, after both trimming and host removal. If TRF is enabled, two further output collections are added, containing only the reads affected by repeat removal. These are useful for inspection but are not meant to be carried forward.
 >    {: .warning}
 >
 > 2. {% tool [Merge collections](__MERGE_COLLECTION__) %} with the following parameters:
@@ -195,7 +195,7 @@ TRF and FastQC are optional and are skipped in this tutorial, matching how Knead
 >
 >    > <comment-title> Why merge these two collections? </comment-title>
 >    >
->    > KneadData outputs two separate collections of reads: `Paired output reads`, the quality-filtered and host-decontaminated reads that kept their mate pair, and `Unmatched reads`, the orphaned reads. Orphaned reads are those that lost their paired read during quality filtering but still contain information themselves. Merging both collections ensures that all of the surviving microbial sequence data is used in the strain-level analysis.
+>    > Of KneadData's output collections, `Paired output reads` and `Unmatched reads` are the final fully decontaminated reads. Merging both ensures that all of the surviving microbial sequence data is used in the strain-level analysis, since orphaned reads also carry valuable information.
 >    {: .comment}
 >
 {: .hands_on}
@@ -268,7 +268,7 @@ SameStr is not a single tool but a chain of command-line tools, each carrying ou
 > 1. {% tool [SameStr Convert](toolshed.g2.bx.psu.edu/repos/iuc/samestr/samestr_convert/1.2025.111+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Aligned reads"*: `filtered alignments` collection produced by **Samtools view** {% icon tool %}
 >    - {% icon param-collection %} *"Taxonomic profile"*: `Predicted taxon relative abundances` collection produced by **MetaPhlAn** {% icon tool %}
->    - *"SameStr database"*: `mpa_vJan25_CHOCOPhlAnSGB_202503-11062025`
+>    - *"SameStr database"*: `MetaPhlAn clade-specific marker genes (mpa_vJan25_CHOCOPhlAnSGB_202503-11062025)`
 >    - In *"Alignment Parameters"*:
 >        - *"Percent identity"*: `0.9` (expressed as a fraction)
 >        - *"Minimum alignment length"*: `40`
@@ -326,7 +326,6 @@ Each run of SameStr Convert produces two outputs. The per-clade SNV profiles are
 
 The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with an underscore, which adds the sample name as an extra prefix, producing `sample_clade.sample` (e.g. `Pre-FMT_t__SGB14809.Pre-FMT`). This breaks the `clade.sample` format that SameStr Merge expects, so the following step removes this prefix and restores the original identifiers. The step is added to the workflow as a workaround for Apply Rules' flat-list input requirement.
 
-![Rule Builder configured to restore each clade's original identifier](../../images/samestr-rule-builder.gif "Apply Rules Rule Builder with the regular expression that strips the sample-name prefix added by Flatten collection.")
 
 > <hands-on-title> Fix the Collection Identifiers </hands-on-title>
 >
@@ -338,7 +337,13 @@ The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with
 >           - Select *"Create column from expression replacement"*
 >           - Fill in *"Regular Expression"*: `^[^_]+_(.*)$`
 >           - Fill in *"Replacement Expression"*: `\1`
+>
+>           {% snippet faqs/galaxy/analysis_regular_expressions.md %}
+>
 >           - Click *"Apply"*
+>
+>           ![Rule Builder configured to restore each clade's original identifier](../../images/samestr-rule-builder.gif "Apply Rules Rule Builder with the regular expression that strips the sample-name prefix added by Flatten collection.")
+>
 >        2. Click *"{% icon plus%} Rules"* -> *"Add/Modify Column Definitions"*
 >           - Click *"List Identifier(s)"* and select `B`
 >           - Click *"Apply"*
@@ -347,9 +352,9 @@ The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with
 >
 {: .hands_on}
 
-> <warning-title> Incorrect Identifiers </warning-title>
+> <warning-title> Sample Names Must Not Contain Underscores </warning-title>
 >
-> The regex `^[^_]+_(.*)$` strips everything before the first underscore, which only works because samples were renamed to `Pre-FMT`, `Donor`, and `Post-FMT` earlier. Make sure the rename step was completed before running this tool.
+> The regex `^[^_]+_(.*)$` strips everything up to the first underscore, treating it as the sample-name prefix added by **Flatten collection**. This only works if sample names themselves contain no underscores. If your own sample names contain underscores, this step will strip too much, please avoid underscores in your naming, or adjust the regex accordingly.
 {: .warning}
 
 
@@ -368,6 +373,8 @@ The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with
 > 1. {% tool [SameStr Merge](toolshed.g2.bx.psu.edu/repos/iuc/samestr/samestr_merge/1.2025.111+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input SNV profiles"*: the SNV profile collection produced by **Apply rules** {% icon tool %}
 >    - *"SameStr database"*: `mpa_vJan25_CHOCOPhlAnSGB_202503-11062025`
+>
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -533,6 +540,11 @@ This table shows how many different taxa were detected in each sample at every t
 
 ![Taxon counts table from SameStr Summarize](../../images/samestr-taxon-counts.png "Number of taxa detected in each sample at each taxonomic level.")
 
+> <comment-title> Sample Identifiers in the Screenshots </comment-title>
+>
+> The screenshot above shows outputs generated without the sample rename step applied, so they use the original sample identifiers instead of the renamed ones: `28A` corresponds to `Pre-FMT`, `28B` to `Donor`, and `28C` to `Post-FMT`. If you completed the rename step earlier in this tutorial, your own results will show the renamed identifiers instead.
+{: .comment}
+
 ### Co-occurrence table
 
 This table is the fastest way to check whether clades are shared at all between samples. *shared_species* and *shared_clade* count how many taxa were detected in both samples, regardless of whether they turned out to be the same strain, while *shared_strain* counts only those clades confirmed as the same strain by SameStr Compare. The gap between *shared_clade* and *shared_strain* tells you how many shared taxa were only confirmed at the species/clade level instead of being detected as strains. Open the `Strain co-occurrences` dataset in your own history to see your results. The image below shows an example.
@@ -590,6 +602,8 @@ Now that you have run through each step individually, this section shows how to 
 >
 > 1. Run the **SameStr** {% icon workflow %} workflow using the parameter values described in the previous section, tool by tool
 >    - {% icon param-collection %} *"Raw Reads"*: the paired collection built in the *Get data* step
+>    - *"Select MetaPhlAn Database"*: `MetaPhlAn clade-specific marker genes (mpa_vJan25_CHOCOPhlAnSGB_202503-11062025)`
+>    - *"Select SameStr database"*: `MetaPhlAn clade-specific marker genes (mpa_vJan25_CHOCOPhlAnSGB_202503-11062025)`
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/microbiome/tutorials/samestr-strain-detection/workflows/samestr-strain-detection.ga" title="SameStr" %}
 >
@@ -606,7 +620,7 @@ Now that you have run through each step individually, this section shows how to 
 >
 >    > <warning-title> Changing Parameters </warning-title>
 >    >
->    > The tutorial dataset was reduced to the minimum size that still produces results with the parameter values listed above. Changing these parameters may therefore cause the workflow to produce no output. To experiment with different parameter values, download the complete samples from the ENA under accession PRJEB39023 and repeat the Data Upload step with the full dataset.
+>    > The tutorial dataset was reduced to the minimum size that still produces results with the parameter values listed above. Changing these parameters may therefore cause the workflow to produce no output. To experiment with different parameter values, download the complete samples from the [ENA under accession PRJEB39023](https://www.ebi.ac.uk/ena/browser/view/PRJEB39023) and repeat the Data Upload step with the full dataset.
 >    {: .warning}
 >
 {: .hands_on}
