@@ -104,7 +104,7 @@ Before we align the files, we need to first check whether all of the words are
 in our dictionary. MFA offers the Find OOVs (out of vocabulary words) tool to do this.
 
 
-## Sub-step with **MFA Find OOVs**
+## Find OOVs
 
 > <hands-on-title> Find out-of-vocabulary words </hands-on-title>
 >
@@ -123,8 +123,6 @@ in our dictionary. MFA offers the Find OOVs (out of vocabulary words) tool to do
 > **Expected output:** A .zip file containing a text file (`oovs_found_english_us_arpa.txt`) listing all words from your transcription that are not in the English US ARPA dictionary. If no OOVs are found, the file will be empty (if that is the case, you can skip the next three steps and go straight to MFA Align).
 >
 {: .hands_on}
-
-## Sub-step with **Unzip**
 
 In order to generate the  pronunciations of the OOVs, we need the single file oovs_found_english_us_arpa.txt. We therefore need to unzip the output of Find OOVs so we can work with the file. The missing pronunciations can be generated automatically in the next step (MFA G2P) or manually using the editor.
 
@@ -149,7 +147,7 @@ In order to generate the  pronunciations of the OOVs, we need the single file oo
 {: .hands_on}
 
 
-## Sub-step with **MFA G2P**
+## Generate pronunciations
 
 Now we can generate pronunciations for each of the out of vocabulary words using MFA's built in grapheme-to-phoneme (G2P) tool. Select the same model you used for finding OOVs.
 
@@ -182,7 +180,7 @@ Now we can generate pronunciations for each of the out of vocabulary words using
 {: .hands_on}
 
 
-## Sub-step with **MFA Merge**
+## Update dictionary
 
 Now we will add the new words to the built-in dictionary so that they are recognized when we run the aligner.
 
@@ -211,7 +209,7 @@ Now we will add the new words to the built-in dictionary so that they are recogn
 >
 {: .hands_on}
 
-## Sub-step with **MFA Align**
+## Align pronunciations with audio
 
 Now we're ready to align the pronunciations with the audio. Since we only have one spekaer and no spekaer ID, we leave the number of spekaer characters at 0. If you have a spekaer ID at the start of your file name, then select the number of characters corresponding to the speaker ID.
 
