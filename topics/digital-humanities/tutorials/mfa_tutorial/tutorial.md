@@ -19,7 +19,7 @@ contributions:
 
 This tutorial explains how to use the Montreal Forced Aligner (MFA) {% cite mcauliffe17_interspeech %} on the Galaxy platform.
 
-The aligner breaks down speech into its smallest possible sounds (phones) and aligns the indivdual
+The aligner breaks down speech into its smallest possible sounds (phones) and aligns the individual
 sounds to their corresponding orthographic transcription. For example, the word 'fox' is broken down
 into four sounds: F AA K S or /f ɑː k s/ (depending on whether you use ARPAbet or IPA for the transcription). The phonetic transcription of
 each sound is given a precise time boundary to match it to the corresponding sound in the audio file.
@@ -46,7 +46,7 @@ Audio can be transcribed using e.g. Elan {% cite wittenburg-etal-2006-elan %} or
 
 Audio or video files must first be segmented and transcribed using e.g. Elan {% cite wittenburg-etal-2006-elan %} or Praat
 {% cite Praat %} and the transcript exported as a TextGrid (alternatively as a .lab/.txt file but these must be pasted in as a single line). The TextGrid should contain a single
-tier with short intervals (a breath gorup). Each interval should correspond to an utterance in the audio file. The tier name can be a speaker ID (though this is not necessary).
+tier with short intervals (a breath group). Each interval should correspond to an utterance in the audio file. The tier name can be a speaker ID (though this is not necessary).
 
 
 ## Required data formats
@@ -211,7 +211,7 @@ Now we will add the new words to the built-in dictionary so that they are recogn
 
 ## Align pronunciations with audio
 
-Now we're ready to align the pronunciations with the audio. Since we only have one spekaer and no spekaer ID, we leave the number of spekaer characters at 0. If you have a spekaer ID at the start of your file name, then select the number of characters corresponding to the speaker ID.
+Now we're ready to align the pronunciations with the audio. Since we only have one speaker and no speaker ID, we leave the number of speaker characters at 0. If you have a speaker ID at the start of your file name, then select the number of characters corresponding to the speaker ID.
 
 > <hands-on-title> Align Audio and Pronounciation </hands-on-title>
 >
