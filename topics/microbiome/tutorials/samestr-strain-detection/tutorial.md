@@ -540,10 +540,6 @@ This table shows how many different taxa were detected in each sample at every t
 
 ![Taxon counts table from SameStr Summarize](../../images/samestr-taxon-counts.png "Number of taxa detected in each sample at each taxonomic level.")
 
-> <comment-title> Sample Identifiers in the Screenshots </comment-title>
->
-> The screenshot above shows outputs generated without the sample rename step applied, so they use the original sample identifiers instead of the renamed ones: `28A` corresponds to `Pre-FMT`, `28B` to `Donor`, and `28C` to `Post-FMT`. If you completed the rename step earlier in this tutorial, your own results will show the renamed identifiers instead.
-{: .comment}
 
 ### Co-occurrence table
 
