@@ -338,17 +338,17 @@ The {% tool [Flatten collection](__FLATTEN__) %} tool joins each identifier with
 >           - Fill in *"Regular Expression"*: `^[^_]+_(.*)$`
 >           - Fill in *"Replacement Expression"*: `\1`
 >
->           {% snippet faqs/galaxy/analysis_regular_expressions.md %}
+>             {% snippet faqs/galaxy/analysis_regular_expressions.md %}
 >
 >           - Click *"Apply"*
 >
->           ![Rule Builder configured to restore each clade's original identifier](../../images/samestr-rule-builder.gif "Apply Rules Rule Builder with the regular expression that strips the sample-name prefix added by Flatten collection.")
+>             ![Rule Builder configured to restore each clade's original identifier](../../images/samestr-rule-builder.gif "Apply Rules Rule Builder with the regular expression that strips the sample-name prefix added by Flatten collection.")
 >
 >        2. Click *"{% icon plus%} Rules"* -> *"Add/Modify Column Definitions"*
 >           - Click *"List Identifier(s)"* and select `B`
 >           - Click *"Apply"*
 >        3. Click *"Save"*
-
+>
 >
 {: .hands_on}
 
