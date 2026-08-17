@@ -79,8 +79,7 @@ The following example file matches the above criteria and will be used in the ne
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/records/21371207/files/the_fox_and_the_grapes.zip?download
->
+>    https://zenodo.org/records/21371207/files/the_fox_and_the_grapes.zip
 >    ```
 >
 >
