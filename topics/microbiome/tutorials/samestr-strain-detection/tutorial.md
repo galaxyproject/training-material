@@ -231,7 +231,7 @@ The result of these two steps is a single collection containing one set of reads
 >
 >
 > 2. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.22+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"SAM/BAM/CRAM data set"*: `SAM file` (output of **MetaPhlAn** {% icon tool %})
+>    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: `SAM file collection` (output of **MetaPhlAn** {% icon tool %})
 >    - *"What would you like to look at?"*: `All reads in the input dataset`
 >        - *"What would you like to have reported?"*: `The actual reads`
 >            - *"Output format"*: `BAM (-b)`
