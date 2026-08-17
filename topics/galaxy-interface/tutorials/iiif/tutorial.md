@@ -7,11 +7,6 @@ questions:
   - How can you add existing IIIF repositories to Galaxy?
 objectives:
   - Import datasets to Galaxy using the IIIF integration in Galaxy
-requirements:
-  - type: "internal"
-    topic_name: digital-humanities
-    tutorials:
-      - introduction_to_dh
 time_estimation: 15M
 key_points:
   - With the IIIF integration in Galaxy, you can directly browse IIIF from within Galaxy, eliminating manual download cycles.
@@ -57,7 +52,7 @@ Galaxy integrates IIIF through its File Sources (Remote Files) framework, enabli
 
 After saving, your new entry appears in **My Repositories**.
 
-![My Repositories] {% link topics/galaxy-interface/tutorials/iiif/bodleian.png %}
+![Screenshot of My Repositories in Galaxy UI]({% link topics/galaxy-interface/tutorials/iiif/bodleian.png %})
 
 Once you have added your IIIF Manifest, you can access its content and load images into your history for further processing.
 
