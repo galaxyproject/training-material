@@ -246,7 +246,7 @@ Now we're ready to align the pronunciations with the audio. Since we only have o
 >
 {: .hands_on}
 
-## Downloading and Exporting Results
+# Downloading and Exporting Results
 
 > <hands-on-title> Extract and download your aligned files </hands-on-title>
 >
