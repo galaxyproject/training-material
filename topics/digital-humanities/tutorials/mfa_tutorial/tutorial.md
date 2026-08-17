@@ -142,7 +142,7 @@ In order to generate the  pronunciations of the OOVs, we need the single file oo
 >    > <comment-title> Check the OOVs </comment-title>
 >    >
 >    > Double-check the OOVs found file and make sure that none of the OOVs are typos. To do so, click on the {% icon galaxy-eye %} icon next to the dataset name to look at the file. If you do find a typo, you must correct this in the transcription, then upload the .TextGrid again and rerun the previous steps.
->   {: .comment}
+>    {: .comment}
 >
 {: .hands_on}
 
