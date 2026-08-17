@@ -10,28 +10,26 @@ objectives:
 time_estimation: 1H
 contributions:
   authorship:
-    - wallajess    
+    - wallajess
   reviewing:
     - Sch-Da
   testing:
     - Sch-Da
 ---
 
-<!-- This is a comment. -->
+This tutorial explains how to use the Montreal Forced Aligner (MFA) {% cite mcauliffe17_interspeech %} on the Galaxy platform.
 
-This tutorial explains how to use the Montreal Forced Aligner (MFA) {% cite mcauliffe17_interspeech %} on the Galaxy platform. 
-
-The aligner breaks down speech into its smallest possible sounds (phones) and aligns the indivdual 
+The aligner breaks down speech into its smallest possible sounds (phones) and aligns the indivdual
 sounds to their corresponding orthographic transcription. For example, the word 'fox' is broken down
-into four sounds: F AA K S or /f ɑː k s/ (depending on whether you use ARPAbet or IPA for the transcription). The phonetic transcription of 
-each sound is given a precise time boundary to match it to the corresponding sound in the audio file. 
-Each sound can then be analyzed individually without the need for lengthy manual segmentation. For example, researchers can then 
+into four sounds: F AA K S or /f ɑː k s/ (depending on whether you use ARPAbet or IPA for the transcription). The phonetic transcription of
+each sound is given a precise time boundary to match it to the corresponding sound in the audio file.
+Each sound can then be analyzed individually without the need for lengthy manual segmentation. For example, researchers can then
 measure and compare each pronunciation of a certain sound in very little time.
 
-To achieve this, MFA has acoustic models and pronunciation dictionaries for numerous languages, 
-which can be selected in Galaxy. 
+To achieve this, MFA has acoustic models and pronunciation dictionaries for numerous languages,
+which can be selected in Galaxy.
 
-The tool requires an audio or video file and an orthographic transcription as a TextGrid file. 
+The tool requires an audio or video file and an orthographic transcription as a TextGrid file.
 Audio can be transcribed using e.g. Elan {% cite wittenburg-etal-2006-elan %} or Praat {% cite Praat %}. Speech should be segmented into breath groups (the speech in between two breaths) and the transcript exported as a TextGrid. The audio file and TextGrid should then be compressed into one .zip file to be uploaded into Galaxy.
 
 
@@ -47,14 +45,14 @@ Audio can be transcribed using e.g. Elan {% cite wittenburg-etal-2006-elan %} or
 # Preprocessing
 
 Audio or video files must first be segmented and transcribed using e.g. Elan {% cite wittenburg-etal-2006-elan %} or Praat
-{% cite Praat %} and the transcript exported as a TextGrid (alternatively as a .lab/.txt file but these must be pasted in as a single line). The TextGrid should contain a single 
+{% cite Praat %} and the transcript exported as a TextGrid (alternatively as a .lab/.txt file but these must be pasted in as a single line). The TextGrid should contain a single
 tier with short intervals (a breath gorup). Each interval should correspond to an utterance in the audio file. The tier name can be a speaker ID (though this is not necessary).
 
 
 ## Required data formats
-The filenames of the audio/video file and the transcript must be identical except 
-for the extension (e.g. .wav or .TextGrid). It is helpful to have the speaker ID 
-prefix to the filename (e.g. JW_interview.wav, JW_interview.TextGrid), then you 
+The filenames of the audio/video file and the transcript must be identical except
+for the extension (e.g. .wav or .TextGrid). It is helpful to have the speaker ID
+prefix to the filename (e.g. JW_interview.wav, JW_interview.TextGrid), then you
 can instruct the aligner to use the corresponding number of characters (2 in the previous example) as the speaker information. This speaker ID will be retained in the output, allowing you to later identify and analyze speech patterns by speaker.
 
 These should then be compressed into one .zip file to be uploaded into Galaxy.
@@ -82,9 +80,9 @@ The following example file matches the above criteria and will be used in the ne
 >
 >    ```
 >    https://zenodo.org/records/21371207/files/the_fox_and_the_grapes.zip?download
->    
+>
 >    ```
->    
+>
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -94,7 +92,7 @@ The following example file matches the above criteria and will be used in the ne
 >    - Click on the dataset produced by MFA Find OOVs
 >    - Click the {% icon galaxy-pencil %} (edit) icon
 >    - Choose a meaningful name, for example, `the_fox_and_the_grapes.zip`
->    
+>
 > 4. Change the datatype of the dataset to mfa_corpus_model.zip
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
@@ -103,7 +101,7 @@ The following example file matches the above criteria and will be used in the ne
 
 # Align the files
 
-Before we align the files, we need to first check whether all of the words are 
+Before we align the files, we need to first check whether all of the words are
 in our dictionary. MFA offers the Find OOVs (out of vocabulary words) tool to do this.
 
 
@@ -260,7 +258,7 @@ Now we're ready to align the pronunciations with the audio. Since we only have o
 >    - Save the .zip file to your computer
 >
 > 2. Extract the files on your computer
->   
+>
 > 3. Open in Praat for analysis:
 >    - In Praat, open the original audio file (File → Open → Read from file...)
 >    - Then open the corresponding TextGrid (Objects window → Read → Read from file...)
@@ -282,8 +280,8 @@ Once you have aligned TextGrids, you can:
 
 # Conclusion
 
-In this tutorial, we uploaded a sample audio file and transcription. 
-We checked for any out-of-vocabulary words (OOVs) missing from our dictionary and generated the pronunciations using G2P. 
+In this tutorial, we uploaded a sample audio file and transcription.
+We checked for any out-of-vocabulary words (OOVs) missing from our dictionary and generated the pronunciations using G2P.
 After checking and, if necessary, correcting these pronunciations, we merged the generated pronunciations with the built-in dictionary and ran the aligner on our files, producing aligned TextGrid files with precise phoneme-level time boundaries.
 
 You now have a fully aligned and labeled corpus ready for phonetic analysis.
