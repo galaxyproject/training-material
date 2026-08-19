@@ -16,7 +16,7 @@ The following is a set of guidelines for contributing to this training material 
 
 This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/introduction/slides.html)
 
-By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
+By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md) and our [AI policy](AI-policy.md).
 
 We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
