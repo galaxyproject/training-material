@@ -18,6 +18,11 @@ objectives:
   number of years.
 - Remove duplicate eclipse records while retaining one occurrence of each eclipse.
 - Run the analysis reproducibly with workflow parameters.
+requirements:
+  - type: "internal"
+    topic_name: digital-humanities
+    tutorials:
+      - introduction_to_dh
 time_estimation: 45m
 key_points:
 - The observable magnitude mag1 is used for filtering.
@@ -42,7 +47,7 @@ contributions:
 # Introduction
 Ancient sources contain numerous astronomical observations that can be used to establish absolute dates. Solar eclipses are particularly important in this context. In antiquity, eclipses were often perceived as a threat and bad omen, causing fear and potentially political disturbances. By far not every partial solar eclipse has been noticed by an unprepared observer. Changes in ambient illumination remain relatively inconspicuous until a large part of the solar disk is covered. Even when about three quarters of the Sun's area is obscured, the reduction in daylight may still pass largely unnoticed with the most dramatic changes in illumination occuring only during the very deep partial phases close to totality. Historical visibility must be understood primarily in terms of the conspicuous environmental effects of a deep eclipse—diminished and altered daylight, unusual shadows, and, near totality, a pronounced twilight-like appearance. These facts make eclipses of high magnitude particularly relevant when considering events that could have attracted widespread attention without advance knowledge of the phenomenon. A series of such high magnitude solar eclipses at a certain location within a limited number of years is a rare phenomenon. Such eclipse series have been interpreted to being the cause of political disturbances.
 
-This tutorial will show you how to identify such sequences of notable eclipses step-by-step based on pre-calculated tables which are available for the following locations relevant for classicale antiquity: Alexandria, Amarna, Assur, Athens, Babylon, Jerusalem, Knossos, Mari, Memphis, Rome, and Thebes. The data are deposited in DaSCH's repository DSP (`{% cite GautschyDaSCHData %}`). The dataset contains calculations of notable solar eclipses for the period between 2500 BCE and 1000 CE. It is a solar eclipse canon with identifications of the eclipses recorded in historical sources. `{% cite Gautschy2012 %}` discusses two examples of the solar eclipse canon's application. If you want to know more about the basics of eclipses, `{% cite GautschyDaSCHDocu %}` provides an introduction to eclipse geometry and the underlying calculations.
+This tutorial will show you how to identify such sequences of notable eclipses step-by-step based on pre-calculated tables which are available for the following locations relevant for classicale antiquity: Alexandria, Amarna, Assur, Athens, Babylon, Jerusalem, Knossos, Mari, Memphis, Rome, and Thebes. The data are deposited in DaSCH's repository DSP ({% cite GautschyDaSCHData %}). The dataset contains calculations of notable solar eclipses for the period between 2500 BCE and 1000 CE. It is a solar eclipse canon with identifications of the eclipses recorded in historical sources. {% cite Gautschy2012 %} discusses two examples of the solar eclipse canon's application. If you want to know more about the basics of eclipses, {% cite GautschyDaSCHDocu %} provides an introduction to eclipse geometry and the underlying calculations.
 
 <agenda-title></agenda-title>
 >
@@ -82,12 +87,12 @@ downloaded there and uploaded from the local computer.
 
 Examples of suitable input files are:
 
-- Amarna: https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
-- Athens: https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original
-- Babylon: https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original
-- Jerusalem: https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original
-- Rome: https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original
-- Thebes: https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original
+- Amarna: [https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original)
+- Athens: [https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original](https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original)
+- Babylon: [https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original](https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original)
+- Jerusalem: [https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original(https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original)
+- Rome: [https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original](https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original)
+- Thebes: [https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original](https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original)
 
 Input files are expected to have the following structure:
 
@@ -123,7 +128,7 @@ Relevant columns for the workflow are:
 
 # Workflow overview
 
-The workflow analysis consists of eight processing stages:
+The workflow analysis consists of nine processing stages:
 
 1.  Upload / import the eclipse data.
 2.  Convert the original text file to tab-separated data.
@@ -132,12 +137,13 @@ The workflow analysis consists of eight processing stages:
     threshold.
 5.  Sort the selected eclipses chronologically.
 6.  Find groups of N consecutive eclipses occurring within X years.
-7.  Remove duplicate eclipse rows while retaining one occurrence.
-8.  Sort the final result chronologically.
+7.  Sort the eclipses chronologically.
+8.  Remove duplicate eclipse rows while retaining one occurrence.
+9.  Sort the final result chronologically.
 
 ![Visulisation of the workflow](Visualisierung_Solec_GalaxyWorkflow.png "Visulisation of the workflow")
 
-If you run the published workflow rather than following the tutorial step-by-step on your own, you need upload a file with the source data and to supply the following three values at runtime:
+If you run the published workflow rather than following the tutorial step-by-step on your own, you need to upload a file with the source data and to supply the following three values at runtime:
 
  | Workflow parameter | Example | Meaning |
  | ------------------------- | ------- | ------------------------------------------------- |
@@ -173,73 +179,73 @@ want to investigate. For example, a study threshold of `0.85` requires a source 
 Once you click start, your upload should begin. It will first turn orange while in progress, then turn green once it is successfully uploaded. After this step you should have one file in your History.
 
 
-
 # Step 2: Convert the text file to tabular data
 
-The original `.txt` file is converted into a tab-separated format
-suitable for subsequent Galaxy tools.
-
-> ### {% icon hands_on %} Convert the file
+> <hands-on-title> Convert the file </hands-on-title>
 >
-> **Tool:** `Convert`
+> 1. {% tool [Convert](Convert characters1) %} with the following parameters:
+>    - {% icon param-file %} *"in Dataset"*: `Solar eclipse data (.txt)` (Input dataset)
 >
-> -   Input: **Solar eclipse data (.txt)**
-> -   Convert from: spaces/whitespace as configured in the workflow
-> -   Output: tabular dataset
+>    > <comment-title> The original `.txt` file is converted into a tab-separated format suitable for subsequent Galaxy tools by changing the spaces/whitespaces to tabs. The output is a tabular dataset.</comment-title>
 >
-> The workflow uses the Galaxy `Convert` tool (`Convert characters1`,
-> version 1.0.1).
+>
+{: .hands_on}
 
 # Step 3: Separate observable and theoretical magnitude
 
-The original `mag` and `Tmax` columns contain two values separated by `/`. A **Text
-reformatting with awk** step splits the `mag` field and creates the columns
-`mag1` and `mag2`. The two `Tmax` values correspond to the two `mag` values. Since
-`Tmax` is not needed to perform operations in the following, it is not separated into
-two columns. The following step preserves the header and replaces the original `mag` field with two columns.
-
- > <hands-on-title> Split the magnitude column </hands-on-title>
- >
- > 1. {% tool [Text
-reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3)
-%} with the following parameters:
- >    - {% icon param-file %} *"File to process"*: `out_file1` (output
+> <hands-on-title> Separate observable and theoretical magnitude </hands-on-title>
+>
+> The original `mag` and `Tmax` columns contain two values separated by `/`. A **Replace text** step splits the `mag` field and creates the columns
+`mag1` and `mag2`. The two `Tmax` values correspond to the two `mag` values, they are split as well, but not used further during the workflow.
+> 
+> 1. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `out_file1` (output
 of **Convert** {% icon tool %})
- >    - *"AWK Program"*: `BEGIN { OFS=\t }
-NR == 1 {
-     print $1,$2,$3,$4,$5,mag1,mag2,$7,$8
-     next
-}
-{
-     split($6,m,/);
-     print $1,$2,$3,$4,$5,m[1],m[2],$7,$8
-}`
- >
+>    - In *"Replacement"*:
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `mag`
+>            - *"Replace with:"*: `mag1 \t mag2`
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `Tmax`
+>            - *"Replace with:"*: `Tmax1 \t Tmax2`
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `/`
+>            - *"Replace with:"*: `\t`
+>    - Click *"Run Tool"*.
+>
+>    > <comment-title>The first two replacements prepare the header for new columns. The third replacement then actually replaces all "/" with a tab separator.</comment-title>
+>
 {: .hands_on}
-
-> <question-title></question-title>
->
-> 1. What has to change in the AWK expression if the an import file has no header?
-> 2. What has to change in the AWK expression if column 5 would contain the magnitudes and not column 6?
->
-> > <solution-title></solution-title>
-> >
-> > 1. NR == 0
-> > 2. split($5,m,/);
-> >
-> {: .solution}
->
-{: .question}
 
 The resulting table has the structure:
 
-`Y  M  D  Type  deltaT  mag1  mag2  Tmax  Tend`
+`Y  M  D  Type  deltaT  mag1  mag2  Tmax1 Tmax2  Tend`
 
 # Step 4: Select eclipses above the magnitude threshold
 
-The workflow uses another **Text reformatting with awk** step. The
-user-supplied **Magnitude threshold** is connected to the first AWK
-variable (`VAR1`).
+> <hands-on-title> Select eclipses above the magnitude threshold </hands-on-title>
+>
+>The workflow uses a **Filter** step to select all eclipses with a magnitude greater or equal to a user-supplied **Magnitude threshold**.
+>
+> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Replace Text in entire line** {% icon tool %})
+>    - In *"Replacement"*:
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `mag`
+>            - *"Replace with:"*: `mag1 \t mag2`
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `Tmax`
+>            - *"Replace with:"*: `Tmax1 \t Tmax2`
+>        - {% icon param-repeat %} *"Insert Replacement"*
+>            - *"Find pattern"*: `/`
+>            - *"Replace with:"*: `\t`
+>    - Click *"Run Tool"*.
+>
+>    > <comment-title>The first two replacements prepare the header for new columns. The third replacement then actually replaces all "/" with a tab separator.</comment-title>
+>
+{: .hands_on}
+
+
 
 > ### {% icon hands_on %} Filter by observable magnitude
 >
@@ -351,6 +357,41 @@ If the condition is satisfied, all eclipses in that group are returned.
 > }
 > ```
 
+
+ > <hands-on-title> Split the magnitude column </hands-on-title>
+ >
+ > 1. {% tool [Text
+reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3)
+%} with the following parameters:
+ >    - {% icon param-file %} *"File to process"*: `out_file1` (output
+of **Convert** {% icon tool %})
+ >    - *"AWK Program"*: `BEGIN { OFS=\t }
+NR == 1 {
+     print $1,$2,$3,$4,$5,mag1,mag2,$7,$8
+     next
+}
+{
+     split($6,m,/);
+     print $1,$2,$3,$4,$5,m[1],m[2],$7,$8
+}`
+ >
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. What has to change in the AWK expression if the an import file has no header?
+> 2. What has to change in the AWK expression if column 5 would contain the magnitudes and not column 6?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. NR == 0
+> > 2. split($5,m,/);
+> >
+> {: .solution}
+>
+{: .question}
+
+
 > ### {% icon comment %} What counts as a group?
 >
 > With `N = 3` and `X = 10`, the workflow examines every three
@@ -403,7 +444,7 @@ than chronological position, the result is sorted once more.
 > 2.  Column 2: Month (`M`)
 > 3.  Column 3: Day (`D`)
 >
-> Header lines: `1`
+> Header lines: `0`
 
 The final dataset is therefore a chronological list of eclipses that
 satisfy the magnitude threshold and belong to at least one qualifying
