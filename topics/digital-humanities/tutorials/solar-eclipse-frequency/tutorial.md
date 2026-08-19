@@ -10,8 +10,7 @@ questions:
 objectives:
 - Import a pre-calculated solar-eclipse dataset into Galaxy.
 - Convert a text file to tab-separated tabular data.
-- Split the eclipse magnitude field into observable (mag1) and theoretical (mag2)
-  magnitudes.
+- Split the eclipse magnitude and time of maximum eclipse fields into observable (mag1 / Tmax1) and theoretical (mag2 / Tmax2) magnitudes.
 - Filter eclipses using a user-defined minimum observable magnitude.
 - Sort eclipse records chronologically.
 - Identify groups of N consecutive eclipses occurring within a user-defined maximum
@@ -29,7 +28,7 @@ key_points:
 - 'The workflow exposes three runtime parameters: minimum magnitude, number of eclipses,
   and maximum interval in years.'
 - Galaxy workflow parameters separate the scientific question from hard-coded values.
-- perform compact, reproducible transformations and selections on tabular
+- Perform compact, reproducible transformations and selections on tabular
   astronomical data.
 - The final result contains each qualifying eclipse once and is sorted chronologically.
 contributions:
@@ -47,7 +46,7 @@ contributions:
 # Introduction
 Ancient sources contain numerous astronomical observations that can be used to establish absolute dates. Solar eclipses are particularly important in this context. In antiquity, eclipses were often perceived as a threat and bad omen, causing fear and potentially political disturbances. By far not every partial solar eclipse has been noticed by an unprepared observer. Changes in ambient illumination remain relatively inconspicuous until a large part of the solar disk is covered. Even when about three quarters of the Sun's area is obscured, the reduction in daylight may still pass largely unnoticed with the most dramatic changes in illumination occuring only during the very deep partial phases close to totality. Historical visibility must be understood primarily in terms of the conspicuous environmental effects of a deep eclipse—diminished and altered daylight, unusual shadows, and, near totality, a pronounced twilight-like appearance. These facts make eclipses of high magnitude particularly relevant when considering events that could have attracted widespread attention without advance knowledge of the phenomenon. A series of such high magnitude solar eclipses at a certain location within a limited number of years is a rare phenomenon. Such eclipse series have been interpreted to being the cause of political disturbances.
 
-This tutorial will show you how to identify such sequences of notable eclipses step-by-step based on pre-calculated tables which are available for the following locations relevant for classicale antiquity: Alexandria, Amarna, Assur, Athens, Babylon, Jerusalem, Knossos, Mari, Memphis, Rome, and Thebes. The data are deposited in DaSCH's repository DSP ({% cite GautschyDaSCHData %}). The dataset contains calculations of notable solar eclipses for the period between 2500 BCE and 1000 CE. It is a solar eclipse canon with identifications of the eclipses recorded in historical sources. {% cite Gautschy2012 %} discusses two examples of the solar eclipse canon's application. If you want to know more about the basics of eclipses, {% cite GautschyDaSCHDocu %} provides an introduction to eclipse geometry and the underlying calculations.
+This tutorial will show you how to identify such sequences of notable eclipses step-by-step based on pre-calculated tables which are available for the following locations relevant for classical antiquity: Alexandria, Amarna, Assur, Athens, Babylon, Jerusalem, Knossos, Mari, Memphis, Rome, and Thebes. The data are deposited in DaSCH's repository DSP ({% cite GautschyDaSCHData %}). The dataset contains calculations of notable solar eclipses for the period between 2500 BCE and 1000 CE. It is a solar eclipse canon with identifications of the eclipses recorded in historical sources. {% cite Gautschy2012 %} discusses two examples of the solar eclipse canon's application. If you want to know more about the basics of eclipses, {% cite GautschyDaSCHDocu %} provides an introduction to eclipse geometry and the underlying calculations.
 
 <agenda-title></agenda-title>
 >
@@ -74,9 +73,9 @@ workflow to answer a configurable question:
 > threshold belong to a group of N consecutive eclipses occurring within
 > at most X years?**
 
-The published workflow is deliberately parameterised. Instead of fixing a
+The published workflow is parameterised. Instead of fixing a
 particular threshold, number of eclipses, or time interval in the
-workflow, the person running it supplies these values at runtime.
+workflow, you can supply these values at runtime.
 
 ## The input data
 
@@ -90,7 +89,7 @@ Examples of suitable input files are:
 - Amarna: [https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original)
 - Athens: [https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original](https://ingest.dasch.swiss/projects/0868/assets/5DeOeAhy2Mf-HZBdK4jDWHS/original)
 - Babylon: [https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original](https://ingest.dasch.swiss/projects/0868/assets/4hh1eegWr9U-SkJdggNo4fu/original)
-- Jerusalem: [https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original(https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original)
+- Jerusalem: [https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original](https://ingest.dasch.swiss/projects/0868/assets/6AaA42isNKi-xuIFgPapETm/original)
 - Rome: [https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original](https://ingest.dasch.swiss/projects/0868/assets/6UlGbASVDAP-oQoqtM0sJT4/original)
 - Thebes: [https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original](https://ingest.dasch.swiss/projects/0868/assets/44KbkIeJKAV-c1ZniSserLQ/original)
 
@@ -111,7 +110,7 @@ The original text file contains the following columns:
  | Tmax | Two times of maximum eclipse values separated by `/` |
  | Tend | End time |
 
-The `mag` and `Tmax` fields contain two values. This workflow separates the two `mag` values into:
+The `mag` and `Tmax` fields contain two values. This workflow separates the two `mag` and `Tmax` values into:
 
 -   **mag1**: the maximum magnitude actually observable at the selected
     location.
@@ -136,7 +135,7 @@ The workflow analysis consists of nine processing stages:
 
 1.  Upload / import the eclipse data.
 2.  Convert the original text file to tab-separated data.
-3.  Split `mag` into `mag1` and `mag2`.
+3.  Split `mag` and `Tmax` into `mag1`, `mag2`, `Tmax1` and `Tmax2`.
 4.  Select eclipses whose observable magnitude meets the user-defined
     threshold.
 5.  Sort the selected eclipses chronologically.
@@ -185,11 +184,14 @@ Once you click start, your upload should begin. It will first turn orange while 
 
 # Step 2: Convert the text file to tabular data
 
+The original `.txt` file is converted into a tab-separated format suitable for subsequent Galaxy tools by changing the spaces/whitespaces to tabs. The output is a tabular dataset.
+
 > <hands-on-title> Convert the file </hands-on-title>
 >
 > 1. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
->     - {% icon param-file %} *"File to process"*: `out_file1` `output` (Input dataset) {% icon tool %})
->    - Click *"Run Tool"*.
+>    - {% icon param-file %} *"Convert all"*: `Whitespaces`
+>    - *"in Dataset"*: `origin` (Input dataset) {% icon tool %}
+> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> The original `.txt` file is converted into a tab-separated format suitable for subsequent Galaxy tools by changing the spaces/whitespaces to tabs. The output is a tabular dataset.</comment-title>
 >
@@ -216,9 +218,7 @@ of **Convert delimiters to TAB** {% icon tool %})
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `/`
 >            - *"Replace with:"*: `\t`
->    - Click *"Run Tool"*.
->
->    > <comment-title>The first two replacements prepare the header for new columns. The third replacement then actually replaces all "/" with a tab separator.</comment-title>
+> 2. Click *"Run Tool"*.
 >
 {: .hands_on}
 
@@ -233,10 +233,10 @@ The resulting table has the structure:
 >The workflow uses a **Filter** step to select all eclipses with a magnitude greater or equal to a user-supplied **Magnitude threshold**.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Replace Text in entire line** {% icon tool %})
+>    - {% icon param-file %} *"Filter *"*: `out_file1` (output of **Replace Text in entire line** {% icon tool %})
 >    - *"With following condition"*: `c6>=0.8`
 >    - *"Number of header lines to skip"*: `1`
->    - Click *"Run Tool"*.
+> 2. Click *"Run Tool"*.
 >
 >    > <comment-title>You have to set the number of header lines to 1 in order to skip the header. The condition states that the value in column 6 of the file has to be greater than or equal to 0.8</comment-title>
 >
@@ -250,7 +250,7 @@ The resulting table has the structure:
 > > <solution-title></solution-title>
 > >
 > > 1. In *"Number of header lines to skip"*: `0`
-> > 2. In "With following condition"*: `c7>=0.8`
+> > 2. In *"With following condition"*: `c7>=0.8`
 > >
 > {: .solution}
 >
@@ -276,14 +276,9 @@ groups can be identified.
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `1`
->    - Click *"Run Tool"*.
+> 2. Click *"Run Tool"*.
 >
->    > <comment-title> The configured numeric ascending sorts in this order:
-> 1.  Column 1: Year (`Y`)
-> 2.  Column 2: Month (`M`)
-> 3.  Column 3: Day (`D`)
->    The header line is skipped. This produces a chronologically ordered sequence of eclipses satisfying
-the magnitude criterion. </comment-title>
+>    > <comment-title>The configured numeric ascending sorts in this order: 1. Column 1: Year (`Y`), 2. Column 2: Month (`M`), 3. Column 3: Day (`D`). The header line is skipped. This produces a chronologically ordered sequence of eclipses satisfying the magnitude criterion.</comment-title>
 >
 {: .hands_on}
 
@@ -334,14 +329,16 @@ of **Sort** {% icon tool %})
 >     }
 > }
 > `
->    - Click *"Run Tool"*.
+>    - In *"+ Insert variables"*: `3`
+>    - In *"+ Insert variables"*: `10`
+> 2. Click *"Run Tool"*.
 > 
->    > <comment-title>W hat counts as a group? With `N = 3` and `X = 10`, the workflow examines every three
+>    > <comment-title> What counts as a group? With `3` (N) and `10` (years), the workflow examines every three
 > consecutive eclipses in the magnitude-filtered chronological list. A
 > group qualifies when the year difference between its first and third
 > eclipse is no more than ten years. There may be overlapping groups because an eclipse can belong to more than one qualifying group. For example, if
 eclipses A-B-C qualify and B-C-D also qualify, B and C are emitted twice by the group-selection step. This is intentional: the group-selection step first identifies all
-qualifying windows. The next steps collapse repeated eclipse rows.</comment-title>
+qualifying windows. The next steps will collapse repeated eclipse rows.</comment-title>
 >
 {: .hands_on}
 
@@ -364,38 +361,31 @@ reformatting** {% icon tool %})
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
->    - Click *"Run Tool"*.
->    > <comment-title> The configured numeric ascending sorts in this order:
-> 1.  Column 1: Year (`Y`)
-> 2.  Column 2: Month (`M`)
-> 3.  Column 3: Day (`D`)
->    This produces a chronologically ordered sequence of eclipses. Some of them are listed more than once. No header line needs to be skipped because the Text reformatting tool eliminated the header. </comment-title>
+>  2. Click *"Run Tool"*.
+>
+>    > <comment-title>The configured numeric ascending sorts in this order: 1. Column 1: Year (`Y`), 2. Column 2: Month (`M`), 3. Column 3: Day (`D`). This produces a chronologically ordered sequence of eclipses. Some of them are listed more than once. No header line needs to be skipped because the Text reformatting tool eliminated the header.</comment-title>
 >
 {: .hands_on}
 
 
-# Step 7: Remove duplicate eclipse rows
+# Step 8: Remove duplicate eclipse rows
 
 A **Unique** step removes repeated rows if the list is sorted well.
 
 <hands-on-title> Remove duplicates </hands-on-title>
 >
 > 1. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `outfile` (output of **Sort** {% icon tool %})
->    - *"Number of header lines"*: `0`
->    - Click *"Run Tool"*.
+>    - {% icon param-file %} *"File to scan for unique values *"*: `outfile` (output of **Sort** {% icon tool %})
+>    - *"Avoid comparing the first N fields *"*: `0`
+> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> This produces a list with each eclipse only occuring once, but not in chronological order. </comment-title>
 >
 {: .hands_on}
 
-# Step 8: Sort the final result
+# Step 9: Sort the final result
 
 Because the duplicate-removal step does not preserve chronological order, the result is sorted once more.
-
-# Step 7: Sort chronologically
-
-The grouping destroyed the chronological order and some eclipses are listed more than once. The list needs to be sorted to be prepared for the following step.
 
 <hands-on-title> Sort chronologically </hands-on-title>
 >
@@ -411,15 +401,9 @@ The grouping destroyed the chronological order and some eclipses are listed more
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
->    - Click *"Run Tool"*.
+>  2. Click *"Run Tool"*.
 >
->    > <comment-title> The configured numeric ascending sorts in this order:
-> 1.  Column 1: Year (`Y`)
-> 2.  Column 2: Month (`M`)
-> 3.  Column 3: Day (`D`)
->    This produces the final dataset which is a chronological list of eclipses that
-satisfy the magnitude threshold and belong to at least one qualifying
-group. </comment-title>
+>    > <comment-title>The configured numeric ascending sorts in this order: 1. Column 1: Year (`Y`), 2. Column 2: Month (`M`), 3. Column 3: Day (`D`). This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group..</comment-title>
 >
 {: .hands_on}
 
@@ -465,11 +449,11 @@ changed without editing the workflow.
 >
 > For example, compare:
 >
->     Minimum magnitude     N   Maximum interval
->   ------------------- ----- ------------------
->                 `0.8`   `3`               `10`
->                 `0.8`   `4`               `20`
->                 `0.9`   `3`               `20`
+>   | Minimum magnitude | N | Maximum interval |
+>   | ----------------- | - | ---------------- |
+>   | 0.8 | 3 | 10 | 
+>   | 0.8 | 4 | 20 |
+>   | 0.9 | 3 | 20 |
 >
 > Consider:
 >
