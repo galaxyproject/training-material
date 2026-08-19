@@ -1,6 +1,6 @@
 # GTN Generative AI Contributions Policy
 
-The GTN is committed to providing high-quality human-written and human-curated tutorials. As such, the use of AI agents to directly create GTN content is not allowed.
+The GTN is committed to providing high-quality human-written and human-curated tutorials. As such, the use of Generative AI tools to directly create GTN content is not allowed.
 
 ## Summary
 
@@ -16,13 +16,14 @@ The GTN is committed to providing high-quality human-written and human-curated t
 
 - Learners already have the ability to ask LLMs to create tutorials for them; The GTN is a resource for human written, curated and verified tutorials.
 - Contributors making use of generative AI tools oftentimes increase the maintainer burden by not fully understanding the contents of their own contribution, not describing their contribution accurately in the PR/issue/commit message, and not thorougly testing tutorials and ensuring it works as described.
+- LLMs [distort our written language](https://arxiv.org/abs/2603.18161) and result in [semantic ablation](https://www.theregister.com/software/2026/02/16/semantic-ablation-why-ai-writing-is-boring-and-dangerous/4414930), which is highly detrimental when writing tutorials.
+- Every discussion, issue, and pull request is read and reviewed by humans (and sometimes machines, too). It is a boundary point at which people interact with each other and the work done. It is rude and disrespectful to approach this boundary with low-effort, unqualified work, since it puts the burden of validation on the maintainer.
 - We fully expect that new contributors will be less confident in their contributions, and our guidance to them is to start with small contributions that they can fully understand to build confidence. We aspire to be a welcoming community that helps new contributors grow their expertise, but learning involves taking small steps, getting feedback, and iterating. Passing maintainer feedback to an LLM doesn’t help anyone grow, and does not sustain our community.
 - The GTN community is very international. Most contributors are not native English speakers. It is ok for GTN content not to be perfect English. Reviewers will check for typos and grammar mistakes. We much prefer your own (possibly imperfect) words, to LLM generated text.
-- Every discussion, issue, and pull request is read and reviewed by humans (and sometimes machines, too). It is a boundary point at which people interact with each other and the work done. It is rude and disrespectful to approach this boundary with low-effort, unqualified work, since it puts the burden of validation on the maintainer.
 
 ## Societal Motivation
 
-AI tools have several ethical issues. They require an unreasonable amount of energy [1] and water [2] to build and operate, their models are built in part with heavily exploited workers in unacceptable working conditions [3], usually without consent from or compensation for creators of the source material [4] and oftentimes causing DDoS attacks against FOSS infrastructure in the process [5] (which in turn force the deployment of challenge-based protections and increase cost and complexity of self-hosting for everybody [6]). Furthermore, they are being used to undermine labor and justify layoffs [7]. These are harms that we do not want to perpetuate, even if only indirectly.
+AI tools have several ethical issues. They require an unreasonable amount of energy [1] and water [2] to build and operate, their models are built in part with heavily exploited workers in unacceptable working conditions [3], usually without consent from or compensation for creators of the source material [4] Furthermore, they are being used to undermine labor and justify layoffs [5]. These are harms that we do not want to perpetuate, even if only indirectly.
 
 
 ## Acknowledgements
@@ -42,9 +43,5 @@ This AI Policy is heavily inspired by:
 
 [4] “Amid the rise of generative AI, creators, artists and media rights holders have been forced to reckon with the unlicensed use of their copyrighted material to train AI models without consent or compensation.” — Variety, 2025-03-03
 
-[5] “When one of these botnets goes nuts, the result is indistinguishable from a distributed denial-of-service (DDOS) attack — it is a distributed denial-of-service attack. Should anybody be in doubt about the moral integrity of the people running these systems, a look at the techniques they use should make the situation abundantly clear.” — LWN.net, 2025-02-14
-
-[6] Including our infrastructure. As of writing (2025-09), Anubis is being used by the postmarketOS GitLab instance and wiki as well as many other sites and Alpine’s GitLab is protected by go-away to fight off scrapers. Many other websites have adopted similar restrictions.
-
-[7] “Since the rise of generative AI, many have feared the toll it would take on the livelihood of human workers. Now CEOs are admitting AI’s impact and layoffs are starting to ramp up.” — Forbes, 2025-07-17
+[5] “Since the rise of generative AI, many have feared the toll it would take on the livelihood of human workers. Now CEOs are admitting AI’s impact and layoffs are starting to ramp up.” — Forbes, 2025-07-17
 
