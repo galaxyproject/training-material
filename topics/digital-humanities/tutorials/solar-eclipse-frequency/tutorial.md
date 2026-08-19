@@ -188,7 +188,7 @@ Once you click start, your upload should begin. It will first turn orange while 
 > <hands-on-title> Convert the file </hands-on-title>
 >
 > 1. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
->    - {% icon param-file %} *"in Dataset"*: `Solar eclipse data (.txt)` (Input dataset)
+>     - {% icon param-file %} *"File to process"*: `out_file1` `output` (Input dataset) {% icon tool %})
 >    - Click *"Run Tool"*.
 >
 >    > <comment-title> The original `.txt` file is converted into a tab-separated format suitable for subsequent Galaxy tools by changing the spaces/whitespaces to tabs. The output is a tabular dataset.</comment-title>
