@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@94f5ad3653c639590cde7e36f1d1201a970ee1f8",
+		release: "galaxy-training-network@399e31bbb2997338211dd171ca3c53979147aeb4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -892,16 +892,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://bio.tools/tool/samtools",
-      "name": "SAMtools"
-    },
-    {
-      "@type": "Thing",
-      "url": "https://bio.tools/tool/jbrowse",
-      "name": "JBrowse"
-    },
-    {
-      "@type": "Thing",
       "url": "https://bio.tools/tool/jbrowse",
       "name": "JBrowse"
     },
@@ -1411,11 +1401,29 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org" title="">
 			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
 		</a>
 	</li>
     
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
     
     
     
@@ -1432,24 +1440,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<li>
 		<a class="dropdown-item" href="https://galaxytrakr.org/" title="">
 			GalaxyTrakr
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
-			UseGalaxy.cz
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
-			UseGalaxy.fr
 		</a>
 	</li>
     
@@ -2503,16 +2493,6 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
-- name: trim_galore
-  owner: bgruening
-  revisions: 949f01671246
-  tool_panel_section_label: FASTA/FASTQ
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: bamtools_filter
-  owner: devteam
-  revisions: cb20f99fd45b
-  tool_panel_section_label: SAM/BAM
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bamtools_filter
   owner: devteam
   revisions: 993b19f20c76
@@ -2520,18 +2500,8 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bowtie2
   owner: devteam
-  revisions: f76cbb84d67f
+  revisions: a470b376503d
   tool_panel_section_label: Mapping
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: fastqc
-  owner: devteam
-  revisions: e7b2202befea
-  tool_panel_section_label: FASTA/FASTQ
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: samtools_stats
-  owner: devteam
-  revisions: 24c5d43cb545
-  tool_panel_section_label: SAM/BAM
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: samtools_stats
   owner: devteam
@@ -2540,23 +2510,13 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: samtools_stats
   owner: devteam
-  revisions: 57934e90e27c
+  revisions: 8fca6e1eac98
   tool_panel_section_label: SAM/BAM
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: jbrowse
-  owner: iuc
-  revisions: 4542035c1075
-  tool_panel_section_label: Graph/Display Data
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: jbrowse
   owner: iuc
   revisions: 1483285bdb7a
   tool_panel_section_label: Graph/Display Data
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: multiqc
-  owner: iuc
-  revisions: c1a4b5f3b432
-  tool_panel_section_label: Quality Control
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
@@ -2672,7 +2632,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/94f5ad3653c639590cde7e36f1d1201a970ee1f8">94f5ad3</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/399e31bbb2997338211dd171ca3c53979147aeb4">399e31b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
