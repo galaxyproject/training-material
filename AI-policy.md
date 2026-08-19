@@ -23,7 +23,7 @@ The GTN is committed to providing high-quality human-written and human-curated t
 
 ## Societal Motivation
 
-AI tools have several ethical issues. They require an unreasonable amount of energy [1] and water [2] to build and operate, their models are built in part with heavily exploited workers in unacceptable working conditions [3], usually without consent from or compensation for creators of the source material [4] Furthermore, they are being used to undermine labor and justify layoffs [5]. These are harms that we do not want to perpetuate, even if only indirectly.
+AI tools have several ethical issues. [They require an unreasonable amount of energy](https://www.theverge.com/2024/5/15/24157496/microsoft-ai-carbon-footprint-greenhouse-gas-emissions-grow-climate-pledge), and [water](https://restofworld.org/2024/data-centers-environmental-issues/)  to build and operate, their models are built in part with heavily [exploited workers in unacceptable working conditions](https://time.com/6247678/openai-chatgpt-kenya-workers/), usually [without consent from or compensation for creators of the source material](https://variety.com/vip-special-reports/ai-training-consent-content-licensing-special-report-1236307878/). Furthermore, they are being used to [undermine labor and justify layoffs](https://www.forbes.com/sites/richardnieva/2025/07/17/ai-tech-layoffs/). These are harms that we do not want to perpetuate, even if only indirectly.
 
 
 ## Acknowledgements
@@ -32,16 +32,4 @@ This AI Policy is heavily inspired by:
 - [LLVM AI Tool Use Policy](https://llvm.org/docs/AIToolPolicy.html)
 - [The Carpentries Generative AI Contributions Policy](https://docs.carpentries.org/policies/genai-policy.html)
 - [rust-lang/rust LLM policy](https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/)
-
-## References
-
-[1] “After pledging to slash its greenhouse gas emissions, Microsoft’s climate pollution has grown by 30 percent as the company prioritizes AI.” — The Verge, 2024-05-15
-
-[2] “Over the past 12 years, 16 data centers have been approved in Santiago’s metropolitan area. Most use millions of liters of water annually to keep computers from overheating. Chile is in the midst of a drought, expected to last until 2040.” — Rest of World, 2024-05-31
-
-[3] “OpenAI Used Kenyan Workers on Less Than $2 Per Hour to Make ChatGPT Less Toxic” — TIME, 2023-01-18
-
-[4] “Amid the rise of generative AI, creators, artists and media rights holders have been forced to reckon with the unlicensed use of their copyrighted material to train AI models without consent or compensation.” — Variety, 2025-03-03
-
-[5] “Since the rise of generative AI, many have feared the toll it would take on the livelihood of human workers. Now CEOs are admitting AI’s impact and layoffs are starting to ramp up.” — Forbes, 2025-07-17
 
