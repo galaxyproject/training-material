@@ -6,6 +6,21 @@ layout: faq
 contributors: [hexylena]
 ---
 
+In short a diff defines the changes needed to get from an old content of the files in a directory to new content of these files.
+For the sake of the tutorials this allows to deterministacally modify file contents and to minimise errors during editing.
+
+> > <code-in-title>Apply a diff</code-in-title>
+> > 
+> > Given a diff (abbreviated as `DIFFLINES` in the following) the edit desribed can be executed using the following lines.
+> > 
+> > ```
+> > $ patch -p1 << 'EOF' 
+> > DIFFLINES
+> > EOF
+> > ```
+> {: .code-in}
+
+
 If you haven't worked with diffs before, this can be something quite new or different.
 
 If we have two files, let's say a grocery list, in two files. We'll call them 'a' and 'b'.
