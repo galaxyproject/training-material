@@ -187,7 +187,7 @@ Once you click start, your upload should begin. It will first turn orange while 
 
 > <hands-on-title> Convert the file </hands-on-title>
 >
-> 1. {% tool [Convert](Convert characters1) %} with the following parameters:
+> 1. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
 >    - {% icon param-file %} *"in Dataset"*: `Solar eclipse data (.txt)` (Input dataset)
 >    - Click *"Run Tool"*.
 >
@@ -205,7 +205,7 @@ Once you click start, your upload should begin. It will first turn orange while 
 > 
 > 1. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `out_file1` (output
-of **Convert** {% icon tool %})
+of **Convert delimiters to TAB** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `mag`
@@ -276,6 +276,7 @@ groups can be identified.
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `1`
+>    - Click *"Run Tool"*.
 >
 >    > <comment-title> The configured numeric ascending sorts in this order:
 > 1.  Column 1: Year (`Y`)
@@ -333,7 +334,8 @@ of **Sort** {% icon tool %})
 >     }
 > }
 > `
->
+>    - Click *"Run Tool"*.
+> 
 >    > <comment-title>W hat counts as a group? With `N = 3` and `X = 10`, the workflow examines every three
 > consecutive eclipses in the magnitude-filtered chronological list. A
 > group qualifies when the year difference between its first and third
@@ -362,7 +364,7 @@ reformatting** {% icon tool %})
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
->
+>    - Click *"Run Tool"*.
 >    > <comment-title> The configured numeric ascending sorts in this order:
 > 1.  Column 1: Year (`Y`)
 > 2.  Column 2: Month (`M`)
@@ -381,6 +383,7 @@ A **Unique** step removes repeated rows if the list is sorted well.
 > 1. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `outfile` (output of **Sort** {% icon tool %})
 >    - *"Number of header lines"*: `0`
+>    - Click *"Run Tool"*.
 >
 >    > <comment-title> This produces a list with each eclipse only occuring once, but not in chronological order. </comment-title>
 >
@@ -408,6 +411,7 @@ The grouping destroyed the chronological order and some eclipses are listed more
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
+>    - Click *"Run Tool"*.
 >
 >    > <comment-title> The configured numeric ascending sorts in this order:
 > 1.  Column 1: Year (`Y`)
