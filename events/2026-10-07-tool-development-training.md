@@ -12,10 +12,10 @@ contributions:
     - bernt-matthias
   funding:
     - deNBI
+
+mode: onsite
+
 location:
   name: Freiburg Galaxy Team 
-  address: Georges-Köhler-Allee 79
-  postcode: 79110
-  city: Freiburg
-  country: Germany
+
 ---
