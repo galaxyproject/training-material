@@ -143,7 +143,7 @@ The workflow analysis consists of nine processing stages:
 8.  Remove duplicate eclipse rows while retaining one occurrence.
 9.  Sort the final result chronologically.
 
-![Visulisation of the workflow](Visualisierung_Solec_GalaxyWorkflow.png "Visulisation of the workflow")
+![Visulisation of the workflow]({% link topics/digital-humanities/tutorial/solar-eclipse-frequency/images/Visualisierung_Solec_GalaxyWorkflow.png %} "Visulisation of the workflow")
 
 If you run the published workflow rather than following the tutorial step-by-step on your own, you need to upload a file with the source data and to supply the following three values at runtime:
 
