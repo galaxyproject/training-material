@@ -444,10 +444,10 @@ Because the duplicate-removal step does not preserve chronological order, the re
 
 # Run the analysis as a workflow
 
-If you now want to repeat this analysis with different input data or paramater settings,
-you don't want to repeat all these steps again by hand. For this, we can use the workflow.
+Suppose you now want to repeat this analysis with different input data or paramater settings.
+You would not want to repeat all these steps again by hand. For this, we can use the workflow.
 
-If you run the published workflow rather than following the tutorial step-by-step on your own, you need to upload a file with the source data and to supply the following three values at runtime:
+When you run the workflow, you need to upload a file with the source data and to supply the following three values at runtime:
 
 | Workflow parameter | Example | Meaning |
 | ------------------------- | ------- | ------------------------------------------------- |
@@ -455,16 +455,28 @@ If you run the published workflow rather than following the tutorial step-by-ste
 | Number of eclipses | 3 | Number of consecutive eclipses, N |
 | Maximum interval in years | 10 | Maximum span between the first and Nth eclipse, X |
 
-> <hands-on-title>Run</hands-on-title>
+
+But first, we must import the workflow into Galaxy:
+
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/digital-humanities/tutorials/solar-eclipse-frequence/workflows/solar-eclipse-frequency.ga" title="Solar eclipse Frequency Workflow" %}
+
+Now we can run it:
+
+> <hands-on-title>Run the workflow</hands-on-title>
 >
-> 1.  Select the eclipse data file as the workflow dataset input.
-> 2.  Enter `0.8` for **Magnitude threshold**.
-> 3.  Enter `3` for **Number of eclipses**.
-> 4.  Enter `10` for **Maximum interval in years**.
-> 5.  Run the workflow.
-> 6.  Inspect the final sorted dataset.
+> 1. **Run the workflow** with the following parameters:
+>    - Select the eclipse data file as the workflow dataset input.
+>    - Enter `0.8` for **Magnitude threshold**.
+>    - Enter `3` for **Number of eclipses**.
+>    - Enter `10` for **Maximum interval in years**.
+>    - Run the workflow.
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+> 2.  Inspect the final sorted dataset.
 >
 {: .hands_on}
+
 
 ## Interpreting the result
 
@@ -485,7 +497,7 @@ changed without editing the workflow.
 
 > <hands-on-title>Experiment</hands-on-title>
 >
-> Run the workflow several times with different parameters.
+> 1. **Run the workflow** several times with different parameters.
 >
 > For example, compare:
 >
