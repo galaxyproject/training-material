@@ -220,7 +220,6 @@ of **Convert delimiters to TAB** {% icon tool %})
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `/`
 >            - *"Replace with:"*: `\t`
-> 2. Click *"Run Tool"*.
 >
 {: .hands_on}
 
@@ -238,7 +237,6 @@ The resulting table has the structure:
 >    - {% icon param-file %} *"Filter *"*: `out_file1` (output of **Replace Text in entire line** {% icon tool %})
 >    - *"With following condition"*: `c6>=0.8`
 >    - *"Number of header lines to skip"*: `1`
-> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> About the parameters </comment-title>
 >    > You have to set the number of header lines to 1 in order to skip the header.
@@ -282,7 +280,6 @@ groups can be identified.
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `1`
-> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -345,7 +342,6 @@ If the condition is satisfied, all eclipses in that group are returned.
 >
 >    - In *"+ Insert variables"*: `3`
 >    - In *"+ Insert variables"*: `10`
-> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> What counts as a group? </comment-title>
 >    > With `3` (N) and `10` (years), the workflow examines every three
@@ -380,7 +376,6 @@ reformatting** {% icon tool %})
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
->  2. Click *"Run Tool"*.
 >
 >    > <comment-title> About the output </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -404,7 +399,6 @@ A **Unique** step removes repeated rows if the list is sorted well.
 > 1. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to scan for unique values *"*: `outfile` (output of **Sort** {% icon tool %})
 >    - *"Avoid comparing the first N fields *"*: `0`
-> 2. Click *"Run Tool"*.
 >
 >    > <comment-title> About the output </comment-title>
 >    > This produces a list with each eclipse only occuring once, but not in chronological order.
@@ -430,7 +424,6 @@ Because the duplicate-removal step does not preserve chronological order, the re
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
->  2. Click *"Run Tool"*.
 >
 >    > <comment-title>Details about the sorting </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -473,7 +466,6 @@ Now we can run it:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
-> 2.  Inspect the final sorted dataset.
 >
 {: .hands_on}
 
