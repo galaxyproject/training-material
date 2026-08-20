@@ -2,6 +2,13 @@
     "a_galaxy_workflow": "true",
     "annotation": "This workflow allows to identify consecutive groups of a number of solar eclipses within a given time span.",
     "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-5470-8720",
+            "name": "Rita Gautschy"
+        }
+    ],
     "format-version": "0.1",
     "license": "CC-BY-4.0",
     "logo_url": "https://iiif.dasch.swiss:443/0810/7WumAIYuJsQ-CroJQljo3CV.jp2/full/2227,836/0/default.jpg",
@@ -54,8 +61,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 628.0859375,
-                "top": 207.4765625
+                "left": 321.72917637867624,
+                "top": 218.15856000664067
             },
             "tool_id": null,
             "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
@@ -154,10 +161,50 @@
             "workflow_outputs": []
         },
         "5": {
-            "annotation": "This step splits two magnitude values within one column by the delimiter \"/\". The first magnitude (mag1) denotes the actually observable maximal magnitude of the eclipse at a certain location. This is the relevant number. The second value (mag2) gives the theoretical maximum magnitude, but the Sun may be below the horizon when it is reached.",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "annotation": "This is a helper step to construct the input parameter for the next workflow step from a variable part of the input parameter (the magnitude threshold)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
             "errors": null,
             "id": 5,
+            "input_connections": {
+                "components_1|param_type|component_value": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Compose text parameter value",
+            "name": "Compose text parameter value",
+            "outputs": [
+                {
+                    "name": "out1",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 629.4957887712238,
+                "top": 217.7963896273998
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e188c9826e0f",
+                "name": "compose_text_param",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"c6>=\"}}, {\"__index__\": 1, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "2db71ac0-7ea8-45f8-8ede-f146f3a6b9f4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "This step splits two magnitude values within one column by the delimiter \"/\". The first magnitude (mag1) denotes the actually observable maximal magnitude of the eclipse at a certain location. This is the relevant number. The second value (mag2) gives the theoretical maximum magnitude, but the Sun may be below the horizon when it is reached.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 6,
             "input_connections": {
                 "infile": {
                     "id": 4,
@@ -165,8 +212,8 @@
                 }
             },
             "inputs": [],
-            "label": null,
-            "name": "Text reformatting",
+            "label": "Text reformatting",
+            "name": "Replace Text",
             "outputs": [
                 {
                     "name": "outfile",
@@ -174,78 +221,72 @@
                 }
             ],
             "position": {
-                "left": 628.5695535713141,
-                "top": 37.462748428975516
+                "left": 629.5390625,
+                "top": 36.496343749999454
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
             "tool_shed_repository": {
                 "changeset_revision": "ab83aa685821",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"code\": \"BEGIN { OFS=\\\"\\\\t\\\" }\\nNR == 1 {\\n    print $1,$2,$3,$4,$5,\\\"mag1\\\",\\\"mag2\\\",$7,$8\\n    next\\n}\\n{\\n    split($6,m,\\\"/\\\");\\n    print $1,$2,$3,$4,$5,m[1],m[2],$7,$8\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"mag\", \"replace_pattern\": \" mag1\\\\tmag2\", \"sed_options\": null}, {\"__index__\": 1, \"find_pattern\": \"Tmax\", \"replace_pattern\": \"Tmax1\\\\tTmax2\", \"sed_options\": null}, {\"__index__\": 2, \"find_pattern\": \"/\", \"replace_pattern\": \"\\\\t\", \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "9.5+galaxy3",
             "type": "tool",
-            "uuid": "283f24a4-1195-4314-a0f8-9ed7dbd70fb8",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "6": {
-            "annotation": "Select all eclipses above a minimum magnitude threshold. Meaningful values are between 0.5 and 1.0",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
-            "errors": null,
-            "id": 6,
-            "input_connections": {
-                "infile": {
-                    "id": 5,
-                    "output_name": "outfile"
-                },
-                "variables_0|value": {
-                    "id": 1,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": "Select eclipses above a threshold",
-            "name": "Text reformatting",
-            "outputs": [
-                {
-                    "name": "outfile",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "left": 934.1569052432053,
-                "top": 73.63312290848393
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
-            "tool_shed_repository": {
-                "changeset_revision": "ab83aa685821",
-                "name": "text_processing",
-                "owner": "bgruening",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"code\": \"BEGIN {\\n    OFS=\\\"\\\\t\\\"\\n    threshold = VAR1 + 0\\n}\\n\\nNR == 1 {\\n    print\\n    next\\n}\\n\\n$6 >= threshold {\\n    print\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_uuid": null,
-            "tool_version": "9.5+galaxy3",
-            "type": "tool",
-            "uuid": "4b51e786-c6d2-4a91-8b18-e1ae8896fadd",
+            "uuid": "954bbfcd-9c6b-4677-868c-a83bcbf94297",
             "when": null,
             "workflow_outputs": []
         },
         "7": {
-            "annotation": "This step sorts the remaining values chronologically in ascending order.",
-            "content_id": "sort1",
+            "annotation": "Select all eclipses above a minimum magnitude threshold. Meaningful values are between 0.5 and 1.0",
+            "content_id": "Filter1",
             "errors": null,
             "id": 7,
             "input_connections": {
+                "cond": {
+                    "id": 5,
+                    "output_name": "out1"
+                },
                 "input": {
                     "id": 6,
                     "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Select eclipses above a threshold",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 940.3565905365872,
+                "top": 72.93102671737564
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": {\"__class__\": \"ConnectedValue\"}, \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "5855b125-6c11-4481-99c3-a0dfac5a439a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "This step sorts the remaining values chronologically in ascending order.",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "out_file1"
                 }
             },
             "inputs": [],
@@ -271,14 +312,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "8": {
+        "9": {
             "annotation": "This step finds every consecutive group of N eclipses where the time span between the 1st and Nth eclipse is smaller or equal to a number of years. N and years are input parameters of this workflow.",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
             "errors": null,
-            "id": 8,
+            "id": 9,
             "input_connections": {
                 "infile": {
-                    "id": 7,
+                    "id": 8,
                     "output_name": "out_file1"
                 },
                 "variables_0|value": {
@@ -319,46 +360,6 @@
             "when": null,
             "workflow_outputs": []
         },
-        "9": {
-            "annotation": "Remove duplicate rows, the first occurrence of each row is kept.",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
-            "errors": null,
-            "id": 9,
-            "input_connections": {
-                "infile": {
-                    "id": 8,
-                    "output_name": "outfile"
-                }
-            },
-            "inputs": [],
-            "label": "Remove duplicates",
-            "name": "Text reformatting",
-            "outputs": [
-                {
-                    "name": "outfile",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "left": 1868.1068046001665,
-                "top": 402.9426294444399
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3",
-            "tool_shed_repository": {
-                "changeset_revision": "ab83aa685821",
-                "name": "text_processing",
-                "owner": "bgruening",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"code\": \"NR == 1 {\\n    print\\n    next\\n}\\n\\n!seen[$0]++\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_uuid": null,
-            "tool_version": "9.5+galaxy3",
-            "type": "tool",
-            "uuid": "c69e37a6-168a-4ffc-a7ea-2fefbe27b5c6",
-            "when": null,
-            "workflow_outputs": []
-        },
         "10": {
             "annotation": "Sort the final list of consecutive eclipse groups chronologically.",
             "content_id": "sort1",
@@ -371,7 +372,7 @@
                 }
             },
             "inputs": [],
-            "label": "Sort the final result",
+            "label": "Sort result",
             "name": "Sort",
             "outputs": [
                 {
@@ -380,8 +381,8 @@
                 }
             ],
             "position": {
-                "left": 2168.553646663855,
-                "top": 465.59207072007615
+                "left": 1859.81249660691,
+                "top": 425.9352684443167
             },
             "post_job_actions": {},
             "tool_id": "sort1",
@@ -391,10 +392,98 @@
             "type": "tool",
             "uuid": "619d26c6-b613-4446-afdf-8f042a5589c7",
             "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "Remove duplicate rows, the first occurrence of each row is kept.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Remove duplicates",
+            "name": "Unique",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2161.4072813960256,
+                "top": 437.97772162451434
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"is_numeric\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "414fbb60-fb76-4437-8ca4-21537eb487b0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "Arrange the final list of results in chronological order.",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Sort",
+                    "name": "input"
+                }
+            ],
+            "label": "Sort final list of results",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2478.9097621135015,
+                "top": 500.73394883796345
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "final_solar_eclipse_results"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "sort1",
+            "tool_state": "{\"column\": \"1\", \"column_set\": [{\"__index__\": 0, \"other_column\": \"2\", \"other_style\": \"num\", \"other_order\": \"ASC\"}, {\"__index__\": 1, \"other_column\": \"3\", \"other_style\": \"num\", \"other_order\": \"ASC\"}], \"header_lines\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"order\": \"ASC\", \"style\": \"num\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "7aee065a-9b69-49c6-8213-cfc169412d5d",
+            "when": null,
             "workflow_outputs": [
                 {
+                    "label": "final_solar_eclipse_results",
                     "output_name": "out_file1",
-                    "label": "qualifying_eclipses"
+                    "uuid": "a7306d70-74fe-4764-a3e9-46a5b1d1b30e"
                 }
             ]
         }
@@ -406,6 +495,6 @@
         "Astronomy",
         "humanities"
     ],
-    "uuid": "d0134f75-1754-4f56-9b5c-f939934c57b3",
-    "version": 16
+    "uuid": "27bc1593-7eeb-4481-999c-42d78477b792",
+    "version": 30
 }
