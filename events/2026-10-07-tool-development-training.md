@@ -11,7 +11,7 @@ contributions:
     - SaimMomin12
     - bernt-matthias
   funding:
-    - denbi
+    - deNBI
 location:
   name: Freiburg Galaxy Team 
   address: Georges-Köhler-Allee 79
