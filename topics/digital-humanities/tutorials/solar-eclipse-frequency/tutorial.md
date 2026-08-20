@@ -128,9 +128,9 @@ Relevant columns for the workflow are:
 - Column 3: `D` (day)
 - Column 6: `mag` (maximum magnitude of the solar eclipse)
 
-# Workflow overview
+## Analysis overview
 
-The workflow analysis consists of nine processing stages:
+This analysis consists of nine processing stages:
 
 1.  Upload / import the eclipse data.
 2.  Convert the original text file to tab-separated data.
@@ -143,18 +143,18 @@ The workflow analysis consists of nine processing stages:
 8.  Remove duplicate eclipse rows while retaining one occurrence.
 9.  Sort the final result chronologically.
 
-![Visulisation of the workflow]({% link topics/digital-humanities/tutorial/solar-eclipse-frequency/images/Visualisierung_Solec_GalaxyWorkflow.png %} "Visulisation of the workflow")
-
-If you run the published workflow rather than following the tutorial step-by-step on your own, you need to upload a file with the source data and to supply the following three values at runtime:
-
- | Workflow parameter | Example | Meaning |
- | ------------------------- | ------- | ------------------------------------------------- |
- | Minimum magnitude | 0.8 | Minimum observable magnitude (`mag1`) |
- | Number of eclipses | 3 | Number of consecutive eclipses, N |
- | Maximum interval in years | 10 | Maximum span between the first and Nth eclipse, X |
+![Visulisation of the workflow]({% link topics/digital-humanities/tutorials/solar-eclipse-frequency/images/Visualisierung_Solec_GalaxyWorkflow.png %} "Visulisation of the workflow")
 
 
-# Step 1: Import the eclipse data
+
+# Step-by-step Analysis
+
+In the next sections, we will walk you through this analysis step by step.
+
+In the [final section](#run-the-analysis-as-a-workflow), we will show you how you can speed up this analysis by using the *workflow*.
+
+
+## Step 1: Import the eclipse data
 
 You can upload data in various ways. Here are some examples:
 
@@ -182,7 +182,7 @@ want to investigate. For example, a study threshold of `0.85` requires a source 
 Once you click start, your upload should begin. It will first turn orange while in progress, then turn green once it is successfully uploaded. After this step you should have one file in your History.
 
 
-# Step 2: Convert the text file to tabular data
+## Step 2: Convert the text file to tabular data
 
 The original `.txt` file is converted into a tab-separated format suitable for subsequent Galaxy tools by changing the spaces/whitespaces to tabs. The output is a tabular dataset.
 
@@ -200,7 +200,7 @@ The original `.txt` file is converted into a tab-separated format suitable for s
 >
 {: .hands_on}
 
-# Step 3: Separate observable and theoretical magnitude
+## Step 3: Separate observable and theoretical magnitude
 
 The original `mag` and `Tmax` columns contain two values separated by `/`. A {% tool [Replace text] %} step splits the `mag` field and creates the columns
 `mag1` and `mag2`. The two `Tmax` values correspond to the two `mag` values, they are split as well, but not used further during the workflow.
@@ -228,7 +228,7 @@ The resulting table has the structure:
 
 `Y  M  D  Type  deltaT  mag1  mag2  Tmax1 Tmax2  Tend`
 
-# Step 4: Select eclipses above the magnitude threshold
+## Step 4: Select eclipses above the magnitude threshold
 
 > <hands-on-title> Select eclipses above the magnitude threshold </hands-on-title>
 >
@@ -263,7 +263,7 @@ The resulting table has the structure:
 {: .question}
 
 
-# Step 5: Sort the eclipses chronologically
+## Step 5: Sort the eclipses chronologically
 
 The remaining eclipses must be in chronological order before consecutive
 groups can be identified.
@@ -296,7 +296,7 @@ groups can be identified.
 {: .hands_on}
 
 
-# Step 6: Find groups of eclipses
+## Step 6: Find groups of eclipses
 
 This is the central analytical step of the workflow. You have to supply as input:
 
@@ -361,7 +361,7 @@ If the condition is satisfied, all eclipses in that group are returned.
 >
 {: .hands_on}
 
-# Step 7: Sort chronologically
+## Step 7: Sort chronologically
 
 The grouping destroyed the chronological order and some eclipses are listed more than once. The list needs to be sorted to be prepared for the following step.
 
@@ -395,7 +395,7 @@ reformatting** {% icon tool %})
 {: .hands_on}
 
 
-# Step 8: Remove duplicate eclipse rows
+## Step 8: Remove duplicate eclipse rows
 
 A **Unique** step removes repeated rows if the list is sorted well.
 
@@ -412,7 +412,7 @@ A **Unique** step removes repeated rows if the list is sorted well.
 >
 {: .hands_on}
 
-# Step 9: Sort the final result
+## Step 9: Sort the final result
 
 Because the duplicate-removal step does not preserve chronological order, the result is sorted once more.
 
@@ -442,15 +442,18 @@ Because the duplicate-removal step does not preserve chronological order, the re
 >
 {: .hands_on}
 
-# Run the workflow
+# Run the analysis as a workflow
 
-A useful first test is:
+If you now want to repeat this analysis with different input data or paramater settings,
+you don't want to repeat all these steps again by hand. For this, we can use the workflow.
 
-  |  Parameter | Value |
-  |  ------------------------- | ------- |
-  |  Minimum magnitude | 0.8 |
-  |  Number of eclipses | 3 |
-  |  Maximum interval in years | 10 |
+If you run the published workflow rather than following the tutorial step-by-step on your own, you need to upload a file with the source data and to supply the following three values at runtime:
+
+| Workflow parameter | Example | Meaning |
+| ------------------------- | ------- | ------------------------------------------------- |
+| Minimum magnitude | 0.8 | Minimum observable magnitude (`mag1`) |
+| Number of eclipses | 3 | Number of consecutive eclipses, N |
+| Maximum interval in years | 10 | Maximum span between the first and Nth eclipse, X |
 
 > <hands-on-title>Run</hands-on-title>
 >
@@ -463,7 +466,7 @@ A useful first test is:
 >
 {: .hands_on}
 
-# Interpreting the result
+## Interpreting the result
 
 The workflow returns **all eclipses with `mag1` at or above the
 threshold that are members of at least one group of N consecutive
@@ -475,7 +478,7 @@ workflow identifies astronomical configurations in the pre-calculated
 dataset; historical interpretation requires appropriate contextual
 evidence.
 
-# Explore the parameters
+## Explore the parameters
 
 The main advantage of the workflow is that the research question can be
 changed without editing the workflow.
@@ -503,7 +506,7 @@ changed without editing the workflow.
 >
 {: .hands_on}
 
-# Why use a Galaxy workflow?
+## Why use a Galaxy workflow?
 
 The workflow makes several parts of the analysis explicit:
 
