@@ -417,7 +417,7 @@ A useful first test is:
   |  Number of eclipses | 3 | 
   |  Maximum interval in years | 10 | 
 
-> ### {% icon hands_on %} Run
+> ### <hands-on-title>Run</hands-on-title>
 >
 > 1.  Select the eclipse data file as the workflow dataset input.
 > 2.  Enter `0.8` for **Magnitude threshold**.
@@ -443,7 +443,7 @@ evidence.
 The main advantage of the workflow is that the research question can be
 changed without editing the workflow.
 
-> ### {% icon hands_on %} Experiment
+> ### <hands-on-title>Experiment</hands-on-title>
 >
 > Run the workflow several times with different parameters.
 >
