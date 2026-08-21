@@ -451,7 +451,7 @@ When you run the workflow, you need to upload a file with the source data and to
 
 But first, we must import the workflow into Galaxy:
 
-{% snippet faqs/galaxy/workflows_run_trs.md path="topics/digital-humanities/tutorials/solar-eclipse-frequence/workflows/solar-eclipse-frequency.ga" title="Solar eclipse Frequency Workflow" %}
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/digital-humanities/tutorials/solar-eclipse-frequency/workflows/solar-eclipse-frequency.ga" title="Solar eclipse Frequency Workflow" %}
 
 Now we can run it:
 
