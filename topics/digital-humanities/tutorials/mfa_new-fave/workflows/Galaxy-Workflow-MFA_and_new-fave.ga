@@ -1,0 +1,456 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Tutorial explaining how to use the Montreal Forced Aligner (MFA) and new-fave for vowel extraction",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0009-5001-4180",
+            "name": "Jessica Wallace"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "MFA and new-fave",
+    "readme": "Tutorial showing how to use the Montreal Forced Aligner and new-fave. It uses sample data that can be found on Zenodo. After uploading the data, the next step is to check whether there are any words that are not included in the dictionary (find OOVs). Then you can generate pronunciations of these words using G2P before merging them with the built-in dictionary. Next, the phonetic transcriptions can be aligned to the individual sounds in the audio file. The aligned TextGrid and the original audio file are then input into new-fave to automatically extract the vowel formant measurents.",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Upload data as a .zip file",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload data as a .zip file",
+                    "name": "the_fox_and_the_grapes.zip"
+                }
+            ],
+            "label": "the_fox_and_the_grapes.zip",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 299.5903559843678
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "f4597898-fcd8-43b6-a27f-c02227cbf6ed",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "mfa_find_oovs",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "corpus_source": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFA Find OOVs",
+            "outputs": [
+                {
+                    "name": "output_archive",
+                    "type": "mfa_oov.zip"
+                }
+            ],
+            "position": {
+                "left": 331.033203125,
+                "top": 2.6333312988281237
+            },
+            "post_job_actions": {},
+            "tool_id": "mfa_find_oovs",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"corpus_source\": {\"__class__\": \"ConnectedValue\"}, \"dictionary_type\": {\"source\": \"builtin\", \"__current_case__\": 0, \"builtin_dictionary\": \"english_us_arpa\"}, \"speaker_characters\": \"0\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.8+1",
+            "type": "tool",
+            "uuid": "4d190180-2fa2-4077-a8c3-e737045d5c15",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Archive containing unknown words",
+                    "output_name": "output_archive",
+                    "uuid": "51049ee4-c300-4fca-85d8-23f3fcc2c13e"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Unzip the output file to get the audio for new-fave",
+            "name": "Unzip",
+            "outputs": [
+                {
+                    "name": "unzipped",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 317.7666015625,
+                "top": 481.79998779296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "6a7e010c05db",
+                "name": "unzip",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"extract_options\": {\"target\": \"all\", \"__current_case__\": 0, \"keep_regex\": \".*\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "6.0+galaxy5",
+            "type": "tool",
+            "uuid": "d679f703-d373-4bae-b084-463317b4fe4d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "audio file and transciption (not aligned)",
+                    "output_name": "unzipped",
+                    "uuid": "082f0b80-237f-4838-b832-efb241d6f45d"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output_archive"
+                }
+            },
+            "inputs": [],
+            "label": "Unzip the file to get the list of unknown words (oovs_found)",
+            "name": "Unzip",
+            "outputs": [
+                {
+                    "name": "unzipped_single",
+                    "type": "_sniff_"
+                }
+            ],
+            "position": {
+                "left": 595.6990631217118,
+                "top": 13.833431505483713
+            },
+            "post_job_actions": {
+                "RenameDatasetActionunzipped_single": {
+                    "action_arguments": {
+                        "newname": "unknown_words"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "unzipped_single"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "6a7e010c05db",
+                "name": "unzip",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"extract_options\": {\"target\": \"single\", \"__current_case__\": 3, \"pathtofile\": \"oovs_found_english_us_arpa.txt\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "6.0+galaxy5",
+            "type": "tool",
+            "uuid": "572e1c06-0c94-4f84-b734-fda065864459",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "List of unknown words",
+                    "output_name": "unzipped_single",
+                    "uuid": "6d280e1c-cad3-4ce9-809d-07358f2a07eb"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "mfa_g2p",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_type|word_list": {
+                    "id": 3,
+                    "output_name": "unzipped_single"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MFA G2P",
+                    "name": "input_type"
+                }
+            ],
+            "label": null,
+            "name": "MFA G2P",
+            "outputs": [
+                {
+                    "name": "output_dictionary",
+                    "type": "mfa.dict"
+                }
+            ],
+            "position": {
+                "left": 854.8284409484866,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_dictionary": {
+                    "action_arguments": {
+                        "newname": "generated_pronunciations_oovs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_dictionary"
+                }
+            },
+            "tool_id": "mfa_g2p",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"g2p_model_type\": {\"source\": \"builtin\", \"__current_case__\": 0, \"builtin_g2p\": \"english_us_arpa\"}, \"include_bracketed\": false, \"input_type\": {\"source_type\": \"word_list\", \"__current_case__\": 0, \"word_list\": {\"__class__\": \"ConnectedValue\"}}, \"num_pronunciations\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.8+1",
+            "type": "tool",
+            "uuid": "c74cc8bb-f98d-4b42-a5c8-5a734386fd0c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "dictionary of generated pronunciations for OOVs",
+                    "output_name": "output_dictionary",
+                    "uuid": "7bf2c13a-44fb-4959-b99b-ed1269806554"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "mfa_merge",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "other_dicts_0|dictionary_file": {
+                    "id": 4,
+                    "output_name": "output_dictionary"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFA Merge",
+            "outputs": [
+                {
+                    "name": "merged_dict",
+                    "type": "mfa.dict"
+                }
+            ],
+            "position": {
+                "left": 1096.1892093003867,
+                "top": 2.3109559598572673
+            },
+            "post_job_actions": {
+                "RenameDatasetActionmerged_dict": {
+                    "action_arguments": {
+                        "newname": "merged_dictionary"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "merged_dict"
+                }
+            },
+            "tool_id": "mfa_merge",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dictionary_type\": {\"source\": \"builtin\", \"__current_case__\": 0, \"builtin_dictionary\": \"english_us_arpa\"}, \"other_dicts\": [{\"__index__\": 0, \"dictionary_file\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.8+1",
+            "type": "tool",
+            "uuid": "89edf0de-b875-479c-9ab8-7d7d627ac95e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Updated dictionary including OOVs",
+                    "output_name": "merged_dict",
+                    "uuid": "5bdaa586-4fa9-4779-8d27-c71373279d6c"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "mfa_align",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "corpus_source": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "dictionary_type|dictionary_file": {
+                    "id": 5,
+                    "output_name": "merged_dict"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MFA Align",
+                    "name": "dictionary_type"
+                }
+            ],
+            "label": "Run the aligner",
+            "name": "MFA Align",
+            "outputs": [
+                {
+                    "name": "output_archive",
+                    "type": "mfa_textgrids.zip"
+                }
+            ],
+            "position": {
+                "left": 666.6470086305058,
+                "top": 249.07599092383106
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_archive": {
+                    "action_arguments": {
+                        "newname": "aligned_textgrid"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_archive"
+                }
+            },
+            "tool_id": "mfa_align",
+            "tool_state": "{\"acoustic_type\": {\"source\": \"builtin\", \"__current_case__\": 0, \"builtin_acoustic\": \"english_us_arpa\"}, \"corpus_source\": {\"__class__\": \"ConnectedValue\"}, \"dictionary_type\": {\"source\": \"history\", \"__current_case__\": 1, \"dictionary_file\": {\"__class__\": \"ConnectedValue\"}}, \"speaker_characters\": \"0\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.8+1",
+            "type": "tool",
+            "uuid": "524e0ec7-9b2e-422e-bfa8-1fe5e9911757",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Aligned TextGrid",
+                    "output_name": "output_archive",
+                    "uuid": "befd334e-fae2-4e66-be33-adc567ded35f"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 6,
+                    "output_name": "output_archive"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unzip",
+            "outputs": [
+                {
+                    "name": "unzipped",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1076.7916617271194,
+                "top": 252.91701156133018
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "6a7e010c05db",
+                "name": "unzip",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"extract_options\": {\"target\": \"all\", \"__current_case__\": 0, \"keep_regex\": \".*\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "6.0+galaxy5",
+            "type": "tool",
+            "uuid": "a3d3891c-d446-441b-aaa7-f6c11e5718a0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "new_fave_extract",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "audio": {
+                    "id": 2,
+                    "output_name": "unzipped"
+                },
+                "text_grid": {
+                    "id": 7,
+                    "output_name": "unzipped"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Vowel formant extraction",
+            "outputs": [
+                {
+                    "name": "out_tracks",
+                    "type": "csv"
+                },
+                {
+                    "name": "out_points",
+                    "type": "csv"
+                },
+                {
+                    "name": "out_param",
+                    "type": "csv"
+                },
+                {
+                    "name": "out_logparam",
+                    "type": "csv"
+                },
+                {
+                    "name": "out_grid",
+                    "type": "textgrid"
+                }
+            ],
+            "position": {
+                "left": 746.9298919461028,
+                "top": 470.06425132813837
+            },
+            "post_job_actions": {},
+            "tool_id": "new_fave_extract",
+            "tool_state": "{\"__input_ext\": \"input\", \"adv_params\": {\"tracking\": {\"ft_config\": null}, \"recoding\": {\"rules\": {\"basic_rules\": \"\", \"__current_case__\": 1, \"rules_config\": null}, \"labelset_parser\": null}, \"optimization\": {\"optimize\": {\"disable\": \"\", \"__current_case__\": 0, \"f1_cutoff\": null, \"f2_cutoff\": null, \"vowel_place\": null}}, \"points_measurement\": {\"point_heuristic\": null}}, \"audio\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"exclude_overlaps\": false, \"fave_aligned\": false, \"outputs\": [\"tracks\", \"points\", \"param\", \"log_param\", \"textgrid\"], \"ref\": {\"kind\": \"\", \"__current_case__\": 0}, \"speaker_data\": [], \"text_grid\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.1+galaxy0",
+            "type": "tool",
+            "uuid": "e16c46ba-68d8-4e47-9fb7-876d0f4f44b0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "out_points",
+                    "output_name": "out_points",
+                    "uuid": "11b64739-74c0-4535-aa19-1ff1c6d81640"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "phonetics",
+        "vowels",
+        "linguistics",
+        "humanities",
+        "MFA",
+        "new-fave"
+    ],
+    "uuid": "cabb8a40-59df-4ede-9f35-739f96bd37ae",
+    "version": 20
+}
