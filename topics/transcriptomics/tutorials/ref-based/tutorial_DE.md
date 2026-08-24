@@ -1837,7 +1837,7 @@ Die annotierte Tabelle enthält keine Spaltennamen, was die Lesbarkeit erschwert
 >
 >    {% snippet faqs/galaxy-de/datasets_create_new_file.md name="header" format="tabular" %}
 >
-> 2. {% tool [Concatenate datasets](cat1) %} um diese Kopfzeile zur **Annotate** Ausgabe hinzuzufügen:
+> 2. {% tool [Concatenate multiple datasets or collections](cat1) %} um diese Kopfzeile zur **Annotate** Ausgabe hinzuzufügen:
 >    - {% icon param-file %} *"Concatenate Dataset "*: der `header`-Datensatz
 >    - *"Dataset "*
 >       - Klicken Sie auf {% icon param-repeat %} *"Insert Dataset "*

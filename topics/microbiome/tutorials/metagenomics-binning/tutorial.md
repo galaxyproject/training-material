@@ -34,10 +34,10 @@ contributions:
   editing:
   - bebatut
 requirements:
-  - type: internal
-    topic_name: microbiome
-    tutorials:
-      - metagenomics-assembly
+- type: internal
+  topic_name: microbiome
+  tutorials:
+  - metagenomics-assembly
 subtopic: metagenomics
 tags:
 - binning
@@ -58,9 +58,19 @@ recordings:
   captioners:
   - npechl
   bot-timestamp: 1725013820
+- youtube_id: https://youtu.be/RjsWjuBzCd4
+  length: 34M
+  galaxy_version: 25.1.2.dev0
+  date: '2026-03-25'
+  speakers:
+  - paulzierep
+  captioners:
+  - paulzierep
+  bot-timestamp: 1774437607
 
 
 ---
+
 
 Metagenomics is the study of genetic material recovered directly from environmental samples, such as soil, water, or gut contents, without the need for isolating or cultivating individual organisms. Metagenomics binning is a process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
 

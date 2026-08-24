@@ -279,9 +279,9 @@ element is 1, corresponding to the digit, and the rest are 0's.
 > <hands-on-title>One-Hot Encoding</hands-on-title>
 >
 > - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.10.0) %}
+>    - *"Total number of classes"*: Select `10`
 >    - *"Input file"* : Select `y_train`
 >    - *"Does the dataset contain header?"* : Select `No`
->    - *"Total number of classes"*: Select `10`
 >    - Click *"Run Tool"*
 >
 {: .hands_on}

@@ -9,7 +9,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -19,7 +19,7 @@ jobs:
           reviewdog_version: latest
 
       - name: 'Download artifact'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({

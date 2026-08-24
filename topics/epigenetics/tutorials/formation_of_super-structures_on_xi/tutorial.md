@@ -632,7 +632,7 @@ We can now concatenate the MACS2 outputs with the location of the peaks (concate
 
 > <hands-on-title>Prepare the peak coordinates</hands-on-title>
 >
-> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 1. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: output of **MACS2 callpeak** {% icon tool %} for `wt_CTCF_rep1`
 >    - Click on *"Insert Dataset"*:
 >       - For *"Dataset"*: select the output of **MACS2 callpeak** {% icon tool %} for `wt_H3K4me3_rep1`
@@ -701,7 +701,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >     6. `wt_H3K27me3_rep2` - `wt_input_rep2`
 > 2. Rename the outputs of **bamCompare** {% icon tool %} with the name of the ChIP data
 > 3. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} for each combination input - ChIP data
-> 4. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 4. {% tool [Concatenate multiple datasets or collections](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: one output of **MACS2 callpeak** {% icon tool %}
 >    - Click on *"Insert Dataset"*:
 >       - In *"Select"*: one other output of **MACS2 callpeak** {% icon tool %}

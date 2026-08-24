@@ -7,8 +7,8 @@ title: "RAD-Seq Reference-based data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 tags:
   - RAD-seq
-  - Genetic composition EBV class
-  - Species population EBV class
+  - genetic composition EBV class
+  - species population EBV class
   - EBV dataset
   - EBV workflow
   - biodiversity

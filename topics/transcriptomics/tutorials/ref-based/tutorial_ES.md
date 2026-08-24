@@ -1848,7 +1848,7 @@ La tabla de anotaciones no contiene nombres de columnas, lo que dificulta su lec
 > 
 >    {% snippet faqs/galaxy-es/datasets_create_new_file.md name="header" format="tabular" %}
 > 
-> 2. {% tool [Concatenate datasets](cat1) %} para añadir esta línea de cabecera a la salida **Annotate**:
+> 2. {% tool [Concatenate multiple datasets or collections](cat1) %} para añadir esta línea de cabecera a la salida **Annotate**:
 >    - {% icon param-file %} *"Concatenate Dataset "*: el conjunto de datos `header`
 >    - *"Dataset "*
 >       - Haga clic en {% icon param-repeat %} *"Insertar conjunto de datos "*

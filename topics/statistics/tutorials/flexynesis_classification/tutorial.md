@@ -23,6 +23,18 @@ answer_histories:
     - label: "usegalaxy.eu"
       history: https://usegalaxy.eu/u/nilchia/h/final-modeling-breast-cancer-subtypes-tabpfn-3
       date: 2025-08-01
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/nilchia/h/gta2026-modeling-breast-cancer-subtypes-with-flexynesis
+      date: 2026-05-18
+recordings:
+- captioners:
+  - Nilchia
+  date: '2026-05-18'
+  galaxy_version: '26.0'
+  length: 22M
+  youtube_id: Z8JhJARdRv8
+  speakers:
+  - Nilchia
 ---
 
 Flexynesis represents a state-of-the-art deep learning framework specifically designed for multi-modal data integration in biological research ({% cite Uyar2024 %}). What sets Flexynesis apart is its comprehensive suite of deep learning architectures that can handle various data integration scenarios while providing robust feature selection and hyperparameter optimization.
@@ -139,12 +151,12 @@ It is possible to set early stopping criteria in Flexynesis, which is basically 
 
 > <hands-on-title> Flexynesis </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
->        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Training omics data"*: `train_gex_brca.tabular`
+>        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Test omics data"*: `test_gex_brca.tabular`
 >        - *"What type of assay is your input?"*: `gex`
 >        - In *"Multiple omics layers?"*:
@@ -155,13 +167,14 @@ It is possible to set early stopping criteria in Flexynesis, which is basically 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `1`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
@@ -244,7 +257,7 @@ And finally the UMAP plot.
 
 > <hands-on-title> UMAP plot </hands-on-title>
 >
-> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Flexynesis plot"*: `Dimensionality reduction`
 >        - {% icon param-file %} *"Predicted labels"*: `table` (output of **Sort** {% icon tool %})
@@ -275,12 +288,12 @@ In reality, hyperparameter optimization should run for multiple steps so that th
 
 > <hands-on-title> Flexynesis </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
->        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Training omics data"*: `train_gex_brca.tabular`
+>        - {% icon param-file %} *"Test clinical data"*: `test_clin_brca.tabular`
 >        - {% icon param-file %} *"Test omics data"*: `test_gex_brca.tabular`
 >        - *"What type of assay is your input?"*: `gex`
 >        - In *"Multiple omics layers?"*:
@@ -291,13 +304,14 @@ In reality, hyperparameter optimization should run for multiple steps so that th
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
@@ -355,7 +369,7 @@ And finally the UMAP plot.
 
 > <hands-on-title> UMAP plot </hands-on-title>
 >
-> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis plot](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Flexynesis plot"*: `Dimensionality reduction`
 >        - {% icon param-file %} *"Predicted labels"*: `table` (output of **Sort** {% icon tool %})
@@ -773,7 +787,7 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 
 > <hands-on-title> Flexynesis on CNA </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
@@ -784,19 +798,20 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 
 > <hands-on-title> Flexynesis on GEX </hands-on-title>
 >
-> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3) %} with the following parameters:
+> 1. {% tool [Flexynesis](toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0) %} with the following parameters:
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 >    - *"Type of Analysis"*: `Supervised training`
 >        - {% icon param-file %} *"Training clinical data"*: `train_clin_brca.tabular`
@@ -807,13 +822,14 @@ To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on 
 >        - *"Model class"*: `DirectPred`
 >        - *"Column name in the train clinical data to use for predictions, multiple targets are allowed"*: `Column: 16` (CLAUDIN_SUBTYPE)
 >        - In *"Advanced Options"*:
->            - *"Variance threshold (as percentile) to drop low variance features."*: `0.8`
+>            - *"Variance threshold (as percentile) to drop low variance features."*: `80`
 >            - *"Minimum number of features to retain after feature selection."*: `100`
 >            - *"Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection."*: `10.0`
 >            - *"Number of iterations for hyperparameter optimization."*: `5`
 >        - In *"Visualization"*:
 >            - *"Generate embeddings plot?"*: `Yes`
 >            - *"Generate precision-recall curves plot?"*: `Yes`
+>        - Finally set the *"Save the trained model?"* to `No`
 >
 {: .hands_on}
 

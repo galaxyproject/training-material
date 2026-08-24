@@ -26,20 +26,21 @@ contributions:
     - paulzierep
     - scorreard
     - BirdmanRidesAgain
-
+  editing:
+    - martincarrere
 ---
 
-Galaxy offers thousands of tools. They are developed across various GitHub repositories. Furthermore, Galaxy also embraces granular implementation of software tools as sub-modules. In practice, this means that tool suites are separated into Galaxy tools, also known as wrappers, that capture their component operations. Some key examples of suites include [Mothur](https://bio.tools/mothur) and [OpenMS](https://bio.tools/openms), which translate to tens and even hundreds of Galaxy tools.
+Galaxy offers thousands of tools. They are developed across various GitHub repositories. Furthermore, Galaxy also embraces the granular implementation of software tools as sub-modules. In practice, this means that tool suites are separated into Galaxy tools, also known as wrappers, that capture their component operations. Some key examples of suites include [Mothur](https://bio.tools/mothur) and [OpenMS](https://bio.tools/openms), which translate to tens and even hundreds of Galaxy tools.
 
 While granularity supports the composability of tools into rich domain-specific workflows, this decentralized development and sub-module architecture makes it **difficult for Galaxy users to find and reuse tools**. It may also result in Galaxy tool developers **duplicating efforts** by simultaneously wrapping the same software. This is further complicated by a lack of tool metadata, which prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms and operations like [EDAM ontology](https://edamontology.org/page).
 
 The final challenge is also an opportunity: the global nature of Galaxy means that it is a big community. Solving the visibility of tools across this ecosystem and the potential benefits are far-reaching for global collaboration on tool and workflow development.
 
-To provide the research community with a comprehensive list of available Galaxy tools, [Galaxy Codex](https://github.com/galaxyproject/galaxy_codex) was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, [bio.tools](https://bio.tools/) identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*).
+To provide the research community with a comprehensive list of available Galaxy tools, [Galaxy Codex](https://github.com/galaxyproject/galaxy_codex) was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, [bio.tools](https://bio.tools/) identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers ([UseGalaxy.org, UseGalaxy.eu and UseGalaxy.org.au](https://galaxyproject.org/use/)).
 
-![A diagram illustrating the Galaxy Codex pipeline, showcasing the various steps involved in creating a community Galaxy tool table.](./images/galaxy_tool_metadata_extractor_pipeline.png "Workflow of the Galaxy Codex pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.")
+![A diagram illustrating the Galaxy Codex pipeline, showcasing the various steps involved in creating a community Galaxy tool table.](./images/galaxy_tool_metadata_extractor_pipeline.png "Workflow of the Galaxy Codex pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud that can be integrated into any website.")
 
-The pipeline creates a [table with all tools and their metadata](https://galaxyproject.github.io/galaxy_codex/communities/). This table can be **filtered to only include tools that are relevant to a specific research community**. Here is an example for the microbial related tools:
+The pipeline creates a [table with all tools and their metadata](https://galaxyproject.github.io/galaxy_codex/communities/). This table can be **filtered to only include tools that are relevant to a specific research community**. Here is an example of the microbial related tools:
 
 <iframe id="edam" src="https://galaxyproject.github.io/galaxy_codex/communities/microgalaxy/resources/" frameBorder="0" width="100%" height="600px"> ![Interactive table for microgalaxy tools](./images/microgalaxy_tools.png) </iframe>
 
@@ -47,7 +48,7 @@ The generated community-specific table can be used as is (e.g. downloadable tsv 
 
 The pipeline is **fully automated** and executes on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
 
-The aim of this tutorial is to create such table for a community.
+The aim of this tutorial is to create such a table for a community.
 
 > <agenda-title></agenda-title>
 >
@@ -60,10 +61,10 @@ The aim of this tutorial is to create such table for a community.
 
 # Add your community to the Galaxy CoDex
 
-You first need to check if your Community is in the [Galaxy CoDex](https://github.com/galaxyproject/galaxy_codex/tree/main/communities), a central resource for Galaxy communities.
+You first need to check if your community is in the [Galaxy CoDex](https://github.com/galaxyproject/galaxy_codex/tree/main/communities), a central resource for Galaxy communities.
 If the community is already there, you can move to the next step of this tutorial.
 
-If you community is not already included, follow these steps :
+If your community is not already included, follow these steps :
 > <hands-on-title>Add your community to the Galaxy CoDex</hands-on-title>
 >
 > You need to create a new folder in the data/community folder within Galaxy CoDex code source.
@@ -80,9 +81,9 @@ If you community is not already included, follow these steps :
 >
 {: .hands_on}
 
-# Pull list of tools relevant to your community from the Galaxy ToolShed
+# Pull a list of tools relevant to your community from the Galaxy ToolShed
 
-To add tools in your community tool table, you will need to indicate a list of tags relevant to your community, and tools associated with this tag will be automatically pulled from the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) on a weekly basis. Only tools in the selected ToolShed categories will be added to the filtered table. As a result, it is recommended to include broad categories.
+To add tools to your community tool table, you will need to indicate a list of tags relevant to your community, and tools associated with this tag will be automatically pulled from the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) on a weekly basis. Only tools in the selected ToolShed categories will be added to the filtered table. As a result, it is recommended to include broad categories.
 You will then be able to remove tools that are not relevant to your community or deprecated.
 
 > <hands-on-title>Select the ToolShed categories</hands-on-title>
@@ -93,9 +94,9 @@ You will then be able to remove tools that are not relevant to your community or
 > 4. Open the tool entries on the ToolShed, and note their categories
 {: .hands_on}
 
-# Add the list relevant tags for your community in the categories file
+# Add the list of relevant tags for your community to the categories file\.
 
-> <hands-on-title>Add the ToolShed catgories to the categories file</hands-on-title>
+> <hands-on-title>Add the ToolShed categories to the categories file</hands-on-title>
 > 1. Open or create the file named `categories` in your community metadata folder (`communities/<your community>/metadata/categories`)
 > 2. Add the name of the categories relevant to your community in the `categories` file you started above, with 1 ToolShed category per row. For example, see [a list of valid ToolShed categories](https://toolshed.g2.bx.psu.edu/).
 >
@@ -119,7 +120,7 @@ Once you have a list of the ToolShed categories that you wish to keep, you can s
 
 The Pull Request will be reviewed. Make sure to respond to any feedback.
 
-On the Sunday following the merge of the previous pull request, two files will be generated :
+On the Sunday following the merging of the previous pull request, two files will be generated :
 - A JSON file with all tool suites and a short description will be created in `communities/<your community>/resources/tools_filtered_by_ts_categories.json`.
 - A table with all tool suites and a short description will be created in `communities/<your community>/metadata/tool_status.tsv`.
 
@@ -127,7 +128,7 @@ On the Sunday following the merge of the previous pull request, two files will b
 
 The generated table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community.
 
-Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you!).
+Galaxy Codex allows for an additional optional filter for tools that can be defined by the community curator (maybe that is you!).
 
 The additional filter must be stored in the file called `tools_status.tsv` located in `communities/<your community>/metadata`. The file must include at least 3 columns (with a header):
 1. `Suite ID`
@@ -142,7 +143,7 @@ abricate	TRUE	FALSE
 abritamr	TRUE	FALSE
 ```
 
-To generate this file, we recommend you to use the generated file `tools_status.tsv` and to simply update the last two columns.
+To generate this file, we recommend that you use the generated file `tools_status.tsv` and to simply update the last two columns.
 
 > <hands-on-title>Review tools in your community table</hands-on-title>
 >
@@ -159,7 +160,7 @@ To generate this file, we recommend you to use the generated file `tools_status.
 >
 {: .hands_on}
 
-On the Sunday following the merge of the previous pull request, a `curated_tools.tsv` file will be generated in `communities/<your community>/resources/` folder reflecting the Galaxy tool landscape for your community. You or other community members can review tools in your community from this page to make step-by-step changes or updates to the `tools_status.tsv` file as needed.
+On the Sunday following the merging of the previous pull request, a `curated_tools.tsv` file will be generated in `communities/<your community>/resources/` folder reflecting the Galaxy tool landscape for your community. You or other community members can review tools in your community from this page to make step-by-step changes or updates to the `tools_status.tsv` file as needed.
 
 We recommend collaborative work be done with a cloud-based system such as a Google Sheets page.
 
@@ -170,12 +171,12 @@ Here is an overview of the files (the top three files in the table are the most 
 | categories | communities/<your_community>/metadata/ | Manual | Name of the categories relevant to your community, with 1 ToolShed category per row | NA | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/metadata/categories) |
 | tool_status.tsv | communities/<your community>/metadata/ | Automatic (to update manually) | Table with all tool suites and a short description | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/metadata/tool_status.tsv) |
 | curated_tools.tsv | communities/<your_community>/metadata/ | Automatic | Curated table with all tool suites and a short description | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/curated_tools.tsv) |
-| curated_tools_w_biotools.tsv | communities/<your_community>/resources/ | Automatic | Curated table with all tool suites that have a biotools ID | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/curated_tools_w_biotools.tsv) |
-| curated_tools_wo_biotools.tsv | communities/<your_community>/resources/ | Automatic | Curated table with all tool suites without a biotools ID (You can add them on BioTools or link them!!) | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/curated_tools_wo_biotools.tsv) |
-| tools.html | communities/<your_community>/resources/ | Automatic | A list of the tools in html format to include in a website | HTML | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/tools.html) |
-| tools_wordcloud.png | communities/<your_community>/resources/ | Automatic | A wordcloud with the tools used the tool suites | PNG | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/tools_wordcloud.png) |
+| curated_tools_w_biotools.tsv | communities/<your_community>/resources/ | Automatic | Curated table with all tool suites that have a BioTools ID | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/curated_tools_w_biotools.tsv) |
+| curated_tools_wo_biotools.tsv | communities/<your_community>/resources/ | Automatic | Curated table with all tool suites without a BioTools ID (You can add them to BioTools or link them!!) | TSV | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/curated_tools_wo_biotools.tsv) |
+| tools.html | communities/<your_community>/resources/ | Automatic | A list of the tools in HTML format to include in a website | HTML | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/tools.html) |
+| tools_wordcloud.png | communities/<your_community>/resources/ | Automatic | A wordcloud with the tools used in the tool suites | PNG | [Example](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/microgalaxy/resources/tools_wordcloud.png) |
 
-![Flowchart illustrating the steps to generate the tool resources for your community.](./images/codex_tools_flowchart.png "Flowchart illustrating the steps to generate the tool resources for your community.")
+![Flowchart illustrates the steps to generate the tool’s resources for your community.](./images/codex_tools_flowchart.png "Flowchart illustrates the steps to generate the tool’s resources for your community.")
 
 # Embed the interactive table in your community page on the Hub
 

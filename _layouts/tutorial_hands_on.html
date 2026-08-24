@@ -100,6 +100,10 @@ We should ONLY be using new_material (if at all possible.)
             {% assign tuto_has_docker = true %}
         {% endif %}
 
+        {% if page.translations %}
+        <div><strong>{% icon language aria=false %} {{ locale['translations'] | default: "Translations" }}:</strong> {% for lang in page.translations %}<a href="./tutorial{% if lang != 'en' %}_{{lang | upcase}}{% endif %}.html"> {% icon language aria=false %} {{ site.other_languages[lang] }} </a>{% endfor %}</div>
+        {% endif %}
+
         {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
             {% assign tuto_has_zenodo = true %}
         {% endif %}

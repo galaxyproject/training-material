@@ -3,7 +3,7 @@ title: Importing via links
 area: data upload
 box_type: tip
 layout: faq
-contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,nekrut,mblue9]
+contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,nekrut,mblue9,TuturBaba]
 optional_parameters:
   reset_form: Tell the user to reset the form first
   collection: Adds step to click the collection button
@@ -75,4 +75,9 @@ examples:
 * Click on **Create list** (and wait a bit)
 {% else %}
 * **Close** the window
+{% endif %}
+{% if include.collection %}
+![Galaxy upload link]({% link faqs/galaxy/images/datasets_import_via_link_collection.gif %}){: style="width:75%; display:block; margin:auto;"}
+{% else %}
+![Galaxy upload link]({% link faqs/galaxy/images/datasets_import_via_link.gif %}){: style="width:75%; display:block; margin:auto;"}
 {% endif %}

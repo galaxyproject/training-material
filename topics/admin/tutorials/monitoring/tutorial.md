@@ -26,6 +26,7 @@ key_points:
   - Use Grafana to visualise these metrics, and monitor their values
 contributors:
   - hexylena
+  - tomasvondrak
 requirements:
   - type: "internal"
     topic_name: admin
@@ -902,9 +903,44 @@ You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}da
 
 {% snippet topics/admin/faqs/missed-something.md step=13 %}
 
+# Galaxy Job Radar
+Another possibility for data visualisation in Galaxy ecosystem is [Galaxy Job Radar](https://github.com/CESNET/gjr) (GJR). GJR is a project that visualizes traffic between [Galaxy server](https://galaxyproject.org) and its [Pulsars](https://github.com/galaxyproject/pulsar).
+
+![image](../../images/gjr_logo.png "Logo of GJR project.")
+
+Namely it shows jobs of a Galaxy instance, their distribution over Pulsar computational nodes, in which state they are and more. It supports both live view and history replay of traffic and past schedule evaluation.
+
+[CESNET](https://www.cesnet.cz/en) manages a central instance of GJR at [https://gjr.metacentrum.cz](https://gjr.metacentrum.cz)
+
+**Galaxy Job Radar admins invite any public Galaxy servers to join this effort and share the anonymous data about their jobs with the central instance.**
+
+## How to join
+
+### Summary
+
+*Start with writing us an email at galaxy@cesnet.cz that you'd like to join. First we will celebrate and then happily walk you through what needs to be done.*
+
+1. Your Galaxy needs to be sending data to your InfluxDB via [gxadmin scripts](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles/usegalaxy-eu.job-radar-stats-influxdb)
+2. You give us access to read the InfluxDB (we need: `influxdb_password_var_name;influxdb_host;influxdb_port;influxdb_username`) and some basic information about your server (we need: `name;lat;long;`)
+3. You send us information about your Pulsar servers (we need: `galaxy;pulsar_id;lat;long;node_count;desc`)
+4. Wait few days and your Galaxy and Pulsars show up at [https://gjr.metacentrum.cz](https://gjr.metacentrum.cz)
+
+### Details
+
+GJR periodically requests data from each connected Galaxy through their own `InfluxDB` instance. Schema of this setup:
+
+![image](../../images/gjr_global_data_flow.png "Flow of data from all connected Galaxy servers to shared InfluxDB."){: width="583" height="449"}
+
+For this to work we need the contributors to run an InfluxDB, fill it periodically with anonymous new data (with `gxadmin` scripts below) and give us read access to this data on InfluxDB. 
+
+Note: If you do not run InfluxDB for monitoring yet there is a Galaxy [training section]({% link topics/admin/#st-monitoring %}) above available which will explain reasons and guide you through the setup. 
+
+Simplified schema of the full setup:
+
+![image](../../images/gjr_local_data_flow.png "How collected Galaxy statistics are being visualized."){: width="537" height="212"}
+
 # Conclusion
 
-Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The UseGalaxy.\* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.\*, and then to extend them to your own needs.
-
+Monitoring with Telegraf, InfluxDB, Grafana and Galaxy Job Radar can provide an easy solution to monitor your infrastructure. The UseGalaxy.\* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.\*, and then to extend them to your own needs. Galaxy Job Radar is experimental solution still under development and ongoing testing. Still it is valuable if you join it so that it can bring admins and users overall view of Galaxy jobs traffic accros the world.
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}

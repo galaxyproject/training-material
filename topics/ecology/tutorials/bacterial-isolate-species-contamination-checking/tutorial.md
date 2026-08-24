@@ -252,7 +252,7 @@ To explore **Kraken** report and specially to detect more reliably minority orga
 > <hands-on-title> Identify contamination </hands-on-title>
 >
 > 1. {% tool [Recentrifuge](toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select taxonomy file tabular formated"*: report of **Kraken2** {% icon tool %}
+>    - {% icon param-collection %} *"Select taxonomy file tabular formated"*: **Classification** output of **Kraken2** {% icon tool %}
 >    - *"Type of input file (Centrifuge, CLARK, Generic, Kraken, LMAT)"*: `Kraken`
 >    - In *"Database type"*:
 >        - *"Cached database whith taxa ID"*: latest

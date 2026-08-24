@@ -1833,7 +1833,7 @@ La tabella annotata non contiene nomi di colonne, il che rende difficile la lett
 > 
 >    {% snippet faqs/galaxy-it/datasets_create_new_file.md name="header" format="tabular" %}
 > 
-> 2. {% tool [Concatenate datasets](cat1) %} per aggiungere questa riga di intestazione all'output **Annotate**:
+> 2. {% tool [Concatenate multiple datasets or collections](cat1) %} per aggiungere questa riga di intestazione all'output **Annotate**:
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `header` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*

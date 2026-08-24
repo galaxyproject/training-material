@@ -17,6 +17,7 @@ tags:
   - taxonomic data
   - data quality
   - biodiversity
+level: Introductory
 contributions:
   authorship:
   - onorvez

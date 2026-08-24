@@ -22,6 +22,10 @@ module Gtn
     @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
     @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
     @NEWS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-news.yaml')
+    @EVENT_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event.yaml', permitted_classes: [Date])
+    @EVENT_EXTERNAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event-external.yaml', permitted_classes: [Date])
+
+
     @requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
     @requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
@@ -32,6 +36,8 @@ module Gtn
     @FAQ_SCHEMA = automagic_loading(@FAQ_SCHEMA_UNSAFE)
     @QUIZ_SCHEMA = automagic_loading(@QUIZ_SCHEMA_UNSAFE)
     @NEWS_SCHEMA = automagic_loading(@NEWS_SCHEMA_UNSAFE)
+    @EVENT_SCHEMA = automagic_loading(@EVENT_SCHEMA_UNSAFE)
+    @EVENT_EXTERNAL_SCHEMA = automagic_loading(@EVENT_EXTERNAL_SCHEMA_UNSAFE)
 
     @TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
     @SLIDES_SCHEMA['mapping']['contributions']['required'] = false
@@ -43,6 +49,9 @@ module Gtn
     @faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
     @quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
     @news_validator = Kwalify::Validator.new(@NEWS_SCHEMA)
+    @event_validator = Kwalify::Validator.new(@EVENT_SCHEMA)
+    @event_external_validator = Kwalify::Validator.new(@EVENT_EXTERNAL_SCHEMA)
+
     @requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
     @requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
 
@@ -215,6 +224,27 @@ module Gtn
       errs
     end
 
+    def self.lint_event_file(fn)
+      errs = []
+      data = lintable?(fn)
+      return data if data.nil? || data.is_a?(Array)
+
+      if data.key?('cover')
+        if !data['cover'].start_with?('https://')
+          if !File.exist?(data['cover'])
+            errs.push("Cover image #{data['cover']} does not exist")
+          end
+        end
+      end
+
+      if data['layout'] == 'event-external'
+        errs.push(*validate_document(data, @event_external_validator))
+      elsif data['layout'] == 'event'
+        errs.push(*validate_document(data, @event_validator))
+      end
+      errs
+    end
+
     def self.lint_quiz_file(fn)
       errs = []
       data = lintable?(fn)
@@ -277,6 +307,10 @@ module Gtn
       # Lint news
       errors += Dir.glob('./news/_posts/*')
                    .map { |x| [x, lint_news_file(x)] }
+
+      # Lint events
+      errors += Dir.glob('./events/*.md')
+                   .map { |x| [x, lint_event_file(x)] }
 
       errors.reject! { |_path, errs| errs.nil? or errs.empty? }
 

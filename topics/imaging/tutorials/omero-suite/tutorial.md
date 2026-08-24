@@ -118,7 +118,13 @@ To this end, we have prepared an integrative dataset with images, metadata and r
 >    - **Important:** Choose the correct data type if prompted.
 >
 >    ```
->    {{ page.zenodo_link }}
+>    {{ page.zenodo_link }}/files/image85-H-01-00.tif
+>    {{ page.zenodo_link }}/files/image85-H-01-00.tif.tabular
+>    {{ page.zenodo_link }}/files/image86-H-02-00.tif
+>    {{ page.zenodo_link }}/files/image86-H-02-00.tif.tabular
+>    {{ page.zenodo_link }}/files/image87-H-03-00.tif
+>    {{ page.zenodo_link }}/files/image87-H-03-00.tif.tabular
+>    {{ page.zenodo_link }}/files/metadata_dataset.csv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -126,7 +132,7 @@ To this end, we have prepared an integrative dataset with images, metadata and r
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >   
->    - Select the following files: 
+>    - Once imported, your files should appear with the following names:
 >    
 >       - `image85-H-01-00.tif`
 >       - `image85-H-01-00.tif.tabular`

@@ -4,18 +4,24 @@ level: Intermediate
 title: GLEAM Image Learner - Validating Skin Lesion Classification on HAM10000
 zenodo_link: https://zenodo.org/records/17114688
 questions:
-  - "How do we validate GLEAM's Image Learner against a published benchmark on HAM10000?"
-  - "How do we set up a balanced train/validation/test split for multi-class image classification?"
-  - "How do we interpret accuracy, weighted precision/recall, and weighted F1 for imbalanced medical imaging datasets?"
+- How do we validate GLEAM's Image Learner against a published benchmark on HAM10000?
+- How do we set up a balanced train/validation/test split for multi-class image classification?
+- How do we interpret accuracy, weighted precision/recall, and weighted F1 for imbalanced
+  medical imaging datasets?
 objectives:
-  - "Prepare a balanced HAM10000 subset and perform a stratified 70/10/20 train/validation/test split."
-  - "Train an Image Learner model using a pretrained CaFormer S18 384 backbone."
-  - "Evaluate performance using accuracy and weighted precision/recall/F1, and inspect confusion patterns."
-time_estimation: "1h"
+- Prepare a balanced HAM10000 subset and perform a stratified 70/10/20 train/validation/test
+  split.
+- Train an Image Learner model using a pretrained CaFormer S18 384 backbone.
+- Evaluate performance using accuracy and weighted precision/recall/F1, and inspect
+  confusion patterns.
+time_estimation: 1h
 key_points:
-- Use Galaxy tools (Image Learner) to build a deep learning model for skin lesion classification based on the HAM10000 dataset.
-- Understand the dataset composition and the importance of data augmentation to handle class imbalance.
-- Confirm the robustness of the model by evaluating its performance metrics including accuracy, ROC-AUC, and F1-score.
+- Use Galaxy tools (Image Learner) to build a deep learning model for skin lesion
+  classification based on the HAM10000 dataset.
+- Understand the dataset composition and the importance of data augmentation to handle
+  class imbalance.
+- Confirm the robustness of the model by evaluating its performance metrics including
+  accuracy, ROC-AUC, and F1-score.
 contributors:
 - khaivandangusf2210
 - paulocilasjr
@@ -28,7 +34,20 @@ tags:
 - Deep Learning
 - Image Learner
 - Skin Lesion Classification
+recordings:
+- youtube_id: rbIHDHVDArU
+  length: 39M
+  galaxy_version: 26.0.1.dev1
+  date: '2026-05-13'
+  speakers:
+  - paulocilasjr
+  captioners:
+  - natalie-wa
+  bot-timestamp: 1778712786
+
+
 ---
+
 
 In this tutorial, we will use the HAM10000 ("Human Against Machine with 10,000 training images") dataset to develop a deep learning classifier for dermoscopic skin lesion classification. The goal is to accurately classify seven types of pigmented skin lesions using the GLEAM Image Learner tool.
 
@@ -119,10 +138,10 @@ The metadata CSV now includes additional fields while keeping the same number of
 >
 > Following the preprocessing pipeline described by {% cite Shetty2022 %}, **horizontal flip augmentation** is applied during dataset preparation. Horizontal flips:
 >
-> - Improve robustness to lesion orientation and acquisition variability  
-> - Increase effective training diversity without collecting additional images  
-> - Help reduce sensitivity to class- and pose-specific patterns  
-> - Preserve diagnostically relevant structures while introducing harmless variation  
+> - Improve robustness to lesion orientation and acquisition variability
+> - Increase effective training diversity without collecting additional images
+> - Help reduce sensitivity to class- and pose-specific patterns
+> - Preserve diagnostically relevant structures while introducing harmless variation
 >
 > In {% cite Shetty2022 %}, this preprocessing strategy (including horizontal flips) is associated with improved HAM10000 skin-lesion classification performance (reported accuracy: 95.18%).
 >
@@ -132,11 +151,11 @@ The metadata CSV now includes additional fields while keeping the same number of
 
 # Using Image Learner Tool
 
-## Prepare environment and get the data 
+## Prepare environment and get the data
 
 > <comment-title>Dataset Preprocessing</comment-title>
 >
-> The dataset available on Zenodo has been preprocessed following {% cite Shetty2022 %} methodology. 
+> The dataset available on Zenodo has been preprocessed following {% cite Shetty2022 %} methodology.
 >
 {:  .comment}
 

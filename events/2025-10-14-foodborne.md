@@ -23,7 +23,7 @@ mode: onsite
 
 contributions:
   organisers: [annahenger, abdullahkahraman]
-  instructors: [wm75, EngyNasr, santinofaack]
+  instructors: [wm75, EngyNasr, santamccloud]
 
 location:
   geo:

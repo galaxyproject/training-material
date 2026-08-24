@@ -15,6 +15,8 @@ time_estimation: 2h
 key_points:
 - Clean raw ab1 sequences and compare filtered sequences to NCBI nucleotidic database
 - Submit cleaned and unique sequences to European Nucleotide Archive (ENA) resource
+tags:
+  - biodiversity
 contributions:
     authorship:
         - Najatamk
@@ -74,7 +76,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
-> 5. **Build a Collection** containing these two files, you can ame i "ab1" for example
+> 5. **Build a Collection** containing these two files, you can name it "ab1" for example
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
