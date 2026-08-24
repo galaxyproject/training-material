@@ -611,4 +611,4 @@ Now that you have your "compass," it is time to choose a specific path. Pick the
 
 * **Tracking:** {% icon level %} [Object Tracking using CellProfiler]({% link topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.md %}) – Move from static images to following individual objects through time and space.
 
-* **Histology & Pathology:** *Coming Soon!* A dedicated tutorial on **Histology Staining and Color Deconvolution** is currently in development.
+* **Histology & Pathology:** {% icon level %} [Stain Quantification and Color Deconvolution]({% link topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.md %}) – Use color deconvolution to separate stain channels and quantify the percentage of stained area in histological images (e.g. IHC/DAB staining).
