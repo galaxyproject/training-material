@@ -234,7 +234,7 @@ The resulting table has the structure:
 > The workflow uses a **Filter** step to select all eclipses with a magnitude greater or equal to a user-supplied **Magnitude threshold**.
 >
 > 1. {% tool [Filter data](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter *"*: `out_file1` (output of **Replace Text in entire line** {% icon tool %})
+>    - {% icon param-file %} *"Filter *"*: `Replace Text on dataset` (output of **Replace Text in entire line** {% icon tool %})
 >    - *"With following condition"*: `c6>=0.8`
 >    - *"Number of header lines to skip"*: `1`
 >
