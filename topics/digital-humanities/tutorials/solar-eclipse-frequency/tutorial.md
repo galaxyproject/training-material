@@ -269,7 +269,7 @@ groups can be identified.
 > <hands-on-title> Sort the eclipses chronologically </hands-on-title>
 >
 > 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `outfile` (output of **Filter** {% icon tool %})
+>    - {% icon param-file %} *"Sort Dataset"*: `Filter on dataset` (output of **Filter** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
 >    - In *"Column selection"*:
