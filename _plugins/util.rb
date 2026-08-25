@@ -101,6 +101,7 @@ ALLOWED_SHORT_IDS = [
   'mousemine',
   'ncbi_datasets_source',
   'netcdf2zarr',
+  'new_fave_extract',
   'omicsdi',
   'param_value_from_file',
   'Paste1',
