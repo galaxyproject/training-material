@@ -246,9 +246,28 @@ Now we're ready to align the pronunciations with the audio. Since we only have o
 >
 {: .hands_on}
 
+# Downloading and Exporting Results
+
+> <hands-on-title> Extract and download your aligned files </hands-on-title>
+>
+> 1. Download the aligned archive:
+>    - Click the download icon ({% icon download %}) next to the `aligned_textgrids` dataset
+>    - Save the .zip file to your computer
+>
+> 2. Extract the files on your computer
+>
+> 3. Open in Praat for analysis:
+>    - In Praat, open the original audio file (File → Open → Read from file...)
+>    - Then open the corresponding TextGrid (Objects window → Read → Read from file...)
+>    - Select both and click "View & Edit" to visualize the alignment
+>
+>
+{: .hands_on}
+
+
 # Exctact the vowel formant measurements with new-fave
 
-Now that the audio has been aligned with transciptions, we can use new-fave to identif the vowel intervals in the alignment and extract their formant measurements from the audio.
+Now that the audio has been aligned with transciptions, we can use new-fave to identify the vowel intervals in the alignment and extract their formant measurements from the audio.
 
 New-fave uses the vowel boundaries in the aligned TextGrid to determine when each vowel is uttered in the recording. It then measures the formant frequencies at or across those vowel intervals. The resulting measurements can be used to examine vowel production and variation.
 
@@ -272,37 +291,18 @@ New-fave uses the vowel boundaries in the aligned TextGrid to determine when eac
 >
 {: .hands_on}
 
-# Downloading and Exporting Results
-
-> <hands-on-title> Extract and download your aligned files </hands-on-title>
->
-> 1. Download the aligned archive:
->    - Click the download icon ({% icon download %}) next to the `aligned_textgrids` dataset
->    - Save the .zip file to your computer
->
-> 2. Extract the files on your computer
->
-> 3. Open in Praat for analysis:
->    - In Praat, open the original audio file (File → Open → Read from file...)
->    - Then open the corresponding TextGrid (Objects window → Read → Read from file...)
->    - Select both and click "View & Edit" to visualize the alignment
->
->
-{: .hands_on}
-
-
 # Next Steps and Use Cases
 
-Once you have extracted the vowel formant measurements you can:
+Once you have extracted the vowel formant measurements, the following could be the next steps for extending your analysis.
 
 - **Quality control and data cleaning:**
-Automated alignment and formant extraction can greatly reduce the emount of manual work, but the resulting measurements should always be inspected before they are used for analysis. In particular, it is important to check tokens with unusually high or low formant values and verify the alignemnt of vowel boundaries.
+Automated alignment and formant extraction can greatly reduce the amount of manual work, but the resulting measurements should always be inspected before they are used for analysis. In particular, it is important to check tokens with unusually high or low formant values and verify the alignment of vowel boundaries.
 - **Normalizing:**
 For comparisons across speakers, raw formant values are often not sufficient because speakers differ in vocal-tract size and other anatomical characteristics. It may therefore be useful to normalize your data (e.g. using Nearey or Lobanov normalization methods). The resulting dataset can then be combined with metadata (e.g. speaker age, gender, or location, lexical item, phonological context) for statistical analysis and visualization.
 - **Visualization:**
 One application is to visualize vowel spaces. Plotting F1 against F2 allows researchers to examine the relative position of vowels and compare vowel systems across speakers or groups. These plots can provide a first visualization of patterns such as vowel raising, fronting, lowering, backing, or mergers.
-- **Sociophonetic and variationst approaches:**
-Formant measurements are often used for sociophonetic research. For example, whether vowel production varies across different age groups, regions, social groups, style of speech, etc. These patterns can be used to study lanugage variation and change.
+- **Sociophonetic and variationist analysis:**
+Formant measurements are often used for sociophonetic research. For example, whether vowel production varies across different age groups, regions, social groups, style of speech, etc. These patterns can be used to study language variation and change.
 
 
 # Conclusion
