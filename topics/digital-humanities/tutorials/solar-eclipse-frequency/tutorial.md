@@ -313,7 +313,7 @@ If the condition is satisfied, all eclipses in that group are returned.
 > <hands-on-title> Find groups of eclipses </hands-on-title>
 >
 > 1. {% tool [Text reformatting - with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Sort** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `Sort in dataset` (output of **Sort** {% icon tool %})
 >    - *"AWK Program"*:
 >
 >      ```
