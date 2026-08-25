@@ -395,7 +395,7 @@ A **Unique** step removes repeated rows if the list is sorted well.
 
 > <hands-on-title> Remove duplicates </hands-on-title>
 >
-> 1. {% tool [Unique occurrences of each record ](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3) %} with the following parameters:
+> 1. {% tool [Unique occurrences of each record](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"File to scan for unique values *"*: `Sort on dataset` (output of **Sort** {% icon tool %})
 >    - *"Avoid comparing the first N fields *"*: `0`
 >
