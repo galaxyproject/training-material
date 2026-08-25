@@ -413,7 +413,7 @@ Because the duplicate-removal step does not preserve chronological order, the re
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
 > 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `outfile` (output of **Unique** {% icon tool %})
+>    - {% icon param-file %} *"Sort Dataset"*: `Unique on dataset` (output of **Unique** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
 >    - In *"Column selection"*:
