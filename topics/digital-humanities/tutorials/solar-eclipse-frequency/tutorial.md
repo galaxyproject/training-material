@@ -364,7 +364,7 @@ The grouping destroyed the chronological order and some eclipses are listed more
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
 > 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `outfile` (output of **Text
+>    - {% icon param-file %} *"Sort Dataset"*: `Text reformatting on dataset` (output of **Text
 reformatting** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
