@@ -265,8 +265,8 @@ New-fave uses the vowel boundaries in the aligned TextGrid to determine when eac
 >    > 1. tracks: formant measurements sampled across the duration of each vowel, producing a vowel track, typcially used when examining the trajectory of a vowel.
 >    > 2. points: formant measurements taken at specific points within each vowel, typcially used when a single measurement is needed to represent a vowel.
 >    > 3. param: smoothed formant trajectories represented using Discrete cosine transform (DCT) parameters
->    > 4. log param: DCT parameters calculated from the log-trasnformed formant values.
->    > 5. textgrid: the TextGrid containing the vowel intervals used for the textraction.
+>    > 4. log param: DCT parameters calculated from the log-transformed formant values.
+>    > 5. textgrid: the TextGrid containing the vowel intervals used for the extraction.
 >    > The choice of output depends on what you want to do with the measurements. For example, points are useful when you want a compact set of measurements for statistical analysis, whereas tracks preserve more information about how the formants change over the course of vowel.
 >    {: .comment}
 >
@@ -293,18 +293,20 @@ New-fave uses the vowel boundaries in the aligned TextGrid to determine when eac
 
 # Next Steps and Use Cases
 
-Once you have aligned TextGrids, you can:
+Once you have extracted the vowel formant measurements you can:
 
-- **Measure vowel formants:** Extract and analyze vowel characteristics from aligned vowel intervals. To do so, you can use new-fave.
-- **Compare pronunciations:** Analyze variation across speakers or time
-- **Assess speech rate:** Measure duration of phonemes or words to study articulation speed
-- **Study consonant voicing:** Use the precise time boundaries to measure voice onset time (VOT)
+- **Quality control and data cleaning:**
+Automated alignment and formant extraction can greatly reduce the emount of manual work, but the resulting measurements should always be inspected before they are used for analysis. In particular, it is important to check tokens with unusually high or low formant values and verify the alignemnt of vowel boundaries.
+- **Normalizing:**
+For comparisons across speakers, raw formant values are often not sufficient because speakers differ in vocal-tract size and other anatomical characteristics. It may therefore be useful to normalize your data (e.g. using Nearey or Lobanov normalization methods). The resulting dataset can then be combined with metadata (e.g. speaker age, gender, or location, lexical item, phonological context) for statistical analysis and visualization.
+- **Visualization:**
+One application is to visualize vowel spaces. Plotting F1 against F2 allows researchers to examine the relative position of vowels and compare vowel systems across speakers or groups. These plots can provide a first visualization of patterns such as vowel raising, fronting, lowering, backing, or mergers.
+- **Sociophonetic and variationst approaches:**
+Formant measurements are often used for sociophonetic research. For example, whether vowel production varies across different age groups, regions, social groups, style of speech, etc. These patterns can be used to study lanugage variation and change.
 
 
 # Conclusion
 
 In this tutorial, we uploaded a sample audio file and transcription.
 We checked for any out-of-vocabulary words (OOVs) missing from our dictionary and generated the pronunciations using G2P.
-After checking and, if necessary, correcting these pronunciations, we merged the generated pronunciations with the built-in dictionary and ran the aligner on our files, producing aligned TextGrid files with precise phoneme-level time boundaries.
-
-You now have a fully aligned and labeled corpus ready for phonetic analysis.
+After checking and, if necessary, correcting these pronunciations, we merged the generated pronunciations with the built-in dictionary and ran the aligner on our files, producing aligned TextGrid files with precise phoneme-level time boundaries. We then extracted vowel formant measurements using new-fave.
