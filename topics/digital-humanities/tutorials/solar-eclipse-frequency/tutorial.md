@@ -26,7 +26,7 @@ time_estimation: 45m
 key_points:
 - The observable magnitude mag1 is used for filtering.
 - The workflow exposes three runtime parameters: minimum magnitude, number of eclipses,
-  and maximum interval in years.'
+  and maximum interval in years.
 - Galaxy workflow parameters separate the scientific question from hard-coded values.
 - Perform compact, reproducible transformations and selections on tabular
   astronomical data.
