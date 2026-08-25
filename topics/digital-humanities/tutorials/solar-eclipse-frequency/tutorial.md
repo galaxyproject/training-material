@@ -211,7 +211,7 @@ The original `mag` and `Tmax` columns contain two values separated by `/`. A {% 
 >    - {% icon param-file %} *"File to process"*: `Convert on dataset 1` (output
 of **Convert delimiters to TAB** {% icon tool %})
 >    - In *"Replacement"*:
->        - {% icon param-repeat %} *"Insert Replacement"*
+>        - {% icon param-repeat %} *"Replacement"*
 >            - *"Find pattern"*: `mag`
 >            - *"Replace with:"*: `mag1 \t mag2`
 >        - {% icon param-repeat %} *"Insert Replacement"*
