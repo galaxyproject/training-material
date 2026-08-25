@@ -208,7 +208,7 @@ The original `mag` and `Tmax` columns contain two values separated by `/`. A {% 
 > <hands-on-title> Separate observable and theoretical magnitude </hands-on-title>
 >
 > 1. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `out_file1` (output
+>    - {% icon param-file %} *"File to process"*: `Convert on dataset 1` (output
 of **Convert delimiters to TAB** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
