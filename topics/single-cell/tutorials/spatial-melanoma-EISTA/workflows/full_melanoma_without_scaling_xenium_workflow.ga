@@ -463,8 +463,8 @@
                 }
             ],
             "position": {
-                "left": 660,
-                "top": 571.2947477930629
+                "left": 659.9999313140252,
+                "top": 572.452434039607
             },
             "post_job_actions": {
                 "HideDatasetActionspatialdata_output": {
@@ -493,13 +493,7 @@
             "type": "tool",
             "uuid": "6cb4860c-e82f-4b1e-bfd4-ce7fcd317134",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "SpatialData with QC metrics",
-                    "output_name": "spatialdata_output",
-                    "uuid": "20ee356a-543b-4667-a354-b6601ddf3eac"
-                }
-            ]
+            "workflow_outputs": []
         },
         "10": {
             "annotation": "",
@@ -2450,7 +2444,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.rank_genes_groups\", \"__current_case__\": 4, \"get_df\": {\"get_df_select\": \"True\", \"__current_case__\": 1, \"key\": \"\", \"pval_cutoff\": null, \"log2fc_min\": null, \"log2fc_max\": null, \"gene_symbols\": \"\"}, \"groupby\": \"leiden_res_0.4\", \"use_raw\": false, \"groups\": \"\", \"layer\": \"\", \"ref\": {\"rest\": \"rest\", \"__current_case__\": 0}, \"n_genes\": null, \"tl_rank_genes_groups_method\": {\"method\": \"wilcoxon\", \"__current_case__\": 1, \"corr_method\": \"benjamini-hochberg\", \"tie_correct\": false}, \"key_added\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"tl.rank_genes_groups\", \"__current_case__\": 4, \"get_df\": {\"get_df_select\": \"True\", \"__current_case__\": 1, \"key\": \"\", \"pval_cutoff\": null, \"log2fc_min\": null, \"log2fc_max\": null, \"gene_symbols\": \"\"}, \"groupby\": \"leiden_res_0.6\", \"use_raw\": false, \"groups\": \"\", \"layer\": \"\", \"ref\": {\"rest\": \"rest\", \"__current_case__\": 0}, \"n_genes\": null, \"tl_rank_genes_groups_method\": {\"method\": \"wilcoxon\", \"__current_case__\": 1, \"corr_method\": \"benjamini-hochberg\", \"tie_correct\": false}, \"key_added\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.11.5+galaxy0",
             "type": "tool",
@@ -2458,14 +2452,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "AnnData with markers",
-                    "output_name": "anndata_out",
-                    "uuid": "de26d617-2bf2-4470-894c-de70fd813cf5"
-                },
-                {
                     "label": "Rank genes for characterizing groups",
                     "output_name": "ranked_gene",
                     "uuid": "89b1795e-0238-4835-b5a9-1a1d40ba4f7e"
+                },
+                {
+                    "label": "AnnData with markers",
+                    "output_name": "anndata_out",
+                    "uuid": "de26d617-2bf2-4470-894c-de70fd813cf5"
                 }
             ]
         },
@@ -2493,7 +2487,15 @@
                 "left": 5060,
                 "top": 91.29474779306298
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot ranking of genes"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "7f478b3258ec",
@@ -2507,7 +2509,13 @@
             "type": "tool",
             "uuid": "3a72cdee-c585-4149-acd7-903acd9503f2",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "Plot ranking of genes",
+                    "output_name": "out_png",
+                    "uuid": "18d96a8b-501e-47bb-ab29-f9b09e353b8a"
+                }
+            ]
         },
         "48": {
             "annotation": "",
@@ -2534,8 +2542,8 @@
                 }
             ],
             "position": {
-                "left": 5326.86244179191,
-                "top": 66.30131629471562
+                "left": 5305.9524920487365,
+                "top": 77.88993385231072
             },
             "post_job_actions": {
                 "RenameDatasetActionspatialdata_output_h5ad": {
@@ -2603,7 +2611,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"centrality_scores\", \"__current_case__\": 4, \"cluster_key\": \"leiden_res_0.4\", \"score\": null, \"connectivity_key\": \"spatial_connectivities\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"centrality_scores\", \"__current_case__\": 4, \"cluster_key\": \"leiden_res_0.6\", \"score\": null, \"connectivity_key\": \"spatial_connectivities\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.8.1+galaxy0",
             "type": "tool",
@@ -2647,7 +2655,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"nhood_enrichment\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.4\", \"library_key\": null, \"connectivity_key\": \"spatial_connectivities\", \"n_perms\": \"1000\", \"seed\": null}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"nhood_enrichment\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.6\", \"library_key\": null, \"connectivity_key\": \"spatial_connectivities\", \"n_perms\": \"1000\", \"seed\": null}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.8.1+galaxy0",
             "type": "tool",
@@ -2676,10 +2684,18 @@
                 }
             ],
             "position": {
-                "left": 5774.076404554363,
+                "left": 5775.40625,
                 "top": 0
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionplot_output_png": {
+                    "action_arguments": {
+                        "newname": "Plot Centrality Scores"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output_png"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "0a089e4b62d7",
@@ -2687,13 +2703,19 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_centrality_scores\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.4\", \"score\": null, \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_centrality_scores\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.6\", \"score\": null, \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.8.1+galaxy0",
             "type": "tool",
             "uuid": "6b6f9349-b418-4731-8ad5-ad1deac6cfd3",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "Plot Centrality Scores",
+                    "output_name": "plot_output_png",
+                    "uuid": "53fde591-e03f-43c4-a934-de1179115d79"
+                }
+            ]
         },
         "52": {
             "annotation": "",
@@ -2719,7 +2741,15 @@
                 "left": 6001.868453331679,
                 "top": 2.7470088401306976
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionplot_output_png": {
+                    "action_arguments": {
+                        "newname": "Plot Neighborhood Enrichment"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output_png"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "0a089e4b62d7",
@@ -2727,13 +2757,19 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_nhood_enrichment\", \"__current_case__\": 0, \"cluster_key\": \"leiden_res_0.4\", \"mode\": \"zscore\", \"annotate\": false, \"method\": null, \"cmap\": \"viridis\", \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_nhood_enrichment\", \"__current_case__\": 0, \"cluster_key\": \"leiden_res_0.6\", \"mode\": \"zscore\", \"annotate\": false, \"method\": null, \"cmap\": \"viridis\", \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.8.1+galaxy0",
             "type": "tool",
             "uuid": "e106afd1-0cba-434f-81e1-a8b36c601aee",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "Plot Neighborhood Enrichment",
+                    "output_name": "plot_output_png",
+                    "uuid": "f3ad4b94-c4f7-4ee1-8da9-28e5a62a43a0"
+                }
+            ]
         },
         "53": {
             "annotation": "",
@@ -2804,7 +2840,12 @@
                     "output_name": "spatialdata_output_h5ad"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool CellTypist",
+                    "name": "adata"
+                }
+            ],
             "label": "CellTypist-annotated AnnData",
             "name": "CellTypist",
             "outputs": [
@@ -2831,7 +2872,7 @@
                 },
                 "RenameDatasetActionout_png": {
                     "action_arguments": {
-                        "newname": "CellTypist-annotated AnnData"
+                        "newname": "Plot CellTypist"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "out_png"
@@ -2844,7 +2885,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dotplot\": {\"generate\": \"yes\", \"__current_case__\": 1, \"reference\": \"leiden_res_0.4\", \"prediction\": \"majority_voting\", \"format\": \"png\"}, \"majority_voting\": true, \"min_prop\": \"0.0\", \"mode\": \"best match\", \"model_source\": {\"source\": \"cached\", \"__current_case__\": 0, \"cached_model\": \"Adult_Human_Skin_v1\"}, \"p_thres\": \"0.5\", \"transpose_input\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adata\": {\"__class__\": \"RuntimeValue\"}, \"dotplot\": {\"generate\": \"yes\", \"__current_case__\": 1, \"reference\": \"leiden_res_0.6\", \"prediction\": \"majority_voting\", \"format\": \"png\"}, \"majority_voting\": true, \"min_prop\": \"0.0\", \"mode\": \"best match\", \"model_source\": {\"source\": \"cached\", \"__current_case__\": 0, \"cached_model\": \"Adult_Human_Skin_v1\"}, \"p_thres\": \"0.5\", \"transpose_input\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.7.1+galaxy1",
             "type": "tool",
@@ -2855,6 +2896,11 @@
                     "label": "CellTypist-annotated AnnData",
                     "output_name": "anndata_out",
                     "uuid": "be8d4eb6-9c98-4b47-8ef5-57acb4348dd1"
+                },
+                {
+                    "label": "Plot CellTypist",
+                    "output_name": "out_png",
+                    "uuid": "1a8734e4-565a-48b7-879d-83fe9f0f77e1"
                 }
             ]
         },
@@ -2885,7 +2931,7 @@
             "post_job_actions": {
                 "RenameDatasetActionanndata_out": {
                     "action_arguments": {
-                        "newname": "Final Anndata"
+                        "newname": "Final Liana Anndata"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "anndata_out"
@@ -2898,7 +2944,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"rank_aggregate\", \"__current_case__\": 0, \"groupby\": \"leiden_res_0.4\", \"resource_selection\": {\"resource_type\": \"resource_name\", \"__current_case__\": 0, \"resource_api_cached\": {\"resource_source_selector\": \"builtin\", \"__current_case__\": 1, \"resource_name\": \"consensus\"}}, \"expr_prop\": \"0.1\", \"min_cells\": \"5\", \"groupby_pairs\": {\"groupby_pairs_selector\": \"all\", \"__current_case__\": 0}, \"base\": \"2.718281828459045\", \"aggregate_method\": \"rra\", \"consensus_opts\": {\"consensus_opts_selector\": \"default\", \"__current_case__\": 0}, \"return_all_lrs\": false, \"key_added\": \"liana_res\", \"layer\": \"\", \"use_raw\": false, \"de_method\": \"t-test\", \"n_perms\": \"1000\", \"seed\": \"1337\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"rank_aggregate\", \"__current_case__\": 0, \"groupby\": \"leiden_res_0.6\", \"resource_selection\": {\"resource_type\": \"resource_name\", \"__current_case__\": 0, \"resource_api_cached\": {\"resource_source_selector\": \"builtin\", \"__current_case__\": 1, \"resource_name\": \"consensus\"}}, \"expr_prop\": \"0.1\", \"min_cells\": \"5\", \"groupby_pairs\": {\"groupby_pairs_selector\": \"all\", \"__current_case__\": 0}, \"base\": \"2.718281828459045\", \"aggregate_method\": \"rra\", \"consensus_opts\": {\"consensus_opts_selector\": \"default\", \"__current_case__\": 0}, \"return_all_lrs\": false, \"key_added\": \"liana_res\", \"layer\": \"\", \"use_raw\": false, \"de_method\": \"t-test\", \"n_perms\": \"1000\", \"seed\": \"1337\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.7.3+galaxy0",
             "type": "tool",
@@ -2906,9 +2952,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Final Anndata",
+                    "label": "Final Liana Anndata",
                     "output_name": "anndata_out",
-                    "uuid": "78bb90d9-05fc-4584-b645-58e8081323fa"
+                    "uuid": "ffad758d-6eb9-4ec0-8b05-615c6e27f772"
                 }
             ]
         },
@@ -2967,13 +3013,7 @@
             "type": "tool",
             "uuid": "c3b1896b-6708-4294-8ae4-abb9d7387a29",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "SpatialData with Final metrics",
-                    "output_name": "spatialdata_output",
-                    "uuid": "7f630e77-d3d7-495f-92c8-b26efb828c25"
-                }
-            ]
+            "workflow_outputs": []
         },
         "57": {
             "annotation": "",
@@ -2999,7 +3039,15 @@
                 "left": 6940.513771656996,
                 "top": 69.90538567816144
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Plot spatial clusters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "cec3ffd4752f",
@@ -3007,16 +3055,22 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"morphology_focus\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [{\"__index__\": 0, \"labels_element\": \"cell_labels\", \"color\": \"leiden_res_0.4\", \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"contour_px\": \"3\", \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_alpha\": \"0.0\", \"fill_alpha\": null, \"outline_color\": null, \"scale\": null, \"colorbar\": \"auto\", \"table_name\": \"table_processed\", \"table_layer\": null, \"gene_symbols\": null}], \"render_points\": [], \"render_shapes\": [], \"show_params\": {\"coordinate_systems\": \"global\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"morphology_focus\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [{\"__index__\": 0, \"labels_element\": \"cell_labels\", \"color\": \"leiden_res_0.6\", \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"contour_px\": \"3\", \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_alpha\": \"0.0\", \"fill_alpha\": null, \"outline_color\": null, \"scale\": null, \"colorbar\": \"auto\", \"table_name\": \"table_processed\", \"table_layer\": null, \"gene_symbols\": null}], \"render_points\": [], \"render_shapes\": [], \"show_params\": {\"coordinate_systems\": \"global\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "0.8.0+galaxy0",
             "type": "tool",
             "uuid": "9ebd5e21-d285-4f63-b8d0-2386a43bc6cb",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "Plot spatial clusters",
+                    "output_name": "plot_output",
+                    "uuid": "95aaccc1-d99d-44bf-a4b9-d0dbfacff685"
+                }
+            ]
         }
     },
     "tags": [],
-    "uuid": "c14540b3-2c2c-40e3-b94a-ec6034da45c1",
-    "version": 10
+    "uuid": "494ab5cc-298e-41e6-b5c7-90da44e58b79",
+    "version": 26
 }

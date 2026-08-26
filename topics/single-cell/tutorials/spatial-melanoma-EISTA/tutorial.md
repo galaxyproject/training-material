@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Spatial transcriptomics analysis of a primary dermal melanoma section with Xenium
 subtopic: spatial
 level: Advanced
-zenodo_link: https://zenodo.org/records/21792657
+zenodo_link: https://zenodo.org/records/22078050
 questions:
 - How is a Xenium output bundle turned into a SpatialData object in Galaxy, and what does that object contain?
 - Which quality control metrics are specific to segmented cells, and how do they change the filtering decisions?
@@ -15,16 +15,16 @@ objectives:
 - Export the expression table to AnnData and inspect its dimensions
 - Evaluate transcript-based and morphology-based quality control metrics and map them onto the tissue image
 - Apply filters and record how many cells each one removes
-- Execute normalisation, feature selection, scaling, dimensionality reduction and clustering
+- Execute normalisation, feature selection, dimensionality reduction and clustering
 - Identify marker genes for each cluster and assign a biological description supported by published evidence
 - Appraise CellTypist, Squidpy and LIANA outputs and explain what each one does not establish
 time_estimation: 5H
 key_points:
 - Xenium measures individual segmented cells, so morphology metrics such as cell area are quality control criteria in their own right, alongside transcript counts
-- Filters interact. The cell area cutoff also removed the highest-count objects in this section, so thresholds have to be reported together rather than one at a time
+- On a cropped region, gene-level filters remove genes that are real but absent from the field of view, so a crop has to be reported alongside the results
+- Choosing a Leiden resolution is a judgement about biology, not a default. Compare what each split is made of, and reject a resolution that merges distinct lineages
 - A Leiden group is a partition of a graph, not a cell type. Marker genes, position in the tissue and the quality control profile decide what it is
-- Reference-based annotation is only as good as its reference. When CellTypist and the marker genes disagree, the marker genes are the stronger evidence
-- Expression-based ligand-receptor rankings need a spatial cross-check before they become hypotheses worth testing
+- Reference-based annotation is only as good as its reference. High agreement at low confidence is the signature of cells forced onto the nearest available label
 requirements:
 -
     type: "internal"
@@ -178,7 +178,7 @@ The full section is a diagonal band of tissue about 9,000 × 4,300 µm, with nor
 the melanoma at the other. The archive above holds a 1,350 × 900 µm box cut out of the tumour, at
 x 7350–8700 µm and y 1500–2400 µm, containing 10,810 of the 112,551 segmented cells.
 
-![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/region_selection.png "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
+![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
 
 Two things follow from that choice, and both matter for how the results should be read.
 
@@ -437,11 +437,13 @@ The observation table already carries per-cell measurements made on the instrume
 >
 {: .hands_on}
 
-![Violin plot of detected genes per cell before filtering.](../../images/spatial-melanoma-EISTA/qc_violin_genes_initial.png "Detected genes per cell across the 10,810 cells in the window, before filtering.")
+![Violin plot of detected genes per cell before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_n_genes_by_counts_before_filtering.png "Detected genes per cell across the 10,810 cells in the window, before filtering.")
 
-![Violin plot of total transcript counts per cell before filtering.](../../images/spatial-melanoma-EISTA/qc_violin_counts_initial.png "Total transcript counts per cell before filtering.")
+![Violin plot of total transcript counts per cell before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_total_counts_before_filtering.png "Total transcript counts per cell before filtering.")
 
-![Violin plot of segmented cell area before filtering.](../../images/spatial-melanoma-EISTA/qc_violin_area_initial.png "Segmented cell area in µm² before filtering. The long upper tail is what the area filter will remove.")
+![Violin plot of segmented cell area before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_cell_area_before_filtering.png "Segmented cell area in µm² before filtering. The long upper tail is what the area filter will remove.")
+
+![Detected genes against total counts before filtering, coloured by cell area.](../../images/spatial-melanoma-EISTA/Scatter_plot_before_filtering.png "Detected genes against total counts before filtering, coloured by cell area. The relationship curves rather than running straight, because each additional transcript is increasingly likely to repeat a gene the cell has already detected.")
 
 Plotting the same metrics on the tissue is the check that separates a technical failure from a real tissue compartment. To do that, the annotated table has to go back into the spatial object.
 
@@ -480,9 +482,9 @@ Plotting the same metrics on the tissue is the check that separates a technical 
 >
 {: .hands_on}
 
-![Spatial map of the unfiltered section coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/spatial_qc_initial_total_counts.jpg "Total transcript counts per cell across the window before filtering, drawn on the morphology image. The axes are in pixels, which is the unit of the global coordinate system.")
+![Spatial map of the unfiltered section coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_total_counts_before_filtering.jpg "Total transcript counts per cell across the window before filtering, drawn on the morphology image. The axes are in pixels, which is the unit of the global coordinate system.")
 
-![Spatial map of the unfiltered section coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/spatial_qc_initial_n_genes.jpg "Detected genes per cell across the same window before filtering.")
+![Spatial map of the unfiltered section coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_n_genes_by_counts_before_filtering.jpg "Detected genes per cell across the same window before filtering.")
 
 > <question-title>Interpret the QC output</question-title>
 >
@@ -734,17 +736,17 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 >
 {: .hands_on}
 
-![Violin plot of detected genes per cell after filtering.](../../images/spatial-melanoma-EISTA/qc_violin_genes_filtered.png "Detected genes per cell across the 10,722 retained cells.")
+![Violin plot of detected genes per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_n_genes_by_counts_after_filtering.png "Detected genes per cell across the 10,722 retained cells.")
 
-![Violin plot of total transcript counts per cell after filtering.](../../images/spatial-melanoma-EISTA/qc_violin_counts_filtered.png "Total transcript counts per cell after filtering.")
+![Violin plot of total transcript counts per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_total_counts_after_filtering.png "Total transcript counts per cell after filtering.")
 
-![Violin plot of segmented cell area after filtering.](../../images/spatial-melanoma-EISTA/qc_violin_area_filtered.png "Segmented cell area after filtering. The distribution now stops at 400 µm².")
+![Violin plot of segmented cell area after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_cell_area_after_filtering.png "Segmented cell area after filtering. The distribution now stops at 400 µm².")
 
-![Scatter plot of detected genes against total counts, coloured by cell area, after filtering.](../../images/spatial-melanoma-EISTA/qc_scatter_filtered.png "Detected genes against total counts for the retained cells, coloured by cell area. The curve saturates as counts rise, because each further transcript is increasingly likely to repeat a gene already detected.")
+![Scatter plot of detected genes against total counts, coloured by cell area, after filtering.](../../images/spatial-melanoma-EISTA/Scatter_plot_after_filtering.png "Detected genes against total counts for the retained cells, coloured by cell area. The curve saturates as counts rise, because each further transcript is increasingly likely to repeat a gene already detected.")
 
-![Spatial map of the retained cells coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/spatial_qc_filtered_total_counts.jpg "Total transcript counts across the 10,722 retained cells in the window, drawn on the morphology image.")
+![Spatial map of the retained cells coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_after_filtering.jpg "Total transcript counts across the 10,722 retained cells in the window, drawn on the morphology image.")
 
-![Spatial map of the retained cells coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/spatial_qc_filtered_n_genes.jpg "Detected genes across the retained cells. Content varies across the window, with denser tumour on the left and the second melanocytic compartment on the right.")
+![Spatial map of the retained cells coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_table_processed_after_filtering.jpg "Detected genes across the retained cells. Content varies across the window, with denser tumour on the left and the second melanocytic compartment on the right.")
 
 > <comment-title>Would a stricter transcript threshold be better?</comment-title>
 >
@@ -820,7 +822,7 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >
 {: .hands_on}
 
-![Two panels of gene dispersion against mean expression, with the 2,000 selected highly variable genes in black and the remaining genes in grey.](../../images/spatial-melanoma-EISTA/hvg_selection.png "Normalised and raw dispersion against mean expression. The selected genes sit above the trend for their expression level.")
+![Two panels of gene dispersion against mean expression, with the 2,000 selected highly variable genes in black and the remaining genes in grey.](../../images/spatial-melanoma-EISTA/Plot_HVGs.png "Normalised and raw dispersion against mean expression. The selected genes sit above the trend for their expression level.")
 
 > <question-title>Interpret the feature selection</question-title>
 >
@@ -885,9 +887,9 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >
 {: .hands_on}
 
-![Four PCA panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/pca_qc_covariates.png "PCA coloured by quality control covariates. Transcript content varies along the main axes of the embedding.")
+![Four PCA panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/Plot_PCA.png "PCA coloured by quality control covariates. Transcript content varies along the main axes of the embedding.")
 
-![Four UMAP panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/umap_qc_covariates.png "UMAP coloured by quality control covariates. The small satellite islands on the right hold the lowest-content cells in the dataset.")
+![Four UMAP panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/Plot_UMAP.png "UMAP coloured by quality control covariates. The small satellite islands on the right hold the lowest-content cells in the dataset.")
 
 > <question-title>Should total counts be regressed out?</question-title>
 >
@@ -926,7 +928,7 @@ Leiden partitions the expression-neighbour graph, and the resolution controls ho
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Scanpy cluster, embed** {% icon tool %}
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - *"Coarseness of the clustering"*: `0.4`
->        - *"Key under which to add the cluster labels"*: `leiden_res_0.4`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_0.6`
 >        - *"Use weights from knn graph"*: `Yes`
 >        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
 >        - *"Random seed"*: `0`
@@ -949,34 +951,55 @@ Leiden partitions the expression-neighbour graph, and the resolution controls ho
 >
 {: .hands_on}
 
-![Three UMAP panels coloured by Leiden labels at resolutions 0.2, 0.4 and 0.6, showing 6, 11 and 12 groups.](../../images/spatial-melanoma-EISTA/leiden_resolution_comparison.png "UMAP coloured by Leiden groups at the three tested resolutions.")
+![Three UMAP panels coloured by Leiden labels at resolutions 0.2, 0.4 and 0.6, showing 6, 11 and 12 groups.](../../images/spatial-melanoma-EISTA/Plot_Leiden_comparison.png "UMAP coloured by Leiden groups at the three tested resolutions.")
 
 | Resolution | Groups |
 | --- | ---: |
-| 0.2 | 5 |
-| 0.4 | 8 |
+| 0.2 | 4 |
+| 0.4 | 6 |
 | 0.6 | 9 |
 
-We continue with `leiden_res_0.4`. Its 8 groups separate the main populations without breaking them into fragments, which the marker genes in the next section will show. Going up to 0.6 splits one myeloid group in two and adds nothing that the markers support; dropping to 0.2 merges the two melanoma states, which is precisely the distinction worth keeping. The group sizes are:
+We continue with `leiden_res_0.6`, and the reason is worth setting out, because choosing a resolution is
+the step in this analysis with the least guidance and the most consequence.
+
+Leiden partitions are close to hierarchical in practice, so the most informative comparison is not the
+group count but what each additional split is made of. Cross-tabulating the three results shows that at
+0.2 one group carries *CD3E*, *CD4*, *CD8A* and *IL2RG* together with *CYBB*, *MRC1*, *CD14* and
+*CTSC*: T cells and macrophages in the same group. Those are separate haematopoietic lineages, so 0.2
+is too coarse whatever else it gets right.
+
+At 0.4 the immune compartment separates correctly, but one group of 913 cells ranks *POSTN*, *COL5A1*,
+*COL5A2* and *SULF1* alongside *COL4A1*, *COL4A2* and *PDGFRB*. Collagen V is an interstitial fibrillar
+collagen produced by fibroblasts; collagen IV is a basement-membrane collagen deposited around vessels.
+At 0.6 those 913 cells divide 586 / 315, with *COL11A1*, *CTHRC1* and *CTSK* on one side and *PECAM1*,
+*CD34* and *KDR* on the other. Those marker sets do not overlap, which is the signature of two lineages
+rather than two states of one.
+
+Going to 0.6 also separates 631 cells from the melanoma group whose ranked genes are *LDHA*, *SLC2A3*,
+*ALDOA*, *PKM*, *ENO2*, *BNIP3*, *EGLN1* and *ADM*: four glycolytic enzymes, a glucose transporter and
+three hypoxia-associated genes, which is a coherent programme rather than a scatter of unrelated genes.
+
+The group sizes at 0.6 are:
 
 | Group | Cells | Group | Cells |
 | --- | ---: | --- | ---: |
-| `0` | 3,582 | `4` | 1,159 |
-| `1` | 1,841 | `5` | 608 |
-| `2` | 1,532 | `6` | 357 |
-| `3` | 1,339 | `7` | 304 |
+| `0` | 3,629 | `5` | 626 |
+| `1` | 2,337 | `6` | 596 |
+| `2` | 1,404 | `7` | 317 |
+| `3` | 885 | `8` | 297 |
+| `4` | 631 | | |
 
 > <question-title>Compare the resolutions</question-title>
 >
-> 1. What would you check before trusting the extra groups that appear at 0.4 but not at 0.2?
-> 2. Does choosing this resolution establish that the tissue contains 8 cell populations?
-> 3. The same analysis on the whole section returns 13 groups at this resolution. Have five populations been lost?
+> 1. What evidence separates a split worth keeping from a split that is only noise?
+> 2. Does choosing 0.6 establish that the window contains nine cell populations?
+> 3. Two of the nine groups, `2` and `5`, are both melanocytic and share *VGF*, *S100A1*, *MME* and *PAEP*. Is that an over-split?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Whether each new group has its own significant marker genes, whether it occupies a coherent position in the tissue, and whether it differs from its parent group in expression programme rather than only in transcript content. A group that splits off with no significant markers and a much lower count depth is a depth artefact. Group `1` here is exactly the case to scrutinise: only 9 of its top 18 genes reach significance, and its median transcript count is 130 against 701 for group `0`.
-> > 2. No. The partition is a starting point for interpretation. Two of these groups share a melanocytic programme and a third is defined largely by measurement depth, so the number of biologically distinct populations the markers support is smaller than 8.
-> > 3. Some are genuinely absent rather than lost. Keratinocytes, mast cells and the inflammatory fibroblasts are not in this window at all, so no resolution could recover them. The rest is a question of statistical power: populations that made up a fraction of a per cent of the section, such as the mature dendritic cells, have too few cells here to separate, and Leiden folds them into the myeloid group. Cropping trades breadth for speed, and the rarest populations pay first.
+> > 1. Three things, and they are independent of one another. Whether the new group has significant marker genes of its own rather than a weaker version of its parent's; whether those markers belong to a recognised programme rather than being an unrelated list; and whether the group differs from its parent in expression rather than only in transcript content. The fibroblast and endothelial split passes all three. A group that appears with no significant markers and a much lower median count than its parent is a depth artefact, not a population.
+> > 2. No. A partition is a hypothesis about structure, and the marker genes, the position in the tissue and the quality control profile are what turn a group into a claim about biology. Here two groups are melanocytic states rather than separate populations, so the number of distinct populations the evidence supports is smaller than nine.
+> > 3. The data argue against a simple over-split, and this is a good case for checking the quality control profile before deciding. Group `5` has a median of 855 transcripts and 506 detected genes over a median area of 122 µm², the highest content of any group in the window; group `2` has 174 transcripts and 128 genes over 78 µm². They also differ in programme, not only in depth: group `5` adds *GSTO1*, *CD109*, *MELTF*, *SOAT1* and *SPOCK1*, and CellTypist assigns it the `Melanocyte` label for 100 per cent of its cells at the second-highest mean confidence in the dataset. A more cautious reading is that group `2` is the one to question, since low content and a high proportion of counts in its top 50 genes are exactly what a shallow measurement looks like.
 > >
 > {: .solution}
 >
@@ -992,7 +1015,7 @@ Ranked genes show which genes separate each group from all the remaining cells. 
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison`
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >    - *"Get ranked genes as a Tabular file?"*: `Yes`
->        - *"The key of the observations grouping to consider"*: `leiden_res_0.4`
+>        - *"The key of the observations grouping to consider"*: `leiden_res_0.6`
 >        - *"Comparison"*: `Compare each group to the union of the rest of the group`
 >        - *"Method"*: `Wilcoxon-Rank-Sum`
 >            - *"P-value correction method"*: `Benjamini-Hochberg`
@@ -1007,7 +1030,8 @@ Ranked genes show which genes separate each group from all the remaining cells. 
 >
 {: .hands_on}
 
-![Eight panels, one per Leiden group, each listing the top 20 ranked genes against their test score.](../../images/spatial-melanoma-EISTA/ranked_genes_per_cluster.png "Top 20 ranked genes for each group at resolution 0.4. Group 1 stands out: its scores fall away quickly and most of its genes do not reach significance.")
+
+![Nine panels, one per Leiden group, each listing the top twenty ranked genes against their test score.](../../images/spatial-melanoma-EISTA/Plot_ranking_of_genes.png "Top twenty ranked genes for each group at resolution 0.6. The scores fall away at different rates: group 6 opens at 40 for POSTN, group 2 at 44 for S100A1, and group 8 at 28 for XBP1.")
 
 > <warning-title>Discard ADGRG1 before interpreting these results</warning-title>
 >
@@ -1023,75 +1047,75 @@ Reading the ranked genes together with published marker definitions gives the de
 
 | Group | Cells | Median counts | Median area (µm²) | Ranked genes used | Description |
 | --- | ---: | ---: | ---: | --- | --- |
-| `0` | 3,582 | 701 | 85 | *AKT2*, *ERBB3*, *MLANA*, *TNC*, *CDK2*, *CD59*, *ATP1A1*, *EDNRB*, *BACE2*, *MCAM* | Melanoma cells, differentiated melanocytic state |
-| `1` | 1,841 | 130 | 53 | *S100A1*, *HOXB7*, *VGF*, *MME*, *PAEP* (only 9 of 18 significant) | Melanocytic, *VGF*-positive; low complexity, interpret with caution |
-| `2` | 1,532 | 127 | 41 | *CD3E*, *CD8A*, *CD2*, *IL2RG*, *GZMA*, *CXCL9*, *CD96*, *ITGAL*, *GBP5*, *MX1*, *IRF1* | T and NK lymphocytes with an interferon signature |
-| `3` | 1,339 | 606 | 96 | *MME*, *LDHA*, *L1CAM*, *FBL*, *PRAME*, *EGLN1*, *CD44*, *ALDOA*, *PKM*, *TFAP2A*, *MLANA*, *CD109* | Melanoma cells, glycolytic and hypoxia-associated state |
-| `4` | 1,159 | 188 | 46 | *CXCL9*, *CD4*, *ITGB2*, *CTSC*, *CYBB*, *MRC1*, *CD14*, *CD68*, *MSR1*, *CD163*, *CXCL10*, *SIGLEC1* | Myeloid cells and macrophages |
-| `5` | 608 | 263 | 50 | *POSTN*, *COL5A1*, *COL5A2*, *CXCL12*, *SULF1*, *THY1*, *ADAM12*, *CTHRC1*, *COL11A1*, *THBS2*, *PRRX1* | Matrix-remodelling fibroblasts, myofibroblastic {CAF}-like |
-| `6` | 357 | 252 | 55 | *COL4A1*, *COL4A2*, *PLVAP*, *PECAM1*, *ENG*, *CD34*, *KDR*, *PDGFRB*, *HSPG2*, *COL18A1* | Vasculature: endothelium with pericytes |
-| `7` | 304 | 209 | 50 | *XBP1*, *PIM2*, *MZB1*, *TENT5C*, *POU2AF1*, *SLAMF7*, *CD38*, *CD79A*, *DERL3*, *IRF4* | Plasma cells |
+| `0` | 3,629 | 685 | 83 | *AKT2*, *ERBB3*, *TNC*, *CDK2*, *ATP1A1*, *CD59*, *MLANA*, *TIMP2*, *EDNRB*, *MFGE8*, *BACE2* | Melanoma, differentiated melanocytic state |
+| `1` | 2,337 | 105 | 38 | *CD3E*, *CD8A*, *CXCL9*, *CD2*, *IL2RG*, *GIMAP4*, *GZMA*, *IKZF1*, *CD96*, *ITGAL*, *GBP5*, *KLRK1*, *CD247* | T and NK lymphocytes |
+| `2` | 1,404 | 174 | 78 | *S100A1*, *VGF*, *HOXB7*, *MME*, *PAEP*, *SOST*, *L1CAM* | Melanocytic, *VGF*-positive; low complexity |
+| `3` | 885 | 218 | 49 | *CTSC*, *CD4*, *CYBB*, *ITGB2*, *GRN*, *CXCL9*, *MRC1*, *CD68*, *CD14*, *FCGR2A*, *MSR1*, *SIGLEC1*, *CD163* | Myeloid cells and macrophages |
+| `4` | 631 | 493 | 74 | *LDHA*, *SLC2A3*, *CD44*, *ALDOA*, *PRAME*, *PKM*, *BNIP3*, *EGLN1*, *ENO2*, *ADM*, *TFAP2A* | Melanoma, glycolytic and hypoxia-associated state |
+| `5` | 626 | 855 | 122 | *PAEP*, *VGF*, *GSTO1*, *MLANA*, *MME*, *L1CAM*, *S100A1*, *CD109*, *MELTF*, *SOAT1*, *SPOCK1* | Melanoma, high-content melanocytic state |
+| `6` | 596 | 255 | 49 | *POSTN*, *COL5A1*, *COL5A2*, *CXCL12*, *THY1*, *SULF1*, *CTHRC1*, *ADAM12*, *CTSK*, *COL11A1*, *CDH11*, *THBS2*, *PRRX1* | Fibroblasts, myofibroblastic |
+| `7` | 317 | 264 | 57 | *COL4A1*, *COL4A2*, *PLVAP*, *PECAM1*, *ENG*, *EPAS1*, *CD34*, *KDR*, *HSPG2*, *COL18A1* | Endothelium |
+| `8` | 297 | 206 | 50 | *XBP1*, *PIM2*, *MZB1*, *SLAMF7*, *TENT5C*, *POU2AF1*, *CD38*, *CD79A*, *DERL3*, *IRF4* | Plasma cells |
+
+Every group has significant markers throughout its top sixteen genes, which is not something the coarser
+partitions achieved.
 
 The evidence behind each description:
 
-- **Melanoma cells (`0` and `3`).** Both carry a melanocytic lineage programme. *MLANA* is one of the canonical melanocyte markers used to define that population in the healthy human skin atlas, alongside *PMEL*, *TYR*, *TYRP1* and *DCT* ({% cite Reynolds2021Skin %}), and *PRAME* separates malignant from benign melanocytic lesions in diagnostic practice, with reported sensitivity around 90 per cent and specificity around 96 per cent for melanoma versus nevi ({% cite Alomari2023PRAMEp16 %}); nodal nevi are uniformly negative while metastatic melanoma is positive ({% cite Kanavy2024PRAMEnodal %}). What separates the two groups is metabolic rather than lineage. Group `3` ranks *LDHA*, *ALDOA* and *PKM*, three glycolytic enzymes, together with *EGLN1*, the oxygen sensor that controls HIF stability, and *CD44*. Group `0` instead ranks the differentiation and adhesion programme, *ERBB3*, *EDNRB*, *MCAM* and *TNC*. Reading those together as a hypoxic, glycolytic tumour state is an interpretation rather than a measurement, and it should be labelled as one: the panel contains no direct hypoxia reporter, and *CD44* and *PKM* are broadly expressed. What supports it is that melanoma cells are known to switch to a dedifferentiated phenotype under stresses including hypoxia ({% cite Emmons2019Dedifferentiation %}), and that this group sits at one end of the window while the differentiated group sits at the other. Confirming it would need a hypoxia marker or an independent section.
-- **Melanocytic, *VGF*-positive (`1`).** Shares *S100A1*, *VGF*, *HOXB7*, *MME* and *PAEP* with the *VGF*-positive state seen in the whole section. Treat it carefully: its median transcript count is 130 against 701 for group `0`, its median `pct_counts_in_top_50_genes` is 63 against 32, and only 9 of its top 18 genes reach significance. Much of what distinguishes it may be measurement depth rather than biology.
-- **T and NK lymphocytes (`2`).** *CD3E*, *CD2* and *CD8A* with *GZMA* indicate T cells with a cytotoxic bias, and the same markers resolve T cells from macrophages in single-cell spatial imaging of primary melanoma ({% cite Nirmal2022SpatialMelanoma %}). *CD96* and *ITGAL* extend the lymphocyte identity. The notable addition here is a coherent interferon signature, *CXCL9*, *GBP5*, *MX1* and *IRF1*, which is not something the group in the whole section showed as clearly.
-- **Myeloid cells (`4`).** *CD68* and *CD163* mark macrophage populations whose density increases with Breslow thickness and stage in cutaneous melanoma ({% cite Demyashkin2025Macrophages %}). Co-expression of *CD163*, *MRC1* and *MSR1* corresponds to the immunosuppressive, scavenger-receptor-high {TAM} phenotype described in melanoma ({% cite Zhang2024AcralMelanoma %}). *CXCL9* and *CXCL10* are interferon-induced chemokines, and their appearance in both this group and the lymphocyte group is the clearest hint in the data that the two are talking to each other.
-- **Fibroblasts (`5`).** *POSTN* defines a myofibroblastic {CAF} subpopulation associated with matrix remodelling and immune suppression in single-cell and spatial tumour data ({% cite Yang2023PostnCAF %}). *COL11A1*, *CTHRC1*, *SULF1* and *ADAM12* extend that signature, and *CXCL12* is the chemokine most associated with fibroblast-driven immune exclusion.
-- **Vasculature (`6`).** *PECAM1*, *CD34* and *KDR* are endothelial; *PDGFRB* is pericyte-associated. The healthy skin reference resolves both vascular endothelial and pericyte states in dermis ({% cite Reynolds2021Skin %}). *COL4A1*, *COL4A2* and *HSPG2* encode basement-membrane components, expected around vessels.
-- **Plasma cells (`7`).** *MZB1*, *DERL3*, *XBP1* and *POU2AF1* describe the secretory programme of plasma cells, with *CD79A* marking B lineage and *CD38* and *SLAMF7* plasma-cell surface identity.
+- **Melanocytic groups (`0`, `2`, `4`, `5`).** All four carry a melanocytic lineage programme. *MLANA*
+  is among the canonical melanocyte markers used to define that population in the healthy adult human
+  skin atlas, alongside *PMEL*, *TYR*, *TYRP1* and *DCT* ({% cite Reynolds2021Skin %}), and *PRAME*
+  distinguishes malignant from benign melanocytic lesions in diagnostic practice, with reported
+  sensitivity around 90 per cent and specificity around 96 per cent for melanoma against nevi
+  ({% cite Alomari2023PRAMEp16 %}); nodal nevi are uniformly negative while metastatic melanoma is
+  positive ({% cite Kanavy2024PRAMEnodal %}). Together these four groups are 59 per cent of the window,
+  which is consistent with the abundant dermal tumour 10x Genomics reports for this block
+  ({% cite TenXSkinMelanoma %}).
+- **What separates the melanoma groups.** Group `0` ranks differentiation and adhesion genes, *ERBB3*,
+  *EDNRB*, *TNC* and *MFGE8*. Group `4` ranks *LDHA*, *ALDOA*, *PKM* and *ENO2*, four enzymes of
+  glycolysis, together with *SLC2A3*, which encodes the glucose transporter GLUT3, and three genes
+  associated with the hypoxia response: *BNIP3*, *ADM*, and *EGLN1*, which encodes the prolyl
+  hydroxylase that controls HIF stability. Reading that as a hypoxic, glycolytic tumour state is an
+  interpretation rather than a measurement, since the panel carries no direct hypoxia reporter, but it
+  is supported by two independent observations: melanoma cells are known to adopt a dedifferentiated
+  phenotype under stresses including hypoxia ({% cite Emmons2019Dedifferentiation %}), and *BNIP3* is
+  among the more spatially structured genes in this window, with a Moran's I of 0.26. Group `5` is the
+  highest-content group in the window, with a median of 855 transcripts and 506 detected genes over a
+  median area of 122 µm², and it adds *CD109* and *MELTF*.
+- **T and NK lymphocytes (`1`).** *CD3E*, *CD2* and *CD247* are T-cell receptor complex components,
+  *CD8A* indicates a cytotoxic bias, and *KLRK1*, which encodes NKG2D, means the group is better
+  described as a mixed cytotoxic lymphocyte compartment than as T cells alone at this resolution. The
+  same markers resolve T cells from macrophages in single-cell spatial imaging of primary melanoma
+  ({% cite Nirmal2022SpatialMelanoma %}). *CXCL9*, *GBP5* and *GIMAP4* add an interferon-associated
+  component.
+- **Myeloid cells (`3`).** *CD68* and *CD163* mark macrophage populations whose density rises with
+  Breslow thickness and stage in cutaneous melanoma ({% cite Demyashkin2025Macrophages %}), and the
+  combination of *CD163*, *MRC1* and *MSR1* corresponds to the scavenger-receptor-high, immunosuppressive
+  phenotype described in melanoma ({% cite Zhang2024AcralMelanoma %}). *CXCL9* appears in both this
+  group and the lymphocyte group.
+- **Fibroblasts (`6`).** *POSTN* defines a myofibroblastic {CAF} subpopulation associated with matrix
+  remodelling and immune suppression in single-cell and spatial tumour data
+  ({% cite Yang2023PostnCAF %}), and *COL11A1*, *CTHRC1*, *SULF1*, *ADAM12* and *CTSK* extend that
+  signature. *CXCL12* is the chemokine most often linked to fibroblast-driven immune exclusion, and
+  *PRRX1* is a fibroblast transcription factor.
+- **Endothelium (`7`).** *PECAM1*, *CD34* and *KDR* are endothelial, and the healthy skin reference
+  resolves vascular endothelial states in dermis ({% cite Reynolds2021Skin %}). *COL4A1*, *COL4A2*,
+  *HSPG2* and *COL18A1* encode basement-membrane components, which is what surrounds a vessel.
+  *PLVAP* is a plasmalemma vesicle protein of the endothelial fenestral diaphragm.
+- **Plasma cells (`8`).** *MZB1*, *DERL3*, *XBP1* and *POU2AF1* describe the secretory programme of
+  plasma cells, with *CD79A* marking B lineage and *CD38* and *SLAMF7* plasma-cell surface identity.
 
 > <comment-title>What this window does not contain</comment-title>
 >
-> Three populations that the whole section supports are absent here, and it is worth naming them so that
-> nobody reads their absence as a negative result.
+> Populations that the whole section supports are absent here, and their absence is a property of the
+> field of view rather than a result. Keratinocytes, mast cells and an inflammatory fibroblast state all
+> sit in the epidermal lobe several millimetres away, and their marker genes are among the 245 removed
+> by the gene filter earlier in this tutorial.
 >
-> Keratinocytes, mast cells and an inflammatory *IL6*-positive fibroblast state all sit in the epidermal
-> lobe at the far end of the tissue, several millimetres outside this window. Their marker genes are
-> among the 245 that the gene filter removed. Mature *LAMP3*-positive dendritic cells are present in the
-> window, but at roughly a hundred cells they are too few to separate as their own Leiden group and are
-> absorbed into the myeloid group.
->
-> The general lesson holds beyond this dataset: a cropped region tells you about the cells inside it,
-> and says nothing at all about the cells outside it. Report the window alongside the findings.
+> A cropped region tells you about the cells inside it and nothing about the cells outside it. Report
+> the window alongside the findings.
 >
 {: .comment}
-
-> <question-title>The three low-content groups</question-title>
->
-> Group `2` holds 17,437 cells, 16 per cent of the section. Its median transcript count is 58, its median `pct_counts_in_top_50_genes` is 95, and *SOX2-OT* is the only gene that reaches a meaningful test score.
->
-> 1. Why is `pct_counts_in_top_50_genes` so high here, and does it indicate a dominant expression programme?
-> 2. *SOX2-OT* is the only gene with a substantial score. Is it a marker?
-> 3. How would you test whether this group corresponds to the necrotic region 10x Genomics describes?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Because these cells detect only around 53 distinct genes, so the 50 most abundant of them account for almost everything the cell has. The metric is close to saturated by arithmetic rather than by biology, which is a useful reminder that a {QC} metric can be uninformative outside the range it was designed for.
-> > 2. Not in any useful sense. With about 58 counts per cell a differential test compares near-empty profiles, and a gene can reach significance simply by being detected slightly more often than in cells with hundreds of counts. Ranked genes from cells with almost no signal describe the detection floor, not the tissue.
-> > 3. Map the group onto the tissue with **SpatialData Plot**, coloured by `leiden_res_0.4`, and compare its position with the morphology image and with the region 10x describes. The spatial statistics in the next section give a partial answer already, and it is not the simple one: group `2` is moderately self-enriched, with a z-score of 180, but it also has the highest closeness and degree centrality of any group, meaning its cells are interspersed throughout the rest of the tissue rather than confined to one patch. That pattern is more consistent with a general low-detection population, with some regional concentration, than with a single necrotic zone. Settling it needs the histology, so the defensible statement is that this group is dominated by low-content objects whose distribution is partly regional and partly diffuse.
-> >
-> {: .solution}
->
-{: .question}
-
-> <question-title>Two melanocytic groups</question-title>
->
-> Group `8` ranks *S100A1* first, shares *MLANA*, *PRAME*, *ATP1A1* and *L1CAM* with groups `0` and `1` at lower scores, and adds *VGF*, *HOXB7*, *PAEP* and *BIRC7*. Its median transcript count is 212 against 484 and 1,079 for the two main melanoma groups, and its median `pct_counts_in_top_50_genes` is 52 against 35 and 29.
->
-> Is `8` a distinct melanoma cell state, or the same population measured less well?
->
-> > <solution-title></solution-title>
-> >
-> > The evidence is now mostly on the side of a real state. The shared melanocytic markers place `8` in the melanocytic lineage, and the lower transcript content and higher top-50 concentration are the usual signature of a shallower measurement. What tips the balance is the spatial result in the next section: `8` has a self-enrichment z-score of 371, the second highest in the section after the epidermis, and it is depleted against every other group. A population that is merely a low-depth tail of groups `0` and `1` would be scattered among them, not gathered into its own territory.
-> >
-> > What would still strengthen it: testing whether the *VGF*, *PAEP* and *BIRC7* enrichment survives a comparison against groups `0` and `1` alone rather than against all other cells, and repeating the analysis on another section. Reporting it as a spatially distinct candidate melanocytic state, with the depth caveat attached, is the defensible position.
-> >
-> {: .solution}
->
-{: .question}
-
 
 # Spatial statistics with Squidpy
 
@@ -1123,25 +1147,25 @@ Squidpy builds its own graph from the cell coordinates, independent of the expre
 > 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with spatial neighbours`
 >    - *"Operation"*: `Compute centrality scores per cluster or cell type (gr.centrality_scores)`
->        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.4`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.6`
 >        - *"Connectivity key"*: `spatial_connectivities`
 >
 > 2. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: output of **Squidpy** {% icon tool %}
 >    - *"Operation"*: `Plot centrality scores (pl.centrality_scores)`
->        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.4`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.6`
 >
 > 3. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: the centrality output from step 1
 >    - *"Operation"*: `Compute neighborhood enrichment by permutation test (gr.nhood_enrichment)`
->        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.4`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.6`
 >        - *"Connectivity key"*: `spatial_connectivities`
 >        - *"Number of permutations"*: `1000`
 >
 > 4. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: output of **Squidpy** {% icon tool %}
 >    - *"Operation"*: `Plot neighborhood enrichment (pl.nhood_enrichment)`
->        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.4`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.6`
 >        - *"Mode"*: `zscore`
 >
 > 5. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
@@ -1155,34 +1179,37 @@ Squidpy builds its own graph from the cell coordinates, independent of the expre
 >
 {: .hands_on}
 
-![Three panels showing average clustering, closeness centrality and degree centrality for the eleven Leiden groups.](../../images/spatial-melanoma-EISTA/squidpy_centrality_scores.png "Average clustering, closeness centrality and degree centrality per group in the spatial-neighbour graph.")
 
-![Heatmap of neighbourhood-enrichment z-scores for all pairs of the eleven Leiden groups.](../../images/spatial-melanoma-EISTA/squidpy_neighbourhood_enrichment.png "Neighbourhood-enrichment z-scores from 1,000 permutations. The diagonal is strongly positive for every group, and the largest value is c_7 against itself.")
 
-Selected values from the reference run:
+![Three panels showing average clustering, closeness centrality and degree centrality for the nine Leiden groups.](../../images/spatial-melanoma-EISTA/Plot_Centrality_Scores.png "Average clustering, closeness centrality and degree centrality per group in the spatial-neighbour graph. Groups 0 and 1 sit at the top of all three; groups 7 and 8 at the bottom.")
+
+![Heatmap of neighbourhood-enrichment z-scores for all pairs of the nine Leiden groups.](../../images/spatial-melanoma-EISTA/Plot_Neighborhood_Enrichment.png "Neighbourhood-enrichment z-scores from 1,000 permutations. The diagonal is positive throughout, and the brightest cell is group 4 against itself.")
+
+Values from this run:
 
 | Group | Degree centrality | Closeness centrality | Self-enrichment z-score |
 | --- | ---: | ---: | ---: |
-| `0` melanoma, differentiated | 0.422 | 0.395 | 94 |
-| `1` melanocytic, *VGF*+ | 0.462 | 0.540 | 62 |
-| `2` T and NK cells | 0.372 | 0.344 | 46 |
-| `3` melanoma, glycolytic | 0.236 | 0.191 | 75 |
-| `4` myeloid | 0.400 | 0.436 | 26 |
-| `5` fibroblasts | 0.232 | 0.298 | 27 |
-| `6` vasculature | 0.094 | 0.191 | 64 |
-| `7` plasma cells | 0.108 | 0.150 | 37 |
+| `0` melanoma, differentiated | 0.395 | 0.371 | 107 |
+| `1` T and NK cells | 0.544 | 0.588 | 48 |
+| `2` melanocytic, *VGF*+ | 0.235 | 0.286 | 87 |
+| `3` myeloid | 0.346 | 0.389 | 20 |
+| `4` melanoma, glycolytic | 0.076 | 0.091 | 112 |
+| `5` melanoma, high-content | 0.162 | 0.147 | 48 |
+| `6` fibroblasts | 0.225 | 0.288 | 27 |
+| `7` endothelium | 0.089 | 0.180 | 62 |
+| `8` plasma cells | 0.104 | 0.147 | 39 |
 
 > <question-title>Interpret the spatial statistics</question-title>
 >
-> 1. Every group has a positive z-score against itself, from 26 for the myeloid group to 94 for the differentiated melanoma group. What does that tell you, and is it surprising?
-> 2. The two melanoma groups `0` and `3` are each strongly self-enriched but score −34 and −36 against each other. In the whole section the equivalent pair is enriched together. What has changed?
-> 3. The T and NK group `2` is positive against the myeloid group `4` (z of 33 and 34), against fibroblasts (19) and against plasma cells (17), while being negative against both melanoma groups. What kind of tissue arrangement is that, and what does it not prove?
+> 1. Every group is enriched next to itself, from z of 20 for the myeloid group to 112 for the glycolytic melanoma group. Is that a result?
+> 2. The glycolytic melanoma group `4` has the highest self-enrichment (112) and the lowest degree centrality (0.076). What arrangement produces that, and how does it bear on whether the group is real?
+> 3. The lymphocyte group `1` has the highest degree and closeness centrality, and is positive against myeloid cells (z 25 and 28), fibroblasts (19 and 21) and plasma cells (15 and 16) while being negative against every melanocytic group. What does that describe, and what does it not establish?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. That every population is spatially clustered rather than scattered at random, which is what tissue looks like: cells of a type sit together. It would be far more surprising, and would point to something wrong with either the clustering or the coordinates, if the diagonal were flat. Reading the diagonal first is a good habit, because it is the cheapest sanity check available on a spatial graph.
-> > 2. The window has changed, not the biology. Across the whole section the two melanoma states intermingle within one large mass, so they are neighbours. This window was deliberately placed on an interface, with the differentiated state on one side and the glycolytic state on the other, so within the window they are mostly apart. The same two populations can be enriched or depleted against each other depending on how much tissue you look at, which is why a neighbourhood-enrichment score is a statement about a field of view rather than about two cell types in general.
-> > 3. It describes an immune and stromal compartment that sits together and sits apart from the tumour: lymphocytes beside macrophages, fibroblasts and plasma cells, all of them depleted against both melanoma groups. In melanoma this pattern is usually read as immune exclusion, and the fibroblast group here expresses *CXCL12*, the chemokine most associated with fibroblast-driven exclusion, which makes the reading tempting. It does not prove it. Adjacency is not interaction, a z-score computed on 1,532 lymphocytes in a single window is not a general property of the tumour, and exclusion is a claim about a boundary that would need the tumour margin rather than the middle of a window to test.
+> > 1. Not by itself. Cells of a type sit together in tissue, so a positive diagonal is what a working analysis looks like; a flat diagonal would suggest a problem with the clustering or the coordinates. It is worth reading first precisely because it is the cheapest check available on a spatial graph, and it is the off-diagonal that carries the information.
+> > 2. A compact territory that touches few other groups. Low degree centrality means most of a cell's six nearest neighbours belong to its own group, and high self-enrichment means that is more than chance would give. For group `4` this matters for interpretation: a group that were merely the low-quality tail of the main melanoma group would be scattered through it, not gathered into its own patch. Combined with a coherent glycolytic programme and *BNIP3* being spatially structured, the spatial evidence supports treating it as a state rather than an artefact.
+> > 3. It describes an immune and stromal compartment that sits together and apart from the tumour. In melanoma this pattern is usually read as immune exclusion, and the fibroblast group here expresses *CXCL12*, the chemokine most associated with fibroblast-driven exclusion, which makes the reading tempting. It does not establish it. Adjacency is not interaction, and exclusion is a claim about a tumour boundary, which would need a field of view containing that boundary rather than a window inside the tumour.
 > >
 > {: .solution}
 >
@@ -1192,17 +1219,17 @@ Moran's I measures whether a gene's expression is spatially structured rather th
 
 | Gene | Moran's I | Interpretation |
 | --- | ---: | --- |
-| *VGF* | 0.50 | Marks the *VGF*-positive melanocytic group, which occupies its own territory |
+| *VGF* | 0.50 | Marks the *VGF*-positive melanocytic groups, which hold their own territory |
 | *CXCL9* | 0.43 | Interferon-induced chemokine, concentrated in the immune compartment |
 | *CXCL10* | 0.33 | The same programme as *CXCL9* |
-| *PAEP* | 0.30 | Co-expressed with *VGF* in group `1` |
+| *PAEP* | 0.30 | Co-expressed with *VGF* in groups `2` and `5` |
 | *PLVAP* | 0.28 | Endothelial, so it follows the vessels |
+| *DLL3* | 0.27 | Notch ligand, patchily distributed |
 | *POSTN* | 0.27 | Fibroblast matrix programme |
-| *BNIP3* | 0.26 | Hypoxia-inducible, consistent with the glycolytic tumour state |
+| *BNIP3* | 0.26 | Hypoxia-associated, consistent with the glycolytic tumour state |
+| *SELE* | 0.25 | Endothelial activation |
 | *COL4A1* | 0.24 | Basement membrane around vessels |
-| *SELE* | 0.22 | Endothelial activation |
-| *BIRC7* | 0.22 | Melanocytic |
-| *SOX2-OT* | 0.04 | Essentially unstructured |
+| *CCL22* | 0.23 | Chemokine of the myeloid compartment |
 
 > <question-title>Interpret Moran's I</question-title>
 >
@@ -1232,7 +1259,7 @@ CellTypist assigns each cell the best-matching label from a reference built on a
 >    - *"Probability threshold"*: `0.5`
 >    - *"Refine the predicted labels by running the majority voting classifier after over-clustering"*: `Yes`
 >    - *"Generate a dotplot of the predicted cell types"*: `Yes`
->        - *"Reference column in AnnData.obs for dotplot"*: `leiden_res_0.4`
+>        - *"Reference column in AnnData.obs for dotplot"*: `leiden_res_0.6`
 >        - *"Prediction to plot"*: `majority_voting`
 >
 > 2. Rename the AnnData output `CellTypist-annotated AnnData`
@@ -1254,31 +1281,58 @@ CellTypist assigns each cell the best-matching label from a reference built on a
 >
 {: .comment}
 
+Before majority voting, CellTypist assigns 34 different labels across the window: Melanocyte to 4,513
+cells, Differentiated_KC to 1,717, Th to 677, Tc to 566, VE2 to 487, Undifferentiated_KC to 355,
+Mono_mac to 339 and F1 to 284, among others. Majority voting then collapses those 34 to five.
+
+| Leiden group | Markers say | Dominant majority-voting label | Share | Mean confidence |
+| --- | --- | --- | ---: | ---: |
+| `0` | Melanoma, differentiated | Melanocyte | 99.4% | 0.479 |
+| `1` | T and NK cells | Differentiated_KC | 69.7% | 0.113 |
+| `2` | Melanocytic, *VGF*+ | Differentiated_KC / Melanocyte | 54.4% / 45.4% | 0.093 |
+| `3` | Myeloid | Differentiated_KC | 94.5% | 0.170 |
+| `4` | Melanoma, glycolytic | Melanocyte | 99.0% | 0.272 |
+| `5` | Melanoma, high-content | Melanocyte | 100% | 0.385 |
+| `6` | Fibroblasts | Differentiated_KC | 93.6% | 0.205 |
+| `7` | Endothelium | VE2 | 55.2% | 0.296 |
+| `8` | Plasma cells | Tc | 96.0% | 0.151 |
+
+Four groups agree with the markers: the three melanocytic groups are labelled Melanocyte, and the
+endothelial group is labelled VE2, a vascular endothelial state of the reference. Four contradict them
+and one is split. The four that agree are also the four with the highest mean confidence, which is the
+most useful pattern in the table.
+
 > <question-title>Is a reference-transfer label a cell type?</question-title>
 >
-> On the full section, this model labelled 86.5 per cent of a group whose markers are *CD14*, *CD68*,
-> *CD163*, *MRC1* and *MSR1* as `Differentiated_KC`, with a mean confidence of 0.16. It also assigned only
-> 58 cells in the entire section the `Plasma` label, although the markers support thousands.
+> Group `8` expresses *MZB1*, *DERL3*, *POU2AF1*, *CD79A* and *CD38*, and is labelled `Tc` for 96 per cent
+> of its cells at a mean confidence of 0.151. Group `6` expresses *POSTN*, *COL11A1* and *CTHRC1*, and is
+> labelled `Differentiated_KC` for 93.6 per cent of its cells. There is not a keratinocyte anywhere in
+> this window.
 >
-> 1. Which result should be believed, and why?
-> 2. What do those two failures have in common?
-> 3. How should CellTypist output be reported in a melanoma study?
+> 1. Which result should be believed for groups `6` and `8`, and why?
+> 2. A label can be assigned to 96 per cent of a group and still be wrong. What is the difference between
+>    agreement and confidence, and which one is the warning?
+> 3. Why does `Differentiated_KC` appear at all, given that the window contains no epidermis?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The markers. *CD14*, *CD68*, *CD163*, *MRC1* and *MSR1* form a coherent macrophage programme with
-> >    published support in melanoma ({% cite Demyashkin2025Macrophages %}), and a confidence of 0.16 is
-> >    low. A weakly supported reference label contradicting a coherent marker panel is the weaker
-> >    evidence. The STHELAR resource takes the same view: reference predictions are treated as
-> >    supportive, and final identities come from combining them with marker genes and literature
-> >    ({% cite Gaudin2026STHELAR %}).
-> > 2. Both are reference mismatch. The model is built from healthy adult skin, which contains few plasma
-> >    cells and no tumour, so cells with no good match are pushed onto whichever label is nearest.
-> >    Reference transfer can only ever return labels that exist in the reference, and it will always
-> >    return something.
-> > 3. As a preliminary hypothesis, with confidence scores shown alongside the labels, and with the
-> >    marker evidence given precedence wherever the two disagree. A large dot in a low-probability
-> >    colour on the dot plot is a warning, not a result.
+> > 1. The markers, in both cases. *MZB1*, *DERL3* and *POU2AF1* form the secretory programme of plasma
+> >    cells, and *POSTN* with *COL11A1* and *CTHRC1* is a fibroblast matrix programme. Both are coherent
+> >    sets whose members belong together; the reference labels are not supported by anything except the
+> >    classifier. The STHELAR resource takes the same view for Xenium data: reference predictions are
+> >    treated as supportive, and final identities come from combining them with marker-gene evidence and
+> >    literature context ({% cite Gaudin2026STHELAR %}).
+> > 2. Agreement measures how consistently the classifier assigns the same label within a group;
+> >    confidence measures how well the cells actually match that label. Majority voting drives agreement
+> >    up by construction, because it replaces each cell's own prediction with the dominant label of its
+> >    neighbourhood. Confidence is the quantity that carries the warning, and 0.151 for group `8` is a
+> >    clear one. High agreement at low confidence is the signature of a group being forced onto the
+> >    nearest available label.
+> > 3. Because reference transfer can only return labels that exist in the reference, and it always
+> >    returns something. The model is built from healthy adult skin, where keratinocytes are the most
+> >    abundant cell type, so cells with no good match land there. The absence of epidermis in the window
+> >    does not stop the label being used; it only makes it obviously wrong, which is a helpful accident
+> >    for a tutorial.
 > >
 > {: .solution}
 >
@@ -1300,49 +1354,79 @@ CellTypist assigns each cell the best-matching label from a reference built on a
 
 # Ligand-receptor rankings with LIANA
 
-LIANA combines several scoring methods and curated {LR} resources into a consensus ranking ({% cite Dimitrov2022Liana %}, {% cite Dimitrov2024LianaPlus %}). The source and target categories here are Leiden groups.
+LIANA runs several published ligand-receptor methods over a curated resource and combines their results
+into a consensus ranking, which avoids committing to any single method's assumptions
+({% cite Dimitrov2022Liana %}, {% cite Dimitrov2024LianaPlus %}). The source and target categories here
+are the Leiden groups.
 
 > <hands-on-title>Rank ligand-receptor pairs</hands-on-title>
 >
 > 1. {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellTypist-annotated AnnData`
 >    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
->        - *"Group By"*: `leiden_res_0.4`
->        - *"Resource source"*: `Use a built-in resource`
->            - *"Resource source"*: `Download from LIANA API`
+>        - *"Group By"*: `leiden_res_0.6`
+>        - *"Resource source"*: `Download from LIANA API`
 >            - *"Resource name"*: `consensus`
 >        - *"Expression proportion"*: `0.1`
 >        - *"Minimum number of cells"*: `5`
 >        - *"Use raw counts"*: `No`
 >        - *"Results key in adata.uns"*: `liana_res`
 >
-> 2. Rename the generated file `Final Anndata`
+> 2. Rename the generated file `Final Liana Anndata`
 >
 {: .hands_on}
 
-The output is a table of source-to-target pairs ranked by magnitude and by specificity. On an earlier run of this section, the highest-ranked pairs by magnitude were dominated by *CD44* as the receptor, with *COL4A1* and *COL4A2* from the vasculature as the ligands, and with several melanoma-to-melanoma pairs involving *TIMP2* and *PKM*. Inspect your own `liana_res` table before quoting any pair: the ranking depends on the partition, so a table computed on a different number of groups is not transferable.
+The result is 2,829 ranked source-to-target pairs, stored in `uns['liana_res']`. Read it with
+{% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3) %}.
+Two columns order the table: `magnitude_rank`, which reflects how strongly both partners are expressed,
+and `specificity_rank`, which reflects how restricted the pair is to that particular source and target.
+The strongest pairs by magnitude are:
 
-Whatever the top pair turns out to be, the cross-check below is the step that decides what it is worth.
+| Source | Target | Ligand | Receptor | Magnitude rank | Specificity rank |
+| --- | --- | --- | --- | ---: | ---: |
+| `7` endothelium | `4` melanoma, glycolytic | *COL4A1* | *CD44* | 1.0 × 10⁻⁶ | 2.4 × 10⁻⁴ |
+| `4` melanoma, glycolytic | `4` melanoma, glycolytic | *PKM* | *CD44* | 1.0 × 10⁻⁵ | 0.125 |
+| `7` endothelium | `0` melanoma, differentiated | *COL4A1* | *CD44* | 1.0 × 10⁻⁵ | 6.8 × 10⁻³ |
+| `7` endothelium | `5` melanoma, high-content | *COL4A1* | *CD44* | 1.8 × 10⁻⁵ | 9.2 × 10⁻³ |
+| `5` melanoma, high-content | `4` melanoma, glycolytic | *PKM* | *CD44* | 2.8 × 10⁻⁵ | 0.195 |
+| `7` endothelium | `4` melanoma, glycolytic | *COL4A2* | *CD44* | 4.0 × 10⁻⁵ | 1.3 × 10⁻³ |
 
-The top pair has real support in melanoma biology. CD44 on melanoma cells binds type IV collagen and mediates migration on collagen IV and invasion through reconstituted basement membrane ({% cite Knutson1996CD44Collagen %}), and the binding region within the collagen IV α1 chain has been mapped ({% cite Lauer2003CD44ColIV %}).
+The top pair is not biologically implausible. CD44 on melanoma cells binds type IV collagen and mediates
+migration on collagen IV and invasion through reconstituted basement membrane
+({% cite Knutson1996CD44Collagen %}), and the binding region within the collagen IV α1 chain has been
+mapped ({% cite Lauer2003CD44ColIV %}). Collagen IV is what endothelial basement membrane is made of,
+and group `7` ranks *COL4A1* and *COL4A2* first and second.
 
-> <question-title>Cross-check the top LIANA result</question-title>
+Before treating that as a finding, three checks are worth making, and this table fails two of them.
+
+> <question-title>Read the ranking critically</question-title>
 >
-> Suppose the top-ranked pair is *COL4A1* from the vasculature (`5`) to melanoma (`0`). In the neighbourhood-enrichment matrix from the previous section, the z-score between groups `5` and `0` is −74 in one direction and −70 in the other.
->
-> 1. What does that mean for the *COL4A1*-*CD44* ranking?
-> 2. *CD44* is the receptor in five of the six top pairs. What does that suggest about the ranking?
-> 3. What combination of evidence would justify following up a LIANA hit?
+> 1. *CD44* is the receptor in every one of the six top pairs. Look back at the marker table: where does *CD44* appear? What does that imply about the ranking?
+> 2. The neighbourhood-enrichment z-score between groups `7` and `4` is −11 in both directions. What does that mean for the top-ranked pair?
+> 3. The `PKM`–`CD44` pair from group `4` to itself has a magnitude rank of 1.0 × 10⁻⁵ but a specificity rank of 0.125. How should those two numbers be read together?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The two groups sit next to each other **less** often than chance, so the highest-ranked interaction in the table joins populations that are spatially depleted for contact. LIANA ranks from expression alone and has no access to position, so a top rank implies nothing about proximity. The pair might still matter at the interfaces that do exist, or through diffusible rather than contact-dependent signalling, but the ranking by itself is not evidence of an interaction in this tissue. This is the most useful cross-check a spatial dataset offers, and it costs nothing once the Squidpy result is in hand.
-> > 2. That the ranking is influenced by how broadly a gene is expressed. *CD44* is expressed across many cell types, and *PKM* and *TIMP2* are similarly broad, so pairs involving them score highly for many source-target combinations, including melanoma to melanoma. *CD44* is also reported not to be a primary adhesion receptor for collagen, which is a further reason for caution about mechanism.
-> > 3. Expression of both partners above a stated proportion in the relevant groups; spatial adjacency of those groups, or a plausible diffusible mechanism if they are not adjacent; markers supporting the identity of both groups; independent literature for the pair in the same disease context; and reproduction in another section. The *COL4A1*-*CD44* pair meets the expression and literature criteria and fails the adjacency one, so it is a hypothesis rather than a finding.
+> > 1. *CD44* is the fifth-ranked marker gene of group `4`. A receptor that is itself a marker of one group will pair highly with whatever ligands its neighbours express, so much of this table is a restatement of that one fact rather than six independent findings. Checking whether a partner in a top pair is a cluster marker is a quick way to see whether a ranking is reporting a specific interaction or an abundant gene.
+> > 2. That the two groups sit next to each other less often than chance. LIANA scores expression alone and has no access to position, so a high magnitude rank implies nothing about proximity. The pair could still matter at whatever interface does exist, or through a diffusible mechanism, but collagen IV signalling through CD44 is contact-dependent, so a depleted adjacency undercuts this particular reading. Group `4` is also the most spatially self-contained group in the window, with a self-enrichment of 112, which is consistent with it having few contacts with anything else.
+> > 3. They answer different questions. Magnitude asks how strongly both partners are expressed, and 1.0 × 10⁻⁵ is high. Specificity asks whether the pair is restricted to this source and target, and 0.125 is unremarkable: *PKM* and *CD44* are broadly expressed, so the same pair scores well for many combinations. A pair worth following up should rank well on both, as *COL4A1*–*CD44* from `7` to `4` does on magnitude and specificity, whereas the *PKM* pairs do not.
 > >
 > {: .solution}
 >
 {: .question}
+
+> <comment-title>What would make a ligand-receptor hit worth following up</comment-title>
+>
+> Expression of both partners above a stated proportion in the relevant groups; a good rank on
+> specificity as well as magnitude; spatial adjacency of the two groups, or a plausible diffusible
+> mechanism if they are not adjacent; markers that independently support the identity of both groups;
+> literature for the pair in the same disease context; and reproduction in another section.
+>
+> The *COL4A1*–*CD44* pair meets the expression, specificity and literature criteria and fails the
+> adjacency one. That makes it a hypothesis to test on a field of view containing the tumour-vessel
+> interface, not a result to report from this window.
+>
+{: .comment}
 
 # Return the processed table to SpatialData
 
@@ -1364,7 +1448,7 @@ Everything computed so far lives in an AnnData object. Writing it back into the 
 >        - *"Image element name"*: `morphology_focus`
 >    - In *"Render Labels"*:
 >        - *"Labels element name"*: `cell_labels`
->        - *"Color column"*: `leiden_res_0.4`
+>        - *"Color column"*: `leiden_res_0.6`
 >        - *"Table name"*: `table_processed`
 >    - In *"Plot Display Parameters"*:
 >        - *"Coordinate system(s)"*: `global`
