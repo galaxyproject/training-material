@@ -2840,12 +2840,7 @@
                     "output_name": "spatialdata_output_h5ad"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool CellTypist",
-                    "name": "adata"
-                }
-            ],
+            "inputs": [],
             "label": "CellTypist-annotated AnnData",
             "name": "CellTypist",
             "outputs": [
@@ -2885,7 +2880,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adata\": {\"__class__\": \"RuntimeValue\"}, \"dotplot\": {\"generate\": \"yes\", \"__current_case__\": 1, \"reference\": \"leiden_res_0.6\", \"prediction\": \"majority_voting\", \"format\": \"png\"}, \"majority_voting\": true, \"min_prop\": \"0.0\", \"mode\": \"best match\", \"model_source\": {\"source\": \"cached\", \"__current_case__\": 0, \"cached_model\": \"Adult_Human_Skin_v1\"}, \"p_thres\": \"0.5\", \"transpose_input\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"dotplot\": {\"generate\": \"yes\", \"__current_case__\": 1, \"reference\": \"leiden_res_0.6\", \"prediction\": \"majority_voting\", \"format\": \"png\"}, \"majority_voting\": true, \"min_prop\": \"0.0\", \"mode\": \"best match\", \"model_source\": {\"source\": \"cached\", \"__current_case__\": 0, \"cached_model\": \"Adult_Human_Skin_v1\"}, \"p_thres\": \"0.5\", \"transpose_input\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "1.7.1+galaxy1",
             "type": "tool",
@@ -2893,14 +2888,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "CellTypist-annotated AnnData",
-                    "output_name": "anndata_out",
-                    "uuid": "be8d4eb6-9c98-4b47-8ef5-57acb4348dd1"
-                },
-                {
                     "label": "Plot CellTypist",
                     "output_name": "out_png",
                     "uuid": "1a8734e4-565a-48b7-879d-83fe9f0f77e1"
+                },
+                {
+                    "label": "CellTypist-annotated AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "be8d4eb6-9c98-4b47-8ef5-57acb4348dd1"
                 }
             ]
         },
@@ -3070,7 +3065,12 @@
             ]
         }
     },
-    "tags": [],
-    "uuid": "494ab5cc-298e-41e6-b5c7-90da44e58b79",
-    "version": 26
+    "tags": [
+        "single-cell",
+        "spatial-transcriptomics",
+        "xenium",
+        "spatialdata"
+    ],
+    "uuid": "e4e6c29b-b486-45c8-82f0-3f64a0d47069",
+    "version": 27
 }

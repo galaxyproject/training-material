@@ -65,7 +65,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 Cutaneous melanoma arises from melanocytes and grows inside skin that already contains keratinocytes, fibroblasts, blood vessels, and both resident and recruited immune cells. Where those populations sit relative to the tumour carries information that a dissociated measurement throws away: immune cells at a tumour margin behave differently from immune cells excluded from it, and the spatial arrangement of myeloid and lymphoid populations in primary melanoma changes as a lesion progresses ({% cite Nirmal2022SpatialMelanoma %}). {ST} records gene expression together with the position of each measurement, so expression can be compared with the tissue image and with neighbouring cells, which is what makes a {TME} accessible to analysis.
 
-This tutorial uses the 10x Genomics **FFPE Human Skin Primary Dermal Melanoma** dataset, generated with the Xenium Prime 5K Human Pan Tissue and Pathways Panel ({% cite TenXSkinMelanoma %}). 10x Genomics describes the sample as a primary dermal melanoma from the right lower extremity, with abundant tumour cells in the dermis, necrosis along the outer edge of the dermis, and pyknotic nuclei indicating cell death. The published run metrics are 112,551 cells detected and a median of 306 transcripts per cell. The panel used for this preview dataset was a development version targeting 5,006 genes, and the data are licensed CC BY 4.0.
+This tutorial uses the 10x Genomics **FFPE Human Skin Primary Dermal Melanoma** dataset, generated with the Xenium Prime 5K Human Pan Tissue and Pathways Panel ({% cite TenXSkinMelanoma %}). 10x Genomics describes the sample as a primary dermal melanoma from the right lower extremity, with abundant tumour cells in the dermis, necrosis along the outer edge of the dermis, and pyknotic nuclei indicating cell death. The published run metrics are 112,551 cells detected and a median of 306 transcripts per cell. The panel used for this preview dataset was a development version targeting 5,006 genes.
 
 Xenium images individual transcripts and assigns them to segmented cells, so each row of the expression table is intended to be a single cell. That makes cell-level annotation meaningful, and it also means the analysis has to account for segmentation error: a boundary can enclose two neighbouring cells as one object, or cut one cell in two. The morphological measurements Xenium reports for every cell, such as `cell_area` and `nucleus_area`, are therefore {QC} metrics in their own right, alongside transcript counts.
 
@@ -75,16 +75,6 @@ should need. We therefore start from a 1,350 × 900 µm window cut out of the tu
 cells, roughly a tenth of the data. The window is provided ready to use, and an optional section
 records how it was built from the raw Xenium output bundle and how the boundaries were chosen, so that
 the same preparation can be applied to another section.
-
-Everything from here on is the biology of one window. It is a real melanoma microenvironment and the
-populations recovered from it are genuine, but they are not the full inventory of the section: the
-epidermis, the mast cells and one fibroblast state sit at the far end of the tissue and do not appear
-here at all. Where that matters, the text says so.
-
-The analysis itself is the same whatever the field of view: {QC} before and after filtering,
-normalisation and feature selection, {PCA} and {UMAP}, three Leiden resolutions, ranked genes, Squidpy
-spatial statistics, reference-based annotation, and finally the processed table written back into the
-spatial object.
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
@@ -178,14 +168,6 @@ x 7350–8700 µm and y 1500–2400 µm, containing 10,810 of the 112,551 segmen
 
 ![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
 
-Two things follow from that choice, and both matter for how the results should be read.
-
-The window contains an interface rather than uniform tumour, which is what makes the spatial statistics
-later worth reading: there is something for adjacency to detect. And it cannot contain everything.
-Keratinocytes, mast cells and an inflammatory fibroblast population live in the epidermal lobe at the
-opposite end of the tissue, several millimetres away, so they are absent from every result that
-follows. Their absence is a property of the window, not a finding about the tumour.
-
 > <details-title>Elements in the object</details-title>
 >
 > | Element type | Name | Contents |
@@ -226,7 +208,7 @@ follows. Their absence is a property of the window, not a finding about the tumo
 > The same Zenodo record holds these files, and the complete uncropped section is there too as
 > `melanoma.spatialdata.zip` if you would rather skip straight to the crop.
 >
-> **Step 1: import the bundle files**
+> 2. Import the bundle files from [Zenodo]({{ page.zenodo_link }}):
 >
 > ```
 > {{ page.zenodo_link }}/files/cell_feature_matrix.h5
@@ -242,9 +224,8 @@ follows. Their absence is a property of the window, not a finding about the tumo
 > {{ page.zenodo_link }}/files/transcripts.parquet
 > ```
 >
-> **Step 2: assemble the SpatialData object**
 >
-> {% tool [SpatialData IO](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_io/spatialdata_io/0.8.0+galaxy0) %} with the following parameters:
+> 2. {% tool [SpatialData IO](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_io/spatialdata_io/0.8.0+galaxy0) %} with the following parameters:
 > - *"Spatial Technology"*: `10x Genomics Xenium`
 >     - {% icon param-file %} *"Cell feature matrix"*: `cell_feature_matrix.h5`
 >     - {% icon param-file %} *"Cells metadata"*: `cells.parquet`
@@ -266,9 +247,8 @@ follows. Their absence is a property of the window, not a finding about the tumo
 >
 > Rename the generated file `melanoma.spatialdata.zip`. This is the complete section, 112,551 cells.
 >
-> **Step 3: crop to the window**
 >
-> {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 3. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 > - {% icon param-file %} *"SpatialData object"*: `melanoma.spatialdata.zip`
 > - *"Operation"*: `Query a SpatialData object or SpatialElement within a bounding box. (sd.bounding_box_query)`
 >     - *"Axes"*: `x,y`
@@ -291,15 +271,7 @@ follows. Their absence is a property of the window, not a finding about the tumo
 >
 > **How the window was chosen.** Regions can be drawn by hand in [Xenium Explorer](https://www.10xgenomics.com/support/software/xenium-explorer/latest/tutorials/xe-selecting-multiple-regions-of-interest),
 > which exports the outline as a polygon of vertices in micrometres, and **SpatialData Operations**
-> accepts a polygon through `polygon_query` as well as a rectangle through `bounding_box_query`. Drawing
-> by eye has a trap, though: a lasso around the visually striking part of this section captured the
-> epidermal lobe and almost none of the tumour, 2% of the melanoma cells, with a median of 145
-> transcripts per cell against 305 across the section. It looked like a fair sample and was not.
->
-> This window was chosen by measurement instead. Every rectangle on a 150 µm grid across the tumour side
-> was scored on how closely its cell-type composition matched the whole section, with a floor on the
-> rarest populations, and this box won. It holds median transcript content of 318 against 320 for the
-> section, so nothing about the quality control story is distorted by the choice.
+> accepts a polygon through `polygon_query` as well as a rectangle through `bounding_box_query`.
 >
 {: .details}
 
@@ -1263,21 +1235,6 @@ CellTypist assigns each cell the best-matching label from a reference built on a
 > 2. Rename the AnnData output `CellTypist-annotated AnnData`
 >
 {: .hands_on}
-
-> <comment-title>If this step fails on memory or on the matrix</comment-title>
->
-> Two failures are common here, and both are covered earlier in this tutorial.
->
-> `Invalid expression matrix in .X, expect log1p normalized expression to 10000 counts per cell` means
-> the restore step was skipped or came too late. Go back and run it, then re-run CellTypist on the
-> restored object.
->
-> A job held for exceeding its memory has the same root cause. The scaled matrix is dense, so CellTypist
-> loads a matrix several times larger than it needs to and can exceed the allocation on a public server.
-> Restoring the log-normalised matrix brings back sparsity and the problem goes away, which is a better
-> answer than asking for more memory.
->
-{: .comment}
 
 Before majority voting, CellTypist assigns 34 different labels across the window: Melanocyte to 4,513
 cells, Differentiated_KC to 1,717, Th to 677, Tc to 566, VE2 to 487, Undifferentiated_KC to 355,
