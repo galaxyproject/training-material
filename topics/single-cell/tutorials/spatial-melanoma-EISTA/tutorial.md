@@ -320,8 +320,8 @@ The Scanpy tools work on AnnData, so the first analysis step pulls the `table` e
 >    > > <solution-title></solution-title>
 >    > >
 >    > > `n_obs` is the number of segmented cells and `n_vars` the number of measured genes. The gene count matches the published panel size exactly: the development panel targets 5,006 genes ({% cite TenXSkinMelanoma %}), and cropping a region removes cells, never genes. The cell count does not match the published 112,551, and should not: that figure is for the whole section, and we are working inside a window holding 10,810 of them, or 9.6%.
-> >
-> > Checking both numbers before going further is a cheap way to catch a crop that silently selected the wrong area, which is easy to do when the coordinate units are ambiguous.
+>    > >
+>    > > Checking both numbers before going further is a cheap way to catch a crop that silently selected the wrong area, which is easy to do when the coordinate units are ambiguous.
 >    > >
 >    > {: .solution}
 >    >
