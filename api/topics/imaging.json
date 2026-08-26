@@ -288,7 +288,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBioImage.IO Model\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nImage for Prediction\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Process image with BioImage.IO model\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Split image along axes\"];\n  2 -->|output_predicted_image| 3;\n  4[\"Extract dataset\"];\n  3 -->|output| 4;\n  5[\"Extract dataset\"];\n  3 -->|output| 5;\n  6[\"Process images using arithmetic expressions\"];\n  4 -->|output| 6;\n  5 -->|output| 6;\n  7[\"Threshold image\"];\n  6 -->|result| 7;\n  8[\"Convert binary image to label map\"];\n  7 -->|output| 8;\n  9[\"Overlay images\"];\n  1 -->|output| 9;\n  8 -->|output| 9;\n  beb76f8f-00d4-41dc-9409-8241dbdb1f01[\"Output\\nout_png\"];\n  9 --> beb76f8f-00d4-41dc-9409-8241dbdb1f01;\n  style beb76f8f-00d4-41dc-9409-8241dbdb1f01 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nBioImage.IO Model\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nImage for Prediction\"]\n  2[label=\"Process image with BioImage.IO model\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Split image along axes\"]\n  2 -> 3 [label=\"output_predicted_image\"]\n  4[label=\"Extract dataset\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Extract dataset\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Process images using arithmetic expressions\"]\n  4 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Threshold image\"]\n  6 -> 7 [label=\"result\"]\n  8[label=\"Convert binary image to label map\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Overlay images\"]\n  1 -> 9 [label=\"output\"]\n  8 -> 9 [label=\"output\"]\n  kbeb76f8f00d441dc94098241dbdb1f01[color=lightseagreen,label=\"Output\\nout_png\"]\n  9 -> kbeb76f8f00d441dc94098241dbdb1f01\n}",
           "workflow_tools": [
@@ -446,11 +446,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -582,10 +577,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -690,10 +681,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -803,10 +790,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -925,10 +908,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -1043,10 +1022,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -1155,10 +1130,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -1272,10 +1243,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -1843,7 +1810,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\noriginal_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nChannel selection\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nsegmented image\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Split image along axes\"];\n  0 -->|output| 3;\n  4[\"Generate ISCC-CODE\"];\n  2 -->|output| 4;\n  5[\"Extract dataset\"];\n  3 -->|output| 5;\n  1 -->|output| 5;\n  6[\"Parse parameter value\"];\n  4 -->|output_file| 6;\n  7[\"Otsu\"];\n  5 -->|output| 7;\n  33221213-66f9-453f-b2a3-d69fcdaa7eb3[\"Output\\notsu_segmented\"];\n  7 --> 33221213-66f9-453f-b2a3-d69fcdaa7eb3;\n  style 33221213-66f9-453f-b2a3-d69fcdaa7eb3 stroke:#2c3143,stroke-width:4px;\n  8[\"Verify ISCC-CODE\"];\n  6 -->|text_param| 8;\n  7 -->|output| 8;\n  4edb3676-7cb6-4c65-a497-09d71fb8caa9[\"Output\\nISCC-code\"];\n  8 --> 4edb3676-7cb6-4c65-a497-09d71fb8caa9;\n  style 4edb3676-7cb6-4c65-a497-09d71fb8caa9 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\noriginal_image\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nChannel selection\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nsegmented image\"]\n  3[label=\"Split image along axes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Generate ISCC-CODE\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Extract dataset\"]\n  3 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Parse parameter value\"]\n  4 -> 6 [label=\"output_file\"]\n  7[label=\"Otsu\"]\n  5 -> 7 [label=\"output\"]\n  k3322121366f9453fb2a3d69fcdaa7eb3[color=lightseagreen,label=\"Output\\notsu_segmented\"]\n  7 -> k3322121366f9453fb2a3d69fcdaa7eb3\n  8[label=\"Verify ISCC-CODE\"]\n  6 -> 8 [label=\"text_param\"]\n  7 -> 8 [label=\"output\"]\n  k4edb36767cb64c65a49709d71fb8caa9[color=lightseagreen,label=\"Output\\nISCC-code\"]\n  8 -> k4edb36767cb64c65a49709d71fb8caa9\n}",
           "workflow_tools": [
@@ -2065,11 +2032,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -2201,10 +2163,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -2311,10 +2269,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -2419,10 +2373,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -2541,10 +2491,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -2651,10 +2597,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_similarity/iscc_sum_similarity/0.1.0+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -2765,10 +2707,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -2875,10 +2813,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -3274,7 +3208,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nRaw cycle images\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Illumination correction with Basic\"];\n  2 -->|output| 3;\n  8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86[\"Output\\nDFP images\"];\n  3 --> 8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86;\n  style 8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86 stroke:#2c3143,stroke-width:4px;\n  a5432ed5-980f-4f04-83a2-b5514019b11b[\"Output\\nFFP images\"];\n  3 --> a5432ed5-980f-4f04-83a2-b5514019b11b;\n  style a5432ed5-980f-4f04-83a2-b5514019b11b stroke:#2c3143,stroke-width:4px;\n  4[\"Stitching and registration with Ashlar\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  2 -->|output| 4;\n  0 -->|output| 4;\n  81f2c552-cd84-4d48-af14-eb252550f35a[\"Output\\nRegistered image\"];\n  4 --> 81f2c552-cd84-4d48-af14-eb252550f35a;\n  style 81f2c552-cd84-4d48-af14-eb252550f35a stroke:#2c3143,stroke-width:4px;\n  5[\"TMA dearray with UNetCoreograph\"];\n  4 -->|output| 5;\n  d79b4449-f879-42a9-9c79-0e0a6df0fa79[\"Output\\nDearray images\"];\n  5 --> d79b4449-f879-42a9-9c79-0e0a6df0fa79;\n  style d79b4449-f879-42a9-9c79-0e0a6df0fa79 stroke:#2c3143,stroke-width:4px;\n  c3ae2005-725a-487c-a77a-437636f3a296[\"Output\\nTMA dearray map\"];\n  5 --> c3ae2005-725a-487c-a77a-437636f3a296;\n  style c3ae2005-725a-487c-a77a-437636f3a296 stroke:#2c3143,stroke-width:4px;\n  0ed3e920-42ce-457d-9ebe-f0cd0baa1dea[\"Output\\nDearray masks\"];\n  5 --> 0ed3e920-42ce-457d-9ebe-f0cd0baa1dea;\n  style 0ed3e920-42ce-457d-9ebe-f0cd0baa1dea stroke:#2c3143,stroke-width:4px;\n  6[\"Nuclear segmentation\"];\n  5 -->|tma_sections| 6;\n  65c32086-b193-440f-b1a1-e5731bda0820[\"Output\\nNuclear mask\"];\n  6 --> 65c32086-b193-440f-b1a1-e5731bda0820;\n  style 65c32086-b193-440f-b1a1-e5731bda0820 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert dearray images to OME-TIFF\"];\n  5 -->|tma_sections| 7;\n  d1c85ec4-1aea-48ce-88c3-ede346d9b34f[\"Output\\nConverted image\"];\n  7 --> d1c85ec4-1aea-48ce-88c3-ede346d9b34f;\n  style d1c85ec4-1aea-48ce-88c3-ede346d9b34f stroke:#2c3143,stroke-width:4px;\n  8[\"Cell feature quantification with MC-Quant\"];\n  0 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  a277be13-b5af-4591-b86b-a8679f561677[\"Output\\nPrimary Mask Quantification\"];\n  8 --> a277be13-b5af-4591-b86b-a8679f561677;\n  style a277be13-b5af-4591-b86b-a8679f561677 stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF channels\"];\n  0 -->|output| 9;\n  7 -->|output| 9;\n  0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c[\"Output\\nRenamed image\"];\n  9 --> 0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c;\n  style 0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c stroke:#2c3143,stroke-width:4px;\n  10[\"Convert to Anndata\"];\n  8 -->|cellmask| 10;\n  a10efe57-5e36-4625-8ac8-a4bd27b3ce7e[\"Output\\nAnndata feature table\"];\n  10 --> a10efe57-5e36-4625-8ac8-a4bd27b3ce7e;\n  style a10efe57-5e36-4625-8ac8-a4bd27b3ce7e stroke:#2c3143,stroke-width:4px;\n  11[\"Scimap phenotyping\"];\n  10 -->|outfile| 11;\n  1 -->|output| 11;\n  1711b39d-79db-4012-80b6-abfae28439ae[\"Output\\nPhenotyped feature table\"];\n  11 --> 1711b39d-79db-4012-80b6-abfae28439ae;\n  style 1711b39d-79db-4012-80b6-abfae28439ae stroke:#2c3143,stroke-width:4px;\n  12[\"Create a Vitessce dashboard\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;\n  9093603f-8ee1-424b-8520-c5f5d3e9dc3d[\"Output\\nVitessce dashboard\"];\n  12 --> 9093603f-8ee1-424b-8520-c5f5d3e9dc3d;\n  style 9093603f-8ee1-424b-8520-c5f5d3e9dc3d stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmarkers.csv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"]\n  2[color=lightblue,label=\"ℹ️ Input Collection\\nRaw cycle images\"]\n  3[label=\"Illumination correction with Basic\"]\n  2 -> 3 [label=\"output\"]\n  k8a05fb699e2b4fa4ab8c77d3241f7a86[color=lightseagreen,label=\"Output\\nDFP images\"]\n  3 -> k8a05fb699e2b4fa4ab8c77d3241f7a86\n  ka5432ed5980f4f0483a2b5514019b11b[color=lightseagreen,label=\"Output\\nFFP images\"]\n  3 -> ka5432ed5980f4f0483a2b5514019b11b\n  4[label=\"Stitching and registration with Ashlar\"]\n  3 -> 4 [label=\"output_dfp\"]\n  3 -> 4 [label=\"output_ffp\"]\n  2 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  k81f2c552cd844d48af14eb252550f35a[color=lightseagreen,label=\"Output\\nRegistered image\"]\n  4 -> k81f2c552cd844d48af14eb252550f35a\n  5[label=\"TMA dearray with UNetCoreograph\"]\n  4 -> 5 [label=\"output\"]\n  kd79b4449f87942a99c790e0a6df0fa79[color=lightseagreen,label=\"Output\\nDearray images\"]\n  5 -> kd79b4449f87942a99c790e0a6df0fa79\n  kc3ae2005725a487ca77a437636f3a296[color=lightseagreen,label=\"Output\\nTMA dearray map\"]\n  5 -> kc3ae2005725a487ca77a437636f3a296\n  k0ed3e92042ce457d9ebef0cd0baa1dea[color=lightseagreen,label=\"Output\\nDearray masks\"]\n  5 -> k0ed3e92042ce457d9ebef0cd0baa1dea\n  6[label=\"Nuclear segmentation\"]\n  5 -> 6 [label=\"tma_sections\"]\n  k65c32086b193440fb1a1e5731bda0820[color=lightseagreen,label=\"Output\\nNuclear mask\"]\n  6 -> k65c32086b193440fb1a1e5731bda0820\n  7[label=\"Convert dearray images to OME-TIFF\"]\n  5 -> 7 [label=\"tma_sections\"]\n  kd1c85ec41aea48ce88c3ede346d9b34f[color=lightseagreen,label=\"Output\\nConverted image\"]\n  7 -> kd1c85ec41aea48ce88c3ede346d9b34f\n  8[label=\"Cell feature quantification with MC-Quant\"]\n  0 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"tma_sections\"]\n  6 -> 8 [label=\"mask\"]\n  ka277be13b5af4591b86ba8679f561677[color=lightseagreen,label=\"Output\\nPrimary Mask Quantification\"]\n  8 -> ka277be13b5af4591b86ba8679f561677\n  9[label=\"Rename OME-TIFF channels\"]\n  0 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output\"]\n  k0867cba20ac1413db6d0aba8b2dcbe0c[color=lightseagreen,label=\"Output\\nRenamed image\"]\n  9 -> k0867cba20ac1413db6d0aba8b2dcbe0c\n  10[label=\"Convert to Anndata\"]\n  8 -> 10 [label=\"cellmask\"]\n  ka10efe575e3646258ac8a4bd27b3ce7e[color=lightseagreen,label=\"Output\\nAnndata feature table\"]\n  10 -> ka10efe575e3646258ac8a4bd27b3ce7e\n  11[label=\"Scimap phenotyping\"]\n  10 -> 11 [label=\"outfile\"]\n  1 -> 11 [label=\"output\"]\n  k1711b39d79db401280b6abfae28439ae[color=lightseagreen,label=\"Output\\nPhenotyped feature table\"]\n  11 -> k1711b39d79db401280b6abfae28439ae\n  12[label=\"Create a Vitessce dashboard\"]\n  11 -> 12 [label=\"output\"]\n  9 -> 12 [label=\"renamed_image\"]\n  6 -> 12 [label=\"mask\"]\n  k9093603f8ee1424b8520c5f5d3e9dc3d[color=lightseagreen,label=\"Output\\nVitessce dashboard\"]\n  12 -> k9093603f8ee1424b8520c5f5d3e9dc3d\n}",
           "workflow_tools": [
@@ -4056,11 +3990,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -4192,10 +4121,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -4309,10 +4234,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -4417,10 +4338,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/goeckslab/gate_finder/gate_finder/3.5.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -4532,10 +4449,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -4651,10 +4564,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -4766,10 +4675,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/2.1.0+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -4884,10 +4789,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -5000,10 +4901,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -5111,10 +5008,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/3.5.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -5233,10 +5126,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -5254,9 +5143,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.7.0+galaxy3",
+                  "6.7.0+galaxy4",
                   "0.4",
-                  "6.7.0+galaxy4"
+                  "6.7.0+galaxy3"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -5331,8 +5220,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.7.0+galaxy3",
                   "6.7.0+galaxy4",
+                  "6.7.0+galaxy3",
                   "6.7.0+galaxy2"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -5347,8 +5236,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.7.0+galaxy3",
                   "6.7.0+galaxy4",
+                  "6.7.0+galaxy3",
                   "6.7.0+galaxy2"
                 ],
                 "server": "https://usegalaxy.org"
@@ -5363,10 +5252,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.18.0+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -5484,10 +5369,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -5603,10 +5484,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -5716,10 +5593,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -5836,10 +5709,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/watsocam/palom/palom/2022.8.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -6361,7 +6230,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nImage to segment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSigma Values\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nGround Truth Image\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Split by group\"];\n  1 -->|output| 3;\n  4[\"Parse parameter value\"];\n  3 -->|split_output| 4;\n  5[\"Filter 2-D image\"];\n  4 -->|float_param| 5;\n  0 -->|output| 5;\n  6[\"Perform histogram equalization\"];\n  5 -->|output| 6;\n  7[\"Threshold image\"];\n  6 -->|output| 7;\n  8[\"Compute image segmentation and object detection performance measures\"];\n  2 -->|output| 8;\n  7 -->|output| 8;\n  9[\"Collapse Collection\"];\n  8 -->|results| 9;\n  54631b7f-9caa-476a-a194-1b8a862e12b6[\"Output\\noutput\"];\n  9 --> 54631b7f-9caa-476a-a194-1b8a862e12b6;\n  style 54631b7f-9caa-476a-a194-1b8a862e12b6 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nImage to segment\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSigma Values\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nGround Truth Image\"]\n  3[label=\"Split by group\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Parse parameter value\"]\n  3 -> 4 [label=\"split_output\"]\n  5[label=\"Filter 2-D image\"]\n  4 -> 5 [label=\"float_param\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Perform histogram equalization\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Threshold image\"]\n  6 -> 7 [label=\"output\"]\n  8[label=\"Compute image segmentation and object detection performance measures\"]\n  2 -> 8 [label=\"output\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Collapse Collection\"]\n  8 -> 9 [label=\"results\"]\n  k54631b7f9caa476aa1941b8a862e12b6[color=lightseagreen,label=\"Output\\noutput\"]\n  9 -> k54631b7f9caa476aa1941b8a862e12b6\n}",
           "workflow_tools": [
@@ -6552,11 +6421,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -6688,10 +6552,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -6796,10 +6656,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -6914,10 +6770,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -7036,10 +6888,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -7154,10 +7002,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -7276,10 +7120,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -7359,8 +7199,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.4+galaxy5",
-                  "1.4.0-1",
-                  "1.4+galaxy6"
+                  "1.4+galaxy6",
+                  "1.4.0-1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -7369,9 +7209,9 @@
                 "versions": [
                   "1.4+galaxy5",
                   "1.4+galaxy6",
-                  "0.11.3-2",
+                  "1.4+galaxy4",
                   "1.4+galaxy3",
-                  "1.4+galaxy4"
+                  "0.11.3-2"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -7401,10 +7241,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -7890,7 +7726,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting modules\"];\n  1[\"Download images\"];\n  2[\"Segment complete nuclei\"];\n  0 -->|output_pipeline| 2;\n  3[\"Segmentation mask complete nuclei\"];\n  2 -->|output_pipeline| 3;\n  4[\"Label nuclei\"];\n  3 -->|output_pipeline| 4;\n  5[\"Save labelled nuclei\"];\n  4 -->|output_pipeline| 5;\n  6[\"Detect dark holes in nuclei\"];\n  5 -->|output_pipeline| 6;\n  7[\"Segment nucleoli that fall inside nuclei\"];\n  6 -->|output_pipeline| 7;\n  8[\"Segment nucleoli\"];\n  7 -->|output_pipeline| 8;\n  9[\"Convert the segmented nucleoli into an image\"];\n  8 -->|output_pipeline| 9;\n  10[\"Combine masks nuclei + nucleoli\"];\n  9 -->|output_pipeline| 10;\n  11[\"Save combined segmentation masks\"];\n  10 -->|output_pipeline| 11;\n  12[\"Segment all nuclei\"];\n  11 -->|output_pipeline| 12;\n  13[\"Segmentation mask nucleoli including cells touching borders\"];\n  12 -->|output_pipeline| 13;\n  14[\"Extract background\"];\n  13 -->|output_pipeline| 14;\n  15[\"Measure the image granularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"Measure the nuclei texture\"];\n  15 -->|output_pipeline| 16;\n  17[\"Measure the nuclei intensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"Measure size and shape of nuclei and nucleoli\"];\n  17 -->|output_pipeline| 18;\n  19[\"Relate nucleoli with their parent nuclei\"];\n  18 -->|output_pipeline| 19;\n  20[\"Measure the image quality\"];\n  19 -->|output_pipeline| 20;\n  21[\"Measure the area occupied by nuclei and nucleoli\"];\n  20 -->|output_pipeline| 21;\n  22[\"Measure the image intensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"Export measurements\"];\n  22 -->|output_pipeline| 23;\n  24[\"Run CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting modules\"]\n  1[label=\"Download images\"]\n  2[label=\"Segment complete nuclei\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Segmentation mask complete nuclei\"]\n  2 -> 3 [label=\"output_pipeline\"]\n  4[label=\"Label nuclei\"]\n  3 -> 4 [label=\"output_pipeline\"]\n  5[label=\"Save labelled nuclei\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"Detect dark holes in nuclei\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"Segment nucleoli that fall inside nuclei\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"Segment nucleoli\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Convert the segmented nucleoli into an image\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"Combine masks nuclei + nucleoli\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"Save combined segmentation masks\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"Segment all nuclei\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  13[label=\"Segmentation mask nucleoli including cells touching borders\"]\n  12 -> 13 [label=\"output_pipeline\"]\n  14[label=\"Extract background\"]\n  13 -> 14 [label=\"output_pipeline\"]\n  15[label=\"Measure the image granularity\"]\n  14 -> 15 [label=\"output_pipeline\"]\n  16[label=\"Measure the nuclei texture\"]\n  15 -> 16 [label=\"output_pipeline\"]\n  17[label=\"Measure the nuclei intensity\"]\n  16 -> 17 [label=\"output_pipeline\"]\n  18[label=\"Measure size and shape of nuclei and nucleoli\"]\n  17 -> 18 [label=\"output_pipeline\"]\n  19[label=\"Relate nucleoli with their parent nuclei\"]\n  18 -> 19 [label=\"output_pipeline\"]\n  20[label=\"Measure the image quality\"]\n  19 -> 20 [label=\"output_pipeline\"]\n  21[label=\"Measure the area occupied by nuclei and nucleoli\"]\n  20 -> 21 [label=\"output_pipeline\"]\n  22[label=\"Measure the image intensity\"]\n  21 -> 22 [label=\"output_pipeline\"]\n  23[label=\"Export measurements\"]\n  22 -> 23 [label=\"output_pipeline\"]\n  24[label=\"Run CellProfiler\"]\n  1 -> 24 [label=\"output_tar\"]\n  23 -> 24 [label=\"output_pipeline\"]\n}",
           "workflow_tools": [
@@ -9136,11 +8972,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -9272,10 +9103,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -9293,8 +9120,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -9359,8 +9186,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -9398,10 +9225,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -9519,10 +9342,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -9649,10 +9468,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -9770,10 +9585,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -9791,8 +9602,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -9857,8 +9668,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -9896,10 +9707,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -10017,10 +9824,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -10147,10 +9950,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -10268,10 +10067,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -10289,8 +10084,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10355,8 +10150,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -10394,10 +10189,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -10517,10 +10308,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -10538,8 +10325,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10604,8 +10391,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -10643,10 +10430,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -10764,10 +10547,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -10894,10 +10673,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -11015,10 +10790,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -11036,8 +10807,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy2",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11102,8 +10873,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy2",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -11141,10 +10912,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -11264,10 +11031,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -11285,8 +11048,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11351,8 +11114,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -11390,10 +11153,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -11511,10 +11270,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -11641,10 +11396,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -11762,10 +11513,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -11783,8 +11530,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11849,8 +11596,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -11888,10 +11635,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -12009,10 +11752,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -12139,10 +11878,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -12258,10 +11993,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -12388,10 +12119,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -12509,10 +12236,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -12530,8 +12253,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -12596,8 +12319,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12635,10 +12358,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -12756,10 +12475,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -12886,10 +12601,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -13007,10 +12718,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -13028,8 +12735,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13094,8 +12801,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -13133,10 +12840,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -13254,10 +12957,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -13384,10 +13083,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -13503,10 +13198,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -13633,10 +13324,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -13752,10 +13439,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -13882,10 +13565,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -14003,10 +13682,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -14024,8 +13699,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.45",
-                  "0.43"
+                  "0.43",
+                  "0.45"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14137,10 +13812,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -14858,7 +14529,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nIDR IDs\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nChannel to analyze\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nz-stack\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"Download IDR/OMERO\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  4[\"Unzip\"];\n  3 -->|output_tar| 4;\n  5[\"IDR Image IDs\"];\n  4 -->|unzipped| 5;\n  6[\"Perform 2-D spot detection\"];\n  5 -->|output| 6;\n  7[\"Convert point coordinates to label map\"];\n  6 -->|fn_out| 7;\n  8[\"Overlay images\"];\n  5 -->|output| 8;\n  7 -->|output| 8;\n  f3538bf0-0dc6-4237-a2ad-bdf539b01c70[\"Output\\nout_png\"];\n  8 --> f3538bf0-0dc6-4237-a2ad-bdf539b01c70;\n  style f3538bf0-0dc6-4237-a2ad-bdf539b01c70 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nIDR IDs\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nChannel to analyze\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nz-stack\"]\n  3[label=\"Download IDR/OMERO\"]\n  0 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Unzip\"]\n  3 -> 4 [label=\"output_tar\"]\n  5[label=\"IDR Image IDs\"]\n  4 -> 5 [label=\"unzipped\"]\n  6[label=\"Perform 2-D spot detection\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Convert point coordinates to label map\"]\n  6 -> 7 [label=\"fn_out\"]\n  8[label=\"Overlay images\"]\n  5 -> 8 [label=\"output\"]\n  7 -> 8 [label=\"output\"]\n  kf3538bf00dc64237a2adbdf539b01c70[color=lightseagreen,label=\"Output\\nout_png\"]\n  8 -> kf3538bf00dc64237a2adbdf539b01c70\n}",
           "workflow_tools": [
@@ -15054,11 +14725,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -15190,10 +14856,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -15298,10 +14960,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -15420,10 +15078,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -15538,10 +15192,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -15653,10 +15303,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -15774,10 +15420,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -15886,10 +15528,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -16010,10 +15648,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -16491,7 +16125,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nImage\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSeeds\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Convert image format\"];\n  0 -->|output| 2;\n  09e98f2a-17b3-429b-877d-93de63ca7e1a[\"Output\\nSingle channel image\"];\n  2 --> 09e98f2a-17b3-429b-877d-93de63ca7e1a;\n  style 09e98f2a-17b3-429b-877d-93de63ca7e1a stroke:#2c3143,stroke-width:4px;\n  3[\"Convert binary image to label map\"];\n  1 -->|output| 3;\n  4d2a861c-3746-4c24-9b81-96d8f7a710d4[\"Output\\nlabel map\"];\n  3 --> 4d2a861c-3746-4c24-9b81-96d8f7a710d4;\n  style 4d2a861c-3746-4c24-9b81-96d8f7a710d4 stroke:#2c3143,stroke-width:4px;\n  4[\"Convert single-channel to multi-channel image\"];\n  2 -->|output| 4;\n  66990d3d-7b19-43f6-ac5a-ecd5557bff35[\"Output\\nmulti-channel image\"];\n  4 --> 66990d3d-7b19-43f6-ac5a-ecd5557bff35;\n  style 66990d3d-7b19-43f6-ac5a-ecd5557bff35 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter 2-D image\"];\n  2 -->|output| 5;\n  e030c644-5cb4-4c1e-8287-8fc6d2950490[\"Output\\nSmoothed image\"];\n  5 --> e030c644-5cb4-4c1e-8287-8fc6d2950490;\n  style e030c644-5cb4-4c1e-8287-8fc6d2950490 stroke:#2c3143,stroke-width:4px;\n  6[\"Compute Voronoi tessellation\"];\n  3 -->|output| 6;\n  af96320e-5fa7-49d2-831b-bb438f8b2d73[\"Output\\ntesselation\"];\n  6 --> af96320e-5fa7-49d2-831b-bb438f8b2d73;\n  style af96320e-5fa7-49d2-831b-bb438f8b2d73 stroke:#2c3143,stroke-width:4px;\n  7[\"Threshold image\"];\n  5 -->|output| 7;\n  633e495b-ca86-451b-836c-bfceeb8d25ee[\"Output\\nmask\"];\n  7 --> 633e495b-ca86-451b-836c-bfceeb8d25ee;\n  style 633e495b-ca86-451b-836c-bfceeb8d25ee stroke:#2c3143,stroke-width:4px;\n  8[\"Count objects in label map\"];\n  6 -->|result| 8;\n  b977eb0c-e874-439f-b42b-756d6a864112[\"Output\\nobject count\"];\n  8 --> b977eb0c-e874-439f-b42b-756d6a864112;\n  style b977eb0c-e874-439f-b42b-756d6a864112 stroke:#2c3143,stroke-width:4px;\n  9[\"Extract image features\"];\n  6 -->|result| 9;\n  2 -->|output| 9;\n  5a94a425-9000-4083-aae7-232ea01ae215[\"Output\\nimage features\"];\n  9 --> 5a94a425-9000-4083-aae7-232ea01ae215;\n  style 5a94a425-9000-4083-aae7-232ea01ae215 stroke:#2c3143,stroke-width:4px;\n  10[\"Process images using arithmetic expressions\"];\n  6 -->|result| 10;\n  1 -->|output| 10;\n  7 -->|output| 10;\n  45f919dd-298f-4e94-a390-e73537b5fedb[\"Output\\nsegmentation\"];\n  10 --> 45f919dd-298f-4e94-a390-e73537b5fedb;\n  style 45f919dd-298f-4e94-a390-e73537b5fedb stroke:#2c3143,stroke-width:4px;\n  11[\"Colorize label map\"];\n  10 -->|result| 11;\n  6903fd1b-304a-4e4a-a529-8f3643bcd445[\"Output\\ncolorized label map\"];\n  11 --> 6903fd1b-304a-4e4a-a529-8f3643bcd445;\n  style 6903fd1b-304a-4e4a-a529-8f3643bcd445 stroke:#2c3143,stroke-width:4px;\n  12[\"Overlay images\"];\n  4 -->|output| 12;\n  11 -->|output| 12;\n  2adb0afd-923f-4641-bafb-10eaca09a4e0[\"Output\\nsegmented image\"];\n  12 --> 2adb0afd-923f-4641-bafb-10eaca09a4e0;\n  style 2adb0afd-923f-4641-bafb-10eaca09a4e0 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nImage\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSeeds\"]\n  2[label=\"Convert image format\"]\n  0 -> 2 [label=\"output\"]\n  k09e98f2a17b3429b877d93de63ca7e1a[color=lightseagreen,label=\"Output\\nSingle channel image\"]\n  2 -> k09e98f2a17b3429b877d93de63ca7e1a\n  3[label=\"Convert binary image to label map\"]\n  1 -> 3 [label=\"output\"]\n  k4d2a861c37464c249b8196d8f7a710d4[color=lightseagreen,label=\"Output\\nlabel map\"]\n  3 -> k4d2a861c37464c249b8196d8f7a710d4\n  4[label=\"Convert single-channel to multi-channel image\"]\n  2 -> 4 [label=\"output\"]\n  k66990d3d7b1943f6ac5aecd5557bff35[color=lightseagreen,label=\"Output\\nmulti-channel image\"]\n  4 -> k66990d3d7b1943f6ac5aecd5557bff35\n  5[label=\"Filter 2-D image\"]\n  2 -> 5 [label=\"output\"]\n  ke030c6445cb44c1e82878fc6d2950490[color=lightseagreen,label=\"Output\\nSmoothed image\"]\n  5 -> ke030c6445cb44c1e82878fc6d2950490\n  6[label=\"Compute Voronoi tessellation\"]\n  3 -> 6 [label=\"output\"]\n  kaf96320e5fa749d2831bbb438f8b2d73[color=lightseagreen,label=\"Output\\ntesselation\"]\n  6 -> kaf96320e5fa749d2831bbb438f8b2d73\n  7[label=\"Threshold image\"]\n  5 -> 7 [label=\"output\"]\n  k633e495bca86451b836cbfceeb8d25ee[color=lightseagreen,label=\"Output\\nmask\"]\n  7 -> k633e495bca86451b836cbfceeb8d25ee\n  8[label=\"Count objects in label map\"]\n  6 -> 8 [label=\"result\"]\n  kb977eb0ce874439fb42b756d6a864112[color=lightseagreen,label=\"Output\\nobject count\"]\n  8 -> kb977eb0ce874439fb42b756d6a864112\n  9[label=\"Extract image features\"]\n  6 -> 9 [label=\"result\"]\n  2 -> 9 [label=\"output\"]\n  k5a94a42590004083aae7232ea01ae215[color=lightseagreen,label=\"Output\\nimage features\"]\n  9 -> k5a94a42590004083aae7232ea01ae215\n  10[label=\"Process images using arithmetic expressions\"]\n  6 -> 10 [label=\"result\"]\n  1 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"output\"]\n  k45f919dd298f4e94a390e73537b5fedb[color=lightseagreen,label=\"Output\\nsegmentation\"]\n  10 -> k45f919dd298f4e94a390e73537b5fedb\n  11[label=\"Colorize label map\"]\n  10 -> 11 [label=\"result\"]\n  k6903fd1b304a4e4aa5298f3643bcd445[color=lightseagreen,label=\"Output\\ncolorized label map\"]\n  11 -> k6903fd1b304a4e4aa5298f3643bcd445\n  12[label=\"Overlay images\"]\n  4 -> 12 [label=\"output\"]\n  11 -> 12 [label=\"output\"]\n  k2adb0afd923f4641bafb10eaca09a4e0[color=lightseagreen,label=\"Output\\nsegmented image\"]\n  12 -> k2adb0afd923f4641bafb10eaca09a4e0\n}",
           "workflow_tools": [
@@ -17132,11 +16766,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -17268,10 +16897,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -17386,10 +17011,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -17508,10 +17129,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -17626,10 +17243,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -17748,10 +17361,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -17866,10 +17475,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -17977,10 +17582,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -18097,10 +17698,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -18221,10 +17818,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -18333,10 +17926,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -18452,10 +18041,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -18563,10 +18148,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -18687,10 +18268,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/voronoi_tesselation/voronoi_tessellation/0.22.0+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -19221,7 +18798,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nImage to Upload in OMERO\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nTarget Dataset\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nOMERO server address\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nSelect Metadata Type\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nMetadata File\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nROIs File\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"OMERO Image Import\"];\n  1 -->|output| 6;\n  0 -->|output| 6;\n  2 -->|output| 6;\n  062f153f-4e64-47db-a940-eb552e6aae56[\"Output\\nimage_upload_log\"];\n  6 --> 062f153f-4e64-47db-a940-eb552e6aae56;\n  style 062f153f-4e64-47db-a940-eb552e6aae56 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert\"];\n  6 -->|log| 7;\n  8[\"Replace Text\"];\n  7 -->|out_file1| 8;\n  9[\"Split file\"];\n  8 -->|outfile| 9;\n  10[\"Parse parameter value\"];\n  9 -->|list_output_tab| 10;\n  11[\"OMERO Metadata Import\"];\n  4 -->|output| 11;\n  3 -->|output| 11;\n  10 -->|integer_param| 11;\n  2 -->|output| 11;\n  8fbe8e5a-9214-44f0-ab1f-5dc421963754[\"Output\\nmetadata_import_log\"];\n  11 --> 8fbe8e5a-9214-44f0-ab1f-5dc421963754;\n  style 8fbe8e5a-9214-44f0-ab1f-5dc421963754 stroke:#2c3143,stroke-width:4px;\n  12[\"OMERO ROI Import\"];\n  10 -->|integer_param| 12;\n  5 -->|output| 12;\n  2 -->|output| 12;\n  7b584a96-912c-4f74-9901-3d233b47f502[\"Output\\nlog\"];\n  12 --> 7b584a96-912c-4f74-9901-3d233b47f502;\n  style 7b584a96-912c-4f74-9901-3d233b47f502 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nImage to Upload in OMERO\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nTarget Dataset\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nOMERO server address\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\nSelect Metadata Type\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nMetadata File\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nROIs File\"]\n  6[label=\"OMERO Image Import\"]\n  1 -> 6 [label=\"output\"]\n  0 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  k062f153f4e6447dba940eb552e6aae56[color=lightseagreen,label=\"Output\\nimage_upload_log\"]\n  6 -> k062f153f4e6447dba940eb552e6aae56\n  7[label=\"Convert\"]\n  6 -> 7 [label=\"log\"]\n  8[label=\"Replace Text\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Split file\"]\n  8 -> 9 [label=\"outfile\"]\n  10[label=\"Parse parameter value\"]\n  9 -> 10 [label=\"list_output_tab\"]\n  11[label=\"OMERO Metadata Import\"]\n  4 -> 11 [label=\"output\"]\n  3 -> 11 [label=\"output\"]\n  10 -> 11 [label=\"integer_param\"]\n  2 -> 11 [label=\"output\"]\n  k8fbe8e5a921444f0ab1f5dc421963754[color=lightseagreen,label=\"Output\\nmetadata_import_log\"]\n  11 -> k8fbe8e5a921444f0ab1f5dc421963754\n  12[label=\"OMERO ROI Import\"]\n  10 -> 12 [label=\"integer_param\"]\n  5 -> 12 [label=\"output\"]\n  2 -> 12 [label=\"output\"]\n  k7b584a96912c4f7499013d233b47f502[color=lightseagreen,label=\"Output\\nlog\"]\n  12 -> k7b584a96912c4f7499013d233b47f502\n}",
           "workflow_tools": [
@@ -19622,11 +19199,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -19758,10 +19330,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -19866,10 +19434,6 @@
           {
             "id": "param_value_from_file",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -19978,10 +19542,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -20063,9 +19623,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.5.0",
-                  "0.4.0",
                   "0.5.1",
+                  "0.4.0",
+                  "0.5.0",
                   "0.2.0",
                   "0.1.1"
                 ],
@@ -20084,8 +19644,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.5.0",
-                  "0.4.0"
+                  "0.4.0",
+                  "0.5.0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -20106,10 +19666,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -20127,8 +19683,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.2",
-                  "9.5+galaxy3"
+                  "9.5+galaxy3",
+                  "1.1.2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -20139,8 +19695,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.2",
                   "9.5+galaxy3",
+                  "1.1.2",
                   "9.5+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -20204,11 +19760,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.2",
                   "9.5+galaxy3",
+                  "1.1.2",
                   "9.5+galaxy2",
-                  "9.11+galaxy0",
                   "9.5+galaxy0",
+                  "9.11+galaxy0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -20247,10 +19803,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -20366,10 +19918,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -20481,10 +20029,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -20600,10 +20144,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -20717,10 +20257,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -20829,10 +20365,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy5",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -21471,7 +21003,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput the test data\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput a BiaPy YAML configuration file\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nInput the image ground truth\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Build a workflow with BiaPy\"];\n  1 -->|output| 3;\n  2 -->|output| 3;\n  0 -->|output| 3;\n  40a9aa77-8541-4b12-91e6-a6e98af013ea[\"Output\\npredictions_post_proc\"];\n  3 --> 40a9aa77-8541-4b12-91e6-a6e98af013ea;\n  style 40a9aa77-8541-4b12-91e6-a6e98af013ea stroke:#2c3143,stroke-width:4px;\n  4[\"Render 3-D image data\"];\n  0 -->|output| 4;\n  3 -->|predictions_post_proc| 4;\n  07011470-6b7a-4460-8e2b-728b08c1e77d[\"Output\\nhtml\"];\n  4 --> 07011470-6b7a-4460-8e2b-728b08c1e77d;\n  style 07011470-6b7a-4460-8e2b-728b08c1e77d stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput the test data\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput a BiaPy YAML configuration file\"]\n  2[color=lightblue,label=\"ℹ️ Input Collection\\nInput the image ground truth\"]\n  3[label=\"Build a workflow with BiaPy\"]\n  1 -> 3 [label=\"output\"]\n  2 -> 3 [label=\"output\"]\n  0 -> 3 [label=\"output\"]\n  k40a9aa7785414b1291e6a6e98af013ea[color=lightseagreen,label=\"Output\\npredictions_post_proc\"]\n  3 -> k40a9aa7785414b1291e6a6e98af013ea\n  4[label=\"Render 3-D image data\"]\n  0 -> 4 [label=\"output\"]\n  3 -> 4 [label=\"predictions_post_proc\"]\n  k070114706b7a44608e2b728b08c1e77d[color=lightseagreen,label=\"Output\\nhtml\"]\n  4 -> k070114706b7a44608e2b728b08c1e77d\n}",
           "workflow_tools": [
@@ -21718,11 +21250,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -21854,10 +21381,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -21962,10 +21485,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -22084,10 +21603,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -22202,10 +21717,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -22312,10 +21823,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -22431,10 +21938,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -22540,10 +22043,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/biapy/biapy/3.6.8+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -22948,7 +22447,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nYOLO Class File\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Perform histogram equalization\"];\n  0 -->|output| 2;\n  3[\"Convert image format\"];\n  2 -->|output| 3;\n  4[\"AnyLabeling Interactive\"];\n  3 -->|output| 4;\n  5[\"Convert AnyLabeling JSON to YOLO text\"];\n  1 -->|output| 5;\n  4 -->|al_output| 5;\n  6[\"Perform YOLO training\"];\n  3 -->|output| 6;\n  5 -->|output_yolo| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nYOLO Class File\"]\n  2[label=\"Perform histogram equalization\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Convert image format\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"AnyLabeling Interactive\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Convert AnyLabeling JSON to YOLO text\"]\n  1 -> 5 [label=\"output\"]\n  4 -> 5 [label=\"al_output\"]\n  6[label=\"Perform YOLO training\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output_yolo\"]\n}",
           "workflow_tools": [
@@ -23038,11 +22537,6 @@
       },
       "supported_servers_matrix": {
         "servers": [
-          {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
           {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
@@ -23175,10 +22669,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -23283,10 +22773,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.45+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -23403,10 +22889,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -23515,10 +22997,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -23625,10 +23103,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -23745,10 +23219,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -24030,7 +23500,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Mitochondrion detection\"];\n  b84bfb33-15eb-4984-b109-fab32f3813df[\"Output\\nSpot Detection of Mitoflashes\"];\n  0 --> b84bfb33-15eb-4984-b109-fab32f3813df;\n  style b84bfb33-15eb-4984-b109-fab32f3813df stroke:#2c3143,stroke-width:4px;\n  1[\"Mitochondrion tracking\"];\n  0 -->|fn_out| 1;\n  a25e8913-0019-4dd3-aed4-8138e7dd8da3[\"Output\\nSpot Detection Across Frames\"];\n  1 --> a25e8913-0019-4dd3-aed4-8138e7dd8da3;\n  style a25e8913-0019-4dd3-aed4-8138e7dd8da3 stroke:#2c3143,stroke-width:4px;\n  2[\"Curve fitting to measured intensities\"];\n  1 -->|fn_out| 2;\n  a978b043-f089-4d41-8f5d-0df99915dd45[\"Output\\nCurve Fitting for Mitoflash Detection\"];\n  2 --> a978b043-f089-4d41-8f5d-0df99915dd45;\n  style a978b043-f089-4d41-8f5d-0df99915dd45 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Mitochondrion detection\"]\n  kb84bfb3315eb4984b109fab32f3813df[color=lightseagreen,label=\"Output\\nSpot Detection of Mitoflashes\"]\n  0 -> kb84bfb3315eb4984b109fab32f3813df\n  1[label=\"Mitochondrion tracking\"]\n  0 -> 1 [label=\"fn_out\"]\n  ka25e891300194dd3aed48138e7dd8da3[color=lightseagreen,label=\"Output\\nSpot Detection Across Frames\"]\n  1 -> ka25e891300194dd3aed48138e7dd8da3\n  2[label=\"Curve fitting to measured intensities\"]\n  1 -> 2 [label=\"fn_out\"]\n  ka978b043f0894d418f5d0df99915dd45[color=lightseagreen,label=\"Output\\nCurve Fitting for Mitoflash Detection\"]\n  2 -> ka978b043f0894d418f5d0df99915dd45\n}",
           "workflow_tools": [
@@ -24220,11 +23690,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -24356,10 +23821,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -24470,10 +23931,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -24582,10 +24039,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -25102,7 +24555,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\ninput images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nfeature_extraction\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Collapse Collection\"];\n  2 -->|output| 3;\n  189572e7-e0e6-4818-91b1-441beced67a4[\"Output\\noutput\"];\n  3 --> 189572e7-e0e6-4818-91b1-441beced67a4;\n  style 189572e7-e0e6-4818-91b1-441beced67a4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\ninput images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nfeature_extraction\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Collapse Collection\"]\n  2 -> 3 [label=\"output\"]\n  k189572e7e0e6481891b1441beced67a4[color=lightseagreen,label=\"Output\\noutput\"]\n  3 -> k189572e7e0e6481891b1441beced67a4\n}",
           "workflow_tools": [
@@ -25322,7 +24775,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfilter rules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Threshold image\"];\n  2 -->|output| 3;\n  4[\"Convert binary image to label map\"];\n  3 -->|output| 4;\n  5[\"Extract image features\"];\n  4 -->|output| 5;\n  6[\"Filter label map by rules\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  f6f7f638-0f3c-404e-ab2e-5281a0393060[\"Output\\noutput\"];\n  6 --> f6f7f638-0f3c-404e-ab2e-5281a0393060;\n  style f6f7f638-0f3c-404e-ab2e-5281a0393060 stroke:#2c3143,stroke-width:4px;\n  7[\"Extract image features\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n  31da5e27-19fe-465e-95f0-96d3f6dcaba4[\"Output\\noutput\"];\n  7 --> 31da5e27-19fe-465e-95f0-96d3f6dcaba4;\n  style 31da5e27-19fe-465e-95f0-96d3f6dcaba4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput image\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nfilter rules\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Threshold image\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Convert binary image to label map\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Extract image features\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Filter label map by rules\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  kf6f7f6380f3c404eab2e5281a0393060[color=lightseagreen,label=\"Output\\noutput\"]\n  6 -> kf6f7f6380f3c404eab2e5281a0393060\n  7[label=\"Extract image features\"]\n  6 -> 7 [label=\"output\"]\n  0 -> 7 [label=\"output\"]\n  k31da5e2719fe465e95f096d3f6dcaba4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k31da5e2719fe465e95f096d3f6dcaba4\n}",
           "workflow_tools": [
@@ -25548,11 +25001,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -25684,10 +25132,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -25802,10 +25246,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -25924,10 +25364,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -26042,10 +25478,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -26164,10 +25596,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -26280,10 +25708,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -26404,10 +25828,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -27005,7 +26425,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n  dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e[\"Output\\nCellProfiler pipeline output files\"];\n  12 --> dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e;\n  style dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting Modules\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"ColorToGray\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Unzip\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"IdentifyPrimaryObjects\"]\n  2 -> 4 [label=\"output_pipeline\"]\n  5[label=\"MeasureObjectSizeShape\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"MeasureObjectIntensity\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"TrackObjects\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"OverlayOutlines\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Tile\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"SaveImages\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"ExportToSpreadsheet\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"CellProfiler\"]\n  3 -> 12 [label=\"unzipped\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label=\"Output\\nCellProfiler pipeline output files\"]\n  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e\n}",
           "workflow_tools": [
@@ -27756,11 +27176,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -27892,10 +27307,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -28014,10 +27425,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -28129,10 +27536,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -28253,10 +27656,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -28373,10 +27772,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -28497,10 +27892,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -28617,10 +28008,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -28741,10 +28128,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -28856,10 +28239,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -28980,10 +28359,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -29093,10 +28468,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -29212,10 +28583,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -29299,8 +28666,8 @@
                 "state": "inexact",
                 "versions": [
                   "6.0+galaxy2",
-                  "6.0+galaxy1",
                   "6.0+galaxy0",
+                  "6.0+galaxy1",
                   "6.0+galaxy5",
                   "6.0+galaxy3"
                 ],
@@ -29315,8 +28682,8 @@
                 "state": "inexact",
                 "versions": [
                   "6.0+galaxy2",
-                  "6.0+galaxy1",
                   "6.0+galaxy0",
+                  "6.0+galaxy1",
                   "6.0+galaxy5",
                   "6.0+galaxy3"
                 ],
@@ -29840,7 +29207,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Show image info\"];\n  0 -->|output| 1;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Perform histogram equalization\"];\n  2 -->|output| 3;\n  4[\"Threshold image\"];\n  2 -->|output| 4;\n  5[\"Convert binary image to label map\"];\n  4 -->|output| 5;\n  6[\"Overlay images\"];\n  3 -->|output| 6;\n  5 -->|output| 6;\n  d362c206-756d-4f04-82f0-bd6f24907e04[\"Output\\nout_png\"];\n  6 --> d362c206-756d-4f04-82f0-bd6f24907e04;\n  style d362c206-756d-4f04-82f0-bd6f24907e04 stroke:#2c3143,stroke-width:4px;\n  7[\"Count objects in label map\"];\n  5 -->|output| 7;\n  9c56017b-20c7-4ad3-8340-d36dd6b2e7b4[\"Output\\noutput\"];\n  7 --> 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4;\n  style 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput_image\"]\n  1[label=\"Show image info\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Perform histogram equalization\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Threshold image\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Convert binary image to label map\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Overlay images\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output\"]\n  kd362c206756d4f0482f0bd6f24907e04[color=lightseagreen,label=\"Output\\nout_png\"]\n  6 -> kd362c206756d4f0482f0bd6f24907e04\n  7[label=\"Count objects in label map\"]\n  5 -> 7 [label=\"output\"]\n  k9c56017b20c74ad38340d36dd6b2e7b4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k9c56017b20c74ad38340d36dd6b2e7b4\n}",
           "workflow_tools": [
@@ -30033,11 +29400,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -30169,10 +29531,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -30287,10 +29645,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -30409,10 +29763,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -30529,10 +29879,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -30645,10 +29991,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -30765,10 +30107,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -30889,10 +30227,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -31004,10 +30338,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -31617,11 +30947,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -31753,10 +31078,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -31861,10 +31182,6 @@
           {
             "id": "interactive_tool_cellprofiler",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -31973,10 +31290,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -32083,10 +31396,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -32191,10 +31500,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -32306,10 +31611,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -32380,8 +31681,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.1.0+galaxy3",
-                  "3.0.10+galaxy0",
                   "3.1.0+galaxy1",
+                  "3.0.10+galaxy0",
                   "3.1.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -32421,10 +31722,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -32538,10 +31835,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -32646,10 +31939,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -32768,10 +32057,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -32886,10 +32171,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.16.3+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -33008,10 +32289,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -33128,10 +32405,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -33244,10 +32517,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -33358,10 +32627,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -33482,10 +32747,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -33592,10 +32853,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.5",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -33711,10 +32968,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -33823,10 +33076,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -34438,7 +33687,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nbones_threshold_huv\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\ny_tol_bones_px\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\ndicom_series\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Create header\"];\n  4[\"Compose text parameter value\"];\n  1 -->|output| 4;\n  5[\"Convert DICOM to TIFF\"];\n  2 -->|output| 5;\n  6[\"Add ”centroid_y” rule\"];\n  3 -->|outfile| 6;\n  7[\"Add ”label” rule\"];\n  3 -->|outfile| 7;\n  8[\"Concatenate images or channels\"];\n  5 -->|output| 8;\n  9[\"Convert\"];\n  6 -->|outfile| 9;\n  10[\"Convert\"];\n  7 -->|outfile| 10;\n  11[\"Scale image\"];\n  8 -->|output| 11;\n  12[\"Clip image intensities\"];\n  11 -->|output| 12;\n  13[\"Threshold image\"];\n  12 -->|output| 13;\n  0 -->|output| 13;\n  14[\"Apply ridge filter\"];\n  12 -->|output| 14;\n  15[\"Convert binary image to label map\"];\n  13 -->|output| 15;\n  16[\"Threshold image\"];\n  14 -->|output| 16;\n  17[\"Extract image features\"];\n  15 -->|output| 17;\n  18[\"Convert binary image to label map\"];\n  16 -->|output| 18;\n  19[\"Query Tabular\"];\n  17 -->|output| 19;\n  20[\"Extract image features\"];\n  18 -->|output| 20;\n  21[\"Compute\"];\n  19 -->|output| 21;\n  4 -->|out1| 21;\n  22[\"Query Tabular\"];\n  20 -->|output| 22;\n  23[\"Parse parameter value\"];\n  21 -->|out_file1| 23;\n  24[\"Parse parameter value\"];\n  22 -->|output| 24;\n  25[\"Replace Text\"];\n  9 -->|out_file1| 25;\n  23 -->|text_param| 25;\n  26[\"Replace Text\"];\n  10 -->|out_file1| 26;\n  24 -->|text_param| 26;\n  27[\"Filter label map by rules\"];\n  17 -->|output| 27;\n  15 -->|output| 27;\n  25 -->|outfile| 27;\n  8fa03bee-9e05-4f98-9816-20a6ab4d37cb[\"Output\\nsegm_bones\"];\n  27 --> 8fa03bee-9e05-4f98-9816-20a6ab4d37cb;\n  style 8fa03bee-9e05-4f98-9816-20a6ab4d37cb stroke:#2c3143,stroke-width:4px;\n  28[\"Filter label map by rules\"];\n  20 -->|output| 28;\n  18 -->|output| 28;\n  26 -->|outfile| 28;\n  9d82b7c6-8f5c-4523-aac2-21ec66030e62[\"Output\\nsegm_aorticbif\"];\n  28 --> 9d82b7c6-8f5c-4523-aac2-21ec66030e62;\n  style 9d82b7c6-8f5c-4523-aac2-21ec66030e62 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nbones_threshold_huv\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\ny_tol_bones_px\"]\n  2[color=lightblue,label=\"ℹ️ Input Collection\\ndicom_series\"]\n  3[label=\"Create header\"]\n  4[label=\"Compose text parameter value\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Convert DICOM to TIFF\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Add ”centroid_y” rule\"]\n  3 -> 6 [label=\"outfile\"]\n  7[label=\"Add ”label” rule\"]\n  3 -> 7 [label=\"outfile\"]\n  8[label=\"Concatenate images or channels\"]\n  5 -> 8 [label=\"output\"]\n  9[label=\"Convert\"]\n  6 -> 9 [label=\"outfile\"]\n  10[label=\"Convert\"]\n  7 -> 10 [label=\"outfile\"]\n  11[label=\"Scale image\"]\n  8 -> 11 [label=\"output\"]\n  12[label=\"Clip image intensities\"]\n  11 -> 12 [label=\"output\"]\n  13[label=\"Threshold image\"]\n  12 -> 13 [label=\"output\"]\n  0 -> 13 [label=\"output\"]\n  14[label=\"Apply ridge filter\"]\n  12 -> 14 [label=\"output\"]\n  15[label=\"Convert binary image to label map\"]\n  13 -> 15 [label=\"output\"]\n  16[label=\"Threshold image\"]\n  14 -> 16 [label=\"output\"]\n  17[label=\"Extract image features\"]\n  15 -> 17 [label=\"output\"]\n  18[label=\"Convert binary image to label map\"]\n  16 -> 18 [label=\"output\"]\n  19[label=\"Query Tabular\"]\n  17 -> 19 [label=\"output\"]\n  20[label=\"Extract image features\"]\n  18 -> 20 [label=\"output\"]\n  21[label=\"Compute\"]\n  19 -> 21 [label=\"output\"]\n  4 -> 21 [label=\"out1\"]\n  22[label=\"Query Tabular\"]\n  20 -> 22 [label=\"output\"]\n  23[label=\"Parse parameter value\"]\n  21 -> 23 [label=\"out_file1\"]\n  24[label=\"Parse parameter value\"]\n  22 -> 24 [label=\"output\"]\n  25[label=\"Replace Text\"]\n  9 -> 25 [label=\"out_file1\"]\n  23 -> 25 [label=\"text_param\"]\n  26[label=\"Replace Text\"]\n  10 -> 26 [label=\"out_file1\"]\n  24 -> 26 [label=\"text_param\"]\n  27[label=\"Filter label map by rules\"]\n  17 -> 27 [label=\"output\"]\n  15 -> 27 [label=\"output\"]\n  25 -> 27 [label=\"outfile\"]\n  k8fa03bee9e054f98981620a6ab4d37cb[color=lightseagreen,label=\"Output\\nsegm_bones\"]\n  27 -> k8fa03bee9e054f98981620a6ab4d37cb\n  28[label=\"Filter label map by rules\"]\n  20 -> 28 [label=\"output\"]\n  18 -> 28 [label=\"output\"]\n  26 -> 28 [label=\"outfile\"]\n  k9d82b7c68f5c4523aac221ec66030e62[color=lightseagreen,label=\"Output\\nsegm_aorticbif\"]\n  28 -> k9d82b7c68f5c4523aac221ec66030e62\n}",
           "workflow_tools": [
@@ -34697,11 +33946,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -34833,10 +34077,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -34943,10 +34183,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -35051,10 +34287,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -35171,10 +34403,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -35192,8 +34420,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.2",
-                  "9.5+galaxy3"
+                  "9.5+galaxy3",
+                  "1.1.2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -35303,10 +34531,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -35324,8 +34548,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.5+galaxy3",
-                  "1.1.1"
+                  "1.1.1",
+                  "9.5+galaxy3"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -35432,10 +34656,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -35564,10 +34784,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -35585,12 +34801,12 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
+                  "1.2.0",
                   "1.3.0",
                   "2.0",
                   "1.4",
-                  "1.5",
-                  "1.2.0"
+                  "1.6",
+                  "1.5"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -35660,9 +34876,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
                   "2.0",
                   "1.4",
+                  "1.6",
                   "2.1+galaxy0",
                   "1.1.0"
                 ],
@@ -35681,10 +34897,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
                   "1.3.0",
                   "2.0",
                   "1.4",
+                  "1.6",
                   "1.5",
                   "1.3.1"
                 ],
@@ -35705,10 +34921,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -35827,10 +35039,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -35943,10 +35151,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.7.3+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -36063,10 +35267,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -36181,10 +35381,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -36291,10 +35487,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/concat_channels/ip_concat_channels/0.5",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -36409,10 +35601,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -36519,10 +35707,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/libcarna_render/libcarna_render/0.2.0+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -36633,10 +35817,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -36743,10 +35923,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/scale_image/ip_scale_image/0.25.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -36859,10 +36035,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -36983,10 +36155,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -37101,10 +36269,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -37210,9 +36374,9 @@
                 "versions": [
                   "3.3.0",
                   "3.1.2",
-                  "3.2.0",
-                  "3.1.1",
                   "3.0.0",
+                  "3.1.1",
+                  "3.2.0",
                   "3.1.0"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -37640,7 +36804,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nROI image for staining analysis\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Sample ID\"];\n  2[\"header for total area\"];\n  3[\"Stain intensity normalization CLAHE\"];\n  0 -->|output| 3;\n  4[\"Show image info\"];\n  0 -->|output| 4;\n  5[\"Color Deconvolution\"];\n  3 -->|output| 5;\n  b4393dde-25b8-49ad-b48c-5d2df47c1408[\"Output\\nDeconvolved Image\"];\n  5 --> b4393dde-25b8-49ad-b48c-5d2df47c1408;\n  style b4393dde-25b8-49ad-b48c-5d2df47c1408 stroke:#2c3143,stroke-width:4px;\n  6[\"Width Extraction\"];\n  4 -->|output| 6;\n  7[\"Height Extraction\"];\n  4 -->|output| 7;\n  8[\"Split Image Channels for Staining Detection\"];\n  5 -->|output| 8;\n  cbd8deec-7ea2-4715-bc9b-c1eea3c787fc[\"Output\\nCollection: Individual Deconvolved Channels\"];\n  8 --> cbd8deec-7ea2-4715-bc9b-c1eea3c787fc;\n  style cbd8deec-7ea2-4715-bc9b-c1eea3c787fc stroke:#2c3143,stroke-width:4px;\n  9[\"Text transformation\"];\n  6 -->|out_file1| 9;\n  10[\"Text transformation\"];\n  7 -->|out_file1| 10;\n  11[\"Collection: Extract Stain Channel from Sub-Collections\"];\n  8 -->|output| 11;\n  23ea738b-06ae-4688-ab4a-b29c196a9cfa[\"Output\\nSelected Stain Channel\"];\n  11 --> 23ea738b-06ae-4688-ab4a-b29c196a9cfa;\n  style 23ea738b-06ae-4688-ab4a-b29c196a9cfa stroke:#2c3143,stroke-width:4px;\n  12[\"Paste\"];\n  9 -->|output| 12;\n  10 -->|output| 12;\n  13[\"Threshold Stain Channel Collection\"];\n  11 -->|output| 13;\n  a3923c7b-8253-4578-9647-b11f5bbd91a6[\"Output\\nSelected Stain Channel Thresholded\"];\n  13 --> a3923c7b-8253-4578-9647-b11f5bbd91a6;\n  style a3923c7b-8253-4578-9647-b11f5bbd91a6 stroke:#2c3143,stroke-width:4px;\n  14[\"Compute\"];\n  12 -->|out_file1| 14;\n  15[\"Generate ROIs of stained region\"];\n  13 -->|output| 15;\n  21505140-b70c-4dab-ba64-46e68c2121c7[\"Output\\nROIs\"];\n  15 --> 21505140-b70c-4dab-ba64-46e68c2121c7;\n  style 21505140-b70c-4dab-ba64-46e68c2121c7 stroke:#2c3143,stroke-width:4px;\n  b05b07b2-2e6c-4d58-a92a-88c4c32828c3[\"Output\\nROIs Image\"];\n  15 --> b05b07b2-2e6c-4d58-a92a-88c4c32828c3;\n  style b05b07b2-2e6c-4d58-a92a-88c4c32828c3 stroke:#2c3143,stroke-width:4px;\n  16[\"Extract Image Features\"];\n  13 -->|output| 16;\n  11 -->|output| 16;\n  19b9fc98-e80e-48f6-8bd9-a23a59e09e84[\"Output\\nCollection of Tabular: Staining Quantification Results\"];\n  16 --> 19b9fc98-e80e-48f6-8bd9-a23a59e09e84;\n  style 19b9fc98-e80e-48f6-8bd9-a23a59e09e84 stroke:#2c3143,stroke-width:4px;\n  17[\"Cut\"];\n  14 -->|out_file1| 17;\n  18[\"Prepare Header Source Dataset\"];\n  16 -->|output| 18;\n  19[\"Extract\"];\n  16 -->|output| 19;\n  20[\"Extract element identifiers\"];\n  16 -->|output| 20;\n  21[\"Collapse Collection\"];\n  17 -->|out_file1| 21;\n  22[\"Header Extraction\"];\n  18 -->|output| 22;\n  23[\"Collapse Collection into one file\"];\n  19 -->|out_file1| 23;\n  24[\"Concatenate datasets\"];\n  2 -->|outfile| 24;\n  21 -->|output| 24;\n  25[\"Paste header with Sample ID\"];\n  1 -->|outfile| 25;\n  22 -->|out_file1| 25;\n  26[\"Paste Sample Names with Tabular Results\"];\n  20 -->|output| 26;\n  23 -->|output| 26;\n  27[\"Tabular: Staining Feature Results\"];\n  25 -->|out_file1| 27;\n  26 -->|out_file1| 27;\n  28[\"Paste\"];\n  27 -->|out_file1| 28;\n  24 -->|out_file1| 28;\n  29[\"Percent area computation\"];\n  28 -->|out_file1| 29;\n  1c3f7fd0-bad7-4891-9f95-f1346e44c20f[\"Output\\nTabular File: Staining Feature Results\"];\n  29 --> 1c3f7fd0-bad7-4891-9f95-f1346e44c20f;\n  style 1c3f7fd0-bad7-4891-9f95-f1346e44c20f stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nROI image for staining analysis\"]\n  1[label=\"Sample ID\"]\n  2[label=\"header for total area\"]\n  3[label=\"Stain intensity normalization CLAHE\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Show image info\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Color Deconvolution\"]\n  3 -> 5 [label=\"output\"]\n  kb4393dde25b849adb48c5d2df47c1408[color=lightseagreen,label=\"Output\\nDeconvolved Image\"]\n  5 -> kb4393dde25b849adb48c5d2df47c1408\n  6[label=\"Width Extraction\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"Height Extraction\"]\n  4 -> 7 [label=\"output\"]\n  8[label=\"Split Image Channels for Staining Detection\"]\n  5 -> 8 [label=\"output\"]\n  kcbd8deec7ea24715bc9bc1eea3c787fc[color=lightseagreen,label=\"Output\\nCollection: Individual Deconvolved Channels\"]\n  8 -> kcbd8deec7ea24715bc9bc1eea3c787fc\n  9[label=\"Text transformation\"]\n  6 -> 9 [label=\"out_file1\"]\n  10[label=\"Text transformation\"]\n  7 -> 10 [label=\"out_file1\"]\n  11[label=\"Collection: Extract Stain Channel from Sub-Collections\"]\n  8 -> 11 [label=\"output\"]\n  k23ea738b06ae4688ab4ab29c196a9cfa[color=lightseagreen,label=\"Output\\nSelected Stain Channel\"]\n  11 -> k23ea738b06ae4688ab4ab29c196a9cfa\n  12[label=\"Paste\"]\n  9 -> 12 [label=\"output\"]\n  10 -> 12 [label=\"output\"]\n  13[label=\"Threshold Stain Channel Collection\"]\n  11 -> 13 [label=\"output\"]\n  ka3923c7b825345789647b11f5bbd91a6[color=lightseagreen,label=\"Output\\nSelected Stain Channel Thresholded\"]\n  13 -> ka3923c7b825345789647b11f5bbd91a6\n  14[label=\"Compute\"]\n  12 -> 14 [label=\"out_file1\"]\n  15[label=\"Generate ROIs of stained region\"]\n  13 -> 15 [label=\"output\"]\n  k21505140b70c4dabba6446e68c2121c7[color=lightseagreen,label=\"Output\\nROIs\"]\n  15 -> k21505140b70c4dabba6446e68c2121c7\n  kb05b07b22e6c4d58a92a88c4c32828c3[color=lightseagreen,label=\"Output\\nROIs Image\"]\n  15 -> kb05b07b22e6c4d58a92a88c4c32828c3\n  16[label=\"Extract Image Features\"]\n  13 -> 16 [label=\"output\"]\n  11 -> 16 [label=\"output\"]\n  k19b9fc98e80e48f68bd9a23a59e09e84[color=lightseagreen,label=\"Output\\nCollection of Tabular: Staining Quantification Results\"]\n  16 -> k19b9fc98e80e48f68bd9a23a59e09e84\n  17[label=\"Cut\"]\n  14 -> 17 [label=\"out_file1\"]\n  18[label=\"Prepare Header Source Dataset\"]\n  16 -> 18 [label=\"output\"]\n  19[label=\"Extract\"]\n  16 -> 19 [label=\"output\"]\n  20[label=\"Extract element identifiers\"]\n  16 -> 20 [label=\"output\"]\n  21[label=\"Collapse Collection\"]\n  17 -> 21 [label=\"out_file1\"]\n  22[label=\"Header Extraction\"]\n  18 -> 22 [label=\"output\"]\n  23[label=\"Collapse Collection into one file\"]\n  19 -> 23 [label=\"out_file1\"]\n  24[label=\"Concatenate datasets\"]\n  2 -> 24 [label=\"outfile\"]\n  21 -> 24 [label=\"output\"]\n  25[label=\"Paste header with Sample ID\"]\n  1 -> 25 [label=\"outfile\"]\n  22 -> 25 [label=\"out_file1\"]\n  26[label=\"Paste Sample Names with Tabular Results\"]\n  20 -> 26 [label=\"output\"]\n  23 -> 26 [label=\"output\"]\n  27[label=\"Tabular: Staining Feature Results\"]\n  25 -> 27 [label=\"out_file1\"]\n  26 -> 27 [label=\"out_file1\"]\n  28[label=\"Paste\"]\n  27 -> 28 [label=\"out_file1\"]\n  24 -> 28 [label=\"out_file1\"]\n  29[label=\"Percent area computation\"]\n  28 -> 29 [label=\"out_file1\"]\n  k1c3f7fd0bad748919f95f1346e44c20f[color=lightseagreen,label=\"Output\\nTabular File: Staining Feature Results\"]\n  29 -> k1c3f7fd0bad748919f95f1346e44c20f\n}",
           "workflow_tools": [
@@ -38083,11 +37247,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -38219,10 +37378,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -38327,10 +37482,6 @@
           {
             "id": "Grep1",
             "servers": [
-              {
-                "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -38439,10 +37590,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -38547,10 +37694,6 @@
           {
             "id": "Show beginning1",
             "servers": [
-              {
-                "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -38659,10 +37802,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -38767,10 +37906,6 @@
           {
             "id": "__EXTRACT_DATASET__",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -38879,10 +38014,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -38989,10 +38120,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -39091,8 +38218,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.1.0",
-                  "0.1.1"
+                  "0.1.1",
+                  "0.1.0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -39111,10 +38238,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -39237,10 +38360,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -39360,10 +38479,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -39381,12 +38496,12 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
+                  "1.2.0",
                   "1.3.0",
                   "2.0",
                   "1.4",
-                  "1.5",
-                  "1.2.0"
+                  "1.6",
+                  "1.5"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -39468,10 +38583,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
                   "1.3.0",
                   "2.0",
                   "1.4",
+                  "1.6",
                   "1.5",
                   "1.3.1"
                 ],
@@ -39492,10 +38607,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -39614,10 +38725,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -39730,10 +38837,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.25.2+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -39852,10 +38955,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -39968,10 +39067,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -40076,10 +39171,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -40200,10 +39291,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -40322,10 +39409,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -40436,10 +39519,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/imagej2_analyze_particles_binary/imagej2_analyze_particles_binary/20240614+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -40554,10 +39633,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -40668,10 +39743,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -40780,10 +39851,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -40900,10 +39967,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -41024,10 +40087,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -41605,7 +40664,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-08-25 09:46:04 +0000",
+          "modified": "2026-08-26 00:07:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nElectropheresis-Gel.jpg\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert coordinates to label map\"];\n  2[\"Convert image format\"];\n  0 -->|output| 2;\n  3[\"Extract image features\"];\n  1 -->|output| 3;\n  4[\"Show image info\"];\n  2 -->|output| 4;\n  5[\"Split image along axes\"];\n  2 -->|output| 5;\n  6[\"QuPath\"];\n  2 -->|output| 6;\n  ecf5b534-95d3-40d0-af1d-28480b447188[\"Output\\noutputs\"];\n  6 --> ecf5b534-95d3-40d0-af1d-28480b447188;\n  style ecf5b534-95d3-40d0-af1d-28480b447188 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nElectropheresis-Gel.jpg\"]\n  1[label=\"Convert coordinates to label map\"]\n  2[label=\"Convert image format\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Extract image features\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Show image info\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Split image along axes\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"QuPath\"]\n  2 -> 6 [label=\"output\"]\n  kecf5b53495d340d0af1d28480b447188[color=lightseagreen,label=\"Output\\noutputs\"]\n  6 -> kecf5b53495d340d0af1d28480b447188\n}",
           "workflow_tools": [
@@ -41714,11 +40773,6 @@
       },
       "supported_servers_matrix": {
         "servers": [
-          {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
           {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
@@ -41851,10 +40905,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -41961,10 +41011,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -42069,10 +41115,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.45+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -42189,10 +41231,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -42307,10 +41345,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -42431,10 +41465,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -42548,10 +41578,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
@@ -42965,11 +41991,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mbac.gmu.edu:8080/",
             "name": "MBAC Metabiome Portal",
             "usegalaxy": false
@@ -43101,10 +42122,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -43212,10 +42229,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
               },
               {
@@ -43321,10 +42334,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/ecology/sam3_semantic_segmentation/sam3_semantic_segmentation/1.0.1+galaxy6",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://mbac.gmu.edu:8080/"
