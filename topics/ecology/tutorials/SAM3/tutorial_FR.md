@@ -256,7 +256,6 @@ Dans cette seconde partie, nous allons appliquer SAM3 à la vidéo `2024-09-20-P
 >    > >
 >    > > Il est possible que la vidéo ne se charge pas dans Galaxy pour plusieurs raisons :
 >    > > - La vidéo est trop volumineuse pour votre connexion internet
->    > > - Le paramètre {% icon param-select %} *"Video quality"* : `Original quality (copy)` rend l'affichage dans Galaxy indisponible
 >    > >
 >    > > Dans ce cas, utilisez {% icon galaxy-save %} pour télécharger la vidéo et la lire localement avec votre lecteur vidéo habituel.
 >    > {: .warning}

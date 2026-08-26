@@ -243,7 +243,6 @@ In this second section, we will execute SAM3 tool to the video `2024-09-20-PorzB
 >    > >
 >    > > The video may not load in Galaxy for several reasons:
 >    > > - The file is too large for your internet connection
->    > > - The {% icon param-select %} *"Video quality"*: `Original quality (copy)` setting makes in-browser playback unavailable
 >    > >
 >    > > In that case, use {% icon galaxy-save %} to download the video and play it locally with your usual media player.  
 >    > {: .warning}
