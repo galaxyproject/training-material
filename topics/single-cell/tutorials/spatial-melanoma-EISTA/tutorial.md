@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Spatial transcriptomics analysis of a primary dermal melanoma section with Xenium
 subtopic: spatial
 level: Advanced
@@ -56,12 +55,11 @@ abbreviations:
 contributions:
     authorship:
         - khaled196
+        - poterlowicz-lab
     editing:
         - pavanvidem
         - Nilchia
         - mbaardwijk
-    funding:
-        - poterlowicz-lab
 gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
