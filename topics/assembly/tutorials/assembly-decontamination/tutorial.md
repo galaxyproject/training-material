@@ -3,20 +3,32 @@ layout: tutorial_hands_on
 title: Decontamination of a genome assembly
 zenodo_link: https://zenodo.org/records/13367433
 questions:
-- How to remove contaminant sequences from your assembly?
+- How to screen for adaptor and vector contamination in a genome assembly?
+- How to identify and remove foreign organism contamination using NCBI FCS GX?
+- How to remove mitochondrial DNA from a nuclear genome assembly?
 objectives:
-- Remove contaminant sequences from an assembly
-- Identify contaminant species
-- Remove Mitochondrial DNA from an assembly
+- Screen for synthetic sequence contamination (adaptors, vectors) with FCS Adaptor
+- Identify and remove foreign organism contamination with FCS GX
+- Identify and remove mitochondrial DNA from a nuclear genome assembly
 time_estimation: 1H30M
 key_points:
 - Assembly decontamination is important to avoid false identification of genes, blast
   hits...
+- FCS Adaptor screens for synthetic sequences (adaptors, vectors) from library preparation
+- FCS GX identifies foreign organism contamination (bacteria, virus, human)
+- BLAST against the RefSeq Mitochondrion database identifies mitochondrial scaffolds
 contributions:
   authorship:
   - delphine-l
+  editing:
+  - delphine-l
 tags:
   - biodiversity
+follow_up_training:
+- type: internal
+  topic_name: sequence-analysis
+  tutorials:
+  - ncbi-fcs
 recordings:
 - youtube_id: -5oxfNnNwoA
   length: 29M
@@ -37,10 +49,21 @@ edam_ontology:
 
 
 
-When sequencing a genome, it is common that contamination from a foreign organism get mixed with the genomic material of our species of interest. For instance, if you are processing a whole body sample of an insect then you will sequence not only the insect, but everything on and inside of it. When building a reference genome, it is important to separate these contaminants from the genome of our species. Foreign DNA sequences could cause false positive identification when running BLAST analyses, the misidentification of genes that don't actually belong to the species, or they can be incorporated as 'reference' sequence for that species in the public archives when those sequences did not actually belong to that species.
+When sequencing a genome, it is common that contamination from a foreign organism gets mixed with the genomic material of our species of interest. For instance, if you are processing a whole body sample of an insect then you will sequence not only the insect, but everything on and inside of it. When building a reference genome, it is important to separate these contaminants from the genome of our species. Foreign DNA sequences could cause false positive identification when running BLAST analyses, the misidentification of genes that don't actually belong to the species, or they can be incorporated as 'reference' sequence for that species in the public archives when those sequences did not actually belong to that species.
 
+In addition to foreign organisms, genome assemblies can contain synthetic sequences (adaptors, vectors, primers) from the library preparation process. These sequences are artefacts and must be removed before submission to public databases.
 
-In this tutorial, we will learn how to separate these contaminants from a genome assembly of a vertebrate. It will also include the removal of mitogenome contigs so that the final genome assembly contains only nuclear DNA. (A separate tutorial exists for assembling the mitogenome.)
+In this tutorial, we will learn how to decontaminate a genome assembly of a vertebrate using the NCBI Foreign Contamination Screen (FCS) tool suite:
+- **FCS Adaptor** detects synthetic sequences (adaptors, vectors) introduced during library preparation.
+- **FCS GX** detects foreign organism contamination such as bacteria, viruses, and human DNA.
+
+We will also use BLAST to identify mitochondrial scaffolds so that the final genome assembly contains only nuclear DNA. (A separate tutorial exists for assembling the mitogenome.)
+
+> <comment-title>More about the NCBI FCS tools</comment-title>
+>
+> For a more in-depth tutorial on FCS Adaptor and FCS GX, including how the tools work and how to interpret their outputs, see the dedicated tutorial: {% link topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.md %}.
+>
+{: .comment}
 
 
 
@@ -69,6 +92,7 @@ For this tutorial, we are using the genome assembly of the zebra finch (*Taeniop
 
 The analysis described in this tutorial will work with any assembly in FASTA format. If your initial dataset is compressed, use the tool `Convert compressed file to uncompressed.` first.
 
+FCS GX requires a **Taxonomic Identifier** (NCBI tax_id) for the target species. This tells the tool what organism the assembly belongs to, so that it can distinguish between sequences from the target species and foreign contaminants. For the zebra finch, the NCBI taxonomic identifier is `8932` (*Taeniopygia guttata*).
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -93,14 +117,153 @@ The analysis described in this tutorial will work with any assembly in FASTA for
 >
 {: .hands_on}
 
+# Screen for Adaptor Contamination
+
+Adaptors, vectors, and primers used during library preparation can sometimes end up incorporated into the assembled sequences. **FCS Adaptor** screens for these synthetic sequences and produces a report of which sequences are affected and where the contamination is located.
+
+> <hands-on-title> Screen for Adaptors </hands-on-title>
+>
+> 1. {% tool [NCBI FCS Adaptor](toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Genome sequence (fasta/fasta.gz)"*: `Contaminated Assembly`
+>    - *"Taxonomy"*: `Eukaryotes (--euk)`
+>
+{: .hands_on}
+
+FCS Adaptor produces two outputs:
+- An **adaptor report** (tabular): lists each contaminated sequence, its length, the recommended action (`ACTION_TRIM` or `ACTION_EXCLUDE`), and the coordinates of the contamination.
+- A **cleaned FASTA**: the assembly with adaptor-contaminated regions removed.
+
+Take a look at the adaptor report to see if any adaptors were found.
+
+> <question-title></question-title>
+>
+>  Were any adaptors found in the zebra finch assembly?
+>
+> > <solution-title></solution-title>
+> >
+> >  Check the adaptor report. If it contains only a header line, then no adaptors were found. If there are additional rows, they describe where adaptor contamination was detected.
+> >
+> {: .solution}
+>
+{: .question}
+
+
+# Modify Adaptor Action Report
+
+The adaptor report from FCS Adaptor assigns `ACTION_TRIM` to contaminated regions, meaning those regions should be trimmed from the sequence. However, we need to distinguish between two cases:
+
+- **Terminal adaptors** (near the start or end of a scaffold, within 100 bp of either end): trimming is appropriate because it only removes a small portion at the edge of the scaffold.
+- **Mid-sequence adaptors** (more than 100 bp from both ends): trimming would split the scaffold and destroy it. Instead, we want to **mask** these regions by changing the action from `ACTION_TRIM` to `FIX`.
+
+> <comment-title>Automated vs manual</comment-title>
+>
+> In the VGP decontamination workflow, this logic is handled automatically by a subworkflow called "Modify action report". Here, we do it manually step by step so you can understand the logic. If you run the full workflow, this is all taken care of for you.
+>
+{: .comment}
+
+The steps below check if any adaptors were found, then split the report by adaptor position and change mid-sequence adaptors from `ACTION_TRIM` to `FIX`.
+
+> <hands-on-title> Count lines in the adaptor report </hands-on-title>
+>
+> 1. {% tool [Line/Word/Character count](wc_gnu) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `adaptor report` (output of **NCBI FCS Adaptor** {% icon tool %})
+>    - *"Operation"*: `Count lines`
+>
+{: .hands_on}
+
+If the report contains only 1 line (the header), then no adaptors were found and you can skip ahead to the next section. Otherwise, continue with the filtering steps below.
+
+> <hands-on-title> Filter mid-sequence adaptors </hands-on-title>
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `adaptor report` (output of **NCBI FCS Adaptor** {% icon tool %})
+>    - *"With following condition"*: `int(c4.split('..')[0])>100 and int(c4.split('..')[1])<int(c2)-100`
+>
+>    This selects rows where the adaptor starts more than 100 bp from the beginning AND ends more than 100 bp before the end of the scaffold.
+>
+> 2. Rename the output `Mid-sequence adaptors`
+>
+{: .hands_on}
+
+> <hands-on-title> Filter terminal adaptors </hands-on-title>
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `adaptor report` (output of **NCBI FCS Adaptor** {% icon tool %})
+>    - *"With following condition"*: `int(c4.split('..')[0])<=100 or int(c4.split('..')[1])>=int(c2)-100`
+>
+>    This selects rows where the adaptor is near the start or end of the scaffold.
+>
+> 2. Rename the output `Terminal adaptors`
+>
+{: .hands_on}
+
+> <hands-on-title> Filter sequences with empty coordinates </hands-on-title>
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `adaptor report` (output of **NCBI FCS Adaptor** {% icon tool %})
+>    - *"With following condition"*: `c4==""`
+>
+>    This selects sequences marked for exclusion (entirely contaminated), which have no coordinate range in column 4.
+>
+> 2. Rename the output `Sequences to exclude`
+>
+{: .hands_on}
+
+> <hands-on-title> Change mid-sequence adaptors from TRIM to FIX </hands-on-title>
+>
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `Mid-sequence adaptors` (output of **Filter** {% icon tool %})
+>    - In *"Replacement"*:
+>        - *"Find pattern"*: `ACTION_TRIM`
+>        - *"Replace with"*: `FIX`
+>
+> 2. Rename the output `Modified mid-sequence adaptors`
+>
+{: .hands_on}
+
+> <hands-on-title> Concatenate the modified report </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.5+galaxy2) %} with the following parameters:
+>    - {% icon param-files %} *"Datasets to concatenate"*: `Modified mid-sequence adaptors`, `Terminal adaptors`, `Sequences to exclude`
+>
+> 2. Rename the output `Modified Adaptor Action Report`
+>
+{: .hands_on}
+
+# Clean Adaptor Contamination
+
+Now we use FCS GX in **clean mode** to apply the modified action report to our assembly. This removes entirely contaminated sequences (ACTION_EXCLUDE), trims terminal adaptors (ACTION_TRIM), and masks mid-sequence adaptors (FIX).
+
+> <comment-title>Why use FCS GX to clean?</comment-title>
+>
+> FCS Adaptor produces a cleaned FASTA, but it only handles simple cases (full exclusions and end trims). For mid-sequence adaptors, we need FCS GX's clean mode, which can handle `FIX` actions by masking the affected regions instead of splitting the contig.
+>
+{: .comment}
+
+> <hands-on-title> Clean Adaptors </hands-on-title>
+>
+> 1. {% tool [NCBI FCS GX](toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.5+galaxy2) %} with the following parameters:
+>    - *"Run FCS GX in"*: `Clean genome`
+>    - {% icon param-file %} *"Genome assembly to clean (fasta/fasta.gz)"*: `Contaminated Assembly` (the original input dataset)
+>    - {% icon param-file %} *"Action report from FCS GX or FCS-adaptor"*: `Modified Adaptor Action Report` (output of **Concatenate datasets** {% icon tool %})
+>    - *"Minimum sequence length"*: `200`
+>
+> 2. Rename the cleaned output: `Adaptor-cleaned Assembly`
+>
+{: .hands_on}
+
+FCS GX in clean mode produces two outputs:
+- A **cleaned FASTA**: the assembly with adaptor contamination resolved.
+- A **contaminant FASTA**: sequences that were excluded.
+
 # Genome Masking
 
 
 Genome masking refers to hiding regions of low complexity in the genome, such as repeats. Masking a genome reduces the noise and improves the efficacy of the decontamination by emphasizing the regions that contribute the most to the classification ({% cite saini2016gene %}, {% cite maskedref-website %}).
 
-The first step of our analysis is therefore to mask our genome assembly. There are two types of masking, depending on the requirements of the tools we are using:
+We need to mask our assembly before running the contamination screen and mitochondrial identification. There are two types of masking:
 
-- **Soft Masking** The masked regions are replaced by lower case letters. This is the prefered method of masking when the tools understand it, because it does not cause any loss of information.
+- **Soft Masking** The masked regions are replaced by lower case letters. This is the preferred method of masking when the tools understand it, because it does not cause any loss of information.
 - **Hard Masking** The masked regions are replaced by a wildcard letter: `N`s for nucleotide sequences, `X`s for proteins. Use this technique if you are unsure whether the tools you will be using knows to ignore lower case letters.
 
 
@@ -110,9 +273,9 @@ The first step of our analysis is therefore to mask our genome assembly. There a
 >
 {: .details}
 
-In this tutorial we will use `Kraken2` to classify our contaminant scaffolds, `Blastn` to identify the mitochondrial sequences, and `DustMasker` to mask our genome. `Dustmasker` generates soft masked sequences, while `Kraken2` and `Blast` needs hard masked sequences, so we will need to do some file manipulations along the way.
+In this tutorial we will use `DustMasker` to soft mask the genome, and then convert the soft masked sequences to hard masked sequences for `Blast`. `FCS GX` will also use the soft masked sequences for foreign contamination screening.
 
-Before running the analysis, ensure the sequences in your assembly are uppercase. This will ensure the soft masking can be done properly. *If* your sequences are not uppercase, then run the optional step "Convert the assembly file to upper case". We will then convert the lower case letter to `N`s to hard mask the sequences for `Kraken2` and `Blast`.
+Before running the analysis, ensure the sequences in your assembly are uppercase. This will ensure the soft masking can be done properly. *If* your sequences are not uppercase, then run the optional step "Convert the assembly file to upper case". We will then convert the lower case letter to `N`s to hard mask the sequences for `Blast`.
 
 > <details-title> Why do the sequences need to be in uppercase? </details-title>
 >
@@ -123,8 +286,8 @@ Before running the analysis, ensure the sequences in your assembly are uppercase
 
 > <details-title> Optional : Convert the assembly file to upper case </details-title>
 >
-> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Contaminated assembly`
+> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `Adaptor-cleaned Assembly`
 >    - *"SED Program"*: `s/^[^>].+/\U&/g` (Convert letters in the sequence to uppercase)
 >
 >
@@ -133,9 +296,9 @@ Before running the analysis, ensure the sequences in your assembly are uppercase
 
 > <hands-on-title> Mask the Genome with Dustmasker </hands-on-title>
 >
-> 1. {% tool [NCBI BLAST+ dustmasker](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_dustmasker_wrapper/2.14.1+galaxy1) %} with the following parameters:
+> 1. {% tool [NCBI BLAST+ dustmasker](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_dustmasker_wrapper/2.16.0+galaxy0) %} with the following parameters:
 >    - *"Subject database/sequences"*: `FASTA file from your history`
->        - {% icon param-file %} *"Nucleotide FASTA subject file to use instead of a database"*: `Contaminated assembly` (or the output of **Text transformation** {% icon tool %} if you converted your sequences to upper case)
+>        - {% icon param-file %} *"Nucleotide FASTA subject file to use instead of a database"*: `Adaptor-cleaned Assembly` (or the output of **Text transformation** {% icon tool %} if you converted your sequences to upper case)
 >    - *"DUST level"*: `40`
 >    - *"Output format"*: `FASTA`
 >
@@ -147,151 +310,114 @@ Take a peek at your genome assembly. You can see that the beginning of the first
 
 > <hands-on-title> Soft Masking to Hard Masking </hands-on-title>
 >
-> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %} with the following parameters:
+> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Soft Masked assembly` (output of **NCBI BLAST+ dustmasker** {% icon tool %})
 >    - *"SED Program"*: `/^>/!y/atcgn/NNNNN/`: In sequence lines (not starting with ">"), replace each instance of lower case bases (a t c or g), including undefined ones (n), to `N`s).
 >
 > 2. Rename your file `Hard Masked assembly`
 >
 >    {% snippet  faqs/galaxy/analysis_regular_expressions.md %}
-> 
+>
 >    > <comment-title> Unsure about your regex? </comment-title>
 >    >
 >    > Ask ChatGPT about it. E.g. [What is the sed command to convert a text to upper case?](https://chatgpt.com/share/de569538-0e4d-41ac-8380-2d52af62b3d7) or test with a [regex tester](https://sed.js.org/) website (Warning, some of these testers do not understand the lowercase and uppercase transformations)
->    > 
+>    >
 >    {: .comment}
 >
-> 
+>
 {: .hands_on}
 
 Take a look at your dataset and see that the lower case bases have been converted to `N`s.
 
-# Identify Non-Target Contaminants
+# Identify Foreign Contaminants
 
-[Kraken2](https://ccb.jhu.edu/software/kraken2/) is a tool for taxonomic classification. It matches the kmers found in our assemblies to the ones stored in its databases. For the purpose of decontamination, we only need to identify possible contaminants, not the sequences belonging to our sampled organisms. Therefore, we only need to use a database containing likely contaminants such as bacteria, virus, and human (always wear gloves, folks!).
-The best option at the time of this tutorial's writing is the PlusPF database which contains the RefSeq Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core) plus protozoa and fungi data.
+[NCBI FCS GX](https://github.com/ncbi/fcs-gx) (Foreign Contamination Screen for GenBank cross-species) is NCBI's purpose-built tool for identifying foreign organism contamination in genome assemblies. It screens your assembly against a comprehensive database of known organisms and flags sequences that don't belong to your target species. FCS GX requires a taxonomic identifier for the target species so it can distinguish between sequences from the target organism and foreign contaminants.
 
+The decontamination process with FCS GX has two steps:
+1. **Screen**: identify contaminants and generate an action report
+2. **Clean**: apply the action report to remove the contaminated sequences
 
-
-> <hands-on-title> Identify the taxonomy of our sequences </hands-on-title>
+> <hands-on-title> Screen for Foreign Contaminants </hands-on-title>
 >
-> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
->    - *"Single or paired reads"*: `Single`
->        - {% icon param-file %} *"Input sequences"*: `Hard Masked assembly` (output of **Text transformation** {% icon tool %})
->    - *"Print scientific names instead of just taxids"*: `Yes`
->    - *"Confidence"*: `0.3`
->    - *"Split classified and unclassified outputs?"*: `Yes`
->    - *"Select a Kraken2 database"*: `PlusPF (2021-05-17)`
+> 1. {% tool [NCBI FCS GX](toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.5+galaxy2) %} with the following parameters:
+>    - *"Run FCS GX in"*: `Screen genome`
+>    - {% icon param-file %} *"Genome assembly to screen (fasta/fasta.gz)"*: `Soft Masked assembly` (output of **NCBI BLAST+ dustmasker** {% icon tool %})
+>    - *"GX database"*: `test-only`
+>    - *"Taxonomy entry"*: `NCBI Taxonomic identifier`
+>        - *"NCBI Taxonomic identifier"*: `8932`
+>    - *"Species"*: `Taeniopygia guttata`
 >
->
-{: .hands_on}
-
-
-Kraken provides us with three outputs:
-- A table containing the classification information for each sequence
-- A fasta file containing the classified sequences (our contaminants)
-- A fasta file containing the unclassified sequences (our precious zebra finch)
-
-We could decide to use the fasta file of unclassified sequences as our assembly, but remember that our genome is hard masked. That means that we lost information. Because we don't use it now doesn't mean we never will. So instead of using the masked genome, we will remove the classified sequences from our original assembly.
-
-
-But first, we are naturally curious people, and we want to know what type of contaminants we had in our sample.
-
-
-## Investigate our contaminants
-
-Take a look at the classification output of Kraken2. You can see five columns containing:
-
-1. `C` / `U`: a one letter code indicating that the sequence was either classified or unclassified.
-2. The sequence ID.
-3. The taxonomy ID Kraken2 used to label the sequence; this is 0 if the sequence is unclassified.
-4. The length of the sequence in bp.
-5. A space-delimited list indicating the LCA mapping of each k-mer in the sequence(s). For example, "562:13 561:4 A:31 0:1" would indicate that:
-    - the first 13 k-mers mapped to taxonomy ID #562
-    - the next 4 k-mers mapped to taxonomy ID #561
-    - the next 31 k-mers contained an ambiguous nucleotide
-    - the next k-mer was not in the database
-
-To identify our contaminants, we only need the information from the first three columns, and only for the sequences that are classified. So we will start by extracting our three columns and then filtering out unclassified sequences.
-
-> <hands-on-title> Extract classification information </hands-on-title>
->
-> 1. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1,c2,c3`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: `Kraken2 on data X: Classification` (output of **Kraken2** {% icon tool %})
->
->
->    > <comment-title> Columns definitions </comment-title>
+>    > <comment-title>Using the test database</comment-title>
 >    >
->    > The three columns that we extracted contain:
->    > 1. Whether the sequence is classified `C` or unclassified `U`
->    > 2. The sequence name
->    > 3. The sequence classification
+>    > We use the `test-only` FCS GX database for this tutorial to keep the runtime short. For a real analysis, you should use the full `all` database which contains a comprehensive set of reference genomes. The test database contains only a small subset of organisms and may miss some contaminants.
 >    >
 >    {: .comment}
 >
->    > <comment-title> What if my organism is in the database? </comment-title>
->    >
->    > The filtering of contaminants is based on their presence in the database. Any sequence classified by Kraken2 is considered as a contaminant. If you are working on an organism that is present in the database, this filtering will not work.
->    >
->    > *If you can't find a database that include contaminants but exclude your organism, you will need to process the outputs of Kraken differently.* Instead of filtering the sequences on classified/unclassified, select the sequences that do not match the taxonomic ID of your species. That is true for the rest of the section.
->    {: .comment}
->
 {: .hands_on}
 
 
-> <hands-on-title> Remove unclassified sequences </hands-on-title>
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `Cut on data X` (output of **Cut** {% icon tool %})
->    - *"With following condition"*: `c1!='U'`
->
-> 2. Rename the output `Contaminants informations`
->
-{: .hands_on}
+FCS GX in screen mode produces two outputs:
+- A **taxonomy report** (tabular): shows the taxonomic assignment for each sequence, including the number of bases assigned to different taxonomic divisions.
+- An **action report** (tabular): lists the sequences identified as contaminants with recommended cleanup actions (`EXCLUDE`, `TRIM`, or `FIX`).
+
+Take a look at both reports to see what contaminants were identified.
 
 
 > <question-title></question-title>
 >
->  How many different contaminants are in our sample?
+>  What contaminants were identified in the zebra finch assembly?
 >
 > > <solution-title></solution-title>
 > >
-> >  We found two contaminants in our sample: Salmonella and Yersinia phage phiR1-37.
+> >  Look at the action report. You should find contaminants from bacteria such as *Salmonella* and/or *Yersinia*.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Get the list of contaminants to remove from our assembly
+Now we clean the assembly by applying the action report:
 
-In order to remove the contaminant sequences from our assembly, we need a list of the contaminants names, that we will get by extracting the contaminant IDs from the Kraken output.
-
-
-> <hands-on-title> Get contaminant sequence names </hands-on-title>
+> <hands-on-title> Clean Foreign Contaminants </hands-on-title>
 >
-> 1. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c2`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: `Contaminants informations` (output of **Filter** {% icon tool %})
+> 1. {% tool [NCBI FCS GX](toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.5+galaxy2) %} with the following parameters:
+>    - *"Run FCS GX in"*: `Clean genome`
+>    - {% icon param-file %} *"Genome assembly to clean (fasta/fasta.gz)"*: `Soft Masked assembly` (output of **NCBI BLAST+ dustmasker** {% icon tool %})
+>    - {% icon param-file %} *"Action report from FCS GX or FCS-adaptor"*: the action report from the screen step (output of **NCBI FCS GX** {% icon tool %})
+>    - *"Minimum sequence length"*: `200`
 >
-> 2. Rename the output `List of Contaminants`
+> 2. Rename the cleaned output: `Decontaminated Assembly`
 >
 {: .hands_on}
 
+FCS GX in clean mode produces:
+- A **cleaned FASTA**: the assembly with contaminant sequences removed.
+- A **contaminant sequences FASTA**: the sequences that were identified as foreign contaminants.
 
-Now that we have our list of contaminants, we will go through a similar process to extract mitochondrial sequences.
+# Identify Mitochondrial DNA
 
+We start by filtering the soft masked assembly to only include sequences that could plausibly be mitochondrial in size. This reduces the BLAST search space and speeds up the analysis.
 
-# Identify mitochondrial DNA
+> <hands-on-title> Filter sequences by length </hands-on-title>
+>
+> 1. {% tool [Filter sequences by length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2) %} with the following parameters:
+>    - {% icon param-file %} *"Fasta file"*: `Soft Masked assembly` (output of **NCBI BLAST+ dustmasker** {% icon tool %})
+>    - *"Minimum length"*: `0`
+>    - *"Maximum length"*: `100000`
+>
+>    > <comment-title>Maximum length</comment-title>
+>    >
+>    > For vertebrates, mitochondrial genomes are typically around 16,000-17,000 bp. We use a generous upper bound of 100,000 bp to avoid missing any scaffolds that contain mitochondrial sequences alongside some flanking DNA. Set this to `0` to use all sequences (no length filtering).
+>    >
+>    {: .comment}
+>
+{: .hands_on}
 
-We start with running Blastn against a database containing mitochondrial sequences.
+Now we run BLAST against the RefSeq Mitochondrion database to identify which of these filtered scaffolds match known mitochondrial sequences. We use the hard masked assembly for BLAST to reduce noise from repetitive regions.
 
 > <hands-on-title> Blastn against RefSeq Mitochondrion </hands-on-title>
 >
-> 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.14.1+galaxy1) %} with the following parameters:
+> 1. {% tool [NCBI BLAST+ blastn](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.16.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Nucleotide query sequence(s)"*: `Hard Masked assembly` (output of **Text transformation** {% icon tool %})
 >    - *"Subject database/sequences"*: `Locally installed BLAST database`
 >        - *"Nucleotide BLAST database"*: `RefSeq Mitochondrion`
@@ -307,15 +433,15 @@ We start with running Blastn against a database containing mitochondrial sequenc
 
 This step may take a little while, so you have time to make yourself a cup of coffee.
 
-Next, we parse the result of the Blastn to extract a report on the alignements between our assemblies and the database, and a list of the scaffolds aligning with mitochondrial sequences.
+Next, we parse the result of the Blastn to extract a report on the alignments between our assemblies and the database, and a list of the scaffolds aligning with mitochondrial sequences.
 
 
-> <hands-on-title> Extract alignement informations from the Blast output</hands-on-title>
+> <hands-on-title> Extract alignment information from the Blast output</hands-on-title>
 >
 > 1. {% tool [Parse mitochondrial blast](toolshed.g2.bx.psu.edu/repos/iuc/parse_mito_blast/parse_mito_blast/1.0.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file generated by mito-blast"*: `blastn Text transformation on data X vs 'refseq_mitochondrion'` (output of **NCBI BLAST+ blastn** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file generated by mito-blast"*: output of **NCBI BLAST+ blastn** {% icon tool %}
 >
-> 2. Rename the output `List of Mitochondrial sequences`
+> 2. Rename the scaffold names output `List of Mitochondrial sequences`
 >
 {: .hands_on}
 
@@ -335,37 +461,25 @@ Next, we parse the result of the Blastn to extract a report on the alignements b
 
 
 
-# Remove contaminants and mitochondrial DNA from the assembly
+# Remove Mitochondrial DNA from the Assembly
 
-From the previous sections, we obtain two files containing a list of sequences belonging to contaminants and one belonging to the mitochondria. We will merge these two lists to clean up our original assembly.
+Foreign contaminants have already been removed by FCS GX in the previous section. Now we only need to remove the mitochondrial scaffolds from the decontaminated assembly using gfastats.
 
-
-> <hands-on-title> Concatenate lists of scaffolds to remove </hands-on-title>
+> <hands-on-title> Remove mitochondrial scaffolds from the assembly </hands-on-title>
 >
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
->    - {% icon param-files %} *"Datasets to concatenate"*: `List of Contaminants`, `List of Mitochondrial sequences`
->
-> 2. Rename the output `Sequences to remove`
->
-{: .hands_on}
-
-Now we will use gfastats, a tool box for genome assemblies with capability for manipulations and statistics generation.
-
-> <hands-on-title> Remove scaffolds from the original genome assembly </hands-on-title>
->
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output` (Input dataset)
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `Decontaminated Assembly` (cleaned output of the second **NCBI FCS GX** {% icon tool %} run, the one that removed foreign contaminants)
 >    - *"Specify target sequences"*: `Enabled`
->        - {% icon param-file %} *"Exclude specific intervals"*: `Sequences to remove` (output of **Concatenate datasets** {% icon tool %}). This input can be a bed file with sequence coordinates, or, in our case, a simple list of sequence IDs to remove from the fasta file. 
+>        - {% icon param-file %} *"Exclude specific intervals"*: `List of Mitochondrial sequences` (output of **Parse mitochondrial blast** {% icon tool %}). This input can be a bed file with sequence coordinates, or, in our case, a simple list of sequence IDs to remove from the fasta file.
 >    - *"Tool mode"*: `Genome assembly manipulation`
 >        - *"Output format"*: `FASTA.gz`
 >
+> 2. Rename the output: `Final Decontaminated Assembly`
 >
 {: .hands_on}
 
 # Conclusion
 
-In this tutorial we used taxonomic classification to identified contaminants and Blast to identify mitochondrial sequences in a genome assembly. We then removed these sequences to keep only the nuclear DNA of our species of interest.
+In this tutorial we used FCS Adaptor to screen for synthetic sequences, FCS GX to identify and remove foreign organism contaminants, and BLAST to identify mitochondrial sequences in a genome assembly. We then removed the mitochondrial scaffolds to keep only the nuclear DNA of our species of interest.
 
 Now that we have removed the contaminants and mitochondrial DNA from our assembly, it is ready for manual curation!
-
