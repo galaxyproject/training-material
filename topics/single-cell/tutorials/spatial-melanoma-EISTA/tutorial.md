@@ -1354,6 +1354,32 @@ most useful pattern in the table. The dot plot produced by the same job shows bo
 >
 {: .comment}
 
+> <comment-title>A second reference: what changes with an immune-only model</comment-title>
+>
+> Running the same job again with the CellTypist model built from immune populations across 20 tissues
+> and 18 studies ({% cite Dominguez2022CellTypist %}) changes which groups the classifier gets right, not
+> how confident it is overall. The two references disagree in opposite directions.
+>
+> Group `1` (T and NK), `6` (fibroblasts), `7` (endothelium) and `8` (plasma cells) go from wrong or
+> weakly-supported skin-model labels to correct immune-model labels at markedly higher confidence:
+> `Differentiated_KC` at 0.09 becomes `T cells` at 0.61 for group `1`, `Differentiated_KC` at 0.20 becomes
+> `Fibroblasts` at 0.78 for group `6`, and `Tc` at 0.15 becomes `Plasma cells` at 0.52 for group `8`.
+> That is the expected result: an immune-focused reference should out-perform a skin reference on immune
+> and stromal populations.
+>
+> The trade runs the other way for the four melanocytic groups. The skin reference has a `Melanocyte`
+> label and uses it correctly for groups `0`, `4` and `5`; the immune reference has no melanocyte category
+> at all, so those cells are forced onto `T cells` or `ILC` instead, the nearest labels available. Neither
+> model is more accurate in general. Each is only as good as its reference contains the population being
+> classified, which is the same lesson as the `Differentiated_KC` result above, from the opposite side.
+>
+> Group `3`, the myeloid and macrophage group, is wrong in both references, and this one is not fully
+> explained. The immune model does carry `Macrophages` and `Monocytes` categories, and 12.9 per cent of
+> the group's cells are called `Macrophages` before majority voting, but voting collapses that to 91.2 per
+> cent `T cells`. Why a model built to recognise macrophages still misses this group is left open here.
+>
+{: .comment}
+
 # Ligand-receptor rankings with LIANA
 
 LIANA runs several published ligand-receptor methods over a curated resource and combines their results
