@@ -101,7 +101,7 @@ spatial object.
 
 ![Flow diagram of the analysis stages, from the SpatialData input through quality control, filtering, normalisation, embedding, clustering, marker ranking, spatial statistics, reference transfer and ligand-receptor ranking, to the processed SpatialData output.](../../images/spatial-melanoma-EISTA/spatial_melanoma_pipeline.svg "Analysis stages covered by this tutorial. Blue stages read and describe the data, green stages prepare it for clustering, orange stages interpret the groups, and purple stages package the result.")
 
-Two different graphs are built during this analysis, and keeping them apart is the most useful distinction in the tutorial:
+Two different graphs are built during this analysis:
 
 1. Scanpy builds an **expression-neighbour graph** from {PCA} coordinates. Cells with similar expression profiles are connected. Leiden clustering and {UMAP} both use these connections ({% cite Wolf2018Scanpy %}).
 2. Squidpy builds a **spatial-neighbour graph** from the cell coordinates. Cells that are physically close in the section are connected ({% cite Palla2022Squidpy %}).
@@ -500,12 +500,12 @@ Plotting the same metrics on the tissue is the check that separates a technical 
 
 > <question-title>Interpret the QC output</question-title>
 >
-> The violin plots show the shape of each distribution but not the numbers behind it. To read the numbers off the object rather than off the picture, run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3) %} on `QC metrics before filtering` with *"What to inspect?"*: `Key-indexed observations annotation (obs)`, then open the resulting table with {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to get medians and counts for any column. For this window before filtering that gives a median of 305 total counts and 234 detected genes per cell, and a median `cell_area` of 60.2 µm² with the first percentile at 10.9 µm² and the maximum at 1,016.8 µm².
+> The violin plots show the shape of each distribution but not the numbers behind it. To read the numbers off the object rather than off the picture, run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3) %} on `QC metrics before filtering` with *"What to inspect?"*: `Key-indexed observations annotation (obs)`, then open the resulting table with {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to get medians and counts for any column. For this window before filtering that gives a median of 316 total counts and 236 detected genes per cell, and a median `cell_area` of 61.5 µm² with the first percentile at 11.9 µm² and the maximum at 476.9 µm².
 >
-> The two figures used in the next question come from the same columns counted across the whole section. Counting rows where `cell_area` is below 10 gives 840 objects, whose median `total_counts` is 13; counting rows above 400 gives 203 objects, whose median `total_counts` is 2,694. Inside this window the same thresholds remove 47 objects at the bottom and 8 at the top. In Galaxy you can get both with {% tool [Filter data on any column using simple expressions](Filter1) %} on the `obs` table (`c8<10`, then `c8>400`, adjusting the column number to wherever `cell_area` sits in your export) followed by **Datamash**. It is worth doing this once by hand, because every threshold in the next section is chosen from these numbers rather than from a rule of thumb.
+> The two figures used in the next question come from the same table. Counting rows where `cell_area` is below 10 gives 60 objects, whose median `total_counts` is 21; counting rows above 400 gives 8 objects, whose median `total_counts` is 3,132. The area filter applied later removes 47 of those 60 rather than all of them, because the gene filter has already taken the other 13. In Galaxy you can get both with {% tool [Filter data on any column using simple expressions](Filter1) %} on the `obs` table (`c8<10`, then `c8>400`, adjusting the column number to wherever `cell_area` sits in your export) followed by **Datamash**. It is worth doing this once by hand, because every threshold in the next section is chosen from these numbers rather than from a rule of thumb.
 >
 > 1. The scatter plot shows a tight curved relationship between total counts and detected genes rather than a straight line. Why is that curve expected?
-> 2. Across the whole section, 840 objects have an area below 10 µm², with a median of 13 transcripts, and 203 objects have an area above 400 µm², with a median of 2,694 transcripts against 305 across all cells. What two different problems do these tails suggest?
+> 2. 60 objects have an area below 10 µm², with a median of 21 transcripts. 8 objects have an area above 400 µm², with a median of 3,132 transcripts against 316 across all cells. What two different problems do these tails suggest?
 > 3. Why is the spatial map necessary before deciding to remove low-count cells?
 >
 > > <solution-title></solution-title>
@@ -638,7 +638,7 @@ Each step below is a separate job that takes the output of the previous job, and
 >
 {: .comment}
 
-Now the morphology filter. `cell_area` is reported in µm², and the window is 10 to 400 µm²: just above the first percentile of this section at the bottom, and above the 99.5th percentile at the top.
+Now the morphology filter. `cell_area` is reported in µm², and the window is 10 to 400 µm²: just below the first percentile of this window at the bottom, which is 11.9 µm², and well above the 99.5th percentile at the top, which is 284.8 µm².
 
 > <hands-on-title>Filter on segmented cell area</hands-on-title>
 >
@@ -762,7 +762,7 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 >
 > A minimum of 10 transcripts per cell follows published Xenium practice ({% cite Gaudin2026STHELAR %}) and retains 99.7 per cent of cells here, but it is a permissive choice. Later in this tutorial two Leiden groups appear with medians of 105 and 174 transcripts per cell, 3,741 cells in total, which pass this filter while carrying little expression information.
 >
-> Raising the threshold to around 50 transcripts would remove 551 cells, 419 of them from the lymphocyte group, and simplify the clustering. It would also discard cells from a documented necrotic region, which is a real feature of this sample. Neither choice is wrong. What matters is that the threshold is stated, and that groups made of low-content cells are identified as such rather than annotated as cell types. We keep the permissive threshold here precisely so that those groups appear and can be recognised.
+> Raising the threshold to around 50 transcripts would remove 623 cells, 419 of them from the lymphocyte group, and simplify the clustering.
 >
 {: .comment}
 
