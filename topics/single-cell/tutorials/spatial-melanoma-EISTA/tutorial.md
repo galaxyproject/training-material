@@ -778,6 +778,7 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Filtered_AnnData_table.h5ad
+>    {{ page.zenodo_link }}/files/melanoma_roi.spatialdata.zip
 >    ```
 >
 {: .details}
@@ -1456,7 +1457,9 @@ Everything computed so far lives in an AnnData object. Writing it back into the 
 >
 {: .hands_on}
 
-This last plot is where the analysis becomes checkable against the tissue. Group `0` should fill most of the window, group `4` should sit in its own compact patch rather than scattered through it, and the immune and stromal groups should trace the band between the two melanocytic compartments.
+This last plot is where the analysis becomes checkable against the tissue. Group `0` should fill most of the window, group `4` should sit in its own compact patch rather than scattered through it, and the immune and stromal groups should trace the band between the two melanocytic compartments.#
+
+![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
 
 # Conclusion
 
