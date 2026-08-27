@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" width="1040" height="640" font-family="Helvetica, Arial, sans-serif">
   <title>Analysis pipeline for the Xenium primary dermal melanoma section</title>
-  <desc>Flow diagram with eight stages: SpatialData input, table export, quality control metrics, RNA and cell-area filtering, normalisation and feature selection, scaling with PCA and UMAP, multi-resolution Leiden clustering, marker ranking, Squidpy spatial statistics, CellTypist reference transfer, LIANA ligand-receptor ranking, and the processed SpatialData output.</desc>
+  <desc>Flow diagram with eleven stages: cropped SpatialData input, quality control metrics, RNA and cell-area filtering, normalisation and feature selection, PCA and UMAP embedding, multi-resolution Leiden clustering, marker ranking, Squidpy spatial statistics, CellTypist reference transfer, LIANA ligand-receptor ranking, and the processed SpatialData output.</desc>
 
   <rect x="0" y="0" width="1040" height="640" fill="#ffffff"/>
 
@@ -15,7 +15,7 @@
   <text x="180" y="58" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f3a5f">1. SpatialData input</text>
   <text x="180" y="80" text-anchor="middle" font-size="13" fill="#22303f">Xenium object: morphology image,</text>
   <text x="180" y="98" text-anchor="middle" font-size="13" fill="#22303f">cell labels, transcripts, table</text>
-  <text x="180" y="116" text-anchor="middle" font-size="13" fill="#22303f">112,551 cells x 5,006 genes</text>
+  <text x="180" y="116" text-anchor="middle" font-size="13" fill="#22303f">Cropped window, 10,810 x 5,006</text>
 
   <rect x="370" y="30" width="300" height="94" rx="8" fill="#e8eef7" stroke="#3a5f8f" stroke-width="2"/>
   <text x="520" y="58" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f3a5f">2. Quality control metrics</text>
@@ -26,8 +26,8 @@
   <rect x="710" y="30" width="300" height="94" rx="8" fill="#e8eef7" stroke="#3a5f8f" stroke-width="2"/>
   <text x="860" y="58" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f3a5f">3. Filtering</text>
   <text x="860" y="80" text-anchor="middle" font-size="13" fill="#22303f">RNA content, then cell area</text>
-  <text x="860" y="98" text-anchor="middle" font-size="13" fill="#22303f">108,749 cells retained</text>
-  <text x="860" y="116" text-anchor="middle" font-size="13" fill="#22303f">(96.6 per cent)</text>
+  <text x="860" y="98" text-anchor="middle" font-size="13" fill="#22303f">10,722 cells retained (99.2%),</text>
+  <text x="860" y="116" text-anchor="middle" font-size="13" fill="#22303f">4,761 of 5,006 genes</text>
 
   <line x1="330" y1="77" x2="366" y2="77" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow)"/>
   <line x1="670" y1="77" x2="706" y2="77" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow)"/>
@@ -40,16 +40,16 @@
   <text x="180" y="270" text-anchor="middle" font-size="13" fill="#22303f">flagged, not removed</text>
 
   <rect x="370" y="184" width="300" height="94" rx="8" fill="#eaf3ea" stroke="#3f7d3f" stroke-width="2"/>
-  <text x="520" y="212" text-anchor="middle" font-size="15" font-weight="bold" fill="#255025">5. Scaling and embedding</text>
-  <text x="520" y="234" text-anchor="middle" font-size="13" fill="#22303f">Scaled matrix feeds PCA</text>
+  <text x="520" y="212" text-anchor="middle" font-size="15" font-weight="bold" fill="#255025">5. Embedding</text>
+  <text x="520" y="234" text-anchor="middle" font-size="13" fill="#22303f">Log-normalised matrix feeds PCA</text>
   <text x="520" y="252" text-anchor="middle" font-size="13" fill="#22303f">Expression-neighbour graph</text>
   <text x="520" y="270" text-anchor="middle" font-size="13" fill="#22303f">(15 neighbours), then UMAP</text>
 
   <rect x="710" y="184" width="300" height="94" rx="8" fill="#eaf3ea" stroke="#3f7d3f" stroke-width="2"/>
   <text x="860" y="212" text-anchor="middle" font-size="15" font-weight="bold" fill="#255025">6. Leiden clustering</text>
   <text x="860" y="234" text-anchor="middle" font-size="13" fill="#22303f">Resolutions 0.2, 0.4 and 0.6</text>
-  <text x="860" y="252" text-anchor="middle" font-size="13" fill="#22303f">give 6, 11 and 12 groups</text>
-  <text x="860" y="270" text-anchor="middle" font-size="13" fill="#22303f">leiden_res_0.4 selected</text>
+  <text x="860" y="252" text-anchor="middle" font-size="13" fill="#22303f">give 4, 6 and 9 groups</text>
+  <text x="860" y="270" text-anchor="middle" font-size="13" fill="#22303f">leiden_res_0.6 selected</text>
 
   <line x1="330" y1="231" x2="366" y2="231" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow)"/>
   <line x1="670" y1="231" x2="706" y2="231" stroke="#4a4a4a" stroke-width="2" marker-end="url(#arrow)"/>
