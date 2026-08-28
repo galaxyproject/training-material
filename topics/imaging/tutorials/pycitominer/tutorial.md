@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Use Pycytominer in Galaxy for processing high dimensional readouts from high-throughput image-based profiling experiments"
+title: "Use Pycytominer in Galaxy for processing high dimensional image readouts"
 level: Intermediate
 subtopic: analyses
 questions:
