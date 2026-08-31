@@ -20,7 +20,7 @@ registration:
 
 contributions:
   organisers: [teresa-m, Sch-Da]
-  instructors: [dianichj, bgruening, Nilchia, wm75, paulzierep]
+  instructors: [dianichj, Nilchia, wm75, paulzierep]
   funding: [deNBI, nfdi4plants]
 
 location:
