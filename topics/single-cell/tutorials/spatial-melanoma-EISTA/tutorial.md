@@ -745,7 +745,7 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 > 3. Repeat the two {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} jobs from the *Map the QC metrics* box, using the output of step 2 as the *"SpatialData object"*
 >
 {: .hands_on}
-
+{% snippet faqs/galaxy/tools_rerun.md %}
 ![Violin plot of detected genes per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_n_genes_by_counts_after_filtering.png "Detected genes per cell across the 10,722 retained cells.")
 
 ![Violin plot of total transcript counts per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_total_counts_after_filtering.png "Total transcript counts per cell after filtering.")
