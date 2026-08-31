@@ -164,11 +164,7 @@ shared coordinate system ({% cite Marconato2025SpatialData %}).
 >
 {: .hands_on}
 
-> <tip-title>Rename Galaxy datasets</tip-title>
->
 > {% snippet faqs/galaxy/datasets_rename.md %}
->
-{: .tip}
 
 ## The window we are working in
 
