@@ -70,7 +70,7 @@ This tutorial uses the 10x Genomics **FFPE Human Skin Primary Dermal Melanoma** 
 Xenium images individual transcripts and assigns them to segmented cells, so each row of the expression table is intended to be a single cell. That makes cell-level annotation meaningful, and it also means the analysis has to account for segmentation error: a boundary can enclose two neighbouring cells as one object, or cut one cell in two. The morphological measurements Xenium reports for every cell, such as `cell_area` and `nucleus_area`, are therefore {QC} metrics in their own right, alongside transcript counts.
 
 **This tutorial works on a region of interest cut out of that section, not the whole slide.** The full
-section holds 112,551 cells, which takes hours to process and more memory than a training session
+section holds 112,551 cells, which takes hours to process and more memory than a typical training session
 should need. We therefore start from a 1,350 × 900 µm window cut out of the tumour, holding 10,810
 cells, roughly a tenth of the data. The window is provided ready to use, and an optional section
 records how it was built from the raw Xenium output bundle and how the boundaries were chosen, so that
