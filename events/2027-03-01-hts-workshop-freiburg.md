@@ -21,7 +21,7 @@ registration:
 contributions:
   organisers: [teresa-m, Sch-Da]
   instructors: [dianichj, Nilchia, wm75, paulzierep]
-  funding: [deNBI, nfdi4plants]
+  funding: [deNBI, mwk, nfdi4plants]
 
 location:
   geo:
