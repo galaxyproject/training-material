@@ -732,7 +732,7 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 >
 > 1. Repeat the four {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} jobs from the *Visualise QC metrics* box, using `Filtered AnnData table` as the *"Annotated data matrix"* each time
 >
->  {% snippet faqs/galaxy/tools_rerun.md %}
+>  Re-run the tool
 >
 > 2. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `melanoma_roi.spatialdata.zip`
