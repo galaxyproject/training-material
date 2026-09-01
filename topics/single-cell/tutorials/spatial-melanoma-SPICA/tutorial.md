@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Spatial transcriptomics analysis of a primary dermal melanoma section with Xenium
+title: Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium
 subtopic: spatial
 level: Advanced
 zenodo_link: https://zenodo.org/records/22078050
