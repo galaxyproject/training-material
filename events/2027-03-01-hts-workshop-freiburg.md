@@ -129,7 +129,7 @@ Please see the Program tab.
 ## Registaion
 
 The number of places in this workshop is limited. The course is conducted in person only (not online or hybrid). 
-Please note that the tutorials on which this workshop is based are all accessible through Open Educational Resources via the Galaxy Training Material. 
+Please note that the tutorials on which this workshop is based are all accessible online as Open Educational Resources via the Galaxy Training Material. 
 Please click on the Program tab and the content for the respective day to view more information.
 There are no fees for the workshop; however, you will need to cover your own accommodation, travel costs, and catering expenses.
 
