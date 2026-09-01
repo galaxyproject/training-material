@@ -952,10 +952,11 @@ We continue with `leiden_res_0.6`, and the reason is worth setting out, because 
 the step in this analysis with the least guidance and the most consequence.
 
 Leiden partitions are close to hierarchical in practice, so the most informative comparison is not the
-group count but what each additional split is made of. Cross-tabulating the three results shows that at
-0.2 one group carries *CD3E*, *CD4*, *CD8A* and *IL2RG* together with *CYBB*, *MRC1*, *CD14* and
-*CTSC*: T cells and macrophages in the same group. Those are separate haematopoietic lineages, so 0.2
-is too coarse whatever else it gets right.
+group count but what each additional split is made of. That comparison uses each partition's own marker
+genes, not cluster membership alone, and the marker-ranking procedure for the resolution finally chosen
+is set out in the next section. At 0.2 one group carries *CD3E*, *CD4*, *CD8A* and *IL2RG* together with
+*CYBB*, *MRC1*, *CD14* and *CTSC*: T cells and macrophages in the same group. Those are separate
+haematopoietic lineages, so 0.2 is too coarse whatever else it gets right.
 
 At 0.4 the immune compartment separates correctly, but one group of 913 cells ranks *POSTN*, *COL5A1*,
 *COL5A2* and *SULF1* alongside *COL4A1*, *COL4A2* and *PDGFRB*. Collagen V is an interstitial fibrillar
