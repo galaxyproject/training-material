@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>full_melanoma_without_scaling_xenium_workflow / Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium / Single Cell</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@30ea1b8e3658dfdd4ddb7fd7f7fd151d495e71f9",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="full_melanoma_without_scaling_xenium_workflow">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Single Cell / Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium / full_melanoma_without_scaling_xenium_workflow">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.png">
+	<!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<style>
+hgroup {margin-bottom: 2rem; border-bottom: 1px solid var(--border-light);}
+hgroup p { font-family: monospace; font-size: 0.8rem;}
+.meta ul { padding-left: 1em;}
+</style>
+
+<section>
+	<hgroup>
+		<h1 data-toc-skip>full_melanoma_without_scaling_xenium_workflow</h1>
+		<p>single-cell-spatial-melanoma-SPICA/full-melanoma-without-scaling-xenium-workflow</p>
+	</hgroup>
+	
+	<div class="row">
+		<div class="col-md-3 meta">
+			
+			<b>Author(s)</b>
+			<br/>
+			
+			Khaled Jum'ah
+			
+			
+			<br/>
+
+			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
+			<b>Version</b>
+			<br/>
+			1
+
+			<br/>
+
+			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
+			<b>Last updated</b>
+			<br/>
+			Sep 1, 2026
+
+			<br/>
+
+			<i class="fas fa-balance-scale" aria-hidden="true"></i><span class="visually-hidden">license</span>
+			<b>License</b>
+			<br/>
+
+			
+			<a href="https://spdx.org/licenses/Artistic-2.0">Artistic-2.0</a>
+			
+			<br/>
+
+			
+			<i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span>
+			<b>Tags</b>
+			<br/>
+
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #00fde9; --color-darker: #00e1d0; --color-dimmed: #00efdc;">single-cell</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffdad9; --color-darker: #ffb7b6; --color-dimmed: #ffc9c8;">spatial-transcriptomics</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #afecff; --color-darker: #00dcff; --color-dimmed: #7ce4ff;">xenium</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #dce1ff; --color-darker: #bcc6ff; --color-dimmed: #ccd4ff;">spatialdata</div>
+			
+			</br>
+			
+
+
+			<b>Features</b>
+			<ul>
+			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+			
+			</ul>
+
+			<hr/>
+
+
+			<b>Tutorial</b>
+			<br/>
+			<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <a href="../tutorial.html">Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium</a>
+			</br>
+
+			
+			
+			<i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> <a href="index.html">Other workflows associated with this material</a>
+			
+
+
+			<hr/>
+			<b>Workflow Testing</b>
+			<br/>
+
+			Tests: ✅ <br/>
+			Results: Not yet automated
+
+			<hr/>
+
+			<b>FAIRness</b>
+
+			<i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span>
+			<b><abbr title="Persistent URL">PURL</abbr></b>
+			<br/>
+			<a href="https://gxy.io/GTN:">https://gxy.io/GTN:</a>
+			<br/>
+
+			
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/single-cell/spatial-melanoma-SPICA/full-melanoma-without-scaling-xenium-workflow/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			
+
+			
+
+		</div>
+		<div class="col-md-9">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Launch in Tutorial Mode</span>
+			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="show-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
+			<br/>
+
+			<span class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+					<img src="/training-material/assets/images/galaxylogo.png" style="height: 16px" alt="galaxy logo"/>
+					Run Workflow in Galaxy
+				</button>
+				<ul class="dropdown-menu">
+					
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.ca/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Galaxy Canada</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item hide-when-galaxy-proxy-active">
+						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-spatial-melanoma-SPICA/versions/full-melanoma-without-scaling-xenium-workflow">Import to another server (≥23.0+ only!)</a>
+					</li>
+				</ul>
+			</span>
+			<a class="btn btn-primary" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.ga">
+				<i class="fas fa-download" aria-hidden="true"></i><span class="visually-hidden">galaxy-download</span>
+				Download
+			</a>
+			<pre class="mermaid">flowchart TD
+  0["ℹ️ Input Dataset\nmelanoma_roi.spatialdata.zip"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["initial Anndata table"];
+  0 -->|output| 1;
+  2["Inspect AnnData"];
+  1 -->|result_adata| 2;
+  3["Inspect AnnData"];
+  1 -->|result_adata| 3;
+  4["QC metrics before filtering"];
+  1 -->|result_adata| 4;
+  480e466a-0f38-40d8-a144-9544b85e7bf0["Output\nQC metrics before filtering"];
+  4 --> 480e466a-0f38-40d8-a144-9544b85e7bf0;
+  style 480e466a-0f38-40d8-a144-9544b85e7bf0 stroke:#2c3143,stroke-width:4px;
+  5["Violin_Plots_before_filteration"];
+  4 -->|anndata_out| 5;
+  a0abc5c3-707e-45b4-9004-b319c5a8b9d7["Output\nViolin_Plots_before_filteration"];
+  5 --> a0abc5c3-707e-45b4-9004-b319c5a8b9d7;
+  style a0abc5c3-707e-45b4-9004-b319c5a8b9d7 stroke:#2c3143,stroke-width:4px;
+  6["Scatter plot before filtering"];
+  4 -->|anndata_out| 6;
+  68b0cadd-79b3-436a-b8ef-ff785b7b2659["Output\nScatter plot before filtering"];
+  6 --> 68b0cadd-79b3-436a-b8ef-ff785b7b2659;
+  style 68b0cadd-79b3-436a-b8ef-ff785b7b2659 stroke:#2c3143,stroke-width:4px;
+  7["SpatialData with QC metrics"];
+  0 -->|output| 7;
+  4 -->|anndata_out| 7;
+  8["Scanpy filter Minimum genes expressed"];
+  4 -->|anndata_out| 8;
+  47b83004-9657-421f-af26-fff91e232ff2["Output\nFilter minimum genes expressed"];
+  8 --> 47b83004-9657-421f-af26-fff91e232ff2;
+  style 47b83004-9657-421f-af26-fff91e232ff2 stroke:#2c3143,stroke-width:4px;
+  9["Spatial Plot total_counts before filtering"];
+  7 -->|spatialdata_output| 9;
+  0d65f539-3c53-4486-bf86-34446d2f0130["Output\nSpatial Plot total_counts before filtering"];
+  9 --> 0d65f539-3c53-4486-bf86-34446d2f0130;
+  style 0d65f539-3c53-4486-bf86-34446d2f0130 stroke:#2c3143,stroke-width:4px;
+  10["Spatial Plot n_genes_by_counts before filtering"];
+  7 -->|spatialdata_output| 10;
+  7efe5b5c-cef3-4d16-b7b3-ad219e5f308b["Output\nSpatial Plot n_genes_by_counts before filtering"];
+  10 --> 7efe5b5c-cef3-4d16-b7b3-ad219e5f308b;
+  style 7efe5b5c-cef3-4d16-b7b3-ad219e5f308b stroke:#2c3143,stroke-width:4px;
+  11["Inspect AnnData"];
+  8 -->|anndata_out| 11;
+  12["Filter minimum number of counts of gene expressed"];
+  8 -->|anndata_out| 12;
+  3eeec312-343d-45dc-861e-8b2897774a73["Output\nFilter minimum number of counts of gene expressed"];
+  12 --> 3eeec312-343d-45dc-861e-8b2897774a73;
+  style 3eeec312-343d-45dc-861e-8b2897774a73 stroke:#2c3143,stroke-width:4px;
+  13["Inspect AnnData"];
+  12 -->|anndata_out| 13;
+  14["Filter minimum number of cells expressed"];
+  12 -->|anndata_out| 14;
+  b7fd86f9-614c-40e7-bcfe-adf512b7d8f8["Output\nFilter minimum number of cells expressed"];
+  14 --> b7fd86f9-614c-40e7-bcfe-adf512b7d8f8;
+  style b7fd86f9-614c-40e7-bcfe-adf512b7d8f8 stroke:#2c3143,stroke-width:4px;
+  15["Filter genes based on number of cells or counts Minimum number of counts"];
+  14 -->|anndata_out| 15;
+  b94fe64d-2fc6-4f03-8fe4-bd912045d7e2["Output\nFilter genes based on number of cells or counts Minimum number of counts"];
+  15 --> b94fe64d-2fc6-4f03-8fe4-bd912045d7e2;
+  style b94fe64d-2fc6-4f03-8fe4-bd912045d7e2 stroke:#2c3143,stroke-width:4px;
+  16["Inspect AnnData"];
+  15 -->|anndata_out| 16;
+  17["Filter maximum number of counts"];
+  15 -->|anndata_out| 17;
+  cda1adb3-249e-4c41-9964-c7108943e2c1["Output\nFilter maximum number of counts"];
+  17 --> cda1adb3-249e-4c41-9964-c7108943e2c1;
+  style cda1adb3-249e-4c41-9964-c7108943e2c1 stroke:#2c3143,stroke-width:4px;
+  18["Filter maximum number of genes expressed"];
+  17 -->|anndata_out| 18;
+  17e8e16f-fba2-449e-ad0c-c12df7691a94["Output\nFilter maximum number of genes expressed"];
+  18 --> 17e8e16f-fba2-449e-ad0c-c12df7691a94;
+  style 17e8e16f-fba2-449e-ad0c-c12df7691a94 stroke:#2c3143,stroke-width:4px;
+  19["Inspect AnnData"];
+  18 -->|anndata_out| 19;
+  20["Filter cell_area more than 10"];
+  18 -->|anndata_out| 20;
+  acc71f7e-f132-4bd2-9e53-877e8770171b["Output\nFilter cell_area more than 10"];
+  20 --> acc71f7e-f132-4bd2-9e53-877e8770171b;
+  style acc71f7e-f132-4bd2-9e53-877e8770171b stroke:#2c3143,stroke-width:4px;
+  21["Filter cell_area less than 400"];
+  20 -->|anndata_out| 21;
+  ca03e483-8b0f-44cb-b3ae-e15689b6f2c3["Output\nFilter cell_area less than 400"];
+  21 --> ca03e483-8b0f-44cb-b3ae-e15689b6f2c3;
+  style ca03e483-8b0f-44cb-b3ae-e15689b6f2c3 stroke:#2c3143,stroke-width:4px;
+  22["Filtered AnnData table"];
+  21 -->|anndata_out| 22;
+  60870001-3a7c-4fbb-ab6b-970421fd652e["Output\nFiltered AnnData table"];
+  22 --> 60870001-3a7c-4fbb-ab6b-970421fd652e;
+  style 60870001-3a7c-4fbb-ab6b-970421fd652e stroke:#2c3143,stroke-width:4px;
+  23["Violin_Plots_after_filteration"];
+  22 -->|anndata_out| 23;
+  a0cf61fc-3975-4710-aa0e-e9f5692f8776["Output\nViolin_Plots_after_filteration"];
+  23 --> a0cf61fc-3975-4710-aa0e-e9f5692f8776;
+  style a0cf61fc-3975-4710-aa0e-e9f5692f8776 stroke:#2c3143,stroke-width:4px;
+  24["Filtered AnnData with counts layer"];
+  22 -->|anndata_out| 24;
+  22 -->|anndata_out| 24;
+  a055e10c-0d99-425e-9c28-d63f06c82aef["Output\nFiltered AnnData with counts layer"];
+  24 --> a055e10c-0d99-425e-9c28-d63f06c82aef;
+  style a055e10c-0d99-425e-9c28-d63f06c82aef stroke:#2c3143,stroke-width:4px;
+  25["Scatter plot after filtering"];
+  22 -->|anndata_out| 25;
+  7bca78a9-9ce9-4ec4-9780-edb169e1f0a8["Output\nScatter plot after filtering"];
+  25 --> 7bca78a9-9ce9-4ec4-9780-edb169e1f0a8;
+  style 7bca78a9-9ce9-4ec4-9780-edb169e1f0a8 stroke:#2c3143,stroke-width:4px;
+  26["SpatialData Operations"];
+  0 -->|output| 26;
+  22 -->|anndata_out| 26;
+  27["Normalised AnnData"];
+  22 -->|anndata_out| 27;
+  c6a7a260-bf51-4d43-bd09-ec330f7b2401["Output\nNormalised AnnData"];
+  27 --> c6a7a260-bf51-4d43-bd09-ec330f7b2401;
+  style c6a7a260-bf51-4d43-bd09-ec330f7b2401 stroke:#2c3143,stroke-width:4px;
+  28["Spatial Plot total_counts after filtering"];
+  26 -->|spatialdata_output| 28;
+  53ce37a0-b4b7-4cae-815e-7d559f9ffbcc["Output\nSpatial Plot after filtering"];
+  28 --> 53ce37a0-b4b7-4cae-815e-7d559f9ffbcc;
+  style 53ce37a0-b4b7-4cae-815e-7d559f9ffbcc stroke:#2c3143,stroke-width:4px;
+  29["Spatial Plot table_processed after filtering"];
+  26 -->|spatialdata_output| 29;
+  7bca9117-c8ca-4e90-9460-6654be842c12["Output\nSpatial Plot table_processed after filtering"];
+  29 --> 7bca9117-c8ca-4e90-9460-6654be842c12;
+  style 7bca9117-c8ca-4e90-9460-6654be842c12 stroke:#2c3143,stroke-width:4px;
+  30["Log-normalised AnnData"];
+  27 -->|anndata_out| 30;
+  660d8a75-9957-43e7-960c-135063391fbe["Output\nLog-normalised AnnData"];
+  30 --> 660d8a75-9957-43e7-960c-135063391fbe;
+  style 660d8a75-9957-43e7-960c-135063391fbe stroke:#2c3143,stroke-width:4px;
+  31["AnnData with HVGs"];
+  30 -->|anndata_out| 31;
+  4740d7e3-1cd9-4b76-8370-0e70499cb489["Output\nAnnData with HVGs"];
+  31 --> 4740d7e3-1cd9-4b76-8370-0e70499cb489;
+  style 4740d7e3-1cd9-4b76-8370-0e70499cb489 stroke:#2c3143,stroke-width:4px;
+  32["Plot HVGs"];
+  31 -->|anndata_out| 32;
+  a3d8a78b-9a07-4a6a-91bb-70e9e8212b71["Output\nPlot HVGs"];
+  32 --> a3d8a78b-9a07-4a6a-91bb-70e9e8212b71;
+  style a3d8a78b-9a07-4a6a-91bb-70e9e8212b71 stroke:#2c3143,stroke-width:4px;
+  33["AnnData with PCA"];
+  31 -->|anndata_out| 33;
+  8efe9097-9ad1-45ee-a143-11de4e3842c2["Output\nAnnData with PCA"];
+  33 --> 8efe9097-9ad1-45ee-a143-11de4e3842c2;
+  style 8efe9097-9ad1-45ee-a143-11de4e3842c2 stroke:#2c3143,stroke-width:4px;
+  34["Compute a neighborhood graph of observations"];
+  33 -->|anndata_out| 34;
+  c687c794-9ec8-40a5-94c4-0b03f3342ee2["Output\nCompute a neighborhood graph of observations"];
+  34 --> c687c794-9ec8-40a5-94c4-0b03f3342ee2;
+  style c687c794-9ec8-40a5-94c4-0b03f3342ee2 stroke:#2c3143,stroke-width:4px;
+  35["Plot PCA"];
+  33 -->|anndata_out| 35;
+  e27e7111-88e7-47d9-87be-e301065d75ec["Output\nPlot PCA"];
+  35 --> e27e7111-88e7-47d9-87be-e301065d75ec;
+  style e27e7111-88e7-47d9-87be-e301065d75ec stroke:#2c3143,stroke-width:4px;
+  36["AnnData with UMAP"];
+  34 -->|anndata_out| 36;
+  afbad56e-b458-42f7-afb5-0b8e67650a10["Output\nAnnData with UMAP"];
+  36 --> afbad56e-b458-42f7-afb5-0b8e67650a10;
+  style afbad56e-b458-42f7-afb5-0b8e67650a10 stroke:#2c3143,stroke-width:4px;
+  37["Plot  UMAP"];
+  36 -->|anndata_out| 37;
+  dc45eb7a-5163-4398-b5c8-ef8adeffee18["Output\nPlot UMAP"];
+  37 --> dc45eb7a-5163-4398-b5c8-ef8adeffee18;
+  style dc45eb7a-5163-4398-b5c8-ef8adeffee18 stroke:#2c3143,stroke-width:4px;
+  38["Anndata with leiden_res_0.2"];
+  36 -->|anndata_out| 38;
+  e3b4870a-92a7-4bd0-b9c5-e2a56be63007["Output\nAnndata with leiden_res_0.2"];
+  38 --> e3b4870a-92a7-4bd0-b9c5-e2a56be63007;
+  style e3b4870a-92a7-4bd0-b9c5-e2a56be63007 stroke:#2c3143,stroke-width:4px;
+  39["AnnData with Leiden comparison 0.2 and 0.4"];
+  38 -->|anndata_out| 39;
+  5d8af959-556a-4f34-8653-328d44d4728b["Output\nAnnData with Leiden comparison 0.2 and 0.4"];
+  39 --> 5d8af959-556a-4f34-8653-328d44d4728b;
+  style 5d8af959-556a-4f34-8653-328d44d4728b stroke:#2c3143,stroke-width:4px;
+  40["AnnData with Leiden comparison 0.2 and 0.4 and 0.6"];
+  39 -->|anndata_out| 40;
+  9cdc369f-fb6e-4a35-aec3-99eb7342b9c3["Output\nAnnData with Leiden comparison 0.2 and 0.4 and 0.6"];
+  40 --> 9cdc369f-fb6e-4a35-aec3-99eb7342b9c3;
+  style 9cdc369f-fb6e-4a35-aec3-99eb7342b9c3 stroke:#2c3143,stroke-width:4px;
+  41["Plot Leiden comparison"];
+  40 -->|anndata_out| 41;
+  263c895d-0bc7-4d53-853b-675fc0876fb9["Output\nPlot Leiden comparison"];
+  41 --> 263c895d-0bc7-4d53-853b-675fc0876fb9;
+  style 263c895d-0bc7-4d53-853b-675fc0876fb9 stroke:#2c3143,stroke-width:4px;
+  42["Rank genes for characterizing groups"];
+  40 -->|anndata_out| 42;
+  de26d617-2bf2-4470-894c-de70fd813cf5["Output\nAnnData with markers"];
+  42 --> de26d617-2bf2-4470-894c-de70fd813cf5;
+  style de26d617-2bf2-4470-894c-de70fd813cf5 stroke:#2c3143,stroke-width:4px;
+  89b1795e-0238-4835-b5a9-1a1d40ba4f7e["Output\nRank genes for characterizing groups"];
+  42 --> 89b1795e-0238-4835-b5a9-1a1d40ba4f7e;
+  style 89b1795e-0238-4835-b5a9-1a1d40ba4f7e stroke:#2c3143,stroke-width:4px;
+  43["Plot ranking of genes"];
+  42 -->|anndata_out| 43;
+  18d96a8b-501e-47bb-ab29-f9b09e353b8a["Output\nPlot ranking of genes"];
+  43 --> 18d96a8b-501e-47bb-ab29-f9b09e353b8a;
+  style 18d96a8b-501e-47bb-ab29-f9b09e353b8a stroke:#2c3143,stroke-width:4px;
+  44["AnnData with spatial neighbours"];
+  42 -->|anndata_out| 44;
+  aafb91c5-c8d4-4876-88df-9732f4096a6b["Output\nAnnData with spatial neighbours"];
+  44 --> aafb91c5-c8d4-4876-88df-9732f4096a6b;
+  style aafb91c5-c8d4-4876-88df-9732f4096a6b stroke:#2c3143,stroke-width:4px;
+  45["Squidpy"];
+  44 -->|spatialdata_output_h5ad| 45;
+  46["Squidpy"];
+  45 -->|spatialdata_output_h5ad| 46;
+  47["Squidpy Plot"];
+  45 -->|spatialdata_output_h5ad| 47;
+  53fde591-e03f-43c4-a934-de1179115d79["Output\nPlot Centrality Scores"];
+  47 --> 53fde591-e03f-43c4-a934-de1179115d79;
+  style 53fde591-e03f-43c4-a934-de1179115d79 stroke:#2c3143,stroke-width:4px;
+  48["Squidpy Plot"];
+  46 -->|spatialdata_output_h5ad| 48;
+  f3ad4b94-c4f7-4ee1-8da9-28e5a62a43a0["Output\nPlot Neighborhood Enrichment"];
+  48 --> f3ad4b94-c4f7-4ee1-8da9-28e5a62a43a0;
+  style f3ad4b94-c4f7-4ee1-8da9-28e5a62a43a0 stroke:#2c3143,stroke-width:4px;
+  49["AnnData with Squidpy results"];
+  46 -->|spatialdata_output_h5ad| 49;
+  6b0b214b-c790-4c5c-ae8f-ea7bbbba77e0["Output\nAnnData with Squidpy results"];
+  49 --> 6b0b214b-c790-4c5c-ae8f-ea7bbbba77e0;
+  style 6b0b214b-c790-4c5c-ae8f-ea7bbbba77e0 stroke:#2c3143,stroke-width:4px;
+  50["CellTypist-annotated AnnData"];
+  49 -->|spatialdata_output_h5ad| 50;
+  be8d4eb6-9c98-4b47-8ef5-57acb4348dd1["Output\nCellTypist-annotated AnnData"];
+  50 --> be8d4eb6-9c98-4b47-8ef5-57acb4348dd1;
+  style be8d4eb6-9c98-4b47-8ef5-57acb4348dd1 stroke:#2c3143,stroke-width:4px;
+  1a8734e4-565a-48b7-879d-83fe9f0f77e1["Output\nPlot CellTypist"];
+  50 --> 1a8734e4-565a-48b7-879d-83fe9f0f77e1;
+  style 1a8734e4-565a-48b7-879d-83fe9f0f77e1 stroke:#2c3143,stroke-width:4px;
+  51["SpatialData with Squidpy results"];
+  0 -->|output| 51;
+  49 -->|spatialdata_output_h5ad| 51;
+  52["Final Lana Anndata"];
+  50 -->|anndata_out| 52;
+  ffad758d-6eb9-4ec0-8b05-615c6e27f772["Output\nFinal Liana Anndata"];
+  52 --> ffad758d-6eb9-4ec0-8b05-615c6e27f772;
+  style ffad758d-6eb9-4ec0-8b05-615c6e27f772 stroke:#2c3143,stroke-width:4px;
+  53["Spatial_Plot_on_VGF_morons_HVG"];
+  51 -->|spatialdata_output| 53;
+  d3883ba5-bbbb-4cb8-9678-22bd1b7b2f6b["Output\nSpatial_Plot_on_VGF_morons_HVG"];
+  53 --> d3883ba5-bbbb-4cb8-9678-22bd1b7b2f6b;
+  style d3883ba5-bbbb-4cb8-9678-22bd1b7b2f6b stroke:#2c3143,stroke-width:4px;
+  54["SpatialData with Final metrics"];
+  0 -->|output| 54;
+  52 -->|anndata_out| 54;
+  55["SpatialData Plot"];
+  54 -->|spatialdata_output| 55;
+  95aaccc1-d99d-44bf-a4b9-d0dbfacff685["Output\nPlot spatial clusters"];
+  55 --> 95aaccc1-d99d-44bf-a4b9-d0dbfacff685;
+  style 95aaccc1-d99d-44bf-a4b9-d0dbfacff685 stroke:#2c3143,stroke-width:4px;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>melanoma_roi.spatialdata.zip</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</td>
+					<td>Scanpy Inspect and manipulate</td>
+					<td>QC metrics before filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Violin_Plots_before_filteration</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Scatter plot before filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Scanpy filter Minimum genes expressed</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td>Spatial Plot total_counts before filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td>Spatial Plot n_genes_by_counts before filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter minimum number of counts of gene expressed</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter minimum number of cells expressed</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter genes based on number of cells or counts Minimum number of counts</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter maximum number of counts</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter maximum number of genes expressed</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter cell_area more than 10</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>Filter cell_area less than 400</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</td>
+					<td>Scanpy Inspect and manipulate</td>
+					<td>Filtered AnnData table</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Violin_Plots_after_filteration</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.11.4+galaxy3</td>
+					<td>Manipulate AnnData</td>
+					<td>Filtered AnnData with counts layer</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Scatter plot after filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0</td>
+					<td>Scanpy normalize</td>
+					<td>Normalised AnnData</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td>Spatial Plot total_counts after filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td>Spatial Plot table_processed after filtering</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</td>
+					<td>Scanpy Inspect and manipulate</td>
+					<td>Log-normalised AnnData</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</td>
+					<td>Scanpy filter</td>
+					<td>AnnData with HVGs</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Plot HVGs</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</td>
+					<td>Scanpy cluster, embed</td>
+					<td>AnnData with PCA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</td>
+					<td>Scanpy Inspect and manipulate</td>
+					<td>Compute a neighborhood graph of observations</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Plot PCA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</td>
+					<td>Scanpy cluster, embed</td>
+					<td>AnnData with UMAP</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Plot  UMAP</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</td>
+					<td>Scanpy cluster, embed</td>
+					<td>Anndata with leiden_res_0.2</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</td>
+					<td>Scanpy cluster, embed</td>
+					<td>AnnData with Leiden comparison 0.2 and 0.4</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</td>
+					<td>Scanpy cluster, embed</td>
+					<td>AnnData with Leiden comparison 0.2 and 0.4 and 0.6</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Plot Leiden comparison</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</td>
+					<td>Scanpy Inspect and manipulate</td>
+					<td>Rank genes for characterizing groups</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</td>
+					<td>Scanpy plot</td>
+					<td>Plot ranking of genes</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0</td>
+					<td>Squidpy</td>
+					<td>AnnData with spatial neighbours</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0</td>
+					<td>Squidpy Plot</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0</td>
+					<td>Squidpy Plot</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0</td>
+					<td>Squidpy</td>
+					<td>AnnData with Squidpy results</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1</td>
+					<td>CellTypist</td>
+					<td>CellTypist-annotated AnnData</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0</td>
+					<td>Liana methods</td>
+					<td>Final Lana Anndata</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td>Spatial_Plot_on_VGF_morons_HVG</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</td>
+					<td>SpatialData Plot</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_inspect/b26b87f5a13c">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.11.4+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.11.4+galaxy3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_manipulate/9ef202055d5c">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/celltypist/1fc548259280">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/liana_methods/89635206a199">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_cluster_reduce_dimension/795751257d82">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_filter/2e6029e47eb5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_inspect/a8d291df615d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_normalize/2b6498d4c8c6">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_plot/7f478b3258ec">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/spatialdata_operation/ad593d73a014">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/spatialdata_plot/cec3ffd4752f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/squidpy_graph/662e929f44fa">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/squidpy_plot/0a089e4b62d7">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
+
+			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
+			<h2>Importing into Galaxy</h2>
+			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+			<!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing a workflow</div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ol>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/FXlkreylhww" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
+
+			<h2>Version History</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Commit</th>
+						<th>Time</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr>
+						<td>3</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/0fedcb2b3e75252f530d5eabc1acf0bbd52fdf08">0fedcb2b3</a></td>
+						<td>2026-09-01 14:52:29</td>
+						<td>fix viloin plot display</td>
+					</tr>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/7bee176ae128d08b5a4338b9130609b09695e3c8">7bee176ae</a></td>
+						<td>2026-09-01 14:16:46</td>
+						<td>update the tutirial to visualise HVG with Morans values and update the workflow to match the tutorial</td>
+					</tr>
+					
+					<tr>
+						<td>1</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/5565e4cbc11aeea9831a8a07f23d7298b2c1b167">5565e4cbc</a></td>
+						<td>2026-09-01 12:16:08</td>
+						<td>update tutorial adress most of the commnets</td>
+					</tr>
+					
+				</tbody>
+			</table>
+
+
+			<h2>For Admins</h2>
+			<h3>Installing the workflow tools</h3>
+
+			<pre>
+wget https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.ga -O workflow.ga
+workflow-to-tools -w workflow.ga -o tools.yaml
+shed-tools install -g GALAXY -a API_KEY -t tools.yaml
+workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
+			</pre>
+		</div>
+	</div>
+</section>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/single-cell/tutorials/spatial-melanoma-SPICA/workflows/full-melanoma-without-scaling-xenium-workflow.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/30ea1b8e3658dfdd4ddb7fd7f7fd151d495e71f9">30ea1b8</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+	<script src="/training-material/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="/training-material/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	
+
+    </body>
+</html>
