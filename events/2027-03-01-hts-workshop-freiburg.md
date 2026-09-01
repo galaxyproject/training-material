@@ -118,7 +118,7 @@ Connect with experts and peers, gain practical skills, and take your research ca
 
 ## Learning Objectives:
 
-- To get introduced to Galaxy as a data analysis platform and the GTN training material
+- To get introduced to Galaxy as a data analysis platform and the Galaxy Training Network's (GTN) training material
 - To learn how to use tools and databases in Galaxy
 - To be able to run different tools and workflows
 
