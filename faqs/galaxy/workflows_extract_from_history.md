@@ -12,7 +12,7 @@ contributors: [shiltemann,hexylena,nsoranzo]
 
    This will make the creation of the workflow easier.
 
-2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+2. Click on {{% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 
    ![`Extract Workflow` entry in the history options menu]({% link topics/introduction/images/history_menu_extract_workflow.png %})
 
