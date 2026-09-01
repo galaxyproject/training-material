@@ -449,7 +449,6 @@ Plotting the same metrics on the tissue is the check that separates a technical 
 >    - {% icon param-file %} *"SpatialData object"*: `SpatialData with QC metrics`
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `morphology_focus`
->        - Leave *"Channel"* empty
 >    - In *"Render Labels"*:
 >        - *"Labels element name"*: `cell_labels`
 >        - *"Color column"*: `total_counts`
@@ -1221,7 +1220,7 @@ Values from this run:
 >
 {: .question}
 
-## Spatially Variable Genes ##### I will need to think about the title and  visualise a high-scoring gene on the tissue to see whether a spatial pattern can indeed be observed.
+## Spatially Variable Genes
 
 Moran's I measures whether a gene's expression is spatially structured rather than randomly distributed ({% cite Moran1950Autocorrelation %}). The result is stored in the object and can be read with **Inspect AnnData**. Genes from the top of that ranking in the reference run:
 
@@ -1238,6 +1237,37 @@ Moran's I measures whether a gene's expression is spatially structured rather th
 | *SELE* | 0.25 | Endothelial activation |
 | *COL4A1* | 0.24 | Basement membrane around vessels |
 | *CCL22* | 0.23 | Chemokine of the myeloid compartment |
+
+### Visual confirmation on the tissue.
+
+A high Moran's I value indicates a gene is more spatially structured than random, but the statistic alone does not show how that pattern manifests. Plotting a high-scoring gene on the tissue image is therefore an essential check. A gene that is truly spatially informative should show a coherent, non-random pattern when visualised. Visualisation also helps distinguish a genuine biological gradient from a statistical artefact that can arise from outliers, uneven cell density, or inflated p-values
+
+To do this, we import the AnnData table containing the Squidpy results back into the SpatialData object, then use SpatialData Plot to colour cells by expression of the gene of interest. The steps below demonstrate this for VGF, the highest-scoring gene in this window.
+
+> <hands-on-title>Visualize High-Scoring Genes</hands-on-title>
+>
+> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `melanoma_roi.spatialdata.zip`
+>    - *"Operation"*: `Import anndata table to a SpatialData object`
+>        - {% icon param-file %} *"annotated data object to add"*: `AnnData with Squidpy results`
+>        - *"Table name"*: `table_processed`
+>
+>  Rename the generated file `SpatialData with Squidpy results`
+>
+> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `SpatialData with Squidpy results`
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `morphology_focus`
+>    - In *"Render Labels"*:
+>        - *"Labels element name"*: `cell_labels`
+>        - *"Color column"*: `VGF`
+>        - *"Table name"*: `table_processed`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `global`
+>
+{: .hands_on}
+
+![Spatial map of VGF expression, showing concentration in melanocytic groups 2 and 5.](../../images/spatial-melanoma-SPICA/Spatial_Plot_on_VGF_morons_HVG.jpg "VGF expression on tissue, Moran's I = 0.49, concentrated in melanocytic groups 2 and 5.")
 
 > <question-title>Interpret Moran's I</question-title>
 >

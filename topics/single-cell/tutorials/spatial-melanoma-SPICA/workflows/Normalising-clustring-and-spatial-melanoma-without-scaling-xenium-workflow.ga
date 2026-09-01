@@ -1343,9 +1343,66 @@
         },
         "25": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
             "errors": null,
             "id": 25,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "operation_condi|adata": {
+                    "id": 23,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SpatialData Operations",
+                    "name": "operation_condi"
+                }
+            ],
+            "label": "SpatialData with Squidpy results",
+            "name": "SpatialData Operations",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                }
+            ],
+            "position": {
+                "left": 3948.7356567382812,
+                "top": 287.98297119140625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionspatialdata_output": {
+                    "action_arguments": {
+                        "newname": "SpatialData with Squidpy results"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ad593d73a014",
+                "name": "spatialdata_operation",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"import_table\", \"__current_case__\": 24, \"adata\": {\"__class__\": \"ConnectedValue\"}, \"table_name\": \"table_processed\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "1c678ad4-4d0b-4307-a4b2-f4a219e26653",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0",
+            "errors": null,
+            "id": 26,
             "input_connections": {
                 "adata": {
                     "id": 24,
@@ -1395,18 +1452,72 @@
                 }
             ]
         },
-        "26": {
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 25,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": "Spatial_Plot_on_VGF_morons_HVG",
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 4212.741271972656,
+                "top": 305.071044921875
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Spatial_Plot_on_VGF_morons_HVG"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"morphology_focus\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [{\"__index__\": 0, \"labels_element\": \"cell_labels\", \"color\": \"leiden_res_0.6\", \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"contour_px\": \"3\", \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_alpha\": \"0.0\", \"fill_alpha\": null, \"outline_color\": null, \"scale\": null, \"colorbar\": \"auto\", \"table_name\": \"table_processed\", \"table_layer\": null, \"gene_symbols\": null}], \"render_points\": [], \"render_shapes\": [], \"show_params\": {\"coordinate_systems\": \"global\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "34fdbd3d-a567-4b7d-8b9a-552533355b6a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Spatial_Plot_on_VGF_morons_HVG",
+                    "output_name": "plot_output",
+                    "uuid": "c0cd1651-e840-4386-bedf-176334e0db04"
+                }
+            ]
+        },
+        "28": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
             "errors": null,
-            "id": 26,
+            "id": 28,
             "input_connections": {
                 "input_spatialdata": {
                     "id": 1,
                     "output_name": "output"
                 },
                 "operation_condi|adata": {
-                    "id": 25,
+                    "id": 26,
                     "output_name": "anndata_out"
                 }
             },
@@ -1452,14 +1563,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "27": {
+        "29": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
             "errors": null,
-            "id": 27,
+            "id": 29,
             "input_connections": {
                 "input_spatialdata": {
-                    "id": 26,
+                    "id": 28,
                     "output_name": "spatialdata_output"
                 }
             },
@@ -1513,6 +1624,6 @@
         "xenium",
         "spatialdata"
     ],
-    "uuid": "4657c2db-df70-4650-abc8-b173b906e78b",
-    "version": 2
+    "uuid": "87192abf-c6b4-41ae-9309-f0a0bc063f07",
+    "version": 4
 }
