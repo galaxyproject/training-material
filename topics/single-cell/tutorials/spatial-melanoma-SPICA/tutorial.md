@@ -434,7 +434,7 @@ Several variables need to be checked to assess the quality of the data and to de
 >
 {: .hands_on}
 
-![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area before filtering.](../../images/spatial-melanoma-SPICA/Violin_Plots_before_filteration.pnd "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² before filtering.")
+![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area before filtering.](../../images/spatial-melanoma-SPICA/Violin_Plots_before_filteration.png "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² before filtering.")
 
 ![Detected genes against total counts before filtering, coloured by cell area.](../../images/spatial-melanoma-SPICA/Scatter_plot_before_filtering.png "Detected genes against total counts before filtering, coloured by cell area. The relationship curves rather than running straight, because each additional transcript is increasingly likely to repeat a gene the cell has already detected.")
 
@@ -724,7 +724,7 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 {: .hands_on}
 {% snippet faqs/galaxy/tools_rerun.md %}
 
-![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area after filteration.](../../images/spatial-melanoma-SPICA/Violin_Plots_after_filteration.pnd "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² after filteration.")
+![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area after filteration.](../../images/spatial-melanoma-SPICA/Violin_Plots_after_filteration.png "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² after filteration.")
 
 ![Scatter plot of detected genes against total counts, coloured by cell area, after filtering.](../../images/spatial-melanoma-SPICA/Scatter_plot_after_filtering.png "Detected genes against total counts for the retained cells, coloured by cell area. The curve saturates as counts rise, because each further transcript is increasingly likely to repeat a gene already detected.")
 
