@@ -99,18 +99,16 @@ spatial object.
 
 # Analysis strategy
 
-![Flow diagram of the analysis stages, from the SpatialData input through quality control, filtering, normalisation, embedding, clustering, marker ranking, spatial statistics, reference transfer and ligand-receptor ranking, to the processed SpatialData output.](../../images/spatial-melanoma-EISTA/spatial_melanoma_pipeline.svg "Analysis stages covered by this tutorial. Blue stages read and describe the data, green stages prepare it for clustering, orange stages interpret the groups, and purple stages package the result.")
+![Flow diagram of the analysis stages, from the SpatialData input through quality control, filtering, normalisation, embedding, clustering, marker ranking, spatial statistics, reference transfer and ligand-receptor ranking, to the processed SpatialData output.](../../images/spatial-melanoma-SPICA/spatial_melanoma_pipeline.png "Analysis stages covered by this tutorial. Blue stages read and describe the data, green stages prepare it for clustering, orange stages interpret the groups, and purple stages package the result.")
 
 Two different graphs are built during this analysis:
 
 1. Scanpy builds an **expression-neighbour graph** from {PCA} coordinates. Cells with similar expression profiles are connected. Leiden clustering and {UMAP} both use these connections ({% cite Wolf2018Scanpy %}).
 2. Squidpy builds a **spatial-neighbour graph** from the cell coordinates. Cells that are physically close in the section are connected ({% cite Palla2022Squidpy %}).
 
-A **Leiden group** is simply the set of cells given the same Leiden label. It becomes a candidate cell population only when its ranked genes, its position in the tissue and its {QC} profile all point the same way.
-
 | Analysis stage | Purpose | Main output |
 | --- | --- | --- |
-| SpatialData input | A cropped Xenium object holding the morphology image, segmentation labels, transcripts and the expression table, all in one coordinate system | SpatialData archive |
+| SpatialData input | A cropped Xenium object holding the morphology image, segmentation labels, transcripts and the expression table, all in one coordinate system | SpatialData object  |
 | Scanpy {QC} | Examine transcript content and segmented cell size, filter cells and genes, map the metrics onto the tissue | {QC} panels before and after filtering |
 | Scanpy preprocessing | Normalise, log-transform and select highly variable genes | Log-normalised object with {HVG} annotation |
 | Scanpy clustering | Calculate {PCA}, build the expression-neighbour graph, generate {UMAP}, compare three Leiden resolutions | Embeddings and three sets of Leiden labels |
@@ -118,7 +116,7 @@ A **Leiden group** is simply the set of cells given the same Leiden label. It be
 | Squidpy | Build the spatial-neighbour graph, calculate adjacency statistics and spatial autocorrelation | Centrality scores, neighbourhood enrichment, Moran's I |
 | CellTypist | Compare each cell with a healthy adult skin reference and refine by majority voting | Predicted labels, majority-voting labels, confidence scores |
 | LIANA | Rank candidate {LR} pairs between Leiden groups | Ranked source-to-target {LR} table |
-| SpatialData output | Write the processed table back into the spatial object | Archive containing `table_processed` |
+| SpatialData output | Write the processed table back into the SpatialData object | SpatialData object containing `table_processed` |
 
 > <question-title></question-title>
 >
@@ -136,7 +134,7 @@ A **Leiden group** is simply the set of cells given the same Leiden label. It be
 
 # Get the data
 
-The tutorial starts from `melanoma_roi.spatialdata.zip`, a SpatialData archive holding the window and
+The tutorial starts from `melanoma_roi.spatialdata.zip`, a SpatialData Object  holding the window and
 everything that goes with it: the morphology image, the cell and nucleus segmentation masks, the
 decoded transcripts, and an expression table with one row per segmented cell. SpatialData was designed
 to keep exactly this kind of multi-modal output together in one object, with every element aligned to a
@@ -150,7 +148,7 @@ shared coordinate system ({% cite Marconato2025SpatialData %}).
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import the prepared archive from [Zenodo]({{ page.zenodo_link }}):
+> 2. Import the prepared SpatialData object from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
 >    {{ page.zenodo_link }}/files/melanoma_roi.spatialdata.zip
@@ -169,10 +167,10 @@ shared coordinate system ({% cite Marconato2025SpatialData %}).
 ## The window we are working in
 
 The full section is a diagonal band of tissue about 9,000 × 4,300 µm, with normal skin at one end and
-the melanoma at the other. The archive above holds a 1,350 × 900 µm box cut out of the tumour, at
+the melanoma at the other. The spatial object above holds a 1,350 × 900 µm box cut out of the tumour, at
 x 7350–8700 µm and y 1500–2400 µm, containing 10,810 of the 112,551 segmented cells.
 
-![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
+![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-SPICA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
 
 Two things follow from that choice, and both matter for how the results should be read.
 
@@ -200,9 +198,9 @@ follows. Their absence is a property of the window, not a finding about the tumo
 >
 {: .details}
 
-> <details-title>Optional: build the archive yourself from the Xenium output bundle</details-title>
+> <details-title>Optional: build the SpatialData object yourself from the Xenium output bundle</details-title>
 >
-> Everything below is optional. The analysis starts from the archive you have just imported, and this
+> Everything below is optional. The analysis starts from the SpatialData object you have just imported, and this
 > box records how it was made, for anyone who wants to apply the same preparation to another Xenium
 > section.
 >
@@ -332,7 +330,7 @@ follows. Their absence is a property of the window, not a finding about the tumo
 
 # Extract the expression table
 
-The Scanpy tools work on AnnData, so the first analysis step pulls the `table` element out of the archive. The archive itself stays in the history, because we need it again for every spatial plot.
+The Scanpy tools work on AnnData, so the first analysis step pulls the `table` element out of the SpatialData object. The object itself stays in the history, because we need it again for every spatial plot.
 
 > <hands-on-title>Export and inspect the AnnData table</hands-on-title>
 >
@@ -403,7 +401,7 @@ The observation table already carries per-cell measurements made on the instrume
 
 # Quality control before filtering
 
-`total_counts` measures how much signal a cell carries and `n_genes_by_counts` how many different genes it detects. The `pct_counts_in_top_N_genes` metrics report the share of a cell's counts held by its most abundant genes. On top of these, Xenium gives us `cell_area`, which is measured from the image and is independent of the transcripts.
+Several variables need to be checked to assess the quality of the data and to determine reasonable values for filtering. `total_counts` measures how much signal a cell carries and `n_genes_by_counts` how many different genes it detects. The `pct_counts_in_top_N_genes` metrics report the share of a cell's counts held by its most abundant genes. On top of these, Xenium gives us `cell_area`, which is measured from the image and is independent of the transcripts.
 
 > <hands-on-title>Compute QC metrics</hands-on-title>
 >
@@ -422,21 +420,12 @@ The observation table already carries per-cell measurements made on the instrume
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `n_genes_by_counts`
+>            - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts, cell_area`
+>        - In *“Violin plot attributes”*:
+>            - *“Display keys in multiple panels”*: `Yes`
+>
 >
 > 2. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
->    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
->        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `total_counts`
->
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
->    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
->        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `cell_area`
->
-> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"x coordinate"*: `total_counts`
@@ -445,15 +434,11 @@ The observation table already carries per-cell measurements made on the instrume
 >
 {: .hands_on}
 
-![Violin plot of detected genes per cell before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_n_genes_by_counts_before_filtering.png "Detected genes per cell across the 10,810 cells in the window, before filtering.")
+![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area before filtering.](../../images/spatial-melanoma-SPICA/Violin_Plots_before_filteration.pnd "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² before filtering.")
 
-![Violin plot of total transcript counts per cell before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_total_counts_before_filtering.png "Total transcript counts per cell before filtering.")
+![Detected genes against total counts before filtering, coloured by cell area.](../../images/spatial-melanoma-SPICA/Scatter_plot_before_filtering.png "Detected genes against total counts before filtering, coloured by cell area. The relationship curves rather than running straight, because each additional transcript is increasingly likely to repeat a gene the cell has already detected.")
 
-![Violin plot of segmented cell area before filtering.](../../images/spatial-melanoma-EISTA/Violin_plot_cell_area_before_filtering.png "Segmented cell area in µm² before filtering. The long upper tail is what the area filter will remove.")
-
-![Detected genes against total counts before filtering, coloured by cell area.](../../images/spatial-melanoma-EISTA/Scatter_plot_before_filtering.png "Detected genes against total counts before filtering, coloured by cell area. The relationship curves rather than running straight, because each additional transcript is increasingly likely to repeat a gene the cell has already detected.")
-
-Plotting the same metrics on the tissue is the check that separates a technical failure from a real tissue compartment. To do that, the annotated table has to go back into the spatial object.
+Plotting the same metrics on the tissue is the check that separates a technical failure from a real tissue compartment. To do that, the annotated table has to go back into the SpatialData object.
 
 > <hands-on-title>Map the QC metrics onto the morphology image</hands-on-title>
 >
@@ -490,9 +475,9 @@ Plotting the same metrics on the tissue is the check that separates a technical 
 >
 {: .hands_on}
 
-![Spatial map of the unfiltered section coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_total_counts_before_filtering.jpg "Total transcript counts per cell across the window before filtering, drawn on the morphology image. The axes are in pixels, which is the unit of the global coordinate system.")
+![Spatial map of the unfiltered section coloured by total transcript counts per cell.](../../images/spatial-melanoma-SPICA/Spatial_Plot_total_counts_before_filtering.jpg "Total transcript counts per cell across the window before filtering, drawn on the morphology image. The axes are in pixels, which is the unit of the global coordinate system.")
 
-![Spatial map of the unfiltered section coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_n_genes_by_counts_before_filtering.jpg "Detected genes per cell across the same window before filtering.")
+![Spatial map of the unfiltered section coloured by the number of detected genes per cell.](../../images/spatial-melanoma-SPICA/Spatial_Plot_n_genes_by_counts_before_filtering.jpg "Detected genes per cell across the same window before filtering.")
 
 > <question-title>Interpret the QC output</question-title>
 >
@@ -516,7 +501,7 @@ Plotting the same metrics on the tissue is the check that separates a technical 
 
 # Filtering
 
-We filter in two stages: first on transcript content, then on segmented cell area. The transcript thresholds follow published Xenium practice, since the STHELAR resource filtered cells with fewer than 10 transcripts before clustering ({% cite Gaudin2026STHELAR %}). The area window is derived from the distribution above.
+We filter in two stages: first on transcript content, then on segmented cell area. The transcript thresholds to filtere cells with fewer than 10 transcripts before clustering. The area window is set to 10 and 400.
 
 Each step below is a separate job that takes the output of the previous job, and inspecting the object after each one is what makes the effect of every threshold visible.
 
@@ -610,27 +595,23 @@ Each step below is a separate job that takes the output of the previous job, and
 >    >
 >    {: .question}
 >
-> 8. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Scanpy filter** {% icon tool %}
->    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a cell to pass filtering"*: `100000000`
 >
-> 9. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Scanpy filter** {% icon tool %}
->    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - *"Filter"*: `Maximum number of genes expressed`
->            - *"Maximum number of genes expressed required for a cell to pass filtering"*: `100000000`
->
-> 10. Rename the generated file `AnnData after transcript filtering`
+>  Rename the generated file `AnnData after transcript filtering`
 >
 {: .hands_on}
 
-> <comment-title>Why the upper transcript limits are effectively switched off</comment-title>
+> <comment-title>Why no max_counts/max_genes upper filter here</comment-title>
 >
-> The two maximum thresholds are set to 100,000,000, which no cell in any dataset will reach. They are kept in the analysis as placeholders, so that the sequence of filters is complete and the same set of steps can be reused on a section where an upper limit is needed.
+> `pp.filter_cells` filters outliers on both ends of the count distribution, not only the low end
+> ({% cite ScanpyFilterCellsDocs %}). The high end is normally used to catch multiplets: 10x's QC guidance
+> for droplet platforms flags an unusually high feature count as a multiplet signal and suggests a cutoff
+> of two to five MADs above the median ({% cite TenXQCFilters %}), and Scrublet is built to detect the
+> same thing by simulating merged cells from the data ({% cite Wolock2019Scrublet %}). Both are standard
+> for droplet-based data, where there is no other way to catch a multiplet.
 >
-> The job those limits would normally do, removing objects carrying implausibly many transcripts, is done here by the cell-area filter instead. We will see in a moment that it removes the same objects, and for a reason that can be stated in terms of the image rather than the counts.
+> For Xenium the same failure mode, two cells merged by a segmentation error, is what the `cell_area`
+> filter above already removes, directly from the segmentation rather than from counts
+> ({% cite TenXCellTypeAnnotation %}).
 >
 {: .comment}
 
@@ -726,7 +707,7 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 
 > <hands-on-title>Visualise QC after filtering</hands-on-title>
 >
-> 1. Repeat the four {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} jobs from the *Visualise QC metrics* box, using `Filtered AnnData table` as the *"Annotated data matrix"* each time
+> 1. Repeat the two {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} jobs from the *Visualise QC metrics* box, using `Filtered AnnData table` as the *"Annotated data matrix"* each time
 >
 >  Re-run the tool
 >
@@ -742,21 +723,18 @@ Repeating the {QC} plots on the filtered object, and mapping them back onto the 
 >
 {: .hands_on}
 {% snippet faqs/galaxy/tools_rerun.md %}
-![Violin plot of detected genes per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_n_genes_by_counts_after_filtering.png "Detected genes per cell across the 10,722 retained cells.")
 
-![Violin plot of total transcript counts per cell after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_total_counts_after_filtering.png "Total transcript counts per cell after filtering.")
+![Violin plot of detected genes per cell, total transcript counts per cell and segmented cell area after filteration.](../../images/spatial-melanoma-SPICA/Violin_Plots_after_filteration.pnd "Detected genes per cell, Total transcript counts per cell and Segmented cell area in µm² after filteration.")
 
-![Violin plot of segmented cell area after filtering.](../../images/spatial-melanoma-EISTA/Violin_Plot_cell_area_after_filtering.png "Segmented cell area after filtering. The distribution now stops at 400 µm².")
+![Scatter plot of detected genes against total counts, coloured by cell area, after filtering.](../../images/spatial-melanoma-SPICA/Scatter_plot_after_filtering.png "Detected genes against total counts for the retained cells, coloured by cell area. The curve saturates as counts rise, because each further transcript is increasingly likely to repeat a gene already detected.")
 
-![Scatter plot of detected genes against total counts, coloured by cell area, after filtering.](../../images/spatial-melanoma-EISTA/Scatter_plot_after_filtering.png "Detected genes against total counts for the retained cells, coloured by cell area. The curve saturates as counts rise, because each further transcript is increasingly likely to repeat a gene already detected.")
+![Spatial map of the retained cells coloured by total transcript counts per cell.](../../images/spatial-melanoma-SPICA/Spatial_Plot_after_filtering.jpg "Total transcript counts across the 10,722 retained cells in the window, drawn on the morphology image.")
 
-![Spatial map of the retained cells coloured by total transcript counts per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_after_filtering.jpg "Total transcript counts across the 10,722 retained cells in the window, drawn on the morphology image.")
-
-![Spatial map of the retained cells coloured by the number of detected genes per cell.](../../images/spatial-melanoma-EISTA/Spatial_Plot_table_processed_after_filtering.jpg "Detected genes across the retained cells. Content varies across the window, with denser tumour on the left and the second melanocytic compartment on the right.")
+![Spatial map of the retained cells coloured by the number of detected genes per cell.](../../images/spatial-melanoma-SPICA/Spatial_Plot_table_processed_after_filtering.jpg "Detected genes across the retained cells. Content varies across the window, with denser tumour on the left and the second melanocytic compartment on the right.")
 
 > <comment-title>Would a stricter transcript threshold be better?</comment-title>
 >
-> A minimum of 10 transcripts per cell follows published Xenium practice ({% cite Gaudin2026STHELAR %}) and retains 99.7 per cent of cells here, but it is a permissive choice. Later in this tutorial two Leiden groups appear with medians of 105 and 174 transcripts per cell, 3,741 cells in total, which pass this filter while carrying little expression information.
+> A minimum of 10 transcripts per cell and retains 99.7 per cent of cells here, but it is a permissive choice. Later in this tutorial two Leiden groups appear with medians of 105 and 174 transcripts per cell, 3,741 cells in total, which pass this filter while carrying little expression information.
 >
 > Raising the threshold to around 50 transcripts would remove 623 cells, 419 of them from the lymphocyte group, and simplify the clustering.
 >
@@ -829,7 +807,7 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >
 {: .hands_on}
 
-![Two panels of gene dispersion against mean expression, with the 2,000 selected highly variable genes in black and the remaining genes in grey.](../../images/spatial-melanoma-EISTA/Plot_HVGs.png "Normalised and raw dispersion against mean expression. The selected genes sit above the trend for their expression level.")
+![Two panels of gene dispersion against mean expression, with the 2,000 selected highly variable genes in black and the remaining genes in grey.](../../images/spatial-melanoma-SPICA/Plot_HVGs.png "Normalised and raw dispersion against mean expression. The selected genes sit above the trend for their expression level.")
 
 > <question-title>Interpret the feature selection</question-title>
 >
@@ -847,7 +825,13 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 
 # Dimensionality reduction and clustering
 
-{PCA} compresses correlated expression patterns into orthogonal components. A nearest-neighbour graph then links cells with similar coordinates, and {UMAP} gives a two-dimensional view of that graph. {UMAP} shows expression similarity; it is not a map of the tissue.
+{PCA} compresses correlated expression patterns into orthogonal components. The neighbourhood graph
+built from those components connects cells with similar expression, not cells that sit near each other
+in the section; Scanpy builds this **expression-neighbour graph** from {PCA} coordinates
+({% cite Wolf2018Scanpy %}), Leiden clustering partitions it ({% cite Traag2019Leiden %}), and {UMAP}
+gives a two-dimensional view of it. {UMAP} shows expression similarity; it is not a map of the tissue.
+Squidpy builds a second, spatial-neighbour graph later in this tutorial, connecting cells that are
+physically close in the section rather than similar in expression.
 
 > <hands-on-title>Run the PCA</hands-on-title>
 >
@@ -863,6 +847,8 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts,cell_area`
 >
 {: .hands_on}
+
+![Four PCA panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-SPICA/Plot_PCA.png "PCA coloured by quality control covariates. Transcript content varies along the main axes of the embedding.")
 
 > <comment-title>Why the matrix is not scaled</comment-title>
 >
@@ -898,9 +884,7 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 >
 {: .hands_on}
 
-![Four PCA panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/Plot_PCA.png "PCA coloured by quality control covariates. Transcript content varies along the main axes of the embedding.")
-
-![Four UMAP panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-EISTA/Plot_UMAP.png "UMAP coloured by quality control covariates. The small satellite islands on the right hold the lowest-content cells in the dataset.")
+![Four UMAP panels coloured by log total counts, log detected genes, total counts and cell area.](../../images/spatial-melanoma-SPICA/Plot_UMAP.png "UMAP coloured by quality control covariates. The small satellite islands on the right hold the lowest-content cells in the dataset.")
 
 > <question-title>Should total counts be regressed out?</question-title>
 >
@@ -922,7 +906,7 @@ Counts per cell vary for reasons that include cell size and segmentation, so exp
 
 ## Clustering at three resolutions
 
-Leiden partitions the expression-neighbour graph, and the resolution controls how finely ({% cite Traag2019Leiden %}). Testing several resolutions shows which structures are stable and which appear only when the partition is pushed. We use the three values `0.2`, `0.4` and `0.6`, which are the resolutions the STHELAR resource used for Xenium sections ({% cite Gaudin2026STHELAR %}), and store each result under its own key.
+Leiden partitions the expression-neighbour graph, and the resolution controls how finely ({% cite Traag2019Leiden %}). Testing several resolutions shows which structures are stable and which appear only when the partition is pushed. We use the three values `0.2`, `0.4` and `0.6` and store each result under its own key.
 
 > <hands-on-title>Cluster the neighbourhood graph</hands-on-title>
 >
@@ -962,7 +946,7 @@ Leiden partitions the expression-neighbour graph, and the resolution controls ho
 >
 {: .hands_on}
 
-![Three UMAP panels coloured by Leiden labels at resolutions 0.2, 0.4 and 0.6, showing 4, 6 and 9 groups.](../../images/spatial-melanoma-EISTA/Plot_Leiden_comparison.png "UMAP coloured by Leiden groups at the three tested resolutions.")
+![Three UMAP panels coloured by Leiden labels at resolutions 0.2, 0.4 and 0.6, showing 4, 6 and 9 groups.](../../images/spatial-melanoma-SPICA/Plot_Leiden_comparison.png "UMAP coloured by Leiden groups at the three tested resolutions.")
 
 | Resolution | Groups |
 | --- | ---: |
@@ -1016,9 +1000,16 @@ The group sizes at 0.6 are:
 >
 {: .question}
 
+> <comment-title>A Leiden group is a label, not a cell type</comment-title>
+>
+> A **Leiden group** is simply the set of cells given the same Leiden label. It becomes a candidate cell population only when its ranked genes, its position in the tissue and its {QC} profile all point the same way.
+>
+{: .comment}
+
+
 # Marker genes
 
-Ranked genes show which genes separate each group from all the remaining cells. We use the Wilcoxon rank-sum test with Benjamini-Hochberg correction, the combination used to refine annotations in the STHELAR Xenium resource ({% cite Gaudin2026STHELAR %}).
+Ranked genes show which genes separate each group from all the remaining cells. We use the Wilcoxon rank-sum test with Benjamini-Hochberg correction.
 
 > <hands-on-title>Rank the marker genes</hands-on-title>
 >
@@ -1042,7 +1033,7 @@ Ranked genes show which genes separate each group from all the remaining cells. 
 {: .hands_on}
 
 
-![Nine panels, one per Leiden group, each listing the top twenty ranked genes against their test score.](../../images/spatial-melanoma-EISTA/Plot_ranking_of_genes.png "Top twenty ranked genes for each group at resolution 0.6. The scores fall away at different rates: group 6 opens at 40 for POSTN, group 2 at 44 for S100A1, and group 8 at 28 for XBP1.")
+![Nine panels, one per Leiden group, each listing the top twenty ranked genes against their test score.](../../images/spatial-melanoma-SPICA/Plot_ranking_of_genes.png "Top twenty ranked genes for each group at resolution 0.6. The scores fall away at different rates: group 6 opens at 40 for POSTN, group 2 at 44 for S100A1, and group 8 at 28 for XBP1.")
 
 > <warning-title>Discard ADGRG1 before interpreting these results</warning-title>
 >
@@ -1190,11 +1181,20 @@ Squidpy builds its own graph from the cell coordinates, independent of the expre
 >
 {: .hands_on}
 
+## Spatial centrality measures
+Three measures are used to describe the position of cells in the spatial-neighbour graph:
+- **Degree centrality** measures the number of spatial neighbours a cell has. Higher values indicate cells with more direct neighbours.
+- **Closeness centrality** measures how close a cell is to other cells in the network. Higher values indicate a more central position.
+- **Average clustering** measures how strongly a cell's neighbours are connected to each other. Higher values indicate a more tightly connected local neighbourhood.
 
+![Three panels showing average clustering, closeness centrality and degree centrality for the nine Leiden groups.](../../images/spatial-melanoma-SPICA/Plot_Centrality_Scores.png "Average clustering, closeness centrality and degree centrality per group in the spatial-neighbour graph. Group 1 sits at the top of all three; group 4 is lowest on degree and closeness centrality.")
 
-![Three panels showing average clustering, closeness centrality and degree centrality for the nine Leiden groups.](../../images/spatial-melanoma-EISTA/Plot_Centrality_Scores.png "Average clustering, closeness centrality and degree centrality per group in the spatial-neighbour graph. Group 1 sits at the top of all three; group 4 is lowest on degree and closeness centrality.")
+## Neighbourhood enrichment
 
-![Heatmap of neighbourhood-enrichment z-scores for all pairs of the nine Leiden groups.](../../images/spatial-melanoma-EISTA/Plot_Neighborhood_Enrichment.png "Neighbourhood-enrichment z-scores from 1,000 permutations. The diagonal is positive throughout, and the brightest cell is group 4 against itself.")
+Neighbourhood enrichment tests whether pairs of Leiden groups occur next to each other more or less often than expected by chance. Squidpy compares the observed neighbourhoods with those obtained after randomly permuting the group labels.
+The resulting **z-score** indicates the direction and strength of enrichment. Positive values indicate that two groups are neighbours more often than expected, while negative values indicate fewer neighbouring pairs than expected.
+
+![Heatmap of neighbourhood-enrichment z-scores for all pairs of the nine Leiden groups.](../../images/spatial-melanoma-SPICA/Plot_Neighborhood_Enrichment.png "Neighbourhood-enrichment z-scores from 1,000 permutations. The diagonal is positive throughout, and the brightest cell is group 4 against itself.")
 
 Values from this run:
 
@@ -1225,6 +1225,8 @@ Values from this run:
 > {: .solution}
 >
 {: .question}
+
+## Spatially Variable Genes ##### I will need to think about the title and  visualise a high-scoring gene on the tissue to see whether a spatial pattern can indeed be observed.
 
 Moran's I measures whether a gene's expression is spatially structured rather than randomly distributed ({% cite Moran1950Autocorrelation %}). The result is stored in the object and can be read with **Inspect AnnData**. Genes from the top of that ranking in the reference run:
 
@@ -1258,7 +1260,7 @@ Moran's I measures whether a gene's expression is spatially structured rather th
 
 # Cell type annotation with CellTypist
 
-CellTypist assigns each cell the best-matching label from a reference built on annotated single-cell data, and can then refine the assignment by majority voting within over-clustered neighbourhoods ({% cite Dominguez2022CellTypist %}). The model used here holds labels from healthy adult human skin, from the atlas that defines keratinocyte, fibroblast, vascular, pericyte, Schwann, melanocyte and immune states in skin ({% cite Reynolds2021Skin %}).
+CellTypist assigns each cell the label that best matches its gene expression profile based on a reference model trained on annotated single-cell data, and can then further refine the assignment by majority voting among cells within over-clustered neighbourhoods ({% cite Dominguez2022CellTypist %}). The model used here is based on healthy adult human skin and includes keratinocyte, fibroblast, vascular, pericyte, Schwann cell, melanocyte, and immune cell states ({% cite Reynolds2021Skin %}).
 
 > <hands-on-title>Annotate the cells</hands-on-title>
 >
@@ -1298,7 +1300,7 @@ endothelial group is labelled VE2, a vascular endothelial state of the reference
 and one is split. The four that agree are also the four with the highest mean confidence, which is the
 most useful pattern in the table. The dot plot produced by the same job shows both quantities at once.
 
-![CellTypist dot plot with the nine Leiden groups along the horizontal axis and the five majority-voting labels along the vertical axis, dot size giving the fraction of cells and dot colour the mean prediction probability.](../../images/spatial-melanoma-EISTA/Plot_CellTypist.png "Majority-voting labels against Leiden groups. Dot size is the fraction of cells in a group carrying that label, and dot colour is the mean prediction probability, running from dark blue at 0 through pale at 0.5 to red at 1. Size is agreement and colour is confidence, so the large dark dots in the Differentiated_KC row are groups where nearly every cell took the same label with almost no support for it. The palest dots are Melanocyte for groups 0, 4 and 5 and VE2 for group 7, the four assignments the markers agree with. The Th row is nearly empty because majority voting leaves that label on only 129 of 10,722 cells.")
+![CellTypist dot plot with the nine Leiden groups along the horizontal axis and the five majority-voting labels along the vertical axis, dot size giving the fraction of cells and dot colour the mean prediction probability.](../../images/spatial-melanoma-SPICA/Plot_CellTypist.png "Majority-voting labels against Leiden groups. Dot size is the fraction of cells in a group carrying that label, and dot colour is the mean prediction probability, running from dark blue at 0 through pale at 0.5 to red at 1. Size is agreement and colour is confidence, so the large dark dots in the Differentiated_KC row are groups where nearly every cell took the same label with almost no support for it. The palest dots are Melanocyte for groups 0, 4 and 5 and VE2 for group 7, the four assignments the markers agree with. The Th row is nearly empty because majority voting leaves that label on only 129 of 10,722 cells.")
 
 > <question-title>Is a reference-transfer label a cell type?</question-title>
 >
@@ -1317,9 +1319,7 @@ most useful pattern in the table. The dot plot produced by the same job shows bo
 > > 1. The markers, in both cases. *MZB1*, *DERL3* and *POU2AF1* form the secretory programme of plasma
 > >    cells, and *POSTN* with *COL11A1* and *CTHRC1* is a fibroblast matrix programme. Both are coherent
 > >    sets whose members belong together; the reference labels are not supported by anything except the
-> >    classifier. The STHELAR resource takes the same view for Xenium data: reference predictions are
-> >    treated as supportive, and final identities come from combining them with marker-gene evidence and
-> >    literature context ({% cite Gaudin2026STHELAR %}).
+> >    classifier.
 > > 2. Agreement measures how consistently the classifier assigns the same label within a group;
 > >    confidence measures how well the cells actually match that label. Majority voting drives agreement
 > >    up by construction, because it replaces each cell's own prediction with the dominant label of its
@@ -1454,7 +1454,7 @@ Before treating that as a finding, three checks are worth making, and this table
 
 # Return the processed table to SpatialData
 
-Everything computed so far lives in an AnnData object. Writing it back into the spatial object keeps the annotations together with the image and the segmentation, so the result can be plotted or opened in a viewer such as napari ({% cite Marconato2025SpatialData %}).
+Everything computed so far lives in an AnnData object. Writing it back into the spatialData object keeps the annotations together with the image and the segmentation, so the result can be plotted or opened in a viewer such as napari ({% cite Marconato2025SpatialData %}).
 
 > <hands-on-title>Create the final processed object</hands-on-title>
 >
@@ -1479,15 +1479,15 @@ Everything computed so far lives in an AnnData object. Writing it back into the 
 >
 {: .hands_on}
 
-This last plot is where the analysis becomes checkable against the tissue. Group `0` should fill most of the window, group `4` should sit in its own compact patch rather than scattered through it, and the immune and stromal groups should trace the band between the two melanocytic compartments.#
+The spatial plot provides a way to check the analysis results against the tissue and see whether the identified groups correspond to coherent regions in the tissue. Group `0` should fill most of the window, group `4` should sit in its own compact region rather than scattered through it, and the immune and stromal groups should trace the band between the two melanocytic compartments.
 
-![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-EISTA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
+![Cluster territories across the whole section with the selected window outlined, and the window shown enlarged beneath.](../../images/spatial-melanoma-SPICA/plot_output.jpg "The window against the whole section. It sits inside the tumour and spans an interface: one melanocytic compartment on the left, another on the right, and a band of immune and stromal cells between them.")
 
 # Conclusion
 
 We built a SpatialData object from a Xenium output bundle, cut a 1,350 × 900 µm window out of the tumour, and analysed the 10,810 segmented cells inside it. Filtering on transcript content and on segmented cell area retained 10,722 cells, or 99.2 per cent, and removed 245 of the 5,006 genes because they are not detected anywhere in this window. Expression was normalised to 10,000 counts per cell and log-transformed, 2,000 highly variable genes were flagged, and the log-normalised matrix fed {PCA}, a 15-neighbour expression graph and {UMAP}. Leiden clustering at resolutions 0.2, 0.4 and 0.6 gave 4, 6 and 9 groups, and we carried the nine groups at 0.6 forward.
 
-Ranked genes supported descriptions for all nine: three melanoma states separated by metabolism and content rather than lineage, a fourth *VGF*-positive melanocytic group whose distinctness is partly a matter of measurement depth, cytotoxic lymphocytes carrying an interferon signature, myeloid cells and macrophages, matrix-remodelling fibroblasts, endothelium, and plasma cells.
+Ranked genes supported descriptions for all nine Leiden groups at resolution 0.6: three melanoma states separated by metabolism and content rather than lineage, a fourth *VGF*-positive melanocytic group whose distinctness is partly a matter of measurement depth, cytotoxic lymphocytes carrying an interferon signature, myeloid cells and macrophages, matrix-remodelling fibroblasts, endothelium, and plasma cells.
 
 Just as important are the results that came with limits attached. *ADGRG1* ranked first for the differentiated melanoma group and was discarded, because 10x Genomics documents non-specific binding for that probe in the panel version used. The gene-level filter removed 245 genes, most of them markers of populations that live outside the window. Squidpy described an immune and stromal compartment sitting together and apart from the tumour, which is suggestive of immune exclusion but does not establish it. Moran's I values were uniformly lower than on the full section, not because the measurements are worse but because the field of view is smaller.
 
