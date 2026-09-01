@@ -101,11 +101,6 @@ spatial object.
 
 ![Flow diagram of the analysis stages, from the SpatialData input through quality control, filtering, normalisation, embedding, clustering, marker ranking, spatial statistics, reference transfer and ligand-receptor ranking, to the processed SpatialData output.](../../images/spatial-melanoma-SPICA/spatial_melanoma_pipeline.png "Analysis stages covered by this tutorial. Blue stages read and describe the data, green stages prepare it for clustering, orange stages interpret the groups, and purple stages package the result.")
 
-Two different graphs are built during this analysis:
-
-1. Scanpy builds an **expression-neighbour graph** from {PCA} coordinates. Cells with similar expression profiles are connected. Leiden clustering and {UMAP} both use these connections ({% cite Wolf2018Scanpy %}).
-2. Squidpy builds a **spatial-neighbour graph** from the cell coordinates. Cells that are physically close in the section are connected ({% cite Palla2022Squidpy %}).
-
 | Analysis stage | Purpose | Main output |
 | --- | --- | --- |
 | SpatialData input | A cropped Xenium object holding the morphology image, segmentation labels, transcripts and the expression table, all in one coordinate system | SpatialData object  |
