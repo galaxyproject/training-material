@@ -637,22 +637,15 @@ How do they compare with the texts we just saw?
 To find out, we can upload a third text and compare it with the reference text we like. 
 
 > <hands-on-title>Upload a file</hands-on-title>
-> 1. At the top of the **Activity Bar**, click the {% icon galaxy-upload %} **Upload** activity
->
->    ![upload data button shown in the galaxy interface]({% link topics/introduction/images/upload-data.png %})
->
->    This brings up a box:
->
->    ![the Galaxy upload dialogue, the 'regular' tab is active with a large textarea to paste subsequent URL]({% link topics/introduction/images/upload-box.png %})
->
-> 3. Click **Paste/Fetch data**
-> 4. Paste in the address of the third file in the Zenodo folder:
+> 1. At the top of the **Activity Bar**, click the {% icon galaxy-upload %} **Upload** icon.
+> 2. Click **Paste/Fetch data**
+> 3. Paste in the address of the third file in the Zenodo folder:
 >    ```
 >    https://zenodo.org/records/22229997/files/eaglesfield-smith.txt
 >    ```
 >
-> 5. Click **Start**
-> 6. Click **Close**
+> 4. Click **Start**
+> 5. Click **Close**
 {: .hands_on}
 
 You now have a further version of the poem <em>The Sorrows of Yamba</em>.
@@ -664,9 +657,9 @@ Let's compare Eaglesfield Smith's version with the Cheap repository's version in
 
 {% snippet faqs/galaxy/workflows_run.md box_type="hands_on" %}
 
-In the {% icon galaxy-workflows-activity %} **Workflows** section of your activity bar, click on the workflow `Introduction to DH in Galaxy [your initials]` that you created earlier.
+In the {% icon galaxy-workflows-activity %} **Workflows** section of your activity bar, click **My Workflows** and then click on the title of the workflow `Introduction to DH in Galaxy [your initials]` that you created earlier.
 You will see a preview of the workflow and various options. 
-Click on  {% icon workflow-run %} **Run**.
+Click on  {% icon workflow-run %} **Run** in the upper right corner.
 A new site opens, it is called a **workflow form**.
 
 Toggle:
@@ -684,10 +677,11 @@ A new site opens, showing the workflow invocation form and your workflow's progr
 Congratulations - you just started your first workflow!
 
 You can get to the history you created by clicking on the {% icon galaxy-histories-activity %} history link in the top left corner of the workflow invocation form.
-In this history, you should now see 16 datasets: 2 input files and all the steps of the above analysis. 
+Once the workflow is finished, you should now see 16 datasets in this history: 2 input files and all the steps of the above analysis. 
 You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:
 
 Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
+So the text likely has a different emphasis than the initial two texts we checked.
 
  ![Word Cloud of Eaglesfield Smith's Text Version](../../images/wc_smith.png "Word Cloud of Eaglesfield Smith's Text Version")
 
