@@ -122,7 +122,7 @@ These are the natural format for raw camera data, as imaging sensors essentially
 
 * **8-bit:** 2<sup>8</sup> = 256 possible values (range: 0 to 255 for unsigned, or -128 to 127 for signed). While this looks fine to our eyes, it is often too "coarse" for thorough quantitative analysis.
 
-* **16-bit:** 2<sup>16</sup> = 65,536 possible values (range: 0 to 65,535 for unsigned, or -32,768 to 32,767 for signed). This is the **scientific gold standard for image acquisition and storage**, because it allows you to detect even subtle differences in image intensities that would be lost (e.g., due to rounding) when using an 8-bit representation {% cite Haase2022 %}.
+* **16-bit:** 2<sup>16</sup> = 65,536 possible values (range: 0 to 65,535 for unsigned, or -32,768 to 32,767 for signed). This is the **scientific gold standard for image acquisition and storage**, because it allows you to detect even subtle differences in image intensities that would be lost (e.g., due to rounding) when using an 8-bit representation (e.g., {% cite Haase2022 %}).
 
 * **32-bit:** 2<sup>32</sup> = 4,294,967,296 possible values. While less common in direct acquisition, 32-bit integer formats are sometimes used in intermediate processing steps or for label images where many distinct regions need to be encoded.
 
@@ -348,7 +348,7 @@ In Galaxy, you can start the pre-processing stage with tools like **{% tool [App
 ## Stage B: Segmentation (defining objects)
 This is the most critical step. Here, you tell the computer which pixels belong to an "object" (like a nucleus) and which belong to the "background." 
 
-* **Thresholding:** A "cutoff" method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a **Binary Mask**.
+* **Thresholding:** A "cutoff" method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a **binary mask** (also called a **binary image**).
 * **Inference (Deep Learning):** Advanced AI models like **Cellpose** use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as "untangling" cells that are touching or overlapping in high-density environments ({% cite stringer2025cellpose3 %}, {% cite Schmidt2018 %}, {% cite Pachitariu2025.04.28.651001 %}).
 
 > <hands-on-title> Creating a Segmentation Mask </hands-on-title>
@@ -363,11 +363,11 @@ This is the most critical step. Here, you tell the computer which pixels belong 
 >
 {: .hands_on}
 
-> <comment-title>Masks vs. Label Images</comment-title>
+> <comment-title>Binary Masks vs. Label Images</comment-title>
 > It is important to distinguish between these two types of images in Galaxy:
 >
 > * **Binary Mask:** This is what you created with the **Threshold** tool. Every pixel is either "Background" (0) or "Foreground" (255). It tells the computer *where* the objects are, but it doesn't know that one cell is different from the one next to it.
-> * **Label Image:** Tools like **Label objects** (Connected Component Analysis) take a mask and assign a unique integer to every separate "blob." The first cell’s pixels all become `1`, the second cell `2`, and so on.
+> * **Label Image:** Tools like **Label objects** (Connected Component Analysis) take a binary mask and assign a unique integer to every separate "blob." The first cell’s pixels all become `1`, the second cell `2`, and so on. Label images are also called **label maps** or sometimes **label masks**.
 >
 {: .comment}
 
@@ -611,4 +611,4 @@ Now that you have your "compass," it is time to choose a specific path. Pick the
 
 * **Tracking:** {% icon level %} [Object Tracking using CellProfiler]({% link topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.md %}) – Move from static images to following individual objects through time and space.
 
-* **Histology & Pathology:** *Coming Soon!* A dedicated tutorial on **Histology Staining and Color Deconvolution** is currently in development.
+* **Histology & Pathology:** {% icon level %} [Stain Quantification and Color Deconvolution]({% link topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.md %}) – Use color deconvolution to separate stain channels and quantify the percentage of stained area in histological images (e.g. IHC/DAB staining).
