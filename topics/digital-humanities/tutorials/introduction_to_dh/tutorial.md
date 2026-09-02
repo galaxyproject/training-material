@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: Introduction to Digital Humanities in Galaxy
-priority: 1
 level: Introductory
 zenodo_link: 'https://doi.org/10.5281/zenodo.17053219'
 questions:
@@ -256,7 +255,7 @@ We also use this tool on the second file.
 >    - {% icon param-file %} *"from"*: `2: SoY_Univ_Mag_Source.txt`
 >
 >    {% snippet faqs/galaxy/tools_rerun.md %}
-> 
+>
 > 2. Once it is finished, rename this file to `SoY_Univ_Mag.txt`.
 >
 {: .hands_on}
@@ -316,19 +315,19 @@ To get an idea of how the two cleaned texts compare, we check out their metadata
 
 # Different ways to compare the texts
 
-There are various ways to compare two texts. 
-You could, for example, compare them quantitatively with the tool {% tool Line/Word/Character count %}. 
-The output of the tool would show, that the texts have different lengths. 
-While both files are only two lines long, the poem from the cheap repository is 1139 words long, more than double the amount of the second poem. 
+There are various ways to compare two texts.
+You could, for example, compare them quantitatively with the tool {% tool Line/Word/Character count %}.
+The output of the tool would show, that the texts have different lengths.
+While both files are only two lines long, the poem from the cheap repository is 1139 words long, more than double the amount of the second poem.
 
-Another option for comparing the texts is by visualising their content. 
-We will use a word cloud next to do just that. 
+Another option for comparing the texts is by visualising their content.
+We will use a word cloud next to do just that.
 
 
 ## Compare visually
 
-A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts. 
-Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about. 
+A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts.
+Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about.
 
 > <hands-on-title> Visualize the Content of Poem One </hands-on-title>
 >
@@ -347,7 +346,7 @@ Particularly for larger corpora, a word cloud can be a nice way to get a first i
 >
 {: .hands_on}
 
-The word cloud for the second text is created in the same way. 
+The word cloud for the second text is created in the same way.
 We suggest using the rerun {%icon dataset-rerun %} button on `Wordcloud Poem One`, to reun the tool with `SoY_Univ_Mag_cleaned.txt` as an input and create a wordcloud for it. That way we can make sure to use identical input parameters (e.g. font, color option, etc.) which helps for easy comparison.
 This should look as follows:
 
@@ -395,20 +394,20 @@ The visualisation suggests that the text's metrics, which we checked with the li
 
 With this text's length and just two poems, this is, of course, something you can find out by reading both texts. However, this distant reading approach can give you important preliminary insights to guide your close reading, particularly with bigger corpora.
 
-Of course, the word cloud insights are just a first glance and do not allow a proper analysis; 
-we need to compare both texts properly. 
+Of course, the word cloud insights are just a first glance and do not allow a proper analysis;
+we need to compare both texts properly.
 
 ## Compare texts side by side
 
-But what is a good way to compare those texts in depth? 
-We suggest comparing them side by side and line by line. 
+But what is a good way to compare those texts in depth?
+We suggest comparing them side by side and line by line.
 For that, we adapt the layout once more.
 
 ### Replace spaces with line breaks to prepare side-by-side comparison
 
-We used {% tool Replace text in entire line %} to remove the punctuation earlier. 
-This time, we use the same tool to replace characters in our files. 
-To get a convenient layout that shows one word per line, we use Regular Expressions to replace the spaces (\s) with line breaks (\n). 
+We used {% tool Replace text in entire line %} to remove the punctuation earlier.
+This time, we use the same tool to replace characters in our files.
+To get a convenient layout that shows one word per line, we use Regular Expressions to replace the spaces (\s) with line breaks (\n).
 That way, each word gets displayed in a different line, which prepares the detailed comparison in the next step.
 
 > <hands-on-title> Changing Layout of Poem One </hands-on-title>
@@ -430,7 +429,7 @@ That way, each word gets displayed in a different line, which prepares the detai
 >
 {: .hands_on}
 
-When you click on the eye {% icon galaxy-eye %} icon of the data set in the history, when the dataset turns green, you can see that it now contains one word per line. 
+When you click on the eye {% icon galaxy-eye %} icon of the data set in the history, when the dataset turns green, you can see that it now contains one word per line.
 To match this, we rerun {%icon dataset-rerun %} the step with the same parameters also for the second poem.
 
 > <hands-on-title> Changing Layout of Poem Two </hands-on-title>
@@ -460,8 +459,8 @@ To match this, we rerun {%icon dataset-rerun %} the step with the same parameter
 >
 {: .question}
 
-Now, both poems show one word per line, which is the perfect setup to compare them side by side. 
-Use a tool called <em>diff</em> to visualise this. 
+Now, both poems show one word per line, which is the perfect setup to compare them side by side.
+Use a tool called <em>diff</em> to visualise this.
 To reproduce the setup from this tutorial, make sure to select the version from the Cheap Repository as the first input file and the one from the Universal Magazine as the second input file.
 
 ### Using *diff* to compare texts side by side
@@ -496,26 +495,26 @@ We get two new files as a result. The HTML report and the raw output it is based
 {: .question}
 
 In the HTML report, you can quickly identify deletions (in red) and additions (in green) between both texts.
-You can also see smaller details, which you might quickly miss manually. 
-Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected. 
-You can furthermore see how the perspective was changed between the poems. 
-While line 359-361 in the cheap repository text states "they sell us", the other text states "they sell them" (l. 298-300), suggesting the reader is (no longer) among the group which is sold. 
+You can also see smaller details, which you might quickly miss manually.
+Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected.
+You can furthermore see how the perspective was changed between the poems.
+While line 359-361 in the cheap repository text states "they sell us", the other text states "they sell them" (l. 298-300), suggesting the reader is (no longer) among the group which is sold.
 You can go through the HTML file and detect further changes in language and length.
 
-Seeing this, you might want to go into detail with the respective themes once more. As "death" was central in both word clouds, we will extract sentences containing this word so you can analyze them further. 
-The recent files without punctuation and one word per line are not the easiest form for this. 
+Seeing this, you might want to go into detail with the respective themes once more. As "death" was central in both word clouds, we will extract sentences containing this word so you can analyze them further.
+The recent files without punctuation and one word per line are not the easiest form for this.
 Instead, we use an earlier version from our history.
 
 # Extract specific sentences
 
 ## Breaking text into sentences
 
-We return to Regular Expressions a third time, but this time we use a different tool with further functionalities. 
+We return to Regular Expressions a third time, but this time we use a different tool with further functionalities.
 The tools helps us to divide the text into more lines, to make it easier to extract sentences containing the word "death".
 
-Full stops  help us to indicate a sentence, which will not be perfectly accurate but sufficient for this case. 
-Of course, you could spend more time on this and make it neater. 
-Make sure to use not the last input but the poems without a hyperlink, but including punctuation. 
+Full stops  help us to indicate a sentence, which will not be perfectly accurate but sufficient for this case.
+Of course, you could spend more time on this and make it neater.
+Make sure to use not the last input but the poems without a hyperlink, but including punctuation.
 This will not work if the text contains no more full stops.
 
 > <hands-on-title> Rearrange Poem One </hands-on-title>
@@ -541,7 +540,7 @@ This will not work if the text contains no more full stops.
 
 
 
-when you have finished this step, remember to rerun {%icon dataset-rerun %} this tool for the second poem 
+when you have finished this step, remember to rerun {%icon dataset-rerun %} this tool for the second poem
 
 > <hands-on-title> Rearrange Poem Two </hands-on-title>
 >
@@ -600,22 +599,19 @@ When you enable the window manager at the top bar, you can click on the eye {% i
 
 # Creating a Workflow
 
-If you only analyze those two poems, you might find it easier to do those steps manually as we did above. 
-But particularly if you want to do this for several files, Galaxy has a great advantage: the ability to create workflows from a history. 
+If you only analyze those two poems, you might find it easier to do those steps manually as we did above.
+But particularly if you want to do this for several files, Galaxy has a great advantage: the ability to create workflows from a history.
 The workflow allows you to easily run the same tools with the same settings, in the same order, as when you first ran the analysis.
 You can also apply this to new input texts and save time by not having to redo all of the above steps.
 
 We start with the history you created step by step when following this tutorial.
 
-{% snippet faqs/galaxy/workflows_extract_from_history.md  box_type="hands_on" %}
+{% snippet faqs/galaxy/workflows_extract_from_history.md  box_type="hands_on" workflow-name="Introduction to DH in Galaxy [your initials]"  rename-inputs="The input files are currently named the same as the texts you used in your history. We want to make that more generic, for example by renaming this section `Input Text One` and `Input Text Two`." %}
 
-You can set the **Workflow name** to `Introduction to DH in Galaxy [your initials]`.
-The input files are currently named the same as the texts you used in your history.
-We want to make that more generic, for example by renaming this section `Input Text One` and `Input Text Two`.
 
 For a more detailed explanation of how to create workflows, you can also [check out the extended tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html %}).
 
-You can look at your workflow in the workflow editor. 
+You can look at your workflow in the workflow editor.
 This is the space where you could now manually adapt your workflow further.
 
 {% snippet faqs/galaxy/workflows_edit.md box_type="hands_on" %}
@@ -626,7 +622,7 @@ The workflow you created could look similar to this:
 The auto-generated workflow you initially see is likely organised a bit differently from the one in the image above.
 You can play around in the workflow editor to rearrange the tools as you like.
 
-Do not forget to click {% icon dataset-save %} *Save* icon if you want to keep your changes. 
+Do not forget to click {% icon dataset-save %} *Save* icon if you want to keep your changes.
 
 # Rerun your Workflow on Different Texts
 
@@ -635,7 +631,7 @@ Once you have created and adapted your workflow, it is ready to run.
 In our example, there are many different versions of <em>The Sorrows of Yamba</em>.
 We have compared two now, but there are actually more!
 How do they compare with the texts we just saw?
-To find out, we can upload a third text and compare it with the reference text we like. 
+To find out, we can upload a third text and compare it with the reference text we like.
 
 > <hands-on-title>Upload a file</hands-on-title>
 > 1. At the top of the **Activity Bar**, click the {% icon galaxy-upload %} **Upload** icon.
@@ -659,7 +655,7 @@ Let's compare Eaglesfield Smith's version with the Cheap repository's version in
 {% snippet faqs/galaxy/workflows_run.md box_type="hands_on" %}
 
 In the {% icon galaxy-workflows-activity %} **Workflows** section of your activity bar, click **My Workflows** and then click on the title of the workflow `Introduction to DH in Galaxy [your initials]` that you created earlier.
-You will see a preview of the workflow and various options. 
+You will see a preview of the workflow and various options.
 Click on  {% icon workflow-run %} **Run** in the upper right corner.
 A new site opens, it is called a **workflow form**.
 
@@ -671,14 +667,14 @@ As **Input for Text One**, select: `SoY_Cheap_Repo_Source.txt`
 
 As **Input for Text Two**, select: `eaglesfield-smith.txt`
 
-Both should already be in your history. 
+Both should already be in your history.
 
 Click on {% icon workflow-run %} **Run Workflow** in the upper right corner to start the workflow.
 A new site opens, showing the workflow invocation form and your workflow's progress.
 Congratulations - you just started your first workflow!
 
 You can get to the history you created by clicking on the {% icon galaxy-histories-activity %} history link in the top left corner of the workflow invocation form.
-Once the workflow is finished, you should now see 16 datasets in this history: 2 input files and all the steps of the above analysis. 
+Once the workflow is finished, you should now see 16 datasets in this history: 2 input files and all the steps of the above analysis.
 You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:
 
 Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
@@ -691,19 +687,19 @@ If you want to see in more detail how the texts differ from each other, you can 
 
 # Conclusion
 
-Congratulations! 
-You just finished your first analysis and ran your first workflow with Galaxy, well done! 
-The tutorial covered the basic setup of Galaxy and how to register, log in, and upload your material. 
+Congratulations!
+You just finished your first analysis and ran your first workflow with Galaxy, well done!
+The tutorial covered the basic setup of Galaxy and how to register, log in, and upload your material.
 You are now familiar with terms in Galaxy, such as history, dataset, and tool.
 We used several tools, learned to rerun them, and learned how to view the outputs in different ways.
-Various Regular Expression patterns helped to rearrange and clean text.  
-Moreover, we reshaped the text to compare it with the <em>diff</em> tool. 
+Various Regular Expression patterns helped to rearrange and clean text.
+Moreover, we reshaped the text to compare it with the <em>diff</em> tool.
 Then, we extracted notable sentences for further close reading.
 To re-use all of those steps effectively on a different set of texts, we extracted a workflow from your history and reran it.
 
 With all this knowledge in mind, you can now continue with one of our other tutorials or experiment with your own input. Enjoy!
 
-If you want to go a step further, you can make your analysis more complex and extract additional differences between the poems automatically to adapt the above analysis. 
+If you want to go a step further, you can make your analysis more complex and extract additional differences between the poems automatically to adapt the above analysis.
 For inspiration, check out the [advanced tutorial on Text-Mining]({% link topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html %}) or the other tutorials from the Digital Humanities section.
 
 [^1]: Thanks to Lilli Fortmeier for suggesting this use case!
