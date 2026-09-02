@@ -600,8 +600,8 @@ When you enable the window manager at the top bar, you can click on the eye {% i
 # Creating a Workflow
 
 If you only analyze those two poems, you might find it easier to do those steps manually as we did above. 
-But particularly, if you  want to do this for several files, Galaxy has a great advantage: the possibility to create workflows out of a history. 
-The workflow allows you to easily run exactly the same tools, with the same settings, in the same order as the first time you ran the analysis.
+But particularly if you want to do this for several files, Galaxy has a great advantage: the ability to create workflows from a history. 
+The workflow allows you to easily run the same tools with the same settings in the same order as the first time you ran the analysis.
 You can also apply this to new input texts and save the time of redoing all of the above steps.
 
 We start with the history you created step by step by following this tutorial.
