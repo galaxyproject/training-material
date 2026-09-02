@@ -601,28 +601,28 @@ When you enable the window manager at the top bar, you can click on the eye {% i
 
 If you only analyze those two poems, you might find it easier to do those steps manually as we did above. 
 But particularly if you want to do this for several files, Galaxy has a great advantage: the ability to create workflows from a history. 
-The workflow allows you to easily run the same tools with the same settings in the same order as the first time you ran the analysis.
-You can also apply this to new input texts and save the time of redoing all of the above steps.
+The workflow allows you to easily run the same tools with the same settings, in the same order, as when you first ran the analysis.
+You can also apply this to new input texts and save time by not having to redo all of the above steps.
 
-We start with the history you created step by step by following this tutorial.
+We start with the history you created step by step when following this tutorial.
 
 {% snippet faqs/galaxy/workflows_extract_from_history.md  box_type="hands_on" %}
 
 You can set the **Workflow name** to `Introduction to DH in Galaxy [your initials]`.
-The input files are currently named like the texts you used in your history.
+The input files are currently named the same as the texts you used in your history.
 We want to make that more generic, for example by renaming this section `Input Text One` and `Input Text Two`.
 
 For a more detailed explanation of how to create workflows, you can also [check out the extended tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html %}).
 
 You can look at your workflow in the workflow editor. 
-This is the space were you could now manually adapt your workflow further.
+This is the space where you could now manually adapt your workflow further.
 
 {% snippet faqs/galaxy/workflows_edit.md box_type="hands_on" %}
 
 The workflow you created could look similar to this:
 ![Screenshot of Workflow extracted from the Tutorial Introduction to DH](../../images/WF_Intro_to_DH.png)
 
-Likely, the auto-generated workflow you see initially is organised a bit differently than in the above image.
+The auto-generated workflow you initially see is likely organised a bit differently from the one in the image above.
 You can play around in the workflow editor to rearrange the tools as you like.
 
 Do not forget to click {% icon dataset-save %} *Save* icon if you want to keep your changes. 
@@ -631,8 +631,8 @@ Do not forget to click {% icon dataset-save %} *Save* icon if you want to keep y
 
 Once you have created and adapted your workflow, it is ready to run.
 
-In our example, there are many different versions of “The Sorrows of Yamba”.
-We have compared two now - but there are actually more!
+In our example, there are many different versions of <em>The Sorrows of Yamba</em>.
+We have compared two now, but there are actually more!
 How do they compare with the texts we just saw?
 To find out, we can upload a third text and compare it with the reference text we like. 
 
@@ -646,7 +646,7 @@ To find out, we can upload a third text and compare it with the reference text w
 >    ![the Galaxy upload dialogue, the 'regular' tab is active with a large textarea to paste subsequent URL]({% link topics/introduction/images/upload-box.png %})
 >
 > 3. Click **Paste/Fetch data**
-> 4. Paste in the address of the third files in the Zenodo folder:
+> 4. Paste in the address of the third file in the Zenodo folder:
 >    ```
 >    https://zenodo.org/records/22229997/files/eaglesfield-smith.txt
 >    ```
@@ -655,12 +655,12 @@ To find out, we can upload a third text and compare it with the reference text w
 > 6. Click **Close**
 {: .hands_on}
 
-You now have a further version of the poem “The Sorrows of Yamba”.
-This one is attributed to Easglesfield Smith and is based on the poem's edition from 1822.
+You now have a further version of the poem <em>The Sorrows of Yamba</em>.
+This one is attributed to Easglesfield Smith and is based on the 1822 edition of the poem.
 If you check the {% icon galaxy-eye %} (eye) icon next to the dataset name, you can already take a quick look at the file.
 
-We can now compare this version with one of the other texts to see more differences.
-Let's compare Eaglesfield Smith's version with that of the Cheap repository in the workflow!
+We can now compare this version with another text to identify more differences.
+Let's compare Eaglesfield Smith's version with the Cheap repository's version in the workflow!
 
 {% snippet faqs/galaxy/workflows_run.md box_type="hands_on" %}
 
@@ -671,7 +671,7 @@ A new site opens, it is called a **workflow form**.
 
 Toggle:
 - **Send results to a new history** to see your analysis in a new history and give it a suitable name.
-- **Re-use jobs with identical parameters**. This will save compute and energy by showing you identical jobs insetad of rerunning them anew. This is possible here, because we already did the analysis on the text from the Cheap Repository.
+- **Re-use jobs with identical parameters**. This will save compute and energy by showing you identical jobs instead of rerunning them anew. Reusing jobs is possible here because we have already analysed the text from the Cheap Repository.
 
 As **Input for Text One**, select: `SoY_Cheap_Repo_Source.txt`
 
@@ -680,27 +680,35 @@ As **Input for Text Two**, select: `eaglesfield-smith.txt`
 Both should already be in your history. 
 
 Click on {% icon workflow-run %} **Run Workflow** in the upper right corner to start the workflow.
-A new site opens that shows you the workflow invocation form and progress of your workflow.
+A new site opens, showing the workflow invocation form and your workflow's progress.
 Congratulations - you just started your first workflow!
 
 You can get to the history you created by clicking on the {% icon galaxy-histories-activity %} history link in the top left corner of the workflow invocation form.
-In this history you should now see 16 datasets: 2 input files as well as all the steps of the above analysis. You can click on all of them as before and for example check out the wordcloud of the Eaglesfield Smith poem:
+In this history, you should now see 16 datasets: 2 input files and all the steps of the above analysis. 
+You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:
 
 Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
 
  ![Word Cloud of Eaglesfield Smith's Text Version](../../images/wc_smith.png "Word Cloud of Eaglesfield Smith's Text Version")
 
-If you want to see in more details how the texts differ from each other, you can always dive deeper into the HTML <em>diff</em> file and analyse more closely.
+If you want to see in more detail how the texts differ from each other, you can always dive deeper into the HTML <em>diff</em> file and analyse more closely.
 
 
 # Conclusion
 
-Congratulations! You just finished your first analysis and ran your first workflow with Galaxy, well done! The tutorial covered the basic setup of Galaxy and how you can register, log in and upload your material. You are now familiar with terms in Galaxy, like history, dataset, tool, etc. We used several tools, learned to rerun them and how we can see the outputs in different ways. We used various versions of Regular Expressions to rearrange and clean your text. We also reshaped the text to compare it with the <em>diff</em> tool. Then, we extracted notable sentences for further close reading.
-To reuse all of those steps in an effective way on a different set of texts, we extracted a workflow from your history and reran it.
+Congratulations! 
+You just finished your first analysis and ran your first workflow with Galaxy, well done! 
+The tutorial covered the basic setup of Galaxy and how to register, log in, and upload your material. 
+You are now familiar with terms in Galaxy, such as history, dataset, and tool.
+We used several tools, learned to rerun them, and learned how to view the outputs in different ways.
+Various Regular Expression patterns helped to rearrange and clean text.  
+Moreover, we reshaped the text to compare it with the <em>diff</em> tool. 
+Then, we extracted notable sentences for further close reading.
+To re-use all of those steps effectively on a different set of texts, we extracted a workflow from your history and reran it.
 
 With all this knowledge in mind, you can now continue with one of our other tutorials or experiment with your own input. Enjoy!
 
-If you want to go a step further, you can make your analysis more complex and extract further differences between the poems automatically to adapt the above analysis. 
+If you want to go a step further, you can make your analysis more complex and extract additional differences between the poems automatically to adapt the above analysis. 
 For inspiration, check out the [advanced tutorial on Text-Mining]({% link topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html %}) or the other tutorials from the Digital Humanities section.
 
 [^1]: Thanks to Lilli Fortmeier for suggesting this use case!
