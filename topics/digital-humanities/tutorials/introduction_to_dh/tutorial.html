@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@30ea1b8e3658dfdd4ddb7fd7f7fd151d495e71f9",
+		release: "galaxy-training-network@ce770702ea22b11edf8021854bf296df86f8b797",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to Digital Humanities in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-08-12 16:05:58 +0000">
+<meta name="DC.date" content="2026-09-03 10:36:02 +0000">
 <meta name="DC.creator" content="Daniela Schneider">
 <meta name="DC.creator" content="Rand Zoabi"><meta name="description" content=" Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive  digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking  advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of  this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science  performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.  -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/) ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-08-12 16:05:58 +0000",
+  "dateModified": "2026-09-03 10:36:02 +0000",
   "datePublished": "2025-09-11 10:05:34 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -274,7 +274,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Introduction to Digital Humanities in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/introduction_to_dh/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT1H",
   "teaches": "- Log in to Galaxy\n- Upload files to the platform\n- Use tools within Galaxy\n- Clean and prepare text data\n- Compare two texts\n- Visualize your results",
   "keywords": [
@@ -823,7 +823,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://doi.org/10.5281/zenodo.17053220",
+      "url": "https://doi.org/10.5281/zenodo.17053219",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1117,7 +1117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.17053220">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.17053219">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1252,7 +1252,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 11, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 12, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 3, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1272,7 +1272,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.5</a> (2 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1325,6 +1325,8 @@ Then, we take a closer look. For an easier comparison, we reformat both texts an
       <li><a href="#extract-sentences-containing-death" id="markdown-toc-extract-sentences-containing-death">Extract sentences containing ‘death’</a></li>
     </ol>
   </li>
+  <li><a href="#creating-a-workflow" id="markdown-toc-creating-a-workflow">Creating a Workflow</a></li>
+  <li><a href="#rerun-your-workflow-on-different-texts" id="markdown-toc-rerun-your-workflow-on-different-texts">Rerun your Workflow on Different Texts</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -1336,7 +1338,7 @@ Then, we take a closer look. For an easier comparison, we reformat both texts an
 <p>To use Galaxy’s full potential, you must register and create an account. You can skip this step if you already have a Galaxy account.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I create an account on a public Galaxy instance?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>     <p>There are several UseGalaxy servers:</p>     <ul>       <li>         <p><a href="https://usegalaxy.fr">UseGalaxy.fr</a> (<strong>FR</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.eu">UseGalaxy.eu</a> (<strong>EU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org">UseGalaxy.org</a> (<strong>US</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org.au">UseGalaxy.org.au</a> (<strong>AU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.ca">UseGalaxy.ca</a> (<strong>CA</strong>)</p>       </li>     </ul>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>     <p>On the login page, find the <strong>Register here</strong> link and click on it.</p>   </li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>     <p>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</p>     <p>Missing? Check your <strong>Trash</strong> and <strong>Spam</strong> folders.</p>   </li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>     <p>Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.</p>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I create an account on a public Galaxy instance?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>     <p>There are several UseGalaxy servers:</p>     <ul>       <li>         <p><a href="https://usegalaxy.org.au">UseGalaxy.org.au</a> (<strong>AU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org">UseGalaxy.org</a> (<strong>US</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.fr">UseGalaxy.fr</a> (<strong>FR</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.ca">UseGalaxy.ca</a> (<strong>CA</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.eu">UseGalaxy.eu</a> (<strong>EU</strong>)</p>       </li>     </ul>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>     <p>On the login page, find the <strong>Register here</strong> link and click on it.</p>   </li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>     <p>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</p>     <p>Missing? Check your <strong>Trash</strong> and <strong>Spam</strong> folders.</p>   </li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>     <p>Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.</p>   </li> </ol> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <p>Alternatively, you can log in using a single sign-on of your choice, for example, from <a href="https://iam.services.base4nfdi.de/faq_ENG/">IAM4NFDI</a> on <a href="https://usegalaxy.eu/">Galaxy Europe</a>.</p>
@@ -1465,7 +1467,7 @@ the grey (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to the dataset name, to look at the file content</p>
 
-      <p><img src="../../images/eye-icon.png" alt="galaxy history view showing a single dataset mutant_r1.fastq. Display link is being hovered." width="292" height="289" loading="lazy" /></p>
+      <p><img src="../../images/eye-icon.png" alt="galaxy history view showing two datasets. Display link is being hovered." width="292" height="289" loading="lazy" /></p>
     </li>
     <li>
       <p>Check the datatype - is it <strong>txt</strong>? Then you are all set. Otherwise, adapt the datatype.</p>
@@ -1671,17 +1673,17 @@ The hashtag propagates the tags, so all further outputs from this dataset contai
 
 <h1 id="different-ways-to-compare-the-texts">Different ways to compare the texts</h1>
 
-<p>There are various ways to compare two texts. 
-You could, for example, compare them quantitatively with the tool <span><strong>Line/Word/Character count</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>. 
-The output of the tool would show, that the texts have different lengths. 
+<p>There are various ways to compare two texts.
+You could, for example, compare them quantitatively with the tool <span><strong>Line/Word/Character count</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>.
+The output of the tool would show, that the texts have different lengths.
 While both files are only two lines long, the poem from the cheap repository is 1139 words long, more than double the amount of the second poem.</p>
 
-<p>Another option for comparing the texts is by visualising their content. 
+<p>Another option for comparing the texts is by visualising their content.
 We will use a word cloud next to do just that.</p>
 
 <h2 id="compare-visually">Compare visually</h2>
 
-<p>A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts. 
+<p>A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts.
 Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1709,7 +1711,7 @@ Particularly for larger corpora, a word cloud can be a nice way to get a first i
 
 </blockquote>
 
-<p>The word cloud for the second text is created in the same way. 
+<p>The word cloud for the second text is created in the same way.
 We suggest using the rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> button on <code class="language-plaintext highlighter-rouge">Wordcloud Poem One</code>, to reun the tool with <code class="language-plaintext highlighter-rouge">SoY_Univ_Mag_cleaned.txt</code> as an input and create a wordcloud for it. That way we can make sure to use identical input parameters (e.g. font, color option, etc.) which helps for easy comparison.
 This should look as follows:</p>
 
@@ -1772,20 +1774,20 @@ This should look as follows:</p>
 
 <p>With this text’s length and just two poems, this is, of course, something you can find out by reading both texts. However, this distant reading approach can give you important preliminary insights to guide your close reading, particularly with bigger corpora.</p>
 
-<p>Of course, the word cloud insights are just a first glance and do not allow a proper analysis; 
+<p>Of course, the word cloud insights are just a first glance and do not allow a proper analysis;
 we need to compare both texts properly.</p>
 
 <h2 id="compare-texts-side-by-side">Compare texts side by side</h2>
 
-<p>But what is a good way to compare those texts in depth? 
-We suggest comparing them side by side and line by line. 
+<p>But what is a good way to compare those texts in depth?
+We suggest comparing them side by side and line by line.
 For that, we adapt the layout once more.</p>
 
 <h3 id="replace-spaces-with-line-breaks-to-prepare-side-by-side-comparison">Replace spaces with line breaks to prepare side-by-side comparison</h3>
 
-<p>We used <span><strong>Replace text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> to remove the punctuation earlier. 
-This time, we use the same tool to replace characters in our files. 
-To get a convenient layout that shows one word per line, we use Regular Expressions to replace the spaces (\s) with line breaks (\n). 
+<p>We used <span><strong>Replace text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> to remove the punctuation earlier.
+This time, we use the same tool to replace characters in our files.
+To get a convenient layout that shows one word per line, we use Regular Expressions to replace the spaces (\s) with line breaks (\n).
 That way, each word gets displayed in a different line, which prepares the detailed comparison in the next step.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1818,7 +1820,7 @@ That way, each word gets displayed in a different line, which prepares the detai
 
 </blockquote>
 
-<p>When you click on the eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon of the data set in the history, when the dataset turns green, you can see that it now contains one word per line. 
+<p>When you click on the eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon of the data set in the history, when the dataset turns green, you can see that it now contains one word per line.
 To match this, we rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> the step with the same parameters also for the second poem.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1863,8 +1865,8 @@ To match this, we rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true">
 
 </blockquote>
 
-<p>Now, both poems show one word per line, which is the perfect setup to compare them side by side. 
-Use a tool called <code class="language-plaintext highlighter-rouge">diff</code> to visualise this. 
+<p>Now, both poems show one word per line, which is the perfect setup to compare them side by side.
+Use a tool called <em>diff</em> to visualise this.
 To reproduce the setup from this tutorial, make sure to select the version from the Cheap Repository as the first input file and the one from the Universal Magazine as the second input file.</p>
 
 <h3 id="using-diff-to-compare-texts-side-by-side">Using <em>diff</em> to compare texts side by side</h3>
@@ -1904,7 +1906,7 @@ To reproduce the setup from this tutorial, make sure to select the version from 
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Lines 6-40 of the cheap poem are marked in green. They are not part of the universal poem. The couple of lines before and after are identical.</li>
+      <li>Lines 6-40 of the cheap poem are marked in red. They are not part of the universal poem. The couple of lines before and after are identical.</li>
     </ol>
 
   </blockquote>
@@ -1912,26 +1914,26 @@ To reproduce the setup from this tutorial, make sure to select the version from 
 </blockquote>
 
 <p>In the HTML report, you can quickly identify deletions (in red) and additions (in green) between both texts.
-You can also see smaller details, which you might quickly miss manually. 
-Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected. 
-You can furthermore see how the perspective was changed between the poems. 
-While line 359-361 in the cheap repository text states “they sell us”, the other text states “they sell them” (l. 298-300), suggesting the reader is (no longer) among the group which is sold. 
+You can also see smaller details, which you might quickly miss manually.
+Lines 63/64 and 28/29, respectively, show that also changes within one word (prisoner / prisner) are detected.
+You can furthermore see how the perspective was changed between the poems.
+While line 359-361 in the cheap repository text states “they sell us”, the other text states “they sell them” (l. 298-300), suggesting the reader is (no longer) among the group which is sold.
 You can go through the HTML file and detect further changes in language and length.</p>
 
-<p>Seeing this, you might want to go into detail with the respective themes once more. As “death” was central in both word clouds, we will extract sentences containing this word so you can analyze them further. 
-The recent files without punctuation and one word per line are not the easiest form for this. 
+<p>Seeing this, you might want to go into detail with the respective themes once more. As “death” was central in both word clouds, we will extract sentences containing this word so you can analyze them further.
+The recent files without punctuation and one word per line are not the easiest form for this.
 Instead, we use an earlier version from our history.</p>
 
 <h1 id="extract-specific-sentences">Extract specific sentences</h1>
 
 <h2 id="breaking-text-into-sentences">Breaking text into sentences</h2>
 
-<p>We return to Regular Expressions a third time, but this time we use a different tool with further functionalities. 
+<p>We return to Regular Expressions a third time, but this time we use a different tool with further functionalities.
 The tools helps us to divide the text into more lines, to make it easier to extract sentences containing the word “death”.</p>
 
-<p>Full stops  help us to indicate a sentence, which will not be perfectly accurate but sufficient for this case. 
-Of course, you could spend more time on this and make it neater. 
-Make sure to use not the last input but the poems without a hyperlink, but including punctuation. 
+<p>Full stops  help us to indicate a sentence, which will not be perfectly accurate but sufficient for this case.
+Of course, you could spend more time on this and make it neater.
+Make sure to use not the last input but the poems without a hyperlink, but including punctuation.
 This will not work if the text contains no more full stops.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2042,21 +2044,99 @@ This will not work if the text contains no more full stops.</p>
 
 <p>When you enable the window manager at the top bar, you can click on the eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbols of your last two outputs and visualize them side by side in two different windows. Six and seven lines from the poems contain the term, respectively. You could analyze them in detail now to see where they differ. While the first lines are nearly identical, the last ones are completely different in both versions of the poem. An intriguing insight for further analysis. No wonder the poems and their many editions have sparked the interest of many researchers.</p>
 
-<p>If you only analyze those two poems, you might find it easier to do those steps manually. But particularly, if you create a workflow out of this, you can reproduce this process with only a few clicks, saving you considerable work.</p>
+<h1 id="creating-a-workflow">Creating a Workflow</h1>
 
-<p>Learn how to <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">extract a workflow from the above analysis</a>.</p>
+<p>If you only analyze those two poems, you might find it easier to do those steps manually as we did above.
+But particularly if you want to do this for several files, Galaxy has a great advantage: the ability to create workflows from a history.
+The workflow allows you to easily run the same tools with the same settings, in the same order, as when you first ran the analysis.
+You can also apply this to new input texts and save time by not having to redo all of the above steps.</p>
 
-<p>Alternatively, you can make your analysis more complex and extract further differences between the poems automatically to adapt the above analysis. For inspiration, check out
-the <a href="/training-material/topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html">advanced tutorial on Text-Mining</a>.</p>
+<p>We start with the history you created step by step when following this tutorial.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-extracting-a-workflow-from-your-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Extracting a workflow from your history</div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> button.</p>     <p>This will make the creation of the workflow easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>   </li>   <li>     <p>Replace the <strong>Workflow name</strong> to something more descriptive. For example <code class="language-plaintext highlighter-rouge">Introduction to DH in Galaxy [your initials]</code>.</p>   </li>   <li><strong>Rename</strong> each workflow input in the boxes at the top of the second column.     <ul>       <li>The input files are currently named the same as the texts you used in your history. We want to make that more generic, for example by renaming this section <code class="language-plaintext highlighter-rouge">Input Text One</code> and <code class="language-plaintext highlighter-rouge">Input Text Two</code>.</li>     </ul>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create Workflow</strong> button near the top.</p>     <p>You will get a message that the workflow was created.</p>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>For a more detailed explanation of how to create workflows, you can also <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">check out the extended tutorial</a>.</p>
+
+<p>You can look at your workflow in the workflow editor.
+This is the space where you could now manually adapt your workflow further.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-opening-the-workflow-editor"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Opening the workflow editor</div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances)</li>   <li>Click on the <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <em>Edit</em> button of the workflow you would like to edit</li>   <li>Make your desired changes in the workflow editor</li>   <li>Click on the <i class="fas fa-save" aria-hidden="true"></i><span class="visually-hidden">dataset-save</span> <em>Save</em> icon, which appears next to the workflow title if you have unsaved changes, to save your changes and continue editing, or on <i class="fas fa-save" aria-hidden="true"></i><span class="visually-hidden">dataset-save</span> <em>Save + Exit</em> in the activity bar to save your changes and leave the workflow editor.</li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>The workflow you created could look similar to this:
+<img src="../../images/WF_Intro_to_DH.png" alt="Screenshot of Workflow extracted from the Tutorial Introduction to DH. " width="1230" height="793" loading="lazy" /></p>
+
+<p>The auto-generated workflow you initially see is likely organised a bit differently from the one in the image above.
+You can play around in the workflow editor to rearrange the tools as you like.</p>
+
+<p>Do not forget to click <i class="fas fa-save" aria-hidden="true"></i><span class="visually-hidden">dataset-save</span> <em>Save</em> icon if you want to keep your changes.</p>
+
+<h1 id="rerun-your-workflow-on-different-texts">Rerun your Workflow on Different Texts</h1>
+
+<p>Once you have created and adapted your workflow, it is ready to run.</p>
+
+<p>In our example, there are many different versions of <em>The Sorrows of Yamba</em>.
+We have compared two now, but there are actually more!
+How do they compare with the texts we just saw?
+To find out, we can upload a third text and compare it with the reference text we like.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-a-file-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Upload a file</div>
+  <ol>
+    <li>At the top of the <strong>Activity Bar</strong>, click the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> icon.</li>
+    <li>Click <strong>Paste/Fetch data</strong></li>
+    <li>Paste in the address of the third file in the Zenodo folder:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/22229997/files/eaglesfield-smith.txt
+</code></pre></div>      </div>
+    </li>
+    <li>Click <strong>Start</strong></li>
+    <li>Click <strong>Close</strong></li>
+  </ol>
+</blockquote>
+
+<p>You now have a further version of the poem <em>The Sorrows of Yamba</em>.
+This one is attributed to Easglesfield Smith and is based on the 1822 edition of the poem.
+If you check the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to the dataset name, you can already take a quick look at the file.</p>
+
+<p>We can now compare this version with another text to identify more differences.
+Let’s compare Eaglesfield Smith’s version with the Cheap repository’s version in the workflow!</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-running-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Running a workflow</div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <strong>Workflows</strong> on the <strong>Activity Bar</strong> on the left.</li>   <li>At the top of the resulting page you will have the option to switch between the <em>My workflows</em>, <em>Workflows shared with me</em> and <em>Public workflows</em> tabs.</li>   <li>Select the tab <em>My workflows</em></li>   <li>     <p>Search for the workflow named <code class="language-plaintext highlighter-rouge">Introduction to DH in Galaxy [your initials]</code>.</p>     <p><img src="/training-material/topics/climate/images/bgc_calib/bgc_workflow.png" alt="Select workflow" width="15%" /></p>   </li>   <li>Click on the workflow name: a pop-up window opens with a preview of the workflow.</li>   <li>To run it directly: click <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run</strong> (top-right). This will take you to the <em>workflow run form</em>.</li>   <li>Configure the workflow     <ul>       <li><strong>Send results to a new history</strong>: if enabled, will send the results to a new history instead of your current active history. You can provide a name for the new history here as well.</li>       <li><strong>Re-use jobs with identical parameters</strong>. This will check if any identical jobs have already been run before, and save compute time and energy by re-using the previous results. Great to use if you previously ran (part of) this workflow on the same data already.</li>     </ul>   </li>   <li>Set the workflow parameters (e.g. input data)     <ul>       <li>As <strong>Input for Text One</strong>, select: <code class="language-plaintext highlighter-rouge">SoY_Cheap_Repo_Source.txt</code>; As <strong>Input for Text Two</strong>, select: <code class="language-plaintext highlighter-rouge">eaglesfield-smith.txt</code>. Both should already be in your history.</li>     </ul>   </li>   <li>Click on <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run Workflow</strong> in the upper right corner to start the workflow.</li>   <li>You will now see the <em>workflow invocation</em> page showing the progress of your workflow. This page can always be accessed via <i class="fas fa-list" aria-hidden="true"></i><span class="visually-hidden">galaxy-panelview</span> <strong>Workflow invocations</strong> on the Activity bar (left-hand menu).     <ul>       <li>If you sent the results to a new history, you can view this history by clicking on the <i class="fas fa-hdd" aria-hidden="true"></i><span class="visually-hidden">galaxy-histories-activity</span> history link in the top left corner of the workflow invocation page.</li>     </ul>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>Congratulations - you just started your first workflow!</p>
+
+<p>Once the workflow is finished, you should now see 16 datasets in this history: 2 input files and all the steps of the above analysis.</p>
+
+<p>You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:</p>
+
+<p>Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
+So the text likely has a different emphasis than the initial two texts we checked.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/wc_smith.png" alt="Word Cloud of Eaglesfield Smith's Text Version. " width="400" height="200" loading="lazy" /><a target="_blank" href="../../images/wc_smith.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Word Cloud of Eaglesfield Smith's Text Version</figcaption></figure>
+
+<p>If you want to see in more detail how the texts differ from each other, you can always dive deeper into the HTML <em>diff</em> file and analyse more closely.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Congratulations! You just finished your first analysis with Galaxy, well done! The tutorial covered the basic setup of Galaxy and how you can register, log in and upload your material. You are now familiar with terms in Galaxy, like history, dataset, tool, etc. We used several tools, learned to rerun them and how we can see the outputs in different ways. We used various versions of Regular Expressions to rearrange and clean your text. We also reshaped the text to compare it with the <code class="language-plaintext highlighter-rouge">diff</code> tool. In the end, we extracted notable sentences for further close reading.
-The workflow created from this history would look as follows:</p>
-
-<p><img src="../../images/WF_Intro_to_DH.png" alt="Screenshot of Workflow extracted from the Tutorial Introduction to DH. " width="1230" height="793" loading="lazy" /></p>
+<p>Congratulations!
+You just finished your first analysis and ran your first workflow with Galaxy, well done!
+The tutorial covered the basic setup of Galaxy and how to register, log in, and upload your material.
+You are now familiar with terms in Galaxy, such as history, dataset, and tool.
+We used several tools, learned to rerun them, and learned how to view the outputs in different ways.
+Various Regular Expression patterns helped to rearrange and clean text.
+Moreover, we reshaped the text to compare it with the <em>diff</em> tool.
+Then, we extracted notable sentences for further close reading.
+To re-use all of those steps effectively on a different set of texts, we extracted a workflow from your history and reran it.</p>
 
 <p>With all this knowledge in mind, you can now continue with one of our other tutorials or experiment with your own input. Enjoy!</p>
+
+<p>If you want to go a step further, you can make your analysis more complex and extract additional differences between the poems automatically to adapt the above analysis.
+For inspiration, check out the <a href="/training-material/topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html">advanced tutorial on Text-Mining</a> or the other tutorials from the Digital Humanities section.</p>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
@@ -2506,7 +2586,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/30ea1b8e3658dfdd4ddb7fd7f7fd151d495e71f9">30ea1b8</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ce770702ea22b11edf8021854bf296df86f8b797">ce77070</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
