@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Bacterial genome quality control
-zenodo_link: 'https://zenodo.org/records/1'
+zenodo_link: ''
 draft: true
 questions:
 - to do
