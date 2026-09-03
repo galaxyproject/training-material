@@ -3,7 +3,7 @@ title: Running a workflow
 area: workflows
 box_type: tip
 layout: faq
-contributors: [shiltemann,hexylena,wm75, Marie59,katherine-d21,bebatuti, Sch-da]
+contributors: [shiltemann,hexylena,wm75, Marie59,katherine-d21,bebatut, Sch-Da]
 ---
 
 1. Click on {% icon galaxy-workflows-activity %} **Workflows** on the **Activity Bar** on the left.
