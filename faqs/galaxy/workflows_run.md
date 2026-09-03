@@ -18,7 +18,7 @@ contributors: [shiltemann,hexylena,wm75, Marie59,katherine-d21,bebatuti, Sch-da]
 7. Configure the workflow
    - **Send results to a new history**: if enabled, will send the results to a new history instead of your current active history. You can provide a name for the new history here as well.
    - **Re-use jobs with identical parameters**. This will check if any identical jobs have already been run before, and save compute time and energy by re-using the previous results. Great to use if you previously ran (part of) this workflow on the same data already.
-8. Set the parameters
+8. Set the workflow parameters (e.g. input data)
    {% if include.parameters %} - {{include.parameters}}{% endif %}
 {% unless include.tab == "My workflows" %}
 {{include}}
