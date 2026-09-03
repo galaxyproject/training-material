@@ -652,29 +652,13 @@ If you check the {% icon galaxy-eye %} (eye) icon next to the dataset name, you 
 We can now compare this version with another text to identify more differences.
 Let's compare Eaglesfield Smith's version with the Cheap repository's version in the workflow!
 
-{% snippet faqs/galaxy/workflows_run.md box_type="hands_on" %}
+{% snippet faqs/galaxy/workflows_run.md box_type="hands_on" name="Introduction to DH in Galaxy [your initials]" tab="My workflows" parameters="As **Input for Text One**, select: `SoY_Cheap_Repo_Source.txt`; As **Input for Text Two**, select: `eaglesfield-smith.txt`. Both should already be in your history. " %}
 
-In the {% icon galaxy-workflows-activity %} **Workflows** section of your activity bar, click **My Workflows** and then click on the title of the workflow `Introduction to DH in Galaxy [your initials]` that you created earlier.
-You will see a preview of the workflow and various options.
-Click on  {% icon workflow-run %} **Run** in the upper right corner.
-A new site opens, it is called a **workflow form**.
-
-Toggle:
-- **Send results to a new history** to see your analysis in a new history and give it a suitable name.
-- **Re-use jobs with identical parameters**. This will save compute and energy by showing you identical jobs instead of rerunning them anew. Reusing jobs is possible here because we have already analysed the text from the Cheap Repository.
-
-As **Input for Text One**, select: `SoY_Cheap_Repo_Source.txt`
-
-As **Input for Text Two**, select: `eaglesfield-smith.txt`
-
-Both should already be in your history.
-
-Click on {% icon workflow-run %} **Run Workflow** in the upper right corner to start the workflow.
-A new site opens, showing the workflow invocation form and your workflow's progress.
 Congratulations - you just started your first workflow!
 
-You can get to the history you created by clicking on the {% icon galaxy-histories-activity %} history link in the top left corner of the workflow invocation form.
+
 Once the workflow is finished, you should now see 16 datasets in this history: 2 input files and all the steps of the above analysis.
+
 You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:
 
 Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
