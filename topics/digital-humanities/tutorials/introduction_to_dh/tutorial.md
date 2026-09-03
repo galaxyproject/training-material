@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Introduction to Digital Humanities in Galaxy
 level: Introductory
-zenodo_link: 'https://doi.org/10.5281/zenodo.17053219'
+zenodo_link: 'https://doi.org/10.5281/zenodo.22229997'
 questions:
   - How to get started in Galaxy for text-related tasks?
 objectives:
@@ -359,7 +359,7 @@ This should look as follows:
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.8`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output file to `Wordcloud Poem Two`.
-
+>
 >    > <comment-title> Uniqueness of the Word Cloud </comment-title>
 >    >
 >    > The word cloud from this tool looks a little different each time you run it. The layout may vary even when you redo it with the exact same text and inputs.
