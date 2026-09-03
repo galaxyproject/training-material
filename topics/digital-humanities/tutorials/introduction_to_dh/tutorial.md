@@ -460,7 +460,7 @@ To match this, we rerun {%icon dataset-rerun %} the step with the same parameter
 {: .question}
 
 Now, both poems show one word per line, which is the perfect setup to compare them side by side.
-Use a tool called <em>diff</em> to visualise this.
+Use a tool called *diff* to visualise this.
 To reproduce the setup from this tutorial, make sure to select the version from the Cheap Repository as the first input file and the one from the Universal Magazine as the second input file.
 
 ### Using *diff* to compare texts side by side
@@ -628,7 +628,7 @@ Do not forget to click {% icon dataset-save %} *Save* icon if you want to keep y
 
 Once you have created and adapted your workflow, it is ready to run.
 
-In our example, there are many different versions of <em>The Sorrows of Yamba</em>.
+In our example, there are many different versions of *The Sorrows of Yamba*.
 We have compared two now, but there are actually more!
 How do they compare with the texts we just saw?
 To find out, we can upload a third text and compare it with the reference text we like.
@@ -645,7 +645,7 @@ To find out, we can upload a third text and compare it with the reference text w
 > 5. Click **Close**
 {: .hands_on}
 
-You now have a further version of the poem <em>The Sorrows of Yamba</em>.
+You now have a further version of the poem *The Sorrows of Yamba*.
 This one is attributed to Easglesfield Smith and is based on the 1822 edition of the poem.
 If you check the {% icon galaxy-eye %} (eye) icon next to the dataset name, you can already take a quick look at the file.
 
@@ -654,6 +654,7 @@ Let's compare Eaglesfield Smith's version with the Cheap repository's version in
 
 {% snippet faqs/galaxy/workflows_run.md box_type="hands_on" name="Introduction to DH in Galaxy [your initials]" tab="My workflows" parameters="As **Input for Text One**, select: `SoY_Cheap_Repo_Source.txt`; As **Input for Text Two**, select: `eaglesfield-smith.txt`. Both should already be in your history. " %}
 
+
 Congratulations - you just started your first workflow!
 
 
@@ -661,12 +662,12 @@ Once the workflow is finished, you should now see 16 datasets in this history: 2
 
 You can click on all of them as before, and for example, check out the wordcloud of the Eaglesfield Smith poem:
 
-Now <em>africs</em> is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
+Now *africs* is in the center. Not <em>death</em> or <em>yamba</em> as in the other two poems.
 So the text likely has a different emphasis than the initial two texts we checked.
 
  ![Word Cloud of Eaglesfield Smith's Text Version](../../images/wc_smith.png "Word Cloud of Eaglesfield Smith's Text Version")
 
-If you want to see in more detail how the texts differ from each other, you can always dive deeper into the HTML <em>diff</em> file and analyse more closely.
+If you want to see in more detail how the texts differ from each other, you can always dive deeper into the HTML *diff* file and analyse more closely.
 
 
 # Conclusion
@@ -677,7 +678,7 @@ The tutorial covered the basic setup of Galaxy and how to register, log in, and 
 You are now familiar with terms in Galaxy, such as history, dataset, and tool.
 We used several tools, learned to rerun them, and learned how to view the outputs in different ways.
 Various Regular Expression patterns helped to rearrange and clean text.
-Moreover, we reshaped the text to compare it with the <em>diff</em> tool.
+Moreover, we reshaped the text to compare it with the *diff* tool.
 Then, we extracted notable sentences for further close reading.
 To re-use all of those steps effectively on a different set of texts, we extracted a workflow from your history and reran it.
 
