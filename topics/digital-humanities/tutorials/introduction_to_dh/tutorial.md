@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Introduction to Digital Humanities in Galaxy
 level: Introductory
+priority: 1
 zenodo_link: 'https://doi.org/10.5281/zenodo.22229997'
 questions:
   - How to get started in Galaxy for text-related tasks?
