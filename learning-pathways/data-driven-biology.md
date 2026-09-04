@@ -4,6 +4,9 @@ cover-image: /assets/images/genomics_intro.png
 cover-image-alt: "Genomics intro"
 tags: [introduction, real-course, data-science]
 type: use
+topics:
+  - data-science
+
 editorial_board:
 - nekrut
 
