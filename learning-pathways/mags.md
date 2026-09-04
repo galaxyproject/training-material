@@ -3,6 +3,8 @@ layout: learning-pathway  # (uncomment this line to activate it)
 type: use
 cover-image: assets/images/microgalaxy-logo.png
 cover-image-alt: "microgalaxy logo"
+topics:
+  - microbiome
 
 editorial_board:
 - bebatut
@@ -119,7 +121,7 @@ pathway:
 #
 #        By the end of this module, you'll be able to confidently assign taxonomic identities to your MAGs, enabling deeper insights into microbial diversity and function.
 #    tutorials:
-#      - name: 
+#      - name:
 #        topic: microbiome
 
   - section: "Module 6: Functional Annotation of MAGs – Applying Genomic Approaches to Metagenome-Assembled Genomes"
@@ -143,7 +145,7 @@ pathway:
 
   - section: "Recommended follow-up tutorial"
     description: |
-        While this learning pathway goes into detail about all steps required for MAGs generation, a full end-to-end training was developed, which executes all workflows for MAGs generation and annotation instead of running individual steps. This tutorial can be used as a guide to execute the workflows on your own data. It explains how you can perform quality control, remove host contamination, and run the main MAGs workflow to obtain quality-controlled, taxonomically and functionally annotated MAGs. 
+        While this learning pathway goes into detail about all steps required for MAGs generation, a full end-to-end training was developed, which executes all workflows for MAGs generation and annotation instead of running individual steps. This tutorial can be used as a guide to execute the workflows on your own data. It explains how you can perform quality control, remove host contamination, and run the main MAGs workflow to obtain quality-controlled, taxonomically and functionally annotated MAGs.
     tutorials:
       - name: mags-building
         topic: microbiome
