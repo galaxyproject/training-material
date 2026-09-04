@@ -101,6 +101,21 @@ layout: base
         {% include _includes/tutorial_list.html sub=subtopic %}
     {% endfor %}
 
+    <!-- learning pathways for this topic -->
+    {% assign pathways = site.pages | where: "layout", "learning-pathway" | where_exp: "item", "item.topics contains topic.name" | sort: "priority", "last" %}
+    {% for lp in pathways %}
+      {% if forloop.index == 1 %}
+      <h2> Learning Pathways </h2>
+      Or have a look at one of our learning pathways involving this topic. Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.
+
+      <div class="pathwaylist row">
+      {% endif %}
+
+      {% include _includes/pathway-card.html path=lp %}
+
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+
     {{ content }}
 
     {% unless topic.tag_based %}
