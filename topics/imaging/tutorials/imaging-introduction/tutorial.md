@@ -118,26 +118,24 @@ Now, we can extract metadata from an image.
 
 # Visual Inspection of TIFF Images
 
-Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF cannot be displayed in most web browsers directly. Therefore, for visual inspection of TIFF images, we use a TIFF visualization plugin in Galaxy.
+Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). TIFF images can now be previewed directly in Galaxy, without needing an external viewer.
 
 > <hands-on-title>Visual Inspection of TIFF Images</hands-on-title>
 >
-> 1. Click on the title of your file to see the row of small icons for saving, linking, etc.:
-> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](../../images/imaging-introduction/LittleJobIcons.png)
-> 2. Click on the **visualise icon** {% icon galaxy-visualise %} and then select the **Tiff Viewer** visualization plugin.
+> 1. Click on the dataset to expand it, then click **Preview** {% icon galaxy-eye %} to view the image directly.
 >
 {: .hands_on}
 
 Your image should look something like this:
 
-![raw input image](../../images/imaging-introduction/viz_input.png){: width="75%"}
+![raw input image](../../images/imaging-introduction/tiffviewer_input.png){: width="75%"}
 
 > <question-title></question-title>
 >
-> You can observe that the image content is barely visible. Why?
+> Although the image now displays with reasonable contrast in Galaxy's preview, the underlying pixel values only cover a small part of the possible intensity range. How can you find this out, e.g. by checking the dataset details or histogram?
 >
 > > <solution-title></solution-title>
-> > The original image is 16-bit and the intensity values of the image (33069 to 36863) are spread over a very small fraction (only about 6%) of the intensity values that can be represented using 16 bits (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
+> > The original image is 16-bit and the intensity values of the image (33069 to 36863) only span about 6% of the range that can be represented using 16 bits (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Galaxy's built-in preview automatically rescales the *displayed* contrast so the image looks visible on screen, but the underlying pixel values in the dataset itself are unchanged and still concentrated in this narrow range. Tools and viewers that don't apply this automatic rescaling (as well as any downstream analysis) will still need the intensity histogram to be normalized explicitly.
 > {: .solution }
 {: .question}
 
