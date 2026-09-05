@@ -36,7 +36,7 @@ Multiple packages exist for performing MD simulations. One of the most popular i
 This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
 > <comment-title>More information</comment-title>
-> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
+> This guide is based on the [GROMACS tutorial provided by Justin Lemkul](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
 {: .comment}
 
 > <agenda-title></agenda-title>
@@ -81,6 +81,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    - *"Select lines from"*: uploaded PDB file
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
+> 4. {% icon galaxy-pencil %} **Rename the dataset** to `1AKI_clean.pdb`
 >
 {: .hands_on}
 
@@ -171,7 +172,7 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 
 To remove any steric clashes or unusual geometry which would artificially raise the energy of the system, we must relax the structure by running an energy minimization (EM) algorithm.
 
-Here, and in the later steps, two options are presented under 'Parameter input'. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found [here](http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html).
+Here, and in the later steps, two options are presented under 'Parameter input'. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found [in the GROMACS manual](http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html).
 
 > <hands-on-title>energy minimization</hands-on-title>
 >
@@ -203,16 +204,18 @@ Firstly, we perform equilibration using classical NVT dynamics.
 
 > <hands-on-title>NVT dynamics</hands-on-title>
 >
-> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - *"Use a checkpoint (CPT) file"*: `No CPT input`
->    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `Apply position restraints`
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
->    - *"Ensemble"*: `Isothermal-isochoric ensemble (NVT).`
+>    - *"Inputs"*
+>    - *"Checkpoint (CPT) file"*: `Nothing selected`
+>    -  {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    -  *"Outputs"*
 >    - *"Trajectory output"*: `Return no trajectory output` (we are not interested in how the system evolves to the equilibrated state, merely the final structure)
 >    - *"Structure output"*: `Return .gro file`
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Settings"*
+>    - *"Ensemble"*: `Isothermal-isochoric ensemble (NVT).`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
@@ -235,17 +238,18 @@ Note that we can continue where the last simulation left off (with new parameter
 
 > <hands-on-title>NPT dynamics</hands-on-title>
 >
-> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
+>    - *"Inputs"*
 >    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
->    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `No position restraints`
->    - {% icon param-file %} *"Position restraint file"*: None
->    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
+>    - {% icon param-file %} *"Position restraint (ITP) file"*: None
+>    - *"Outputs"*
 >    - *"Trajectory output"*: `Return no trajectory output`
 >    - *"Structure output"*: `Return .gro file`
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Settings"*
+>    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
@@ -276,7 +280,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 > <hands-on-title>Production simulation</hands-on-title>
 >
-> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
