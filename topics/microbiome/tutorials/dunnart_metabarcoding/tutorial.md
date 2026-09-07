@@ -32,7 +32,7 @@ key_points:
   - Taxonomic assignments depend on both the reference database and classifier. A classifier appropriate for the sequenced 16S region should be used, and taxonomic assignments should not automatically be interpreted as species-level identification.
   - Sequencing depth varies among samples. Sampling depth for diversity analyses represents a trade-off between retaining samples and retaining microbial diversity within each sample.
   - Relative-abundance plots are useful for exploring community composition but should not, by themselves, be used to determine whether taxa differ statistically between groups.
-  - Differential abundance methods such as ANCOM-BC2 address a different question from alpha- or beta-diversity analyses: which individual taxa are associated with the experimental groups?
+  - Differential abundance methods such as ANCOM-BC2 address a different question from alpha- or beta-diversity analyses. Which individual taxa are associated with the experimental groups?
   - QIIME 2 outputs can be exported for downstream statistical analysis, integration with additional metadata and publication-quality visualisation in R.
 contributions:
   authorship:
