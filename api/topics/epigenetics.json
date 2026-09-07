@@ -554,7 +554,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Paired End Reads Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nwt_input_rep1.bam\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nwt_H3K4me3_rep1.bam\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nwt_CTCF_rep1.bam\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nwt_H3K27me3_rep1.bam\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nwt_input_rep2.bam\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nwt_H3K4me3_rep2.bam\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nwt_CTCF_rep2.bam\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nwt_H3K27me3_rep2.bam\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"Trim Galore!\"];\n  0 -->|output| 9;\n  a66a6432-690f-4e66-88c0-7eba0a014677[\"Output\\nwt_H3K4me3_rep1_trim_galore\"];\n  9 --> a66a6432-690f-4e66-88c0-7eba0a014677;\n  style a66a6432-690f-4e66-88c0-7eba0a014677 stroke:#2c3143,stroke-width:4px;\n  10[\"Flatten collection\"];\n  0 -->|output| 10;\n  11[\"Samtools idxstats\"];\n  1 -->|output| 11;\n  12[\"bamCoverage\"];\n  1 -->|output| 12;\n  13[\"bamCoverage\"];\n  2 -->|output| 13;\n  14[\"bamCoverage\"];\n  2 -->|output| 14;\n  73e2f018-d9e4-4f74-8110-598b9b43a940[\"Output\\nwt_H3K4me3_rep1_bamcoverage\"];\n  14 --> 73e2f018-d9e4-4f74-8110-598b9b43a940;\n  style 73e2f018-d9e4-4f74-8110-598b9b43a940 stroke:#2c3143,stroke-width:4px;\n  15[\"Samtools idxstats\"];\n  2 -->|output| 15;\n  09449d6f-ce88-4448-9928-064c729c32d1[\"Output\\nwt_H3K4me3_rep1_idxstats\"];\n  15 --> 09449d6f-ce88-4448-9928-064c729c32d1;\n  style 09449d6f-ce88-4448-9928-064c729c32d1 stroke:#2c3143,stroke-width:4px;\n  16[\"plotFingerprint\"];\n  2 -->|output| 16;\n  1 -->|output| 16;\n  17[\"bamCompare\"];\n  2 -->|output| 17;\n  1 -->|output| 17;\n  18[\"MACS2 callpeak\"];\n  1 -->|output| 18;\n  2 -->|output| 18;\n  a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd[\"Output\\nwt_H3K4me3_input_rep1_macs2\"];\n  18 --> a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd;\n  style a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd stroke:#2c3143,stroke-width:4px;\n  19[\"bamCompare\"];\n  2 -->|output| 19;\n  1 -->|output| 19;\n  5174d1aa-21f6-4187-8935-70ba8bd0f6e0[\"Output\\nwt_H3K4me3_input_rep1_bamcompare\"];\n  19 --> 5174d1aa-21f6-4187-8935-70ba8bd0f6e0;\n  style 5174d1aa-21f6-4187-8935-70ba8bd0f6e0 stroke:#2c3143,stroke-width:4px;\n  20[\"bamCompare\"];\n  3 -->|output| 20;\n  1 -->|output| 20;\n  21[\"MACS2 callpeak\"];\n  1 -->|output| 21;\n  3 -->|output| 21;\n  22[\"bamCompare\"];\n  3 -->|output| 22;\n  1 -->|output| 22;\n  23[\"bamCompare\"];\n  4 -->|output| 23;\n  1 -->|output| 23;\n  24[\"MACS2 callpeak\"];\n  1 -->|output| 24;\n  4 -->|output| 24;\n  25[\"bamCompare\"];\n  6 -->|output| 25;\n  5 -->|output| 25;\n  26[\"MACS2 callpeak\"];\n  5 -->|output| 26;\n  6 -->|output| 26;\n  27[\"bamCompare\"];\n  7 -->|output| 27;\n  5 -->|output| 27;\n  28[\"MACS2 callpeak\"];\n  5 -->|output| 28;\n  7 -->|output| 28;\n  29[\"multiBamSummary\"];\n  1 -->|output| 29;\n  2 -->|output| 29;\n  3 -->|output| 29;\n  4 -->|output| 29;\n  5 -->|output| 29;\n  6 -->|output| 29;\n  7 -->|output| 29;\n  8 -->|output| 29;\n  30[\"bamCompare\"];\n  8 -->|output| 30;\n  5 -->|output| 30;\n  31[\"MACS2 callpeak\"];\n  5 -->|output| 31;\n  8 -->|output| 31;\n  32[\"Bowtie2\"];\n  9 -->|trimmed_reads_paired_collection| 32;\n  33[\"FastQC\"];\n  10 -->|output| 33;\n  549b52d6-cce1-42d9-80b5-e9934913045b[\"Output\\ntext_file\"];\n  33 --> 549b52d6-cce1-42d9-80b5-e9934913045b;\n  style 549b52d6-cce1-42d9-80b5-e9934913045b stroke:#2c3143,stroke-width:4px;\n  34[\"Concatenate datasets\"];\n  18 -->|output_narrowpeaks| 34;\n  21 -->|output_narrowpeaks| 34;\n  35[\"plotCorrelation\"];\n  29 -->|outFile| 35;\n  36[\"Concatenate datasets\"];\n  18 -->|output_narrowpeaks| 36;\n  21 -->|output_narrowpeaks| 36;\n  24 -->|output_narrowpeaks| 36;\n  26 -->|output_narrowpeaks| 36;\n  28 -->|output_narrowpeaks| 36;\n  31 -->|output_narrowpeaks| 36;\n  37[\"bedtools SortBED\"];\n  34 -->|out_file1| 37;\n  38[\"bedtools SortBED\"];\n  36 -->|out_file1| 38;\n  39[\"bedtools MergeBED\"];\n  37 -->|output| 39;\n  931eb26a-0e5d-4556-b67f-1c37372aaf28[\"Output\\nwt_H3K4me3_CTCF_rep1_mergebed\"];\n  39 --> 931eb26a-0e5d-4556-b67f-1c37372aaf28;\n  style 931eb26a-0e5d-4556-b67f-1c37372aaf28 stroke:#2c3143,stroke-width:4px;\n  40[\"bedtools MergeBED\"];\n  38 -->|output| 40;\n  9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb[\"Output\\nwt_all_mergebed\"];\n  40 --> 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb;\n  style 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb stroke:#2c3143,stroke-width:4px;\n  41[\"computeMatrix\"];\n  17 -->|outFileName| 41;\n  20 -->|outFileName| 41;\n  39 -->|output| 41;\n  42[\"computeMatrix\"];\n  17 -->|outFileName| 42;\n  20 -->|outFileName| 42;\n  23 -->|outFileName| 42;\n  25 -->|outFileName| 42;\n  27 -->|outFileName| 42;\n  30 -->|outFileName| 42;\n  40 -->|output| 42;\n  43[\"plotHeatmap\"];\n  41 -->|outFileName| 43;\n  44[\"plotHeatmap\"];\n  42 -->|outFileName| 44;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Paired End Reads Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_input_rep1.bam\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_rep1.bam\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_CTCF_rep1.bam\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K27me3_rep1.bam\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_input_rep2.bam\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_rep2.bam\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_CTCF_rep2.bam\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K27me3_rep2.bam\"]\n  9[label=\"Trim Galore!\"]\n  0 -> 9 [label=\"output\"]\n  ka66a6432690f4e6688c07eba0a014677[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_trim_galore\"]\n  9 -> ka66a6432690f4e6688c07eba0a014677\n  10[label=\"Flatten collection\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"Samtools idxstats\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"bamCoverage\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"bamCoverage\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"bamCoverage\"]\n  2 -> 14 [label=\"output\"]\n  k73e2f018d9e44f748110598b9b43a940[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_bamcoverage\"]\n  14 -> k73e2f018d9e44f748110598b9b43a940\n  15[label=\"Samtools idxstats\"]\n  2 -> 15 [label=\"output\"]\n  k09449d6fce8844489928064c729c32d1[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_idxstats\"]\n  15 -> k09449d6fce8844489928064c729c32d1\n  16[label=\"plotFingerprint\"]\n  2 -> 16 [label=\"output\"]\n  1 -> 16 [label=\"output\"]\n  17[label=\"bamCompare\"]\n  2 -> 17 [label=\"output\"]\n  1 -> 17 [label=\"output\"]\n  18[label=\"MACS2 callpeak\"]\n  1 -> 18 [label=\"output\"]\n  2 -> 18 [label=\"output\"]\n  ka36b5a6cd9924a2d8fd895e8eac74cbd[color=lightseagreen,label=\"Output\\nwt_H3K4me3_input_rep1_macs2\"]\n  18 -> ka36b5a6cd9924a2d8fd895e8eac74cbd\n  19[label=\"bamCompare\"]\n  2 -> 19 [label=\"output\"]\n  1 -> 19 [label=\"output\"]\n  k5174d1aa21f64187893570ba8bd0f6e0[color=lightseagreen,label=\"Output\\nwt_H3K4me3_input_rep1_bamcompare\"]\n  19 -> k5174d1aa21f64187893570ba8bd0f6e0\n  20[label=\"bamCompare\"]\n  3 -> 20 [label=\"output\"]\n  1 -> 20 [label=\"output\"]\n  21[label=\"MACS2 callpeak\"]\n  1 -> 21 [label=\"output\"]\n  3 -> 21 [label=\"output\"]\n  22[label=\"bamCompare\"]\n  3 -> 22 [label=\"output\"]\n  1 -> 22 [label=\"output\"]\n  23[label=\"bamCompare\"]\n  4 -> 23 [label=\"output\"]\n  1 -> 23 [label=\"output\"]\n  24[label=\"MACS2 callpeak\"]\n  1 -> 24 [label=\"output\"]\n  4 -> 24 [label=\"output\"]\n  25[label=\"bamCompare\"]\n  6 -> 25 [label=\"output\"]\n  5 -> 25 [label=\"output\"]\n  26[label=\"MACS2 callpeak\"]\n  5 -> 26 [label=\"output\"]\n  6 -> 26 [label=\"output\"]\n  27[label=\"bamCompare\"]\n  7 -> 27 [label=\"output\"]\n  5 -> 27 [label=\"output\"]\n  28[label=\"MACS2 callpeak\"]\n  5 -> 28 [label=\"output\"]\n  7 -> 28 [label=\"output\"]\n  29[label=\"multiBamSummary\"]\n  1 -> 29 [label=\"output\"]\n  2 -> 29 [label=\"output\"]\n  3 -> 29 [label=\"output\"]\n  4 -> 29 [label=\"output\"]\n  5 -> 29 [label=\"output\"]\n  6 -> 29 [label=\"output\"]\n  7 -> 29 [label=\"output\"]\n  8 -> 29 [label=\"output\"]\n  30[label=\"bamCompare\"]\n  8 -> 30 [label=\"output\"]\n  5 -> 30 [label=\"output\"]\n  31[label=\"MACS2 callpeak\"]\n  5 -> 31 [label=\"output\"]\n  8 -> 31 [label=\"output\"]\n  32[label=\"Bowtie2\"]\n  9 -> 32 [label=\"trimmed_reads_paired_collection\"]\n  33[label=\"FastQC\"]\n  10 -> 33 [label=\"output\"]\n  k549b52d6cce142d980b5e9934913045b[color=lightseagreen,label=\"Output\\ntext_file\"]\n  33 -> k549b52d6cce142d980b5e9934913045b\n  34[label=\"Concatenate datasets\"]\n  18 -> 34 [label=\"output_narrowpeaks\"]\n  21 -> 34 [label=\"output_narrowpeaks\"]\n  35[label=\"plotCorrelation\"]\n  29 -> 35 [label=\"outFile\"]\n  36[label=\"Concatenate datasets\"]\n  18 -> 36 [label=\"output_narrowpeaks\"]\n  21 -> 36 [label=\"output_narrowpeaks\"]\n  24 -> 36 [label=\"output_narrowpeaks\"]\n  26 -> 36 [label=\"output_narrowpeaks\"]\n  28 -> 36 [label=\"output_narrowpeaks\"]\n  31 -> 36 [label=\"output_narrowpeaks\"]\n  37[label=\"bedtools SortBED\"]\n  34 -> 37 [label=\"out_file1\"]\n  38[label=\"bedtools SortBED\"]\n  36 -> 38 [label=\"out_file1\"]\n  39[label=\"bedtools MergeBED\"]\n  37 -> 39 [label=\"output\"]\n  k931eb26a0e5d4556b67f1c37372aaf28[color=lightseagreen,label=\"Output\\nwt_H3K4me3_CTCF_rep1_mergebed\"]\n  39 -> k931eb26a0e5d4556b67f1c37372aaf28\n  40[label=\"bedtools MergeBED\"]\n  38 -> 40 [label=\"output\"]\n  k9c4c5a1ff2c14e83b1f9ff32ee48baeb[color=lightseagreen,label=\"Output\\nwt_all_mergebed\"]\n  40 -> k9c4c5a1ff2c14e83b1f9ff32ee48baeb\n  41[label=\"computeMatrix\"]\n  17 -> 41 [label=\"outFileName\"]\n  20 -> 41 [label=\"outFileName\"]\n  39 -> 41 [label=\"output\"]\n  42[label=\"computeMatrix\"]\n  17 -> 42 [label=\"outFileName\"]\n  20 -> 42 [label=\"outFileName\"]\n  23 -> 42 [label=\"outFileName\"]\n  25 -> 42 [label=\"outFileName\"]\n  27 -> 42 [label=\"outFileName\"]\n  30 -> 42 [label=\"outFileName\"]\n  40 -> 42 [label=\"output\"]\n  43[label=\"plotHeatmap\"]\n  41 -> 43 [label=\"outFileName\"]\n  44[label=\"plotHeatmap\"]\n  42 -> 44 [label=\"outFileName\"]\n}",
           "workflow_tools": [
@@ -1367,6 +1367,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -1478,6 +1483,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -1584,6 +1593,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -1687,6 +1700,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -1803,6 +1820,14 @@
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -1925,6 +1950,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.eu"
@@ -2043,6 +2076,14 @@
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2166,6 +2207,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.eu"
@@ -2263,8 +2312,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.5.4+galaxy0",
-                  "3.5.2+galaxy0",
-                  "3.3.2.0.0"
+                  "3.3.2.0.0",
+                  "3.5.2+galaxy0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -2285,6 +2334,14 @@
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2405,6 +2462,14 @@
                 "state": "exact",
                 "version": "3.5.1.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2530,6 +2595,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.5.1.0.1",
                 "server": "https://usegalaxy.eu"
@@ -2646,6 +2719,11 @@
                 "state": "exact",
                 "version": "0.6.7+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.6.7+galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2772,6 +2850,11 @@
               {
                 "state": "exact",
                 "version": "2.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -2782,8 +2865,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
                   "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.5.3+galaxy1",
                   "2.3.4.3+galaxy0",
                   "2.4.5+galaxy0",
@@ -2829,9 +2912,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -2884,8 +2967,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -2907,6 +2990,11 @@
                 "state": "exact",
                 "version": "0.74+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.74+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2974,8 +3062,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.7",
                   "2.0.8",
+                  "2.0.7",
                   "2.0",
                   "2.0.3"
                 ],
@@ -3034,6 +3122,11 @@
                 "state": "exact",
                 "version": "2.0.4",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.0.4",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -3161,6 +3254,13 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.7.0+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.17.0+galaxy0",
                 "server": "https://usegalaxy.eu"
@@ -3275,6 +3375,10 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1",
                 "server": "https://usegalaxy.eu"
@@ -3325,10 +3429,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.27.1",
-                  "2.31.1",
+                  "2.27.0.0",
                   "2.31.1+galaxy2",
-                  "2.27.0.0"
+                  "2.27.1",
+                  "2.31.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3373,8 +3477,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.31.1",
-                  "2.31.1+galaxy2"
+                  "2.31.1+galaxy2",
+                  "2.31.1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -3400,6 +3504,11 @@
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.30.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -3454,9 +3563,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.27.0.0",
                   "2.31.1+galaxy0",
-                  "2.27.1",
-                  "2.27.0.0"
+                  "2.27.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3527,6 +3636,11 @@
                 "state": "exact",
                 "version": "2.30.0+galaxy2",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.30.0+galaxy2",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -3650,6 +3764,11 @@
                 "state": "exact",
                 "version": "2.2.7.1+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.2.7.1+galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -4606,9 +4725,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"FastQC\"];\n  1 -->|output| 10;\n  11[\"bwameth\"];\n  0 -->|output| 11;\n  1 -->|output| 11;\n  12[\"Replace column\"];\n  3 -->|output| 12;\n  4 -->|output| 12;\n  13[\"metilene\"];\n  2 -->|output| 13;\n  5 -->|output| 13;\n  3 -->|output| 13;\n  8 -->|output| 13;\n  7 -->|output| 13;\n  6 -->|output| 13;\n  14[\"MethylDackel\"];\n  11 -->|output| 14;\n  15[\"MethylDackel\"];\n  11 -->|output| 15;\n  16[\"Select last\"];\n  12 -->|outfile_replace| 16;\n  17[\"Select last\"];\n  15 -->|outFileExtractCpGFraction| 17;\n  18[\"computeMatrix\"];\n  16 -->|outfile| 18;\n  2 -->|output| 18;\n  19[\"Text reformatting\"];\n  17 -->|outfile| 19;\n  20[\"computeMatrix\"];\n  19 -->|outfile| 20;\n  2 -->|output| 20;\n  21[\"plotProfile\"];\n  20 -->|outFileName| 21;\n  0f7c068c-3037-4f76-b6aa-6b14c51c4c20[\"Output\\nplot_profile_tabular\"];\n  21 --> 0f7c068c-3037-4f76-b6aa-6b14c51c4c20;\n  style 0f7c068c-3037-4f76-b6aa-6b14c51c4c20 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"FastQC\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"bwameth\"]\n  0 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Replace column\"]\n  3 -> 12 [label=\"output\"]\n  4 -> 12 [label=\"output\"]\n  13[label=\"metilene\"]\n  2 -> 13 [label=\"output\"]\n  5 -> 13 [label=\"output\"]\n  3 -> 13 [label=\"output\"]\n  8 -> 13 [label=\"output\"]\n  7 -> 13 [label=\"output\"]\n  6 -> 13 [label=\"output\"]\n  14[label=\"MethylDackel\"]\n  11 -> 14 [label=\"output\"]\n  15[label=\"MethylDackel\"]\n  11 -> 15 [label=\"output\"]\n  16[label=\"Select last\"]\n  12 -> 16 [label=\"outfile_replace\"]\n  17[label=\"Select last\"]\n  15 -> 17 [label=\"outFileExtractCpGFraction\"]\n  18[label=\"computeMatrix\"]\n  16 -> 18 [label=\"outfile\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"Text reformatting\"]\n  17 -> 19 [label=\"outfile\"]\n  20[label=\"computeMatrix\"]\n  19 -> 20 [label=\"outfile\"]\n  2 -> 20 [label=\"output\"]\n  21[label=\"plotProfile\"]\n  20 -> 21 [label=\"outFileName\"]\n  k0f7c068c30374f76b6aa6b14c51c4c20[color=lightseagreen,label=\"Output\\nplot_profile_tabular\"]\n  21 -> k0f7c068c30374f76b6aa6b14c51c4c20\n}",
+          "modified": "2026-09-07 13:15:22 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"FastQC\"];\n  1 -->|output| 10;\n  11[\"bwameth\"];\n  0 -->|output| 11;\n  1 -->|output| 11;\n  12[\"Replace column\"];\n  3 -->|output| 12;\n  4 -->|output| 12;\n  13[\"metilene\"];\n  2 -->|output| 13;\n  5 -->|output| 13;\n  3 -->|output| 13;\n  8 -->|output| 13;\n  7 -->|output| 13;\n  6 -->|output| 13;\n  14[\"MethylDackel\"];\n  11 -->|output| 14;\n  15[\"MethylDackel\"];\n  11 -->|output| 15;\n  16[\"Select last\"];\n  12 -->|outfile_replace| 16;\n  17[\"Select last\"];\n  15 -->|outFileExtractCpGFraction| 17;\n  18[\"computeMatrix\"];\n  16 -->|outfile| 18;\n  2 -->|output| 18;\n  19[\"Text reformatting\"];\n  17 -->|outfile| 19;\n  20[\"computeMatrix\"];\n  19 -->|outfile| 20;\n  2 -->|output| 20;\n  21[\"plotProfile\"];\n  20 -->|outFileName| 21;\n  2cc5b748-5468-4264-a076-3f0147499f6c[\"Output\\nplot_profile_tabular\"];\n  21 --> 2cc5b748-5468-4264-a076-3f0147499f6c;\n  style 2cc5b748-5468-4264-a076-3f0147499f6c stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"FastQC\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"bwameth\"]\n  0 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Replace column\"]\n  3 -> 12 [label=\"output\"]\n  4 -> 12 [label=\"output\"]\n  13[label=\"metilene\"]\n  2 -> 13 [label=\"output\"]\n  5 -> 13 [label=\"output\"]\n  3 -> 13 [label=\"output\"]\n  8 -> 13 [label=\"output\"]\n  7 -> 13 [label=\"output\"]\n  6 -> 13 [label=\"output\"]\n  14[label=\"MethylDackel\"]\n  11 -> 14 [label=\"output\"]\n  15[label=\"MethylDackel\"]\n  11 -> 15 [label=\"output\"]\n  16[label=\"Select last\"]\n  12 -> 16 [label=\"outfile_replace\"]\n  17[label=\"Select last\"]\n  15 -> 17 [label=\"outFileExtractCpGFraction\"]\n  18[label=\"computeMatrix\"]\n  16 -> 18 [label=\"outfile\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"Text reformatting\"]\n  17 -> 19 [label=\"outfile\"]\n  20[label=\"computeMatrix\"]\n  19 -> 20 [label=\"outfile\"]\n  2 -> 20 [label=\"output\"]\n  21[label=\"plotProfile\"]\n  20 -> 21 [label=\"outFileName\"]\n  k2cc5b74854684264a0763f0147499f6c[color=lightseagreen,label=\"Output\\nplot_profile_tabular\"]\n  21 -> k2cc5b74854684264a0763f0147499f6c\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0",
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0",
@@ -4905,7 +5024,7 @@
                 {
                   "output_name": "output_outFileNameData",
                   "label": "plot_profile_tabular",
-                  "uuid": "0f7c068c-3037-4f76-b6aa-6b14c51c4c20"
+                  "uuid": "2cc5b748-5468-4264-a076-3f0147499f6c"
                 }
               ]
             }
@@ -5038,6 +5157,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -5090,9 +5214,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
+                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0"
+                  "3.1.2.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -5162,6 +5286,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -5169,8 +5301,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0",
                   "3.3.0.0.0"
@@ -5288,6 +5420,11 @@
               {
                 "state": "exact",
                 "version": "3.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -5341,8 +5478,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.1.2.0.0",
+                  "3.5.4+galaxy0",
                   "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
@@ -5411,6 +5548,14 @@
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -5539,6 +5684,11 @@
               {
                 "state": "exact",
                 "version": "3.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -5653,6 +5803,14 @@
                 "state": "exact",
                 "version": "0.3.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.5.2+galaxy0",
+                  "0.2.1"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -5770,6 +5928,11 @@
                 "state": "exact",
                 "version": "0.5.2+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.5.2+galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -5895,6 +6058,13 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.2"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1",
                 "server": "https://usegalaxy.eu"
@@ -6014,6 +6184,11 @@
               {
                 "state": "exact",
                 "version": "0.2",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.2",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -6064,8 +6239,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.1",
                   "9.5+galaxy3",
+                  "1.1.1",
                   "1.1.2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
@@ -6120,13 +6295,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.1",
                   "9.5+galaxy3",
+                  "1.1.1",
                   "1.1.2",
                   "9.5+galaxy2",
-                  "9.11+galaxy0",
+                  "9.5+galaxy0",
                   "9.3+galaxy1",
-                  "9.5+galaxy0"
+                  "9.11+galaxy0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -6141,13 +6316,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.1",
                   "9.5+galaxy3",
+                  "1.1.1",
                   "1.1.2",
                   "9.5+galaxy2",
-                  "9.11+galaxy0",
-                  "9.3+galaxy1",
                   "9.5+galaxy0",
+                  "9.3+galaxy1",
+                  "9.11+galaxy0",
                   "9.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -6160,18 +6335,23 @@
               {
                 "state": "exact",
                 "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.1",
                   "9.5+galaxy3",
+                  "1.1.1",
                   "1.1.2",
                   "9.5+galaxy2",
-                  "9.11+galaxy0",
-                  "9.3+galaxy1",
                   "9.5+galaxy0",
+                  "9.3+galaxy1",
+                  "9.11+galaxy0",
                   "9.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -6290,6 +6470,11 @@
               {
                 "state": "exact",
                 "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -6340,9 +6525,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -6394,9 +6579,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -6405,8 +6590,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -6422,14 +6607,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1",
                   "0.71",
-                  "0.70",
-                  "0.69"
+                  "0.69",
+                  "0.70"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -6441,14 +6626,19 @@
               {
                 "state": "exact",
                 "version": "0.68",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.68",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -6544,8 +6734,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.2.9+galaxy0",
-                  "0.2.2",
                   "0.2.7+galaxy0",
+                  "0.2.2",
                   "0.2.8+galaxy0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
@@ -6562,11 +6752,11 @@
                 "state": "inexact",
                 "versions": [
                   "0.2.9+galaxy0",
-                  "0.2.2",
                   "0.2.7+galaxy0",
-                  "0.2.6+galaxy0",
+                  "0.2.2",
                   "0.2.3+galaxy0",
-                  "0.2.2+galaxy1"
+                  "0.2.2+galaxy1",
+                  "0.2.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -6574,12 +6764,17 @@
                 "state": "inexact",
                 "versions": [
                   "0.2.9+galaxy0",
-                  "0.2.2",
                   "0.2.7+galaxy0",
+                  "0.2.2",
                   "0.2.3+galaxy0",
                   "0.2.0.4"
                 ],
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.2.0.3",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -6707,6 +6902,11 @@
               {
                 "state": "exact",
                 "version": "0.2.7+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.2.7+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -6827,6 +7027,11 @@
               {
                 "state": "exact",
                 "version": "1.2.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.2.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -6939,6 +7144,11 @@
               {
                 "state": "exact",
                 "version": "0.2.6.1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.2.6.1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -7045,6 +7255,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "missing",
@@ -7608,7 +7822,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nR01C02_Red.idat\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nR02C02_Red.idat\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nR05C02_Red.idat\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nR06C02_Red.idat\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nR01C02_Green.idat\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nR02C02_Green.idat\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nR05C02_Green.idat\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nR06C02_Green.idat\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nphenotype Table txt file\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nUCSC Main on Human\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"Infinium Human Methylation BeadChip\"];\n  4 -->|output| 10;\n  5 -->|output| 10;\n  6 -->|output| 10;\n  7 -->|output| 10;\n  0 -->|output| 10;\n  1 -->|output| 10;\n  2 -->|output| 10;\n  3 -->|output| 10;\n  8 -->|output| 10;\n  9 -->|output| 10;\n  2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a[\"Output\\nSNPInfo Table\"];\n  10 --> 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a;\n  style 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a stroke:#2c3143,stroke-width:4px;\n  d1732a98-1861-4612-bdaa-f68861c22f56[\"Output\\nDifferentially Methylated Regions\"];\n  10 --> d1732a98-1861-4612-bdaa-f68861c22f56;\n  style d1732a98-1861-4612-bdaa-f68861c22f56 stroke:#2c3143,stroke-width:4px;\n  9aa8b4a9-611e-4a39-864f-400f17866a9e[\"Output\\nDifferentially Methylated Positions\"];\n  10 --> 9aa8b4a9-611e-4a39-864f-400f17866a9e;\n  style 9aa8b4a9-611e-4a39-864f-400f17866a9e stroke:#2c3143,stroke-width:4px;\n  14ddb6f7-637e-4193-bfb5-80aeae4fab64[\"Output\\nQuality Control Report\"];\n  10 --> 14ddb6f7-637e-4193-bfb5-80aeae4fab64;\n  style 14ddb6f7-637e-4193-bfb5-80aeae4fab64 stroke:#2c3143,stroke-width:4px;\n  c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d[\"Output\\nQuality Control Plot\"];\n  10 --> c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d;\n  style c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d stroke:#2c3143,stroke-width:4px;\n  11[\"ChIPpeakAnno annoPeaks\"];\n  10 -->|dmp| 11;\n  bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5[\"Output\\nTable of Annotated Peaks\"];\n  11 --> bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5;\n  style bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5 stroke:#2c3143,stroke-width:4px;\n  12[\"Cut\"];\n  11 -->|tab| 12;\n  0b54dfe5-f84a-4288-b631-ae4dc2384a17[\"Output\\nCut on Table of Annotated Peaks\"];\n  12 --> 0b54dfe5-f84a-4288-b631-ae4dc2384a17;\n  style 0b54dfe5-f84a-4288-b631-ae4dc2384a17 stroke:#2c3143,stroke-width:4px;\n  13[\"Remove beginning\"];\n  12 -->|out_file1| 13;\n  8f65cf82-7427-4273-ba0b-a6673ee1ff2d[\"Output\\nRemove beginning on the cut output\"];\n  13 --> 8f65cf82-7427-4273-ba0b-a6673ee1ff2d;\n  style 8f65cf82-7427-4273-ba0b-a6673ee1ff2d stroke:#2c3143,stroke-width:4px;\n  14[\"Cluster Profiler Bitr\"];\n  13 -->|out_file1| 14;\n  7989f80a-3e79-4d2f-bbe4-e4d641eebd6a[\"Output\\nTable of Translated Gene ID's\"];\n  14 --> 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a;\n  style 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a stroke:#2c3143,stroke-width:4px;\n  15[\"Cluster Profiler GO\"];\n  14 -->|translation| 15;\n  ff6c7018-b821-4ade-9931-fa99aeb0a86c[\"Output\\nGO Enrichment Analysis of a Gene Set\"];\n  15 --> ff6c7018-b821-4ade-9931-fa99aeb0a86c;\n  style ff6c7018-b821-4ade-9931-fa99aeb0a86c stroke:#2c3143,stroke-width:4px;\n  03b88399-095b-4bd5-9693-528c60338407[\"Output\\nGO Enrichment Analysis Visualization\"];\n  15 --> 03b88399-095b-4bd5-9693-528c60338407;\n  style 03b88399-095b-4bd5-9693-528c60338407 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nR01C02_Red.idat\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nR02C02_Red.idat\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nR05C02_Red.idat\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nR06C02_Red.idat\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nR01C02_Green.idat\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nR02C02_Green.idat\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nR05C02_Green.idat\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nR06C02_Green.idat\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nphenotype Table txt file\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nUCSC Main on Human\"]\n  10[label=\"Infinium Human Methylation BeadChip\"]\n  4 -> 10 [label=\"output\"]\n  5 -> 10 [label=\"output\"]\n  6 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"output\"]\n  0 -> 10 [label=\"output\"]\n  1 -> 10 [label=\"output\"]\n  2 -> 10 [label=\"output\"]\n  3 -> 10 [label=\"output\"]\n  8 -> 10 [label=\"output\"]\n  9 -> 10 [label=\"output\"]\n  k2ac7dd5ded744d58b1cbbe7dcca9154a[color=lightseagreen,label=\"Output\\nSNPInfo Table\"]\n  10 -> k2ac7dd5ded744d58b1cbbe7dcca9154a\n  kd1732a9818614612bdaaf68861c22f56[color=lightseagreen,label=\"Output\\nDifferentially Methylated Regions\"]\n  10 -> kd1732a9818614612bdaaf68861c22f56\n  k9aa8b4a9611e4a39864f400f17866a9e[color=lightseagreen,label=\"Output\\nDifferentially Methylated Positions\"]\n  10 -> k9aa8b4a9611e4a39864f400f17866a9e\n  k14ddb6f7637e4193bfb580aeae4fab64[color=lightseagreen,label=\"Output\\nQuality Control Report\"]\n  10 -> k14ddb6f7637e4193bfb580aeae4fab64\n  kc8c37ff8716d4c23a84f7cebcb4b6c9d[color=lightseagreen,label=\"Output\\nQuality Control Plot\"]\n  10 -> kc8c37ff8716d4c23a84f7cebcb4b6c9d\n  11[label=\"ChIPpeakAnno annoPeaks\"]\n  10 -> 11 [label=\"dmp\"]\n  kbedf4346da4d4e1abf3ca7d20f3ec3c5[color=lightseagreen,label=\"Output\\nTable of Annotated Peaks\"]\n  11 -> kbedf4346da4d4e1abf3ca7d20f3ec3c5\n  12[label=\"Cut\"]\n  11 -> 12 [label=\"tab\"]\n  k0b54dfe5f84a4288b631ae4dc2384a17[color=lightseagreen,label=\"Output\\nCut on Table of Annotated Peaks\"]\n  12 -> k0b54dfe5f84a4288b631ae4dc2384a17\n  13[label=\"Remove beginning\"]\n  12 -> 13 [label=\"out_file1\"]\n  k8f65cf8274274273ba0ba6673ee1ff2d[color=lightseagreen,label=\"Output\\nRemove beginning on the cut output\"]\n  13 -> k8f65cf8274274273ba0ba6673ee1ff2d\n  14[label=\"Cluster Profiler Bitr\"]\n  13 -> 14 [label=\"out_file1\"]\n  k7989f80a3e794d2fbbe4e4d641eebd6a[color=lightseagreen,label=\"Output\\nTable of Translated Gene ID's\"]\n  14 -> k7989f80a3e794d2fbbe4e4d641eebd6a\n  15[label=\"Cluster Profiler GO\"]\n  14 -> 15 [label=\"translation\"]\n  kff6c7018b8214ade9931fa99aeb0a86c[color=lightseagreen,label=\"Output\\nGO Enrichment Analysis of a Gene Set\"]\n  15 -> kff6c7018b8214ade9931fa99aeb0a86c\n  k03b88399095b4bd59693528c60338407[color=lightseagreen,label=\"Output\\nGO Enrichment Analysis Visualization\"]\n  15 -> k03b88399095b4bd59693528c60338407\n}",
           "workflow_tools": [
@@ -8338,6 +8552,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -8453,6 +8672,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -8564,6 +8788,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -8667,6 +8895,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -8774,6 +9006,11 @@
                 "state": "exact",
                 "version": "0.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -8887,6 +9124,11 @@
               {
                 "state": "exact",
                 "version": "0.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -8996,6 +9238,11 @@
               {
                 "state": "exact",
                 "version": "0.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -9101,6 +9348,11 @@
                 "state": "exact",
                 "version": "2.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -9667,7 +9919,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"IdxStats\"];\n  0 -->|output| 9;\n  10[\"bamCoverage\"];\n  0 -->|output| 10;\n  11[\"bamCoverage\"];\n  0 -->|output| 11;\n  12[\"plotFingerprint\"];\n  4 -->|output| 12;\n  0 -->|output| 12;\n  13[\"computeGCBias\"];\n  4 -->|output| 13;\n  14[\"IdxStats\"];\n  4 -->|output| 14;\n  15[\"bamCoverage\"];\n  4 -->|output| 15;\n  16[\"bamCoverage\"];\n  4 -->|output| 16;\n  17[\"bamCompare\"];\n  0 -->|output| 17;\n  4 -->|output| 17;\n  18[\"bamCompare\"];\n  0 -->|output| 18;\n  4 -->|output| 18;\n  19[\"MACS2 callpeak\"];\n  4 -->|output| 19;\n  0 -->|output| 19;\n  20[\"multiBamSummary\"];\n  7 -->|output| 20;\n  6 -->|output| 20;\n  5 -->|output| 20;\n  4 -->|output| 20;\n  3 -->|output| 20;\n  2 -->|output| 20;\n  1 -->|output| 20;\n  0 -->|output| 20;\n  21[\"computeMatrix\"];\n  18 -->|outFileName| 21;\n  8 -->|output| 21;\n  22[\"computeMatrix\"];\n  18 -->|outFileName| 22;\n  8 -->|output| 22;\n  23[\"plotCorrelation\"];\n  20 -->|outFile| 23;\n  24[\"plotHeatmap\"];\n  21 -->|outFileName| 24;\n  25[\"plotHeatmap\"];\n  22 -->|outFileName| 25;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"IdxStats\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"bamCoverage\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"bamCoverage\"]\n  0 -> 11 [label=\"output\"]\n  12[label=\"plotFingerprint\"]\n  4 -> 12 [label=\"output\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"computeGCBias\"]\n  4 -> 13 [label=\"output\"]\n  14[label=\"IdxStats\"]\n  4 -> 14 [label=\"output\"]\n  15[label=\"bamCoverage\"]\n  4 -> 15 [label=\"output\"]\n  16[label=\"bamCoverage\"]\n  4 -> 16 [label=\"output\"]\n  17[label=\"bamCompare\"]\n  0 -> 17 [label=\"output\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"bamCompare\"]\n  0 -> 18 [label=\"output\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"MACS2 callpeak\"]\n  4 -> 19 [label=\"output\"]\n  0 -> 19 [label=\"output\"]\n  20[label=\"multiBamSummary\"]\n  7 -> 20 [label=\"output\"]\n  6 -> 20 [label=\"output\"]\n  5 -> 20 [label=\"output\"]\n  4 -> 20 [label=\"output\"]\n  3 -> 20 [label=\"output\"]\n  2 -> 20 [label=\"output\"]\n  1 -> 20 [label=\"output\"]\n  0 -> 20 [label=\"output\"]\n  21[label=\"computeMatrix\"]\n  18 -> 21 [label=\"outFileName\"]\n  8 -> 21 [label=\"output\"]\n  22[label=\"computeMatrix\"]\n  18 -> 22 [label=\"outFileName\"]\n  8 -> 22 [label=\"output\"]\n  23[label=\"plotCorrelation\"]\n  20 -> 23 [label=\"outFile\"]\n  24[label=\"plotHeatmap\"]\n  21 -> 24 [label=\"outFileName\"]\n  25[label=\"plotHeatmap\"]\n  22 -> 25 [label=\"outFileName\"]\n}",
           "workflow_tools": [
@@ -9979,7 +10231,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Trim Galore!\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  2 -->|trimmed_reads_single| 3;\n  4[\"BAM-to-SAM\"];\n  3 -->|output| 4;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Trim Galore!\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Bowtie2\"]\n  2 -> 3 [label=\"trimmed_reads_single\"]\n  4[label=\"BAM-to-SAM\"]\n  3 -> 4 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -10059,6 +10311,11 @@
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
             "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.fr/",
@@ -10177,6 +10434,11 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -10303,6 +10565,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -10313,8 +10583,8 @@
                   "3.5.4+galaxy0",
                   "3.5.1.0.0",
                   "3.3.2.0.0",
-                  "3.5.2+galaxy0",
-                  "3.3.0.0.0"
+                  "3.3.0.0.0",
+                  "3.5.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -10332,8 +10602,8 @@
                   "3.5.4+galaxy0",
                   "3.5.1.0.0",
                   "3.3.2.0.0",
-                  "3.5.2+galaxy0",
                   "3.3.0.0.0",
+                  "3.5.2+galaxy0",
                   "2.5.0.0",
                   "3.1.2.0.0",
                   "2.3.5.0"
@@ -10374,9 +10644,9 @@
                 "state": "inexact",
                 "versions": [
                   "3.3.0.0.0",
-                  "3.5.4+galaxy0",
+                  "3.5.1.0.0",
                   "3.1.2.0.0",
-                  "3.5.1.0.0"
+                  "3.5.4+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10446,6 +10716,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -10454,8 +10732,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.3.0.0.0",
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0"
                 ],
@@ -10473,16 +10751,16 @@
                 "state": "inexact",
                 "versions": [
                   "3.3.0.0.0",
-                  "3.5.4+galaxy0",
-                  "3.1.2.0.0",
                   "3.5.1.0.0",
+                  "3.1.2.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.2.1.0.0",
                   "3.5.2+galaxy0",
                   "3.0.2.0",
                   "2.5.0.0",
-                  "3.2.0.0.0",
-                  "2.3.5.0"
+                  "2.3.5.0",
+                  "3.2.0.0.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -10519,9 +10797,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
-                  "3.2.0.0.0"
+                  "3.2.0.0.0",
+                  "3.5.4+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10591,6 +10869,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -10598,8 +10884,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0",
                   "3.3.0.0.0"
@@ -10617,14 +10903,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0",
                   "3.3.0.0.0",
                   "2.5.0.0",
-                  "3.1.2.0.0",
-                  "2.3.5.0"
+                  "2.3.5.0",
+                  "3.1.2.0.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -10661,9 +10947,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
+                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0"
+                  "3.1.2.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10733,6 +11019,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -10740,8 +11034,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
+                  "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0",
                   "3.3.0.0.0"
@@ -10795,8 +11089,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10867,6 +11161,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -10894,8 +11196,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0",
                   "3.1.2.0.0",
+                  "3.5.1.0.0",
                   "3.5.2+galaxy0",
                   "3.3.2.0.0",
                   "3.3.0.0.0",
@@ -10937,9 +11239,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "3.5.4+galaxy0",
                   "3.1.2.0.0",
-                  "3.5.1.0.0",
-                  "3.5.4+galaxy0"
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10986,8 +11288,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.5.4+galaxy0",
-                  "3.5.2+galaxy0",
-                  "3.3.2.0.0"
+                  "3.3.2.0.0",
+                  "3.5.2+galaxy0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -11010,6 +11312,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -11017,10 +11327,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
-                  "3.5.2+galaxy0",
+                  "3.5.1.0.0",
                   "3.3.2.0.0",
+                  "3.5.2+galaxy0",
                   "3.3.0.0.0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -11036,11 +11346,11 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "3.5.4+galaxy0",
                   "3.1.2.0.0",
                   "3.5.1.0.0",
-                  "3.5.4+galaxy0",
-                  "3.5.2+galaxy0",
                   "3.3.2.0.0",
+                  "3.5.2+galaxy0",
                   "3.3.0.0.0",
                   "2.5.0.0",
                   "2.3.5.0"
@@ -11152,6 +11462,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -11222,9 +11540,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
+                  "3.1.2.0.1",
                   "3.5.4+galaxy0",
-                  "3.1.2.0.1"
+                  "3.5.1.0.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11297,6 +11615,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.eu"
@@ -11304,11 +11630,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
                   "3.5.4+galaxy0",
+                  "3.5.1.0.1",
                   "3.3.2.0.1",
-                  "3.3.0.0.1",
-                  "3.5.2+galaxy0"
+                  "3.5.2+galaxy0",
+                  "3.3.0.0.1"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -11323,13 +11649,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
-                  "3.5.4+galaxy0",
                   "3.1.2.0.1",
+                  "3.5.4+galaxy0",
+                  "3.5.1.0.1",
                   "3.3.2.0.1",
-                  "3.3.0.0.1",
                   "3.5.2+galaxy0",
                   "3.0.2.0",
+                  "3.3.0.0.1",
                   "2.5.0.0",
                   "2.3.5.0"
                 ],
@@ -11368,9 +11694,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.4.3.1",
                   "0.6.10+galaxy0",
-                  "0.6.7+galaxy0",
-                  "0.4.3.1"
+                  "0.6.7+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11434,9 +11760,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.4.3.1",
                   "0.6.10+galaxy0",
                   "0.6.7+galaxy0",
-                  "0.4.3.1",
                   "0.6.3",
                   "0.6.7+galaxy1"
                 ],
@@ -11446,6 +11772,11 @@
                 "state": "exact",
                 "version": "0.4.3.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.4.3.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -11465,8 +11796,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.6.7+galaxy0",
                   "0.4.3.1",
+                  "0.6.7+galaxy0",
                   "0.6.3"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -11474,9 +11805,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.4.3.1",
                   "0.6.10+galaxy0",
                   "0.6.7+galaxy0",
-                  "0.4.3.1",
                   "0.6.3",
                   "0.6.7+galaxy1",
                   "0.4.2",
@@ -11559,8 +11890,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.7",
-                  "2.0.4"
+                  "2.0.4",
+                  "2.0.7"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -11586,6 +11917,11 @@
                 "state": "exact",
                 "version": "2.0.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.0.1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "missing",
@@ -11642,11 +11978,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
-                  "2.4.2+galaxy0",
                   "2.3.4.2",
-                  "2.5.3+galaxy1",
-                  "2.5.4+galaxy0"
+                  "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
+                  "2.5.4+galaxy0",
+                  "2.5.3+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11698,8 +12034,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
-                  "2.5.3+galaxy1",
                   "2.5.4+galaxy0",
+                  "2.5.3+galaxy1",
                   "2.5.5+galaxy0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
@@ -11715,19 +12051,19 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
-                  "2.4.2+galaxy0",
                   "2.3.4.2",
-                  "2.5.3+galaxy1",
+                  "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.5.4+galaxy0",
+                  "2.5.3+galaxy1",
                   "2.3.4.3+galaxy0",
                   "2.4.5+galaxy0",
                   "2.5.5+galaxy0",
-                  "2.5.0+galaxy0",
-                  "2.3.4.3",
-                  "2.3.4.1",
                   "2.3.0.1",
-                  "2.5.3+galaxy0"
+                  "2.3.4.3",
+                  "2.5.3+galaxy0",
+                  "2.3.4.1",
+                  "2.5.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -11739,30 +12075,35 @@
               {
                 "state": "exact",
                 "version": "2.3.2.2",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.3.2.2",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
-                  "2.4.2+galaxy0",
                   "2.3.4.2",
-                  "2.5.3+galaxy1",
+                  "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.5.4+galaxy0",
+                  "2.5.3+galaxy1",
                   "2.3.4.3+galaxy0",
                   "2.4.5+galaxy0",
                   "2.5.5+galaxy0",
-                  "2.5.0+galaxy0",
                   "2.3.4.3",
-                  "2.5.3+galaxy0"
+                  "2.5.3+galaxy0",
+                  "2.5.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
                   "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.5.3+galaxy1",
                   "2.3.4.3+galaxy0",
                   "2.4.5+galaxy0",
@@ -11808,9 +12149,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11862,9 +12203,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -11873,8 +12214,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -11900,14 +12241,19 @@
               {
                 "state": "exact",
                 "version": "0.69",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.69",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -11959,10 +12305,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
+                  "2.0.8",
                   "2.0.7",
-                  "2.0.8"
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11976,8 +12322,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.7",
                   "2.0.8",
+                  "2.0.7",
                   "2.0",
                   "2.0.3"
                 ],
@@ -12017,10 +12363,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
-                  "2.0.7",
                   "2.0.8",
+                  "2.0.7",
+                  "2.0.4",
                   "2.0.3",
                   "2.0.2"
                 ],
@@ -12045,6 +12391,17 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "2.0.5",
+                  "2.0.8",
+                  "2.0.7",
+                  "2.0.4",
+                  "2.0.6"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.1",
                 "server": "https://usegalaxy.eu"
@@ -12052,10 +12409,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
-                  "2.0.7",
                   "2.0.8",
+                  "2.0.7",
+                  "2.0.4",
                   "2.0.3",
                   "2.0.6"
                 ],
@@ -12107,9 +12464,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.1.1.20160309.5",
                   "2.2.7.1+galaxy0",
-                  "2.2.9.1+galaxy0",
-                  "2.1.1.20160309.5"
+                  "2.2.9.1+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -12176,6 +12533,14 @@
                 "state": "exact",
                 "version": "2.1.1.20160309.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.2.7.1+galaxy0",
+                  "2.2.9.1+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -12819,9 +13184,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  96d67c9c-0da4-4eca-b6d7-706296cbcc09[\"Output\\noutput_overlapping_peaks\"];\n  60 --> 96d67c9c-0da4-4eca-b6d7-706296cbcc09;\n  style 96d67c9c-0da4-4eca-b6d7-706296cbcc09 stroke:#2c3143,stroke-width:4px;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  f116a49a-b764-48bf-86d9-76678e0dfe19[\"Output\\noutput_g1e_peaks\"];\n  61 --> f116a49a-b764-48bf-86d9-76678e0dfe19;\n  style f116a49a-b764-48bf-86d9-76678e0dfe19 stroke:#2c3143,stroke-width:4px;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  dde4d5a1-e044-435a-ac53-d983aa7fbc95[\"Output\\noutput_megakaryocyte_peaks\"];\n  62 --> dde4d5a1-e044-435a-ac53-d983aa7fbc95;\n  style dde4d5a1-e044-435a-ac53-d983aa7fbc95 stroke:#2c3143,stroke-width:4px;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Trimmomatic\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Trimmomatic\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  2 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"Trimmomatic\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"FastQC\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"Trimmomatic\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"FastQC\"]\n  5 -> 19 [label=\"output\"]\n  20[label=\"Trimmomatic\"]\n  5 -> 20 [label=\"output\"]\n  21[label=\"FastQC\"]\n  6 -> 21 [label=\"output\"]\n  22[label=\"Trimmomatic\"]\n  6 -> 22 [label=\"output\"]\n  23[label=\"FastQC\"]\n  7 -> 23 [label=\"output\"]\n  24[label=\"Trimmomatic\"]\n  7 -> 24 [label=\"output\"]\n  25[label=\"FastQC\"]\n  10 -> 25 [label=\"fastq_out\"]\n  26[label=\"Map with BWA\"]\n  10 -> 26 [label=\"fastq_out\"]\n  27[label=\"FastQC\"]\n  12 -> 27 [label=\"fastq_out\"]\n  28[label=\"Map with BWA\"]\n  12 -> 28 [label=\"fastq_out\"]\n  29[label=\"FastQC\"]\n  14 -> 29 [label=\"fastq_out\"]\n  30[label=\"Map with BWA\"]\n  14 -> 30 [label=\"fastq_out\"]\n  31[label=\"FastQC\"]\n  16 -> 31 [label=\"fastq_out\"]\n  32[label=\"Map with BWA\"]\n  16 -> 32 [label=\"fastq_out\"]\n  33[label=\"FastQC\"]\n  18 -> 33 [label=\"fastq_out\"]\n  34[label=\"Map with BWA\"]\n  18 -> 34 [label=\"fastq_out\"]\n  35[label=\"FastQC\"]\n  20 -> 35 [label=\"fastq_out\"]\n  36[label=\"Map with BWA\"]\n  20 -> 36 [label=\"fastq_out\"]\n  37[label=\"FastQC\"]\n  22 -> 37 [label=\"fastq_out\"]\n  38[label=\"Map with BWA\"]\n  22 -> 38 [label=\"fastq_out\"]\n  39[label=\"FastQC\"]\n  24 -> 39 [label=\"fastq_out\"]\n  40[label=\"Map with BWA\"]\n  24 -> 40 [label=\"fastq_out\"]\n  41[label=\"Samtools idxstats\"]\n  26 -> 41 [label=\"bam_output\"]\n  42[label=\"Samtools idxstats\"]\n  28 -> 42 [label=\"bam_output\"]\n  43[label=\"Samtools idxstats\"]\n  30 -> 43 [label=\"bam_output\"]\n  44[label=\"bamCompare\"]\n  30 -> 44 [label=\"bam_output\"]\n  26 -> 44 [label=\"bam_output\"]\n  45[label=\"Samtools idxstats\"]\n  32 -> 45 [label=\"bam_output\"]\n  46[label=\"plotFingerprint\"]\n  26 -> 46 [label=\"bam_output\"]\n  28 -> 46 [label=\"bam_output\"]\n  30 -> 46 [label=\"bam_output\"]\n  32 -> 46 [label=\"bam_output\"]\n  47[label=\"MACS2 callpeak\"]\n  26 -> 47 [label=\"bam_output\"]\n  28 -> 47 [label=\"bam_output\"]\n  30 -> 47 [label=\"bam_output\"]\n  32 -> 47 [label=\"bam_output\"]\n  48[label=\"bamCompare\"]\n  32 -> 48 [label=\"bam_output\"]\n  28 -> 48 [label=\"bam_output\"]\n  49[label=\"Samtools idxstats\"]\n  34 -> 49 [label=\"bam_output\"]\n  50[label=\"Samtools idxstats\"]\n  36 -> 50 [label=\"bam_output\"]\n  51[label=\"Samtools idxstats\"]\n  38 -> 51 [label=\"bam_output\"]\n  52[label=\"bamCompare\"]\n  38 -> 52 [label=\"bam_output\"]\n  34 -> 52 [label=\"bam_output\"]\n  53[label=\"Samtools idxstats\"]\n  40 -> 53 [label=\"bam_output\"]\n  54[label=\"multiBamSummary\"]\n  26 -> 54 [label=\"bam_output\"]\n  28 -> 54 [label=\"bam_output\"]\n  30 -> 54 [label=\"bam_output\"]\n  32 -> 54 [label=\"bam_output\"]\n  34 -> 54 [label=\"bam_output\"]\n  36 -> 54 [label=\"bam_output\"]\n  38 -> 54 [label=\"bam_output\"]\n  40 -> 54 [label=\"bam_output\"]\n  55[label=\"plotFingerprint\"]\n  34 -> 55 [label=\"bam_output\"]\n  36 -> 55 [label=\"bam_output\"]\n  38 -> 55 [label=\"bam_output\"]\n  40 -> 55 [label=\"bam_output\"]\n  56[label=\"MACS2 callpeak\"]\n  34 -> 56 [label=\"bam_output\"]\n  36 -> 56 [label=\"bam_output\"]\n  38 -> 56 [label=\"bam_output\"]\n  40 -> 56 [label=\"bam_output\"]\n  57[label=\"bamCompare\"]\n  40 -> 57 [label=\"bam_output\"]\n  36 -> 57 [label=\"bam_output\"]\n  58[label=\"computeMatrix\"]\n  44 -> 58 [label=\"outFileName\"]\n  48 -> 58 [label=\"outFileName\"]\n  47 -> 58 [label=\"output_narrowpeaks\"]\n  59[label=\"plotCorrelation\"]\n  54 -> 59 [label=\"outFile\"]\n  60[label=\"bedtools Intersect intervals\"]\n  47 -> 60 [label=\"output_narrowpeaks\"]\n  56 -> 60 [label=\"output_narrowpeaks\"]\n  k96d67c9c0da44ecab6d7706296cbcc09[color=lightseagreen,label=\"Output\\noutput_overlapping_peaks\"]\n  60 -> k96d67c9c0da44ecab6d7706296cbcc09\n  61[label=\"bedtools Intersect intervals\"]\n  47 -> 61 [label=\"output_narrowpeaks\"]\n  56 -> 61 [label=\"output_narrowpeaks\"]\n  kf116a49ab76448bf86d976678e0dfe19[color=lightseagreen,label=\"Output\\noutput_g1e_peaks\"]\n  61 -> kf116a49ab76448bf86d976678e0dfe19\n  62[label=\"bedtools Intersect intervals\"]\n  56 -> 62 [label=\"output_narrowpeaks\"]\n  47 -> 62 [label=\"output_narrowpeaks\"]\n  kdde4d5a1e044435aac53d983aa7fbc95[color=lightseagreen,label=\"Output\\noutput_megakaryocyte_peaks\"]\n  62 -> kdde4d5a1e044435aac53d983aa7fbc95\n  63[label=\"computeMatrix\"]\n  52 -> 63 [label=\"outFileName\"]\n  57 -> 63 [label=\"outFileName\"]\n  56 -> 63 [label=\"output_narrowpeaks\"]\n  64[label=\"plotHeatmap\"]\n  58 -> 64 [label=\"outFileName\"]\n  65[label=\"plotHeatmap\"]\n  63 -> 65 [label=\"outFileName\"]\n}",
+          "modified": "2026-09-07 13:15:22 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  ecbe0bd5-0673-4020-9b31-2766327b2a24[\"Output\\noutput_overlapping_peaks\"];\n  60 --> ecbe0bd5-0673-4020-9b31-2766327b2a24;\n  style ecbe0bd5-0673-4020-9b31-2766327b2a24 stroke:#2c3143,stroke-width:4px;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  fab5213e-110e-4d43-94b8-7b13266e8957[\"Output\\noutput_g1e_peaks\"];\n  61 --> fab5213e-110e-4d43-94b8-7b13266e8957;\n  style fab5213e-110e-4d43-94b8-7b13266e8957 stroke:#2c3143,stroke-width:4px;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  d866d64e-f409-44bf-91c5-793a8b54ac6c[\"Output\\noutput_megakaryocyte_peaks\"];\n  62 --> d866d64e-f409-44bf-91c5-793a8b54ac6c;\n  style d866d64e-f409-44bf-91c5-793a8b54ac6c stroke:#2c3143,stroke-width:4px;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Trimmomatic\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Trimmomatic\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  2 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"Trimmomatic\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"FastQC\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"Trimmomatic\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"FastQC\"]\n  5 -> 19 [label=\"output\"]\n  20[label=\"Trimmomatic\"]\n  5 -> 20 [label=\"output\"]\n  21[label=\"FastQC\"]\n  6 -> 21 [label=\"output\"]\n  22[label=\"Trimmomatic\"]\n  6 -> 22 [label=\"output\"]\n  23[label=\"FastQC\"]\n  7 -> 23 [label=\"output\"]\n  24[label=\"Trimmomatic\"]\n  7 -> 24 [label=\"output\"]\n  25[label=\"FastQC\"]\n  10 -> 25 [label=\"fastq_out\"]\n  26[label=\"Map with BWA\"]\n  10 -> 26 [label=\"fastq_out\"]\n  27[label=\"FastQC\"]\n  12 -> 27 [label=\"fastq_out\"]\n  28[label=\"Map with BWA\"]\n  12 -> 28 [label=\"fastq_out\"]\n  29[label=\"FastQC\"]\n  14 -> 29 [label=\"fastq_out\"]\n  30[label=\"Map with BWA\"]\n  14 -> 30 [label=\"fastq_out\"]\n  31[label=\"FastQC\"]\n  16 -> 31 [label=\"fastq_out\"]\n  32[label=\"Map with BWA\"]\n  16 -> 32 [label=\"fastq_out\"]\n  33[label=\"FastQC\"]\n  18 -> 33 [label=\"fastq_out\"]\n  34[label=\"Map with BWA\"]\n  18 -> 34 [label=\"fastq_out\"]\n  35[label=\"FastQC\"]\n  20 -> 35 [label=\"fastq_out\"]\n  36[label=\"Map with BWA\"]\n  20 -> 36 [label=\"fastq_out\"]\n  37[label=\"FastQC\"]\n  22 -> 37 [label=\"fastq_out\"]\n  38[label=\"Map with BWA\"]\n  22 -> 38 [label=\"fastq_out\"]\n  39[label=\"FastQC\"]\n  24 -> 39 [label=\"fastq_out\"]\n  40[label=\"Map with BWA\"]\n  24 -> 40 [label=\"fastq_out\"]\n  41[label=\"Samtools idxstats\"]\n  26 -> 41 [label=\"bam_output\"]\n  42[label=\"Samtools idxstats\"]\n  28 -> 42 [label=\"bam_output\"]\n  43[label=\"Samtools idxstats\"]\n  30 -> 43 [label=\"bam_output\"]\n  44[label=\"bamCompare\"]\n  30 -> 44 [label=\"bam_output\"]\n  26 -> 44 [label=\"bam_output\"]\n  45[label=\"Samtools idxstats\"]\n  32 -> 45 [label=\"bam_output\"]\n  46[label=\"plotFingerprint\"]\n  26 -> 46 [label=\"bam_output\"]\n  28 -> 46 [label=\"bam_output\"]\n  30 -> 46 [label=\"bam_output\"]\n  32 -> 46 [label=\"bam_output\"]\n  47[label=\"MACS2 callpeak\"]\n  26 -> 47 [label=\"bam_output\"]\n  28 -> 47 [label=\"bam_output\"]\n  30 -> 47 [label=\"bam_output\"]\n  32 -> 47 [label=\"bam_output\"]\n  48[label=\"bamCompare\"]\n  32 -> 48 [label=\"bam_output\"]\n  28 -> 48 [label=\"bam_output\"]\n  49[label=\"Samtools idxstats\"]\n  34 -> 49 [label=\"bam_output\"]\n  50[label=\"Samtools idxstats\"]\n  36 -> 50 [label=\"bam_output\"]\n  51[label=\"Samtools idxstats\"]\n  38 -> 51 [label=\"bam_output\"]\n  52[label=\"bamCompare\"]\n  38 -> 52 [label=\"bam_output\"]\n  34 -> 52 [label=\"bam_output\"]\n  53[label=\"Samtools idxstats\"]\n  40 -> 53 [label=\"bam_output\"]\n  54[label=\"multiBamSummary\"]\n  26 -> 54 [label=\"bam_output\"]\n  28 -> 54 [label=\"bam_output\"]\n  30 -> 54 [label=\"bam_output\"]\n  32 -> 54 [label=\"bam_output\"]\n  34 -> 54 [label=\"bam_output\"]\n  36 -> 54 [label=\"bam_output\"]\n  38 -> 54 [label=\"bam_output\"]\n  40 -> 54 [label=\"bam_output\"]\n  55[label=\"plotFingerprint\"]\n  34 -> 55 [label=\"bam_output\"]\n  36 -> 55 [label=\"bam_output\"]\n  38 -> 55 [label=\"bam_output\"]\n  40 -> 55 [label=\"bam_output\"]\n  56[label=\"MACS2 callpeak\"]\n  34 -> 56 [label=\"bam_output\"]\n  36 -> 56 [label=\"bam_output\"]\n  38 -> 56 [label=\"bam_output\"]\n  40 -> 56 [label=\"bam_output\"]\n  57[label=\"bamCompare\"]\n  40 -> 57 [label=\"bam_output\"]\n  36 -> 57 [label=\"bam_output\"]\n  58[label=\"computeMatrix\"]\n  44 -> 58 [label=\"outFileName\"]\n  48 -> 58 [label=\"outFileName\"]\n  47 -> 58 [label=\"output_narrowpeaks\"]\n  59[label=\"plotCorrelation\"]\n  54 -> 59 [label=\"outFile\"]\n  60[label=\"bedtools Intersect intervals\"]\n  47 -> 60 [label=\"output_narrowpeaks\"]\n  56 -> 60 [label=\"output_narrowpeaks\"]\n  kecbe0bd5067340209b312766327b2a24[color=lightseagreen,label=\"Output\\noutput_overlapping_peaks\"]\n  60 -> kecbe0bd5067340209b312766327b2a24\n  61[label=\"bedtools Intersect intervals\"]\n  47 -> 61 [label=\"output_narrowpeaks\"]\n  56 -> 61 [label=\"output_narrowpeaks\"]\n  kfab5213e110e4d4394b87b13266e8957[color=lightseagreen,label=\"Output\\noutput_g1e_peaks\"]\n  61 -> kfab5213e110e4d4394b87b13266e8957\n  62[label=\"bedtools Intersect intervals\"]\n  56 -> 62 [label=\"output_narrowpeaks\"]\n  47 -> 62 [label=\"output_narrowpeaks\"]\n  kd866d64ef40944bf91c5793a8b54ac6c[color=lightseagreen,label=\"Output\\noutput_megakaryocyte_peaks\"]\n  62 -> kd866d64ef40944bf91c5793a8b54ac6c\n  63[label=\"computeMatrix\"]\n  52 -> 63 [label=\"outFileName\"]\n  57 -> 63 [label=\"outFileName\"]\n  56 -> 63 [label=\"output_narrowpeaks\"]\n  64[label=\"plotHeatmap\"]\n  58 -> 64 [label=\"outFileName\"]\n  65[label=\"plotHeatmap\"]\n  63 -> 65 [label=\"outFileName\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0",
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0",
@@ -13117,7 +13482,7 @@
                 {
                   "output_name": "output",
                   "label": "output_overlapping_peaks",
-                  "uuid": "96d67c9c-0da4-4eca-b6d7-706296cbcc09"
+                  "uuid": "ecbe0bd5-0673-4020-9b31-2766327b2a24"
                 }
               ]
             },
@@ -13165,7 +13530,7 @@
                 {
                   "output_name": "output",
                   "label": "output_g1e_peaks",
-                  "uuid": "f116a49a-b764-48bf-86d9-76678e0dfe19"
+                  "uuid": "fab5213e-110e-4d43-94b8-7b13266e8957"
                 }
               ]
             },
@@ -13213,7 +13578,7 @@
                 {
                   "output_name": "output",
                   "label": "output_megakaryocyte_peaks",
-                  "uuid": "dde4d5a1-e044-435a-ac53-d983aa7fbc95"
+                  "uuid": "d866d64e-f409-44bf-91c5-793a8b54ac6c"
                 }
               ]
             }
@@ -13275,6 +13640,11 @@
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
             "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.eu",
@@ -13388,6 +13758,11 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -13511,6 +13886,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.eu"
@@ -13563,9 +13946,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.4+galaxy0",
                   "3.5.1.0.0",
-                  "3.2.0.0.0"
+                  "3.2.0.0.0",
+                  "3.5.4+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13632,6 +14015,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.eu"
@@ -13684,7 +14075,135 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
+                  "3.5.1.0.0",
+                  "3.5.4+galaxy0",
+                  "3.1.2.0.0"
+                ],
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0"
+                ],
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "exact",
+                "version": "3.3.2.0.0",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "3.3.2.0.0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "inexact",
+                "versions": [
                   "3.5.4+galaxy0",
                   "3.5.1.0.0"
                 ],
@@ -13753,124 +14272,12 @@
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "3.3.2.0.0"
-          },
-          {
-            "id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mbac.gmu.edu:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.5.4+galaxy0"
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
                 ],
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.hyphy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.5.4+galaxy0"
-                ],
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "exact",
-                "version": "3.3.2.0.0",
-                "server": "https://usegalaxy.be/"
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -13926,8 +14333,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13992,6 +14399,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -14046,9 +14461,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "3.5.4+galaxy0",
                   "3.1.2.0.0",
-                  "3.5.1.0.0",
-                  "3.5.4+galaxy0"
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14113,6 +14528,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -14236,6 +14659,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.eu"
@@ -14288,9 +14719,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
+                  "3.1.2.0.1",
                   "3.5.4+galaxy0",
-                  "3.1.2.0.1"
+                  "3.5.1.0.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14358,6 +14789,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -14453,8 +14892,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.7.18",
                   "0.7.19",
+                  "0.7.18",
                   "0.7.17.5"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -14481,6 +14920,11 @@
                 "state": "exact",
                 "version": "0.7.17.4",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.7.17.4",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -14610,6 +15054,22 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0",
+                  "0.74+galaxy1",
+                  "0.65",
+                  "0.69",
+                  "0.68",
+                  "0.52",
+                  "0.67",
+                  "0.62",
+                  "0.63",
+                  "0.64"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "0.72+galaxy1",
                 "server": "https://usegalaxy.eu"
@@ -14662,10 +15122,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
+                  "2.0.8",
                   "2.0.7",
-                  "2.0.8"
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14736,6 +15196,17 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "2.0.5",
+                  "2.0.8",
+                  "2.0.7",
+                  "2.0.4",
+                  "2.0.6"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.3",
                 "server": "https://usegalaxy.eu"
@@ -14788,9 +15259,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.27.1",
+                  "2.31.1+galaxy0",
                   "2.27.0.2",
-                  "2.31.1+galaxy0"
+                  "2.27.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14843,8 +15314,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.31.1+galaxy0",
-                  "2.30.0",
-                  "2.30.0+galaxy1"
+                  "2.30.0+galaxy1",
+                  "2.30.0"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -14865,6 +15336,11 @@
                 "state": "exact",
                 "version": "2.29.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.29.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -14923,9 +15399,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.1.1.20160309.5",
                   "2.2.7.1+galaxy0",
-                  "2.2.9.1+galaxy0",
-                  "2.1.1.20160309.5"
+                  "2.2.9.1+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14992,6 +15468,14 @@
                 "state": "exact",
                 "version": "2.1.1.20160309.6",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.2.7.1+galaxy0",
+                  "2.2.9.1+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -15097,8 +15581,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.39+galaxy2",
-                  "0.38.1"
+                  "0.38.1",
+                  "0.39+galaxy2"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -15130,15 +15614,28 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.39+galaxy0",
-                  "0.39+galaxy2",
                   "0.38.1",
+                  "0.39+galaxy2",
                   "0.36.4",
-                  "0.36.5",
                   "0.32.3",
-                  "0.32.1",
                   "0.32.2",
-                  "0.36.0"
+                  "0.36.0",
+                  "0.32.1"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.39+galaxy0",
+                  "0.38.1",
+                  "0.39+galaxy2",
+                  "0.36.4",
+                  "0.32.3",
+                  "0.36.5",
+                  "0.32.2",
+                  "0.36.0",
+                  "0.32.1"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -15741,7 +16238,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nHiC_S2_1p_10min_lowU_R1.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nHiC_S2_1p_10min_lowU_R2.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\ndm3_genome.fasta\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nGM12878_25kb_cooler_coarsen.cool\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\ncorrected_contact_matrix_dm3_large.h5\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nH3K36me3.bw\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nH3K27me3.bw\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nH4K16ac.bw\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\ndm3_genes.bed\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"Bowtie2\"];\n  0 -->|output| 9;\n  10[\"Bowtie2\"];\n  1 -->|output| 10;\n  11[\"hicFindRestSite\"];\n  2 -->|output| 11;\n  12[\"hicInfo\"];\n  3 -->|output| 12;\n  13[\"hicDetectLoops\"];\n  3 -->|output| 13;\n  14[\"hicInfo\"];\n  4 -->|output| 14;\n  15[\"hicPCA\"];\n  4 -->|output| 15;\n  16[\"hicFindTADs\"];\n  4 -->|output| 16;\n  17[\"hicBuildMatrix\"];\n  11 -->|restrictionSites| 17;\n  9 -->|output| 17;\n  10 -->|output| 17;\n  18[\"hicPlotMatrix\"];\n  13 -->|output_loops| 18;\n  3 -->|output| 18;\n  19[\"hicPlotMatrix\"];\n  15 -->|pearson_outfile| 19;\n  15 -->|pca1| 19;\n  20[\"hicPlotMatrix\"];\n  15 -->|pearson_outfile| 20;\n  15 -->|pca2| 20;\n  21[\"pyGenomeTracks\"];\n  16 -->|domains| 21;\n  4 -->|output| 21;\n  16 -->|tad_score| 21;\n  15 -->|pca1| 21;\n  15 -->|pca2| 21;\n  5 -->|output| 21;\n  6 -->|output| 21;\n  7 -->|output| 21;\n  8 -->|output| 21;\n  16 -->|domains| 21;\n  22[\"hicCorrectMatrix\"];\n  17 -->|outFileName| 22;\n  23[\"hicMergeMatrixBins\"];\n  17 -->|outFileName| 23;\n  24[\"hicCorrectMatrix\"];\n  17 -->|outFileName| 24;\n  25[\"hicPlotMatrix\"];\n  22 -->|outFileName| 25;\n  26[\"hicPlotMatrix\"];\n  23 -->|outFileName| 26;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nHiC_S2_1p_10min_lowU_R1.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nHiC_S2_1p_10min_lowU_R2.fastq.gz\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\ndm3_genome.fasta\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nGM12878_25kb_cooler_coarsen.cool\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\ncorrected_contact_matrix_dm3_large.h5\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nH3K36me3.bw\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nH3K27me3.bw\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nH4K16ac.bw\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\ndm3_genes.bed\"]\n  9[label=\"Bowtie2\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Bowtie2\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"hicFindRestSite\"]\n  2 -> 11 [label=\"output\"]\n  12[label=\"hicInfo\"]\n  3 -> 12 [label=\"output\"]\n  13[label=\"hicDetectLoops\"]\n  3 -> 13 [label=\"output\"]\n  14[label=\"hicInfo\"]\n  4 -> 14 [label=\"output\"]\n  15[label=\"hicPCA\"]\n  4 -> 15 [label=\"output\"]\n  16[label=\"hicFindTADs\"]\n  4 -> 16 [label=\"output\"]\n  17[label=\"hicBuildMatrix\"]\n  11 -> 17 [label=\"restrictionSites\"]\n  9 -> 17 [label=\"output\"]\n  10 -> 17 [label=\"output\"]\n  18[label=\"hicPlotMatrix\"]\n  13 -> 18 [label=\"output_loops\"]\n  3 -> 18 [label=\"output\"]\n  19[label=\"hicPlotMatrix\"]\n  15 -> 19 [label=\"pearson_outfile\"]\n  15 -> 19 [label=\"pca1\"]\n  20[label=\"hicPlotMatrix\"]\n  15 -> 20 [label=\"pearson_outfile\"]\n  15 -> 20 [label=\"pca2\"]\n  21[label=\"pyGenomeTracks\"]\n  16 -> 21 [label=\"domains\"]\n  4 -> 21 [label=\"output\"]\n  16 -> 21 [label=\"tad_score\"]\n  15 -> 21 [label=\"pca1\"]\n  15 -> 21 [label=\"pca2\"]\n  5 -> 21 [label=\"output\"]\n  6 -> 21 [label=\"output\"]\n  7 -> 21 [label=\"output\"]\n  8 -> 21 [label=\"output\"]\n  16 -> 21 [label=\"domains\"]\n  22[label=\"hicCorrectMatrix\"]\n  17 -> 22 [label=\"outFileName\"]\n  23[label=\"hicMergeMatrixBins\"]\n  17 -> 23 [label=\"outFileName\"]\n  24[label=\"hicCorrectMatrix\"]\n  17 -> 24 [label=\"outFileName\"]\n  25[label=\"hicPlotMatrix\"]\n  22 -> 25 [label=\"outFileName\"]\n  26[label=\"hicPlotMatrix\"]\n  23 -> 26 [label=\"outFileName\"]\n}",
           "workflow_tools": [
@@ -16156,6 +16653,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -16208,8 +16710,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy1",
-                  "2.1.4.0"
+                  "2.1.4.0",
+                  "3.6+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16248,8 +16750,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
-                  "3.7.2+galaxy0"
+                  "3.7.2+galaxy0",
+                  "3.7.6+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -16276,6 +16778,10 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.4.3.0",
                 "server": "https://usegalaxy.eu"
@@ -16283,10 +16789,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
                   "3.7.2+galaxy0",
-                  "3.7.5+galaxy0",
+                  "3.7.6+galaxy1",
                   "3.7.6+galaxy2",
+                  "3.7.5+galaxy0",
                   "3.7.5+galaxy1"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -16299,10 +16805,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
                   "3.7.2+galaxy0",
-                  "3.7.5+galaxy0",
+                  "3.7.6+galaxy1",
                   "3.7.6+galaxy2",
+                  "3.7.5+galaxy0",
                   "3.7.5+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
@@ -16340,8 +16846,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy1",
-                  "2.1.4.0"
+                  "2.1.4.0",
+                  "3.6+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16403,6 +16909,10 @@
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -16527,6 +17037,11 @@
               {
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -16638,6 +17153,11 @@
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -16756,6 +17276,11 @@
               {
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -16765,8 +17290,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3.0",
-                  "3.6+galaxy0"
+                  "3.6+galaxy0",
+                  "3.4.3.0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -16867,6 +17392,11 @@
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -16985,6 +17515,11 @@
               {
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -16994,8 +17529,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy0",
-                  "3.4.3.0"
+                  "3.4.3.0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -17100,6 +17635,11 @@
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -17222,6 +17762,11 @@
               {
                 "state": "exact",
                 "version": "3.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -17231,8 +17776,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy0",
-                  "3.4.3.0"
+                  "3.4.3.0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -17241,8 +17786,8 @@
                 "versions": [
                   "3.7.2+galaxy0",
                   "3.7.6+galaxy1",
-                  "3.7.5+galaxy0",
-                  "3.7.5+galaxy1"
+                  "3.7.5+galaxy1",
+                  "3.7.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -17342,6 +17887,11 @@
               {
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -17351,8 +17901,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy0",
-                  "3.4.3.0"
+                  "3.4.3.0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -17394,8 +17944,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.1.4.0",
-                  "3.6+galaxy1"
+                  "3.6+galaxy1",
+                  "2.1.4.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -17434,8 +17984,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
-                  "3.7.2+galaxy0"
+                  "3.7.2+galaxy0",
+                  "3.7.6+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -17462,6 +18012,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.6+galaxy1",
+                  "3.7.6+galaxy1"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.4.3.0",
                 "server": "https://usegalaxy.eu"
@@ -17469,8 +18027,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
                   "3.7.2+galaxy0",
+                  "3.7.6+galaxy1",
                   "3.7.5+galaxy1",
                   "3.7.5+galaxy0"
                 ],
@@ -17484,8 +18042,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.7.6+galaxy1",
                   "3.7.2+galaxy0",
+                  "3.7.6+galaxy1",
                   "3.7.5+galaxy1",
                   "3.7.5+galaxy0"
                 ],
@@ -17524,8 +18082,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.1.4.0",
-                  "3.6+galaxy1"
+                  "3.6+galaxy1",
+                  "2.1.4.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -17591,6 +18149,11 @@
               {
                 "state": "exact",
                 "version": "3.7.6+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.7.6+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -17601,8 +18164,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.6+galaxy0",
-                  "3.4.3.0"
+                  "3.4.3.0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -17709,6 +18272,11 @@
                 "state": "exact",
                 "version": "2.5.3+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.5.3+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -17823,6 +18391,11 @@
                 "state": "exact",
                 "version": "3.8+galaxy2",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.8+galaxy2",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -18650,7 +19223,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGATA1 ChIP-Seq peaks\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nI certify that I am not using this workflow for commercial purposes\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"Trim Galore!\"];\n  0 -->|output| 3;\n  4[\"Flatten collection\"];\n  0 -->|output| 4;\n  5[\"Bowtie2\"];\n  3 -->|trimmed_reads_paired_collection| 5;\n  6[\"Falco\"];\n  4 -->|output| 6;\n  7[\"plotFingerprint\"];\n  5 -->|output| 7;\n  8[\"Filter BAM\"];\n  5 -->|output| 8;\n  9[\"MultiQC\"];\n  6 -->|text_file| 9;\n  10[\"MarkDuplicates\"];\n  8 -->|out_file1| 10;\n  11[\"Select\"];\n  10 -->|metrics_file| 11;\n  12[\"Falco\"];\n  10 -->|outFile| 12;\n  13[\"bedtools BAM to BED\"];\n  10 -->|outFile| 13;\n  14[\"Paired-end histogram\"];\n  10 -->|outFile| 14;\n  15[\"Transpose\"];\n  11 -->|out_file1| 15;\n  16[\"MultiQC\"];\n  12 -->|text_file| 16;\n  17[\"MACS2 callpeak\"];\n  13 -->|output| 17;\n  18[\"Extract dataset\"];\n  17 -->|output_narrowpeaks| 18;\n  19[\"Extract dataset\"];\n  17 -->|output_narrowpeaks| 19;\n  20[\"Wig/BedGraph-to-bigWig\"];\n  17 -->|output_treat_pileup| 20;\n  21[\"bedtools Intersect intervals\"];\n  18 -->|output| 21;\n  19 -->|output| 21;\n  22[\"bedtools Intersect intervals\"];\n  21 -->|output| 22;\n  1 -->|output| 22;\n  23[\"Extract Genomic DNA\"];\n  22 -->|output| 23;\n  24[\"computeMatrix\"];\n  20 -->|out_file1| 24;\n  22 -->|output| 24;\n  25[\"MEME-ChIP\"];\n  23 -->|output| 25;\n  2 -->|output| 25;\n  fbd5951d-3055-40c3-a14f-340a54da4924[\"Output\\noutput\"];\n  25 --> fbd5951d-3055-40c3-a14f-340a54da4924;\n  style fbd5951d-3055-40c3-a14f-340a54da4924 stroke:#2c3143,stroke-width:4px;\n  26[\"plotHeatmap\"];\n  24 -->|outFileName| 26;\n  7f06a448-0145-4e07-890b-6409de321123[\"Output\\noutFileName\"];\n  26 --> 7f06a448-0145-4e07-890b-6409de321123;\n  style 7f06a448-0145-4e07-890b-6409de321123 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGATA1 ChIP-Seq peaks\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nI certify that I am not using this workflow for commercial purposes\"]\n  3[label=\"Trim Galore!\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Flatten collection\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Bowtie2\"]\n  3 -> 5 [label=\"trimmed_reads_paired_collection\"]\n  6[label=\"Falco\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"plotFingerprint\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Filter BAM\"]\n  5 -> 8 [label=\"output\"]\n  9[label=\"MultiQC\"]\n  6 -> 9 [label=\"text_file\"]\n  10[label=\"MarkDuplicates\"]\n  8 -> 10 [label=\"out_file1\"]\n  11[label=\"Select\"]\n  10 -> 11 [label=\"metrics_file\"]\n  12[label=\"Falco\"]\n  10 -> 12 [label=\"outFile\"]\n  13[label=\"bedtools BAM to BED\"]\n  10 -> 13 [label=\"outFile\"]\n  14[label=\"Paired-end histogram\"]\n  10 -> 14 [label=\"outFile\"]\n  15[label=\"Transpose\"]\n  11 -> 15 [label=\"out_file1\"]\n  16[label=\"MultiQC\"]\n  12 -> 16 [label=\"text_file\"]\n  17[label=\"MACS2 callpeak\"]\n  13 -> 17 [label=\"output\"]\n  18[label=\"Extract dataset\"]\n  17 -> 18 [label=\"output_narrowpeaks\"]\n  19[label=\"Extract dataset\"]\n  17 -> 19 [label=\"output_narrowpeaks\"]\n  20[label=\"Wig/BedGraph-to-bigWig\"]\n  17 -> 20 [label=\"output_treat_pileup\"]\n  21[label=\"bedtools Intersect intervals\"]\n  18 -> 21 [label=\"output\"]\n  19 -> 21 [label=\"output\"]\n  22[label=\"bedtools Intersect intervals\"]\n  21 -> 22 [label=\"output\"]\n  1 -> 22 [label=\"output\"]\n  23[label=\"Extract Genomic DNA\"]\n  22 -> 23 [label=\"output\"]\n  24[label=\"computeMatrix\"]\n  20 -> 24 [label=\"out_file1\"]\n  22 -> 24 [label=\"output\"]\n  25[label=\"MEME-ChIP\"]\n  23 -> 25 [label=\"output\"]\n  2 -> 25 [label=\"output\"]\n  kfbd5951d305540c3a14f340a54da4924[color=lightseagreen,label=\"Output\\noutput\"]\n  25 -> kfbd5951d305540c3a14f340a54da4924\n  26[label=\"plotHeatmap\"]\n  24 -> 26 [label=\"outFileName\"]\n  k7f06a44801454e07890b6409de321123[color=lightseagreen,label=\"Output\\noutFileName\"]\n  26 -> k7f06a44801454e07890b6409de321123\n}",
           "workflow_tools": [
@@ -18997,6 +19570,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -19108,6 +19686,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -19214,6 +19796,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -19317,6 +19903,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -19428,6 +20018,11 @@
                 "state": "exact",
                 "version": "3.5.4+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -19550,6 +20145,11 @@
               {
                 "state": "exact",
                 "version": "3.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -19603,9 +20203,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
+                  "3.1.2.0.1",
                   "3.5.4+galaxy0",
-                  "3.1.2.0.1"
+                  "3.5.1.0.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -19673,6 +20273,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -19793,6 +20401,11 @@
               {
                 "state": "exact",
                 "version": "3.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -19846,9 +20459,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.4.3.1",
                   "0.6.10+galaxy0",
-                  "0.6.7+galaxy0",
-                  "0.4.3.1"
+                  "0.6.7+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -19922,6 +20535,11 @@
               {
                 "state": "exact",
                 "version": "0.6.7+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.6.7+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -19932,8 +20550,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.6.7+galaxy0",
                   "0.4.3.1",
+                  "0.6.7+galaxy0",
                   "0.6.3"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -20042,6 +20660,11 @@
                 "state": "exact",
                 "version": "2.5.2+galaxy2",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.5.2+galaxy2",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -20168,6 +20791,11 @@
               {
                 "state": "exact",
                 "version": "2.5.3+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.5.3+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -20279,6 +20907,11 @@
                 "state": "exact",
                 "version": "3.1.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.1.1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -20402,6 +21035,11 @@
               {
                 "state": "exact",
                 "version": "2.31.1+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.31.1+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -20412,9 +21050,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0",
-                  "2.30.0+galaxy2",
                   "2.30.0+galaxy1",
+                  "2.30.0+galaxy2",
+                  "2.30.0",
                   "2.29.2",
                   "2.19.0"
                 ],
@@ -20525,6 +21163,11 @@
               {
                 "state": "exact",
                 "version": "2.31.1+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.31.1+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -20588,8 +21231,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy0",
                   "1.1.0",
+                  "1.9+galaxy0",
                   "1.9+galaxy1"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -20644,6 +21287,11 @@
                 "state": "exact",
                 "version": "1.8+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.8+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -20767,6 +21415,11 @@
               {
                 "state": "exact",
                 "version": "3.0.3+galaxy3",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.0.3+galaxy3",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -20884,6 +21537,11 @@
               {
                 "state": "exact",
                 "version": "1.2.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.2.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -20991,6 +21649,11 @@
                 "state": "exact",
                 "version": "2.0.3",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.0.3",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -21105,6 +21768,11 @@
                 "state": "exact",
                 "version": "2.2.9.1+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.2.9.1+galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -21224,6 +21892,11 @@
               {
                 "state": "exact",
                 "version": "4.11.2+galaxy1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "4.11.2+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -21282,9 +21955,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "1.7",
                   "1.27+galaxy4",
                   "1.11+galaxy1",
-                  "1.7",
                   "1.33+galaxy3",
                   "1.35+galaxy1"
                 ],
@@ -21347,6 +22020,11 @@
               {
                 "state": "exact",
                 "version": "1.27+galaxy3",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.27+galaxy3",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -21359,10 +22037,10 @@
                 "versions": [
                   "1.7",
                   "1.11+galaxy0",
-                  "1.9+galaxy1",
                   "1.8+galaxy1",
-                  "1.7.1",
+                  "1.9+galaxy1",
                   "1.8+galaxy0",
+                  "1.7.1",
                   "1.9",
                   "1.8+galaxy2"
                 ],
@@ -21465,6 +22143,11 @@
                 "state": "exact",
                 "version": "1.0.2",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.0.2",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -21574,6 +22257,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "missing",
@@ -22296,7 +22983,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-07 08:16:35 +0000",
+          "modified": "2026-09-07 13:15:22 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Paired End Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nctcf peaks\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nbed file with genes\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ATAC remove nextera adapters with cutadapt\"];\n  0 -->|output| 3;\n  d197ec94-1dec-41f4-b70f-7b350a07bdf7[\"Output\\nreport\"];\n  3 --> d197ec94-1dec-41f4-b70f-7b350a07bdf7;\n  style d197ec94-1dec-41f4-b70f-7b350a07bdf7 stroke:#2c3143,stroke-width:4px;\n  4[\"Flatten collection\"];\n  0 -->|output| 4;\n  5[\"Filter\"];\n  1 -->|output| 5;\n  6[\"Bowtie2\"];\n  3 -->|out_pairs| 6;\n  7[\"Flatten collection\"];\n  3 -->|out_pairs| 7;\n  8[\"FastQC\"];\n  4 -->|output| 8;\n  9[\"bedtools Intersect intervals\"];\n  5 -->|out_file1| 9;\n  2 -->|output| 9;\n  10[\"Filter BAM ATAC\"];\n  6 -->|output| 10;\n  11[\"FastQC\"];\n  7 -->|output| 11;\n  12[\"MarkDuplicates\"];\n  10 -->|out_file1| 12;\n  13[\"Paired-end histogram\"];\n  12 -->|outFile| 13;\n  14[\"bedtools BAM to BED\"];\n  12 -->|outFile| 14;\n  15[\"MACS2 callpeak\"];\n  14 -->|output| 15;\n  16[\"Wig/BedGraph-to-bigWig\"];\n  15 -->|output_treat_pileup| 16;\n  17[\"pyGenomeTracks\"];\n  16 -->|out_file1| 17;\n  15 -->|output_narrowpeaks| 17;\n  2 -->|output| 17;\n  1 -->|output| 17;\n  18[\"computeMatrix\"];\n  16 -->|out_file1| 18;\n  2 -->|output| 18;\n  19[\"computeMatrix\"];\n  16 -->|out_file1| 19;\n  9 -->|output| 19;\n  78114e87-4bae-456d-b32b-3e0eed141052[\"Output\\ncomputeMatrix on input dataset(s): Matrix\"];\n  19 --> 78114e87-4bae-456d-b32b-3e0eed141052;\n  style 78114e87-4bae-456d-b32b-3e0eed141052 stroke:#2c3143,stroke-width:4px;\n  20[\"plotHeatmap\"];\n  18 -->|outFileName| 20;\n  21[\"plotHeatmap\"];\n  19 -->|outFileName| 21;\n  67a173a4-2d79-43e7-b3fc-c250022a5c0a[\"Output\\nplotHeatmap on input dataset(s): Image\"];\n  21 --> 67a173a4-2d79-43e7-b3fc-c250022a5c0a;\n  style 67a173a4-2d79-43e7-b3fc-c250022a5c0a stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Paired End Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nctcf peaks\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nbed file with genes\"]\n  3[label=\"ATAC remove nextera adapters with cutadapt\"]\n  0 -> 3 [label=\"output\"]\n  kd197ec941dec41f4b70f7b350a07bdf7[color=lightseagreen,label=\"Output\\nreport\"]\n  3 -> kd197ec941dec41f4b70f7b350a07bdf7\n  4[label=\"Flatten collection\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Filter\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Bowtie2\"]\n  3 -> 6 [label=\"out_pairs\"]\n  7[label=\"Flatten collection\"]\n  3 -> 7 [label=\"out_pairs\"]\n  8[label=\"FastQC\"]\n  4 -> 8 [label=\"output\"]\n  9[label=\"bedtools Intersect intervals\"]\n  5 -> 9 [label=\"out_file1\"]\n  2 -> 9 [label=\"output\"]\n  10[label=\"Filter BAM ATAC\"]\n  6 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  7 -> 11 [label=\"output\"]\n  12[label=\"MarkDuplicates\"]\n  10 -> 12 [label=\"out_file1\"]\n  13[label=\"Paired-end histogram\"]\n  12 -> 13 [label=\"outFile\"]\n  14[label=\"bedtools BAM to BED\"]\n  12 -> 14 [label=\"outFile\"]\n  15[label=\"MACS2 callpeak\"]\n  14 -> 15 [label=\"output\"]\n  16[label=\"Wig/BedGraph-to-bigWig\"]\n  15 -> 16 [label=\"output_treat_pileup\"]\n  17[label=\"pyGenomeTracks\"]\n  16 -> 17 [label=\"out_file1\"]\n  15 -> 17 [label=\"output_narrowpeaks\"]\n  2 -> 17 [label=\"output\"]\n  1 -> 17 [label=\"output\"]\n  18[label=\"computeMatrix\"]\n  16 -> 18 [label=\"out_file1\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"computeMatrix\"]\n  16 -> 19 [label=\"out_file1\"]\n  9 -> 19 [label=\"output\"]\n  k78114e874bae456db32b3e0eed141052[color=lightseagreen,label=\"Output\\ncomputeMatrix on input dataset(s): Matrix\"]\n  19 -> k78114e874bae456db32b3e0eed141052\n  20[label=\"plotHeatmap\"]\n  18 -> 20 [label=\"outFileName\"]\n  21[label=\"plotHeatmap\"]\n  19 -> 21 [label=\"outFileName\"]\n  k67a173a42d7943e7b3fcc250022a5c0a[color=lightseagreen,label=\"Output\\nplotHeatmap on input dataset(s): Image\"]\n  21 -> k67a173a42d7943e7b3fcc250022a5c0a\n}",
           "workflow_tools": [
@@ -23569,6 +24256,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -23680,6 +24372,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -23783,6 +24479,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -23892,6 +24592,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -23998,6 +24702,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -24045,9 +24753,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
+                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
-                  "3.5.1.0.0"
+                  "3.1.2.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -24112,6 +24820,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -24166,9 +24882,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.1",
+                  "3.1.2.0.1",
                   "3.5.4+galaxy0",
-                  "3.1.2.0.1"
+                  "3.5.1.0.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -24236,6 +24952,14 @@
                 "state": "exact",
                 "version": "3.3.2.0.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.5.4+galaxy0",
+                  "3.5.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -24361,6 +25085,11 @@
               {
                 "state": "exact",
                 "version": "1.1.1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -24477,6 +25206,16 @@
                 "state": "exact",
                 "version": "2.4.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.5.2+galaxy3",
+                  "2.5.3+galaxy0",
+                  "2.5.2+galaxy2",
+                  "2.5.2+galaxy1"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -24599,6 +25338,23 @@
                 "state": "exact",
                 "version": "2.4.2+galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.5.4+galaxy0",
+                  "2.5.3+galaxy1",
+                  "2.5.5+galaxy0",
+                  "2.5.0+galaxy0",
+                  "2.3.2.2",
+                  "2.2.6.2",
+                  "0.2",
+                  "2.2.6",
+                  "0.6",
+                  "0.4",
+                  "0.3"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -24725,6 +25481,11 @@
               {
                 "state": "exact",
                 "version": "2.5.4+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.5.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -24735,8 +25496,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.5+galaxy1",
                   "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.5.3+galaxy1",
                   "2.3.4.3+galaxy0",
                   "2.4.5+galaxy0",
@@ -24857,6 +25618,22 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0",
+                  "0.74+galaxy1",
+                  "0.65",
+                  "0.69",
+                  "0.68",
+                  "0.52",
+                  "0.67",
+                  "0.62",
+                  "0.63",
+                  "0.64"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "0.72+galaxy1",
                 "server": "https://usegalaxy.eu"
@@ -24909,9 +25686,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -24964,8 +25741,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -24987,6 +25764,11 @@
                 "state": "exact",
                 "version": "0.74+galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.74+galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -25044,8 +25826,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1.0",
-                  "2.18.2.1"
+                  "2.18.2.1",
+                  "3.1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25114,6 +25896,11 @@
               {
                 "state": "exact",
                 "version": "2.18.2.2",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.18.2.2",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -25164,10 +25951,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
+                  "2.0.8",
                   "2.0.7",
-                  "2.0.8"
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25238,6 +26025,17 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "2.0.5",
+                  "2.0.8",
+                  "2.0.7",
+                  "2.0.4",
+                  "2.0.6"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.3",
                 "server": "https://usegalaxy.eu"
@@ -25291,8 +26089,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.27.0.0",
-                  "2.27.1",
-                  "2.31.1+galaxy0"
+                  "2.31.1+galaxy0",
+                  "2.27.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25367,16 +26165,21 @@
               {
                 "state": "exact",
                 "version": "2.30.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "2.30.0",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
                   "2.31.1+galaxy0",
-                  "2.30.0+galaxy2",
                   "2.30.0+galaxy1",
-                  "2.29.0",
-                  "2.29.2"
+                  "2.30.0+galaxy2",
+                  "2.29.2",
+                  "2.29.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -25423,9 +26226,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.27.1",
+                  "2.31.1+galaxy0",
                   "2.27.0.2",
-                  "2.31.1+galaxy0"
+                  "2.27.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25496,6 +26299,11 @@
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "2.30.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -25550,9 +26358,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.1.1.20160309.5",
                   "2.2.7.1+galaxy0",
-                  "2.2.9.1+galaxy0",
-                  "2.1.1.20160309.5"
+                  "2.2.9.1+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25619,6 +26427,14 @@
                 "state": "exact",
                 "version": "2.1.1.20160309.6",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.2.7.1+galaxy0",
+                  "2.2.9.1+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -25736,6 +26552,11 @@
               {
                 "state": "exact",
                 "version": "1.0.1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.0.1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -25845,6 +26666,14 @@
                 "state": "exact",
                 "version": "3.6",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.9+galaxy0",
+                  "3.8+galaxy2"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -25973,6 +26802,11 @@
               {
                 "state": "exact",
                 "version": "5.1+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "5.1+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -26081,6 +26915,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "missing",
