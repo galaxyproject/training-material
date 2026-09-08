@@ -7,6 +7,8 @@ description: |
 cover-image: assets/images/galaxy_climate.png
 cover-image-alt: Image of the earth surrounded by a bar colors representing Earth's increasing temperatures.
 tags: [Climate, Overview]
+topics:
+  - climate
 
 editorial_board:
 - Marie59

@@ -26,6 +26,8 @@ If you have any questions, you can reach us using the [Matrix chat](https://matr
 
 You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.
 
+New contributors can get started with our [onboarding learning pathway](https://training.galaxyproject.org/training-material/learning-pathways/onboarding-contributing.html).
+
 You can check our [Frequently Asked Questions](https://training.galaxyproject.org/training-material/faq#how-can-i-contribute) and our [dedicated tutorials](https://training.galaxyproject.org/training-material/topics/contributing) for more details.
 
 # How is the training material maintained?

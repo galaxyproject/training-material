@@ -2,6 +2,8 @@
 layout: learning-pathway
 tags: [beginner, ecology]
 type: use
+topics:
+  - ecology
 
 editorial_board:
 - yvanlebras
@@ -9,7 +11,7 @@ editorial_board:
 funding:
 - gallantries
 
-title: Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery
+title: Data analysis and modelling for evidence and hypothesis generation and knowledge discovery
 
 description: |
   This Learning Pathway collects the results of Intellectual Output 4 in the Gallantries Project

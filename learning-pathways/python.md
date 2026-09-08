@@ -4,6 +4,8 @@ title: Introductory Python
 type: use
 description: |
   This is an introductory course of Python, as it was taught in [Avans Hogeschool](https://www.avans.nl/) in the Netherlands.
+topics:
+  - data-science
 
 editorial_board:
 - hexylena

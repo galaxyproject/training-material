@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Pangenome analysis with Roary"
-zenodo_link: "https://doi.org/10.5281/zenodo.21339040"
+zenodo_link: "https://doi.org/10.5281/zenodo.21339041"
 tags:
   - pangenome
   - prokaryote
@@ -53,7 +53,7 @@ With the advent of Next-Generation Sequencing technologies around 2010, sequenci
 According to {% cite Matthews2024 %}, there exist three major types of pangenomes. Here we focus on the **Presence-Absence Variation Pangenome** (see Figure 2) that was originally introduced by {% cite Tettelin2005 %} and whose description has been expanded by others over the years. This consists of:
 - The **Core Genome**: Set of genes shared by all individuals of a species. This is sometimes strictly defined as 100% presence, or more loosely as a "**soft-core**" with 95% or 99% presence.
 - And the **Accessory Genome**: Set of genes present in only a subset of individuals. This is further divided into
-  - **Shell Genome**: Set of genes present in 1% to 99% of individuals 
+  - **Shell Genome**: Set of genes present in 1% to 99% of individuals
   - and the **Cloud Genome**: Set of genes present in less than 1%.
 
 <figure style="text-align: center;">
@@ -108,15 +108,15 @@ You will use Prokka to annotate all bacterial strains simultaneously using the d
 
 > <hands-on-title>Annotate Strains</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.6+galaxy2) %} in the list that appears. Select it to open the tool. 
+> 1. Select `Tools` in the left sidebar and search for {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.6+galaxy2) %} in the list that appears. Select it to open the tool.
 >
 > 2. Within Prokka, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"Contigs to annotate"*: Click on the *"Dataset collection"* icon and select your `Assemblies` dataset collection
 >    - *"Genus name"*: Enter `Listeria`
->    - *"Species name"*: Enter `monocytogenes` 
+>    - *"Species name"*: Enter `monocytogenes`
 >    - *"Additional outputs"*: Deselect all options except `Annotation in GFF3 format, containing both sequences and annotations (.gff)`
 >
-> 3. Run the tool. 
+> 3. Run the tool.
 >
 {: .hands_on}
 
@@ -141,14 +141,14 @@ Now you will run Roary to compare the genes identified across all strains by Pro
 
 > <hands-on-title>Identify Core and Accessory Genes</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [Roary](toolshed.g2.bx.psu.edu/repos/iuc/roary/roary/3.13.0+galaxy3) %} in the list that appears. Select it to open the tool. 
+> 1. Select `Tools` in the left sidebar and search for {% tool [Roary](toolshed.g2.bx.psu.edu/repos/iuc/roary/roary/3.13.0+galaxy3) %} in the list that appears. Select it to open the tool.
 >
 > 2. Within Roary, select the following parameters (leave everything else unchanged):
 >    - *"Individual gff files or a dataset collection"*: Select `Collection` in the dropdown
 >      - {% icon param-file %} *"Dataset collection to submit to Roary"*: Select the collection containing the GFF3 output files from the previous step.
 >    - *"Additional outputs"*: Tick `Accessory binary genes in newick format`
 >
-> 3. Run the tool. 
+> 3. Run the tool.
 >
 {: .hands_on}
 
@@ -157,7 +157,7 @@ Now you will run Roary to compare the genes identified across all strains by Pro
 Once Roary has finished, four different output files will appear in your history. Examine each output file:
 
 - {% icon param-file %} **Summary statistics** file: Gives you a quick overview of how many genes belong to the core genome and the accessory genome.
-- {% icon param-file %} **Gene Presence Absence** file: Shows which genes are found in which strains. 
+- {% icon param-file %} **Gene Presence Absence** file: Shows which genes are found in which strains.
 - {% icon param-file %} **Core Gene Alignment** file: Contains the aligned sequences of the core genes in FASTA format.
 - {% icon param-file %} **Accessory Binary Genes (Newick)** file: Contains a phylogenetic tree based on the presence and absence of the accessory genes.
 
@@ -181,12 +181,12 @@ You can now use the {% icon param-file %} **Core Gene Alignment** file to build 
 
 > <hands-on-title>Build a phylogenetic tree</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.4.0+galaxy2) %} in the list that appears. Select it to open the tool. 
+> 1. Select `Tools` in the left sidebar and search for {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.4.0+galaxy2) %} in the list that appears. Select it to open the tool.
 >
 > 2. Within IQ-TREE, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: Select the `Core Gene Alignment` file
 >
-> 3. Run the tool. 
+> 3. Run the tool.
 >
 {: .hands_on}
 
@@ -202,13 +202,13 @@ Once IQ-TREE has finished, five different output files will appear in your histo
 
 ## Visualize the Phylogenetic Tree
 
-Now that you have a phylogenetic tree from your bacterial strains, you can view it visually. 
+Now that you have a phylogenetic tree from your bacterial strains, you can view it visually.
 
 > <hands-on-title>Visualize the Phylogenetic Tree</hands-on-title>
 >
 > 1. Select the {% icon param-file %} **MaxLikelihood Tree** file in your history and click the {% icon galaxy-eye %} **View** icon.
 >
-> 2. By default, the file is displayed in {% icon galaxy-eye %} **Preview** mode. In the top tab bar, select {% icon galaxy-barchart %} **Visualize**. 
+> 2. By default, the file is displayed in {% icon galaxy-eye %} **Preview** mode. In the top tab bar, select {% icon galaxy-barchart %} **Visualize**.
 >
 > 3. Select the `Phylogenetic Tree Browser`
 >
