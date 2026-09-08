@@ -136,7 +136,6 @@ SAM3 is a text-guided segmentation model. It automatically detects and segments 
 >    - {% icon param-toggle %} *"Show bounding boxes on annotated output"*: `Yes`
 >    - {% icon param-toggle %}  *"Inference image size"*: `644 (default, balanced)` (default)
 >    - {% icon param-toggle %} *"Normalize outputs?"*: `No` (default)
->    - {% icon param-toggle %} *"Normalize outputs?"*: `No` (default)
 >
 > 2. Click **Run Tool**
 >
