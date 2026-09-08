@@ -34,8 +34,6 @@ requirements:
 
 ---
 
-# Introduction
-
 Pangenomes reduce the limitations associated with linear reference genomes, also known as reference bias, so more reads are mapped and fewer reads get discarded ({% cite Matthews2024 %}). To learn more about pangenomics, please refer to this [tutorial](../../../genome-annotation/tutorials/pangenome-annotation-with-roary/tutorial.html#pangenomics). Due to the increased natural genomic variation in pangenomes, reads can be mapped with an increased alignment accuracy, which in turn can improve downstream analysis ({% cite Liao2023 %}).
 
 In this tutorial, you will learn how to map reads to a small pangenome. As an example, we will be using a pangenome of the ABO blood group locus. The ABO locus encodes for ABO glycosyltransferases. These enzymes are encoded by three different alleles (A, B and O), where an individual's blood type is determined by the inherited combination of them. 
