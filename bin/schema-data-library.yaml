@@ -22,7 +22,7 @@ mapping:
         type: str
         enum:
           - "Galaxy Training Network Material. See https://training.galaxyproject.org"
-  items:
+  items: # topic folder
     type: seq
     required: yes
     sequence:
@@ -49,7 +49,7 @@ mapping:
               - FAIR Data, Workflows, and Research
               - Using Galaxy and Managing your Data
               - Genome Annotation
-              - Image Analysis using Galaxy
+              - Imaging
               - Introduction to Galaxy Analyses
               - Materials Science
               - Metabolomics
@@ -65,22 +65,49 @@ mapping:
               - Visualisation
           description:
             type: str
-          items:
-            type: any
-          url:
-            type: str
-          src:
-            type: str
-            enum:
-              - url
-          ext:
-            type: str
-          info:
-            type: str
-          md5sum:
-            type: str
-            required: true
-            pattern: /^[0-9a-f]{32}$/
+          items: # tutorial folder
+            type: seq
+            required: yes
+            sequence:
+            - type: map
+              required: yes
+              mapping:
+                name:
+                  type: str
+                description:
+                  type: str
+                items:  # Zenodo version folder
+                  type: seq
+                  required: yes
+                  sequence:
+                  - type: map
+                    required: yes
+                    mapping:
+                      name:
+                        type: str
+                      description:
+                        type: str
+                      items:  # files in the zenodo record
+                        type: seq
+                        required: yes
+                        sequence:
+                        - type: map
+                          required: yes
+                          mapping:
+                            url:
+                              type: str
+                            src:
+                              type: str
+                              enum:
+                                - url
+                            ext:
+                              type: str
+                            info:
+                              type: str
+                            md5sum:
+                              type: str
+                              required: true
+                              pattern: /^[0-9a-f]{32}$/
 
 
 
