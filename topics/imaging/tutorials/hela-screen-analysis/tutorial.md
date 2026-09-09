@@ -127,11 +127,11 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    max	100000	0.5
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
+>     {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 11. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
+>     {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
