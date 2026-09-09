@@ -40,6 +40,7 @@ contributions:
     - tflowers15
     - gkphilip
     - egmg726
+    - laurageissler
   funding:
     - unimelb
     - melbournebioinformatics
