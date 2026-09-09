@@ -132,6 +132,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 11. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 {: .hands_on}
 
 
