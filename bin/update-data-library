@@ -53,13 +53,22 @@ def update_tutorial(path, zenodo_id)
 end
 
 def update_data_library(path, topic, tutorial, zenodo_record)
+
   zenodo_id = zenodo_record['id'].to_s
   zenodo_files = zenodo_record.fetch('files', []).map do |f|
     official_extension = f['type']
 
     link = f['links']['self'].sub(%r{/content$}, '')
-    unofficial_extension = link.split('.')[-1]
+
+    # try a two-part extension, eg. fastq.gz
+    unofficial_extension = link.split('.')[-2..-1].join(".")
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+
+    # if no match, use only last part
+    if ext.nil?
+      unofficial_extension = link.split('.')[-1]
+      ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+    end
 
     # Example:
     # https://zenodo.org/api/records/10870107/files/elem_s2_r1.fq.gz/content
