@@ -293,7 +293,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput Molecules with SMILES and NAME without a header.\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nNumber of conformers to generate\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nOptimization Levels\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nQC Method\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"Cut SMILES column\"];\n  0 -->|output| 4;\n  5[\"Cut NAME column\"];\n  0 -->|output| 5;\n  6[\"Split file\"];\n  4 -->|output| 6;\n  7[\"Split file\"];\n  5 -->|output| 7;\n  8[\"Parse parameter value\"];\n  7 -->|list_output_tab| 8;\n  9[\"Convert compounds from SMILES to SDF and add the name as title.\"];\n  8 -->|text_param| 9;\n  6 -->|list_output_tab| 9;\n  10[\"Merge the individual SDF files\"];\n  9 -->|outfile| 10;\n  11[\"Generate conformers\"];\n  10 -->|out_file1| 11;\n  1 -->|output| 11;\n  f4f8881e-cd64-42ae-8435-1288e4e473b5[\"Output\\nconformer_output\"];\n  11 --> f4f8881e-cd64-42ae-8435-1288e4e473b5;\n  style f4f8881e-cd64-42ae-8435-1288e4e473b5 stroke:#2c3143,stroke-width:4px;\n  12[\"Molecular format conversion \"];\n  11 -->|outfile| 12;\n  5dcb6f02-62c9-4f43-9810-a10052b59b41[\"Output\\nXYZ output\"];\n  12 --> 5dcb6f02-62c9-4f43-9810-a10052b59b41;\n  style 5dcb6f02-62c9-4f43-9810-a10052b59b41 stroke:#2c3143,stroke-width:4px;\n  13[\"xTB molecular optimization\"];\n  12 -->|file_outputs| 13;\n  2 -->|output| 13;\n  01a9a1af-e225-4613-94f9-dfdad37c93a2[\"Output\\noptimized output\"];\n  13 --> 01a9a1af-e225-4613-94f9-dfdad37c93a2;\n  style 01a9a1af-e225-4613-94f9-dfdad37c93a2 stroke:#2c3143,stroke-width:4px;\n  14[\"QCxMS neutral run\"];\n  3 -->|output| 14;\n  13 -->|output| 14;\n  e6e6a07b-d478-4a87-b491-42abee9094b1[\"Output\\n[.in] output\"];\n  14 --> e6e6a07b-d478-4a87-b491-42abee9094b1;\n  style e6e6a07b-d478-4a87-b491-42abee9094b1 stroke:#2c3143,stroke-width:4px;\n  969b3e2f-fbee-48f9-829a-c0032580e6f8[\"Output\\n[.xyz] output\"];\n  14 --> 969b3e2f-fbee-48f9-829a-c0032580e6f8;\n  style 969b3e2f-fbee-48f9-829a-c0032580e6f8 stroke:#2c3143,stroke-width:4px;\n  dc4811ad-6cff-42cc-a2f8-52ab585f47fe[\"Output\\n[.start] output\"];\n  14 --> dc4811ad-6cff-42cc-a2f8-52ab585f47fe;\n  style dc4811ad-6cff-42cc-a2f8-52ab585f47fe stroke:#2c3143,stroke-width:4px;\n  15[\"QCxMS production run\"];\n  14 -->|coords1| 15;\n  14 -->|coords2| 15;\n  14 -->|coords3| 15;\n  fc53168a-99f8-441c-9325-2d812bf03100[\"Output\\nres output\"];\n  15 --> fc53168a-99f8-441c-9325-2d812bf03100;\n  style fc53168a-99f8-441c-9325-2d812bf03100 stroke:#2c3143,stroke-width:4px;\n  16[\"Filter failed datasets\"];\n  15 -->|res_files| 16;\n  17[\"QCxMS get results\"];\n  12 -->|file_outputs| 17;\n  16 -->|output| 17;\n  d81bf92a-604c-46b9-86a9-bf3c2281ebcb[\"Output\\nMSP output\"];\n  17 --> d81bf92a-604c-46b9-86a9-bf3c2281ebcb;\n  style d81bf92a-604c-46b9-86a9-bf3c2281ebcb stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput Molecules with SMILES and NAME without a header.\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nNumber of conformers to generate\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nOptimization Levels\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\nQC Method\"]\n  4[label=\"Cut SMILES column\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Cut NAME column\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Split file\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"Split file\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Parse parameter value\"]\n  7 -> 8 [label=\"list_output_tab\"]\n  9[label=\"Convert compounds from SMILES to SDF and add the name as title.\"]\n  8 -> 9 [label=\"text_param\"]\n  6 -> 9 [label=\"list_output_tab\"]\n  10[label=\"Merge the individual SDF files\"]\n  9 -> 10 [label=\"outfile\"]\n  11[label=\"Generate conformers\"]\n  10 -> 11 [label=\"out_file1\"]\n  1 -> 11 [label=\"output\"]\n  kf4f8881ecd6442ae84351288e4e473b5[color=lightseagreen,label=\"Output\\nconformer_output\"]\n  11 -> kf4f8881ecd6442ae84351288e4e473b5\n  12[label=\"Molecular format conversion \"]\n  11 -> 12 [label=\"outfile\"]\n  k5dcb6f0262c94f439810a10052b59b41[color=lightseagreen,label=\"Output\\nXYZ output\"]\n  12 -> k5dcb6f0262c94f439810a10052b59b41\n  13[label=\"xTB molecular optimization\"]\n  12 -> 13 [label=\"file_outputs\"]\n  2 -> 13 [label=\"output\"]\n  k01a9a1afe225461394f9dfdad37c93a2[color=lightseagreen,label=\"Output\\noptimized output\"]\n  13 -> k01a9a1afe225461394f9dfdad37c93a2\n  14[label=\"QCxMS neutral run\"]\n  3 -> 14 [label=\"output\"]\n  13 -> 14 [label=\"output\"]\n  ke6e6a07bd4784a87b49142abee9094b1[color=lightseagreen,label=\"Output\\n[.in] output\"]\n  14 -> ke6e6a07bd4784a87b49142abee9094b1\n  k969b3e2ffbee48f9829ac0032580e6f8[color=lightseagreen,label=\"Output\\n[.xyz] output\"]\n  14 -> k969b3e2ffbee48f9829ac0032580e6f8\n  kdc4811ad6cff42cca2f852ab585f47fe[color=lightseagreen,label=\"Output\\n[.start] output\"]\n  14 -> kdc4811ad6cff42cca2f852ab585f47fe\n  15[label=\"QCxMS production run\"]\n  14 -> 15 [label=\"coords1\"]\n  14 -> 15 [label=\"coords2\"]\n  14 -> 15 [label=\"coords3\"]\n  kfc53168a99f8441c93252d812bf03100[color=lightseagreen,label=\"Output\\nres output\"]\n  15 -> kfc53168a99f8441c93252d812bf03100\n  16[label=\"Filter failed datasets\"]\n  15 -> 16 [label=\"res_files\"]\n  17[label=\"QCxMS get results\"]\n  12 -> 17 [label=\"file_outputs\"]\n  16 -> 17 [label=\"output\"]\n  kd81bf92a604c46b986a9bf3c2281ebcb[color=lightseagreen,label=\"Output\\nMSP output\"]\n  17 -> kd81bf92a604c46b986a9bf3c2281ebcb\n}",
           "workflow_tools": [
@@ -835,6 +835,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -903,6 +908,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -948,6 +958,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -1004,6 +1018,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -1053,6 +1071,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1106,6 +1128,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -1155,6 +1181,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1214,6 +1244,10 @@
                 "state": "exact",
                 "version": "1.1.4+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.4+galaxy0"
@@ -1264,6 +1298,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1324,6 +1362,10 @@
                 "state": "exact",
                 "version": "3.1.1+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.1.1+galaxy0"
@@ -1371,6 +1413,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -1445,6 +1491,10 @@
                 "state": "exact",
                 "version": "0.5.2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.5.2"
@@ -1508,6 +1558,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1555,8 +1609,8 @@
                   "9.5+galaxy3",
                   "0.1.1",
                   "9.5+galaxy2",
-                  "9.5+galaxy0",
-                  "9.11+galaxy0"
+                  "9.11+galaxy0",
+                  "9.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -1582,6 +1636,10 @@
                 "state": "exact",
                 "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "9.3+galaxy1"
@@ -1643,6 +1701,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1689,8 +1751,8 @@
                   "1.1.0",
                   "9.5+galaxy3",
                   "9.5+galaxy2",
-                  "9.5+galaxy0",
-                  "9.11+galaxy0"
+                  "9.11+galaxy0",
+                  "9.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -1715,6 +1777,10 @@
                 "state": "exact",
                 "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "9.3+galaxy1"
@@ -1764,6 +1830,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1832,6 +1902,10 @@
                   "5.2.1+galaxy4"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "5.2.1+galaxy2"
@@ -1881,6 +1955,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1916,8 +1994,8 @@
                 "versions": [
                   "5.2.1+galaxy7",
                   "5.2.1+galaxy6",
-                  "5.2.1+galaxy5",
-                  "5.2.1+galaxy4"
+                  "5.2.1+galaxy4",
+                  "5.2.1+galaxy5"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -1957,6 +2035,10 @@
                   "5.2.1+galaxy6"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "5.2.1+galaxy3"
@@ -2006,6 +2088,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -2074,6 +2160,10 @@
                   "5.2.1+galaxy6"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "5.2.1+galaxy4"
@@ -2123,6 +2213,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -2191,6 +2285,10 @@
                   "5.2.1+galaxy4"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "5.2.1+galaxy3"
@@ -2240,6 +2338,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -2269,16 +2371,16 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.7.1+galaxy0",
-                  "6.6.1+galaxy3"
+                  "6.6.1+galaxy3",
+                  "6.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "6.7.1+galaxy0",
-                  "6.6.1+galaxy3"
+                  "6.6.1+galaxy3",
+                  "6.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2303,6 +2405,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "6.6.1+galaxy1"
@@ -2352,6 +2458,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -2409,6 +2519,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "6.6.1+galaxy3"
@@ -2756,7 +2870,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ntreated\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ncontrol\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"MSI classification\"];\n  9 -->|outfile_imzml| 10;\n  4 -->|pixel_annotations| 10;\n  11[\"MSI segmentation\"];\n  9 -->|outfile_imzml| 11;\n  12[\"Filter\"];\n  10 -->|mzfeatures| 12;\n  13[\"Join two files\"];\n  12 -->|out_file1| 13;\n  2 -->|output| 13;\n  14[\"Summary Statistics\"];\n  13 -->|merged_file| 14;\n  15[\"MSI mz images\"];\n  13 -->|merged_file| 15;\n  3 -->|output| 15;\n  16[\"Select\"];\n  13 -->|merged_file| 16;\n  17[\"MSI mz images\"];\n  16 -->|out_file1| 17;\n  3 -->|output| 17;\n  2[\"ℹ️ Input Dataset\\nGlycan_IDs\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nall_files\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"MSI combine\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"MSI preprocessing\"];\n  4 -->|outfile_imzml| 5;\n  6[\"MSI Qualitycontrol\"];\n  4 -->|outfile_imzml| 6;\n  4 -->|pixel_annotations| 6;\n  7[\"MALDIquant preprocessing\"];\n  5 -->|outfile_imzml| 7;\n  8[\"MALDIquant peak detection\"];\n  7 -->|outfile_imzml| 8;\n  4 -->|pixel_annotations| 8;\n  9[\"MSI preprocessing\"];\n  5 -->|outfile_imzml| 9;\n  8 -->|intensity_matrix| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ntreated\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\ncontrol\"]\n  10[label=\"MSI classification\"]\n  9 -> 10 [label=\"outfile_imzml\"]\n  4 -> 10 [label=\"pixel_annotations\"]\n  11[label=\"MSI segmentation\"]\n  9 -> 11 [label=\"outfile_imzml\"]\n  12[label=\"Filter\"]\n  10 -> 12 [label=\"mzfeatures\"]\n  13[label=\"Join two files\"]\n  12 -> 13 [label=\"out_file1\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"Summary Statistics\"]\n  13 -> 14 [label=\"merged_file\"]\n  15[label=\"MSI mz images\"]\n  13 -> 15 [label=\"merged_file\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"Select\"]\n  13 -> 16 [label=\"merged_file\"]\n  17[label=\"MSI mz images\"]\n  16 -> 17 [label=\"out_file1\"]\n  3 -> 17 [label=\"output\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nGlycan_IDs\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nall_files\"]\n  4[label=\"MSI combine\"]\n  1 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MSI preprocessing\"]\n  4 -> 5 [label=\"outfile_imzml\"]\n  6[label=\"MSI Qualitycontrol\"]\n  4 -> 6 [label=\"outfile_imzml\"]\n  4 -> 6 [label=\"pixel_annotations\"]\n  7[label=\"MALDIquant preprocessing\"]\n  5 -> 7 [label=\"outfile_imzml\"]\n  8[label=\"MALDIquant peak detection\"]\n  7 -> 8 [label=\"outfile_imzml\"]\n  4 -> 8 [label=\"pixel_annotations\"]\n  9[label=\"MSI preprocessing\"]\n  5 -> 9 [label=\"outfile_imzml\"]\n  8 -> 9 [label=\"intensity_matrix\"]\n}",
           "workflow_tools": [
@@ -3697,6 +3811,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -3765,6 +3884,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -3810,6 +3934,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -3866,6 +3994,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -3915,6 +4047,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -3968,6 +4104,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -4017,6 +4157,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4070,6 +4214,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -4119,6 +4267,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4179,6 +4331,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.0.1"
@@ -4228,6 +4384,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4295,6 +4455,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.3"
@@ -4344,6 +4508,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4373,12 +4541,12 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.6.0.1",
                   "2.10.0.0",
-                  "2.6.0.0",
-                  "2.4.0.1",
                   "2.2.6.0",
+                  "2.4.0.1",
                   "3.4.3+galaxy0",
-                  "2.6.0.1"
+                  "2.6.0.0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -4418,6 +4586,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.3"
@@ -4467,6 +4639,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4506,8 +4682,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -4519,8 +4695,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -4534,6 +4710,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.2"
@@ -4580,6 +4760,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -4651,6 +4835,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.3"
@@ -4700,6 +4888,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4729,9 +4921,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
                   "2.10.0.0",
                   "1.12.1.4",
+                  "3.4.3+galaxy0",
                   "2.6.0.1"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -4744,8 +4936,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -4757,8 +4949,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -4773,6 +4965,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.3"
@@ -4819,6 +5015,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -4889,6 +5089,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.12.1.3"
@@ -4938,6 +5142,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4968,8 +5176,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.18.0.5",
-                  "1.18.0.6",
-                  "1.22.0.0"
+                  "1.22.0.0",
+                  "1.18.0.6"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -4981,8 +5189,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.18.0.6",
-                  "1.22.0.0"
+                  "1.22.0.0",
+                  "1.18.0.6"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -4994,8 +5202,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.18.0.6",
-                  "1.22.0.0"
+                  "1.22.0.0",
+                  "1.18.0.6"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -5009,6 +5217,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.18.0.4"
@@ -5058,6 +5270,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -5117,6 +5333,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.18.0.3"
@@ -5356,7 +5576,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nReference compound list alkanes\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference spectra\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nsample_metadata.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"msconvert\"];\n  3 -->|output| 4;\n  5[\"MSnbase readMSData\"];\n  4 -->|output| 5;\n  6[\"xcms findChromPeaks xcmsSet\"];\n  5 -->|xsetRData| 6;\n  7[\"xcms findChromPeaks Merger\"];\n  6 -->|xsetRData| 7;\n  2 -->|output| 7;\n  8[\"xcms groupChromPeaks group\"];\n  7 -->|xsetRData| 8;\n  9[\"xcms adjustRtime retcor\"];\n  8 -->|xsetRData| 9;\n  10[\"xcms groupChromPeaks group\"];\n  9 -->|xsetRData| 10;\n  11[\"xcms fillChromPeaks fillPeaks\"];\n  10 -->|xsetRData| 11;\n  940c7549-1bae-4ddd-9e92-75fc7d2c8eef[\"Output\\nFeature (peak) intensities\"];\n  11 --> 940c7549-1bae-4ddd-9e92-75fc7d2c8eef;\n  style 940c7549-1bae-4ddd-9e92-75fc7d2c8eef stroke:#2c3143,stroke-width:4px;\n  9f910e82-e7a5-4201-b944-1845ba6aa2e9[\"Output\\nFeature (peak) metadata (mz, rt, ...)\"];\n  11 --> 9f910e82-e7a5-4201-b944-1845ba6aa2e9;\n  style 9f910e82-e7a5-4201-b944-1845ba6aa2e9 stroke:#2c3143,stroke-width:4px;\n  5bab8f28-4df1-4397-af04-168546bd0e52[\"Output\\nxcmsObj (XCMSnExp)\"];\n  11 --> 5bab8f28-4df1-4397-af04-168546bd0e52;\n  style 5bab8f28-4df1-4397-af04-168546bd0e52 stroke:#2c3143,stroke-width:4px;\n  12[\"RAMClustR\"];\n  11 -->|xsetRData| 12;\n  92fac5e6-1578-4e52-ac9d-2982e19a5b88[\"Output\\nDeconvoluted spectra\"];\n  12 --> 92fac5e6-1578-4e52-ac9d-2982e19a5b88;\n  style 92fac5e6-1578-4e52-ac9d-2982e19a5b88 stroke:#2c3143,stroke-width:4px;\n  f7657c17-6293-4fbb-b014-28009d495de7[\"Output\\nFeature (spectra) intensities\"];\n  12 --> f7657c17-6293-4fbb-b014-28009d495de7;\n  style f7657c17-6293-4fbb-b014-28009d495de7 stroke:#2c3143,stroke-width:4px;\n  13[\"RIAssigner\"];\n  12 -->|mass_spectra_merged| 13;\n  0 -->|output| 13;\n  7ec6ce02-5d83-48ab-ba0a-94976db297e5[\"Output\\nRetention indexed spectra\"];\n  13 --> 7ec6ce02-5d83-48ab-ba0a-94976db297e5;\n  style 7ec6ce02-5d83-48ab-ba0a-94976db297e5 stroke:#2c3143,stroke-width:4px;\n  14[\"matchms similarity\"];\n  13 -->|output| 14;\n  1 -->|output| 14;\n  024327f7-13b8-4ce9-8708-9f430d7ceedf[\"Output\\nCosineGreedy scores of input dataset(s)\"];\n  14 --> 024327f7-13b8-4ce9-8708-9f430d7ceedf;\n  style 024327f7-13b8-4ce9-8708-9f430d7ceedf stroke:#2c3143,stroke-width:4px;\n  15[\"matchms scores formatter\"];\n  14 -->|similarity_scores| 15;\n  8a767006-4b3c-41ba-bea5-18fd100ce930[\"Output\\nmatchms_scores\"];\n  15 --> 8a767006-4b3c-41ba-bea5-18fd100ce930;\n  style 8a767006-4b3c-41ba-bea5-18fd100ce930 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nReference compound list alkanes\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference spectra\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nsample_metadata.tsv\"]\n  3[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  4[label=\"msconvert\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"MSnbase readMSData\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"xcms findChromPeaks xcmsSet\"]\n  5 -> 6 [label=\"xsetRData\"]\n  7[label=\"xcms findChromPeaks Merger\"]\n  6 -> 7 [label=\"xsetRData\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"xcms groupChromPeaks group\"]\n  7 -> 8 [label=\"xsetRData\"]\n  9[label=\"xcms adjustRtime retcor\"]\n  8 -> 9 [label=\"xsetRData\"]\n  10[label=\"xcms groupChromPeaks group\"]\n  9 -> 10 [label=\"xsetRData\"]\n  11[label=\"xcms fillChromPeaks fillPeaks\"]\n  10 -> 11 [label=\"xsetRData\"]\n  k940c75491bae4ddd9e9275fc7d2c8eef[color=lightseagreen,label=\"Output\\nFeature (peak) intensities\"]\n  11 -> k940c75491bae4ddd9e9275fc7d2c8eef\n  k9f910e82e7a54201b9441845ba6aa2e9[color=lightseagreen,label=\"Output\\nFeature (peak) metadata (mz, rt, ...)\"]\n  11 -> k9f910e82e7a54201b9441845ba6aa2e9\n  k5bab8f284df14397af04168546bd0e52[color=lightseagreen,label=\"Output\\nxcmsObj (XCMSnExp)\"]\n  11 -> k5bab8f284df14397af04168546bd0e52\n  12[label=\"RAMClustR\"]\n  11 -> 12 [label=\"xsetRData\"]\n  k92fac5e615784e52ac9d2982e19a5b88[color=lightseagreen,label=\"Output\\nDeconvoluted spectra\"]\n  12 -> k92fac5e615784e52ac9d2982e19a5b88\n  kf7657c1762934fbbb01428009d495de7[color=lightseagreen,label=\"Output\\nFeature (spectra) intensities\"]\n  12 -> kf7657c1762934fbbb01428009d495de7\n  13[label=\"RIAssigner\"]\n  12 -> 13 [label=\"mass_spectra_merged\"]\n  0 -> 13 [label=\"output\"]\n  k7ec6ce025d8348abba0a94976db297e5[color=lightseagreen,label=\"Output\\nRetention indexed spectra\"]\n  13 -> k7ec6ce025d8348abba0a94976db297e5\n  14[label=\"matchms similarity\"]\n  13 -> 14 [label=\"output\"]\n  1 -> 14 [label=\"output\"]\n  k024327f713b84ce987089f430d7ceedf[color=lightseagreen,label=\"Output\\nCosineGreedy scores of input dataset(s)\"]\n  14 -> k024327f713b84ce987089f430d7ceedf\n  15[label=\"matchms scores formatter\"]\n  14 -> 15 [label=\"similarity_scores\"]\n  k8a7670064b3c41babea518fd100ce930[color=lightseagreen,label=\"Output\\nmatchms_scores\"]\n  15 -> k8a7670064b3c41babea518fd100ce930\n}",
           "workflow_tools": [
@@ -5907,6 +6127,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -5975,6 +6200,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -6023,6 +6253,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -6059,8 +6293,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.0.26121.7",
-                  "3.0.20287.7",
-                  "3.0.26121.8"
+                  "3.0.26121.8",
+                  "3.0.20287.7"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6091,6 +6325,10 @@
                 "state": "exact",
                 "version": "3.0.20287.2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.0.20287.2"
@@ -6137,6 +6375,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -6208,6 +6450,10 @@
                 "state": "exact",
                 "version": "2.16.1+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.16.1+galaxy0"
@@ -6257,6 +6503,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -6325,6 +6575,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -6374,120 +6628,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
-                ],
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.org"
-              }
-            ],
-            "version": "3.12.0+galaxy0"
-          },
-          {
-            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mbac.gmu.edu:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.hyphy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -6559,6 +6700,135 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "3.12.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
+                ],
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -6608,6 +6878,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -6676,6 +6950,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -6725,6 +7003,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -6793,6 +7075,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -6842,6 +7128,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -6871,10 +7161,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.20.0+galaxy0",
                   "0.33.1+galaxy0",
+                  "0.27.0+galaxy0",
                   "0.30.2+galaxy0",
-                  "0.27.0+galaxy0"
+                  "0.20.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -6886,8 +7176,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.33.1+galaxy0",
-                  "0.30.2+galaxy0",
                   "0.27.0+galaxy0",
+                  "0.30.2+galaxy0",
                   "0.22.0+galaxy2"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -6910,6 +7200,10 @@
                 "state": "exact",
                 "version": "0.17.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.17.0+galaxy0"
@@ -6956,6 +7250,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -7029,6 +7327,10 @@
                   "0.1.4"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.20.0+galaxy0"
@@ -7078,6 +7380,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7140,6 +7446,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.20.0+galaxy0"
@@ -7189,6 +7499,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7218,8 +7532,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.1+galaxy0",
                   "1.3.0+galaxy1",
+                  "1.3.1+galaxy0",
                   "1.3.0+galaxy7"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -7256,6 +7570,10 @@
                 "state": "exact",
                 "version": "1.2.4+galaxy2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.2.4+galaxy2"
@@ -7305,6 +7623,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7334,8 +7656,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.1+galaxy0",
                   "1.3.0+galaxy1",
+                  "1.3.1+galaxy0",
                   "1.3.0+galaxy7"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -7379,6 +7701,10 @@
                   "1.2.4+galaxy2"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.3.0+galaxy0"
@@ -7428,6 +7754,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7457,8 +7787,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.2+galaxy2",
-                  "1.0.2+galaxy0"
+                  "1.0.2+galaxy0",
+                  "1.0.2+galaxy2"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -7493,6 +7823,10 @@
                 "state": "exact",
                 "version": "1.0.2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.0.2"
@@ -7542,6 +7876,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7572,8 +7910,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.4.1+galaxy1",
-                  "0.6.1+galaxy0",
-                  "0.4.1+galaxy0"
+                  "0.4.1+galaxy0",
+                  "0.6.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -7605,6 +7943,10 @@
                 "state": "exact",
                 "version": "0.3.4+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.3.4+galaxy1"
@@ -7654,6 +7996,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7683,10 +8029,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.2.0+galaxy10",
-                  "0.2.0+galaxy8",
+                  "0.2.1+galaxy10",
                   "0.2.0+galaxy9",
-                  "0.2.1+galaxy10"
+                  "0.2.0+galaxy10",
+                  "0.2.0+galaxy8"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -7697,10 +8043,10 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.2.1+galaxy10",
+                  "0.2.0+galaxy9",
                   "0.2.0+galaxy10",
                   "0.2.0+galaxy8",
-                  "0.2.0+galaxy9",
-                  "0.2.1+galaxy10",
                   "0.2.0+galaxy4"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -7713,10 +8059,10 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.2.1+galaxy10",
+                  "0.2.0+galaxy9",
                   "0.2.0+galaxy10",
                   "0.2.0+galaxy8",
-                  "0.2.0+galaxy9",
-                  "0.2.1+galaxy10",
                   "0.2.0+galaxy4",
                   "0.2.0+galaxy7",
                   "0.2.0+galaxy6",
@@ -7732,6 +8078,10 @@
                 "state": "exact",
                 "version": "0.2.0+galaxy2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "0.2.0+galaxy2"
@@ -8196,7 +8546,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFeature table\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"MFAssignR KMDNoise\"];\n  0 -->|output| 1;\n  2[\"MFAssignR HistNoise\"];\n  0 -->|output| 2;\n  3[\"MFAssignR SNplot\"];\n  0 -->|output| 3;\n  74da5be7-06ed-475c-a95a-813cc74dd124[\"Output\\nSNplot\"];\n  3 --> 74da5be7-06ed-475c-a95a-813cc74dd124;\n  style 74da5be7-06ed-475c-a95a-813cc74dd124 stroke:#2c3143,stroke-width:4px;\n  4[\"MFAssignR IsoFiltR\"];\n  0 -->|output| 4;\n  5[\"MFAssignR MFAssignCHO\"];\n  4 -->|iso_out| 5;\n  4 -->|mono_out| 5;\n  36722438-d25d-4107-87fa-3340ac8f55f6[\"Output\\nplots\"];\n  5 --> 36722438-d25d-4107-87fa-3340ac8f55f6;\n  style 36722438-d25d-4107-87fa-3340ac8f55f6 stroke:#2c3143,stroke-width:4px;\n  6[\"MFAssignR RecalList\"];\n  5 -->|Unambig| 6;\n  96ae5d5e-fc6d-4523-a3ad-fdc2dc9fab45[\"Output\\nrecal_series\"];\n  6 --> 96ae5d5e-fc6d-4523-a3ad-fdc2dc9fab45;\n  style 96ae5d5e-fc6d-4523-a3ad-fdc2dc9fab45 stroke:#2c3143,stroke-width:4px;\n  7[\"MFAssignR FindRecalSeries\"];\n  6 -->|recal_series| 7;\n  65060598-3645-458d-82cd-0613189020f3[\"Output\\nfinal_series\"];\n  7 --> 65060598-3645-458d-82cd-0613189020f3;\n  style 65060598-3645-458d-82cd-0613189020f3 stroke:#2c3143,stroke-width:4px;\n  8[\"MFAssignR Recal\"];\n  5 -->|Unambig| 8;\n  4 -->|iso_out| 8;\n  4 -->|mono_out| 8;\n  7 -->|final_series| 8;\n  1f370a51-f49b-476f-ad9e-09b69a168158[\"Output\\nMZplot\"];\n  8 --> 1f370a51-f49b-476f-ad9e-09b69a168158;\n  style 1f370a51-f49b-476f-ad9e-09b69a168158 stroke:#2c3143,stroke-width:4px;\n  9[\"MFAssignR MFAssign\"];\n  8 -->|Iso| 9;\n  8 -->|Mono| 9;\n  0b738f04-c31c-4949-890d-00e15b465187[\"Output\\nNone\"];\n  9 --> 0b738f04-c31c-4949-890d-00e15b465187;\n  style 0b738f04-c31c-4949-890d-00e15b465187 stroke:#2c3143,stroke-width:4px;\n  cafc72e0-b9d0-4eb1-a8a1-9f87ea72690e[\"Output\\nAmbig\"];\n  9 --> cafc72e0-b9d0-4eb1-a8a1-9f87ea72690e;\n  style cafc72e0-b9d0-4eb1-a8a1-9f87ea72690e stroke:#2c3143,stroke-width:4px;\n  378afd46-c896-4393-9e6c-c379609a39d1[\"Output\\nUnambig\"];\n  9 --> 378afd46-c896-4393-9e6c-c379609a39d1;\n  style 378afd46-c896-4393-9e6c-c379609a39d1 stroke:#2c3143,stroke-width:4px;\n  7456324f-04c0-4573-8abf-fda0567b7732[\"Output\\nplots\"];\n  9 --> 7456324f-04c0-4573-8abf-fda0567b7732;\n  style 7456324f-04c0-4573-8abf-fda0567b7732 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFeature table\"]\n  1[label=\"MFAssignR KMDNoise\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"MFAssignR HistNoise\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"MFAssignR SNplot\"]\n  0 -> 3 [label=\"output\"]\n  k74da5be706ed475ca95a813cc74dd124[color=lightseagreen,label=\"Output\\nSNplot\"]\n  3 -> k74da5be706ed475ca95a813cc74dd124\n  4[label=\"MFAssignR IsoFiltR\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MFAssignR MFAssignCHO\"]\n  4 -> 5 [label=\"iso_out\"]\n  4 -> 5 [label=\"mono_out\"]\n  k36722438d25d410787fa3340ac8f55f6[color=lightseagreen,label=\"Output\\nplots\"]\n  5 -> k36722438d25d410787fa3340ac8f55f6\n  6[label=\"MFAssignR RecalList\"]\n  5 -> 6 [label=\"Unambig\"]\n  k96ae5d5efc6d4523a3adfdc2dc9fab45[color=lightseagreen,label=\"Output\\nrecal_series\"]\n  6 -> k96ae5d5efc6d4523a3adfdc2dc9fab45\n  7[label=\"MFAssignR FindRecalSeries\"]\n  6 -> 7 [label=\"recal_series\"]\n  k650605983645458d82cd0613189020f3[color=lightseagreen,label=\"Output\\nfinal_series\"]\n  7 -> k650605983645458d82cd0613189020f3\n  8[label=\"MFAssignR Recal\"]\n  5 -> 8 [label=\"Unambig\"]\n  4 -> 8 [label=\"iso_out\"]\n  4 -> 8 [label=\"mono_out\"]\n  7 -> 8 [label=\"final_series\"]\n  k1f370a51f49b476fad9e09b69a168158[color=lightseagreen,label=\"Output\\nMZplot\"]\n  8 -> k1f370a51f49b476fad9e09b69a168158\n  9[label=\"MFAssignR MFAssign\"]\n  8 -> 9 [label=\"Iso\"]\n  8 -> 9 [label=\"Mono\"]\n  k0b738f04c31c4949890d00e15b465187[color=lightseagreen,label=\"Output\\nNone\"]\n  9 -> k0b738f04c31c4949890d00e15b465187\n  kcafc72e0b9d04eb1a8a19f87ea72690e[color=lightseagreen,label=\"Output\\nAmbig\"]\n  9 -> kcafc72e0b9d04eb1a8a19f87ea72690e\n  k378afd46c89643939e6cc379609a39d1[color=lightseagreen,label=\"Output\\nUnambig\"]\n  9 -> k378afd46c89643939e6cc379609a39d1\n  k7456324f04c045738abffda0567b7732[color=lightseagreen,label=\"Output\\nplots\"]\n  9 -> k7456324f04c045738abffda0567b7732\n}",
           "workflow_tools": [
@@ -8654,6 +9004,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -8722,6 +9077,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -8767,6 +9127,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -8827,6 +9191,10 @@
                 "state": "exact",
                 "version": "1.1.2+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy1"
@@ -8876,6 +9244,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -8940,6 +9312,10 @@
                   "1.1.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -8989,6 +9365,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9042,6 +9422,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -9091,6 +9475,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9155,6 +9543,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -9204,6 +9596,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9276,6 +9672,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -9325,6 +9725,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9389,6 +9793,10 @@
                   "1.1.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -9438,6 +9846,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9502,6 +9914,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -9551,6 +9967,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9604,8 +10024,8 @@
                 "versions": [
                   "1.1.2+galaxy1",
                   "1.1.1+galaxy0",
-                  "1.1.1+galaxy1",
-                  "1.0.3+galaxy0"
+                  "1.0.3+galaxy0",
+                  "1.1.1+galaxy1"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -9623,6 +10043,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -9672,6 +10096,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9736,6 +10164,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -9782,6 +10214,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -9838,8 +10274,8 @@
                 "versions": [
                   "1.1.2+galaxy1",
                   "1.1.1+galaxy0",
-                  "1.1.1+galaxy1",
-                  "1.0.3+galaxy0"
+                  "1.0.3+galaxy0",
+                  "1.1.1+galaxy1"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -9857,6 +10293,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -9906,6 +10346,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9970,6 +10414,10 @@
                   "1.1.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -10019,6 +10467,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -10077,6 +10529,10 @@
                 "state": "exact",
                 "version": "1.1.2+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -10126,6 +10582,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -10190,6 +10650,10 @@
                   "1.1.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -10239,6 +10703,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -10297,6 +10765,10 @@
                 "state": "exact",
                 "version": "1.1.2+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -10346,6 +10818,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -10410,6 +10886,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.1+galaxy0"
@@ -10456,6 +10936,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -10531,6 +11015,10 @@
                   "1.1.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.1.2+galaxy0"
@@ -10849,7 +11337,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nUploaded Composite Dataset imzml\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nAnnotation\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nm/z features\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"MSI Qualitycontrol\"];\n  0 -->|output| 3;\n  4[\"MSI plot spectra\"];\n  0 -->|output| 4;\n  5[\"MSI filtering\"];\n  0 -->|output| 5;\n  6[\"MSI plot spectra\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"MSI data exporter\"];\n  5 -->|outfile_imzml| 7;\n  8[\"MSI mz images\"];\n  2 -->|output| 8;\n  5 -->|outfile_imzml| 8;\n  9[\"Filter\"];\n  7 -->|feature_output| 9;\n  10[\"MSI mz images\"];\n  9 -->|out_file1| 10;\n  5 -->|outfile_imzml| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nUploaded Composite Dataset imzml\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nAnnotation\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nm/z features\"]\n  3[label=\"MSI Qualitycontrol\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"MSI plot spectra\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MSI filtering\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"MSI plot spectra\"]\n  0 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"MSI data exporter\"]\n  5 -> 7 [label=\"outfile_imzml\"]\n  8[label=\"MSI mz images\"]\n  2 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"outfile_imzml\"]\n  9[label=\"Filter\"]\n  7 -> 9 [label=\"feature_output\"]\n  10[label=\"MSI mz images\"]\n  9 -> 10 [label=\"out_file1\"]\n  5 -> 10 [label=\"outfile_imzml\"]\n}",
           "workflow_tools": [
@@ -11664,6 +12152,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -11732,6 +12225,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -11777,6 +12275,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -11833,6 +12335,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "local",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "local"
@@ -11882,6 +12388,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -11921,8 +12431,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -11934,8 +12444,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -11949,6 +12459,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.0"
@@ -11998,6 +12512,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12037,8 +12555,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12050,8 +12568,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12065,6 +12583,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.0"
@@ -12114,6 +12636,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12143,11 +12669,11 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.10.0.0",
+                  "3.4.3+galaxy0",
+                  "1.12.1.2",
                   "2.4.0.0",
                   "2.6.0.2",
-                  "1.12.1.2",
-                  "3.4.3+galaxy0",
-                  "2.10.0.0",
                   "2.6.0.1"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -12155,8 +12681,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.12.1.2",
                   "3.4.3+galaxy0",
+                  "1.12.1.2",
                   "2.6.0.1"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -12164,8 +12690,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12177,8 +12703,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12192,6 +12718,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.0"
@@ -12241,6 +12771,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12275,8 +12809,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.12.1.2",
                   "3.4.3+galaxy0",
+                  "1.12.1.2",
                   "2.6.0.1"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -12284,8 +12818,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12297,8 +12831,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12312,6 +12846,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.2"
@@ -12361,6 +12899,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12400,8 +12942,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12413,8 +12955,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.4.3+galaxy0",
-                  "2.10.0.0"
+                  "2.10.0.0",
+                  "3.4.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12429,6 +12971,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.1"
@@ -12478,6 +13024,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12507,12 +13057,12 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.6.0.3",
+                  "3.4.3+galaxy0",
                   "2.6.0.1",
-                  "1.12.1.3",
                   "2.6.0.2",
                   "2.10.0.0",
-                  "3.4.3+galaxy0"
+                  "2.6.0.3",
+                  "1.12.1.3"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -12524,8 +13074,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.0.0",
-                  "3.4.3+galaxy0"
+                  "3.4.3+galaxy0",
+                  "2.10.0.0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12537,8 +13087,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.0.0",
-                  "3.4.3+galaxy0"
+                  "3.4.3+galaxy0",
+                  "2.10.0.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12552,6 +13102,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.0"
@@ -12601,6 +13155,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12635,8 +13193,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.6.0.1",
                   "3.4.3+galaxy0",
+                  "2.6.0.1",
                   "2.6.0.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -12644,8 +13202,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.0.0",
-                  "3.4.3+galaxy0"
+                  "3.4.3+galaxy0",
+                  "2.10.0.0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12657,8 +13215,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.0.0",
-                  "3.4.3+galaxy0"
+                  "3.4.3+galaxy0",
+                  "2.10.0.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -12672,6 +13230,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.6.0.3"
@@ -13257,7 +13819,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-09-09 09:24:32 +0000",
+          "modified": "2026-09-09 09:41:02 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nHU_neg_048.mzML\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"xcms fillChromPeaks fillPeaks\"];\n  9 -->|xsetRData| 10;\n  11[\"CAMERA.annotate\"];\n  10 -->|xsetRData| 11;\n  12[\"Batch_correction\"];\n  10 -->|dataMatrix| 12;\n  0 -->|output| 12;\n  11 -->|variableMetadata| 12;\n  13[\"Quality Metrics\"];\n  10 -->|dataMatrix| 13;\n  0 -->|output| 13;\n  11 -->|variableMetadata| 13;\n  14[\"Quality Metrics\"];\n  12 -->|dataMatrix_out| 14;\n  0 -->|output| 14;\n  12 -->|variableMetadata_out| 14;\n  15[\"Generic_Filter\"];\n  12 -->|dataMatrix_out| 15;\n  14 -->|sampleMetadata_out| 15;\n  14 -->|variableMetadata_out| 15;\n  16[\"Univariate\"];\n  15 -->|dataMatrix_out| 16;\n  15 -->|sampleMetadata_out| 16;\n  15 -->|variableMetadata_out| 16;\n  17[\"Generic_Filter\"];\n  15 -->|dataMatrix_out| 17;\n  15 -->|sampleMetadata_out| 17;\n  16 -->|variableMetadata_out| 17;\n  18[\"HMDB MS search\"];\n  17 -->|variableMetadata_out| 18;\n  2[\"MSnbase readMSData\"];\n  1 -->|output| 2;\n  3[\"xcms findChromPeaks xcmsSet\"];\n  2 -->|xsetRData| 3;\n  4[\"xcms plot chromatogram\"];\n  3 -->|xsetRData| 4;\n  5[\"xcms findChromPeaks Merger\"];\n  3 -->|xsetRData| 5;\n  6[\"xcms groupChromPeaks group\"];\n  5 -->|xsetRData| 6;\n  7[\"xcms adjustRtime retcor\"];\n  6 -->|xsetRData| 7;\n  8[\"xcms plot chromatogram\"];\n  7 -->|xsetRData| 8;\n  9[\"xcms groupChromPeaks group\"];\n  7 -->|xsetRData| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nHU_neg_048.mzML\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nInput dataset collection\"]\n  10[label=\"xcms fillChromPeaks fillPeaks\"]\n  9 -> 10 [label=\"xsetRData\"]\n  11[label=\"CAMERA.annotate\"]\n  10 -> 11 [label=\"xsetRData\"]\n  12[label=\"Batch_correction\"]\n  10 -> 12 [label=\"dataMatrix\"]\n  0 -> 12 [label=\"output\"]\n  11 -> 12 [label=\"variableMetadata\"]\n  13[label=\"Quality Metrics\"]\n  10 -> 13 [label=\"dataMatrix\"]\n  0 -> 13 [label=\"output\"]\n  11 -> 13 [label=\"variableMetadata\"]\n  14[label=\"Quality Metrics\"]\n  12 -> 14 [label=\"dataMatrix_out\"]\n  0 -> 14 [label=\"output\"]\n  12 -> 14 [label=\"variableMetadata_out\"]\n  15[label=\"Generic_Filter\"]\n  12 -> 15 [label=\"dataMatrix_out\"]\n  14 -> 15 [label=\"sampleMetadata_out\"]\n  14 -> 15 [label=\"variableMetadata_out\"]\n  16[label=\"Univariate\"]\n  15 -> 16 [label=\"dataMatrix_out\"]\n  15 -> 16 [label=\"sampleMetadata_out\"]\n  15 -> 16 [label=\"variableMetadata_out\"]\n  17[label=\"Generic_Filter\"]\n  15 -> 17 [label=\"dataMatrix_out\"]\n  15 -> 17 [label=\"sampleMetadata_out\"]\n  16 -> 17 [label=\"variableMetadata_out\"]\n  18[label=\"HMDB MS search\"]\n  17 -> 18 [label=\"variableMetadata_out\"]\n  2[label=\"MSnbase readMSData\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"xcms findChromPeaks xcmsSet\"]\n  2 -> 3 [label=\"xsetRData\"]\n  4[label=\"xcms plot chromatogram\"]\n  3 -> 4 [label=\"xsetRData\"]\n  5[label=\"xcms findChromPeaks Merger\"]\n  3 -> 5 [label=\"xsetRData\"]\n  6[label=\"xcms groupChromPeaks group\"]\n  5 -> 6 [label=\"xsetRData\"]\n  7[label=\"xcms adjustRtime retcor\"]\n  6 -> 7 [label=\"xsetRData\"]\n  8[label=\"xcms plot chromatogram\"]\n  7 -> 8 [label=\"xsetRData\"]\n  9[label=\"xcms groupChromPeaks group\"]\n  7 -> 9 [label=\"xsetRData\"]\n}",
           "workflow_tools": [
@@ -13443,6 +14005,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -13511,6 +14078,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -13556,6 +14128,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -13618,6 +14194,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.8"
@@ -13667,6 +14247,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -13728,6 +14312,10 @@
                 "state": "exact",
                 "version": "2.2.4",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.4"
@@ -13777,6 +14365,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -13840,6 +14432,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.7.6"
@@ -13886,6 +14482,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -13963,6 +14563,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2018-10-01"
@@ -14012,6 +14616,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14029,8 +14637,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.7+camera1.48.0-galaxy3",
-                  "2.2.7+camera1.48.0-galaxy1"
+                  "2.2.7+camera1.48.0-galaxy1",
+                  "2.2.7+camera1.48.0-galaxy3"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -14075,12 +14683,16 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.7+camera1.48.0-galaxy1",
+                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.6+camera1.48.0-galaxy1",
                   "2.2.6+camera1.48.0-galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.4"
@@ -14130,6 +14742,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14195,6 +14811,10 @@
                 "state": "exact",
                 "version": "2.2.7+camera1.48.0-galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.7+camera1.48.0-galaxy1"
@@ -14241,6 +14861,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -14322,6 +14946,10 @@
                 "state": "exact",
                 "version": "2.16.1+galaxy2",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.16.1+galaxy2"
@@ -14368,6 +14996,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -14440,6 +15072,10 @@
                   "2.16.1+galaxy2"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.8.2.1"
@@ -14489,6 +15125,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14556,6 +15196,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -14605,6 +15249,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14683,6 +15331,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -14732,6 +15384,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14805,6 +15461,10 @@
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.0"
@@ -14854,6 +15514,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14871,8 +15535,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -14894,8 +15558,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.4.4.0",
                   "3.12.0+galaxy0"
                 ],
@@ -14904,8 +15568,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.12.0+galaxy0",
                   "2.1.0"
                 ],
@@ -14932,6 +15596,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -14981,6 +15649,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -14998,8 +15670,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -15024,8 +15696,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.12.0+galaxy0",
                   "2.1.0"
                 ],
@@ -15049,12 +15721,16 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.12.0+galaxy0",
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.0"
@@ -15101,6 +15777,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -15183,6 +15863,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -15229,6 +15913,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -15301,6 +15989,10 @@
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.0"
@@ -15350,6 +16042,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -15367,8 +16063,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -15390,8 +16086,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.4.4.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -15399,8 +16095,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.4.4.0",
                   "3.12.0+galaxy0"
                 ],
@@ -15427,6 +16123,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -15476,6 +16176,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -15493,8 +16197,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -15539,12 +16243,16 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.12.0+galaxy0",
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.0"
@@ -15594,6 +16302,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -15673,6 +16385,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -15722,6 +16438,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -15791,6 +16511,10 @@
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.1"
@@ -15837,6 +16561,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -15919,6 +16647,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy1",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy1"
@@ -15965,6 +16697,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -16037,6 +16773,10 @@
                   "3.12.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.4.4.1"
@@ -16086,6 +16826,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -16145,6 +16889,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.1.2"
@@ -16194,6 +16942,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -16257,6 +17009,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.0.0"
@@ -16303,6 +17059,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -16372,6 +17132,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2017.04"
@@ -16418,6 +17182,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -16484,6 +17252,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2020.01"
@@ -17170,6 +17942,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -17238,6 +18015,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -17286,6 +18068,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -17303,8 +18089,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.7+camera1.48.0-galaxy3",
-                  "2.2.7+camera1.48.0-galaxy1"
+                  "2.2.7+camera1.48.0-galaxy1",
+                  "2.2.7+camera1.48.0-galaxy3"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -17326,8 +18112,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.7+camera1.48.0-galaxy1",
+                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.4"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -17335,8 +18121,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.7+camera1.48.0-galaxy1",
+                  "2.2.7+camera1.48.0-galaxy3",
                   "2.2.4",
                   "2.2.0"
                 ],
@@ -17369,6 +18155,10 @@
                 "state": "exact",
                 "version": "2.2.6+camera1.48.0-galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.6+camera1.48.0-galaxy0"
@@ -17415,6 +18205,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -17486,6 +18280,10 @@
                 "state": "exact",
                 "version": "2.16.1+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.16.1+galaxy0"
@@ -17532,6 +18330,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -17606,6 +18408,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -17655,6 +18461,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -17723,6 +18533,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -17772,120 +18586,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
-                ],
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.org"
-              }
-            ],
-            "version": "3.12.0+galaxy0"
-          },
-          {
-            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mbac.gmu.edu:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.hyphy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -17957,6 +18658,135 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "3.12.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
+                ],
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -18006,6 +18836,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -18023,8 +18857,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
                 ],
                 "server": "http://galaxy.inf.ethz.ch"
               },
@@ -18046,8 +18880,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.12.0+galaxy4",
                   "3.12.0+galaxy3",
+                  "3.12.0+galaxy4",
                   "3.4.4.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -18078,6 +18912,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -18127,6 +18965,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -18195,6 +19037,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -18244,6 +19090,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -18307,6 +19157,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -18353,6 +19207,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -18424,6 +19282,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -18470,6 +19332,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -18533,6 +19399,10 @@
                 "state": "exact",
                 "version": "19.12",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "19.12"
@@ -18579,6 +19449,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -18654,6 +19528,10 @@
                 "state": "exact",
                 "version": "1.2.8",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.2.8"
@@ -18915,6 +19793,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -18983,6 +19866,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -19028,6 +19916,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -19091,6 +19983,10 @@
                 "state": "exact",
                 "version": "2.3.10",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.3.10"
@@ -19140,6 +20036,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -19199,6 +20099,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.2.8"
@@ -19248,6 +20152,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -19310,6 +20218,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.0.7"
@@ -19359,6 +20271,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -19422,6 +20338,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.0.0"
@@ -19471,6 +20391,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -19534,6 +20458,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2020.01"
@@ -19580,6 +20508,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -19655,6 +20587,10 @@
                 "state": "exact",
                 "version": "1.2.8",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "1.2.8"
@@ -20128,6 +21064,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite",
             "usegalaxy": false
@@ -20196,6 +21137,11 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)",
+            "usegalaxy": false
           }
         ],
         "tools": [
@@ -20241,6 +21187,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -20312,6 +21262,10 @@
                 "state": "exact",
                 "version": "2.16.1+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "2.16.1+galaxy0"
@@ -20361,6 +21315,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -20424,6 +21382,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy3",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy3"
@@ -20473,6 +21435,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -20541,6 +21507,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -20590,120 +21560,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.12.0+galaxy4",
-                  "3.12.0+galaxy3"
-                ],
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.4.4.0"
-                ],
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "exact",
-                "version": "3.12.0+galaxy0",
-                "server": "https://usegalaxy.org"
-              }
-            ],
-            "version": "3.12.0+galaxy0"
-          },
-          {
-            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mbac.gmu.edu:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.hyphy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -20775,6 +21632,135 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "3.12.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.12.0+galaxy3",
+                  "3.12.0+galaxy4"
+                ],
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.4.4.0"
+                ],
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "exact",
+                "version": "3.12.0+galaxy0",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -20821,6 +21807,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -20889,6 +21879,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy3",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy3"
@@ -20935,6 +21929,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -21006,6 +22004,10 @@
                 "state": "exact",
                 "version": "3.12.0+galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.12.0+galaxy0"
@@ -21052,6 +22054,10 @@
               {
                 "state": "missing",
                 "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
               },
               {
                 "state": "missing",
@@ -21116,6 +22122,10 @@
                 "state": "exact",
                 "version": "3.0.0+metaMS1.24.0-galaxy0",
                 "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
               }
             ],
             "version": "3.0.0+metaMS1.24.0-galaxy0"
