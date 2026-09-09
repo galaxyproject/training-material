@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Bacterial pangenomics
-zenodo_link: 'https://zenodo.org/records/1'
+zenodo_link: 'https://zenodo.org/record/'
 draft: true
 questions:
 - to do
