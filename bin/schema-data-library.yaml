@@ -1,0 +1,86 @@
+---
+type: map
+required: yes
+mapping:
+  destination:
+    type: map
+    required: yes
+    mapping:
+      type:
+        type: str
+        required: yes
+        enum:
+          - library
+      name:
+        type: str
+        required: yes
+        enum:
+          - "GTN - Material"
+      description:
+        type: str
+      synopsis:
+        type: str
+        enum:
+          - "Galaxy Training Network Material. See https://training.galaxyproject.org"
+  items:
+    type: seq
+    required: yes
+    sequence:
+      - type: map
+        required: yes
+        mapping:
+          name:
+            type: str
+            required: yes
+            enum: # todo: auto-detect all our topic names and check
+              - Galaxy Server Administration
+              - Image Analysis using Deep Learning
+              - Assembly
+              - Earth Data science
+              - Galaxy Community Building
+              - Computational Chemistry
+              - Contributing to the Galaxy Training Material
+              - Foundations of Data Science
+              - Development in Galaxy
+              - Digital Humanities
+              - Ecology
+              - Epigenetics
+              - Evolution
+              - FAIR Data, Workflows, and Research
+              - Using Galaxy and Managing your Data
+              - Genome Annotation
+              - Image Analysis using Galaxy
+              - Introduction to Galaxy Analyses
+              - Materials Science
+              - Metabolomics
+              - Microbiome
+              - Proteomics
+              - Sequence Analysis
+              - Single Cell
+              - Statistics and Machine Learning
+              - Synthetic Biology
+              - Teaching and Hosting Galaxy Training
+              - Transcriptomics
+              - Variant Analysis
+              - Visualisation
+          description:
+            type: str
+          items:
+            type: any
+          url:
+            type: str
+          src:
+            type: str
+            enum:
+              - url
+          ext:
+            type: str
+          info:
+            type: str
+          md5sum:
+            type: str
+            #required: true
+            pattern: /^[0-9a-f]{32}$/
+
+
+
