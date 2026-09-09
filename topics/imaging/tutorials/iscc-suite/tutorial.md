@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Content Tracking and Verification in Galaxy Workflows with ISCC-SUM
 level: Intermediate
 subtopic: advanced
-zenodo_link: https://zenodo.org/records/18611428
+zenodo_link: 'https://zenodo.org/record/18611428'
 answer_histories:
 - label: UseGalaxy.eu - ISCC workflow integration
   history: https://usegalaxy.eu/u/maartenpaul/h/iscc-tutorial-1

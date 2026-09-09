@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Very Short Introductions: QC'
-zenodo_link: https://zenodo.org/records/10870107
+zenodo_link: 'https://zenodo.org/record/10870107'
 questions:
   - 'How do I know my sequencing data is good?'
 objectives:

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
-zenodo_link: 'https://zenodo.org/records/11089653'
+zenodo_link: 'https://zenodo.org/record/11089653'
 tags:
   - phylogenetics
   - evolution

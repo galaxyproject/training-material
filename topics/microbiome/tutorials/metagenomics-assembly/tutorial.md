@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Assembly of metagenomic sequencing data
-zenodo_link: https://zenodo.org/record/7818827
+zenodo_link: 'https://zenodo.org/record/7818827'
 level: Introductory
 questions:
 - Why metagenomic data should be assembled?

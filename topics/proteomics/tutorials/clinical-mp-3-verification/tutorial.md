@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Clinical Metaproteomics 3: Verification"
-zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
+zenodo_link: 'https://zenodo.org/record/10105821'
 questions:
 - Why do we need to verify our identified peptides
 - What is the importance of making a new database for quantification

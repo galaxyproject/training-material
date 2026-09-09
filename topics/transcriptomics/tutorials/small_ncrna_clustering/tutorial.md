@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Small Non-coding RNA Clustering using BlockClust
-zenodo_link: https://zenodo.org/record/1491876
+zenodo_link: 'https://zenodo.org/record/1491876'
 questions:
 - What do the read profiles of small non-coding RNAs represent?
 - How to cluster the read profiles based on some intrinsic features?

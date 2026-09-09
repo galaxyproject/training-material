@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Image classification in Galaxy with fruit 360 dataset
-zenodo_link: https://zenodo.org/record/5702887
+zenodo_link: 'https://zenodo.org/record/5702887'
 questions:
 - How to solve an image classification problem using convolutional neural network (CNN)?
 objectives:

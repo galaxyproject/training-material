@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Evaluating and ranking a set of pathways based on multiple metrics
-zenodo_link: https://zenodo.org/record/6628296
+zenodo_link: 'https://zenodo.org/record/6628296'
 questions:
 - How to evaluate a set of heterologous pathways ?
 objectives:

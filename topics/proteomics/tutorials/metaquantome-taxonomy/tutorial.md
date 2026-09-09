@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "metaQuantome 3: Taxonomy"
-zenodo_link: "https://doi.org/10.5281/zenodo.4110725"
+zenodo_link: 'https://zenodo.org/record/4110725'
 level: Intermediate
 questions:
  - "How do I look at differentially expressed taxa?"

@@ -5,7 +5,7 @@ redirect_from:
   - /topics/proteomics/tutorials/neoantigen-3-fragpipe-discovery/tutorial.html
 
 title: "Neoantigen 2: Database merge and FragPipe discovery"
-zenodo_link: 'https://zenodo.org/records/14374118'
+zenodo_link: 'https://zenodo.org/record/14374118'
 questions:
 - What are the key features and unique sequences in protein datasets that contribute to neoantigen discovery?
 - How can we identify neoantigens from proteomic data?

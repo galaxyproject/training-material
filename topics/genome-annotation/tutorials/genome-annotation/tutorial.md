@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Genome Annotation"
-zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
+zenodo_link: 'https://zenodo.org/record/1250793'
 tags:
   - prokaryote
 questions:

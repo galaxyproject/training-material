@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "De Bruijn Graph Assembly"
-zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+zenodo_link: 'https://zenodo.org/record/582600'
 questions:
   - "What are the factors that affect genome assembly?"
   - "How does Genome assembly work?"

@@ -6,7 +6,7 @@ redirect_from:
 
 
 title: "Neoantigen 3: PepQuery2 Verification"
-zenodo_link: 'https://zenodo.org/records/15090517'
+zenodo_link: 'https://zenodo.org/record/15090517'
 questions:
 - How can neoantigens be verified using bioinformatics tools?
 - What is the role of mass spectrometry and peptide sequence databases in neoantigen discovery?

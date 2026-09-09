@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2
 
-zenodo_link: https://zenodo.org/records/13710591
+zenodo_link: 'https://zenodo.org/record/13710591'
 
 abbreviations:
   SPUN: Society for the Protection of Underground Networks

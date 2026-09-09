@@ -6,7 +6,7 @@ redirect_from:
   - /topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Using dataset collections"
-zenodo_link: "https://doi.org/10.5281/zenodo.5119008"
+zenodo_link: 'https://zenodo.org/record/5119008'
 tags:
 - collections
 level: Intermediate

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Unsupervised Analysis of Bone Marrow Cells with Flexynesis
-zenodo_link: 'https://zenodo.org/records/16287482'
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How can we identify distinct cell populations in bone marrow single-cell data without prior labels?
 - What cellular patterns and relationships can be discovered through unsupervised deep learning approaches?
