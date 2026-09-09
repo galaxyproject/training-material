@@ -199,7 +199,7 @@ The resulting workflow should look something like this:
 
 # Apply workflow to screen
 
-Now we want to apply our extracted workflow to a series of images and merge the results. For this purpose, we create a new workflow that uses the previously created workflow as a sub-workflow.
+Now we want to apply our extracted workflow to a series of images and merge the results. For this purpose, we create another workflow that uses the previously created workflow as a sub-workflow.
 
 > <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
