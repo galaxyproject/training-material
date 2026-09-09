@@ -222,7 +222,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > >
 > {: .comment}
 > 
-> > <comment-title>Alternately running qiime2 cutadapt trim-paired</comment-title>
+> > <details-title>Alternately running qiime2 cutadapt trim-paired</details-title>
 > > 
 > > The following step shows the tool set up for running `qiime2 cutadapt trim-paired` to perform a simplified trimming approach without the `NextSeq trimming` option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone `cutadapt` (including `NextSeq trimming`) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
 > >
@@ -248,9 +248,15 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > > >
 > > {: .hands_on}
 > >
-> {: .comment}
+> {: .details}
 > 
 {: .hands_on}
+
+> <comment-title>Additional Quality Control Steps</comment-title>
+>
+> When processing your own data, you should inspect the quality of your datasets before and after running `cutadapt` in order to determine the parameters to set for `cutadapt` and then to ensure that `cutadapt` has adequately cleaned your data. These quality control steps can be done using the tools `FastQC` and `MultiQC`. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
+> 
+{: .comment}
 
 ## Create a QIIME2 Artefact
 
@@ -917,8 +923,6 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 Some packages require your data to be in a consistent order (i.e. the order of your ASVs in the taxonomy table rows to be the same order of ASVs in the columns of your ASV table). It's recommended to clean up your taxonomy file. You can have blank spots where the level of classification was not completely resolved.
 
 # Conclusion
-
-We have used `QIIME2` to process fat-tailed dunnart faecal samples and analyse differences in the observed microbiome between 5 captive and 5 wild fat-tailed dunnarts.
 
 ## What have we done?
 
