@@ -76,8 +76,8 @@ def update_data_library(path, topic, tutorial, zenodo_record)
       'src' => 'url',
       'ext' => ext || f['type'],
       'info' => "https://doi.org/10.5281/zenodo.#{zenodo_id}",
-      # 'checksum' => f['checksum'],
-      # 'key' => f['key'],
+      'md5sum' => f['checksum'].sub('md5:',''),
+      #'key' => f['key'],
     }
   end
 
@@ -111,6 +111,7 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
   zenodo_record = request("https://zenodo.org/api/records/#{tutorial_zenodo_id}")
   new_zenodo_id = zenodo_record['id'].to_s
 
+  print(zenodo_record)
   # If it's redirected we'll get a different ID here
   puts "Discovered zenodo link: #{new_zenodo_id}"
 
