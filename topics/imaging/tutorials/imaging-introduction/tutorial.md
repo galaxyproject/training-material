@@ -30,7 +30,9 @@ contributions:
     - thomaswollmann
     - shiltemann
     - kostrykin
+    - dianichj
   funding:
+    - deNBI
     - elixir-europe
 tags:
   - Image segmentation
@@ -118,26 +120,24 @@ Now, we can extract metadata from an image.
 
 # Visual Inspection of TIFF Images
 
-Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF cannot be displayed in most web browsers directly. Therefore, for visual inspection of TIFF images, we use a TIFF visualization plugin in Galaxy.
+Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). TIFF images can be visually inspected directly within Galaxy.
 
 > <hands-on-title>Visual Inspection of TIFF Images</hands-on-title>
 >
-> 1. Click on the title of your file to see the row of small icons for saving, linking, etc.:
-> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](../../images/imaging-introduction/LittleJobIcons.png)
-> 2. Click on the **visualise icon** {% icon galaxy-visualise %} and then select the **Tiff Viewer** visualization plugin.
+> 1. Click on the dataset to expand it, then click **Preview** {% icon galaxy-eye %} to show the image for direct visual inspection.
 >
 {: .hands_on}
 
 Your image should look something like this:
 
-![raw input image](../../images/imaging-introduction/viz_input.png){: width="75%"}
+![raw input image](../../images/imaging-introduction/tiffviewer_input.png){: width="75%"}
 
 > <question-title></question-title>
 >
-> You can observe that the image content is barely visible. Why?
+> The image now displays in Galaxy as a grayscale image. The lowest intensity values are shown as black and the highest intensity values as white. But what range of intensity values do those correspond to?
 >
 > > <solution-title></solution-title>
-> > The original image is 16-bit and the intensity values of the image (33069 to 36863) are spread over a very small fraction (only about 6%) of the intensity values that can be represented using 16 bits (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
+> > The original image is 16-bit and the intensity values of the image (33069 to 36863, where 33069 corresponds to black and 36863 corresponds to white) only span about 6% of the range that can be represented using 16 bits (0 to 65535). For direct visual inspection of the image, Galaxy automatically performs a _windowing operation_ on the intensity values of the image, so that intensity values that are not present in the image do not get encoded in the color values. This strongly enhances visual recognisability of the image (compared to encoding 0 as black and 65535 as white without using windowing for the intensity values). Other visualization tools might not apply windowing automatically and will require explicit normalization of the image intensity histogram.
 > {: .solution }
 {: .question}
 
