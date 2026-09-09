@@ -1,0 +1,2884 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Aligned with tutorial.md: corrected gene-filter order, added Inspect AnnData checkpoints after filtering steps 2/4/6, added regress_out(total_counts) and a second PCA/PCA QC plot, and rewired neighbours to PCA after regression.\nCellTypist fix: normalization is performed by pp.normalize_total(target_sum=10000) followed by pp.log1p. The pp.regress_out branch is retained only for PCA comparison, because regression replaces .X with residuals that CellTypist rejects. Neighbors and all downstream clustering/spatial/CellTypist/LIANA steps now branch from the PCA computed on normalized log1p expression, preserving valid .X.\n\nWorkflow output labels and dataset rename actions were normalised to unique, human-readable names for GTN workflow testing and Zenodo expected outputs. Large spatialdata.zip intermediates/final objects are intentionally not exposed as test outputs. Analytical tool order, parameters, and connections are unchanged.",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "full-V1-Breast-Cancer-Block-A-Section-1-workflow",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Spatial Data object"
+                }
+            ],
+            "label": "Spatial Data object",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 86.63933649532893
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "dbfd99b4-78bb-4b3e-9a04-c3dbf0a92ac7",
+            "when": null,
+            "workflow_outputs": [],
+            "post_job_actions": {}
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Operations",
+            "outputs": [
+                {
+                    "name": "result_adata",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 343.71011752814195,
+                "top": 67.2747985205412
+            },
+            "post_job_actions": {
+                "RenameDatasetActionresult_adata": {
+                    "action_arguments": {
+                        "newname": "Initial AnnData table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "result_adata"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ad593d73a014",
+                "name": "spatialdata_operation",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"export_table\", \"__current_case__\": 23, \"table_name\": \"table\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "5b97b047-be7e-4b43-a919-a3b3f3ff377b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Initial AnnData table",
+                    "output_name": "result_adata",
+                    "uuid": "314501bd-adef-498e-9b3c-81ba64466e40"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "result_adata"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 587.6267765201044,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActiongeneral": {
+                    "action_arguments": {
+                        "newname": "Initial AnnData dimensions"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "general"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3a9aee9e3551",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.13.3+galaxy0",
+            "type": "tool",
+            "uuid": "34a9d983-c25a-4e95-b561-c8dcb558dc53",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Initial AnnData dimensions",
+                    "output_name": "general",
+                    "uuid": "59c1d3d5-58cd-43a6-8bcf-802b21d6f628"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "adata": {
+                    "id": 1,
+                    "output_name": "result_adata"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy Inspect and manipulate",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 581.8810712007162,
+                "top": 232.03801568670136
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "QC metrics before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a8d291df615d",
+                "name": "scanpy_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.calculate_qc_metrics\", \"__current_case__\": 0, \"expr_type\": \"counts\", \"var_type\": \"genes\", \"qc_vars\": \"\", \"percent_top\": \"50,100,200,300\", \"layer\": \"\", \"use_raw\": false, \"log1p\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "c4e5adee-9c0e-4941-82d3-c1685fc7ce51",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "QC metrics before filtering",
+                    "output_name": "anndata_out",
+                    "uuid": "6b87b499-73f0-4b0a-aa9a-3065ef32b4d0"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 838.7268825347808,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActiongeneral": {
+                    "action_arguments": {
+                        "newname": "QC summary before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "general"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "b26b87f5a13c",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.11.4+galaxy3",
+            "type": "tool",
+            "uuid": "fb0a113e-7eb3-4916-81b5-dce19224765c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "QC summary before filtering",
+                    "output_name": "general",
+                    "uuid": "d74e2e79-becf-4f96-b0e5-6eef2afb04ed"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 838.7268825347808,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Scatter plot before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.scatter\", \"__current_case__\": 0, \"type\": {\"type\": \"xy\", \"__current_case__\": 0, \"x\": \"total_counts\", \"y\": \"n_genes_by_counts\", \"log\": false, \"color\": \"pct_counts_in_top_50_genes\", \"layers\": {\"use_layers\": \"false\", \"__current_case__\": 1}}, \"use_raw\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"none\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"color_map\": null, \"palette\": null, \"frameon\": true, \"size\": null, \"title\": \"\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "553585f4-52b8-4b54-8376-7c32facbad83",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Scatter plot before filtering",
+                    "output_name": "out_png",
+                    "uuid": "9646b945-8901-486a-80d3-7142d27aa2dc"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 838.7268825347808,
+                "top": 314.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Violin plots before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 4, \"interactive_plot\": false, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"n_genes_by_counts, total_counts\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 1}}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw_method\": \"scott\", \"bw_adjust\": \"1.0\", \"orient\": null, \"linewidth\": null, \"color\": null, \"saturation\": \"0.75\"}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "edb1da86-bbcf-4214-b02c-179c11fde835",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Violin plots before filtering",
+                    "output_name": "out_png",
+                    "uuid": "418330e7-dadb-4aa5-8a19-e3f86e32a04a"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "operation_condi|adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SpatialData Operations",
+                    "name": "operation_condi"
+                }
+            ],
+            "label": null,
+            "name": "SpatialData Operations",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                }
+            ],
+            "position": {
+                "left": 840.7935952509483,
+                "top": 446.44166752548654
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ad593d73a014",
+                "name": "spatialdata_operation",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"import_table\", \"__current_case__\": 24, \"adata\": {\"__class__\": \"ConnectedValue\"}, \"table_name\": \"table_qc\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "c09600ac-5a7c-4ecf-9ef2-d579f1f9c94f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 851.3243037903364,
+                "top": 640.0200896962901
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter minimum genes expressed per spot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 0, \"filter\": {\"filter\": \"min_genes\", \"__current_case__\": 2, \"min_genes\": \"500\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "7ff3302f-136b-4133-99ea-639a3019e2a3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter minimum genes expressed per spot",
+                    "output_name": "anndata_out",
+                    "uuid": "40c936e4-4ddf-47ea-a22c-952373f52a4b"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 7,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 1058.7268825347808,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Spatial Plot total_counts before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"V1_Breast_Cancer_Block_A_Section_1_hires_image\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [], \"render_points\": [], \"render_shapes\": [{\"__index__\": 0, \"shapes_element\": \"V1_Breast_Cancer_Block_A_Section_1\", \"color\": \"total_counts\", \"fill_alpha\": null, \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_condi\": {\"outline_type\": \"no\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"scale\": \"1.0\", \"method\": null, \"table_name\": \"table_qc\", \"table_layer\": null, \"gene_symbols\": null, \"shape\": null, \"colorbar\": \"auto\", \"datashader_reduction\": \"None\"}], \"show_params\": {\"coordinate_systems\": \"V1_Breast_Cancer_Block_A_Section_1\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "92f2827f-0bcb-4770-9891-9c59d2ca447e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Spatial Plot total_counts before filtering",
+                    "output_name": "plot_output",
+                    "uuid": "3e9c73f1-062f-4159-95d9-c462f44f6b1a"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 7,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 1058.7268825347808,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Spatial Plot n_genes_by_counts before filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"V1_Breast_Cancer_Block_A_Section_1_hires_image\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [], \"render_points\": [], \"render_shapes\": [{\"__index__\": 0, \"shapes_element\": \"V1_Breast_Cancer_Block_A_Section_1\", \"color\": \"n_genes_by_counts\", \"fill_alpha\": null, \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_condi\": {\"outline_type\": \"no\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"scale\": \"1.0\", \"method\": null, \"table_name\": \"table_qc\", \"table_layer\": null, \"gene_symbols\": null, \"shape\": null, \"colorbar\": \"auto\", \"datashader_reduction\": \"None\"}], \"show_params\": {\"coordinate_systems\": \"V1_Breast_Cancer_Block_A_Section_1\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "a605d0b7-79bf-41bd-910b-18736b2d3cc7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Spatial Plot n_genes_by_counts before filtering",
+                    "output_name": "plot_output",
+                    "uuid": "e05a5c78-4d3d-4083-bae1-ccae17fd6ad6"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "adata": {
+                    "id": 8,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1058.7268825347808,
+                "top": 314.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter minimum counts per spot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 0, \"filter\": {\"filter\": \"min_counts\", \"__current_case__\": 0, \"min_counts\": \"1000\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "f98066bb-347a-4e99-8754-a0236925ab46",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter minimum counts per spot",
+                    "output_name": "anndata_out",
+                    "uuid": "d7169911-e30a-496c-8381-1d6e81c2834b"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect after minimum cell filters",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1060,
+                "top": 560
+            },
+            "post_job_actions": {
+                "RenameDatasetActiongeneral": {
+                    "action_arguments": {
+                        "newname": "Inspect after minimum spot filters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "general"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "b26b87f5a13c",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.11.4+galaxy3",
+            "type": "tool",
+            "uuid": "d0a0aaf2-64a6-4371-bb90-dde6eee8cb8c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Inspect after minimum spot filters",
+                    "output_name": "general",
+                    "uuid": "01394547-200c-4fd2-9e5b-e7decd0007db"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "adata": {
+                    "id": 11,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1277.2244026045405,
+                "top": 74.70705039773603
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter minimum spots expressed per gene"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_genes\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"3\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "b0f7baee-0585-4e8b-80d3-b0a8610957c7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter minimum spots expressed per gene",
+                    "output_name": "anndata_out",
+                    "uuid": "dea0f5dc-3839-49c4-9a3f-5b3856da494a"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "adata": {
+                    "id": 13,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1498.7268825347808,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter minimum counts per gene"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.filter_genes\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_counts\", \"__current_case__\": 0, \"min_counts\": \"3\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "f662dd77-ce47-4da0-a6ec-1934aff95c8f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter minimum counts per gene",
+                    "output_name": "anndata_out",
+                    "uuid": "492b0556-5366-48bc-9bab-103d56757b5c"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 14,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect after gene filters",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1500,
+                "top": 560
+            },
+            "post_job_actions": {
+                "RenameDatasetActiongeneral": {
+                    "action_arguments": {
+                        "newname": "Inspect after gene filters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "general"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "b26b87f5a13c",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.11.4+galaxy3",
+            "type": "tool",
+            "uuid": "1041deb9-fbf3-43f1-af5d-5ce3c9d7667f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Inspect after gene filters",
+                    "output_name": "general",
+                    "uuid": "8a24ed16-aabd-425f-9316-05c39788b2f7"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "adata": {
+                    "id": 14,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1718.7268825347808,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter maximum counts per spot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 0, \"filter\": {\"filter\": \"max_counts\", \"__current_case__\": 1, \"max_counts\": \"75000\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "78420667-3178-4d8c-9e1a-a1c807da663c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter maximum counts per spot",
+                    "output_name": "anndata_out",
+                    "uuid": "b579c64e-f53a-4a43-8b33-580b07ce5113"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "adata": {
+                    "id": 16,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1938.7268825347808,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Filter maximum genes per spot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 0, \"filter\": {\"filter\": \"max_genes\", \"__current_case__\": 3, \"max_genes\": \"10000\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "80c82661-ddc1-4fc8-b4d1-e2a397728f8d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter maximum genes per spot",
+                    "output_name": "anndata_out",
+                    "uuid": "0143a60b-0d84-4acd-9656-b7bb04e0ec70"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect after upper cell filters",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1940,
+                "top": 560
+            },
+            "post_job_actions": {
+                "RenameDatasetActiongeneral": {
+                    "action_arguments": {
+                        "newname": "Inspect after upper spot filters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "general"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.11.4+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "b26b87f5a13c",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.11.4+galaxy3",
+            "type": "tool",
+            "uuid": "74d135f9-8bb1-4469-9518-033b198ab81b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Inspect after upper spot filters",
+                    "output_name": "general",
+                    "uuid": "f6a7ce96-5c69-4f32-a017-7dac7d286e22"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "adata": {
+                    "id": 17,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy Inspect and manipulate",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 2158.7268825347805,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "QC metrics after filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a8d291df615d",
+                "name": "scanpy_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.calculate_qc_metrics\", \"__current_case__\": 0, \"expr_type\": \"counts\", \"var_type\": \"genes\", \"qc_vars\": \"\", \"percent_top\": \"50,100,200,300\", \"layer\": \"\", \"use_raw\": false, \"log1p\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "f7214b39-9b8d-4aa6-a2e1-e701b8967b16",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "QC metrics after filtering",
+                    "output_name": "anndata_out",
+                    "uuid": "6df152fd-4d8f-43c8-af39-b5d1e60270bf"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "adata": {
+                    "id": 19,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2378.7268825347805,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Scatter plot after filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.scatter\", \"__current_case__\": 0, \"type\": {\"type\": \"xy\", \"__current_case__\": 0, \"x\": \"total_counts\", \"y\": \"n_genes_by_counts\", \"log\": false, \"color\": \"pct_counts_in_top_50_genes\", \"layers\": {\"use_layers\": \"false\", \"__current_case__\": 1}}, \"use_raw\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"none\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"color_map\": null, \"palette\": null, \"frameon\": true, \"size\": null, \"title\": \"\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "5c32627c-fbe2-4666-a181-6028ac63f985",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Scatter plot after filtering",
+                    "output_name": "out_png",
+                    "uuid": "9976361f-8b18-405a-bf5b-e49dd0a299d1"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "adata": {
+                    "id": 19,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2378.7268825347805,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Violin plots after filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 4, \"interactive_plot\": false, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"n_genes_by_counts, total_counts\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 1}}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw_method\": \"scott\", \"bw_adjust\": \"1.0\", \"orient\": null, \"linewidth\": null, \"color\": null, \"saturation\": \"0.75\"}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "dddc6d9a-3bdc-4860-8f5a-04cef543be16",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Violin plots after filtering",
+                    "output_name": "out_png",
+                    "uuid": "7b29ceaf-ed0d-4c3f-a7ab-830ba5d7a67c"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "operation_condi|adata": {
+                    "id": 19,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SpatialData Operations",
+                    "name": "operation_condi"
+                }
+            ],
+            "label": null,
+            "name": "SpatialData Operations",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                }
+            ],
+            "position": {
+                "left": 2366.097490775149,
+                "top": 329.59494158876925
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ad593d73a014",
+                "name": "spatialdata_operation",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"import_table\", \"__current_case__\": 24, \"adata\": {\"__class__\": \"ConnectedValue\"}, \"table_name\": \"table_qc_filtered\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "a762b58c-fb13-48a4-98c9-607a3358bbb3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "adata": {
+                    "id": 19,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy normalize",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 2356.6374059814066,
+                "top": 520.0201048101484
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Normalised AnnData"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2b6498d4c8c6",
+                "name": "scanpy_normalize",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.normalize_total\", \"__current_case__\": 0, \"target_sum\": \"10000.0\", \"exclude_highly_expressed\": {\"exclude_highly_expressed\": \"False\", \"__current_case__\": 1}, \"key_added\": \"\", \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "aca3f731-fe76-4814-98b5-14c8d1f13596",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Normalised AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "d6d4f6c9-80fe-4ce3-93d0-40560a8fa881"
+                }
+            ]
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 22,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 2599.76209842303,
+                "top": 65.2469554004041
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Spatial Plot total_counts after filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"V1_Breast_Cancer_Block_A_Section_1_hires_image\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [], \"render_points\": [], \"render_shapes\": [{\"__index__\": 0, \"shapes_element\": \"V1_Breast_Cancer_Block_A_Section_1\", \"color\": \"total_counts\", \"fill_alpha\": null, \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_condi\": {\"outline_type\": \"no\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"scale\": \"1.0\", \"method\": null, \"table_name\": \"table_qc_filtered\", \"table_layer\": null, \"gene_symbols\": null, \"shape\": null, \"colorbar\": \"auto\", \"datashader_reduction\": \"None\"}], \"show_params\": {\"coordinate_systems\": \"V1_Breast_Cancer_Block_A_Section_1\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "338f4b5d-92b9-4bb1-a552-240535638f46",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Spatial Plot total_counts after filtering",
+                    "output_name": "plot_output",
+                    "uuid": "d8899793-677b-4e55-8efa-f0e0b0158197"
+                }
+            ]
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 22,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 2593.4553752272013,
+                "top": 204.1671098740304
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Spatial Plot n_genes_by_counts after filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"V1_Breast_Cancer_Block_A_Section_1_hires_image\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [], \"render_points\": [], \"render_shapes\": [{\"__index__\": 0, \"shapes_element\": \"V1_Breast_Cancer_Block_A_Section_1\", \"color\": \"n_genes_by_counts\", \"fill_alpha\": null, \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_condi\": {\"outline_type\": \"no\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"scale\": \"1.0\", \"method\": null, \"table_name\": \"table_qc_filtered\", \"table_layer\": null, \"gene_symbols\": null, \"shape\": null, \"colorbar\": \"auto\", \"datashader_reduction\": \"None\"}], \"show_params\": {\"coordinate_systems\": \"V1_Breast_Cancer_Block_A_Section_1\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "b7076f03-d582-44a8-973e-20e09a054cbc",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Spatial Plot n_genes_by_counts after filtering",
+                    "output_name": "plot_output",
+                    "uuid": "f4df54d6-91fe-4f5e-8c75-68ee6d90c6a4"
+                }
+            ]
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "adata": {
+                    "id": 23,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy Inspect and manipulate",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 2598.7268825347805,
+                "top": 314.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Log-normalised AnnData"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a8d291df615d",
+                "name": "scanpy_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.log1p\", \"__current_case__\": 6, \"base\": null, \"layer\": \"\", \"obsm\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "ffb5884d-a9ad-4c41-b6a6-eb6c974dd342",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Log-normalised AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "b385cd91-4d8a-4c21-aa87-80da44cbcd38"
+                }
+            ]
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "adata": {
+                    "id": 26,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 2818.7268825347805,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with HVGs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2e6029e47eb5",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.highly_variable_genes\", \"__current_case__\": 4, \"flavor\": {\"flavor\": \"cell_ranger\", \"__current_case__\": 1, \"n_top_genes\": \"3000\"}, \"n_bins\": \"20\", \"subset\": false, \"layer\": \"\", \"batch_key\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "17ee0146-0f17-438c-a95b-b9fd924dc9f1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with HVGs",
+                    "output_name": "anndata_out",
+                    "uuid": "5f92b165-679c-492a-8cc7-388daa6f27ce"
+                }
+            ]
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "adata": {
+                    "id": 27,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3038.7268825347805,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot HVGs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.highly_variable_genes\", \"__current_case__\": 9, \"log\": false, \"highly_variable_genes\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "ebf7a42c-bfa1-4fbc-8f48-e9f226612e23",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot HVGs",
+                    "output_name": "out_png",
+                    "uuid": "a1882863-1e26-4e2f-991e-b0e3abe652f3"
+                }
+            ]
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "adata": {
+                    "id": 27,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "PCA on normalized log1p data (main analysis)",
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 3038.7268825347805,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with PCA"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.pca\", \"__current_case__\": 2, \"n_comps\": \"50\", \"layer\": \"\", \"dtype\": \"float32\", \"pca\": {\"chunked\": \"False\", \"__current_case__\": 1, \"zero_center\": true, \"svd_solver\": null, \"random_state\": \"0\"}, \"mask_var\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "45dcc24e-901b-4f6c-88e3-5b2b3217b5b2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with PCA",
+                    "output_name": "anndata_out",
+                    "uuid": "8bb1e8ea-78c1-4cc1-b025-2c92f6125bee"
+                }
+            ]
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "adata": {
+                    "id": 27,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "OPTIONAL: regress out total_counts",
+            "name": "Scanpy remove confounders",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 3260,
+                "top": 360
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData regressed for total_counts"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "80fe16f87825",
+                "name": "scanpy_remove_confounders",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.regress_out\", \"__current_case__\": 0, \"layer\": \"\", \"keys\": \"total_counts\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "c9ba4614-42ad-41ba-b7b8-23999f45a5b5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData regressed for total_counts",
+                    "output_name": "anndata_out",
+                    "uuid": "360c6a0e-78f9-445e-bb2f-51c24c737f13"
+                }
+            ]
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "adata": {
+                    "id": 29,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "Plot PCA before regression",
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3258.7268825347805,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot PCA before regression"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.pca\", \"__current_case__\": 11, \"interactive_plot\": false, \"color\": \"log1p_total_counts,log1p_n_genes_by_counts,total_counts\", \"gene_symbols\": \"\", \"use_raw\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"right margin\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"size\": null, \"color_map\": null, \"palette\": null, \"frameon\": true, \"ncols\": \"4\", \"wspace\": \"0.1\", \"hspace\": \"0.25\", \"title\": \"\"}, \"add_outline\": false, \"outline_color_border\": null, \"outline_color_gap\": null, \"outline_width_border\": \"0.3\", \"outline_width_gap\": \"0.05\", \"matplotlib_pyplot_scatter\": {\"alpha\": null, \"vmin\": null, \"vmax\": null, \"linewidths\": \"0.0\", \"edgecolors\": null}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "17803797-c27d-418e-a0d6-5426f96ae9a3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot PCA before regression",
+                    "output_name": "out_png",
+                    "uuid": "7b829aeb-be17-4abc-96fd-72040db3b886"
+                }
+            ]
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "adata": {
+                    "id": 29,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "Neighbors from non-regressed PCA",
+            "name": "Scanpy Inspect and manipulate",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 3920,
+                "top": 200
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Compute a neighborhood graph of observations"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a8d291df615d",
+                "name": "scanpy_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.neighbors\", \"__current_case__\": 1, \"n_neighbors\": \"15\", \"n_pcs\": null, \"use_rep\": \"\", \"knn\": true, \"pp_neighbors_method\": \"umap\", \"metric\": \"euclidean\", \"random_state\": \"0\", \"key_added\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "94de850d-7ca4-4e55-aea4-d16da8ae6b33",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Compute a neighborhood graph of observations",
+                    "output_name": "anndata_out",
+                    "uuid": "2788f7b3-e0d3-4819-811e-0f5e3f691bcf"
+                }
+            ]
+        },
+        "33": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 33,
+            "input_connections": {
+                "adata": {
+                    "id": 30,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "OPTIONAL: PCA after regression",
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 3480,
+                "top": 360
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "PCA after regression AnnData"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"pp.pca\", \"__current_case__\": 2, \"n_comps\": \"50\", \"layer\": \"\", \"dtype\": \"float32\", \"pca\": {\"chunked\": \"False\", \"__current_case__\": 1, \"zero_center\": true, \"svd_solver\": null, \"random_state\": \"0\"}, \"mask_var\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "6cbfa72d-0275-40ca-a82a-c33aaa138ffc",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "PCA after regression AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "61d941a2-5e48-46bd-a2cd-442b1b0162d5"
+                }
+            ]
+        },
+        "34": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 34,
+            "input_connections": {
+                "adata": {
+                    "id": 32,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 4138.72688253478,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with UMAP"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.umap\", \"__current_case__\": 5, \"min_dist\": \"0.5\", \"spread\": \"1.0\", \"n_components\": \"2\", \"maxiter\": null, \"alpha\": \"1.0\", \"gamma\": \"1.0\", \"negative_sample_rate\": \"5\", \"init_pos\": \"spectral\", \"random_state\": \"0\", \"neighbors_key\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "2b8e4af3-f14d-469c-8f1e-f29c0dbd57c3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with UMAP",
+                    "output_name": "anndata_out",
+                    "uuid": "0e9fc2db-f2be-4efc-a56d-48ac366ff428"
+                }
+            ]
+        },
+        "35": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 35,
+            "input_connections": {
+                "adata": {
+                    "id": 33,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": "OPTIONAL: plot PCA after regression",
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3700,
+                "top": 360
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot PCA after regression"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.pca\", \"__current_case__\": 11, \"interactive_plot\": false, \"color\": \"log1p_total_counts,log1p_n_genes_by_counts,total_counts\", \"gene_symbols\": \"\", \"use_raw\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"right margin\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"size\": null, \"color_map\": null, \"palette\": null, \"frameon\": true, \"ncols\": \"4\", \"wspace\": \"0.1\", \"hspace\": \"0.25\", \"title\": \"\"}, \"add_outline\": false, \"outline_color_border\": null, \"outline_color_gap\": null, \"outline_width_border\": \"0.3\", \"outline_width_gap\": \"0.05\", \"matplotlib_pyplot_scatter\": {\"alpha\": null, \"vmin\": null, \"vmax\": null, \"linewidths\": \"0.0\", \"edgecolors\": null}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "ad057274-ac78-447e-a21d-47334e7beca4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot PCA after regression",
+                    "output_name": "out_png",
+                    "uuid": "5f8d47ee-2d50-4756-8cee-5cf0df29ebce"
+                }
+            ]
+        },
+        "36": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 36,
+            "input_connections": {
+                "adata": {
+                    "id": 34,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4358.72688253478,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot UMAP"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.umap\", \"__current_case__\": 16, \"interactive_plot\": false, \"color\": \"log1p_total_counts,log1p_n_genes_by_counts,total_counts\", \"gene_symbols\": \"\", \"use_raw\": false, \"edges\": {\"edges\": \"False\", \"__current_case__\": 1}, \"arrows\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"right margin\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"size\": null, \"color_map\": null, \"palette\": null, \"frameon\": true, \"ncols\": \"4\", \"wspace\": \"0.1\", \"hspace\": \"0.25\", \"title\": \"\"}, \"add_outline\": false, \"outline_color_border\": null, \"outline_color_gap\": null, \"outline_width_border\": \"0.3\", \"outline_width_gap\": \"0.05\", \"matplotlib_pyplot_scatter\": {\"alpha\": null, \"vmin\": null, \"vmax\": null, \"linewidths\": \"0.0\", \"edgecolors\": null}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "1ad4e641-f51c-44d6-8cd7-d46c9add52a8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot UMAP",
+                    "output_name": "out_png",
+                    "uuid": "ad7087ab-0bcd-4942-940b-a163d24a75bf"
+                }
+            ]
+        },
+        "37": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 37,
+            "input_connections": {
+                "adata": {
+                    "id": 34,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 4358.72688253478,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with leiden_res_0.4"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.leiden\", \"__current_case__\": 1, \"resolution\": \"0.4\", \"random_state\": \"0\", \"key_added\": \"leiden_res_0.4\", \"directed\": false, \"use_weights\": true, \"n_iterations\": \"2\", \"neighbors_key\": \"\", \"flavor\": \"leidenalg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "f098c2b6-3bf1-4734-9f56-2aff2ed68678",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with leiden_res_0.4",
+                    "output_name": "anndata_out",
+                    "uuid": "4dcbb2e6-ceb4-4143-a176-a34674c28eeb"
+                }
+            ]
+        },
+        "38": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 38,
+            "input_connections": {
+                "adata": {
+                    "id": 37,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 4578.72688253478,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with Leiden comparison 0.4 and 0.8"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.leiden\", \"__current_case__\": 1, \"resolution\": \"0.8\", \"random_state\": \"0\", \"key_added\": \"leiden_res_0.8\", \"directed\": false, \"use_weights\": true, \"n_iterations\": \"2\", \"neighbors_key\": \"\", \"flavor\": \"leidenalg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "389bdf79-d900-4cd0-9916-e85d36e613c2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with Leiden comparison 0.4 and 0.8",
+                    "output_name": "anndata_out",
+                    "uuid": "69161704-d219-4257-8668-72d566cf44da"
+                }
+            ]
+        },
+        "39": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "errors": null,
+            "id": 39,
+            "input_connections": {
+                "adata": {
+                    "id": 38,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy cluster, embed",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 4798.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with Leiden comparison 0.4 and 0.8 and 1.2"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "795751257d82",
+                "name": "scanpy_cluster_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.leiden\", \"__current_case__\": 1, \"resolution\": \"1.2\", \"random_state\": \"0\", \"key_added\": \"leiden_res_1.2\", \"directed\": false, \"use_weights\": true, \"n_iterations\": \"2\", \"neighbors_key\": \"\", \"flavor\": \"leidenalg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "f1701d3d-c392-4e0a-ba41-5e5b0c85e194",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with Leiden comparison 0.4 and 0.8 and 1.2",
+                    "output_name": "anndata_out",
+                    "uuid": "e7680bc2-2270-4b5c-ad1e-9cf1b8eec804"
+                }
+            ]
+        },
+        "40": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 40,
+            "input_connections": {
+                "adata": {
+                    "id": 39,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5018.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot Leiden comparison"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.umap\", \"__current_case__\": 16, \"interactive_plot\": false, \"color\": \"leiden_res_0.4,leiden_res_0.8,leiden_res_1.2\", \"gene_symbols\": \"\", \"use_raw\": false, \"edges\": {\"edges\": \"False\", \"__current_case__\": 1}, \"arrows\": false, \"sort_order\": true, \"groups\": \"\", \"plot\": {\"components\": [], \"projection\": \"2d\", \"legend_loc\": \"right margin\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"size\": null, \"color_map\": null, \"palette\": null, \"frameon\": true, \"ncols\": \"4\", \"wspace\": \"0.1\", \"hspace\": \"0.25\", \"title\": \"\"}, \"add_outline\": false, \"outline_color_border\": null, \"outline_color_gap\": null, \"outline_width_border\": \"0.3\", \"outline_width_gap\": \"0.05\", \"matplotlib_pyplot_scatter\": {\"alpha\": null, \"vmin\": null, \"vmax\": null, \"linewidths\": \"0.0\", \"edgecolors\": null}, \"layer\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "8fa8b720-5d6e-4db5-a106-0d578a36b489",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot Leiden comparison",
+                    "output_name": "out_png",
+                    "uuid": "9b7be0bb-66af-40bd-bd5a-ebbb94081ba8"
+                }
+            ]
+        },
+        "41": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "errors": null,
+            "id": 41,
+            "input_connections": {
+                "adata": {
+                    "id": 39,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy Inspect and manipulate",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "ranked_gene",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 5018.726882534781,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "AnnData with markers"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                },
+                "RenameDatasetActionranked_gene": {
+                    "action_arguments": {
+                        "newname": "Rank genes for characterizing groups"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "ranked_gene"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a8d291df615d",
+                "name": "scanpy_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"tl.rank_genes_groups\", \"__current_case__\": 4, \"get_df\": {\"get_df_select\": \"True\", \"__current_case__\": 1, \"key\": \"\", \"pval_cutoff\": null, \"log2fc_min\": null, \"log2fc_max\": null, \"gene_symbols\": \"\"}, \"groupby\": \"leiden_res_0.8\", \"use_raw\": false, \"groups\": \"\", \"layer\": \"\", \"ref\": {\"rest\": \"rest\", \"__current_case__\": 0}, \"n_genes\": null, \"tl_rank_genes_groups_method\": {\"method\": \"wilcoxon\", \"__current_case__\": 1, \"corr_method\": \"benjamini-hochberg\", \"tie_correct\": false}, \"key_added\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "b30c41c3-10a0-4294-b27d-e537c58b2f25",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with markers",
+                    "output_name": "anndata_out",
+                    "uuid": "7605b86d-d57f-4097-8abc-844ff391d8ff"
+                },
+                {
+                    "label": "Rank genes for characterizing groups",
+                    "output_name": "ranked_gene",
+                    "uuid": "5bddad81-ea2b-47e2-9aa2-af7137d0472f"
+                }
+            ]
+        },
+        "42": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "errors": null,
+            "id": 42,
+            "input_connections": {
+                "adata": {
+                    "id": 41,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5238.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot ranking of genes"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "7f478b3258ec",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false, \"output_anndata\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"png\", \"method\": {\"method\": \"pl.rank_genes_groups\", \"__current_case__\": 24, \"groups\": \"\", \"n_genes\": \"20\", \"gene_symbols\": \"\", \"fontsize\": \"8\", \"ncols\": \"4\", \"sharey\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.11.5+galaxy0",
+            "type": "tool",
+            "uuid": "cb0b2a22-b404-4b81-83ad-5fc29ec47cd6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot ranking of genes",
+                    "output_name": "out_png",
+                    "uuid": "88d10f17-6172-4081-bb03-7c160c4f03e8"
+                }
+            ]
+        },
+        "43": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "errors": null,
+            "id": 43,
+            "input_connections": {
+                "input_data": {
+                    "id": 41,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                },
+                {
+                    "name": "spatialdata_output_h5ad",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 5238.726882534781,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionspatialdata_output_h5ad": {
+                    "action_arguments": {
+                        "newname": "AnnData with spatial neighbours"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "662e929f44fa",
+                "name": "squidpy_graph",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"spatial_neighbors\", \"__current_case__\": 0, \"spatial_key\": \"spatial\", \"elements_to_coordinate_systems\": null, \"library_key\": null, \"coord_type\": \"grid\", \"n_neighs\": \"6\", \"radius\": null, \"delaunay\": false, \"n_rings\": \"1\", \"percentile\": null, \"transform\": null, \"set_diag\": false, \"key_added\": \"spatial\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "916ab22c-a296-46e2-a7a2-848d78d76b56",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with spatial neighbours",
+                    "output_name": "spatialdata_output_h5ad",
+                    "uuid": "4ca71327-f343-4483-b3bc-2efa00cb95ba"
+                }
+            ]
+        },
+        "44": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "errors": null,
+            "id": 44,
+            "input_connections": {
+                "input_data": {
+                    "id": 43,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                },
+                {
+                    "name": "spatialdata_output_h5ad",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 5458.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionspatialdata_output_h5ad": {
+                    "action_arguments": {
+                        "newname": "AnnData with centrality scores"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "662e929f44fa",
+                "name": "squidpy_graph",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"centrality_scores\", \"__current_case__\": 4, \"cluster_key\": \"leiden_res_0.8\", \"score\": null, \"connectivity_key\": \"spatial_connectivities\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "012c7a3b-a19e-4b43-b96b-857a61610385",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with centrality scores",
+                    "output_name": "spatialdata_output_h5ad",
+                    "uuid": "0484bff2-7dc1-47f4-928f-136e225cf8b5"
+                }
+            ]
+        },
+        "45": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
+            "errors": null,
+            "id": 45,
+            "input_connections": {
+                "input_data": {
+                    "id": 44,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy Plot",
+            "outputs": [
+                {
+                    "name": "plot_output_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5678.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output_png": {
+                    "action_arguments": {
+                        "newname": "Plot Centrality Scores"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0a089e4b62d7",
+                "name": "squidpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_centrality_scores\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.8\", \"score\": null, \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "9ba55e5b-9f07-4468-8742-aa7655a9999d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot Centrality Scores",
+                    "output_name": "plot_output_png",
+                    "uuid": "5cf72a12-55c7-4e95-8775-91805c053000"
+                }
+            ]
+        },
+        "46": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "errors": null,
+            "id": 46,
+            "input_connections": {
+                "input_data": {
+                    "id": 44,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                },
+                {
+                    "name": "spatialdata_output_h5ad",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 5678.726882534781,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionspatialdata_output_h5ad": {
+                    "action_arguments": {
+                        "newname": "AnnData with neighborhood enrichment"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "662e929f44fa",
+                "name": "squidpy_graph",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"nhood_enrichment\", \"__current_case__\": 2, \"cluster_key\": \"leiden_res_0.8\", \"library_key\": null, \"connectivity_key\": \"spatial_connectivities\", \"n_perms\": \"1000\", \"seed\": null}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "7d609b98-a81d-4f32-b1bc-cc795008741f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with neighborhood enrichment",
+                    "output_name": "spatialdata_output_h5ad",
+                    "uuid": "bbc473e1-298d-4492-9d27-c9ad363aab71"
+                }
+            ]
+        },
+        "47": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
+            "errors": null,
+            "id": 47,
+            "input_connections": {
+                "input_data": {
+                    "id": 46,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy Plot",
+            "outputs": [
+                {
+                    "name": "plot_output_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5898.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output_png": {
+                    "action_arguments": {
+                        "newname": "Plot Neighborhood Enrichment"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0a089e4b62d7",
+                "name": "squidpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"plot_nhood_enrichment\", \"__current_case__\": 0, \"cluster_key\": \"leiden_res_0.8\", \"mode\": \"zscore\", \"annotate\": false, \"method\": null, \"cmap\": \"viridis\", \"palette\": null, \"width\": null, \"height\": null, \"dpi\": null, \"pl_format\": \"png\"}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "3006f299-8fea-41e3-9d73-e2539e6109b7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot Neighborhood Enrichment",
+                    "output_name": "plot_output_png",
+                    "uuid": "1eef148b-6ae6-409e-be2b-a8e25d929759"
+                }
+            ]
+        },
+        "48": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "errors": null,
+            "id": 48,
+            "input_connections": {
+                "input_data": {
+                    "id": 46,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Squidpy",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                },
+                {
+                    "name": "spatialdata_output_h5ad",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 5898.726882534781,
+                "top": 194.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionspatialdata_output_h5ad": {
+                    "action_arguments": {
+                        "newname": "AnnData with Moran's I"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "662e929f44fa",
+                "name": "squidpy_graph",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_data\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"spatial_autocorr\", \"__current_case__\": 8, \"connectivity_key\": \"spatial_connectivities\", \"genes\": null, \"mode\": \"moran\", \"transformation\": true, \"n_perms\": \"1000\", \"two_tailed\": false, \"corr_method\": null, \"attr\": \"X\", \"layer\": null, \"seed\": null, \"use_raw\": false}, \"table_key\": \"table\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.8.1+galaxy0",
+            "type": "tool",
+            "uuid": "4808e561-ba88-4f7f-a3bd-523814e363cf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "AnnData with Moran's I",
+                    "output_name": "spatialdata_output_h5ad",
+                    "uuid": "f8443664-5a29-4996-ae05-467d11af0e69"
+                }
+            ]
+        },
+        "49": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1",
+            "errors": null,
+            "id": 49,
+            "input_connections": {
+                "adata": {
+                    "id": 48,
+                    "output_name": "spatialdata_output_h5ad"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CellTypist",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 6118.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "CellTypist-annotated AnnData"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                },
+                "RenameDatasetActionout_png": {
+                    "action_arguments": {
+                        "newname": "Plot CellTypist predicted labels"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_png"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "1fc548259280",
+                "name": "celltypist",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"dotplot\": {\"generate\": \"yes\", \"__current_case__\": 1, \"reference\": \"leiden_res_0.8\", \"prediction\": \"predicted_labels\", \"format\": \"png\"}, \"majority_voting\": false, \"min_prop\": \"0.0\", \"mode\": \"best match\", \"model_source\": {\"source\": \"cached\", \"__current_case__\": 0, \"cached_model\": \"Cells_Adult_Breast_v1\"}, \"p_thres\": \"0.5\", \"transpose_input\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.7.1+galaxy1",
+            "type": "tool",
+            "uuid": "62a5bc3d-7ac1-4715-9e51-b797af251906",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "CellTypist-annotated AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "61fd9c3d-edf3-4288-97fe-b9a6d83bebba"
+                },
+                {
+                    "label": "Plot CellTypist predicted labels",
+                    "output_name": "out_png",
+                    "uuid": "56e6cddc-9018-428d-a5f3-04be80e81d42"
+                }
+            ]
+        },
+        "50": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0",
+            "errors": null,
+            "id": 50,
+            "input_connections": {
+                "adata": {
+                    "id": 49,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Liana methods",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 6338.726882534781,
+                "top": 74.7239212243482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionanndata_out": {
+                    "action_arguments": {
+                        "newname": "Final LIANA AnnData"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "anndata_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "89635206a199",
+                "name": "liana_methods",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"rank_aggregate\", \"__current_case__\": 0, \"groupby\": \"leiden_res_0.8\", \"resource_selection\": {\"resource_type\": \"resource_name\", \"__current_case__\": 0, \"resource_api_cached\": {\"resource_source_selector\": \"builtin\", \"__current_case__\": 1, \"resource_name\": \"consensus\"}}, \"expr_prop\": \"0.1\", \"min_cells\": \"5\", \"groupby_pairs\": {\"groupby_pairs_selector\": \"all\", \"__current_case__\": 0}, \"base\": \"2.718281828459045\", \"aggregate_method\": \"rra\", \"consensus_opts\": {\"consensus_opts_selector\": \"default\", \"__current_case__\": 0}, \"return_all_lrs\": false, \"key_added\": \"liana_res\", \"layer\": \"\", \"use_raw\": false, \"de_method\": \"t-test\", \"n_perms\": \"1000\", \"seed\": \"1337\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.7.3+galaxy0",
+            "type": "tool",
+            "uuid": "2a6716c9-b5b7-40c1-9c96-f45da2b5728a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Final LIANA AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "714c6e64-6fe4-4f65-9e1f-bbfad00fa5eb"
+                }
+            ]
+        },
+        "51": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "errors": null,
+            "id": 51,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "operation_condi|adata": {
+                    "id": 50,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SpatialData Operations",
+                    "name": "operation_condi"
+                }
+            ],
+            "label": null,
+            "name": "SpatialData Operations",
+            "outputs": [
+                {
+                    "name": "spatialdata_output",
+                    "type": "spatialdata.zip"
+                }
+            ],
+            "position": {
+                "left": 6650.890561848192,
+                "top": 56.885827291861936
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ad593d73a014",
+                "name": "spatialdata_operation",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"operation_condi\": {\"operation\": \"import_table\", \"__current_case__\": 24, \"adata\": {\"__class__\": \"ConnectedValue\"}, \"table_name\": \"table_processed\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "7190ab1f-fc58-4b0c-bf6b-7e4374f66a3e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "52": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "errors": null,
+            "id": 52,
+            "input_connections": {
+                "input_spatialdata": {
+                    "id": 51,
+                    "output_name": "spatialdata_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SpatialData Plot",
+            "outputs": [
+                {
+                    "name": "plot_output",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 6907.439060546514,
+                "top": 72.59501543120976
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_output": {
+                    "action_arguments": {
+                        "newname": "Plot spatial clusters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cec3ffd4752f",
+                "name": "spatialdata_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_spatialdata\": {\"__class__\": \"ConnectedValue\"}, \"render_images\": [{\"__index__\": 0, \"image_element\": \"V1_Breast_Cancer_Block_A_Section_1_hires_image\", \"channel\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"alpha\": \"1.0\", \"scale\": null, \"grayscale\": false, \"colorbar\": \"auto\", \"channels_as_legend\": false, \"method\": null, \"datashader_reduction\": \"None\"}], \"render_labels\": [], \"render_points\": [], \"render_shapes\": [{\"__index__\": 0, \"shapes_element\": \"V1_Breast_Cancer_Block_A_Section_1\", \"color\": \"leiden_res_0.8\", \"fill_alpha\": null, \"groups\": null, \"cmap_or_palette_condi\": {\"color_map_type\": \"none\", \"__current_case__\": 0}, \"na_color\": \"default\", \"outline_condi\": {\"outline_type\": \"no\", \"__current_case__\": 0}, \"normalize_condi\": {\"normalize\": \"no\", \"__current_case__\": 0}, \"scale\": \"1.0\", \"method\": null, \"table_name\": \"table_processed\", \"table_layer\": null, \"gene_symbols\": null, \"shape\": null, \"colorbar\": \"auto\", \"datashader_reduction\": \"None\"}], \"show_params\": {\"coordinate_systems\": \"V1_Breast_Cancer_Block_A_Section_1\", \"figsize_width\": \"6.4\", \"figsize_height\": \"4.8\", \"dpi\": \"100\", \"ncols\": \"4\", \"legend_fontsize\": null, \"legend_fontweight\": \"bold\", \"legend_loc\": \"right margin\", \"legend_fontoutline\": null, \"na_in_legend\": true, \"colorbar\": true, \"legend_title\": null, \"outline_legend_title\": null, \"wspace\": null, \"hspace\": \"0.25\", \"frameon\": \"default\", \"title\": null, \"pad_extent\": \"0.0\", \"scalebar_dx\": null, \"scalebar_units\": \"um\", \"format\": \"jpg\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "d15f8a94-5e57-4f38-beb0-2da9784bef4e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Plot spatial clusters",
+                    "output_name": "plot_output",
+                    "uuid": "95e8c532-e1e8-42f8-9d76-404e18c74dc3"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "e8bad5cf-0043-4687-a2ab-df1dd96ca025",
+    "version": 8
+}
