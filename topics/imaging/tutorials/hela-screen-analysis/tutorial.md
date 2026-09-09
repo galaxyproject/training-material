@@ -175,7 +175,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Area`
 >      - {% icon param-check %} `Major axis length`
 >
-> 7. After selecting the **Extract workflow** option from the history menu, we can generate a workflow for batch processing:
+> 7. Now we can extract the workflow for batch processing. To do that, select the **Extract workflow** option from the history menu. This will automatically generate a workflow for batch processing:
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
