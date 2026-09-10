@@ -15,6 +15,8 @@ contributions:
     - Sch-Da
   testing:
     - Sch-Da
+  funding:
+    - nfditextplus
 ---
 
 This tutorial explains how to use the Montreal Forced Aligner (MFA) {% cite mcauliffe17_interspeech %} on the Galaxy platform.
