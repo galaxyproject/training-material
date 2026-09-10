@@ -111,7 +111,7 @@ This Galaxy tutorial based on material from the [Metabarcoding of bacteria in du
 
 # Data upload
 
-These [samples](./index.html#data) were sequenced on a single Illumina NextSeq run at the Walter and Eliza Hall Institute (WEHI), Melbourne, Australia. Data from WEHI came as paired-end, demultiplexed, unzipped *.fastq files with adapters still attached. Following the [QIIME2 importing tutorial](https://amplicon-docs.qiime2.org/en/stable/how-to-guides/how-to-import.html), this is the Casava One Eight format. The files have been renamed to satisfy the Casava format as `SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq` (e.g. `CTRLA_Fwd04-Rev25_L001_R1_001.fastq.gz`). The files were then zipped (`.gzip`).
+These dunnart faecal samples were sequenced on a single Illumina NextSeq run at the Walter and Eliza Hall Institute (WEHI), Melbourne, Australia. Data from WEHI came as paired-end, demultiplexed, unzipped *.fastq files with adapters still attached. Following the [QIIME2 importing tutorial](https://amplicon-docs.qiime2.org/en/stable/how-to-guides/how-to-import.html), this is the Casava One Eight format. The files have been renamed to satisfy the Casava format as `SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq` (e.g. `CTRLA_Fwd04-Rev25_L001_R1_001.fastq.gz`). The files were then zipped (`.gzip`).
 
 Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R2` respectively) will be imported and exported as a single QIIME 2 artefact file. These samples are already demultiplexed (i.e. sequences from each sample have been written to separate files), so a metadata file is not initially required.
 
@@ -501,7 +501,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 
 > <comment-title></comment-title>
 > 
-> [The classifier](https://www.dropbox.com/scl/fi/5eg7gqeczdzjf287o20p6/silva_138.2_16s_v4_classifier.qza?rlkey=a8gde5oggidosqxapqw44kdum&st=axl7llhj&dl=0) used here is only appropriate for the specific 16S rRNA region that *this* data represents. You will need to train your own classifier for your own data. For more information about training your own classifier, see [Extra Information](./07-extra-info.html#train-silva-v138-classifier-for-16s18s-rrna-gene-marker-sequences-).
+> [The classifier](https://www.dropbox.com/scl/fi/5eg7gqeczdzjf287o20p6/silva_138.2_16s_v4_classifier.qza?rlkey=a8gde5oggidosqxapqw44kdum&st=axl7llhj&dl=0) used here is only appropriate for the specific 16S rRNA region that *this* data represents. You will need to train your own classifier for your own data. For more information about training your own classifier, see [Extra Information]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#train-the-silva-v138-classifier-for-16s18s-rrna-gene-marker-sequences).
 >
 {: .comment}
 
