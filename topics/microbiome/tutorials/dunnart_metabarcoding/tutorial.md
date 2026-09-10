@@ -51,6 +51,7 @@ tags:
   - taxonomy
   - metabarcoding
   - amplicon
+  - microbiome
 
 ---
 
@@ -87,10 +88,9 @@ Quantitative Insights Into Microbial Ecology 2 ([QIIME 2](https://www.nature.com
 
 ### Viewing QIIME2 visualisations
 
-In order to use QIIME2 View to visualise your files, you will need to use a Google Chrome or Mozilla Firefox web browser (not in private browsing). For more information, click [here](https://view.qiime2.org). As this tutorial uses Galaxy Australia, you will need to download the visual files (*.qzv) to your local computer and view them in [QIIME2 View](https://view.qiime2.org) (q2view).
+In order to use [QIIME2 View](https://view.qiime2.org) to visualise your files, you will need to use a Google Chrome or Mozilla Firefox web browser (not in private browsing). As this tutorial uses Galaxy Australia, you will need to download the visual files (*.qzv) to your local computer and view them in [QIIME2 View](https://view.qiime2.org) (q2view).
 
 We will be doing this step multiple times throughout this workshop to view visualisation files as they are generated.
-
 
 > <comment-title>The QIIME vizualisation extractor Tool</comment-title>
 > 
@@ -381,7 +381,7 @@ In the following command, a pooling method of `pseudo` is selected. Pseudo-pooli
 >
 > > <hands-on-title>Import denoised dataset files</hands-on-title>
 > >
-> > 1. Import the DADA2 output table, representative sequences and denoising stats files from [Zenodo](https://zenodo.org/api/records/21614437):
+> > 1. Import the DADA2 output table, representative sequences and denoising stats files from [Zenodo](https://zenodo.org/records/21614437):
 > >
 > >    ```text
 > >    https://zenodo.org/records/21614437/files/dada2out_table.qza
@@ -574,7 +574,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >
 > This section contains information on how to train the classifier for analysing your **own** data.
 >
-> The newest version of the [SILVA](https://www.arb-silva.de/) database (v138) can be trained to classify marker gene sequences originating from the 16S/18S rRNA gene. Reference files `silva-138-99-seqs.qza` and `silva-138-99-tax.qza` were [downloaded from SILVA](https://www.arb-silva.de/download/archive/) and imported to get the artefact files. You can download both these files from [here](https://www.dropbox.com/s/x8ogeefjknimhkx/classifier_files.zip?dl=0).
+> The newest version of the [SILVA](https://www.arb-silva.de/) database (v138) can be trained to classify marker gene sequences originating from the 16S/18S rRNA gene. Reference files `silva-138-99-seqs.qza` and `silva-138-99-tax.qza` were [downloaded from SILVA](https://www.arb-silva.de/download/archive/) and imported to get the artefact files. You can [download both these files](https://www.dropbox.com/s/x8ogeefjknimhkx/classifier_files.zip?dl=0) uploaded to Dropbox by Melbourne Bioinformatics.
 >
 > > <hands-on-title>Train Classifier</hands-on-title>
 > > 
