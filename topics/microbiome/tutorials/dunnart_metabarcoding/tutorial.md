@@ -501,7 +501,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 
 > <comment-title></comment-title>
 > 
-> [The classifier](https://www.dropbox.com/scl/fi/5eg7gqeczdzjf287o20p6/silva_138.2_16s_v4_classifier.qza?rlkey=a8gde5oggidosqxapqw44kdum&st=axl7llhj&dl=0) used here is only appropriate for the specific 16S rRNA region that *this* data represents. You will need to train your own classifier for your own data. For more information about training your own classifier, see [Extra Information]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#train-the-silva-v138-classifier-for-16s18s-rrna-gene-marker-sequences).
+> [The classifier](https://www.dropbox.com/scl/fi/5eg7gqeczdzjf287o20p6/silva_138.2_16s_v4_classifier.qza?rlkey=a8gde5oggidosqxapqw44kdum&st=axl7llhj&dl=0) used here is only appropriate for the specific 16S rRNA region that *this* data represents. You will need to train your own classifier for your own data. For more information about training your own classifier, see [Details: Train the SILVA v138 Classifier for 16S/18S rRNA Gene Marker Sequences]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#details-train-the-silva-v138-classifier-for-16s-18s-rrna-gene-marker-sequences).
 >
 {: .comment}
 
