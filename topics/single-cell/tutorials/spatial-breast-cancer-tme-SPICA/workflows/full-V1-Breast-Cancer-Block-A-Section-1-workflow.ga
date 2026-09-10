@@ -2,8 +2,26 @@
     "a_galaxy_workflow": "true",
     "annotation": "Aligned with tutorial.md: corrected gene-filter order, added Inspect AnnData checkpoints after filtering steps 2/4/6, added regress_out(total_counts) and a second PCA/PCA QC plot, and rewired neighbours to PCA after regression.\nCellTypist fix: normalization is performed by pp.normalize_total(target_sum=10000) followed by pp.log1p. The pp.regress_out branch is retained only for PCA comparison, because regression replaces .X with residuals that CellTypist rejects. Neighbors and all downstream clustering/spatial/CellTypist/LIANA steps now branch from the PCA computed on normalized log1p expression, preserving valid .X.\n\nWorkflow output labels and dataset rename actions were normalised to unique, human-readable names for GTN workflow testing and Zenodo expected outputs. Large spatialdata.zip intermediates/final objects are intentionally not exposed as test outputs. Analytical tool order, parameters, and connections are unchanged.",
     "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-5481-8893",
+            "name": "Khaled Jumah"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6173-5674",
+            "name": "Krzysztof Potwerlowicz"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-8747-1494",
+            "name": "Myrthe van Baardwijk"
+        }
+    ],
     "format-version": "0.1",
-    "name": "full-V1-Breast-Cancer-Block-A-Section-1-workflow",
+    "license": "MIT",
+    "name": "full-V1-Breast-Cancer-Block-A-Section-1-workflow (imported from uploaded file)",
     "report": {
         "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
     },
@@ -33,8 +51,7 @@
             "type": "data_input",
             "uuid": "dbfd99b4-78bb-4b3e-9a04-c3dbf0a92ac7",
             "when": null,
-            "workflow_outputs": [],
-            "post_job_actions": {}
+            "workflow_outputs": []
         },
         "1": {
             "annotation": "",
@@ -2709,14 +2726,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "CellTypist-annotated AnnData",
-                    "output_name": "anndata_out",
-                    "uuid": "61fd9c3d-edf3-4288-97fe-b9a6d83bebba"
-                },
-                {
                     "label": "Plot CellTypist predicted labels",
                     "output_name": "out_png",
                     "uuid": "56e6cddc-9018-428d-a5f3-04be80e81d42"
+                },
+                {
+                    "label": "CellTypist-annotated AnnData",
+                    "output_name": "anndata_out",
+                    "uuid": "61fd9c3d-edf3-4288-97fe-b9a6d83bebba"
                 }
             ]
         },
@@ -2878,7 +2895,15 @@
             ]
         }
     },
-    "tags": [],
-    "uuid": "e8bad5cf-0043-4687-a2ab-df1dd96ca025",
-    "version": 8
+    "tags": [
+        "single-cell",
+        "Visium",
+        "Spatial-transcriptomics",
+        "10X-Genomics",
+        "Spatial2Galaxy",
+        "Cancer",
+        "Breast-Cancer"
+    ],
+    "uuid": "f72755c1-4c02-4337-9968-caf20e79e081",
+    "version": 1
 }
