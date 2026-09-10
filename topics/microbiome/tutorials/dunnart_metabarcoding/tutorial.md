@@ -253,7 +253,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > 
 {: .hands_on}
 
-> <comment-title>Additional Quality Control Steps</comment-title>
+> <comment-title>Quality Control</comment-title>
 >
 > When processing your own data, you should inspect the quality of your datasets before and after running `cutadapt` in order to determine the parameters to set for `cutadapt` and then to ensure that `cutadapt` has adequately cleaned your data. These quality control steps can be done using the tools `FastQC` and `MultiQC`. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
 > 
