@@ -110,9 +110,7 @@ Now that we know that the quality of our data is good, we can continue to map th
 
 > <hands-on-title>Map reads to the pangenome</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [vg giraffe](toolshed.g2.bx.psu.edu/repos/iuc/vg_giraffe/vg_giraffe/1.73.0+galaxy0 ) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *VG Giraffe*, select the following parameters (leave everything else unchanged):
+> 1. Run {% tool [vg giraffe](toolshed.g2.bx.psu.edu/repos/iuc/vg_giraffe/vg_giraffe/1.73.0+galaxy0 ) %}, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"Graph to Map Against"*: Select the `ABOlocus.gbz` graph
 >    - For *"Input Reads"*: Select `Read and align paired-end FASTQ/FASTA files (two files)` in the dropdown
 >      - {% icon param-file %} *"Forward Reads"*: Select `HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz`
@@ -130,8 +128,6 @@ Now that we know that the quality of our data is good, we can continue to map th
 >    >
 >    > Using a standard alignment format as the chosen output still provides the advantages of mapping to a pangenome as it reduces reference bias and leads to an overall improved alignment accuracy which is kept after surjection.
 >    {: .comment}
->
-> 3. Run the tool. 
 >
 {: .hands_on}
 
