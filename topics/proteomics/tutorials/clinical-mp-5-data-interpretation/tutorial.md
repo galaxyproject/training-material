@@ -35,6 +35,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-data-interpretation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-5-data-interpretation/tutorial
 
 recordings:
 - captioners:

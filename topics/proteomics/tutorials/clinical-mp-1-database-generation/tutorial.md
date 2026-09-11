@@ -36,6 +36,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-1-database-generation/tutorial
 
 recordings:
 - captioners:

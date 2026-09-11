@@ -33,6 +33,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-quantitation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-4-quantitation/tutorial
 
 recordings:
 - captioners:
