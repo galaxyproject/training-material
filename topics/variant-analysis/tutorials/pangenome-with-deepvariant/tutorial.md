@@ -34,7 +34,7 @@ requirements:
 
 ---
 
-Pangenomes reduce the limitations associated with linear reference genomes, also known as reference bias, so more reads are mapped and fewer reads get discarded ({% cite Matthews2024 %}). To learn more about pangenomics, please refer to this [tutorial](../../../genome-annotation/tutorials/pangenome-annotation-with-roary/tutorial.html#pangenomics). Due to the increased natural genomic variation in pangenomes, reads can be mapped with an increased alignment accuracy, which in turn can improve downstream analysis ({% cite Liao2023 %}).
+Pangenomes reduce the limitations associated with linear reference genomes, also known as reference bias, so more reads are mapped and fewer reads get discarded ({% cite Matthews2024 %}). To learn more about pangenomics, please refer to this [tutorial]({% link topics/genome-annotation/tutorials/pangenome-annotation-with-roary/tutorial.md %}#pangenomics). Due to the increased natural genomic variation in pangenomes, reads can be mapped with an increased alignment accuracy, which in turn can improve downstream analysis ({% cite Liao2023 %}).
 
 In this tutorial, you will learn how to map reads to a small pangenome. As an example, we will be using a pangenome of the ABO blood group locus. The ABO locus encodes for ABO glycosyltransferases. These enzymes are encoded by three different alleles (A, B and O), where an individual's blood type is determined by the inherited combination of them. 
 
@@ -66,10 +66,10 @@ To start mapping reads to a pangenome and to call variants on the alignments, yo
 > 2. {% tool [Import](upload1) %} the following files from [Zenodo](https://doi.org/10.5281/zenodo.22640895).
 >
 >    ```
->    https://zenodo.org/records/22640896/files/ABOlocus.gbz?download=1
->    https://zenodo.org/records/22640896/files/HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz?download=1
->    https://zenodo.org/records/22640896/files/HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz?download=1
->    https://zenodo.org/records/22640896/files/path_list_file.txt?download=1
+>    https://zenodo.org/records/22640896/files/ABOlocus.gbz
+>    https://zenodo.org/records/22640896/files/HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz
+>    https://zenodo.org/records/22640896/files/HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz
+>    https://zenodo.org/records/22640896/files/path_list_file.txt
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -83,8 +83,8 @@ In general, it is always good practice to assess the quality of your data before
 
 > <hands-on-title>Checking data quality with Falco</hands-on-title>
 >
-> 1. Run {% tool Falco %} with the following parameters (leave everything else unchanged):
->    - {% icon param-files %} "Raw read data from your current history": HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz and HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz
+> 1. Run {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters (leave everything else unchanged):
+>    - {% icon param-files %} "Raw read data from your current history": `HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz` and `HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz`
 >
 {: .hands_on}
 
@@ -252,7 +252,7 @@ The VCF file output can now be used for downstream analysis, such as visualisati
 
 # Re-run everything with a workflow
 
-Rather than manually executing each tool shown in this tutorial again to map reads with *VG Giraffe* against a pangenome in GBZ file format, and to call variants with *DeepVariant*, you can use the `Pangenome Variant Calling using VG Giraffe and Google DeepVariant` workflow published to [IWC Workflow Library](https://iwc.galaxyproject.org/) to automate and run the tools sequentially. Read more on how to [import the workflow](../../../introduction/tutorials/galaxy-intro-rdm/tutorial.html#hands-on-try-an-iwc-workflow-with-example-data) to your Galaxy profile. Once the workflow is imported, you can run it with your own data.
+Rather than manually executing each tool shown in this tutorial again to map reads with *VG Giraffe* against a pangenome in GBZ file format, and to call variants with *DeepVariant*, you can use the `Pangenome Variant Calling using VG Giraffe and Google DeepVariant` workflow published to [IWC Workflow Library](https://iwc.galaxyproject.org/) to automate and run the tools sequentially. Read more on how to [import the workflow]({% link topics/introduction/tutorials/galaxy-intro-rdm/tutorial.md %}#hands-on-try-an-iwc-workflow-with-example-data) to your Galaxy profile. Once the workflow is imported, you can run it with your own data.
 
 {% snippet faqs/galaxy/workflows_run.md %}
 
