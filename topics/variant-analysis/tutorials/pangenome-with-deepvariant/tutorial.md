@@ -201,16 +201,12 @@ Note, that pangenome graphs in the GBZ format may not include all bases for the 
 
 > <hands-on-title>Export Linear Reference</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [vg paths](toolshed.g2.bx.psu.edu/repos/iuc/vg_paths/vg_paths/1.73.0+galaxy0) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *vg paths*, select the following parameters (leave everything else unchanged):
+> 1. Run {% tool [vg paths](toolshed.g2.bx.psu.edu/repos/iuc/vg_paths/vg_paths/1.73.0+galaxy0) %}, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"Input Graph"*: Select the `ABOlocus.gbz` graph
 >    - For *"Path Selection"*: Select `From file` in the dropdown
 >      - {% icon param-file %} *"File with path names"*: Select the `path_list_file.txt` file. This file targets that only the reference for the ABO locus should be exported.
 >    - For *"Output Type"*: Select `Path Data` in the dropdown
 >      - *"Data Format"*: Select `Paths in FASTA format` in the dropdown
->
-> 3. Run the tool. 
 >
 {: .hands_on}
 
