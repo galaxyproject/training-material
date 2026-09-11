@@ -218,9 +218,7 @@ Now that we have prepared our data, we are ready to call variants to identify ge
 
 > <hands-on-title>Calling Variants</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [DeepVariant](toolshed.g2.bx.psu.edu/repos/iuc/deepvariant/deepvariant/1.10.0+galaxy0) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *DeepVariant*, select the following parameters (leave everything else unchanged):
+> 1. Run {% tool [DeepVariant](toolshed.g2.bx.psu.edu/repos/iuc/deepvariant/deepvariant/1.10.0+galaxy0) %}, select the following parameters (leave everything else unchanged):
 >    - For *"Source for the reference genome"*: Select `Use a genome from history` in the dropdown
 >      - {% icon param-file %} *"Reference genome"*: Select the `ABOlocus.fa` file
 >    - {% icon param-file %} *"BAM File"*: Select the sorted BAM file
@@ -233,8 +231,6 @@ Now that we have prepared our data, we are ready to call variants to identify ge
 >    > To [improve accuracy](https://github.com/vgteam/vg_wdl#read-realignment) ({% cite Liao2023 %}) with *DeepVariant*, left-aligning and realigning the reads helps. *DeepVariant* already realigns reads up to a maximum length of 500 bp by default. To enable left-aligning, we set `normalize_reads=true` during *DeepVariant*'s *make example* step.   
 >    >
 >    {: .comment}
->
-> 3. Run the tool. 
 >
 {: .hands_on}
 
