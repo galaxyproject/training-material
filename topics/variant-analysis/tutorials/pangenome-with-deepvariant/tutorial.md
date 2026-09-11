@@ -83,12 +83,8 @@ In general, it is always good practice to assess the quality of your data before
 
 > <hands-on-title>Checking data quality with Falco</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *Falco*, select the following parameters (leave everything else unchanged):
->    - {% icon param-file %} *"Raw read data from your current history"*: Click on the *"Multiple datasets"* icon and select both of your input reads `HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz` and `HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz`
->
-> 3. Run the tool. 
+> 1. Run {% tool Falco %} with the following parameters (leave everything else unchanged):
+>    - {% icon param-files %} "Raw read data from your current history": HG004.hs37d5.2x250.abo.R1.trimmed.fastq.gz and HG004.hs37d5.2x250.abo.R2.trimmed.fastq.gz
 >
 {: .hands_on}
 
