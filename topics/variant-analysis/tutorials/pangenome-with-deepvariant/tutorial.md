@@ -143,9 +143,7 @@ After surjecting the graph-based alignments to the linear reference coordinates,
 
 > <hands-on-title>Post-process Alignments</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *AWK*, select the following parameters (leave everything else unchanged):
+> 1. Run {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %}, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"File to process"*: Select the SAM file output by *VG Giraffe*
 >    - For *"AWK Program"*: Copy and enter the following code:
 >       ```
@@ -176,8 +174,6 @@ After surjecting the graph-based alignments to the linear reference coordinates,
 >       ```
 >    - For *"Variables"*: Click the `Insert Variables` button once so a new text field appears
 >      - For *"1: Variables"*: Enter the value `3000`. This value will be inserted for the VAR1 variable in the code above and represents the maximum allowable fragment length (in bp) for a read pair.
->
-> 3. Run the tool. 
 >
 {: .hands_on}
 
