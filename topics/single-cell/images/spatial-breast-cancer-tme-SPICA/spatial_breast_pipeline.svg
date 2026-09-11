@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Breast cancer Visium analysis workflow</title>
+<desc id="desc">Flow from the prepared SpatialData object through quality control, filtering, normalisation, PCA, transcriptomic neighbours, Leiden clustering, marker ranking, spatial statistics, CellTypist and LIANA, ending with the processed table returned to SpatialData.</desc>
+<style>
+text{font-family:Arial,sans-serif;fill:#222}.box{fill:#f5f5f5;stroke:#555;stroke-width:2;rx:12}.arrow{stroke:#555;stroke-width:2.5;fill:none;marker-end:url(#m)}.head{font-size:18px;font-weight:bold}.sub{font-size:14px}
+</style>
+<defs><marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
+<rect class="box" x="35" y="45" width="185" height="74"/><text class="head" x="127" y="75" text-anchor="middle">SpatialData</text><text class="sub" x="127" y="99" text-anchor="middle">histology + Visium spots</text>
+<rect class="box" x="275" y="45" width="185" height="74"/><text class="head" x="367" y="75" text-anchor="middle">QC + filtering</text><text class="sub" x="367" y="99" text-anchor="middle">3813 → 3800 spots</text>
+<rect class="box" x="515" y="45" width="185" height="74"/><text class="head" x="607" y="75" text-anchor="middle">Normalise + HVGs</text><text class="sub" x="607" y="99" text-anchor="middle">10k, log1p, 3000 HVGs</text>
+<rect class="box" x="755" y="45" width="185" height="74"/><text class="head" x="847" y="75" text-anchor="middle">PCA + neighbours</text><text class="sub" x="847" y="99" text-anchor="middle">non-regressed main branch</text>
+<rect class="box" x="995" y="45" width="170" height="74"/><text class="head" x="1080" y="75" text-anchor="middle">UMAP + Leiden</text><text class="sub" x="1080" y="99" text-anchor="middle">0.4 / 0.8 / 1.2</text>
+<path class="arrow" d="M220 82 H275"/><path class="arrow" d="M460 82 H515"/><path class="arrow" d="M700 82 H755"/><path class="arrow" d="M940 82 H995"/>
+<rect class="box" x="995" y="215" width="170" height="74"/><text class="head" x="1080" y="245" text-anchor="middle">Rank markers</text><text class="sub" x="1080" y="269" text-anchor="middle">leiden_res_0.8</text>
+<rect class="box" x="755" y="215" width="185" height="74"/><text class="head" x="847" y="245" text-anchor="middle">Squidpy</text><text class="sub" x="847" y="269" text-anchor="middle">physical spot neighbours</text>
+<rect class="box" x="515" y="215" width="185" height="74"/><text class="head" x="607" y="245" text-anchor="middle">CellTypist</text><text class="sub" x="607" y="269" text-anchor="middle">direct reference matches</text>
+<rect class="box" x="275" y="215" width="185" height="74"/><text class="head" x="367" y="245" text-anchor="middle">LIANA</text><text class="sub" x="367" y="269" text-anchor="middle">candidate LR rankings</text>
+<rect class="box" x="35" y="215" width="185" height="74"/><text class="head" x="127" y="245" text-anchor="middle">SpatialData output</text><text class="sub" x="127" y="269" text-anchor="middle">table_processed + overlay</text>
+<path class="arrow" d="M1080 119 V215"/><path class="arrow" d="M995 252 H940"/><path class="arrow" d="M755 252 H700"/><path class="arrow" d="M515 252 H460"/><path class="arrow" d="M275 252 H220"/>
+<rect class="box" x="755" y="335" width="185" height="58"/><text class="head" x="847" y="362" text-anchor="middle">Optional regression</text><text class="sub" x="847" y="382" text-anchor="middle">QC/PCA comparison only</text>
+<path class="arrow" d="M847 119 V335"/>
+</svg>
