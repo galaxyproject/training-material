@@ -185,13 +185,9 @@ The upcoming variant calling step requires the alignments to be in BAM format. F
 
 > <hands-on-title>Convert SAM to BAM</hands-on-title>
 >
-> 1. Select `Tools` in the left sidebar and search for {% tool [Samtools sort](toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.8) %} in the list that appears. Select it to open the tool. 
->
-> 2. Within *Samtools sort*, select the following parameters (leave everything else unchanged):
+> 1. Run {% tool [Samtools sort](toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.8) %}, select the following parameters (leave everything else unchanged):
 >    - {% icon param-file %} *"BAM File"*: Select the processed SAM file from the previous step
 >    - For *"Primary sort key"*: Select `coordinate` in the dropdown
->
-> 3. Run the tool. 
 >
 {: .hands_on}
 
