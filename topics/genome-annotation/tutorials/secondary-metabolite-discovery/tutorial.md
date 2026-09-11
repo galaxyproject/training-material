@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 draft: true
 
 title: Secondary metabolite discovery
-zenodo_link: https://zenodo.org/records/10652998
+zenodo_link: 'https://zenodo.org/record/10652998'
 questions:
 - How to discover secondary metabolites produced by microorganisms ?
 - How to identify the discovered secondary metabolites in compound libraries ?

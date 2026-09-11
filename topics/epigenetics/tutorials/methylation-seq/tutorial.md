@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "DNA Methylation data analysis"
-zenodo_link: "https://zenodo.org/record/557099"
+zenodo_link: 'https://zenodo.org/record/557099'
 answer_histories:
   - label: "DNA Methylation data analysis"
     history: https://usegalaxy.eu/u/videmp/h/dna-methylation-data-analysis-gtn-answer

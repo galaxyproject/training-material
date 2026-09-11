@@ -4,7 +4,7 @@ redirect_from:
   - /topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial
 
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
-zenodo_link: "https://doi.org/10.5281/zenodo.197100"
+zenodo_link: 'https://zenodo.org/record/197100'
 edam_ontology: ["topic_3169"]
 tags:
   - ChIP-seq

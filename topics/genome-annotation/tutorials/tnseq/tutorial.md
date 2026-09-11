@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Essential genes detection with Transposon insertion sequencing"
-zenodo_link: "https://doi.org/10.5281/zenodo.2579335"
+zenodo_link: 'https://zenodo.org/record/2579335'
 tags:
   - bacteria
   - tnseq

@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: 'Inferring single cell trajectories with Monocle3'
 subtopic: single-cell-CS
 priority: 5
-zenodo_link: 'https://zenodo.org/records/10397366'
+zenodo_link: 'https://zenodo.org/record/10397366'
 
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "3: RNA-seq genes to pathways"
 subtopic: end-to-end
-zenodo_link: "https://zenodo.org/record/2596382"
+zenodo_link: 'https://zenodo.org/record/2596382'
 tags:
   - mouse
 questions:

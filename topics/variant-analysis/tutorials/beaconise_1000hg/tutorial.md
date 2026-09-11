@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons"
-zenodo_link: 'https://zenodo.org/records/10658688'
+zenodo_link: 'https://zenodo.org/record/10658688'
 subtopic: 'data-management'
 priority: 2
 questions:

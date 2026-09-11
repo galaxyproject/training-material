@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: OpenRefine Tutorial for researching cultural data
 level: Introductory
-zenodo_link: 'https://doi.org/10.5281/zenodo.17047254'
+zenodo_link: 'https://zenodo.org/record/17047254'
 questions:
 - How to use OpenRefine in Galaxy to clean your data?
 - How to use a workflow in Galaxy to extract and visualise information from your data?

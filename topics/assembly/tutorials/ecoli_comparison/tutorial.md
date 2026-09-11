@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Making sense of a newly assembled genome"
-zenodo_link: https://zenodo.org/record/3382053
+zenodo_link: 'https://zenodo.org/record/3382053'
 requirements:
   -
     type: "internal"

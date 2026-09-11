@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "De picos a genes"
-zenodo_link: "https://doi.org/10.5281/zenodo.1025586"
+zenodo_link: 'https://zenodo.org/record/1025586'
 level: Introductory
 questions:
 - "¿Cómo utilizar Galaxy?"

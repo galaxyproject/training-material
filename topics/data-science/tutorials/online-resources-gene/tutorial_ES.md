@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Aprendizaje sobre un gen a través de recursos y formatos biológicos
 level: Introductory
 draft: true
-zenodo_link: https://zenodo.org/record/8304465
+zenodo_link: 'https://zenodo.org/record/8304465'
 questions:
 - ¿Cómo utilizar recursos de bioinformática para investigar una familia específica de proteínas (opsinas)?
 - ¿Cómo navegar por el Genome Data Viewer para encontrar opsinas en el genoma humano?

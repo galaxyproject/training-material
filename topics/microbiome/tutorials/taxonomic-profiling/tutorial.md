@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Taxonomic Profiling and Visualization of Metagenomic Data
-zenodo_link: https://zenodo.org/record/7871630
+zenodo_link: 'https://zenodo.org/record/7871630'
 questions:
 - Which species (or genera, families, ...) are present in my sample?
 - What are the different approaches and tools to get the community profile of my sample?

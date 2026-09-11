@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Fine tune large protein model (ProtTrans) using HuggingFace
-zenodo_link: https://zenodo.org/records/10986248
+zenodo_link: 'https://zenodo.org/record/10986248'
 questions:
 - How to load large protein AI models?
 - How to fine-tune such models on downstream tasks such as post-translational site

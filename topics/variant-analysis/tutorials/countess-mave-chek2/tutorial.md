@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Calculating CHEK2 variant effect scores from MAVE data with CountESS
 subtopic: human-genetics-cancer
-zenodo_link: https://zenodo.org/records/20250971
+zenodo_link: 'https://zenodo.org/record/20250971'
 questions:
 - What is a multiplexed assay of variant effect?
 - How can variant frequencies before and after selection be transformed into functional scores?
