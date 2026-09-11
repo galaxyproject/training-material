@@ -276,8 +276,11 @@ module Gtn
     # Companion function to Gtn::Linter.check_dois
     def self.check_pmids(contents)
       # https://www.ncbi.nlm.nih.gov/pubmed/24678044
-      find_matching_texts(contents,
-                          %r{(\[[^\]]*\]\(https?://www.ncbi.nlm.nih.gov/pubmed//[0-9]*\))}).map do |idx, _text, selected|
+      # https://pubmed.ncbi.nlm.nih.gov/24678044/
+      find_matching_texts(
+        contents,
+        %r{(\[[^\]]*\]\(https?://(?:www\.ncbi\.nlm\.nih\.gov/pubmed|pubmed\.ncbi\.nlm\.nih\.gov)/[0-9]+/?\))}
+      ).map do |idx, _text, selected|
         ReviewDogEmitter.warning(
           path: @path,
           idx: idx,
