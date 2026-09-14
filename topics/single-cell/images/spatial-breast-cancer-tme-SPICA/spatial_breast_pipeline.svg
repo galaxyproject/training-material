@@ -1,22 +1,113 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-<title id="title">Breast cancer Visium analysis workflow</title>
-<desc id="desc">Flow from the prepared SpatialData object through quality control, filtering, normalisation, PCA, transcriptomic neighbours, Leiden clustering, marker ranking, spatial statistics, CellTypist and LIANA, ending with the processed table returned to SpatialData.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="730" viewBox="0 0 1160 730" role="img" aria-labelledby="svgtitle svgdesc">
+<title id="svgtitle">Visium breast cancer analysis workflow</title>
+<desc id="svgdesc">Eleven numbered analysis stages arranged in four rows, each row read from left to right. Row one covers the SpatialData input, quality control metrics and filtering. Row two covers normalisation and feature selection, PCA and embedding, and Leiden clustering. A separate optional branch below row two runs total-count regression as a PCA comparison only and does not feed any later stage. Row three covers marker ranking, Squidpy spatial statistics and reference transfer with CellTypist. Row four covers LIANA ligand-receptor ranking and the processed SpatialData output.</desc>
 <style>
-text{font-family:Arial,sans-serif;fill:#222}.box{fill:#f5f5f5;stroke:#555;stroke-width:2;rx:12}.arrow{stroke:#555;stroke-width:2.5;fill:none;marker-end:url(#m)}.head{font-size:18px;font-weight:bold}.sub{font-size:14px}
+  text{font-family:Helvetica,Arial,sans-serif;fill:#1a1a1a}
+  .bx{stroke-width:1.6;rx:9;ry:9}
+  .b1{fill:#e8eef8;stroke:#3a5f9e}
+  .b2{fill:#e6f2ea;stroke:#2f7d4f}
+  .b3{fill:#fbeedd;stroke:#b3701d}
+  .b4{fill:#f2eaf7;stroke:#75439b}
+  .b5{fill:#f4f4f4;stroke:#8a8a8a;stroke-dasharray:5 4}
+  .h{font-size:15.5px;font-weight:bold}
+  .s{font-size:12.5px}
+  .h1{fill:#26406e}.h2{fill:#215c3a}.h3{fill:#8a5514}.h4{fill:#573072}.h5{fill:#5c5c5c}
+  .a{stroke:#4a4a4a;stroke-width:2;fill:none;marker-end:url(#ah)}
+  .ad{stroke:#8a8a8a;stroke-width:1.8;fill:none;stroke-dasharray:5 4;marker-end:url(#ahd)}
 </style>
-<defs><marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
-<rect class="box" x="35" y="45" width="185" height="74"/><text class="head" x="127" y="75" text-anchor="middle">SpatialData</text><text class="sub" x="127" y="99" text-anchor="middle">histology + Visium spots</text>
-<rect class="box" x="275" y="45" width="185" height="74"/><text class="head" x="367" y="75" text-anchor="middle">QC + filtering</text><text class="sub" x="367" y="99" text-anchor="middle">3813 → 3800 spots</text>
-<rect class="box" x="515" y="45" width="185" height="74"/><text class="head" x="607" y="75" text-anchor="middle">Normalise + HVGs</text><text class="sub" x="607" y="99" text-anchor="middle">10k, log1p, 3000 HVGs</text>
-<rect class="box" x="755" y="45" width="185" height="74"/><text class="head" x="847" y="75" text-anchor="middle">PCA + neighbours</text><text class="sub" x="847" y="99" text-anchor="middle">non-regressed main branch</text>
-<rect class="box" x="995" y="45" width="170" height="74"/><text class="head" x="1080" y="75" text-anchor="middle">UMAP + Leiden</text><text class="sub" x="1080" y="99" text-anchor="middle">0.4 / 0.8 / 1.2</text>
-<path class="arrow" d="M220 82 H275"/><path class="arrow" d="M460 82 H515"/><path class="arrow" d="M700 82 H755"/><path class="arrow" d="M940 82 H995"/>
-<rect class="box" x="995" y="215" width="170" height="74"/><text class="head" x="1080" y="245" text-anchor="middle">Rank markers</text><text class="sub" x="1080" y="269" text-anchor="middle">leiden_res_0.8</text>
-<rect class="box" x="755" y="215" width="185" height="74"/><text class="head" x="847" y="245" text-anchor="middle">Squidpy</text><text class="sub" x="847" y="269" text-anchor="middle">physical spot neighbours</text>
-<rect class="box" x="515" y="215" width="185" height="74"/><text class="head" x="607" y="245" text-anchor="middle">CellTypist</text><text class="sub" x="607" y="269" text-anchor="middle">direct reference matches</text>
-<rect class="box" x="275" y="215" width="185" height="74"/><text class="head" x="367" y="245" text-anchor="middle">LIANA</text><text class="sub" x="367" y="269" text-anchor="middle">candidate LR rankings</text>
-<rect class="box" x="35" y="215" width="185" height="74"/><text class="head" x="127" y="245" text-anchor="middle">SpatialData output</text><text class="sub" x="127" y="269" text-anchor="middle">table_processed + overlay</text>
-<path class="arrow" d="M1080 119 V215"/><path class="arrow" d="M995 252 H940"/><path class="arrow" d="M755 252 H700"/><path class="arrow" d="M515 252 H460"/><path class="arrow" d="M275 252 H220"/>
-<rect class="box" x="755" y="335" width="185" height="58"/><text class="head" x="847" y="362" text-anchor="middle">Optional regression</text><text class="sub" x="847" y="382" text-anchor="middle">QC/PCA comparison only</text>
-<path class="arrow" d="M847 119 V335"/>
+<defs>
+  <marker id="ah" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#4a4a4a"/></marker>
+  <marker id="ahd" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#8a8a8a"/></marker>
+</defs>
+
+<!-- Row 1 -->
+<rect class="bx b1" x="24"  y="24" width="340" height="112"/>
+<text class="h h1" x="194" y="52" text-anchor="middle">1. SpatialData input</text>
+<text class="s" x="194" y="76" text-anchor="middle">Visium object: H&amp;E image, capture-spot</text>
+<text class="s" x="194" y="94" text-anchor="middle">shapes and the annotated expression</text>
+<text class="s" x="194" y="112" text-anchor="middle">table in one coordinate system</text>
+
+<rect class="bx b1" x="410" y="24" width="340" height="112"/>
+<text class="h h1" x="580" y="52" text-anchor="middle">2. Quality control metrics</text>
+<text class="s" x="580" y="76" text-anchor="middle">total_counts, n_genes_by_counts and</text>
+<text class="s" x="580" y="94" text-anchor="middle">pct_counts_in_top_N_genes, inspected as</text>
+<text class="s" x="580" y="112" text-anchor="middle">distributions and mapped onto the tissue</text>
+
+<rect class="bx b1" x="796" y="24" width="340" height="112"/>
+<text class="h h1" x="966" y="52" text-anchor="middle">3. Filtering</text>
+<text class="s" x="966" y="76" text-anchor="middle">Lower spot filters, then gene filters,</text>
+<text class="s" x="966" y="94" text-anchor="middle">then upper spot filters, with the effect</text>
+<text class="s" x="966" y="112" text-anchor="middle">of each threshold recorded</text>
+
+<path class="a" d="M364 80 H404"/>
+<path class="a" d="M750 80 H790"/>
+<path class="a" d="M966 136 V162 H194 V186"/>
+
+<!-- Row 2 -->
+<rect class="bx b2" x="24"  y="188" width="340" height="112"/>
+<text class="h h2" x="194" y="216" text-anchor="middle">4. Normalisation and features</text>
+<text class="s" x="194" y="240" text-anchor="middle">Target sum 10,000 per spot, then log1p,</text>
+<text class="s" x="194" y="258" text-anchor="middle">then highly variable genes annotated</text>
+<text class="s" x="194" y="276" text-anchor="middle">without subsetting the matrix</text>
+
+<rect class="bx b2" x="410" y="188" width="340" height="112"/>
+<text class="h h2" x="580" y="216" text-anchor="middle">5. PCA and embedding</text>
+<text class="s" x="580" y="240" text-anchor="middle">PCA on the non-regressed log-normalised</text>
+<text class="s" x="580" y="258" text-anchor="middle">branch, expression-neighbour graph</text>
+<text class="s" x="580" y="276" text-anchor="middle">(15 neighbours), then UMAP</text>
+
+<rect class="bx b2" x="796" y="188" width="340" height="112"/>
+<text class="h h2" x="966" y="216" text-anchor="middle">6. Leiden clustering</text>
+<text class="s" x="966" y="240" text-anchor="middle">Three resolutions compared on the same</text>
+<text class="s" x="966" y="258" text-anchor="middle">graph; one partition carried forward on</text>
+<text class="s" x="966" y="276" text-anchor="middle">stability and marker evidence</text>
+
+<path class="a" d="M364 244 H404"/>
+<path class="a" d="M750 244 H790"/>
+
+<!-- Optional branch band -->
+<rect class="bx b5" x="410" y="330" width="340" height="82"/>
+<text class="h h5" x="580" y="357" text-anchor="middle">Optional: regress out total_counts</text>
+<text class="s" x="580" y="379" text-anchor="middle">A second PCA used only as a QC comparison.</text>
+<text class="s" x="580" y="397" text-anchor="middle">It does not feed any later stage.</text>
+<path class="ad" d="M194 300 V371 H406"/>
+
+<!-- Row 2 to row 3 connector, routed clear of the optional box -->
+<path class="a" d="M966 300 V440 H194 V466"/>
+
+<!-- Row 3 -->
+<rect class="bx b3" x="24"  y="468" width="340" height="112"/>
+<text class="h h3" x="194" y="496" text-anchor="middle">7. Marker ranking</text>
+<text class="s" x="194" y="520" text-anchor="middle">Wilcoxon rank-sum test with Benjamini-</text>
+<text class="s" x="194" y="538" text-anchor="middle">Hochberg correction, each group against</text>
+<text class="s" x="194" y="556" text-anchor="middle">the union of the rest</text>
+
+<rect class="bx b3" x="410" y="468" width="340" height="112"/>
+<text class="h h3" x="580" y="496" text-anchor="middle">8. Squidpy spatial statistics</text>
+<text class="s" x="580" y="520" text-anchor="middle">Hexagonal-grid spatial-neighbour graph,</text>
+<text class="s" x="580" y="538" text-anchor="middle">centrality, neighbourhood enrichment</text>
+<text class="s" x="580" y="556" text-anchor="middle">and Moran's I</text>
+
+<rect class="bx b3" x="796" y="468" width="340" height="112"/>
+<text class="h h3" x="966" y="496" text-anchor="middle">9. Reference transfer</text>
+<text class="s" x="966" y="520" text-anchor="middle">CellTypist adult human breast model,</text>
+<text class="s" x="966" y="538" text-anchor="middle">direct predicted labels with majority</text>
+<text class="s" x="966" y="556" text-anchor="middle">voting disabled</text>
+
+<path class="a" d="M364 524 H404"/>
+<path class="a" d="M750 524 H790"/>
+<path class="a" d="M966 580 V606 H194 V630"/>
+
+<!-- Row 4 -->
+<rect class="bx b3" x="24"  y="632" width="340" height="76"/>
+<text class="h h3" x="194" y="660" text-anchor="middle">10. LIANA</text>
+<text class="s" x="194" y="682" text-anchor="middle">Ligand-receptor pairs ranked between</text>
+<text class="s" x="194" y="700" text-anchor="middle">Leiden groups from expression alone</text>
+
+<rect class="bx b4" x="410" y="632" width="340" height="76"/>
+<text class="h h4" x="580" y="660" text-anchor="middle">11. SpatialData output</text>
+<text class="s" x="580" y="682" text-anchor="middle">Processed table written back as</text>
+<text class="s" x="580" y="700" text-anchor="middle">table_processed beside image and spots</text>
+
+<path class="a" d="M364 670 H404"/>
 </svg>
