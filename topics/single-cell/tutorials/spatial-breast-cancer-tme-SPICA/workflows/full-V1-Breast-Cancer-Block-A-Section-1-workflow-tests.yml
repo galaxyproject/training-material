@@ -1,0 +1,119 @@
+- doc: |
+    Test for the full Visium breast-cancer workflow (10x Human Breast Cancer, Block A Section 1).
+
+    The assertions target the deterministic text outputs of the Inspect AnnData
+    checkpoints, because those record the matrix dimensions at each filtering stage
+    and are exactly the figures quoted in the tutorial. Binary outputs (.h5ad and
+    rendered plots) are checked for non-emptiness only: HDF5 containers and
+    matplotlib output are not byte-reproducible across library versions, so an exact
+    comparison would fail for reasons unrelated to the analysis.
+
+    Reference outputs for every step are archived on Zenodo record 22676369.
+  job:
+    Spatial Data object:
+      class: File
+      location: https://zenodo.org/records/22676369/files/V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip
+      filetype: spatialdata.zip
+  outputs:
+
+    # --- Dimensions at each filtering checkpoint -------------------------------
+    Initial AnnData dimensions:
+      asserts:
+        - that: has_text
+          text: "3798"
+        - that: has_text
+          text: "36601"
+
+    Inspect after minimum spot filters:
+      asserts:
+        - that: has_text
+          text: "3795"
+        - that: has_text
+          text: "36601"
+
+    Inspect after gene filters:
+      asserts:
+        - that: has_text
+          text: "3795"
+        - that: has_text
+          text: "22240"
+
+    Inspect after upper spot filters:
+      asserts:
+        - that: has_text
+          text: "3790"
+        - that: has_text
+          text: "22240"
+
+    # --- Quality control metrics were attached --------------------------------
+    QC summary before filtering:
+      asserts:
+        - that: has_text
+          text: "total_counts"
+        - that: has_text
+          text: "n_genes_by_counts"
+
+    # --- Marker table for the selected partition ------------------------------
+    Rank genes for characterizing groups:
+      asserts:
+        - that: has_text
+          text: "logfoldchanges"
+        - that: has_n_lines
+          min: 100
+
+    # --- Key objects are produced and non-empty -------------------------------
+    AnnData with HVGs:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    AnnData with PCA:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    AnnData with Leiden comparison 0.4 and 0.8 and 1.2:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    AnnData with Moran's I:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    CellTypist-annotated AnnData:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    Final LIANA AnnData:
+      asserts:
+        - that: has_size
+          min_size: 1000000
+
+    # --- Figures reproduced by the workflow -----------------------------------
+    Plot Leiden comparison:
+      asserts:
+        - that: has_size
+          min_size: 10000
+
+    Plot ranking of genes:
+      asserts:
+        - that: has_size
+          min_size: 10000
+
+    Plot CellTypist predicted labels:
+      asserts:
+        - that: has_size
+          min_size: 10000
+
+    Plot spatial Morans clusters:
+      asserts:
+        - that: has_size
+          min_size: 10000
+
+    Plot spatial clusters:
+      asserts:
+        - that: has_size
+          min_size: 10000
