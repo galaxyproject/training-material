@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Dataset construction for bacterial comparative genomics
-zenodo_link: 'https://zenodo.org/record/'
+zenodo_link: ''
 draft: true
 questions:
 - to do
