@@ -252,7 +252,7 @@ The VCF file output can now be used for downstream analysis, such as visualisati
 
 # Re-run everything with a workflow
 
-Rather than manually executing each tool shown in this tutorial again to map reads with *VG Giraffe* against a pangenome in GBZ file format, and to call variants with *DeepVariant*, you can use the `Pangenome Variant Calling using VG Giraffe and Google DeepVariant` workflow published to [IWC Workflow Library](https://iwc.galaxyproject.org/) to automate and run the tools sequentially. Read more on how to [import the workflow]({% link topics/introduction/tutorials/galaxy-intro-rdm/tutorial.md %}#hands-on-try-an-iwc-workflow-with-example-data) to your Galaxy profile. Once the workflow is imported, you can run it with your own data.
+Rather than manually executing each tool shown in this tutorial again to map reads with *VG Giraffe* against a pangenome in GBZ file format, and to call variants with *DeepVariant*, you can use a [workflow that has been published to WorkflowHub](https://workflowhub.eu/workflows/2310) to automate and run the tools sequentially. Read more on how to [import the workflow]({% link topics/introduction/tutorials/galaxy-intro-rdm/tutorial.md %}#hands-on-obtain-workflow-from-workflowhub) to your Galaxy profile. Once the workflow is imported, you can run it with your own data.
 
 {% snippet faqs/galaxy/workflows_run.md %}
 
