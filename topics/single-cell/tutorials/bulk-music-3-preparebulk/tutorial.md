@@ -27,6 +27,7 @@ contributions:
 tags:
   - transcriptomics
   - data management
+  - deconvolution
 
 requirements:
   -

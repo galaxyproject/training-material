@@ -58,8 +58,9 @@ key_points:
 tags:
   - pangeo
   - interactive-tools
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 notebook:
   language: python
   snippet: topics/climate/tutorials/pangeo-notebook/preamble.md

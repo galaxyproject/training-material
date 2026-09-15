@@ -13,6 +13,7 @@ answer_histories:
 tags:
   - plants
   - paper-replication
+  - 10x
 questions:
   - Can we reclaim cell markers using a different analysis method?
   - Are highly variable genes paramount to the analysis?

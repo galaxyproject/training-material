@@ -357,7 +357,7 @@ We have extracted genes that are differentially expressed in IR- vs. mock-treate
 >
 > 1. Use the **Gene length and GC content** tool on the _Annotation file_ (gtf format). See this [screenshot](https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20210701.png)
 >    - *"Analysis to perform"*: `gene lengths only`
-> 2. Merge the gene length and the annotated DESeq2 result file **DESeq2 result file** with primary factor Treatment using the **Join two files** tool. In *"Keep the header lines"*: `No`. See this [Screenshot](https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20214135.png)
+> 2. Merge the gene length and the DESeq2 result file **DESeq2 result file** with primary factor Treatment using the **Join two files** tool. In *"Keep the header lines"*: `No`. See this [Screenshot](https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20214135.png)
 > 3. Use the **Compute on rows** tool to create a column with TRUE and FALSE using the following expression: `bool(float(c3)>2)`. In the *"Error handling"* choose in *"Autodetect column types"* `No` and *"Fail on references to non-existent columns"* `No` and *"If an expression cannot be computed for a row"* choose `Fill in a replacement value` and Replacement value `False`. See this [screenshot](https://github.com/pacthoen/BMW2_RNA_clust_vis/blob/main/screenshots/Screenshot%202025-05-22%20222441.png)
 > 4. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c9`
@@ -468,7 +468,7 @@ For filtering the most variable genes, we will compute the coefficient of variat
 >       - *"Custom function on vec"*: `vec.mean()`
 >       - *"For each"*: `row`
 >       - *"Output formatting options"*: keep everything checked. Output should have column and row headers
-> 3. Use the **Join two files** tool to merge the normalised count data with the standard deviation and mean datasets (in two subsequent steps). 
+> 3. Use the **Join two files** tool to merge the VST normalised count data with the standard deviation and mean datasets (in two subsequent steps). 
 >    -  *"First line is a header line"*: `Yes`
 >    -  You may want to give names to the new columns added to indicate which column contains the standard deviation and which the mean using the **Table rename column** tool.
 > 4. Use the **Compute on row** tool to calculate the CV, which is defined as the standard deviation divided by the mean. Check carefully which columns you need for this. Label the new column as `CV` using the **Table rename column** tool.

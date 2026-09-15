@@ -28,7 +28,12 @@ contributions:
     - maximskorik
   editing:
     - hexylena
-
+tags:
+  - metabolomics
+  - exposomics
+  - gc-ms
+edam_ontology:
+  - topic_3172
 ---
 
 The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics' studies based on untargeted mass spectrometry provide the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.

@@ -27,7 +27,7 @@ contributions:
   - deNBI
   - uni-freiburg
 subtopic: special
-tags: [mouse, imaging]
+tags: [mouse, imaging, mass spectrometry imaging]
 ---
 
 

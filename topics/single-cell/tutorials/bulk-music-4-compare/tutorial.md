@@ -6,6 +6,7 @@ title: Comparing inferred cell compositions using MuSiC deconvolution
 zenodo_link: https://zenodo.org/record/7319925
 tags:
   - transcriptomics
+  - deconvolution
 questions:
 - How do the cell type distributions vary in bulk RNA samples across my variable of interest?
 - For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?

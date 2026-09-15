@@ -28,6 +28,12 @@ contributions:
   funding:
     - elixir-europe
     - uni-freiburg
+tags:
+  - metabolomics
+  - mass spectrometry imaging
+  - imaging
+edam_ontology:
+  - topic_3172
 ---
 
 

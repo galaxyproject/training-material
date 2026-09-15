@@ -6,6 +6,7 @@ redirect_from:
 title: "Extracting Workflows from Histories"
 tags:
   - workflows
+  - history
 zenodo_link: ""
 questions:
   - "What is a workflow?"

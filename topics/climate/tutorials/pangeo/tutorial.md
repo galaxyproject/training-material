@@ -26,8 +26,9 @@ key_points:
 - Xarray Tools in Galaxy
 tags:
   - pangeo
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 
 
 recordings:

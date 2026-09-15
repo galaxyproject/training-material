@@ -8,6 +8,7 @@ redirect_from:
 
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
+- single-cell
 questions:
   - "What are barcodes?"
   - "What is their purpose?"

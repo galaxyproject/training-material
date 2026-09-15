@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>{{ page.title }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
+        {{ 'load' | bundle_preloads }}
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        {{ page | generate_dublin_core: site }}
+
+        {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" | strip_html | regex_replace:'[\n\r\s"]',' ' | truncate: 1000 -%}
+        <meta name="description" content="{{ og_desc }}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="{{ og_title | default: page.title }}">
+        <meta property="og:description" content="{{ og_desc }}">
+
+        {%- if page.cover %}{% assign coverimage = page.cover %}
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "assets/images/GTNLogo1000.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "assets/images/GTNLogo1000.png" %}
+	{%- if page.layout == "tutorial_hands_on" or page.layout == "tutorial_slides" or page.layout == "event" or page.layout == "workflow" or page.layout == "faq" or page.layout == "introduction_slides" or page.layout == "learning-pathway"  -%}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url | replace: ".html", ".png" }}">
+	{% elsif page.layout == "topic" or page.layout == "recordings" %}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url }}index.png">
+	{%- else -%}
+	<meta property="og:image" content="{% if og_image contains 'https://' %}{{ og_image }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ og_image }}{% endif %}">
+	{%- endif -%}
+
+        <!-- fontawesome -->
+        <link href="{{site.baseurl}}/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="{{site.baseurl}}/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="{{site.baseurl}}/assets/fontawesome/css/solid.css" rel="stylesheet" />
+	</head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        {{ 'theme' | load_bundle }}
+
+
+{% assign contributors = site.data['contributors'] %}
+{% assign entity = site | fetch_contributor: page.contributor %}
+
+<script type="application/ld+json">
+	{{ page.contributor | to_pfo_jsonld: site }}
+</script>
+
+<div style="width: 30em;aspect-ratio: 3/1; display: flex; flex-direction: row; margin: 2em; border: 1px solid red;">
+	<div style="width: 10em">
+		{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+	</div>
+	<div style="width: 20em">
+		<h1 style="font-size:1.5rem; margin:0.1rem">{{ entity.name }}</h1>
+		<i>Since {{ entity.joined }}</i>
+
+		<div>
+		{{ page.counts_fmt }}
+		</div>
+	</div>
+</div>
+
+        {{ 'main' | load_bundle }}
+
+    </body>
+</html>

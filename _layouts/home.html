@@ -233,8 +233,8 @@ layout: base
 
                 <div class="newstable">
                 <div class="list-group">
-                 {% assign upcoming_events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true  %}
-                 {% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " %}
+                 {% assign upcoming_events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.draft != true" | where: "not_started", true  %}
+                 {% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.draft != true" | where_exp: "item", "item.event_state == 'ongoing'  " %}
 
                  {% assign events = ongoing_events | concat: upcoming_events | sort: 'date_start' %}
                  {% assign events_length = events | size %}

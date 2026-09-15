@@ -18,11 +18,8 @@ key_points:
 tags:
   - earth-system
   - ocean
-  - geographical information system
-  - ODV
-  - netcdf data
-  - maps
-  - marine data
+  - GIS
+  - netcdf
 contributions:
   authorship:
     - Marie59
