@@ -17,7 +17,7 @@ For all of the possible repositories, you should fill the following fields:
 - In the `Name` section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets.
 - Optionally, you can provide a `Description` for this repository. This is a note for yourself.
 
-{% include _includes/cyoa-choices.html option1="Onedata" option2="Amazon Web Services Private Bucket" option3="Amazon Web Services Public Bucket" option4="Azure Blob" option5="Dropbox" option6="eLabFTW" option7="An FTP Server" option8="Export to Google Drive" option9="InvenioRDM" option10="S3 Compatible Storage with Credentials" option11="WebDAV" option12="Zenodo" default="Onedata" text="Select the repository you like to add to your Galaxy account." disambiguation="BYOD" %}
+{% include _includes/cyoa-choices.html option1="Onedata" option2="Amazon Web Services Private Bucket" option3="Amazon Web Services Public Bucket" option4="Azure Blob" option5="Dropbox" option6="eLabFTW" option7="An FTP Server" option8="Export to Google Drive" option9="InvenioRDM" option10="S3 Compatible Storage with Credentials" option11="WebDAV" option12="Zenodo" option13="RSpace" default="Onedata" text="Select the repository you like to add to your Galaxy account." disambiguation="BYOD" %}
 
 <div class="Onedata" markdown="1">
 If you have an [Onedata](https://onedata.org/) account, you can use this repository to import and/or export your data directly from and to Onedata. The minimal supported Onezone version is 21.02.4. More information on Onedata can be found on [Onedata's website](https://onedata.org/#/home).
@@ -115,6 +115,15 @@ In some cases, you may need to activate some features on your ownCloud or nextCl
 - Provide a name for the "creator" metadata of your records on Zenodo using the `Publication Name` field.  You can always change this value later by editing the records in Zenodo. If left blank, an anonymous user will be used as the creator.
 - You have to provide a `Personal Access Token` from your Zenodo account to Galaxy. To do so, you need to log into your account. Then, visit this site: https://zenodo.org/account/settings/applications/. Alternatively, you can click on your username on top right and then click on "Applications". Here, you need to create a "Personal Access Token". This will allow Galaxy to display your draft records and upload files to them. If you enabled the option to export data from Galaxy to Zenodo, make sure to enable the **deposit:write** scope when creating the token.
 - Click on `Create`.
+</div>
+<div class="RSpace" markdown="1">
+[RSpace](https://www.researchspace.com/) is an electronic laboratory notebook (ELN) - comparable to eLabFTW - for documenting experiments, protocols, observations, data, and research results in a structured and collaborative environment. RSpace is now open source, and RSpace Community is free to use, while managed Team and Enterprise versions are paid. A use can get an idea about its features by using the [community server](https://community.researchspace.com).
+- RSpace has its own [Galaxy integration](https://documentation.researchspace.com/l/en/article/zzsl46jo5y-galaxy) and can send data to Galaxy and track invocations using this data.
+- Add a name like community.researchspace
+- Optional description
+- Add the RSpace instance endpoint e.g.: https://community.researchspace.com
+- Add the `RSpace API Key`. You get it on the RSpace server, when you click on profile, then on regenerate key. Store it you will not see it again.
+- Click `Create`.
 </div>
 
 > <tip-title>What can you do after you connected a repository</tip-title>

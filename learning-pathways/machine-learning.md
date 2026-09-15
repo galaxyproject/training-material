@@ -2,7 +2,8 @@
 layout: learning-pathway
 tags: [beginner, machine learning]
 type: use
-
+topics:
+  - statistics
 editorial_board:
 - anuprulez
 
@@ -20,7 +21,7 @@ pathway:
 
   - section: "Module 2: Classification and Regression"
     description:  |
-      Regression and classification 
+      Regression and classification
     tutorials:
       - topic: statistics
         name: classification_machinelearning

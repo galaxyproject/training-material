@@ -153,7 +153,7 @@ We need a reference genome to map the reads on.
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
 > <hands-on-title>Mapping with Bowtie2</hands-on-title>
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0) %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end`
 >       - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Paired Reads`
 >       - *"Do you want to set paired-end options?"*: `No`
@@ -210,7 +210,7 @@ After that, you should have a look at the reads and inspect the BAM file where t
 The BAM file includes a lot of information about each read, particularly the quality of mapping.
 
 > <hands-on-title>Summary of mapping quality</hands-on-title>
-> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.8) %} with the following parameters
+> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.9) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
 >    - *"Use reference sequence"*: `Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
@@ -237,7 +237,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > 5. How many reads have a mapping quality score below 20?
 >
 > > <solution-title></solution-title>
-> > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.
+> > 1. There are 32,663 mismatches for 5,004,018 bases mapped which on average produces 0.00653 mismatches per mapped bases.
 > > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.
 > > 3. The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.
 > > 4. The insert size is the distance between the two reads in the pairs.
@@ -245,7 +245,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > >      1. {% tool [Filter BAM](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with a filter to keep only the reads with a mapping quality >= 20
 > >      2. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5) %} on the output of **Filter**
 > >
-> >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
+> >    Before filtering: 98,118 reads and after filtering: 92,152 reads.
 >  {: .solution }
 {: .question}
 
@@ -259,7 +259,7 @@ The Integrative Genomics Viewer (IGV) is a high-performance visualization tool f
 
 ## JBrowse
 
-{% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0) %} is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+{% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
 
