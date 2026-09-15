@@ -35,6 +35,14 @@ And what if the structure we use is not an experimentally determined structure a
 
 This tutorial explores exactly that question.
 
+
+> <warning-title>LICENSE</warning-title>
+>
+> SIMORGH is only available for NON-COMMERCIAL use. Permission is only granted for academic, research, and educational purposes. Before using, be sure to review, agree, and comply with the license.
+> For commercial use, please review the SIMORGH license on GitHub and contact the [copyright holders](https://github.com/amisteromid/SIMORGH)
+{: .warning}
+
+
 We will use the **Escherichia coli Signal Recognition Particle Receptor FtsY** as our example.
 FtsY binds **Guanosine-5'-diphosphate (GDP)**, and experimentally determined structures are available in both apo and holo conformations.
 
@@ -110,6 +118,9 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >       - *"Number of ensembles"*: `1`
 >       - *"Set seed"*: `42`
 >       - *"Number of models to use for structure prediction"*: `1`
+>       - *"Use AMBER"*: `Don't use AMBER`
+>
+> 4. Rename the data `FtsY Colabfold predicted`
 >
 {: .hands_on}
 
@@ -179,14 +190,14 @@ Finally, `print`, prints out any line that is not skipped.
 In summary, "Keep everything except ATOM/HETATM/TER records from chain B."
 
 Copy the following script in the ***"AWK Program"*** of the following tool:
->   ```
->   {
->     rectype = substr($0,1,6)
->     chain = substr($0,22,1)
->     if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "B") next
->     print
->   }
->   ```
+```
+{
+  rectype = substr($0,1,6)
+  chain = substr($0,22,1)
+  if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "B") next
+  print
+}
+```
 
 > <hands-on-title>   Text reformatting with awk </hands-on-title>
 >
@@ -206,15 +217,90 @@ Copy the following script in the ***"AWK Program"*** of the following tool:
 
 # Binding Site Prediction with SIMORGH
 
-TO_BE_ADDED
+A single protein structure is only one snapshot of a moving molecule. To capture this motion, we generate a conformational ensemble for each structure using BBFlow ({% cite Wolf2025-dm %}).
+BBFlow is a structure-conditioned flow-matching model for generating diverse protein backbone ensembles.
+Given a protein backbone as input, it stochastically samples structurally distinct states, capturing the underlying geometric heterogeneity of the protein.
+This structural diversity is then leveraged by SIMORGH to predict ligand-binding sites, reducing bias from relying on a single input structure and improving the performance.
+
+
+> <hands-on-title> SIMORGH </hands-on-title>
+>
+> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+>    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
+>    - *"PDB file"*: `6N5J PDB fixed chainA`
+>    - *"Run BBflow?"*: `Yes`
+>    - *"Number of conformations to sample"*: `8`
+>
+> 2. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+>    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
+>    - *"PDB file"*: `6FQD PDB fixed chainA`
+>    - *"Run BBflow?"*: `Yes`
+>    - *"Number of conformations to sample"*: `8`
+>
+> 3. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+>    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
+>    - *"PDB file"*: `FtsY Colabfold predicted`
+>    - *"Run BBflow?"*: `Yes`
+>    - *"Number of conformations to sample"*: `8`
+>
+{: .hands_on}
+
+
+> <question-title></question-title>
+>
+> 1. TO_BE_ADDED
+>
+> > <solution-title></solution-title>
+> >
+> > 1. TO_BE_ADDED
+> >
+> {: .solution}
+>
+{: .question}
+
 
 # What Does SIMORGH Actually Learn?
 
-TO_BE_ADDED
+SIMORGH can incorporate protein dynamics in two stages.
+
+* Stage 1 --> **Conformation Augmentation**
+    The first encoder sees different conformations of the same protein.
+    Instead of learning from a single static structure, SIMORGH is exposed to the **structural variability of the protein**.
+* Stage 2 --> **Learned Aggregation**
+    SIMORGH then learns how to combine the embeddings from these different conformations into **one final prediction**.
+
+In other words:
+**Multiple conformations** --> **Multiple embeddings** --> **Learned aggregation** --> **Final prediction**
+
+This allows the model to use information from the protein's dynamic ensemble rather than relying on a single structural snapshot.
+
 
 # Bonus Challenge
 
-TO_BE_ADDED
+Although this would not count as a prediction that incorporates learned protein dynamics, you can run SIMORGH without BBFlow to isolate the effect of aggregation.
+
+This time we run SIMORGH on `6N5J PDB fixed chainA` without using BBflow.
+
+> <hands-on-title> SIMORGH </hands-on-title>
+>
+> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+>    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
+>    - *"PDB file"*: `6N5J PDB fixed chainA`
+>    - *"Run BBflow?"*: `No`
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. TO_BE_ADDED
+>
+> > <solution-title></solution-title>
+> >
+> > 1. TO_BE_ADDED
+> >
+> {: .solution}
+>
+{: .question}
 
 # Conclusion
 
