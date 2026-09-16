@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Mass spectrometry imaging: Loading and exploring MSI data"
 edam_ontology: ["topic_0121"]
-zenodo_link: "https://doi.org/10.5281/zenodo.1560646"
+zenodo_link: 'https://zenodo.org/record/1560646'
 level: Introductory
 questions:
   - "Did the tryptic digestions work?"
