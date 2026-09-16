@@ -3,20 +3,20 @@ layout: tutorial_hands_on
 
 title: Comparing ligand-binding site predictions across different protein structure modalities using SIMORGH
 questions:
-- TO_BE_ADDED
-- TO_BE_ADDED
+- How does the structural modality (Apo, Holo, or Predicted) affect ligand-binding site prediction?
+- Can integrating protein dynamics improve binding site predictions across different modalities?
 objectives:
-- TO_BE_ADDED
-- TO_BE_ADDED
-- TO_BE_ADDED
+- Prepare and preprocess experimental and predicted protein structures for binding site prediction.
+- Run SIMORGH to predict ligand-binding sites.
+- Compare predictions using static structures versus dynamic structural ensembles.
 time_estimation: 1H
 key_points:
-- TO_BE_ADDED
-- TO_BE_ADDED
+- Protein structures are dynamic, and leveraging structural ensembles can improve binding site predictions.
+- SIMORGH uses deep learning to aggregate information from diverse protein states, reducing bias toward a single conformation.
 contributors:
 - Nilchia
 - amisteromid
-subtopic: TO_BE_ADDED
+subtopic: structural-biology
 answer_histories:
     - label: "usegalaxy.eu"
       history: TO_BE_ADDED
@@ -31,7 +31,7 @@ Why does this matter?
 In the holo structure, the protein has already adopted a conformation compatible with the ligand. As a result, the binding pocket is often easier to identify: the pocket is already **pre-organized around the ligand**.
 
 But what happens when the ligand is not there?
-And what if the structure we use is not an experimentally determined structure at all, but an **Colabfold prediction**?
+And what if the structure we use is not an experimentally determined structure at all, but a **Colabfold prediction**?
 
 This tutorial explores exactly that question. We will use SIMORGH ({% cite SIMORGH2026 %}) to address this challenge.
 
@@ -80,14 +80,14 @@ To answer this, we will compare **three structural modalities**:
 >
 > 1. {% tool [Get PDB file](toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1) %} with the following parameters:
 >    - *"PDB accession code"*: `6N5J`
->    - In *"Aditional options"*:
+>    - In *"Additional options"*:
 >       - *"Output Tags"*: `#apo`
 >
 > 2. Rename the data `6N5J PDB`
 >
 > 3. {% tool [Get PDB file](toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1) %} with the following parameters:
 >    - *"PDB accession code"*: `6FQD`
->    - In *"Aditional options"*:
+>    - In *"Additional options"*:
 >       - *"Output Tags"*: `#holo`
 >
 > 4. Rename the data `6FQD PDB`
@@ -117,7 +117,7 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >    - *"Query sequence fasta"*: `FtsY.fasta`
 >
 > 3. {% tool [Colabfold Alphafold](toolshed.g2.bx.psu.edu/repos/iuc/colabfold_alphafold/colabfold_alphafold/1.5.5+galaxy1) %} with the following parameters:
->    - *Tar file output from colabfold MSA tool"*: `Output of Colabfold MSA`
+>    - *"Tar file output from colabfold MSA tool"*: `Output of Colabfold MSA`
 >    - In *"Advanced options"*:
 >       - *"How many recycles to run?"*: `5`
 >       - *"Number of ensembles"*: `1`
@@ -125,22 +125,22 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >       - *"Number of models to use for structure prediction"*: `1`
 >       - *"Use AMBER"*: `Don't use AMBER`
 >
-> 3. {% tool [ Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
->    - *Input List"*: `PDB predictions` output of Colabfold Alphafold
->    - *How should a dataset be selected?"*: `The first dataset`
+> 4. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - *"Input List"*: `PDB predictions` output of Colabfold Alphafold
+>    - *"How should a dataset be selected?"*: `The first dataset`
 >
-> 4. Rename the data `FtsY Colabfold predicted`
+> 5. Rename the data `FtsY Colabfold predicted`
 >
 {: .hands_on}
 
 
 > <question-title></question-title>
 >
-> 1. TO_BE_ADDED
+> 1. Why might a Colabfold predicted structure differ from the experimental apo or holo structures?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. TO_BE_ADDED
+> > 1. Colabfold predicts the structure based on sequence and evolutionary information. It typically predicts an averaged or lowest-energy state (often apo-like), but it does not know about specific ligands present in the experimental holo environment.
 > >
 > {: .solution}
 >
@@ -150,11 +150,11 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 
 ## PDB cleanup
 
-Next we should preprocess the raw exprimental PDB structures to fix structural anomalies. We will use pdbfixer ({% cite pdbfixer %}) to identify and model missing heavy atoms, insert missing flexible loops or internal side chains based on the sequence, remove crystallographic water molecules or unwanted ligand, replace non-standard residue entries with standard amino acids, and add explicit hydrogen atoms at specified pH levels to ensure physical completeness for downstream modeling.
+Next we should preprocess the raw experimental PDB structures to fix structural anomalies. We will use pdbfixer ({% cite pdbfixer %}) to identify and model missing heavy atoms, insert missing flexible loops or internal side chains based on the sequence, remove crystallographic water molecules or unwanted ligand, replace non-standard residue entries with standard amino acids, and add explicit hydrogen atoms at specified pH levels to ensure physical completeness for downstream modeling.
 
 > <hands-on-title>  PDBFixer </hands-on-title>
 >
-> 1. {% tool [ PDBFixer](toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0) %} with the following parameters:
+> 1. {% tool [PDBFixer](toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0) %} with the following parameters:
 >    - *"PDB input file"*: `6N5J PDB`
 >    - *"Missing atoms to be added"*: `Heavy atoms only`
 >    - *"Which heterogens to keep"*: `None`
@@ -162,7 +162,7 @@ Next we should preprocess the raw exprimental PDB structures to fix structural a
 >
 > 2. Rename the data `6N5J PDB fixed`
 >
-> 3. {% tool [ PDBFixer](toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0) %} with the following parameters:
+> 3. {% tool [PDBFixer](toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0) %} with the following parameters:
 >    - *"PDB input file"*: `6FQD PDB`
 >    - *"Missing atoms to be added"*: `Heavy atoms only`
 >    - *"Which heterogens to keep"*: `None`
@@ -174,11 +174,11 @@ Next we should preprocess the raw exprimental PDB structures to fix structural a
 
 > <question-title></question-title>
 >
-> 1. TO_BE_ADDED
+> 1. Why is it important to replace non-standard residues with standard equivalents?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. TO_BE_ADDED
+> > 1. Downstream tools like SIMORGH or BBFlow are often trained on standard amino acids. Non-standard residues can cause errors or be ignored during the prediction process if they are not explicitly handled by the models.
 > >
 > {: .solution}
 >
@@ -210,13 +210,13 @@ Copy the following script in the ***"AWK Program"*** of the following tool:
 
 > <hands-on-title>   Text reformatting with awk </hands-on-title>
 >
-> 1. {% tool [  Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} with the following parameters:
+> 1. {% tool [Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} with the following parameters:
 >    - *"File to process"*: `6N5J PDB fixed`
 >    - *"AWK Program"*: `copy the text from above`
 >
 > 2. Rename the data `6N5J PDB fixed chainA`
 >
-> 3. {% tool [  Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} with the following parameters:
+> 3. {% tool [Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} with the following parameters:
 >    - *"File to process"*: `6FQD PDB fixed`
 >    - *"AWK Program"*: `copy the text from above`
 >
@@ -257,7 +257,7 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 
 > <question-title></question-title>
 >
-> 1. TO_BE_ADDED
+> 1. Looking at the results, do the binding site predictions differ between the apo, holo, and Colabfold structures when using BBFlow ensembles?
 >
 > > <solution-title></solution-title>
 > >
@@ -301,7 +301,7 @@ This time we run SIMORGH on `6N5J PDB fixed chainA` without using BBflow.
 
 > <question-title></question-title>
 >
-> 1. TO_BE_ADDED
+> 1. How does the prediction on the static `6N5J PDB fixed chainA` (without BBFlow) compare to the prediction that used the BBFlow ensemble?
 >
 > > <solution-title></solution-title>
 > >
@@ -313,4 +313,6 @@ This time we run SIMORGH on `6N5J PDB fixed chainA` without using BBflow.
 
 # Conclusion
 
-TO_BE_ADDED
+In this tutorial, you learned how to prepare different structural modalities of the same protein (experimental apo, experimental holo, and predicted structures) for ligand-binding site prediction. We demonstrated that using a single static structure can introduce bias, depending on whether the protein is pre-organized for the ligand (holo) or not (apo/predicted).
+
+By leveraging **BBFlow** to generate structural ensembles and **SIMORGH** to aggregate these diverse states, we can predict ligand-binding sites more robustly, capturing the dynamic nature of proteins and overcoming the limitations of static structural snapshots.
