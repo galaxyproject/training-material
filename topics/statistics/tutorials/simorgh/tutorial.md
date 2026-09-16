@@ -131,6 +131,8 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >
 > 5. Rename the data `FtsY Colabfold predicted`
 >
+> 6. Add the tag: `#colabfold`
+>
 {: .hands_on}
 
 
