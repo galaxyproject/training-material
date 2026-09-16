@@ -107,6 +107,7 @@ def update_data_library(path, topic, tutorial, zenodo_record)
       'description' => topic['description'],
       'items' => [
         'name' => tutorial['name'],
+        'description' => "This folder contains input datasets for the GTN tutorial '#{tutorial['name']}'"
         'items' => [
           'name' => "DOI: 10.5281/zenodo.#{zenodo_id}",
           'description' => 'latest',
@@ -171,6 +172,9 @@ def parse_metadata(path)
   tutorial_metadata = YAML.load_file(path, permitted_classes: [Date])
   topic = { 'name' => topic_metadata['title'], 'topic_id' => topic_metadata['name'], 'description' => topic_metadata['summary'] }
   tutorial = { 'name' => tutorial_metadata['title'] }
+
+  puts tutorial_metadata
+
   [topic, tutorial]
 end
 
