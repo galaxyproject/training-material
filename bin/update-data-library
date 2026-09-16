@@ -94,6 +94,10 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     }
   end
 
+  tutorial_name = tutorial['name']
+  tutorial_path = tutorial['path'].sub('.md','.html')
+  topic_name = topic['name']
+
   library = {
     'destination' => {
       'type' => 'library',
@@ -104,10 +108,12 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     'items' => [
       'name' => topic['name'],
       'topic_id' => topic['topic_id'],
-      'description' => topic['description'],
+      'description' => "Tutorial input datasets for GTN topic '#{topic_name}'",
       'items' => [
         'name' => tutorial['name'],
-        'description' => "This folder contains input datasets for the GTN tutorial '#{tutorial['name']}'"
+        'tutorial_id' => tutorial['tutorial_id'],
+        'description' => "Input Datasets for tutorial",
+        'tutorial_readme' => "This folder contains input datasets for the GTN tutorial [#{tutorial_name}](https://training.galaxyproject.org/#{tutorial_path})",
         'items' => [
           'name' => "DOI: 10.5281/zenodo.#{zenodo_id}",
           'description' => 'latest',
@@ -168,13 +174,12 @@ end
 def parse_metadata(path)
   parts = path.to_s.split('/')
   topic_id = parts[1]
+  tutorial_id = parts[3]
+
   topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"), permitted_classes: [Date])
   tutorial_metadata = YAML.load_file(path, permitted_classes: [Date])
-  topic = { 'name' => topic_metadata['title'], 'topic_id' => topic_metadata['name'], 'description' => topic_metadata['summary'] }
-  tutorial = { 'name' => tutorial_metadata['title'] }
-
-  puts tutorial_metadata
-
+  topic = { 'name' => topic_metadata['title'], 'topic_id' => topic_id, 'description' => topic_metadata['summary'] }
+  tutorial = { 'name' => tutorial_metadata['title'], 'tutorial_id' => tutorial_id, 'path' => path }
   [topic, tutorial]
 end
 

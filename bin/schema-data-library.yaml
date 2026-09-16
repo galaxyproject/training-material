@@ -29,6 +29,41 @@ mapping:
       - type: map
         required: yes
         mapping:
+          topic_id:
+            type: str
+            required: yes
+            enum: # todo: auto-detect all our topic names and check
+              - admin
+              - ai4life
+              - assembly
+              - climate
+              - community
+              - computational-chemistry
+              - contributing
+              - data-science
+              - dev
+              - digital-humanities
+              - ecology
+              - epigenetics
+              - evolution
+              - fair
+              - galaxy-interface
+              - genome-annotation
+              - imaging
+              - introduction
+              - materials-science
+              - metabolomics
+              - microbiome
+              - phage-galaxy
+              - proteomics
+              - sequence-analysis
+              - single-cell
+              - statistics
+              - synthetic-biology
+              - teaching
+              - transcriptomics
+              - variant-analysis
+              - visualisation
           name:
             type: str
             required: yes
@@ -75,6 +110,10 @@ mapping:
                 name:
                   type: str
                 description:
+                  type: str
+                tutorial_id: # todo: validate it is an existing tutorial folder name
+                  typs: str
+                tutorial_readme:
                   type: str
                 items:  # Zenodo version folder
                   type: seq
