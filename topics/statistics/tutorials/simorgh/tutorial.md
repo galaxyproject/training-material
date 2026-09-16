@@ -33,7 +33,12 @@ In the holo structure, the protein has already adopted a conformation compatible
 But what happens when the ligand is not there?
 And what if the structure we use is not an experimentally determined structure at all, but an **Colabfold prediction**?
 
-This tutorial explores exactly that question.
+This tutorial explores exactly that question. We will use SIMORGH ({% cite SIMORGH2026 %}) to address this challenge.
+
+Simorgh is a deep learning framework built on SE(3)-equivariant neural networks for ligand-binding site prediction.
+It combines local geometric reasoning with information from diverse protein states.
+A message-passing module first encodes the spatial context of individual residues within each structure, followed by an aggregation module that integrates these residue-level representations across the ensemble.
+By explicitly modeling structural variability, Simorgh identifies binding sites that are meaningful across multiple protein states, rather than being biased toward a single structure.
 
 
 > <warning-title>LICENSE</warning-title>
@@ -119,6 +124,10 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >       - *"Set seed"*: `42`
 >       - *"Number of models to use for structure prediction"*: `1`
 >       - *"Use AMBER"*: `Don't use AMBER`
+>
+> 3. {% tool [ Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - *Input List"*: `PDB predictions` output of Colabfold Alphafold
+>    - *How should a dataset be selected?"*: `The first dataset`
 >
 > 4. Rename the data `FtsY Colabfold predicted`
 >
