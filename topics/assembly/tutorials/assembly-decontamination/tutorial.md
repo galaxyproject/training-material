@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Decontamination of a genome assembly
-zenodo_link: https://zenodo.org/records/13367433
+zenodo_link: 'https://zenodo.org/record/13367433'
 questions:
 - How to remove contaminant sequences from your assembly?
 objectives:
