@@ -50,7 +50,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > This tutorial stops after peptide-ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
 > The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/).
-
+{: .comment-title}
 
 # From raw data to mzml format
  1. get your data: click [here](https://git.nfdi4plants.org/venn/Ru_ChlamyHeatstress/-/blob/main/assays/Proteomics/dataset/20191101_Zhang_35C_A_sample01.raw?ref_type=heads) and download the sample file
@@ -370,7 +370,7 @@ The `.prot` file contains:
 
 # Optional extension: what changes for N15-labelled data?
 
-The main workflow above is deliberately label-free. ProteomIQon also supports metabolically labelled data such as 15N experiments, but the search database and quantification settings must then be changed consistently.
+The main workflow above is deliberately label-free (in this case label-free means 14N). ProteomIQon also supports metabolically labelled data such as 15N experiments, but the search database and quantification settings must then be changed consistently.
 
 In an N15-labelled experiment, nitrogen atoms containing 14N are replaced by the heavier 15N isotope during metabolic labelling. The mass shift of a peptide depends on the number of nitrogen atoms contained in that peptide. This produces predictable light/heavy peptide-ion relationships that can be used during labelled quantification.
 
@@ -392,7 +392,7 @@ For an N15 workflow:
 >
 > > <solution-title></solution-title>
 > >
-> > The peptide database determines which light or labelled peptide variants can be identified, while the quantification mode determines which chromatographic partner ions are searched and quantified. Inconsistent settings would make the workflow biologically and computationally inconsistent.
+> > The peptide database determines which label-free or labelled peptide variants can be identified, while the quantification mode determines which chromatographic partner ions are searched and quantified. Inconsistent settings would make the workflow biologically and computationally inconsistent.
 > {: .solution}
 {: .question}
 
@@ -427,7 +427,7 @@ For an N15 workflow:
 
 # Conclusion
 
-In this tutorial, you followed a core ProteomIQon DDA workflow from open mass-spectrometry data to peptide identification, statistical validation, peptide-ion quantification, and protein inference.
+In this tutorial, you followed a core ProteomIQon DDA workflow from open mass-spectrometry data to peptide identification, statistical validation, peptide quantification, and protein inference.
 
 You first converted mzML data to the mzLite format used throughout the workflow and generated a peptide search database from a protein FASTA file. You then matched MS/MS spectra to candidate peptides, used target-decoy information and statistical modelling to retain confident PSMs, quantified identified peptide ions from fitted chromatographic peak areas, and finally mapped peptide evidence back to proteins and protein groups.
 
