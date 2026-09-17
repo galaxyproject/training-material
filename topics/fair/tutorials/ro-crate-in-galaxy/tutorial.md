@@ -22,6 +22,7 @@ contributions:
     - pauldg
   editing: 
     - Marie59
+    - martincarrere
   funding:
     - by-covid
     - eurosciencegateway
