@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Clinical Metaproteomics 5: Data Interpretation"
-zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
+zenodo_link: 'https://zenodo.org/record/10105821'
 questions:
 - Why do we need to interpret the data?
 - Can we visualize the data?
@@ -35,6 +35,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-data-interpretation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-5-data-interpretation/tutorial
 
 recordings:
 - captioners:

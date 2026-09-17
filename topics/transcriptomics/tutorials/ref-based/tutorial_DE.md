@@ -11,7 +11,7 @@ tags:
 - QC
 - cyoa
 level: Introductory
-zenodo_link: https://zenodo.org/record/6457007
+zenodo_link: 'https://zenodo.org/record/6457007'
 questions:
 - Was sind die Schritte zur Verarbeitung von RNA‑Seq‑Daten?
 - Wie identifiziert man differentiell exprimierte Gene über mehrere experimentelle Bedingungen?
