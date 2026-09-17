@@ -108,11 +108,12 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     'items' => [
       'name' => topic['name'],
       'topic_id' => topic['topic_id'],
-      'description' => "Tutorial input datasets for GTN topic '#{topic_name}'",
+      'description' => "Tutorial input datasets for GTN topic #{topic_name}",
+      'topic_readme' => topic['description'],
       'items' => [
         'name' => tutorial['name'],
         'tutorial_id' => tutorial['tutorial_id'],
-        'description' => "Input Datasets for tutorial",
+        'description' => "Input datasets for #{tutorial_name}",
         'tutorial_readme' => "This folder contains input datasets for the GTN tutorial [#{tutorial_name}](https://training.galaxyproject.org/#{tutorial_path})",
         'items' => [
           'name' => "DOI: 10.5281/zenodo.#{zenodo_id}",
@@ -190,7 +191,7 @@ command :update do |c|
   c.option '--fragile', 'Exit quickly if the data library already exists'
   c.action do |args, options|
     path = Pathname.new(args.first).cleanpath
-    #puts "--> Checking tutorial: #{path}"
+    puts "--> Checking tutorial: #{path}"
     zenodo_id = parse_tutorial_for_zenodo_link(path).to_s
     if zenodo_id.nil? || zenodo_id.empty?
       exit 0
