@@ -10,6 +10,7 @@ answer_histories:
   history: https://usegalaxy.eu/u/videmp/h/gtn-chip-seq-formation-of-super-structures-on-xi
 tags:
     - ChIP-seq
+    - epigenetics
 questions:
     - Histone modification?
     - How is a raw set of ChIP-seq data processed and analyzed?
@@ -272,9 +273,9 @@ With ChiP sequencing, we obtain sequences corresponding to a portion of DNA link
 >    > How many reads where mapped? Uniquely or several times?
 >    >
 >    > > <solution-title></solution-title>
->    > > The overall alignment rate is 98.57%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
+>    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
->    > > 41514 (85.72%) reads have been aligned concordantly exactly 1 time and 5190 (10.72%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
+>    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
 >    > > however, the number of false positives may also increase.
 >    > {: .solution }
 >    {: .question}
