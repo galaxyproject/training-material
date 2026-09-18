@@ -1,12 +1,12 @@
 {
     "a_galaxy_workflow": "true",
-    "annotation": "",
+    "annotation": "A common ChIP-seq workflow based on Formation of the Super-Structures on the Inactive X, https://gxy.io/GTN:T00140",
     "comments": [],
     "creator": [
         {
             "class": "Person",
             "identifier": "0000-0002-2301-112X",
-            "name": "Friederike D\u00fcndar"
+            "name": "Friederike Dündar"
         },
         {
             "class": "Person",
@@ -16,7 +16,7 @@
         {
             "class": "Person",
             "identifier": "0000-0001-9852-1987",
-            "name": "B\u00e9r\u00e9nice Batut"
+            "name": "Bérénice Batut"
         },
         {
             "class": "Person",
@@ -47,19 +47,20 @@
     "format-version": "0.1",
     "license": "CC-BY-4.0",
     "name": "GTN - ChIP Seq - Formation Of Super Structures On Xi",
+    "readme": "A common ChIP-seq workflow based on Formation of the Super-Structures on the Inactive X, https://gxy.io/GTN:T00140.\n\nInputs:\n- FASTQ files of ChIP\n- FASTQ files of Input\n\nOutputs:\n- A tabular file of enriched peaks representing protein binidng sites\n- Some informative plots, including heatmaps showing the consensus structure/shape of the peaks",
     "report": {
         "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
     },
     "steps": {
         "0": {
-            "annotation": "",
+            "annotation": "Paired collection created from wt_H3K4me3_read*.fastq.gz",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "Paired collection created from wt_H3K4me3_read*.fastq.gz",
                     "name": "Input Paired End Reads Collection"
                 }
             ],
@@ -71,7 +72,7 @@
                 "top": 1508.0406523272222
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null}",
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null, \"column_definitions\": null}",
             "tool_version": null,
             "type": "data_collection_input",
             "uuid": "4f54751a-a16d-4f8b-a740-91e5152f7fab",
@@ -79,14 +80,14 @@
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "",
+            "annotation": "wt_input_rep1",
             "content_id": null,
             "errors": null,
             "id": 1,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_input_rep1",
                     "name": "wt_input_rep1.bam"
                 }
             ],
@@ -106,14 +107,14 @@
             "workflow_outputs": []
         },
         "2": {
-            "annotation": "",
+            "annotation": "wt_H3K4me3_rep1",
             "content_id": null,
             "errors": null,
             "id": 2,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_H3K4me3_rep1",
                     "name": "wt_H3K4me3_rep1.bam"
                 }
             ],
@@ -133,14 +134,14 @@
             "workflow_outputs": []
         },
         "3": {
-            "annotation": "",
+            "annotation": "wt_CTCF_rep1",
             "content_id": null,
             "errors": null,
             "id": 3,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_CTCF_rep1",
                     "name": "wt_CTCF_rep1.bam"
                 }
             ],
@@ -160,14 +161,14 @@
             "workflow_outputs": []
         },
         "4": {
-            "annotation": "",
+            "annotation": "wt_H3K27me3_rep1",
             "content_id": null,
             "errors": null,
             "id": 4,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_H3K27me3_rep1",
                     "name": "wt_H3K27me3_rep1.bam"
                 }
             ],
@@ -187,14 +188,14 @@
             "workflow_outputs": []
         },
         "5": {
-            "annotation": "",
+            "annotation": "wt_input_rep2",
             "content_id": null,
             "errors": null,
             "id": 5,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_input_rep2",
                     "name": "wt_input_rep2.bam"
                 }
             ],
@@ -214,14 +215,14 @@
             "workflow_outputs": []
         },
         "6": {
-            "annotation": "",
+            "annotation": "wt_H3K4me3_rep2",
             "content_id": null,
             "errors": null,
             "id": 6,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_H3K4me3_rep2",
                     "name": "wt_H3K4me3_rep2.bam"
                 }
             ],
@@ -241,14 +242,14 @@
             "workflow_outputs": []
         },
         "7": {
-            "annotation": "",
+            "annotation": "wt_CTCF_rep2",
             "content_id": null,
             "errors": null,
             "id": 7,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_CTCF_rep2",
                     "name": "wt_CTCF_rep2.bam"
                 }
             ],
@@ -268,14 +269,14 @@
             "workflow_outputs": []
         },
         "8": {
-            "annotation": "",
+            "annotation": "wt_H3K27me3_rep2",
             "content_id": null,
             "errors": null,
             "id": 8,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "wt_H3K27me3_rep2",
                     "name": "wt_H3K27me3_rep2.bam"
                 }
             ],
@@ -296,7 +297,7 @@
         },
         "9": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0",
             "errors": null,
             "id": 9,
             "input_connections": {
@@ -328,15 +329,16 @@
                 "top": 1394.7640192625804
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "cd7e644cae1d",
+                "changeset_revision": "b94789823aad",
                 "name": "trim_galore",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"params\": {\"settingsType\": \"custom\", \"__current_case__\": 1, \"quality\": \"15\", \"stringency\": \"3\", \"error_rate\": \"0.1\", \"min_length\": \"20\", \"clip_R1\": null, \"clip_R2\": null, \"report\": true, \"retain_unpaired\": {\"retain_unpaired_select\": \"no_output\", \"__current_case__\": 0}}, \"rrbs\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"singlePaired\": {\"sPaired\": \"paired_collection\", \"__current_case__\": 2, \"input_mate_pairs\": {\"__class__\": \"ConnectedValue\"}, \"trimming\": {\"trimming_select\": \"\", \"__current_case__\": 0}, \"trim1\": false, \"three_prime_clip_R1\": null, \"three_prime_clip_R2\": null}, \"trimming\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.6.7+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "0.6.10+galaxy0",
             "type": "tool",
             "uuid": "8ba82aa7-e90d-454d-9afe-c91330d88518",
             "when": null,
@@ -375,6 +377,7 @@
             "post_job_actions": {},
             "tool_id": "__FLATTEN__",
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"join_identifier\": \"_\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "9f8756f0-5d7c-49c8-b4f4-2bc3988e1039",
@@ -383,7 +386,7 @@
         },
         "11": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.8",
             "errors": null,
             "id": 11,
             "input_connections": {
@@ -406,15 +409,16 @@
                 "top": 575.1020421692099
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.8",
             "tool_shed_repository": {
-                "changeset_revision": "7def34e6cf4d",
+                "changeset_revision": "13aad5cb9be4",
                 "name": "samtools_idxstats",
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.0.4",
+            "tool_uuid": null,
+            "tool_version": "2.0.8",
             "type": "tool",
             "uuid": "c9a86595-3d43-411b-a227-ba71a0a479a9",
             "when": null,
@@ -422,7 +426,7 @@
         },
         "12": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "errors": null,
             "id": 12,
             "input_connections": {
@@ -445,15 +449,16 @@
                 "top": 703.3246845551505
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "12af64f93288",
+                "changeset_revision": "d13c066a4751",
                 "name": "deeptools_bam_coverage",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"exactScaling\": false, \"outFileFormat\": \"bedgraph\", \"region\": \"chrX\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"outFileFormat\": \"bedgraph\", \"region\": \"X\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "f2f39152-9f70-4798-89ee-ccd389c51082",
             "when": null,
@@ -461,7 +466,7 @@
         },
         "13": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "errors": null,
             "id": 13,
             "input_connections": {
@@ -484,15 +489,16 @@
                 "top": 0
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "12af64f93288",
+                "changeset_revision": "d13c066a4751",
                 "name": "deeptools_bam_coverage",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "c171aad0-cb84-44e8-aac8-a289b8d8c1e5",
             "when": null,
@@ -500,7 +506,7 @@
         },
         "14": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "errors": null,
             "id": 14,
             "input_connections": {
@@ -523,29 +529,24 @@
                 "top": 132.4181186393239
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "12af64f93288",
+                "changeset_revision": "d13c066a4751",
                 "name": "deeptools_bam_coverage",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"exactScaling\": false, \"outFileFormat\": \"bedgraph\", \"region\": \"chrX\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"25\", \"outFileFormat\": \"bedgraph\", \"region\": \"X\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2308125349\", \"__current_case__\": 7}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "8f239db8-258c-4c7e-85ae-4b9732665c4a",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "wt_H3K4me3_rep1_bamcoverage",
-                    "output_name": "outFileName",
-                    "uuid": "73e2f018-d9e4-4f74-8110-598b9b43a940"
-                }
-            ]
+            "workflow_outputs": []
         },
         "15": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.8",
             "errors": null,
             "id": 15,
             "input_connections": {
@@ -568,29 +569,24 @@
                 "top": 258.44845102212514
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.8",
             "tool_shed_repository": {
-                "changeset_revision": "7def34e6cf4d",
+                "changeset_revision": "13aad5cb9be4",
                 "name": "samtools_idxstats",
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.0.4",
+            "tool_uuid": null,
+            "tool_version": "2.0.8",
             "type": "tool",
             "uuid": "8377fd06-d480-42ee-a677-5fd05d73083e",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "wt_H3K4me3_rep1_idxstats",
-                    "output_name": "output",
-                    "uuid": "09449d6f-ce88-4448-9928-064c729c32d1"
-                }
-            ]
+            "workflow_outputs": []
         },
         "16": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy0",
             "errors": null,
             "id": 16,
             "input_connections": {
@@ -624,15 +620,16 @@
                 "top": 381.9962121694517
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "793665fff0f8",
+                "changeset_revision": "bed4b253dc69",
                 "name": "deeptools_plot_fingerprint",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"binSize\": \"500\", \"numberOfSamples\": \"10000\", \"doExtendCustom\": {\"doExtend\": \"no\", \"__current_case__\": 0}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"skipZeros\": false, \"plotTitle\": \"\", \"blackListFileName\": null}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"region\": \"chrX\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"__input_ext\": \"input\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"binSize\": \"500\", \"numberOfSamples\": \"10000\", \"doExtendCustom\": {\"doExtend\": \"no\", \"__current_case__\": 0}, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"skipZeros\": false, \"plotTitle\": \"\", \"blackListFileName\": null, \"ggplot\": false}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"region\": \"chrX\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "d05f9875-4f36-4ba6-ada4-f58db54b6589",
             "when": null,
@@ -640,7 +637,7 @@
         },
         "17": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 17,
             "input_connections": {
@@ -675,15 +672,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "e90eeeda-e9b6-49a3-b148-2f4bd61bce7f",
             "when": null,
@@ -691,7 +689,7 @@
         },
         "18": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 18,
             "input_connections": {
@@ -727,29 +725,24 @@
                 "top": 1181.1904266975585
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "09aaf86a-b1ce-4f03-8191-5f2b1c52da8e",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "wt_H3K4me3_input_rep1_macs2",
-                    "output_name": "output_narrowpeaks",
-                    "uuid": "a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd"
-                }
-            ]
+            "workflow_outputs": []
         },
         "19": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 19,
             "input_connections": {
@@ -776,29 +769,24 @@
                 "top": 992.0114646765242
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bedgraph\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bedgraph\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "f250f272-26ab-4af8-a34a-a7b2e810773c",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "wt_H3K4me3_input_rep1_bamcompare",
-                    "output_name": "outFileName",
-                    "uuid": "5174d1aa-21f6-4187-8935-70ba8bd0f6e0"
-                }
-            ]
+            "workflow_outputs": []
         },
         "20": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 20,
             "input_connections": {
@@ -833,15 +821,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "ac7ce980-870d-4e3b-8e55-dc85e507655b",
             "when": null,
@@ -849,7 +838,7 @@
         },
         "21": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 21,
             "input_connections": {
@@ -885,15 +874,16 @@
                 "top": 1610.3019281996628
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "a358caee-9660-4798-be68-49773d3fce96",
             "when": null,
@@ -901,7 +891,7 @@
         },
         "22": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 22,
             "input_connections": {
@@ -928,15 +918,16 @@
                 "top": 1426.9958688101187
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bedgraph\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bedgraph\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "365193ec-fb99-489b-9588-ad88f4ab96ff",
             "when": null,
@@ -944,7 +935,7 @@
         },
         "23": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 23,
             "input_connections": {
@@ -979,15 +970,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "b7f0fd5c-25cd-49b6-b7de-3b6dfddcb375",
             "when": null,
@@ -995,7 +987,7 @@
         },
         "24": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 24,
             "input_connections": {
@@ -1031,15 +1023,16 @@
                 "top": 2039.964954850218
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "83c717f5-d44e-4b89-8729-9ce3f5ada959",
             "when": null,
@@ -1047,7 +1040,7 @@
         },
         "25": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 25,
             "input_connections": {
@@ -1082,15 +1075,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "cc54d7da-d1c8-4d3f-a676-4a906fef0895",
             "when": null,
@@ -1098,7 +1092,7 @@
         },
         "26": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 26,
             "input_connections": {
@@ -1134,15 +1128,16 @@
                 "top": 2933.0368425105626
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "763d8b18-e31e-49dd-b124-c209e47d8a65",
             "when": null,
@@ -1150,7 +1145,7 @@
         },
         "27": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 27,
             "input_connections": {
@@ -1185,15 +1180,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "05d06db5-4168-4967-971d-b23bbdc52d1f",
             "when": null,
@@ -1201,7 +1197,7 @@
         },
         "28": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 28,
             "input_connections": {
@@ -1237,15 +1233,16 @@
                 "top": 3362.021135539857
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "df4404af-2dc7-44cb-9206-f6f46d3ab612",
             "when": null,
@@ -1253,7 +1250,7 @@
         },
         "29": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/4.0.0+galaxy0",
             "errors": null,
             "id": 29,
             "input_connections": {
@@ -1311,15 +1308,16 @@
                 "top": 2456.4177666131136
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "004aea905d4d",
+                "changeset_revision": "db9bba3f6180",
                 "name": "deeptools_multi_bam_summary",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"mode\": {\"modeOpt\": \"bins\", \"__current_case__\": 0, \"binSize\": \"1000\", \"distanceBetweenBins\": \"500\"}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"ConnectedValue\"}}, \"outRawCounts\": false, \"region\": \"chrX\", \"scalingFactors\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"mode\": {\"modeOpt\": \"bins\", \"__current_case__\": 0, \"binSize\": \"1000\", \"distanceBetweenBins\": \"500\"}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"ConnectedValue\"}}, \"outRawCounts\": false, \"region\": \"X\", \"scalingFactors\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "1ec767b6-72b9-4b3a-9dbd-37f5130161c8",
             "when": null,
@@ -1327,7 +1325,7 @@
         },
         "30": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "errors": null,
             "id": 30,
             "input_connections": {
@@ -1362,15 +1360,16 @@
                     "output_name": "outFileName"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "de72ba3ed6f2",
+                "changeset_revision": "10ebedbfee31",
                 "name": "deeptools_bam_compare",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"bam\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"chrX\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamFile1\": {\"__class__\": \"ConnectedValue\"}, \"bamFile2\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"comparison\": {\"type\": \"log2\", \"__current_case__\": 0, \"pseudocount\": \"1 1\"}, \"outFileFormat\": \"bigwig\", \"region\": \"X\", \"scaling\": {\"method\": \"readCount\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "11f2a819-d11f-44dd-a948-268848295bc9",
             "when": null,
@@ -1378,7 +1377,7 @@
         },
         "31": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "errors": null,
             "id": 31,
             "input_connections": {
@@ -1414,15 +1413,16 @@
                 "top": 3793.062365820355
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "640d3af5d833",
+                "changeset_revision": "86e2413cf3f8",
                 "name": "macs2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"No\", \"__current_case__\": 0, \"input_control_file\": {\"__class__\": \"ConnectedValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"1870000000\", \"__current_case__\": 1}, \"format\": \"BAMPE\", \"nomodel_type\": {\"nomodel_type_selector\": \"create_model\", \"__current_case__\": 0, \"mfold_lower\": \"5\", \"mfold_upper\": \"50\", \"band_width\": \"300\"}, \"outputs\": [\"html\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.7.1+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
             "uuid": "1dd53065-e792-48d9-9a34-e462746e18b2",
             "when": null,
@@ -1430,7 +1430,7 @@
         },
         "32": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0",
             "errors": null,
             "id": 32,
             "input_connections": {
@@ -1462,19 +1462,26 @@
                 "top": 1496.637592989782
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "f76cbb84d67f",
+                "changeset_revision": "a470b376503d",
                 "name": "bowtie2",
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"paired_collection\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false, \"paired_options\": {\"paired_options_selector\": \"no\", \"__current_case__\": 1}}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"mm10\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.5.4+galaxy0",
+            "tool_uuid": null,
+            "tool_version": "2.5.5+galaxy0",
             "type": "tool",
             "uuid": "9dfaa574-93d3-49ab-a194-4ed47017918a",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "mapping_stats",
+                    "output_name": "mapping_stats",
+                    "uuid": "7d3186bb-d406-4d25-bcd4-d59d20592f85"
+                }
+            ]
         },
         "33": {
             "annotation": "",
@@ -1526,17 +1533,12 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "0.74+galaxy1",
             "type": "tool",
             "uuid": "743476a7-e659-4e4c-a67c-4f8e01e24d86",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "text_file",
-                    "output_name": "text_file",
-                    "uuid": "549b52d6-cce1-42d9-80b5-e9934913045b"
-                }
-            ]
+            "workflow_outputs": []
         },
         "34": {
             "annotation": "",
@@ -1555,7 +1557,7 @@
             },
             "inputs": [],
             "label": null,
-            "name": "Concatenate datasets",
+            "name": "Concatenate multiple datasets or collections",
             "outputs": [
                 {
                     "name": "out_file1",
@@ -1569,6 +1571,7 @@
             "post_job_actions": {},
             "tool_id": "cat1",
             "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"input2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "93e86b36-c41d-4f6e-aa0d-f44fc54e1bcf",
@@ -1577,7 +1580,7 @@
         },
         "35": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/4.0.0+galaxy0",
             "errors": null,
             "id": 35,
             "input_connections": {
@@ -1600,15 +1603,16 @@
                 "top": 2451.0753612111844
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fd408d755394",
+                "changeset_revision": "45a7f5f0fed0",
                 "name": "deeptools_plot_correlation",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"corData\": {\"__class__\": \"ConnectedValue\"}, \"corMethod\": \"pearson\", \"outFileCorMatrix\": false, \"outFileFormat\": \"png\", \"plotting_type\": {\"whatToPlot\": \"heatmap\", \"__current_case__\": 0, \"zMin\": \"\", \"zMax\": \"\", \"colorMap\": \"RdYlBu\", \"plotTitle\": \"\", \"plotNumbers\": false, \"plotHeight\": \"9.5\", \"plotWidth\": \"11.0\"}, \"removeOutliers\": false, \"skipZeros\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"corData\": {\"__class__\": \"ConnectedValue\"}, \"corMethod\": \"pearson\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"ggplot\": false, \"outFileCorMatrix\": false, \"outFileFormat\": \"png\", \"plotting_type\": {\"whatToPlot\": \"heatmap\", \"__current_case__\": 0, \"zMin\": \"\", \"zMax\": \"\", \"colorMap\": \"RdYlBu\", \"plotTitle\": \"\", \"plotNumbers\": false, \"plotHeight\": \"9.5\", \"plotWidth\": \"11.0\"}, \"removeOutliers\": false, \"skipZeros\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "6e724d39-d914-4e3b-9981-f7f87434bade",
             "when": null,
@@ -1647,7 +1651,7 @@
             },
             "inputs": [],
             "label": null,
-            "name": "Concatenate datasets",
+            "name": "Concatenate multiple datasets or collections",
             "outputs": [
                 {
                     "name": "out_file1",
@@ -1661,6 +1665,7 @@
             "post_job_actions": {},
             "tool_id": "cat1",
             "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"input2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 3, \"input2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 4, \"input2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "b6e36905-ee81-4ea9-bfd0-b0748447a0f4",
@@ -1669,7 +1674,7 @@
         },
         "37": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0",
             "errors": null,
             "id": 37,
             "input_connections": {
@@ -1692,15 +1697,16 @@
                 "top": 1453.59113046461
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "a1a923cd89e8",
+                "changeset_revision": "2892111d91f8",
                 "name": "bedtools",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"genome_file_opts\": {\"genome_file_opts_selector\": \"loc\", \"__current_case__\": 0, \"genome\": null}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"option\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.30.0+galaxy2",
+            "tool_uuid": null,
+            "tool_version": "2.31.1+galaxy0",
             "type": "tool",
             "uuid": "862416d4-227b-4f67-92d7-8b8078d04151",
             "when": null,
@@ -1708,7 +1714,7 @@
         },
         "38": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0",
             "errors": null,
             "id": 38,
             "input_connections": {
@@ -1731,15 +1737,16 @@
                 "top": 2439.8862687554947
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "a1a923cd89e8",
+                "changeset_revision": "2892111d91f8",
                 "name": "bedtools",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"genome_file_opts\": {\"genome_file_opts_selector\": \"loc\", \"__current_case__\": 0, \"genome\": null}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"option\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.30.0+galaxy2",
+            "tool_uuid": null,
+            "tool_version": "2.31.1+galaxy0",
             "type": "tool",
             "uuid": "c6b88816-2161-4b9a-8cc7-1435ce7d83c8",
             "when": null,
@@ -1747,7 +1754,7 @@
         },
         "39": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.31.1+galaxy2",
             "errors": null,
             "id": 39,
             "input_connections": {
@@ -1770,15 +1777,16 @@
                 "top": 1457.2522763074392
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.31.1+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "a1a923cd89e8",
+                "changeset_revision": "2892111d91f8",
                 "name": "bedtools",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"bed\", \"c_and_o_argument_repeat\": [], \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"distance\": \"0\", \"header\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"strand\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.30.0",
+            "tool_uuid": null,
+            "tool_version": "2.31.1+galaxy2",
             "type": "tool",
             "uuid": "944931ba-824d-4976-9990-a3b64b607dca",
             "when": null,
@@ -1792,7 +1800,7 @@
         },
         "40": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.31.1+galaxy2",
             "errors": null,
             "id": 40,
             "input_connections": {
@@ -1815,15 +1823,16 @@
                 "top": 2441.6148100915098
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.31.1+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "a1a923cd89e8",
+                "changeset_revision": "2892111d91f8",
                 "name": "bedtools",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"bed\", \"c_and_o_argument_repeat\": [], \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"distance\": \"0\", \"header\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"strand\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.30.0",
+            "tool_uuid": null,
+            "tool_version": "2.31.1+galaxy2",
             "type": "tool",
             "uuid": "b3c82d22-9c6b-4f18-91bf-6a33132232ce",
             "when": null,
@@ -1837,7 +1846,7 @@
         },
         "41": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy0",
             "errors": null,
             "id": 41,
             "input_connections": {
@@ -1875,15 +1884,16 @@
                 "top": 1436.5599460000042
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9470f29702f8",
+                "changeset_revision": "d9ccce056684",
                 "name": "deeptools_compute_matrix",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"bed\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"mode\": {\"mode_select\": \"reference-point\", \"__current_case__\": 1, \"referencePoint\": \"center\", \"nanAfterEnd\": false, \"beforeRegionStartLength\": \"3000\", \"afterRegionStartLength\": \"3000\"}, \"multibigwig_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bigwigfiles\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"regionsFiles\": [{\"__index__\": 0, \"regionsFile\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "79d2ee45-1b6e-4c31-b75c-beb7d0b80831",
             "when": null,
@@ -1891,7 +1901,7 @@
         },
         "42": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy0",
             "errors": null,
             "id": 42,
             "input_connections": {
@@ -1945,15 +1955,16 @@
                 "top": 2435.9706018314096
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9470f29702f8",
+                "changeset_revision": "d9ccce056684",
                 "name": "deeptools_compute_matrix",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"bed\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"mode\": {\"mode_select\": \"reference-point\", \"__current_case__\": 1, \"referencePoint\": \"center\", \"nanAfterEnd\": false, \"beforeRegionStartLength\": \"3000\", \"afterRegionStartLength\": \"3000\"}, \"multibigwig_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bigwigfiles\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"regionsFiles\": [{\"__index__\": 0, \"regionsFile\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.0",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "c32eccc5-ece8-4d91-85fc-f8d1ba9cc2ff",
             "when": null,
@@ -1961,7 +1972,7 @@
         },
         "43": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy0",
             "errors": null,
             "id": 43,
             "input_connections": {
@@ -1980,27 +1991,34 @@
                 }
             ],
             "position": {
-                "left": 4538.466422608253,
-                "top": 1476.4159102868944
+                "left": 4538.452949621405,
+                "top": 1474.7322036307332
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "ba6efa77fb79",
+                "changeset_revision": "037a701703b2",
                 "name": "deeptools_plot_heatmap",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"yMin\": null, \"yMax\": null, \"xAxisLabel\": \"distance from TSS (bp)\", \"yAxisLabel\": \"genes\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"whatToShow\": \"plot, heatmap and colorbar\", \"startLabel\": \"TSS\", \"endLabel\": \"TES\", \"referencePointLabel\": \"TSS\", \"samplesLabel\": null, \"regionsLabel\": null, \"plotTitle\": \"\", \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"perGroup\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"no\", \"__current_case__\": 0, \"clustering\": {\"clustering_options\": \"kmeans\", \"__current_case__\": 0, \"k_kmeans\": \"2\"}, \"silhouette\": false}, \"clusterUsingSamples\": null}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.1",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"xAxisLabel\": \"distance from TSS (bp)\", \"yAxisLabel\": \"genes\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"boxAroundHeatmaps\": false, \"whatToShow\": \"plot, heatmap and colorbar\", \"plotTitle\": \"\", \"perGroup\": false, \"samplesLabel\": null, \"startLabel\": \"TSS\", \"endLabel\": \"TES\", \"refPointLabel\": \"\", \"regionsLabel\": null, \"yMin\": null, \"yMax\": null, \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"ggplot\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"no\", \"__current_case__\": 0, \"clustering\": {\"clustering_options\": \"kmeans\", \"__current_case__\": 0, \"k_kmeans\": \"2\"}, \"silhouette\": false}, \"clusterUsingSamples\": null}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "938daaba-fe5d-4a17-935c-0e34d30757c5",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "wt_H3K4me3_CTCF_rep1_heatmap",
+                    "output_name": "outFileName",
+                    "uuid": "1c0d06c9-6a34-4492-ac75-e06e9a513b71"
+                }
+            ]
         },
         "44": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy0",
             "errors": null,
             "id": 44,
             "input_connections": {
@@ -2019,28 +2037,33 @@
                 }
             ],
             "position": {
-                "left": 4537.361531430736,
-                "top": 2454.4173079596794
+                "left": 4535.621270821656,
+                "top": 2454.4061819888866
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "ba6efa77fb79",
+                "changeset_revision": "037a701703b2",
                 "name": "deeptools_plot_heatmap",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"yMin\": null, \"yMax\": null, \"xAxisLabel\": \"distance from TSS (bp)\", \"yAxisLabel\": \"genes\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"whatToShow\": \"plot, heatmap and colorbar\", \"startLabel\": \"\", \"endLabel\": \"\", \"referencePointLabel\": \"\", \"samplesLabel\": null, \"regionsLabel\": null, \"plotTitle\": \"\", \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"perGroup\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"no\", \"__current_case__\": 0, \"clustering\": {\"clustering_options\": \"kmeans\", \"__current_case__\": 0, \"k_kmeans\": \"6\"}, \"silhouette\": false}, \"clusterUsingSamples\": null}, \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "3.5.1.0.1",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"xAxisLabel\": \"distance from TSS (bp)\", \"yAxisLabel\": \"genes\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"boxAroundHeatmaps\": false, \"whatToShow\": \"plot, heatmap and colorbar\", \"plotTitle\": \"\", \"perGroup\": false, \"samplesLabel\": null, \"startLabel\": \"\", \"endLabel\": \"\", \"refPointLabel\": \"\", \"regionsLabel\": null, \"yMin\": null, \"yMax\": null, \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"ggplot\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"no\", \"__current_case__\": 0, \"clustering\": {\"clustering_options\": \"kmeans\", \"__current_case__\": 0, \"k_kmeans\": \"6\"}, \"silhouette\": false}, \"clusterUsingSamples\": null}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "4.0.0+galaxy0",
             "type": "tool",
             "uuid": "3474931f-6d25-46ea-91d0-19c1e89d4626",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "wt_all_heatmap",
+                    "output_name": "outFileName",
+                    "uuid": "f81833e2-d724-4108-996a-5374c937e443"
+                }
+            ]
         }
     },
-    "tags": [
-        "epigenetics"
-    ],
-    "uuid": "e73712d9-5f12-4e04-886f-8c1c73b1e92a",
-    "version": 2
+    "tags": [],
+    "uuid": "a6e905ce-585a-42a7-9bb0-9831e2fdc530",
+    "version": 8
 }
