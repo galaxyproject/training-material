@@ -33,6 +33,11 @@ key_points:
 contributions:
   authorship:
   - gautschr
+  reviewing:
+    - Shiltemann
+    - Sch-Da
+  testing:
+    - Sch-Da
   data:
   - dasch-swiss
   funding:
