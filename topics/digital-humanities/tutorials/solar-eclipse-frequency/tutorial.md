@@ -464,6 +464,8 @@ But first, we must import the workflow into Galaxy:
 
 Now we can run it:
 
+{% snippet faqs/galaxy/workflows_import.md %}
+
 > <hands-on-title>Run the workflow</hands-on-title>
 >
 > 1. **Run the workflow** with the following parameters:
