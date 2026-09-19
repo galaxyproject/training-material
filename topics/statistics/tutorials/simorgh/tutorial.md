@@ -129,7 +129,7 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 > 1. Create a new **fasta** dataset (`FtsY.fasta`) from the following:
 >
 >    ```text
->    6N5J_1|Chains A, B|Signal recognition particle receptor FtsY|Escherichia coli (strain K12) (83333)
+>    >6N5J_1|Chains A, B|Signal recognition particle receptor FtsY|Escherichia coli (strain K12) (83333)
 >    GFARLKRSLLKTKENLGSGFISLFRGKKIDDDLFEELEEQLLIADVGVETTRKIITNLTEGASRKQLRDAEALYGLLKEE
 >    MGEILAKVDEPLNVEGKAPFVILMVGVNGVGKTTTIGKLARQFEQQGKSVMLAAGDTFRAAAVEQLQVWGQRNNIPVIAQ
 >    HTGADSASVIFDAIQAAKARNIDVLIADTAGRLQNKSHLMEELKKIVRVMKKLDVEAPHEVMLTIDASTGQNAVSQAKLF
@@ -264,19 +264,19 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 
 > <hands-on-title> SIMORGH </hands-on-title>
 >
-> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
 >    - *"PDB file"*: `6N5J PDB fixed chainB`
 >    - *"Run BBflow?"*: `Yes`
 >    - *"Number of conformations to sample"*: `8`
 >
-> 2. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+> 2. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
 >    - *"PDB file"*: `6FQD PDB fixed chainB`
 >    - *"Run BBflow?"*: `Yes`
 >    - *"Number of conformations to sample"*: `8`
 >
-> 3. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+> 3. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
 >    - *"PDB file"*: `FtsY Colabfold predicted`
 >    - *"Run BBflow?"*: `Yes`
@@ -352,7 +352,7 @@ This time we run SIMORGH on `6N5J PDB fixed chainB` without using BBflow.
 
 > <hands-on-title> SIMORGH </hands-on-title>
 >
-> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
+> 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
 >    - *"PDB file"*: `6N5J PDB fixed chainB`
 >    - *"Run BBflow?"*: `No`
