@@ -1,0 +1,82 @@
+- doc: Test outline for simorgh
+  job:
+    I certify that I am NOT using this tool for commercial purposes.: true
+  outputs:
+    pdb_out_holo_multi:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "8665"
+    viz_out_holo:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    viz_out_holo_single:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    pdb_out_holo_single:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "2062"
+    pdb_out_colabfold_single:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "2327"
+    viz_out_colabfold_single:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    viz_out_apo_single:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    pdb_out_apo_single:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "4697"
+    viz_out_apo:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    pdb_out_apo_multi:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "9657"
+    viz_out_colab:
+        asserts:
+        - that: "has_text_matching"
+          expression: |-
+            <h3 style="text-align:center;">Predicted Probability</h3>
+    pdb_out_colabfold_multi:
+        asserts:
+        - that: "has_text"
+          text: "ATOM"
+        - that: "has_text"
+          text: "END"
+        - that: "has_n_lines"
+          n: "9721"
