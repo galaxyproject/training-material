@@ -16,11 +16,10 @@ key_points:
 contributors:
 - Nilchia
 - amisteromid
-subtopic: structural-biology
 answer_histories:
     - label: "usegalaxy.eu"
       history: https://usegalaxy.eu/u/nilchia/h/comparing-ligand-binding-site-predictions-across-different-protein-structure-modalities-using-simorgh
-      date: 18.09.2026
+      date: 2026-09-18
 ---
 
 Proteins are not static objects. They constantly move and change shape, and these conformational changes can be especially important when a ligand binds.
@@ -107,8 +106,8 @@ To answer this, we will compare **three structural modalities**:
 > > <solution-title></solution-title>
 > >
 > > 1. The holo structure has a deeper and better-defined pocket, with a shape that is more complementary to the ligand.
-> The apo structure generally has a shallower or less well-defined cavity.
-> This illustrates how ligand binding can reshape or stabilize a binding pocket to accommodate the ligand.
+> > The apo structure generally has a shallower or less well-defined cavity.
+> > This illustrates how ligand binding can reshape or stabilize a binding pocket to accommodate the ligand.
 > >
 > > 6N5J PDB
 > >
@@ -169,7 +168,8 @@ We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Colabfold predicts the structure based on sequence and evolutionary information. It typically predicts an averaged or lowest-energy state (often apo-like), but it does not know about specific ligands present in the experimental holo environment.
+> > 1. Colabfold predicts the structure based on sequence and evolutionary information.
+> > It typically predicts an averaged or lowest-energy state (often apo-like), but it does not know about specific ligands present in the experimental holo environment.
 > >
 > {: .solution}
 >
@@ -207,7 +207,8 @@ Next we should preprocess the raw experimental PDB structures to fix structural 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Downstream tools like SIMORGH or BBFlow are often trained on standard amino acids. Non-standard residues can cause errors or be ignored during the prediction process if they are not explicitly handled by the models.
+> > 1. Downstream tools like SIMORGH or BBFlow are often trained on standard amino acids.
+> > Non-standard residues can cause errors or be ignored during the prediction process if they are not explicitly handled by the models.
 > >
 > {: .solution}
 >
