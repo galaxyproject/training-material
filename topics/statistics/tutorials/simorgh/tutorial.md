@@ -94,6 +94,33 @@ To answer this, we will compare **three structural modalities**:
 >
 {: .hands_on}
 
+> <question-title></question-title>
+>
+> View the PDB files by clicking on the eye icon {% icon galaxy-eye %}.
+> It will visualize the PDB with the `Molstar Viewer`.
+> In the **Components** section, click on the three dots right side of the **Polymer**. Then **Add Representation** and then select **Molecular Surface**
+>
+> 1. Compare the apo and holo structures, focusing on their cavities.
+> Which structure has a deeper and more clearly defined pocket?
+> What might this difference suggest about the effect of ligand binding on the protein structure?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The holo structure has a deeper and better-defined pocket, with a shape that is more complementary to the ligand.
+> The apo structure generally has a shallower or less well-defined cavity.
+> This illustrates how ligand binding can reshape or stabilize a binding pocket to accommodate the ligand.
+> >
+> > 6N5J PDB
+> >
+> > <img src="../../images/simorgh/6N5J_pdb.png" alt="6N5J PDB" width="500">
+> >
+> > 6FQD PDB
+> >
+> > <img src="../../images/simorgh/6FQD_pdb.png" alt="6FQD PDB" width="500">
+> {: .solution}
+>
+{: .question}
+
 ## Predicted structures
 
 We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of our protein.
@@ -259,11 +286,41 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 
 > <question-title></question-title>
 >
-> 1. Looking at the results, do the binding site predictions differ between the apo, holo, and Colabfold structures when using BBFlow ensembles?
+> 1. Which prediction identifies a more concentrated binding site?
+>
+> 2. Which prediction shows a more intense binding-site signal (color)?
+>
+> 3. Is the ColabFold prediction more similar to the apo or holo
 >
 > > <solution-title></solution-title>
 > >
-> > 1. TO_BE_ADDED
+> > 1. The holo prediction appears more concentrated, whereas the apo prediction shows more spatially scattered predictions.
+> > This indicates a more clearly defined potential binding pocket in the holo structure.
+> > However, a concentrated prediction does not by itself establish prediction accuracy; it primarily suggests a strong potential druggable pocket.
+> >
+> > 2. The holo structure shows a more intense signal.
+> > The intensity represents the model's confidence in its prediction for the corresponding residues or regions.
+> > A stronger signal indicates a higher predicted probability of binding.
+> > However, this should be interpreted as model confidence rather than direct evidence that the prediction is experimentally correct.
+> >
+> > 3. ColabFold predictions are largely influenced by the structures represented in the ColabFold training data, which are primarily derived from experimentally determined structures in the PDB.
+> > Depending on the protein, the prediction may resemble either the apo or holo conformation.
+> > In general, however, the prediction tends to represent a low-energy state of the protein in the absence of the ligand, and binding pockets may therefore be less organized than in the holo structure.
+> >
+> > Interestingly, in this example, the ColabFold prediction is closer to the holo structure.
+> > This could indicate either that Simorgh is robust to ligand-free structural predictions and can recover a ligand-compatible conformation, or that the ColabFold model has learned a structural bias toward the holo-like conformation from its training data.
+> >
+> > Apo structure prediction on bbflow ensemble
+> >
+> > <img src="../../images/simorgh/apo_multi.png" alt="apo_multi" width="500">
+> >
+> > holo structure prediction on bbflow ensemble
+> >
+> > <img src="../../images/simorgh/holo_multi.png" alt="holo_multi" width="500">
+> >
+> > Colabfold structure prediction on bbflow ensemble
+> >
+> > <img src="../../images/simorgh/colabfold_multi.png" alt="colabfold_multi" width="500">
 > >
 > {: .solution}
 >
@@ -303,12 +360,25 @@ This time we run SIMORGH on `6N5J PDB fixed chainB` without using BBflow.
 
 > <question-title></question-title>
 >
-> 1. How does the prediction on the static `6N5J PDB fixed chainB` (without BBFlow) compare to the prediction that used the BBFlow ensemble?
+> 1. How does the prediction on the static 6N5J PDB fixed chainB (without BBFlow) compare to the prediction that used the BBFlow ensemble?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. TO_BE_ADDED
+> > 1. Simorgh shows a consistent improvement when using the BBFlow ensemble.
+> > However, the difference is usually subtle and may not be visually apparent.
+> > The improvement is more evident in quantitative metrics, such as precision–recall, where we typically observe a few percent gain.
 > >
+> > Apo structure prediction on bbflow ensemble (left) and static structure (right).
+> >
+> > <img src="../../images/simorgh/apo_multi_single.png" alt="apo_multi_single" width="500">
+> >
+> > Holo structure prediction on bbflow ensemble (left) and static structure (right).
+> >
+> > <img src="../../images/simorgh/holo_multi_single.png" alt="holo_multi_single" width="500">
+> >
+> > Colabfold structure prediction on bbflow ensemble (left) and static structure (right).
+> >
+> > <img src="../../images/simorgh/colabfold_multi_single.png" alt="colabfold_multi_single" width="500">
 > {: .solution}
 >
 {: .question}
