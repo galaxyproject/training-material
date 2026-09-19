@@ -98,7 +98,7 @@ Examples of suitable input files are:
 
 Input files are expected to have the following structure:
 
-`Y  M  D  Type  deltaT  mag  Tmax  Tend`
+`Y  M  D  Type  deltaT  mag  Tbeg  Tmax  Tend  SR  SS`
 
 The original text file contains the following columns:
 
@@ -110,6 +110,7 @@ The original text file contains the following columns:
  | Type | Eclipse type |
  | deltaT | Delta T |
  | mag | Two magnitude values separated by `/` |
+ | Tbeg | Start time |
  | Tmax | Two times of maximum eclipse values separated by `/` |
  | Tend | End time |
  | SR | Local time of sunrise|
@@ -233,7 +234,7 @@ of **Convert delimiters to TAB** {% icon tool %})
 
 The resulting table has the structure:
 
-`Y  M  D  Type  deltaT  mag1  mag2  Tmax1 Tmax2  Tend  SR  SS`
+`Y  M  D  Type  deltaT  mag1  mag2  Tbeg  Tmax1 Tmax2  Tend  SR  SS`
 
 ## Step 4: Select eclipses above the magnitude threshold
 
@@ -450,10 +451,12 @@ That way, you can save some clicks. But make sure to select the output of **Uniq
 
 # Run the analysis as a workflow
 
-Suppose you now want to repeat this analysis with different input data or paramater settings.
+Suppose you now want to repeat this analysis with different input data or parameter settings.
 You would not want to repeat all these steps again by hand. For this, we can use the workflow.
 
-When you run the workflow, you need to upload a file with the source data and to supply the following three values at runtime:
+The tutorial [Extracting Workflows from Histories](https://gxy.io/GTN:T00151) shows you how you can create a workflow from your own History. For variables to be flexible as in our workflow you need to extract your input parameters - how to achieve that is explained in the tutorial [Using Workflow Parameters](https://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html).
+
+When you run the solar eclipse frequency workflow, you need to upload a file with the source data and to supply the following three values at runtime:
 
 | Workflow parameter | Example | Meaning |
 | ------------------------- | ------- | ------------------------------------------------- |
