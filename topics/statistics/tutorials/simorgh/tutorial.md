@@ -19,8 +19,8 @@ contributors:
 subtopic: structural-biology
 answer_histories:
     - label: "usegalaxy.eu"
-      history: TO_BE_ADDED
-      date: TO_BE_ADDED
+      history: https://usegalaxy.eu/u/nilchia/h/comparing-ligand-binding-site-predictions-across-different-protein-structure-modalities-using-simorgh
+      date: 18.09.2026
 ---
 
 Proteins are not static objects. They constantly move and change shape, and these conformational changes can be especially important when a ligand binds.
@@ -186,26 +186,26 @@ Next we should preprocess the raw experimental PDB structures to fix structural 
 >
 {: .question}
 
-## Retrieve chain A
+## Retrieve chain B
 
-Since FtsY is a homodimer, we will use a single chain A for simplicity. For this task, we will use *"Text reformating with awk"* tool ({% cite Gruning2018-lh %}) to reformat our pdb files.
+Since FtsY is a homodimer, we will use a single chain B for simplicity. For this task, we will use *"Text reformating with awk"* tool ({% cite Gruning2018-lh %}) to reformat our pdb files.
 
 The command `rectype = substr($0,1,6)`, gets the characters 1-6 of the current line (such as ATOM, HETATM, or TER).
 
 Then the command `chain = substr($0,22,1)` gets the character 22 of the line which corresponds to either A or B (the chain identifiers).
 
-Then, `if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "B") next` skips any line that is `ATOM, HETATM, or TER` and it is chain `B`.
+Then, `if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "A") next` skips any line that is `ATOM, HETATM, or TER` and it is chain `A`.
 
 Finally, `print`, prints out any line that is not skipped.
 
-In summary, "Keep everything except ATOM/HETATM/TER records from chain B."
+In summary, "Keep everything except ATOM/HETATM/TER records from chain A."
 
 Copy the following script in the ***"AWK Program"*** of the following tool:
 ```
 {
   rectype = substr($0,1,6)
   chain = substr($0,22,1)
-  if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "B") next
+  if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "A") next
   print
 }
 ```
@@ -216,13 +216,13 @@ Copy the following script in the ***"AWK Program"*** of the following tool:
 >    - *"File to process"*: `6N5J PDB fixed`
 >    - *"AWK Program"*: `copy the text from above`
 >
-> 2. Rename the data `6N5J PDB fixed chainA`
+> 2. Rename the data `6N5J PDB fixed chainB`
 >
 > 3. {% tool [Text reformatting with awk](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0) %} with the following parameters:
 >    - *"File to process"*: `6FQD PDB fixed`
 >    - *"AWK Program"*: `copy the text from above`
 >
-> 4. Rename the data `6FQD PDB fixed chainA`
+> 4. Rename the data `6FQD PDB fixed chainB`
 >
 {: .hands_on}
 
@@ -238,13 +238,13 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 >
 > 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
->    - *"PDB file"*: `6N5J PDB fixed chainA`
+>    - *"PDB file"*: `6N5J PDB fixed chainB`
 >    - *"Run BBflow?"*: `Yes`
 >    - *"Number of conformations to sample"*: `8`
 >
 > 2. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
->    - *"PDB file"*: `6FQD PDB fixed chainA`
+>    - *"PDB file"*: `6FQD PDB fixed chainB`
 >    - *"Run BBflow?"*: `Yes`
 >    - *"Number of conformations to sample"*: `8`
 >
@@ -290,20 +290,20 @@ This allows the model to use information from the protein's dynamic ensemble rat
 
 Although this would not count as a prediction that incorporates learned protein dynamics, you can run SIMORGH without BBFlow to isolate the effect of aggregation.
 
-This time we run SIMORGH on `6N5J PDB fixed chainA` without using BBflow.
+This time we run SIMORGH on `6N5J PDB fixed chainB` without using BBflow.
 
 > <hands-on-title> SIMORGH </hands-on-title>
 >
 > 1. {% tool [SIMORGH](toolshed.g2.bx.psu.edu/repos/bgruening/SIMORGH/SIMORGH/1.0.1+galaxy0) %} with the following parameters:
 >    - *"I certify that I am NOT using this tool for commercial purposes."*: `Yes`
->    - *"PDB file"*: `6N5J PDB fixed chainA`
+>    - *"PDB file"*: `6N5J PDB fixed chainB`
 >    - *"Run BBflow?"*: `No`
 >
 {: .hands_on}
 
 > <question-title></question-title>
 >
-> 1. How does the prediction on the static `6N5J PDB fixed chainA` (without BBFlow) compare to the prediction that used the BBFlow ensemble?
+> 1. How does the prediction on the static `6N5J PDB fixed chainB` (without BBFlow) compare to the prediction that used the BBFlow ensemble?
 >
 > > <solution-title></solution-title>
 > >
