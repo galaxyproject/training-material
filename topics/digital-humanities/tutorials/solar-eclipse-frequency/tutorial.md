@@ -112,6 +112,8 @@ The original text file contains the following columns:
  | mag | Two magnitude values separated by `/` |
  | Tmax | Two times of maximum eclipse values separated by `/` |
  | Tend | End time |
+ | SR | Local time of sunrise|
+ | SS | Local time of sunset|
 
 The `mag` and `Tmax` fields contain two values. This workflow separates the two `mag` and `Tmax` values into:
 
@@ -217,19 +219,21 @@ of **Convert delimiters to TAB** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Replacement"*
 >            - *"Find pattern"*: `mag`
->            - *"Replace with:"*: `mag1 \t mag2`
+>            - *"Replace with:"*: `mag1\tmag2`
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `Tmax`
->            - *"Replace with:"*: `Tmax1 \t Tmax2`
+>            - *"Replace with:"*: `Tmax1\tTmax2`
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `/`
 >            - *"Replace with:"*: `\t`
+>
+>    {% snippet faqs/galaxy/analysis_regular_expressions.md %}
 >
 {: .hands_on}
 
 The resulting table has the structure:
 
-`Y  M  D  Type  deltaT  mag1  mag2  Tmax1 Tmax2  Tend`
+`Y  M  D  Type  deltaT  mag1  mag2  Tmax1 Tmax2  Tend  SR  SS`
 
 ## Step 4: Select eclipses above the magnitude threshold
 
