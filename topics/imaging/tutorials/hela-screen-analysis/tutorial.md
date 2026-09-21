@@ -52,9 +52,9 @@ tags:
 ---
 
 
-This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo]({{ page.zenodo_link }}).
+This tutorial shows how to segment and extract features from cell nuclei in Galaxy for image analysis. As an example use case, this tutorial shows you how to compare the phenotypes of PLK1 treated cells in comparison to a control. The data used in this tutorial is available at [Zenodo]({{ page.zenodo_link }}).
 
-RNA interference (RNAi) is used in the example use case for silencing genes by way of mRNA degradation. Gene knockdown by this method is achieved by introducing small double-stranded interfering RNAs (siRNA) into the cytoplasm. Small interfering RNAs can originate from inside the cell or can be exogenously introduced into the cell. Once introduced into the cell, exogenous siRNAs are processed by the RNA-induced silencing complex (RISC).The siRNA is complementary to the target mRNA to be silenced, and the RISC uses the siRNA as a template for locating the target mRNA. After the RISC localizes to the target mRNA, the RNA is cleaved by a ribonuclease. RNAi is widely used as a laboratory technique for genetic functional analysis. RNAi in organisms such as C. elegans and Drosophila melanogaster provides a quick and inexpensive means of investigating gene function. Insights gained from experimental RNAi use may be useful in identifying potential therapeutic targets, drug development, or other applications. RNA interference is a very useful research tool, allowing investigators to carry out large genetic screens in an effort to identify targets for further research related to a particular pathway, drug, or phenotype.
+RNA interference (RNAi) is used in the example use case for silencing genes by way of mRNA degradation. Gene knockdown by this method is achieved by introducing small double-stranded interfering RNAs (siRNA) into the cytoplasm. Small interfering RNAs can originate from inside the cell or can be exogenously introduced into the cell. Once introduced into the cell, exogenous siRNAs are processed by the RNA-induced silencing complex (RISC). The siRNA is complementary to the target mRNA to be silenced, and the RISC uses the siRNA as a template for locating the target mRNA. After the RISC localizes to the target mRNA, the RNA is cleaved by a ribonuclease. RNAi is widely used as a laboratory technique for genetic functional analysis. RNAi in organisms such as C. elegans and Drosophila melanogaster provides a quick and inexpensive means of investigating gene function. Insights gained from experimental RNAi use may be useful in identifying potential therapeutic targets, drug development, or other applications. RNA interference is a very useful research tool, allowing investigators to carry out large genetic screens in an effort to identify targets for further research related to a particular pathway, drug, or phenotype.
 
 The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an early trigger for G2/M transition. PLK1 supports the functional maturation of the centrosome in late G2/early prophase and establishment of the bipolar spindle. PLK1 is being studied as a target for cancer drugs. Many colon and lung cancers are caused by K-RAS mutations. These cancers are dependent on PLK1.
 
@@ -120,18 +120,19 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    - *"Extract single file"*: `All files`
 >
 > 9. Rename {% icon galaxy-pencil %} the collection to `PLK1`
-> 9. Upload {% icon galaxy-upload %} the following segmentation filter rules as a new pasted file (format: `tabular`):
+> 10. Upload {% icon galaxy-upload %} the following segmentation filter rules as a new pasted file (format: `tabular`):
 >    ```
 >    	area	eccentricity
 >    min	500	0.
 >    max	100000	0.5
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
+>     {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
-> 9. Rename {% icon galaxy-pencil %} dataset to `rules`
+> 11. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
+>     {% snippet faqs/galaxy/datasets_rename.md %}
+>
 {: .hands_on}
 
 
@@ -164,7 +165,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    - {% icon param-file %} *"Label map"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
 >    - {% icon param-file %} *"Features"*: output of {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %}
 >    - {% icon param-file %} *"Rules"*: `rules` file
-> 6. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters to extract features the final readout from the segmented objects:
+> 6. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters to extract features for the final readout from the segmented objects:
 >    - {% icon param-file %} *"Label map"*: output of {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4) %}
 >    - *"Use the intensity image to compute additional features"*: `Use intensity image`
 >    - {% icon param-file %} *"Intensity image"*: `testinput.tiff` file
@@ -173,20 +174,22 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Mean Intensity (requires original image)`
 >      - {% icon param-check %} `Area`
 >      - {% icon param-check %} `Major axis length`
-> 7. Now we can extract the workflow for batch processing:
->    - Name it "feature_extraction".
->    - Don't treat `B2.zip` and `B3.zip` as inputs (the workflow is supposed to be applied to the images directly).
->    - Exclude {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} by unchecking the tool (3 times).
+>
+> 7. Now we can extract the workflow for batch processing. To do that, select the **Extract workflow** option from the history menu. This will automatically generate a workflow for batch processing:
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
-> 8. Edit the workflow you just created:
->    - Select "Input dataset" from the list of tools. The step {% icon param-file %} **8: Input Dataset** appears.
->    - Change the "Label" of {% icon param-file %} **8: Input Dataset** to `input image`.
->    - Change the "Label" of {% icon param-file %} **1: rules** to `filter rules`.
->    - Connect the output of {% icon param-file %} **8: input image** to the input of {% icon tool %} **2: Filter 2-D image**.
->    - Connect the output of {% icon param-file %} **8: input image** to the "Intensity image" input of {% icon tool %} **7: Extract image features**.
->    - Mark the results of {% icon tool %} **6: Filter label map by rules** and {% icon tool %} **7: Extract image features** as the primary outputs of the workflow (by clicking on the checkboxes of the outputs).
+>  - First, name the workflow `feature_extraction`.
+>  - Exclude `B2.zip` and `B3.zip` as inputs by unchecking them (the workflow is meant to be applied directly to the images).
+>  - Exclude all three {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} steps by unchecking them.
+>
+> 8. Let's edit the workflow we just created:
+>  - Select **Input dataset** from the list of tools. The step {% icon param-file %} **8: Input Dataset** appears.
+>  - Rename {% icon param-file %} **8: Input Dataset** to `input image`.
+>  - Rename {% icon param-file %} **1: rules** to `filter rules`.
+>  - Connect the output of {% icon param-file %} **8: input image** to the input of {% icon tool %} **2: Filter 2-D image**.
+>  - Connect the output of {% icon param-file %} **8: input image** to the "Intensity image" input of {% icon tool %} **7: Extract image features**.
+>  - Mark the outputs of {% icon tool %} **6: Filter label map by rules** and {% icon tool %} **7: Extract image features** as the workflow's primary outputs by checking their output checkboxes.
 >
 {: .hands_on}
 
@@ -196,7 +199,7 @@ The resulting workflow should look something like this:
 
 # Apply workflow to screen
 
-Now we want to apply our extracted workflow to a series of images and merge the results. For this purpose, we create a workflow which uses the previously created workflow as a sub-workflow.
+Now we want to apply our extracted workflow to a series of images and merge the results. For this purpose, we create another workflow that uses the previously created workflow as a sub-workflow.
 
 > <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
