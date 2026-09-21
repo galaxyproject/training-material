@@ -4,7 +4,9 @@ layout: tutorial_hands_on
 title: CUT&RUN data analysis
 zenodo_link: https://zenodo.org/record/6823059
 answer_histories:
-  - label: "Using Separate Preprocessing Tools"
+  - label: "Usegalaxy.eu 21-09-2026"
+    history: https://usegalaxy.eu/u/videmp/h/cut-and-run-gtn-answer-key-21-09-2026
+  - label: "Usegalaxy.eu 19-03-2025"
     history: https://usegalaxy.eu/u/videmp/h/cut-run-gtn-answer-key
 questions:
 - Which binding motif has the transcription factor GATA1?
