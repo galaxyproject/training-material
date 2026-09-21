@@ -298,7 +298,7 @@ CARD can be very helpful to check all the resistance genes and check if it is lo
 > > <solution-title></solution-title>
 > >
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
-> > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
+> > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome match with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
 > > 3. No, these are completely unrelated. Unfortunately this is a **very** common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them 'accessions'), and then someone else needs to build a service to link these databases.
 > >
 > {: .solution}
