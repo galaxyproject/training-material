@@ -748,6 +748,7 @@ Now we will generate a heatmap. Each line will be a peak. The coverage will be s
 >    - *"Show advanced options"*: `Yes`
 >    - *"The x-axis label”*: `distance from peak center (bp)`
 >    - *"The y-axis label for the top panel"* : `GATA1 peaks`
+>    - *"Plot black boxes around the heatmaps"*: `No`
 >    - *"Reference point label”*: `peak center`
 >    - *"Labels for the regions plotted in the heatmap"*: `GATA1_peaks`
 {: .hands_on}
