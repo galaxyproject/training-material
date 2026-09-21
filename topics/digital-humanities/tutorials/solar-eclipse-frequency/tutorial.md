@@ -454,7 +454,7 @@ That way, you can save some clicks. But make sure to select the output of **Uniq
 Suppose you now want to repeat this analysis with different input data or parameter settings.
 You would not want to repeat all these steps again by hand. For this, we can use the workflow.
 
-The tutorial [Extracting Workflows from Histories](https://gxy.io/GTN:T00151) shows you how you can create a workflow from your own History. For variables to be flexible as in our workflow you need to extract your input parameters - how to achieve that is explained in the tutorial [Using Workflow Parameters](https://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html).
+The tutorial [Extracting Workflows from Histories](https://gxy.io/GTN:T00151) shows you how you can create a workflow from your own History. For variables to be flexible as in our workflow you need to extract your input parameters - how to achieve that is explained in the tutorial [Using Workflow Parameters]({% link topics/galaxy-interface/tutorials/workflow-parameters/tutorial.md %}).
 
 When you run the solar eclipse frequency workflow, you need to upload a file with the source data and to supply the following three values at runtime:
 
