@@ -34,7 +34,7 @@ contributions:
   authorship:
   - gautschr
   reviewing:
-    - Shiltemann
+    - shiltemann
     - Sch-Da
   testing:
     - Sch-Da
