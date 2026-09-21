@@ -505,6 +505,7 @@ We can now visualize the contigs, the mapping coverage, and the genes, using JBr
 >                    - *"Track Type"*: `BAM Pileups`
 >                        - {% icon param-file %} *"BAM Track Data"*: Bowtie2's output
 >                        - *"Autogenerate SNP Track"*: `Yes`
+>                        - *"Track Visibility"*: `On for new users`
 >
 > 3. View the output of JBrowse
 >
