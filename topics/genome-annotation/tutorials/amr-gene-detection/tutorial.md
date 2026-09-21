@@ -306,7 +306,7 @@ CARD can be very helpful to check all the resistance genes and check if it is lo
 
 # Visualization of the ARGs and plasmid genes in their genomic context
 
-We would like to look at the ARGs and plasmid genes in their genomic context. To do that, we will usie [JBrowse](https://jbrowse.org/jb2/) ({% cite diesh2023jbrowse %}) with several information:
+We would like to look at the ARGs and plasmid genes in their genomic context. To do that, we will use [JBrowse](https://jbrowse.org/jb2/) ({% cite diesh2023jbrowse %}) with several information:
 
 1. Assembly as the reference
 2. ARGs location
