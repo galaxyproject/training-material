@@ -72,9 +72,9 @@ remarkable eclipses could have had drastic consequences.
 In this tutorial, we use pre-calculated solar-eclipse data and a Galaxy
 workflow to answer a configurable question:
 
-> **Which eclipses with an observable magnitude at or above a chosen
-> threshold belong to a group of N consecutive eclipses occurring within
-> at most X years?**
+**Which eclipses with an observable magnitude at or above a chosen
+threshold belong to a group of N consecutive eclipses occurring within
+at most X years?**
 
 The published workflow is parameterised. Instead of fixing a
 particular threshold, number of eclipses, or time interval in the
