@@ -174,7 +174,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_content.png "Per base sequence content")
 >    > >
->    > >     - No N in the reads
+>    > >     - A tiny portion (about 0.1%) of the bases are N (unknown)
 >    > >
 >    > >        ![Per base N content for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_n_content.png "Per base N content")
 >    > >
@@ -182,7 +182,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >        ![Sequence Duplication Levels for read1](../../images/formation_of_super-structures_on_xi/read1_sequence_duplication_levels.png "Sequence Duplication Levels")
 >    > >
->    > >     - No more known adapters
+>    > >     - Although there is some representation of Illumina universal adapter (in blue), it is significantly low. The same is true for sequences with polyA (purple) and polyG (brown) tails.
 >    > >
 >    > >        ![Adapter Content for read1](../../images/formation_of_super-structures_on_xi/read1_adapter_content.png "Adapter Content")
 >    > >
