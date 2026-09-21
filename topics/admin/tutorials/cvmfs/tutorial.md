@@ -143,6 +143,8 @@ The Galaxy project supports a few CVMFS repositories.
 | Repository                 | Repository Address              | Contents                                                                         |
 | ----------                 | ------------------              | --------                                                                         |
 | Reference Data and Indices | `data.galaxyproject.org`        | Genome sequences and their tool indices, Galaxy `.loc` files for them as well    |
+| BRC Analytics Data         | `brc.galaxyproject.org`         | Pathogen sequences and indexes available in Galaxy for BRC Analytics             |
+| Vertebrate Genomes Project | `vgp.galaxyproject.org`         | Assemblies and indexes from the Vertebrate Genomes Project                       |
 | Singularity Containers     | `singularity.galaxyproject.org` | Singularity containers for everything in Biocontainers for use in Galaxy systems |
 | Galaxy Main Configuration  | `main.galaxyproject.org`        | The configuration files etc for Galaxy Main (usegalaxy.org)                      |
 
@@ -522,18 +524,30 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -76,6 +76,8 @@ galaxy_config:
+>    @@ -76,6 +76,10 @@ galaxy_config:
 >         # TUS
 >         galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
 >         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >    +    # CVMFS
->    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>    +    tool_data_table_config_path:
+>    +      - /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml
+>    +      - /cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
+>
+>    If you have also enabled the BRC Analytics or VGP CVMFS repositories, add their data table configuration files to the same list:
+>
+>    ```yaml
+>    tool_data_table_config_path:
+>      - /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml
+>      - /cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>      - /cvmfs/brc.galaxyproject.org/config/tool_data_table_conf.xml
+>      - /cvmfs/vgp.galaxyproject.org/config/tool_data_table_conf.xml
+>    ```
 >
 >    > This time I'm going to edit the groupvars galaxyservers.yml file. And in
 >    > our Galaxy section. Which is here. Which is here. At the bottom of that
@@ -542,9 +556,8 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > can't remember what they are off the top of my head but luckily they're
 >    > inside this solution box and so I will just copy them. And paste. And as
 >    > you can see pointing to /cvmfs/data.galaxyproject.org/byhand/location
->    > and then that tool data table conf xml file. And then we have a list
->    > here and we separate it by commas and then we point it to the second
->    > one. Right, so we save this file.
+>    > and then that tool data table conf xml file. And then we have a YAML list
+>    > here and we point it to the second one. Right, so we save this file.
 >    {: .spoken data-visual="terminal" data-ref="gvconf"}
 >
 > 2. Re-run the playbook

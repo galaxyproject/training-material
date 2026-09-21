@@ -31,6 +31,9 @@ contributions:
     - uni-freiburg
     - nfdi4plants
 
+tags:
+- galaxy-intro
+- fair
 ---
 
 

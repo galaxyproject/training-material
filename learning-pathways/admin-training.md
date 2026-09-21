@@ -6,7 +6,8 @@ description: |
   Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
   will guide you through all the steps required to setup your own Galaxy server with Ansible,
   configuring it, and making it production ready.
-
+topics:
+  - admin
 cover-image: assets/images/gat.png
 cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
 editorial_board:
