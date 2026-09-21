@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSolar eclipse data .txt"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nMagnitude threshold"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nNumber of eclipses"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nMaximum interval in years"]
+  4[label="Convert file format: .txt -> .tsv"]
+  0 -> 4 [label="output"]
+  5[label="Compose text parameter value"]
+  1 -> 5 [label="output"]
+  6[label="Text reformatting"]
+  4 -> 6 [label="out_file1"]
+  7[label="Select eclipses above a threshold"]
+  5 -> 7 [label="out1"]
+  6 -> 7 [label="outfile"]
+  8[label="Sort chronologically"]
+  7 -> 8 [label="out_file1"]
+  9[label="Select groups of eclipses"]
+  8 -> 9 [label="out_file1"]
+  2 -> 9 [label="output"]
+  3 -> 9 [label="output"]
+  10[label="Sort result"]
+  9 -> 10 [label="outfile"]
+  11[label="Remove duplicates"]
+  10 -> 11 [label="out_file1"]
+  12[label="Sort final list of results"]
+  11 -> 12 [label="outfile"]
+  ka7306d7074fe4764a3e946a5b1d1b30e[color=lightseagreen,label="Output\nfinal_solar_eclipse_results"]
+  12 -> ka7306d7074fe4764a3e946a5b1d1b30e
+}
