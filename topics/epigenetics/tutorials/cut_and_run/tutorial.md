@@ -213,7 +213,7 @@ The MultiQC report (of FastQC) pointed out that we have in our data some standar
 > > <solution-title></solution-title>
 > >
 > > 1. 163,656 (54.6%) for Rep 1 and 169,776 (56.6%) for Rep 2
-> > 2. The last line indicates that 10477 (3.49%) of pairs have been removed from Rep1 and 15775 (5.26%) pairs from Rep2.
+> > 2. The last line indicates that 10577 (3.53%) of pairs have been removed from Rep1 and 16212 (5.40%) pairs from Rep2.
 > >
 > {: .solution}
 >
@@ -250,7 +250,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 
 > <comment-title>Bowtie2 Results</comment-title>
 > You should get similar results to this from Bowtie2:
-> ![Mapping statistics of bowtie2](../../images/cut_and_run/mapping_stats.png "Mapping statistics of bowtie2")
+> ![Mapping statistics of bowtie2](../../images/cut_and_run/mapping_stats.png "Mapping statistics of bowtie2 for Rep1")
 {: .comment}
 
 > <question-title></question-title>
@@ -259,7 +259,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 >
 > > <solution-title></solution-title>
 > >
-> > 36.47+62.39=98.86%
+> > 41.42+57.48=98.90%
 > >
 > {: .solution}
 >
@@ -391,7 +391,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 81460 for Rep1 and 100507 for Rep2
+> > 1. 81460 for Rep1 and 100505 for Rep2
 > > 2. 982 for Rep1 and 1042 for Rep2
 > >
 > {: .solution}
@@ -521,7 +521,7 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 6314 for Rep1 and 7678 for Rep2
+> > 1. 6314 for Rep1 and 7679 for Rep2
 > >
 > {: .solution}
 >
@@ -581,7 +581,7 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 > > > <solution-title></solution-title>
 > > >
 > > > 1. 2,865 peaks
-> > > 2. We started with 6,314 and 7,678 peaks. Thus, we could remove 3,449 and 4,813 peaks.
+> > > 2. We started with 6,314 and 7,679 peaks. Thus, we could remove 3,449 and 4,814 peaks.
 > > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A has to overlap with 50 bases with the peak in file B.
 > > > 4. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
 > > {: .solution}
