@@ -524,7 +524,7 @@ If it takes too long to build the JBrowse instance, you can view an embedded one
 >
 > > <solution-title></solution-title>
 > >
-> > 1. By zooming at the beginning of the contig, the name for rep16 is DUF536 domain-containing protein
+> > 1. By zooming at the beginning of the contig, the name for rep16 is Regulator of chromosome segregation-like C-terminal domain-containing protein
 > > 2. aac(6')-aph(2'') is on contig00019:20311..21749. The corresponding gene found by Bakta is bifunctional aminoglycoside N-acetyltransferase AAC(6')-Ie/aminoglycoside O-phosphotransferase APH(2'')-Ia. When clicking on it, we can find the dbxref attributes:
 > >   - NCBI Protein: WP_001028144.1
 > >   - UniRef: UniRef50_P0A0C2
