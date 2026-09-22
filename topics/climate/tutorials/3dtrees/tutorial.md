@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: '3Dtrees: From LiDAR point clouds to individual trees'
 level: Introductory
-zenodo_link: ''
 questions:
 - How can LiDAR describe the three-dimensional structure of a forest?
 - How can individual trees be identified in a point cloud?
@@ -18,10 +17,16 @@ key_points:
 - LiDAR records the 3D structure of vegetation and terrain
 - SegmentAnyTree predicts tree and non-tree points and assigns an ID to each predicted tree
 - Visual inspection can reveal obvious problems but is not a quantitative accuracy assessment
+tags:
+  - earth-system
+  - forest
+  - land
 contributions:
   authorship:
   - kgerb
   - Marie59
+  funding:
+  - dataterra
 requirements:
 - type: internal
   topic_name: introduction
@@ -43,6 +48,8 @@ This tutorial is for interested beginners, ecology students, and ecologists. You
 3Dtrees tools in Galaxy to prepare one point cloud and predict individual trees with
 SegmentAnyTree (SAT). At the end, you will have a point cloud with tree labels and an interactive
 Potree view for inspecting the results in your browser.
+
+You will learn how to use a workflow built by the 3Dtrees community on datasets that are part of THEIA Data.
 
 > <tip-title>New to Galaxy?</tip-title>
 >
@@ -66,12 +73,10 @@ We will import one file, standardize it, and make quick overview images. Next, w
 smaller processing units, predict trees, and transfer the predictions to a denser point cloud.
 Finally, we will inspect the result in 3D. Each step prepares an output for the next one.
 
-## Get data
-
 The data were collected by drone near Pic Saint-Loup in southern France. We use only the smallest
 file, `Strip-20210804-150144_D.las` (about 455 MB), to keep the tutorial manageable. LAS is a common
 format for LiDAR points; LAZ is its compressed form. Both can store extra information for each
-point, such as color or a predicted tree identifier.
+point, such as color or a predicted tree identifier. These data are part of THEIA.
 
 > <details-title>About the Pic Saint-Loup dataset</details-title>
 >
@@ -90,44 +95,81 @@ point, such as color or a predicted tree identifier.
 >
 {: .details}
 
+> <details-title>What's THEIA ?</details-title>
+>
+> All of these datasets are part of the THEIA Data and Services Hub for Continental Surfaces, which contributes to the [**Data Terra Research Infrastructure**](https://www.data-terra.org/). 
+> The complete collection of datasets can be discovered through [the THEIA catalogue](https://catalogue.theia.data-terra.org/). 
+> The catalogue federates and harvests metadata from a range of thematic data repositories, as well as institutional repositories, including the INRAE repository. 
+> The integration of additional data sources is currently ongoing.
+> ![THEIA's logo](../../images/3dtrees/theia.png "THEIA's logo")
+{: .details}
+
+{% include _includes/cyoa-choices.html option1="Get data" option2="History" default="Get data"
+       text="You can either get your data via Galaxy or if this is not working use a existing history" %}
+
+<div class="Get-data" markdown="1">
+
+## Get data 
+
 > <hands-on-title>Import one flight-area file</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 >
->    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+>   {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
 > 2. Open **Upload**, then select **{% icon pref-cloud %} Choose Remote Files**.
 > 
-> ![Galaxy upload dialog with the Choose Remote Files button available](../../images/3dtrees/upload_pannel.png "Open the remote-file browser from the upload dialog")
+>   ![Galaxy upload dialog with the Choose Remote Files button available](../../images/3dtrees/upload_pannel.png "Open the remote-file browser from the upload dialog")
 >
 > 3. Search for `recherche`, then open **Recherche Data Gouv**.
 > 4. Search for `pic`, then open **Données lidar acquises par drone au pied du Pic St Loup (34)**.
 >
-> ![Remote-file browser showing the Pic Saint-Loup LiDAR dataset in Recherche Data Gouv](../../images/3dtrees/rdg_repo.png "Open the Pic Saint-Loup dataset")
+>   ![Remote-file browser showing the Pic Saint-Loup LiDAR dataset in Recherche Data Gouv](../../images/3dtrees/rdg_repo.png "Open the Pic Saint-Loup dataset")
 >
 > 5. Select only `Strip-20210804-150144_D.las`, then select **Start**.
 >
-> ![Recherche Data Gouv browser with Strip-20210804-150144_D.las selected](../../images/3dtrees/data_upload.png "Select only flight-area file D for this tutorial")
+>   ![Recherche Data Gouv browser with Strip-20210804-150144_D.las selected](../../images/3dtrees/data_upload.png "Select only flight-area file D for this tutorial")
 >
 > 6. Wait for the dataset to turn green in the history.
 >
-> ![Galaxy history showing the imported LAS dataset ready for analysis](../../images/3dtrees/data_inhistory.png "Wait until the dataset turns green before continuing")
+>   ![Galaxy history showing the imported LAS dataset ready for analysis](../../images/3dtrees/data_inhistory.png "Wait until the dataset turns green before continuing")
 >
-> > <tip-title>Check the file type</tip-title>
-> >
-> > Check that Galaxy recognizes the datatype as **las**.
-> >
-> >  {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
-> {: .tip}
-> 
+>   > <tip-title>Check the file type</tip-title>
+>   >
+>   > Check that Galaxy recognizes the datatype as **las**.
+>   >
+>   >  {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
+>   {: .tip}
+>
 > 7. Rename the dataset to `Strip-20210804-150144_D.las` if the remote import did not preserve its
 >    filename. Do not build a four-file collection for this tutorial.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Strip-20210804-150144_D.las" box_type="none" %}
 {: .hands_on}
+</div>
+
+<div class="History" markdown="1">
+
+## Use an existing history
+
+You can directly import this hisory called ["Pic Saint Loup"](https://earth-system.usegalaxy.eu/u/marie.josse/h/pic-saint-loup) by clicking on the top right button **Import this history** there.
+
+</div>
 
 
-# Standardize the point cloud
+# Discover the 3Dtrees workflow 
+
+In the folowing part of this training we will discover step by step the workflow design by the 3Dtrees community.
+
+> <details-title>What's 3Dtrees community ?</details-title>
+>
+> [3Dtrees](https://3dtrees.earth/) community is aiming at building the Global Forest Reference 
+> Researchers worldwide are sharing high-quality 3D forest data to advance science, AI, and sustainability. Explore what's already here, or contribute your own.
+> This community is part of a wider network called [**NFDI4Earth**](https://www.nfdi4earth.de/)
+> ![3Dtrees' logo](../../images/3dtrees/3dtrees.png "3Dtrees' logo")
+{: .details}
+
+## Standardize the point cloud
 
 Files from different scanners can store point information in different ways. Standardization
 checks the file and prepares a consistent format for the next tools. It checks the file header,
@@ -156,11 +198,11 @@ covered by the survey. This helps prevent file-format problems later; it does no
 >
 > Select all correct statements.
 >
-> - [ ] It checks file information and prepares a consistent format for the next tools.
-> - [ ] It creates a summary and a footprint of the input.
-> - [ ] It assigns every tree a unique identifier.
-> - [ ] It proves that later segmentation results are accurate.
-> - [ ] It turns unrelated flight areas into one continuous survey.
+> a. It checks file information and prepares a consistent format for the next tools.
+> b. It creates a summary and a footprint of the input.
+> c. It assigns every tree a unique identifier.
+> d. It proves that later segmentation results are accurate.
+> e. It turns unrelated flight areas into one continuous survey.
 >
 > > <solution-title></solution-title>
 > >
@@ -174,7 +216,7 @@ covered by the survey. This helps prevent file-format problems later; it does no
 
 The standardized point cloud, its metadata, and its footprint should now appear in the history.
 
-# Get a first impression with overview images
+## Get a first impression with overview images
 
 Before predicting trees, take a quick look at the input. The Overviews tool creates images you
 can open directly in Galaxy, without a 3D viewer. Top views show the survey shape and canopy gaps.
@@ -211,7 +253,7 @@ Side views help you recognize the ground, taller vegetation, and layers within t
 >
 {: .question}
 
-# Prepare the data for segmentation
+## Prepare the data for segmentation
 
 Large point clouds can be too big to process at once. SmartTile can divide them into smaller
 spatial *tiles*. When tiles are created, an overlapping margin, or *buffer*, gives the model more
@@ -259,7 +301,7 @@ you do not need multiple tiles to continue.
 >
 {: .question}
 
-# Identify individual trees with SegmentAnyTree
+## Identify individual trees with SegmentAnyTree
 
 SegmentAnyTree is a trained deep-learning model that adds two predictions to each point.
 *Semantic segmentation* assigns a class: `PredSemantic` distinguishes tree from non-tree points.
@@ -305,7 +347,7 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 >
 {: .question}
 
-# Combine predictions and restore point attributes
+## Combine predictions and restore point attributes
 
 If processing tiles overlap, the same tree can appear in more than one prediction. SmartTile uses
 the saved tile layout to remove instances belonging only to a tile's overlap margin. This step
@@ -347,7 +389,7 @@ Use `output_merged_with_originals` for visualization. It combines the prediction
 original point attributes. Here, "merged" refers to outputs derived from file D, not to combining
 the four flight areas.
 
-# Inspect the result in Potree
+## Inspect the result in Potree
 
 The overview images gave us a quick first look. Potree now lets us rotate and zoom into the final
 point cloud in a browser. We can inspect whether predicted tree boundaries look plausible and
@@ -374,31 +416,31 @@ look for missed trees, trees joined together, or one tree split into several ins
 
 > <question-title>Does the segmentation look plausible?</question-title>
 >
-> Tick the observations that would support a plausible segmentation.
+> Select the observations that would support a plausible segmentation.
 >
-> - [ ] Most instance colors follow recognizable tree crowns rather than scattered patches.
-> - [ ] Neighboring, visibly separate crowns usually have different instance identifiers.
-> - [ ] Visible ground points are generally assigned to the non-tree class in `PredSemantic`.
-> - [ ] Large numbers of crowns are split exactly along straight processing boundaries.
-> - [ ] One instance identifier spans many unrelated crowns.
+> a. Most instance colors follow recognizable tree crowns rather than scattered patches.
+> b. Neighboring, visibly separate crowns usually have different instance identifiers.
+> c. Visible ground points are generally assigned to the non-tree class in `PredSemantic`.
+> d. Large numbers of crowns are split exactly along straight processing boundaries.
+> e. One instance identifier spans many unrelated crowns.
 >
 > Why is this only a visual inspection and not a quantitative accuracy analysis? Select all correct
 > statements.
 >
-> - [ ] A result can look plausible and still contain missed, merged, or split trees.
-> - [ ] This exercise does not compare predictions with independently labelled reference trees.
-> - [ ] Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> - [ ] Potree automatically proves that every displayed tree is correct.
+> a. A result can look plausible and still contain missed, merged, or split trees.
+> b. This exercise does not compare predictions with independently labelled reference trees.
+> c. Measuring accuracy requires reference labels and a method for comparing them with predictions.
+> d. Potree automatically proves that every displayed tree is correct.
 >
 > > <solution-title></solution-title>
 > >
 > > In the first list, the first three observations support a plausible result. Straight splits at
 > > processing boundaries and one ID covering unrelated crowns suggest errors.
 > >
-> > - [x] A result can look plausible and still contain missed, merged, or split trees.
-> > - [x] This exercise does not compare predictions with independently labelled reference trees.
-> > - [x] Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> > - [ ] Potree automatically proves that every displayed tree is correct.
+> > a. [x] A result can look plausible and still contain missed, merged, or split trees.
+> > b. [x] This exercise does not compare predictions with independently labelled reference trees.
+> > c. [x] Measuring accuracy requires reference labels and a method for comparing them with predictions.
+> > d. [ ] Potree automatically proves that every displayed tree is correct.
 > >
 > > Potree helps you find visible problems. It does not calculate segmentation accuracy for you.
 > >
@@ -413,7 +455,7 @@ look for missed trees, trees joined together, or one tree split into several ins
 >
 {: .warning}
 
-# Optional next steps
+## Optional next steps
 
 Once the predictions have been checked, individual-tree labels can support studies of tree
 height, crown size, and tree density. The wider point cloud also provides information about canopy
@@ -452,3 +494,11 @@ the result for inspection.
 `PredSemantic` tells you the predicted class; `PredInstance` tells you which predicted tree a point
 belongs to. These labels provide a starting point for ecological analysis. Your visual checks can
 reveal obvious errors; measuring accuracy requires independently labelled reference trees.
+
+# Acknowledgements
+
+This work takes place within the scope of the environment EOSC node Data Terra as partof the colloboration between Data Terra and NFDI4Earth.
+![EOSC node Data Terra's logo](../../images/3dtrees/eosc.png "EOSC node's logo")
+![Data Terra's logo](../../images/3dtrees/dataterra.png "Data Terra's logo")
+![NFDI4Earth's logo](../../images/3dtrees/nfdi4earth.png "NFDI4Earth's logo")
+
