@@ -271,7 +271,7 @@ you do not need multiple tiles to continue.
 > <hands-on-title>Prepare processing units and subsampled points</hands-on-title>
 >
 > 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
->    - *"Operation"*: `Tile (COPC normalize + tile + subsample)`
+>    - *"Operation"*: `Tile and subsample`
 >        - {% icon param-file %} *"Input point clouds (LAZ/LAS)"*: `pc_standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
 >
 > Five outputs should appear: the normalized source cloud, two subsampled collections, a layout
