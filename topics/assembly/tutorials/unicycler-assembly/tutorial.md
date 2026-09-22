@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler Assembly"
+subtopic: hybrid-assembly
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 level: Introductory
 tags:
