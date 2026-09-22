@@ -198,11 +198,11 @@ covered by the survey. This helps prevent file-format problems later; it does no
 >
 > Select all correct statements.
 >
-> a. It checks file information and prepares a consistent format for the next tools.
-> b. It creates a summary and a footprint of the input.
-> c. It assigns every tree a unique identifier.
-> d. It proves that later segmentation results are accurate.
-> e. It turns unrelated flight areas into one continuous survey.
+> - a. It checks file information and prepares a consistent format for the next tools.
+> - b. It creates a summary and a footprint of the input.
+> - c. It assigns every tree a unique identifier.
+> - d. It proves that later segmentation results are accurate.
+> - e. It turns unrelated flight areas into one continuous survey.
 >
 > > <solution-title></solution-title>
 > >
@@ -418,29 +418,29 @@ look for missed trees, trees joined together, or one tree split into several ins
 >
 > Select the observations that would support a plausible segmentation.
 >
-> a. Most instance colors follow recognizable tree crowns rather than scattered patches.
-> b. Neighboring, visibly separate crowns usually have different instance identifiers.
-> c. Visible ground points are generally assigned to the non-tree class in `PredSemantic`.
-> d. Large numbers of crowns are split exactly along straight processing boundaries.
-> e. One instance identifier spans many unrelated crowns.
+> - a. Most instance colors follow recognizable tree crowns rather than scattered patches.
+> - b. Neighboring, visibly separate crowns usually have different instance identifiers.
+> - c. Visible ground points are generally assigned to the non-tree class in `PredSemantic`.
+> - d. Large numbers of crowns are split exactly along straight processing boundaries.
+> - e. One instance identifier spans many unrelated crowns.
 >
 > Why is this only a visual inspection and not a quantitative accuracy analysis? Select all correct
 > statements.
 >
-> a. A result can look plausible and still contain missed, merged, or split trees.
-> b. This exercise does not compare predictions with independently labelled reference trees.
-> c. Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> d. Potree automatically proves that every displayed tree is correct.
+> - a. A result can look plausible and still contain missed, merged, or split trees.
+> - b. This exercise does not compare predictions with independently labelled reference trees.
+> - c. Measuring accuracy requires reference labels and a method for comparing them with predictions.
+> - d. Potree automatically proves that every displayed tree is correct.
 >
 > > <solution-title></solution-title>
 > >
 > > In the first list, the first three observations support a plausible result. Straight splits at
 > > processing boundaries and one ID covering unrelated crowns suggest errors.
 > >
-> > a. [x] A result can look plausible and still contain missed, merged, or split trees.
-> > b. [x] This exercise does not compare predictions with independently labelled reference trees.
-> > c. [x] Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> > d. [ ] Potree automatically proves that every displayed tree is correct.
+> > - a. [x] A result can look plausible and still contain missed, merged, or split trees.
+> > - b. [x] This exercise does not compare predictions with independently labelled reference trees.
+> > - c. [x] Measuring accuracy requires reference labels and a method for comparing them with predictions.
+> > - d. [ ] Potree automatically proves that every displayed tree is correct.
 > >
 > > Potree helps you find visible problems. It does not calculate segmentation accuracy for you.
 > >
