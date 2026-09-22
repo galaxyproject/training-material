@@ -314,7 +314,7 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 > >
 > > <img src="../../images/simorgh/apo_multi.png" alt="apo_multi" width="500">
 > >
-> > Apo structure prediction on bbflow ensemble
+> > Apo structure prediction on BBflow ensemble
 > >
 > > <img src="../../images/simorgh/holo_multi.png" alt="holo_multi" width="500">
 > >
