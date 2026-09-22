@@ -50,7 +50,7 @@ By explicitly modeling structural variability, Simorgh identifies binding sites 
 We will use the **Escherichia coli Signal Recognition Particle Receptor FtsY** as our example.
 FtsY binds **Guanosine-5'-diphosphate (GDP)**, and experimentally determined structures are available in both apo and holo conformations.
 
-We will work with two experimental structures; one is 6N5J which is in Apo state ({% cite Ataide2019-en %}), and the other one is 6FQD which is in Holo state ({% cite Mrusek2018-nw %}).
+We will work with two experimental structures; 6N5J represents the apo state ({% cite Ataide2019-en %}), and 6FQD represents the Holo state ({% cite Mrusek2018-nw %}).
 
 The interesting question is:
 
