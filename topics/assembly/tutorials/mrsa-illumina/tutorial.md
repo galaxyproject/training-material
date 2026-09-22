@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 title: Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq
   Data
+subtopic: short-read-assembly
 zenodo_link: https://zenodo.org/record/10669812
 questions:
 - How to check the quality of the MiSeq data?
