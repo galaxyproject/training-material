@@ -318,7 +318,7 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 > >
 > > <img src="../../images/simorgh/holo_multi.png" alt="holo_multi" width="500">
 > >
-> > holo structure prediction on bbflow ensemble
+> > holo structure prediction on BBflow ensemble
 > >
 > > <img src="../../images/simorgh/colabfold_multi.png" alt="colabfold_multi" width="500">
 > >
