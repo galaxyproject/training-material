@@ -23,7 +23,7 @@ answer_histories:
 ---
 
 Proteins are not static objects. They constantly move and change shape, and these conformational changes can be especially important when a ligand binds.
-A protein structure captured **before ligand binding** is called the **apo** form, while a structure captured **with a ligand bound** is called the **holo** form.
+A protein structure captured **before ligand binding** is called the **apo** form, while a structure captured **with a ligand bound** is called the **holo** form (for more information about apo and holo state, please take a look at [How different are structurally flexible and rigid binding sites?](https://pubmed.ncbi.nlm.nih.gov/17059826/)).
 
 Why does this matter?
 
@@ -48,7 +48,7 @@ By explicitly modeling structural variability, Simorgh identifies binding sites 
 
 
 We will use the **Escherichia coli Signal Recognition Particle Receptor FtsY** as our example.
-FtsY binds **Guanosine-5'-diphosphate (GDP)**, and experimentally determined structures are available in both apo and holo conformations.
+FtsY binds **Guanosine-5'-diphosphate (GDP)**, and experimentally determined structures are available in either apo or holo conformations.
 
 We will work with two experimental structures; 6N5J represents the apo state ({% cite Ataide2019-en %}), and 6FQD represents the Holo state ({% cite Mrusek2018-nw %}).
 
@@ -124,6 +124,9 @@ To answer this, we will compare **three structural modalities**:
 ## Predicted structures
 
 We will use Colabfold ({% cite Mirdita2022-ko %}) to predict the 3D structure of our protein.
+
+Please note that since the training data consist of BBFlow conformations, applying relaxation during inference introduces a distribution shift that may alter the structural features learned by the model.
+Therefore, it is preferable to avoid unnecessary relaxation during inference. To do that we will exclude AMBER relaxation.
 
 > <hands-on-title> Colabfold prediction </hands-on-title>
 >
