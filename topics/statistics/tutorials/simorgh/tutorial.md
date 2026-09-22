@@ -310,7 +310,7 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 > > In general, however, the prediction tends to represent a low-energy state of the protein in the absence of the ligand, and binding pockets may therefore be less organized than in the holo structure.
 > >
 > > Interestingly, in this example, the ColabFold prediction is closer to the holo structure.
-> > This could indicate either that Simorgh is robust to ligand-free structural predictions and can recover a ligand-compatible conformation, or that the ColabFold model has learned a structural bias toward the holo-like conformation from its training data.
+> > This could indicate either that SIMORGH is robust to ligand-free structural predictions and can recover a ligand-compatible conformation, or that the ColabFold model has learned a structural bias toward the holo-like conformation from its training data.
 > >
 > > <img src="../../images/simorgh/apo_multi.png" alt="apo_multi" width="500">
 > >
