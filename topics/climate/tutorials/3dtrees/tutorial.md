@@ -135,12 +135,12 @@ point, such as color or a predicted tree identifier. These data are part of THEI
 >
 >   ![Galaxy history showing the imported LAS dataset ready for analysis](../../images/3dtrees/data_inhistory.png "Wait until the dataset turns green before continuing")
 >
->   > <tip-title>Check the file type</tip-title>
->   >
->   > Check that Galaxy recognizes the datatype as **las**.
->   >
->   >  {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
->   {: .tip}
+> > <tip-title>Check the file type</tip-title>
+> >
+> > Check that Galaxy recognizes the datatype as **las**.
+> >
+> >  {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
+> {: .tip}
 >
 > 7. Rename the dataset to `Strip-20210804-150144_D.las` if the remote import did not preserve its
 >    filename. Do not build a four-file collection for this tutorial.
