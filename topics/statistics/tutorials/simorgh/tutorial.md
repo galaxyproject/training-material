@@ -225,7 +225,7 @@ Then the command `chain = substr($0,22,1)` gets the character 22 of the line whi
 
 Then, `if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == "A") next` skips any line that is `ATOM, HETATM, or TER` and it is chain `A`.
 
-Finally, `print`, prints out any line that is not skipped.
+Finally, `print` outputs any line that is not skipped.
 
 In summary, "Keep everything except ATOM/HETATM/TER records from chain A."
 
