@@ -363,7 +363,7 @@ or validate every added point.
 > <hands-on-title>Filter overlap predictions and prepare the final cloud</hands-on-title>
 >
 > 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
->    - *"Operation"*: `Filter (remove overlap-only instances)`
+>    - *"Operation"*: `Filter/Merge segmented files`
 >        - {% icon param-file %} *"Segmented tiles (LAZ/LAS)"*: `output` (output of **3Dtrees: SegmentAnyTree** {% icon tool %})
 >        - {% icon param-file %} *"Tile layout JSON (tile_bounds_tindex.json)"*: `output_tile_bounds_json` (output of **3DTrees: SmartTile** {% icon tool %})
 >        - *"Border zone width"*: `Derive from tile layout JSON (recommended)`
