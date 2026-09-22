@@ -24,11 +24,11 @@ contributers:
     authorship: 
     - paulineHans
 tags:
-- proteomics
-- dda
-- label-free
-- n15
-- proteomiqon
+- ["proteomics"]
+- ["dda"]
+- ["label-free"]
+- ["n15"]
+
 requierements: 
     -
      type: "internal"
@@ -53,12 +53,12 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 {: .comment-title}
 
 # From raw data to mzml format
- 1. get your data: click [here](https://git.nfdi4plants.org/venn/Ru_ChlamyHeatstress/-/blob/main/assays/Proteomics/dataset/20191101_Zhang_35C_A_sample01.raw?ref_type=heads) and download the sample file
- 2. convert your .raw file to a .mzml file with  the MSConvert Tool which is aviable on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which converts continuous profile spectra into centroided peaks with defined m/z values and intensities. A detailled guide about how to use MSConvert on GALAXY you can find [here](https://galaxyproject.org/news/2019-03-24-msconvert/)
+ 1. get your data: click to [download the data](https://git.nfdi4plants.org/venn/Ru_ChlamyHeatstress/-/blob/main/assays/Proteomics/dataset/20191101_Zhang_35C_A_sample01.raw?ref_type=heads) and download the sample file
+ 2. convert your .raw file to a .mzml file with  the MSConvert Tool which is aviable on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which converts continuous profile spectra into centroided peaks with defined m/z values and intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
 
 # Convert mzML to mzLite
 
- The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. To use it go to GALAXY and upload you're .mzml file. You need a parameter file written in JSON. You can find a default version of the MzMlToMzLiteParams.JSON file [here](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). You don't need to modify anything. To understand the parameters in detail, you find a detailed documentation [here](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html). 
+ The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. To use it go to GALAXY and upload you're .mzml file. You need a parameter file written in JSON. You can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). You don't need to modify anything. To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html). 
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
@@ -78,17 +78,18 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 > > <solution-title></solution-title>
 > > 
-> > `PSMBasedQuantification` needs the mzLite file because it extracts ion chromatograms from the MS1 data and fits chromatographic peaks for identified peptide ions.
+> > The `PSM` reads the precursor masses to comprehend a peptidion candidate with the theoretical peptidion from the `PeptideDB database`.  
+> > Another example is the `PSMBasedQuantification` needs the mzLite file because it extracts ion chromatograms from the MS1 data and fits chromatographic peaks for identified peptide ions.
 > > 
 > {: .solution}
 {: .question}
 
 # creating a peptide database with PeptideDB
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need is [here](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database. 
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy Data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database. 
 
 > <warning-title>The upstream default currently includes N15</warning-title>
 >
-> The current version of `peptideDBParams.json`, which you can find [here](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/peptideDBParams.json) currently contains `N15` in `IsotopicMod`. That is appropriate only when an N15-labelled search space is required. **For the label-free analysis in this tutorial, use an empty list `IsotopicMod: []`.**
+> The current version of `peptideDBParams.json`, which you can find [Parameter File](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/peptideDBParams.json) currently contains `N15` in `IsotopicMod`. That is appropriate only when an N15-labelled search space is required. **For the label-free analysis in this tutorial, use an empty list `IsotopicMod: []`.**
 >
 > Do not assume that a default parameter file is automatically correct for every experiment. Protease, modifications, missed cleavages, and isotope labels must match the underlying experimental design.
 {: .warning}
@@ -104,7 +105,7 @@ If you are working with mass spectrometry data and wish to analyse the results f
 >    - *Isotopic modification*: **[]** for the label-free tutorial
 > 4. Configure fixed and variable modifications according to the tutorial parameter file.
 > 5. Run the tool.
-> 6. Rename the generated database to `chlamy_peptides.db`.
+> 6. Rename the generated database to `chlamy.db`.
 >
 {: .hands_on}
 
