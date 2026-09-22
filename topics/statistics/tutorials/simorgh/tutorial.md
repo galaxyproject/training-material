@@ -322,7 +322,7 @@ This structural diversity is then leveraged by SIMORGH to predict ligand-binding
 > >
 > > <img src="../../images/simorgh/colabfold_multi.png" alt="colabfold_multi" width="500">
 > >
-> > Colabfold structure prediction on bbflow ensemble
+> > Colabfold structure prediction on BBflow ensemble
 > >
 > {: .solution}
 >
