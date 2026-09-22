@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: '3Dtrees: From LiDAR point clouds to individual trees'
+subtopic: analysing
 level: Introductory
 questions:
 - How can LiDAR describe the three-dimensional structure of a forest?
