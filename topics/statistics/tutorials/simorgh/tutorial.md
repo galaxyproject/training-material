@@ -217,7 +217,7 @@ Next we should preprocess the raw experimental PDB structures to fix structural 
 
 ## Retrieve chain B
 
-Since FtsY is a homodimer, we will use a single chain B for simplicity. For this task, we will use *"Text reformating with awk"* tool ({% cite Gruning2018-lh %}) to reformat our pdb files.
+Since FtsY is a homodimer, we will use a single chain B for simplicity. For this task, we will use *"Text reformating with awk"* tool ({% cite Gruning2018-lh %}) to reformat our PDB files.
 
 The command `rectype = substr($0,1,6)`, gets the characters 1-6 of the current line (such as ATOM, HETATM, or TER).
 
