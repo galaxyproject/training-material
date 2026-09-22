@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 title: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C
   data
+subtopic: pacbio-assembly
 zenodo_link: https://zenodo.org/record/5887339
 level: Intermediate
 tags:
