@@ -14,7 +14,8 @@ def fetch_and_extract_individual_server_tools(server):
     # request the tools via the API
     url = '%s/api/tools?in_panel=False' % server['url'].rstrip('/')
     try:
-        response = requests.get(url, timeout=20)
+        print("Checking compatibility for "+server['name'])
+        response = requests.get(url, timeout=30)
     except:
         print(server['name'] + " Connection Timeout (20s)")
         return
@@ -66,7 +67,7 @@ def extract_public_galaxy_servers_tools():
       s = { 'name': server['name'], 'url': server['url'] }
       to_process.append(s)
 
-    pool = multiprocessing.pool.ThreadPool(processes=200)
+    pool = multiprocessing.pool.ThreadPool(processes=20)
     processed = pool.map(fetch_and_extract_individual_server_tools, to_process, chunksize=1)
     pool.close()
 
