@@ -7,13 +7,15 @@ import logging
 import multiprocessing.pool
 import os
 import requests
+import yaml
 
 
 def fetch_and_extract_individual_server_tools(server):
     # request the tools via the API
     url = '%s/api/tools?in_panel=False' % server['url'].rstrip('/')
     try:
-        response = requests.get(url, timeout=20)
+        print("Checking compatibility for "+server['name'])
+        response = requests.get(url, timeout=30)
     except:
         print(server['name'] + " Connection Timeout (20s)")
         return
@@ -53,25 +55,17 @@ def extract_public_galaxy_servers_tools():
     server_tools = {}
 
     to_process = []
-    serverlist = requests.get('https://galaxyproject.org/use/feed.json').json()
-    for server in serverlist:
-        # We intentionally drop all usegalaxy.eu subdomains. They're all the
-        # same as the top level domain and just pollute the supported instances
-        # list.
-        if '.usegalaxy.eu' in server['url']:
-            continue
-        # Apparently the french do it too
-        if '.usegalaxy.fr' in server['url']:
-            continue
-        # The aussies will soon
-        if '.usegalaxy.org.au' in server['url']:
-            continue
-        # No test servers permitted
-        if 'test.' in server['url']:
-            continue
+    #serverlist = requests.get('https://galaxyproject.org/use/feed.json').json()
 
-        s = { 'name': server['title'], 'url': server['url'] }
-        to_process.append(s)
+    with open("metadata/galaxy-servers.yaml") as f:
+      try:
+        serverlist = yaml.safe_load(f)
+      except yaml.YAMLError as exc:
+        print(exc)
+
+    for server in serverlist['galaxies']:
+      s = { 'name': server['name'], 'url': server['url'] }
+      to_process.append(s)
 
     pool = multiprocessing.pool.ThreadPool(processes=20)
     processed = pool.map(fetch_and_extract_individual_server_tools, to_process, chunksize=1)
