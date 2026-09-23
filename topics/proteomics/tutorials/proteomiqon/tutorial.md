@@ -2,9 +2,8 @@
 layout: tutorial_hands_on
 title: The ProteomIQon Pipeline - a beginner's guide
 zenodo_link: https://zenodo.org/records/22918096
-Level: Introductory
-questions: 
-- Understand the ProteomIQon Tool Chain
+level: Introductory
+subtopic: id-quant
 
 objectives: 
 - Understand how you can use the ProteomIQon Tool Chain in a DDA workflow.
