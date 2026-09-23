@@ -306,14 +306,15 @@
     <main role="main" aria-label="Page bin/supported-fetch.py">
       <article>
         
-<p>!/usr/bin/env python import argparse import csv import io import json import logging import multiprocessing.pool import os import requests</p>
+<p>!/usr/bin/env python import argparse import csv import io import json import logging import multiprocessing.pool import os import requests import yaml</p>
 
 <p>def fetch_and_extract_individual_server_tools(server):</p>
 
 <pre># request the tools via the API
 url = &#39;%s/api/tools?in_panel=False&#39; % server[&#39;url&#39;].rstrip(&#39;/&#39;)
 try:
-    response = requests.get(url, timeout=20)
+    print(&quot;Checking compatibility for &quot;+server[&#39;name&#39;])
+    response = requests.get(url, timeout=30)
 except:
     print(server[&#39;name&#39;] + &quot; Connection Timeout (20s)&quot;)
     return
@@ -353,25 +354,17 @@ return server[&#39;name&#39;], {
 server_tools = {}
 
 to_process = []
-serverlist = requests.get(&#39;https://galaxyproject.org/use/feed.json&#39;).json()
-for server in serverlist:
-    # We intentionally drop all usegalaxy.eu subdomains. They&#39;re all the
-    # same as the top level domain and just pollute the supported instances
-    # list.
-    if &#39;.usegalaxy.eu&#39; in server[&#39;url&#39;]:
-        continue
-    # Apparently the french do it too
-    if &#39;.usegalaxy.fr&#39; in server[&#39;url&#39;]:
-        continue
-    # The aussies will soon
-    if &#39;.usegalaxy.org.au&#39; in server[&#39;url&#39;]:
-        continue
-    # No test servers permitted
-    if &#39;test.&#39; in server[&#39;url&#39;]:
-        continue
+#serverlist = requests.get(&#39;https://galaxyproject.org/use/feed.json&#39;).json()
 
-    s = { &#39;name&#39;: server[&#39;title&#39;], &#39;url&#39;: server[&#39;url&#39;] }
-    to_process.append(s)
+with open(&quot;metadata/galaxy-servers.yaml&quot;) as f:
+  try:
+    serverlist = yaml.safe_load(f)
+  except yaml.YAMLError as exc:
+    print(exc)
+
+for server in serverlist[&#39;galaxies&#39;]:
+  s = { &#39;name&#39;: server[&#39;name&#39;], &#39;url&#39;: server[&#39;url&#39;] }
+  to_process.append(s)
 
 pool = multiprocessing.pool.ThreadPool(processes=20)
 processed = pool.map(fetch_and_extract_individual_server_tools, to_process, chunksize=1)
