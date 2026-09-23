@@ -1,11 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: The ProteomIQon Pipeline - a beginner's guide
-Level: Beginner
+zenodo_link: https://zenodo.org/records/22912796
+Level: Introductory
 questions: 
 - Understand the ProteomIQon Tool Chain
-- Get familiar with the single Tools
-- How can ProteomIQon be used to identify and quantify peptide ions from DDA mass spectrometry data?
 
 objectives: 
 - Understand how you can use the ProteomIQon Tool Chain in a DDA workflow.
@@ -14,32 +13,41 @@ objectives:
 - Perform peptide spectrum matching (PSM) and evaluate PSM confidence.
 - Quantify identified peptide ions from MS data.
 - Perform protein inference and interpret protein groups.
-time-Estimation: 1H30M
-key_Points: 
+time_estimation: 1H30M
+key_points: 
     - ProteomIQon provides modular tools for peptide identification, quantification, and protein inference.
     - Target/Decoy scoring and PSMStatistics are used to control false discoveries.
     - PSMBasedQuantification estimates peptide-ion abundance from fitted chromatographic peak areas.
     - Protein inference accounts for peptide-to-protein mappings.
-contributers: 
+contributions: 
     authorship: 
     - paulineHans
 tags:
-- ["proteomics"]
-- ["dda"]
-- ["label-free"]
-- ["n15"]
+- proteomics
+- dda
+- label-free
+- n15
 
-requierements: 
+requirements: 
     -
      type: "internal"
      topic_name: proteomics
 ---
 
 
-Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state (Lawrance, Klopcic, & Wasinger, 2005). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins. Advantages of the ProteomIQon are that it can handle label-free (14N), labled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [Github](https://github.com/CSBiology/ProteomIQon).
+Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state {% cite Lawrance, Ian Craig and Klopcic, Borut and Wasinger, Valerie C %}. Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins. Advantages of the ProteomIQon are that it can handle label-free (14N), labled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [Github](https://github.com/CSBiology/ProteomIQon).
 
-This beginner friednly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization: 
+This beginner friendly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization and agenda: 
 ![ProteomIQonWorkflow](../../images/proteomiqon-beginnerguide/ProteomIQonWorkflow.png)
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Input data
 
@@ -67,7 +75,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > 3. Use the tutorial parameter settings for mzML-to-mzLite conversion.
 > 4. Run the tool.
 > 5. Rename the output to `sample01.mzlite`.
->
+> 
 {: .hands_on}
 
 
