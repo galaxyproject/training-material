@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: Analysing Solar Eclipse Frequency with a Galaxy Workflow
-lang: en
+zenodo_link: 'https://zenodo.org/record/22912793'
+
 level: Intermediate
 questions:
 - How can we identify groups of solar eclipses above a user-defined observable magnitude
@@ -171,7 +172,7 @@ You can upload data in various ways. Here are some examples:
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
+> 2. Import the `Amarnasolec05mittlere.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
 >
 >    ```
 >    https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
