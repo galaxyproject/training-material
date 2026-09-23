@@ -5,7 +5,10 @@ zenodo_link: https://zenodo.org/records/22918096
 level: Introductory
 subtopic: id-quant
 
-objectives: 
+questions:
+- How can ProteomIQon be used to identify and quantify peptide ions from DDA mass spectrometry data?
+
+objectives:
 - Understand how you can use the ProteomIQon Tool Chain in a DDA workflow.
 - Describe the main steps of a ProteomIQon DDA workflow.
 - Build a peptide database from a protein FASTA file.
