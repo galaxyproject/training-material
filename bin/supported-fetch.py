@@ -8,16 +8,34 @@ import multiprocessing.pool
 import os
 import requests
 import yaml
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 def fetch_and_extract_individual_server_tools(server):
     # request the tools via the API
     url = '%s/api/tools?in_panel=False' % server['url'].rstrip('/')
+
+    session = requests.Session()
+
+    retry = Retry(
+        total=3,
+        connect=3,              # Connection-level retries
+        read=2,                 # Read timeout retries
+        backoff_factor=3,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"]
+    )
+
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+
+
     try:
-        print("Checking compatibility for "+server['name'])
-        response = requests.get(url, timeout=30)
-    except:
-        print(server['name'] + " Connection Timeout (20s)")
+        print("Checking compatibility for %s (%s)" % (server['name'], server['url']))
+        response = session.get(url, timeout=30)
+    except Exception as e:
+        print(server['name'] + " Connection Timeout (30s) "+repr(e))
         return
 
     # check status
@@ -67,7 +85,7 @@ def extract_public_galaxy_servers_tools():
       s = { 'name': server['name'], 'url': server['url'] }
       to_process.append(s)
 
-    pool = multiprocessing.pool.ThreadPool(processes=20)
+    pool = multiprocessing.pool.ThreadPool(processes=1)
     processed = pool.map(fetch_and_extract_individual_server_tools, to_process, chunksize=1)
     pool.close()
 
