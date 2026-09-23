@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler Assembly"
-zenodo_link: "https://doi.org/10.5281/zenodo.940733"
+zenodo_link: 'https://zenodo.org/record/940733'
 level: Introductory
 tags:
   - prokaryote
