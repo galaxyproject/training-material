@@ -2,7 +2,9 @@
 layout: tutorial_hands_on
 
 title: "Unicycler Assembly"
+subtopic: hybrid-assembly
 zenodo_link: 'https://zenodo.org/record/940733'
+
 level: Introductory
 tags:
   - prokaryote

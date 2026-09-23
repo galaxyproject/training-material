@@ -2,7 +2,9 @@
 layout: tutorial_hands_on
 
 title: "An Introduction to Genome Assembly"
+subtopic: introduction
 zenodo_link: 'https://zenodo.org/record/582600'
+
 questions:
   - "How do we perform a very basic genome assembly from short read data?"
 objectives:

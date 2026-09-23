@@ -1,7 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: Hybrid genome assembly - Nanopore and Illumina
+subtopic: hybrid-assembly
 zenodo_link: 'https://zenodo.org/record/15756328'
+
 tags:
   - assembly
   - nanopore
