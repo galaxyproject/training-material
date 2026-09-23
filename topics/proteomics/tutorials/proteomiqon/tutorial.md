@@ -61,8 +61,11 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 {: .comment-title}
 
 # From raw data to mzml format
- 1. get your data: click to [download the data](https://git.nfdi4plants.org/venn/Ru_ChlamyHeatstress/-/blob/main/assays/Proteomics/dataset/20191101_Zhang_35C_A_sample01.raw?ref_type=heads) and download the sample file
- 2. convert your .raw file to a .mzml file with  the MSConvert Tool which is aviable on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which converts continuous profile spectra into centroided peaks with defined m/z values and intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
+ <hands-on-title>Import the Dataset</hands-on-title>
+ > 1. get your data: 
+ >> click to [download the data](https://git.nfdi4plants.org/caroott/RatioLFQ/-/blob/main/assays/DilutionSeries/dataset/20170519%20TM%20FScon3601/20170519%20TM%20FScon3601.wiff?ref_type=heads) >>and download the file and rename it to "sample.wiff"
+ > 2. convert your sample.wiff file to a .mzml file with  the MSConvert Tool which is aviable on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). 
+ >>Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which >>converts continuous profile spectra into centroided peaks with defined m/z values and >>intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
 
 # Convert mzML to mzLite
 
