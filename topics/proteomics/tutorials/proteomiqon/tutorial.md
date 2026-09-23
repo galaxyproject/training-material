@@ -39,7 +39,7 @@ requirements:
 Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}).
 Advantages of the ProteomIQon are that it can handle label-free (14N), labeled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
 
-This beginner friendly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization and agenda: 
+This beginner friendly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization and agenda:
 ![ProteomIQonWorkflow](../../images/proteomiqon-beginnerguide/ProteomIQonWorkflow.png)
 
 > <agenda-title></agenda-title>
@@ -63,15 +63,40 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 {: .comment-title}
 
 # From raw data to mzml format
- <hands-on-title>Import the Dataset</hands-on-title>
- > 1. get your data: 
- click to [download the data](https://git.nfdi4plants.org/caroott/RatioLFQ/-/blob/main/assays/DilutionSeries/dataset/20170519%20TM%20FScon3601/20170519%20TM%20FScon3601.wiff?ref_type=heads) and download the file and rename it to "sample.wiff"
- > 2. convert your sample.wiff file to a .mzml file with  the MSConvert Tool which is available on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). 
- Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which converts continuous profile spectra into centroided peaks with defined m/z values and  intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
+
+> <hands-on-title>Import datasets</hands-on-title>
+>
+> 1. Create a new history for this analysis
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Give the history a good name
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 3. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
+>
+>    ```
+>    https://zenodo.org/records/22918096/files/sample.wiff
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 4. Convert the datatype using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
+>    - {% icon param-file %} *"Input unrefined MS data"*: file X that you just uploaded
+>    - {% icon param-toggle %} *"Do you agree to the vendor licenses?"*: `Yes`
+>    - *"Output Type"*: `mzML`
+>    - In *"Data Processing Filters"*:
+>        - *"Apply Peak Picking"*: `Yes`
+>
+{: .hands_on}
+
 
 # Convert mzML to mzLite
 
- The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.  
+ The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
@@ -79,22 +104,22 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > 2. Select the `mzML` file as input.
 > 3. Run the tool.
 > 4. Rename the output to `sample.mzlite`.
-> 
+>
 {: .hands_on}
 
 > <question-title>Why keep the mzLite file?</question-title>
-> 
+>
 > Which later step in this tutorial needs access to the MS1 signal rather than only peptide identifications?
-> 
+>
 > > <solution-title></solution-title>
-> > 
-> > The `PSM` reads the precursor masses to comprehend a peptidion candidate with the theoretical peptidion from the `PeptideDB database`.  
+> >
+> > The `PSM` reads the precursor masses to comprehend a peptidion candidate with the theoretical peptidion from the `PeptideDB database`.
 > > Another example is the `PSMBasedQuantification` needs the mzLite file because it extracts ion chromatograms from the MS1 data and fits chromatographic peaks for identified peptide ions.
 > {: .solution}
 {: .question}
 
 # creating a peptide database with PeptideDB
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database. 
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
 
 > <warning-title>The upstream default currently includes N15</warning-title>
 >
@@ -119,21 +144,21 @@ If you are working with mass spectrometry data and wish to analyse the results f
 {: .hands_on}
 
 > <question-title>What happens when more missed cleavages are allowed?</question-title>
-> 
+>
 >  Imagine that `MaxMissedCleavages` is increased from `2` to `5`. What happens to the peptide search space?
-> 
+>
 > >  <solution-title></solution-title>
-> > 
+> >
 > >  More theoretical peptides are generated because additional incompletely cleaved peptide sequences are accepted. This increases the search space and can increase both computational cost and the number of candidate peptides considered for a spectrum.
 >  {: .solution}
 {: .question}
 >
 > <question-title>Why must the protease setting match the experiment?</question-title>
-> 
+>
 >  What would happen if the proteins were digested experimentally with trypsin but the database were generated using a different protease?
-> 
+>
 > >  <solution-title></solution-title>
-> > 
+> >
 > >  The theoretical peptide search space would no longer represent the peptides expected from the experimental digestion. Many real peptides could be absent from the database, while many irrelevant peptide candidates could be introduced.
 > {: .solution}
 {: .question}
@@ -144,7 +169,7 @@ Now for the first interesting tool, PeptideSpectrumMatching; this tool attempts 
 The tool then searches the PeptideDB for all peptides whose mass approximately matches this calculated mass. The permitted deviation is defined via LookUpPPM.
 For each matching peptide, the tool then calculates which fragment ions should theoretically be produced (fragmentation). These theoretical fragments are compared with the actually measured MS2 spectrum.
 The better the theoretical peptide matches the measured spectrum, the higher the score. To this end, ProteomIQon calculates, amongst other things, a SEQUEST-like and an Andromeda-like score, as well as an X!Tandem-like score.
-In addition to the genuine peptides, the decoy peptides are also tested. These are artificially generated reference peptides which are later used by PSMStatistics to estimate how many of the identified hits are likely to be false. This is used to determine the False Discovery Rate (FDR). 
+In addition to the genuine peptides, the decoy peptides are also tested. These are artificially generated reference peptides which are later used by PSMStatistics to estimate how many of the identified hits are likely to be false. This is used to determine the False Discovery Rate (FDR).
 
 The current default search settings include a `LookUpPPM` value of `30.0` ppm and precursor charges between `2` and `5`. See the [PeptideSpectrumMatching documentation](https://csbiology.github.io/ProteomIQon/tools/PeptideSpectrumMatching.html) for the complete parameter description.
 
@@ -163,7 +188,7 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm an
 {: .hands_on}
 
 
- We now understand which input files the tool is getting and what it does, but what are we getting in return? The result is a .psm file with a lot of information, so lets have a look deeper inside. 
+ We now understand which input files the tool is getting and what it does, but what are we getting in return? The result is a .psm file with a lot of information, so lets have a look deeper inside.
 
 | Column | Description |
 | --- | --- |
@@ -261,7 +286,7 @@ The `.qpsm` output retains the identification information and adds statistical c
 > {: .solution}
 {: .question}
 
-# Quantification of identified peptides 
+# Quantification of identified peptides
 Peptide identification tells us which peptide is likely to have produced an MS/MS spectrum, but it does not by itself estimate how abundant that peptide ion was in the chromatographic run.
 
 `PSMBasedQuantification` uses the confident identifications from `PSMStatistics` to locate peptide ions in the MS1 data. For each identified peptide ion, it extracts an ion chromatogram around the expected monoisotopic m/z and retention time, detects chromatographic peaks, and fits the peak closest to the identification. **The fitted peak area is reported as the peptide-ion quantity.**
@@ -309,7 +334,7 @@ The resulting file is a .quant file now we look at the output to get a better un
 | `Params_Light` | Estimated parameters of the fitted chromatographic peak model. |
 | `Difference_SearchRT_FittedRT_Light` | Difference between the identification retention time and fitted peak retention time. |
 | `KLDiv_Observed_Theoretical_Light` | Kullback-Leibler divergence comparing observed and theoretical isotope-pattern information before correction. |
-| `KLDiv_CorrectedObserved_Theoretical_Light` | Kullback-Leibler divergence after correction. | 
+| `KLDiv_CorrectedObserved_Theoretical_Light` | Kullback-Leibler divergence after correction. |
 
 > <question-title>Which value should be used as the main peptide-ion abundance estimate?</question-title>
 >
@@ -331,7 +356,7 @@ The resulting file is a .quant file now we look at the output to get a better un
 > {: .solution}
 {: .question}
 
-# Protein Inferece - peptides to proteins 
+# Protein Inferece - peptides to proteins
 Peptide identification does not always translate into a unique protein identification. The same peptide sequence can occur in multiple proteins, homologues, or isoforms. `ProteinInference` therefore maps identified peptides back to proteins and reports **protein groups** that represent the available peptide evidence.
 
 The current parameters are documented in [ProteinInference](https://csbiology.github.io/ProteomIQon/tools/ProteinInference.html):
@@ -443,7 +468,7 @@ You first converted mzML data to the mzLite format used throughout the workflow 
 
 A central lesson is that the intermediate files are not independent outputs: each represents a different stage of the same analysis. Parameters chosen early in the workflow, especially digestion settings, modifications, isotope labels, and identifier parsing, influence the interpretation of later results. For reproducible analysis, these parameters must match the experimental design and should be documented together with the exact ProteomIQon/Galaxy tool versions used.
 
-# Literature 
+# Literature
 - [ProteomIQon](https://csbiology.github.io/ProteomIQon/)
 - [ProteomIQon Repository](https://github.com/CSBiology/ProteomIQon/tree/main)
 - [QualIQon](https://zenodo.org/records/22691077)
