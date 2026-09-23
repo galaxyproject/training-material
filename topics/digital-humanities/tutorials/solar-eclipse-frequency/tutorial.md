@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: Analysing Solar Eclipse Frequency with a Galaxy Workflow
-lang: en
+zenodo_link: 'https://zenodo.org/record/22912793'
+
 level: Intermediate
 questions:
 - How can we identify groups of solar eclipses above a user-defined observable magnitude
