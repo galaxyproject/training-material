@@ -17,7 +17,7 @@ time_estimation: 1H30M
 key_points: 
     - ProteomIQon provides modular tools for peptide identification, quantification, and protein inference.
     - Target/Decoy scoring and PSMStatistics are used to control false discoveries.
-    - PSMBasedQuantification estimates peptide-ion abundance from fitted chromatographic peak areas.
+    - PSMBasedQuantification estimates peptideion abundance from fitted chromatographic peak areas.
     - Protein inference accounts for peptide-to-protein mappings.
 contributions: 
     authorship: 
@@ -444,5 +444,5 @@ A central lesson is that the intermediate files are not independent outputs: eac
 
 # Literature 
 - [ProteomIQon](https://csbiology.github.io/ProteomIQon/)
-- [ProteomIQon_Repository](https://github.com/CSBiology/ProteomIQon/tree/main)
+- [ProteomIQon Repository](https://github.com/CSBiology/ProteomIQon/tree/main)
 - [QualIQon](https://zenodo.org/records/22691077)
