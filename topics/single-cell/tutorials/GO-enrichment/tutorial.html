@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0bbf971bbc35cc75a725c794084bf47e58a5313",
+		release: "galaxy-training-network@8be6a8109fac796880b0c2331720a0276115e322",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="GO Enrichment Analysis on Single-Cell RNA-Seq Data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-06-25 14:26:36 +0000">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
 <meta name="DC.creator" content="Menna Gamal"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / GO Enrichment Analysis on Single-Cell RNA-Seq Data / Hands-on: GO Enrichment Analysis on Single-Cell RNA-Seq Data">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-06-25 14:26:36 +0000",
+  "dateModified": "2026-09-23 07:25:04 +0000",
   "datePublished": "2024-09-17 07:09:29 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -273,7 +273,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "GO Enrichment Analysis on Single-Cell RNA-Seq Data",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/GO-enrichment/tutorial.html",
-  "version": 9,
+  "version": 10,
   "timeRequired": "PT3H",
   "teaches": "- Understand the role of GO Enrichment in Single-Cell Analysis.\n- Use marker genes from different cell clusters or conditions for GO enrichment analysis.\n- Compare enrichment across experimental conditions (e.g., wild type vs. knockout) to uncover functional changes associated with genetic or environmental perturbations.\n- Link GO enrichment results with previously annotated cell clusters, providing a clearer picture of the functional roles of different cell populations.",
   "keywords": [
@@ -1134,7 +1134,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/records/13461890",
+      "url": "https://zenodo.org/record/13461890",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1552,7 +1552,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/13461890">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/13461890">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1664,7 +1664,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 17, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1684,7 +1684,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -1786,13 +1786,13 @@ We will perform GO enrichment analysis as a type of over-representation analysis
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/records/13461890">Zenodo</a></p>
+      <p>Import the files from <a href="https://zenodo.org/record/13461890">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13461890/files/Galaxy3-[GO].obo
-https://zenodo.org/records/13461890/files/Galaxy2-[GO_annotations_Mus_musculus].tabular
-https://zenodo.org/records/13461890/files/Galaxy5-[Markers_-_clusters].tabular
-https://zenodo.org/records/13461890/files/Galaxy4-[Background_gene_set].tabular
-https://zenodo.org/records/13461890/files/Galaxy1-[Markers_-_genotype_].tabular
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/13461890/files/Galaxy3-[GO].obo
+https://zenodo.org/record/13461890/files/Galaxy2-[GO_annotations_Mus_musculus].tabular
+https://zenodo.org/record/13461890/files/Galaxy5-[Markers_-_clusters].tabular
+https://zenodo.org/record/13461890/files/Galaxy4-[Background_gene_set].tabular
+https://zenodo.org/record/13461890/files/Galaxy1-[Markers_-_genotype_].tabular
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -2506,7 +2506,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f0bbf971bbc35cc75a725c794084bf47e58a5313">f0bbf97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8be6a8109fac796880b0c2331720a0276115e322">8be6a81</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

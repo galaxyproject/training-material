@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0bbf971bbc35cc75a725c794084bf47e58a5313",
+		release: "galaxy-training-network@8be6a8109fac796880b0c2331720a0276115e322",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-09-01 18:34:05 +0000">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
 <meta name="DC.creator" content="Khaled Jum'ah">
 <meta name="DC.creator" content="Krzysztof Poterlowicz"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-09-01 18:34:05 +0000",
+  "dateModified": "2026-09-23 07:25:04 +0000",
   "datePublished": "2026-09-01 18:34:05 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/spatial-melanoma-SPICA/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT5H",
   "teaches": "- Build a SpatialData object from a Xenium output bundle with SpatialData IO\n- Export the expression table to AnnData and inspect its dimensions\n- Evaluate transcript-based and morphology-based quality control metrics and map them onto the tissue image\n- Apply filters and record how many cells each one removes\n- Execute normalisation, feature selection, dimensionality reduction and clustering\n- Identify marker genes for each cluster and assign a biological description supported by published evidence\n- Appraise CellTypist, Squidpy and LIANA outputs and explain what each one does not establish",
   "keywords": [
@@ -880,7 +880,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/records/22078050",
+      "url": "https://zenodo.org/record/22078050",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1466,7 +1466,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/22078050">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/22078050">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1554,7 +1554,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 1, 2026 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 1, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1572,7 +1572,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1756,9 +1756,9 @@ shared coordinate system (<span class="citation"><a href="#Marconato2025SpatialD
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Import the prepared SpatialData object from <a href="https://zenodo.org/records/22078050">Zenodo</a>:</p>
+      <p>Import the prepared SpatialData object from <a href="https://zenodo.org/record/22078050">Zenodo</a>:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/22078050/files/melanoma_roi.spatialdata.zip
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/22078050/files/melanoma_roi.spatialdata.zip
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1919,20 +1919,20 @@ section.</p>
 <code class="language-plaintext highlighter-rouge">melanoma.spatialdata.zip</code> if you would rather skip straight to the crop.</p>
 
   <ol>
-    <li>Import the bundle files from <a href="https://zenodo.org/records/22078050">Zenodo</a>:</li>
+    <li>Import the bundle files from <a href="https://zenodo.org/record/22078050">Zenodo</a>:</li>
   </ol>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/22078050/files/cell_feature_matrix.h5
-https://zenodo.org/records/22078050/files/cells.parquet
-https://zenodo.org/records/22078050/files/cells.zarr.zip
-https://zenodo.org/records/22078050/files/experiment.xenium
-https://zenodo.org/records/22078050/files/morphology_focus_0000.ome.tif
-https://zenodo.org/records/22078050/files/morphology_focus_0001.ome.tif
-https://zenodo.org/records/22078050/files/morphology_focus_0002.ome.tif
-https://zenodo.org/records/22078050/files/morphology_focus_0003.ome.tif
-https://zenodo.org/records/22078050/files/cell_boundaries.parquet
-https://zenodo.org/records/22078050/files/nucleus_boundaries.parquet
-https://zenodo.org/records/22078050/files/transcripts.parquet
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/22078050/files/cell_feature_matrix.h5
+https://zenodo.org/record/22078050/files/cells.parquet
+https://zenodo.org/record/22078050/files/cells.zarr.zip
+https://zenodo.org/record/22078050/files/experiment.xenium
+https://zenodo.org/record/22078050/files/morphology_focus_0000.ome.tif
+https://zenodo.org/record/22078050/files/morphology_focus_0001.ome.tif
+https://zenodo.org/record/22078050/files/morphology_focus_0002.ome.tif
+https://zenodo.org/record/22078050/files/morphology_focus_0003.ome.tif
+https://zenodo.org/record/22078050/files/cell_boundaries.parquet
+https://zenodo.org/record/22078050/files/nucleus_boundaries.parquet
+https://zenodo.org/record/22078050/files/transcripts.parquet
 </code></pre></div>  </div>
 
   <ol>
@@ -2705,10 +2705,10 @@ filter above already removes, directly from the segmentation rather than from co
 
   <ol>
     <li>
-      <p>Import these files from <a href="https://zenodo.org/records/22078050">Zenodo</a>:</p>
+      <p>Import these files from <a href="https://zenodo.org/record/22078050">Zenodo</a>:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/22078050/files/Filtered_AnnData_table.h5ad
-https://zenodo.org/records/22078050/files/melanoma_roi.spatialdata.zip
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/22078050/files/Filtered_AnnData_table.h5ad
+https://zenodo.org/record/22078050/files/melanoma_roi.spatialdata.zip
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -4556,7 +4556,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f0bbf971bbc35cc75a725c794084bf47e58a5313">f0bbf97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8be6a8109fac796880b0c2331720a0276115e322">8be6a81</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

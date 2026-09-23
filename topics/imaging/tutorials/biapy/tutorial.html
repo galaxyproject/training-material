@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0bbf971bbc35cc75a725c794084bf47e58a5313",
+		release: "galaxy-training-network@8be6a8109fac796880b0c2331720a0276115e322",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Execute a BiaPy workflow in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-02-17 14:46:32 +0000">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
 <meta name="DC.creator" content="Riccardo Massei">
 <meta name="DC.creator" content="Daniel Franco Barranco"><meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-02-17 14:46:32 +0000",
+  "dateModified": "2026-09-23 07:25:04 +0000",
   "datePublished": "2026-02-11 09:11:29 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Execute a BiaPy workflow in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT2H",
   "teaches": "- Learn to configure and run a BiaPy workflow by editing a YAML file to define hardware settings, data paths, and model selection.\n- Execute an inference workflow in Galaxy using two different pre-trained models sourced from BioImage.IO.",
   "keywords": [
@@ -840,7 +840,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/records/10973241",
+      "url": "https://zenodo.org/record/10973241",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1175,8 +1175,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
-                    
-                
             
                 
                     
@@ -1236,8 +1234,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
-                    
-                
             
         
     
@@ -1279,7 +1275,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10973241">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/10973241">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1378,7 +1374,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 11, 2026 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 17, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1396,7 +1392,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1458,7 +1454,7 @@ visually inspect the differences in segmentation quality between the two models.
 
 <h2 id="getting-test-data-and-the-biapy-yaml-configuration-file">Getting test data and the BiaPy YAML configuration file</h2>
 
-<p>The dataset required for this tutorial is available from <a href="https://zenodo.org/records/10973241">Zenodo</a>. The CartoCell dataset contains whole epithelial cysts acquired at low resolution with minimal human intervention (<a href="https://zenodo.org/records/10973241">more information</a>). The dataset is divided into <em>test</em>, <em>train</em> and <em>validation</em> data, each folder containing images and associated segmentation masks.</p>
+<p>The dataset required for this tutorial is available from <a href="https://zenodo.org/record/10973241">Zenodo</a>. The CartoCell dataset contains whole epithelial cysts acquired at low resolution with minimal human intervention (<a href="https://zenodo.org/record/10973241">more information</a>). The dataset is divided into <em>test</em>, <em>train</em> and <em>validation</em> data, each folder containing images and associated segmentation masks.</p>
 
 <p>In order to simplify the upload, we already prepared the test images and YAML files in the <strong>Data Library</strong> that you can access on the left panel in Galaxy.</p>
 
@@ -2208,7 +2204,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f0bbf971bbc35cc75a725c794084bf47e58a5313">f0bbf97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8be6a8109fac796880b0c2331720a0276115e322">8be6a81</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0bbf971bbc35cc75a725c794084bf47e58a5313",
+		release: "galaxy-training-network@8be6a8109fac796880b0c2331720a0276115e322",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Quantitative Analysis of Histological Staining Using Color Deconvolution">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-06-21 07:40:51 +0000">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
 <meta name="DC.creator" content="Diana Chiang Jurado"><meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Imaging / Quantitative Analysis of Histological Staining Using Color Deconvolution / Hands-on: Quantitative Analysis of Histological Staining Using Color Deconvolution">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-06-21 07:40:51 +0000",
+  "dateModified": "2026-09-23 07:25:04 +0000",
   "datePublished": "2026-06-15 10:30:49 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -268,7 +268,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Quantitative Analysis of Histological Staining Using Color Deconvolution",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/stain-quantification-color-deconvolution/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT3H",
   "teaches": "- Apply color deconvolution to separate stain channels in histological images\n- Extract and isolate the stain channel of interest (e.g. DAB)\n- Apply automatic thresholding to distinguish stained from unstained regions\n- Calculate the percentage of positively stained area relative to total tissue area\n- Interpret quantitative staining results across multiple images",
   "keywords": [
@@ -950,7 +950,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/records/20629365",
+      "url": "https://zenodo.org/record/20629365",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1290,8 +1290,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
-                    
-                
             
                 
                     
@@ -1351,8 +1349,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
-                    
-                
             
         
     
@@ -1383,7 +1379,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/20629365">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/20629365">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1447,7 +1443,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 15, 2026 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 21, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1465,7 +1461,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1607,32 +1603,32 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <ol>
     <li>Create a new history and name it something meaningful, e.g. <code class="language-plaintext highlighter-rouge">Histology Stain Quantification</code></li>
-    <li>Import the images from <a href="https://zenodo.org/records/20629365">Zenodo</a> or from the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> → <code class="language-plaintext highlighter-rouge">imaging</code> → <code class="language-plaintext highlighter-rouge">Quantitative Analysis of Histological Staining Using Color Deconvolution</code>):
+    <li>Import the images from <a href="https://zenodo.org/record/20629365">Zenodo</a> or from the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> → <code class="language-plaintext highlighter-rouge">imaging</code> → <code class="language-plaintext highlighter-rouge">Quantitative Analysis of Histological Staining Using Color Deconvolution</code>):
       <ul>
         <li><code class="language-plaintext highlighter-rouge">Tx</code> (treated)</li>
         <li><code class="language-plaintext highlighter-rouge">Vehicle</code> (DMSO or untreated)</li>
       </ul>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20629365/files/Tx_Sample1.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample2.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample3.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample4.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample5.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample6.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample7.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample8.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample9.tiff
-https://zenodo.org/records/20629365/files/Tx_Sample10.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample1.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample2.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample3.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample4.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample5.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample6.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample7.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample8.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample9.tiff
-https://zenodo.org/records/20629365/files/Vehicle_Sample10.tiff
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/20629365/files/Tx_Sample1.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample2.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample3.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample4.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample5.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample6.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample7.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample8.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample9.tiff
+https://zenodo.org/record/20629365/files/Tx_Sample10.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample1.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample2.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample3.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample4.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample5.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample6.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample7.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample8.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample9.tiff
+https://zenodo.org/record/20629365/files/Vehicle_Sample10.tiff
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -2883,7 +2879,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f0bbf971bbc35cc75a725c794084bf47e58a5313">f0bbf97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8be6a8109fac796880b0c2331720a0276115e322">8be6a81</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

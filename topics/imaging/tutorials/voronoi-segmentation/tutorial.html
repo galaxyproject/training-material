@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0bbf971bbc35cc75a725c794084bf47e58a5313",
+		release: "galaxy-training-network@8be6a8109fac796880b0c2331720a0276115e322",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Voronoi segmentation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-02-20 14:07:26 +0000">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
 <meta name="DC.creator" content="Even Moa Myklebust">
 <meta name="DC.creator" content="Riccardo Massei">
 <meta name="DC.creator" content="Leonid Kostrykin">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-02-20 14:07:26 +0000",
+  "dateModified": "2026-09-23 07:25:04 +0000",
   "datePublished": "2025-05-13 06:12:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -271,7 +271,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Voronoi segmentation",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/voronoi-segmentation/tutorial.html",
-  "version": 8,
+  "version": 9,
   "timeRequired": "PT1H",
   "teaches": "- How to perform Voronoi Segmentation in Galaxy.\n- How to extract a single channel from an image.\n- How to overlay two images.\n- How to count objectives in a layer map.",
   "keywords": [
@@ -1131,7 +1131,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/records/15172302",
+      "url": "https://zenodo.org/record/15281843",
       "name": "Associated Training Datasets"
     }
   ]
@@ -1484,8 +1484,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
-                    
-                
             
                 
                     
@@ -1533,8 +1531,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
                     
                 
                     
@@ -1645,7 +1641,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/15172302">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/15281843">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -1756,7 +1752,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 13, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 20, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1774,7 +1770,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
 
     </blockquote>
     </section>
@@ -1790,13 +1786,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>Voronoi segmentation is a technique used to divide an image or space into regions
-based on the proximity to a set of defined points, called seeds or sites. Each 
-region, known as a Voronoi cell, contains all locations that are closer to its 
-seed than to any other. This approach is especially useful when analyzing spatial 
-relationships, as it reveals how different areas relate in terms of distance and 
-distribution. Voronoi segmentation is widely applicable for tasks where it’s 
-important to understand the proximity or neighborhood structure of points, such 
-as organizing space, studying clustering patterns, or identifying regions of 
+based on the proximity to a set of defined points, called seeds or sites. Each
+region, known as a Voronoi cell, contains all locations that are closer to its
+seed than to any other. This approach is especially useful when analyzing spatial
+relationships, as it reveals how different areas relate in terms of distance and
+distribution. Voronoi segmentation is widely applicable for tasks where it’s
+important to understand the proximity or neighborhood structure of points, such
+as organizing space, studying clustering patterns, or identifying regions of
 influence around each point in various types of data.</p>
 
 <blockquote class="agenda">
@@ -1880,13 +1876,13 @@ influence around each point in various types of data.</p>
 
   <h3 id="application-to-bioimaging">Application to Bioimaging</h3>
 
-  <p>In bioimage analysis, Voronoi segmentation is a valuable tool for studying the 
-spatial organization of cells, tissues, or other biological structures within an 
-image. By dividing an image into regions around each identified cell or structure, 
-Voronoi segmentation enables researchers to analyze how different cell types are 
-distributed, measure distances between cells, and examine clustering patterns. This 
-can provide insights into cellular interactions, tissue organization, and functional 
-relationships within biological samples, such as identifying the proximity of immune 
+  <p>In bioimage analysis, Voronoi segmentation is a valuable tool for studying the
+spatial organization of cells, tissues, or other biological structures within an
+image. By dividing an image into regions around each identified cell or structure,
+Voronoi segmentation enables researchers to analyze how different cell types are
+distributed, measure distances between cells, and examine clustering patterns. This
+can provide insights into cellular interactions, tissue organization, and functional
+relationships within biological samples, such as identifying the proximity of immune
 cells to tumor cells or mapping neuron distributions within brain tissue.</p>
 
   <figure id="figure-1" style="max-width: 90%;"><img src="../../images/voronoi-segmentation/cell_image-B2-W00026-P00001-Z00000-T00000-dapi.png" alt="Cell image." width="1344" height="1024" loading="lazy" /><a target="_blank" href="../../images/voronoi-segmentation/cell_image-B2-W00026-P00001-Z00000-T00000-dapi.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Cell image.</figcaption></figure>
@@ -1977,7 +1973,7 @@ For this tutorial, we have already prepared seed images, which you can download 
         <p><!--END_SNIPPET--></p>
       </li>
       <li>
-        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/records/15172302">Zenodo</a>:</p>
+        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/record/15281843">Zenodo</a>:</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15281843/files/images_and_seeds.zip
 </code></pre></div>        </div>
@@ -2023,7 +2019,7 @@ For this tutorial, we have already prepared seed images, which you can download 
         <p><!--END_SNIPPET--></p>
       </li>
       <li>
-        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/records/15172302">Zenodo</a>:</p>
+        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/record/15281843">Zenodo</a>:</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15281843/files/images_and_seeds.zip
 </code></pre></div>        </div>
@@ -2069,7 +2065,7 @@ For this tutorial, we have already prepared seed images, which you can download 
         <p><!--END_SNIPPET--></p>
       </li>
       <li>
-        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/records/15172302">Zenodo</a>:</p>
+        <p>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/record/15281843">Zenodo</a>:</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15424465/files/image_and_seed.zip
 </code></pre></div>        </div>
@@ -2102,12 +2098,12 @@ For this tutorial, we have already prepared seed images, which you can download 
 </div>
 
 <h2 id="generate-an-object-mask-from-pixel-intensity">Generate an object mask from pixel intensity</h2>
-<p>In case there should be empty regions without objects in the image, we wish to constrain the single Voronoi regions to roughly the area where an object is. 
+<p>In case there should be empty regions without objects in the image, we wish to constrain the single Voronoi regions to roughly the area where an object is.
 Therefore, we first smooth the image to reduce the influence of noise, and then apply a threshold on the smoothed image to get a binary mask.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-mask-vs-seeds"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Mask vs seeds</div>
-  <p>The process used to create a mask can also be used to make seeds, as in the 
+  <p>The process used to create a mask can also be used to make seeds, as in the
 <a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html">Imaging introduction tutorial</a>.</p>
 </blockquote>
 
@@ -2277,9 +2273,9 @@ Therefore, we first smooth the image to reduce the influence of noise, and then 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The purpose of smoothing is to reduce noise. 
-For seed generation, noise might lead to false seeds where there is no object. 
-Smoothing also promotes connectedness within an object, where noise might make an object appear as two separate objects. 
+    <p>The purpose of smoothing is to reduce noise.
+For seed generation, noise might lead to false seeds where there is no object.
+Smoothing also promotes connectedness within an object, where noise might make an object appear as two separate objects.
 For mask generation, the same principles apply.</p>
 
   </blockquote>
@@ -2325,9 +2321,9 @@ For mask generation, the same principles apply.</p>
 </blockquote>
 
 <h2 id="apply-the-mask-and-visualize-the-segmentation">Apply the mask and visualize the segmentation</h2>
-<p>A Voronoi tessellation segments an image into non-overlapping segments that cover the entire image. 
-This makes sure that segments do not overlap, but empty spaces between objects will be counted as part of the segment belonging to the nearest item. 
-A more accurate segmentation can be achieved by using the mask to reduce the size of the Voronoi segments. 
+<p>A Voronoi tessellation segments an image into non-overlapping segments that cover the entire image.
+This makes sure that segments do not overlap, but empty spaces between objects will be counted as part of the segment belonging to the nearest item.
+A more accurate segmentation can be achieved by using the mask to reduce the size of the Voronoi segments.
 This can be achieved with the following operation.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
@@ -2429,8 +2425,8 @@ This can be achieved with the following operation.</p>
 
 </blockquote>
 
-<p>In this last step, we compute the max, min and mean intensity for each image segment, as well as the area and the major and minor axis lengths. 
-Depending on the use case, the distribution of these extracted features could reveal different subgroups in the data. 
+<p>In this last step, we compute the max, min and mean intensity for each image segment, as well as the area and the major and minor axis lengths.
+Depending on the use case, the distribution of these extracted features could reveal different subgroups in the data.
 In this way, the features could be used to categorize different types of objects.</p>
 
 <h2 id="visualize-segment-features-with-a-scatter-plot">Visualize segment features with a scatter plot</h2>
@@ -2463,7 +2459,7 @@ In this way, the features could be used to categorize different types of objects
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>This pipeline performs Voronoi segmentation and can be applied to datasets from any field as long as the input data satisfies the input data criteria. 
+<p>This pipeline performs Voronoi segmentation and can be applied to datasets from any field as long as the input data satisfies the input data criteria.
 The steps in this tutorial are also available on Galaxy as a published workflow called <a href="https://usegalaxy.eu/published/workflow?id=23030421cd9fcfb2">Voronoi segmentation</a>.</p>
 
                 </section>
@@ -2892,7 +2888,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f0bbf971bbc35cc75a725c794084bf47e58a5313">f0bbf97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8be6a8109fac796880b0c2331720a0276115e322">8be6a81</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
