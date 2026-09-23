@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: The ProteomIQon Pipeline - a beginner's guide
-zenodo_link: https://zenodo.org/records/22912796
+zenodo_link: https://zenodo.org/records/22918096
 Level: Introductory
 questions: 
 - Understand the ProteomIQon Tool Chain
