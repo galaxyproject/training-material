@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Supervised Learning with Hyperdimensional Computing"
-zenodo_link: "https://doi.org/10.5281/zenodo.6467875"
+zenodo_link: 'https://zenodo.org/record/11397775'
 questions:
   - "How to encode data into vectors in a high-dimensional space?"
   - "What kind of operations can be performed on these vectors?"
