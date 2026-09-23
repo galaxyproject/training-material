@@ -16,21 +16,20 @@ objectives:
 - Quantify identified peptide ions from MS data.
 - Perform protein inference and interpret protein groups.
 time_estimation: 1H30M
-key_points: 
+key_points:
     - ProteomIQon provides modular tools for peptide identification, quantification, and protein inference.
     - Target/Decoy scoring and PSMStatistics are used to control false discoveries.
     - PSMBasedQuantification estimates peptideion abundance from fitted chromatographic peak areas.
     - Protein inference accounts for peptide-to-protein mappings.
-contributions: 
-    authorship: 
+contributions:
+    authorship:
     - paulineHans
 tags:
-- proteomics
 - DDA
 - label-free
 - n15
 
-requirements: 
+requirements:
     -
      type: "internal"
      topic_name: proteomics
