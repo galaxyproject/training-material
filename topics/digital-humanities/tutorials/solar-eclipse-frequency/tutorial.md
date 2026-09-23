@@ -433,20 +433,21 @@ Because the duplicate-removal step does not preserve chronological order, the re
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
-We have already used this tool in a previous step with similar parameters.
-You can redo all the input steps by step, or you can rerun the earlier sort tool:
-
-{% snippet faqs/galaxy/tools_rerun.md %}
-
-That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
-
->    > <comment-title>Details about the sorting </comment-title>
->    > The configured numeric ascending sorts in this order:
->    > 1. Column 1: Year (`Y`)
->    > 2. Column 2: Month (`M`)
->    > 3. Column 3: Day (`D`).
->    > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
->    {: .comment}
+>
+> We have already used this tool in a previous step with similar parameters.
+> You can redo all the input steps by step, or you can rerun the earlier sort tool:
+>
+> {% snippet faqs/galaxy/tools_rerun.md %}
+>
+> That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
+>
+> > <comment-title>Details about the sorting </comment-title>
+> > The configured numeric ascending sorts in this order:
+> > 1. Column 1: Year (`Y`)
+> > 2. Column 2: Month (`M`)
+> > 3. Column 3: Day (`D`).
+> > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
+> {: .comment}
 >
 {: .hands_on}
 
