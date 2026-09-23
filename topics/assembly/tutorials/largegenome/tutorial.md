@@ -3,7 +3,8 @@ layout: tutorial_hands_on
 
 title: "Large genome assembly and polishing"
 subtopic: hybrid-assembly
-zenodo_link: "https://doi.org/10.5281/zenodo.7055935"
+zenodo_link: 'https://zenodo.org/record/7055935'
+
 tags:
   - assembly
   - polishing

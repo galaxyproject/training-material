@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Mapping
-zenodo_link: https://doi.org/10.5281/zenodo.1324070
+zenodo_link: 'https://zenodo.org/record/1324070'
 questions:
   - Was ist Mapping?
   - Welche zwei Dinge sind entscheidend für ein korrektes Mapping?

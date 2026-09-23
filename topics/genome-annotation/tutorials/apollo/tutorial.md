@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Refining Genome Annotations with Apollo (prokaryotes)
-zenodo_link: https://zenodo.org/record/4889110
+zenodo_link: 'https://zenodo.org/record/4889110'
 tags:
   - gmod
   - prokaryote

@@ -5,7 +5,7 @@ title: "Combining single cell datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
-zenodo_link: 'https://zenodo.org/records/15090813'
+zenodo_link: 'https://zenodo.org/record/15090813'
 
 questions:
   - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?

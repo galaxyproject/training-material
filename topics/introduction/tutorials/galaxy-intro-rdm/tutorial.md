@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Introduction to Galaxy as an RDM platform
-zenodo_link: https://zenodo.org/records/18803585/
+zenodo_link: 'https://zenodo.org/record/18803585'
 level: Introductory
 questions:
 - Which RDM features does Galaxy offer?
