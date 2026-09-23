@@ -1,0 +1,185 @@
+- doc: Test outline for Pangenome-Variant-Calling-using-VG-Giraffe-and-Google-DeepVariant
+  job:
+    Input Graph:
+      class: File
+      location: https://zenodo.org/records/22298869/files/GBZ_FILE.gbz?download=1
+      filetype: gbz
+    Input Read 1:
+      class: File
+      location: https://zenodo.org/records/22298869/files/Read_1.fastqsanger.gz?download=1
+      filetype: fastqsanger.gz
+    Input Read 2:
+      class: File
+      location: https://zenodo.org/records/22298869/files/Read_2.fastqsanger.gz?download=1
+      filetype: fastqsanger.gz
+    Reference Prefix: null
+    Giraffe Preset: default
+    Reads per Chunk: '20000000'
+    Sample Name: s0
+    Input XG Graph: null
+    Giraffe Mapper Options: null
+    Giraffe Prune Low Complexity: true
+    Giraffe Maximum Fragment Length: '3000'
+    DeepVariant Minimum Mapping Quality: null
+    DeepVariant Keep Legacy Allele Counter: false
+    DeepVariant Normalize Reads: true
+    DeepVariant Realign Reads: true
+    DeepVariant Model Type: WGS
+    DeepVariant make_examples Extra Args: null
+    DeepVariant Maximum Read Length to Realign: '500'
+    DeepVariant Haploid Contigs: null
+    DeepVariant Small Model Disabled: false
+    hap.py Target Regions: null
+  outputs:
+    BAM:
+      element_test:
+        has_size: 117467
+        delta: 5000
+    Unmapped reads BAM:
+      element_test:
+        has_size: 494
+        delta: 50
+    DeepVariant VCF:
+      asserts:
+        - that: "has_line"
+          line: "##fileformat=VCFv4.2"
+          n: 1
+        - that: "has_n_lines"
+          n: 146
+        - that: "has_text"
+          text: "chr1"
+          n: 59
+        - that: "has_text"
+          text: "chr2"
+          n: 63
+        - that: "has_line"
+          line: "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	s0"
+          n: 1
+        - that: "has_line"
+          line: "chr1	1123	.	A	G	30	PASS	.	GT:GQ:DP:AD:VAF:MID:PL	0/1:30:30:17,13:0.433333:small_model:29,0,51"
+          n: 1
+    DeepVariant gVCF:
+      asserts:
+        - that: "has_line"
+          line: "##fileformat=VCFv4.2"
+          n: 1
+        - that: "has_n_lines"
+          n: 363
+        - that: "has_text"
+          text: "chr1"
+          n: 173
+        - that: "has_text"
+          text: "chr2"
+          n: 166
+        - that: "has_line"
+          line: "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	s0"
+          n: 1
+        - that: "has_line"
+          line: "chr1	1	.	A	<*>	0	.	END=34	GT:GQ:MIN_DP:PL	0/0:1:0:0,0,0"
+          n: 1
+- doc: Test outline for Pangenome-Variant-Calling-using-VG-Giraffe-and-Google-DeepVariant with hap.py
+  job:
+    Input Graph:
+      class: File
+      location: https://zenodo.org/records/22298869/files/GBZ_FILE.gbz?download=1
+      filetype: gbz
+    Input Read 1:
+      class: File
+      location: https://zenodo.org/records/22298869/files/Read_1.fastqsanger.gz?download=1
+      filetype: fastqsanger.gz
+    Input Read 2:
+      class: File
+      location: https://zenodo.org/records/22298869/files/Read_2.fastqsanger.gz?download=1
+      filetype: fastqsanger.gz
+    hap.py Truth VCF File:
+      class: File
+      location: https://zenodo.org/records/22298869/files/Truth.vcf?download=1
+      filetype: vcf
+    Reference Prefix: null
+    Giraffe Preset: default
+    Reads per Chunk: '20000000'
+    Sample Name: s0
+    Input XG Graph: null
+    Giraffe Mapper Options: null
+    Giraffe Prune Low Complexity: true
+    Giraffe Maximum Fragment Length: '3000'
+    DeepVariant Minimum Mapping Quality: null
+    DeepVariant Keep Legacy Allele Counter: false
+    DeepVariant Normalize Reads: true
+    DeepVariant Realign Reads: true
+    DeepVariant Model Type: WGS
+    DeepVariant make_examples Extra Args: null
+    DeepVariant Maximum Read Length to Realign: '500'
+    DeepVariant Haploid Contigs: null
+    DeepVariant Small Model Disabled: false
+    hap.py Target Regions: null
+  outputs:
+    BAM:
+      element_test:
+        has_size: 117467
+        delta: 5000
+    Unmapped reads BAM:
+      element_test:
+        has_size: 494
+        delta: 50
+    DeepVariant VCF:
+      asserts:
+        - that: "has_line"
+          line: "##fileformat=VCFv4.2"
+          n: 1
+        - that: "has_n_lines"
+          n: 146
+        - that: "has_text"
+          text: "chr1"
+          n: 59
+        - that: "has_text"
+          text: "chr2"
+          n: 63
+        - that: "has_line"
+          line: "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	s0"
+          n: 1
+        - that: "has_line"
+          line: "chr1	1123	.	A	G	30	PASS	.	GT:GQ:DP:AD:VAF:MID:PL	0/1:30:30:17,13:0.433333:small_model:29,0,51"
+          n: 1
+    DeepVariant gVCF:
+      asserts:
+        - that: "has_line"
+          line: "##fileformat=VCFv4.2"
+          n: 1
+        - that: "has_n_lines"
+          n: 363
+        - that: "has_text"
+          text: "chr1"
+          n: 173
+        - that: "has_text"
+          text: "chr2"
+          n: 166
+        - that: "has_line"
+          line: "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	s0"
+          n: 1
+        - that: "has_line"
+          line: "chr1	1	.	A	<*>	0	.	END=34	GT:GQ:MIN_DP:PL	0/0:1:0:0,0,0"
+          n: 1
+    hap.py Metrics:
+      element_test:
+        has_size: 3345
+        delta: 300
+    hap.py Results:
+      asserts:
+        - that: "has_line"
+          line: "Benchmarking	Summary:"
+          n: 1
+        - that: "has_line"
+          line: "Type	Filter	TRUTH.TOTAL	TRUTH.TP	TRUTH.FN	QUERY.TOTAL	QUERY.FP	QUERY.UNK	FP.gt	FP.al	METRIC.Recall	METRIC.Precision	METRIC.Frac_NA	METRIC.F1_Score	TRUTH.TOTAL.TiTv_ratio	QUERY.TOTAL.TiTv_ratio	TRUTH.TOTAL.het_hom_ratio	QUERY.TOTAL.het_hom_ratio"
+          n: 1
+        - that: "has_line"
+          line: "	SNP	PASS	58	58	0	58	0	0	0	0	1.0	1.0	0.0	1.0	0.567568	0.567568	1.230769	1.230769"
+          n: 1
+    hap.py Summary:
+      asserts:
+        - that: "has_line"
+          line: "Type,Filter,TRUTH.TOTAL,TRUTH.TP,TRUTH.FN,QUERY.TOTAL,QUERY.FP,QUERY.UNK,FP.gt,FP.al,METRIC.Recall,METRIC.Precision,METRIC.Frac_NA,METRIC.F1_Score,TRUTH.TOTAL.TiTv_ratio,QUERY.TOTAL.TiTv_ratio,TRUTH.TOTAL.het_hom_ratio,QUERY.TOTAL.het_hom_ratio"
+          n: 1
+        - that: "has_line"
+          line: "SNP,PASS,58,58,0,58,0,0,0,0,1.0,1.0,0.0,1.0,0.5675675675675675,0.5675675675675675,1.2307692307692308,1.2307692307692308"
+          n: 1
