@@ -60,7 +60,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > This tutorial stops after peptide-ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
 > The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/).
-{: .comment-title}
+{: .comment}
 
 # From raw data to mzml format
 
@@ -84,12 +84,14 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 4. Convert the datatype using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
+> 4. Convert the `wiff` file to `mzML` using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
 >    - {% icon param-file %} *"Input unrefined MS data"*: file X that you just uploaded
 >    - {% icon param-toggle %} *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
 >        - *"Apply Peak Picking"*: `Yes`
+>
+> A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
 >
 {: .hands_on}
 
