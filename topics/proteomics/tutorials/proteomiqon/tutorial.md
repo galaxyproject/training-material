@@ -24,7 +24,7 @@ contributions:
     - paulineHans
 tags:
 - proteomics
-- dda
+- DDA
 - label-free
 - n15
 
@@ -35,7 +35,8 @@ requirements:
 ---
 
 
-Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state {% cite Lawrance, Ian Craig and Klopcic, Borut and Wasinger, Valerie C %}. Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins. Advantages of the ProteomIQon are that it can handle label-free (14N), labled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [Github](https://github.com/CSBiology/ProteomIQon).
+Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}).
+Advantages of the ProteomIQon are that it can handle label-free (14N), labeled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
 
 This beginner friendly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization and agenda: 
 ![ProteomIQonWorkflow](../../images/proteomiqon-beginnerguide/ProteomIQonWorkflow.png)
@@ -51,7 +52,7 @@ This beginner friendly training will explain how to work with ProteomIQon's main
 
 # Input data
 
-This beginner training is based on label-free proteomics data from *Chlamydomonas reinhardtii*. The original experiment, raw files, and metadata are available from [PlantDataHub](https://git.nfdi4plants.org/venn/Ru_ChlamyHeatstress/-/tree/main/assays/Proteomics/dataset?ref_type=heads). A corresponding *C. reinhardtii* reference proteome can be obtained from [UniProt proteome UP000006906](https://www.uniprot.org/proteomes/UP000006906).
+This beginner training is based on label-free proteomics data from *Chlamydomonas reinhardtii*. The original experiment, raw files, and metadata are available from [PlantDataHub](https://git.nfdi4plants.org/caroott/RatioLFQ). A corresponding *C. reinhardtii* reference proteome can be obtained from [UniProt](https://www.uniprot.org/proteomes/UP000006906).
 
 > <comment-title>Scope of this tutorial</comment-title>
 >
@@ -63,44 +64,40 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 # From raw data to mzml format
  <hands-on-title>Import the Dataset</hands-on-title>
  > 1. get your data: 
- >> click to [download the data](https://git.nfdi4plants.org/caroott/RatioLFQ/-/blob/main/assays/DilutionSeries/dataset/20170519%20TM%20FScon3601/20170519%20TM%20FScon3601.wiff?ref_type=heads) >>and download the file and rename it to "sample.wiff"
- > 2. convert your sample.wiff file to a .mzml file with  the MSConvert Tool which is aviable on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). 
- >>Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which >>converts continuous profile spectra into centroided peaks with defined m/z values and >>intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
+ click to [download the data](https://git.nfdi4plants.org/caroott/RatioLFQ/-/blob/main/assays/DilutionSeries/dataset/20170519%20TM%20FScon3601/20170519%20TM%20FScon3601.wiff?ref_type=heads) and download the file and rename it to "sample.wiff"
+ > 2. convert your sample.wiff file to a .mzml file with  the MSConvert Tool which is available on [GALAXY](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.26121.8&version=latest). 
+ Selecet the .mzml as output format, and don't forget to add the PeakPicking Filter, which converts continuous profile spectra into centroided peaks with defined m/z values and  intensities. A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
 
 # Convert mzML to mzLite
 
- The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. To use it go to GALAXY and upload you're .mzml file. You need a parameter file written in JSON. You can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). You don't need to modify anything. To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html). 
+ The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.  
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
 > 1. Open **ProteomIQon MzMLToMzLite** in Galaxy.
-> 2. Select the tutorial `mzML` file as input.
-> 3. Use the tutorial parameter settings for mzML-to-mzLite conversion.
-> 4. Run the tool.
-> 5. Rename the output to `sample01.mzlite`.
+> 2. Select the `mzML` file as input.
+> 3. Run the tool.
+> 4. Rename the output to `sample.mzlite`.
 > 
 {: .hands_on}
 
-
-> <question-title>Why keep the mzLite file?<question-title>
+> <question-title>Why keep the mzLite file?</question-title>
 > 
 > Which later step in this tutorial needs access to the MS1 signal rather than only peptide identifications?
 > 
->
 > > <solution-title></solution-title>
 > > 
 > > The `PSM` reads the precursor masses to comprehend a peptidion candidate with the theoretical peptidion from the `PeptideDB database`.  
 > > Another example is the `PSMBasedQuantification` needs the mzLite file because it extracts ion chromatograms from the MS1 data and fits chromatographic peaks for identified peptide ions.
-> > 
 > {: .solution}
 {: .question}
 
 # creating a peptide database with PeptideDB
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy Data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database. 
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database. 
 
 > <warning-title>The upstream default currently includes N15</warning-title>
 >
-> The current version of `peptideDBParams.json`, which you can find [Parameter File](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/peptideDBParams.json) currently contains `N15` in `IsotopicMod`. That is appropriate only when an N15-labelled search space is required. **For the label-free analysis in this tutorial, use an empty list `IsotopicMod: []`.**
+> The current version of `peptideDBParams.json`, which you can find [under this link](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/peptideDBParams.json) currently contains `N15` in `IsotopicMod`. That is appropriate only when an N15-labeled search space is required. **For the label-free analysis in this tutorial, use an empty list `IsotopicMod: []`.** You should also assign the `Name` field to the model organism currently in use. The default setting is `AraTest`, but as we are working with *C. reinhardtii*, this should be changed to `Chlamy` or `Chlamydomonas`
 >
 > Do not assume that a default parameter file is automatically correct for every experiment. Protease, modifications, missed cleavages, and isotope labels must match the underlying experimental design.
 {: .warning}
@@ -114,9 +111,9 @@ If you are working with mass spectrometry data and wish to analyse the results f
 >    - *Minimum missed cleavages*: `0`
 >    - *Maximum missed cleavages*: `2`
 >    - *Isotopic modification*: **[]** for the label-free tutorial
-> 4. Configure fixed and variable modifications according to the tutorial parameter file.
+> 4. Understand the parameters from the parameter file in order to apply the correct settings to GALAXY
 > 5. Run the tool.
-> 6. Rename the generated database to `chlamy.db`.
+> 6. Rename the generated database to `Chlamy.db`.
 >
 {: .hands_on}
 
@@ -150,17 +147,17 @@ In addition to the genuine peptides, the decoy peptides are also tested. These a
 
 The current default search settings include a `LookUpPPM` value of `30.0` ppm and precursor charges between `2` and `5`. See the [PeptideSpectrumMatching documentation](https://csbiology.github.io/ProteomIQon/tools/PeptideSpectrumMatching.html) for the complete parameter description.
 
-[![Peptide Spectrum Matching](../../images/proteomiqon-beginnerguide/PSM.png)(https://github.com/CSBiology/ProteomIQon/blob/main/docs/img/PSM.png)]
+![Peptide Spectrum Matching](../../images/proteomiqon-beginnerguide/PSM.png)
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
 > 1. Open **ProteomIQon PeptideSpectrumMatching** in Galaxy.
 > 2. Select:
->    - the `sample01.mzlite` file,
->    - the `chlamydomonas_peptides.db` database,
+>    - the `sample.mzlite` file,
+>    - the `Chlamy.db` database,
 >    - the PeptideSpectrumMatching parameter settings.
 > 3. Run the tool.
-> 4. Rename the output to `sample01.psm`.
+> 4. Rename the output to `sample.psm`.
 > 5. Inspect the tabular output.
 {: .hands_on}
 
@@ -199,18 +196,18 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm an
 # Evaluate the psm results with peptide spectrum matching statistics (PSMStats)
 The `.psm` file contains several search-engine and quality-related features for each candidate. `PSMStatistics` combines these features into a single model score using a semi-supervised procedure. Target and decoy labels provide the training signal, and the model is retrained iteratively as confident target matches are added.
 
-[![PeptideSpectrumMatching](../../images/proteomiqon-beginnerguide/SemiSupervisedScoring.png)(https://github.com/CSBiology/ProteomIQon/blob/main/docs/img/SemiSupervisedScoring.png)]
+![PeptideSpectrumMatching](../../images/proteomiqon-beginnerguide/SemiSupervisedScoring.png)
 
 From the combined score, the tool calculates two important statistical measures:
 
 - **PEP value (Posterior Error Probability):** an estimate of the probability that an individual PSM is incorrect.
-- **q-value:** The q-value of a PSM is the estimated minimum FDR among the score thresholds at which this PSM is still retained.
+- **Q-value:** The Q-value of a PSM is the estimated minimum FDR among the score thresholds at which this PSM is still retained.
 
-The default estimated-threshold configuration currently uses a q-value threshold of `0.01`, a PEP threshold of `0.05`, up to `15` iterations, and a minimum increase between iterations of `0.005`. See the [PSMStatistics documentation](https://csbiology.github.io/ProteomIQon/tools/PSMStatistics.html) for details.
+The default estimated-threshold configuration currently uses a Q-value threshold of `0.01`, a PEP threshold of `0.05`, up to `15` iterations, and a minimum increase between iterations of `0.005`. See the [PSMStatistics documentation](https://csbiology.github.io/ProteomIQon/tools/PSMStatistics.html) for details.
 
 | Parameter | Default | Meaning |
 | --- | ---: | --- |
-| `QValueThreshold` | `0.01` | Keep PSMs whose q-value is below the threshold. |
+| `QValueThreshold` | `0.01` | Keep PSMs whose Q-value is below the threshold. |
 | `PepValueThreshold` | `0.05` | Keep PSMs whose PEP value is below the threshold. |
 | `MaxIterations` | `15` | Maximum number of retraining iterations. |
 | `MinimumIncreaseBetweenIterations` | `0.005` | Stop when too few additional confident positives are gained. |
@@ -222,11 +219,11 @@ The default estimated-threshold configuration currently uses a q-value threshold
 >
 > 1. Open **ProteomIQon PSMStatistics** in Galaxy.
 > 2. Select:
->    - `sample01.psm`,
->    - `chlamy_peptides.db`,
+>    - `sample.psm`,
+>    - `Chlamy.db`,
 >    - the PSMStatistics parameters.
 > 3. Run the tool.
-> 4. Rename the main output to `sample01.qpsm`.
+> 4. Rename the main output to `sample.qpsm`.
 > 5. Inspect the output table
 {: .hands_on}
 
@@ -239,17 +236,17 @@ The `.qpsm` output retains the identification information and adds statistical c
 | `AndroScore` | Andromeda-like spectrum-matching score. |
 | `XtandemScore` | X!Tandem-like spectrum-matching score. |
 | `ModelScore` | Combined score learned by PSMStatistics. |
-| `QValue` | Estimated q-value for the PSM. Lower values indicate stronger statistical confidence. |
+| `QValue` | Estimated Q-value for the PSM. Lower values indicate stronger statistical confidence. |
 | `PEPValue` | Estimated posterior error probability for the individual PSM. Lower values indicate stronger confidence. |
 | `ProteinNames` | Protein identifiers associated with the identified peptide. |
 
-> <question-title>What is the difference between a q-value and a PEP value?</question-title>
+> <question-title>What is the difference between a Q-value and a PEP value?</question-title>
 >
 > Which value is intended to describe the error probability of one individual PSM?
 >
 > > <solution-title></solution-title>
 > >
-> > The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **q-value** is related to the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
+> > The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **Q-value** is related to the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
 > {: .solution}
 {: .question}
 
@@ -272,7 +269,7 @@ Important parameters to run the tool are described in the [PSMBasedQuantificatio
 
 | Parameter | Meaning |
 | --- | --- |
-| `PerformLabeledQuantification` | Selects label-free or labelled quantification behaviour. |
+| `PerformLabeledQuantification` | Selects label-free or labeled quantification behaviour. |
 | `XicExtraction.ScanTimeWindow` | Defines the retention-time window searched around an identification. |
 | `XicExtraction.MzWindow_Da` | Defines the m/z window used to extract the ion chromatogram. |
 | `XicExtraction.XicProcessing` | Controls chromatographic peak detection, for example the wavelet method. |
@@ -284,14 +281,14 @@ Nice! so we know now which files are needed and what the parameters mean. So let
 >
 > 1. Open **ProteomIQon PSMBasedQuantification** in Galaxy.
 > 2. Select:
->    - `sample01.mzlite`,
->    - `sample01.qpsm`,
->    - `chlamy_peptides.db`.
-> 3. Set *Perform labelled quantification* to **lable-free**.
+>    - `sample.mzlite`,
+>    - `sample.qpsm`,
+>    - `Chlamy.db`.
+> 3. Set *Perform labeled quantification* to **lable-free**.
 > 4. Keep the tutorial XIC and peak-detection settings.
 > 5. If available in the Galaxy wrapper, enable diagnostic-chart generation for this training run.
 > 6. Run the tool.
-> 7. Rename the main output to `sample01.quant`.
+> 7. Rename the main output to `sample.quant`.
 {: .hands_on}
 
 The resulting file is a .quant file now we look at the output to get a better understanding of what we got. Important output columns include:
@@ -301,11 +298,11 @@ The resulting file is a .quant file now we look at the output to get a better un
 | `StringSequence` | Peptide sequence representation. |
 | `Charge` | Charge state of the quantified peptide ion. |
 | `PrecursorMZ` | Mean precursor m/z associated with the identifications. |
-| `QValue` | Best q-value associated with the peptide ion. |
+| `QValue` | Best Q-value associated with the peptide ion. |
 | `PEPValue` | Best PEP value associated with the peptide ion. |
 | `ProteinNames` | Protein identifiers associated with the peptide. |
-| `QuantMz_Light` | m/z used for the light/unlabelled peptide-ion quantification. |
-| `Quant_Light` | Fitted chromatographic peak area; the main quantitative abundance estimate for the light/unlabelled ion. |
+| `QuantMz_Light` | m/z used for the light/unlabeled peptide-ion quantification. |
+| `Quant_Light` | Fitted chromatographic peak area; the main quantitative abundance estimate for the light/unlabeled ion. |
 | `MeasuredApex_Light` | Measured intensity at the chromatographic peak apex. |
 | `Seo_Light` | Standard error of prediction of the fitted peak model. |
 | `Params_Light` | Estimated parameters of the fitted chromatographic peak model. |
@@ -344,18 +341,18 @@ The current parameters are documented in [ProteinInference](https://csbiology.gi
 | `Protein` | Controls how overlapping protein groups are kept or merged. |
 | `Peptide` | Controls which peptides are considered for later quantification of protein groups. |
 | `GroupFiles` | Determines whether several input runs are inferred together. |
-| `GetQValue` | Controls protein-level FDR/q-value estimation. |
+| `GetQValue` | Controls protein-level FDR/Q-value estimation. |
 
 
 > <hands-on-title>Run ProteinInference</hands-on-title>
 >
 > 1. Open **ProteomIQon ProteinInference** in Galaxy.
 > 2. Select:
->    - `sample01.qpsm`,
->    - `chlamy_peptides.db`.
+>    - `sample.qpsm`,
+>    - `Chlamy.db`.
 > 3. Use the tutorial ProteinInference parameter settings.
 > 4. Run the tool.
-> 5. Rename the output to `sample01.prot`.
+> 5. Rename the output to `sample.prot`.
 > 6. Inspect the resulting protein groups.
 {: .hands_on}
 
@@ -368,7 +365,7 @@ The `.prot` file contains:
 | `Class` | Peptide-evidence class. Its interpretation is most informative when an appropriate GFF3 annotation is supplied. |
 | `TargetScore` | Protein-group score derived from target peptide evidence. |
 | `DecoyScore` | Corresponding score derived from decoy protein evidence. |
-| `QValue` | Protein-level q-value estimated from target and decoy scoring. |
+| `QValue` | Protein-level Q-value estimated from target and decoy scoring. |
 
 > <question-title>Why can one peptide support more than one protein?</question-title>
 >
@@ -380,16 +377,16 @@ The `.prot` file contains:
 > {: .solution}
 {: .question}
 
-# Optional extension: what changes for N15-labelled data?
+# Optional extension: what changes for N15-labeled data?
 
-The main workflow above is deliberately label-free (in this case label-free means 14N). ProteomIQon also supports metabolically labelled data such as 15N experiments, but the search database and quantification settings must then be changed consistently.
+The main workflow above is deliberately label-free (in this case label-free means 14N). ProteomIQon also supports metabolically labeled data such as 15N experiments, but the search database and quantification settings must then be changed consistently.
 
-In an N15-labelled experiment, nitrogen atoms containing 14N are replaced by the heavier 15N isotope during metabolic labelling. The mass shift of a peptide depends on the number of nitrogen atoms contained in that peptide. This produces predictable light/heavy peptide-ion relationships that can be used during labelled quantification.
+In an N15-labeled experiment, nitrogen atoms containing 14N are replaced by the heavier 15N isotope during metabolic labelling. The mass shift of a peptide depends on the number of nitrogen atoms contained in that peptide. This produces predictable light/heavy peptide-ion relationships that can be used during labeled quantification.
 
 For an N15 workflow:
 
-1. `PeptideDB` must include the N15 isotope modification so that labelled peptide variants are represented in the search space.
-2. `PSMBasedQuantification` must use the N15-labelled quantification mode rather than `Unlabeled`.
+1. `PeptideDB` must include the N15 isotope modification so that labeled peptide variants are represented in the search space.
+2. `PSMBasedQuantification` must use the N15-labeled quantification mode rather than `Unlabeled`.
 3. The resulting `.quant` file can contain both light and heavy quantities, including `Quant_Light` and `Quant_Heavy`.
 
 > <question-title>Should an N15 isotope modification be included for an unlabeled sample?</question-title>
@@ -404,7 +401,7 @@ For an N15 workflow:
 >
 > > <solution-title></solution-title>
 > >
-> > The peptide database determines which label-free or labelled peptide variants can be identified, while the quantification mode determines which chromatographic partner ions are searched and quantified. Inconsistent settings would make the workflow biologically and computationally inconsistent.
+> > The peptide database determines which label-free or labeled peptide variants can be identified, while the quantification mode determines which chromatographic partner ions are searched and quantified. Inconsistent settings would make the workflow biologically and computationally inconsistent.
 > {: .solution}
 {: .question}
 
@@ -415,7 +412,7 @@ For an N15 workflow:
 | `.mzlite` | MzMLToMzLite | Efficient access to the MS spectra used by downstream ProteomIQon tools. |
 | `.db` | PeptideDB | Search database of theoretical peptides, masses, modifications, and protein relationships. |
 | `.psm` | PeptideSpectrumMatching | Candidate peptide-spectrum matches and search scores. |
-| `.qpsm` | PSMStatistics | Statistically evaluated PSMs with model score, q-value, and PEP value. |
+| `.qpsm` | PSMStatistics | Statistically evaluated PSMs with model score, Q-value, and PEP value. |
 | `.quant` | PSMBasedQuantification | Quantified peptide ions based on fitted chromatographic peaks. |
 | `.prot` | ProteinInference | Protein groups and protein-level confidence information. |
 
@@ -424,7 +421,7 @@ For an N15 workflow:
 > Which file would you inspect for each of the following questions?
 >
 > 1. How large is the fitted chromatographic peak area of an identified peptide ion?
-> 2. What is the q-value of a statistically evaluated PSM?
+> 2. What is the Q-value of a statistically evaluated PSM?
 > 3. Which proteins form an inferred protein group?
 > 4. Which target and decoy candidates were initially scored for a spectrum?
 >
@@ -449,4 +446,3 @@ A central lesson is that the intermediate files are not independent outputs: eac
 - [ProteomIQon](https://csbiology.github.io/ProteomIQon/)
 - [ProteomIQon_Repository](https://github.com/CSBiology/ProteomIQon/tree/main)
 - [QualIQon](https://zenodo.org/records/22691077)
-- [Lawrance, Klopcic, & Wasinger, 2005](https://onlinelibrary.wiley.com/doi/pdf/10.1097/01.MIB.0000178264.41722.0f?msockid=2e1ecf716df267212797db846c4a66e9)
