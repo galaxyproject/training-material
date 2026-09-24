@@ -363,7 +363,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
->                - *"Include spacer at the end of the track"*: `2`
+>                - *"Include spacer at the end of the track"*: `1`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bedgraph track`
 >                - *"Plot title"*: `Megakaryocytes Control`
@@ -391,7 +391,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
->                - *"Include spacer at the end of the track"*: `2`
+>                - *"Include spacer at the end of the track"*: `1`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
@@ -407,7 +407,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 
 > <comment-title>pyGenomeTracks Results</comment-title>
 > You should get similar to results to this from pyGenomeTracks:
-> ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
+> ![pyGenomeTracks output](../../images/tal1/pygenometracks_runx1.png "pyGenomeTracks output")
 {: .comment}
 
 > <question-title></question-title>
