@@ -343,7 +343,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >    ```
 >
 > 3. Rename the files
-> 3. {% tool [multiBamSummary](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/4.0.0) %} with the following parameters:
+> 3. {% tool [multiBamSummary](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/4.0.0+galaxy1) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"BAM/CRAM file"*: the 8 imported BAM files
 >    - *"Choose computation mode"*: `Bins`
@@ -391,7 +391,7 @@ Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool
 
 > <hands-on-title>IP strength estimation</hands-on-title>
 >
-> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0) %} with the following parameters:
+> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"BAM/CRAM file"*: `wt_input_rep1` and `wt_H3K4me3_rep1`
 >    - *"Region of the genome to limit the operation to"*: `X`
@@ -461,7 +461,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 
 > <hands-on-title>Coverage file normalization</hands-on-title>
 >
-> 1. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0) %} with the following parameters:
+> 1. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"BAM file"*: `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `25`
 >    - *"Scaling/Normalization method"*: `Normalize coverage to 1x`
@@ -480,7 +480,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    > {: .solution }
 >    {: .question}
 >
-> 2. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0) %} with the same parameters but
+> 2. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/4.0.0+galaxy1) %} with the same parameters but
 >    - *"Coverage file format"*: `bigWig`
 >
 >    > <question-title></question-title>
@@ -513,7 +513,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 
 > <hands-on-title>Generation of input-normalized coverage files</hands-on-title>
 >
-> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0) %} with the following parameters:
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_H3K4me3_rep1.bam`
 >    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `50`
@@ -532,7 +532,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >    > {: .solution }
 >    {: .question}
 >
-> 2. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0) %} with the same parameters but:
+> 2. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy1) %} with the same parameters but:
 >    - *"Coverage file format"*: `bigWig`
 >
 > 3. Use **IGV** {% icon tool %} to inspect the log2 ratio. Or, as an alternative, you can use **JBrowse2** from the tools on Galaxy.
@@ -613,7 +613,7 @@ Since we already generated the required files for the H3K4me3 sample, let's make
 
 > <hands-on-title>Prepare the peaks and data for CTCF</hands-on-title>
 >
-> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0) %} with the following parameters:
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_CTCF_rep1.bam`
 >    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `50`
@@ -655,7 +655,7 @@ Optionally, we can also use **plotProfile** {% icon tool %} to create a profile 
 
 > <hands-on-title>Plot the heatmap</hands-on-title>
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0)%} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1)%} with the following parameters:
 >    - *"Select regions"*:
 >       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
@@ -664,7 +664,7 @@ Optionally, we can also use **plotProfile** {% icon tool %} to create a profile 
 >       - *"The reference point for the plotting"*: `center of region`
 >       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
 >       - *"Distance downstream of the end site of the given regions"*: `3000`
-> 2. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0) %} with the following parameters
+> 2. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
 >       - *"Plot black boxes around the heatmaps"*: `No`
@@ -697,7 +697,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 
 > <hands-on-title>(Optional) Plot the heatmap for all the samples</hands-on-title>
 >
-> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0) %} for each combination input - ChIP data:
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/4.0.0+galaxy1) %} for each combination input - ChIP data:
 >     1. `wt_CTCF_rep1` - `wt_input_rep1` (already done)
 >     2. `wt_H3K4me3_rep1` - `wt_input_rep1` (already done)
 >     3. `wt_H3K27me3_rep1` - `wt_input_rep1`
@@ -715,7 +715,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
 > 6. {% tool [bedtools MergeBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.31.1+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
-> 7. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0)%} with the same parameters but:
+> 7. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1)%} with the same parameters but:
 >    - *"Select regions"*:
 >       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
@@ -724,7 +724,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >       - *"The reference point for the plotting"*: `center of region`
 >       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
 >       - *"Distance downstream of the end site of the given regions"*: `3000`
-> 8. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0) %} with the following parameters
+> 8. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
 >       - *"Plot black boxes around the heatmaps"*: `No`
