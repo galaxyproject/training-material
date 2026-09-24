@@ -135,7 +135,7 @@ We first have to check if our data contains adapter sequences that we have to re
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 2. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
+> 2. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Raw read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %} selected as **Dataset collection**.
 > 3. Inspect the web page output of **Falco** {% icon tool %} for the `Rep1_forward` sample. Check what adapters are found at the end of the reads.
 >
@@ -172,7 +172,7 @@ We first have to check if our data contains adapter sequences that we have to re
 >
 >    As it is tedious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %}.
 >
-> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %} to aggregate the FastQC reports with the following parameters:
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
@@ -195,7 +195,7 @@ The MultiQC report (of FastQC) pointed out that we have in our data some standar
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy1) %} with the following parameters:
+> 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
 >        - *"Select a paired collection"*: `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
@@ -234,7 +234,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 
 > <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
 >        - *"FASTQ Paired Dataset*: select the output of **Trim Galore!** {% icon tool %} *"paired reads"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
@@ -275,7 +275,7 @@ Before we apply any filters on our mapped data, let us check the cumulative enri
 
 > <hands-on-title>Assess Signal CUT&RUN Enrichment using plotFingerprint</hands-on-title>
 >
-> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.4+galaxy0) %} with the following parameters:
+> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >    - {% icon param-collection %} *"BAM/CRAM file"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >
@@ -310,7 +310,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/iuc/ngsutils_bam_filter/ngsutils_bam_filter/0.5.9) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Condition"*
@@ -379,7 +379,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0) %}:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_transpose.png "Metrics of MarkDuplicates")
@@ -407,10 +407,10 @@ too much compared to the diversity of the library you generated. Consequently, l
 
 > <hands-on-title>Check Adapter Removal with Falco</hands-on-title>
 >
-> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Raw read data from your current history"*: select the output of **MarkDuplicates** BAM.
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %} to aggregate the FastQC reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
@@ -721,7 +721,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > <hands-on-title>Generate the matrix</hands-on-title>
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.4+galaxy0) %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1) %} with the following parameters:
 >    - In *"Select regions"*:
 >        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: `True GATA1 CUT and RUN peaks`
@@ -742,7 +742,7 @@ Now we will generate a heatmap. Each line will be a peak. The coverage will be s
 
 > <hands-on-title>Generate the heatmap</hands-on-title>
 >
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `Yes`
