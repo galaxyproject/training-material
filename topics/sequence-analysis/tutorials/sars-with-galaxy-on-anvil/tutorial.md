@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: SARS-CoV-2 Viral Sample Alignment and Variant Visualization
 level: Introductory
-zenodo_link: 'https://doi.org/10.5281/zenodo.8115178'
+zenodo_link: 'https://zenodo.org/record/8115178'
 questions:
 - How do I check my data quality?
 - How do I put together my dataset of fragmented sequences into a full sequence? 

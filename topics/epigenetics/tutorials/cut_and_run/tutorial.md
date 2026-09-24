@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CUT&RUN data analysis
-zenodo_link: https://zenodo.org/record/6823059
+zenodo_link: 'https://zenodo.org/record/6823059'
 answer_histories:
   - label: "Using Separate Preprocessing Tools"
     history: https://usegalaxy.eu/u/videmp/h/cut-run-gtn-answer-key
