@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Indexing and profiling microbes with MetaSBT
-zenodo_link: https://zenodo.org/records/15882806
+zenodo_link: 'https://zenodo.org/record/15882806'
 requirements:
 -
   type: "internal"

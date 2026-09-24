@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Deep Learning (Part 1) - Feedforward neural networks (FNN)
-zenodo_link: https://zenodo.org/record/4660497
+zenodo_link: 'https://zenodo.org/record/4660497'
 questions:
 - What is a feedforward neural network (FNN)?
 - What are some applications of FNN?

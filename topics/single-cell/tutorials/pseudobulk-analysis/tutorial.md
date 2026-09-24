@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Pseudobulk Analysis with Decoupler and EdgeR
 subtopic: exploratory
-zenodo_link: https://zenodo.org/records/15275834
+zenodo_link: 'https://zenodo.org/record/15275834'
 questions:
 - How does pseudobulk analysis help in understanding cell-type-specific gene expression
   changes?
