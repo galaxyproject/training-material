@@ -5,6 +5,10 @@ redirect_from:
 
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
+answer_histories:
+- label: UseGalaxy.eu - Sept 2026
+  history: https://usegalaxy.eu/u/videmp/h/identification-of-the-binding-sites-of-the-t-cell-acute-lymphocytic-leukemia-protein-1-tal1-sept-2026
+  date: 2026-09-24
 edam_ontology: ["topic_3169"]
 tags:
   - ChIP-seq
