@@ -805,11 +805,12 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 
 > <hands-on-title> Copy UMAP embedding </hands-on-title>
 >
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Anndata 5k PBMC magic` (output of **external.pp.magic** {% icon tool %})
->    - *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
->       - *"Keys from embeddings to copy"*: `X_umap`
->       - {% icon param-file %} *"IAnnData objects with embeddings to copy"*: `Anndata 5k PBMC leiden`
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC magic` (output of **external.pp.magic** {% icon tool %})
+>    - *"Function to manipulate the object"*: `Copy embeddings from a different anndata object`
+>    - {% icon param-file %} *"Source anndata object"*: `Anndata 5k PBMC leiden`
+>    - Click on {% icon param-repeat %} *"Insert keys from embeddings to copy"*
+>       - *"Key to be copied from the source anndata"*: `X_umap`
 >
 >    > <comment-title> Annotations to copy </comment-title>
 >    >
@@ -839,7 +840,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > <hands-on-title> Plot marker genes </hands-on-title>
 >
 > 1. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, CD3D, CD8A, CD4, MS4A1, NKG7, CD14, FCER1A`
 >        - {% icon param-toggle %} *"Show edges?"*: `No`
