@@ -77,21 +77,23 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > 3. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
 >
 >    ```
->    https://zenodo.org/records/22918096/files/sample.wiff
+>    https://zenodo.org/records/22934182/files/sample.wiff.tar
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 4. Convert the `wiff` file to `mzML` using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
->    - {% icon param-file %} *"Input unrefined MS data"*: file X that you just uploaded
->    - {% icon param-toggle %} *"Do you agree to the vendor licenses?"*: `Yes`
+> 4. Convert the `sample.wiff.tar` file to `mzML` using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
+>    - {% icon param-file %} *Input unrefined MS data*: the sample.wiff.tar that you just uploaded
+>    - {% icon param-toggle %} *Do you agree to the vendor licenses?*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
 >        - *"Apply Peak Picking"*: `Yes`
 >
-> A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://galaxyproject.org/news/2019-03-24-msconvert/)
+> 5. Rename the output `mzml` file to `sample.mzml`
+>
+> A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://github.com/galaxyproteomics/tools-galaxyp/tree/master/tools/msconvert)
 >
 {: .hands_on}
 
@@ -102,10 +104,9 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
-> 1. Open **ProteomIQon MzMLToMzLite** in Galaxy.
-> 2. Select the `mzML` file as input.
-> 3. Run the tool.
-> 4. Rename the output to `sample.mzlite`.
+> 1. Open {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8 ) %} in Galaxy.
+>    - {% icon param-file %} *Select the `sample.mzML` file as input.*
+> 2. Run the tool and rename the output to `sample.mzlite`.
 >
 {: .hands_on}
 
@@ -121,7 +122,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 {: .question}
 
 # creating a peptide database with PeptideDB
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. The FASTA file that you need can be found here [Chlamy data for download](https://www.uniprot.org/proteomes/UP000006906). It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
 
 > <warning-title>The upstream default currently includes N15</warning-title>
 >
@@ -132,16 +133,20 @@ If you are working with mass spectrometry data and wish to analyse the results f
 
 > <hands-on-title>Create a peptide database</hands-on-title>
 >
-> 1. Open **ProteomIQon PeptideDB** in Galaxy.
-> 2. Select the *C. reinhardtii* FASTA file.
-> 3. Configure the digestion parameters to match the tutorial experiment:
+> 1. download the FASTA file from above [Uniprot]({{ page.uniprot_link}})
+    ```
+    https://www.uniprot.org/proteomes/UP000006906
+    ```
+> 2. Open the {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7) %} in Galaxy.
+>    - {% icon param-file %} *Select the **C. reinhardtii** FASTA file.*
+>    - Configure the digestion parameters to match the tutorial experiment:
 >    - *Protease*: `Trypsin`
 >    - *Minimum missed cleavages*: `0`
 >    - *Maximum missed cleavages*: `2`
 >    - *Isotopic modification*: **[]** for the label-free tutorial
-> 4. Understand the parameters from the parameter file in order to apply the correct settings to GALAXY
-> 5. Run the tool.
-> 6. Rename the generated database to `Chlamy.db`.
+> 3. Understand the parameters from the parameter file in order to apply the correct settings to GALAXY
+> 4. Run the tool.
+> 5. Rename the generated database to `Chlamy.db`.
 >
 {: .hands_on}
 
@@ -179,11 +184,11 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm an
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
-> 1. Open **ProteomIQon PeptideSpectrumMatching** in Galaxy.
+> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} in Galaxy.
 > 2. Select:
->    - the `sample.mzlite` file,
->    - the `Chlamy.db` database,
->    - the PeptideSpectrumMatching parameter settings.
+>    -  {% icon param-file %} *sample.mzlite file*,
+>    -  {% icon param-file %} *Chlamy.db database*,
+>    -  {% icon param-file %} *PeptideSpectrumMatching parameter settings.*
 > 3. Run the tool.
 > 4. Rename the output to `sample.psm`.
 > 5. Inspect the tabular output.
@@ -245,11 +250,11 @@ The default estimated-threshold configuration currently uses a Q-value threshold
 
 > <hands-on-title>Run PSMStatistics</hands-on-title>
 >
-> 1. Open **ProteomIQon PSMStatistics** in Galaxy.
+> 1. Open {% tool [ProteomIQon PSMStatistics](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.8) %} in Galaxy.
 > 2. Select:
->    - `sample.psm`,
->    - `Chlamy.db`,
->    - the PSMStatistics parameters.
+>    - {% icon param-file %} *sample.psm*
+>    - {% icon param-file %} *Chlamy.db*
+>    - {% icon param-file %} *the PSMStatistics parameters.*
 > 3. Run the tool.
 > 4. Rename the main output to `sample.qpsm`.
 > 5. Inspect the output table
@@ -307,12 +312,12 @@ Important parameters to run the tool are described in the [PSMBasedQuantificatio
 Nice! so we know now which files are needed and what the parameters mean. So let's run the tool in GALAXY
 > <hands-on-title>Run PSMBasedQuantification</hands-on-title>
 >
-> 1. Open **ProteomIQon PSMBasedQuantification** in Galaxy.
+> 1. Open {% tool [ProteomIQon PSMBasedQuantification](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8) %} in Galaxy.
 > 2. Select:
->    - `sample.mzlite`,
->    - `sample.qpsm`,
->    - `Chlamy.db`.
-> 3. Set *Perform labeled quantification* to **lable-free**.
+>    - {% icon param-file %} *sample.mzlite*
+>    - {% icon param-file %} *sample.qpsm*
+>    - {% icon param-file %} *Chlamy.db.*
+> 3. Set {% icon param-toggle %} *Perform labeled quantification* to `No`.
 > 4. Keep the tutorial XIC and peak-detection settings.
 > 5. If available in the Galaxy wrapper, enable diagnostic-chart generation for this training run.
 > 6. Run the tool.
@@ -374,10 +379,10 @@ The current parameters are documented in [ProteinInference](https://csbiology.gi
 
 > <hands-on-title>Run ProteinInference</hands-on-title>
 >
-> 1. Open **ProteomIQon ProteinInference** in Galaxy.
+> 1. Open {% tool [ProteomIQon ProteinInference](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.7) %} in Galaxy.
 > 2. Select:
->    - `sample.qpsm`,
->    - `Chlamy.db`.
+>    - {% icon param-file %} *sample.qpsm*
+>    - {% icon param-file %} *Chlamy.db.*
 > 3. Use the tutorial ProteinInference parameter settings.
 > 4. Run the tool.
 > 5. Rename the output to `sample.prot`.

@@ -4,12 +4,16 @@
     "comments": [],
     "creator": [
         {
-            "class": "Organization",
-            "name": "CSBiology",
-            "url": "https://csbiology.github.io/"
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0007-8992-9447",
+            "name": "Pauline Hans"
         }
     ],
+    "doi": [
+        "https://doi.org/10.5281/zenodo.14361117"
+    ],
     "format-version": "0.1",
+    "help": "If something doesn't work, please have a look at our documentation or write an issue here: \nhttps://github.com/CSBiology/ProteomIQon\nor contact us directly: \nhttps://github.com/caroott\nhttps://github.com/paulineHans ",
     "license": "MIT",
     "name": "ProteomIQon Workflow",
     "readme": "\n[![Made with F#](https://img.shields.io/badge/Made%20with-FSharp-rgb(184,69,252).svg)](https://fsharp.org/)\n![GitHub contributors](https://img.shields.io/github/contributors/CSBiology/ProteomIQon)\n\nThe ProteomIQon \n----------------------\n\nThe ProteomIQon is a collection of open source computational proteomics tools to build pipelines for the evaluation of MS derived proteomics data\nwritten in F#. Each tool is described in detail on its corresponding [documentation page](http://csbiology.github.io/ProteomIQon).\n\nThe Core Project\n------------------\n\nThe ProteomIQon core is referenced by all tools. It contains mainly serializable data transfer objects such as tool results and tool parameters, as well as their mapping to domain specific types. This is also the place for any kind of code reusable across tools such as thin wrappers around data readers, logging or CLI formatting. \n\nDocumentation\n-------------\nAn introductory documentation you can find [here](https://csbiology.github.io/ProteomIQon/)\nMore detailed documentation and tutorials for this library are automatically generated (using F# formatting) from the *.fsx and *.md files in the \u2018docs\u2019 folder. If you spot a typo, please submit a pull request!\n\nContributing\n------------\n\nPlease refer to the CSB [Contribution guidelines](.github/CONTRIBUTING.md)\n\nCitation\n----------------\n\nWhen using ProteomIQon in scientifc or commercial releases, please cite us using the following DOI: `10.5281/zenodo.6335068`\n\n[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6335068.svg)](https://doi.org/10.5281/zenodo.6335068)",
@@ -18,14 +22,14 @@
     },
     "steps": {
         "0": {
-            "annotation": "This Tool need's a FASTA File for creating a Peptide Database. ",
+            "annotation": "",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "This Tool need's a FASTA File for creating a Peptide Database. ",
+                    "description": "",
                     "name": "Fasta"
                 }
             ],
@@ -33,41 +37,41 @@
             "name": "Fasta",
             "outputs": [],
             "position": {
-                "left": 6.215496206750525e-05,
-                "top": 150
+                "left": 0,
+                "top": 431.5
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "2df28ced-a76c-4f5d-a51d-1c3ce555f6d7",
+            "uuid": "f728a58d-092e-426f-8fbc-927a41d92622",
             "when": null,
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "The input file need's to be in the .mzML format, to get there convert your raw mass spectrometery files with MSConvert",
+            "annotation": "",
             "content_id": null,
             "errors": null,
             "id": 1,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "The input file need's to be in the .mzML format, to get there convert your raw mass spectrometery files with MSConvert",
-                    "name": "MzML"
+                    "description": "",
+                    "name": "msoutput"
                 }
             ],
-            "label": "MzML",
-            "name": "MzML",
+            "label": "msoutput",
+            "name": "msoutput",
             "outputs": [],
             "position": {
-                "left": 0,
-                "top": 320.0000457480309
+                "left": 0.5,
+                "top": 732.5
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "4921941b-e830-4f56-9d67-b3e0f5075210",
+            "uuid": "32a0a55d-893c-45f3-b7f2-ab536f38e363",
             "when": null,
             "workflow_outputs": []
         },
@@ -92,8 +96,8 @@
                 }
             ],
             "position": {
-                "left": 300.00006215496205,
-                "top": 150
+                "left": 304,
+                "top": 396.5
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7",
@@ -103,22 +107,67 @@
                 "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"FixedMods\": null, \"IsotopicMod\": \"[]\", \"MassMode\": \"Monoisotopic\", \"MaxMass\": \"15000.0\", \"MaxMissedCleavages\": \"2\", \"MaxPepLength\": \"65\", \"MinMissedCleavages\": \"0\", \"MinPepLength\": \"4\", \"ParseProteinIDRegexPattern\": \"id\", \"Protease\": \"Trypsin\", \"VarModThreshold\": \"4\", \"VariableMods\": [\"Acetylation'ProtNTerm'\", \"Oxidation'Met'\"], \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"outputParamfile\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"FixedMods\": null, \"IsotopicMod\": \"N15\", \"MassMode\": \"Monoisotopic\", \"MaxMass\": \"15000.0\", \"MaxMissedCleavages\": \"2\", \"MaxPepLength\": \"65\", \"MinMissedCleavages\": \"0\", \"MinPepLength\": \"4\", \"ParseProteinIDRegexPattern\": \"id\", \"Protease\": \"Trypsin\", \"VarModThreshold\": \"4\", \"VariableMods\": [\"Acetylation'ProtNTerm'\", \"Oxidation'Met'\"], \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"outputParamfile\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "0.0.7",
             "type": "tool",
-            "uuid": "1837eb51-fef2-48c1-be9c-7fb4fd8d856c",
+            "uuid": "ac5a5928-e4fb-404c-aea8-8e19f118ba29",
             "when": null,
             "workflow_outputs": []
         },
         "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8",
             "errors": null,
             "id": 3,
             "input_connections": {
-                "instrumentOutput": {
+                "input": {
                     "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool msconvert",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "left": 302,
+                "top": 677.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8",
+            "tool_shed_repository": {
+                "changeset_revision": "252d185267fc",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": \"true\", \"__current_case__\": 1, \"pick_peaks_ms_levels\": \"1-\", \"pick_peaks_algorithm\": \"vendor\"}, \"precursor_refinement\": {\"use_mzrefinement\": \"false\", \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": \"false\", \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": \"false\", \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": \"false\", \"__current_case__\": 1}, \"ms2deisotope\": false, \"demultiplex\": {\"demultiplex_on\": \"false\", \"__current_case__\": 1}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": false, \"filter_ms_levels\": {\"do_ms_level_filter\": \"false\", \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": false, \"scan_summing\": {\"do_scan_summing\": \"false\", \"__current_case__\": 0}, \"simAsSpectra\": false, \"srmAsSpectra\": false, \"acceptZeroLengthSpectra\": false, \"ignoreUnknownInstrumentError\": false, \"multi_run_output\": {\"do_multi_run_output\": \"false\", \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"license_agreement\": true, \"output_type\": \"mzML\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"32\", \"binary_compression\": \"zlib\", \"gzip_compression\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.0.26121.8",
+            "type": "tool",
+            "uuid": "2f7de01e-2abf-4a5a-a315-47b5506dc170",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "instrumentOutput": {
+                    "id": 3,
                     "output_name": "output"
                 }
             },
@@ -132,8 +181,8 @@
                 }
             ],
             "position": {
-                "left": 300.00006215496205,
-                "top": 320
+                "left": 603,
+                "top": 700
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8",
@@ -147,18 +196,18 @@
             "tool_uuid": null,
             "tool_version": "0.0.8",
             "type": "tool",
-            "uuid": "4fb78e41-a798-453a-a148-0d41812d1fe0",
+            "uuid": "be20c256-d4ec-4e1e-87bb-a1a95c0c3ddf",
             "when": null,
             "workflow_outputs": []
         },
-        "4": {
-            "annotation": "Peptide Spectrum Matching need's the peptide data base (.db) and the .mzlite file. ",
+        "5": {
+            "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7",
             "errors": null,
-            "id": 4,
+            "id": 5,
             "input_connections": {
                 "instrumentOutput": {
-                    "id": 3,
+                    "id": 4,
                     "output_name": "out_mzlite"
                 },
                 "peptideDB": {
@@ -176,8 +225,8 @@
                 }
             ],
             "position": {
-                "left": 650.000062154962,
-                "top": 50
+                "left": 905,
+                "top": 448.5
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7",
@@ -191,22 +240,22 @@
             "tool_uuid": null,
             "tool_version": "0.0.7",
             "type": "tool",
-            "uuid": "882d5d2e-f33b-4bd8-b949-16c348dc36d1",
+            "uuid": "59f71473-5e98-4c94-bf2e-cda4847e12a8",
             "when": null,
             "workflow_outputs": []
         },
-        "5": {
-            "annotation": "Needs .db and .psm (Step 6) ",
+        "6": {
+            "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.8",
             "errors": null,
-            "id": 5,
+            "id": 6,
             "input_connections": {
                 "peptideDB": {
                     "id": 2,
                     "output_name": "out_db"
                 },
                 "psm": {
-                    "id": 4,
+                    "id": 5,
                     "output_name": "out_psm"
                 }
             },
@@ -220,8 +269,8 @@
                 }
             ],
             "position": {
-                "left": 950.000062154962,
-                "top": 120
+                "left": 1187.5,
+                "top": 257
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.8",
@@ -235,18 +284,66 @@
             "tool_uuid": null,
             "tool_version": "0.0.8",
             "type": "tool",
-            "uuid": "4cef572e-4e18-41f4-a688-4eefdd9cd282",
+            "uuid": "92386d01-595f-4e35-bde5-6ac9a3d09766",
             "when": null,
             "workflow_outputs": []
         },
-        "6": {
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "instrumentOutput": {
+                    "id": 4,
+                    "output_name": "out_mzlite"
+                },
+                "peptideDB": {
+                    "id": 2,
+                    "output_name": "out_db"
+                },
+                "scoredPSMs": {
+                    "id": 5,
+                    "output_name": "out_psm"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Proteomiqon PSMBasedQuantification",
+            "outputs": [
+                {
+                    "name": "out_quant",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1433.5,
+                "top": 587.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8",
+            "tool_shed_repository": {
+                "changeset_revision": "4abcc674fc0b",
+                "name": "proteomiqon_psmbasedquantification",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"BaseLineCorrectionCond\": {\"BaseLineCorrectionEnabled\": \"yes\", \"__current_case__\": 0, \"MaxIterations\": \"10\", \"Lambda\": \"6\", \"P\": \"0.05\"}, \"PerformLabeledQuantification\": true, \"XicExtraction\": {\"ScanTimeWindow\": \"2.0\", \"MzWindow_DaTypeCond\": {\"MzWindow_DaType\": \"Fixed\", \"__current_case__\": 0, \"MzWindow_Da\": \"0.07\"}, \"XicProcessing\": {\"ProcessingTypeCond\": {\"ProcessingType\": \"Wavelet\", \"__current_case__\": 1, \"BorderPadding\": \"2\", \"BorderPadMethod\": \"Random\", \"InternalPaddingMethod\": \"LinearInterpolation\", \"HugeGapPaddingMethod\": \"Zero\", \"HugeGapPaddingDistance\": \"100.0\", \"MinPeakDistance\": null, \"MinPeakLength\": \"0.1\", \"MaxPeakLength\": \"1.5\", \"NoiseQuantile\": \"0.01\", \"MinSNR\": \"0.01\"}}, \"TopKPSMs\": \"3\"}, \"instrumentOutput\": {\"__class__\": \"ConnectedValue\"}, \"outputParamfile\": false, \"peptideDB\": {\"__class__\": \"ConnectedValue\"}, \"scoredPSMs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.0.8",
+            "type": "tool",
+            "uuid": "fdc9921d-fe7c-4c3f-9bbb-3184723c1723",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.7",
             "errors": null,
-            "id": 6,
+            "id": 8,
             "input_connections": {
                 "PSMInputModeCond|scoredPSMs": {
-                    "id": 5,
+                    "id": 6,
                     "output_name": "out_qpsm"
                 },
                 "peptideDB": {
@@ -269,7 +366,7 @@
                 }
             ],
             "position": {
-                "left": 1250.000062154962,
+                "left": 1479.5,
                 "top": 0
             },
             "post_job_actions": {},
@@ -284,60 +381,16 @@
             "tool_uuid": null,
             "tool_version": "0.0.7",
             "type": "tool",
-            "uuid": "8e4363f3-321b-46ba-8934-3e639ac9ab15",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "7": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8",
-            "errors": null,
-            "id": 7,
-            "input_connections": {
-                "instrumentOutput": {
-                    "id": 3,
-                    "output_name": "out_mzlite"
-                },
-                "peptideDB": {
-                    "id": 2,
-                    "output_name": "out_db"
-                },
-                "scoredPSMs": {
-                    "id": 5,
-                    "output_name": "out_qpsm"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Proteomiqon PSMBasedQuantification",
-            "outputs": [
-                {
-                    "name": "out_quant",
-                    "type": "tabular"
-                }
-            ],
-            "position": {
-                "left": 1250.000062154962,
-                "top": 320
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8",
-            "tool_shed_repository": {
-                "changeset_revision": "4abcc674fc0b",
-                "name": "proteomiqon_psmbasedquantification",
-                "owner": "galaxyp",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"BaseLineCorrectionCond\": {\"BaseLineCorrectionEnabled\": \"yes\", \"__current_case__\": 0, \"MaxIterations\": \"10\", \"Lambda\": \"6\", \"P\": \"0.05\"}, \"PerformLabeledQuantification\": false, \"XicExtraction\": {\"ScanTimeWindow\": \"2.0\", \"MzWindow_DaTypeCond\": {\"MzWindow_DaType\": \"Fixed\", \"__current_case__\": 0, \"MzWindow_Da\": \"0.07\"}, \"XicProcessing\": {\"ProcessingTypeCond\": {\"ProcessingType\": \"Wavelet\", \"__current_case__\": 1, \"BorderPadding\": \"2\", \"BorderPadMethod\": \"Random\", \"InternalPaddingMethod\": \"LinearInterpolation\", \"HugeGapPaddingMethod\": \"Zero\", \"HugeGapPaddingDistance\": \"100.0\", \"MinPeakDistance\": null, \"MinPeakLength\": \"0.1\", \"MaxPeakLength\": \"1.5\", \"NoiseQuantile\": \"0.01\", \"MinSNR\": \"0.01\"}}, \"TopKPSMs\": \"3\"}, \"instrumentOutput\": {\"__class__\": \"ConnectedValue\"}, \"outputParamfile\": false, \"peptideDB\": {\"__class__\": \"ConnectedValue\"}, \"scoredPSMs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_uuid": null,
-            "tool_version": "0.0.8",
-            "type": "tool",
-            "uuid": "0e4507fc-391d-4413-bd25-10ad73338b25",
+            "uuid": "c704d0b4-f6ff-487e-bfb4-01c604de1c55",
             "when": null,
             "workflow_outputs": []
         }
     },
-    "tags": [],
-    "uuid": "16d27802-d243-4981-8595-ac84a4d4df2b",
-    "version": 1
+    "tags": [
+        "Proteomics",
+        "MassSpectrometry",
+        "Pipeline"
+    ],
+    "uuid": "a22617de-eebf-4461-a344-c88529de9d1c",
+    "version": 6
 }
