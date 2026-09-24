@@ -20,12 +20,7 @@ objectives:
   - Identify TAL1 binding sites with MACS2
   - Determine unique/common TAL1 binding sites from G1E and Megakaryocytes
   - Identify unique/common TAL1 peaks occupying gene promoters
-  - Visually inspect TAL1 peaks with Trackster
-requirements:
-  -
-    type: "external"
-    title: "Trackster"
-    link: "https://wiki.galaxyproject.org/Learn/Visualization"
+  - Visually inspect TAL1 peaks with pyGenomeTracks
 time_estimation: "3h"
 key_points:
   - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
@@ -38,6 +33,7 @@ contributions:
   - vivekbhr
   - joachimwolff
   - erxleben
+  - pavanvidem
   funding:
   - deNBI
 ---
@@ -331,46 +327,113 @@ MACS2 generates bedGraph and BED files that we will use to visualize read abunda
 
 We will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
 
-> <hands-on-title>Inspecting peaks and aligned data with Trackster</hands-on-title>
+## Visualise Regions with pyGenomeTracks
+
+In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**.
+
+> <hands-on-title>Task description</hands-on-title>
 >
-> 1. Import gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6) %} with the following parameters:
+>    - *"Region of the genome to limit the operation"*: `chr16:92501466-92926074` (the location of _Runx1_ gene)
+>    - In *"Include tracks in your plot"*:
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: `G1E Control`
+>                - {% icon param-file %} *"Track file(s) bedgraph format"*: Select the output of  **MACS2** {% icon tool %} (Bedgraph Control)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
+>                - *"Maximum value"*: `100`
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: `G1E Treatment`
+>                - {% icon param-file %} *"Track file(s) bedgraph format"*: Select the output of  **MACS2** {% icon tool %} (Bedgraph Treatment)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
+>                - *"Maximum value"*: `100`
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `NarrowPeak track`
+>                - *"Plot title"*: `G1E narrow peaks`
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the output of  **MACS2** {% icon tool %} (narrow Peaks)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"display to use"*: `box: Draw a box`
+>                - *"Plot labels (name, p-val, q-val)"*: `No`
+>                - *"Include spacer at the end of the track"*: `2`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: `Megakaryocytes Control`
+>                - {% icon param-file %} *"Track file(s) bedgraph format"*: Select the output of  **MACS2** {% icon tool %} (Bedgraph Control)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
+>                - *"Maximum value"*: `100`
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: `Megakaryocytes Treatment`
+>                - {% icon param-file %} *"Track file(s) bedgraph format"*: Select the output of  **MACS2** {% icon tool %} (Bedgraph Treatment)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
+>                - *"Maximum value"*: `100`
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `NarrowPeak track`
+>                - *"Plot title"*: `Megakaryocytes narrow peaks`
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the output of  **MACS2** {% icon tool %} (narrow Peaks)
+>                - *"Color of track"*: Select the color of your choice
+>                - *"display to use"*: `box: Draw a box`
+>                - *"Plot labels (name, p-val, q-val)"*: `No`
+>                - *"Include spacer at the end of the track"*: `2`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `RefSeq_gene_annotations_mm10.bed`
+>                - *"Color of track"*: Select the color of your choice
+>                - *"height"*: `3`
+>                - *"Plot labels"*: `yes`
+>                    - *"Put all labels inside the plotted region"*: `Yes`
+>                    - *"Allow to put labels in the right margin"*: `Yes`
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the output.
 >
-> 2. Click "Visualize" on the page header and select "Create Visualization"
+{: .hands_on}
+
+> <comment-title>pyGenomeTracks Results</comment-title>
+> You should get similar to results to this from pyGenomeTracks:
+> ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
+{: .comment}
+
+> <question-title></question-title>
+> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2.
 >
->    ![vizbutton](../../images/tal1/create-visualization.png "Trackster can be accessed from the Visualize button at the top of the screen.")
+> 1. How many TSS are accessible in the sample in the displayed region?
+> 2. How many CTCF binding loci are accessible?
+> 3. Can you spot peaks with no TSS and no CTCF peak?
 >
-> 3. Set up Trackster
->    - Select Trackster
->    - *"Select a dataset to visualize"*: Select the imported gene annotation file (**Tip**: if this file doesn't appear as an option, go back to the history and edit the attribute Database/Build to be `mm10`)
->    - Click "Create Visualization"
+> > <solution-title></solution-title>
+> >
+> > 1. In total, we can see 3 TSS for 6 transcripts for 2 genes. The TSS of RAC2 corresponds to an ATAC-Seq peak whereas there is no significant coverage on both TSS of SSTR3.
+> >
+> > 2. Only the first peak on the left overlaps with a CTCF binding site.
+> >
+> > 3. Amongst the 4 peaks in this region, the 2 in the middle do not correspond to CTCF peaks or TSS.
+> >
+> {: .solution}
 >
-> 4. Configure the visualization
->    - Select "View in new visualization"
->    - *"Browser name"*: Enter a name for your visualization
->    - *"Reference genome build (dbkey):"*: `mm10`
->    - Click "Create"
->
->    ![tracksterdb](../../images/tal1/configure-visualization.png "Assign session name and reference genome.")
->
-> 5. Add tracks to Trackster
->    - Click the "Add tracks" (plus sign) button at the top right
->    - Using the search bar, search for and add the following tracks from MACS2 callpeak output to your view
->       - G1E Treatment bedGraph
->       - G1E Control bedGraph
->       - G1E narrow peaks
->       - Megakaryocytes Treatment bedGraph
->       - Megakaryocytes Control bedGraph
->       - Megakaryocytes narrow peaks
->    - Rename the tracks, if desired
->    - Play around with the track configurations, for example the color or the display mode
->
->    ![tracksterselect](../../images/tal1/add-tracks.png "Select data from the history to view in Trackster.")
->
+{: .question}
+
 > 6. Navigate to the *Runx1* locus (`chr16:92501466-92926074`) to inspect the aligned reads and TAL1 peaks.
 >
 >    > <question-title></question-title>
 >    >
->    > 1. What do you see at the *Runx1* locus in Trackster?
+>    > 1. What do you see at the *Runx1* locus in pyGenomeTracks?
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. Directly upstream of the shorter *Runx1* gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.
