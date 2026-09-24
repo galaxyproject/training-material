@@ -1,52 +1,82 @@
----
-- doc: Test sample data for the workflow
+- doc: Test outline for Identification-of-the-binding-sites-of-the-T-cell-acute-lymphocytic-leukemia-protein-1-(TAL1)
   job:
-    G1E_input_R1_downsampled_SRR507859.fastqsanger:
-      class: File
-      location: https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
-      filetype: fastqsanger
-    G1E_input_R2_downsampled_SRR507860.fastqsanger:
-      class: File
-      location: https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
-      filetype: fastqsanger
     G1E_Tal1_R1_downsampled_SRR492444.fastqsanger:
       class: File
       location: https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+      filetype: fastqsanger
+    G1E_input_R1_downsampled_SRR507859.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
       filetype: fastqsanger
     G1E_Tal1_R2_downsampled_SRR492445.fastqsanger:
       class: File
       location: https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
       filetype: fastqsanger
-    Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger:
+    G1E_input_R2_downsampled_SRR507860.fastqsanger:
       class: File
-      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
-      filetype: fastqsanger
-    Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger:
-      class: File
-      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+      location: https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
       filetype: fastqsanger
     Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger:
       class: File
       location: https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
       filetype: fastqsanger
+    Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+      filetype: fastqsanger
     Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger:
       class: File
       location: https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+      filetype: fastqsanger
+    Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
       filetype: fastqsanger
     RefSeq_gene_annotations_mm10.bed:
       class: File
       location: https://zenodo.org/record/197100/files/RefSeq_gene_annotations_mm10.bed
       filetype: bed
   outputs:
-    output_overlapping_peaks:
+    pyGenomeTracks_plot:
       asserts:
-        has_text:
-          text: 'chr16'
-    output_g1e_peaks:
+        has_image_width: 
+          value: 1133
+        has_image_height: 
+          value: 738
+        has_size:
+          value: 127253
+          delta: 2000
+    heatmap_megakaryocytes:
       asserts:
-        has_text:
-          text: 'chr16'
-    output_megakaryocyte_peaks:
+        has_image_width: 
+          value: 1259
+        has_image_height: 
+          value: 2559
+        has_size:
+          value: 340377
+          delta: 3000
+    heatmap_G1E:
       asserts:
-        has_text:
-          text: 'chr16'
+        has_image_width: 
+          value: 1259
+        has_image_height: 
+          value: 2559
+        has_size:
+          value: 635901
+          delta: 6000
+    peaks_in_both_G1E_and_megakaryocytes:
+      asserts:
+        has_text_matching:
+          expression: 'chr11\t32245633\t32246026'
+          expression: 'chrX\t7971282\t7971695'
+    peaks_in_only_G1E:
+      asserts:
+        has_text_matching:
+          expression: 'chr1\t161099688\t161100164'
+          expression: 'chrX\t7993211\t7993820'
+      path: test-data/peaks_in_only_G1E.bed
+    peaks_in_only_megakaryocytes:
+      asserts:
+        has_text_matching:
+          expression: 'chr10\t43588297\t43588478'
+          expression: 'chrX\t8000059\t8000242'
