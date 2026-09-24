@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Metatranscriptomics analysis using microbiome RNA-seq data
-zenodo_link: https://zenodo.org/record/4776250
+zenodo_link: 'https://zenodo.org/record/4776250'
 questions:
 - How to analyze metatranscriptomics data?
 - What information can be extracted of metatranscriptomics data?
