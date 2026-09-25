@@ -310,7 +310,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/iuc/ngsutils_bam_filter/ngsutils_bam_filter/0.5.9) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](ttoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Condition"*
@@ -379,7 +379,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0) %}:
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy1) %}:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_transpose.png "Metrics of MarkDuplicates")
