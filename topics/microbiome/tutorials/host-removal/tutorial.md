@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Remove contamination and host reads
-zenodo_link: https://zenodo.org/records/17829290
+zenodo_link: 'https://zenodo.org/record/17829290'
 level: Introductory
 questions:
 - What preprocessing steps are required to obtain cleaned reads for downstream analysis?

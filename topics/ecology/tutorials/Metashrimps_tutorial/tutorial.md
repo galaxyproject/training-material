@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Creating FAIR Quality assessment reports and draft of Data Papers from EML
   metadata with MetaShRIMPS
-zenodo_link: https://doi.org/10.5281/zenodo.8130567
+zenodo_link: 'https://zenodo.org/record/8130567'
 questions:
 - How to improve the FAIR quality of an EML metadata ?
 - How to use metadata for machine actionnable processes ?
