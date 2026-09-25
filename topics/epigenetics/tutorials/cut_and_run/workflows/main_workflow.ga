@@ -17,7 +17,7 @@
     "format-version": "0.1",
     "license": "MIT",
     "name": "CUT&amp;RUN",
-    "readme": "This workflow runs the entire CUT&RUN analysis, from raw FASTQ files to motif analysis, as described in the [GTN tutorial](https://gxy.io/GTN:T00424). This workflow has been implemented to analyze 2 samples (or 2 replicates, in this tutorial) aligned on the canonical version of hg38 (human genome). \n\n**Inputs**\n  - Collection containing list of 2 paired FASTQ files genereated from the CUT&RUN experiment\n  - A BED file containing predicted peaks from previous ChIP-seq experiments\n\n**Outputs**\n  - Heatmap showing the overall peak structure of each of the input CUT&RUN samples or replicates\n  - A detailed HTML report of sequence motifs of the transcription factor binding",
+    "readme": "This workflow runs the entire CUT&RUN analysis, from raw FASTQ files to motif analysis, as described in the [GTN tutorial](https://gxy.io/GTN:T00424). This workflow has been implemented to analyze 2 samples (or 2 replicates, in this tutorial). \n\n**Inputs**\n  - Collection containing list of 2 paired FASTQ files genereated from the CUT&RUN experiment\n  - A BED file containing predicted peaks from previous ChIP-seq experiments\n\n**Outputs**\n  - Heatmap showing the overall peak structure of each of the input CUT&RUN samples or replicates\n  - A detailed HTML report of sequence motifs of the transcription factor binding",
     "report": {
         "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
     },
@@ -311,7 +311,7 @@
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "bed4b253dc69",
+                "changeset_revision": "c0893efd5a8f",
                 "name": "deeptools_plot_fingerprint",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
@@ -1180,7 +1180,7 @@
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "d9ccce056684",
+                "changeset_revision": "1030f37ff2f0",
                 "name": "deeptools_compute_matrix",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
@@ -1204,7 +1204,12 @@
                     "output_name": "outFileName"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool plotHeatmap",
+                    "name": "matrixFile"
+                }
+            ],
             "label": null,
             "name": "plotHeatmap",
             "outputs": [
@@ -1220,12 +1225,12 @@
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "037a701703b2",
+                "changeset_revision": "7fdfac4711b2",
                 "name": "deeptools_plot_heatmap",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"xAxisLabel\": \"distance from peak center (bp)\", \"yAxisLabel\": \"GATA1 peaks\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"boxAroundHeatmaps\": true, \"whatToShow\": \"plot, heatmap and colorbar\", \"plotTitle\": \"\", \"perGroup\": false, \"samplesLabel\": null, \"startLabel\": \"TSS\", \"endLabel\": \"TES\", \"refPointLabel\": \"peak center\", \"regionsLabel\": \"GATA1_peaks\", \"yMin\": null, \"yMax\": null, \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"ggplot\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"yes\", \"__current_case__\": 1}, \"clusterUsingSamples\": null}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"sortRegions\": \"descend\", \"sortUsing\": \"mean\", \"sortUsingSamples\": null, \"linesAtTickMarks\": false, \"averageTypeSummaryPlot\": \"mean\", \"plotType\": \"lines\", \"missingDataColor\": \"black\", \"colorMapRepeat\": [], \"alpha\": \"1.0\", \"colorList\": \"\", \"zMin\": \"\", \"zMax\": \"\", \"xAxisLabel\": \"distance from peak center (bp)\", \"yAxisLabel\": \"GATA1 peaks\", \"heatmapWidth\": \"7.5\", \"heatmapHeight\": \"25.0\", \"boxAroundHeatmaps\": true, \"whatToShow\": \"plot, heatmap and colorbar\", \"plotTitle\": \"\", \"perGroup\": false, \"samplesLabel\": null, \"startLabel\": \"TSS\", \"endLabel\": \"TES\", \"refPointLabel\": \"peak center\", \"regionsLabel\": \"GATA1_peaks\", \"yMin\": null, \"yMax\": null, \"legendLocation\": \"best\", \"labelRotation\": \"0\", \"ggplot\": false, \"used_multiple_regions\": {\"used_multiple_regions_options\": \"yes\", \"__current_case__\": 1}, \"clusterUsingSamples\": null}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"RuntimeValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "4.0.0+galaxy1",
             "type": "tool",
@@ -1244,6 +1249,6 @@
         "epigenetics",
         "cut&run"
     ],
-    "uuid": "974fe3ff-9a0c-4ae9-ac1c-33130802e3ef",
-    "version": 13
+    "uuid": "f0926e80-3870-4062-b171-dec17d4d82ac",
+    "version": 16
 }

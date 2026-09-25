@@ -5,7 +5,7 @@ title: CUT&RUN data analysis
 zenodo_link: https://zenodo.org/record/6823059
 answer_histories:
   - label: "Usegalaxy.eu 21-09-2026"
-    history: https://usegalaxy.eu/u/videmp/h/cut-and-run-gtn-answer-key-21-09-2026
+    history: https://usegalaxy.eu/u/videmp/h/cut-and-run-gtn-answer-key-25-09-2026
   - label: "Usegalaxy.eu 19-03-2025"
     history: https://usegalaxy.eu/u/videmp/h/cut-run-gtn-answer-key
 questions:
@@ -748,7 +748,7 @@ Now we will generate a heatmap. Each line will be a peak. The coverage will be s
 >    - *"Show advanced options"*: `Yes`
 >    - *"The x-axis label”*: `distance from peak center (bp)`
 >    - *"The y-axis label for the top panel"* : `GATA1 peaks`
->    - *"Plot black boxes around the heatmaps"*: `No`
+>    - *"Plot black boxes around the heatmaps"*: `Yes`
 >    - *"Reference point label”*: `peak center`
 >    - *"Labels for the regions plotted in the heatmap"*: `GATA1_peaks`
 {: .hands_on}
