@@ -7,7 +7,7 @@ title: "Formation of the Super-Structures on the Inactive X"
 zenodo_link: "https://zenodo.org/record/1324070"
 answer_histories:
 - label: UseGalaxy.eu
-  history: https://usegalaxy.eu/u/videmp/h/gtn-chip-seq-formation-of-super-structures-on-xi
+  history: https://usegalaxy.eu/u/videmp/h/gtn-formation-of-super-structures-on-xi-sept-2026
 tags:
     - ChIP-seq
     - epigenetics
@@ -359,7 +359,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >
 >    Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.
 >
-> 4. {% tool [plotCorrelation](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/4.0.0) %} with the following parameters:
+> 4. {% tool [plotCorrelation](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"Matrix file from the multiBamSummary tool"*: `correlation matrix`(output of **multiBamSummary** {% icon tool %})
 >    - *"Correlation method"*: `Pearson`
 >
@@ -727,7 +727,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 > 8. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
->       - *"Plot black boxes around the heatmaps"*: `No`
+>       - *"Plot black boxes around the heatmaps"*: `Yes`
 >       - *"Reference point label"*: select the right label
 >       - *"Did you compute the matrix with more than one groups of regions?"*: `No, I used only one group`
 >           - *"Clustering algorithm"*: `Kmeans clustering`
