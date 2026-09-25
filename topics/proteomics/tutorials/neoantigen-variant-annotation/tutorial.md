@@ -5,7 +5,7 @@ redirect_from:
   - /topics/proteomics/tutorials/neoantigen-5-variant-annotation/tutorial.html
 
 title: "Neoantigen 4: Variant Annotation"
-zenodo_link: 'https://zenodo.org/records/14375693'
+zenodo_link: 'https://zenodo.org/record/14375693'
 questions:
 - How can neoantigens be identified in cancer genomes?
 - What role do neoantigens play in personalized immunotherapy?

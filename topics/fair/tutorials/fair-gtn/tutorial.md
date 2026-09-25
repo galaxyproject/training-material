@@ -1,6 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: FAIR Galaxy Training Material
+redirect_from:
+  - /topics/contributing/tutorials/fair-gtn/tutorial
+
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
   GTN: Galaxy Training Network

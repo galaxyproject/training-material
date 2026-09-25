@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Quality Control
-zenodo_link: https://zenodo.org/records/61771
+zenodo_link: 'https://zenodo.org/record/61771'
 questions:
 - How to perform quality control of NGS raw data?
 - What are the quality parameters to check for a dataset?
