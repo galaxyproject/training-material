@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Peptide and Protein ID using OpenMS tools"
-zenodo_link: "https://zenodo.org/record/546301"
+zenodo_link: 'https://zenodo.org/record/546301'
 level: Advanced
 questions:
   - "How to convert LC-MS/MS raw files?"

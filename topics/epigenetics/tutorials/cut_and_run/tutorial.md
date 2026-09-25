@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CUT&RUN data analysis
-zenodo_link: https://zenodo.org/record/6823059
+zenodo_link: 'https://zenodo.org/record/6823059'
 answer_histories:
   - label: "Usegalaxy.eu 21-09-2026"
     history: https://usegalaxy.eu/u/videmp/h/cut-and-run-gtn-answer-key-25-09-2026
