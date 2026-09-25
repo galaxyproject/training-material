@@ -241,7 +241,7 @@ The first step is to check the quality of the reads and the presence of the Next
 
 > <comment-title>falco Results</comment-title>
 > This is what you should expect from the **Adapter Content** section:
-> ![falco screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "falco screenshot on the Adapter Content section")
+> ![falco screenshot of the Adapter Content section](../../images/atac-seq/falco_adapter_content_before_cutadapt.png "falco screenshot on the Adapter Content section")
 {: .comment}
 
 The falco web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
@@ -319,7 +319,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > <comment-title>falco Results</comment-title>
 > Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
-> ![falco screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "falco screenshot on the adapter content section after cutadapt")
+> ![falco screenshot on the adapter content section after cutadapt](../../images/atac-seq/falco_adapter_content_after_cutadapt.png "falco screenshot on the adapter content section after cutadapt")
 > However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 {: .comment}
 
@@ -835,7 +835,7 @@ As CTCF creates accessible regions, a region containing a peak with no correspon
 In this training you have learned the general principles of ATAC-Seq data analysis. ATAC-Seq
 is a method to investigate the chromatin accessibility and the genome is treated with
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
-inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **FastQC**, shows a warning in these areas. We mapped the reads
+inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **Falco**, shows a warning in these areas. We mapped the reads
 with **Bowtie2**, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with **MACS2**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
