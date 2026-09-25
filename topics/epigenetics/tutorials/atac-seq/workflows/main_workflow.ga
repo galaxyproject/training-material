@@ -11,7 +11,7 @@
     ],
     "format-version": "0.1",
     "license": "CC-BY-4.0",
-    "name": "ATAC-seq GTM",
+    "name": "ATAC-seq GTN",
     "readme": "Bulk ATAC-seq analysis workflow used in https://gxy.io/GTN:T00137. It works with a subsampled Human hg38, chr22 dataset. \n\n**Inputs**\n- Paired collection of an ATAC FASTQ file, subsampled to only reads from chr22\n- DNA binding sitess of CTCF as narrowPeak file, downloaded from ENCODE\n- Gene annotation on chr22 extracted from UCSC table browser.\n\n**Outputs**\n- Predicted open chromatin regions\n- A heatmaps of those regions on chr22 around TSS and known CTCF peaks\n- Visual representation known CTCF peaks over predicted open chromatin regions on a genome browser      ",
     "report": {
         "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
@@ -40,7 +40,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null, \"column_definitions\": null}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "bc757f9d-1170-4c95-ac5c-480470121791",
+            "uuid": "6ca86cb5-e01d-4e61-90a4-f1eadf68441a",
             "when": null,
             "workflow_outputs": []
         },
@@ -64,10 +64,10 @@
                 "top": 752.8176626487575
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_state": "{\"optional\": false, \"format\": [\"encodepeak\"], \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "57b68fc1-a0ee-4e9b-91cf-a8671fac5820",
+            "uuid": "f4ef88e9-f781-45f0-a738-2b5c3649fdc5",
             "when": null,
             "workflow_outputs": []
         },
@@ -91,10 +91,10 @@
                 "top": 1106.6870788686779
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_state": "{\"optional\": false, \"format\": [\"bed\"], \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "86a3282b-56ae-496f-9d05-ff05345e9ff7",
+            "uuid": "6b0db2d6-e970-48f1-9876-30249d3028ed",
             "when": null,
             "workflow_outputs": []
         },
@@ -158,13 +158,13 @@
             "tool_uuid": null,
             "tool_version": "5.2+galaxy2",
             "type": "tool",
-            "uuid": "22a4bcc3-0958-4fbf-a5fb-85f58ba6f22e",
+            "uuid": "f554bd12-8724-4248-a175-1cd55a0fe64a",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "report",
                     "output_name": "report",
-                    "uuid": "d197ec94-1dec-41f4-b70f-7b350a07bdf7"
+                    "uuid": "3c22eaf4-3d1a-4eab-880f-680d38df77c3"
                 }
             ]
         },
@@ -198,7 +198,7 @@
             "tool_uuid": null,
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "3ca7a2d9-0f6a-4fd8-afaf-7da02f511cc7",
+            "uuid": "6fd05935-5581-4785-afd2-a5c157502cfe",
             "when": null,
             "workflow_outputs": []
         },
@@ -232,7 +232,7 @@
             "tool_uuid": null,
             "tool_version": "1.1.1",
             "type": "tool",
-            "uuid": "1b289582-5610-48cf-8800-4d2b9b55cdaa",
+            "uuid": "38d04f4e-33af-4b0f-85de-dbae09887a99",
             "when": null,
             "workflow_outputs": []
         },
@@ -292,17 +292,17 @@
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"--very-sensitive\"}, \"library\": {\"type\": \"paired_collection\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false, \"paired_options\": {\"paired_options_selector\": \"no\", \"__current_case__\": 1}}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"hg38canon\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"--very-sensitive\"}, \"library\": {\"type\": \"paired_collection\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false, \"paired_options\": {\"paired_options_selector\": \"yes\", \"__current_case__\": 0, \"I\": \"0\", \"X\": \"1000\", \"fr_rf_ff\": \"--fr\", \"no_mixed\": false, \"no_discordant\": false, \"dovetail\": true, \"no_contain\": false, \"no_overlap\": false}}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"hg38canon\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "2.5.5+galaxy0",
             "type": "tool",
-            "uuid": "d39ca9a5-e829-4f1b-adf8-c4e1a6facb4e",
+            "uuid": "2d7fa0f1-e43f-47ae-9757-7191ca27c9b9",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "mapping_stats",
                     "output_name": "mapping_stats",
-                    "uuid": "14815d0e-72dc-4236-926d-631f519f665f"
+                    "uuid": "25c7e8d9-0d98-46ce-803f-9c6b049c20f6"
                 }
             ]
         },
@@ -336,13 +336,13 @@
             "tool_uuid": null,
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "816e7a96-2371-4fa6-a82a-75be508a21b1",
+            "uuid": "a8fe4e76-aa28-484e-967f-1680484db54e",
             "when": null,
             "workflow_outputs": []
         },
         "8": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0",
             "errors": null,
             "id": 8,
             "input_connections": {
@@ -353,20 +353,20 @@
             },
             "inputs": [
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "adapters"
                 },
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "contaminants"
                 },
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "limits"
                 }
             ],
             "label": null,
-            "name": "FastQC",
+            "name": "Falco",
             "outputs": [
                 {
                     "name": "html_file",
@@ -378,35 +378,22 @@
                 }
             ],
             "position": {
-                "left": 524.5104602390693,
-                "top": 809.7770847332921
+                "left": 550.9938860393895,
+                "top": 808.4844560971551
             },
-            "post_job_actions": {
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "text_file"
-                },
-                "RenameDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "newname": "FastQC of #{input_file}"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "html_file"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1",
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "2c64fded1286",
-                "name": "fastqc",
-                "owner": "devteam",
+                "changeset_revision": "219ffa24f789",
+                "name": "falco",
+                "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"bisulfite\": false, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"generate_summary\": false, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"nogroup\": false, \"reverse_complement\": false, \"subsample\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.74+galaxy1",
+            "tool_version": "1.3.2+galaxy0",
             "type": "tool",
-            "uuid": "913d6ce5-e578-4b4c-8c84-6b9693185df3",
+            "uuid": "8156638e-5f2d-435e-8625-b5568ab5fd8a",
             "when": null,
             "workflow_outputs": []
         },
@@ -440,8 +427,8 @@
                 }
             ],
             "position": {
-                "left": 2714.6883830154084,
-                "top": 1190.2812126608917
+                "left": 2714.6873939530356,
+                "top": 1189.6996998637035
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.31.1+galaxy0",
@@ -455,13 +442,13 @@
             "tool_uuid": null,
             "tool_version": "2.31.1+galaxy0",
             "type": "tool",
-            "uuid": "74b6cc89-fd88-44b6-b1dd-458a133e5b18",
+            "uuid": "7a13f031-98df-49d9-8de4-574d9b77da76",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "CTCF Peaks on chr22",
                     "output_name": "output",
-                    "uuid": "43c72733-e244-407c-8756-6bc01d4b45a0"
+                    "uuid": "04a45b27-0a15-44be-a272-b169193d1fc0"
                 }
             ]
         },
@@ -509,17 +496,17 @@
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"conditions\": [{\"__index__\": 0, \"filters\": [{\"__index__\": 0, \"bam_property\": {\"bam_property_selector\": \"mapQuality\", \"__current_case__\": 14, \"bam_property_value\": \">=30\"}}, {\"__index__\": 1, \"bam_property\": {\"bam_property_selector\": \"isProperPair\", \"__current_case__\": 11, \"bam_property_value\": true}}, {\"__index__\": 2, \"bam_property\": {\"bam_property_selector\": \"reference\", \"__current_case__\": 20, \"bam_property_value\": \"!chrM\"}}]}], \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"rule_configuration\": {\"rules_selector\": \"true\", \"__current_case__\": 1, \"rules\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"conditions\": [{\"__index__\": 0, \"filters\": [{\"__index__\": 0, \"bam_property\": {\"bam_property_selector\": \"mapQuality\", \"__current_case__\": 14, \"bam_property_value\": \">=30\"}}, {\"__index__\": 1, \"bam_property\": {\"bam_property_selector\": \"isProperPair\", \"__current_case__\": 11, \"bam_property_value\": true}}, {\"__index__\": 2, \"bam_property\": {\"bam_property_selector\": \"reference\", \"__current_case__\": 20, \"bam_property_value\": \"!chrM\"}}]}], \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"rule_configuration\": {\"rules_selector\": \"false\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "2.5.3+galaxy0",
             "type": "tool",
-            "uuid": "ca04a8cc-d1e2-469d-9af3-47323b5ca430",
+            "uuid": "2b72f7f5-4cdb-4871-99db-d3cf4d3d4b31",
             "when": null,
             "workflow_outputs": []
         },
         "11": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0",
             "errors": null,
             "id": 11,
             "input_connections": {
@@ -530,20 +517,20 @@
             },
             "inputs": [
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "adapters"
                 },
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "contaminants"
                 },
                 {
-                    "description": "runtime parameter for tool FastQC",
+                    "description": "runtime parameter for tool Falco",
                     "name": "limits"
                 }
             ],
             "label": null,
-            "name": "FastQC",
+            "name": "Falco",
             "outputs": [
                 {
                     "name": "html_file",
@@ -555,35 +542,22 @@
                 }
             ],
             "position": {
-                "left": 811.9159277872519,
-                "top": 681.4260242883769
+                "left": 878.3623655399448,
+                "top": 431.3939597172058
             },
-            "post_job_actions": {
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "text_file"
-                },
-                "RenameDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "newname": "FastQC of #{input_file}"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "html_file"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1",
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "2c64fded1286",
-                "name": "fastqc",
-                "owner": "devteam",
+                "changeset_revision": "219ffa24f789",
+                "name": "falco",
+                "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"bisulfite\": false, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"generate_summary\": false, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"nogroup\": false, \"reverse_complement\": false, \"subsample\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.74+galaxy1",
+            "tool_version": "1.3.2+galaxy0",
             "type": "tool",
-            "uuid": "662b6633-6e15-4247-bbd6-110eedaf1bf4",
+            "uuid": "9de23db3-137a-4f19-bd42-45bd0e9b3c1f",
             "when": null,
             "workflow_outputs": []
         },
@@ -635,7 +609,7 @@
             "tool_uuid": null,
             "tool_version": "3.1.1.0",
             "type": "tool",
-            "uuid": "b34e429b-f1df-46c5-ac50-aacf7a3ee6e1",
+            "uuid": "9f12d4df-2675-45e7-ace0-2070c98e3c95",
             "when": null,
             "workflow_outputs": []
         },
@@ -685,7 +659,7 @@
             "tool_uuid": null,
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "e2ddc414-9a5d-4cc0-ae4a-9a3a692ae862",
+            "uuid": "eeddae07-d732-4754-aa0c-94a4149bf05d",
             "when": null,
             "workflow_outputs": []
         },
@@ -725,7 +699,7 @@
             "tool_uuid": null,
             "tool_version": "2.31.1+galaxy0",
             "type": "tool",
-            "uuid": "f09f7871-f87e-482c-937c-c03263af23ce",
+            "uuid": "adfe5b9e-01ac-49cb-b965-199708f7f9e0",
             "when": null,
             "workflow_outputs": []
         },
@@ -821,11 +795,11 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": false}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"all\", \"__current_case__\": 2}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"control\": {\"c_select\": \"No\", \"__current_case__\": 1}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"2700000000\", \"__current_case__\": 0}, \"format\": \"BED\", \"nomodel_type\": {\"nomodel_type_selector\": \"nomodel\", \"__current_case__\": 1, \"extsize\": \"200\", \"shift\": \"-100\"}, \"outputs\": [\"peaks_tabular\", \"summits\", \"bdg\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advanced_options\": {\"to_large\": false, \"nolambda\": false, \"spmr\": false, \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": true}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"all\", \"__current_case__\": 2}, \"d_min\": \"20\", \"buffer_size\": \"100000\"}, \"control\": {\"c_select\": \"No\", \"__current_case__\": 1}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"2700000000\", \"__current_case__\": 0}, \"format\": \"BED\", \"nomodel_type\": {\"nomodel_type_selector\": \"nomodel\", \"__current_case__\": 1, \"extsize\": \"200\", \"shift\": \"-100\"}, \"outputs\": [\"peaks_tabular\", \"summits\", \"bdg\"], \"treatment\": {\"t_multi_select\": \"No\", \"__current_case__\": 0, \"input_treatment_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "2.2.9.1+galaxy0",
             "type": "tool",
-            "uuid": "c21a0795-a39c-4419-a691-2fefa73d67a6",
+            "uuid": "610ab942-c4dc-4777-a201-01be262ae502",
             "when": null,
             "workflow_outputs": []
         },
@@ -867,7 +841,7 @@
             "tool_uuid": null,
             "tool_version": "1.1.1",
             "type": "tool",
-            "uuid": "51722fca-ef21-4042-ac62-a6149ccfcdcf",
+            "uuid": "8f631d98-fde2-4fb7-8c45-43a1ec5587c1",
             "when": null,
             "workflow_outputs": []
         },
@@ -884,6 +858,10 @@
                 "tracks_1|track_file_style_conditional|track_input_narrow_peak": {
                     "id": 15,
                     "output_name": "output_narrowpeaks"
+                },
+                "tracks_2|track_file_style_conditional|bed_gtf|track_input_bed": {
+                    "id": 2,
+                    "output_name": "output"
                 },
                 "tracks_3|track_file_style_conditional|track_input_narrow_peak": {
                     "id": 1,
@@ -911,17 +889,17 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"global_args\": {\"title\": \"\", \"fontsize\": \"12\", \"dpi\": \"72\", \"width\": \"40.0\", \"plotWidth\": null, \"height\": null, \"trackLabelFraction\": \"0.05\", \"trackLabelHAlign\": \"left\", \"decreasingXAxis\": false}, \"image_file_format\": \"png\", \"region\": \"chr22:37,193,000-37,252,000\", \"tracks\": [{\"__index__\": 0, \"track_file_style_conditional\": {\"track_file_style_selector\": \"bigwig_track_option\", \"__current_case__\": 7, \"title\": \"Coverage from MACS2 (extended +/-100bp)\", \"track_input_bigwig\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"#00b050\", \"alpha\": \"1.0\", \"color_negative\": {\"color_negative_select\": \"false\", \"__current_case__\": 0}, \"min_value\": \"0.0\", \"max_value\": null, \"height_bigwig\": \"5.0\", \"reading_bw_conditional\": {\"summary_method\": \"mean\", \"number_of_bins\": null, \"nans_to_zeros\": false}, \"type_conditional\": {\"type_selector\": \"fill_option\", \"__current_case__\": 2}, \"logScale_conditional\": {\"transform_selector\": \"no\", \"__current_case__\": 0}, \"op\": {\"operation\": \"file\", \"second_file\": {\"__class__\": \"RuntimeValue\"}}, \"show_data\": true, \"grid\": false, \"invert_orientation\": false, \"overlay_select\": \"no\", \"spacer_height\": null}}, {\"__index__\": 1, \"track_file_style_conditional\": {\"track_file_style_selector\": \"narrow_peak_track_option\", \"__current_case__\": 5, \"title\": \"Peaks from MACS2 (extended +/-100bp)\", \"track_input_narrow_peak\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"#00b050\", \"height_narrow_peak\": \"1.5\", \"display\": {\"display_selector\": \"box\", \"__current_case__\": 1, \"use_summit\": true}, \"line_width\": \"1.0\", \"labels\": {\"show_labels\": \"true\", \"__current_case__\": 0, \"fontsize\": null}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 2, \"track_file_style_conditional\": {\"track_file_style_selector\": \"gene_track_option\", \"__current_case__\": 3, \"title\": \"Genes\", \"bed_gtf\": {\"input_bed_or_gtf\": \"bed\", \"__current_case__\": 0, \"track_input_bed\": {\"__class__\": \"RuntimeValue\"}}, \"color_bed\": {\"color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}, \"height_bed\": \"5.0\", \"display_cond\": {\"display\": \"stacked\", \"__current_case__\": 0, \"labels\": {\"plot_labels\": \"true\", \"__current_case__\": 0, \"all_labels_inside\": false, \"labels_in_margin\": false, \"fontsize\": null, \"fontstyle\": \"normal\"}, \"bed_style\": {\"bed_style_select\": \"flybase\", \"__current_case__\": 0, \"border_color_bed\": {\"border_color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}, \"arrowhead_included\": false, \"arrowhead_fraction\": \"0.004\", \"bed_advanced\": {\"height_utr\": \"1.0\", \"color_utr\": {\"color_utr_select\": \"manually\", \"__current_case__\": 0, \"color\": \"grey\"}, \"global_max_row\": false, \"gene_rows\": null, \"max_labels\": \"60\", \"line_width\": \"0.5\", \"backbone_color_bed\": {\"backbone_color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}}}}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 3, \"track_file_style_conditional\": {\"track_file_style_selector\": \"narrow_peak_track_option\", \"__current_case__\": 5, \"title\": \"CTCF peaks\", \"track_input_narrow_peak\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"#00b0f0\", \"height_narrow_peak\": \"1.5\", \"display\": {\"display_selector\": \"box\", \"__current_case__\": 1, \"use_summit\": true}, \"line_width\": \"1.0\", \"labels\": {\"show_labels\": \"true\", \"__current_case__\": 0, \"fontsize\": null}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 4, \"track_file_style_conditional\": {\"track_file_style_selector\": \"xaxis_option\", \"__current_case__\": 13, \"title\": \"\", \"fontsize\": null, \"xaxis_where\": \"bottom\", \"spacer_height\": null}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"global_args\": {\"title\": \"\", \"fontsize\": \"12\", \"dpi\": \"72\", \"width\": \"40.0\", \"plotWidth\": null, \"height\": null, \"trackLabelFraction\": \"0.05\", \"trackLabelHAlign\": \"left\", \"decreasingXAxis\": false}, \"image_file_format\": \"png\", \"region\": \"chr22:37,193,000-37,252,000\", \"tracks\": [{\"__index__\": 0, \"track_file_style_conditional\": {\"track_file_style_selector\": \"bigwig_track_option\", \"__current_case__\": 7, \"title\": \"Coverage from MACS2 (extended +/-100bp)\", \"track_input_bigwig\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"#00b050\", \"alpha\": \"1.0\", \"color_negative\": {\"color_negative_select\": \"false\", \"__current_case__\": 0}, \"min_value\": \"0.0\", \"max_value\": null, \"height_bigwig\": \"5.0\", \"reading_bw_conditional\": {\"summary_method\": \"mean\", \"number_of_bins\": null, \"nans_to_zeros\": false}, \"type_conditional\": {\"type_selector\": \"fill_option\", \"__current_case__\": 2}, \"logScale_conditional\": {\"transform_selector\": \"no\", \"__current_case__\": 0}, \"op\": {\"operation\": \"file\", \"second_file\": {\"__class__\": \"RuntimeValue\"}}, \"show_data\": true, \"grid\": false, \"invert_orientation\": false, \"overlay_select\": \"no\", \"spacer_height\": null}}, {\"__index__\": 1, \"track_file_style_conditional\": {\"track_file_style_selector\": \"narrow_peak_track_option\", \"__current_case__\": 5, \"title\": \"Peaks from MACS2 (extended +/-100bp)\", \"track_input_narrow_peak\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"#00b050\", \"height_narrow_peak\": \"1.5\", \"display\": {\"display_selector\": \"box\", \"__current_case__\": 1, \"use_summit\": true}, \"line_width\": \"1.0\", \"labels\": {\"show_labels\": \"false\", \"__current_case__\": 1}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 2, \"track_file_style_conditional\": {\"track_file_style_selector\": \"gene_track_option\", \"__current_case__\": 3, \"title\": \"Genes\", \"bed_gtf\": {\"input_bed_or_gtf\": \"bed\", \"__current_case__\": 0, \"track_input_bed\": {\"__class__\": \"RuntimeValue\"}}, \"color_bed\": {\"color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}, \"height_bed\": \"5.0\", \"display_cond\": {\"display\": \"stacked\", \"__current_case__\": 0, \"labels\": {\"plot_labels\": \"true\", \"__current_case__\": 0, \"all_labels_inside\": false, \"labels_in_margin\": false, \"fontsize\": null, \"fontstyle\": \"normal\"}, \"bed_style\": {\"bed_style_select\": \"flybase\", \"__current_case__\": 0, \"border_color_bed\": {\"border_color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}, \"arrowhead_included\": false, \"arrowhead_fraction\": \"0.004\", \"bed_advanced\": {\"height_utr\": \"1.0\", \"color_utr\": {\"color_utr_select\": \"manually\", \"__current_case__\": 0, \"color\": \"grey\"}, \"global_max_row\": false, \"gene_rows\": null, \"max_labels\": \"60\", \"line_width\": \"0.5\", \"backbone_color_bed\": {\"backbone_color_bed_select\": \"manually\", \"__current_case__\": 0, \"color\": \"#000000\"}}}}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 3, \"track_file_style_conditional\": {\"track_file_style_selector\": \"narrow_peak_track_option\", \"__current_case__\": 5, \"title\": \"CTCF peaks\", \"track_input_narrow_peak\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"#00b0f0\", \"height_narrow_peak\": \"1.5\", \"display\": {\"display_selector\": \"box\", \"__current_case__\": 1, \"use_summit\": true}, \"line_width\": \"1.0\", \"labels\": {\"show_labels\": \"false\", \"__current_case__\": 1}, \"overlay_select\": \"no\", \"invert_orientation\": false, \"spacer_height\": null}}, {\"__index__\": 4, \"track_file_style_conditional\": {\"track_file_style_selector\": \"xaxis_option\", \"__current_case__\": 13, \"title\": \"\", \"fontsize\": null, \"xaxis_where\": \"bottom\", \"spacer_height\": null}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "3.9+galaxy0",
             "type": "tool",
-            "uuid": "8cfe5143-c452-490f-883c-bec99f2f1249",
+            "uuid": "6e09aea0-799b-493a-a44c-c61c600d45aa",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "pyGenomeTracks Plot",
                     "output_name": "outFileName",
-                    "uuid": "5cf5dd64-8cbe-4443-9bb8-517cb0203f4b"
+                    "uuid": "203b94d8-1fe6-4a0d-b3ba-81ef40a4f5a8"
                 }
             ]
         },
@@ -974,7 +952,7 @@
             "tool_uuid": null,
             "tool_version": "4.0.0+galaxy1",
             "type": "tool",
-            "uuid": "ade4d0c4-55d8-4e57-b9a5-7d86e0afe6fb",
+            "uuid": "c40cd80d-4847-4d52-9375-617f72a6c0fd",
             "when": null,
             "workflow_outputs": []
         },
@@ -1012,8 +990,8 @@
                 }
             ],
             "position": {
-                "left": 3022.480010783376,
-                "top": 1064.9089142475837
+                "left": 3022.4686752829048,
+                "top": 1064.430109261198
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1",
@@ -1027,7 +1005,7 @@
             "tool_uuid": null,
             "tool_version": "4.0.0+galaxy1",
             "type": "tool",
-            "uuid": "20ecf3b9-81e6-4eae-ab7c-0bc9c84c9e94",
+            "uuid": "d324ffba-8b59-4b1c-af53-1895ec3c56ce",
             "when": null,
             "workflow_outputs": []
         },
@@ -1063,17 +1041,17 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"interpolationMethod\": \"auto\", \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
             "tool_version": "4.0.0+galaxy1",
             "type": "tool",
-            "uuid": "4696e0d0-baee-4a65-b5a5-e30eb725bbbc",
+            "uuid": "f6b8f5ae-8d54-4c3e-a75e-6b602b573693",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "heatmap at chr22 TSS",
                     "output_name": "outFileName",
-                    "uuid": "d362c0f9-e213-4c21-9d83-94b4d85199f9"
+                    "uuid": "4188da56-6411-44dc-b962-d726b6d74c2b"
                 }
             ]
         },
@@ -1113,13 +1091,13 @@
             "tool_uuid": null,
             "tool_version": "4.0.0+galaxy1",
             "type": "tool",
-            "uuid": "29fd1643-4276-446a-82af-463d822ab8e4",
+            "uuid": "e2a9c823-c905-4dbf-b2b2-b637777780d9",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "heatmap at CTCF peaks",
                     "output_name": "outFileName",
-                    "uuid": "cbe2fb96-9640-42d8-9da2-a286e6e56180"
+                    "uuid": "cf438abf-d34e-499a-adee-edb6dc22d432"
                 }
             ]
         }
@@ -1127,6 +1105,6 @@
     "tags": [
         "epigenetics"
     ],
-    "uuid": "1bfdcd3b-c049-4aa7-92c4-dd6ac4bea1b7",
-    "version": 3
+    "uuid": "19606433-ee90-4354-a18a-d7bb787c2775",
+    "version": 9
 }

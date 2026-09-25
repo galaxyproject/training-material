@@ -199,10 +199,10 @@ The first step is to check the quality of the reads and the presence of the Next
 >   
 > 2. Rename the flatten collection: `Flat Collection`
 >   
-> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+> 3. Run {% tool [falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >    - *"Raw read data from your current history"*: `Flat Collection` (Flattened paired end read dataset collection)
 >
-> 4. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
+> 4. Inspect the web page output of **falco** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
 > > <question-title></question-title>
 > >
@@ -235,12 +235,12 @@ The first step is to check the quality of the reads and the presence of the Next
 >    {: .question}
 {: .hands_on}
 
-> <comment-title>FastQC Results</comment-title>
+> <comment-title>falco Results</comment-title>
 > This is what you should expect from the **Adapter Content** section:
-> ![FastQC screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the Adapter Content section")
+> ![falco screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "falco screenshot on the Adapter Content section")
 {: .comment}
 
-The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
+The falco web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
 
 ## Trimming Reads
 
@@ -253,7 +253,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >        - {% icon param-collection %} *"Paired Collection"*: `Paired Reads`
 >        - In *"Read 1 Adapters"*:
@@ -300,22 +300,22 @@ The forward and reverse adapters are slightly different. We will also trim low q
 >
 {: .question}
 
-> <hands-on-title>Check Adapter Removal with FastQC</hands-on-title>
+> <hands-on-title>Check Adapter Removal with falco</hands-on-title>
 >
 > 1. Run {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
 >    - *"Input collection"*: `Adapter Trimmed Reads`
 >   
 > 2. Rename the flatten collection: `Flat Trimmed Reads`
 >   
-> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+> 3. Run {% tool [falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >    - *"Raw read data from your current history"*: `Flat Trimmed Reads`
 >
 > 4. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
-> <comment-title>FastQC Results</comment-title>
+> <comment-title>falco Results</comment-title>
 > Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
-> ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+> ![falco screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "falco screenshot on the adapter content section after cutadapt")
 > However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 {: .comment}
 
@@ -339,7 +339,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 
 > <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
 >        - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Adapter Trimmed Reads`
 >        - *"Do you want to set paired-end options?"*: `Yes`
@@ -390,7 +390,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Insert Condition"*
@@ -404,7 +404,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `reference`
 >                        - *"Filter on the reference name for the read"*: `!chrM`
->    - *"Would you like to set rules?"*: `No`
+>    - *"Would you like to set rules?"*: `False`
 >
 >
 > 2. Click on the input and the output BAM files of the filtering step. Check the size of the files.
@@ -446,7 +446,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > <hands-on-title>Remove duplicates</hands-on-title>
 >
-> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/3.1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -474,7 +474,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy1) %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
@@ -503,7 +503,7 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 
 > <hands-on-title>Plot the distribution of fragment sizes.</hands-on-title>
 >
-> 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1) %} with the following parameters:
+> 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.2) %} with the following parameters:
 >    - {% icon param-file %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
 >    - *"Lower bp limit (optional)"*: `0`
 >    - *"Upper bp limit (optional)"*: `1000`
@@ -571,7 +571,7 @@ We convert the BAM file to BED format because when we set the extension size in 
 
 > <hands-on-title>Convert the BAM to BED</hands-on-title>
 >
-> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
+> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.31.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
 >
 {: .hands_on}
@@ -582,7 +582,7 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 
 > <hands-on-title>Call peaks with MACS2</hands-on-title>
 >
-> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6) %} with the following parameters:
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
 >        - {% icon param-file %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
@@ -620,7 +620,7 @@ As our training dataset is focused on chromosome 22 we will only use the CTCF pe
 >    - {% icon param-file %} *"Filter"*: Select the first dataset: `ENCFF933NTR.bed.gz`
 >    - *"With following condition"*: `c1=='chr22'`
 >
-> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.31.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select the output of **Filter** data on any column using simple expressions {% icon tool %}
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
 >        - {% icon param-file %} *"File B to intersect with A"*:  Select the dataset `chr22 genes`
@@ -668,7 +668,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > <hands-on-title>Generate the matrix</hands-on-title>
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1) %} with the following parameters:
 >    - In *"Select regions"*:
 >        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
@@ -689,7 +689,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 > <hands-on-title>Generate the heatmap</hands-on-title>
 >
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `no`
@@ -718,7 +718,7 @@ Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
 
 > <hands-on-title>Generate the matrix</hands-on-title>
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1) %} with the following parameters:
 >    - In *"Select regions"*:
 >        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `intergenic CTCF peaks chr22`
@@ -731,7 +731,7 @@ Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
 >    - *"Show advanced options"*: `yes`
 >        - *"Convert missing values to 0?"*: `Yes`
 >
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*:  Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
@@ -758,7 +758,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6) %} with the following parameters:
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.9+galaxy0) %} with the following parameters:
 >    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
 >    - In *"Include tracks in your plot"*:
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
