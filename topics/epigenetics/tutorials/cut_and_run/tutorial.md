@@ -310,7 +310,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](ttoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Condition"*
