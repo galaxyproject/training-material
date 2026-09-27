@@ -5,26 +5,26 @@ title: Understanding Galaxy Data Managers
 level: Introductory
 subtopic: tooldev
 questions:
-- What are data managers and why are they needed?
-- How do you write a data manager tool?
-- How do you test a data manager tool?
+- What are Data Managers and why are they needed?
+- How do you write a Data Manager Tool?
+- How do you test a Data Manager Tool?
 objectives:
-- Understand the idea behind and the concept of Galaxy data managers
-- Understand what components are needed to write your own data manager tool
-- Know how to test a data manager and be aware of the limitations of the current test framework with respect to data managers
+- Understand the idea behind and the concept of Galaxy Data Managers
+- Understand what components are needed to write your own Data Manager Tool
+- Know how to test a Data Manager and be aware of the limitations of the current test framework with respect to Data Managers
 time_estimation: 2H
 key_points:
-- Data managers are tools to be run by admins of a Galaxy instance.
-- They automate reference data collection and preparation and they write data table (.loc file) records.
-- In addition to a regular tool wrapper xml file, data managers require several xml config files that define the interaction of the data manager with the Galaxy framework and with the data tables they are supposed to populate.
-- Currently, Galaxy only allows for partial automation of data manager testing. Some manual testing is required.
+- Data Managers are tools to be run by admins of a Galaxy instance.
+- They automate reference data collection and preparation and they write Data Table (.loc file) records.
+- In addition to a regular tool wrapper xml file, Data Managers require several xml config files that define the interaction of the Data Manager with the Galaxy framework and with the Data Tables they are supposed to populate.
+- Currently, Galaxy only allows for partial automation of Data Manager testing. Some manual testing is required.
 contributions:
   authorship:
     - wm75
 
 ---
 
-# What are data managers and why are they needed?
+# What are Data Managers and why are they needed?
 
 Many tools run with two kinds of input data: some experimental data specific to
 the tool run (like, e.g., sequencing data) and other data, which stays the
@@ -53,7 +53,7 @@ and whether it needs some reformatting or other pre-processing before being usab
 
 In principle, admins could automate some of this work through scripts, but it would be nice to not have each admin reinvent the wheel.
 
-## The idea of data managers
+## The idea behind Data Managers
 
 Just like admin-installed data found via .loc files frees the *user* from having to care about all the details of how to obtain the data,
 special tools, ideally written by people who know how to obtain and set up certain types of data,
@@ -62,13 +62,13 @@ In other words, admins become users themselves. They don't have to know all the 
 
 > <comment-title>Reference document</comment-title>
 >
-> This tutorial is an attempt to describe the different parts and functions of data managers in
+> This tutorial is an attempt to describe the different parts and functions of Data Managers in
 > a way that is structured as logically as possible.
 >
 > An in-depth, technical explanation of this matter is provided at
 > <https://docs.galaxyproject.org/en/latest/dev/data_managers.html>
 > and, when in doubt, that material should be considered the reference document
-> for data managers.
+> for Data Managers.
 >
 {: .comment}
 
@@ -81,11 +81,11 @@ In other words, admins become users themselves. They don't have to know all the 
 >
 {: .agenda}
 
-# Components of a data manager
+# Components of a Data Manager
 
-Here you see a tree view of the files that together constitute the widely used [bowtie2 data manager](https://github.com/galaxyproject/tools-iuc/tree/main/data_managers/data_manager_bowtie2_index_builder):
+Here you see a tree view of the files that together constitute the widely used [bowtie2 Data Manager](https://github.com/galaxyproject/tools-iuc/tree/main/data_managers/data_manager_bowtie2_index_builder):
 
-![Terminal tree view of the folder structure of the bowtie2 data manager](../../images/data-manager-file-layout.png "Layout of a typical data manager folder"){:max-width="70%"}
+![Terminal tree view of the folder structure of the bowtie2 Data Manager](../../images/data-manager-file-layout.png "Layout of a typical Data Manager folder"){:max-width="70%"}
 
 Lets look at these components one-by-one:
 
@@ -93,10 +93,10 @@ Lets look at these components one-by-one:
 
    This is what the admin is interacting with when installing new data (bowtie2 indices in this case).
 
-2. In the root folder of the data manager, there is a **Data Manager Configuration** file.
+2. In the root folder of the Data Manager, there is a **Data Manager Configuration** file.
 
    This file is always named `data_manager_conf.xml`.
-   It declares, which .loc files the data manager will write to,
+   It declares, which .loc files the Data Manager will write to,
    defines how the output of the Data Manager Tool is to be translated into .loc file records,
    and where exactly Galaxy should store the data downloaded by the Data Manager Tool.
 
@@ -106,9 +106,9 @@ Lets look at these components one-by-one:
 
    We will not discuss the contents of this file any further here.
 
-4. A `test-data` folder with, you may guess it, data for testing the data manager.
+4. A `test-data` folder with, you may guess it, data for testing the Data Manager.
 
-   We will discuss testing data managers at the end of the tutorial.
+   We will discuss testing Data Managers at the end of the tutorial.
 
 5. A `tool-data` folder
 
@@ -119,30 +119,30 @@ Lets look at these components one-by-one:
    "one .loc.sample file for each Data Table used" is independent of whether the Data Tables are read from or written to.
    In fact, Data Manager Tools may both write to Data Tables and use other Data Tables as a source for populating
    select boxes in their tool interface.
-   The bowtie2 data manager, for example, lets the admin select the reference genome to build an index for
-   from the list of installed genomes read from the `all_fasta` data table.
-   The index it builds is useful for both bowtie2 and tophat2 so the path to the installed index will get recorded in the corresponding two data tables.
+   The bowtie2 Data Manager, for example, lets the admin select the reference genome to build an index for
+   from the list of installed genomes read from the `all_fasta` Data Table.
+   The index it builds is useful for both bowtie2 and tophat2 so the path to the installed index will get recorded in the corresponding two Data Tables.
    The `tool-data` folder of this Data Manager, therefor, has three .loc.sample files -
    `all_fasta.loc.sample`, `bowtie2_indices.loc.sample` and `tophat2_indices.loc.sample`.
    Each of these files consists only of comment lines describing the .loc file purpose and expected structure.
 
    Comment lines in .loc.sample files are optional and just that: comments that are ignored by Galaxy.
-   The only place that *Galaxy* reads .loc file structure from is the Data table configuration file discussed next.
+   The only place that *Galaxy* reads .loc file structure from is the Data Table configuration file discussed next.
 
    > <details-title>Content of .loc.sample files</details-title>
    >
    > Tools can use .loc.sample files with actual record lines to point to data directly *shipping* with the tool.
    > That data would then also be stored in the `tool-data` folder (which explains its name).
-   > Most tools and data managers, however, do not ship data directly and provide empty .loc.sample files with optional
-   > comment lines like the bowtie2 data manager example.
+   > Most tools and Data Managers, however, do not ship data directly and provide empty .loc.sample files with optional
+   > comment lines like the bowtie2 Data Manager example.
    >
    {: .details}
 
-6. A Data table configuration file
+6. A Data Table configuration file
 
-   This file is always named `tool_data_table_conf.xml.sample` and provides the *layout* information for all Data tables the Data manager operates on and uses.
+   This file is always named `tool_data_table_conf.xml.sample` and provides the *layout* information for all Data Tables the Data Manager operates on and uses.
 
-   For the bowtie2 data manager, this file has the following content:
+   For the bowtie2 Data Manager, this file has the following content:
 
    ```
    <tables>
@@ -164,13 +164,13 @@ Lets look at these components one-by-one:
    </tables>
    ```
 
-   The Data tables mentioned here are the same as the ones the `tool-data` folder has .loc.sample files for,
+   The Data Tables mentioned here are the same as the ones the `tool-data` folder has .loc.sample files for,
    but here we find the metadata for these tables, i.e. their name and .loc file name (which *could*,
    but probably shouldn't be different) and the identifiers for the different columns in each table.
 
-   > <warning-title>Released Data table layout information can never be changed again!</warning-title>
+   > <warning-title>Released Data Table layout information can never be changed again!</warning-title>
    >
-   > Every version of every regular tool and of every Data manager tool using a given data table needs to declare its expected layout in a `tool_data_table_conf.xml.sample`.
+   > Every version of every regular tool and of every Data Manager Tool using a given Data Table needs to declare its expected layout in a `tool_data_table_conf.xml.sample`.
    > An instance of Galaxy that gets conflicting layout information about the same Data Table from different tools or tool versions will refuse to load the Data Table
    > (or even refuse to start at all) until an admin resolves the conflict.
    >
@@ -185,18 +185,18 @@ Lets look at these components one-by-one:
    >
    {: .warning}
 
-7. A Data table configuration test file
+7. A Data Table configuration test file
 
    This file is always named `tool_data_table_conf.xml.test`, is very similar to the `tool_data_table_conf.xml.sample`,
    but exists only for testing purposes, which, again, will be discussed at the end of the tutorial.
 
-# How are Data managers different from regular tools?
+# How are Data Managers different from regular tools?
 
 1. (Normally) only admins can run them through the Admin interface of Galaxy
 
 2. They do create an output dataset in your history,
    but their **"side-effects"** are what really matters. As such side-effects
-   data managers will:
+   Data Managers will:
 
    - typically, download or compute some data.
    - always instruct Galaxy to write at least one line of tab-separated info to
@@ -210,17 +210,17 @@ Lets look at these components one-by-one:
 
 1. It declares itself a Data Manager through the `tool_type="manage_data"` attribute.
 
-   `<tool id="example_dm" name="An example Data manager" version="1.0" tool_type="manage_data" profile="23.0">`
+   `<tool id="example_dm" name="An example Data Manager" version="1.0" tool_type="manage_data" profile="23.0">`
 
    This has several consequences:
 
    1. The tool will only appear in the Admin user interface.
    2. Galaxy will expect the output of the tool to be of `format="data_manager_json"`
-      and its content to describe which columns should be added to new lines in which Data tables.
+      and its content to describe which columns should be added to new lines in which Data Tables.
    3. Galaxy will expect any data downloaded or computed by the tool to live in that output's
       `extra_files_path`.
 
-      For example, if the output section of the Data manager looks like this:
+      For example, if the output section of the Data Manager looks like this:
 
       ```
       <outputs>
@@ -235,31 +235,31 @@ Lets look at these components one-by-one:
       [among other things](https://docs.galaxyproject.org/en/latest/dev/data_managers.html#example-json-input-to-tool).
       You do not have to read the file if you don't want to, but you will have to overwrite it!
 
-   > <comment-title>Minimal profile version for data managers</comment-title>
+   > <comment-title>Minimal profile version for Data Managers</comment-title>
    >
-   > Data managers were executed in Galaxy's main environment until release 18.09!
+   > Data Managers were executed in Galaxy's main environment until release 18.09!
    >
    > This means:
    >
-   > - if you want to use `requirements` in a data manager tool, you should set
+   > - if you want to use `requirements` in a Data Manager Tool, you should set
    >   `profile="18.09"` or higher
-   > - if you are bumping the profile version of an existing data manager to
+   > - if you are bumping the profile version of an existing Data Manager to
    >   beyond 18.09, you may have to add requirements to it that bring in things
    >   the old version happened to find in Galaxy's environment.
    >
    {: .comment}
 
-2. In its command section (or in a helper script called from there), the data manager tool
+2. In its command section (or in a helper script called from there), the Data Manager Tool
 
    1. **overwrites** the already existing output file with a json of the items that should be
-      added to one or more Data tables.
+      added to one or more Data Tables.
 
    2. **creates** the folder at `output.extra_files_path` and deposits any data
       there that Galaxy should move then to a permanent storage location
 
-3. The data manager tool ships with a `data_manager_conf.xml` file,
+3. The Data Manager Tool ships with a `data_manager_conf.xml` file,
    which forms the bridge between the `data_manager_json` file that it produces
-   as output and the Data table files Galaxy is supposed to add lines to.
+   as output and the Data Table files Galaxy is supposed to add lines to.
 
    An example config file:
 
@@ -293,7 +293,7 @@ Lets look at these components one-by-one:
     </data_managers>
     ```
 
-   This file declares column names for a single Data table (`cat_database`) that
+   This file declares column names for a single Data Table (`cat_database`) that
    Galaxy should add lines to based on the `data_manager_json` file returned by
    the `data_manager_cat` tool, and which might look like this:
 
@@ -311,20 +311,20 @@ Lets look at these components one-by-one:
    ```
 
    Here, each innermost dictionary corresponds to one line that Galaxy should
-   add to the Data table `cat_database` and the keys in it match the column names
+   add to the Data Table `cat_database` and the keys in it match the column names
    declared in the `data_manager_conf.xml` file so Galaxy knows which dict value
-   it should write into which column of the Data table.
+   it should write into which column of the Data Table.
 
    The example tool downloads data, then extracts it into two folders, `a_CAT_database`
    and `a_taxonomy` under its output's `extra_files_path` folder. The tool wants
    Galaxy to record the `extra_files_path` folder name both in the value column and in the
-   name column of the `cat_database` Data table.
+   name column of the `cat_database` Data Table.
 
    It also wants to store the paths to the extracted `database_folder` and `taxonomy_folder` so that tools that later want to use that data can discover
-   it from the corresponding columns of the Data table.
+   it from the corresponding columns of the Data Table.
 
    However, here's the issue:
-   The Data manager tool at run time knows only the `extra_files_path`, but not the
+   The Data Manager Tool at run time knows only the `extra_files_path`, but not the
    ultimate location that Galaxy will move the data to. This is where the more
    complicated parts of the above `data_manager_conf.xml` file enter the scene:
 
@@ -351,25 +351,25 @@ Lets look at these components one-by-one:
 
    1. The `<move>` element says that Galaxy should take (see the `<source>` element) the data that lives where the `${database_folder}` item of the `data_manager_json` output says it lives and move it to a destination `CAT/${database_folder}` under the base path indicated by `${GALAXY_DATA_MANAGER_DATA_PATH}` (which itself is the configured cached data storage path of the Galaxy instance).
 
-   2. The first `<value_translation>` element says that Galaxy should not write the Data manager tool-provided value for `database_folder` directly, but instead first translate it to `${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder`. If you compare the resulting string with the `<move>` instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.
+   2. The first `<value_translation>` element says that Galaxy should not write the Data Manager Tool-provided value for `database_folder` directly, but instead first translate it to `${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder`. If you compare the resulting string with the `<move>` instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.
 
       The second `<value_translation>` element simply says that Galaxy should turn the result of the first translation into an absolute path on the system. The result is then the value that will get written into the `database_folder` column of the `cat_database` table.
 
-   The same logic is then used again to move the `taxonomy` folder to its final destination and to obtain the value to write to the corresponding Data table column.
+   The same logic is then used again to move the `taxonomy` folder to its final destination and to obtain the value to write to the corresponding Data Table column.
 
-# How to test data manager tools?
+# How to test Data Manager Tools?
 
-Unfortunately, the only automated tests you can run on a data manager tool are the ones available for regular tools, too.
+Unfortunately, the only automated tests you can run on a Data Manager Tool are the ones available for regular tools, too.
 
-This means that you can test assumptions about the tool's `data_manager_json` output, about the command line formed and the stdout and stderr generated, but you can **not** verify that the data manager framework detects any data in the `extra_files_path` and moves it to the intended location.
+This means that you can test assumptions about the tool's `data_manager_json` output, about the command line formed and the stdout and stderr generated, but you can **not** verify that the Data Manager framework detects any data in the `extra_files_path` and moves it to the intended location.
 
-For this reason, `planemo serve` is a very important command to use during any work on data managers!
+For this reason, `planemo serve` is a very important command to use during any work on Data Managers!
 
-> <comment-title>Getting planemo to work on a data managers</comment-title>
+> <comment-title>Getting planemo to work on a Data Managers</comment-title>
 >
-> `planemo test` and `planemo serve` work just fine for data managers,
-> if you keep in mind that a data manager is more than just the tool xml file.
-> If you're following the standard layout of data managers with the tool xml
+> `planemo test` and `planemo serve` work just fine for Data Managers,
+> if you keep in mind that a Data Manager is more than just the tool xml file.
+> If you're following the standard layout of Data Managers with the tool xml
 > file in a subfolder, you need to run planemo from *outside* that subfolder to have
 > it discover all required files beyond the tool xml, but point it to the tool
 > xml to test or serve.
@@ -385,19 +385,19 @@ For this reason, `planemo serve` is a very important command to use during any w
 >
 {: .comment}
 
-With a correctly written `tool_data_table_conf.xml.test` the Data manager, during testing, will read from and write to the .loc files in its `test-data` folder.
+With a correctly written `tool_data_table_conf.xml.test` the Data Manager, during testing, will read from and write to the .loc files in its `test-data` folder.
 This data is persistent across planemo runs as is the actual installed data, so after testing with `planemo serve`, you can inspect the .loc file records that have been written and check the path recorded there to see if the data has been installed the way you intended.
 
-Before committing the test-data folder you may want to consider clearing the data tables you may have populated in it.
+Before committing the test-data folder you may want to consider clearing the Data Tables you may have populated in it.
 
-## Testing data managers and their client tools in combination
+## Testing Data Managers and their client tools in combination
 
-As said above, `planemo serve` and `planemo test` need to be run from the root folder of the data manager, but it's possible to point planemo to multiple xml files to test and you can use this to test both the data manager tool and a tool using its data table in one session through, e.g.:
+As said above, `planemo serve` and `planemo test` need to be run from the root folder of the Data Manager, but it's possible to point planemo to multiple xml files to test and you can use this to test both the Data Manager Tool and a tool using its Data Table in one session through, e.g.:
 
 - `planemo serve data_manager/bowtie2_index_builder.xml ../../tools/bowtie2/bowtie2_wrapper.xml` run from the parent directory of the `data_manager` subfolder, or
 - `planemo serve data_managers/data_manager_bowtie2_index_builder/data_manager/bowtie2_index_builder.xml tools/bowtie2/bowtie2_wrapper.xml` run from the root folder of the tools-iuc repo.
 
-If you have previously served your data manager in isolation and installed some data, then, because this brings the data manager's test-data folder back into scope, that data will be immediately usable by the client tool.
+If you have previously served your Data Manager in isolation and installed some data, then, because this brings the Data Manager's test-data folder back into scope, that data will be immediately usable by the client tool.
 
 # Data Manager Checklist
 
@@ -436,10 +436,10 @@ In a few places this list goes beyond Galaxy's requirements for Data Manager Too
 >
 > 2. Logic checks
 >
->    - {% icon point-right %} Data manager (or helper script) writes JSON to primary output
+>    - {% icon point-right %} Data Manager (or helper script) writes JSON to primary output
 >    - {% icon point-right %} Data to be managed gets written to `extra_files_path`
 >    - {% icon point-right %} `<move>` logic in `data_manger_conf.xml` handles transfer of all relevant content under `extra_files_path` to `<target base="${GALAXY_DATA_MANAGER_DATA_PATH}">` destination
 >    - {% icon point-right %} `<value_translation>` logic in `data_manger_conf.xml` handles rewrite of all paths to managed data to point to target destinations
->    - {% icon point-right %} Data manager (or helper script) deletes any irrelevant data left behind under `extra_files_path`
+>    - {% icon point-right %} Data Manager (or helper script) deletes any irrelevant data left behind under `extra_files_path`
 >
 {: .hands_on}
