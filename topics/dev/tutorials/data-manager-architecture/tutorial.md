@@ -16,8 +16,8 @@ time_estimation: 2H
 key_points:
 - Data Managers are tools to be run by admins of a Galaxy instance.
 - They automate reference data collection and preparation and they write Data Table (.loc file) records.
-- In addition to a regular tool wrapper xml file, Data Managers require several xml config files that define the interaction of the Data Manager with the Galaxy framework and with the Data Tables they are supposed to populate.
-- Currently, Galaxy only allows for partial automation of Data Manager testing. Some manual testing is required.
+- In addition to a regular tool wrapper XML file, Data Managers require one more XML config file that defines their interaction with the Galaxy framework and a few other files to declare and set up the Data Tables they are supposed to populate.
+- Currently, Galaxy only allows for partial automation of Data Manager testing. Some manual testing is required, and a checklist to clear before releasing a new Data Manager is recommended.
 contributions:
   authorship:
     - wm75
@@ -51,7 +51,7 @@ and whether it needs some reformatting or other pre-processing before being usab
 
 ![The issue of maintaining different kinds of data with the .loc files approach illustrated through three examples](../../images/loc-files-approach.png "The issue of maintaining different kinds of data with the .loc files approach")
 
-In principle, admins could automate some of this work through scripts, but it would be nice to not have each admin reinvent the wheel.
+In principle, admins could automate some of this work through scripts, but it would be great to not have each admin reinvent the wheel, and provide one, reproducible way of installing any given reference data instead.
 
 ## The idea behind Data Managers
 
@@ -320,7 +320,7 @@ Lets look at these components one-by-one:
    Galaxy to record the `extra_files_path` folder name both in the value column and in the
    name column of the `cat_database` Data Table.
 
-   It also wants to store the paths to the extracted `database_folder` and `taxonomy_folder` so that tools that later want to use that data can discover
+   It also wants to store the paths to the extracted `database_folder` and `taxonomy_folder` to let tools, that later want to use that data, discover
    it from the corresponding columns of the Data Table.
 
    However, here's the issue:
@@ -349,9 +349,10 @@ Lets look at these components one-by-one:
 
    The definitions of the `database_folder` column hold two types of instructions for Galaxy:
 
-   1. The `<move>` element says that Galaxy should take (see the `<source>` element) the data that lives where the `${database_folder}` item of the `data_manager_json` output says it lives and move it to a destination `CAT/${database_folder}` under the base path indicated by `${GALAXY_DATA_MANAGER_DATA_PATH}` (which itself is the configured cached data storage path of the Galaxy instance).
+   1. The `<move>` element says that Galaxy should take (see the `<source>` element) the data that lives where the `${database_folder}` item of the `data_manager_json` output says it lives and move it to a destination `CAT/${database_folder}` under the base path indicated by `${GALAXY_DATA_MANAGER_DATA_PATH}` (which itself is the configured storage path for managed data of the Galaxy instance).
 
-   2. The first `<value_translation>` element says that Galaxy should not write the Data Manager Tool-provided value for `database_folder` directly, but instead first translate it to `${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder`. If you compare the resulting string with the `<move>` instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.
+   2. The first `<value_translation>` element says that Galaxy should not write the Data Manager Tool-provided value for `database_folder` directly, but instead first translate it to `${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}`.
+   3. If you compare the resulting string with the `<move>` instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.
 
       The second `<value_translation>` element simply says that Galaxy should turn the result of the first translation into an absolute path on the system. The result is then the value that will get written into the `database_folder` column of the `cat_database` table.
 
@@ -359,9 +360,71 @@ Lets look at these components one-by-one:
 
 # How to test Data Manager Tools?
 
+The key file for testing a Data Manager Tool is `tool_data_table_conf.xml.test` in the root folder of the Data Manager.
+This file is an exact copy of the `tool_data_table_conf.xml.sample` file in that same folder - except that the:
+
+`<file path="tool-data/[Table name].loc" />`
+
+lines in every table declaration are changed to:
+
+`<file path="${__HERE__}/test-data/[Table name].loc" />`
+
+where `${__HERE__}` references the folder that the `tool_data_table_conf.xml.test` file lives in.
+
+For the bowtie2 Data Manager, for example, the file's content is this:
+
+   ```
+   <tables>
+       <!-- Locations of indexes in the Bowtie2 mapper format -->
+       <table name="bowtie2_indexes" comment_char="#">
+           <columns>value, dbkey, name, path</columns>
+           <file path="${__HERE__}/test-data/bowtie2_indices.loc" />
+       </table>
+       <!-- Locations of indexes in the Bowtie2 mapper format for TopHat2 to use -->
+       <table name="tophat2_indexes" comment_char="#">
+           <columns>value, dbkey, name, path</columns>
+           <file path="${__HERE__}/test-data/tophat2_indices.loc" />
+       </table>
+       <!-- Locations of all fasta files under genome directory -->
+       <table name="all_fasta" comment_char="#">
+           <columns>value, dbkey, name, path</columns>
+           <file path="${__HERE__}/test-data/all_fasta.loc" />
+       </table>
+   </tables>
+   ```
+
+The referenced .loc files in the `test-data` folder must exist, but can be empty if the Data Manager is supposed to write to them as part of the test run.
+If the Data Manager needs to *read* the referenced Data Table to populate its tool interface, you need to have at least one record in the corresponding `test-data/[Table name].loc` file.
+
+For example, the bowtie2 Data Manager needs to read from the `all_fasta` table and ships with this content of `test-data/all_fasta.loc` (comment lines omitted for brevity):
+
+   ```
+   phiX174    phiX174    phiX 174    ${__HERE__}/phiX174.fasta
+   ```
+
+The last column uses the special variable `${__HERE__}` again, which means the folder, i.e. test-data, that the file using it lives in.
+The file `test-data/phiX174.fasta`, in turn, holds the tiny genome of the bacteriophage Phi X 174 that a test run of the Data Manager is supposed to create a bowtie2 index for.
+
+Taken together, this arrangement of test files allows the Data Manager Tool wrapper to define the following simple test case:
+
+   ```
+   <test>
+       <param name="all_fasta_source" value="phiX174"/>
+       <output name="out_file" value="bowtie2_data_manager.1.json"/>
+   </test>
+   ```
+
+When executed with `planemo test`, this will:
+
+1. load the Data Tables declared in `tool_data_table_conf.xml.test` into Galaxy,
+2. select the `phiX174` record from the `test-data/all_fasta.loc` table,
+3. pass the path to the `test-data/phiX174.fasta` file defined in the record to the command line section of the tool, and
+4. verify that the tool's primary output matches the content of the file `bowtie2_data_manager.1.json`, which also lives in the test-data folder.
+
 Unfortunately, the only automated tests you can run on a Data Manager Tool are the ones available for regular tools, too.
 
-This means that you can test assumptions about the tool's `data_manager_json` output, about the command line formed and the stdout and stderr generated, but you can **not** verify that the Data Manager framework detects any data in the `extra_files_path` and moves it to the intended location.
+This means that, with automated tests, you can verify assumptions about the tool's `data_manager_json` output, about the command line formed and the stdout and stderr generated,
+but you need to verify **manually** that the Data Manager framework detects any data in the `extra_files_path` and moves it to the intended location.
 
 For this reason, `planemo serve` is a very important command to use during any work on Data Managers!
 
@@ -441,5 +504,9 @@ In a few places this list goes beyond Galaxy's requirements for Data Manager Too
 >    - {% icon point-right %} `<move>` logic in `data_manger_conf.xml` handles transfer of all relevant content under `extra_files_path` to `<target base="${GALAXY_DATA_MANAGER_DATA_PATH}">` destination
 >    - {% icon point-right %} `<value_translation>` logic in `data_manger_conf.xml` handles rewrite of all paths to managed data to point to target destinations
 >    - {% icon point-right %} Data Manager (or helper script) deletes any irrelevant data left behind under `extra_files_path`
+>
+> 3. Manual cleanup work before commitiing / publishing
+>
+>    - {% icon point-right %} All .loc files in test-data, which may have been wriiten to during manual and/or automated testing of the Data Manager are reverted to their original state.
 >
 {: .hands_on}
