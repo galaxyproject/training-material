@@ -6,24 +6,28 @@ digraph main {
   2[color=lightblue,label="ℹ️ Input Dataset\nbed file with genes"]
   3[label="ATAC remove nextera adapters with cutadapt"]
   0 -> 3 [label="output"]
-  kd197ec941dec41f4b70f7b350a07bdf7[color=lightseagreen,label="Output\nreport"]
-  3 -> kd197ec941dec41f4b70f7b350a07bdf7
+  k3c22eaf43d1a4eab880f680d38df77c3[color=lightseagreen,label="Output\nreport"]
+  3 -> k3c22eaf43d1a4eab880f680d38df77c3
   4[label="Flatten collection"]
   0 -> 4 [label="output"]
   5[label="Filter"]
   1 -> 5 [label="output"]
   6[label="Bowtie2"]
   3 -> 6 [label="out_pairs"]
+  k25c7e8d90d9846ce803f9c6b049c20f6[color=lightseagreen,label="Output\nmapping_stats"]
+  6 -> k25c7e8d90d9846ce803f9c6b049c20f6
   7[label="Flatten collection"]
   3 -> 7 [label="out_pairs"]
-  8[label="FastQC"]
+  8[label="Falco"]
   4 -> 8 [label="output"]
   9[label="bedtools Intersect intervals"]
   5 -> 9 [label="out_file1"]
   2 -> 9 [label="output"]
+  k04a45b270a1544bea272b169193d1fc0[color=lightseagreen,label="Output\nCTCF Peaks on chr22"]
+  9 -> k04a45b270a1544bea272b169193d1fc0
   10[label="Filter BAM ATAC"]
   6 -> 10 [label="output"]
-  11[label="FastQC"]
+  11[label="Falco"]
   7 -> 11 [label="output"]
   12[label="MarkDuplicates"]
   10 -> 12 [label="out_file1"]
@@ -40,18 +44,20 @@ digraph main {
   15 -> 17 [label="output_narrowpeaks"]
   2 -> 17 [label="output"]
   1 -> 17 [label="output"]
+  k203b94d81fe64a0db3ba81ef40a4f5a8[color=lightseagreen,label="Output\npyGenomeTracks Plot"]
+  17 -> k203b94d81fe64a0db3ba81ef40a4f5a8
   18[label="computeMatrix"]
   16 -> 18 [label="out_file1"]
   2 -> 18 [label="output"]
   19[label="computeMatrix"]
   16 -> 19 [label="out_file1"]
   9 -> 19 [label="output"]
-  k78114e874bae456db32b3e0eed141052[color=lightseagreen,label="Output\ncomputeMatrix on input dataset(s): Matrix"]
-  19 -> k78114e874bae456db32b3e0eed141052
   20[label="plotHeatmap"]
   18 -> 20 [label="outFileName"]
+  k4188da56641144dcb962d726b6d74c2b[color=lightseagreen,label="Output\nheatmap at chr22 TSS"]
+  20 -> k4188da56641144dcb962d726b6d74c2b
   21[label="plotHeatmap"]
   19 -> 21 [label="outFileName"]
-  k67a173a42d7943e7b3fcc250022a5c0a[color=lightseagreen,label="Output\nplotHeatmap on input dataset(s): Image"]
-  21 -> k67a173a42d7943e7b3fcc250022a5c0a
+  kcf438abfd34e499aadeeedb6dc22d432[color=lightseagreen,label="Output\nheatmap at CTCF peaks"]
+  21 -> kcf438abfd34e499aadeeedb6dc22d432
 }
