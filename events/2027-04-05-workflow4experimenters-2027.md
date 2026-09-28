@@ -13,8 +13,6 @@ cover-image-alt: W4E official logo, which is a green square with W4E written in 
 tags:
 - metabolomics
 
-external: https://workflow4metabolomics.github.io/website/W4E/w4e2027.html
-
 contributions:
   organisers:
   - workflow4metabolomics
@@ -47,8 +45,10 @@ contributions:
 date_start: 2027-04-05
 date_end: 2027-04-30
 
-cost: 1300€ for academic and 2500€ for private institution (to cover expenses for trainers, organization, materials and meals); special discount of 100€ is offered for [RFMF](https://www.rfmf.fr/) members 2027.
+cost: 1300 EUR (academic), 2500 EUR (private institution). 100 EUR for [RFMF](https://www.rfmf.fr/) members 2027.
+
 audience: This event is intended for anyone interested in learning how to process metabolomic data in Galaxy, including PhD students, technicians, engineers, post-docs, scientists. As the school is based on a bring-your-own-data format, best benefit is achieved when participants do have data to bring to the training at the time of the school.
+
 contact_email: workflow4metabolomics@proton.me
 async: false
 mode: onsite
@@ -75,7 +75,7 @@ infrastructure:
   servers:
     - server: https://workflow4metabolomics.usegalaxy.fr/
       name: "Galaxy FR - W4M subdomain"
-      tiaas_link: 
+      tiaas_link:
 
   custom:
     description: |
@@ -157,7 +157,7 @@ program:
 
 Analyze your data with Galaxy and the Workflow4Metabolomics infrastructure!
 
-The Workflow4Experimenters 2027 session will take place in April 2027. 
+The Workflow4Experimenters 2027 session will take place in April 2027.
 During this one-week course (entirely in English), participants will learn how to use the W4M infrastructure and analyze their own LC-MS, GC-MS, or NMR data.
 
 For this new session, we continue with the acclaimed two-step format:
@@ -168,8 +168,12 @@ For this new session, we continue with the acclaimed two-step format:
 
 **The pre-registration is soon to be opened. As soon as it opens, you will find here the link to the pre-registration form.**
 
+Cost is 1300€ for academic and 2500€ for private institution (to cover expenses for trainers, organization, materials and meals); special discount of 100€ is offered for [RFMF](https://www.rfmf.fr/) members 2027.
+
 **Scientific comitee**: C. Delporte (ULB, Bruxelles), C. Dalle (U.DAB IRBA, Brétigny-sur-Orge), Y. Guitton (Laberca Oniris/INRAE, Nantes), D. Centeno & M. Pétéra (PFEM INRAE, Clermont-Ferrand), G. Le Corguillé (Abims, Roscoff), B. Diémé (PFEM Université Clermont Auvergne), F. Souard (ULB, Bruxelles & Université de Grenoble), C. Canlet, M. Tremblay-Franco (Toxalim INRAE, Toulouse), I. Schmitz (PBS, CNRS, Rouen), S. Chéreau (INRAE, Rennes), H. Hecht (RECETOX, Brno), R.Weber (University of Birmingham)
 
 **Contact**: workflow4metabolomics@proton.me
 
 **Sponsor**: W4M is jointly developed and maintained by the French Bioinformatics Infrastructure (IFB, ELIXIR-FR), the French Infrastructure for Metabolomics and Fluxomics (MetaboHUB) and the Réseau Francophone de Métabolomique et Fluxomique (RFMF).
+
+**See also:** <https://workflow4metabolomics.github.io/website/W4E/w4e2027.html>
