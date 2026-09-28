@@ -1,3 +1,0 @@
----
-layout: workflow-list
----
