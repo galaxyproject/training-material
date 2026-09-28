@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aab1d7d6c8f01937905ddc233da5e4d731539eb4",
+		release: "galaxy-training-network@400387097e86f8dfa7369b8629d1d7eed05430fc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Single-cell ATAC-seq standard processing with SnapATAC2">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
+<meta name="DC.date" content="2026-09-28 08:18:00 +0000">
 <meta name="DC.creator" content="Timon Schlegel"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Single-cell ATAC-seq standard processing with SnapATAC2 / Hands-on: Single-cell ATAC-seq standard processing with SnapATAC2">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-09-23 07:25:04 +0000",
+  "dateModified": "2026-09-28 08:18:00 +0000",
   "datePublished": "2024-07-11 14:34:09 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -304,7 +304,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Single-cell ATAC-seq standard processing with SnapATAC2",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT4H",
   "teaches": "- Learn how single-cell ATAC-seq data is processed\n- Create a count-matrix from a 10X fragment file\n- Perform filtering, dimension reduction and clustering on AnnData matrices\n- Generate and filter a cell-by-gene matrix\n- Identify marker genes for the clusters and annotate the cell types",
   "keywords": [
@@ -960,6 +960,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://bio.tools/tool/anndata",
+      "name": "anndata"
+    },
+    {
+      "@type": "Thing",
       "url": "https://bio.tools/tool/scanpy",
       "name": "SCANPY"
     },
@@ -1479,7 +1484,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 11, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1497,7 +1502,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -2614,13 +2619,14 @@ In scRNA-seq, filtering and normalization are therefore required to produce a hi
   <div class="box-title hands-on-title" id="hands-on-copy-umap-embedding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Copy UMAP embedding</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.3+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.9+galaxy1)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Anndata 5k PBMC magic</code> (output of <strong>external.pp.magic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Copy embeddings (such as UMAP, tSNE)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Anndata 5k PBMC magic</code> (output of <strong>external.pp.magic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Copy embeddings from a different anndata object</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source anndata object”</em>: <code class="language-plaintext highlighter-rouge">Anndata 5k PBMC leiden</code></li>
+        <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert keys from embeddings to copy”</em>
           <ul>
-            <li><em>“Keys from embeddings to copy”</em>: <code class="language-plaintext highlighter-rouge">X_umap</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“IAnnData objects with embeddings to copy”</em>: <code class="language-plaintext highlighter-rouge">Anndata 5k PBMC leiden</code></li>
+            <li><em>“Key to be copied from the source anndata”</em>: <code class="language-plaintext highlighter-rouge">X_umap</code></li>
           </ul>
         </li>
       </ul>
@@ -2663,7 +2669,7 @@ In scRNA-seq, filtering and normalization are therefore required to produce a hi
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy3" title="Plot with Scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy3)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (output of <strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
           <ul>
             <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">leiden, CD3D, CD8A, CD4, MS4A1, NKG7, CD14, FCER1A</code></li>
@@ -3587,11 +3593,6 @@ tools:
   revisions: 7d37cfda8e00
   tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: anndata_ops
-  owner: ebi-gxa
-  revisions: a4774b7b2e85
-  tool_panel_section_label: Single-cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_inspect
   owner: iuc
   revisions: 6f0d0c784f09
@@ -3600,6 +3601,16 @@ tools:
 - name: anndata_manipulate
   owner: iuc
   revisions: ed4996a16f7f
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_manipulate
+  owner: iuc
+  revisions: be1fdce914c6
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_manipulate
+  owner: iuc
+  revisions: 637e50759b72
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_filter
@@ -3624,6 +3635,11 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snapatac2_clustering
   owner: iuc
+  revisions: 94ae400dde2f
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snapatac2_clustering
+  owner: iuc
   revisions: d3ea0ba3d066
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
@@ -3634,7 +3650,17 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snapatac2_plotting
   owner: iuc
+  revisions: c01f0a08ab43
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snapatac2_plotting
+  owner: iuc
   revisions: 05bd4db20227
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snapatac2_preprocessing
+  owner: iuc
+  revisions: 48d9421bf176
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snapatac2_preprocessing
@@ -3758,7 +3784,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aab1d7d6c8f01937905ddc233da5e4d731539eb4">aab1d7d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/400387097e86f8dfa7369b8629d1d7eed05430fc">4003870</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

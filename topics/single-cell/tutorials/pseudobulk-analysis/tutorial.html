@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aab1d7d6c8f01937905ddc233da5e4d731539eb4",
+		release: "galaxy-training-network@400387097e86f8dfa7369b8629d1d7eed05430fc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pseudobulk Analysis with Decoupler and EdgeR">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
+<meta name="DC.date" content="2026-09-28 08:18:00 +0000">
 <meta name="DC.creator" content="Diana Chiang Jurado"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Pseudobulk Analysis with Decoupler and EdgeR / Hands-on: Pseudobulk Analysis with Decoupler and EdgeR">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-09-23 07:25:04 +0000",
+  "dateModified": "2026-09-28 08:18:00 +0000",
   "datePublished": "2025-02-12 16:29:15 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Pseudobulk Analysis with Decoupler and EdgeR",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/pseudobulk-analysis/tutorial.html",
-  "version": 9,
+  "version": 10,
   "timeRequired": "PT4H",
   "teaches": "- Understand the principles of pseudobulk analysis in single-cell data\n- Understand and generate the pseudobulk expression matrix with Decoupler\n- Perform differential expression analysis using edgeR",
   "keywords": [
@@ -1484,7 +1484,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 12, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1502,7 +1502,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -1669,7 +1669,8 @@ To view more specific details in the AnnData object, select a different paramete
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-missing-raw-counts"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-missing-raw-counts" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Missing Raw Counts? </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>If your AnnData object lacks raw counts, you can use the <strong><a href="https://toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0">AnnData Operations</a></strong> tool on the <strong><a href="https://singlecell.usegalaxy.eu">Single Cell Galaxy instance</a></strong>. This tool allows you to copy the <code class="language-plaintext highlighter-rouge">.X</code> matrix into a new layer that you may assign a new label, for e.g., <code class="language-plaintext highlighter-rouge">counts</code> or <code class="language-plaintext highlighter-rouge">raw_counts</code>, making it available as a parameter for Decoupler.</p>
+  <p>If your AnnData object lacks raw counts, you can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.9+galaxy1)</span> tool with <em>“Function to manipulate the object
+“</em> as <code class="language-plaintext highlighter-rouge">Copy data matrix (.X) from a different anndata object</code>. Use the same anndata object for both the source and destination. This tool allows you to copy the <code class="language-plaintext highlighter-rouge">.X</code> matrix into a new layer that you may assign a new label, for e.g., <code class="language-plaintext highlighter-rouge">counts</code> or <code class="language-plaintext highlighter-rouge">raw_counts</code>, making it available as a parameter for Decoupler.</p>
 
   <p>Importantly, ensure that the copying of this matrix as a raw counts layer is done carefully and correctly. To verify that your AnnData object contains the necessary raw counts layer, you can use the <strong><a href="https://toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0">Inspect AnnData Object</a></strong> tool. This tool helps confirm the presence of raw counts and other essential metadata in your AnnData object before proceeding with pseudobulk analysis.</p>
 
@@ -2844,7 +2845,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aab1d7d6c8f01937905ddc233da5e4d731539eb4">aab1d7d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/400387097e86f8dfa7369b8629d1d7eed05430fc">4003870</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

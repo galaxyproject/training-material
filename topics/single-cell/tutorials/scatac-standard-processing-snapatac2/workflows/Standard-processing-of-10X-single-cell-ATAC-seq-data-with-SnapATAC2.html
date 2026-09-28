@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aab1d7d6c8f01937905ddc233da5e4d731539eb4",
+		release: "galaxy-training-network@400387097e86f8dfa7369b8629d1d7eed05430fc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -244,14 +244,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			2
+			3
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Aug 9, 2024
+			Sep 28, 2026
 
 			<br/>
 
@@ -270,9 +270,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #e1c7ff; --color-darker: #d3a9ff; --color-dimmed: #dab8ff;">scATAC-seq</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #d5aeff; --color-darker: #c991ff; --color-dimmed: #cf9fff;">scATAC-seq</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #9ce700; --color-darker: #8acd00; --color-dimmed: #93da00;">epigenetics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #8ed100; --color-darker: #7dbb00; --color-dimmed: #85c600;">epigenetics</div>
 			
 			</br>
 			
@@ -341,13 +341,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy Australia</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.ca/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy Canada</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-standard-processing-snapatac2/versions/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2">Galaxy Main</a></li>
 					
@@ -481,20 +481,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   8c1c7aa9-b9dd-467b-9715-73773aea093f["Output\nanndata_magic"];
   27 --> 8c1c7aa9-b9dd-467b-9715-73773aea093f;
   style 8c1c7aa9-b9dd-467b-9715-73773aea093f stroke:#2c3143,stroke-width:4px;
-  28["Copy obsm"];
-  21 -->|anndata_out| 28;
+  28["Manipulate AnnData"];
   27 -->|anndata_out| 28;
-  2c3825d3-7151-4eef-97d0-c8a31ca6fd3e["Output\nanndata_gene-matrix_leiden"];
-  28 --> 2c3825d3-7151-4eef-97d0-c8a31ca6fd3e;
-  style 2c3825d3-7151-4eef-97d0-c8a31ca6fd3e stroke:#2c3143,stroke-width:4px;
+  21 -->|anndata_out| 28;
+  ff2018c3-8b63-4e41-b2a8-5704ddf2ddbb["Output\nanndata_gene-matrix_leiden"];
+  28 --> ff2018c3-8b63-4e41-b2a8-5704ddf2ddbb;
+  style ff2018c3-8b63-4e41-b2a8-5704ddf2ddbb stroke:#2c3143,stroke-width:4px;
   29["umap_plot_with_scanpy"];
-  28 -->|output_h5ad| 29;
+  28 -->|anndata| 29;
   4 -->|output| 29;
   4cfbbb70-156b-48d7-b14b-db21198d9b6d["Output\numap_marker-genes"];
   29 --> 4cfbbb70-156b-48d7-b14b-db21198d9b6d;
   style 4cfbbb70-156b-48d7-b14b-db21198d9b6d stroke:#2c3143,stroke-width:4px;
   30["Inspect observations"];
-  28 -->|output_h5ad| 30;
+  28 -->|anndata| 30;
   31["Cut leiden from table"];
   30 -->|obs| 31;
   11c22200-a54e-4585-82c4-8457dbbfb53c["Output\nleiden annotation"];
@@ -507,7 +507,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   32 --> 467de061-79e6-4148-8a65-c06383a14012;
   style 467de061-79e6-4148-8a65-c06383a14012 stroke:#2c3143,stroke-width:4px;
   33["Manipulate AnnData"];
-  28 -->|output_h5ad| 33;
+  28 -->|anndata| 33;
   32 -->|outfile_replace| 33;
   cbba6173-f439-4fd5-8423-946aa625112b["Output\nanndata_cell_type"];
   33 --> cbba6173-f439-4fd5-8423-946aa625112b;
@@ -577,103 +577,97 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Keys for annotations of obs/cells or vars/genes</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Plotting</td>
 					<td>pl.frag_size_distr</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Plotting</td>
 					<td>pl.frag_size_distr_log</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>metrics.tsse</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.import_data-sorted_by_barcodes</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Plotting</td>
 					<td>pl.tsse</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.filter_cells</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.add_tile_matrix</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.select_features</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.scrublet</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>pp.filter_doublets</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Clustering</td>
 					<td>tl.spectral</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Clustering</td>
 					<td>tl.umap</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Clustering</td>
 					<td>pp.knn</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Clustering</td>
 					<td>tl.leiden</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Plotting</td>
 					<td>pl.umap</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</td>
 					<td>SnapATAC2 Preprocessing</td>
 					<td>make_gene_matrix</td>
 				</tr>
@@ -703,9 +697,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0</td>
-					<td>AnnData Operations</td>
-					<td>Copy obsm</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.13.3+galaxy0</td>
+					<td>Manipulate AnnData</td>
+					<td></td>
 				</tr>
 				
 				<tr>
@@ -778,18 +772,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0">toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/ebi-gxa/anndata_ops/a4774b7b2e85">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0</a></td>
 				<td>
 					
@@ -807,6 +789,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					
 					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_manipulate/ed4996a16f7f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.13.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.13.3+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_manipulate/637e50759b72">
 						View in ToolShed
 					</a>
 					
@@ -862,11 +856,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_clustering/d3ea0ba3d066">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_clustering/94ae400dde2f">
 						View in ToolShed
 					</a>
 					
@@ -874,11 +868,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_plotting/05bd4db20227">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_plotting/c01f0a08ab43">
 						View in ToolShed
 					</a>
 					
@@ -886,11 +880,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_preprocessing/c5c94e01a1b5">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/snapatac2_preprocessing/48d9421bf176">
 						View in ToolShed
 					</a>
 					
@@ -920,6 +914,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>3</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/d564737abf797c846c99091b0cd421d542965cf6">d564737ab</a></td>
+						<td>2026-09-24 16:15:10</td>
+						<td>Remove anndata ops from scatac preprocessing</td>
+					</tr>
 					
 					<tr>
 						<td>2</td>
@@ -1016,7 +1017,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aab1d7d6c8f01937905ddc233da5e4d731539eb4">aab1d7d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/400387097e86f8dfa7369b8629d1d7eed05430fc">4003870</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aab1d7d6c8f01937905ddc233da5e4d731539eb4",
+		release: "galaxy-training-network@400387097e86f8dfa7369b8629d1d7eed05430fc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -246,14 +246,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			3
+			4
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Mar 19, 2025
+			Sep 28, 2026
 
 			<br/>
 
@@ -272,9 +272,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #9ce700; --color-darker: #8acd00; --color-dimmed: #93da00;">epigenetics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #8ed100; --color-darker: #7dbb00; --color-dimmed: #85c600;">epigenetics</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffbdf3; --color-darker: #ff96ed; --color-dimmed: #ffaaf0;">cut&run</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ff9dee; --color-darker: #ff75e9; --color-dimmed: #ff8aec;">cut&run</div>
 			
 			</br>
 			
@@ -341,11 +341,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-cut_and_run/versions/main-workflow">Galaxy Main</a></li>
+					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-cut_and_run/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-cut_and_run/versions/main-workflow">Galaxy Australia</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-cut_and_run/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.ca/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-cut_and_run/versions/main-workflow">Galaxy Canada</a></li>
 					
@@ -411,20 +411,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   1 -->|output| 22;
   23["Extract Genomic DNA"];
   22 -->|output| 23;
-  24["computeMatrix"];
-  20 -->|out_file1| 24;
+  24["Cut"];
   22 -->|output| 24;
   25["MEME-ChIP"];
   23 -->|output| 25;
   2 -->|output| 25;
-  fbd5951d-3055-40c3-a14f-340a54da4924["Output\noutput"];
-  25 --> fbd5951d-3055-40c3-a14f-340a54da4924;
-  style fbd5951d-3055-40c3-a14f-340a54da4924 stroke:#2c3143,stroke-width:4px;
-  26["plotHeatmap"];
-  24 -->|outFileName| 26;
-  7f06a448-0145-4e07-890b-6409de321123["Output\noutFileName"];
-  26 --> 7f06a448-0145-4e07-890b-6409de321123;
-  style 7f06a448-0145-4e07-890b-6409de321123 stroke:#2c3143,stroke-width:4px;</pre>
+  866ccdf7-bdb9-471d-b68d-4ef3a557ee71["Output\nMEME-ChIP html output"];
+  25 --> 866ccdf7-bdb9-471d-b68d-4ef3a557ee71;
+  style 866ccdf7-bdb9-471d-b68d-4ef3a557ee71 stroke:#2c3143,stroke-width:4px;
+  26["computeMatrix"];
+  20 -->|out_file1| 26;
+  24 -->|out_file1| 26;
+  27["plotHeatmap"];
+  26 -->|outFileName| 27;
+  75ea7005-fe2d-4aac-b587-60281adc6ca3["Output\nheatmap"];
+  27 --> 75ea7005-fe2d-4aac-b587-60281adc6ca3;
+  style 75ea7005-fe2d-4aac-b587-60281adc6ca3 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -471,7 +473,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.4+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1</td>
 					<td>plotHeatmap</td>
 					<td></td>
 				</tr>
@@ -489,6 +491,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Cut1">Cut1</a></td>
+				<td>
+					
+				</td>
+			</tr>
 			
 			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=Grep1">Grep1</a></td>
@@ -512,11 +521,32 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.4+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.4+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/deeptools_compute_matrix/a60c359ec43c">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/b94789823aad">
 						View in ToolShed
 					</a>
 					
@@ -524,11 +554,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.4+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.4+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/deeptools_plot_fingerprint/4ed32329e0ed">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bamtools_filter/47db0f26ca31">
 						View in ToolShed
 					</a>
 					
@@ -536,47 +566,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.4+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.4+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/deeptools_plot_heatmap/e4c7985d4585">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/eefb644655a5">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2">toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bamtools_filter/993b19f20c76">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bowtie2/d5ceb9f3c25b">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bowtie2/a470b376503d">
 						View in ToolShed
 					</a>
 					
@@ -620,11 +614,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/datamash_transpose/a513e3fbb4c5">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/datamash_transpose/a884245d3b3a">
 						View in ToolShed
 					</a>
 					
@@ -644,11 +638,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/falco/959a14c1f2dd">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/falco/219ffa24f789">
 						View in ToolShed
 					</a>
 					
@@ -680,11 +674,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/31c42a2c02d3">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/97255f6fdf7e">
 						View in ToolShed
 					</a>
 					
@@ -733,6 +727,41 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>9</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/e61d8c78ef1df2b18a6db938596f0638dc7c6f14">e61d8c78e</a></td>
+						<td>2026-09-25 10:11:42</td>
+						<td>update the workflow and add a new answer history</td>
+					</tr>
+					
+					<tr>
+						<td>8</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/460a829581a9a5d658e6d4e96907b17dec194eee">460a82958</a></td>
+						<td>2026-09-24 20:20:00</td>
+						<td>update the workflow</td>
+					</tr>
+					
+					<tr>
+						<td>7</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/547d61c2c23f67ae7bf2c70dd3987a20737037f7">547d61c2c</a></td>
+						<td>2026-09-21 14:25:35</td>
+						<td>Update topics/epigenetics/tutorials/cut_and_run/workflows/main_workflow.ga</td>
+					</tr>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/2b068d278fc92624638a99cac34cde36aec7b07c">2b068d278</a></td>
+						<td>2026-09-21 13:28:40</td>
+						<td>update the workflow README</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/2c22129cd2f2bb1535b4e8e61d7eb0d26f577e92">2c22129cd</a></td>
+						<td>2026-09-21 12:55:19</td>
+						<td>Update CUT-N-RUN workflow and tests</td>
+					</tr>
 					
 					<tr>
 						<td>4</td>
@@ -843,7 +872,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aab1d7d6c8f01937905ddc233da5e4d731539eb4">aab1d7d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/400387097e86f8dfa7369b8629d1d7eed05430fc">4003870</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

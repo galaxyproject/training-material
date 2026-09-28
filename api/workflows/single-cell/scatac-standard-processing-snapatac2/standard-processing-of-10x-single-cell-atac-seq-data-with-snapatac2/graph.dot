@@ -95,18 +95,18 @@ digraph main {
   26 -> 27 [label="anndata_out"]
   k8c1c7aa9b9dd467b971573773aea093f[color=lightseagreen,label="Output\nanndata_magic"]
   27 -> k8c1c7aa9b9dd467b971573773aea093f
-  28[label="Copy obsm"]
-  21 -> 28 [label="anndata_out"]
+  28[label="Manipulate AnnData"]
   27 -> 28 [label="anndata_out"]
-  k2c3825d371514eef97d0c8a31ca6fd3e[color=lightseagreen,label="Output\nanndata_gene-matrix_leiden"]
-  28 -> k2c3825d371514eef97d0c8a31ca6fd3e
+  21 -> 28 [label="anndata_out"]
+  kff2018c38b634e41b2a85704ddf2ddbb[color=lightseagreen,label="Output\nanndata_gene-matrix_leiden"]
+  28 -> kff2018c38b634e41b2a85704ddf2ddbb
   29[label="umap_plot_with_scanpy"]
-  28 -> 29 [label="output_h5ad"]
+  28 -> 29 [label="anndata"]
   4 -> 29 [label="output"]
   k4cfbbb70156b48d7b14bdb21198d9b6d[color=lightseagreen,label="Output\numap_marker-genes"]
   29 -> k4cfbbb70156b48d7b14bdb21198d9b6d
   30[label="Inspect observations"]
-  28 -> 30 [label="output_h5ad"]
+  28 -> 30 [label="anndata"]
   31[label="Cut leiden from table"]
   30 -> 31 [label="obs"]
   k11c22200a54e458582c48457dbbfb53c[color=lightseagreen,label="Output\nleiden annotation"]
@@ -117,7 +117,7 @@ digraph main {
   k467de06179e641488a65c06383a14012[color=lightseagreen,label="Output\ncell type annotation"]
   32 -> k467de06179e641488a65c06383a14012
   33[label="Manipulate AnnData"]
-  28 -> 33 [label="output_h5ad"]
+  28 -> 33 [label="anndata"]
   32 -> 33 [label="outfile_replace"]
   kcbba6173f4394fd58423946aa625112b[color=lightseagreen,label="Output\nanndata_cell_type"]
   33 -> kcbba6173f4394fd58423946aa625112b

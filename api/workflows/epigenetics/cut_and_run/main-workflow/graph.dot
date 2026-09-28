@@ -48,16 +48,18 @@ digraph main {
   1 -> 22 [label="output"]
   23[label="Extract Genomic DNA"]
   22 -> 23 [label="output"]
-  24[label="computeMatrix"]
-  20 -> 24 [label="out_file1"]
+  24[label="Cut"]
   22 -> 24 [label="output"]
   25[label="MEME-ChIP"]
   23 -> 25 [label="output"]
   2 -> 25 [label="output"]
-  kfbd5951d305540c3a14f340a54da4924[color=lightseagreen,label="Output\noutput"]
-  25 -> kfbd5951d305540c3a14f340a54da4924
-  26[label="plotHeatmap"]
-  24 -> 26 [label="outFileName"]
-  k7f06a44801454e07890b6409de321123[color=lightseagreen,label="Output\noutFileName"]
-  26 -> k7f06a44801454e07890b6409de321123
+  k866ccdf7bdb9471db68d4ef3a557ee71[color=lightseagreen,label="Output\nMEME-ChIP html output"]
+  25 -> k866ccdf7bdb9471db68d4ef3a557ee71
+  26[label="computeMatrix"]
+  20 -> 26 [label="out_file1"]
+  24 -> 26 [label="out_file1"]
+  27[label="plotHeatmap"]
+  26 -> 27 [label="outFileName"]
+  k75ea7005fe2d4aacb58760281adc6ca3[color=lightseagreen,label="Output\nheatmap"]
+  27 -> k75ea7005fe2d4aacb58760281adc6ca3
 }
