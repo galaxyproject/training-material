@@ -45,7 +45,7 @@ contributions:
 date_start: 2027-04-05
 date_end: 2027-04-30
 
-cost: 1300 EUR (academic), 2500 EUR (private institution). 100 EUR for [RFMF](https://www.rfmf.fr/) members 2027.
+cost: 1300 EUR (academic), 2500 EUR (private institution). 100 EUR discount for [RFMF](https://www.rfmf.fr/) members 2027.
 
 audience: This event is intended for anyone interested in learning how to process metabolomic data in Galaxy, including PhD students, technicians, engineers, post-docs, scientists. As the school is based on a bring-your-own-data format, best benefit is achieved when participants do have data to bring to the training at the time of the school.
 
