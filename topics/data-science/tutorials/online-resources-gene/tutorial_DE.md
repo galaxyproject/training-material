@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Lernen über ein Gen über biologische Ressourcen und Formate hinweg
 level: Introductory
 draft: true
-zenodo_link: https://zenodo.org/record/8304465
+zenodo_link: 'https://zenodo.org/record/8304465'
 questions:
   - Wie kann man bioinformatische Ressourcen nutzen, um eine bestimmte Proteinfamilie (Opsine) zu untersuchen?
   - Wie navigiert man im Genome Data Viewer, um Opsine im menschlichen Genom zu finden?

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Functional annotation of protein sequences
-zenodo_link: https://zenodo.org/record/6861851
+zenodo_link: 'https://zenodo.org/record/6861851'
 tags:
   - eukaryote
   - biodiversity

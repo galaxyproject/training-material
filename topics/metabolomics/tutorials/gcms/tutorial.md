@@ -4,7 +4,7 @@ draft: false
 
 title: 'Mass spectrometry: GC-MS analysis with the metaMS package'
 level: Introductory
-zenodo_link: 'https://zenodo.org/records/16538501' 
+zenodo_link: 'https://zenodo.org/record/16538501'
 questions: 
 - What are the main steps for gas chromatography-mass spectrometry (GC-MS) data processing for untargeted metabolomic analysis?
 - How to conduct metabolomic GC-MS data analysis from preprocessing to annotation using Galaxy?

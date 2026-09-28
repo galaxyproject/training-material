@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Spatial transcriptomics analysis of a primary dermal melanoma section from Xenium
 subtopic: spatial
 level: Advanced
-zenodo_link: https://zenodo.org/records/22078050
+zenodo_link: 'https://zenodo.org/record/22078050'
 questions:
 - How is a Xenium output bundle turned into a SpatialData object in Galaxy, and what does that object contain?
 - Which quality control metrics are specific to segmented cells, and how do they change the filtering decisions?
