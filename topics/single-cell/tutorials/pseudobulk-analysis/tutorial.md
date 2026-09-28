@@ -189,7 +189,8 @@ Most importantly, the `AnnData` object must include a layer containing the raw g
 
 > <tip-title> Missing Raw Counts? </tip-title>
 >
-> If your AnnData object lacks raw counts, you can use the **[AnnData Operations](https://toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0)** tool on the **[Single Cell Galaxy instance](https://singlecell.usegalaxy.eu)**. This tool allows you to copy the `.X` matrix into a new layer that you may assign a new label, for e.g., `counts` or `raw_counts`, making it available as a parameter for Decoupler.
+> If your AnnData object lacks raw counts, you can use the {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %} tool with *"Function to manipulate the object
+"* as `Copy data matrix (.X) from a different anndata object`. Use the same anndata object for both the source and destination. This tool allows you to copy the `.X` matrix into a new layer that you may assign a new label, for e.g., `counts` or `raw_counts`, making it available as a parameter for Decoupler.
 >
 > Importantly, ensure that the copying of this matrix as a raw counts layer is done carefully and correctly. To verify that your AnnData object contains the necessary raw counts layer, you can use the **[Inspect AnnData Object](https://toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0)** tool. This tool helps confirm the presence of raw counts and other essential metadata in your AnnData object before proceeding with pseudobulk analysis.
 >
