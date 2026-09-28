@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Identification of AMR genes in an assembled bacterial genome
-zenodo_link: https://zenodo.org/record/10572227
+zenodo_link: 'https://zenodo.org/record/10572227'
 questions:
 - Which resistance genes are on a bacterial genome?
 - Where are the genes located on the genome?

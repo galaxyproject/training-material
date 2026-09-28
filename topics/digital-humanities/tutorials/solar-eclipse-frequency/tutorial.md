@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: Analysing Solar Eclipse Frequency with a Galaxy Workflow
-lang: en
+zenodo_link: 'https://zenodo.org/record/22912793'
+
 level: Intermediate
 questions:
 - How can we identify groups of solar eclipses above a user-defined observable magnitude
@@ -171,7 +172,7 @@ You can upload data in various ways. Here are some examples:
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
+> 2. Import the `Amarnasolec05mittlere.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
 >
 >    ```
 >    https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
@@ -432,20 +433,21 @@ Because the duplicate-removal step does not preserve chronological order, the re
 >            - *"on column"*: `c3`
 >            - *"everything in"*: `Ascending order`
 >    - *"Number of header lines to skip"*: `0`
-We have already used this tool in a previous step with similar parameters.
-You can redo all the input steps by step, or you can rerun the earlier sort tool:
-
-{% snippet faqs/galaxy/tools_rerun.md %}
-
-That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
-
->    > <comment-title>Details about the sorting </comment-title>
->    > The configured numeric ascending sorts in this order:
->    > 1. Column 1: Year (`Y`)
->    > 2. Column 2: Month (`M`)
->    > 3. Column 3: Day (`D`).
->    > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
->    {: .comment}
+>
+> We have already used this tool in a previous step with similar parameters.
+> You can redo all the input steps by step, or you can rerun the earlier sort tool:
+>
+> {% snippet faqs/galaxy/tools_rerun.md %}
+>
+> That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
+>
+> > <comment-title>Details about the sorting </comment-title>
+> > The configured numeric ascending sorts in this order:
+> > 1. Column 1: Year (`Y`)
+> > 2. Column 2: Month (`M`)
+> > 3. Column 3: Day (`D`).
+> > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
+> {: .comment}
 >
 {: .hands_on}
 

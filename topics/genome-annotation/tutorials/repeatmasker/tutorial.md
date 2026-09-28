@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Masking repeats with RepeatMasker
-zenodo_link: https://zenodo.org/record/7085837
+zenodo_link: 'https://zenodo.org/record/7085837'
 tags:
   - eukaryote
   - biodiversity
