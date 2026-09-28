@@ -4,7 +4,9 @@ layout: tutorial_hands_on
 title: CUT&RUN data analysis
 zenodo_link: 'https://zenodo.org/record/6823059'
 answer_histories:
-  - label: "Using Separate Preprocessing Tools"
+  - label: "Usegalaxy.eu 21-09-2026"
+    history: https://usegalaxy.eu/u/videmp/h/cut-and-run-gtn-answer-key-25-09-2026
+  - label: "Usegalaxy.eu 19-03-2025"
     history: https://usegalaxy.eu/u/videmp/h/cut-run-gtn-answer-key
 questions:
 - Which binding motif has the transcription factor GATA1?
@@ -133,7 +135,7 @@ We first have to check if our data contains adapter sequences that we have to re
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 2. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
+> 2. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Raw read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %} selected as **Dataset collection**.
 > 3. Inspect the web page output of **Falco** {% icon tool %} for the `Rep1_forward` sample. Check what adapters are found at the end of the reads.
 >
@@ -170,7 +172,7 @@ We first have to check if our data contains adapter sequences that we have to re
 >
 >    As it is tedious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %}.
 >
-> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %} to aggregate the FastQC reports with the following parameters:
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
@@ -193,7 +195,7 @@ The MultiQC report (of FastQC) pointed out that we have in our data some standar
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy1) %} with the following parameters:
+> 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
 >        - *"Select a paired collection"*: `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
@@ -213,7 +215,7 @@ The MultiQC report (of FastQC) pointed out that we have in our data some standar
 > > <solution-title></solution-title>
 > >
 > > 1. 163,656 (54.6%) for Rep 1 and 169,776 (56.6%) for Rep 2
-> > 2. The last line indicates that 10477 (3.49%) of pairs have been removed from Rep1 and 15775 (5.26%) pairs from Rep2.
+> > 2. The last line indicates that 10577 (3.53%) of pairs have been removed from Rep1 and 16212 (5.40%) pairs from Rep2.
 > >
 > {: .solution}
 >
@@ -232,7 +234,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 
 > <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.5+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
 >        - *"FASTQ Paired Dataset*: select the output of **Trim Galore!** {% icon tool %} *"paired reads"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
@@ -250,7 +252,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 
 > <comment-title>Bowtie2 Results</comment-title>
 > You should get similar results to this from Bowtie2:
-> ![Mapping statistics of bowtie2](../../images/cut_and_run/mapping_stats.png "Mapping statistics of bowtie2")
+> ![Mapping statistics of bowtie2](../../images/cut_and_run/mapping_stats.png "Mapping statistics of bowtie2 for Rep1")
 {: .comment}
 
 > <question-title></question-title>
@@ -259,7 +261,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 >
 > > <solution-title></solution-title>
 > >
-> > 36.47+62.39=98.86%
+> > 41.42+57.48=98.90%
 > >
 > {: .solution}
 >
@@ -273,7 +275,7 @@ Before we apply any filters on our mapped data, let us check the cumulative enri
 
 > <hands-on-title>Assess Signal CUT&RUN Enrichment using plotFingerprint</hands-on-title>
 >
-> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.4+galaxy0) %} with the following parameters:
+> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/4.0.0+galaxy1) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >    - {% icon param-collection %} *"BAM/CRAM file"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >
@@ -308,7 +310,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Condition"*
@@ -377,7 +379,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy1) %}:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_transpose.png "Metrics of MarkDuplicates")
@@ -391,7 +393,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 81460 for Rep1 and 100507 for Rep2
+> > 1. 81460 for Rep1 and 100505 for Rep2
 > > 2. 982 for Rep1 and 1042 for Rep2
 > >
 > {: .solution}
@@ -405,10 +407,10 @@ too much compared to the diversity of the library you generated. Consequently, l
 
 > <hands-on-title>Check Adapter Removal with Falco</hands-on-title>
 >
-> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.3.2+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Raw read data from your current history"*: select the output of **MarkDuplicates** BAM.
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %} to aggregate the FastQC reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.35+galaxy4) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
 >        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
@@ -521,7 +523,7 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 6314 for Rep1 and 7678 for Rep2
+> > 1. 6314 for Rep1 and 7679 for Rep2
 > >
 > {: .solution}
 >
@@ -581,7 +583,7 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 > > > <solution-title></solution-title>
 > > >
 > > > 1. 2,865 peaks
-> > > 2. We started with 6,314 and 7,678 peaks. Thus, we could remove 3,449 and 4,813 peaks.
+> > > 2. We started with 6,314 and 7,679 peaks. Thus, we could remove 3,449 and 4,814 peaks.
 > > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A has to overlap with 50 bases with the peak in file B.
 > > > 4. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
 > > {: .solution}
@@ -719,7 +721,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > <hands-on-title>Generate the matrix</hands-on-title>
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.4+galaxy0) %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/4.0.0+galaxy1) %} with the following parameters:
 >    - In *"Select regions"*:
 >        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: `True GATA1 CUT and RUN peaks`
@@ -740,12 +742,13 @@ Now we will generate a heatmap. Each line will be a peak. The coverage will be s
 
 > <hands-on-title>Generate the heatmap</hands-on-title>
 >
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/4.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `Yes`
 >    - *"The x-axis label”*: `distance from peak center (bp)`
 >    - *"The y-axis label for the top panel"* : `GATA1 peaks`
+>    - *"Plot black boxes around the heatmaps"*: `Yes`
 >    - *"Reference point label”*: `peak center`
 >    - *"Labels for the regions plotted in the heatmap"*: `GATA1_peaks`
 {: .hands_on}
