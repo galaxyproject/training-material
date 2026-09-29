@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Use Pycytominer in Galaxy for processing high dimensional image readouts"
+title: "Use Pycytominer in Galaxy for processing high dimensional image-based readouts"
 level: Intermediate
 subtopic: analyses
 questions:
@@ -47,8 +47,8 @@ In this context, **Pycytominer** is a Python toolkit for processing high dimensi
 
 ![pycitominer-logo.png](../../images/pycitominer/pycitominer-logo.png){: width="50%"}
 
-In this tutorial, you will learn how to run a Pycitominer pipeline using Galaxy. We will follow the different steps explained in the [Pycitominer documentation](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html). If you want a more comprehensive explanation of
-each step, please feel free to visit the main [Pycitominer main documentation page](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html) or the [GitHub repository](https://github.com/cytomining/pycytominer)!
+In this tutorial, you will learn how to run a Pycytominer pipeline using Galaxy. We will follow the different steps explained in the [Pycytominer documentation](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html). If you want a more comprehensive explanation of
+each step, please feel free to visit the main [Pycytominer main documentation page](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html) or the [GitHub repository](https://github.com/cytomining/pycytominer)!
 
 > <agenda-title></agenda-title>
 >
@@ -71,15 +71,15 @@ The data necessary for this tutorial can be created following the instruction of
 >    - [`01_platemap.tsv`](workflows/test-data/01_platemap.tsv)
 >    - [`01_single_cells.tsv`](workflows/test-data/01_single_cells.tsv)
 >    
->    If you are importing the image via URL:
+>    If you are importing the files via URL:
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    If you are importing the image from the shared data library:
+>    If you are importing the files from the shared data library:
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Confirm the datatypes are correct (`tabular` for both images)
+> 3. Confirm the datatypes are correct (`tabular` for both profiles)
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 > 
@@ -90,14 +90,14 @@ The data necessary for this tutorial can be created following the instruction of
 
 **Aggregation** collapses single-cell measurements into a single profile per well or per sample by computing a summary statistic (such as the median) across all cells.
 
-> <hands-on-title>Aggregate plate readouts with Pycitominer</hands-on-title>
+> <hands-on-title>Aggregate plate readouts with Pycytominer</hands-on-title>
 >
 > 1. {% tool [Aggregate readouts](toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_aggregate/pycytominer_aggregate/1.6.1+galaxy0) %} with the following parameters to aggregate redouts:
 >    - {% icon param-file %} *"Input feature-readouts table"*: `01_single_cells.tsv` file
 >    - *"Aggregation Column"*: Select "c1:Metadata_Plate" and "c2:Metadata_Well"
 >    - *"Aggregation function"*: `Mean`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `01_output_aggregate.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
 The original file with 601 rows is now aggregated into a file with just 7 rows by aggregating plate and single wells!
@@ -108,7 +108,7 @@ The original file with 601 rows is now aggregated into a file with just 7 rows b
 
 **Annotation** merges these profiles with experimental metadata (i.e. plate and well identifiers, and other conditions) so each profile is linked to what was done to the cells.
 
-> <hands-on-title> Annotate readouts with metadata with Pycitominer</hands-on-title>
+> <hands-on-title> Annotate readouts with metadata with Pycytominer</hands-on-title>
 >
 > 1. {% tool [Annotate readouts with metadata](toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_annotate/pycytominer_annotate/1.6.1+galaxy0) %} with the following parameters to aggregate redouts:
 >    - {% icon param-file %} *"Input feature-readouts table"*: `01_output_aggregate.tsv` file
@@ -116,7 +116,7 @@ The original file with 601 rows is now aggregated into a file with just 7 rows b
 >    - {% icon param-file %} *"Input platemap table"*: `01_platemap.tsv` file
 >    - *"Column describing the wells in the platemap"*: Select "c1:well_position"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `02_output_annotated.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
 Three additional columns are now added to the table: "Metadata_treatment", "Metadata_cell_line" and "Metadata_concentration_um". All these information are important to give more context to the data.
@@ -135,7 +135,7 @@ Three additional columns are now added to the table: "Metadata_treatment", "Meta
 >    - *"Value"*: Type "DMSO"
 >    - *"Normalization method"*: Select "Standardize"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `03_output_normalized.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
 Now values do not differ anymore much for scale and unit. Normalization allows a better comparability of the results.
@@ -152,7 +152,7 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 >    - {% icon param-file %} *"Input feature-readouts table"*: 03_output_normalized.tsv` file
 >    - *"Operations"*: Select "Variance Threshold" and "Blocklist"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `04_output_features.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
  We passed from 16 columns to 15, since the feature "Cells_AreaShape_EulerNumber" was removed from the readouts... indeed, all values in each well was equal to 1.0.
@@ -170,7 +170,7 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 >    - *"Column with unique condition"*: Select "c1:Metadata_treatment", "c2:Metadata_cell_line" and "c3:Metadata_concentration_um"
 >    - *"Reduction operation"*: Select "Mean"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `05_output_consensus.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
 We have now a table with just 4 lines, collapsed in the selected unique conditions!
@@ -179,12 +179,12 @@ We have now a table with just 4 lines, collapsed in the selected unique conditio
 
 # A full workflow for table readouts processing
 
-You can now create a workflow from the different Pycitominer steps in your history:
+You can now create a workflow from the different Pycytominer steps in your history:
 
-> <hands-on-title> Extract Pycitominer workflow from history  </hands-on-title>
+> <hands-on-title> Extract Pycytominer workflow from history  </hands-on-title>
 > 1. Now we can extract the workflow for batch processing:
->    - Name it "pycitominer-full-steps".
->    - Don't treat `01_platemap.tsv` and `01_single_cells.tsv` as inputs (the workflow is supposed to be applied to the images directly).
+>    - Name it "pycytominer-full-steps".
+>    - Don't treat `01_platemap.tsv` and `01_single_cells.tsv` as inputs (the workflow is supposed to be applied to the image-based profiles directly).
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
