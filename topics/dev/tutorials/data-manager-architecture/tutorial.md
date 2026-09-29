@@ -168,22 +168,41 @@ Lets look at these components one-by-one:
    but here we find the metadata for these tables, i.e. their name and .loc file name (which *could*,
    but probably shouldn't be different) and the identifiers for the different columns in each table.
 
-   > <warning-title>Released Data Table layout information can never be changed again!</warning-title>
+   > <comment-title>Rules and best practices around Data Table columns</comment-title>
    >
-   > Every version of every regular tool and of every Data Manager Tool using a given Data Table needs to declare its expected layout in a `tool_data_table_conf.xml.sample`.
-   > An instance of Galaxy that gets conflicting layout information about the same Data Table from different tools or tool versions will refuse to load the Data Table
-   > (or even refuse to start at all) until an admin resolves the conflict.
+   > When you are declaring the layout of a new Data Table that no other tool is using yet, you are, in principle,
+   > free to choose, how many columns it should feature and what their names should be.
    >
-   > This means that once you're publicly releasing a Data Manager Tool or regular tool with layout info for a new Data Table,
-   > e.g. by uploading the tool to a Galaxy Toolshed, you must *never* change its layout again in a later version of that tool, or in a new tool reusing the Data Table!
-   > No renaming of columns, no reshuffling, and no addition of new columns! You need to keep that layout frozen!
+   > There are, however, a few commonly used column names with agreed upon meaning in Data Tables that you should be
+   > aware of.
+   > These are the **value**, **name** and **path** columns that nearly every Data Table should use,
+   > and the column **dbkey**, which is very widely used in Galaxy tools and Data Tables from the field of genomics
+   > to associate Data Table records with reference genomes.
+   > 
+   > {% icon point-right %} For these columns, please follow the community [Standards for Data Manager Tools](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/data_managers.html).
    >
-   > It is, therefor, important to consider a new Data Table's columns very carefully.
-   > If you are unsure whether the data it references will be versioned at some point in the future, better assume it will be and add that version column now!
+   > > <warning-title>Released Data Table layout information can never be changed again!</warning-title>
+   > >
+   > > Every version of every regular tool and of every Data Manager Tool using a given Data Table needs to declare its expected layout in a `tool_data_table_conf.xml.sample`.
+   > > An instance of Galaxy that gets conflicting layout information about the same Data Table from different tools or tool versions will refuse to load the Data Table
+   > > (or even refuse to start at all) until an admin resolves the conflict.
+   > >
+   > > This means that once you're publicly releasing a Data Manager Tool or regular tool with layout info for a new Data Table,
+   > > e.g. by uploading the tool to a Galaxy Toolshed, you must *never* change its layout again in a later version of that tool, or in a new tool reusing the Data Table!
+   > > No renaming of columns, no reshuffling, and no addition of new columns! You need to keep that layout frozen!
+   > >
+   > > It is, therefor, important to consider a new Data Table's columns very carefully:
+   > >
+   > > - Use the standard column names, *value*, *name*, *path* and *dbkey*, appropriately (see above)
+   > > - Think about which metadata you need to capture in the Data Table and reserve a column for it
+   > >
+   > >   {% icon tip %} Classic issue: if you are unsure whether the data the Data Table references will be versioned at some point, better assume it will be and add that version column now!
+   > >
+   > > The only way to amend an inadequate table layout later is to have new tool versions declare a *new* Data Table. Try to avoid that confusing scenario if you can!
+   > >
+   > {: .warning}
    >
-   > The only way to amend an inadequate table layout later is to have new tool versions declare a *new* Data Table. Try to avoid that confusing scenario if you can!
-   >
-   {: .warning}
+   {: .comment}
 
 7. A Data Table configuration test file
 
@@ -480,7 +499,11 @@ In a few places this list goes beyond Galaxy's requirements for Data Manager Too
 >
 >      - {% icon point-right %} `tool_data_table_conf.xml.sample` present in root folder
 >      - {% icon galaxy-pencil %} file declares the layout of every Data Table touched by the tool and
->      - {% icon galaxy-pencil %} lists the columns of each table, including a *version* column if versioning the managed data might ever make sense and
+>      - {% icon galaxy-pencil %} lists the columns of each table,
+>
+>        - respecting [guidelines for standard columns](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/data_managers.html),
+>        - including a *version* column if versioning the managed data might ever make sense and
+>
 >      - {% icon galaxy-pencil %} references a .loc file for every declared Data Table via a `<file path="tool-data/[Table name].loc" />` line
 >      - {% icon point-right %} `tool-data` subfolder exists and has a `[Table name].loc.sample` file for every declared Data Table
 >
