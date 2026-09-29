@@ -125,7 +125,7 @@ Three additional columns are now added to the table: "Metadata_treatment", "Meta
 
 # Step3: Normalize — Removing Technical Variation
 
-**Normalization** rescales features to make them comparable across plates and batches, commonly by standardizing each feature against control samples to correct for plate-to-plate variation.
+**Normalization** rescales features to make them comparable across plates and batches, commonly by standardizing each feature against control samples to correct for plate-to-plate variation. Without normalization, features with large absolute values would dominate any downstream distance calculation, regardless of whether they carry biological signal. Normalization also corrects for plate-to-plate technical variation caused by differences in staining efficiency, imaging conditions, or cell density between experimental batches.
 
 > <hands-on-title> Normalize readouts with Pycytominer </hands-on-title>
 >
