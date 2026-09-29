@@ -61,7 +61,21 @@ each step, please feel free to visit the main [Pycytominer main documentation pa
 
 # Getting data
 
-The data necessary for this tutorial can be created following the instruction of the Pycytominer documentation. However, for simplicity, we already made them available for you here in the training!
+A syntethic dataset necessary for this tutorial can be created following the instruction of the [Pycytominer documentation](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html#Tutorial-Data).
+
+**Experimental design**:
+
+| **Property** | **Value** |
+|:-----|:------:|
+| Plates (biological replicates)    | 2      |
+| Wells per plate   | 6 (2 × DMSO vehicle control, 2 × Compound A, 2 × Compound B)      |
+| Cells per well    | ~100      |
+| Total single-cell measurements  | ~1,200      |
+| Morphological features   | 11 (across three compartments)      |
+|:-----|:------:|
+
+
+However, for simplicity, we already made them available for you here in the training!
 
 > <hands-on-title>Data Upload</hands-on-title>
 >
@@ -86,7 +100,7 @@ The data necessary for this tutorial can be created following the instruction of
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 {: .hands_on}
 
-# Step 1: Aggregate — From Cells to Wells
+## Step 1: Aggregate — From Cells to Wells
 
 **Aggregation** collapses single-cell measurements into a single profile per well or per sample by computing a summary statistic (such as the median) across all cells.
 
@@ -104,7 +118,7 @@ The original file with 601 rows is now aggregated into a file with just 7 rows b
 
 ![01-aggregate.png](../../images/pycitominer/01-aggregate.png)
 
-# Step 2: Annotate — Adding Experimental Context
+## Step 2: Annotate — Adding Experimental Context
 
 **Annotation** merges these profiles with experimental metadata (i.e. plate and well identifiers, and other conditions) so each profile is linked to what was done to the cells.
 
@@ -123,7 +137,7 @@ Three additional columns are now added to the table: "Metadata_treatment", "Meta
 
 ![02-annotate.png](../../images/pycitominer/02-annotate.png)
 
-# Step3: Normalize — Removing Technical Variation
+## Step3: Normalize — Removing Technical Variation
 
 **Normalization** rescales features to make them comparable across plates and batches, commonly by standardizing each feature against control samples to correct for plate-to-plate variation. Without normalization, features with large absolute values would dominate any downstream distance calculation, regardless of whether they carry biological signal. Normalization also corrects for plate-to-plate technical variation caused by differences in staining efficiency, imaging conditions, or cell density between experimental batches.
 
@@ -142,7 +156,7 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 
 ![03-normalize.png](../../images/pycitominer/03-normalize.png)
 
-# Step 4: Feature Selection — Keeping Only Informative Features
+## Step 4: Feature Selection — Keeping Only Informative Features
 
 **Feature selection** removes uninformative or redundant features, such as those with low variance, high correlation with other features, or missing values, yielding a compact and reliable feature set.
 
@@ -159,7 +173,7 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 
 ![04-features.png](../../images/pycitominer/04-features.png)
 
-# Step 5: Consensus — Collapsing Replicates
+## Step 5: Consensus — Collapsing Replicates
 
 **Compute Consensus** replicate profiles into one consensus profile per treatment group by computing the median across all replicates.
 
@@ -177,7 +191,7 @@ We have now a table with just 4 lines, collapsed in the selected unique conditio
 
 ![05-consensus.png](../../images/pycitominer/05-consensus.png)
 
-# A full workflow for table readouts processing
+## A full workflow for table readouts processing
 
 You can now create a workflow from the different Pycytominer steps in your history:
 
