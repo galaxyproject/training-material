@@ -43,7 +43,7 @@ tags:
 
 High-content imaging screens generate thousands of microscopy images capturing how cells respond to genetic or chemical perturbations. In particular, [cell painting assays](https://en.wikipedia.org/wiki/Cell_painting) are a high-content/high-throughput imaging methods designed to reveal a broad range of cellular phenotypes. Image analysis makes it possible to extract numerical information from cell shape, producing what are known as "morphological profiles". These morphological profiles offer a window into a variety of biological processes, such as how cells react to genetic modifications, drug exposure, and shifts in their environment ({% cite seal2025cell %}). Extracting biological meaning from these images requires transforming raw features and readouts into clean, comparable profiles. Because of the sheer number of values involved, these results can be extremely large, and specific frameworks are needed to process such morphological profiles correctly.
 
-In this context, **Pycitominer** is a Python toolkit for processing high dimensional readouts from high-throughput image-based profiling experiments ({% cite serrano2025reproducible %}).
+In this context, **Pycytominer** is a Python toolkit for processing high dimensional readouts from high-throughput image-based profiling experiments ({% cite serrano2025reproducible %}).
 
 ![pycitominer-logo.png](../../images/pycitominer/pycitominer-logo.png){: width="50%"}
 
