@@ -47,8 +47,8 @@ In this context, **Pycytominer** is a Python toolkit for processing high dimensi
 
 ![pycitominer-logo.png](../../images/pycitominer/pycitominer-logo.png){: width="50%"}
 
-In this tutorial, you will learn how to run a Pycitominer pipeline using Galaxy. We will follow the different steps explained in the [Pycitominer documentation](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html). If you want a more comphresince explanation of
-each step, please fell free to visit the main [Pycitominer main documentation page](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html) or the [GitHub repository](https://github.com/cytomining/pycytominer)!
+In this tutorial, you will learn how to run a Pycitominer pipeline using Galaxy. We will follow the different steps explained in the [Pycitominer documentation](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html). If you want a more comprehensive explanation of
+each step, please feel free to visit the main [Pycitominer main documentation page](https://pycytominer.readthedocs.io/en/stable/tutorials/introduction_to_pycytominer.html) or the [GitHub repository](https://github.com/cytomining/pycytominer)!
 
 > <agenda-title></agenda-title>
 >
@@ -61,13 +61,13 @@ each step, please fell free to visit the main [Pycitominer main documentation pa
 
 # Getting data
 
-The data necessary for this tutorial can be created following the instruction of the Pycitominer documentation. However, for simplicity, we already made them available for you here in the training!
+The data necessary for this tutorial can be created following the instruction of the Pycytominer documentation. However, for simplicity, we already made them available for you here in the training!
 
 > <hands-on-title>Data Upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 >
-> 2. Download the following image and import it into your Galaxy history.
+> 2. Download the following image-based profiles and import it into your Galaxy history.
 >    - [`01_platemap.tsv`](workflows/test-data/01_platemap.tsv)
 >    - [`01_single_cells.tsv`](workflows/test-data/01_single_cells.tsv)
 >    
@@ -119,7 +119,7 @@ The original file with 601 rows is now aggregated into a file with just 7 rows b
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
 {: .hands_on}
 
-Three additional columns are now added to the table: "Metadata_treatment", "Metadata_cell_line" and "Metadata_concentration_um". All these informations are important to give more context to the data.
+Three additional columns are now added to the table: "Metadata_treatment", "Metadata_cell_line" and "Metadata_concentration_um". All these information are important to give more context to the data.
 
 ![02-annotate.png](../../images/pycitominer/02-annotate.png)
 
@@ -155,7 +155,7 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tabulator** visualization plugin.
 {: .hands_on}
 
- We passed from 16 columns to 15, since the feature "Cells_AreaShape_EulerNumber" was removed from the readouts... indeed, all values in each well was equal to 0.
+ We passed from 16 columns to 15, since the feature "Cells_AreaShape_EulerNumber" was removed from the readouts... indeed, all values in each well was equal to 1.0.
 
 ![04-features.png](../../images/pycitominer/04-features.png)
 
@@ -199,7 +199,7 @@ You can now create a workflow from the different Pycitominer steps in your histo
 >
 {: .hands_on}
 
-You have now an Pycitominer automatized workflow in Galaxy! 
+You have now a Pycytominer automatized workflow in Galaxy! 
 
 ![06-final-workflow.png](../../images/pycitominer/06-final-workflow.png)
 
