@@ -1103,7 +1103,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 
 ## Run Galaxy with planemo
 
-In the part ITs could only be tested by adapting the Galaxy config and adding the IT XML to the Galaxy source. Now [planemo](https://planemo.readthedocs.io/) can server ITs that makes the development process much easier.
+In the past ITs could only be tested by adapting the Galaxy config and adding the IT XML to the Galaxy source. Now [planemo](https://planemo.readthedocs.io/) can serve ITs that makes the development process much easier.
 [planemo](https://planemo.readthedocs.io/) starts a Galaxy development server for
 you, already configured to run tools in Docker. There is nothing to install and
 nothing to configure: no Galaxy clone to edit, no `galaxy.yml`, no
