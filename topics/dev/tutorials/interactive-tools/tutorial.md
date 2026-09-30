@@ -36,6 +36,7 @@ contributors:
   - neoformit
   - Lain-inrae
   - abretaud
+  - paulzierep
   # editing
   - hexylena
   - Marie59
@@ -292,16 +293,10 @@ CMD Rscript -e "shiny::runApp('/srv/shiny-server', host = '0.0.0.0', port = ${PO
 ```
 
 > <tip-title>Why not shiny-server?</tip-title>
-> The `rocker/shiny` image ships with `shiny-server`, and using it means patching
-> the image before it will run as a GxIT. Its configuration file has a mandatory
-> `run_as` directive, so the server only ever runs as one fixed user, and it
-> writes to `/var/log/shiny-server` and `/var/lib/shiny-server`, which are
-> root-owned. Galaxy starts a container as the *job owner*, and that uid is
-> different for every user, so the server has to be able to run as any uid.
-> `shiny::runApp()` has neither requirement: the image above runs unchanged as
-> root, as uid 999 and as uid 1000, and it needs no configuration file at all.
-> The app logs to stdout/stderr, which is also what you want in a container:
-> `docker logs <container>` shows everything the app printed.
+> `shiny-server` needs its configuration patched before it runs as a GxIT: a
+> fixed `run_as` user, and write access to root-owned directories that Galaxy
+> containers don't have. `shiny::runApp()` needs neither, and it logs to
+> stdout/stderr, so `docker logs <container>` shows everything the app printed.
 {: .tip}
 
 This image is already hosted on [Docker Hub](https://hub.docker.com/r/paulzierep/gtn-gxit)
@@ -1108,6 +1103,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 
 ## Run Galaxy with planemo
 
+In the part ITs could only be tested by adapting the Galaxy config and adding the IT XML to the Galaxy source. Now [planemo](https://planemo.readthedocs.io/) can server ITs that makes the development process much easier.
 [planemo](https://planemo.readthedocs.io/) starts a Galaxy development server for
 you, already configured to run tools in Docker. There is nothing to install and
 nothing to configure: no Galaxy clone to edit, no `galaxy.yml`, no
@@ -1121,33 +1117,21 @@ running GxIT.
 > # from the directory that contains your tool XML
 > planemo serve interactivetool_tabulator.xml \
 >   --galaxy_root ~/git/galaxy \
->   --port 9090 \
->   --job_workers 4 \
->   --biocontainers \
->   --docker_run_extra_arguments "--add-host localhost:host-gateway"
+>   --biocontainers
 > ```
 >
-> Galaxy is then available at [http://localhost:9090](http://localhost:9090) with
-> your tool in the tool panel. Stop the server again with `Ctrl-C`.
->
-> > <warning-title>Ask for more than one job worker</warning-title>
-> > A running interactive tool occupies a job worker for as long as the user
-> > keeps it open. planemo starts **one** worker by default, so the first GxIT
-> > you launch takes the only worker and every interactive tool started after it
-> > stays `queued` forever - and a queued job has no entry point, so the
-> > interface reports *No URL available for this interactive tool*. This looks
-> > like a broken tool but is only worker starvation; cancelling the first
-> > session immediately frees the worker and the second tool appears. Pass
-> > `--job_workers 4` (or as many as you want to open at once) to avoid it.
-> {: .warning}
+> Galaxy is then available at [http://localhost:9090](http://localhost:9090) -
+> planemo's default port - with your tool in the tool panel. Stop the server
+> again with `Ctrl-C`.
 >
 > > <tip-title>What the other flags are for</tip-title>
 > > `--galaxy_root` points planemo at an existing Galaxy checkout (optional: it
-> > will use its own if you leave it out), `--biocontainers` lets planemo resolve
-> > tools that need bioconda packages, and
-> > `--docker_run_extra_arguments "--add-host localhost:host-gateway"` is the
-> > same setting the `job_conf.xml` of the *Galaxy from source* option uses, so
-> > that the container can reach the Galaxy server on the host machine.
+> > will use its own if you leave it out) and `--biocontainers` is required
+> > since the IT runs in a container.
+> >
+> > planemo starts with a single job worker, which is enough to run one
+> > interactive tool at a time. If you want to keep several GxIT sessions open
+> > side by side, raise it with `--job_workers 4` (or as many as you need).
 > {: .tip}
 >
 > > <warning-title>The first launch has to download the image</warning-title>
