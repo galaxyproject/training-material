@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
-zenodo_link: "https://zenodo.org/record/1051552"
+zenodo_link: 'https://zenodo.org/record/1051552'
 level: Advanced
 questions:
   - "What are MS1 features?"

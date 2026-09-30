@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Prepare Data from CbioPortal for Flexynesis Integration
-zenodo_link: https://zenodo.org/records/16287482
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How to download data from cBioPortal?
 - How to prepare omics data for Flexynesis integration.

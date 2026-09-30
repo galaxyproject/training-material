@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: AI pipeline for annotating marine species (Project Moorev - Marine)
-zenodo_link: https://doi.org/10.5281/zenodo.20639741
+zenodo_link: 'https://zenodo.org/record/20639741'
 questions:
 - How can we use artificial intelligence to annotate images of marine species?
 - How can we check and correct these annotations?
@@ -135,7 +135,6 @@ SAM3 is a text-guided segmentation model. It automatically detects and segments 
 >    - {% icon version %} *"Video frame stride"*: `5`
 >    - {% icon param-toggle %} *"Show bounding boxes on annotated output"*: `Yes`
 >    - {% icon param-toggle %}  *"Inference image size"*: `644 (default, balanced)` (default)
->    - {% icon param-toggle %} *"Normalize outputs?"*: `No` (default)
 >    - {% icon param-toggle %} *"Normalize outputs?"*: `No` (default)
 >
 > 2. Click **Run Tool**

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data
-zenodo_link: 'https://zenodo.org/records/14501567'
+zenodo_link: 'https://zenodo.org/record/14501567'
 questions:
 - How can we use an existing database annotated database to identify and annotate genetic elements in metagenomics data?
 objectives:
