@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to Image Analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3362976
+zenodo_link: 'https://zenodo.org/record/3362976'
 level: Introductory
 subtopic: introduction
 questions:

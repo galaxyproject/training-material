@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Classification in Machine Learning
-zenodo_link: https://zenodo.org/record/3738729
+zenodo_link: 'https://zenodo.org/record/3738729'
 questions:
 - What is classification and how we can use classification techniques?
 objectives:

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-zenodo_link: "https://doi.org/10.5281/zenodo.839701"
+zenodo_link: 'https://zenodo.org/record/839701'
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
   - "How can I perform taxonomy analysis and visualize metaproteomics data?"

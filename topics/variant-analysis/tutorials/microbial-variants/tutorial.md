@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Microbial Variant Calling"
 subtopic: introduction
-zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+zenodo_link: 'https://zenodo.org/record/582600'
 tags:
   - prokaryote
   - microgalaxy
