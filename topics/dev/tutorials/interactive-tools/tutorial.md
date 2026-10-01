@@ -39,6 +39,16 @@ contributors:
   - paulzierep
   # editing
   - hexylena
+contributions:
+  authorship:
+  - eancelet
+  - yvanlebras
+  - neoformit
+  - Lain-inrae
+  - abretaud
+  - paulzierep
+  editing
+  - hexylena
   - Marie59
 
 ---
