@@ -65,7 +65,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 > This tutorial stops after peptide-ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
-> The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/).
+> The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/). All files that you need and produce with ProteomIQon you can find on [Zenodo](https://zenodo.org/records/22934182)
 {: .comment}
 
 ## From raw data to mzml format
@@ -141,16 +141,16 @@ If you are working with mass spectrometry data and wish to analyse the results f
 
 > <hands-on-title>Create a peptide database</hands-on-title>
 >
-> 1. Download the reference **C. reinhardtii** FASTA file from [Uniprot](https://www.uniprot.org/proteomes/UP000006906)
+> 1. Download the reference **C. reinhardtii** FASTA file from Zenodo
 >
 >    ```
->    https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/UP000006906/UP000006906_3055.fasta.gz
+>    https://zenodo.org/records/22934182/files/Chlamy_JGI5_5Cp_Mp_gen.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 2. {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7) %} with the following parameters.
->    - {% icon param-file %} *"Fasta file"*: `UP000006906_3055.fasta.gz` (the FASTA file from Uniprot)
+> 2. {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.10+galaxy0) %} with the following parameters.
+>    - {% icon param-file %} *"Fasta file"*: `Chlamy_JGI5_5Cp_Mp_gen.fasta` (the FASTA file from Zenodo)
 >    - *Protease*: `Trypsin`
 >    - *Minimum missed cleavages*: `0`
 >    - *Maximum missed cleavages*: `2`
@@ -197,7 +197,7 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm we
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} in Galaxy.
+> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.9+galaxy0) %} in Galaxy.
 > 2. Select:
 >    -  {% icon param-file %} *sample.mzlite file*,
 >    -  {% icon param-file %} *Chlamy.db database*,
@@ -263,7 +263,7 @@ The default estimated-threshold configuration currently uses a Q-value threshold
 
 > <hands-on-title>Run PSMStatistics</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PSMStatistics](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.8) %} in Galaxy.
+> 1. Open {% tool [ProteomIQon PSMStatistics](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.10+galaxy0) %} in Galaxy.
 > 2. Select:
 >    - {% icon param-file %} *sample.psm*
 >    - {% icon param-file %} *Chlamy.db*
@@ -325,7 +325,7 @@ Important parameters to run the tool are described in the [PSMBasedQuantificatio
 Nice! so we know now which files are needed and what the parameters mean. So let's run the tool in GALAXY
 > <hands-on-title>Run PSMBasedQuantification</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PSMBasedQuantification](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.8) %} in Galaxy.
+> 1. Open {% tool [ProteomIQon PSMBasedQuantification](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.12+galaxy0) %} in Galaxy.
 > 2. Select:
 >    - {% icon param-file %} *sample.mzlite*
 >    - {% icon param-file %} *sample.qpsm*
@@ -392,7 +392,7 @@ The current parameters are documented in [ProteinInference](https://csbiology.gi
 
 > <hands-on-title>Run ProteinInference</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon ProteinInference](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.7) %} in Galaxy.
+> 1. Open {% tool [ProteomIQon ProteinInference](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.10+galaxy0) %} in Galaxy.
 > 2. Select:
 >    - {% icon param-file %} *sample.qpsm*
 >    - {% icon param-file %} *Chlamy.db.*
