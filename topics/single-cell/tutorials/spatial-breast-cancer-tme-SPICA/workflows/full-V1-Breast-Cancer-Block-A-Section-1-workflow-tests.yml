@@ -1,0 +1,165 @@
+# GTN workflow test for the validated Visium breast-cancer workflow.
+# The prepared SpatialData input remains on Zenodo record 21792657.
+# Expected non-SpatialData workflow outputs are archived on Zenodo record 22676369.
+# Large spatialdata.zip workflow products are deliberately not duplicated as test outputs.
+
+- doc: Test outline for full-V1-Breast-Cancer-Block-A-Section-1-workflow.
+  job:
+    Spatial Data object:
+      class: File
+      location: https://zenodo.org/records/21792657/files/V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip
+      filetype: spatialdata.zip
+  outputs:
+    Initial AnnData table:
+      location: https://zenodo.org/records/22676369/files/Initial%20AnnData%20table.h5ad
+      compare: diff
+    Initial AnnData dimensions:
+      location: https://zenodo.org/records/22676369/files/Initial%20AnnData%20dimensions.txt
+      compare: diff
+    QC metrics before filtering:
+      location: https://zenodo.org/records/22676369/files/QC%20metrics%20before%20filtering.h5ad
+      compare: diff
+    QC summary before filtering:
+      location: https://zenodo.org/records/22676369/files/QC%20summary%20before%20filtering.txt
+      compare: diff
+    Scatter plot before filtering:
+      location: https://zenodo.org/records/22676369/files/Scatter%20plot%20before%20filtering.png
+      compare: diff
+    Violin plots before filtering:
+      location: https://zenodo.org/records/22676369/files/Violin%20plots%20before%20filtering.png
+      compare: diff
+    Filter minimum genes expressed per spot:
+      location: https://zenodo.org/records/22676369/files/Filter%20minimum%20genes%20expressed%20per%20spot.h5ad
+      compare: diff
+    Spatial Plot total_counts before filtering:
+      location: https://zenodo.org/records/22676369/files/Spatial%20Plot%20total_counts%20before%20filtering.jpg
+      compare: diff
+    Spatial Plot n_genes_by_counts before filtering:
+      location: https://zenodo.org/records/22676369/files/Spatial%20Plot%20n_genes_by_counts%20before%20filtering.jpg
+      compare: diff
+    Filter minimum counts per spot:
+      location: https://zenodo.org/records/22676369/files/Filter%20minimum%20counts%20per%20spot.h5ad
+      compare: diff
+    Inspect after minimum spot filters:
+      location: https://zenodo.org/records/22676369/files/Inspect%20after%20minimum%20spot%20filters.txt
+      compare: diff
+    Filter minimum spots expressed per gene:
+      location: https://zenodo.org/records/22676369/files/Filter%20minimum%20spots%20expressed%20per%20gene.h5ad
+      compare: diff
+    Filter minimum counts per gene:
+      location: https://zenodo.org/records/22676369/files/Filter%20minimum%20counts%20per%20gene.h5ad
+      compare: diff
+    Inspect after gene filters:
+      location: https://zenodo.org/records/22676369/files/Inspect%20after%20gene%20filters.txt
+      compare: diff
+    Filter maximum counts per spot:
+      location: https://zenodo.org/records/22676369/files/Filter%20maximum%20counts%20per%20spot.h5ad
+      compare: diff
+    Filter maximum genes per spot:
+      location: https://zenodo.org/records/22676369/files/Filter%20maximum%20genes%20per%20spot.h5ad
+      compare: diff
+    Inspect after upper spot filters:
+      location: https://zenodo.org/records/22676369/files/Inspect%20after%20upper%20spot%20filters.txt
+      compare: diff
+    QC metrics after filtering:
+      location: https://zenodo.org/records/22676369/files/QC%20metrics%20after%20filtering.h5ad
+      compare: diff
+    Scatter plot after filtering:
+      location: https://zenodo.org/records/22676369/files/Scatter%20plot%20after%20filtering.png
+      compare: diff
+    Violin plots after filtering:
+      location: https://zenodo.org/records/22676369/files/Violin%20plots%20after%20filtering.png
+      compare: diff
+    Normalised AnnData:
+      location: https://zenodo.org/records/22676369/files/Normalised%20AnnData.h5ad
+      compare: diff
+    Spatial Plot total_counts after filtering:
+      location: https://zenodo.org/records/22676369/files/Spatial%20Plot%20total_counts%20after%20filtering.jpg
+      compare: diff
+    Spatial Plot n_genes_by_counts after filtering:
+      location: https://zenodo.org/records/22676369/files/Spatial%20Plot%20n_genes_by_counts%20after%20filtering.jpg
+      compare: diff
+    Log-normalised AnnData:
+      location: https://zenodo.org/records/22676369/files/Log-normalised%20AnnData.h5ad
+      compare: diff
+    AnnData with HVGs:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20HVGs.h5ad
+      compare: diff
+    Plot HVGs:
+      location: https://zenodo.org/records/22676369/files/Plot%20HVGs.png
+      compare: diff
+    AnnData with PCA:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20PCA.h5ad
+      compare: diff
+    AnnData regressed for total_counts:
+      location: https://zenodo.org/records/22676369/files/AnnData%20regressed%20for%20total_counts.h5ad
+      compare: diff
+    Plot PCA before regression:
+      location: https://zenodo.org/records/22676369/files/Plot%20PCA%20before%20regression.png
+      compare: diff
+    Compute a neighborhood graph of observations:
+      location: https://zenodo.org/records/22676369/files/Compute%20a%20neighborhood%20graph%20of%20observations.h5ad
+      compare: diff
+    PCA after regression AnnData:
+      location: https://zenodo.org/records/22676369/files/PCA%20after%20regression%20AnnData.h5ad
+      compare: diff
+    AnnData with UMAP:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20UMAP.h5ad
+      compare: diff
+    Plot PCA after regression:
+      location: https://zenodo.org/records/22676369/files/Plot%20PCA%20after%20regression.png
+      compare: diff
+    Plot UMAP:
+      location: https://zenodo.org/records/22676369/files/Plot%20UMAP.png
+      compare: diff
+    AnnData with leiden_res_0.4:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20leiden_res_0.4.h5ad
+      compare: diff
+    AnnData with Leiden comparison 0.4 and 0.8:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20Leiden%20comparison%200.4%20and%200.8.h5ad
+      compare: diff
+    AnnData with Leiden comparison 0.4 and 0.8 and 1.2:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20Leiden%20comparison%200.4%20and%200.8%20and%201.2.h5ad
+      compare: diff
+    Plot Leiden comparison:
+      location: https://zenodo.org/records/22676369/files/Plot%20Leiden%20comparison.png
+      compare: diff
+    AnnData with markers:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20markers.h5ad
+      compare: diff
+    Rank genes for characterizing groups:
+      location: https://zenodo.org/records/22676369/files/Rank%20genes%20for%20characterizing%20groups.tabular
+      compare: diff
+    Plot ranking of genes:
+      location: https://zenodo.org/records/22676369/files/Plot%20ranking%20of%20genes.png
+      compare: diff
+    AnnData with spatial neighbours:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20spatial%20neighbours.h5ad
+      compare: diff
+    AnnData with centrality scores:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20centrality%20scores.h5ad
+      compare: diff
+    Plot Centrality Scores:
+      location: https://zenodo.org/records/22676369/files/Plot%20Centrality%20Scores.png
+      compare: diff
+    AnnData with neighborhood enrichment:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20neighborhood%20enrichment.h5ad
+      compare: diff
+    Plot Neighborhood Enrichment:
+      location: https://zenodo.org/records/22676369/files/Plot%20Neighborhood%20Enrichment.png
+      compare: diff
+    AnnData with Moran's I:
+      location: https://zenodo.org/records/22676369/files/AnnData%20with%20Moran%27s%20I.h5ad
+      compare: diff
+    CellTypist-annotated AnnData:
+      location: https://zenodo.org/records/22676369/files/CellTypist-annotated%20AnnData.h5ad
+      compare: diff
+    Plot CellTypist predicted labels:
+      location: https://zenodo.org/records/22676369/files/Plot%20CellTypist%20predicted%20labels.png
+      compare: diff
+    Final LIANA AnnData:
+      location: https://zenodo.org/records/22676369/files/Final%20LIANA%20AnnData.h5ad
+      compare: diff
+    Plot spatial clusters:
+      location: https://zenodo.org/records/22676369/files/Plot%20spatial%20clusters.jpg
+      compare: diff
