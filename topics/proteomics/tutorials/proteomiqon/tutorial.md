@@ -62,7 +62,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/).
 {: .comment}
 
-# From raw data to mzml format
+## From raw data to mzml format
 
 > <hands-on-title>Import datasets</hands-on-title>
 >
@@ -93,20 +93,25 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 > 5. Rename the output `mzml` file to `sample.mzml`
 >
-> A detailled guide about how to use MSConvert on GALAXY you can find here [MSConvert Guide](https://github.com/galaxyproteomics/tools-galaxyp/tree/master/tools/msconvert)
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> A detailled guide about how to use MSConvert on Galaxy you can find here [MSConvert Guide](https://github.com/galaxyproteomics/tools-galaxyp/tree/master/tools/msconvert)
 >
 {: .hands_on}
 
 
-# Convert mzML to mzLite
+## Convert mzML to mzLite
 
  The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8 ) %} in Galaxy.
->    - {% icon param-file %} *Select the `sample.mzML` file as input.*
-> 2. Run the tool and rename the output to `sample.mzlite`.
+> 1. {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8 ) %} with the following parameters
+>    - {% icon param-file %} *"Instrument output:"** the `sample.mzML` file
+>
+> 2. **Rename** the output to `sample.mzlite`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -121,8 +126,10 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 > {: .solution}
 {: .question}
 
-# creating a peptide database with PeptideDB
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the PeptideDB Tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
+
+# Creating a peptide database with PeptideDB
+
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the **PeptideDB Tool** {% icon tool %} comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
 
 > <warning-title>The upstream default currently includes N15</warning-title>
 >
@@ -133,42 +140,38 @@ If you are working with mass spectrometry data and wish to analyse the results f
 
 > <hands-on-title>Create a peptide database</hands-on-title>
 >
-> 1. download the FASTA file from above [Uniprot]({{ page.uniprot_link}})
-    ```
-    https://www.uniprot.org/proteomes/UP000006906
-    ```
-> 2. Open the {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7) %} in Galaxy.
->    - {% icon param-file %} *Select the **C. reinhardtii** FASTA file.*
->    - Configure the digestion parameters to match the tutorial experiment:
+> 1. Download the reference FASTA file from [Uniprot](https://www.uniprot.org/proteomes/UP000006906)
+>
+>    ```
+>    https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/UP000006906/UP000006906_3055.fasta.gz
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 2. {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7) %} with the following parameters.
+>    - {% icon param-file %} *"Fasta file"*: `UP000006906_3055.fasta.gz`, the **C. reinhardtii** FASTA file from Uniprot
 >    - *Protease*: `Trypsin`
 >    - *Minimum missed cleavages*: `0`
 >    - *Maximum missed cleavages*: `2`
->    - *Isotopic modification*: **[]** for the label-free tutorial
-> 3. Understand the parameters from the parameter file in order to apply the correct settings to GALAXY
-> 4. Run the tool.
-> 5. Rename the generated database to `Chlamy.db`.
+>    - *Isotopic mod*: make sure nothing is selected here, for label-free analysis
+>
+> 3. **Rename** {% icon galaxy-pencil%} the generated database to `Chlamy.db`.
 >
 {: .hands_on}
 
 > <question-title>What happens when more missed cleavages are allowed?</question-title>
 >
->  Imagine that `MaxMissedCleavages` is increased from `2` to `5`. What happens to the peptide search space?
+>  1. Imagine that `MaxMissedCleavages` is increased from `2` to `5`. What happens to the peptide search space?
+>  2.  What would happen if the proteins were digested experimentally with trypsin but the database were generated using a different protease?
 >
-> >  <solution-title></solution-title>
+> > <solution-title></solution-title>
 > >
-> >  More theoretical peptides are generated because additional incompletely cleaved peptide sequences are accepted. This increases the search space and can increase both computational cost and the number of candidate peptides considered for a spectrum.
->  {: .solution}
-{: .question}
->
-> <question-title>Why must the protease setting match the experiment?</question-title>
->
->  What would happen if the proteins were digested experimentally with trypsin but the database were generated using a different protease?
->
-> >  <solution-title></solution-title>
+> > 1. More theoretical peptides are generated because additional incompletely cleaved peptide sequences are accepted. This increases the search space and can increase both computational cost and the number of candidate peptides considered for a spectrum.
+> > 2. The theoretical peptide search space would no longer represent the peptides expected from the experimental digestion. Many real peptides could be absent from the database, while many irrelevant peptide candidates could be introduced.
 > >
-> >  The theoretical peptide search space would no longer represent the peptides expected from the experimental digestion. Many real peptides could be absent from the database, while many irrelevant peptide candidates could be introduced.
 > {: .solution}
 {: .question}
+
 
 # Peptide Spectrum Matching
 
