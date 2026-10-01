@@ -39,8 +39,7 @@ requirements:
 Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}).
 Advantages of the ProteomIQon are that it can handle label-free (14N), labeled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
 
-This beginner friendly training will explain how to work with ProteomIQon's main tools. Here a short workflow visualization and agenda:
-![ProteomIQonWorkflow](../../images/proteomiqon-beginnerguide/ProteomIQonWorkflow.png)
+This beginner friendly training will explain how to work with ProteomIQon's main tools.
 
 > <agenda-title></agenda-title>
 >
@@ -50,6 +49,11 @@ This beginner friendly training will explain how to work with ProteomIQon's main
 > {:toc}
 >
 {: .agenda}
+
+An overview of the analysis we will perform
+
+![ProteomIQonWorkflow](../../images/proteomiqon-beginnerguide/ProteomIQonWorkflow.png){: style="width: 74%"}
+
 
 # Input data
 
@@ -102,12 +106,12 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 
 ## Convert mzML to mzLite
 
- The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.
+The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
 > 1. {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8 ) %} with the following parameters
->    - {% icon param-file %} *"Instrument output:"** the `sample.mzML` file
+>    - {% icon param-file %} *"Instrument output:"* the `sample.mzML` file
 >
 > 2. **Rename** the output to `sample.mzlite`.
 >
@@ -115,7 +119,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 {: .hands_on}
 
-> <question-title>Why keep the mzLite file?</question-title>
+> <question-title>Why do we need the mzLite file?</question-title>
 >
 > Which later step in this tutorial needs access to the MS1 signal rather than only peptide identifications?
 >
@@ -131,16 +135,11 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 
 If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the **PeptideDB Tool** {% icon tool %} comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
 
-> <warning-title>The upstream default currently includes N15</warning-title>
->
-> The current version of `peptideDBParams.json`, which you can find [under this link](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/peptideDBParams.json) currently contains `N15` in `IsotopicMod`. That is appropriate only when an N15-labeled search space is required. **For the label-free analysis in this tutorial, use an empty list `IsotopicMod: []`.** You should also assign the `Name` field to the model organism currently in use. The default setting is `AraTest`, but as we are working with *C. reinhardtii*, this should be changed to `Chlamy` or `Chlamydomonas`
->
-> Do not assume that a default parameter file is automatically correct for every experiment. Protease, modifications, missed cleavages, and isotope labels must match the underlying experimental design.
-{: .warning}
+
 
 > <hands-on-title>Create a peptide database</hands-on-title>
 >
-> 1. Download the reference FASTA file from [Uniprot](https://www.uniprot.org/proteomes/UP000006906)
+> 1. Download the reference **C. reinhardtii** FASTA file from [Uniprot](https://www.uniprot.org/proteomes/UP000006906)
 >
 >    ```
 >    https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/UP000006906/UP000006906_3055.fasta.gz
@@ -149,20 +148,29 @@ If you are working with mass spectrometry data and wish to analyse the results f
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. {% tool [ProteomIQon PeptideDB](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidedb/proteomiqon_peptidedb/0.0.7) %} with the following parameters.
->    - {% icon param-file %} *"Fasta file"*: `UP000006906_3055.fasta.gz`, the **C. reinhardtii** FASTA file from Uniprot
+>    - {% icon param-file %} *"Fasta file"*: `UP000006906_3055.fasta.gz` (the FASTA file from Uniprot)
 >    - *Protease*: `Trypsin`
 >    - *Minimum missed cleavages*: `0`
 >    - *Maximum missed cleavages*: `2`
->    - *Isotopic mod*: make sure nothing is selected here, for label-free analysis
+>    - *Isotopic mod*: make sure nothing is selected here, so remove the default `N15`, for our label-free analysis
+>
+>    > <tip-title>About default settings</tip-title>
+>    >
+>    > Note that the default `IsotopicMod` by default contains `N15`. That is appropriate only when an N15-labeled search space is required. **For the label-free analysis in this tutorial, use an empty list for `IsotopicMod` by removing the default `N15` value from the list.
+>    >
+>    > You should also assign the `Name` field to the model organism currently in use. The default setting is `AraTest`, but as we are working with *C. reinhardtii*, this should be changed to `Chlamy` or `Chlamydomonas`
+>    >
+>    >  Do not assume that a default parameter file is automatically correct for every experiment. Protease, modifications, missed cleavages, and isotope labels must match the underlying experimental design.
+>    {: .tip}
 >
 > 3. **Rename** {% icon galaxy-pencil%} the generated database to `Chlamy.db`.
 >
 {: .hands_on}
 
-> <question-title>What happens when more missed cleavages are allowed?</question-title>
+> <question-title>Why are the parameter settings important?</question-title>
 >
 >  1. Imagine that `MaxMissedCleavages` is increased from `2` to `5`. What happens to the peptide search space?
->  2.  What would happen if the proteins were digested experimentally with trypsin but the database were generated using a different protease?
+>  2. What would happen if the proteins were digested experimentally with trypsin but the database were generated using a different protease?
 >
 > > <solution-title></solution-title>
 > >
@@ -187,18 +195,16 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm an
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} in Galaxy.
-> 2. Select:
->    -  {% icon param-file %} *sample.mzlite file*,
->    -  {% icon param-file %} *Chlamy.db database*,
->    -  {% icon param-file %} *PeptideSpectrumMatching parameter settings.*
-> 3. Run the tool.
-> 4. Rename the output to `sample.psm`.
-> 5. Inspect the tabular output.
+> 1. {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} with the following parameters
+>    -  {% icon param-file %} *"Instrument output"*: `sample.mzlite` (output from {% tool ProteomIQon MzMLToMzLite %})
+>    -  {% icon param-file %} *"Peptide database"*: `Chlamy.db` database (output from {% tool %})
+>    - *PeptideSpectrumMatching parameter settings*
+> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.psm`.
+> 3. **Inspect** {% icon galaxy-eye %} the tabular output.
 {: .hands_on}
 
 
- We now understand which input files the tool is getting and what it does, but what are we getting in return? The result is a .psm file with a lot of information, so lets have a look deeper inside.
+We now understand which input files the tool is getting and what it does, but what are we getting in return? The result is a .psm file with a lot of information, so lets have a look deeper inside.
 
 | Column | Description |
 | --- | --- |
