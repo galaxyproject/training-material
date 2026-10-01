@@ -25,7 +25,7 @@ contributions:
     authorship:
     - paulineHans
     infrastructure: 
-    - carolineott
+    - caroott
 tags:
 - DDA
 - label-free
