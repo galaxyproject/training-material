@@ -24,6 +24,8 @@ key_points:
 contributions:
     authorship:
     - paulineHans
+    infrastructure: 
+    - carolineott
 tags:
 - DDA
 - label-free
@@ -189,18 +191,20 @@ For each matching peptide, the tool then calculates which fragment ions should t
 The better the theoretical peptide matches the measured spectrum, the higher the score. To this end, ProteomIQon calculates, amongst other things, a SEQUEST-like and an Andromeda-like score, as well as an X!Tandem-like score.
 In addition to the genuine peptides, the decoy peptides are also tested. These are artificially generated reference peptides which are later used by PSMStatistics to estimate how many of the identified hits are likely to be false. This is used to determine the False Discovery Rate (FDR).
 
-The current default search settings include a `LookUpPPM` value of `30.0` ppm and precursor charges between `2` and `5`. See the [PeptideSpectrumMatching documentation](https://csbiology.github.io/ProteomIQon/tools/PeptideSpectrumMatching.html) for the complete parameter description.
+The current default search settings include a `LookUpPPM` value of `30.0` ppm we'll use these settings for our experiment. See the [PeptideSpectrumMatching documentation](https://csbiology.github.io/ProteomIQon/tools/PeptideSpectrumMatching.html) for the complete parameter description.
 
 ![Peptide Spectrum Matching](../../images/proteomiqon-beginnerguide/PSM.png)
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
-> 1. {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} with the following parameters
->    -  {% icon param-file %} *"Instrument output"*: `sample.mzlite` (output from {% tool ProteomIQon MzMLToMzLite %})
->    -  {% icon param-file %} *"Peptide database"*: `Chlamy.db` database (output from {% tool %})
->    - *PeptideSpectrumMatching parameter settings*
-> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.psm`.
-> 3. **Inspect** {% icon galaxy-eye %} the tabular output.
+> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.7) %} in Galaxy.
+> 2. Select:
+>    -  {% icon param-file %} *sample.mzlite file*,
+>    -  {% icon param-file %} *Chlamy.db database*,
+>    -  {% icon param-file %} *"LookUpPPM"*: `30.0`
+> 3. Run the tool.
+> 4. Rename the output to `sample.psm`.
+> 5. Inspect the tabular output.
 {: .hands_on}
 
 
@@ -208,7 +212,7 @@ We now understand which input files the tool is getting and what it does, but wh
 
 | Column | Description |
 | --- | --- |
-| `PSMId` | Identifier constructed for a candidate peptide-spectrum match. |
+| `PSMId` | Identifier constructed for a candidate peptide spectrum match. |
 | `GlobalMod` | Identifier of the global/isotopic modification state used for the peptide candidate. |
 | `PepSequenceID` | Identifier of the unmodified peptide sequence. |
 | `ModSequenceID` | Identifier of the modified peptide sequence. |
@@ -263,7 +267,7 @@ The default estimated-threshold configuration currently uses a Q-value threshold
 > 2. Select:
 >    - {% icon param-file %} *sample.psm*
 >    - {% icon param-file %} *Chlamy.db*
->    - {% icon param-file %} *the PSMStatistics parameters.*
+>    - {% icon param-file %} *Parameters*: `keep default settings`
 > 3. Run the tool.
 > 4. Rename the main output to `sample.qpsm`.
 > 5. Inspect the output table
@@ -327,7 +331,7 @@ Nice! so we know now which files are needed and what the parameters mean. So let
 >    - {% icon param-file %} *sample.qpsm*
 >    - {% icon param-file %} *Chlamy.db.*
 > 3. Set {% icon param-toggle %} *Perform labeled quantification* to `No`.
-> 4. Keep the tutorial XIC and peak-detection settings.
+> 4. - {% icon param-file %} *Parameters*: `keep the other default settings`
 > 5. If available in the Galaxy wrapper, enable diagnostic-chart generation for this training run.
 > 6. Run the tool.
 > 7. Rename the main output to `sample.quant`.
@@ -392,7 +396,7 @@ The current parameters are documented in [ProteinInference](https://csbiology.gi
 > 2. Select:
 >    - {% icon param-file %} *sample.qpsm*
 >    - {% icon param-file %} *Chlamy.db.*
-> 3. Use the tutorial ProteinInference parameter settings.
+>    - {% icon param-file %} *Parameters*: `keep default settings`
 > 4. Run the tool.
 > 5. Rename the output to `sample.prot`.
 > 6. Inspect the resulting protein groups.
