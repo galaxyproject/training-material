@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Introduction to deep learning
-zenodo_link: https://zenodo.org/record/3706539
+zenodo_link: 'https://zenodo.org/record/3706539'
 questions:
 - What are deep learning and neural networks?
 - Why is it useful?
