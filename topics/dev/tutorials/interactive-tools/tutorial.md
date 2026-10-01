@@ -47,7 +47,7 @@ contributions:
   - Lain-inrae
   - abretaud
   - paulzierep
-  editing
+  editing:
   - hexylena
   - Marie59
 
