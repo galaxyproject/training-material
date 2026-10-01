@@ -65,7 +65,8 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 > This tutorial stops after peptide-ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
-> The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/). All files that you need and produce with ProteomIQon you can find on [Zenodo](https://zenodo.org/records/22934182)
+> The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/). 
+> All files that you need and produce with ProteomIQon you can find on [Zenodo](https://zenodo.org/records/22934182)
 {: .comment}
 
 ## From raw data to mzml format
@@ -112,7 +113,7 @@ The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it 
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
-> 1. {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.8 ) %} with the following parameters
+> 1. {% tool [ProteomIQon MzMLToMzLite](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_mzmltomzlite/proteomiqon_mzmltomzlite/0.0.10+galaxy0) %} with the following parameters
 >    - {% icon param-file %} *"Instrument output:"* the `sample.mzML` file
 >
 > 2. **Rename** the output to `sample.mzlite`.
