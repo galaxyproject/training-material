@@ -1523,8 +1523,8 @@ DESeq2 verlangt, dass für jeden Faktor die Anzahl der Proben in jeder Kategorie
 >      - {% icon param-file %} *"Zu verarbeitende Datei "*: Ausgabe von **Elementbezeichner extrahieren** {% icon tool %}
 >      - In *"Replacement "*:
 >         - In *"1: Ersetzung "*
->            - *"Muster finden "*: `(.*)_(.*)_(.*)`
->            - *"Ersetzen durch "*: `\1_\2_\3\tgroup:\2\tgroup:\3`
+>            - *"Muster finden "*: `^([^_]+)_([^_]+)_([^_]+)(_.+)?$`
+>            - *"Ersetzen durch "*: `\1_\2_\3\4\tgroup:\2\tgroup:\3`
 >
 >     Dieser Schritt erstellt 2 zusätzliche Spalten mit der Art der Behandlung und der Sequenzierung, die mit dem {% tool [Tag elements](__TAG_FROM_FILE__) %} tool verwendet werden können
 >
