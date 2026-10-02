@@ -246,10 +246,13 @@ body {
     // The new replacement
     & > h3:not(.nobox),
     > .box-title {
+        position: absolute;
+        display: inline-block;
+        transform: translateY(-100%) translateY(-$tutorial-box-spacing + 0.4rem);
+
         font-size: $font-size + 3;
         margin-inline-start: -$tutorial-box-spacing;
         margin-inline-end: -$tutorial-box-spacing;
-        margin-top: -3.30rem;
         padding-top: calc($tutorial-box-spacing / 2);
         padding-bottom: calc($tutorial-box-spacing / 2);
         padding-inline-start: $tutorial-box-spacing;
@@ -436,11 +439,13 @@ figure {
  }
 }
 
-:not(pre) > code {
+.tool{
+  :not(pre) > code {
     color: var(--code-foreground);
     background: var(--code-background);
     border: 1px solid var(--text-color-muted);
     border-radius: 0.25rem;
+  }
 }
 
 pre.highlight {
