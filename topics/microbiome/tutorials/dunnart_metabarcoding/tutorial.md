@@ -223,18 +223,18 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > > > 1. {% tool [`qiime2 cutadapt trim-paired`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__cutadapt__trim_paired/qiime2__cutadapt__trim_paired/2026.1.0+q2galaxy.2026.1.0) %}:
 > > >    - *"demultiplexed_sequences: SampleData[PairedEndSequencesWithQuality]"*: `combined.qza`
 > > >    - *"Click here for additional options"*
-> > >    - *"front_f: List[Str]"*: `+ Insert front_f: List[Str]"`
+> > >      - *"front_f: List[Str]"*: `+ Insert front_f: List[Str]"`
 > > >        - *"1: front_f: List[Str]"*: `GTGYCAGCMGCCGCGGTAA`
-> > >    - *"front_r: List[Str]"*: `+ Insert front_r: List[Str]"`
+> > >      - *"front_r: List[Str]"*: `+ Insert front_r: List[Str]"`
 > > >        - *"1: front_r: List[Str]"*: `GGACTACNVGGGTWTCTAAT`
-> > >    - *"error_rate: Float % Range(0, 1, inclusive_end=True)"*: `0.1`
-> > >    - *"overlap: Int % Range(1, None)"*: `10`
-> > >    - *"match_adapter_wildcards: Bool"*: `Yes`
-> > >    - *"discard_untrimmed: Bool"*: `Yes`
-> > >    - *"quality_cutoff_5end: Int % Range(0, None)"*: `0`
-> > >    - *"quality_cutoff_3end: Int % Range(0, None)"*: `30`
+> > >      - *"error_rate: Float % Range(0, 1, inclusive_end=True)"*: `0.1`
+> > >      - *"overlap: Int % Range(1, None)"*: `10`
+> > >      - *"match_adapter_wildcards: Bool"*: `Yes`
+> > >      - *"discard_untrimmed: Bool"*: `Yes`
+> > >      - *"quality_cutoff_5end: Int % Range(0, None)"*: `0`
+> > >      - *"quality_cutoff_3end: Int % Range(0, None)"*: `30`
 > > >
-> > > 2. Rename the output to: `trimmed_sequences.qza`
+> > > 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qza`
 > > >
 > > {: .hands_on}
 > >
@@ -261,12 +261,12 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 > 1. {% tool [`Flatten collection`](__FLATTEN__) %}:
 >    - *"Input Collection"*: `trimmed pairs`
 >
-> 2. Rename the output to: `trimmed pairs flattened`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed pairs flattened`
 >
 > 3. {% tool [`Extract element identifiers`](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3) %}:
 >    - *"Dataset collection"*: `trimmed sequences flattened`
 >
-> 4. Rename the output to: `collection identifiers`
+> 4. **Rename** {% icon galaxy-pencil %} the output to: `collection identifiers`
 >
 > 5. {% tool [`Regex Find And Replace`](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %}:
 >    - *"Select lines from"*: Output of `collection identifiers`
@@ -277,21 +277,21 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >        - *"Find Regex"*: `001_reverse`
 >        - *"Replacement"*: `R2_001.fastq.gz`
 >
-> 6. Rename the output to: `corrected identifiers`
+> 6. **Rename** {% icon galaxy-pencil %} the output to: `corrected identifiers`
 >
 > 7. {% tool [`Paste`](Paste1) %}:
 >    - *"Paste"*: `collection identifiers`
 >    - *"and"*: `corrected identifiers`
 >    - *"Delimit by"*: `Tab`
 >
-> 8. Rename the output to: `identifier mapping`
+> 8. **Rename** {% icon galaxy-pencil %} the output to: `identifier mapping`
 >
 > 9. {% tool [`Relabel identifiers`](__RELABEL_FROM_FILE__) %}:
 >    - *"Input Collection"*: `trimmed sequences flattened`
 >    - *"How should the new labels be specified?"*: `Map original identifiers to new ones using a two-column table`
 >        - *"Identifier mapping"*: `identifier mapping`
 >
-> 10. Rename the output to: `trimmed sequences`
+> 10. **Rename** {% icon galaxy-pencil %} the output to: `trimmed sequences`
 >
 {: .hands_on}
 
@@ -307,7 +307,7 @@ Once the collection of trimmed `.fastq.gz` sequences is correctly named to impor
 >      - *"elements"*: `trimmed sequences`
 >    - *"Append an extension?"*: `No, use element identifiers as is` (*If the datasets in the collection include the extension `.fastq.gz`*)
 >
-> 2. Rename the output to: `trimmed_sequences.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qza`
 >
 > > <comment-title></comment-title>
 > >
@@ -343,7 +343,7 @@ TL;DR: when quality plots are essentially straight lines, truncation is less abo
 > 1. {% tool [`qiime2 demux summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__demux__summarize/qiime2__demux__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"data: SampleData[SequencesWithQuality \| PairedEndSequencesWithQuality \| JoinedSequencesWithQuality]"*: `trimmed_sequences.qza`
 >
-> 2. Rename the output to: `trimmed_sequences.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qzv`
 >
 > 3. Visualisations: Read quality and demux output
 >
@@ -392,11 +392,11 @@ In the following command, a pooling method of `pseudo` is selected. Pseudo-pooli
 >   - *"Click here for additional options"*
 >      - *"pooling_method: Str % Choices('independent', 'pseudo')"*: `pseudo `
 >
-> 2. Rename the `table.qza` output to: `dada2out_table.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the `table.qza` output to: `dada2out_table.qza`
 >
-> 3. Rename the `representative_sequences.qza` output to: `dada2out_representative_sequences.qza`
+> 3. **Rename** {% icon galaxy-pencil %} the `representative_sequences.qza` output to: `dada2out_representative_sequences.qza`
 >
-> 4. Rename the `denoising_stats.qza` output to: `dada2out_denoising_stats.qza`
+> 4. **Rename** {% icon galaxy-pencil %} the `denoising_stats.qza` output to: `dada2out_denoising_stats.qza`
 >
 > > <comment-title>Calculating truncation lengths</comment-title>
 > >
@@ -428,7 +428,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 >      - *"input: Metadata"*: `Metadata from Artifact`
 >      - *"Metadata Source"*: `dada2out_denoising_stats.qza`
 >
-> 2. Rename the output to: `16s_denoising_stats.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_denoising_stats.qzv`
 >
 > 3. Visualisation: Denoising Stats
 >
@@ -442,11 +442,11 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 > 1. {% tool [`qiime2 feature-table summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `dada2out_table.qza`
 >   - *"Click here for additional options"*
->      - *"1: input: Metadata"*
->          - *"input: Metadata"*: `Metadata from TSV`
->          - *"Metadata Source"*: `dunnart_metadata.tsv`
+>     - *"1: input: Metadata"*
+>       - *"input: Metadata"*: `Metadata from TSV`
+>       - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. Rename the output to: `summary_table.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `summary_table.qzv`
 >
 > 3. Visualisation: Feature/ASV summary
 >
@@ -462,7 +462,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 > 1. {% tool [`qiime2 feature-table tabulate-seqs`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__tabulate_seqs/qiime2__feature_table__tabulate_seqs/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"data: FeatureData[Sequence \| AlignedSequence]"*: `dada2out_representative_sequences.qza`
 >
-> 2. Rename the output to: `16s_representative_seqs.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_representative_seqs.qzv`
 >
 > 3. Visualisation: Denoising Stats
 >
@@ -500,7 +500,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 >   - *"reads: FeatureData[Sequence]"*: `dada2out_representative_sequences.qza`
 >   - *"classifier: TaxonomicClassifier"*: `silva_138.2_16s_v4_classifier.qza`
 >
-> 2. Rename the output to: `taxonomy_classification.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy_classification.qzv`
 >
 > 3. Visualisation: Denoising Stats
 >
@@ -518,7 +518,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 >     - *"metadata: Metadata"*: `Metadata from Artifact`
 >     - *"Metadata Source"*: `taxonomy_classification.qza`
 >
-> 2. Rename the output to: `taxonomy.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy.qzv`
 >
 > 3. Visualisation: Denoising Stats
 >
@@ -537,19 +537,19 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >   - *"table: FeatureTable[Frequency¹ \| PresenceAbsence²]"*: `dada2out_table.qza`
 >   - *"taxonomy: FeatureData[Taxonomy]"*: `classification.qza`
 >   - *"Click here for additional options"*
->   - *"exclude: Str"*: `Provide a value`
+>     - *"exclude: Str"*: `Provide a value`
 >     - *"exclude"*: `Mitochondria,Chloroplast`
 >
-> 2. Rename the output to: `16s_table_filtered.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_table_filtered.qza`
 >
 > 3. {% tool [`qiime2 feature-table summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `16s_table_filtered.qza`
 >   - *"Click here for additional options"*
->   - *"1: metadata: Metadata"*
->     - *"metadata: Metadata"*: `Metadata from TSV`
->     - *"Metadata Source"*: `dunnart_metadata.tsv`
+>     - *"1: metadata: Metadata"*
+>       - *"metadata: Metadata"*: `Metadata from TSV`
+>       - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 4. Rename the output to: `summary_filtered.qzv`
+> 4. **Rename** {% icon galaxy-pencil %} the output to: `summary_filtered.qzv`
 >
 > 5. Visualisation: Denoising Stats
 >
@@ -574,7 +574,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 > >   - *"f_primer: Str"*: `FORWARD_PRIMER_SEQUENCE`
 > >   - *"r_primer: Str"*: `REVERSE_PRIMER_SEQUENCE`
 > >
-> > 2. Rename the output to: `silva_138_marker_gene.qza`
+> > 2. **Rename** {% icon galaxy-pencil %} the output to: `silva_138_marker_gene.qza`
 > >
 > > The classifier is then trained using a naive Bayes algorithm. See QIIME2 documentation for more [information](https://amplicon-docs.qiime2.org/en/stable/references/plugins/feature-classifier.html#q2-action-feature-classifier-fit-classifier-naive-bayes).
 > >
@@ -583,7 +583,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 > >   - *"reference_taxonomy: FeatureData[Taxonomy]"*: `silva-138-99-tax.qza`
 > >   - *"r_primer: Str"*: `REVERSE_PRIMER_SEQUENCE`
 > >
-> > 4. Rename the output to: `silva_138_marker_gene_classifier.qza `
+> > 4. **Rename** {% icon galaxy-pencil %} the output to: `silva_138_marker_gene_classifier.qza `
 > >
 > {: .hands_on}
 >
@@ -606,13 +606,13 @@ A phylogenetic tree is necessary for any analyses that incorporates information 
 > 1. {% tool [`qiime2 phylogeny align-to-tree-mafft-fasttree`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__phylogeny__align_to_tree_mafft_fasttree/qiime2__phylogeny__align_to_tree_mafft_fasttree/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"sequences: FeatureData[Sequence]"*: `dada2out_representative_sequences.qza`
 >
-> 2. Rename the `rooted_tree.qza` output to: `16s_rooted_tree.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the `rooted_tree.qza` output to: `16s_rooted_tree.qza`
 >
-> 3. Rename the `tree.qza` output to: `16s_unrooted_tree.qza`
+> 3. **Rename** {% icon galaxy-pencil %} the `tree.qza` output to: `16s_unrooted_tree.qza`
 >
-> 4. Rename the `masked_alignment.qza` output to: `masked_aligned_16s_representative_seqs.qza`
+> 4. **Rename** {% icon galaxy-pencil %} the `masked_alignment.qza` output to: `masked_aligned_16s_representative_seqs.qza`
 >
-> 5. Rename the `alignment.qza` output to: `aligned_16s_representative_seqs.qza`
+> 5. **Rename** {% icon galaxy-pencil %} the `alignment.qza` output to: `aligned_16s_representative_seqs.qza`
 >
 {: .hands_on}
 
@@ -626,12 +626,12 @@ Create bar charts to compare the relative abundance of ASVs across samples.
 > 1. {% tool [`qiime2 taxa barplot`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__barplot/qiime2__taxa__barplot/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `16s_table_filtered.qza`
 >   - *"Click here for additional options"*
->   - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
->   - *"1: metadata: Metadata"*
->      - *"metadata: Metadata"*: `Metadata from TSV`
->      - *"Metadata Source"*: `dunnart_metadata.tsv`
+>     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
+>     - *"1: metadata: Metadata"*
+>       - *"metadata: Metadata"*: `Metadata from TSV`
+>       - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. Rename the output to: `barchart.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `barchart.qzv`
 >
 > 3. Visualisation: Taxonomy Barplots
 >
@@ -662,14 +662,14 @@ Generate rarefaction curves to determine whether the samples have been sequenced
 >   - *"table: FeatureTable[Frequency]"*: `16s_table_filtered.qza`
 >   - *"max_depth: Int % Range(1, None)"*: `200000`
 >   - *"Click here for additional options"*
->   - *"phylogeny: Phylogeny[Rooted]"*: `16s_rooted_tree.qza`
->   - *"1: metadata: Metadata"*
->      - *"metadata: Metadata"*: `Metadata from TSV`
->      - *"Metadata Source"*: `dunnart_metadata.tsv`
->   - *"min_depth: Int % Range(1, None)"*: `500`
->   - *"steps: Int % Range(2, None)"*: `40`
+>     - *"phylogeny: Phylogeny[Rooted]"*: `16s_rooted_tree.qza`
+>     - *"1: metadata: Metadata"*
+>       - *"metadata: Metadata"*: `Metadata from TSV`
+>       - *"Metadata Source"*: `dunnart_metadata.tsv`
+>     - *"min_depth: Int % Range(1, None)"*: `500`
+>     - *"steps: Int % Range(2, None)"*: `40`
 >
-> 2. Rename the output to: `16s_alpha_rarefaction.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_alpha_rarefaction.qzv`
 >
 > 3. Visualisation: Rarefaction
 >
@@ -710,19 +710,19 @@ An important parameter that needs to be provided to this script is *"sampling_de
 >      - *"metadata: Metadata"*: `Metadata from TSV`
 >      - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. Rename the `unweighted_unifrac_emperor.qzv` output to: `unweighted_unifrac_emperor.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `unweighted_unifrac_emperor.qzv` output to: `unweighted_unifrac_emperor.qzv`
 >
-> 3. Rename the `weighted_unifrac_emperor.qza` output to: `weighted_unifrac_emperor.qza`
+> 3. **Rename** {% icon galaxy-pencil %} the `weighted_unifrac_emperor.qza` output to: `weighted_unifrac_emperor.qza`
 >
-> 4. Rename the `jaccard_emperor.qzv` output to: `jaccard_emperor.qzv`
+> 4. **Rename** {% icon galaxy-pencil %} the `jaccard_emperor.qzv` output to: `jaccard_emperor.qzv`
 >
-> 5. Rename the `bray_curtis_emperor.qzv` output to: `bray_curtis_emperor.qzv`
+> 5. **Rename** {% icon galaxy-pencil %} the `bray_curtis_emperor.qzv` output to: `bray_curtis_emperor.qzv`
 >
-> 6. Rename the `observed_features_vector.qza` output to: `observed_features_vector.qza`
+> 6. **Rename** {% icon galaxy-pencil %} the `observed_features_vector.qza` output to: `observed_features_vector.qza`
 >
-> 7. Rename the `evenness_vector.qza` output to: `evenness_vector.qza`
+> 7. **Rename** {% icon galaxy-pencil %} the `evenness_vector.qza` output to: `evenness_vector.qza`
 >
-> 8. Rename the `unweighted_unifrac_distance_matrix.qza` output to: `unweighted_unifrac_distance_matrix.qza`
+> 8. **Rename** {% icon galaxy-pencil %} the `unweighted_unifrac_distance_matrix.qza` output to: `unweighted_unifrac_distance_matrix.qza`
 >
 > 9. Visualisations: Unweighted UniFrac Emperor Ordination
 >
@@ -746,7 +746,7 @@ Next, we’ll test for associations between categorical metadata columns and alp
 >     - *"metadata: Metadata"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. Rename the `visualization.qzv` output to: `observed_features-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `observed_features-significance.qzv`
 >
 > 3. Visualisations: Observed Features
 >
@@ -766,7 +766,7 @@ Next, we’ll test for associations between categorical metadata columns and alp
 >     - *"metadata: Metadata"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. Rename the `visualization.qzv` output to: `evenness-group-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `evenness-group-significance.qzv`
 >
 > 3. Visualisations: Observed Evenness
 >
@@ -789,7 +789,7 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >     - *"Column Name"*: `c3: Captivity`
 >
-> 2. Rename the `visualization.qzv` output to: `unweighted-unifrac-captivity-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `unweighted-unifrac-captivity-significance.qzv`
 >
 > 3. Visualisations: Captivity significance output and provenance
 >
@@ -814,14 +814,14 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >   - *"fixed_effects_formula: Str"*: `Captivity`
 >
-> 2. Rename the `ancombc2_results.qza` output to: `ancombc2-results.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the `ancombc2_results.qza` output to: `ancombc2-results.qza`
 >
 > 1. {% tool [`qiime2 composition ancombc2-visualizer`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
 >   - *"data: FeatureData[ANCOMBC2Output]"*: `ancombc2-results.qza`
 >   - *"Click here for additional options"*
->   - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
+>     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
 >
-> 2. Rename the `visualization.qzv` output to: `ancombc2-barplot.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `ancombc2-barplot.qzv`
 >
 > 3. Visualisations: Differential Abundance Testing
 >
@@ -847,7 +847,7 @@ However, when creating a workflow, the `.qza` type and format cannot be pre-fill
 >   - *"The type of your input qza is"*: `Phylogeny[Unrooted]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `NewickDirectoryFormat` (should pre-select the correct datatype)
 >
-> 2. Rename the output to: `16s_unrooted_tree.nwk`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_unrooted_tree.nwk`
 >
 {: .hands_on}
 
@@ -862,7 +862,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >   - *"The type of your input qza is"*: `FeatureTable[Frequency]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `BIOMV210DirFmt` (should pre-select the correct datatype)
 >
-> 2. Rename the output to: `feature-table.biom`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `feature-table.biom`
 >
 > 3. Update the `feature-table.biom` datatype attribute to explicitly define the datatype as `biom1`. This does not affect the contents of the dataset and only informs Galaxy how to interact with it. The output of `qiime2 tools export` has the assigned datatype of `biom`, which is not an accepted input for the `Convert between BIOM table formats` tool. The accepted input format is `biom1`.
 >
@@ -875,7 +875,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >   - *"Input BIOM table"*: `feature-table.biom`
 >   - *"Choose the output type"*: `TSV-formatted (classic) table`
 >
-> 6. Rename the output to: `feature-table.tsv`
+> 6. **Rename** {% icon galaxy-pencil %} the output to: `feature-table.tsv`
 >
 {: .hands_on}
 
@@ -888,7 +888,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >   - *"The type of your input qza is"*: `FeatureData[Taxonomy]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `TSVTaxonomyDirectoryFormat` (should pre-select the correct datatype)
 >
-> 2. Rename the output to: `taxonomy.tsv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy.tsv`
 >
 {: .hands_on}
 
@@ -900,13 +900,13 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >   - *"Remove first"*: `1`
 >   - *"from"*: `taxonomy.tsv`
 >
-> 2. Rename the output to: `taxonomy_noheader.tsv`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy_noheader.tsv`
 >
 > 3. {% tool [` Remove beginning`](Remove beginning1) %}:
 >   - *"Remove first"*: `1`
 >   - *"from"*: `feature-table.tsv`
 >
-> 4. Rename the output to: `feature-table_noheader.tsv`
+> 4. **Rename** {% icon galaxy-pencil %} the output to: `feature-table_noheader.tsv`
 >
 {: .hands_on}
 
