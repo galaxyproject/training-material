@@ -24,12 +24,8 @@ digraph main {
   2 -> 13 [label="output"]
   14[label="bamCoverage"]
   2 -> 14 [label="output"]
-  k73e2f018d9e44f748110598b9b43a940[color=lightseagreen,label="Output\nwt_H3K4me3_rep1_bamcoverage"]
-  14 -> k73e2f018d9e44f748110598b9b43a940
   15[label="Samtools idxstats"]
   2 -> 15 [label="output"]
-  k09449d6fce8844489928064c729c32d1[color=lightseagreen,label="Output\nwt_H3K4me3_rep1_idxstats"]
-  15 -> k09449d6fce8844489928064c729c32d1
   16[label="plotFingerprint"]
   2 -> 16 [label="output"]
   1 -> 16 [label="output"]
@@ -39,13 +35,9 @@ digraph main {
   18[label="MACS2 callpeak"]
   1 -> 18 [label="output"]
   2 -> 18 [label="output"]
-  ka36b5a6cd9924a2d8fd895e8eac74cbd[color=lightseagreen,label="Output\nwt_H3K4me3_input_rep1_macs2"]
-  18 -> ka36b5a6cd9924a2d8fd895e8eac74cbd
   19[label="bamCompare"]
   2 -> 19 [label="output"]
   1 -> 19 [label="output"]
-  k5174d1aa21f64187893570ba8bd0f6e0[color=lightseagreen,label="Output\nwt_H3K4me3_input_rep1_bamcompare"]
-  19 -> k5174d1aa21f64187893570ba8bd0f6e0
   20[label="bamCompare"]
   3 -> 20 [label="output"]
   1 -> 20 [label="output"]
@@ -90,16 +82,16 @@ digraph main {
   8 -> 31 [label="output"]
   32[label="Bowtie2"]
   9 -> 32 [label="trimmed_reads_paired_collection"]
-  33[label="FastQC"]
+  k7d3186bbd4064d25bcd4d59d20592f85[color=lightseagreen,label="Output\nmapping_stats"]
+  32 -> k7d3186bbd4064d25bcd4d59d20592f85
+  33[label="Falco"]
   10 -> 33 [label="output"]
-  k549b52d6cce142d980b5e9934913045b[color=lightseagreen,label="Output\ntext_file"]
-  33 -> k549b52d6cce142d980b5e9934913045b
-  34[label="Concatenate datasets"]
+  34[label="Concatenate multiple datasets or collections"]
   18 -> 34 [label="output_narrowpeaks"]
   21 -> 34 [label="output_narrowpeaks"]
   35[label="plotCorrelation"]
   29 -> 35 [label="outFile"]
-  36[label="Concatenate datasets"]
+  36[label="Concatenate multiple datasets or collections"]
   18 -> 36 [label="output_narrowpeaks"]
   21 -> 36 [label="output_narrowpeaks"]
   24 -> 36 [label="output_narrowpeaks"]
@@ -132,6 +124,10 @@ digraph main {
   40 -> 42 [label="output"]
   43[label="plotHeatmap"]
   41 -> 43 [label="outFileName"]
+  k1c0d06c96a344492ac75e06e9a513b71[color=lightseagreen,label="Output\nwt_H3K4me3_CTCF_rep1_heatmap"]
+  43 -> k1c0d06c96a344492ac75e06e9a513b71
   44[label="plotHeatmap"]
   42 -> 44 [label="outFileName"]
+  kf81833e2d7244108996a5374c937e443[color=lightseagreen,label="Output\nwt_all_heatmap"]
+  44 -> kf81833e2d7244108996a5374c937e443
 }
