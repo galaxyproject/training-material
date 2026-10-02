@@ -177,7 +177,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 >
 > 1. {% tool [`Cutadapt`](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2) %}:
 >    - *"Single-end or Paired-end reads?"*: `Paired-End Collection`
->    - *"Paired Collection"*: `paired reads`
+>    - {% icon param-collection %} *"Paired Collection"*: `paired reads` (the collection you just created)
 >    - *"Read 1 Adapters"*: `+ Insert 5' (Front) Adapters"`
 >        - *"1: 5' (Front) Adapters"*
 >        - *"Source"*: `Enter Custom Sequence`
@@ -196,7 +196,9 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 >    - *"Read Filtering Options"*
 >        - *"Discard Untrimmed Reads"*: `Yes`
 >
-> 2. Rename the output to: `trimmed pairs`
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed pairs`
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > > <comment-title>Primers</comment-title>
 > >
