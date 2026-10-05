@@ -11,7 +11,14 @@ $tutorial-box-spacing: 1rem;
 	--color-background: #fff;
 	--text-color: #292b2c;
 	--text-color-muted: #555; // AA :(
-        --text-color-inverted: #eee;
+	--text-color-inverted: #eee;
+
+	--text-color-inline-code: #c90c15;// bootstrap default bd4147
+	--background-color-inline-code: #f8f9fa;
+
+
+
+
 	 // Allow overriding this separately, should generally default to same
 	 // as textcolour because box titles are still light in every theme.
 	--text-color-boxtitle: var(--text-color);
@@ -95,6 +102,9 @@ body[data-brightness="dark"] {
 
 	--secondary-color: #222;
 	--secondary-color-text: var(--text-color);
+
+	--text-color-inline-code: #ccc;
+	--background-color-inline-code: #222;
 
 }
 
@@ -439,13 +449,9 @@ figure {
  }
 }
 
-.tool{
-  :not(pre) > code {
-    color: var(--code-foreground);
-    background: var(--code-background);
-    border: 1px solid var(--text-color-muted);
-    border-radius: 0.25rem;
-  }
+:not(pre) > code {
+  color: var(--text-color-inline-code);
+  background: var(--background-color-inline-code);
 }
 
 pre.highlight {
