@@ -175,7 +175,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 > <hands-on-title>Run Cutadapt</hands-on-title>
 >
-> 1. {% tool [`Cutadapt`](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2) %}:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2) %}:
 >    - *"Single-end or Paired-end reads?"*: `Paired-End Collection`
 >    - {% icon param-collection %} *"Paired Collection"*: `paired reads` (the collection you just created)
 >    - *"Read 1 Adapters"*: `+ Insert 5' (Front) Adapters"`
@@ -220,7 +220,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > >
 > > > <hands-on-title>Run Cutadapt</hands-on-title>
 > > >
-> > > 1. {% tool [`qiime2 cutadapt trim-paired`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__cutadapt__trim_paired/qiime2__cutadapt__trim_paired/2026.1.0+q2galaxy.2026.1.0) %}:
+> > > 1. {% tool [qiime2 cutadapt trim-paired](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__cutadapt__trim_paired/qiime2__cutadapt__trim_paired/2026.1.0+q2galaxy.2026.1.0) %}:
 > > >    - *"demultiplexed_sequences: SampleData[PairedEndSequencesWithQuality]"*: `combined.qza`
 > > >    - *"Click here for additional options"*
 > > >      - *"front_f: List[Str]"*: `+ Insert front_f: List[Str]"`
@@ -258,17 +258,17 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 
 > <hands-on-title>Prepare Collection for QIIME2</hands-on-title>
 >
-> 1. {% tool [`Flatten collection`](__FLATTEN__) %}:
+> 1. {% tool [Flatten collection](__FLATTEN__) %}:
 >    - *"Input Collection"*: `trimmed pairs`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed pairs flattened`
 >
-> 3. {% tool [`Extract element identifiers`](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3) %}:
+> 3. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3) %}:
 >    - *"Dataset collection"*: `trimmed sequences flattened`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output to: `collection identifiers`
 >
-> 5. {% tool [`Regex Find And Replace`](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %}:
+> 5. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %}:
 >    - *"Select lines from"*: Output of `collection identifiers`
 >    - *"Check"*: `+ Insert Check`
 >        - *"Find Regex"*: `001_forward`
@@ -279,14 +279,14 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 > 6. **Rename** {% icon galaxy-pencil %} the output to: `corrected identifiers`
 >
-> 7. {% tool [`Paste`](Paste1) %}:
+> 7. {% tool [Paste](Paste1) %}:
 >    - *"Paste"*: `collection identifiers`
 >    - *"and"*: `corrected identifiers`
 >    - *"Delimit by"*: `Tab`
 >
 > 8. **Rename** {% icon galaxy-pencil %} the output to: `identifier mapping`
 >
-> 9. {% tool [`Relabel identifiers`](__RELABEL_FROM_FILE__) %}:
+> 9. {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}:
 >    - *"Input Collection"*: `trimmed sequences flattened`
 >    - *"How should the new labels be specified?"*: `Map original identifiers to new ones using a two-column table`
 >        - *"Identifier mapping"*: `identifier mapping`
@@ -299,7 +299,7 @@ Once the collection of trimmed `.fastq.gz` sequences is correctly named to impor
 
 > <hands-on-title>Create QIIME2 Artefact</hands-on-title>
 >
-> 1. {% tool [`qiime2 tools import`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2) %}:
+> 1. {% tool [qiime2 tools import](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2) %}:
 >    - *"Type of data to import"*: `SampleData[PairedEndSequencesWithQuality]`
 >    - *QIIME 2 file format to import from:*: `Casava One Eight Single Lane Per Sample Directory Format`
 >    - *"Import sequences"*
@@ -340,7 +340,7 @@ TL;DR: when quality plots are essentially straight lines, truncation is less abo
 
 > <hands-on-title>Summarise Trimmed Sequences</hands-on-title>
 >
-> 1. {% tool [`qiime2 demux summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__demux__summarize/qiime2__demux__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 demux summarize](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__demux__summarize/qiime2__demux__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"data: SampleData[SequencesWithQuality \| PairedEndSequencesWithQuality \| JoinedSequencesWithQuality]"*: `trimmed_sequences.qza`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qzv`
@@ -385,7 +385,7 @@ In the following command, a pooling method of `pseudo` is selected. Pseudo-pooli
 
 > <hands-on-title>DADA2 Denoise Sequences</hands-on-title>
 >
-> 1. {% tool [`qiime2 dada2 denoise-paired`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__dada2__denoise_paired/qiime2__dada2__denoise_paired/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 dada2 denoise-paired](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__dada2__denoise_paired/qiime2__dada2__denoise_paired/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"demultiplexed_seqs: SampleData[PairedEndSequencesWithQuality]"*: `trimmed_sequences.qza`
 >   - *"trunc_len_f: Int"*: `210`
 >   - *"trunc_len_r: Int"*: `170`
@@ -423,7 +423,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 
 > <hands-on-title>Tabulate Denoising Stats</hands-on-title>
 >
-> 1. {% tool [`qiime2 metadata tabulate`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 metadata tabulate](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"1: input: Metadata"*
 >      - *"input: Metadata"*: `Metadata from Artifact`
 >      - *"Metadata Source"*: `dada2out_denoising_stats.qza`
@@ -439,7 +439,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 
 > <hands-on-title>Summarise DADA2 Table</hands-on-title>
 >
-> 1. {% tool [`qiime2 feature-table summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 feature-table summarize](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `dada2out_table.qza`
 >   - *"Click here for additional options"*
 >     - *"1: input: Metadata"*
@@ -459,7 +459,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 
 > <hands-on-title>Tabulate Representative Sequences</hands-on-title>
 >
-> 1. {% tool [`qiime2 feature-table tabulate-seqs`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__tabulate_seqs/qiime2__feature_table__tabulate_seqs/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 feature-table tabulate-seqs](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__tabulate_seqs/qiime2__feature_table__tabulate_seqs/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"data: FeatureData[Sequence \| AlignedSequence]"*: `dada2out_representative_sequences.qza`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_representative_seqs.qzv`
@@ -496,7 +496,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 
 > <hands-on-title>Classify Taxonomy</hands-on-title>
 >
-> 1. {% tool [`qiime2 feature-classifier classify-sklearn`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__classify_sklearn/qiime2__feature_classifier__classify_sklearn/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 feature-classifier classify-sklearn](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__classify_sklearn/qiime2__feature_classifier__classify_sklearn/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"reads: FeatureData[Sequence]"*: `dada2out_representative_sequences.qza`
 >   - *"classifier: TaxonomicClassifier"*: `silva_138.2_16s_v4_classifier.qza`
 >
@@ -513,7 +513,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 
 > <hands-on-title>Tabulate Taxonomic Assignments</hands-on-title>
 >
-> 1. {% tool [`qiime2 metadata tabulate`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 metadata tabulate](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"1: metadata: Metadata"*
 >     - *"metadata: Metadata"*: `Metadata from Artifact`
 >     - *"Metadata Source"*: `taxonomy_classification.qza`
@@ -533,7 +533,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 
 > <hands-on-title>Filter Taxanomic Table</hands-on-title>
 >
-> 1. {% tool [`qiime2 taxa filter-table`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 taxa filter-table](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency¹ \| PresenceAbsence²]"*: `dada2out_table.qza`
 >   - *"taxonomy: FeatureData[Taxonomy]"*: `classification.qza`
 >   - *"Click here for additional options"*
@@ -542,7 +542,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_table_filtered.qza`
 >
-> 3. {% tool [`qiime2 feature-table summarize`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
+> 3. {% tool [qiime2 feature-table summarize](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `16s_table_filtered.qza`
 >   - *"Click here for additional options"*
 >     - *"1: metadata: Metadata"*
@@ -569,7 +569,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 > >
 > > Reads for the region of interest are first extracted. **You will need to input your forward and reverse primer sequences**. See QIIME2 documentation for more [information](https://amplicon-docs.qiime2.org/en/stable/references/plugins/feature-classifier.html).
 > >
-> > 1. {% tool [`qiime2 feature-classifier extract-reads`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__extract_reads/qiime2__feature_classifier__extract_reads/2026.1.0+q2galaxy.2026.1.0) %}:
+> > 1. {% tool [qiime2 feature-classifier extract-reads](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__extract_reads/qiime2__feature_classifier__extract_reads/2026.1.0+q2galaxy.2026.1.0) %}:
 > >   - *"sequences: FeatureData[Sequence]"*: `silva-138-99-seqs.qza`
 > >   - *"f_primer: Str"*: `FORWARD_PRIMER_SEQUENCE`
 > >   - *"r_primer: Str"*: `REVERSE_PRIMER_SEQUENCE`
@@ -578,7 +578,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 > >
 > > The classifier is then trained using a naive Bayes algorithm. See QIIME2 documentation for more [information](https://amplicon-docs.qiime2.org/en/stable/references/plugins/feature-classifier.html#q2-action-feature-classifier-fit-classifier-naive-bayes).
 > >
-> > 3. {% tool [`qiime2 feature-classifier fit-classifier-naive-bayes`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__fit_classifier_naive_bayes/qiime2__feature_classifier__fit_classifier_naive_bayes/2026.1.0+q2galaxy.2026.1.0) %}:
+> > 3. {% tool [qiime2 feature-classifier fit-classifier-naive-bayes](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__fit_classifier_naive_bayes/qiime2__feature_classifier__fit_classifier_naive_bayes/2026.1.0+q2galaxy.2026.1.0) %}:
 > >   - *"reference_reads: FeatureData[Sequence]"*: `silva_138_marker_gene.qza`
 > >   - *"reference_taxonomy: FeatureData[Taxonomy]"*: `silva-138-99-tax.qza`
 > >   - *"r_primer: Str"*: `REVERSE_PRIMER_SEQUENCE`
@@ -603,7 +603,7 @@ A phylogenetic tree is necessary for any analyses that incorporates information 
 
 > <hands-on-title>Tabulate Taxonomic Assignments</hands-on-title>
 >
-> 1. {% tool [`qiime2 phylogeny align-to-tree-mafft-fasttree`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__phylogeny__align_to_tree_mafft_fasttree/qiime2__phylogeny__align_to_tree_mafft_fasttree/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 phylogeny align-to-tree-mafft-fasttree](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__phylogeny__align_to_tree_mafft_fasttree/qiime2__phylogeny__align_to_tree_mafft_fasttree/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"sequences: FeatureData[Sequence]"*: `dada2out_representative_sequences.qza`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the `rooted_tree.qza` output to: `16s_rooted_tree.qza`
@@ -623,7 +623,7 @@ Create bar charts to compare the relative abundance of ASVs across samples.
 
 > <hands-on-title>Taxonamy Barplot</hands-on-title>
 >
-> 1. {% tool [`qiime2 taxa barplot`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__barplot/qiime2__taxa__barplot/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 taxa barplot](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__barplot/qiime2__taxa__barplot/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `16s_table_filtered.qza`
 >   - *"Click here for additional options"*
 >     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
@@ -658,7 +658,7 @@ Generate rarefaction curves to determine whether the samples have been sequenced
 
 > <hands-on-title>Alpha Diversity Rarefaction</hands-on-title>
 >
-> 1. {% tool [`qiime2 diversity alpha-rarefaction`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_rarefaction/qiime2__diversity__alpha_rarefaction/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 diversity alpha-rarefaction](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_rarefaction/qiime2__diversity__alpha_rarefaction/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency]"*: `16s_table_filtered.qza`
 >   - *"max_depth: Int % Range(1, None)"*: `200000`
 >   - *"Click here for additional options"*
@@ -702,7 +702,7 @@ An important parameter that needs to be provided to this script is *"sampling_de
 
 > <hands-on-title>Phylogenetic Metrics</hands-on-title>
 >
-> 1. {% tool [`qiime2 diversity core-metrics-phylogenetic`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__core_metrics_phylogenetic/qiime2__diversity__core_metrics_phylogenetic/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 diversity core-metrics-phylogenetic](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__core_metrics_phylogenetic/qiime2__diversity__core_metrics_phylogenetic/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency]"*: `16s_table_filtered.qza`
 >   - *"phylogeny: Phylogeny[Rooted]"*: `16s_rooted_tree.qza`
 >   - *"sampling_depth: Int % Range(1, None)"*: `100000`
@@ -740,7 +740,7 @@ Next, we’ll test for associations between categorical metadata columns and alp
 
 > <hands-on-title>Alpha Group Significance - Observed Features</hands-on-title>
 >
-> 1. {% tool [`qiime2 diversity alpha-group-significance`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 diversity alpha-group-significance](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"alpha_diversity: SampleData[AlphaDiversity]"*: `observed_features_vector.qza`
 >   - *"1: metadata: Metadata"*
 >     - *"metadata: Metadata"*: `Metadata from TSV`
@@ -760,7 +760,7 @@ Next, we’ll test for associations between categorical metadata columns and alp
 
 > <hands-on-title>Alpha Group Significance - Evenness</hands-on-title>
 >
-> 1. {% tool [`qiime2 diversity alpha-group-significance`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 diversity alpha-group-significance](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"alpha_diversity: SampleData[AlphaDiversity]"*: `evenness_vector.qza`
 >   - *"1: metadata: Metadata"*
 >     - *"metadata: Metadata"*: `Metadata from TSV`
@@ -783,7 +783,7 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 
 > <hands-on-title>Beta Group Significance - Unifrac Distance</hands-on-title>
 >
-> 1. {% tool [`qiime2 diversity beta-group-significance`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__beta_group_significance/qiime2__diversity__beta_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 diversity beta-group-significance](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__beta_group_significance/qiime2__diversity__beta_group_significance/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"distance_matrix: DistanceMatrix"*: `unweighted_unifrac_distance_matrix.qza`
 >   - *"metadata: MetadataColumn[Categorical]"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
@@ -807,7 +807,7 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 
 > <hands-on-title>Differential Abundance Tests</hands-on-title>
 >
-> 1. {% tool [`qiime2 composition ancombc2`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2/qiime2__composition__ancombc2/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 composition ancombc2](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2/qiime2__composition__ancombc2/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency]"*: `unweighted_unifrac_distance_matrix.qza`
 >   - *"1: metadata: Metadata"*
 >     - *"metadata: Metadata"*: `Metadata from TSV`
@@ -816,7 +816,7 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 >
 > 2. **Rename** {% icon galaxy-pencil %} the `ancombc2_results.qza` output to: `ancombc2-results.qza`
 >
-> 1. {% tool [`qiime2 composition ancombc2-visualizer`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
+> 1. {% tool [qiime2 composition ancombc2-visualizer](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
 >   - *"data: FeatureData[ANCOMBC2Output]"*: `ancombc2-results.qza`
 >   - *"Click here for additional options"*
 >     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
@@ -842,7 +842,7 @@ However, when creating a workflow, the `.qza` type and format cannot be pre-fill
 
 > <hands-on-title>Export Tree</hands-on-title>
 >
-> 1. {% tool [`qiime2 tools export`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
+> 1. {% tool [qiime2 tools export](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
 >   - *"input: The path to the artifact you want to export"*: `16s_unrooted_tree.qza`
 >   - *"The type of your input qza is"*: `Phylogeny[Unrooted]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `NewickDirectoryFormat` (should pre-select the correct datatype)
@@ -857,7 +857,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 
 > <hands-on-title>Export Taxonomy Annotations Table</hands-on-title>
 >
-> 1. {% tool [`qiime2 tools export`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
+> 1. {% tool [qiime2 tools export](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
 >   - *"input: The path to the artifact you want to export"*: `16s_table_filtered.qza`
 >   - *"The type of your input qza is"*: `FeatureTable[Frequency]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `BIOMV210DirFmt` (should pre-select the correct datatype)
@@ -870,7 +870,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >
 > 4. Then convert the BIOM to TSV
 >
-> 5. {% tool [`Convert between BIOM table formats`](toolshed.g2.bx.psu.edu/repos/iuc/biom_convert/biom_convert/2.1.17+galaxy0) %}:
+> 5. {% tool [Convert between BIOM table formats](toolshed.g2.bx.psu.edu/repos/iuc/biom_convert/biom_convert/2.1.17+galaxy0) %}:
 >   - *"Choose the source BIOM format"*: `BIOM File`
 >   - *"Input BIOM table"*: `feature-table.biom`
 >   - *"Choose the output type"*: `TSV-formatted (classic) table`
@@ -883,7 +883,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 
 > <hands-on-title>Export Taxonomy</hands-on-title>
 >
-> 1. {% tool [`qiime2 tools export`](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
+> 1. {% tool [qiime2 tools export](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2) %}:
 >   - *"input: The path to the artifact you want to export"*: `taxonomy_classification.qza`
 >   - *"The type of your input qza is"*: `FeatureData[Taxonomy]` (should pre-select the correct artefact type)
 >   - *"The current QIIME 2 format is"*: `TSVTaxonomyDirectoryFormat` (should pre-select the correct datatype)
@@ -896,13 +896,13 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 
 > <hands-on-title>Remove Header</hands-on-title>
 >
-> 1. {% tool [` Remove beginning`](Remove beginning1) %}:
+> 1. {% tool [ Remove beginning](Remove beginning1) %}:
 >   - *"Remove first"*: `1`
 >   - *"from"*: `taxonomy.tsv`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy_noheader.tsv`
 >
-> 3. {% tool [` Remove beginning`](Remove beginning1) %}:
+> 3. {% tool [ Remove beginning](Remove beginning1) %}:
 >   - *"Remove first"*: `1`
 >   - *"from"*: `feature-table.tsv`
 >
