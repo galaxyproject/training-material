@@ -1,6 +1,8 @@
 ---
 layout: learning-pathway  # (uncomment this line to activate it)
 type: instructors
+topics:
+  - teaching
 
 title: Train the Trainers
 description: |

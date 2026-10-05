@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 level: Intermediate
 title: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with
   HANCOCK
-zenodo_link: https://zenodo.org/records/18807820
+zenodo_link: 'https://zenodo.org/record/18807820'
 questions:
 - How does Multimodal Learner combine tabular, text, and image modalities in a single
   model?

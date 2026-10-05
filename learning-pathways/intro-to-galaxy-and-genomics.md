@@ -2,6 +2,9 @@
 layout: learning-pathway
 tags: [beginner, introduction, sequence-analysis, assembly]
 type: use
+topics:
+  - sequence-analysis
+  - introduction
 
 editorial_board:
 - shiltemann

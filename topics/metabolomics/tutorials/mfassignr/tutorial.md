@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Molecular formula assignment and mass recalibration with MFAssignR package
-zenodo_link: https://zenodo.org/records/13768009
+zenodo_link: 'https://zenodo.org/record/13768009'
 level: Intermediate
 questions:
 - What are the main steps of untargeted metabolomics LC-MS data pre-processing?

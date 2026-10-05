@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Imparare a conoscere un gene attraverso risorse e formati di dato biologici
 level: Introductory
 draft: true
-zenodo_link: https://zenodo.org/record/8304465
+zenodo_link: 'https://zenodo.org/record/8304465'
 questions:
 - Come utilizzare le risorse bioinformatiche per studiare una specifica famiglia di proteine (opsine)?
 - Come navigare nel Genome Data Viewer per trovare le opsine nel genoma umano?

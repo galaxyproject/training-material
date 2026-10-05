@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Compute and analyze biodiversity metrics with PAMPA toolsuite
-zenodo_link: 'https://doi.org/10.5281/zenodo.4264936'
+zenodo_link: 'https://zenodo.org/record/4264936'
 questions:
 - How to evaluate properly populations and communities biological state with abundance data?
 - How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are

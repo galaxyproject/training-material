@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: 'Transcribing Audio and Video files with Automated Speech Recognition'
 level: Introductory
-zenodo_link: https://zenodo.org/records/17949386
+zenodo_link: 'https://zenodo.org/record/17949386'
 questions:
 - How can you convert audio and video files into written text?
 - How can you extract passages from certain speakers for further analysis?

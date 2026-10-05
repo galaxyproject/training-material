@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
 level: Advanced
-zenodo_link: 'https://zenodo.org/records/13692977'
+zenodo_link: 'https://zenodo.org/record/13692977'
 tags:
     - alternative splicing
     - isoform switching
