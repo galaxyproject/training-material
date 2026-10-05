@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Clinical Metaproteomics 1: Database-Generation"
-zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
+zenodo_link: 'https://zenodo.org/record/10105821'
 questions:
 - Why do we need to generate a customized database for metaproteomics research?
 - How do we reduce the size of the database?
@@ -36,6 +36,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-1-database-generation/tutorial
 
 recordings:
 - captioners:

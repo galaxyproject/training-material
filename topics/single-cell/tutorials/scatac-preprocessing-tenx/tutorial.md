@@ -6,7 +6,7 @@ subtopic: scmultiomics
 priority: 1
 redirect_from:
   - /topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial
-zenodo_link: "https://zenodo.org/record/7855968"
+zenodo_link: 'https://zenodo.org/record/7855968'
 tags:
   - 10x
   - epigenetics
