@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Comparison of two annotation tools - Helixer and Braker3
-zenodo_link: https://zenodo.org/records/14770765
+zenodo_link: 'https://zenodo.org/record/14770765'
 tags:
   - eukaryota
   - Braker3

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
 subtopic: analysing
-zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
+zenodo_link: 'https://zenodo.org/record/4108341'
 requirements:
   -
     type: "internal"
@@ -36,9 +36,10 @@ key_points:
 - CLM-FATES is a numerical terrestrial ecosystem model used in climate models
 - Panoply is a quick visualization tools for plotting your results
 - Multi-case simulations can be easily developed and shared with a Galaxy workflow
-contributors:
-- annefou
-- huitang-earth
+contributions:
+  authorship:
+    - annefou
+    - huitang-earth
 
 
 recordings:

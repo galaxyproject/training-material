@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Galaxy Basics for genomics
-zenodo_link: https://doi.org/10.5281/zenodo.4104428
+zenodo_link: 'https://zenodo.org/record/4104428'
 level: Introductory
 questions:
 - Which coding exon has the highest number of single nucleotide polymorphisms (SNPs)
@@ -73,6 +73,9 @@ answer_histories:
 - label: "usegalaxy.org.au"
   history: https://usegalaxy.org.au/u/armin.dadras/h/update-the-workflow-of-the-galaxy-basics-for-genomics
   date: 2025-02-04
+
+tags:
+- galaxy-intro
 ---
 
 

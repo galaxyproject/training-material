@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 level: Intermediate
 title: GLEAM Image Learner - Validating Skin Lesion Classification on HAM10000
-zenodo_link: https://zenodo.org/records/17114688
+zenodo_link: 'https://zenodo.org/record/17114688'
 questions:
 - How do we validate GLEAM's Image Learner against a published benchmark on HAM10000?
 - How do we set up a balanced train/validation/test split for multi-class image classification?
@@ -28,15 +28,6 @@ contributors:
 - qchiujunhao
 - afpybus
 - jgoecks
-recordings:
-- youtube_id: rbIHDHVDArU
-  date: '2026-05-15'
-  galaxy_version: '26.0'
-  length: 40M
-  speakers:
-  - paulocilasjr
-  captioners:
-  - paulocilasjr
 tags:
 - HAM10000 Dataset
 - Image Classification
@@ -147,10 +138,10 @@ The metadata CSV now includes additional fields while keeping the same number of
 >
 > Following the preprocessing pipeline described by {% cite Shetty2022 %}, **horizontal flip augmentation** is applied during dataset preparation. Horizontal flips:
 >
-> - Improve robustness to lesion orientation and acquisition variability  
-> - Increase effective training diversity without collecting additional images  
-> - Help reduce sensitivity to class- and pose-specific patterns  
-> - Preserve diagnostically relevant structures while introducing harmless variation  
+> - Improve robustness to lesion orientation and acquisition variability
+> - Increase effective training diversity without collecting additional images
+> - Help reduce sensitivity to class- and pose-specific patterns
+> - Preserve diagnostically relevant structures while introducing harmless variation
 >
 > In {% cite Shetty2022 %}, this preprocessing strategy (including horizontal flips) is associated with improved HAM10000 skin-lesion classification performance (reported accuracy: 95.18%).
 >
@@ -160,11 +151,11 @@ The metadata CSV now includes additional fields while keeping the same number of
 
 # Using Image Learner Tool
 
-## Prepare environment and get the data 
+## Prepare environment and get the data
 
 > <comment-title>Dataset Preprocessing</comment-title>
 >
-> The dataset available on Zenodo has been preprocessed following {% cite Shetty2022 %} methodology. 
+> The dataset available on Zenodo has been preprocessed following {% cite Shetty2022 %} methodology.
 >
 {:  .comment}
 

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Pangeo Notebook in Galaxy - Introduction to Xarray
 subtopic: advanced
-zenodo_link: 'https://doi.org/10.5281/zenodo.5805953'
+zenodo_link: 'https://zenodo.org/record/5805953'
 requirements:
 -
   type: internal
@@ -58,8 +58,9 @@ key_points:
 tags:
   - pangeo
   - interactive-tools
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 notebook:
   language: python
   snippet: topics/climate/tutorials/pangeo-notebook/preamble.md

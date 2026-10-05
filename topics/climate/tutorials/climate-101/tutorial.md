@@ -15,8 +15,9 @@ key_points:
 - Weather versus Climate
 - Essential Climate Variables
 - Observations, reanalysis, predictions and projections.
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 
 ---
 

@@ -1,0 +1,79 @@
+- doc: Test the SamestrGal workflow using the FMT tutorial dataset (FRICKE case 28)
+  job:
+    Raw Reads:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: 28A
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/records/20745835/files/28A_R1.fastq.gz
+          filetype: fastqsanger.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/records/20745835/files/28A_R2.fastq.gz
+          filetype: fastqsanger.gz
+      - class: Collection
+        type: paired
+        identifier: 28B
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/records/20745835/files/28B_R1.fastq.gz
+          filetype: fastqsanger.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/records/20745835/files/28B_R2.fastq.gz
+          filetype: fastqsanger.gz
+      - class: Collection
+        type: paired
+        identifier: 28C
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/records/20745835/files/28C_R1.fastq.gz
+          filetype: fastqsanger.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/records/20745835/files/28C_R2.fastq.gz
+          filetype: fastqsanger.gz
+    Select Host reference genome: hg19
+    Select Sequencer for Trimmomatic: NexteraPE
+    Run MetaPhlAn: true
+    Select MetaPhlAn Database: mpa_vJan25_CHOCOPhlAnSGB_202503-11062025
+    Select SameStr database: mpa_vJan25_CHOCOPhlAnSGB_202503-11062025
+    Percent identity: '0.9'
+    Minimum alignment length: '40'
+    Minimum base quality: '20'
+    Minimum alignment quality: '0'
+    Minimum vertical coverage: '3'
+    'SameStr Filter: Minimum samples per clade': '2'
+    'SameStr Filter: Marker truncation length': '20'
+    'SameStr Filter: Nucleotides minimum variant coverage': '2'
+    'SameStr Filter: Minimum variant coverage fraction': '0.1'
+    'SameStr Filter: Minimum position coverage': '1'
+    'SameStr Filter: Position coverage standard deviation cutoff': '3.0'
+    'SameStr Filter: Minimum horizontal coverage': '5000'
+    'SameStr Filter: Minimum sample coverage per position': '2'
+    'SameStr Summarize: Minimum overlap for comparison': '5000'
+    'SameStr Summarize: Minimum similarity for shared strains': '0.999'
+  outputs:
+    cooccurrences:
+      path: test-data/cooccurrences.tabular
+    strain events:
+      asserts:
+        has_text:
+          text: "t__SGB4285"
+    taxon counts:
+      path: test-data/taxon counts.tabular
+    stats file:
+      element_tests:
+        t__SGB15299:
+          path: test-data/stats file_t__SGB15299.tabular
+        t__SGB4285:
+          path: test-data/stats file_t__SGB4285.tabular
+        t__SGB6362:
+          path: test-data/stats file_t__SGB6362.tabular

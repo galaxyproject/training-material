@@ -116,7 +116,7 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on __Rule-based__ tab
->    - *"Upload data as"*: `Collection(s)`
+>    - *"Upload type"*: `Collections`
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
@@ -155,7 +155,8 @@ Next we will retrieve the remaining datasets.
 > 1. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - *"Upload data as"*: `Datasets`
+>    - Click on __Rule-based__ tab
+>    - *"Upload type"*: `Collections`
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
@@ -318,8 +319,8 @@ Quantification of miRNAs requires to use two different tools:
 >    - {% icon param-file %} *"Precursor sequences"*: `miRNA_stem-loop_seq.fasta`
 >    - {% icon param-file %} *"Mature miRNA sequences"*: `mature_miRNA_AT.fasta`
 >    - {% icon param-file %} *"Star sequences"*: `star_miRNA_seq.fasta`
-> 5. Rename the outputs as `MiRDeep2 control miRNA` and `MiRDeep2 control miRNA (html)`.
-> 6. Repeat the fourth step by providing `Collapsed BR treated miRNA` as input, and rename the outputs as `MiRDeep2 BR treated miRNA` and `MiRDeep2 BR treated miRNA (html)`
+> 5. Rename the outputs as `MiRDeep2 control miRNA` and `MiRDeep2 control miRNA (html report)`.
+> 6. Repeat the fourth step by providing `Collapsed BR treated miRNA` as input, and rename the outputs as `MiRDeep2 BR treated miRNA` and `MiRDeep2 BR treated miRNA (html report)`
 >
 {: .hands_on}
 
@@ -411,7 +412,7 @@ To get any sensible results, it is worth analyzing the full dataset. You can ana
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links and press <kbd>Start</kbd>
+>    - Copy the Zenodo link and press <kbd>Start</kbd>
 >
 >      ```
 >      https://zenodo.org/record/4663389/files/miRNA_DESeq2_results_complete_dataset.tabular
@@ -532,7 +533,7 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 >        - *"Validate mappings"*: `Yes`
 >    - {% icon param-file %} *"File containing a mapping of transcripts to genes"*: `annotation_AtRTD2.gtf`
 >
-> 2. Rename the outputs as `Salmon control mRNA (Quantification)` and `Salmon control mRNA (Gene Quantification)`
+> 2. Rename the outputs as `Salmon control mRNA: transcript quantification` and `Salmon control mRNA: gene quantification`
 > 3. Repeat the previous procedure by using the `BR treated mRNA` dataset
 >
 >   > <comment-title>Quasi-mapping sequence requirements</comment-title>
@@ -584,10 +585,10 @@ Now, let's analyze which genes show statistically significant differential expre
 >            - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `effects_brassinolide`
 >            - In *"1: Factor level"*:
 >                - *"Specify a factor level"*: `brassinolide`
->                - {% icon param-collection %} *"Counts file(s)"*: `Salmon BR treated mRNA (Gene Quantification)`
+>                - {% icon param-collection %} *"Counts file(s)"*: `Salmon BR treated mRNA: gene quantification`
 >            - In *"2: Factor level"*:
 >                - *"Specify a factor level"*: `control`
->                - {% icon param-collection %} *"Counts file(s)"*: `Salmon control mRNA (Gene Quantification)`
+>                - {% icon param-collection %} *"Counts file(s)"*: `Salmon control mRNA: gene quantification`
 >    - *"Choice of Input data"*: `TPM values (e.g. from kallisto, sailfish or salmon)`
 >        - *"Program used to generate TPMs"*: `Salmon`
 >        - *"Gene mapping format"*: `GTF/GFF3`

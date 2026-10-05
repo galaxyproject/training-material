@@ -22,6 +22,7 @@ contributions:
     - pauldg
   editing: 
     - Marie59
+    - martincarrere
   funding:
     - by-covid
     - eurosciencegateway
@@ -70,6 +71,21 @@ This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate]
 > ```
 > That's it ! Now you can launch your local instance as usual.
 {: .hands_on}
+
+## Install the required tools
+
+The example workflow used in this tutorial requires the following tools. If you're running Galaxy locally, make sure these are installed via the Tool Shed before proceeding (tools marked "Core" ship with Galaxy by default and don't need separate installation):
+
+| Step | Tool | Source | Purpose |
+|------|------|--------|---------|
+| 1 | {% tool [Convert CSV to tabular](csv_to_tabular) %} | Core (built-in) | Convert CSV to tabular |
+| 2 | {% tool [Remove beginning](toolshed.g2.bx.psu.edu/repos/devteam/remove_beginning/Remove beginning1/1.0.0) %} | Tool Shed (devteam) | Strip header lines |
+| 3 | {% tool [Cut](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns/Cut1/1.0.2) %} | Tool Shed (devteam) | Extract columns |
+| 4 | {% tool [Group](Grouping1) %} | Core loaded via `<tool file="stats/grouping.xml" />` in the tool config | Group/aggregate rows |
+| 5 | {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} | Tool Shed (iuc) | Summary statistics |
+| 6 | {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0) %} | Tool Shed (bgruening) | Deduplicate |
+| 7 | {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0) %} | Tool Shed (iuc) | Plot scatterplot |
+
 </div>
 
 <div class="Not_locally" markdown="1">

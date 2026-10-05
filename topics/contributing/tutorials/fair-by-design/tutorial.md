@@ -9,7 +9,7 @@ abbreviations:
   CC: Creative Commons
   MVS: Minimum Viable Skills
   TeSS: Training eSupport System
-zenodo_link: https://zenodo.org/records/11548062
+zenodo_link: 'https://zenodo.org/record/11548062'
 questions:
   - How to develop FAIR learning materials?
   - How to incorporate the FAIR principles in the instructional design process?

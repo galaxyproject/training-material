@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Visualize Climate data with Panoply netCDF viewer
 subtopic: introduction
-zenodo_link: 'https://doi.org/10.5281/zenodo.3695482'
+zenodo_link: 'https://zenodo.org/record/3695482'
 questions:
 - How to start Panoply interactive environment in Galaxy?
 - How to inspect netCDF data?
@@ -19,8 +19,9 @@ key_points:
 - Interact with Galaxy to save your plots
 tags:
 - interactive-tools
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 
 ---
 

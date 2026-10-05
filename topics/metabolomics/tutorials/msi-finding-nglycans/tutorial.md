@@ -29,7 +29,12 @@ requirements:
 
 contributors:
 - foellmelanie
-
+tags:
+  - metabolomics
+  - mass spectrometry imaging
+  - imaging
+edam_ontology:
+  - topic_3172
 ---
 
 

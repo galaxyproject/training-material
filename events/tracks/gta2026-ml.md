@@ -28,7 +28,7 @@ contributions:
         - meltemktn
         - hujambo-dunia
         - paulocilasjr
-        - nilchia
+        - Nilchia
 
 
 program:

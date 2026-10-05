@@ -101,6 +101,12 @@ The configuration is not complex for CVMFS:
 >
 >    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to. You can use the `cvmfs_quota_limit` role variable to control this setting.
 >
+>    If you also want to mount the BRC Analytics pathogen data and Vertebrate Genomes Project repositories, include them in `CVMFS_REPOSITORIES`:
+>
+>    ```
+>    CVMFS_REPOSITORIES="data.galaxyproject.org,brc.galaxyproject.org,vgp.galaxyproject.org"
+>    ```
+>
 > > <tip-title>What is a good size for CVMFS_QUOTA_LIMIT?</tip-title>
 > > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
 > {: .tip}
@@ -108,12 +114,18 @@ The configuration is not complex for CVMFS:
 > 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
 >
 >    ```
->    CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
+>    CVMFS_SERVER_URL="http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
 >    ```
 >
 >    This is a list of the available stratum 1 servers that have this repo.
 >
-> 3. Create a `/etc/cvmfs/keys/data.galaxyproject.org.pub` file with the following contents:
+> 3. Create the key directory:
+>
+>    ```
+>    sudo mkdir -p /etc/cvmfs/keys/galaxyproject.org
+>    ```
+>
+> 4. Create a `/etc/cvmfs/keys/galaxyproject.org/data.galaxyproject.org.pub` file with the following contents:
 >
 >    ```
 >    -----BEGIN PUBLIC KEY-----
@@ -127,7 +139,23 @@ The configuration is not complex for CVMFS:
 >    -----END PUBLIC KEY-----
 >    ```
 >
-> 4. Make a directory for the cache files
+> 5. Create a `/etc/cvmfs/keys/galaxyproject.org/galaxyproject.org.pub` file with the following contents:
+>
+>    ```
+>    -----BEGIN PUBLIC KEY-----
+>    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuJZTWTY3/dBfspFKifv8
+>    TWuuT2Zzoo1cAskKpKu5gsUAyDFbZfYBEy91qbLPC3TuUm2zdPNsjCQbbq1Liufk
+>    uNPZJ8Ubn5PR6kndwrdD13NVHZpXVml1+ooTSF5CL3x/KUkYiyRz94sAr9trVoSx
+>    THW2buV7ADUYivX7ofCvBu5T6YngbPZNIxDB4mh7cEal/UDtxV683A/5RL4wIYvt
+>    S5SVemmu6Yb8GkGwLGmMVLYXutuaHdMFyKzWm+qFlG5JRz4okUWERvtJ2QAJPOzL
+>    mAG1ceyBFowj/r3iJTa+Jcif2uAmZxg+cHkZG5KzATykF82UH1ojUzREMMDcPJi2
+>    dQIDAQAB
+>    -----END PUBLIC KEY-----
+>    ```
+>
+>    The BRC Analytics and VGP repositories use this common Galaxy Project key. The `singularity.galaxyproject.org` repository also uses it, and the data repository is expected to transition to it eventually.
+>
+> 6. Make a directory for the cache files
 >
 >    ```
 >    sudo mkdir /srv/cvmfs
@@ -206,4 +234,3 @@ Probe the connection.
 ## Look at the repository
 
 Now to configure Galaxy to use the CVMFS references we have just installed, see [the Ansible tutorial.]({% link topics/admin/tutorials/cvmfs/tutorial.md %}#configuring-galaxy-to-use-the-cvmfs-references)
-

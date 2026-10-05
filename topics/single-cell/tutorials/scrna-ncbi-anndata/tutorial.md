@@ -22,6 +22,7 @@ key_points:
 tags:
 - data management
 - data import
+- sc_formats
 
 contributions:
   authorship:

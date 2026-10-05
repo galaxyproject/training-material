@@ -1,0 +1,184 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "GTEx Tissue Modeling with Galaxy Image Learner"
+
+questions:
+  - "What is machine learning, and why is it useful for classification?"
+  - "How does GTEx provide data for biological machine learning examples?"
+  - "How can Galaxy Image Learner train and evaluate image classification models?"
+
+objectives:
+  - "Explain the difference between traditional machine learning and deep learning."
+  - "Describe how GTEx gene expression and sample metadata support tissue classification."
+  - "Identify the main Image Learner inputs, settings, and outputs."
+
+contributors:
+  - paulocilasjr
+  - allissadillman
+  - nakucher
+  - jgoecks
+---
+
+# Before the Hands-on
+
+- Machine learning can learn patterns from examples.
+- GTEx provides gene expression data from many human tissues.
+- Image Learner makes image classification workflows available in Galaxy.
+
+???
+
+These slides introduce the ideas needed to understand the tutorial.
+
+---
+
+# What is Machine Learning?
+
+- A way to learn patterns from data instead of writing every rule by hand.
+- A model is trained with examples and then used on new examples.
+- In supervised learning, each training example has an input and a known label.
+- The goal is to make useful predictions on data the model has not seen before.
+
+---
+
+# Prediction and Classification
+
+- Prediction: estimate an outcome from input data.
+- Classification: predict a category or label.
+- Binary classification: two possible labels.
+- Multi-class classification: more than two possible labels.
+
+In this tutorial, the model predicts the tissue label for each GTEx sample.
+
+---
+
+# Traditional Machine Learning
+
+- Often uses human-designed features.
+- Works well with smaller or structured datasets.
+- Can be easier to interpret than deep learning.
+- Examples: logistic regression, random forests, support vector machines.
+
+Tradeoff: feature design can require strong domain expertise.
+
+---
+
+# Deep Learning
+
+- Uses neural networks with many trainable parameters.
+- Can learn useful features directly from raw or lightly processed data.
+- Strong for images, text, audio, and large complex datasets.
+- Usually needs more data, computation, and careful validation.
+
+---
+
+# Traditional ML vs Deep Learning
+
+| Approach | Strengths | Limitations |
+|---|---|---|
+| Traditional ML | Efficient, often easier to interpret | Depends on feature engineering |
+| Deep learning | Learns complex patterns automatically | Needs more data and compute |
+
+Both approaches require good data, clear labels, and careful evaluation.
+
+---
+
+# Why Validation Matters
+
+- A model can memorize training data and still fail on new data.
+- Validation data helps tune model behavior during training.
+- Test data estimates performance after training is complete.
+- Large gaps between training and validation performance may indicate overfitting.
+
+---
+
+# What is GTEx?
+
+- GTEx stands for Genotype-Tissue Expression.
+- It is a reference project for studying human gene expression across tissues.
+- GTEx links molecular measurements with sample and tissue metadata.
+- Researchers use GTEx to study tissue-specific expression and regulation.
+
+---
+
+# GTEx Data Products
+
+- Gene expression matrices: expression values for many genes and samples.
+- Sample annotations: tissue labels and technical metadata.
+- eQTL resources: links between genetic variation and gene expression.
+- Histology and metadata resources: biological and quality context.
+
+For this tutorial, the key pieces are gene TPM values and tissue labels.
+
+---
+
+# GTEx in This Tutorial
+
+- Each sample has thousands of gene expression values.
+- Each sample also has a detailed tissue label.
+- The model learns whether expression patterns can predict tissue type.
+- This is a supervised, multi-class classification task.
+
+---
+
+# What is Image Learner?
+
+- A Galaxy tool for training image-based deep learning models.
+- It accepts images plus a metadata table containing labels.
+- It can train models for classification tasks from the Galaxy interface.
+- It produces reports that summarize training and model performance.
+
+---
+
+# Image Learner Inputs
+
+| Input | Purpose |
+|---|---|
+| Metadata table | One row per image, with image filename and label |
+| Image ZIP archive | Contains the image files referenced by the table |
+
+The `image_path` column points to each image, and the `label` column tells the model what to predict.
+
+---
+
+# Important Settings
+
+- Task type: binary, multi-class, or other supported task.
+- Label column: the target variable the model should predict.
+- Image column: the filename for each input image.
+- Model architecture: the deep learning model used for training.
+- Epochs and early stopping: how long training can continue.
+
+Good settings depend on the dataset, task, and available compute.
+
+---
+
+# Why Use Image Learner?
+
+- Keeps training inside a reproducible Galaxy history.
+- Reduces the amount of code needed to train a model.
+- Standardizes inputs, model settings, and outputs.
+- Makes reports easier to share, inspect, and compare.
+
+This helps researchers focus on the biological question and model interpretation.
+
+---
+
+# Reading Model Results
+
+- Accuracy: how often predictions are correct overall.
+- Precision and recall: how errors differ across classes.
+- Loss: how uncertain or incorrect model predictions are.
+- Training curves: whether learning improves over time.
+- Confusion patterns: which classes are mixed up.
+
+Always compare training, validation, and test performance.
+
+---
+
+# Takeaways
+
+- Machine learning uses examples to learn prediction rules.
+- Deep learning is powerful for complex data but needs careful validation.
+- GTEx provides expression data and tissue labels for supervised learning.
+- Image Learner lets Galaxy users train and inspect image classification models.

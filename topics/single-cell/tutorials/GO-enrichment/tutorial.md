@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: GO Enrichment Analysis on Single-Cell RNA-Seq Data
-zenodo_link: 'https://zenodo.org/records/13461890'
+zenodo_link: 'https://zenodo.org/record/13461890'
 subtopic: exploratory
 
 questions:
@@ -32,7 +32,7 @@ follow_up_training:
         - pseudobulk-analysis
 
 tags:
-- single cell
+- single-cell
 - GO enrichment
 
 time_estimation: 3H

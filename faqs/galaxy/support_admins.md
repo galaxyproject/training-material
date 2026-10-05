@@ -14,4 +14,5 @@ If you suspect there is something wrong with the server, or would like to reques
   - **Galaxy EU:** [Matrix channel](https://matrix.to/#/#usegalaxy-eu_Lobby:gitter.im), [Request TIaaS](https://usegalaxy.eu/tiaas/)
   - **Galaxy AU:** [Email](mailto:help@genome.edu.au), [Request a tool](https://request.usegalaxy.org.au/), [Request Data Quota](https://docs.google.com/forms/d/e/1FAIpQLSeiw6ajmkezLCwbXc3OFQEU3Ai9hGnBd967u9YbQ8ANPgvatA/viewform)
   - **Galaxy FR:** [Request TIaaS](https://usegalaxy.fr/tiaas/)
+  - **Galaxy CA:** [Contact (email, tool request)](https://docs.google.com/forms/d/e/1FAIpQLSfPD6Cah_qOzrFOSptWeFBEutawOR4ZAupDy8hQX7LmLPRapA/viewform)
   - Other Galaxy servers? Check the homepage for more information.

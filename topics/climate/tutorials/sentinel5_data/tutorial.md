@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Sentinel 5P data visualisation
-subtopic: introduction
+subtopic: analysing
 questions:
 - How to visualise volcanoes with Sentinel 5 data ?
 - How can we see the evolution of sulfur dioxide and aerosol index through time?
@@ -20,6 +20,7 @@ key_points:
 - Study volcano activity 
 tags:
   - earth-system
+  - atmosphere
   - volcano
   - satellite data
 contributions:
@@ -85,7 +86,7 @@ Interactive tools are working differently than classical tools as it allows the 
 
 > <hands-on-title> Launch the interactive tool </hands-on-title>
 >
-> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus) %} with the following parameters:
+> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - *"Include data into the environment - optional "*: You don't need anything
 > 2. Click on **Run Tool**

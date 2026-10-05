@@ -70,7 +70,7 @@ If you community is not already included, follow this step :
 
 # Pull list of tags relevant to your community
 
-To add tutorials in your community tutorial table, you will need to indicate a list of tags relevant to your community, and tutorials associated with this tag will be automatically pulled from the [Galaxy Training Network](https://training.galaxyproject.org/) one a week. Only tutorials with the selected tags will be added to the filtered table.
+To add tutorials in your community tutorial table, you will need to indicate a list of tags relevant to your community, and tutorials associated with this tag will be automatically pulled from the [Galaxy Training Network](https://training.galaxyproject.org/) once a week. Only tutorials with the selected tags will be added to the filtered table.
 You will then be able to remove tutorials that are not relevant to your community or deprecated.
 
 > <hands-on-title>Select tutorials tags from the Galaxy Training Network</hands-on-title>
@@ -83,7 +83,7 @@ You will then be able to remove tutorials that are not relevant to your communit
 > You can also create a tag (for example, your community name) and tag all relevant tutorials with it. Then, you only need to use this tag to pull all the relevant tutorials.
 {: .comment}
 
-# Add the list relevant tags for your community in the `tutorial_tags` file
+# Add the list of relevant tags for your community in the `tutorial_tags` file
 
 > <hands-on-title>Add the relevant tags to the tutorial_tags file</hands-on-title>
 > 1. Open or create a file named `tutorial_tags` in your community metadata folder (`communities/<your community>/metadata/tutorial_tags`)
@@ -109,7 +109,7 @@ Once you have a list of the tags that you wish to keep, you can submit this to G
 
 The Pull Request will be reviewed. Make sure to respond to any feedback.
 
-On the sunday following the Pull Request merge, a table with all tutorial will be created in `communities/<your community>/resources/tutorials.tsv`
+On the sunday following the Pull Request merge, a table with all tutorials will be created in `communities/<your community>/resources/tutorials.tsv`
 
 Here is an overview of the files :
 

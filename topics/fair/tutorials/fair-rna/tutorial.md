@@ -30,6 +30,8 @@ contributions:
     - poterlowicz-lab
   funding:
     - elixir-uk-dash
+  editing:
+    - kevinrue
 subtopic: fair-data
 
 requirements:
@@ -120,7 +122,7 @@ Note also, the same record can be accessed using a resolution service, such as [
 
 > <question-title></question-title>
 >
->  Location the dataset using the persistent ID in a different way.  Use the search menu in ArrayExpress to find the dataset again.   Use the following link to (access ArrayExpress)[https://www.ebi.ac.uk/biostudies/arrayexpress/studies/] and then type E-MTAB-8316 into the search bar.
+>  Location the dataset using the persistent ID in a different way.  Use the search menu in ArrayExpress to find the dataset again.   Use the following link to [access ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/) and then type E-MTAB-8316 into the search bar.
 >
 > > <solution-title></solution-title>
 > >

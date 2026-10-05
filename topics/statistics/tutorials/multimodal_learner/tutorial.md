@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 level: Intermediate
 title: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with
   HANCOCK
-zenodo_link: https://zenodo.org/records/18807820
+zenodo_link: 'https://zenodo.org/record/18807820'
 questions:
 - How does Multimodal Learner combine tabular, text, and image modalities in a single
   model?
@@ -28,15 +28,6 @@ contributors:
 - afpybus
 - qchiujunhao
 - jgoecks
-recordings:
-- youtube_id: 0LK_3sn7tZQ
-  date: '2026-05-15'
-  galaxy_version: '26.0'
-  length: 22M
-  speakers:
-  - paulocilasjr
-  captioners:
-  - paulocilasjr
 tags:
 - Multimodal Learning
 - GLEAM
@@ -52,7 +43,6 @@ recordings:
   captioners:
   - natalie-wa
   bot-timestamp: 1778716166
-
 
 ---
 
@@ -144,9 +134,9 @@ Because Multimodal Learner requires a specific input structure—a single sample
 
 > <comment-title>Data preparation: shaping HANCOCK for the tool</comment-title>
 >
-> The raw data published by ({% cite Dorrich2025 %}) can be found here: 
+> The raw data published by ({% cite Dorrich2025 %}) can be found here:
 > [HANCOCK raw dataset](https://www.hancock.research.uni-erlangen.org/download)
-> 
+>
 > We preprocessed the raw data to create a tutorial-friendly derivative:
 >
 > 1) Normalize identifiers consistently (e.g., remove leading zeros; standardize missing values) before merging.
@@ -261,13 +251,13 @@ The HTML report is designed to help you answer two questions quickly: **how well
 
 ![Report tabs containing configuration, metrics and plots of the model](./../../images/multimodal_learner/report_tabs.png "Picture of the report tabs generated after running the multimodal learner tool.")
 
-- **Performance summary (by split)**  
+- **Performance summary (by split)**
   Review ROC–AUC and PR–AUC alongside threshold-dependent metrics (precision, recall, F1). For recurrence prediction, PR–AUC is often especially informative because the positive class can be relatively rare, and false negatives directly reduce recall.
-- **Diagnostics (curves and confusion matrix)**  
+- **Diagnostics (curves and confusion matrix)**
   Use ROC/PR curves to understand ranking performance, then move to the confusion matrix and class-wise metrics to see *where* errors occur. In the HANCOCK recurrence use case, a common pattern is **stronger performance for the negative class (no recurrence)** than the positive class, so the main concern is typically **missed recurrence cases (false negatives)**.
-- **Calibration and threshold behavior**  
+- **Calibration and threshold behavior**
   Calibration plots help you decide whether predicted probabilities can be interpreted as risk. Threshold views show how changing the cutoff trades off false negatives versus false positives. The configuration used was **0.25** decision threshold to make this tradeoff explicit (rather than relying on the default 0.5).
-- **Configuration and reproducibility**  
+- **Configuration and reproducibility**
   Confirm that the report matches your intended setup: which modalities were used, chosen text and image backbones, missing-image handling, split strategy, random seed, and time budget.
 
 # Tutorial Results (JPEG Derivative Dataset)

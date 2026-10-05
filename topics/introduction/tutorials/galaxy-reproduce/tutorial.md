@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "How to reproduce published Galaxy analyses"
-zenodo_link: https://zenodo.org/record/1319069
+zenodo_link: 'https://zenodo.org/record/1319069'
 level: Introductory
 questions:
   - "How to reproduce published Galaxy results (workflows and histories)"
@@ -23,6 +23,8 @@ contributions:
     - annefou
   funding:
     - uni-freiburg
+tags:
+- galaxy-intro
 ---
 
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.

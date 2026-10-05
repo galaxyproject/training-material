@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'galaxyproject'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # Avg commits between successive monday:
           #  Min.   :  2.0
@@ -31,17 +31,17 @@ jobs:
           persist-credentials: false
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '19'
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: |
             vendor/bundle
@@ -65,7 +65,7 @@ jobs:
         run: |
           gem install bundler
           python -m pip install --upgrade pip
-          pip install requests ephemeris
+          pip install requests ephemeris urllib3
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb

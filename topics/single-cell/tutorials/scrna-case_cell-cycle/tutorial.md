@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Removing the effects of the cell cycle
-zenodo_link: https://zenodo.org/record/7311628/
+zenodo_link: 'https://zenodo.org/record/7311628'
 answer_histories:
   - label: "UseGalaxy.eu"
     history: https://singlecell.usegalaxy.eu/u/videmp/h/cell-cycle-regression-workflow
@@ -36,7 +36,7 @@ key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle
 - Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data
 tags:
-
+- Drop-seq
 contributions:
   authorship:
     - MarisaJL

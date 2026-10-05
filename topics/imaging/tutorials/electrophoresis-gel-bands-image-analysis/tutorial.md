@@ -30,7 +30,7 @@ tags:
 
 contributions:
   authorship:
-    - reytakop
+    - reyhaneh-tavakoli
     - dianichj
   reviewing:
     - kostrykin

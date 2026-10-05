@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: ERGA post-assembly QC
+subtopic: assembly-quality
 questions:
 - "What combination of tools can assess the quality of a genome assembly?"
 - "What metrics can help to analyse the quality of an assembly?"

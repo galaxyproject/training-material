@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Age prediction using machine learning
-zenodo_link: https://zenodo.org/record/2545213
+zenodo_link: 'https://zenodo.org/record/2545213'
 questions:
 - How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?
 objectives:

@@ -1,10 +1,13 @@
 ---
 layout: event
 title: "Galaxy Beyond Basics: Mastering Workflows, Automation, and Scalability"
+draft: true
 
 # external: "https://galaxyproject.org/events/2025-03-10-galaxy-workshop-freiburg/"
 
 description: |
+    NOTE: this event has been cancelled.
+
     Join us for an **intensive, week-long, in-person training** designed to elevate your Galaxy expertise to new heights. This workshop is tailored for **data scientists, advanced Galaxy users, and team leaders** who need to **scale, automate, and publish** their data analysis workflows for **batch processing and production-level applications**.
 
 cover-image: events/images/Galaxy_AGT2026.png
@@ -24,7 +27,7 @@ mode: onsite
 
 registration:
   link: https://framaforms.org/pre-registration-for-ifb-training-galaxy-beyond-basics-2026-1772622577
-  deadline: 2026-06-05
+  deadline: 2026-06-25
   open: true
 
 tags:
@@ -258,6 +261,8 @@ program:
 
 
 ---
+
+NOTE: this event has been cancelled.
 
 Over five days, you'll embark on a **comprehensive journey** through Galaxy's advanced capabilities:
 

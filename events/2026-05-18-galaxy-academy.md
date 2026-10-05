@@ -101,7 +101,7 @@ contributions:
         - pratikdjagtap
         - RZ9082
         - rlibouba
-        - reytakop
+        - reyhaneh-tavakoli
         - SaimMomin12
         - sanjaysrikakulam
         - scottcain
@@ -126,6 +126,7 @@ contributions:
         - FAIR2Adapt
         - pndb
         - dataterra
+        - gaiadata
 
 location:
   name: online

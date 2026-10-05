@@ -3,7 +3,7 @@ title: "Quantifying Electrophoresis Gel Bands with QuPath and Galaxy"
 layout: news
 contributions:
   authorship:
-    - reytakop
+    - reyhaneh-tavakoli
     - dianichj
 tags:
   - GTN

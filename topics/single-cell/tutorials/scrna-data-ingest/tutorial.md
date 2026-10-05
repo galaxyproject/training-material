@@ -47,6 +47,7 @@ follow_up_training:
 tags:
   - data management
   - data import
+  - sc_formats
 ---
 
 You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and... you hit the wall! The format of your files is not compatible with the one used in tutorial! Have you been there?

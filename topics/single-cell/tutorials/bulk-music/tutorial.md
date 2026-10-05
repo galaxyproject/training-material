@@ -5,9 +5,10 @@ subtopic: deconvo
 redirect_from:
 - /topics/transcriptomics/tutorials/bulk-music/tutorial
 priority: 1
-zenodo_link: https://zenodo.org/record/5719228
+zenodo_link: 'https://zenodo.org/record/5719228'
 tags:
   - transcriptomics
+  - deconvolution
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
