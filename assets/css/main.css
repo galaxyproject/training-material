@@ -63,6 +63,8 @@
   --text-color: #292b2c;
   --text-color-muted: #555;
   --text-color-inverted: #eee;
+  --text-color-inline-code: #c90c15;
+  --background-color-inline-code: #e8e8e8;
   --text-color-boxtitle: var(--text-color);
   --slide-heading-color: var(--text-color);
   --code-foreground: #fff;
@@ -124,6 +126,8 @@ body[data-brightness=dark] {
   --slide-heading-color: #eee;
   --secondary-color: #222;
   --secondary-color-text: var(--text-color);
+  --text-color-inline-code: #ccc;
+  --background-color-inline-code: #222;
 }
 
 body[data-brightness=dark] img[src$=".gif"] {
@@ -20478,10 +20482,8 @@ figure figcaption {
   }
 }
 :not(pre) > code {
-  color: var(--code-foreground);
-  background: var(--code-background);
-  border: 1px solid var(--text-color-muted);
-  border-radius: 0.25rem;
+  color: var(--text-color-inline-code);
+  background: var(--background-color-inline-code);
 }
 
 pre.highlight {
@@ -20744,10 +20746,12 @@ blockquote.agenda {
 }
 blockquote.agenda > h3:not(.nobox),
 blockquote.agenda > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20778,10 +20782,12 @@ blockquote.tip {
 }
 blockquote.tip > h3:not(.nobox),
 blockquote.tip > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20812,10 +20818,12 @@ blockquote.question {
 }
 blockquote.question > h3:not(.nobox),
 blockquote.question > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20846,10 +20854,12 @@ blockquote.code-in {
 }
 blockquote.code-in > h3:not(.nobox),
 blockquote.code-in > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20880,10 +20890,12 @@ blockquote.code-out {
 }
 blockquote.code-out > h3:not(.nobox),
 blockquote.code-out > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20917,10 +20929,12 @@ blockquote.solution {
 }
 blockquote.solution > h3:not(.nobox),
 blockquote.solution > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20951,10 +20965,12 @@ blockquote.comment {
 }
 blockquote.comment > h3:not(.nobox),
 blockquote.comment > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -20986,10 +21002,12 @@ blockquote.hands_on, blockquote.hands-on {
 blockquote.hands_on > h3:not(.nobox),
 blockquote.hands_on > .box-title, blockquote.hands-on > h3:not(.nobox),
 blockquote.hands-on > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -21022,10 +21040,12 @@ blockquote.key_points {
 }
 blockquote.key_points > h3:not(.nobox),
 blockquote.key_points > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -21057,10 +21077,12 @@ blockquote.overview {
 }
 blockquote.overview > h3:not(.nobox),
 blockquote.overview > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -21091,10 +21113,12 @@ blockquote.warning {
 }
 blockquote.warning > h3:not(.nobox),
 blockquote.warning > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -21125,10 +21149,12 @@ blockquote.details {
 }
 blockquote.details > h3:not(.nobox),
 blockquote.details > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
@@ -21189,10 +21215,12 @@ blockquote.feedback {
 }
 blockquote.feedback > h3:not(.nobox),
 blockquote.feedback > .box-title {
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-100%) translateY(-0.6rem);
   font-size: 18px;
   margin-inline-start: -1rem;
   margin-inline-end: -1rem;
-  margin-top: -3.3rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-inline-start: 1rem;
