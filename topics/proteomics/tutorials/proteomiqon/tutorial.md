@@ -39,8 +39,7 @@ requirements:
 ---
 
 
-Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}).
-Advantages of the ProteomIQon are that it can handle label-free (14N), labeled (15N) and TIMs data. As well it is a full pipeline developed by one group [CSBiology](https://csbiology.github.io/) with direct compatibility. You can find the project also on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
+Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}). Advantages of ProteomIQon include its ability to handle label-free (14N), labelled (15N), and TIMS data. Furthermore, ProteomIQon is a complete pipeline developed by a single group, [CSBiology](https://csbiology.github.io/), ensuring direct compatibility between its individual components. The project is also available on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
 
 This beginner friendly training will explain how to work with ProteomIQon's main tools.
 
@@ -64,7 +63,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 
 > <comment-title>Scope of this tutorial</comment-title>
 >
-> This tutorial stops after peptide-ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
+> This tutorial stops after peptide ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
 > The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/). 
 > All files that you need and produce with ProteomIQon you can find on [Zenodo](https://zenodo.org/records/22934182)
@@ -187,11 +186,11 @@ If you are working with mass spectrometry data and wish to analyse the results f
 
 # Peptide Spectrum Matching
 
-Now for the first interesting tool, PeptideSpectrumMatching; this tool attempts to identify which peptide corresponds to a measured MS/MS spectrum. To do this, the tool first examines the corresponding precursor from the previous MS1 scan and determines its charge based on the isotope pattern (charge state determination). Using the charge and the measured m/z value, the mass of the peptide can then be calculated.
+Now for the first interesting tool, PeptideSpectrumMatching, this tool attempts to identify which peptide corresponds to a measured MS/MS spectrum. To do this, the tool first examines the corresponding precursor from the previous MS1 scan and determines its charge based on the isotope pattern (charge state determination). Using the charge and the measured m/z value, the mass of the peptide can then be calculated.
 The tool then searches the PeptideDB for all peptides whose mass approximately matches this calculated mass. The permitted deviation is defined via LookUpPPM.
 For each matching peptide, the tool then calculates which fragment ions should theoretically be produced (fragmentation). These theoretical fragments are compared with the actually measured MS2 spectrum.
 The better the theoretical peptide matches the measured spectrum, the higher the score. To this end, ProteomIQon calculates, amongst other things, a SEQUEST-like and an Andromeda-like score, as well as an X!Tandem-like score.
-In addition to the genuine peptides, the decoy peptides are also tested. These are artificially generated reference peptides which are later used by PSMStatistics to estimate how many of the identified hits are likely to be false. This is used to determine the False Discovery Rate (FDR).
+In addition to the genuine peptides, the decoy peptides are also tested. These are artificially reference peptides which are later used by PSMStatistics to estimate how many of the identified hits are likely to be false. This is used to determine the False Discovery Rate (FDR).
 
 
 
@@ -262,14 +261,14 @@ We now understand which input files the tool is getting and what it does, but wh
 {: .question}
 
 # Evaluate the psm results with peptide spectrum matching statistics (PSMStats)
-The `.psm` file contains several search-engine and quality-related features for each candidate. `PSMStatistics` combines these features into a single model score using a semi-supervised procedure. Target and decoy labels provide the training signal, and the model is retrained iteratively as confident target matches are added.
+The `.psm` file contains several search-engine and quality related features for each candidate. `PSMStatistics` combines these features into a single model score using a semi-supervised binary classificator. Target and decoy labels provide the training signal, and the model is retrained iteratively as confident target matches are added.
 
 ![PeptideSpectrumMatching](../../images/proteomiqon-beginnerguide/SemiSupervisedScoring.png)
 
 From the combined score, the tool calculates two important statistical measures:
 
 - **PEP value (Posterior Error Probability):** an estimate of the probability that an individual PSM is incorrect.
-- **Q-value:** The Q-value of a PSM is the estimated minimum FDR among the score thresholds at which this PSM is still retained.
+- **Q-value:** The Q-value is the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
 
 The default estimated-threshold configuration currently uses a Q-value threshold of `0.01`, a PEP threshold of `0.05`, up to `15` iterations, and a minimum increase between iterations of `0.005`. See the [PSMStatistics documentation](https://csbiology.github.io/ProteomIQon/tools/PSMStatistics.html) for details.
 
@@ -333,7 +332,7 @@ The `.qpsm` output retains the identification information and adds statistical c
 >
 > > <solution-title></solution-title>
 > >
-> > The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **Q-value** is related to the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
+> > The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **Q-value** is the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
 > {: .solution}
 {: .question}
 
@@ -350,7 +349,7 @@ The `.qpsm` output retains the identification information and adds statistical c
 # Quantification of identified peptides
 Peptide identification tells us which peptide is likely to have produced an MS/MS spectrum, but it does not by itself estimate how abundant that peptide ion was in the chromatographic run.
 
-`PSMBasedQuantification` uses the confident identifications from `PSMStatistics` to locate peptide ions in the MS1 data. For each identified peptide ion, it extracts an ion chromatogram around the expected monoisotopic m/z and retention time, detects chromatographic peaks, and fits the peak closest to the identification. **The fitted peak area is reported as the peptide-ion quantity.**
+`PSMBasedQuantification` uses the confident identifications from `PSMStatistics` to locate peptide ions in the MS1 data. For each identified peptide ion, it extracts an ion chromatogram around the expected monoisotopic m/z and retention time, detects chromatographic peaks, and fits the peak closest to the identification. **The fitted peak area is reported as the peptide ion quantity.**
 
 Important parameters to run the tool are described in the [PSMBasedQuantification documentation](https://csbiology.github.io/ProteomIQon/tools/PSMBasedQuantification.html).
 
@@ -429,7 +428,7 @@ The resulting file is a .quant file now we look at the output to get a better un
 | `AlignmentQValue`                          | Q-value, which is calculated based on the alignment score                                                                                                        |
  
 
-> <question-title>Which value should be used as the main peptide-ion abundance estimate?</question-title>
+> <question-title>Which value should be used as the main peptide ion abundance estimate?</question-title>
 >
 > Would you normally use `MeasuredApex_Light` or `Quant_Light` as the quantity reported by this ProteomIQon step?
 >
@@ -449,7 +448,7 @@ The resulting file is a .quant file now we look at the output to get a better un
 > {: .solution}
 {: .question}
 
-# Protein Inferece - peptides to proteins
+# Protein Inference - peptides to proteins
 Peptide identification does not always translate into a unique protein identification. The same peptide sequence can occur in multiple proteins, homologues, or isoforms. `ProteinInference` therefore maps identified peptides back to proteins and reports **protein groups** that represent the available peptide evidence.
 
 The current parameters are documented in [ProteinInference](https://csbiology.github.io/ProteomIQon/tools/ProteinInference.html):
@@ -497,19 +496,19 @@ The `.prot` file contains:
 > {: .solution}
 {: .question}
 
-# Optional extension: what changes for N15-labeled data?
+# Optional extension: what changes for 15N-labeled data?
 
 The main workflow above is deliberately label-free (in this case label-free means 14N). ProteomIQon also supports metabolically labeled data such as 15N experiments, but the search database and quantification settings must then be changed consistently.
 
-In an N15-labeled experiment, nitrogen atoms containing 14N are replaced by the heavier 15N isotope during metabolic labelling. The mass shift of a peptide depends on the number of nitrogen atoms contained in that peptide. This produces predictable light/heavy peptide-ion relationships that can be used during labeled quantification.
+In an 15N-labeled experiment, nitrogen atoms containing 14N are replaced by the heavier 15N isotope during metabolic labelling. The mass shift of a peptide depends on the number of nitrogen atoms contained in that peptide. This produces predictable light/heavy peptide ion relationships that can be used during labeled quantification.
 
-For an N15 workflow:
+For an 15N workflow:
 
-1. `PeptideDB` must include the N15 isotope modification so that labeled peptide variants are represented in the search space.
-2. `PSMBasedQuantification` must use the N15-labeled quantification mode rather than `Unlabeled`.
+1. `PeptideDB` must include the 15N isotope modification so that labeled peptide variants are represented in the search space.
+2. `PSMBasedQuantification` must use the 15N-labeled quantification mode rather than `Unlabeled`.
 3. The resulting `.quant` file can contain both light and heavy quantities, including `Quant_Light` and `Quant_Heavy`.
 
-> <question-title>Should an N15 isotope modification be included for an unlabeled sample?</question-title>
+> <question-title>Should an 15N isotope modification be included for an unlabeled sample?</question-title>
 >
 > > <solution-title></solution-title>
 > >
