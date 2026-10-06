@@ -216,7 +216,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 > >
 > > The following step shows the tool set up for running **qiime2 cutadapt trim-paired** to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone **Cutadapt** (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
 > >
-> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **Cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-qiime2-artefact).
+> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **Cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-a-qiime2-artefact).
 > >
 > > > <hands-on-title>Run Cutadapt</hands-on-title>
 > > >
