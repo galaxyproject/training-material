@@ -125,28 +125,28 @@ Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R
 > 2. Import datasets from [Zenodo]({{page.zenodo_link}}).
 >
 >    ```
->    https://zenodo.org/records/21614437/files/D01_FWD09_REV01_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D01_FWD09_REV01_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D06_FWD09_REV06_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D06_FWD09_REV06_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D08_FWD09_REV08_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D08_FWD09_REV08_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D09_FWD09_REV09_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D09_FWD09_REV09_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D11_FWD09_REV11_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D11_FWD09_REV11_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D13_FWD10_REV01_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D13_FWD10_REV01_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D14_FWD10_REV02_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D14_FWD10_REV02_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D17_FWD10_REV05_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D17_FWD10_REV05_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D19_FWD10_REV07_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D19_FWD10_REV07_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D20_FWD10_REV08_L001_R1_001.fastq.gz
->    https://zenodo.org/records/21614437/files/D20_FWD10_REV08_L001_R2_001.fastq.gz
->    https://zenodo.org/records/21614437/files/dunnart_metadata.tsv
->    https://zenodo.org/records/21614437/files/silva_138.2_16s_v4_classifier.qza
+>    https://zenodo.org/records/23175186/files/D01_FWD09_REV01_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D01_FWD09_REV01_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D06_FWD09_REV06_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D06_FWD09_REV06_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D08_FWD09_REV08_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D08_FWD09_REV08_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D09_FWD09_REV09_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D09_FWD09_REV09_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D11_FWD09_REV11_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D11_FWD09_REV11_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D13_FWD10_REV01_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D13_FWD10_REV01_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D14_FWD10_REV02_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D14_FWD10_REV02_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D17_FWD10_REV05_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D17_FWD10_REV05_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D19_FWD10_REV07_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D19_FWD10_REV07_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D20_FWD10_REV08_L001_R1_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/D20_FWD10_REV08_L001_R2_001.fastq.gz
+>    https://zenodo.org/records/23175186/files/dunnart_metadata.tsv
+>    https://zenodo.org/records/23175186/files/silva_138.2_16s_v4_classifier.qza
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -373,9 +373,9 @@ In the following command, a pooling method of `pseudo` is selected. Pseudo-pooli
 > > 1. Import the DADA2 output table, representative sequences and denoising stats files from [Zenodo](https://zenodo.org/records/21614437):
 > >
 > >    ```text
-> >    https://zenodo.org/records/21614437/files/dada2out_table.qza
-> >    https://zenodo.org/records/21614437/files/dada2out_representative_sequences.qza
-> >    https://zenodo.org/records/21614437/files/dada2out_denoising_stats.qza
+> >    https://zenodo.org/records/23175186/files/dada2out_table.qza
+> >    https://zenodo.org/records/23175186/files/dada2out_representative_sequences.qza
+> >    https://zenodo.org/records/23175186/files/dada2out_denoising_stats.qza
 > >    ```
 > >
 > {: .hands_on}
