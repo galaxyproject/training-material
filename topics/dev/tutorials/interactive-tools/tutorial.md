@@ -36,7 +36,18 @@ contributors:
   - neoformit
   - Lain-inrae
   - abretaud
+  - paulzierep
   # editing
+  - hexylena
+contributions:
+  authorship:
+  - eancelet
+  - yvanlebras
+  - neoformit
+  - Lain-inrae
+  - abretaud
+  - paulzierep
+  editing:
   - hexylena
   - Marie59
 
@@ -165,7 +176,7 @@ cycle.
 
 The application that we will wrap in this tutorial is a simple web tool which
 allows the user to upload `csv` and `tsv` files, manipulate them and download
-them. Our application is based on an R Shiny App hosted with a Shiny server.
+them. Our application is based on an R Shiny App, started inside the container with `shiny::runApp()`.
 
 Note that there is no link between this Interactive Tool and the Galaxy history.
 More complex applications might be able to read and write outputs to the user's
@@ -173,7 +184,7 @@ history to create a more integrated experience - see the
 [Additional components section](#galaxy-history-interaction)
 to see an example of how this can be done.
 
-Our example application can already be found [online](https://github.com/Lain-inrae/geoc-gxit).
+Our example application can already be found [online](https://github.com/paulzierep/geoc-gxit).
 In the following sections, we will study how it can be built into a GxIT.
 
 
@@ -182,7 +193,7 @@ In the following sections, we will study how it can be built into a GxIT.
 > First, let's clone the repository to take a quick look at it.
 >
 > ```console
-> $ git clone https://github.com/Lain-inrae/geoc-gxit
+> $ git clone https://github.com/paulzierep/geoc-gxit
 > $ cd geoc-gxit
 >
 > $ tree .
@@ -192,7 +203,8 @@ In the following sections, we will study how it can be built into a GxIT.
 > │   ├── app.R
 > │   └── install.R
 > ├── Makefile
-> └── README.md
+> ├── README.md
+> └── .gitignore
 > ```
 > You'll find a Galaxy tool XML, a Dockerfile and two R scripts that will be injected into the container image.
 >
@@ -240,7 +252,7 @@ If you need some help to start your Dockerfile you can always get some inspirati
 
 
 Let's check out
-[the Dockerfile](https://github.com/Lain-inrae/geoc-gxit/blob/master/Dockerfile)
+[the Dockerfile](https://github.com/paulzierep/geoc-gxit/blob/master/Dockerfile)
 that we'll use to containerize our application.
 
 This container recipe can be used to build a Docker image which can be pushed to a
@@ -271,47 +283,33 @@ RUN \
 
 # ------------------------------------------------------------------------------
 
-# These default values can be overridden when we run the container:
-#     docker run -p 8080:8080 -e PORT=8080 -e LOG_PATH=/tmp/shiny/gxit.log <container_name>
-
-# We can also bind the container $LOG_PATH to a local directory in order to
-# follow the log file from the host machine as the container runs. This command
-# will create the log/ directory in our current working directory at runtime -
-# inside we will find our Shiny app log file:
-#     docker run -p 8888:8888 -e LOG_PATH=/tmp/shiny/gxit.log -v $PWD/log:/tmp/shiny <container_name>
-
+# The port the app listens on. It must match <port> in the tool XML, since
+# Galaxy maps that port on the container.
 ARG PORT=8765
-ARG LOG_PATH=/tmp/gxit.log
 
-ENV LOG_PATH=$LOG_PATH
 ENV PORT=$PORT
 
 # ------------------------------------------------------------------------------
 
-# Edit shiny-server config to use our port
-RUN cat /etc/shiny-server/shiny-server.conf \
-    | sed "s/3838/${PORT}/" > /etc/shiny-server/shiny-server.conf.1
-RUN mv /etc/shiny-server/shiny-server.conf.1 /etc/shiny-server/shiny-server.conf
-
-# ------------------------------------------------------------------------------
-
-RUN mkdir -p $(dirname "${LOG_PATH}")
 EXPOSE $PORT
 COPY ./gxit/app.R /srv/shiny-server/
 
-CMD ["/bin/sh", "-c", "shiny-server > ${LOG_PATH} 2>&1"]
+# Run the app with shiny::runApp() rather than shiny-server: shiny-server has a
+# mandatory `run_as` directive which forces the server to be started as a fixed
+# user, and it wants to write to root-owned /var/log and /var/lib directories.
+# runApp() is happy under any uid, which is what a container needs when it is
+# launched by different users (Galaxy runs containers as the job owner).
+CMD Rscript -e "shiny::runApp('/srv/shiny-server', host = '0.0.0.0', port = ${PORT}, launch.browser = FALSE)"
 ```
 
-> <tip-title>Shiny-based interactive tools</tip-title>
-> In a previous version of this tutorial, we ran the Shiny App with `R -e "shiny:runApp()"`
-> rather than using `shiny-server`. The latter is better practice, because it ensures that
-> ports are mapped correctly for websocket functionality. With `shiny::runApp()` you will
-> probably notice a websocket timeout in the app when run as a GxIT - the UI often greys
-> out and becomes unresponsive after 20-30 seconds.
->
+> <tip-title>Why not shiny-server?</tip-title>
+> `shiny-server` needs its configuration patched before it runs as a GxIT: a
+> fixed `run_as` user, and write access to root-owned directories that Galaxy
+> containers don't have. `shiny::runApp()` needs neither, and it logs to
+> stdout/stderr, so `docker logs <container>` shows everything the app printed.
 {: .tip}
 
-This image is already hosted on [Docker Hub](https://hub.docker.com/r/ancelete/first-gxit)
+This image is already hosted on [Docker Hub](https://hub.docker.com/r/paulzierep/gtn-gxit)
 , but anyone can use this Dockerfile to rebuild the image if necessary.
 If so, don't forget to create a `gxit` folder containing `app.R` and `install.R`
 next to your Dockerfile.
@@ -327,9 +325,8 @@ next to your Dockerfile.
 >    ```sh
 >    # Build a container image from our Dockerfile
 >    IMAGE_TAG="myimage"
->    LOG_PATH=`pwd`  # Create log output in current directory
 >    PORT=8765
->    docker build -t $IMAGE_TAG --build-arg LOG_PATH=$LOG_PATH --build-arg PORT=$PORT .
+>    docker build -t $IMAGE_TAG --build-arg PORT=$PORT .
 >    ```
 >
 >    > <tip-title>Automating the build</tip-title>
@@ -364,6 +361,44 @@ Before we go pushing our container to the cloud, we should give it a local test 
 > # in your browser at http://127.0.0.1:8765
 > ```
 {: .hands_on}
+
+> <tip-title>Local image or registry image?</tip-title>
+> The image now exists on your machine, and you can use either the local copy or
+> a copy in the registry. Run `docker image ls` to see what you actually have:
+> the `myimage` you just built is listed locally, and once you have also pushed
+> (or pulled) it under a name like `<DOCKERHUB_USERNAME>/my-first-gxit`, that is
+> listed too. Both can be run, and the registry copy is downloaded first if it
+> is not on the machine yet:
+>
+> ```sh
+> # the image you just built
+> docker run -it -p 127.0.0.1:8765:8765 myimage
+>
+> # the same application, tagged for the registry
+> docker run -it -p 127.0.0.1:8765:8765 <DOCKERHUB_USERNAME>/my-first-gxit:latest
+> ```
+>
+> Galaxy makes the same choice, and it is worth knowing about while you iterate.
+> Galaxy looks for the image named in the tool's `<container>` tag: if that image
+> is already on the machine it uses it, otherwise it downloads it from the
+> registry first. Because a stale local image of the same name wins over the one
+> you just pushed, a new build can appear to have no effect. When you want to be
+> sure Galaxy picks up a new image, remove the old one first:
+>
+> ```sh
+> docker image ls                  # what do I have?
+> docker image rm myimage          # drop the local copy
+> docker pull <DOCKERHUB_USERNAME>/my-first-gxit:latest
+> ```
+>
+> While you are still changing the app, work with the local image
+> (`docker build -t myimage .` and then run `myimage`): rebuilding takes seconds,
+> whereas pushing and pulling a multi-gigabyte image takes minutes. Once the tool
+> works, push the image and point the tool XML at the registry name, so it also
+> works on a machine that has never built it. Keep the name in the tool XML and
+> the name your `Makefile` tags in sync - if they drift apart, Galaxy silently
+> runs an older image of a similar name.
+{: .tip}
 
 ## Push the image
 
@@ -424,8 +459,7 @@ our new Docker container as a Galaxy tool.
 >
 > Create a Galaxy tool XML file named `interactivetool_tabulator.xml`. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:
 > - A `<container>` (under the `<requirements>` tag)
-> - A `<port>` which matches our container
-> - An `<input>` file
+> - An `<entry_points>` section with a `<port>` which matches our container
 > - The `<command>` section
 >
 > > <comment-title>Writing the tool command</comment-title>
@@ -450,13 +484,11 @@ our new Docker container as a Galaxy tool.
 > > {% raw  %}
 > >
 > > ```xml
-> > <tool id="interactive_tool_tabulator" tool_type="interactive" name="Tabulator" version="0.1">
+> > <tool id="interactive_tool_tabulator" tool_type="interactive" name="Tabulator" version="1.0.0">
 > >     <description>Tuto tool for Gxit</description>
-> >
 > >     <requirements>
-> >         <container type="docker">ancelete/geoc-gxit:latest</container>
+> >         <container type="docker">paulzierep/gtn-gxit:latest</container>
 > >     </requirements>
-> >
 > >     <entry_points>
 > >         <entry_point name="first gxit" requires_domain="True">
 > >             <port>8765</port>
@@ -466,29 +498,28 @@ our new Docker container as a Galaxy tool.
 > >                  We can provide the URL with a <url> tag like this:
 > >                  <url>/my/entrypoint</url>
 > >              -->
-> >             <url>/</url>
-> >
 > >         </entry_point>
 > >     </entry_points>
 > >
+> >     <!-- The app is started with shiny::runApp() instead of shiny-server, which
+> >          requires a fixed user (its mandatory `run_as` directive) and writes to
+> >          root-owned /var/log and /var/lib directories - neither of which works in
+> >          a container that Galaxy starts as an arbitrary uid.
+> >          The port below has to match <port> and ARG PORT in the Dockerfile. -->
+> >
+> >     <!-- The command will be templated by Cheetah within Galaxy, and then run
+> >          inside the Docker container. This only works because Galaxy's user data
+> >          directory is mapped onto the Docker container at runtime, which enables
+> >          access to input and output datasets from inside the container. -->
+> >     <command detect_errors="exit_code"><![CDATA[
+> >         Rscript -e "shiny::runApp('/srv/shiny-server', port = 8765, launch.browser = FALSE)"
+> >     ]]></command>
+> >
 > >     <environment_variables>
-> >         <!-- These will be accessible as environment variables inside the Docker container -->
+> >         <!-- Optional. Anything set here is available as an environment variable
+> >              inside the Docker container - see "Reserved environment variables"
+> >              below. Not needed for this example. -->
 > >     </environment_variables>
-> >
-> >     <command><![CDATA[
-> >
-> >         ## The command will be templated by Cheetah within Galaxy, and
-> >         ## then run inside the Docker container!
-> >
-> >         ## This only works because Galaxy's user data directory is mapped
-> >         ## onto the Docker container at runtime - enabling access to
-> >         ## '$infile' and '$outfile' from inside the container.
-> >
-> >         shiny-server 2>&1 > /var/log/tuto-gxit-01.log
-> >         ## The log file can be found inside the container, for debugging purposes
-> >
-> >     ]]>
-> >     </command>
 > >
 > >     <inputs>
 > >     </inputs>
@@ -499,8 +530,6 @@ our new Docker container as a Galaxy tool.
 > >             adding an output ensures to keep track of the IT
 > >             execution in the history
 > >         -->
-> >
-> >         <data name="file_output" format="txt"/>
 > >     </outputs>
 > >
 > >     <tests>
@@ -508,8 +537,6 @@ our new Docker container as a Galaxy tool.
 > >     </tests>
 > >
 > >     <help> <![CDATA[
-> >
-> >         Some help is always of interest ;)
 > >
 > >     ]]></help>
 > >     <citations>
@@ -520,7 +547,7 @@ our new Docker container as a Galaxy tool.
 > >             publisher    = {INRAE},
 > >             url          = {}
 > >         }
-> >         </citation>
+> >     </citation>
 > >     </citations>
 > > </tool>
 > > ```
@@ -1080,6 +1107,63 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 > Install Docker as described on the [docker website](https://docs.docker.com/engine/install/). Click on your distribution name to get specific information.
 {: .hands_on}
 
+{% include _includes/cyoa-choices.html option1="Planemo" option2="Galaxy from source" default="Planemo" text="How do you want to run a local Galaxy to test your interactive tool?" disambiguation="localgalaxy" %}
+
+<div class="Planemo" markdown="1">
+
+## Run Galaxy with planemo
+
+In the past ITs could only be tested by adapting the Galaxy config and adding the IT XML to the Galaxy source. Now [planemo](https://planemo.readthedocs.io/) can serve ITs that makes the development process much easier.
+[planemo](https://planemo.readthedocs.io/) starts a Galaxy development server for
+you, already configured to run tools in Docker. There is nothing to install and
+nothing to configure: no Galaxy clone to edit, no `galaxy.yml`, no
+`job_conf.xml`, no tool panel file, and planemo also starts the proxy that
+publishes your interactive tool. This is the shortest path from a tool XML to a
+running GxIT.
+
+> <hands-on-title></hands-on-title>
+>
+> ```sh
+> # from the directory that contains your tool XML
+> planemo serve interactivetool_tabulator.xml \
+>   --galaxy_root ~/git/galaxy \
+>   --biocontainers
+> ```
+>
+> Galaxy is then available at [http://localhost:9090](http://localhost:9090) -
+> planemo's default port - with your tool in the tool panel. Stop the server
+> again with `Ctrl-C`.
+>
+> > <tip-title>What the other flags are for</tip-title>
+> > `--galaxy_root` points planemo at an existing Galaxy checkout (optional: it
+> > will use its own if you leave it out) and `--biocontainers` is required
+> > since the IT runs in a container.
+> >
+> > planemo starts with a single job worker, which is enough to run one
+> > interactive tool at a time. If you want to keep several GxIT sessions open
+> > side by side, raise it with `--job_workers 4` (or as many as you need).
+> {: .tip}
+>
+> > <warning-title>The first launch has to download the image</warning-title>
+> > planemo starts Galaxy with no container images pre-loaded, so the very first
+> > time you launch your GxIT Galaxy first downloads the (frequently
+> > multi-gigabyte) image and only then starts a container. Until the download
+> > is finished there is no container, so there is no port to map and no entry
+> > point, and the interface reports *No URL available for this interactive
+> > tool*. Nothing has failed - the job is still `new` or `queued`. Pull the
+> > image yourself before starting the tool if you would rather not wait:
+> >
+> > ```sh
+> > docker pull <DOCKERHUB_USERNAME>/my-first-gxit:latest
+> > docker image ls
+> > ```
+> {: .warning}
+{: .hands_on}
+
+</div>
+
+<div class="Galaxy-from-source" markdown="1">
+
 ## Galaxy installation
 
 > <hands-on-title>Install Galaxy</hands-on-title>
@@ -1176,6 +1260,30 @@ Go to the Galaxy directory and:
 
 Galaxy is available at [http://localhost:8080/](http://localhost:8080/) and you should be able to use your GxIT.
 Congrats!
+
+> <warning-title>A large image makes the first run look broken</warning-title>
+> Interactive tool images are frequently several gigabytes, and Galaxy downloads
+> the image when the job starts, before any container exists. Until that download
+> has finished there is no container, so there is no port to map and no entry
+> point for the tool, and the interface reports *No URL available for this
+> interactive tool*. Nothing has failed: the job is still `new` or `queued`.
+> Be patient, and if you are not sure whether you are waiting for a download or
+> looking at a genuine problem, pull the image yourself before starting the tool
+> and watch it with `docker image ls`:
+>
+> ```sh
+> docker pull <DOCKERHUB_USERNAME>/my-first-gxit:latest
+> docker image ls
+> ```
+>
+> The same message appears when a job cannot start at all, so it is worth
+> distinguishing the two cases: a downloading job eventually leaves the
+> `new`/`queued` state on its own, while a job that fails straight away shows an
+> error and its log in the Galaxy job details.
+{: .warning}
+
+</div>
+
 
 # Deployment in a running Galaxy instancce
 

@@ -15,9 +15,9 @@ Anybody is welcome to add their events here.
 
 [Add your own event!]({% link faqs/gtn/gtn_event_create.md %}){: .btn.btn-success}
 
-{% assign upcoming_events = site.pages| where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'upcoming' " | sort: 'date_start'  %}
-{% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " | sort: 'date_start' | reverse %}
-{% assign past_events = site.pages    | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ended'    " | sort: 'date_start' | reverse %}
+{% assign upcoming_events = site.pages| where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'upcoming'" | where_exp: "item", "item.draft != true" | sort: 'date_start'  %}
+{% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'" | where_exp: "item", "item.draft != true" | sort: 'date_start' | reverse %}
+{% assign past_events = site.pages  | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ended'" | where_exp: "item", "item.draft != true" | sort: 'date_start' | reverse %}
 {% assign upcoming_length = upcoming_events | size %}
 {% assign ongoing_length = ongoing_events | size %}
 

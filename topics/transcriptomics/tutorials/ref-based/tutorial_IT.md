@@ -14,7 +14,7 @@ tags:
 - english
 - español
 level: Introductory
-zenodo_link: https://zenodo.org/record/6457007
+zenodo_link: 'https://zenodo.org/record/6457007'
 questions:
 - Quali sono i passaggi per elaborare i dati RNA‑Seq?
 - Come identificare i geni differenzialmente espressi tra più condizioni sperimentali?
