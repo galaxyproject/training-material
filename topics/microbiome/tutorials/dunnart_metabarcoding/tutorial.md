@@ -94,7 +94,7 @@ We will be doing this step multiple times throughout this workshop to view visua
 
 > <comment-title>The QIIME vizualisation extractor Tool</comment-title>
 >
-> Within Galaxy, the `QIIME vizualisation extractor` tool can be used to view QIIME2 `.qzv` visualisation files. However, some QIIME2 visualisation files will not properly display or will lose some of the visualisation's interactive features.
+> Within Galaxy, the **QIIME vizualisation extractor** tool can be used to view QIIME2 `.qzv` visualisation files. However, some QIIME2 visualisation files will not properly display or will lose some of the visualisation's interactive features.
 >
 {: .comment}
 
@@ -111,7 +111,7 @@ This Galaxy tutorial based on material from the [Metabarcoding of bacteria in du
 
 # Data upload
 
-These dunnart faecal samples were sequenced on a single Illumina NextSeq run at the Walter and Eliza Hall Institute (WEHI), Melbourne, Australia. Data from WEHI came as paired-end, demultiplexed, unzipped *.fastq files with adapters still attached. Following the [QIIME2 importing tutorial](https://amplicon-docs.qiime2.org/en/stable/how-to-guides/how-to-import.html), this is the Casava One Eight format. The files have been renamed to satisfy the Casava format as `SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq` (e.g. `CTRLA_Fwd04-Rev25_L001_R1_001.fastq.gz`). The files were then zipped (`.gzip`).
+These dunnart faecal samples were sequenced on a single Illumina NextSeq run at the Walter and Eliza Hall Institute (WEHI), Melbourne, Australia. Data from WEHI came as paired-end, demultiplexed, unzipped `*.fastq` files with adapters still attached. Following the [QIIME2 importing tutorial](https://amplicon-docs.qiime2.org/en/stable/how-to-guides/how-to-import.html), this is the Casava One Eight format. The files have been renamed to satisfy the Casava format as `SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq` (e.g. `CTRLA_Fwd04-Rev25_L001_R1_001.fastq.gz`). The files were then zipped (`.gzip`).
 
 Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R2` respectively) will be imported and exported as a single QIIME 2 artefact file. These samples are already demultiplexed (i.e. sequences from each sample have been written to separate files), so a metadata file is not initially required.
 
@@ -169,9 +169,9 @@ Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R
 
 These sequences still have the primers attached and must be removed prior to denoising.
 
-For this workshop, we perform primer trimming using the `cutadapt` tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using `cutadapt`, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
+For this workshop, we perform primer trimming using the **cutadapt** tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using **cutadapt**, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
 
-It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone `cutadapt` tool instead of `qiime2 cutadapt trim-paired` because the QIIME2 implementation does not have the `NextSeq trimming` parameter (the `--nextseq-trim` flag if running `cutadapt` via command line), which is specifically designed to remove these artificial poly-G tails.
+It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone **cutadapt** tool instead of **qiime2 cutadapt trim-paired** because the QIIME2 implementation does not have the *"NextSeq trimming"* parameter (the `--nextseq-trim` flag if running **cutadapt** via command line), which is specifically designed to remove these artificial poly-G tails.
 
 > <hands-on-title>Run Cutadapt</hands-on-title>
 >
@@ -202,21 +202,21 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 >
 > > <comment-title>Primers</comment-title>
 > >
-> > The primers specified are the Earth Microbiome Project (EMP) 16S V4 primers (515F (Parada)– 806R (Apprill) targeting the v4 region of the bacterial 16S rRNA gene), which correspond to *this* specific experiment. Unless you are using these exact primers for your experiment, you will need to replace the `Custom 5’ adapter sequence` with the primers used in your experiment.
+> > The primers specified are the Earth Microbiome Project (EMP) 16S V4 primers (515F (Parada)– 806R (Apprill) targeting the v4 region of the bacterial 16S rRNA gene), which correspond to *this* specific experiment. Unless you are using these exact primers for your experiment, you will need to replace the *"Custom 5’ adapter sequence"* with the primers used in your experiment.
 > >
 > {: .comment}
 >
 > > <comment-title>Error Rate and Overlap</comment-title>
 > >
-> > The error rate, `Maximum error rate`, and overlap, `Minimum overlap length`, parameters will likely need to be adjusted for your own sample data to maximise the proportion of reads successfully trimmed while avoiding nonspecific matches. Play around with these values and see what happens.
+> > The error rate (*"Maximum error rate"*) and overlap (*"Minimum overlap length"*) parameters will likely need to be adjusted for your own sample data to maximise the proportion of reads successfully trimmed while avoiding nonspecific matches. Play around with these values and see what happens.
 > >
 > {: .comment}
 >
 > > <details-title>Alternately running qiime2 cutadapt trim-paired</details-title>
 > >
-> > The following step shows the tool set up for running `qiime2 cutadapt trim-paired` to perform a simplified trimming approach without the `NextSeq trimming` option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone `cutadapt` (including `NextSeq trimming`) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
+> > The following step shows the tool set up for running **qiime2 cutadapt trim-paired** to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone **cutadapt** (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
 > >
-> > Note, `qiime2 cutadapt trim-paired` requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by `cutadapt`. A QIIME2 artefact can be created from a dataset collection using `qiime2 tools import` as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-qiime2-artefact).
+> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-qiime2-artefact).
 > >
 > > > <hands-on-title>Run Cutadapt</hands-on-title>
 > > >
@@ -244,7 +244,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 > <comment-title>Quality Control</comment-title>
 >
-> When processing your own data, you should inspect the quality of your datasets before and after running `cutadapt` in order to determine the parameters to set for `cutadapt` and then to ensure that `cutadapt` has adequately cleaned your data. These quality control steps can be done using the tools `FastQC` and `MultiQC`. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
+> When processing your own data, you should inspect the quality of your datasets before and after running **cutadapt** in order to determine the parameters to set for **cutadapt** and then to ensure that **cutadapt** has adequately cleaned your data. These quality control steps can be done using the tools **FastQC** and **MultiQC**. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
 >
 {: .comment}
 
@@ -252,9 +252,9 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 QIIME2 requires `.fastq.gz` sequence datasets to follow the CASAVA file naming format (`SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq`, e.g. `D01_FWD09_REV01_L001_R1_001.fastq.gz`) in order to import `.fastq.gz` sequence datasets into the QIIME2 artefact format (`.qza`), which is the data format used by the QIIME2 suite of tools. Generally a single `.qza` QIIME2 artefact will be created that contains all of the `.fastq.gz` sample datasets to be processed.
 
-In Galaxy, the `.fastq.gz` datasets can be provided as an input to the import tool, `qiime2 tools import`, either as individual datasets (although this requires manually specifying each dataset to be included) or as a dataset collection (recommended method). The input dataset collection must be a list collection even when using paired-end reads.
+In Galaxy, the `.fastq.gz` datasets can be provided as an input to the import tool, **qiime2 tools import**, either as individual datasets (although this requires manually specifying each dataset to be included) or as a dataset collection (recommended method). The input dataset collection must be a list collection even when using paired-end reads.
 
-The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by Cutadapt to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
+The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by **cutadapt** to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
 
 > <hands-on-title>Prepare Collection for QIIME2</hands-on-title>
 >
@@ -286,25 +286,29 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 > 8. **Rename** {% icon galaxy-pencil %} the output to: `identifier mapping`
 >
-> 9. {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}:
+> 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the output format of {% tool [Paste](Paste1) %} may be `txt`).
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+> 
+> 10. {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}:
 >    - *"Input Collection"*: `trimmed sequences flattened`
 >    - *"How should the new labels be specified?"*: `Map original identifiers to new ones using a two-column table`
 >        - *"Identifier mapping"*: `identifier mapping`
 >
-> 10. **Rename** {% icon galaxy-pencil %} the output to: `trimmed sequences`
+> 11. **Rename** {% icon galaxy-pencil %} the output to: `trimmed sequences`
 >
 {: .hands_on}
 
-Once the collection of trimmed `.fastq.gz` sequences is correctly named to import into QIIME2, we use the `qiime2 tools import` tool to create a single QIIME2 artefact file (`.qza`) containing all the trimmed sequences.
+Once the collection of trimmed `.fastq.gz` sequences is correctly named to import into QIIME2, we use the **qiime2 tools import** tool to create a single QIIME2 artefact file (`.qza`) containing all the trimmed sequences.
 
 > <hands-on-title>Create QIIME2 Artefact</hands-on-title>
 >
 > 1. {% tool [qiime2 tools import](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2) %}:
 >    - *"Type of data to import"*: `SampleData[PairedEndSequencesWithQuality]`
->    - *QIIME 2 file format to import from:*: `Casava One Eight Single Lane Per Sample Directory Format`
+>    - *"QIIME 2 file format to import from"*: `Casava One Eight Single Lane Per Sample Directory Format`
 >    - *"Import sequences"*
->      - *"Select a mechanism"*: `Use collection to import`
->      - *"elements"*: `trimmed sequences`
+>       - *"Select a mechanism"*: `Use collection to import`
+>       - *"elements"*: `trimmed sequences`
 >    - *"Append an extension?"*: `No, use element identifiers as is` (*If the datasets in the collection include the extension `.fastq.gz`*)
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qza`
@@ -324,7 +328,7 @@ Once the collection of trimmed `.fastq.gz` sequences is correctly named to impor
 
 Create a viewable summary file so the data quality can be checked. Viewing the quality plots generated here helps determine settings for dada2, which we will run next.
 
-Trimmed sequences are processed using the `dada2` [plugin](https://pubmed.ncbi.nlm.nih.gov/27214047/) within QIIME2. DADA2 denoises data by modelling and correcting Illumina amplicon sequencing errors, and infers exact amplicon sequence variants (ASVs), resolving differences of as little as a single nucleotide. Its workflow includes filtering, dereplication, paired-end read merging, and reference-free chimera detection, resulting in a feature (ASV) table.
+Trimmed sequences are processed using the **DADA2** [plugin](https://pubmed.ncbi.nlm.nih.gov/27214047/) within QIIME2. **DADA2** denoises data by modelling and correcting Illumina amplicon sequencing errors, and infers exact amplicon sequence variants (ASVs), resolving differences of as little as a single nucleotide. Its workflow includes filtering, dereplication, paired-end read merging, and reference-free chimera detection, resulting in a feature (ASV) table.
 
 Truncation removes bases from the 3′ end of reads at the specified position. When choosing DADA2 truncation lengths, the first step is to inspect the forward and reverse quality plots you just created. In many modern Illumina datasets, especially after primer and basic quality trimming, these plots may appear relatively flat with consistently high quality across most of the read length. In these cases, there is no obvious “cut point” where quality sharply declines. Instead of looking for a specific quality threshold (for example, Q35), you should choose truncation lengths conservatively, trimming only the very ends of reads if needed while retaining as much high-quality sequence as possible without compromising read overlap.
 
@@ -362,11 +366,11 @@ TL;DR: when quality plots are essentially straight lines, truncation is less abo
 >
 {: .comment}
 
-In the following command, a pooling method of `pseudo` is selected. Pseudo-pooling improves sensitivity to shared low-abundance ASVs across samples while remaining computationally efficient. This is better than the default of `independent` (where samples are denoised independently) when you expect samples in the run to have similar ASVs overall.
+In the following command, a pooling method (*"pooling_method"*) of `pseudo` is selected. Pseudo-pooling improves sensitivity to shared low-abundance ASVs across samples while remaining computationally efficient. This is better than the default of `independent` (where samples are denoised independently) when you expect samples in the run to have similar ASVs overall.
 
 > <comment-title>Precomputed DADA2 Denoising Results</comment-title>
 >
-> The following DADA2 denoising step can take a long time to run (~1h). You can either wait for this step to run or import the results from a previous run of `qiime2 dada2 denoise-paired`.
+> The following DADA2 denoising step can take a long time to run (~1h). You can either wait for this step to run or import the results from a previous run of **qiime2 dada2 denoise-paired**.
 >
 > > <hands-on-title>Import denoised dataset files</hands-on-title>
 > >
@@ -443,9 +447,9 @@ https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/f
 > 1. {% tool [qiime2 feature-table summarize](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `dada2out_table.qza`
 >   - *"Click here for additional options"*
->     - *"1: input: Metadata"*
->       - *"input: Metadata"*: `Metadata from TSV`
->       - *"Metadata Source"*: `dunnart_metadata.tsv`
+>      - *"1: input: Metadata"*
+>         - *"input: Metadata"*: `Metadata from TSV`
+>         - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `summary_table.qzv`
 >
@@ -511,8 +515,8 @@ A classifier has already been trained for you for the V4 region of the bacterial
 >
 > 1. {% tool [qiime2 metadata tabulate](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"1: metadata: Metadata"*
->     - *"metadata: Metadata"*: `Metadata from Artifact`
->     - *"Metadata Source"*: `taxonomy_classification.qza`
+>      - *"metadata: Metadata"*: `Metadata from Artifact`
+>      - *"Metadata Source"*: `taxonomy_classification.qza`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy.qzv`
 >
@@ -533,17 +537,17 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >   - *"table: FeatureTable[Frequency¹ \| PresenceAbsence²]"*: `dada2out_table.qza`
 >   - *"taxonomy: FeatureData[Taxonomy]"*: `classification.qza`
 >   - *"Click here for additional options"*
->     - *"exclude: Str"*: `Provide a value`
->     - *"exclude"*: `Mitochondria,Chloroplast`
+>      - *"exclude: Str"*: `Provide a value`
+>      - *"exclude"*: `Mitochondria,Chloroplast`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_table_filtered.qza`
 >
 > 3. {% tool [qiime2 feature-table summarize](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency \| PresenceAbsence]"*: `16s_table_filtered.qza`
 >   - *"Click here for additional options"*
->     - *"1: metadata: Metadata"*
->       - *"metadata: Metadata"*: `Metadata from TSV`
->       - *"Metadata Source"*: `dunnart_metadata.tsv`
+>      - *"1: metadata: Metadata"*
+>         - *"metadata: Metadata"*: `Metadata from TSV`
+>         - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output to: `summary_filtered.qzv`
 >
@@ -648,7 +652,7 @@ Generate rarefaction curves to determine whether the samples have been sequenced
 
 > <comment-title>Specifying a Max Depth Value</comment-title>
 >
-> The value that you provide for `max_depth` should be determined by reviewing the “Frequency per sample” information presented in the `summary.qzv` file that was created above after filtering. In general, choosing a value that is somewhere around the median frequency seems to work well, but you may want to increase that value if the lines in the resulting rarefaction plot don’t appear to be levelling out, or decrease that value if you seem to be losing many of your samples due to low total frequencies closer to the minimum sampling depth than the maximum sampling depth.
+> The value that you provide for *"max_depth"* should be determined by reviewing the “Frequency per sample” information presented in the `summary.qzv` file that was created above after filtering. In general, choosing a value that is somewhere around the median frequency seems to work well, but you may want to increase that value if the lines in the resulting rarefaction plot don’t appear to be levelling out, or decrease that value if you seem to be losing many of your samples due to low total frequencies closer to the minimum sampling depth than the maximum sampling depth.
 >
 {: .comment}
 
@@ -797,7 +801,7 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 
 ### ANCOM-BC2 Differential Abundance
 
-Finally, we'll do differential abundance testing with ANCOM-BC2. ANCOM-BC2 is a compositionally-aware linear regression model that allows testing for differentially abundant features across sample groups while also implementing bias correction. This can be accessed using the `qiime2 composition ancombc2` tool.
+Finally, we'll do differential abundance testing with ANCOM-BC2. ANCOM-BC2 is a compositionally-aware linear regression model that allows testing for differentially abundant features across sample groups while also implementing bias correction. This can be accessed using the **qiime2 composition ancombc2** tool.
 
 We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Captivity. If you had more than two treatments, you can specify a reference level to define what each group is compared against (*"reference_levels: List[Str]"*: `Captivity::Wild`). This is not necessary when you just have two groups.
 
@@ -830,7 +834,7 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 
 You need to export your ASV table, taxonomy table, and tree file for analyses in R. Many file formats can be accepted.
 
-The tool for exporting QIIME2 artefacts to standard formats, `qiime2 tools export`, requires the user to specify the type and format of `.qza` artefact. When running the tool manually (selecting from the tool panel and specifying the input dataset to be exported), these fields will pre-fill with the correct values for the selected dataset.
+The tool for exporting QIIME2 artefacts to standard formats, **qiime2 tools export**, requires the user to specify the type and format of `.qza` artefact. When running the tool manually (selecting from the tool panel and specifying the input dataset to be exported), these fields will pre-fill with the correct values for the selected dataset.
 
 However, when creating a workflow, the `.qza` type and format cannot be pre-filled and the tool step in the workflow will provide free-text boxes in which the user must provide the correct type and format. The easiest way to determine the type and format is to run the tool manually with an example of the expected input `.qza` and note and copy the type and format that are pre-filled into the tool in the workflow.
 
@@ -860,7 +864,7 @@ Export a FeatureTable[Frequency] artefact as a BIOM v2.1.0 formatted file.
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `feature-table.biom`
 >
-> 3. Update the `feature-table.biom` datatype attribute to explicitly define the datatype as `biom1`. This does not affect the contents of the dataset and only informs Galaxy how to interact with it. The output of `qiime2 tools export` has the assigned datatype of `biom`, which is not an accepted input for the `Convert between BIOM table formats` tool. The accepted input format is `biom1`.
+> 3. **Change** {% icon galaxy-pencil %} the `feature-table.biom` datatype attribute to explicitly define the datatype as `biom1`. This does not affect the contents of the dataset and only informs Galaxy how to interact with it. The output of `qiime2 tools export` has the assigned datatype of `biom`, which is not an accepted input for the `Convert between BIOM table formats` tool. The accepted input format is `biom1`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
