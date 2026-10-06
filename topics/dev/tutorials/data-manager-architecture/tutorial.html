@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Understanding Galaxy Data Managers / Understanding Galaxy Data Managers / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c910d165da65bd0a24140cff8df29db34c7ea66b",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Understanding Galaxy Data Managers">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-10-06 13:00:04 +0000">
+<meta name="DC.creator" content="Wolfgang Maier"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Understanding Galaxy Data Managers / Hands-on: Understanding Galaxy Data Managers">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/data-manager-architecture/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Understanding Galaxy Data Managers",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-10-06 13:00:04 +0000",
+  "datePublished": "2026-10-06 13:00:04 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "# What are Data Managers and why are they needed?",
+  "learningResourceType": "e-learning",
+  "name": "Understanding Galaxy Data Managers",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Understand the idea behind and the concept of Galaxy Data Managers\n- Understand what components are needed to write your own Data Manager Tool\n- Know how to test a Data Manager and be aware of the limitations of the current test framework with respect to Data Managers",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\n# What are Data Managers and why are they needed?\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are Data Managers and why are they needed?\n - How do you write a Data Manager Tool?\n - How do you test a Data Manager Tool?\n\n\n## Learning Objectives\n\n- Understand the idea behind and the concept of Galaxy Data Managers\n- Understand what components are needed to write your own Data Manager Tool\n- Know how to test a Data Manager and be aware of the limitations of the current test framework with respect to Data Managers\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "@id": "https://orcid.org/0000-0002-9464-6640"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/data-manager-architecture/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-dev">
+    <h1 data-toc-skip>Understanding Galaxy Data Managers</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
+    Wolfgang Maier</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are Data Managers and why are they needed?</p>
+</li>
+        
+        <li><p>How do you write a Data Manager Tool?</p>
+</li>
+        
+        <li><p>How do you test a Data Manager Tool?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the idea behind and the concept of Galaxy Data Managers</p>
+</li>
+        
+        <li><p>Understand what components are needed to write your own Data Manager Tool</p>
+</li>
+        
+        <li><p>Know how to test a Data Manager and be aware of the limitations of the current test framework with respect to Data Managers</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 6, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 6, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="what-are-data-managers-and-why-are-they-needed">What are Data Managers and why are they needed?</h1>
+
+<p>Many tools run with two kinds of input data: some experimental data specific to
+the tool run (like, e.g., sequencing data) and other data, which stays the
+same across a range of different tool runs (e.g. a reference genome, or some
+genome annotations that are the same across runs for the same organism).</p>
+
+<p>Forcing users to provide that second type of data for every tool run is undesirable
+because:</p>
+
+<ul>
+  <li>some of that data is complicated to gather from public sources or needs some preprocessing</li>
+  <li>it leads to unnecessary copies of data (of often very significant size) that would better be reused across user accounts</li>
+</ul>
+
+<p>One possible solution (which was actually used in the early days of Galaxy) is to have
+Galaxy server admins collect and prepare commonly used data, store it on the server and
+record the location along with other metadata in a simple tab-separated so-called .loc file.
+Tools can then declare select parameters that are populated with the records of specific .loc files,
+can access the paths stored in them and, at tool run time, retrieve the data cached on the server.</p>
+
+<p>While this is user-friendly, it shifts the burden of making cached data available to admins.
+With more and more tools requiring data of very different formats,
+this approach becomes increasingly unmanageable because, for each tool,
+an admin has to research where to obtain the data, or how to calculate it,
+and whether it needs some reformatting or other pre-processing before being usable by tools.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/loc-files-approach.png" alt="The issue of maintaining different kinds of data with the .loc files approach illustrated through three examples. " width="1047" height="501" loading="lazy" /><a target="_blank" href="../../images/loc-files-approach.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The issue of maintaining different kinds of data with the .loc files approach</figcaption></figure>
+
+<p>In principle, admins could automate some of this work through scripts, but it would be great to not have each admin reinvent the wheel, and provide one, reproducible way of installing any given reference data instead.</p>
+
+<h2 id="the-idea-behind-data-managers">The idea behind Data Managers</h2>
+
+<p>Just like admin-installed data found via .loc files frees the <em>user</em> from having to care about all the details of how to obtain the data,
+special tools, ideally written by people who know how to obtain and set up certain types of data,
+should automate data collection and preparation, and the writing of .loc file records, and make life easier for <em>admins</em>.
+In other words, admins become users themselves. They don’t have to know all the details, but just run a tool that “knows” how to install a certain type of data on the server.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-reference-document"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Reference document</div>
+
+  <p>This tutorial is an attempt to describe the different parts and functions of Data Managers in
+a way that is structured as logically as possible.</p>
+
+  <p>An in-depth, technical explanation of this matter is provided at
+<a href="https://docs.galaxyproject.org/en/latest/dev/data_managers.html">https://docs.galaxyproject.org/en/latest/dev/data_managers.html</a>
+and, when in doubt, that material should be considered the reference document
+for Data Managers.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#what-are-data-managers-and-why-are-they-needed" id="markdown-toc-what-are-data-managers-and-why-are-they-needed">What are Data Managers and why are they needed?</a>    <ol>
+      <li><a href="#the-idea-behind-data-managers" id="markdown-toc-the-idea-behind-data-managers">The idea behind Data Managers</a></li>
+    </ol>
+  </li>
+  <li><a href="#components-of-a-data-manager" id="markdown-toc-components-of-a-data-manager">Components of a Data Manager</a></li>
+  <li><a href="#how-are-data-managers-different-from-regular-tools" id="markdown-toc-how-are-data-managers-different-from-regular-tools">How are Data Managers different from regular tools?</a></li>
+  <li><a href="#how-does-a-data-manager-communicate-with-galaxy" id="markdown-toc-how-does-a-data-manager-communicate-with-galaxy">How does a Data Manager communicate with Galaxy?</a></li>
+  <li><a href="#how-to-test-data-manager-tools" id="markdown-toc-how-to-test-data-manager-tools">How to test Data Manager Tools?</a>    <ol>
+      <li><a href="#testing-data-managers-and-their-client-tools-in-combination" id="markdown-toc-testing-data-managers-and-their-client-tools-in-combination">Testing Data Managers and their client tools in combination</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-manager-checklist" id="markdown-toc-data-manager-checklist">Data Manager Checklist</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="components-of-a-data-manager">Components of a Data Manager</h1>
+
+<p>Here you see a tree view of the files that together constitute the widely used <a href="https://github.com/galaxyproject/tools-iuc/tree/main/data_managers/data_manager_bowtie2_index_builder">bowtie2 Data Manager</a>:</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/data-manager-file-layout.png" alt="Terminal tree view of the folder structure of the bowtie2 Data Manager. " max-width="70%" width="700" height="540" loading="lazy" /><a target="_blank" href="../../images/data-manager-file-layout.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Layout of a typical Data Manager folder</figcaption></figure>
+
+<p>Lets look at these components one-by-one:</p>
+
+<ol>
+  <li>
+    <p>There’s a <code class="language-plaintext highlighter-rouge">data_manager</code> subfolder with the actual Data Manager <strong>Tool</strong> defined through a familiar tool xml file.</p>
+
+    <p>This is what the admin is interacting with when installing new data (bowtie2 indices in this case).</p>
+  </li>
+  <li>
+    <p>In the root folder of the Data Manager, there is a <strong>Data Manager Configuration</strong> file.</p>
+
+    <p>This file is always named <code class="language-plaintext highlighter-rouge">data_manager_conf.xml</code>.
+It declares, which .loc files the Data Manager will write to,
+defines how the output of the Data Manager Tool is to be translated into .loc file records,
+and where exactly Galaxy should store the data downloaded by the Data Manager Tool.</p>
+
+    <p>When talking about Data Managers, their .loc files are called Data Tables.</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">.shed.yml</code> file that serves the same purpose (of declaring metadata for the Galaxy toolshed) as for regular tools.</p>
+
+    <p>We will not discuss the contents of this file any further here.</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">test-data</code> folder with, you may guess it, data for testing the Data Manager.</p>
+
+    <p>We will discuss testing Data Managers at the end of the tutorial.</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">tool-data</code> folder</p>
+
+    <p>All tools, including regular ones, that use Data Tables must include a <code class="language-plaintext highlighter-rouge">tool-data</code> folder.
+In it, there needs to be one, typically empty or comments-only .loc.sample file for every used Data Table.</p>
+
+    <p>Data Manager Tools are special in that they write to Data Tables instead of just reading from them, but the rule of
+“one .loc.sample file for each Data Table used” is independent of whether the Data Tables are read from or written to.
+In fact, Data Manager Tools may both write to Data Tables and use other Data Tables as a source for populating
+select boxes in their tool interface.
+The bowtie2 Data Manager, for example, lets the admin select the reference genome to build an index for
+from the list of installed genomes read from the <code class="language-plaintext highlighter-rouge">all_fasta</code> Data Table.
+The index it builds is useful for both bowtie2 and tophat2 so the path to the installed index will get recorded in the corresponding two Data Tables.
+The <code class="language-plaintext highlighter-rouge">tool-data</code> folder of this Data Manager, therefor, has three .loc.sample files -
+<code class="language-plaintext highlighter-rouge">all_fasta.loc.sample</code>, <code class="language-plaintext highlighter-rouge">bowtie2_indices.loc.sample</code> and <code class="language-plaintext highlighter-rouge">tophat2_indices.loc.sample</code>.
+Each of these files consists only of comment lines describing the .loc file purpose and expected structure.</p>
+
+    <p>Comment lines in .loc.sample files are optional and just that: comments that are ignored by Galaxy.
+The only place that <em>Galaxy</em> reads .loc file structure from is the Data Table configuration file discussed next.</p>
+
+    <blockquote class="details">
+      <div class="box-title details-title" id="details-content-of-loc-sample-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-content-of-loc-sample-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Content of .loc.sample files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>Tools can use .loc.sample files with actual record lines to point to data directly <em>shipping</em> with the tool.
+That data would then also be stored in the <code class="language-plaintext highlighter-rouge">tool-data</code> folder (which explains its name).
+Most tools and Data Managers, however, do not ship data directly and provide empty .loc.sample files with optional
+comment lines like the bowtie2 Data Manager example.</p>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>A Data Table configuration file</p>
+
+    <p>This file is always named <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.sample</code> and provides the <em>layout</em> information for all Data Tables the Data Manager operates on and uses.</p>
+
+    <p>For the bowtie2 Data Manager, this file has the following content:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;tables&gt;
+    &lt;!-- Locations of all fasta files under genome directory --&gt;
+    &lt;table name="all_fasta" comment_char="#"&gt;
+        &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+        &lt;file path="tool-data/all_fasta.loc" /&gt;
+    &lt;/table&gt;
+    &lt;!-- Locations of indexes in the Bowtie2 mapper format --&gt;
+    &lt;table name="bowtie2_indexes" comment_char="#"&gt;
+        &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+        &lt;file path="tool-data/bowtie2_indices.loc" /&gt;
+    &lt;/table&gt;
+    &lt;!-- Locations of indexes in the Bowtie2 mapper format for TopHat2 to use --&gt;
+    &lt;table name="tophat2_indexes" comment_char="#"&gt;
+        &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+        &lt;file path="tool-data/tophat2_indices.loc" /&gt;
+    &lt;/table&gt;
+&lt;/tables&gt;
+</code></pre></div>    </div>
+
+    <p>The Data Tables mentioned here are the same as the ones the <code class="language-plaintext highlighter-rouge">tool-data</code> folder has .loc.sample files for,
+but here we find the metadata for these tables, i.e. their name and .loc file name (which <em>could</em>,
+but probably shouldn’t be different) and the identifiers for the different columns in each table.</p>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-rules-and-best-practices-around-data-table-columns"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Rules and best practices around Data Table columns</div>
+
+      <p>When you are declaring the layout of a new Data Table that no other tool is using yet, you are, in principle,
+free to choose, how many columns it should feature and what their names should be.</p>
+
+      <p>There are, however, a few commonly used column names with agreed upon meaning in Data Tables that you should be
+aware of.
+These are the <strong>value</strong>, <strong>name</strong> and <strong>path</strong> columns that nearly every Data Table should use,
+and the column <strong>dbkey</strong>, which is very widely used in Galaxy tools and Data Tables from the field of genomics
+to associate Data Table records with reference genomes.</p>
+
+      <p><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> For these columns, please follow the community <a href="https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/data_managers.html">Standards for Data Manager Tools</a>.</p>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-released-data-table-layout-information-can-never-be-changed-again"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Released Data Table layout information can never be changed again!</div>
+
+        <p>Every version of every regular tool and of every Data Manager Tool using a given Data Table needs to declare its expected layout in a <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.sample</code>.
+An instance of Galaxy that gets conflicting layout information about the same Data Table from different tools or tool versions will refuse to load the Data Table
+(or even refuse to start at all) until an admin resolves the conflict.</p>
+
+        <p>This means that once you’re publicly releasing a Data Manager Tool or regular tool with layout info for a new Data Table,
+e.g. by uploading the tool to a Galaxy Toolshed, you must <em>never</em> change its layout again in a later version of that tool, or in a new tool reusing the Data Table!
+No renaming of columns, no reshuffling, and no addition of new columns! You need to keep that layout frozen!</p>
+
+        <p>It is, therefor, important to consider a new Data Table’s columns very carefully:</p>
+
+        <ul>
+          <li>Use the standard column names, <em>value</em>, <em>name</em>, <em>path</em> and <em>dbkey</em>, appropriately (see above)</li>
+          <li>
+            <p>Think about which metadata you need to capture in the Data Table and reserve a column for it</p>
+
+            <p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Classic issue: if you are unsure whether the data the Data Table references will be versioned at some point, better assume it will be and add that version column now!</p>
+          </li>
+        </ul>
+
+        <p>The only way to amend an inadequate table layout later is to have new tool versions declare a <em>new</em> Data Table. Try to avoid that confusing scenario if you can!</p>
+
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>A Data Table configuration test file</p>
+
+    <p>This file is always named <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code>, is very similar to the <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.sample</code>,
+but exists only for testing purposes, which, again, will be discussed at the end of the tutorial.</p>
+  </li>
+</ol>
+
+<h1 id="how-are-data-managers-different-from-regular-tools">How are Data Managers different from regular tools?</h1>
+
+<ol>
+  <li>
+    <p>(Normally) only admins can run them through the Admin interface of Galaxy</p>
+  </li>
+  <li>
+    <p>They do create an output dataset in your history,
+but their <strong>“side-effects”</strong> are what really matters. As such side-effects
+Data Managers will:</p>
+
+    <ul>
+      <li>typically, download or compute some data.</li>
+      <li>always instruct Galaxy to write at least one line of tab-separated info to
+at least one Data Table file.</li>
+      <li>
+        <p>if data was downloaded or computed, instruct Galaxy to</p>
+
+        <ul>
+          <li>move the data to a permanent storage location</li>
+          <li>record the path to that location in the newly created Data Table record</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="how-does-a-data-manager-communicate-with-galaxy">How does a Data Manager communicate with Galaxy?</h1>
+
+<ol>
+  <li>
+    <p>It declares itself a Data Manager through the <code class="language-plaintext highlighter-rouge">tool_type="manage_data"</code> attribute.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">&lt;tool id="example_dm" name="An example Data Manager" version="1.0" tool_type="manage_data" profile="23.0"&gt;</code></p>
+
+    <p>This has several consequences:</p>
+
+    <ol>
+      <li>The tool will only appear in the Admin user interface.</li>
+      <li>Galaxy will expect the output of the tool to be of <code class="language-plaintext highlighter-rouge">format="data_manager_json"</code>
+and its content to describe which columns should be added to new lines in which Data Tables.</li>
+      <li>
+        <p>Galaxy will expect any data downloaded or computed by the tool to live in that output’s
+<code class="language-plaintext highlighter-rouge">extra_files_path</code>.</p>
+
+        <p>For example, if the output section of the Data Manager looks like this:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;outputs&gt;
+    &lt;data name="out_file" format="data_manager_json" label="${tool.name}"/&gt;
+&lt;/outputs&gt;
+</code></pre></div>        </div>
+        <p>it should make sure that its command section deposits data to be stored
+by Galaxy in <code class="language-plaintext highlighter-rouge">'$out_file.extra_files_path'</code>.</p>
+      </li>
+      <li>The <code class="language-plaintext highlighter-rouge">data_manager_json</code> output file that the wrapper declares will exist
+<strong>before</strong> the command section runs and will contain a mapping of the input
+parameters,
+<a href="https://docs.galaxyproject.org/en/latest/dev/data_managers.html#example-json-input-to-tool">among other things</a>.
+You do not have to read the file if you don’t want to, but you will have to overwrite it!</li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-minimal-profile-version-for-data-managers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Minimal profile version for Data Managers</div>
+
+      <p>Data Managers were executed in Galaxy’s main environment until release 18.09!</p>
+
+      <p>This means:</p>
+
+      <ul>
+        <li>if you want to use <code class="language-plaintext highlighter-rouge">requirements</code> in a Data Manager Tool, you should set
+<code class="language-plaintext highlighter-rouge">profile="18.09"</code> or higher</li>
+        <li>if you are bumping the profile version of an existing Data Manager to
+beyond 18.09, you may have to add requirements to it that bring in things
+the old version happened to find in Galaxy’s environment.</li>
+      </ul>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>In its command section (or in a helper script called from there), the Data Manager Tool</p>
+
+    <ol>
+      <li>
+        <p><strong>overwrites</strong> the already existing output file with a json of the items that should be
+added to one or more Data Tables.</p>
+      </li>
+      <li>
+        <p><strong>creates</strong> the folder at <code class="language-plaintext highlighter-rouge">output.extra_files_path</code> and deposits any data
+there that Galaxy should move then to a permanent storage location</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>The Data Manager Tool ships with a <code class="language-plaintext highlighter-rouge">data_manager_conf.xml</code> file,
+which forms the bridge between the <code class="language-plaintext highlighter-rouge">data_manager_json</code> file that it produces
+as output and the Data Table files Galaxy is supposed to add lines to.</p>
+
+    <p>An example config file:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;?xml version="1.0"?&gt;
+ &lt;data_managers&gt;
+   &lt;data_manager tool_file="data_manager/data_manager_cat.xml" id="data_manager_cat" &gt;
+     &lt;data_table name="cat_database"&gt;  &lt;!-- Defines a Data Table to be modified. --&gt;
+       &lt;output&gt; &lt;!-- Handle the output of the Data Manager Tool --&gt;
+         &lt;column name="value" /&gt; &lt;!-- columns that are going to be specified by the Data Manager Tool --&gt;
+         &lt;column name="name" /&gt;  &lt;!-- columns that are going to be specified by the Data Manager Tool --&gt;
+         &lt;column name="database_folder" output_ref="out_file" &gt;
+           &lt;move type="directory" relativize_symlinks="True"&gt;
+             &lt;source&gt;${database_folder}&lt;/source&gt;
+             &lt;target base="${GALAXY_DATA_MANAGER_DATA_PATH}"&gt;CAT/${database_folder}&lt;/target&gt;
+           &lt;/move&gt;
+           &lt;value_translation&gt;${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}&lt;/value_translation&gt;
+           &lt;value_translation type="function"&gt;abspath&lt;/value_translation&gt;
+         &lt;/column&gt;
+         &lt;column name="taxonomy_folder" output_ref="out_file" &gt;
+           &lt;move type="directory" relativize_symlinks="True"&gt;
+             &lt;source&gt;${taxonomy_folder}&lt;/source&gt;
+             &lt;target base="${GALAXY_DATA_MANAGER_DATA_PATH}"&gt;CAT/${taxonomy_folder}&lt;/target&gt;
+           &lt;/move&gt;
+           &lt;value_translation&gt;${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${taxonomy_folder}&lt;/value_translation&gt;
+           &lt;value_translation type="function"&gt;abspath&lt;/value_translation&gt;
+         &lt;/column&gt;
+       &lt;/output&gt;
+     &lt;/data_table&gt;
+   &lt;/data_manager&gt;
+ &lt;/data_managers&gt;
+</code></pre></div>    </div>
+
+    <p>This file declares column names for a single Data Table (<code class="language-plaintext highlighter-rouge">cat_database</code>) that
+Galaxy should add lines to based on the <code class="language-plaintext highlighter-rouge">data_manager_json</code> file returned by
+the <code class="language-plaintext highlighter-rouge">data_manager_cat</code> tool, and which might look like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'data_tables': {
+    'cat_database': [
+        {
+            'database_folder': '&lt;extra_files_path&gt;/a_CAT_database',
+            'name': '&lt;extra_files_path&gt;',
+            'taxonomy_folder': '&lt;extra_files_path&gt;/a_taxonomy',
+            'value': '&lt;extra_files_path&gt;'
+        }
+    ]
+}}
+</code></pre></div>    </div>
+
+    <p>Here, each innermost dictionary corresponds to one line that Galaxy should
+add to the Data Table <code class="language-plaintext highlighter-rouge">cat_database</code> and the keys in it match the column names
+declared in the <code class="language-plaintext highlighter-rouge">data_manager_conf.xml</code> file so Galaxy knows which dict value
+it should write into which column of the Data Table.</p>
+
+    <p>The example tool downloads data, then extracts it into two folders, <code class="language-plaintext highlighter-rouge">a_CAT_database</code>
+and <code class="language-plaintext highlighter-rouge">a_taxonomy</code> under its output’s <code class="language-plaintext highlighter-rouge">extra_files_path</code> folder. The tool wants
+Galaxy to record the <code class="language-plaintext highlighter-rouge">extra_files_path</code> folder name both in the value column and in the
+name column of the <code class="language-plaintext highlighter-rouge">cat_database</code> Data Table.</p>
+
+    <p>It also wants to store the paths to the extracted <code class="language-plaintext highlighter-rouge">database_folder</code> and <code class="language-plaintext highlighter-rouge">taxonomy_folder</code> to let tools, that later want to use that data, discover
+it from the corresponding columns of the Data Table.</p>
+
+    <p>However, here’s the issue:
+The Data Manager Tool at run time knows only the <code class="language-plaintext highlighter-rouge">extra_files_path</code>, but not the
+ultimate location that Galaxy will move the data to. This is where the more
+complicated parts of the above <code class="language-plaintext highlighter-rouge">data_manager_conf.xml</code> file enter the scene:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;column name="database_folder" output_ref="out_file" &gt;
+    &lt;move type="directory" relativize_symlinks="True"&gt;
+        &lt;source&gt;${database_folder}&lt;/source&gt;
+        &lt;target base="${GALAXY_DATA_MANAGER_DATA_PATH}"&gt;CAT/${database_folder}&lt;/target&gt;
+    &lt;/move&gt;
+    &lt;value_translation&gt;${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}&lt;/value_translation&gt;
+    &lt;value_translation type="function"&gt;abspath&lt;/value_translation&gt;
+&lt;/column&gt;
+&lt;column name="taxonomy_folder" output_ref="out_file" &gt;
+    &lt;move type="directory" relativize_symlinks="True"&gt;
+        &lt;source&gt;${taxonomy_folder}&lt;/source&gt;
+        &lt;target base="${GALAXY_DATA_MANAGER_DATA_PATH}"&gt;CAT/${taxonomy_folder}&lt;/target&gt;
+    &lt;/move&gt;
+    &lt;value_translation&gt;${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${taxonomy_folder}&lt;/value_translation&gt;
+    &lt;value_translation type="function"&gt;abspath&lt;/value_translation&gt;
+&lt;/column&gt;
+</code></pre></div>    </div>
+
+    <p>The definitions of the <code class="language-plaintext highlighter-rouge">database_folder</code> column hold two types of instructions for Galaxy:</p>
+
+    <ol>
+      <li>
+        <p>The <code class="language-plaintext highlighter-rouge">&lt;move&gt;</code> element says that Galaxy should take (see the <code class="language-plaintext highlighter-rouge">&lt;source&gt;</code> element) the data that lives where the <code class="language-plaintext highlighter-rouge">${database_folder}</code> item of the <code class="language-plaintext highlighter-rouge">data_manager_json</code> output says it lives and move it to a destination <code class="language-plaintext highlighter-rouge">CAT/${database_folder}</code> under the base path indicated by <code class="language-plaintext highlighter-rouge">${GALAXY_DATA_MANAGER_DATA_PATH}</code> (which itself is the configured storage path for managed data of the Galaxy instance).</p>
+      </li>
+      <li>The first <code class="language-plaintext highlighter-rouge">&lt;value_translation&gt;</code> element says that Galaxy should not write the Data Manager Tool-provided value for <code class="language-plaintext highlighter-rouge">database_folder</code> directly, but instead first translate it to <code class="language-plaintext highlighter-rouge">${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}</code>.</li>
+      <li>
+        <p>If you compare the resulting string with the <code class="language-plaintext highlighter-rouge">&lt;move&gt;</code> instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.</p>
+
+        <p>The second <code class="language-plaintext highlighter-rouge">&lt;value_translation&gt;</code> element simply says that Galaxy should turn the result of the first translation into an absolute path on the system. The result is then the value that will get written into the <code class="language-plaintext highlighter-rouge">database_folder</code> column of the <code class="language-plaintext highlighter-rouge">cat_database</code> table.</p>
+      </li>
+    </ol>
+
+    <p>The same logic is then used again to move the <code class="language-plaintext highlighter-rouge">taxonomy</code> folder to its final destination and to obtain the value to write to the corresponding Data Table column.</p>
+  </li>
+</ol>
+
+<h1 id="how-to-test-data-manager-tools">How to test Data Manager Tools?</h1>
+
+<p>The key file for testing a Data Manager Tool is <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code> in the root folder of the Data Manager.
+This file is an exact copy of the <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.sample</code> file in that same folder - except that the:</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;file path="tool-data/[Table name].loc" /&gt;</code></p>
+
+<p>lines in every table declaration are changed to:</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;file path="${__HERE__}/test-data/[Table name].loc" /&gt;</code></p>
+
+<p>where <code class="language-plaintext highlighter-rouge">${__HERE__}</code> references the folder that the <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code> file lives in.</p>
+
+<p>For the bowtie2 Data Manager, for example, the file’s content is this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &lt;tables&gt;
+       &lt;!-- Locations of indexes in the Bowtie2 mapper format --&gt;
+       &lt;table name="bowtie2_indexes" comment_char="#"&gt;
+           &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+           &lt;file path="${__HERE__}/test-data/bowtie2_indices.loc" /&gt;
+       &lt;/table&gt;
+       &lt;!-- Locations of indexes in the Bowtie2 mapper format for TopHat2 to use --&gt;
+       &lt;table name="tophat2_indexes" comment_char="#"&gt;
+           &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+           &lt;file path="${__HERE__}/test-data/tophat2_indices.loc" /&gt;
+       &lt;/table&gt;
+       &lt;!-- Locations of all fasta files under genome directory --&gt;
+       &lt;table name="all_fasta" comment_char="#"&gt;
+           &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+           &lt;file path="${__HERE__}/test-data/all_fasta.loc" /&gt;
+       &lt;/table&gt;
+   &lt;/tables&gt;
+</code></pre></div></div>
+
+<p>The referenced .loc files in the <code class="language-plaintext highlighter-rouge">test-data</code> folder must exist, but can be empty if the Data Manager is supposed to write to them as part of the test run.
+If the Data Manager needs to <em>read</em> the referenced Data Table to populate its tool interface, you need to have at least one record in the corresponding <code class="language-plaintext highlighter-rouge">test-data/[Table name].loc</code> file.</p>
+
+<p>For example, the bowtie2 Data Manager needs to read from the <code class="language-plaintext highlighter-rouge">all_fasta</code> table and ships with this content of <code class="language-plaintext highlighter-rouge">test-data/all_fasta.loc</code> (comment lines omitted for brevity):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   phiX174    phiX174    phiX 174    ${__HERE__}/phiX174.fasta
+</code></pre></div></div>
+
+<p>The last column uses the special variable <code class="language-plaintext highlighter-rouge">${__HERE__}</code> again, which means the folder, i.e. test-data, that the file using it lives in.
+The file <code class="language-plaintext highlighter-rouge">test-data/phiX174.fasta</code>, in turn, holds the tiny genome of the bacteriophage Phi X 174 that a test run of the Data Manager is supposed to create a bowtie2 index for.</p>
+
+<p>Taken together, this arrangement of test files allows the Data Manager Tool wrapper to define the following simple test case:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &lt;test&gt;
+       &lt;param name="all_fasta_source" value="phiX174"/&gt;
+       &lt;output name="out_file" value="bowtie2_data_manager.1.json"/&gt;
+   &lt;/test&gt;
+</code></pre></div></div>
+
+<p>When executed with <code class="language-plaintext highlighter-rouge">planemo test</code>, this will:</p>
+
+<ol>
+  <li>load the Data Tables declared in <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code> into Galaxy,</li>
+  <li>select the <code class="language-plaintext highlighter-rouge">phiX174</code> record from the <code class="language-plaintext highlighter-rouge">test-data/all_fasta.loc</code> table,</li>
+  <li>pass the path to the <code class="language-plaintext highlighter-rouge">test-data/phiX174.fasta</code> file defined in the record to the command line section of the tool, and</li>
+  <li>verify that the tool’s primary output matches the content of the file <code class="language-plaintext highlighter-rouge">bowtie2_data_manager.1.json</code>, which also lives in the test-data folder.</li>
+</ol>
+
+<p>Unfortunately, the only automated tests you can run on a Data Manager Tool are the ones available for regular tools, too.</p>
+
+<p>This means that, with automated tests, you can verify assumptions about the tool’s <code class="language-plaintext highlighter-rouge">data_manager_json</code> output, about the command line formed and the stdout and stderr generated,
+but you need to verify <strong>manually</strong> that the Data Manager framework detects any data in the <code class="language-plaintext highlighter-rouge">extra_files_path</code> and moves it to the intended location.</p>
+
+<p>For this reason, <code class="language-plaintext highlighter-rouge">planemo serve</code> is a very important command to use during any work on Data Managers!</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-getting-planemo-to-work-on-a-data-managers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Getting planemo to work on a Data Managers</div>
+
+  <p><code class="language-plaintext highlighter-rouge">planemo test</code> and <code class="language-plaintext highlighter-rouge">planemo serve</code> work just fine for Data Managers,
+if you keep in mind that a Data Manager is more than just the tool xml file.
+If you’re following the standard layout of Data Managers with the tool xml
+file in a subfolder, you need to run planemo from <em>outside</em> that subfolder to have
+it discover all required files beyond the tool xml, but point it to the tool
+xml to test or serve.</p>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">planemo serve data_manager/bowtie2_index_builder.xml</code> run from the parent directory of the <code class="language-plaintext highlighter-rouge">data_manager</code> subfolder and</li>
+    <li><code class="language-plaintext highlighter-rouge">planemo serve data_managers/data_manager_bowtie2_index_builder/data_manager/bowtie2_index_builder.xml</code> run from the root folder of the tools-iuc repo</li>
+  </ul>
+
+  <p>would both work fine.</p>
+
+  <p>With <code class="language-plaintext highlighter-rouge">planemo serve</code> specifically, don’t be surprised if the tool doesn’t show
+up in the tools panel - it’s not supposed to, but it’s accessible from the
+Admin interface under <em>“Local Data”</em>.</p>
+
+</blockquote>
+
+<p>With a correctly written <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code> the Data Manager, during testing, will read from and write to the .loc files in its <code class="language-plaintext highlighter-rouge">test-data</code> folder.
+This data is persistent across planemo runs as is the actual installed data, so after testing with <code class="language-plaintext highlighter-rouge">planemo serve</code>, you can inspect the .loc file records that have been written and check the path recorded there to see if the data has been installed the way you intended.</p>
+
+<p>Before committing the test-data folder you may want to consider clearing the Data Tables you may have populated in it.</p>
+
+<h2 id="testing-data-managers-and-their-client-tools-in-combination">Testing Data Managers and their client tools in combination</h2>
+
+<p>As said above, <code class="language-plaintext highlighter-rouge">planemo serve</code> and <code class="language-plaintext highlighter-rouge">planemo test</code> need to be run from the root folder of the Data Manager, but it’s possible to point planemo to multiple xml files to test and you can use this to test both the Data Manager Tool and a tool using its Data Table in one session through, e.g.:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">planemo serve data_manager/bowtie2_index_builder.xml ../../tools/bowtie2/bowtie2_wrapper.xml</code> run from the parent directory of the <code class="language-plaintext highlighter-rouge">data_manager</code> subfolder, or</li>
+  <li><code class="language-plaintext highlighter-rouge">planemo serve data_managers/data_manager_bowtie2_index_builder/data_manager/bowtie2_index_builder.xml tools/bowtie2/bowtie2_wrapper.xml</code> run from the root folder of the tools-iuc repo.</li>
+</ul>
+
+<p>If you have previously served your Data Manager in isolation and installed some data, then, because this brings the Data Manager’s test-data folder back into scope, that data will be immediately usable by the client tool.</p>
+
+<h1 id="data-manager-checklist">Data Manager Checklist</h1>
+
+<p>To sum up the key points of the above discussion, here is a practical checklist for Data Manager Tools.
+In a few places this list goes beyond Galaxy’s requirements for Data Manager Tools, but recommends standard approaches.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-checklist-for-data-manager-tools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Checklist for Data Manager Tools</div>
+
+  <ol>
+    <li>
+      <p>Quick check of required files and key content</p>
+
+      <ul>
+        <li>
+          <p>Data Manager Tool XML</p>
+
+          <ul>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Tool XML (and helper scripts, if any) in <code class="language-plaintext highlighter-rouge">data_manager</code> subfolder</li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> Tool XML declares <code class="language-plaintext highlighter-rouge">tool_type="manage_data"</code> and a recent <code class="language-plaintext highlighter-rouge">profile</code></li>
+          </ul>
+        </li>
+        <li>
+          <p>Declaration of Data Tables</p>
+
+          <ul>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.sample</code> present in root folder</li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> file declares the layout of every Data Table touched by the tool and</li>
+            <li>
+              <p><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> lists the columns of each table,</p>
+
+              <ul>
+                <li>respecting <a href="https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/data_managers.html">guidelines for standard columns</a>,</li>
+                <li>including a <em>version</em> column if versioning the managed data might ever make sense and</li>
+              </ul>
+            </li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> references a .loc file for every declared Data Table via a <code class="language-plaintext highlighter-rouge">&lt;file path="tool-data/[Table name].loc" /&gt;</code> line</li>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">tool-data</code> subfolder exists and has a <code class="language-plaintext highlighter-rouge">[Table name].loc.sample</code> file for every declared Data Table</li>
+          </ul>
+        </li>
+        <li>
+          <p>Data Manager framework integration</p>
+
+          <ul>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">data_manger_conf.xml</code> file present in root folder</li>
+          </ul>
+        </li>
+        <li>
+          <p>Toolshed readiness</p>
+
+          <ul>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">.shed.yml</code> file present in root folder</li>
+          </ul>
+        </li>
+        <li>
+          <p>Data Manager tests</p>
+
+          <ul>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">test-data</code> folder exists</li>
+            <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">tool_data_table_conf.xml.test</code> present in root folder</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Logic checks</p>
+
+      <ul>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Data Manager (or helper script) writes JSON to primary output</li>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Data to be managed gets written to <code class="language-plaintext highlighter-rouge">extra_files_path</code></li>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">&lt;move&gt;</code> logic in <code class="language-plaintext highlighter-rouge">data_manger_conf.xml</code> handles transfer of all relevant content under <code class="language-plaintext highlighter-rouge">extra_files_path</code> to <code class="language-plaintext highlighter-rouge">&lt;target base="${GALAXY_DATA_MANAGER_DATA_PATH}"&gt;</code> destination</li>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> <code class="language-plaintext highlighter-rouge">&lt;value_translation&gt;</code> logic in <code class="language-plaintext highlighter-rouge">data_manger_conf.xml</code> handles rewrite of all paths to managed data to point to target destinations</li>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Data Manager (or helper script) deletes any irrelevant data left behind under <code class="language-plaintext highlighter-rouge">extra_files_path</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Manual cleanup work before commitiing / publishing</p>
+
+      <ul>
+        <li><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> All .loc files in test-data, which may have been wriiten to during manual and/or automated testing of the Data Manager are reverted to their original state.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Data Managers are tools to be run by admins of a Galaxy instance.</p>
+</li>
+                        
+                        <li><p>They automate reference data collection and preparation and they write Data Table (.loc file) records.</p>
+</li>
+                        
+                        <li><p>In addition to a regular tool wrapper XML file, Data Managers require one more XML config file that defines their interaction with the Galaxy framework and a few other files to declare and set up the Data Tables they are supposed to populate.</p>
+</li>
+                        
+                        <li><p>Currently, Galaxy only allows for partial automation of Data Manager testing. Some manual testing is required, and a checklist to clear before releasing a new Data Manager is recommended.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/dev/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/data-manager-architecture"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/data-manager-architecture">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Wolfgang Maier,  <b>Understanding Galaxy Data Managers (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{dev-data-manager-architecture,
+author = "Wolfgang Maier",
+	title = "Understanding Galaxy Data Managers (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-manager-architecture/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/data-manager-architecture/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/dev/tutorials/data-manager-architecture/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c910d165da65bd0a24140cff8df29db34c7ea66b">c910d16</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
