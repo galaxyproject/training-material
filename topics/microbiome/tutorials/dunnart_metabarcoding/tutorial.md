@@ -169,9 +169,9 @@ Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R
 
 These sequences still have the primers attached and must be removed prior to denoising.
 
-For this workshop, we perform primer trimming using the **cutadapt** tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using **cutadapt**, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
+For this workshop, we perform primer trimming using the **Cutadapt** tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using **Cutadapt**, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
 
-It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone **cutadapt** tool instead of **qiime2 cutadapt trim-paired** because the QIIME2 implementation does not have the *"NextSeq trimming"* parameter (the `--nextseq-trim` flag if running **cutadapt** via command line), which is specifically designed to remove these artificial poly-G tails.
+It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone **Cutadapt** tool instead of **qiime2 cutadapt trim-paired** because the QIIME2 implementation does not have the *"NextSeq trimming"* parameter (the `--nextseq-trim` flag if running **Cutadapt** via command line), which is specifically designed to remove these artificial poly-G tails.
 
 > <hands-on-title>Run Cutadapt</hands-on-title>
 >
@@ -214,9 +214,9 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 >
 > > <details-title>Alternately running qiime2 cutadapt trim-paired</details-title>
 > >
-> > The following step shows the tool set up for running **qiime2 cutadapt trim-paired** to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone **cutadapt** (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
+> > The following step shows the tool set up for running **qiime2 cutadapt trim-paired** to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone **Cutadapt** (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
 > >
-> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-qiime2-artefact).
+> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **Cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-qiime2-artefact).
 > >
 > > > <hands-on-title>Run Cutadapt</hands-on-title>
 > > >
@@ -244,7 +244,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 > <comment-title>Quality Control</comment-title>
 >
-> When processing your own data, you should inspect the quality of your datasets before and after running **cutadapt** in order to determine the parameters to set for **cutadapt** and then to ensure that **cutadapt** has adequately cleaned your data. These quality control steps can be done using the tools **FastQC** and **MultiQC**. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
+> When processing your own data, you should inspect the quality of your datasets before and after running **Cutadapt** in order to determine the parameters to set for **Cutadapt** and then to ensure that **Cutadapt** has adequately cleaned your data. These quality control steps can be done using the tools **FastQC** and **MultiQC**. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
 >
 {: .comment}
 
@@ -254,7 +254,7 @@ QIIME2 requires `.fastq.gz` sequence datasets to follow the CASAVA file naming f
 
 In Galaxy, the `.fastq.gz` datasets can be provided as an input to the import tool, **qiime2 tools import**, either as individual datasets (although this requires manually specifying each dataset to be included) or as a dataset collection (recommended method). The input dataset collection must be a list collection even when using paired-end reads.
 
-The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by **cutadapt** to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
+The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by **Cutadapt** to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
 
 > <hands-on-title>Prepare Collection for QIIME2</hands-on-title>
 >
@@ -286,7 +286,7 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 > 8. **Rename** {% icon galaxy-pencil %} the output to: `identifier mapping`
 >
-> 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the output format of {% tool [Paste](Paste1) %} may be `txt`).
+> 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the default output format of **Paste** is `txt`).
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 > 
@@ -301,7 +301,7 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 
 Once the collection of trimmed `.fastq.gz` sequences is correctly named to import into QIIME2, we use the **qiime2 tools import** tool to create a single QIIME2 artefact file (`.qza`) containing all the trimmed sequences.
 
-> <hands-on-title>Create QIIME2 Artefact</hands-on-title>
+> <hands-on-title>Create a QIIME2 Artefact</hands-on-title>
 >
 > 1. {% tool [qiime2 tools import](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2) %}:
 >    - *"Type of data to import"*: `SampleData[PairedEndSequencesWithQuality]`
