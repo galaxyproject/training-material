@@ -464,7 +464,7 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_representative_seqs.qzv`
 >
-> 3. Visualisation: Denoising Stats
+> 3. Visualisation: Representative Sequences
 >
 >   - Download `16s_representative_seqs.qzv` to your local computer and view in QIIME 2 View (q2view).
 >   - [Click to view the **`16s_representative_seqs.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AHIIyoQHzEzPyoEXzjBVxBc/16s_representative_seqs.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
@@ -500,12 +500,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 >   - *"reads: FeatureData[Sequence]"*: `dada2out_representative_sequences.qza`
 >   - *"classifier: TaxonomicClassifier"*: `silva_138.2_16s_v4_classifier.qza`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy_classification.qzv`
->
-> 3. Visualisation: Denoising Stats
->
->   - Download `taxonomy_classification.qzv` to your local computer and view in QIIME 2 View (q2view).
->   - [Click to view the **`taxonomy_classification.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AHM-SIH5EEGMxhpwz8vbpG8/taxonomy.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
+> 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy_classification.qza`
 >
 {: .hands_on}
 
@@ -520,7 +515,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy.qzv`
 >
-> 3. Visualisation: Denoising Stats
+> 3. Visualisation: Taxonomy
 >
 >   - Download `taxonomy.qzv` to your local computer and view in QIIME 2 View (q2view).
 >   - [Click to view the **`taxonomy.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AHM-SIH5EEGMxhpwz8vbpG8/taxonomy.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
@@ -531,7 +526,7 @@ A classifier has already been trained for you for the V4 region of the bacterial
 
 Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are retained. Generate a viewable summary file of the new table to see the effect of filtering. According to QIIME developer Nicholas Bokulich, low abundance filtering (i.e. removing ASVs containing very few sequences) is not necessary under the ASV model.
 
-> <hands-on-title>Filter Taxanomic Table</hands-on-title>
+> <hands-on-title>Filter Taxonomic Table</hands-on-title>
 >
 > 1. {% tool [qiime2 taxa filter-table](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency¹ \| PresenceAbsence²]"*: `dada2out_table.qza`
@@ -551,7 +546,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output to: `summary_filtered.qzv`
 >
-> 5. Visualisation: Denoising Stats
+> 5. Visualisation: Filtered Summary
 >
 >   - Download `summary_filtered.qzv` to your local computer and view in QIIME 2 View (q2view).
 >   - [Click to view the **`summary_filtered.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AFgPkLgEwPhYoS_BaZekjMw/summary_table_filtered/summary.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
@@ -746,12 +741,12 @@ Next, we’ll test for associations between categorical metadata columns and alp
 >     - *"metadata: Metadata"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `observed_features-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `observed_features_significance.qzv`
 >
 > 3. Visualisations: Observed Features
 >
->   - Download `observed_features-significance.qzv` to your local computer and view in QIIME 2 View (q2view).
->   - [Click to view the **`observed_features-significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AMje09kxzAz65VKNBORJoAI/observed_features-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
+>   - Download `observed_features_significance.qzv` to your local computer and view in QIIME 2 View (q2view).
+>   - [Click to view the **`observed_features_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/AMje09kxzAz65VKNBORJoAI/observed_features-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
 >
 >   - Select "Captivity" under the "Column" dropdown menu.
 >   ![faith](../../images/dunnart_images/q2view_observed_features.png)
@@ -766,12 +761,12 @@ Next, we’ll test for associations between categorical metadata columns and alp
 >     - *"metadata: Metadata"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `evenness-group-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `evenness_group_significance.qzv`
 >
 > 3. Visualisations: Observed Evenness
 >
->   - Download `evenness-group-significance.qzv` to your local computer and view in QIIME 2 View (q2view).
->   - [Click to view the **`evenness-group-significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALNMCSgm30C2zhm7sHNSA5s/evenness-group-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
+>   - Download `evenness_group_significance.qzv` to your local computer and view in QIIME 2 View (q2view).
+>   - [Click to view the **`evenness_group_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALNMCSgm30C2zhm7sHNSA5s/evenness-group-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
 >   - Select "Captivity" under the "Column" dropdown menu.
 >   ![evenness](../../images/dunnart_images/q2view_evenness.png)
 >
@@ -789,12 +784,12 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >     - *"Column Name"*: `c3: Captivity`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `unweighted-unifrac-captivity-significance.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `unweighted_unifrac_captivity_significance.qzv`
 >
 > 3. Visualisations: Captivity significance output and provenance
 >
->   - Download `unweighted-unifrac-captivity-significance.qzv` to your local computer and view in QIIME 2 View (q2view).
->   - [Click to view the **`unweighted-unifrac-captivity-significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALN4XydwBZnK-0qP0xoUmJg/unweighted-unifrac-captivity-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
+>   - Download `unweighted_unifrac_captivity_significance.qzv` to your local computer and view in QIIME 2 View (q2view).
+>   - [Click to view the **`unweighted_unifrac_captivity_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALN4XydwBZnK-0qP0xoUmJg/unweighted-unifrac-captivity-significance.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
 >   ![provenance](../../images/dunnart_images/q2view_provenance.png)
 >
 {: .hands_on}
@@ -821,12 +816,12 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 >   - *"Click here for additional options"*
 >     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `ancombc2-barplot.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `ancombc2_barplot.qzv`
 >
 > 3. Visualisations: Differential Abundance Testing
 >
->   - Download `ancombc2-barplot.qzv` to your local computer and view in QIIME 2 View (q2view).
->   - [Click to view the **`ancombc2-barplot.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALlpMHvkL69hNlowYAk5I7Y/ancombc2-barplot.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
+>   - Download `ancombc2_barplot.qzv` to your local computer and view in QIIME 2 View (q2view).
+>   - [Click to view the **`ancombc2_barplot.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://www.dropbox.com/scl/fo/romu76hw5alep6qj4xfws/ALlpMHvkL69hNlowYAk5I7Y/ancombc2-barplot.qzv?rlkey=z0rtnozon2hlic4ba6i30c301).
 >
 {: .hands_on}
 
