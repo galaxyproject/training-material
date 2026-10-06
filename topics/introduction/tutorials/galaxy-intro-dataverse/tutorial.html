@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a65ac75685e09f79179996134ba784bf80069498",
+		release: "galaxy-training-network@94596041c204884b22b2c84e212a3f1cafb51e2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to the Dataverse Integration in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-06-25 09:16:34 +0000">
+<meta name="DC.date" content="2026-10-06 12:30:49 +0000">
 <meta name="DC.creator" content="Anup Kumar">
 <meta name="DC.creator" content="Armin Dadras"><meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-06-25 09:16:34 +0000",
+  "dateModified": "2026-10-06 12:30:49 +0000",
   "datePublished": "2026-06-25 09:16:34 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -207,8 +207,40 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "status": "active",
     "foundingDate": "2015-06-29"
   },
-  "funder": [],
-  "funding": [],
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eu/",
+      "name": "The European Union",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://european-union.europa.eu"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101292886",
+      "url": "https://cordis.europa.eu/project/id/101292886",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "AI4Social+",
+        "description": "AI4Social+ is funded under HORIZON-INFRA-2025-01-EOSC-03 to enable AI-readiness in the Humanities and Social Sciences under grant agreement number 101292886.\n",
+        "url": "https://doi.org/10.3030/101292886",
+        "logo": "/training-material/shared/images/logos/EOSC_AI4SOCIAL_ColourPos.png"
+      }
+    }
+  ],
   "identifier": "https://gxy.io/GTN:T00582",
   "accessMode": [
     "textual",
@@ -237,7 +269,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Introduction to the Dataverse Integration in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-dataverse/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT1H",
   "teaches": "- Import datasets to Galaxy using the Dataverse integration in Galaxy",
   "keywords": [
@@ -1110,7 +1142,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 25, 2026 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 6, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1128,7 +1160,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1212,7 +1244,7 @@ If you have already found the file you want to work with, scroll down to “Impo
   <div class="box-title hands-on-title" id="hands-on-generate-an-api-token-in-dataverse"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate an API Token in Dataverse</div>
 
   <ol>
-    <li>Log into the target Dataverse instance (e.g., <a href="https://dataverse.harvard.edu/">Harvard Dataverse</a>).</li>
+    <li>Log in to the target Dataverse instance (e.g., <a href="https://dataverse.harvard.edu/">Harvard Dataverse</a>).</li>
     <li>Click on your account name and select <strong>API Token</strong>.</li>
     <li>Click <strong>Create Token</strong> and <strong>Copy to Clipboard</strong> to copy the token string.</li>
   </ol>
@@ -1420,6 +1452,52 @@ author = "Anup Kumar and Armin Dadras",
                 </blockquote>
 
         
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/ai4social/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logos/EOSC_AI4SOCIAL_ColourPos.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">AI4Social+</div>
+			<div class="description">
+			AI4Social+ is funded under HORIZON-INFRA-2025-01-EOSC-03 to enable AI-readiness in the Humanities and Social Sciences under grant agreement number 101292886.
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/eu/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/EU-logo.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EU</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
 
 
 <script>
@@ -1549,7 +1627,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a65ac75685e09f79179996134ba784bf80069498">a65ac75</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/94596041c204884b22b2c84e212a3f1cafb51e2d">9459604</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
