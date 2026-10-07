@@ -278,7 +278,7 @@ groups can be identified.
 
 > <hands-on-title> Sort the eclipses chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `Filter on dataset` (output of **Filter** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
@@ -373,7 +373,7 @@ The grouping destroyed the chronological order and some eclipses are listed more
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `Text reformatting on dataset` (output of **Text reformatting** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
@@ -421,7 +421,7 @@ Because the duplicate-removal step does not preserve chronological order, the re
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `Unique on dataset` (output of **Unique** {% icon tool %})
 >    - *"on column"*: `c1`
 >    - *"everything in"*: `Ascending order`
