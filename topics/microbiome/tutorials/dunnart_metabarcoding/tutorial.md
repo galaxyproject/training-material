@@ -350,7 +350,6 @@ TL;DR: when quality plots are essentially straight lines, truncation is less abo
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `trimmed_sequences.qzv`
 >
 > 3. Visualisations: Read quality and demux output
->
 >   - Download `trimmed_sequences.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`trimmed_sequences.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/trimmed_sequences.qzv).
 >   - Make sure to switch between the "Overview" and "Interactive Quality Plot" tabs in the top left hand corner. Click and drag on the plot to zoom in. Double click to zoom back out to full size. Hover over a box to see the parametric seven-number summary of the quality scores at the corresponding position.
@@ -435,7 +434,6 @@ A [metadata file](https://use.qiime2.org/en/stable/references/metadata.html) is 
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_denoising_stats.qzv`
 >
 > 3. Visualisation: Denoising Stats
->
 >   - Download `16s_denoising_stats.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`16s_denoising_stats.qzv`** file in QIIME 2 View](
 https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/16s_denoising_stats.qzv).
@@ -454,7 +452,6 @@ https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/f
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `summary_table.qzv`
 >
 > 3. Visualisation: Feature/ASV summary
->
 >   - Download `summary_table.qzv ` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`summary.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/summary.qzv).
 >   - Make sure to switch between the "Overview" and "Feature Detail" tabs in the top left hand corner.
@@ -470,7 +467,6 @@ https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/f
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_representative_seqs.qzv`
 >
 > 3. Visualisation: Representative Sequences
->
 >   - Download `16s_representative_seqs.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`16s_representative_seqs.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/16s_representative_seqs.qzv).
 >
@@ -521,7 +517,6 @@ A classifier has already been trained for you for the V4 region of the bacterial
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `taxonomy.qzv`
 >
 > 3. Visualisation: Taxonomy
->
 >   - Download `taxonomy.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`taxonomy.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/taxonomy.qzv).
 >
@@ -552,7 +547,6 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 > 4. **Rename** {% icon galaxy-pencil %} the output to: `summary_filtered.qzv`
 >
 > 5. Visualisation: Filtered Summary
->
 >   - Download `summary_filtered.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`summary_filtered.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/summary_filtered.qzv).
 >
@@ -634,7 +628,6 @@ Create bar charts to compare the relative abundance of ASVs across samples.
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `barchart.qzv`
 >
 > 3. Visualisation: Taxonomy Barplots
->
 >   - Download `barchart.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view). Try selecting different taxonomic levels and metadata-based sample sorting.
 >   - [Click to view the **`barchart.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/barchart.qzv).
 >   - Increase the "Bar Width", select "Captivity" in "Sort Samples By" drop-down menu and explore the resulting barplots by changing the levels in the "Change Taxonomic Level" dropdown menu (Select Level 1, then Level 3, and then Level 5 for example).
@@ -672,10 +665,8 @@ Generate rarefaction curves to determine whether the samples have been sequenced
 > 2. **Rename** {% icon galaxy-pencil %} the output to: `16s_alpha_rarefaction.qzv`
 >
 > 3. Visualisation: Rarefaction
->
 >   - Download `16s_alpha_rarefaction.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view). Try selecting different taxonomic levels and metadata-based sample sorting.
 >   - [Click to view the **`16s_alpha_rarefaction.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/16s_alpha_rarefaction.qzv).
->
 >   - Select "Animal" in the "Sample Metadata Column" and "observed_features" under "Metric":
 >   ![rarefaction](../../images/dunnart_images/q2view_rarefaction.png)
 >
@@ -710,25 +701,23 @@ An important parameter that needs to be provided to this script is *"sampling_de
 >      - *"metadata: Metadata"*: `Metadata from TSV`
 >      - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `unweighted_unifrac_emperor.qzv` output to: `unweighted_unifrac_emperor.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `qiime2 ... unweighted_unifrac_emperor.qzv` output to: `unweighted_unifrac_emperor.qzv` (i.e. only keep the last part)
 >
-> 3. **Rename** {% icon galaxy-pencil %} the `weighted_unifrac_emperor.qza` output to: `weighted_unifrac_emperor.qza`
+> 3. **Rename** {% icon galaxy-pencil %} the `qiime2 ... weighted_unifrac_emperor.qza` output to: `weighted_unifrac_emperor.qza`
 >
-> 4. **Rename** {% icon galaxy-pencil %} the `jaccard_emperor.qzv` output to: `jaccard_emperor.qzv`
+> 4. **Rename** {% icon galaxy-pencil %} the `qiime2 ... jaccard_emperor.qzv` output to: `jaccard_emperor.qzv`
 >
-> 5. **Rename** {% icon galaxy-pencil %} the `bray_curtis_emperor.qzv` output to: `bray_curtis_emperor.qzv`
+> 5. **Rename** {% icon galaxy-pencil %} the `qiime2 ... bray_curtis_emperor.qzv` output to: `bray_curtis_emperor.qzv`
 >
-> 6. **Rename** {% icon galaxy-pencil %} the `observed_features_vector.qza` output to: `observed_features_vector.qza`
+> 6. **Rename** {% icon galaxy-pencil %} the `qiime2 ... observed_features_vector.qza` output to: `observed_features_vector.qza`
 >
-> 7. **Rename** {% icon galaxy-pencil %} the `evenness_vector.qza` output to: `evenness_vector.qza`
+> 7. **Rename** {% icon galaxy-pencil %} the `qiime2 ... evenness_vector.qza` output to: `evenness_vector.qza`
 >
-> 8. **Rename** {% icon galaxy-pencil %} the `unweighted_unifrac_distance_matrix.qza` output to: `unweighted_unifrac_distance_matrix.qza`
+> 8. **Rename** {% icon galaxy-pencil %} the `qiime2 ... unweighted_unifrac_distance_matrix.qza` output to: `unweighted_unifrac_distance_matrix.qza`
 >
 > 9. Visualisations: Unweighted UniFrac Emperor Ordination
->
 >   - To view the differences between sample composition using unweighted UniFrac in ordination space, download `unweighted_unifrac_emperor.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`unweighted_unifrac_emperor.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/unweighted_unifrac_emperor.qzv).
->
 >   - On q2view, select the "Color" tab, choose "Captivity" under the "Select a Color Category" dropdown menu.
 >   ![unweighted_unifrac_emperor2](../../images/dunnart_images/q2view_unweighted_unifrac_emperor2.png)
 >
@@ -749,10 +738,8 @@ Next, we’ll test for associations between categorical metadata columns and alp
 > 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `observed_features_significance.qzv`
 >
 > 3. Visualisations: Observed Features
->
 >   - Download `observed_features_significance.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`observed_features_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/observed_features_significance.qzv).
->
 >   - Select "Captivity" under the "Column" dropdown menu.
 >   ![faith](../../images/dunnart_images/q2view_observed_features.png)
 >
@@ -769,7 +756,6 @@ Next, we’ll test for associations between categorical metadata columns and alp
 > 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `evenness_group_significance.qzv`
 >
 > 3. Visualisations: Observed Evenness
->
 >   - Download `evenness_group_significance.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`evenness_group_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/evenness_group_significance.qzv).
 >   - Select "Captivity" under the "Column" dropdown menu.
@@ -792,7 +778,6 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 > 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `unweighted_unifrac_captivity_significance.qzv`
 >
 > 3. Visualisations: Captivity significance output and provenance
->
 >   - Download `unweighted_unifrac_captivity_significance.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`unweighted_unifrac_captivity_significance.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/unweighted_unifrac_captivity_significance.qzv).
 >   ![provenance](../../images/dunnart_images/q2view_provenance.png)
@@ -824,7 +809,6 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 > 2. **Rename** {% icon galaxy-pencil %} the `visualization.qzv` output to: `ancombc2_barplot.qzv`
 >
 > 3. Visualisations: Differential Abundance Testing
->
 >   - Download `ancombc2_barplot.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
 >   - [Click to view the **`ancombc2_barplot.qzv`** file in QIIME 2 View](https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/files/ancombc2_barplot.qzv).
 >
