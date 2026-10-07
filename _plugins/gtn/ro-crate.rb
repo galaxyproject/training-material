@@ -75,7 +75,7 @@ module Gtn
         'Includes [Galaxy Workflow Tests](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html)' => workflow['tests'],
         'Includes a [Galaxy Workflow Report](https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html)' => workflow['features']['report'],
         'Uses [Galaxy Workflow Comments](https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html)' => workflow['features']['comments'],
-        'Uses [subworkflows](https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_subworkflows.html)' => workflow['features']['subworkflows'],
+        'Uses [subworkflows](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html#embedding-a-workflow-within-a-workflow)' => workflow['features']['subworkflows'],
       }
 
       mat_contribs = [
