@@ -17,6 +17,9 @@ contributions:
     - dadrasarmin
   editing:
     - Sch-Da
+  funding:
+    - ai4social
+    - eu
 ---
 
 ## What is Dataverse?
@@ -79,7 +82,7 @@ If you need to connect to an institutional Dataverse instance not listed by defa
 
 > <hands-on-title>Generate an API Token in Dataverse</hands-on-title>
 >
-> 1. Log into the target Dataverse instance (e.g., [Harvard Dataverse](https://dataverse.harvard.edu/)).
+> 1. Log in to the target Dataverse instance (e.g., [Harvard Dataverse](https://dataverse.harvard.edu/)).
 > 2. Click on your account name and select **API Token**.
 > 3. Click **Create Token** and **Copy to Clipboard** to copy the token string.
 {: .hands_on}
