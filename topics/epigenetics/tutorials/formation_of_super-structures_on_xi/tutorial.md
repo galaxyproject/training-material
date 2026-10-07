@@ -310,7 +310,7 @@ Besides running IGV locally on our computer, we can use Jbrowse2 to look at the 
 >
 {: .hands_on}
 
-This takes some time to finish. Again, you can explore the genome. For example, you can look at the following coordinate in the genome: `chr2:91,053,413-91,055,345`. For a comprehensive tutorial on Jbrowse please look at this tutorial: https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html.
+This takes some time to finish. Again, you can explore the genome. For example, you can look at the following coordinate in the genome: `chr2:91,053,413-91,055,345`. For a comprehensive tutorial on Jbrowse please look at this tutorial: [Genomic Data Visualisation with JBrowse]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %}).
 
 # Step 3: ChIP-seq Quality Control
 
