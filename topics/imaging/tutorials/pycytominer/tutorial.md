@@ -67,10 +67,10 @@ A synthetic dataset necessary for this tutorial can be created following the ins
 
 | **Property** | **Value** |
 |:-----|:------:|
-| Plates (biological replicates)    | 2      |
+| Plates (biological replicates)    | 1     |
 | Wells per plate   | 6 (2 × DMSO vehicle control, 2 × Compound A, 2 × Compound B)      |
 | Cells per well    | ~100      |
-| Total single-cell measurements  | ~1,200      |
+| Total single-cell measurements  | ~600    |
 | Morphological features   | 11 (across three compartments)      |
 |:-----|:------:|
 
@@ -78,7 +78,7 @@ A synthetic dataset necessary for this tutorial can be created following the ins
 For simplicity, we provide the generated files for this tutorial.
 
 > <hands-on-title>Data Upload</hands-on-title>
->
+>   {% snippet faqs/galaxy/histories_create_new.md %}
 > 1. Create a new history for this tutorial.
 >
 > 2. Download the following image-based profiles and import them into your Galaxy history.
@@ -97,7 +97,6 @@ For simplicity, we provide the generated files for this tutorial.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 > 
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 {: .hands_on}
 
 ## Step 1: Aggregate — From Cells to Wells
@@ -110,11 +109,12 @@ For simplicity, we provide the generated files for this tutorial.
 >    - {% icon param-file %} *"Input feature-readouts table"*: `01_single_cells.tsv` file
 >    - *"Aggregation Column"*: Select "c1:Metadata_Plate" and "c2:Metadata_Well"
 >    - *"Aggregation function"*: `Mean`
+> {% snippet faqs/galaxy/datasets_rename.md %}
 > 2. Rename {% icon galaxy-pencil %} the generated file to `01_output_aggregate.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualisation plugin.
 {: .hands_on}
 
-The original file with 601 rows is now aggregated into a file with just 7 rows by aggregating plate and single wells!
+The 600 single-cell measurements are now aggregated into 6 profiles, one per well: for each feature, the values of the ~100 cells in a well are summarized into a single value (here, the mean).
 
 ![01-aggregate.png](../../images/pycytominer/01-aggregate.png)
 
@@ -130,12 +130,12 @@ The original file with 601 rows is now aggregated into a file with just 7 rows b
 >    - {% icon param-file %} *"Input platemap table"*: `01_platemap.tsv` file
 >    - *"Column describing the wells in the platemap"*: Select "c1:well_position"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `02_output_annotated.tsv`.
-> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
+> 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualisation plugin.
 {: .hands_on}
 
-Three additional columns are now added to the table: "Metadata_treatment", "Metadata_cell_line" and "Metadata_concentration_um". All this information is important to give more context to the data.
+Three additional columns are now added to the table: "Metadata_treatment", "Metadata_cell_line" and "Metadata_concentration_um". Pycytominer adds the Metadata_ prefix to the plate map columns (treatment → Metadata_treatment) to distinguish them from the morphological features. All this information is important to give more context to the data. Metadata_treatment allows us to identify the DMSO control wells used for normalization.
 
-![02-annotate.png](../../images/pycitominer/02-annotate.png)
+![02-annotate.png](../../images/pycytominer/02-annotate.png)
 
 ## Step 3: Normalize by Removing Technical Variation
 
@@ -152,9 +152,9 @@ Three additional columns are now added to the table: "Metadata_treatment", "Meta
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
-Now values do not differ anymore much for scale and unit. Normalization allows a better comparability of the results.
+With the standardize normalization method, feature becomes a z-score based on the mean and standard deviation of the DMSO wells. So DMSO wells end up around 0, and treated wells show how many standard deviations they differ from the control. All features are now expressed in the same unit (standard deviations from the DMSO control), so they can be compared with each other.
 
-![03-normalize.png](../../images/pycitominer/03-normalize.png)
+![03-normalize.png](../../images/pycytominer/03-normalize.png)
 
 ## Step 4: Feature Selection — Keeping Only Informative Features
 
@@ -162,14 +162,14 @@ Now values do not differ anymore much for scale and unit. Normalization allows a
 
 > <hands-on-title>Select informative features with Pycytominer</hands-on-title>
 >
-> 1. {% tool [Select informative features](toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_feature_select/pycytominer_feature_select/1.6.1+galaxy0) %} with the following parameters to aggregate redouts:
->    - {% icon param-file %} *"Input feature-readouts table"*: 03_output_normalized.tsv` file
+> 1. {% tool [Select informative features](toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_feature_select/pycytominer_feature_select/1.6.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input feature-readouts table"*: '03_output_normalized.tsv` file
 >    - *"Operations"*: Select "Variance Threshold" and "Blocklist"
 > 2. Rename {% icon galaxy-pencil %} the generated file to `04_output_features.tsv`.
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualization plugin.
 {: .hands_on}
 
- We went from 16 columns to 15, since the feature "Cells_AreaShape_EulerNumber" was removed from the readouts... indeed, all values in each well was equal to 1.0. 
+ Variance Threshold removes features that barely vary across samples, and Blocklist removes features that are known to be noisy or uninformative in image-based profiling. Thanks to the Variance Threshold operation, the table now has 15 columns instead of 16: Cells_AreaShape_EulerNumber was removed because it has the same value in every well, so it carries no information. 
 
 ![04-features.png](../../images/pycitominer/04-features.png)
 
@@ -189,7 +189,7 @@ The **Compute Consensus** tool collapses replicate profiles into one consensus p
 
 The table now has 3 profiles, one per treatment (DMSO, Compound A and Compound B).
 
-![05-consensus.png](../../images/pycitominer/05-consensus.png)
+![05-consensus.png](../../images/pycytominer/05-consensus.png)
 
 ## A full workflow for table readouts processing
 
@@ -197,8 +197,9 @@ You can now create a workflow from the different Pycytominer steps in your histo
 
 > <hands-on-title> Extract Pycytominer workflow from history  </hands-on-title>
 > 1. Now we can extract the workflow for batch processing:
+>    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >    - Name it "pycytominer-full-steps".
->    - Don't treat `01_platemap.tsv` and `01_single_cells.tsv` as inputs (the workflow is supposed to be applied to the image-based profiles directly).
+>    - Uncheck `01_platemap.tsv` and `01_single_cells.tsv` as inputs (the workflow is supposed to be applied to the image-based profiles directly).
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
