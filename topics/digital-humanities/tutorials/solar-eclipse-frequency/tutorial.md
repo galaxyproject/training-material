@@ -278,18 +278,21 @@ groups can be identified.
 
 > <hands-on-title> Sort the eclipses chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Filter on dataset` (output of **Filter** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `1`
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Filter on dataset` (output of **Filter** {% icon tool %})
+>    - *"Number of header lines"*: `1`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
+>
 >
 >    > <comment-title> </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -373,18 +376,21 @@ The grouping destroyed the chronological order and some eclipses are listed more
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Text reformatting on dataset` (output of **Text reformatting** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `0`
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Text reformatting on dataset` (output of **Text reformatting** {% icon tool %})
+>    - *"Number of header lines"*: `0`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
+>
 >
 >    > <comment-title> About the output </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -421,18 +427,20 @@ Because the duplicate-removal step does not preserve chronological order, the re
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Unique on dataset` (output of **Unique** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `0`
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Unique on dataset` (output of **Unique** {% icon tool %})
+>    - *"Number of header lines"*: `0`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
 >
 > We have already used this tool in a previous step with similar parameters.
 > You can redo all the input steps by step, or you can rerun the earlier sort tool:
