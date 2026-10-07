@@ -288,8 +288,8 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 > 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the default output format of **Paste** is `txt`).
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md %}
-> 
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
 > 10. {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}:
 >    - *"Input Collection"*: `trimmed sequences flattened`
 >    - *"How should the new labels be specified?"*: `Map original identifiers to new ones using a two-column table`
