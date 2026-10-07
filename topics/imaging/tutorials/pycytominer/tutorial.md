@@ -78,8 +78,10 @@ A synthetic dataset necessary for this tutorial can be created following the ins
 For simplicity, we provide the generated files for this tutorial.
 
 > <hands-on-title>Data Upload</hands-on-title>
->   {% snippet faqs/galaxy/histories_create_new.md %}
-> 1. Create a new history for this tutorial.
+>
+> 1. If you are logged in, create a new history for this tutorial
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Download the following image-based profiles and import them into your Galaxy history.
 >    - [`01_platemap.tsv`](workflows/test-data/01_platemap.tsv)
@@ -109,8 +111,11 @@ For simplicity, we provide the generated files for this tutorial.
 >    - {% icon param-file %} *"Input feature-readouts table"*: `01_single_cells.tsv` file
 >    - *"Aggregation Column"*: Select "c1:Metadata_Plate" and "c2:Metadata_Well"
 >    - *"Aggregation function"*: `Mean`
-> {% snippet faqs/galaxy/datasets_rename.md %}
+>
 > 2. Rename {% icon galaxy-pencil %} the generated file to `01_output_aggregate.tsv`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image-based profiles using the **Tabulator** visualisation plugin.
 {: .hands_on}
 
@@ -197,12 +202,11 @@ You can now create a workflow from the different Pycytominer steps in your histo
 
 > <hands-on-title> Extract Pycytominer workflow from history  </hands-on-title>
 > 1. Now we can extract the workflow for batch processing:
+>
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
+>
 >    - Name it "pycytominer-full-steps".
 >    - Uncheck `01_platemap.tsv` and `01_single_cells.tsv` as inputs (the workflow is supposed to be applied to the image-based profiles directly).
->
->    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
->
 > 2. Edit the workflow you just created:
 >    - Select "Input dataset" from the list of tools. The step {% icon param-file %} **8: Input Dataset** appears.
 >    - Select "Input dataset" from the list of tools. The step {% icon param-file %} **9: Input Dataset** appears.
