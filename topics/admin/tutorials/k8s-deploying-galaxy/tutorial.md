@@ -226,7 +226,7 @@ on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG].
 [PV]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 [CSI]: https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/
 [GxyDocs]: https://galaxyproject.org/admin/#configuration
-[CVMFS]: https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html
+[CVMFS]: {% link topics/admin/tutorials/cvmfs/tutorial.md %}
 [BioContainers]: https://biocontainers.pro/#/
 [Namespace]: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [reclaim policy]: https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/
