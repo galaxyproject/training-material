@@ -176,7 +176,7 @@ With the standardize normalization method, feature becomes a z-score based on th
 
  Variance Threshold removes features that barely vary across samples, and Blocklist removes features that are known to be noisy or uninformative in image-based profiling. Thanks to the Variance Threshold operation, the table now has 15 columns instead of 16: Cells_AreaShape_EulerNumber was removed because it has the same value in every well, so it carries no information. 
 
-![04-features.png](../../images/pycitominer/04-features.png)
+![04-features.png](../../images/pycytominer/04-features.png)
 
 ## Step 5: Consensus — Collapsing Replicates
 
@@ -220,7 +220,7 @@ You can now create a workflow from the different Pycytominer steps in your histo
 
 You have now a Pycytominer automatized workflow in Galaxy! 
 
-![06-final-workflow.png](../../images/pycitominer/06-final-workflow.png)
+![06-final-workflow.png](../../images/pycytominer/06-final-workflow.png)
 
 # Conclusion
 
