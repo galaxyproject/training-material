@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@869bda5825a7d848229bf7dc6e94eac81705f7f2",
+		release: "galaxy-training-network@ab3bb5e93682ca21d1c668f1ffce1ec2a744893c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Architecture 15 - Galaxy Production Deployment">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.date" content="2026-10-08 11:30:25 +0000">
 <meta name="DC.creator" content="John Chilton"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 15 - Galaxy Production Deployment  *The architecture of Galaxy's production deployment.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: centered  .pull-left[ #### Default  SQLite  gunicorn all-in-one  Single process  Single host  Local jobs  ]  .pull-right[ #### Production  PostgreSQL  gunicorn for web process + webless workers + nginx proxy  Multiple processes  Multiple hosts  Jobs across many clusters  https://usegalaxy.org/production ]   ---   ### PostgreSQL  - Database server can scale way beyond default sqlite - Supports concurrent connections from multiple Galaxy processes - Better performance for production workloads - https://www.postgresql.org/ - Configuration: `github.com/galaxyproject/usegalaxy-playbook` → `roles/galaxyprojectdotorg.postgresql`   ---   ### nginx (or Apache)  - Optimized servers for serving static content - Reverse prox...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Development in Galaxy / Architecture 15 - Galaxy Production Deployment / Slides: Architecture 15 - Galaxy Production Deployment">
@@ -259,7 +259,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Oct 8, 2026 </div>
 
 	<hr />
 
@@ -348,7 +348,7 @@ class: center, middle</p>
   <li>Galaxy typically runs in Gunicorn - a production-grade ASGI server</li>
   <li>This is a great tool for both development and production but in production typically job running and workflow scheduling should happen outside a webserver</li>
   <li>https://docs.galaxyproject.org/en/master/admin/scaling.html#gunicorn-for-web-serving-and-webless-galaxy-applications-as-job-handlers</li>
-  <li>https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html</li>
+  <li><a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a></li>
 </ul>
 
 <hr />
@@ -374,7 +374,7 @@ and job processing works around this.</p>
 
 <p>https://docs.galaxyproject.org/en/master/admin/cluster.html</p>
 
-<p>https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html</p>
+<p><a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">Connecting Galaxy to a compute cluster</a></p>
 
 <hr />
 
@@ -530,7 +530,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/869bda5825a7d848229bf7dc6e94eac81705f7f2">869bda5</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ab3bb5e93682ca21d1c668f1ffce1ec2a744893c">ab3bb5e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
