@@ -4,11 +4,20 @@ The GTN is committed to providing high-quality human-written and human-curated t
 
 ## Summary
 
-- The use of generative AI to create tutorials, faqs, images, or other GTN content is not permitted.
-- Contributors and reviewers must write issue text, pull request (PR) descriptions, review comments and other (GitHub) communication themselves.
-- It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to create. Or to communicate.
-- Contributions generated with AI oftentimes significantly increase the burden on maintainers.
+- It is **not permitted** to use generative AI to:
+  - create **GTN content** (tutorials, faqs, images, news posts, ..)
+  - **communicate** about your conribution (GitHub PR descriptions, comments, issues)
+
+- It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But any GTN content must be in your own words.
 - If you are a new contributor or not a native English speaker, we understand you may be less confident about your contribution, but our human reviewers are here to guide you through the steps to improve both your contribution and your own skills and understanding.
+
+- For contributions to the **technical framework** you may be assisted by generative AI, under the following conditions:
+  - You must understand and take responsibility for every line of code in your contribution.
+  - You must be able to answer technical questions in review and make any requested changes.
+  - You must disclose and describe the use of generative AI in your PR description.
+  - You must write code comments and documentation yourself. Describing not only what the code does, but why.
+  - You must write the PR/issue descriptions and any other GitHub communications yourself.
+
 - Maintainers are encouraged to deprioritise or reject contributions that they suspect have been made in violation of this policy.
 
 
