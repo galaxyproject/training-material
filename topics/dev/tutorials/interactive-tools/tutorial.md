@@ -512,7 +512,7 @@ our new Docker container as a Galaxy tool.
 > >          directory is mapped onto the Docker container at runtime, which enables
 > >          access to input and output datasets from inside the container. -->
 > >     <command detect_errors="exit_code"><![CDATA[
-> >         Rscript -e "shiny::runApp('/srv/shiny-server', port = 8765, launch.browser = FALSE)"
+> >         Rscript -e "shiny::runApp('/srv/shiny-server', host = '0.0.0.0', port = 8765, launch.browser = FALSE)"
 > >     ]]></command>
 > >
 > >     <environment_variables>
