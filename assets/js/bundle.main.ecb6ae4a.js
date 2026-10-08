@@ -425,3 +425,78 @@ document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
 })
 
 
+// Open external links in a new tab when framed (e.g. Galaxy's GTN overlay), as many sites refuse to render in an iframe
+function openExternalLinksInNewTabWhenFramed() {
+	var framed;
+	try {
+		framed = window.self !== window.top;
+	} catch (e) {
+		framed = true;
+	}
+	if (!framed) {
+		return;
+	}
+
+	// a[*|href] also matches SVG links using xlink:href
+	var linkSelector = "a[href], a[*|href]";
+	var baseurl = document.body.dataset.baseurl || "";
+
+	function markIfExternal(link) {
+		// Galaxy's parent page handles tool and workflow links itself
+		if (link.closest("[data-tool],[data-workflow]")) {
+			return;
+		}
+		var href = link.getAttribute("href") || link.getAttribute("xlink:href");
+		if (!href) {
+			return;
+		}
+		var url;
+		try {
+			url = new URL(href, document.baseURI);
+		} catch (e) {
+			return;
+		}
+		if (url.protocol !== "http:" && url.protocol !== "https:") {
+			return;
+		}
+		var internal = url.origin === window.location.origin &&
+			(url.pathname === baseurl || url.pathname.startsWith(baseurl + "/"));
+		if (internal) {
+			return;
+		}
+		link.setAttribute("target", "_blank");
+		if (link.relList) {
+			link.relList.add("noopener", "noreferrer");
+		} else {
+			var rel = (link.getAttribute("rel") || "").split(/\s+/).filter(Boolean);
+			["noopener", "noreferrer"].forEach(function (token) {
+				if (rel.indexOf(token) === -1) {
+					rel.push(token);
+				}
+			});
+			link.setAttribute("rel", rel.join(" "));
+		}
+	}
+
+	// Mark links up front so the "(opens in new tab)" marker shows before a click
+	function markAll() {
+		document.querySelectorAll(linkSelector).forEach(markIfExternal);
+	}
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", markAll);
+	} else {
+		markAll();
+	}
+
+	// Links added later (e.g. by other scripts) are marked when clicked
+	document.addEventListener("click", function (event) {
+		if (event.defaultPrevented || !(event.target instanceof Element)) {
+			return;
+		}
+		var link = event.target.closest(linkSelector);
+		if (link) {
+			markIfExternal(link);
+		}
+	});
+}
+openExternalLinksInNewTabWhenFramed();
