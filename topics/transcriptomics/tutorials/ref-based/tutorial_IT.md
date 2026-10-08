@@ -1517,8 +1517,8 @@ DESeq2 richiede di specificare, per ciascun fattore sperimentale, i conteggi dei
 >      - {% icon param-file %} *"File to process"*: output di **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement "*:
 >         - In *"1: Replacement "*
->            - *"Find pattern"*: `(.*)_(.*)_(.*)`
->            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
+>            - *"Find pattern"*: `^([^_]+)_([^_]+)_([^_]+)(_.+)?$`
+>            - *"Replace with"*: `\1_\2_\3\4\tgroup:\2\tgroup:\3`
 > 
 >    Questo passaggio crea 2 colonne aggiuntive con il tipo di trattamento e di sequenziamento che possono essere utilizzate con lo strumento {% tool [Elementi tag](__TAG_FROM_FILE__) %}
 > 
