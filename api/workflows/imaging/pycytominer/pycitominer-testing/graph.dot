@@ -1,0 +1,19 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput table readouts"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput plate metadata"]
+  2[label="Aggregate readouts"]
+  0 -> 2 [label="output"]
+  3[label="Annotate readouts with metadata"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Normalize readouts"]
+  3 -> 4 [label="output"]
+  5[label="Select informative features"]
+  4 -> 5 [label="output"]
+  6[label="Compute consensus profiles"]
+  5 -> 6 [label="output"]
+  ke3a16189772b40c38399de397861347a[color=lightseagreen,label="Output\noutput"]
+  6 -> ke3a16189772b40c38399de397861347a
+}
