@@ -12,7 +12,7 @@ examples:
 ---
 
 1. Go to **Interactive Tools** on the **Activity Bar** on the left
-2. If your **Activity Bar** does not show the **Interactive Tools** icon, make sure you are logged in first. 
+2. If your **Activity Bar** does not show the **Interactive Tools** {% icon galaxy-interactive-tool %} icon, make sure you are logged in first. 
 3. Wait for {{ include.tool | default: "your interactive tool" }} to be in the **running** state (Job Info).
 4. You might need to wait a bit until your interactive tool is loaded and ready for you.
 5. Click on {{ include.tool | default: "the tool name" }}
