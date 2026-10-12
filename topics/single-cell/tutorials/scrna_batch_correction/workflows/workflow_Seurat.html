@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@917e68d1d61c2915c7a970d75468b8494be90c0d",
+		release: "galaxy-training-network@53ebc081cd24d0834df3e6b732c736c71becdde3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -270,9 +270,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc1d2; --color-darker: #ff9ebc; --color-dimmed: #ffb0c7;">name:singlecell</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffd9e3; --color-darker: #ffb5ca; --color-dimmed: #ffc7d6;">name:singlecell</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #00eae2; --color-darker: #00d0c9; --color-dimmed: #00ddd6;">name:seurat</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00fcf5; --color-darker: #00e0d9; --color-dimmed: #00eee7;">name:seurat</div>
 			
 			</br>
 			
@@ -343,11 +343,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna_batch_correction/versions/workflow-seurat">Galaxy Main</a></li>
+					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna_batch_correction/versions/workflow-seurat">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna_batch_correction/versions/workflow-seurat">Galaxy Europe</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna_batch_correction/versions/workflow-seurat">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna_batch_correction/versions/workflow-seurat">Galaxy Australia</a></li>
 					
@@ -367,18 +367,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 0 stroke:#2c3143,stroke-width:4px;
   1["Inspect before Split"];
   0 -->|output| 1;
-  4fd1a55f-2bed-49a1-bde0-36a982d6b582["Output\nInspect_before_Split"];
-  1 --> 4fd1a55f-2bed-49a1-bde0-36a982d6b582;
-  style 4fd1a55f-2bed-49a1-bde0-36a982d6b582 stroke:#2c3143,stroke-width:4px;
+  2f786ebf-84ab-4830-9d58-f89770a25927["Output\nInspect_before_Split"];
+  1 --> 2f786ebf-84ab-4830-9d58-f89770a25927;
+  style 2f786ebf-84ab-4830-9d58-f89770a25927 stroke:#2c3143,stroke-width:4px;
   2["Seurat Data Management"];
   0 -->|output| 2;
   3["Seurat Integrate"];
   0 -->|output| 3;
   4["Inspect after Split"];
   3 -->|rds_out| 4;
-  b89b59df-c9e5-47e6-9cab-892824d10093["Output\nInspect_after_Split"];
-  4 --> b89b59df-c9e5-47e6-9cab-892824d10093;
-  style b89b59df-c9e5-47e6-9cab-892824d10093 stroke:#2c3143,stroke-width:4px;
+  3b92058e-ba01-4bd9-bc89-8100aafb8d92["Output\nInspect_after_Split"];
+  4 --> 3b92058e-ba01-4bd9-bc89-8100aafb8d92;
+  style 3b92058e-ba01-4bd9-bc89-8100aafb8d92 stroke:#2c3143,stroke-width:4px;
   5["Seurat Preprocessing"];
   3 -->|rds_out| 5;
   6["Seurat Preprocessing"];
@@ -397,9 +397,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   11 -->|rds_out| 12;
   13["UMAP Plot by Method before Batch Correction"];
   11 -->|rds_out| 13;
-  b8af9c1e-e036-4830-9ab8-4c16f3774845["Output\nUMAP_before_Split"];
-  13 --> b8af9c1e-e036-4830-9ab8-4c16f3774845;
-  style b8af9c1e-e036-4830-9ab8-4c16f3774845 stroke:#2c3143,stroke-width:4px;
+  f327196c-505e-47a2-8f04-6a1db8b8f34a["Output\nUMAP_before_Split"];
+  13 --> f327196c-505e-47a2-8f04-6a1db8b8f34a;
+  style f327196c-505e-47a2-8f04-6a1db8b8f34a stroke:#2c3143,stroke-width:4px;
   14["Seurat Integrate"];
   11 -->|rds_out| 14;
   15["Seurat Integrate"];
@@ -414,9 +414,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   18 -->|rds_out| 19;
   20["UMAP Plot by Method after Batch Correction"];
   18 -->|rds_out| 20;
-  fbcf18f3-4e2a-42b0-8150-6aebf5acbaab["Output\nUMAP_after_Split"];
-  20 --> fbcf18f3-4e2a-42b0-8150-6aebf5acbaab;
-  style fbcf18f3-4e2a-42b0-8150-6aebf5acbaab stroke:#2c3143,stroke-width:4px;</pre>
+  2979f933-3da2-43ed-a8c0-5759c7c88a56["Output\nUMAP_after_Split"];
+  20 --> 2979f933-3da2-43ed-a8c0-5759c7c88a56;
+  style 2979f933-3da2-43ed-a8c0-5759c7c88a56 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -668,7 +668,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/917e68d1d61c2915c7a970d75468b8494be90c0d">917e68d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/53ebc081cd24d0834df3e6b732c736c71becdde3">53ebc08</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
