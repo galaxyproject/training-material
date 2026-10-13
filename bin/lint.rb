@@ -190,20 +190,26 @@ module Gtn
     # Consider:
     #
     #   [see this other tutorial({% link topics/admin/tutorials/ansible/tutorial.md %})
+    #
+    # A #fragment or ?query stays outside of the tag: ({% link topics/admin/tutorials/ansible/tutorial.md %}#some-heading)
     def self.link_gtn_tutorial_external(contents)
       find_matching_texts(
         contents,
         %r{\(https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/([^)]*)\)}
       )
+        # Slides links are handled by link_gtn_slides_external; two fixes on one link corrupt the auto-fix.
+        .reject { |_idx, _text, selected| selected[2][/\A[^#?]*/].end_with?('slides.html') }
         .map do |idx, _text, selected|
         # puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
+        # The link tag only takes a path, so any #fragment or ?query stays outside of it.
+        target, suffix = selected[2].match(/\A([^#?]*)(.*)\z/).captures
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
           # We wrap the entire URL (inside the explicit () in a matching group to make it easy to select/replace)
           match_start: selected.begin(0) + 1,
           match_end: selected.end(0),
-          replacement: "{% link #{selected[2].gsub('.html', '.md')} %}",
+          replacement: "{% link #{target.gsub('.html', '.md')} %}#{suffix}",
           message: 'Please use the link function to link to other pages within the GTN. ' \
                    'It helps us ensure that all links are correct',
           code: 'GTN:003',
@@ -227,10 +233,12 @@ module Gtn
     # Consider:
     #
     #   [see this other tutorial({% link topics/admin/tutorials/ansible/slides.html %})
+    #
+    # A #fragment or ?query stays outside of the tag: ({% link topics/admin/tutorials/ansible/slides.html %}#some-slide)
     def self.link_gtn_slides_external(contents)
       find_matching_texts(
         contents,
-        %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/(.*slides.html))\)}
+        %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/(.*slides.html)([#?][^)]*)?)\)}
       )
         .map do |idx, _text, selected|
         ReviewDogEmitter.error(
@@ -238,7 +246,7 @@ module Gtn
           idx: idx,
           match_start: selected.begin(1),
           match_end: selected.end(1) + 1,
-          replacement: "{% link #{selected[3]} %}",
+          replacement: "{% link #{selected[3]} %}#{selected[4]}",
           message: 'Please use the link function to link to other pages within the GTN. ' \
                    'It helps us ensure that all links are correct',
           code: 'GTN:003',
