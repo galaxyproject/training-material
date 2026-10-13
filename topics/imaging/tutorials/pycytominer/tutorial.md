@@ -30,6 +30,11 @@ time_estimation: "1H"
 contributions:
   authorship:
     - rmassei
+  editing:
+    - dianichj
+  reviewing:
+    - axiomcura
+    - d33bs
   funding:
     - nfdi4bioimage
 tags:
