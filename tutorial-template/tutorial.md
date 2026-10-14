@@ -30,7 +30,7 @@ contributions:
     - contributor1
     - contributor2
   editing:
-    - contibutor1
+    - contributor1
 
 ---
 
