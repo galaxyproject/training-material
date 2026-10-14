@@ -9,12 +9,14 @@ questions:
   - How can detections be improved?
   - How can I use the extracted source properties?
   - How can I get the seed image for the Voronoi segmentation tutorial?
+  - Can the same tool detect human settlements from satellite night lights (Earth observation)?
 objectives:
   - How to perform luminous source extraction in Galaxy.
   - How to identify objects.
   - How to analyse sky images in Galaxy. 
   - How to create a simple segmentation mask. 
   - How to visualize the detected sources. 
+  - How to apply Source Extractor to Earth-observation night lights to detect settlements.
 time_estimation: 1H
 key_points:
 - Source Extractor is a well known astronomy library to detect luminous sources from sky images. 
@@ -29,6 +31,7 @@ requirements:
 contributions:
   authorship:
     - Andrei-EPFL
+    - annefou
   funding:
     - oscars
     - fiesta
@@ -37,6 +40,8 @@ tags:
 - imageanalysis
 - astronomy
 - object detection
+- earth observation
+- light pollution
 
 ---
 
@@ -59,6 +64,10 @@ For more in-depth documentation, you can refer to:
 > {:toc}
 >
 {: .agenda}
+
+This tutorial works with images from two domains — **astronomy** (sky images) and **Earth observation** (night lights). The *same* Source Extractor tool is used in both; only the input image changes. Choose your path.
+
+{% include _includes/cyoa-choices.html option1="Astronomy" option2="Earth" default="Astronomy" text="The same source-detection tool, on two kinds of image: astronomical sky images (stars and galaxies) or satellite night lights (human settlements). Pick the one that interests you most." %}
 
 
 ## Input Requirements 
@@ -154,6 +163,8 @@ err_option = 'none'             # Use 'thresh' as an absolute threshold
 It is advisable to adapt the error estimation to the studied image: e.g. if the background is reasonably uniform, using a global value should be sufficient. In contrast, if the background changes drastically in different regions of the image, a pixel-wise RMS would be preferred.
 
 
+<div class="Astronomy" markdown="1">
+
 ## Getting data from DESI Legacy Surveys
 > <hands-on-title> Data Acquisition </hands-on-title>
 >
@@ -236,3 +247,57 @@ An important output of this tool is the segmentation map of the detected sources
 ![Segmentation map with mask](../../images/astronomy-source-extractor/segmentation-map-with-mask.png "Segmentation map.")
 
 This map can be used as the seed image required by [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %}). In this case, you can observe that the two bright stars still have an important effect on the source detection. Therefore, to improve the results, you can try: better masking, using the array RMS as a relative error in thresholding or different background mesh sizes.
+
+</div>
+
+<div class="Earth" markdown="1">
+
+# Application to Earth Observation: settlements from night lights
+
+The *same* Source Extractor tool can be applied, **unchanged**, to **satellite night lights**. Human settlements glow as compact bright sources on a dark Earth — morphologically just like stars on the sky — so the tool's background estimation, thresholding and deblending work directly, producing a **catalog of lit settlements**. This is a cross-discipline example from the OSCARS-FIESTA project; the full pipeline, provenance and a citable archive are at [annefou/fiesta-galaxy-sourceextractor-eo](https://github.com/annefou/fiesta-galaxy-sourceextractor-eo).
+
+## Getting the data (night lights)
+
+> <hands-on-title> Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import this VIIRS night-lights image of the Po Delta / eastern Po Valley (Italy) — a single-channel 2D GeoTIFF with bright settlements on a dark background:
+>
+>    - [`nightlights_po_delta.tif`](../../images/astronomy-source-extractor/nightlights_po_delta.tif)
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Confirm the datatype is `tiff`.
+{: .hands_on}
+
+> <comment-title> How the image was prepared </comment-title>
+> It is a NASA Black Marble (VNP46A4) annual VIIRS night-lights composite (2021), cropped to the Po Delta and stored as a single-channel radiance GeoTIFF — unlit areas dark, settlements bright — exactly the contrast Source Extractor expects. The download and preprocessing notebooks are in the [OSCARS-FIESTA repository](https://github.com/annefou/fiesta-galaxy-sourceextractor-eo).
+{: .comment}
+
+## Running Source Extractor on night lights
+
+> <hands-on-title> Run Source Extractor </hands-on-title>
+>
+> 1. {% tool [source-extractor](toolshed.g2.bx.psu.edu/repos/astroteam/source_extractor_astro_tool/source_extractor_astro_tool/0.0.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"input_file"*: the imported `nightlights_po_delta.tif`
+>    - keep the default detection parameters (threshold `1.5`, minimum area `5`, background mesh `64`).
+{: .hands_on}
+
+The tool returns the same products as for sky images — a background-subtracted image with detected sources, the background and RMS, a segmentation map, and a **catalog table**. Here the catalog is a list of **lit settlements** (position, flux, size); on this scene Source Extractor detects roughly 450 of them.
+
+![Night lights with detected settlements](../../images/astronomy-source-extractor/nightlights_po_delta_sources.png "Detected settlements (red ellipses) in the Po Valley night lights — the astronomy tool catalogs cities like it catalogs galaxies.")
+
+## From catalog to biodiversity impact
+
+Overlaying the catalog and the night-lights field on the EU **Natura 2000** protected-area network turns the astronomy output into a light-pollution metric. Artificial light at night is a documented stressor for nocturnal birds, insects and bats, so the **Po Delta** — a Ramsar / Natura 2000 wetland and migratory-bird refuge — is a meaningful test. It is still a relative dark refuge (mean night radiance markedly below its surroundings), yet artificial light already covers roughly 18% of its area, with many lit settlements within ~10 km of its boundary — a measurable encroachment on a nocturnal-biodiversity refuge.
+
+![Light pollution at the edge of the Po Delta refuge](../../images/astronomy-source-extractor/nightlights_po_delta_biodiversity.png "Detected settlements and Natura 2000 (Po Delta in yellow): light pollution pressing on a dark refuge.")
+
+</div>
+
+# Conclusion
+
+In this tutorial you ran the Source Extractor tool in Galaxy to detect luminous sources on a dark background — and saw that the *same* tool serves two very different disciplines: detecting stars and galaxies in astronomical sky images, and detecting human settlements in satellite night lights to measure light-pollution pressure on a protected area. A well-described Galaxy tool can be reused across domains because the metadata travels with it.
