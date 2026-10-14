@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9cebe2b50c108f497f2a60ed3108e97e5924b74c",
+		release: "galaxy-training-network@e0d6c746fe6d67bfd78eb123e28eb7b32a8837b2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -247,6 +247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </ol>
   </nav>
   <h1 itemprop="name">Most tools seem to have options for assembly using long and short reads, what are the pros and cons of the different tools?</h1>
+    <i></i>
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/annasyme/" class="contributor-badge contributor-annasyme"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annasyme?s=36" alt="Anna Syme avatar" width="36" class="avatar" />
@@ -260,8 +261,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <div class="container">
       <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <div class="col-md-8" itemprop="text">
-           
-
 
            <p>In our experience, when both long and short reads are allowed as input, the difference comes down to the order in which set is assembled first. For example, Unicycler assembles the short reads first (which can be good, because they are more accurate), and then scaffolds these into larger contigs using long reads. Other tools (or workflows) often assemble long reads first (which can also be good because these can span repeat regions), then correct this assembly with information from the more accurate short reads. There may also be other variations on long/short read assembly, and/or iterations of these types of steps (assemble, correct). My preference is to assemble long reads first, but that’s because I’m really interested in covering repeat regions. If accuracy was the aim, rather than contig length, the short-reads-first approach may be better. For even more complexity … I think some tools now allow input of “trusted contigs” - i.e. contigs assembled from other tools. Ryan Wick has a new tool called <a href="https://github.com/rrwick/Trycycler/wiki">Trycyler</a> that can take in multiple assemblies to make a consensus (bacterial genomes).</p>
 
@@ -417,7 +416,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9cebe2b50c108f497f2a60ed3108e97e5924b74c">9cebe2b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e0d6c746fe6d67bfd78eb123e28eb7b32a8837b2">e0d6c74</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
