@@ -1,0 +1,23 @@
+- doc: Single-file run on flight area D of the Pic Saint-Loup drone LiDAR dataset (doi:10.15454/DMYWPB)
+  job:
+    Point cloud (LAS/LAZ):
+      class: File
+      location: https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
+      filetype: las
+  outputs:
+    standardized:
+      asserts:
+        has_size:
+          min: 1000000
+    convex_hull:
+      asserts:
+        has_text:
+          text: "coordinates"
+    merged_with_originals:
+      asserts:
+        has_size:
+          min: 1000000
+    potree_viewer:
+      asserts:
+        has_size:
+          min: 1

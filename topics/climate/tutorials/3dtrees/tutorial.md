@@ -14,6 +14,11 @@ objectives:
 - Distinguish tree/non-tree classes from individual-tree identifiers
 - Inspect tree predictions and identify obvious visual problems
 time_estimation: 3H
+subtopic: analysing
+tags:
+- earth-system
+- land
+- lidar
 key_points:
 - LiDAR records the 3D structure of vegetation and terrain
 - SegmentAnyTree predicts tree and non-tree points and assigns an ID to each predicted tree
@@ -41,14 +46,22 @@ the points that belong to each tree. This is called *individual-tree segmentatio
 
 This tutorial is for interested beginners, ecology students, and ecologists. You will use the
 3Dtrees tools in Galaxy to prepare one point cloud and predict individual trees with
-SegmentAnyTree (SAT). At the end, you will have a point cloud with tree labels and an interactive
-Potree view for inspecting the results in your browser.
+SegmentAnyTree (SAT) ({% cite Wielgosz2024 %}). At the end, you will have a point cloud with tree
+labels and an interactive Potree view for inspecting the results in your browser.
 
 > <tip-title>New to Galaxy?</tip-title>
 >
 > If Galaxy is new to you, first try [Galaxy Basics for everyone]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md %}).
 >
 {: .tip}
+
+> <comment-title>Which Galaxy server?</comment-title>
+>
+> This tutorial was prepared on [Galaxy Europe](https://usegalaxy.eu), where the 3Dtrees tools and the
+> Recherche Data Gouv remote-file source used below are available. The screenshots come from its
+> [Earth System](https://earth-system.usegalaxy.eu) view, which offers the same tools.
+>
+{: .comment}
 
 
 > <agenda-title></agenda-title>
@@ -68,25 +81,27 @@ Finally, we will inspect the result in 3D. Each step prepares an output for the 
 
 ## Get data
 
-The data were collected by drone near Pic Saint-Loup in southern France. We use only the smallest
-file, `Strip-20210804-150144_D.las` (about 455 MB), to keep the tutorial manageable. LAS is a common
-format for LiDAR points; LAZ is its compressed form. Both can store extra information for each
-point, such as color or a predicted tree identifier.
+The data were collected by drone over a Mediterranean oak forest near Pic Saint-Loup in southern
+France ({% cite Alleaume2021 %}). We use only the smallest file, `Strip-20210804-150144_D.las`
+(about 477 MB), to keep the tutorial manageable. LAS is a common format for LiDAR points; LAZ is
+its compressed form. Both can store extra information for each point, such as color or a predicted
+tree identifier.
 
 > <details-title>About the Pic Saint-Loup dataset</details-title>
 >
 > The data were collected in June 2021 with a YellowScan Surveyor scanner on a DJI Matrice 600 Pro
-> drone. The dataset has about 200--250 points per square metre and is available under the Etalab
-> Open License 2.0.
+> drone, as part of the SENTHYMED/MEDOAK experiment ({% cite Adeline2024 %}). The dates in the file
+> names record when post-processing finished, not the flight date. The points use the RGF93 /
+> Lambert-93 coordinate reference system. The dataset has about 200--250 points per square metre and
+> is available under the Etalab Open License 2.0.
 >
-> The four files total approximately 3.8 GB. The associated paper states that they match four flight
+> The four files total approximately 4.1 GB. The associated paper states that they match four flight
 > areas. A and B are spatially separate, while the published bounding boxes of C and D overlap;
 > consequently, these files should not be treated as four non-overlapping tiles of one continuous
 > survey.
 >
-> See the [dataset record](https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi%3A10.15454%2FDMYWPB)
-> and [dataset documentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10884421/) for provenance and
-> reuse information.
+> See the dataset record ({% cite Alleaume2021 %}) and its documentation ({% cite Adeline2024 %})
+> for provenance and reuse information.
 >
 {: .details}
 
@@ -96,31 +111,39 @@ point, such as color or a predicted tree identifier.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
-> 2. Open **Upload**, then select **{% icon pref-cloud %} Choose Remote Files**.
-> 
-> ![Galaxy upload dialog with the Choose Remote Files button available](../../images/3dtrees/upload_pannel.png "Open the remote-file browser from the upload dialog")
+> 2. Open the **Upload** activity (called **Beta Upload** on some servers), then select
+>    **Choose Remote Files**.
+>
+>    ![Galaxy upload panel listing import methods, including Choose Remote Files](../../images/3dtrees/upload_pannel.png "Open the remote-file browser from the upload panel")
 >
 > 3. Search for `recherche`, then open **Recherche Data Gouv**.
 > 4. Search for `pic`, then open **Données lidar acquises par drone au pied du Pic St Loup (34)**.
 >
-> ![Remote-file browser showing the Pic Saint-Loup LiDAR dataset in Recherche Data Gouv](../../images/3dtrees/rdg_repo.png "Open the Pic Saint-Loup dataset")
+>    ![Remote-file browser showing the Pic Saint-Loup LiDAR dataset in Recherche Data Gouv](../../images/3dtrees/rdg_repo.png "Open the Pic Saint-Loup dataset")
 >
 > 5. Select only `Strip-20210804-150144_D.las`, then select **Start**.
 >
-> ![Recherche Data Gouv browser with Strip-20210804-150144_D.las selected](../../images/3dtrees/data_upload.png "Select only flight-area file D for this tutorial")
+>    > <tip-title>No Recherche Data Gouv source on your server?</tip-title>
+>    >
+>    > Use **Paste Links/URLs** in the upload panel instead and paste this address:
+>    >
+>    > ```
+>    > https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
+>    > ```
+>    >
+>    > Set the datatype to `las` and the name to `Strip-20210804-150144_D.las`.
+>    {: .tip}
 >
 > 6. Wait for the dataset to turn green in the history.
 >
-> ![Galaxy history showing the imported LAS dataset ready for analysis](../../images/3dtrees/data_inhistory.png "Wait until the dataset turns green before continuing")
+>    > <tip-title>Check the file type</tip-title>
+>    >
+>    > Check that Galaxy recognizes the datatype as **las**.
+>    >
+>    > {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
+>    {: .tip}
 >
-> > <tip-title>Check the file type</tip-title>
-> >
-> > Check that Galaxy recognizes the datatype as **las**.
-> >
-> >  {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
-> {: .tip}
-> 
-> 7. Rename the dataset to `Strip-20210804-150144_D.las` if the remote import did not preserve its
+> 7. Rename the dataset to `Strip-20210804-150144_D.las` if the import did not preserve its
 >    filename. Do not build a four-file collection for this tutorial.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Strip-20210804-150144_D.las" box_type="none" %}
@@ -143,11 +166,13 @@ covered by the survey. This helps prevent file-format problems later; it does no
 >    - *"Mode"*: `Single File Standardization`
 >        - {% icon param-file %} *"Point Cloud File"*: `Strip-20210804-150144_D.las`
 >
+>    Three outputs appear in the history: `standardized` (LAZ), `metadata` (JSON), and
+>    `convex_hull` (GeoJSON).
 >
 >    > <comment-title>Choose the output for the next step</comment-title>
 >    >
->    > Use `pc_standardized`, the standardized point cloud, in the next tools. Keep the metadata and
->    > footprint as supporting information about the input.
+>    > Use `standardized`, the standardized point cloud, in the next tools. Keep the metadata and
+>    > footprint (`convex_hull`) as supporting information about the input.
 >    {: .comment}
 >
 {: .hands_on}
@@ -172,8 +197,6 @@ covered by the survey. This helps prevent file-format problems later; it does no
 >
 {: .question}
 
-The standardized point cloud, its metadata, and its footprint should now appear in the history.
-
 # Get a first impression with overview images
 
 Before predicting trees, take a quick look at the input. The Overviews tool creates images you
@@ -183,14 +206,14 @@ Side views help you recognize the ground, taller vegetation, and layers within t
 > <hands-on-title>Create and inspect overview images</hands-on-title>
 >
 > 1. {% tool [3Dtrees: Overviews](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_overviews/3dtrees_overviews/1.2.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Point Cloud Collection"*: `pc_standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
+>    - {% icon param-file %} *"Point Cloud Collection"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
 >
 > 2. Open the **Top View Images** and **Section View Images** collections in the history and view
 >    their images. With the default settings, expect four images in total.
 >
 >    > <comment-title>Reading the overview</comment-title>
 >    >
->    > The input field is called **Point Cloud Collection**, but select only `pc_standardized` for
+>    > The input field is called **Point Cloud Collection**, but select only `standardized` for
 >    > this tutorial. The output collections simply group the overview images.
 >    {: .comment}
 >
@@ -221,24 +244,29 @@ SmartTile also reduces the number of points, a step called *subsampling*. The de
 resolution is 0.1 m: points are reduced using a grid of 10 cm cubes. This reduces processing work,
 but also removes fine detail. A denser version is kept for transferring the predictions later.
 
-Keep the default settings for this tutorial. The **Skip tiling below (MB)** setting means that a
-small single file such as this one may stay as one processing unit. Subsampling still takes place;
-you do not need multiple tiles to continue.
+Keep the default settings for this tutorial. The **Skip tiling below (MB)** setting (default
+10000 MB) means that a single file smaller than this, such as file D, stays as one processing unit.
+Subsampling still takes place; you do not need multiple tiles to continue.
 
 > <hands-on-title>Prepare processing units and subsampled points</hands-on-title>
 >
 > 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
 >    - *"Operation"*: `Tile (COPC normalize + tile + subsample)`
->        - {% icon param-file %} *"Input point clouds (LAZ/LAS)"*: `pc_standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
+>        - {% icon param-file %} *"Input point clouds (LAZ/LAS)"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
 >
-> Five outputs should appear: the normalized source cloud, two subsampled collections, a layout
-> preview, and a tile-layout JSON file describing the processing boundaries.
+>    Five outputs appear in the history:
+>    - `Subsampled tiles (resolution 1)`: a denser collection, subsampled at 0.01 m
+>    - `Subsampled tiles (resolution 2)`: a coarser collection, subsampled at 0.1 m
+>    - `COPC-normalized originals`: the full-resolution input in a cloud-optimized LAZ format
+>    - `Tiling preview (PNG)`: a map of the processing units
+>    - `Tile layout (tile_bounds_tindex.json)`: the processing boundaries
 >
 >    > <comment-title>Keep the outputs for later steps</comment-title>
 >    >
->    > Use the coarse `output_subsampled_res2` collection for SAT. Keep `output_subsampled_res1`,
->    > `output_original_copc`, and `output_tile_bounds_json` for post-processing. These collections
->    > come from your single input file; they are not the four original flight areas.
+>    > Use the coarse `Subsampled tiles (resolution 2)` collection for SAT. Keep
+>    > `Subsampled tiles (resolution 1)`, `COPC-normalized originals`, and the tile layout for
+>    > post-processing. These collections come from your single input file; they are not the four
+>    > original flight areas.
 >    {: .comment}
 >
 {: .hands_on}
@@ -261,7 +289,8 @@ you do not need multiple tiles to continue.
 
 # Identify individual trees with SegmentAnyTree
 
-SegmentAnyTree is a trained deep-learning model that adds two predictions to each point.
+SegmentAnyTree is a deep-learning model trained on laser scans from many forest types, sensors, and
+platforms ({% cite Wielgosz2024 %}). It adds two predictions to each point.
 *Semantic segmentation* assigns a class: `PredSemantic` distinguishes tree from non-tree points.
 *Instance segmentation* separates individual trees: `PredInstance` gives the points belonging to
 each predicted tree a shared identifier.
@@ -270,25 +299,25 @@ For example, two neighboring trees can have the same semantic class but differen
 Ground points belong to the non-tree class; SAT does not provide a detailed vegetation-type map.
 
 > <hands-on-title>Predict trees on the coarse point cloud</hands-on-title>
-> 
+>
 > 1. {% tool [3Dtrees: SegmentAnyTree](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Dataset"*: `output_subsampled_res2` (output of **3DTrees: SmartTile** {% icon tool %})
+>    - {% icon param-file %} *"Input Dataset"*: `Subsampled tiles (resolution 2)` (output of **3DTrees: SmartTile** {% icon tool %})
 >    - *"Predicted instance dimension name"*: `PredInstance`
 >    - *"Predicted semantic dimension name"*: `PredSemantic`
 >
-> Select the `output_subsampled_res2` collection as the input so Galaxy runs SAT on each processing
-> unit. Check the form before running; processing time depends on the data and server availability.
->
-> ![SegmentAnyTree form configured with the subsampled point cloud and prediction dimension names](../../images/3dtrees/smartile.png "Confirm the input and prediction dimension names before running SAT")
+>    Select the collection with the {% icon param-collection %} **Dataset collection** button so
+>    Galaxy runs SAT on each processing unit. Check that both dimension names are set exactly as
+>    above, because the next step looks for `PredInstance`. Processing time depends on the data and
+>    on server availability.
 >
 >    > <comment-title>What SAT adds to the point cloud</comment-title>
 >    >
->    > The output collection contains point clouds with `PredSemantic` and `PredInstance` added.
->    > These labels are model predictions, not measurements made by the LiDAR sensor.
+>    > The `Processed Files` output collection contains point clouds with `PredSemantic` and
+>    > `PredInstance` added. These labels are model predictions, not measurements made by the LiDAR
+>    > sensor.
 >    {: .comment}
 >
 {: .hands_on}
-
 
 > <question-title>Instance and semantic predictions</question-title>
 >
@@ -309,42 +338,42 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 
 If processing tiles overlap, the same tree can appear in more than one prediction. SmartTile uses
 the saved tile layout to remove instances belonging only to a tile's overlap margin. This step
-addresses processing-tile overlap, not overlap between separate drone flights.
+addresses processing-tile overlap, not overlap between separate drone flights. When file D stays
+as one processing unit, there is no tile overlap to remove, but this step is still needed to build
+the final point cloud.
 
 The settings below also transfer the prediction labels to denser points and combine the result
 into one LAZ file. Attribute enrichment brings back available original information, such as RGB
 colors. Transferring labels adds detail to the displayed cloud, but does not independently predict
 or validate every added point.
 
-
 > <hands-on-title>Filter overlap predictions and prepare the final cloud</hands-on-title>
 >
 > 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
 >    - *"Operation"*: `Filter (remove overlap-only instances)`
->        - {% icon param-file %} *"Segmented tiles (LAZ/LAS)"*: `output` (output of **3Dtrees: SegmentAnyTree** {% icon tool %})
->        - {% icon param-file %} *"Tile layout JSON (tile_bounds_tindex.json)"*: `output_tile_bounds_json` (output of **3DTrees: SmartTile** {% icon tool %})
+>        - {% icon param-file %} *"Segmented tiles (LAZ/LAS)"*: `Processed Files` (output of **3Dtrees: SegmentAnyTree** {% icon tool %})
+>        - {% icon param-file %} *"Tile layout JSON (tile_bounds_tindex.json)"*: `Tile layout (tile_bounds_tindex.json)` (output of **3DTrees: SmartTile** {% icon tool %})
 >        - *"Border zone width"*: `Derive from tile layout JSON (recommended)`
 >        - *"Small cluster reassignment"*: `Enabled`
 >        - *"After filtering"*: `Also remap filtered dimensions to another collection`
 >            - *"Remap target files"*: `Originals and subsampled targets`
->                - {% icon param-file %} *"Original files (LAZ/LAS)"*: `output_original_copc` (output of **3DTrees: SmartTile** {% icon tool %})
->                - {% icon param-file %} *"Subsampled target files (LAZ/LAS)"*: `output_subsampled_res1` (output of **3DTrees: SmartTile** {% icon tool %})
+>                - {% icon param-file %} *"Original files (LAZ/LAS)"*: `COPC-normalized originals` (output of **3DTrees: SmartTile** {% icon tool %})
+>                - {% icon param-file %} *"Subsampled target files (LAZ/LAS)"*: `Subsampled tiles (resolution 1)` (output of **3DTrees: SmartTile** {% icon tool %})
 >            - *"Also write one merged output (LAZ)"*: `Yes`
 >                - *"Enrich merged output with original attributes"*: `Yes`
 >                - *"Standardization summary (optional)"*: leave unset for this single-file run
 >
->
->    > <comment-title>Check the complete tool form</comment-title>
+>    > <comment-title>Check the tool form</comment-title>
 >    >
 >    > ![First part of the SmartTile filter form showing segmented tiles and tile-layout inputs](../../images/3dtrees/form1.png "Select the segmentation and tile-layout outputs")
+>    >
 >    > ![Middle part of the SmartTile filter form showing overlap filtering and remapping options](../../images/3dtrees/form2.png "Enable reassignment and remapping to denser point clouds")
->    > ![Final part of the SmartTile filter form showing merged-output and attribute-enrichment options](../../images/3dtrees/form3.png "Create one merged output enriched with original attributes")
 >    {: .comment}
 >
 {: .hands_on}
 
-Use `output_merged_with_originals` for visualization. It combines the predictions with available
-original point attributes. Here, "merged" refers to outputs derived from file D, not to combining
+Use `Merged output with original attributes (LAZ)` for visualization. It combines the predictions
+with available original point attributes. Here, "merged" refers to outputs derived from file D, not to combining
 the four flight areas.
 
 # Inspect the result in Potree
@@ -356,7 +385,7 @@ look for missed trees, trees joined together, or one tree split into several ins
 > <hands-on-title>Create and open the interactive view</hands-on-title>
 >
 > 1. {% tool [3Dtrees: Potree Converter](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_potree/3dtrees_potree/1.0.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Point Cloud Files"*: `output_merged_with_originals` (output of **3DTrees: SmartTile** {% icon tool %})
+>    - {% icon param-file %} *"Point Cloud Files"*: `Merged output with original attributes (LAZ)` (output of **3DTrees: SmartTile** {% icon tool %})
 >    - *"Generate interactive Viewer"*: `Yes`
 >
 > 2. When the tool finishes, open the **Potree Visualization** HTML output using its view icon.
