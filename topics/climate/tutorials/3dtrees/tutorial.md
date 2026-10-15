@@ -219,16 +219,45 @@ Side views help you recognize the ground, taller vegetation, and layers within t
 >
 {: .hands_on}
 
-![North--south side view of the standardized point cloud showing the ground and layered forest canopy](../../images/3dtrees/sectionns.png "Use the side view to inspect canopy height and vertical vegetation layers")
+![Galaxy preview of the section_ns image, where the sloping transect occupies only a thin strip in the middle of the frame](../../images/3dtrees/sectionns.png "The north--south section view as Galaxy shows it")
+
+In the Galaxy preview, the transect fills only a thin strip of the image: the survey is about 270 m
+long but the forest is less than 15 m tall. Open the image at full size, or download it, and zoom in
+to see the canopy. The images below show what to look for. They use the same idea as the Overviews
+tool, a north--south slice through the middle of file D, drawn at true scale and coloured by
+height above the ground.
+
+![Side view of a 10 m wide north--south slice through file D. The ground rises from about 378 m to 430 m along 270 m, and two boxes labelled A and B mark the close-ups](../../images/3dtrees/section_ns_full.png "The whole north--south transect. Boxes A and B mark the two close-ups")
+
+![Close-up A, 40 m long and 4 m wide: several separate crowns 6 to 9 m tall with gaps between them, sparse understory points, and a clear ground line](../../images/3dtrees/section_ns_cutout_a.png "Close-up A: taller, separate crowns with gaps between them")
+
+![Close-up B, 40 m long and 4 m wide: a lower, continuous canopy of 3 to 6 m on a steep slope, with crowns touching each other and few points between canopy and ground](../../images/3dtrees/section_ns_cutout_b.png "Close-up B: lower, continuous canopy on steeper ground")
+
+> <details-title>How the close-ups were made</details-title>
+>
+> The close-ups were drawn outside Galaxy from `Strip-20210804-150144_D.las`, to show detail that is
+> hard to see in the default overview. The full transect is 10 m wide, like the default
+> **Section Width** of the Overviews tool. The close-ups use a 4 m wide slice, so fewer crowns lie
+> behind each other. Height above ground is estimated from the lowest points along the transect and
+> is only used for colour.
+>
+{: .details}
 
 > <question-title>What can the overview tell you?</question-title>
 >
-> Which view helps you spot canopy gaps, and which helps you see vegetation above the ground?
+> 1. Which view helps you spot canopy gaps, and which helps you see vegetation above the ground?
+> 2. Compare close-ups A and B. In which one do you expect individual trees to be harder to
+>    separate, and why?
 >
 > > <solution-title></solution-title>
 > >
-> > The top view helps reveal gaps in the canopy. A side view shows the vertical arrangement of
-> > points above the ground. These images give a first impression; they do not yet identify trees.
+> > 1. The top view helps reveal gaps in the canopy. A side view shows the vertical arrangement of
+> >    points above the ground. These images give a first impression; they do not yet identify
+> >    trees.
+> > 2. Close-up B. Its crowns are lower and touch each other, forming an almost continuous canopy,
+> >    so there are few gaps to mark where one tree ends and the next begins. In close-up A, taller
+> >    crowns are separated by gaps. Keep these areas in mind when you inspect the predictions in
+> >    Potree.
 > >
 > {: .solution}
 >
