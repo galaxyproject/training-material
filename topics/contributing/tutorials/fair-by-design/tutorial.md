@@ -648,7 +648,7 @@ PDF document accessibility is measured with a separate technical specification <
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">Review some general guidelines for development of accessible material</a>
 
 ><tip-title>GTN Accessibility</tip-title>
-> GTN has developed an <a href="https://training.galaxyproject.org/training-material/accessibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
+> GTN has developed an <a href="{% link accessibility.md %}"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
 >
 {: .tip}
 
@@ -832,7 +832,7 @@ PDF document accessibility is measured with a separate technical specification <
         <p class="card-text">
 	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced or reused. <br> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
 	        <br>
-		<a href="https://training.galaxyproject.org/training-material/faqs/gtn/gtn_citing.html">
+		<a href="{% link faqs/gtn/gtn_citing.md %}">
         {% icon point-right %}  See an example citation
         </a>
         </p>
