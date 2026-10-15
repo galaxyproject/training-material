@@ -31,6 +31,7 @@ contributions:
     - annefou
   funding:
     - oscars
+    - fiesta
 
 tags:
   - Isolated object tracking
