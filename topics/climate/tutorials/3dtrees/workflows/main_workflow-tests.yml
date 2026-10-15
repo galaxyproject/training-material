@@ -1,0 +1,61 @@
+# End-to-end test using the tutorial's single flight-area file (about 455 MiB).
+# Run on a Galaxy server with the pinned 3Dtrees tools and a GPU runner for SAT.
+# Check file structure and prediction attributes rather than exact tree IDs,
+# which can vary between model runs.
+- doc: Process Pic Saint-Loup flight area D and create an interactive tree visualization
+  job:
+    Point cloud:
+      class: File
+      location: https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
+      name: Strip-20210804-150144_D.las
+      filetype: las
+  outputs:
+    standardized_point_cloud:
+      asserts:
+        - that: has_size
+          min: 1000
+        - that: has_text
+          text: LASF
+    standardization_metadata:
+      asserts:
+        - that: has_text_matching
+          expression: '"standardized"\s*:\s*\[\s*true\s*\]'
+        - that: has_text_matching
+          expression: '"point_count"\s*:\s*\[\s*[1-9][0-9]*\s*\]'
+    survey_footprint:
+      asserts:
+        has_json_property_with_text:
+          property: type
+          text: FeatureCollection
+    segmented_point_cloud:
+      asserts:
+        - that: has_size
+          min: 1000
+        - that: has_text
+          text: LASF
+        - that: has_text
+          text: PredInstance
+        - that: has_text
+          text: PredSemantic
+    potree_viewer:
+      asserts:
+        has_text:
+          text: 'Potree.loadPointCloud("./pointclouds/potree-vis/metadata.json", "potree-vis"'
+    potree_files:
+      element_tests:
+        metadata:
+          asserts:
+            - that: has_text_matching
+              expression: '"points"\s*:\s*[1-9][0-9]*'
+            - that: has_text_matching
+              expression: '"name"\s*:\s*"PredInstance"'
+            - that: has_text_matching
+              expression: '"name"\s*:\s*"PredSemantic"'
+        hierarchy:
+          asserts:
+            has_size:
+              min: 1
+        octree:
+          asserts:
+            has_size:
+              min: 1
