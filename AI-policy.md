@@ -9,11 +9,11 @@ The GTN is committed to providing high-quality human-written and human-curated t
   - communicate about your contribution (GitHub PR descriptions, comments, issues, reviews, chat messages, etc)
 - It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But any GTN content and communication must be in your own words.
 
-- For contributions to the **technical framework** you may be assisted by generative AI, under the following conditions:
+- For contributions to the **technical framework** you may be *assisted* by generative AI, under the following conditions:
   - You must **understand and take responsibility** for every line of code in your contribution.
   - You must be able to **answer technical questions in review** and make any requested changes.
   - You must **disclose and describe** the use of generative AI in your PR description.
-  - You must write code comments and documentation yourself. Describing not only what the code does, but why.
+  - You must write code comments and documentation yourself. Describing not only what the code does, but why you chose to do it this way.
   - You must write the PR/issue descriptions and any other (GitHub) communications yourself.
 
 - Every **contributor is responsible** for ensuring that their contribution does not violate our policy or license
