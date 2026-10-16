@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Analyses of metagenomics data - The global picture"
-zenodo_link: "https://doi.org/10.5281/zenodo.815875"
+zenodo_link: 'https://zenodo.org/record/815875'
 questions:
   - "How to analyze metagenomics data?"
   - "What information can be extracted of metagenomics data?"

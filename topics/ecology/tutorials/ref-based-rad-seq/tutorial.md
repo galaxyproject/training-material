@@ -4,7 +4,7 @@ redirect_from:
   - /topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial
 
 title: "RAD-Seq Reference-based data analysis"
-zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
+zenodo_link: 'https://zenodo.org/record/1134547'
 tags:
   - RAD-seq
   - genetic composition EBV class

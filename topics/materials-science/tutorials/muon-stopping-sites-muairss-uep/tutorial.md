@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Finding the muon stopping site with pymuon-suite in Galaxy
 level: Introductory
-zenodo_link: https://zenodo.org/records/10219558
+zenodo_link: 'https://zenodo.org/record/10219558'
 questions:
 - "What are stopping sites and why is finding them important?"
 - "What computational techniques can be used to find stopping sites?"

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Batch Correction and Integration with Seurat or Scanpy"
 subtopic: tricks
-zenodo_link: 'https://zenodo.org/records/20574474'
+zenodo_link: 'https://zenodo.org/record/20574474'
 priority: 4
 
 answer_histories:

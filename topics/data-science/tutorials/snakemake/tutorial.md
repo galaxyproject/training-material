@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Make & Snakemake
 level: Intermediate
-zenodo_link: "https://zenodo.org/record/5562251"
+zenodo_link: 'https://zenodo.org/record/5562251'
 requirements:
 - type: "internal"
   topic_name: data-science

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Generating a single cell matrix using Alevin
 subtopic: single-cell-CS
 priority: 1
-zenodo_link: https://zenodo.org/record/4574153
+zenodo_link: 'https://zenodo.org/record/4574153'
 redirect_from:
 - "/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial"
 - "/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial"

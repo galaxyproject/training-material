@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genomic Data Visualisation with JBrowse2
-zenodo_link: https://doi.org/10.5281/zenodo.19554505
+zenodo_link: 'https://zenodo.org/record/19554505'
 questions:
 - How can I visualise features or blast data?
 - How can I visualise sequencing data in a workflow?

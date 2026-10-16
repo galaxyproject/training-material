@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
 subtopic: analysing
-zenodo_link: https://doi.org/10.5281/zenodo.5805953
+zenodo_link: 'https://zenodo.org/record/5805953'
 questions:
 - What Xarray Galaxy Tools can I use in Galaxy and what for?
 - What is an Xarray?

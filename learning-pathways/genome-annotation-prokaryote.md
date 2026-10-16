@@ -5,6 +5,8 @@ description: |
   Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo.
 type: use
 tags: [genome-annotation, prokaryote]
+topics:
+  - genome-annotation
 
 cover-image: assets/images/gga.png
 cover-image-alt: "Galaxy Genome Annotation logo"

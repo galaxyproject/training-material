@@ -1,7 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: Hybrid genome assembly - Nanopore and Illumina
-zenodo_link: https://doi.org/10.5281/zenodo.15756327
+subtopic: hybrid-assembly
+zenodo_link: 'https://zenodo.org/record/15756328'
+
 tags:
   - assembly
   - nanopore
@@ -37,11 +39,11 @@ contributions:
 
 This tutorial explores how long and short read data can be combined to produce a high-quality 'finished' bacterial genome sequence. Termed 'hybrid assembly', we will use read data produced from two different sequencing platforms, Illumina (short read) and Oxford Nanopore Technologies (long read), to reconstruct a bacterial genome sequence.
 
-In this tutorial, we will perform 'de novo assembly'. De novo assembly is the process of assembling a genome from scratch using only the sequenced reads as input - no reference genome is used.  This approach is common practise when working with microorganisms, and has seen increasing use for eukaryotes (including humans) in recent times.  
+In this tutorial, we will perform 'de novo assembly'. De novo assembly is the process of assembling a genome from scratch using only the sequenced reads as input - no reference genome is used.  This approach is common practise when working with microorganisms, and has seen increasing use for eukaryotes (including humans) in recent times.
 
 Using short read data (Illumina) alone for de novo assembly will produce a complete genome, but in pieces (commonly called a 'draft genome'). For the genome to be assembled into a single chromosome (plus a sequence for each plasmid), reads would need to be longer than the longest repeated element on the genome (usually ~7,000 base pairs, Note: Illumina reads are 350 base maximum). Draft bacterial genome sequences are cheap to produce (less than AUD\$60) and useful (>300,000 draft *Salmonella enterica* genome sequences published at NCBI [https://www.ncbi.nlm.nih.gov/pathogens/organisms/](https://www.ncbi.nlm.nih.gov/pathogens/organisms/)), but sometimes you need a high-quality 'finished' bacterial genome sequence.  There are <1,000 'finished' or 'closed' *Salmonella enterica* genome sequences.
 
-In these cases, long reads can be used together with short reads to produce a high-quality assembly. Nanopore long reads (commonly >40,000 bases) can fully span repeats, and reveal how all of the genome fragments should be arranged. Long reads currently have higher error rates than short reads, so the combination of technologies is particularly powerful. Long reads provide information on the genome structure, and short reads provide high base-level accuracy.  
+In these cases, long reads can be used together with short reads to produce a high-quality assembly. Nanopore long reads (commonly >40,000 bases) can fully span repeats, and reveal how all of the genome fragments should be arranged. Long reads currently have higher error rates than short reads, so the combination of technologies is particularly powerful. Long reads provide information on the genome structure, and short reads provide high base-level accuracy.
 
 Combining read data from the long and short read sequencing platforms allows the production of a complete genome sequence with very few sequence errors, but the cost of the read data is about AUD$1,000 to produce the sequence. Understandably, we usually produce a draft genome sequence with very few sequence errors using the Illumina sequencing platform.
 
@@ -56,7 +58,7 @@ This Galaxy tutorial based on material from the [Hybrid genome assembly - Nanopo
 
 
 > <agenda-title></agenda-title>
-> 
+>
 > In this tutorial we will deal with:
 >
 > 1. TOC
@@ -93,7 +95,7 @@ In this section, you will use `Flye` to create a draft genome assembly from Nano
 Let's start with uploading the data.
 
 > <hands-on-title>Import the data</hands-on-title>
-> 
+>
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
@@ -101,12 +103,12 @@ Let's start with uploading the data.
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/uploads/15756328):
->   
+>
 >    - FASTQ file with illumina forward reads: `illumina_reads_1.fastq`
 >    - FASTQ file with illumina reverse reads: `illumina_reads_2.fastq`
 >    - FASTQ file with nanopore reads: `nanopore_reads.fastq`
 >    - FASTA file with reference genome: `reference_genome.fasta`
-> 
+>
 >    ```
 >    https://zenodo.org/records/15756328/files/illumina_reads_1.fastq
 >    https://zenodo.org/records/15756328/files/illumina_reads_2.fastq
@@ -117,7 +119,7 @@ Let's start with uploading the data.
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
-> 
+>
 {: .hands_on}
 
 
@@ -152,28 +154,28 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >      -  *"Lineage"*: `Bacillales`
 >    - *"Which outputs should be generated"*: `Short summary text`
->   
+>
 > 2. ***Rename*** the `short summary` output to `Busco on Reference`.
-> 
+>
 > 3. View the `Busco on Reference` output:
 >    - It may look something like this:
 >      ![output busco report for reference assembly](../../images/denovo_assembly/busco_reference_assembly.png)
-> 
+>
 {: .hands_on}
 
 > <question-title></question-title>
-> 
+>
 > What can you conclude from the BUSCO report?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > - It seems that `Busco` could find almost all expected genes in the reference genome assembly.
 > > - By looking at the results, we see that we have 449 / 450 Complete BUSCOs, and one Fragmented BUSCO.
 > > - This will form the baseline for the `Busco` QC results expected of a high-quality genome assembly.
 > > - From here, we will use our input DNA sequence data to assemble the genome of the sequenced organism, and will compare the QC results to that of the published `reference_genome.fasta` assembly.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <comment-title>BUSCO Databases</comment-title>
@@ -197,14 +199,14 @@ Search for `Flye` in the tools panel search bar and select the tool.
 >    - *"Input reads"*: `nanopore_reads.fastq`
 >    - Leave all other parameters as default
 >    - Scroll down and run Flye by clicking the blue `Run tool` button at the bottom of the page.
-> 
+>
 > 2. View output:
 >    - `Flye` produces a number of outputs. We only need the 'consensus' fasta file. You can delete the other outputs.
-> 
+>
 > 3. ***Rename*** the `Flye on data XX: consensus` output to `Flye: Assembly`
-> 
+>
 {: .hands_on}
- 
+
 
 ## Assessing the Flye draft assembly quality
 
@@ -222,28 +224,28 @@ We need to check if our assembly is good quality or not. It is paramount that ge
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >      -  *"Lineage"*: `Bacillales`
 >    - *"Which outputs should be generated"*: `Short summary text`
-> 
+>
 > 2. ***Rename*** the `short summary` output to `Busco on Flye: Assembly`.
-> 
+>
 > 3. View the `Busco on Flye: Assembly` output:
 >    - It may look something like this:
 >      ![output busco report for draft assembly](../../images/denovo_assembly/busco_draft_assembly.png)
 >    - The `full table` is also useful. It gives a detailed list of the genes we are searching for, and information about whether they were missing, fragmented, or complete in our assembly.
 >      ![output busco table for draft assembly](../../images/denovo_assembly/busco_table_draft_assembly.png)
-> 
+>
 {: .hands_on}
 
 
 > <question-title></question-title>
-> 
+>
 > How does this compare with the reference genome BUSCO report?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > We see that many genes are fragmented or missing. Our draft genome assembly isn't as good as the reference genome ***yet***. This is because we have so far only used the Nanopore long-read sequences, which have higher base-level error rates than short reads. In the next steps we will use Illumina short reads to correct for errors in the assembled Nanopore reads.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 
@@ -265,9 +267,9 @@ Search for the `Quast` tool in the tools panel.
 >    - *"Use a reference genome?"*: `Yes`
 >      - *"Reference genome"*: `reference_genome.fasta`
 >    - *"Output files"*: Select `HTML reports`, `Tabular reports`
-> 
+>
 > 2. ***Rename*** the `tabular report` output to `Quast on Flye: Assembly`.
-> 
+>
 > 3. View output:
 >    - `Quast` will produce a HTML report summarising it's results.
 >    - Open the report. It may look something like this:
@@ -277,21 +279,21 @@ Search for the `Quast` tool in the tools panel.
 >      - \# mismatches per 100 kbp
 >      - \# indels per 100 kbp
 >      - \# contigs information
-> 
+>
 {: .hands_on}
 
 > <question-title></question-title>
-> 
+>
 > What can you conclude about our draft assembly?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > - From the output of `Quast`, our draft assembly seems to have good coverage and not too many contigs.
 > > - Unfortunately, the mismatch / indel rate is quite high.
 > > - Although we don't expect our organism to be ***identical*** to the supplied reference, we would expect fewer mismatches and indels, as the provided reference genome is ***very*** similar to organism which was sequenced.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 
@@ -315,13 +317,13 @@ Search for `Map with BWA-MEM` in the tools panel.
 >    - *"Single or Paired-end reads"*: `Paired `
 >    - *"Select first set of reads"*: `illumina_reads_1.fastq`
 >    - *"Select second set of reads"*: `illumina_reads_2.fastq`
-> 
+>
 > 2. View output:
 >    - The output will be a BAM file (Binary Alignment Map). This is tabular data recording information about how reads were aligned to the draft assembly.
 >    - We can now use this output BAM file as an input to `Pilon`.
-> 
+>
 > 3. ***Rename*** the output to `Flye: Short read alignments`
-> 
+>
 {: .hands_on}
 
 
@@ -334,15 +336,15 @@ Search for `Pilon` in the tools panel.
 > 1. {% tool [Pilon](toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1) %}:
 >    - *"Source for reference genome used for BAM alignments"*: `Use a genome from History`
 >      - *"Select a reference genome"*: `Flye: Assembly`
->    - *"Type automatically determined by pilon"*: 
+>    - *"Type automatically determined by pilon"*:
 >      - *"Input BAM file"*: `Flye: Short read alignments`
 >    - *"Variant calling mode"*: `No`
-> 
+>
 > 2. View output:
 >    - `Pilon` gives a single output file - the polished assembly.
-> 
+>
 > 3. ***Rename*** the output to `Flye: Polished assembly`
-> 
+>
 {: .hands_on}
 
 
@@ -354,58 +356,58 @@ We are now interested to see how much `Pilon` improved our draft assembly.
 > <hands-on-title>Run Quast</hands-on-title>
 >
 > Run `Quast` as before with the new `Flye: Polished assembly` data
-> 
+>
 > 1. Select the history item for our initial `Quast` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Quast` job.
-> 
+>
 > 2. Change the *"Contigs/scaffolds file"* input to `Flye: Polished assembly`.
-> 
+>
 > 3. Click the `Run Tool` button to submit the job.
 >
 > 4. ***Rename*** the `tabular report` output to `Quast on Flye: Polished assembly`.
-> 
-> 5. After `Quast` has finished, open the HTML report. 
+>
+> 5. After `Quast` has finished, open the HTML report.
 >    - Make note of `# mismatches per 100 kbp` and `# indels per 100 kbp`.
-> 
+>
 {: .hands_on}
 
 > <question-title></question-title>
-> 
+>
 > Has our assembly improved?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Yes, we now have lower mismatches and indels per 100kbp.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
 > Run `Busco` as before with the new `Flye: Polished assembly` data
-> 
+>
 > 1. Select the history item for our initial `Busco` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Busco` job.
-> 
+>
 > 2. Change the *"Sequences to analyse"* input to `Flye: Polished assembly`.
-> 
+>
 > 3. Click the `Run Tool` button to submit the job.
 >
 > 4. ***Rename*** the `short summary` output to `Busco on Flye: Polished assembly`.
-> 
+>
 > 5. After `Busco` has finished, open the `Busco on Flye: Polished assembly` output.
-> 
+>
 {: .hands_on}
 
 > <question-title></question-title>
-> 
+>
 > Have we identified more expected genes?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Yes, we now identified 423 complete BUSCO genes.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 
@@ -421,51 +423,51 @@ Our next step is to use a purpose-built hybrid de novo assembly tool, and compar
 ## Section Questions
 
 > <question-title></question-title>
-> 
+>
 > Which read set - short or long - was used to create our draft?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Long reads (Nanopore) were used to create the draft. Long reads allow excellent re-creation of the proper structure of the genome, and adequately handle repeat regions. The drawback of long reads is a higher error rate of the technology compared to short reads. This results in more mismatches and indels.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <question-title></question-title>
-> 
+>
 > How was the draft polished?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Illumina reads have higher per-base accuracy than Nanopore. Illumina reads were aligned to the draft assembly, then `Pilon` used this alignment information to improve locations with errors in the assembly.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <question-title></question-title>
-> 
+>
 > How does `Quast` inform on assembly quality?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > `Quast` shows summary information about the assembly contigs. If a reference genome is given, it informs the genome fraction (how much of the reference is covered by the assembly), if any genomic regions appear duplicated, and error information including the rate of mismatches and indels.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <question-title></question-title>
-> 
+>
 > How does `Busco` inform on assembly quality?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > `Busco` does not use a reference genome to compare. It attempts to locate key genes which should be present in the assembly, and reports whether it could/could not find those genes. If a key gene is found, it reports whether the gene was fragmented (errors) or complete.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 
@@ -495,27 +497,27 @@ Run `Unicycler` using the Nanopore and Illumina read sets.
 >    - *"Select first set of reads"*: `illumina_reads_1.fastq`
 >    - *"Select second set of reads"*: `illumina_reads_2.fastq`
 >    - *"Select long reads. If there are no long reads, leave this empty"*: `nanopore_reads.fastq`
-> 
+>
 > 2. View Output
->    - `Unicycler` will output three files 
->       - The assembly 
->       - An assembly graph 
->       - SPAdes graphs 
->    - We are interested in the `Final Assembly` output, which is the assembly as a `fasta` file. 
-> 
+>    - `Unicycler` will output three files
+>       - The assembly
+>       - An assembly graph
+>       - SPAdes graphs
+>    - We are interested in the `Final Assembly` output, which is the assembly as a `fasta` file.
+>
 > 3. ***Rename*** the `Final Assembly` output to `Unicycler: Assembly`.
-> 
+>
 > > <comment-title></comment-title>
 > >
-> > If `nanopore_reads.fastq` does not appear in the dropdown list, its datatype needs to be changed. 
+> > If `nanopore_reads.fastq` does not appear in the dropdown list, its datatype needs to be changed.
 > >
 > > - Click the pencil {% icon galaxy-pencil %} icon next to `nanopore_reads.fastq` in the history panel.
 > > - Then select the `Datatypes` tab.
 > > - For the parameter `New Type`: `fastqsanger`
 > > - Leave all else default and execute the program.
-> > 
+> >
 > {: .comment}
-> 
+>
 {: .hands_on}
 
 
@@ -526,37 +528,37 @@ Run `Unicycler` using the Nanopore and Illumina read sets.
 > <hands-on-title>Run Quast</hands-on-title>
 >
 > Run `Quast` as before with the new `Unicycler: Assembly` data
-> 
+>
 > 1. Select the history item for our initial `Quast` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Quast` job.
-> 
+>
 > 2. Change the *"Contigs/scaffolds file"* input to `Unicycler: Assembly`.
-> 
+>
 > 3. Click the `Run Tool` button to submit the job.
->   
+>
 > 4. ***Rename*** the `tabular report` output to `Quast on Unicycler: Assembly`.
-> 
+>
 > 5. At time of writing, these were the `Quast` results:
-> 
+>
 > ![output quast report for unicycler assembly](../../images/denovo_assembly/quast_unicycler_assembly.png)
-> 
+>
 {: .hands_on}
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
 > Run `Busco` as before with the new `Unicycler: Assembly` data
-> 
+>
 > 1. Select the history item for our initial `Busco` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Busco` job.
-> 
+>
 > 2. Change the *"Sequences to analyse"* input to `Unicycler: Assembly`.
-> 
+>
 > 3. Click the `Run Tool` button to submit the job.
 >
 > 4. ***Rename*** the `short summary` output to `Busco on Unicycler: Assembly`.
-> 
+>
 > 5. At time of writing, these were the `Busco` results:
-> 
+>
 > ![output busco report for unicycler assembly](../../images/denovo_assembly/busco_unicycler_assembly.png)
-> 
+>
 {: .hands_on}
 
 We can now create an aggregate summary report from all of our `Quast` and `Busco` outputs using `MultiQC`, which enables us to easily compare the quality of our genome assemblies.
@@ -566,7 +568,7 @@ We can now create an aggregate summary report from all of our `Quast` and `Busco
 > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4) %}:
 >    - *"1: Results"*:
 >      - *"Which tool was used generate logs?"*: `BUSCO`
->      - *"Output of BUSCO"*: `Busco on Reference`, `Busco on Fly: Assembly`, `Busco on Fly: Polished assembly`, `Busco on Unicycler: Assembly`, 
+>      - *"Output of BUSCO"*: `Busco on Reference`, `Busco on Fly: Assembly`, `Busco on Fly: Polished assembly`, `Busco on Unicycler: Assembly`,
 >    - Click `+ Insert Results` to add a second results field
 >    - *"2: Results"*:
 >      - *"Which tool was used generate logs?"*: `QUAST`
@@ -579,27 +581,27 @@ We can now create an aggregate summary report from all of our `Quast` and `Busco
 >      - A table of `Quast` statistics for each assembly:
 >        ![table of quast statistics](../../images/denovo_assembly/quast_table_statistics.png)
 >      - The number of contigs identified in each assembly by `Quast`:
->        ![number of contigs in each assembly](../../images/denovo_assembly/quast_num_contigs.png) 
-> 
+>        ![number of contigs in each assembly](../../images/denovo_assembly/quast_num_contigs.png)
+>
 {: .hands_on}
 
 
 > <question-title></question-title>
-> 
+>
 > How does the `Unicycler` assembly compare with the previous assembly produced using `Flye` + `Pilon`?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > It seems that the `Unicycler` assembly is much better than the `Flye` + `Pilon` polishing assembly, and produces the same report as the reference genome. Awesome! Looks like this is pretty good.
-> > 
+> >
 > > The `Unicycler` assembly has:
-> > 
+> >
 > > - A very high Genome fraction (coverage of the reference genome)
 > > - Very few mismatches and indels per 100 kbp
 > > - 15 contigs (compared with the reference genome only having 1 contig)
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 
@@ -613,39 +615,39 @@ To do this, the best course of action would be to generate more long-read data.
 ### Section Questions
 
 > <question-title></question-title>
-> 
+>
 > Why did we select `Paired` for our Illumina reads in the `Unicycler` tool?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > Our short read set was `paired-end`. Short read technology can only sequence a few hundred base-pairs in a single read. To provide better structural information, paired-end sequencing was created, where longer fragments (fixed length) are used. A few hundred bp is sequenced at both ends of the fragment, leaving the middle section unsequenced. The reads produced (the mate-pair) from a single fragment are separated by a fixed length, so we know they are nearby in the genome.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <question-title></question-title>
-> 
+>
 > Does `Unicycler` begin by using the long or short reads?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > Unicycler uses short reads first. It creates an assembly graph from short reads, then uses the long reads to provide better structural information of the genome.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 > <question-title></question-title>
-> 
+>
 > How does `Unicycler` use long reads to improve its assembly graph?
-> 
+>
 > > <solution-title></solution-title>
-> > 
+> >
 > > The assembly graph produced by short reads has tangled regions. When we don't know how sections of the genome are arranged, tangled regions appear in the graph. `Unicycler` uses Nanopore reads which overlap these tangled regions to resolve the proper structure of the genome.
-> > 
+> >
 > {: .solution}
-> 
+>
 {: .question}
 
 

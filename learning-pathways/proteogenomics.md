@@ -2,7 +2,8 @@
 layout: learning-pathway
 tags: [beginner, proteomics]
 type: use
-
+topics:
+  - proteomics
 
 title: Proteogenomics
 description: |

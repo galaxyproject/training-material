@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)
+subtopic: hybrid-assembly
 zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
 - How to check the quality of the MinION data (together with Illumina data)?

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Network analysis with Heinz"
-zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
+zenodo_link: 'https://zenodo.org/record/1344105'
 tags:
   - metatranscriptomics
   - network analysis

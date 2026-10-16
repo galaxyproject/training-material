@@ -1,0 +1,2220 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Workflow for the Galaxy Training Network tutorial \"Metabarcoding of bacteria in dunnart faecal samples across Australia (wild + captive) using QIIME 2\"",
+    "comments": [
+        {
+            "child_steps": [
+                0
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Input Data"
+            },
+            "id": 0,
+            "position": [
+                0,
+                132.60000000000014
+            ],
+            "size": [
+                228,
+                149
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                25,
+                26,
+                27,
+                30,
+                31,
+                32,
+                33
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Alpha and beta diversity analysis"
+            },
+            "id": 7,
+            "position": [
+                4405.2,
+                1904.6000000000004
+            ],
+            "size": [
+                710,
+                1813
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                22,
+                28,
+                34
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Export/Convert Feature Table"
+            },
+            "id": 6,
+            "position": [
+                4333.4,
+                266.60000000000014
+            ],
+            "size": [
+                919,
+                267
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                16,
+                20
+            ],
+            "color": "green",
+            "data": {
+                "title": "Build Phylogenetic Tree"
+            },
+            "id": 5,
+            "position": [
+                3045.4,
+                1513.6000000000004
+            ],
+            "size": [
+                593.3,
+                336.5
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                15,
+                17,
+                18,
+                19,
+                21
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Assign taxonomy"
+            },
+            "id": 4,
+            "position": [
+                3217.9,
+                777.0000000000002
+            ],
+            "size": [
+                827,
+                710
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                1
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Input Data"
+            },
+            "id": 3,
+            "position": [
+                2182.7,
+                1923.5000000000005
+            ],
+            "size": [
+                233,
+                330
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                11,
+                12,
+                13,
+                14
+            ],
+            "color": "red",
+            "data": {
+                "title": "Denoising the data"
+            },
+            "id": 2,
+            "position": [
+                2421.1,
+                394.60000000000014
+            ],
+            "size": [
+                643,
+                898
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                10,
+                9,
+                8,
+                7,
+                5,
+                4,
+                3,
+                6
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Trim Reads/Reformat Trimmed Reads Collection/Create QIIME2 Artefact/Summarise Data"
+            },
+            "id": 1,
+            "position": [
+                351.0999999999999,
+                0
+            ],
+            "size": [
+                1968,
+                436
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-6606-5953",
+            "name": "Tristan Reynolds"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-2671-5093",
+            "name": "Gayle Philip"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-0958-2177",
+            "name": "Ashley Dungan"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-1696-6673",
+            "name": "Emma Gail"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Metabarcoding Dunnart QIIME2 Analysis",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Input paired end sequenced reads collection.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input paired end sequenced reads collection.",
+                    "name": "Input Paired End Reads Collection"
+                }
+            ],
+            "label": "Input Paired End Reads Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 11.027236954000756,
+                "top": 172.81802867980696
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "75b4d233-d13b-43ea-9090-f47f5e85670f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Trained taxonomy classifier",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Trained taxonomy classifier",
+                    "name": "silva_138.2_16s_v4_classifier.qza"
+                }
+            ],
+            "label": "silva_138.2_16s_v4_classifier.qza",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2196.2863516671578,
+                "top": 1964.126152536705
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8ca1d782-be84-40d9-96de-d1732db2de33",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Sample metadata table",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Sample metadata table",
+                    "name": "dunnart_metadata.tsv"
+                }
+            ],
+            "label": "dunnart_metadata.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2196.015181720581,
+                "top": 2139.9662933620566
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4dd90226-c3bf-4b50-a84b-d0b94d77bca3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cutadapt",
+                    "name": "library"
+                }
+            ],
+            "label": null,
+            "name": "Cutadapt",
+            "outputs": [
+                {
+                    "name": "out_pairs",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 381.89996337890625,
+                "top": 158.8666748046876
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "f6168dd17f82",
+                "name": "cutadapt",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adapter_options\": {\"action\": \"trim\", \"error_rate\": \"0.1\", \"no_indels\": false, \"times\": \"1\", \"overlap\": \"10\", \"match_read_wildcards\": false, \"no_match_adapter_wildcards\": true, \"revcomp\": false}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"filter_options\": {\"discard_trimmed\": false, \"discard_untrimmed\": true, \"minimum_length\": \"1\", \"minimum_length2\": null, \"maximum_length\": null, \"maximum_length2\": null, \"max_n\": null, \"max_expected_errors\": null, \"max_average_error_rate\": null, \"discard_casava\": false, \"pair_filter\": \"any\"}, \"library\": {\"type\": \"paired_collection\", \"__current_case__\": 2, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"r1\": {\"adapters\": [], \"front_adapters\": [{\"__index__\": 0, \"adapter_source\": {\"adapter_source_list\": \"user\", \"__current_case__\": 0, \"adapter_name\": \"\", \"adapter\": \"GTGYCAGCMGCCGCGGTAA\"}, \"single_noindels\": false}], \"anywhere_adapters\": []}, \"r2\": {\"adapters2\": [], \"front_adapters2\": [{\"__index__\": 0, \"adapter_source\": {\"adapter_source_list\": \"user\", \"__current_case__\": 0, \"adapter_name\": \"\", \"adapter\": \"GGACTACNVGGGTWTCTAAT\"}, \"single_noindels\": false}], \"anywhere_adapters2\": []}, \"pair_adapters\": false}, \"other_trimming_options\": {\"cut\": \"0\", \"cut2\": \"0\", \"quality_cutoff\": \"0,30\", \"quality_cutoff2\": \"\", \"nextseq_trim\": \"0\", \"trim_n\": false, \"poly_a\": false, \"shorten_options\": {\"shorten_values\": \"False\", \"__current_case__\": 1}, \"shorten_options_r2\": {\"shorten_values_r2\": \"False\", \"__current_case__\": 1}}, \"output_selector\": null, \"read_mod_options\": {\"strip_suffix\": null, \"length_tag\": null, \"rename\": null, \"zero_cap\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.2+galaxy2",
+            "type": "tool",
+            "uuid": "74f2e652-d717-4e7e-8676-92782e143cc3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "__FLATTEN__",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_pairs"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Flatten collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 648.3952145785815,
+                "top": 64.5758617615669
+            },
+            "post_job_actions": {},
+            "tool_id": "__FLATTEN__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"join_identifier\": \"_\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "a15a38f7-b19a-47fd-9729-9a5b041c0dc9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_collection": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract element identifiers",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 886.3999633789062,
+                "top": 187.0333007812501
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "3e27acfa4830",
+                "name": "collection_element_identifiers",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"input_collection\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "f4a20b65-0df3-43a7-b9e0-0670c5ceec1a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1113.7999877929688,
+                "top": 304.9666503906251
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"001_forward\", \"replacement\": \"R1_001.fastq.gz\"}, {\"__index__\": 1, \"pattern\": \"001_reverse\", \"replacement\": \"R2_001.fastq.gz\"}], \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "de342ee2-7a2f-47b2-92aa-43ab59d93fdb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1344.3333129882812,
+                "top": 177.0333007812501
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "9f74ac3b-d1fb-43c9-85f4-1e60ce745b61",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "__RELABEL_FROM_FILE__",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "how|labels": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                },
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Relabel identifiers",
+                    "name": "how"
+                }
+            ],
+            "label": null,
+            "name": "Relabel identifiers",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1583.9997617733131,
+                "top": 86.9806088490426
+            },
+            "post_job_actions": {},
+            "tool_id": "__RELABEL_FROM_FILE__",
+            "tool_state": "{\"how\": {\"how_select\": \"tabular\", \"__current_case__\": 1, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"strict\": false}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "109cb642-bb32-489a-9edd-379a6bfbe5fd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "import_root|__q2galaxy__GUI__cond__format__|import_sequences|__q2galaxy__GUI__cond__sequences__|elements": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 tools import",
+            "outputs": [
+                {
+                    "name": "imported_data",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 1836.6240918871124,
+                "top": 253.533930650093
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__import/qiime2_core__tools__import/2026.1.0+dist.h02a552c2",
+            "tool_shed_repository": {
+                "changeset_revision": "95475922280e",
+                "name": "qiime2_core__tools__import",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"import_root\": {\"type\": \"SampleData__ob__PairedEndSequencesWithQuality__cb__\", \"__current_case__\": 107, \"__q2galaxy__GUI__cond__format__\": {\"format\": \"CasavaOneEightSingleLanePerSampleDirFmt\", \"__current_case__\": 1, \"import_sequences\": {\"__q2galaxy__GUI__cond__sequences__\": {\"__q2galaxy__GUI__select__picker__\": \"collection\", \"__current_case__\": 0, \"elements\": {\"__class__\": \"ConnectedValue\"}, \"__q2galaxy__GUI__cond__add_ext__\": {\"__q2galaxy__GUI__select__ext_pick__\": \"no\", \"__current_case__\": 1}}}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+dist.h02a552c2",
+            "type": "tool",
+            "uuid": "883c625c-92f4-4509-8963-75b59fab8887",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__demux__summarize/qiime2__demux__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "data": {
+                    "id": 9,
+                    "output_name": "imported_data"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 demux summarize",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 2096.3441151057286,
+                "top": 49.655604347270355
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "trimmed_sequences.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__demux__summarize/qiime2__demux__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "9d4d7f37ba01",
+                "name": "qiime2__demux__summarize",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"n\": \"10000\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"data\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "f6f2a394-d58e-49c9-aed4-1549dc9eab6e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__dada2__denoise_paired/qiime2__dada2__denoise_paired/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "demultiplexed_seqs": {
+                    "id": 9,
+                    "output_name": "imported_data"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 dada2 denoise-paired",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "qza"
+                },
+                {
+                    "name": "representative_sequences",
+                    "type": "qza"
+                },
+                {
+                    "name": "denoising_stats",
+                    "type": "qza"
+                },
+                {
+                    "name": "base_transition_stats",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 2449.486167195743,
+                "top": 699.9030491695273
+            },
+            "post_job_actions": {
+                "RenameDatasetActiondenoising_stats": {
+                    "action_arguments": {
+                        "newname": "dada2out_denoising_stats.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "denoising_stats"
+                },
+                "RenameDatasetActionrepresentative_sequences": {
+                    "action_arguments": {
+                        "newname": "dada2out_representative_sequences.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "representative_sequences"
+                },
+                "RenameDatasetActiontable": {
+                    "action_arguments": {
+                        "newname": "dada2out_table.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__dada2__denoise_paired/qiime2__dada2__denoise_paired/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "569b33f54ed0",
+                "name": "qiime2__dada2__denoise_paired",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"trim_left_f\": \"0\", \"trim_left_r\": \"0\", \"max_ee_f\": \"2.0\", \"max_ee_r\": \"2.0\", \"trunc_q\": \"2\", \"min_overlap\": \"12\", \"max_merge_mismatch\": \"0\", \"trim_overhang\": false, \"pooling_method\": \"pseudo\", \"chimera_method\": \"consensus\", \"min_fold_parent_over_abundance\": \"1.0\", \"allow_one_off\": false, \"n_reads_learn\": \"1000000\", \"hashed_feature_ids\": true, \"retain_all_samples\": true}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"demultiplexed_seqs\": {\"__class__\": \"ConnectedValue\"}, \"trunc_len_f\": \"210\", \"trunc_len_r\": \"170\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "2b96208a-c98a-489b-b3f4-1700483401af",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__tabulate_seqs/qiime2__feature_table__tabulate_seqs/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "data": {
+                    "id": 11,
+                    "output_name": "representative_sequences"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 feature-table tabulate-seqs",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 2739.18059530233,
+                "top": 450.62088178626004
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "16s_representative_seqs.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__tabulate_seqs/qiime2__feature_table__tabulate_seqs/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f85a59f6a6dc",
+                "name": "qiime2__feature_table__tabulate_seqs",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"taxonomy\": null, \"metadata\": [], \"merge_method\": \"strict\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"data\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "83f71b87-4feb-413d-b45a-70ad051b50a8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_0|__q2galaxy__GUI__conditional__input__|source": {
+                    "id": 11,
+                    "output_name": "denoising_stats"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 metadata tabulate",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 2763.2752389834063,
+                "top": 673.0083029716709
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "16s_denoising_stats.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "92bb3663bb96",
+                "name": "qiime2__metadata__tabulate",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"page_size\": \"100\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"input\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__input__\": {\"type\": \"qza\", \"__current_case__\": 1, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "41c0e05b-1a80-46cf-a834-9123e0a73c96",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "__q2galaxy__GUI__section__extra_opts__|metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "table": {
+                    "id": 11,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 feature-table summarize",
+            "outputs": [
+                {
+                    "name": "feature_frequencies",
+                    "type": "qza"
+                },
+                {
+                    "name": "sample_frequencies",
+                    "type": "qza"
+                },
+                {
+                    "name": "summary",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 2730.1775996332835,
+                "top": 972.5238635259068
+            },
+            "post_job_actions": {
+                "RenameDatasetActionsummary": {
+                    "action_arguments": {
+                        "newname": "summary.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "summary"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "41e9af5ca46b",
+                "name": "qiime2__feature_table__summarize",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}]}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "39da2ea6-918f-4ea4-9fcc-f970bbcdc7d2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__classify_sklearn/qiime2__feature_classifier__classify_sklearn/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "classifier": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reads": {
+                    "id": 11,
+                    "output_name": "representative_sequences"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 feature-classifier classify-sklearn",
+            "outputs": [
+                {
+                    "name": "classification",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 3277.719904901785,
+                "top": 917.6887597593841
+            },
+            "post_job_actions": {
+                "RenameDatasetActionclassification": {
+                    "action_arguments": {
+                        "newname": "taxonomy_classification.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "classification"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_classifier__classify_sklearn/qiime2__feature_classifier__classify_sklearn/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6131ad924c9d",
+                "name": "qiime2__feature_classifier__classify_sklearn",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"__q2galaxy__GUI__conditional__reads_per_batch__\": {\"__q2galaxy__GUI__select__\": \"auto\", \"__current_case__\": 0, \"reads_per_batch\": \"auto\"}, \"pre_dispatch\": \"2*n_jobs\", \"__q2galaxy__GUI__conditional__confidence__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::Float X Range(0__comma__ 1__comma__ inclusive_end=True)\", \"__current_case__\": 1, \"confidence\": \"0.7\"}, \"read_orientation\": \"auto\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"classifier\": {\"__class__\": \"ConnectedValue\"}, \"reads\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "76530bdd-7b78-45fb-93c4-06911eb1ce84",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__phylogeny__align_to_tree_mafft_fasttree/qiime2__phylogeny__align_to_tree_mafft_fasttree/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "sequences": {
+                    "id": 11,
+                    "output_name": "representative_sequences"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 phylogeny align-to-tree-mafft-fasttree",
+            "outputs": [
+                {
+                    "name": "alignment",
+                    "type": "qza"
+                },
+                {
+                    "name": "masked_alignment",
+                    "type": "qza"
+                },
+                {
+                    "name": "tree",
+                    "type": "qza"
+                },
+                {
+                    "name": "rooted_tree",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 3089.6969309089727,
+                "top": 1551.4915261432216
+            },
+            "post_job_actions": {
+                "RenameDatasetActionalignment": {
+                    "action_arguments": {
+                        "newname": "aligned_16s_representative_seqs.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "alignment"
+                },
+                "RenameDatasetActionmasked_alignment": {
+                    "action_arguments": {
+                        "newname": "masked_aligned_16s_representative_seqs.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "masked_alignment"
+                },
+                "RenameDatasetActionrooted_tree": {
+                    "action_arguments": {
+                        "newname": "16s_rooted_tree.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "rooted_tree"
+                },
+                "RenameDatasetActiontree": {
+                    "action_arguments": {
+                        "newname": "16s_unrooted_tree.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "tree"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__phylogeny__align_to_tree_mafft_fasttree/qiime2__phylogeny__align_to_tree_mafft_fasttree/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "1eae9d13a91e",
+                "name": "qiime2__phylogeny__align_to_tree_mafft_fasttree",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"mask_max_gap_frequency\": \"1.0\", \"mask_min_conservation\": \"0.4\", \"parttree\": false, \"large\": false}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"sequences\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "d071158e-8369-48e1-9c74-80a678b08da2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input": {
+                    "id": 15,
+                    "output_name": "classification"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 tools export",
+            "outputs": [
+                {
+                    "name": "TSVTaxonomyDirectoryFormat",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 3533.7515015631984,
+                "top": 1206.474682603772
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionTSVTaxonomyDirectoryFormat": {
+                    "action_arguments": {
+                        "newtype": "tsv"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "TSVTaxonomyDirectoryFormat"
+                },
+                "RenameDatasetActionTSVTaxonomyDirectoryFormat": {
+                    "action_arguments": {
+                        "newname": "taxonomy.tsv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "TSVTaxonomyDirectoryFormat"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "tool_shed_repository": {
+                "changeset_revision": "b6e4d26e4e7a",
+                "name": "qiime2_core__tools__export",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"fmt_finder\": {\"type\": \"None\", \"__current_case__\": 0, \"output_format\": \"None\"}, \"fmt_peek\": \"TSVTaxonomyDirectoryFormat\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"type_peek\": \"FeatureData[Taxonomy]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+dist.h02a552c2",
+            "type": "tool",
+            "uuid": "270fa2ce-3d4d-4918-97a6-800be2746a74",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "table": {
+                    "id": 11,
+                    "output_name": "table"
+                },
+                "taxonomy": {
+                    "id": 15,
+                    "output_name": "classification"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 taxa filter-table",
+            "outputs": [
+                {
+                    "name": "filtered_table",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 3777.1027927008104,
+                "top": 810.084740719569
+            },
+            "post_job_actions": {
+                "RenameDatasetActionfiltered_table": {
+                    "action_arguments": {
+                        "newname": "16s_table_filtered.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "filtered_table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "baef54e1b523",
+                "name": "qiime2__taxa__filter_table",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"__q2galaxy__GUI__conditional__include__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::default\", \"__current_case__\": 0, \"include\": \"__q2galaxy__::literal::None\"}, \"__q2galaxy__GUI__conditional__exclude__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::provide\", \"__current_case__\": 1, \"exclude\": \"Mitochondria,Chloroplast\"}, \"query_delimiter\": \",\", \"mode\": \"contains\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"taxonomy\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "c6bbe28c-912b-4570-b0de-49b0cd6d8312",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input_0|__q2galaxy__GUI__conditional__input__|source": {
+                    "id": 15,
+                    "output_name": "classification"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 metadata tabulate",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 3747.9658065108747,
+                "top": 1045.2474685076784
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "taxonomy.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__metadata__tabulate/qiime2__metadata__tabulate/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "92bb3663bb96",
+                "name": "qiime2__metadata__tabulate",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"page_size\": \"100\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"input\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__input__\": {\"type\": \"qza\", \"__current_case__\": 1, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "c8b26923-5859-4823-92c9-812bb61ba6bf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input": {
+                    "id": 16,
+                    "output_name": "tree"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 tools export",
+            "outputs": [
+                {
+                    "name": "NewickDirectoryFormat",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 3389.779467320695,
+                "top": 1576.0907607661338
+            },
+            "post_job_actions": {
+                "RenameDatasetActionNewickDirectoryFormat": {
+                    "action_arguments": {
+                        "newname": "16s_unrooted_tree.nwk"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "NewickDirectoryFormat"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "tool_shed_repository": {
+                "changeset_revision": "b6e4d26e4e7a",
+                "name": "qiime2_core__tools__export",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"fmt_finder\": {\"type\": \"None\", \"__current_case__\": 0, \"output_format\": \"None\"}, \"fmt_peek\": \"NewickDirectoryFormat\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"type_peek\": \"Phylogeny[Unrooted]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+dist.h02a552c2",
+            "type": "tool",
+            "uuid": "3f7ea2c1-6f41-4f00-aebd-3c67177b039c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "NewickDirectoryFormat",
+                    "output_name": "NewickDirectoryFormat",
+                    "uuid": "e5b70c15-45bb-4e11-88b7-5bc77f792037"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "TSVTaxonomyDirectoryFormat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3799.04498506568,
+                "top": 1310.9782440819965
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tsv"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "taxonomy_noHeader.tsv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "cba76369-c38c-490d-bc44-12ac9b119275",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "taxonomy_noHeader.tsv",
+                    "output_name": "out_file1",
+                    "uuid": "8caac6b6-e1f7-471e-88b2-2e3f16a9ce2d"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 tools export",
+            "outputs": [
+                {
+                    "name": "BIOMV210DirFmt",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 4388.446069798209,
+                "top": 339.85941168811587
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionBIOMV210DirFmt": {
+                    "action_arguments": {
+                        "newtype": "biom1"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "BIOMV210DirFmt"
+                },
+                "RenameDatasetActionBIOMV210DirFmt": {
+                    "action_arguments": {
+                        "newname": "feature-table.biom"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "BIOMV210DirFmt"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2_core__tools__export/qiime2_core__tools__export/2026.1.0+dist.h02a552c2",
+            "tool_shed_repository": {
+                "changeset_revision": "b6e4d26e4e7a",
+                "name": "qiime2_core__tools__export",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"fmt_finder\": {\"type\": \"None\", \"__current_case__\": 0, \"output_format\": \"None\"}, \"fmt_peek\": \"BIOMV210DirFmt\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"type_peek\": \"FeatureTable[Frequency]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+dist.h02a552c2",
+            "type": "tool",
+            "uuid": "1766fc53-1e68-40fd-bf8d-11b002c62949",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__barplot/qiime2__taxa__barplot/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "__q2galaxy__GUI__section__extra_opts__|metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "__q2galaxy__GUI__section__extra_opts__|taxonomy": {
+                    "id": 15,
+                    "output_name": "classification"
+                },
+                "table": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool qiime2 taxa barplot",
+                    "name": "__q2galaxy__GUI__section__extra_opts__"
+                }
+            ],
+            "label": null,
+            "name": "qiime2 taxa barplot",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4637.760394834783,
+                "top": 1127.3578301741088
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "barchart.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__barplot/qiime2__taxa__barplot/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "3fa5e4d759dc",
+                "name": "qiime2__taxa__barplot",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"taxonomy\": {\"__class__\": \"ConnectedValue\"}, \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"__q2galaxy__GUI__conditional__level_delimiter__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::default\", \"__current_case__\": 0, \"level_delimiter\": \"__q2galaxy__::literal::None\"}}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "0edf3840-13c4-49c6-9355-06ea1092168f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "__q2galaxy__GUI__section__extra_opts__|metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "table": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 feature-table summarize",
+            "outputs": [
+                {
+                    "name": "feature_frequencies",
+                    "type": "qza"
+                },
+                {
+                    "name": "sample_frequencies",
+                    "type": "qza"
+                },
+                {
+                    "name": "summary",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4663.439680835951,
+                "top": 1452.1990854478013
+            },
+            "post_job_actions": {
+                "RenameDatasetActionsummary": {
+                    "action_arguments": {
+                        "newname": "summary_filtered.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "summary"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__feature_table__summarize/qiime2__feature_table__summarize/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "41e9af5ca46b",
+                "name": "qiime2__feature_table__summarize",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}]}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "91736c29-aafd-435b-bc44-84f3716cb806",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2/qiime2__composition__ancombc2/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "table": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 composition ancombc2",
+            "outputs": [
+                {
+                    "name": "ancombc2_output",
+                    "type": "qza"
+                }
+            ],
+            "position": {
+                "left": 4465.5810345770315,
+                "top": 2226.956880680871
+            },
+            "post_job_actions": {
+                "RenameDatasetActionancombc2_output": {
+                    "action_arguments": {
+                        "newname": "ancombc2-results.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "ancombc2_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2/qiime2__composition__ancombc2/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2129213700fb",
+                "name": "qiime2__composition__ancombc2",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__q2galaxy__GUI__section__extra_opts__\": {\"__q2galaxy__GUI__conditional__random_effects_formula__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::default\", \"__current_case__\": 0, \"random_effects_formula\": \"__q2galaxy__::literal::None\"}, \"reference_levels\": [], \"p_adjust_method\": \"holm\", \"prevalence_cutoff\": \"0.1\", \"__q2galaxy__GUI__conditional__group__\": {\"__q2galaxy__GUI__select__\": \"__q2galaxy__::control::default\", \"__current_case__\": 0, \"group\": \"__q2galaxy__::literal::None\"}, \"structural_zeros\": false, \"asymptotic_cutoff\": false, \"alpha\": \"0.05\"}, \"fixed_effects_formula\": \"Captivity\", \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "8b504cc0-de34-4a11-b295-64ff4304237c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_rarefaction/qiime2__diversity__alpha_rarefaction/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "__q2galaxy__GUI__section__extra_opts__|metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "__q2galaxy__GUI__section__extra_opts__|phylogeny": {
+                    "id": 16,
+                    "output_name": "rooted_tree"
+                },
+                "table": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool qiime2 diversity alpha-rarefaction",
+                    "name": "__q2galaxy__GUI__section__extra_opts__"
+                }
+            ],
+            "label": null,
+            "name": "qiime2 diversity alpha-rarefaction",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4702.5049742235,
+                "top": 1959.581905186466
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "16s_alpha_rarefaction.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_rarefaction/qiime2__diversity__alpha_rarefaction/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "3a8c645430a2",
+                "name": "qiime2__diversity__alpha_rarefaction",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"phylogeny\": {\"__class__\": \"ConnectedValue\"}, \"metrics\": [], \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"min_depth\": \"500\", \"steps\": \"40\", \"iterations\": \"10\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"max_depth\": \"200000\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "fd87846c-ba5c-4142-8703-c28ea006714a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__core_metrics_phylogenetic/qiime2__diversity__core_metrics_phylogenetic/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "phylogeny": {
+                    "id": 16,
+                    "output_name": "rooted_tree"
+                },
+                "table": {
+                    "id": 18,
+                    "output_name": "filtered_table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 diversity core-metrics-phylogenetic",
+            "outputs": [
+                {
+                    "name": "rarefied_table",
+                    "type": "qza"
+                },
+                {
+                    "name": "faith_pd_vector",
+                    "type": "qza"
+                },
+                {
+                    "name": "observed_features_vector",
+                    "type": "qza"
+                },
+                {
+                    "name": "shannon_vector",
+                    "type": "qza"
+                },
+                {
+                    "name": "evenness_vector",
+                    "type": "qza"
+                },
+                {
+                    "name": "unweighted_unifrac_distance_matrix",
+                    "type": "qza"
+                },
+                {
+                    "name": "weighted_unifrac_distance_matrix",
+                    "type": "qza"
+                },
+                {
+                    "name": "jaccard_distance_matrix",
+                    "type": "qza"
+                },
+                {
+                    "name": "bray_curtis_distance_matrix",
+                    "type": "qza"
+                },
+                {
+                    "name": "unweighted_unifrac_pcoa_results",
+                    "type": "qza"
+                },
+                {
+                    "name": "weighted_unifrac_pcoa_results",
+                    "type": "qza"
+                },
+                {
+                    "name": "jaccard_pcoa_results",
+                    "type": "qza"
+                },
+                {
+                    "name": "bray_curtis_pcoa_results",
+                    "type": "qza"
+                },
+                {
+                    "name": "unweighted_unifrac_emperor",
+                    "type": "qzv"
+                },
+                {
+                    "name": "weighted_unifrac_emperor",
+                    "type": "qzv"
+                },
+                {
+                    "name": "jaccard_emperor",
+                    "type": "qzv"
+                },
+                {
+                    "name": "bray_curtis_emperor",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4434.31058814342,
+                "top": 2511.7675003585805
+            },
+            "post_job_actions": {
+                "HideDatasetActionbray_curtis_distance_matrix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "bray_curtis_distance_matrix"
+                },
+                "HideDatasetActionbray_curtis_pcoa_results": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "bray_curtis_pcoa_results"
+                },
+                "HideDatasetActionfaith_pd_vector": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "faith_pd_vector"
+                },
+                "HideDatasetActionjaccard_distance_matrix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "jaccard_distance_matrix"
+                },
+                "HideDatasetActionjaccard_pcoa_results": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "jaccard_pcoa_results"
+                },
+                "HideDatasetActionrarefied_table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "rarefied_table"
+                },
+                "HideDatasetActionshannon_vector": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "shannon_vector"
+                },
+                "HideDatasetActionunweighted_unifrac_pcoa_results": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unweighted_unifrac_pcoa_results"
+                },
+                "HideDatasetActionweighted_unifrac_distance_matrix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "weighted_unifrac_distance_matrix"
+                },
+                "HideDatasetActionweighted_unifrac_pcoa_results": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "weighted_unifrac_pcoa_results"
+                },
+                "RenameDatasetActionbray_curtis_emperor": {
+                    "action_arguments": {
+                        "newname": "bray_curtis_emperor.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "bray_curtis_emperor"
+                },
+                "RenameDatasetActionevenness_vector": {
+                    "action_arguments": {
+                        "newname": "evenness_vector.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "evenness_vector"
+                },
+                "RenameDatasetActionjaccard_emperor": {
+                    "action_arguments": {
+                        "newname": "jaccard_emperor.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "jaccard_emperor"
+                },
+                "RenameDatasetActionobserved_features_vector": {
+                    "action_arguments": {
+                        "newname": "observed_features_vector.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "observed_features_vector"
+                },
+                "RenameDatasetActionunweighted_unifrac_distance_matrix": {
+                    "action_arguments": {
+                        "newname": "unweighted_unifrac_distance_matrix.qza"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "unweighted_unifrac_distance_matrix"
+                },
+                "RenameDatasetActionunweighted_unifrac_emperor": {
+                    "action_arguments": {
+                        "newname": "unweighted_unifrac_emperor.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "unweighted_unifrac_emperor"
+                },
+                "RenameDatasetActionweighted_unifrac_emperor": {
+                    "action_arguments": {
+                        "newname": "weighted_unifrac_emperor.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "weighted_unifrac_emperor"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__core_metrics_phylogenetic/qiime2__diversity__core_metrics_phylogenetic/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "4fe98252a16f",
+                "name": "qiime2__diversity__core_metrics_phylogenetic",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"with_replacement\": false, \"ignore_missing_samples\": false}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"phylogeny\": {\"__class__\": \"ConnectedValue\"}, \"sampling_depth\": \"100000\", \"table\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "814bbcf0-a622-4ca8-a687-f037c27ba7bd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/biom_convert/biom_convert/2.1.17+galaxy0",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input|input_fp": {
+                    "id": 22,
+                    "output_name": "BIOMV210DirFmt"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Convert",
+            "outputs": [
+                {
+                    "name": "output_fp",
+                    "type": "biom1"
+                }
+            ],
+            "position": {
+                "left": 4674.346985091507,
+                "top": 317.0186885406822
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_fp": {
+                    "action_arguments": {
+                        "newname": "feature-table.tsv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_fp"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/biom_convert/biom_convert/2.1.17+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b3858ab7f598",
+                "name": "biom_convert",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"type_selector\": \"biom\", \"__current_case__\": 1, \"input_fp\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"type_selector\": \"tsv\", \"__current_case__\": 0, \"header_key\": \"\", \"output_metadata_id\": \"\", \"tsv_metadata_formatter\": \"naive\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1.17+galaxy0",
+            "type": "tool",
+            "uuid": "61e90681-4b22-480b-a338-a2795432db5b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "__BUILD_LIST__",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "datasets_0|input": {
+                    "id": 10,
+                    "output_name": "visualization"
+                },
+                "datasets_1|input": {
+                    "id": 12,
+                    "output_name": "visualization"
+                },
+                "datasets_2|input": {
+                    "id": 13,
+                    "output_name": "visualization"
+                },
+                "datasets_3|input": {
+                    "id": 19,
+                    "output_name": "visualization"
+                },
+                "datasets_4|input": {
+                    "id": 14,
+                    "output_name": "summary"
+                },
+                "datasets_5|input": {
+                    "id": 23,
+                    "output_name": "visualization"
+                },
+                "datasets_6|input": {
+                    "id": 24,
+                    "output_name": "summary"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Build list",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 5086.763257520622,
+                "top": 809.087315787832
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "visualisations"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__BUILD_LIST__",
+            "tool_state": "{\"datasets\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 3, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 4, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 5, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 6, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "201ed92c-c941-435a-9789-c63f3b1f3f61",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "__q2galaxy__GUI__section__extra_opts__|taxonomy": {
+                    "id": 15,
+                    "output_name": "classification"
+                },
+                "data": {
+                    "id": 25,
+                    "output_name": "ancombc2_output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool qiime2 composition ancombc2-visualizer",
+                    "name": "__q2galaxy__GUI__section__extra_opts__"
+                }
+            ],
+            "label": null,
+            "name": "qiime2 composition ancombc2-visualizer",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4780.824698603606,
+                "top": 2321.411968614197
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "ancombc2-barplot.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "58be27be4069",
+                "name": "qiime2__composition__ancombc2_visualizer",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__q2galaxy__GUI__section__extra_opts__\": {\"taxonomy\": {\"__class__\": \"ConnectedValue\"}}, \"data\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "27acc0fd-c032-4882-bfdc-ed672715cc21",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "alpha_diversity": {
+                    "id": 27,
+                    "output_name": "observed_features_vector"
+                },
+                "metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 diversity alpha-group-significance",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4788.415018900183,
+                "top": 2704.4808572091333
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "observed_features-significance.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6698547705c9",
+                "name": "qiime2__diversity__alpha_group_significance",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"alpha_diversity\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "00e4e8fa-913d-47a9-acbd-d98c19c1a602",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "alpha_diversity": {
+                    "id": 27,
+                    "output_name": "evenness_vector"
+                },
+                "metadata_0|__q2galaxy__GUI__conditional__metadata__|source": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "qiime2 diversity alpha-group-significance",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4790.388801048269,
+                "top": 2924.464974347803
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "evenness-group-significance.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__alpha_group_significance/qiime2__diversity__alpha_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6698547705c9",
+                "name": "qiime2__diversity__alpha_group_significance",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"alpha_diversity\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"metadata\": [{\"__index__\": 0, \"__q2galaxy__GUI__conditional__metadata__\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "81b9222a-0c9d-4874-bb14-43706bba55c4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "33": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__beta_group_significance/qiime2__diversity__beta_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "errors": null,
+            "id": 33,
+            "input_connections": {
+                "distance_matrix": {
+                    "id": 27,
+                    "output_name": "unweighted_unifrac_distance_matrix"
+                },
+                "metadata|source": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool qiime2 diversity beta-group-significance",
+                    "name": "metadata"
+                }
+            ],
+            "label": null,
+            "name": "qiime2 diversity beta-group-significance",
+            "outputs": [
+                {
+                    "name": "visualization",
+                    "type": "qzv"
+                }
+            ],
+            "position": {
+                "left": 4786.129456784797,
+                "top": 3174.8365100932324
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvisualization": {
+                    "action_arguments": {
+                        "newname": "unweighted-unifrac-captivity-significance.qzv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "visualization"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__diversity__beta_group_significance/qiime2__diversity__beta_group_significance/2026.1.0+q2galaxy.2026.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8f112ef712c3",
+                "name": "qiime2__diversity__beta_group_significance",
+                "owner": "q2d2",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__q2galaxy__GUI__section__extra_opts__\": {\"method\": \"permanova\", \"pairwise\": false, \"permutations\": \"999\"}, \"chromInfo\": \"/mnt/tools/tool-data/shared/ucsc/chrom/?.len\", \"distance_matrix\": {\"__class__\": \"ConnectedValue\"}, \"metadata\": {\"type\": \"tsv\", \"__current_case__\": 0, \"source\": {\"__class__\": \"ConnectedValue\"}, \"column\": \"3\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2026.1.0+q2galaxy.2026.1.0",
+            "type": "tool",
+            "uuid": "f13c7e6b-9d7b-4388-9de3-a46c76127f10",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "34": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 34,
+            "input_connections": {
+                "input": {
+                    "id": 28,
+                    "output_name": "output_fp"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 4967.434627148267,
+                "top": 348.3268767417312
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tsv"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "feature-table_noHeader.tsv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "f7e77676-f157-4d96-8302-c5428542d97c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "feature-table_noHeader.tsv",
+                    "output_name": "out_file1",
+                    "uuid": "977bd5f4-3a1f-4c5f-ace0-c571b6922e2b"
+                }
+            ]
+        },
+        "35": {
+            "annotation": "",
+            "content_id": "__BUILD_LIST__",
+            "errors": null,
+            "id": 35,
+            "input_connections": {
+                "datasets_0|input": {
+                    "id": 26,
+                    "output_name": "visualization"
+                },
+                "datasets_1|input": {
+                    "id": 30,
+                    "output_name": "visualization"
+                },
+                "datasets_2|input": {
+                    "id": 31,
+                    "output_name": "visualization"
+                },
+                "datasets_3|input": {
+                    "id": 32,
+                    "output_name": "visualization"
+                },
+                "datasets_4|input": {
+                    "id": 33,
+                    "output_name": "visualization"
+                },
+                "datasets_5|input": {
+                    "id": 27,
+                    "output_name": "unweighted_unifrac_emperor"
+                },
+                "datasets_6|input": {
+                    "id": 27,
+                    "output_name": "weighted_unifrac_emperor"
+                },
+                "datasets_7|input": {
+                    "id": 27,
+                    "output_name": "jaccard_emperor"
+                },
+                "datasets_8|input": {
+                    "id": 27,
+                    "output_name": "bray_curtis_emperor"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Build list",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 5606.190593543162,
+                "top": 3042.5431634005686
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "diversity_visualisations"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__BUILD_LIST__",
+            "tool_state": "{\"datasets\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 3, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 4, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 5, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 6, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 7, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}, {\"__index__\": 8, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"identifier\", \"__current_case__\": 1}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "a7c48423-a450-4b93-9275-0b72a6dd51e1",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "microbiome"
+    ],
+    "uuid": "fb6c5ebe-7d37-4c74-9e84-b9f8a8cb0040",
+    "version": 33
+}

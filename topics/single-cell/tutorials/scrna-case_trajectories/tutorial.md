@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Inferring single cell trajectories with Scanpy
 subtopic: single-cell-CS
 priority: 4
-zenodo_link: "https://zenodo.org/record/7075718"
+zenodo_link: 'https://zenodo.org/record/7075718'
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 

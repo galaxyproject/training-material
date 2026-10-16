@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Maker (short)
-zenodo_link: https://doi.org/10.5281/zenodo.4406623
+zenodo_link: 'https://zenodo.org/record/4406623'
 tags:
   - gmod
   - eukaryote

@@ -2,6 +2,9 @@
 layout: learning-pathway
 tags: [beginner, contributing, teaching]
 type: use
+topics:
+  - contributing
+  - teaching
 
 editorial_board:
 - bebatut
@@ -9,7 +12,7 @@ editorial_board:
 funding:
 - gallantries
 
-title: Gallantries Grant - Intellectual Output 5 - Train-the-Trainer and mentoring programme
+title: Train-the-Trainer and mentoring programme
 
 description: |
   This Learning Pathway collects the results of Intellectual Output 5 in the Gallantries Project

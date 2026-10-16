@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Antibiotic resistance detection"
-zenodo_link: "https://doi.org/10.5281/zenodo.3247504"
+zenodo_link: 'https://zenodo.org/record/3247504'
 questions:
   - "How do I assemble a genome with Nanopore data?"
   - "How do I get more information about the structure of the genomes?"

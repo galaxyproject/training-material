@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Refining Genome Annotations with Apollo (eukaryotes)
-zenodo_link: https://zenodo.org/record/6920962
+zenodo_link: 'https://zenodo.org/record/6920962'
 tags:
   - gmod
   - eukaryote

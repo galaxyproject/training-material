@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CLIP-Seq data analysis from pre-processing to motif detection
-zenodo_link: https://zenodo.org/record/1327423
+zenodo_link: 'https://zenodo.org/record/1327423'
 questions:
   - How is raw CLIP-Seq data processed and analysed?
   - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?

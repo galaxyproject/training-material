@@ -1,0 +1,23 @@
+---
+- doc: Test solar eclipse frequency workflow with Amarna data
+  job:
+    Solar eclipse data (.txt):
+      class: File
+      location: https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
+      filetype: txt
+    Magnitude threshold: "0.8"
+    Number of eclipses: "3"
+    Maximum interval in years: "10"
+  outputs:
+    qualifying_eclipses:
+      asserts:
+        - that: has_n_lines
+          n: 58
+        - that: has_n_columns
+          n: 9
+        - that: has_line
+          line: "-2470\t4\t1\tT\t58554.8\t0.943\t0.943\t6.8406\t7.8897/"
+        - that: has_line
+          line: "168\t12\t17\tR\t8885.9\t0.846\t0.925\t5.5190\t6.8071/"
+        - that: has_line
+          line: "916\t4\t5\tR\t2071.8\t0.946\t0.946\t8.4660\t9.9342/"

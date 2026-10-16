@@ -2,6 +2,9 @@
 layout: learning-pathway
 tags: [beginner, genome-annotation]
 type: use
+topics:
+  - genome-annotation
+  - fair
 
 editorial_board:
 - abretaud
@@ -10,7 +13,7 @@ editorial_board:
 funding:
 - gallantries
 
-title: Gallantries Grant - Intellectual Output 3 - Data stewardship, federation, standardisation, and collaboration
+title: Data stewardship, federation, standardisation, and collaboration
 
 description: |
   This Learning Pathway collects the results of Intellectual Output 3 in the Gallantries Project

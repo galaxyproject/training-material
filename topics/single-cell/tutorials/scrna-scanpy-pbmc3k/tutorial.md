@@ -5,7 +5,7 @@ subtopic: firstsc
 priority: 2
 redirect_from:
 - "/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial"
-zenodo_link: https://zenodo.org/record/3581213
+zenodo_link: 'https://zenodo.org/record/3581213'
 questions:
 - What are the steps to prepare single-cell RNA-Seq data for clustering?
 - How to cluster cells in single-cell RNA-Seq data?

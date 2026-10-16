@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 title: Data management in Medicinal Chemistry
 level: Introductory
+redirect_from:
+- /topics/fair/tutorials/med-chem-data/tutorial
 
 questions:
 - Why does medicinal chemistry research produce so much data?
@@ -20,8 +22,8 @@ time_estimation: 1H
 key_points:
 - The power of big data might be useful to shape innovations of the future in the pharmaceutical field.
 - There are many publicly available databases used for drug discovery and development and they might look at the same medicines from different angles and classify them based on various factors.
-- Galaxy provides tools and a platform for medicinal chemistry analyses. 
-  
+- Galaxy provides tools and a platform for medicinal chemistry analyses.
+
 tags:
 - fair
 - data-management
@@ -43,7 +45,7 @@ requirements:
     tutorials:
       - fair-intro
       - data-management
-   
+
 
 follow_up_training:
   -
@@ -58,11 +60,11 @@ recordings:
     youtube_id: "JWV6IiD6mPE"
 ---
 
-The development of medicinal chemistry is advancing very rapidly. Big pharmaceutical companies, research institutes and universities are working on ground-breaking solutions to help patients combat all kinds of diseases. During that development process, tons of data are generated – not only from the lab environment but also from clinical trials. Given that the discovery of more potent, safer and cheaper drugs is the ultimate goal of all research bodies, we should all focus on making the data we gather FAIR: **F**indable, **A**ccessible, **I**nteroperable, and **R**eusable to push the boundaries of drug development even further. 
+The development of medicinal chemistry is advancing very rapidly. Big pharmaceutical companies, research institutes and universities are working on ground-breaking solutions to help patients combat all kinds of diseases. During that development process, tons of data are generated – not only from the lab environment but also from clinical trials. Given that the discovery of more potent, safer and cheaper drugs is the ultimate goal of all research bodies, we should all focus on making the data we gather FAIR: **F**indable, **A**ccessible, **I**nteroperable, and **R**eusable to push the boundaries of drug development even further.
 
-With the currently available methods such as artificial intelligence, machine learning, many toolkits, software and access to various databases, managing big data is now inherently linked to medicinal chemistry and helps to make this area as efficient as it can be. 
+With the currently available methods such as artificial intelligence, machine learning, many toolkits, software and access to various databases, managing big data is now inherently linked to medicinal chemistry and helps to make this area as efficient as it can be.
 
-In this tutorial, we will therefore explore some concepts related to medicinal chemistry, explore the available chemical and pharmacological databases, and perform some basic data analyses using the Galaxy interface. 
+In this tutorial, we will therefore explore some concepts related to medicinal chemistry, explore the available chemical and pharmacological databases, and perform some basic data analyses using the Galaxy interface.
 
 > <agenda-title></agenda-title>
 >
@@ -94,7 +96,7 @@ Additionally, there have been some rules developed to help estimate drug-likenes
 - Abbott bioavailability score ({% cite Martin2005 %})
 
 
-As you see, there are a number of characteristics to consider before even synthesising the molecule in a lab. One of the online tools that help to summarise all the most important information about intrinsic properties and drug-likeness of compounds is called [SwissADME](http://www.swissadme.ch/) and is a free web tool to evaluate pharmacokinetics, drug-likeness and medicinal chemistry friendliness of small molecules ({% cite Daina2017 %}). 
+As you see, there are a number of characteristics to consider before even synthesising the molecule in a lab. One of the online tools that help to summarise all the most important information about intrinsic properties and drug-likeness of compounds is called [SwissADME](http://www.swissadme.ch/) and is a free web tool to evaluate pharmacokinetics, drug-likeness and medicinal chemistry friendliness of small molecules ({% cite Daina2017 %}).
 
 Below we briefly discuss two probably the most well-known rules: Lipinski's and Veber's rules.
 
@@ -106,12 +108,12 @@ This rule of thumb developed back in 1997 by Christopher Lipinski and colleagues
 -	they have up to 5 H-bond donors
 -	they have up to 10 H-bond acceptors
 
-However, nowadays there are more and more drugs being developed which don’t comply with those rules and regardless are still effective. There are voices from the scientific community, pointing out that “We are in danger of repeating our past mistakes if we assume these new modalities are not 'drug-like' and cannot be oral drugs because they are not [rule of 5] compliant” (Michael Shultz from Novartis, cited in {% cite Mullard2018 %} where the authors re-assess the rule of 5). Then, in {% cite OHagan2014 %} we read "This famous "rule of 5" has been highly influential in this regard, but only about 50 % of orally administered new chemical entities actually obey it." 
+However, nowadays there are more and more drugs being developed which don’t comply with those rules and regardless are still effective. There are voices from the scientific community, pointing out that “We are in danger of repeating our past mistakes if we assume these new modalities are not 'drug-like' and cannot be oral drugs because they are not [rule of 5] compliant” (Michael Shultz from Novartis, cited in {% cite Mullard2018 %} where the authors re-assess the rule of 5). Then, in {% cite OHagan2014 %} we read "This famous "rule of 5" has been highly influential in this regard, but only about 50 % of orally administered new chemical entities actually obey it."
 
 
 ## Veber's rule
 
-In ({% cite Veber2002 %}) we read that the commonly applied molecular weight cutoff at 500 does not itself significantly separate compounds with poor oral bioavailability from those with acceptable values. The authors explain that on average both the number of rotatable bonds and polar surface area or hydrogen bond count tend to increase with molecular weight which may in part explain the success of the molecular weight parameter in predicting oral bioavailability. Their observations suggest that compounds will have a high probability of good oral bioavailability if they meet the two criteria: 
+In ({% cite Veber2002 %}) we read that the commonly applied molecular weight cutoff at 500 does not itself significantly separate compounds with poor oral bioavailability from those with acceptable values. The authors explain that on average both the number of rotatable bonds and polar surface area or hydrogen bond count tend to increase with molecular weight which may in part explain the success of the molecular weight parameter in predicting oral bioavailability. Their observations suggest that compounds will have a high probability of good oral bioavailability if they meet the two criteria:
 - 10 or fewer rotatable bonds - increased rotatable bond count has a negative effect on the permeation rate
 - a polar surface area no greater than 140 Å <sup>2</sup> (or 12 or fewer H-bond donors and acceptors) - reduced polar surface area correlates better with increased permeation rate than does lipophilicity
 
@@ -129,18 +131,18 @@ As you can see, to get just one drug to the market, often thousands of structure
 
 Hopefully, now you have an idea of what the process of drug discovery looks like. To understand why managing data in medicinal chemistry is so challenging, let's have a closer look at the "Ten Vs" of big data {% cite Zhao2020 %}:
 
-- **V**olume: size of data. 
-- **V**elocity: speed of new data generation. 
-- **V**ariety: various formats of data. 
-- **V**eracity: quality of data. 
-- **V**alidity: authenticity of data. 
-- **V**ocabulary: terminology of data. 
-- **V**enue: platform of data generation. 
-- **V**isualization: view of data. 
-- **V**olatility: duration of data usefulness. 
+- **V**olume: size of data.
+- **V**elocity: speed of new data generation.
+- **V**ariety: various formats of data.
+- **V**eracity: quality of data.
+- **V**alidity: authenticity of data.
+- **V**ocabulary: terminology of data.
+- **V**enue: platform of data generation.
+- **V**isualization: view of data.
+- **V**olatility: duration of data usefulness.
 - **V**alue: the potential of data usefulness to reduce the cost of drug discovery and development.
 
-Medicinal chemists must keep in mind those features while both searching for data and publishing it. In this way we can focus on the main aspects of data management, try to improve the availability and normalisation of data, and be aware of limitations of repositories and inconsistencies in data quality. 
+Medicinal chemists must keep in mind those features while both searching for data and publishing it. In this way we can focus on the main aspects of data management, try to improve the availability and normalisation of data, and be aware of limitations of repositories and inconsistencies in data quality.
 
 ## FAIR MedChem
 As you saw before, there are many properties that the compounds can be searched by, such as molecular weight, H-bond donors or acceptors, polarity, etc. Sometimes there is a need to assess other molecular properties but it might happen that not all the information is included in the database. This is one of the reasons why new repositories are being developed – they are more specific and gather particular properties of interest. How much easier the life of scientists could be if the relevant data was publicly available, well-ordered and contained the needed metadata? By submitting the data with the necessary information to the repository is a good way to make the data FAIR. This will make it:
@@ -148,7 +150,7 @@ As you saw before, there are many properties that the compounds can be searched 
 - **A**ccessible, as the data will be available online, open and free where possible
 -	**I**nteroperable, as the repository will often enforce the use of formalised, consistent language
 -	**R**eusable, as the data will be released under a license with detailed provenance
-In the repositories 
+In the repositories
 
 
 # Chemical and pharmacological databases
@@ -161,9 +163,9 @@ Currently, there are lots of publicly available databases storing information ab
 - Drug liabilities and toxicities
 - Clinical databases
 
-Below you will find the databases listed under corresponding categories, all taken from {% cite Zhao2020 %} paper. 
+Below you will find the databases listed under corresponding categories, all taken from {% cite Zhao2020 %} paper.
 
-There are many more databases available, and many are still being developed. They are often quite specific and contain certain types of compounds (eg. [PROTACs](http://cadd.zju.edu.cn/protacdb/) or are aimed at a particular disease. If the listed databases are not specific enough for your research, you can try luck by searching smaller, more specific databases. 
+There are many more databases available, and many are still being developed. They are often quite specific and contain certain types of compounds (eg. [PROTACs](http://cadd.zju.edu.cn/protacdb/) or are aimed at a particular disease. If the listed databases are not specific enough for your research, you can try luck by searching smaller, more specific databases.
 
 ## Chemical collections
 
@@ -254,12 +256,12 @@ There are many more databases available, and many are still being developed. The
 
 Depending on the type of analysis you are going to perform, you will work with different file formats. Below are the most important data types, commonly used in cheminformatics, that you will likely see in Galaxy:
 - SDF (.sd, .sdf) - stands for Structure-Data Format, and SDF files wrap the molfile (MDL Molfile) format. Stores information about the chemical structure and associated data of compounds in plain text. Files in SDF format can encode single or multiple molecules that are then delimited by lines consisting of four dollar signs. SDF files are formatted ASCII files that store information about the positions of the individual atoms (either in 2D or 3D space) that make up the molecule. The data on connectivity and hybridization state are also encoded, although their use is less frequent and often inconsistent.
-- MOL (.mol) - an MDL Molfile for holding information about the atoms, bonds, connectivity and coordinates of a molecule. 
+- MOL (.mol) - an MDL Molfile for holding information about the atoms, bonds, connectivity and coordinates of a molecule.
 - MOL2 (.mol2) - a Tripos Mol2 file is a complete, portable representation of a SYBYL molecule. It is an ASCII file which contains all the information needed to
 reconstruct a SYBYL molecule
 - CML (.cml) - Chemical Markup Language (ChemML or CML) is an approach to managing molecular information using tools such as XML and Java. It supports a wide range of chemical concepts including molecules, reactions, spectra and analytical data, computational chemistry, chemical crystallography and materials
 - InChI (IUPAC International Chemical Identifier) - a textual identifier for chemical substances, designed to provide a standard way to encode molecular information. The identifiers describe chemical substances in terms of layers of information — the atoms and their bond connectivity, tautomeric information, isotope information, stereochemistry, and electronic charge information ({% cite Heller2015 %})
-- SMILES (.smi) - the **s**implified **m**olecular-**i**nput **l**ine-**e**ntry **s**ystem (SMILES) is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. A linear text format which can describe the connectivity and chirality of a molecule ({% cite Weininger1988 %}) 
+- SMILES (.smi) - the **s**implified **m**olecular-**i**nput **l**ine-**e**ntry **s**ystem (SMILES) is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. A linear text format which can describe the connectivity and chirality of a molecule ({% cite Weininger1988 %})
 - PDB - the Protein Data Bank (PDB) file format is a textual file format describing the three-dimensional structures of molecules held in the [Protein Data Bank](https://www.rcsb.org/), now succeeded by the mmCIF format. It contains a description and annotation of protein and nucleic acid structures including atomic coordinates, secondary structure assignments, as well as atomic connectivity. In addition, experimental metadata is stored. ({% cite Berman2007 %})
 - GRO (.gro) - a plain text file storing spatial coordinates and velocities (if available) of atoms during a molecular dynamics simulation, utilised by [GROMACS](https://manual.gromacs.org/archive/5.0.3/online/gro.html)
 
@@ -267,9 +269,9 @@ To visualise the structures held by the files with the positions of the individu
 
 If you plan to work with molecular dynamics simulations, there are also some MD trajectory file formats that you might want to get familiar with. In Galaxy, you can convert between xtc, trr, dcd and netcdf files using a tool called {% tool [MDTraj file converter](toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0) %}.
 
-## Galaxy tools 
+## Galaxy tools
 
-In Galaxy Chemical Toolbox there are dozens of tools that can be used for various analyses. Below we will only show a few, mostly related to data import, format conversion and some functions linked to what was discussed previously. 
+In Galaxy Chemical Toolbox there are dozens of tools that can be used for various analyses. Below we will only show a few, mostly related to data import, format conversion and some functions linked to what was discussed previously.
 
 Let's start with importing publicly available data. [Protein Data Bank](https://www.rcsb.org/) stores thousands of three-dimensional structural data of proteins nucleic acids and other biological molecules.
 
@@ -288,7 +290,7 @@ Let's start with importing publicly available data. [Protein Data Bank](https://
 
 This is often the first step of docking studies that you can learn about in other tutorials, for example in [Protein-ligand docking tutorial]({% link topics/computational-chemistry/tutorials/cheminformatics/tutorial.md %}).
 
-You can import any molecule to Galaxy using SMILES notation. Below we show an example with benzenesulfonyl chloride and ethylamine. 
+You can import any molecule to Galaxy using SMILES notation. Below we show an example with benzenesulfonyl chloride and ethylamine.
 
 > <hands-on-title>Import SMILES</hands-on-title>
 >
@@ -300,7 +302,7 @@ You can import any molecule to Galaxy using SMILES notation. Below we show an ex
 > 6. In the second box, under **"Name"** section, enter `Ethylamine` and under **"Type"**: `smi`
 > 7. Below paste the SMILES of ethylamine: `CCN`
 > 8. Click the **"Start"** button, then close the dialogue box. Your files are being added to your history!
->    
+>
 {: .hands_on}
 
 As you learned from the previous section, there are many different formats used in computational chemistry. Of course, Galaxy allows you to interconvert between them - just have a look below!
@@ -310,11 +312,11 @@ As you learned from the previous section, there are many different formats used 
 > 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Molecular input file"*: click on {% icon param-files %} *Multiple datasets* icon and choose both `Benzenesulfonyl chloride` and `Ethylamine`
 >    - *"Output format"* - you have many options to choose from! Not only the formats but also the associated parameters. Just scroll the list and pick the one that is relevant to your downstream analysis. Here we use `MDL MOL format (sdf, mol)`
-> 2. Rename {% icon galaxy-pencil %} the corresponding files `Benzenesulfonyl chloride SDF` and `Ethylamine SDF`. Before renaming the files, make sure to check either the starting dataset numbers or the atoms in the file in order not to confuse the two files! 
+> 2. Rename {% icon galaxy-pencil %} the corresponding files `Benzenesulfonyl chloride SDF` and `Ethylamine SDF`. Before renaming the files, make sure to check either the starting dataset numbers or the atoms in the file in order not to confuse the two files!
 >
 {: .hands_on}
 
-We intentionally chose to work on benzenesulfonyl chloride and ethylamine. Do you know why? Well, if you think about the synthesis of sulfonamides, that's exactly what you need - a sulfonyl chloride and an amine. So... let's do some computational synthesis! 
+We intentionally chose to work on benzenesulfonyl chloride and ethylamine. Do you know why? Well, if you think about the synthesis of sulfonamides, that's exactly what you need - a sulfonyl chloride and an amine. So... let's do some computational synthesis!
 
 > <hands-on-title>Run the reaction</hands-on-title>
 >
@@ -329,7 +331,7 @@ We intentionally chose to work on benzenesulfonyl chloride and ethylamine. Do yo
 >
 > Above we converted the *.smi* file into *.sdf* to show how {% icon tool %} **Compound conversion** tool works. However, it is worth pointing out that {% icon tool %} **Reaction maker** works also with SMILES files and the conversion happens automatically so that your *.smi* dataset is imported as *.sdf* input.
 >
-{: .tip} 
+{: .tip}
 
 > <details-title>Which reactions I can run using this tool?</details-title>
 >
@@ -389,22 +391,22 @@ In medicinal chemistry, we often base the new structures on scaffolds of existin
 >    - {% icon param-file %} *"Input file"*: `Benzenesulfonyl chloride`
 >    - *"Search type"*: `Substructure`
 > 2. Rename {% icon galaxy-pencil %} the output file `Benzenesulfonyl chloride substructures`
->    
+>
 {: .hands_on}
 
 
 > <tip-title>Search ChEMBL database tool works also with SDF!</tip-title>
 >
-> Even though the input format of the above tool is SMILES, it can automatically interconvert between *.sdf* and *.smi* formats, so you don't have to use {% icon tool %} **Compound conversion** tool beforehand. 
-> 
-{: .tip} 
+> Even though the input format of the above tool is SMILES, it can automatically interconvert between *.sdf* and *.smi* formats, so you don't have to use {% icon tool %} **Compound conversion** tool beforehand.
+>
+{: .tip}
 
 > <details-title>Parameters of Search ChEMBL database tool</details-title>
 >
 >  {% icon tool %} **Search ChEMBL database** tool allows for searching the ChEMBL database for compounds which resemble a SMILES string. Two search options are possible:
 > - similarity (searches for compounds which are similar to the input within a specified Tanimoto cutoff)
 > - substructure (searches for compounds which contain the input substructure)
->   
+>
 > Results can be filtered for compounds which are
 > - approved drugs
 > - biotherapeutic
@@ -432,7 +434,7 @@ Let's repeat this step, but with Lipinski's Rule of Five which you learned about
 > > <solution-title></solution-title>
 > >
 > > If you click on the dataset, you will see a short summary of how many molecules have been found.
-> > When we didn't apply any filters, the tool found 45 molecules. After applying Lipinski's Rule of Five filter, 36 molecules satisfied the rules. 
+> > When we didn't apply any filters, the tool found 45 molecules. After applying Lipinski's Rule of Five filter, 36 molecules satisfied the rules.
 > > ![Image showing the preview of the output datasets from searching benzenesulfonyl chloride substructures in the ChEMBL database, with and without Lipinski's Rule of Five filter.]({% link topics/computational-chemistry/images/substructures.png %} "Preview showing the number of molecules found in the ChEMBL database, before and after applying Lipinski's Rule of Five filter")
 > >
 > {: .solution}
@@ -447,13 +449,13 @@ Those are just a few tools, but they offer many parameters that you can tune dep
 # Data-driven medicinal chemistry - yesterday, today and tomorrow
 
 ## Why do we need big data in med-chem?
-In the article by {% cite Lusher2014 %} the role of the medicinal chemist is to make decisions about which of the infinite possibilities of new compounds should be made next. As the amount and variety of data on which to base these decisions grows, so too must the data analysis skills of the medicinal chemist. The authors claim that modern medicinal chemists should be able to recognise sources of relevant information, prepare raw data, use statistical tools, extract meaningful information, interpret results, recognise potential problems and make visualisations to communicate their findings to improve the quality of compounds being produced in research. According to the authors, this situation will require improved education and increased access to data and information management tools. This is where Galaxy comes in, offering not only a platform for data analysis with a plethora of the most commonly used tools in the field but also educational materials allowing anyone to learn and excel in analysis. 
- 
+In the article by {% cite Lusher2014 %} the role of the medicinal chemist is to make decisions about which of the infinite possibilities of new compounds should be made next. As the amount and variety of data on which to base these decisions grows, so too must the data analysis skills of the medicinal chemist. The authors claim that modern medicinal chemists should be able to recognise sources of relevant information, prepare raw data, use statistical tools, extract meaningful information, interpret results, recognise potential problems and make visualisations to communicate their findings to improve the quality of compounds being produced in research. According to the authors, this situation will require improved education and increased access to data and information management tools. This is where Galaxy comes in, offering not only a platform for data analysis with a plethora of the most commonly used tools in the field but also educational materials allowing anyone to learn and excel in analysis.
+
 The privilege of applying computational methods in medicinal chemistry pipelines allows to focus on the most promising compounds and to remove unsuitable ones before the stage of chemical synthesis. Not only is this approach more efficient but also more sustainable and can reduce the costs of the synthetic stage of drug discovery ({% cite Brown2018 %}).
 
-Another important role that big data plays in drug discovery is target identification (and validation) which might be currently one the biggest challenges in medicinal chemistry. By introducing genomic data in drug discovery, we can produce more specific and effective medicines. Understanding the underlying causes of the disease and the biological targets are crucial in designing new drugs and hence should be inherently linked with this process, where possible. 
+Another important role that big data plays in drug discovery is target identification (and validation) which might be currently one the biggest challenges in medicinal chemistry. By introducing genomic data in drug discovery, we can produce more specific and effective medicines. Understanding the underlying causes of the disease and the biological targets are crucial in designing new drugs and hence should be inherently linked with this process, where possible.
 
-## Data challenges 
+## Data challenges
 It is important to understand the limitations of the databases we use since if data is not well understood, the processing and analysis drawn may ultimately be flawed, following the ‘garbage in, garbage out’ principle. Here are some challenges mentioned in {% cite Brown2018 %} that you can explore more in-depth by referring to that article.
 -	Errors
 -	Reproducibility
@@ -472,4 +474,4 @@ expand this section, include examples
 -->
 
 ## Knowledge sharing
-It is not only about gathering and managing the data but also building a culture of knowledge sharing. We work in big, international teams with well-established methods and well-equipped labs. There are so many opportunities for knowledge capture and exchange! The challenge emerges here though – how to efficiently connect and help each other? This is the question that many pharmaceutical companies try to answer, such as Merck & Co. who describe their approach to knowledge management and report on the multiple enduring and complementary teams and initiatives to capture and share knowledge ({% cite Beshore2022 %}). 
+It is not only about gathering and managing the data but also building a culture of knowledge sharing. We work in big, international teams with well-established methods and well-equipped labs. There are so many opportunities for knowledge capture and exchange! The challenge emerges here though – how to efficiently connect and help each other? This is the question that many pharmaceutical companies try to answer, such as Merck & Co. who describe their approach to knowledge management and report on the multiple enduring and complementary teams and initiatives to capture and share knowledge ({% cite Beshore2022 %}).

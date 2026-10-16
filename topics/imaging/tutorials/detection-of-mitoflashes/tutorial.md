@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Tracking of mitochondria and capturing mitoflashes
 level: Intermediate
 subtopic: analyses
-zenodo_link: https://zenodo.org/records/14071552
+zenodo_link: 'https://zenodo.org/record/14071552'
 questions:
 - What are mitoflashes, and why are they relevant for understanding mitochondrial function?
 - How can bioinformatics and image analysis tools help in tracking and analyzing mitochondrial dynamics?

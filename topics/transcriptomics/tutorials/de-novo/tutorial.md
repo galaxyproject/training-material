@@ -5,7 +5,7 @@ title: "De novo transcriptome reconstruction with RNA-Seq"
 subtopic: introduction
 priority: 3
 
-zenodo_link: "https://zenodo.org/records/583140"
+zenodo_link: 'https://zenodo.org/record/583140'
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
   - "How can we generate a transcriptome de novo from RNA sequencing data?"

@@ -6,6 +6,8 @@ description: |
 
 draft: true
 type: use
+topics:
+  - microbiome
 tags: [bacteria, comparative genomics, pangenome, phylogeny, microgalaxy]
 
 editorial_board:

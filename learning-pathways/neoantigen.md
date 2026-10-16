@@ -2,7 +2,8 @@
 layout: learning-pathway
 tags: [intermediate, immunopeptidomics, cancer, proteogenomics, label-free]
 type: use
-
+topics:
+  - proteomics
 
 
 title: Neoantigen discovery using the iPepGen pipeline

@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Genome Assembly Quality Control'
+subtopic: assembly-quality
 zenodo_link: 'https://zenodo.org/record/6947782'
 tags:
   - assembly

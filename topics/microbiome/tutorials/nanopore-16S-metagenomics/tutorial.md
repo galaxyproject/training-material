@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 16S Microbial analysis with Nanopore data
-zenodo_link: https://zenodo.org/record/4274812
+zenodo_link: 'https://zenodo.org/record/4274812'
 questions:
 - How can we analyse the health status of the soil?
 - How do plants modify the composition of microbial communities?

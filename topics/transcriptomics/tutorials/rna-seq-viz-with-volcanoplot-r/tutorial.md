@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with Volcano Plot in R
 level: Intermediate
 subtopic: visualisation
-zenodo_link: "https://zenodo.org/record/2529117"
+zenodo_link: 'https://zenodo.org/record/2529117'
 questions:
   - "How to customise Volcano plot output in R?"
 objectives:

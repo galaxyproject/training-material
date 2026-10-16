@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
-zenodo_link: "https://doi.org/10.5281/zenodo.16416373"
+zenodo_link: 'https://zenodo.org/record/16416373'
 questions:
   - "Why is a Hi-C analysis useful?"
   - "What is 'chromosome conformation capture'?"

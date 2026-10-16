@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Helixer
-zenodo_link: https://zenodo.org/record/7867921
+zenodo_link: 'https://zenodo.org/record/7867921'
 tags:
   - eukaryota
   - helixer

@@ -10,6 +10,9 @@ ec = 0
 learning_pathway_SCHEMA_UNSAFE = YAML.load_file('bin/schema-learning-pathway.yaml')
 learning_pathway_SCHEMA = automagic_loading(learning_pathway_SCHEMA_UNSAFE)
 
+data_library_SCHEMA_UNSAFE = YAML.load_file('bin/schema-data-library.yaml')
+data_library_SCHEMA = automagic_loading(data_library_SCHEMA_UNSAFE)
+
 begin
   event_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event.yaml', permitted_classes: [Date])
 rescue StandardError
@@ -50,6 +53,33 @@ Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |f
     ec = 1
   end
 end
+
+Dir.glob('topics/*/tutorials/*/data-library.yaml').each do |file|
+  errs = []
+  datalib = YAML.load_file(file)
+
+  datalib_validator = Kwalify::Validator.new(data_library_SCHEMA)
+
+  def validate_document(document, validator)
+    errors = validator.validate(document)
+    return errors if errors && !errors.empty?
+
+    []
+  end
+
+  errs.push(*validate_document(datalib, datalib_validator))
+
+  # If we had no errors, validated successfully
+  if errs.empty?
+    puts "\e[38;5;40m#{file} validated succesfully\e[m"
+  else
+    # Otherwise, print errors and exit non-zero
+    puts "\e[48;5;09m#{file}  has errors\e[m"
+    errs.each { |x| puts "  #{x}" }
+    ec = 1
+  end
+end
+
 
 Dir.glob('events/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   errs = []

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2
 
-zenodo_link: https://zenodo.org/records/13710591
+zenodo_link: 'https://zenodo.org/record/13710591'
 
 abbreviations:
   SPUN: Society for the Protection of Underground Networks
@@ -60,7 +60,6 @@ answer_histories:
     date: 2024-09-20
 ---
 
-# Introduction
 
 This tutorial is for you if you are a mycologist using metabarcoding data to understand the fungal composition of soil samples. In particular, this tutorial and its downstream applications will be of most interest to mycorrhizal scientists. [{SPUN}](https://www.spun.earth) is a research and advocacy organisation that uses Illumina sequencing of environmental {eDNA} from soil samples to identify mycorrhizal fungi. At {SPUN}, we use both {ITS2} and {SSU} amplicon sequencing to identify ectomycorrhizal and arbuscular mycorrhizal fungi, respectively. This tutorial focuses on the {ITS2} sequencing used to identify {MF}.
 
@@ -200,10 +199,10 @@ We will briefly look at each type of file to see that it has been uploaded corre
 {: .hands_on}
 
 > <comment-title>Note</comment-title>
-> 
+>
 > - In this case, the ForwardPrimer and ReversePrimer are the same across all samples. This is typical as we usually sequence the same region in all samples using the same primer pair.
 > - LotuS2 allows you to specify the primer set as a parameter, and if this is done, the primer sequence does not need to be written in the mapping file. In this case, we are including primer sequences in the mapping file. When using different primer sets, if you are following these instructions for your data, you may need to change the primer sequences to reflect the primer set used for your sequencing.
-> 
+>
 {: .comment}
 
 > <hands-on-title>Inspect the {sdm} options file</hands-on-title>
@@ -273,7 +272,7 @@ In the next subsection, we show how to run LotuS2 in Galaxy and how to set the p
 
 > <hands-on-title>Run LotuS2</hands-on-title>
 >
-> In the panel on the left, select "Tools", search for "LotuS2" and then run the tool using the parameters below. Leave the rest of the parameters at their default settings. 
+> In the panel on the left, select "Tools", search for "LotuS2" and then run the tool using the parameters below. Leave the rest of the parameters at their default settings.
 >
 > Make sure you have the right version (2.32+galaxy0). You can check the version by clicking the {% icon tool-versions %} (blocks) icon.
 >
@@ -298,8 +297,8 @@ In the next subsection, we show how to run LotuS2 in Galaxy and how to set the p
 > 3. You should see a green box on the next page saying "Started tool LotuS2 and successfully added 1 job to the queue". The box lists the 6 outputs that the tool produces.
 > 4. This step can take 5-10 minutes to run or longer depending on how many other jobs are running on the Galaxy server. While we are waiting for it to finish, you can do the next step on "Creating your own mapping.tsv" file
 > 5. You will know when the tool has finished because all the outputs in the history will turn green.
-> 
-> 
+>
+>
 >  > <comment-title>Notes</comment-title>
 >  >
 >  > - Remember to choose _Paired-end list_ in the sequencing read data section. Galaxy will pick up the Paired-end list available in the History, which will have the name you gave it in the _Create a list of pairs_ step
@@ -352,21 +351,21 @@ The LotuS2 Galaxy tool creates 6 output files that you should see in your histor
 > Click on the little {% icon galaxy-eye %} (eye) icon next to each output in the history to examine it. An explanation of each file is given below.
 >
 > 1. **main log file**: If we had run LotuS on the command line, the contents of the `output/LotuSLogS/LotuS_run.log` would be this main LotuS2 run log file.
-> 
+>
 >     It has information on all the parameters passed to the tool, and information on the start time of each step in the program, plus the output of each step.
->   
+>
 >     You should always check this file first to see if LotuS2 completed correctly, and approximately how many reads were used/classified. If this number is much lower than what you expected, that might indicate a problem with the run and the parameters.
-> 
+>
 > 2. **mapping file**: You can ignore this file as it is a repeat of the mapping TSV file (tab-separated-values) that we used as an input.
-> 
+>
 > 3. **Newick-formatted phylogenetic trees between sequences**: A phylogenetic tree created from the ITS2 sequences. If you want to see what the tree looks like, you can copy the contents of this file and paste it at this [online tree viewer](http://etetoolkit.org/)treeview/
-> 
+>
 > 4. **FASTA-formatted extended OTU seed sequences**: OTU sequences created by the LotuS2 program after clustering near-identical reads
-> 
+>
 > 5. **OTU abundance matrix**: A tabular file with rows and columns with tab-separated-values. Each row is an OTU. The first column has the OTU name, and the remaining columns have the OTU abundance (i.e. how many reads were seen for that OTU) in each sample
-> 
+>
 > 6. **Complete LotuS2 output**: If you try to view this file you will see some unreadable binary characters on the screen. That's because this is a zip file with the complete LotuS2 output folder in one zip folder. You should download this zip file and unzip it on your local computer if you want to see everything inside this folder. ![screenshot of how to download the zip file](images/history-download-zip.png)
-> 
+>
 >     One of the most useful files in this output folder is the `phyloseq.Rdata` file which you can load in R to do further ecological analysis. This is beyond the scope of the current tutorial, but we will cover this topic in future tutorials. If you want to get started on your own, you can look at the last part "Exploration with phyloseq" in the [Building an amplicon sequence variant (ASV) table from 16S data using DADA2]({% link topics/microbiome/tutorials/dada-16S/tutorial.md %}) tutorial.
 {: .hands_on}
 
@@ -378,7 +377,7 @@ The LotuS2 Galaxy tool creates 6 output files that you should see in your histor
 > 2. What percentage of reads are assigned at the phylum level and at the genus level? (hint: main log file)
 > 3. How long did the entire LotuS2 pipeline take to run? (hint: the main log has time stamps at the left of each step in the format hh:mm:ss)
 > 4. Which OTU was most abundant in all samples? (hint: OTU abundance matrix). How many reads were present in each sample?
-> 5. What was the sequence of the least abundant OTU? (hint: FASTA-formatted extended OTU seed sequences)  
+> 5. What was the sequence of the least abundant OTU? (hint: FASTA-formatted extended OTU seed sequences)
 >
 > > <solution-title>Answers</solution-title>
 > >
