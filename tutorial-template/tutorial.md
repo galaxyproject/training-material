@@ -148,6 +148,8 @@ Some images can be added there to support the theory explanation:
 
 ![Alternative text]({% link topics/contributing/images/website_screenshot.png "Legend of the image (optional)")
 
+You can put images in the `images` folder inside your tutorial folder, or in the topic-level images folder if the images are useful to re-use across multiple tutorials in the topic.
+
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
 *Consider adding a detail boxes to expand on the theory* these are collapsed by default
@@ -171,12 +173,12 @@ Some intro text learners need to know about the next hands-on step
 >
 > Here we describe the tools or other actions learners should perform
 >
-> 1. {% tool [Tool Name](toolshed.g2.bx.psu.edu/repos/UUU/VVV/WWW/v1.0+galaxy1) %} with the following parameters:
+> 1. {% tool [Tool Name](toolshed.g2.bx.psu.edu/repos/XXX/YYY/ZZZ/v1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `myfile.txt`
 >    - *"Parameter name"*: `value`
 >    - *"Another Parameter"*: `value`
 >
-> 2. {% tool [My Second Tool](toolshed.g2.bx.psu.edu/repos/UUU/VVV/WWW/v1.0+galaxy1) %} with the following parameters:
+> 2. {% tool [My Second Tool](toolshed.g2.bx.psu.edu/repos/XXX/YYY/ZZZ/v1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: File
 >    - *"Parameter name"*: `value`
 >    - *"Another Parameter"*: `value`
