@@ -200,6 +200,8 @@ The original image is published by [Legacy Surveys / D. Lang (Perimeter Institut
 
 ![Background image](../../images/astronomy-source-extractor/source-extractor_background_no_mask.png "Background image.")
 
+Now let's proceed to post-processing the detected sources on local machine:
+
 > <hands-on-title> Ellipse drawing </hands-on-title>
 >
 > The tool already provides as output an image with ellipses around detected objects. Nevertheless, if you want to create a figure by yourself you can use the table of detected sources returned by the tool ```objects``` in the following way:
