@@ -130,6 +130,10 @@ Before source detection, the tool estimates the image background. This is done b
 bw = 64  # box width in pixels
 bh = 64  # box height in pixels
 ```
+
+The box size expresses assumptions about the scale of background variations and the typical size of sources in the image.
+It should be somewhere in between the size of of the two.
+
 Within each box, the pixel histogram is filtered to remove outliers, and the background level is estimated using a mode approximation based on the median and mean of the remaining pixel values. While 64 is the default value in the [SEP](https://sep.readthedocs.io/en/stable/index.html) package, the original [paper](https://ui.adsabs.harvard.edu/abs/1996A%26AS..117..393B/abstract) suggests that on most images, a value between 32 to 128 pixels should work fine.
 
 After background estimation, the tool identifies groups of pixels that exceed a defined brightness threshold. These parameters should help distinguish between real luminous sources and random fluctuations that can appear in the background.
