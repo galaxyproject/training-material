@@ -243,6 +243,19 @@ Finally, you could follow the ["Hands On: Segment image" from the "Introduction 
 ![Segmentation overlay](../../images/process-image-bioimageio/segmentation.png "Overlay of the original input image and the contours of the segmentation results obtained using the BioImage.IO model and post-processing.")
 
 
+# Example: Segmentation of an astronomical image
+
+<!-- https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_opens_data_treasure_trove_offers_glimpse_of_deep_fields -->
+<!-- https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/03/euclid_deep_field_south_16x_zoom/26614894-1-eng-GB/Euclid_Deep_Field_South_16x_zoom.tif -->
+
+In this example we apply segmentation model on an astronomical image, observed by ESA's Euclid telescope. The image we chose can be found at [ESA](https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_opens_data_treasure_trove_offers_glimpse_of_deep_fields) website. Let's pick the image 16x zoom, [here](https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/03/euclid_deep_field_south_16x_zoom/26614894-1-eng-GB/Euclid_Deep_Field_South_16x_zoom.tif).
+
+Before proceeding, we should convert the image to grayscale. TODO: use galaxy tool?
+
+
+
+
+
 # Conclusion
 
 In this tutorial, you learned how to run a BioImage.IO model on a biological image using Galaxy. By uploading a compatible model and image, setting the appropriate size and axes, and running the tool, you obtained both a predicted image and a tensor matrix representing the model output.
