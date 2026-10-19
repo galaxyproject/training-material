@@ -58,7 +58,7 @@ For more in-depth documentation, you can refer to:
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, we will cover:
+> In this tutorial, you will learn how to:
 >
 > 1. TOC
 > {:toc}
@@ -123,7 +123,7 @@ The filter kernel is used to smooth the input image, which can enhance the detec
 
 ### Parameters for Background Estimation and Thresholding
 
-In this subsection, we describe a subset of tool's parameters that you can change.
+In this subsection, you can change a subset of the tool's parameters.
 
 Before source detection, the tool estimates the image background. This is done by dividing the image into a grid of boxes, each with a default size of:
 ``` python
