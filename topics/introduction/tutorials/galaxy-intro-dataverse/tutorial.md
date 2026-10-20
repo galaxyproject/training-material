@@ -55,8 +55,8 @@ By connecting Galaxy to Dataverse, researchers can directly export their finaliz
 
 ## How can you browse existing Dataverse repositories from within Galaxy?
 
-**Please note:** the Galaxy Dataverse integration is currently only available on [usegalaxy.eu](https://usegalaxy.eu).
-Galaxy has integrated Dataverse directly into its **File Sources (Remote Files)** framework. This allows researchers to search, browse, and import remote repository datasets directly into an active Galaxy history without downloading them locally first.
+**Please note:** The Galaxy Dataverse integration is currently only available on [usegalaxy.eu](https://usegalaxy.eu).
+Galaxy has integrated Dataverse directly into its **File Sources (Remote Files)** framework. This allows researchers to search, browse, and import datasets from remote repositories directly into an active Galaxy history without first downloading them locally.
 
 ### Method 1: Browsing Pre-configured Public Dataverses
 
@@ -67,14 +67,19 @@ Galaxy instances frequently maintain a list of pre-configured public repositorie
 > 1. Click the **Upload Data** icon at the top of the Galaxy tool panel.
 > 2. Inside the upload dialog box, select the **Choose from repository** button at the bottom.
 > 3. In the search/filter box at the top of the repository browser, type `Dataverse`.
-> 4. A list of globally available, pre-configured Dataverse instances will appear. Click on an instance to explore its public directories, datasets, and files. It will look similar to this:
+> 4. A list of globally available, pre-configured Dataverse instances will appear. It will look similar to this:
 >
 > ![Pre-Configured Dataverse](https://galaxyproject.org/images/news/2026-01-15-dataverse/preconfigured_dataverse.png)
 >
+> 5. Click an instance, such as **BSC**, to explore its public directories, datasets, and files of the Barcelona Supercomputing Centre's Dataverse.
 {: .hands_on}
 
-From here, you can select your instance and browse or search for existing files. **Note**: the search is case-sensitive. 
-If you have already found the file you want to work with, scroll down to "Importing Discovered Files into Your History".
+From here, you can browse for existing files or search a term in the search bar. **Note**: The search is case-sensitive. 
+In the BSC Dataverse, search for, for example, _ Handwritten _.
+You will see a folder called _A Dataset for Handwritten Text Recognition in Medieval Notarial Charters Written on Parchment_.
+If you click the name, you can see the contents of that folder.
+
+If you have found the folder or file(s) you want to work with, scroll down to [Importing Files to Galaxy](#importing-files-to-Galaxy).
 
 ### Method 2: Adding and Browsing a Custom Dataverse Repository
 
@@ -89,7 +94,7 @@ If you need to connect to an institutional Dataverse instance not listed by defa
 
 > <hands-on-title>Link the Repository in Galaxy</hands-on-title>
 >
-> 1. In Galaxy, navigate to the top menu and **click on your user name** and then **Preferences**.
+> 1. In Galaxy, navigate to the top menu and **click on your username** and then **Preferences**.
 > 2. Select **Manage your Repositories** and click the **Create** button.
 > 3. Select **Dataverse**.
 > 4. Complete the configuration form:
@@ -105,13 +110,19 @@ The remote repository configuration menu looks like this:
 
 ![Remote Repositories](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_1.png)
 
-Your completed form could look like this (but with information of the desired Dataverse):
+Your completed form could look like this (but with information about the desired Dataverse):
 
 ![Remote Repositories filled form](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_2.png)
 
 After saving, your new entry appears in **My Repositories**.
 
 ![My Repositories](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_3.png)
+
+## Importing Files to Galaxy
+
+To upload your files to Galaxy, it does not matter whether you use the preconfigured Dataverse instances or your custom Dataverse repository.
+
+
 
 > <hands-on-title>Importing Discovered Files into Your History</hands-on-title>
 >
