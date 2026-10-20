@@ -39,6 +39,7 @@ contributions:
     - deNBI
     - elixir-europe
     - oscars
+    - fiesta
 tags:
   - Image segmentation
   - Image thresholding
