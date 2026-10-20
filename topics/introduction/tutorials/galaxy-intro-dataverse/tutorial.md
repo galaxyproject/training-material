@@ -133,7 +133,7 @@ Now with your Dataverse all set, let's see how you can get your data into Galaxy
 > 5. A new window appears, showing you how many files you selected. Click **Start** to run the import process and **Close** to close the upload window.
 > 6. The selected items will populate your Galaxy history.
 >
-> Once the progress bar turns green, they are ready to be routed into any analytical tool or workflow.
+> Once the progress bar turns green, the datasets are ready to be routed into any analytical tool or workflow.
 >
 {: .hands_on}
 
