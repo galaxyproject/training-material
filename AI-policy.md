@@ -10,7 +10,9 @@ The GTN is committed to providing high-quality human-written and human-curated t
   - create GTN content (tutorials, faqs, images, news posts, and any other user-facing content)
   - communicate about your contribution (GitHub PR descriptions, comments, issues, reviews, chat messages, etc)
 
-- It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But all GTN contributions and communication must be in your own words.
+- All GTN contributions and communication must be in your own words.
+- LLMs may be used to answer questions, analyze, distill, refine, check, suggest, review. However we encourage contributors to avoid them in favour of [existing documentation](https://training.galaxyproject.org/training-material/topics/contributing/) and our [chat fora](https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im).
+- Since AI generated information is frequently misleading or false, we cannot supply support on anything referencing AI output.
 - For contributions to the **codebase** (`bin`, `_plugins`) you may be *assisted* by generative AI, under the following conditions:
 
   - You must **understand and take responsibility** for every line of code in your contribution.
