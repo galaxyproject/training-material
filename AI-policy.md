@@ -2,6 +2,12 @@
 
 The GTN is committed to providing high-quality human-written and human-curated tutorials. As such, the use of generative AI tools to create GTN content is not allowed.
 
+## Societal Motivation
+
+AI tools have numerous ethical issues. [Modern AI tools are unlawful by design](https://www.amnesty.org/en/documents/pol40/0996/2026/en/) per human rights organisation Amnesty International. [They require an unreasonable amount of energy](https://www.theverge.com/2024/5/15/24157496/microsoft-ai-carbon-footprint-greenhouse-gas-emissions-grow-climate-pledge), and [water](https://restofworld.org/2024/data-centers-environmental-issues/)  to build and operate, their models are built in part with heavily [exploited workers in unacceptable working conditions](https://time.com/6247678/openai-chatgpt-kenya-workers/), usually [without consent from or compensation for creators of the source material](https://variety.com/vip-special-reports/ai-training-consent-content-licensing-special-report-1236307878/). Furthermore, they are being used to [undermine labor and justify layoffs](https://www.forbes.com/sites/richardnieva/2025/07/17/ai-tech-layoffs/). Even if one accepts the premise they are useful, they bias [high income countries and contribute to a widening skills gap](https://doi.org/10.1126%2Fscience.adz9311). And generally are contrary to the [fundamental reasons we do science](https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/) and we share our knowledge with others.
+
+These are harms that we do not want to perpetuate, even if only indirectly.
+
 ## Rules
 
 - It is **not permitted** to use generative AI to:
@@ -58,13 +64,6 @@ Contributors making use of generative AI tools oftentimes **greatly increase the
 Then an LLM-free GTN benefits you!
 The GTN tutorials serve as a high-quality information source for Galaxy AI solutions such as the Galaxy chatbot.
 As such, to prevent model collapse, we must prevent the use of LLM generated text in the GTN.
-
-
-## Societal Motivation
-
-AI tools have several ethical issues. [They require an unreasonable amount of energy](https://www.theverge.com/2024/5/15/24157496/microsoft-ai-carbon-footprint-greenhouse-gas-emissions-grow-climate-pledge), and [water](https://restofworld.org/2024/data-centers-environmental-issues/)  to build and operate, their models are built in part with heavily [exploited workers in unacceptable working conditions](https://time.com/6247678/openai-chatgpt-kenya-workers/), usually [without consent from or compensation for creators of the source material](https://variety.com/vip-special-reports/ai-training-consent-content-licensing-special-report-1236307878/). Furthermore, they are being used to [undermine labor and justify layoffs](https://www.forbes.com/sites/richardnieva/2025/07/17/ai-tech-layoffs/).
-
-These are harms that we do not want to perpetuate, even if only indirectly.
 
 
 ## Acknowledgements
