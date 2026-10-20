@@ -100,8 +100,8 @@ If you need to connect to an institutional Dataverse instance not listed by defa
 > 4. Complete the configuration form:
 >  * **Name:** A descriptive title (e.g., *My Institutional Dataverse*).
 >  * **Dataverse instance endpoint:** The full base URL of the repository (e.g., `https://dataverse.harvard.edu`).
->  * **API Token:** Paste the token generated in Step 1.
 >  * **Allow Galaxy to export data:** Set to **Yes** if you want the flexibility to push finalized Galaxy histories back to Dataverse later.
+>  * **API Token:** Paste the token generated on the Dataverse instance of your choice in Step 1.
 > 5. Click **Create**.
 >
 {: .hands_on}
@@ -114,26 +114,27 @@ Your completed form could look like this (but with information about the desired
 
 ![Remote Repositories filled form](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_2.png)
 
-After saving, your new entry appears in **My Repositories**.
+After saving, your new entry appears in **My Repositories** under the name you have selected.
 
 ![My Repositories](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_3.png)
 
+Now with your Dataverse all set, let's see how you can get your data into Galaxy.
+
 ## Importing Files to Galaxy
 
-To upload your files to Galaxy, it does not matter whether you use the preconfigured Dataverse instances or your custom Dataverse repository.
-
-
+ Once the connection between Galaxy and the Dataverse instance of your choice is established (via Method 1 or Method 2), navigating and uploading the files follows a standardized routine.
 
 > <hands-on-title>Importing Discovered Files into Your History</hands-on-title>
 >
-> Once the connection is established (via Method 1 or Method 2), navigating and uploading the files follows a standardized routine:
->
-> 1. Open the **Upload Data** menu and click **Choose from repository**.
-> 2. Select your newly configured or pre-configured Dataverse source.
+> 1. Open the **Upload** menu in the activity bar, then click **Choose from repository**.
+> 2. Select your newly configured or pre-configured Dataverse source by typing the name in the search bar and clicking on it.
 > 3. **Browse or Search:** You can navigate through the hierarchical Dataverse collections or use the search filter for dataset names.
-> 4. **Select Files:** Once you find the correct dataset container, click into it, tick the checkbox next to the desired files and hit **Select**.
-> 5. **Execute Import:** The selected items will populate the standard Galaxy upload queue. Click **Start** to run the import process.
+> 4. **Select Files:** Once you find the correct dataset container, click into it, tick the checkbox next to the desired files or the checkbox next to _Label_ to select all files and hit **Select**.
+> 5. A new window appears, showing you how many files you selected. Click **Start** to run the import process and **Close** to close the upload window.
+> 6. The selected items will populate your Galaxy history.
 >
-> Once the progress bar turns green, the files will appear in the right-hand history panel as standard Galaxy datasets, ready to be routed into any analytical tool or workflow.
+> Once the progress bar turns green, they are ready to be routed into any analytical tool or workflow.
 >
 {: .hands_on}
+
+{% snippet faqs/galaxy/histories_dataset_colors.md %}
