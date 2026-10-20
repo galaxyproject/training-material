@@ -2,11 +2,6 @@
 
 The GTN is committed to providing high-quality human-written and human-curated tutorials. As such, the use of generative AI tools to create GTN content is not allowed.
 
-## Societal Motivation
-
-AI tools have numerous ethical issues. [Modern AI tools are unlawful by design](https://www.amnesty.org/en/documents/pol40/0996/2026/en/) per human rights organisation Amnesty International. [They require an unreasonable amount of energy](https://www.theverge.com/2024/5/15/24157496/microsoft-ai-carbon-footprint-greenhouse-gas-emissions-grow-climate-pledge), and [water](https://restofworld.org/2024/data-centers-environmental-issues/)  to build and operate, their models are built in part with heavily [exploited workers in unacceptable working conditions](https://time.com/6247678/openai-chatgpt-kenya-workers/), usually [without consent from or compensation for creators of the source material](https://variety.com/vip-special-reports/ai-training-consent-content-licensing-special-report-1236307878/). Furthermore, they are being used to [undermine labor and justify layoffs](https://www.forbes.com/sites/richardnieva/2025/07/17/ai-tech-layoffs/). Even if one accepts the premise they are useful, they bias [high income countries and contribute to a widening skills gap](https://doi.org/10.1126%2Fscience.adz9311). And generally are contrary to the [fundamental reasons we do science](https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/) and we share our knowledge with others.
-
-These are harms that we do not want to perpetuate, even if only indirectly.
 
 ## Rules
 
@@ -27,6 +22,7 @@ These are harms that we do not want to perpetuate, even if only indirectly.
 - Every **contributor is responsible** for ensuring that their contribution does not violate our policy or license
 - Maintainers are encouraged to deprioritise or reject contributions that they suspect have been made in violation of this policy.
 
+
 ## Motivation
 
 ### The GTN is for Humans
@@ -37,9 +33,9 @@ Learners already have the ability to ask LLMs to create tutorials for them; The 
 
 LLMs [distort our written language](https://arxiv.org/abs/2603.18161) and result in [semantic ablation](https://www.theregister.com/software/2026/02/16/semantic-ablation-why-ai-writing-is-boring-and-dangerous/4414930), which is highly detrimental when writing tutorials.
 Diverse authors bring diverse viewpoints which we may not have considered and value in our didactics.
-LLMs by definition are homogeneous and homogenize all of the text the edit.
+LLMs by definition are homogeneous and homogenize all of the text they edit.
 
-### Contribute what you can, how you can, we're happy to have you join!
+### Contribute what you can, how you can, we're happy to have you join and want you to learn and grow!
 
 If you are a **new contributor or not a native English speaker**, we understand you may be less confident about your contribution, but our human reviewers are here to guide you through the steps to improve both your contribution and your own skills and understanding. The GTN community is very international. Most contributors are not native English speakers. It is ok for GTN content not to be perfect English. Reviewers will check for typos and grammar mistakes. We much prefer your own (possibly imperfect) words, to LLM generated text.
 
@@ -64,6 +60,13 @@ Contributors making use of generative AI tools oftentimes **greatly increase the
 Then an LLM-free GTN benefits you!
 The GTN tutorials serve as a high-quality information source for Galaxy AI solutions such as the Galaxy chatbot.
 As such, to prevent model collapse, we must prevent the use of LLM generated text in the GTN.
+
+
+## Societal Motivation
+
+AI tools have numerous ethical issues. [Modern AI tools are unlawful by design](https://www.amnesty.org/en/documents/pol40/0996/2026/en/) per human rights organisation Amnesty International. [They require an unreasonable amount of energy](https://www.theverge.com/2024/5/15/24157496/microsoft-ai-carbon-footprint-greenhouse-gas-emissions-grow-climate-pledge), and [water](https://restofworld.org/2024/data-centers-environmental-issues/)  to build and operate, their models are built in part with heavily [exploited workers in unacceptable working conditions](https://time.com/6247678/openai-chatgpt-kenya-workers/), usually [without consent from or compensation for creators of the source material](https://variety.com/vip-special-reports/ai-training-consent-content-licensing-special-report-1236307878/). Furthermore, they are being used to [undermine labor and justify layoffs](https://www.forbes.com/sites/richardnieva/2025/07/17/ai-tech-layoffs/). Even if one accepts the premise they are useful, they bias [high income countries and contribute to a widening skills gap](https://doi.org/10.1126%2Fscience.adz9311). And generally are contrary to the [fundamental reasons we do science](https://terrytao.wordpress.com/2026/10/15/why-are-we-even-doing-all-this/) and we share our knowledge with others.
+
+These are harms that we do not want to perpetuate, even if only indirectly.
 
 
 ## Acknowledgements
