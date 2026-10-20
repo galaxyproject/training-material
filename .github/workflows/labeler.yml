@@ -13,3 +13,10 @@ jobs:
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         sync-labels: true
+    - uses: ppremk/lfs-warning@v3.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        filesizelimit: 10MB
+        labelName: "large-files-detected"
+        #exclusionPatterns: |
+        #  **/*.png
