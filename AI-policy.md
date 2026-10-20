@@ -31,7 +31,7 @@ Learners already have the ability to ask LLMs to create tutorials for them; The 
 
 ### We value diverse voices
 
-LLMs [distort our written language](https://arxiv.org/abs/2603.18161) and result in [semantic ablation](https://www.theregister.com/software/2026/02/16/semantic-ablation-why-ai-writing-is-boring-and-dangerous/4414930), which is highly detrimental when writing tutorials.
+LLMs [distort our written language](https://arxiv.org/abs/2603.18161), reduce [linguistic diversity](https://www.nature.com/articles/s41562-026-02550-0) and result in [semantic ablation](https://www.theregister.com/software/2026/02/16/semantic-ablation-why-ai-writing-is-boring-and-dangerous/4414930), which is highly detrimental when writing tutorials.
 Diverse authors bring diverse viewpoints which we may not have considered and value in our didactics.
 LLMs by definition are homogeneous and homogenize all of the text they edit.
 
@@ -39,7 +39,7 @@ LLMs by definition are homogeneous and homogenize all of the text they edit.
 
 If you are a **new contributor or not a native English speaker**, we understand you may be less confident about your contribution, but our human reviewers are here to guide you through the steps to improve both your contribution and your own skills and understanding. The GTN community is very international. Most contributors are not native English speakers. It is ok for GTN content not to be perfect English. Reviewers will check for typos and grammar mistakes. We much prefer your own (possibly imperfect) words, to LLM generated text.
 
-We fully expect that new contributors will be less confident in their contributions, and our guidance to them is to start with small contributions that they can fully understand to build confidence. We aspire to be a **welcoming community that helps new contributors grow their expertise**, but learning involves taking small steps, getting feedback, and iterating.
+We fully expect that new contributors will be less confident in their contributions, and our guidance to them is to start with small contributions that they can fully understand to build confidence. We aspire to be a **welcoming community that helps new contributors grow their expertise**, but learning involves taking small steps, getting feedback, and iterating. Using an LLM [harms the learning process](http://arxiv.org/abs/2601.20245) by which novices become familiar with our framework and develop skills, without significant evidence of efficiency gains.
 
 Passing maintainer feedback to an LLM doesn’t help anyone grow, and does not sustain our community.
 
