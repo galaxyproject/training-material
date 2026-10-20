@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Phylogenetic analysis for bacterial comparative genomics
-zenodo_link: 'https://zenodo.org/records/1'
+zenodo_link: ''
 draft: true
 questions:
 - to do
@@ -71,7 +71,7 @@ tutorial.
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 3. {% tool [Import](upload1) %} the contig file from [Zenodo]({{ page.zenodo_link }}) or from Galaxy shared data libraries:
+> 3. {% tool [Import](upload1) %} the contig file from Zenodo or from Galaxy shared data libraries:
 >
 >    ```
 >    {{ page.zenodo_link }}/files/DRR187559_contigs.fasta

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CRISPR screen analysis
-zenodo_link: https://zenodo.org/record/5750854
+zenodo_link: 'https://zenodo.org/record/5750854'
 questions:
 - What are the steps to process CRISPR screen data?
 - How to identify essential genes across experimental conditions?

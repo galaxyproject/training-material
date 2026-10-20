@@ -81,7 +81,7 @@ Each public Galaxy service is provided through a complex mixture of funding, gov
 **Acknowledgement** statements for the four main `usegalaxy.*` services can be found using the following links:
 
 - Galaxy Australia - [https://site.usegalaxy.org.au/about#acknowledgement-statement](https://site.usegalaxy.org.au/about#acknowledgement-statement)
-- Galaxy Europe - [https://usegalaxy-eu.github.io/about](https://usegalaxy-eu.github.io/about)
+- Galaxy Europe - [https://galaxyproject.org/eu/about/#acknowledgement](https://galaxyproject.org/eu/about/#acknowledgement)
 - Galaxy France - [https://www.france-bioinformatique.fr/en/services/acknowledgement/](https://www.france-bioinformatique.fr/en/services/acknowledgement/)
 - Galaxy Main - [https://usegalaxy.org/#about](https://usegalaxy.org/#about)
 

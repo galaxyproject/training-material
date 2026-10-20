@@ -5,7 +5,7 @@ title: Multi-sample batch correction with Harmony and SnapATAC2
 subtopic: scmultiomics
 priority: 3
 level: Intermediate
-zenodo_link: https://zenodo.org/records/12683310
+zenodo_link: 'https://zenodo.org/record/12683310'
 questions:
 - Why is batch correction important during the analysis of data from multiple samples?
 - How is batch correction performed on single cell ATAC-seq data?

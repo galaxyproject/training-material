@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Advanced Python
 level: Intermediate
-zenodo_link: https://zenodo.org/record/3477564
+zenodo_link: 'https://zenodo.org/record/3477564'
 requirements:
  -
    type: internal

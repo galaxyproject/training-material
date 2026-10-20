@@ -4,6 +4,8 @@ tags: [beginner, genomic-intervals, epigenetics]
 cover-image: assets/images/chipseq-viz.png
 cover-image-alt: "Plot of ChIP-Seq signal from multiple samples across a genome region"
 type: use
+topics:
+  - epigenetics
 
 editorial_board:
 - wm75

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to Image Analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3362976
+zenodo_link: 'https://zenodo.org/record/3362976'
 level: Introductory
 subtopic: introduction
 questions:
@@ -31,10 +31,12 @@ follow_up_training:
 contributions:
   authorship:
     - thomaswollmann
-    - kostrykin
-    - annefou
     - shiltemann
+    - kostrykin
+    - dianichj
+    - annefou
   funding:
+    - deNBI
     - elixir-europe
     - oscars
 tags:
@@ -131,12 +133,12 @@ Our objective is to automatically count the number of melt ponds in the satellit
 
 > <comment-title> Counting melt ponds with a cell-counting workflow </comment-title>
 >
-> In the Earth observation path, we reuse *the same* segment-and-count workflow that was built for counting of stained cell nuclei to count *supraglacial melt ponds* on the Greenland ice sheet. This is a cross-discipline experiment from the [OSCARS-FIESTA](https://oscars-project.eu/projects/fair-image-analysis-across-sciences) project. Why does it work? Melt ponds have a high ice-adapted water index, so in a water-index image they appear as *bright blobs on a darker background*, which is the same characteristic that is exploited for segmenting cell nuclei. The same threshold–label–count steps that count nuclei count melt ponds; only the *index* and the *interpretation of the threshold* are domain-specific.
+> In the Earth observation path, we reuse *the same* segment-and-count workflow that was built for counting of stained cell nuclei to count *supraglacial melt ponds* on the Greenland ice sheet. This is a cross-discipline experiment from the [OSCARS-FIESTA](https://oscars-project.eu/projects/fair-image-analysis-across-sciences) project. Why does it work? Melt ponds have a high ice-adapted water index, so in a water-index image they appear as *bright blobs on a darker background*, which is the same characteristic that is exploited for segmenting cell nuclei. Because every step of the workflow relies only on this contrast, it can be applied to the satellite image without modification. Only two things are specific to Earth observation: how the input image is produced (a water index computed from two spectral bands of the satellite scene, instead of a fluorescence channel recorded by the microscope), and what the threshold separates (open water from ice, instead of nuclei from background).
 {: .comment}
 
 > <comment-title> How the satellite image was prepared </comment-title>
 >
-> The image is a single-band ice-adapted normalised-difference water index, NDWI<sub>ice</sub> = (blue − red)/(blue + red) (Williamson et al. 2018, [doi:10.5194/tc-12-3045-2018](https://doi.org/10.5194/tc-12-3045-2018)), computed from a Sentinel-2 Level-2A scene (tile T22WEV, 2019-07-23) over the south-west Greenland ablation zone and rescaled to 16-bit so that melt ponds are bright. The preprocessing notebooks, the full Galaxy run provenance, the validation against an independently published lake map, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo).
+> The image is a single-band ice-adapted normalised-difference water index, NDWI<sub>ice</sub> = (blue − red)/(blue + red) {% cite Williamson2018 %}, computed from a Sentinel-2 Level-2A scene (tile T22WEV, 2019-07-23) over the south-west Greenland ablation zone and rescaled to 16-bit so that melt ponds are bright. The preprocessing notebooks, the full Galaxy run provenance, the validation against an independently published lake map, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo).
 {: .comment}
 
 </div>
@@ -168,20 +170,18 @@ Now, we can extract metadata from an image.
 
 # Visual Inspection of TIFF Images
 
-Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF cannot be displayed in most web browsers directly. Therefore, for visual inspection of TIFF images, we use a TIFF visualization plugin in Galaxy.
+Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). TIFF images can be visually inspected directly within Galaxy.
 
 > <hands-on-title>Visual Inspection of TIFF Images</hands-on-title>
 >
-> 1. Click on the title of your file to see the row of small icons for saving, linking, etc.:
-> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](../../images/imaging-introduction/LittleJobIcons.png)
-> 2. Click on the **visualise icon** {% icon galaxy-visualise %} and then select the **Tiff Viewer** visualization plugin.
+> 1. Click on the dataset to expand it, then click **Preview** {% icon galaxy-eye %} to show the image for direct visual inspection.
 >
 {: .hands_on}
 
 Your image should look something like this:
 
 <div class="Bioimaging" markdown="1">
-![raw input image](../../images/imaging-introduction/viz_input.png){: width="75%"}
+![raw input image](../../images/imaging-introduction/tiffviewer_input.png){: width="75%"}
 </div>
 
 <div class="Earth-observation" markdown="1">
@@ -190,10 +190,14 @@ Your image should look something like this:
 
 > <question-title></question-title>
 >
-> You can observe that the image content is barely visible. Why?
+> The image now displays in Galaxy as a grayscale image. The lowest intensity values are shown as black and the highest intensity values as white. But what range of intensity values do those correspond to?
 >
 > > <solution-title></solution-title>
-> > The image is 16-bit, but its intensity values cover only a small fraction of the range that 16 bits can represent (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
+> > The original image is 16-bit and the intensity values of the image only span a small fraction of the range that can be represented using 16 bits (0 to 65535):
+> > - **Bioimaging data:** 33069 to 36863 (33069 corresponds to black and 36863 corresponds to white), about 6% of the range.
+> > - **Earth observation data:** 32000 to 38000 (32000 corresponds to black and 38000 corresponds to white), about 9% of the range.
+> >
+> > For direct visual inspection of the image, Galaxy automatically performs a _windowing operation_ on the intensity values of the image, so that intensity values that are not present in the image do not get encoded in the color values. This strongly enhances visual recognisability of the image (compared to encoding 0 as black and 65535 as white without using windowing for the intensity values). Other visualization tools might not apply windowing automatically and will require explicit normalization of the image intensity histogram.
 > {: .solution }
 {: .question}
 

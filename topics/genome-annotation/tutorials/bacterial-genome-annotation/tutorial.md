@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Bacterial Genome Annotation
-zenodo_link: https://zenodo.org/record/10572227
+zenodo_link: 'https://zenodo.org/record/10572227'
 questions:
 - Which genes are on a draft bacterial genome?
 - Which other genomic components can be found on a draft bacterial genome?

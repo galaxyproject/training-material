@@ -5,7 +5,7 @@ redirect_from:
   - /topics/proteomics/tutorials/neoantigen-7-hla-binding-novel-peptides/tutorial.html
 
 title: "Neoantigen 5b: IEDB binding Validated Neopeptides"
-zenodo_link: 'https://zenodo.org/records/14377365'
+zenodo_link: 'https://zenodo.org/record/14377365'
 questions:
 - What are neoantigens, and why are they significant in cancer immunotherapy?
 - How can binding predictions and validation help distinguish strong and weak binders?

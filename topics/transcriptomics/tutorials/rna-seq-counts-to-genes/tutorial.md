@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "2: RNA-seq counts to genes"
 subtopic: end-to-end
-zenodo_link: "https://zenodo.org/record/4273218"
+zenodo_link: 'https://zenodo.org/record/4273218'
 tags:
   - limma-voom
   - mouse

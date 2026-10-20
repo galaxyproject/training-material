@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Controllo qualità
-zenodo_link: https://zenodo.org/records/61771
+zenodo_link: 'https://zenodo.org/record/61771'
 questions:
 - Come eseguire il controllo di qualità dei dati grezzi NGS?
 - Quali sono i parametri di qualità da verificare in un dataset?

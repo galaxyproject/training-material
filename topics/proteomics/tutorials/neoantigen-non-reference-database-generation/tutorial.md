@@ -5,7 +5,7 @@ redirect_from:
   - /topics/proteomics/tutorials/neoantigen-2-non-reference-database-generation/tutorial.html
 
 title: "Neoantigen 1b: Non-Reference-Database-Generation"
-zenodo_link: "https://zenodo.org/records/14372521"
+zenodo_link: 'https://zenodo.org/record/14372521'
 questions:
 - Why must we generate a customized fusion database for Proteogenomics research?
 objectives:

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Creating metadata using Ecological Metadata Language (EML) standard
   with EML Assembly Line functionalities
-zenodo_link: https://zenodo.org/records/10663465
+zenodo_link: 'https://zenodo.org/record/10663465'
 questions:
 - How to generate detailled metadata easily from biodiversity datasets ?
 - How to use international metadata standard?

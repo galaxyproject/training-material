@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Regression in Machine Learning'
-zenodo_link: https://zenodo.org/record/2545213
+zenodo_link: 'https://zenodo.org/record/2545213'
 questions:
 - How to use regression techniques to create predictive models from biological datasets?
 objectives:

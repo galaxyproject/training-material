@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Single Cell Proteomics data analysis with bioconductor-scp'
-zenodo_link: 'https://zenodo.org/records/14650887'
+zenodo_link: 'https://zenodo.org/record/14650887'
 questions:
 - Which biological questions can single cell proteomics (SCP) help find us answers to?
 - Which tools can be used to analyze the SCP data?
