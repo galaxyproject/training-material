@@ -3,7 +3,6 @@
 You MUST NOT generate any content or prose in the following directories:
 
 - topics/
-- faqs/
 - news/
 - events/
 - learning-pathways/

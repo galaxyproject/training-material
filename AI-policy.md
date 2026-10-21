@@ -6,14 +6,14 @@ The GTN is committed to providing high-quality human-written and human-curated t
 ## Rules
 
 - It is **not permitted** to use generative AI to:
-  - create GTN content (tutorials, faqs, images, news posts, and any other user-facing content)
+  - create GTN content (tutorials, news posts, events, learning pathways, images and any other user-facing content)
   - communicate about your contribution (GitHub PR descriptions, comments, issues, reviews, chat messages, etc)
 
 - LLMs **may be used** to answer questions, analyze, distill, refine, check, suggest, review.
   - However, we encourage contributors to avoid them in favour of [existing documentation](https://training.galaxyproject.org/training-material/topics/contributing/) and our [chat forum](https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im).
   - All GTN content and all communication must be in **your own words**.
 
-- For contributions to the **codebase** (`bin`, `_plugins`) you may be *assisted* by generative AI, under the following conditions:
+- For contributions to the **codebase** (e.g. `bin`, `_plugins`) you may be *assisted* by generative AI, under the following conditions:
   - You must **understand and take responsibility** for every line of code in your contribution.
   - You must be able to **answer technical questions in review** and make any requested changes.
   - You must **disclose and describe** the use of generative AI in your PR description.
