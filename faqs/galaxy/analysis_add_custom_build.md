@@ -8,7 +8,7 @@ contributors: [shiltemann]
 ---
 
 - Navigate to the History that contains your fasta for the reference genome
-- Standarize the [fasta format]({% link faqs/galaxy/reference_genomes_custom_genomes.md %}), and wait until the fasta dataset is green
+- Standardize the [fasta format]({% link faqs/galaxy/reference_genomes_custom_genomes.md %}), and wait until the fasta dataset is green
 - Click your username in the masthead, then **Preferences -> Manage Custom Builds** (the page only offers fasta files that were in your current history when it opened)
 - Create a unique **Name** for your reference build {% if include.name %}`{{ include.name }}`{% endif %}
 - Create a unique **Key** (the dbkey) for your reference build {% if include.dbkey %}`{{ include.dbkey }}`{% endif %}
