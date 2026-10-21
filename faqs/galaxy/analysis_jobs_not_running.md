@@ -6,7 +6,7 @@ layout: faq
 contributors: [shiltemann]
 ---
 
-1. **Please make sure you are logged in**. The masthead should show your username. If you see **Login** and **Register** buttons there instead, you are not logged in.
+1. **Please make sure you are logged in**. The masthead should show your username. If you see **Login** and **Register** buttons there instead, you are not logged in. Some servers let you run jobs without logging in, but many require an account.
 
 2. **Activate your account**. If you have recently registered your account, you may first have to activate it. You will receive an e-mail with an activation link.
   - Make sure to check your spam folder!
