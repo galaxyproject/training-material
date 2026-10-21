@@ -162,7 +162,7 @@ covered by the survey. This helps prevent file-format problems later; it does no
 
 > <hands-on-title>Standardize the example LAS file</hands-on-title>
 >
-> 1. {% tool [3DTrees: LAS/LAZ Standardization](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.1.0+galaxy0) %} with the following parameters:
+> 1. {% tool [3DTrees: LAS/LAZ Standardization](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy0) %} with the following parameters:
 >    - *"Mode"*: `Single File Standardization`
 >        - {% icon param-file %} *"Point Cloud File"*: `Strip-20210804-150144_D.las`
 >
@@ -269,33 +269,37 @@ Large point clouds can be too big to process at once. SmartTile can divide them 
 spatial *tiles*. When tiles are created, an overlapping margin, or *buffer*, gives the model more
 context around trees near each edge.
 
-SmartTile also reduces the number of points, a step called *subsampling*. The default coarse
-resolution is 0.1 m: points are reduced using a grid of 10 cm cubes. This reduces processing work,
-but also removes fine detail. A denser version is kept for transferring the predictions later.
+SmartTile also reduces the number of points, a step called *subsampling*. Points are grouped in
+small cubes, called *voxels*, and each voxel is replaced by one point. SegmentAnyTree works on a
+10 cm voxel size, which reduces processing work but also removes fine detail. The predictions are
+transferred back to every point of the original file later.
 
-Keep the default settings for this tutorial. The **Skip tiling below (MB)** setting (default
-10000 MB) means that a single file smaller than this, such as file D, stays as one processing unit.
+Keep the default settings for this tutorial. The **Tiling threshold (MB)** (default 10000 MB)
+means that a single file smaller than this, such as file D, stays as one processing unit.
 Subsampling still takes place; you do not need multiple tiles to continue.
 
 > <hands-on-title>Prepare processing units and subsampled points</hands-on-title>
 >
-> 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
->    - *"Operation"*: `Tile (COPC normalize + tile + subsample)`
->        - {% icon param-file %} *"Input point clouds (LAZ/LAS)"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
+> 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0) %} with the following parameters:
+>    - *"Task"*: `Tile and subsample`
+>        - {% icon param-file %} *"Input LAZ/LAS files"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
+>        - *"Tiling mode"*: `Buffered spatial tiles`
+>        - In *"Output"*:
+>            - {% icon param-repeat %} *"1: Output"*
+>                - *"Resolution"*: `Subsampled`
+>                    - *"Voxel size (cm)"*: `10`
+>                - *"Format"*: `LAZ`
 >
->    Five outputs appear in the history:
->    - `Subsampled tiles (resolution 1)`: a denser collection, subsampled at 0.01 m
->    - `Subsampled tiles (resolution 2)`: a coarser collection, subsampled at 0.1 m
->    - `COPC-normalized originals`: the full-resolution input in a cloud-optimized LAZ format
->    - `Tiling preview (PNG)`: a map of the processing units
->    - `Tile layout (tile_bounds_tindex.json)`: the processing boundaries
+>    Three outputs appear in the history:
+>    - `Tiles, output 1`: the point cloud subsampled at 10 cm, one file per processing unit
+>    - `Tiling preview`: a map of the processing units
+>    - `Tile bounds JSON`: the processing boundaries, needed to put the predictions back together
 >
 >    > <comment-title>Keep the outputs for later steps</comment-title>
 >    >
->    > Use the coarse `Subsampled tiles (resolution 2)` collection for SAT. Keep
->    > `Subsampled tiles (resolution 1)`, `COPC-normalized originals`, and the tile layout for
->    > post-processing. These collections come from your single input file; they are not the four
->    > original flight areas.
+>    > Use `Tiles, output 1` for SegmentAnyTree and keep `Tile bounds JSON` for the merge step.
+>    > The collection comes from your single input file; its elements are not the four original
+>    > flight areas.
 >    {: .comment}
 >
 {: .hands_on}
@@ -320,8 +324,8 @@ Subsampling still takes place; you do not need multiple tiles to continue.
 
 SegmentAnyTree is a deep-learning model trained on laser scans from many forest types, sensors, and
 platforms ({% cite Wielgosz2024 %}). It adds two predictions to each point.
-*Semantic segmentation* assigns a class: `PredSemantic` distinguishes tree from non-tree points.
-*Instance segmentation* separates individual trees: `PredInstance` gives the points belonging to
+*Semantic segmentation* assigns a class: `PredSemantic_SAT` distinguishes tree from non-tree points.
+*Instance segmentation* separates individual trees: `PredInstance_SAT` gives the points belonging to
 each predicted tree a shared identifier.
 
 For example, two neighboring trees can have the same semantic class but different instance IDs.
@@ -329,20 +333,20 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 
 > <hands-on-title>Predict trees on the coarse point cloud</hands-on-title>
 >
-> 1. {% tool [3Dtrees: SegmentAnyTree](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Dataset"*: `Subsampled tiles (resolution 2)` (output of **3DTrees: SmartTile** {% icon tool %})
->    - *"Predicted instance dimension name"*: `PredInstance`
->    - *"Predicted semantic dimension name"*: `PredSemantic`
+> 1. {% tool [3Dtrees: SegmentAnyTree](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input Dataset"*: `Tiles, output 1` (output of **3DTrees: SmartTile** {% icon tool %})
+>    - *"Predicted instance dimension name"*: `PredInstance_SAT`
+>    - *"Predicted semantic dimension name"*: `PredSemantic_SAT`
 >
 >    Select the collection with the {% icon param-collection %} **Dataset collection** button so
->    Galaxy runs SAT on each processing unit. Check that both dimension names are set exactly as
->    above, because the next step looks for `PredInstance`. Processing time depends on the data and
->    on server availability.
+>    Galaxy runs SAT on each processing unit. Keep the default dimension names: the merge and
+>    Potree steps look for `PredInstance_SAT`. Processing time depends on the data and on server
+>    availability.
 >
 >    > <comment-title>What SAT adds to the point cloud</comment-title>
 >    >
->    > The `Processed Files` output collection contains point clouds with `PredSemantic` and
->    > `PredInstance` added. These labels are model predictions, not measurements made by the LiDAR
+>    > The `Processed Files` output collection contains point clouds with `PredSemantic_SAT` and
+>    > `PredInstance_SAT` added. These labels are model predictions, not measurements made by the LiDAR
 >    > sensor.
 >    {: .comment}
 >
@@ -350,60 +354,57 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 
 > <question-title>Instance and semantic predictions</question-title>
 >
-> 1. Two neighboring crowns are both predicted as trees but have different `PredInstance` values.
+> 1. Two neighboring crowns are both predicted as trees but have different `PredInstance_SAT` values.
 >    What does each prediction dimension tell you?
-> 2. Are `PredSemantic` and `PredInstance` measured directly by the LiDAR sensor?
+> 2. Are `PredSemantic_SAT` and `PredInstance_SAT` measured directly by the LiDAR sensor?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. `PredSemantic` describes the class. `PredInstance` identifies the individual tree.
+> > 1. `PredSemantic_SAT` describes the class. `PredInstance_SAT` identifies the individual tree.
 > > 2. No. SAT adds them to the point cloud as predictions.
 > >
 > {: .solution}
 >
 {: .question}
 
-# Combine predictions and restore point attributes
+# Combine predictions and transfer them to the original points
 
 If processing tiles overlap, the same tree can appear in more than one prediction. SmartTile uses
-the saved tile layout to remove instances belonging only to a tile's overlap margin. This step
-addresses processing-tile overlap, not overlap between separate drone flights. When file D stays
-as one processing unit, there is no tile overlap to remove, but this step is still needed to build
-the final point cloud.
+the tile bounds to keep each tree only in the tile that owns it, and joins trees cut by tile
+borders. This step addresses processing-tile overlap, not overlap between separate drone flights.
+When file D stays as one processing unit, there is no tile overlap to remove, but this step is still
+needed to build the final point cloud.
 
-The settings below also transfer the prediction labels to denser points and combine the result
-into one LAZ file. Attribute enrichment brings back available original information, such as RGB
-colors. Transferring labels adds detail to the displayed cloud, but does not independently predict
-or validate every added point.
+The **Remap target** setting then transfers the predictions from the 10 cm points back to every
+point of the original file. The result keeps all original point attributes, such as intensity, and
+adds `PredSemantic_SAT` and `PredInstance_SAT`. Transferring labels adds detail to the displayed
+cloud, but does not independently predict or validate every added point.
 
-> <hands-on-title>Filter overlap predictions and prepare the final cloud</hands-on-title>
+> <hands-on-title>Merge the predictions and transfer them to the original file</hands-on-title>
 >
-> 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.0.1+galaxy0) %} with the following parameters:
->    - *"Operation"*: `Filter (remove overlap-only instances)`
->        - {% icon param-file %} *"Segmented tiles (LAZ/LAS)"*: `Processed Files` (output of **3Dtrees: SegmentAnyTree** {% icon tool %})
->        - {% icon param-file %} *"Tile layout JSON (tile_bounds_tindex.json)"*: `Tile layout (tile_bounds_tindex.json)` (output of **3DTrees: SmartTile** {% icon tool %})
->        - *"Border zone width"*: `Derive from tile layout JSON (recommended)`
->        - *"Small cluster reassignment"*: `Enabled`
->        - *"After filtering"*: `Also remap filtered dimensions to another collection`
->            - *"Remap target files"*: `Originals and subsampled targets`
->                - {% icon param-file %} *"Original files (LAZ/LAS)"*: `COPC-normalized originals` (output of **3DTrees: SmartTile** {% icon tool %})
->                - {% icon param-file %} *"Subsampled target files (LAZ/LAS)"*: `Subsampled tiles (resolution 1)` (output of **3DTrees: SmartTile** {% icon tool %})
->            - *"Also write one merged output (LAZ)"*: `Yes`
->                - *"Enrich merged output with original attributes"*: `Yes`
->                - *"Standardization summary (optional)"*: leave unset for this single-file run
+> 1. {% tool [3DTrees: SmartTile](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0) %} with the following parameters:
+>    - *"Task"*: `Filter / merge segmented tiles`
+>        - {% icon param-collection %} *"Segmented tiles"*: `Processed Files` (output of **3Dtrees: SegmentAnyTree** {% icon tool %})
+>        - *"Voxel size of the segmented tiles (cm)"*: `10`
+>        - *"Model"*: `SegmentAnyTree, ForestMamba or other point predictions`
+>            - *"Instance dimension"*: `PredInstance_SAT`
+>        - {% icon param-file %} *"Tile bounds JSON"*: `Tile bounds JSON` (output of **3DTrees: SmartTile** {% icon tool %})
+>        - *"Remap target"*: `Original files`
+>            - {% icon param-file %} *"Original LAZ/LAS files"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
 >
->    > <comment-title>Check the tool form</comment-title>
+>    Two collections appear in the history: `Merged tiles`, the filtered predictions at 10 cm, and
+>    `Originals with predictions`, file D at full resolution with the predictions added.
+>
+>    > <comment-title>Instance dimension</comment-title>
 >    >
->    > ![First part of the SmartTile filter form showing segmented tiles and tile-layout inputs](../../images/3dtrees/form1.png "Select the segmentation and tile-layout outputs")
->    >
->    > ![Middle part of the SmartTile filter form showing overlap filtering and remapping options](../../images/3dtrees/form2.png "Enable reassignment and remapping to denser point clouds")
+>    > The default **Instance dimension** is `PredInstance`. Change it to `PredInstance_SAT`, the
+>    > name SegmentAnyTree used in the previous step, otherwise SmartTile cannot find the tree IDs.
 >    {: .comment}
 >
 {: .hands_on}
 
-Use `Merged output with original attributes (LAZ)` for visualization. It combines the predictions
-with available original point attributes. Here, "merged" refers to outputs derived from file D, not to combining
-the four flight areas.
+Use `Originals with predictions` for visualization. Its single element is file D with the
+predictions added; nothing from the other three flight areas is included.
 
 # Inspect the result in Potree
 
@@ -413,19 +414,23 @@ look for missed trees, trees joined together, or one tree split into several ins
 
 > <hands-on-title>Create and open the interactive view</hands-on-title>
 >
-> 1. {% tool [3Dtrees: Potree Converter](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_potree/3dtrees_potree/1.0.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Point Cloud Files"*: `Merged output with original attributes (LAZ)` (output of **3DTrees: SmartTile** {% icon tool %})
+> 1. {% tool [3Dtrees: Potree Converter](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_potree/3dtrees_potree/1.2.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Point Cloud Files"*: `Originals with predictions` (output of **3DTrees: SmartTile** {% icon tool %})
 >    - *"Generate interactive Viewer"*: `Yes`
+>    - *"Special Coloring"*: `Enabled`
+>        - *"Special Coloring Instance Attributes"*: `PredInstance_SAT`
 >
 > 2. When the tool finishes, open the **Potree Visualization** HTML output using its view icon.
-> 3. Inspect a few neighboring trees from above and from the side. Compare colors by
->    `PredInstance` with the tree/non-tree classes in `PredSemantic`. If RGB is available, also
->    compare the original colors.
+> 3. Inspect a few neighboring trees from above and from the side, for example the areas of
+>    close-ups A and B. Colour the points by the special instance colouring, then by the tree/non-tree
+>    classes in `PredSemantic_SAT`.
 >
->    > <comment-title>Compare three views</comment-title>
+>    > <comment-title>Special colouring</comment-title>
 >    >
->    > RGB shows the original colors, `PredSemantic` shows predicted classes, and `PredInstance`
->    > separates predicted trees. Instance colors represent identifiers, not species or confidence.
+>    > Tree IDs are just numbers, so colouring them directly often gives neighbouring trees almost
+>    > the same colour. **Special Coloring** assigns a small set of colours so that nearby trees get
+>    > different ones. The colours represent identifiers, not species or confidence. This file has no
+>    > RGB colours, so the instance and class views are the main ones to compare.
 >    {: .comment}
 >
 {: .hands_on}
@@ -436,7 +441,7 @@ look for missed trees, trees joined together, or one tree split into several ins
 >
 > - [ ] Most instance colors follow recognizable tree crowns rather than scattered patches.
 > - [ ] Neighboring, visibly separate crowns usually have different instance identifiers.
-> - [ ] Visible ground points are generally assigned to the non-tree class in `PredSemantic`.
+> - [ ] Visible ground points are generally assigned to the non-tree class in `PredSemantic_SAT`.
 > - [ ] Large numbers of crowns are split exactly along straight processing boundaries.
 > - [ ] One instance identifier spans many unrelated crowns.
 >
@@ -507,6 +512,6 @@ You turned one drone LiDAR file into a point cloud with predicted tree labels an
 view. Along the way, you checked the input, reduced processing work, predicted trees, and prepared
 the result for inspection.
 
-`PredSemantic` tells you the predicted class; `PredInstance` tells you which predicted tree a point
+`PredSemantic_SAT` tells you the predicted class; `PredInstance_SAT` tells you which predicted tree a point
 belongs to. These labels provide a starting point for ecological analysis. Your visual checks can
 reveal obvious errors; measuring accuracy requires independently labelled reference trees.
