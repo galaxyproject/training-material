@@ -25,3 +25,5 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 * Enter a name for your collection
 * Click **Build** to build your collection
 * Click on the checkmark icon at the top of your history again
+
+Once the collection is created, the original datasets are hidden (**Hide original elements** is on by default). Click the {% icon galaxy-show-hidden %} hidden items counter at the top of the history panel to show them.

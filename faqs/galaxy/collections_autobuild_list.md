@@ -20,4 +20,4 @@ contributors: [Marie59]
 * Click **Build** to build your collection (**letter e**)
 * Click on the checkmark icon at the top of your history again (first **letter a**)
 
-Once the collection is created, all files turn green. You can limit visible files using the eye icons in the history panel.
+Once the collection is created, the original datasets are hidden (**Hide original elements** is on by default). Click the {% icon galaxy-show-hidden %} hidden items counter at the top of the history panel to show them.
