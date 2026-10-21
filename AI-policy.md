@@ -6,7 +6,7 @@ The GTN is committed to providing high-quality human-written and human-curated t
 ## Rules
 
 - It is **not permitted** to use generative AI to:
-  - create GTN content (tutorials, news posts, events, learning pathways, images and any other user-facing content)
+  - create GTN content (tutorials, news posts, events, learning pathways, images, and any other user-facing content)
   - communicate about your contribution (GitHub PR descriptions, comments, issues, reviews, chat messages, etc)
 
 - LLMs **may be used** to answer questions, analyze, distill, refine, check, suggest, review.
@@ -19,6 +19,8 @@ The GTN is committed to providing high-quality human-written and human-curated t
   - You must **disclose and describe** the use of generative AI in your PR description.
   - You must write code comments and documentation, yourself. Describing not only what the code does, but why you chose to do it this way.
   - You must write the PR/issue descriptions and any other (GitHub) communications yourself.
+
+- Some parts of the GTN codebase are a mix of technical framework and user-facing content (e.g. _layouts folder). Please use your best judgment to adhere to the spirit of this policy when editing these files (and always disclose your AI usage in your PR description).
 
 - Every **contributor is responsible** for ensuring that their contribution does not violate our policy or license
 - Since AI generated information is frequently misleading or false, we cannot offer support on anything referencing AI output.

@@ -21,7 +21,6 @@ You MUST NOT ever edit the contents of files in any of these folders.
 
 It is very important to never generate any text which may end up in a tutorial.
 
-Copying files from e.g. the gtn-templates folder does not require attributions to you, however if you do anything more (text, snippet generation for the user) then you must add 'llm' as an author/contributor.
 
 ## The user needs help with GTN formatting or structure
 
@@ -64,4 +63,5 @@ For the `bin/` and `_plugins/` folders, you may make changes/additions freely.
 
 You MUST add the text 'assisted-by: {model}' in the git commit message trailer, e.g. `assisted-by: GPT-6.1-sol medium` or similar to any commits you make on their behalf.
 
-It is strictly mandatory for GTN contribution to disclose AI usage.
+You MUST add the label 'ai-assisted' to any PR you create for the user in GitHub, and you must remind the user that
+it is strictly mandatory for GTN contribution to disclose and describe AI usage in PR description.
