@@ -24,7 +24,7 @@ contributions:
 
 ## What is Dataverse?
 
-At its core, **[Dataverse](https://dataverse.org/)** is an open-source web application designed to share, preserve, cite, explore, and analyze research data. Developed and led by the [Institute for Quantitative Social Science (IQSS)](https://www.iq.harvard.edu/) at [Harvard University](https://www.harvard.edu/), it serves as a robust repository platform used by universities, research institutions, and laboratories worldwide to host data across all scientific disciplines from genomics and structural biology to the social sciences.
+At its core, **[Dataverse](https://dataverse.org/)** is an open-source web application designed to share, preserve, cite, explore, and analyze research data. Developed and led by the [Institute for Quantitative Social Science (IQSS)](https://www.iq.harvard.edu/) at [Harvard University](https://www.harvard.edu/), it serves as a robust repository platform used by universities, research institutions, and laboratories worldwide to host data across all scientific disciplines, from genomics and structural biology to the social sciences.
 
 For researchers, Dataverse acts as a digital archive that ensures data is not just stored, but made visible and accessible to the global scientific community. It automates the creation of standard academic citations and permanent identifiers, making data sharing an easy part of the research lifecycle.
 
@@ -79,7 +79,7 @@ In the BSC Dataverse, search for, for example, _ Handwritten _.
 You will see a folder called _A Dataset for Handwritten Text Recognition in Medieval Notarial Charters Written on Parchment_.
 If you click the name, you can see the contents of that folder.
 
-If you have found the folder or file(s) you want to work with, scroll down to [Importing Files to Galaxy](#importing-files-to-Galaxy).
+If you have found the folder or file(s) you want to work with, scroll down to "Importing Files to Galaxy".
 
 ### Method 2: Adding and Browsing a Custom Dataverse Repository
 
