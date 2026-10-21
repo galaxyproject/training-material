@@ -22,8 +22,8 @@ The best places to ask your analysis questions are:
 
 The more detail you provide, the better we can help you. Please provide information about:
 - **Your data and experiment** e.g. "paired-end RNASeq, mouse, 16 triplicates, 2 timepoints", etc
-- **Your goal and research question** e.g. "I want to detect diffentially expressed genes between these two groups and generate a volcano plot"
-- **What you have already tried?** Do you already know which tools you want to use? Did you already try some but they didn't work? Why not? Did you find good papers describing something similiar to what you want to do? etc.
+- **Your goal and research question** e.g. "I want to detect differentially expressed genes between these two groups and generate a volcano plot"
+- **What you have already tried?** Do you already know which tools you want to use? Did you already try some but they didn't work? Why not? Did you find good papers describing something similar to what you want to do? etc.
 - **Which Galaxy are you using?** And if you have already tried some steps, please [share your Galaxy history via URL]({%link faqs/galaxy/histories_sharing.md %}) and provide this along with your question.
 - **Examples**
   - **Bad Question:** *"Help!!! How to perform metagenomics analysis. I need it urgent!"*
@@ -32,7 +32,7 @@ The more detail you provide, the better we can help you. Please provide informat
 
 #### Before you ask
 - Check the [Galaxy Help forum](https://help.galaxyproject.org/) to see if others have already asked a similar question before.
-- [Search]({% link search2.html %}) the [GTN website](https://training.galaxyproject.org) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't doe exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data or research question.
+- [Search]({% link search2.html %}) the [GTN website](https://training.galaxyproject.org) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't do exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data or research question.
 
 #### Be patient
 Please remember that most of the people answering questions on Matrix chat and the help forum are **volunteers** from the community. They take time out of their busy days to help you. They may also be in a different time zone, so it may take some time to get answers. Please always be patient and kind to each other, and adhere to our [code of conduct](https://galaxyproject.org/community/coc/).
