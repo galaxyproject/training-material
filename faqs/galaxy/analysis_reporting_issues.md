@@ -10,7 +10,7 @@ contributors: [jennaj, garimavs]
     - **Red Error Datasets**:
         - Refer to the [Troubleshooting errors]({% link faqs/galaxy/analysis_troubleshooting.md %}) FAQ for red error in datasets.
     - **Unexpected results in Green Success Dataset**:
-        - To resolve it you may be asked to send in a shared history link and possibly a shared workflow link. For sharing your history, refer to this [these instructions]({% link faqs/galaxy/histories_sharing.md %}).
+        - To resolve it you may be asked to send in a shared history link and possibly a shared workflow link. For sharing your history, refer to [these instructions]({% link faqs/galaxy/histories_sharing.md %}).
         - To reach our support team, visit [Support FAQs]({% link faqs/galaxy/ %}#support).
     - **Functionality problems**:
         - Using [Galaxy Help](https://help.galaxyproject.org/) is the best way to get help in most cases.
