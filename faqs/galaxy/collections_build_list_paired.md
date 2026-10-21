@@ -17,7 +17,7 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 
   ![collection building wizard paired list]({% link topics/galaxy-interface/images/paired_list_selector.png %}){:width="15%"}
 
-* Check and configure auto-pairing. Commonly matepairs have suffix `_1 ` and `_2` or `_R1` and `_R2`. Click on 'Next' at the bottom.
+* Check and configure auto-pairing. Commonly matepairs have suffix `_1` and `_2` or `_R1` and `_R2`. Click on 'Next' at the bottom.
 
   ![edit and build a paired list collection]({% link topics/galaxy-interface/images/paired_list_edit.png %}){:width="15%"}
 
