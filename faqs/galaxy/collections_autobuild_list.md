@@ -8,7 +8,7 @@ contributors: [Marie59]
 
 * Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel (**letter a**) ![Select Items button]({% link topics/climate/images/bgc_calib/collection_emptyhist.png %})
 * Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %} all the datasets in your history you would like to include (**letter b**){% endif %}
-* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected (see letter b below)** and choose **Auto build List**
+* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected (see letter b below)** (or **All N selected** if you checked every item) and choose **Auto build List**
 
   ![Collection building with autobuild]({% link topics/climate/images/bgc_calib/build_collection.png %}){:width="15%"}
 

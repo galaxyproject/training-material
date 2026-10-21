@@ -9,7 +9,7 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 
 * Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel ![Select Items button]({% link topics/galaxy-interface/images/historyItemControls.png %})
 * Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %}all the datasets in your history you would like to include{% endif %}
-* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** and choose **Advanced Build List**
+* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** (or **All N selected** if you checked every item) and choose **Advanced Build List**
 
   ![build paired collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
