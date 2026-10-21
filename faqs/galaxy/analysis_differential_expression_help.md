@@ -7,7 +7,7 @@ layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
-The error and usage help in this FAQ applies to most if not all Bioconductor tools.
+The error and usage help in this FAQ applies to most RNA-seq quantification and differential expression tools.
 
 - DEseq2
 - Limma
