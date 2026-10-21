@@ -18,13 +18,13 @@ contributions:
 
 2. Click on **Register** in the top bar on the server.
 
-   ![Login or Register on the top panel]({{site.baseurl}}/faqs/galaxy/images/login_register.png)
+   ![Login or Register on the top panel]({% link faqs/galaxy/images/login_register.png %})
 
 3. Fill in the registration form, then click on **Create**.
 
    Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.
 
-   ![Banner warning about account with unverified email address]({{site.baseurl}}/faqs/galaxy/images/unverified_account.png)
+   ![Banner warning about account with unverified email address]({% link faqs/galaxy/images/unverified_account.png %})
 
 4. Check for a **Confirmation Email** in the email you used for account creation.
 
