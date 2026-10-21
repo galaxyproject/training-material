@@ -18,13 +18,13 @@ For example, you are allowed to have 1 account on Galaxy US, and another account
 
 <br>
 Need more disk space?
-  - Review your [**User -> Preferences -> Storage Dashboard**](https://my.galaxy.training/?path=/storage) to find and manage all of your data.
+  - Review your [**Storage Dashboard**](https://my.galaxy.training/?path=/storage) (click your username in the masthead, then **Preferences**) to find and manage all of your data.
   - Read about [more ways to free up space in your account]({% link faqs/galaxy/account_reduce_quota_usage.md %})
   - [Contact the admins of your Galaxy server]({% link faqs/galaxy/support_admins.md %}) to ask about possibilities for temporarily increasing your quota.
 
 <br>
 Other tips:
   - Forgot your password? You can request a reset link in on the login page.
-  - If you want to associate your account with a different email address, you can do so under **User -> Preferences** in the top menu bar.
-  - To start over with a new account, delete your existing account(s) first before creating your new account. This can be done in **User -> Preferences** menu in the top bar.
+  - If you want to associate your account with a different email address, you can do so under **Preferences** (click your username in the masthead).
+  - To start over with a new account, delete your existing account(s) first before creating your new account. This can be done under **Preferences** (click your username in the masthead).
 
