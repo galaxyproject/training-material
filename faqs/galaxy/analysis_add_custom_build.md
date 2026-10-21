@@ -15,3 +15,4 @@ contributors: [shiltemann]
 - Under **Definition**, select the option `FASTA-file from history`
 - Under **FASTA-file**, select your fasta file {% if include.fasta %}`{{ include.fasta }}`{% endif %}
 - Click the **Save** button
+- Wait a minute and reload the page; the build is listed once Galaxy has counted its chromosomes
