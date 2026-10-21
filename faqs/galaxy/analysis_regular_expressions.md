@@ -49,7 +49,7 @@ Below are just a few examples of basic expressions:
 
 **Replacing**
 
-Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups `(...)`, which we can refer to using `\1`, `\2` etc for the first and second captured values. If you want to refer to the whole match, use `&`.
+Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups `(...)`, which we can refer to using `\1`, `\2` etc for the first and second captured values. If you want to refer to the whole match, use `&` in sed-based tools (e.g. **Text transformation** with sed), or `\g<0>` in **Regex Find and Replace**.
 
 | Regular expression      | Input        | Captures               |
 |-------------------------|--------------|------------------------|
@@ -60,7 +60,7 @@ An expression like `s/find/replacement/g` indicates a replacement expression, th
 
 Example: `s/chr(\d{1,2})/CHR\1/g` will replace `chr14` with `CHR14` etc.
 
-You can also use replacement modifier such as convert to lower case `\L` or upper case `\U`. Example: `s/.*/\U&/g` will convert the whole text to upper case.
+You can also use replacement modifier such as convert to lower case `\L` or upper case `\U`. Example: `s/.*/\U&/g` will convert the whole text to upper case. These modifiers only work in sed-based tools; **Regex Find and Replace** has no case conversion.
 
 Note: In Galaxy, you are often asked to provide the find and replacement expressions separately, so you don't have to use the `s/../../g` structure.
 
