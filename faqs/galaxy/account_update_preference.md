@@ -16,7 +16,7 @@ contributors: [jennaj, bernandez]
    - {% icon pref-toolboxfilters %} Manage Toolbox Filters (customize your Toolbox by displaying or omitting sets of Tools; depending on the server)
    - {% icon pref-apikey %} Manage Galaxy API Key (access your current API key or create a new one)
    - {% icon pref-apikey %} Manage Your Tools Credentials (credentials tools use to access external services)
-   - {% icon pref-notifications %} Manage Notifications (allow push and tab notifcations on job completion)
+   - {% icon pref-notifications %} Manage Notifications (allow push and tab notifications on job completion)
    - {% icon pref-identities %} Manage Third-Party Identities (connect or disconnect access to your third-party identities; depending on the server)
    - {% icon pref-custombuilds %} Manage Custom Builds (custom databases based on fasta datasets)
    - {% icon pref-palette %} Pick a Color Theme (interface color theme; depending on the server)
