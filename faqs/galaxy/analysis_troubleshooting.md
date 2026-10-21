@@ -34,7 +34,7 @@ When something goes wrong in Galaxy, there are a number of things you can do to 
 5. **Ask for help!**
    - Where?
      {% if include.sc %}- In the [User community chatspace in Slack]({{site.slack.invite_link}}) in our [#single-cell-users]({{site.slack.single_cell_channel}}) channel
-     {% endif %}- In the [GTN Matrix Channel](https://gitter.im/Galaxy-Training-Network/Lobby)
-     - In the [Galaxy Matrix Channel](https://gitter.im/galaxyproject/Lobby)
+     {% endif %}- In the [GTN Matrix Channel](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im)
+     - In the [Galaxy Matrix Channel](https://matrix.to/#/#galaxyproject_Lobby:gitter.im)
      - Browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before (or post your question).
    - When asking for help, it is useful to [share a link to your history]({% link faqs/galaxy/histories_sharing.md %})

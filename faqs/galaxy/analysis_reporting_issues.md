@@ -17,7 +17,7 @@ contributors: [jennaj, garimavs]
         - If the problem is more complex, email a description of the problem and how to reproduce it.
     - **Administrative problems**:
         - If the problem is present in your own Galaxy, the administrative configuration may be a factor.
-        - For the fastest help directly from the development community, admin issues can be alternatively reported to the [mailing list](https://galaxyproject.org/mailing-lists) or the GalaxyProject [Gitter channel](https://gitter.im/galaxyproject/Lobby).
+        - For the fastest help directly from the development community, admin issues can be alternatively reported to the [mailing list](https://galaxyproject.org/mailing-lists) or the GalaxyProject [Matrix channel](https://matrix.to/#/#galaxyproject_Lobby:gitter.im).
 
 - For **Security Issues**, do not report them via GitHub. Kindly disclose these as explained in this [document](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md).
 - For **Bug Reporting**, create a [Github issue](https://github.com/galaxyproject/galaxy/issues). Include the steps mentioned [in these instructions]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}).
