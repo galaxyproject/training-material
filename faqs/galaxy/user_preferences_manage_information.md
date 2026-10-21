@@ -8,7 +8,7 @@ contributors: [jennaj, Melkeb]
 
 Start at the Galaxy server where you are working. Remember that accounts at different Galaxy servers are distinct.
 1. Log into your account.
-2. Click your username in the masthead (on the right, near the top), then **Preferences**.
+2. Click your username in the top bar (on the right, near the top), then **Preferences**.
 3. Click on **Manage Information**.
 4. You may change your email address and public name on the form.
 5. Your may also change your password by clicking on **Change Password**.
