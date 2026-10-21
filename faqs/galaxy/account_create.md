@@ -20,17 +20,17 @@ contributions:
 
    ![Login or Register on the top panel]({{site.baseurl}}/faqs/galaxy/images/login_register.png)
 
-5. Fill in the the registration form, then click on **Create**.
+3. Fill in the the registration form, then click on **Create**.
 
    Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.
 
    ![Banner warning about account with unverified email address]({{site.baseurl}}/faqs/galaxy/images/unverified_account.png)
 
-6. Check for a **Confirmation Email** in the email you used for account creation.
+4. Check for a **Confirmation Email** in the email you used for account creation.
 
     Missing? Check your **Trash** and **Spam** folders.
 
-9. Click on the **Email confirmation link** to fully activate your account.
+5. Click on the **Email confirmation link** to fully activate your account.
 
    {% icon galaxy-info %} Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?
 
