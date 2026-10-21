@@ -30,6 +30,7 @@ When something goes wrong in Galaxy, there are a number of things you can do to 
    - Write down any information you think might help solve the problem
      - See [this FAQ]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}) on how to write good bug reports
    - Click **{% icon galaxy-bug %} Report** button
+   - The report is sent to the admins of the Galaxy server you are using, if that server has error reporting set up
 
 5. **Ask for help!**
    - Where?
