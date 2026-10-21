@@ -32,7 +32,7 @@ The more detail you provide, the better we can help you. Please provide informat
 
 #### Before you ask
 - Check the [Galaxy Help forum](https://help.galaxyproject.org/) to see if others have already asked a similar question before.
-- [Search]({% link search2.html %}) the [GTN website](https://training.galaxyproject.org) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't do exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data or research question.
+- [Search]({% link search2.html %}) the [GTN website]({% link index.md %}) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't do exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data or research question.
 
 #### Be patient
 Please remember that most of the people answering questions on Matrix chat and the help forum are **volunteers** from the community. They take time out of their busy days to help you. They may also be in a different time zone, so it may take some time to get answers. Please always be patient and kind to each other, and adhere to our [code of conduct](https://galaxyproject.org/community/coc/).

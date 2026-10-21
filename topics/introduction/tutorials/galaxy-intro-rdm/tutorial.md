@@ -1025,8 +1025,8 @@ tools available for any scientific domain.
 >   {% snippet faqs/galaxy/galaxy_labs.md %}
 >
 > And the following GTN resources:
-> - [GTN Tutorials by Topic](https://training.galaxyproject.org)
-> - [GTN Learning Pathways](https://training.galaxyproject.org/learning-pathways)
+> - [GTN Tutorials by Topic]({% link index.md %})
+> - [GTN Learning Pathways]({% link learning-pathways/ %})
 >
 {: .comment}
 

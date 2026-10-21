@@ -21,4 +21,4 @@ contributors: [jennaj, garimavs]
 
 - For **Security Issues**, do not report them via GitHub. Kindly disclose these as explained in this [document](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md).
 - For **Bug Reporting**, create a [Github issue](https://github.com/galaxyproject/galaxy/issues). Include the steps mentioned [in these instructions]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}).
-- Search the [Galaxy Help](https://help.galaxyproject.org/) forum for prior Q & A, and the [GTN Search](https://training.galaxyproject.org/search) for FAQs and tutorials, to verify in case your issue was already faced by someone.
+- Search the [Galaxy Help](https://help.galaxyproject.org/) forum for prior Q & A, and the [GTN Search]({% link search2.html %}) for FAQs and tutorials, to verify in case your issue was already faced by someone.
