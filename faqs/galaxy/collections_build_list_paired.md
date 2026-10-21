@@ -21,7 +21,7 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 
   ![edit and build a paired list collection]({% link topics/galaxy-interface/images/paired_list_edit.png %}){:width="15%"}
 
-* Edit the  **List Identifier** as required.
+* Edit the **List Identifier** as required by double-clicking its cell.
 * Enter a name for your collection
 * Click **Build** to build your collection
 * Click on the checkmark icon at the top of your history again
