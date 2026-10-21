@@ -20,7 +20,7 @@ contributions:
 
    ![Login or Register on the top panel]({{site.baseurl}}/faqs/galaxy/images/login_register.png)
 
-3. Fill in the the registration form, then click on **Create**.
+3. Fill in the registration form, then click on **Create**.
 
    Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.
 
@@ -32,7 +32,7 @@ contributions:
 
 5. Click on the **Email confirmation link** to fully activate your account.
 
-   {% icon galaxy-info %} Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?
+   {% icon galaxy-info %} Delivery of the confirmation email is blocked by your email provider or you mistyped the email address in the registration form?
 
    Please do **not** register again. Click **Resend Verification** in the banner to get a new confirmation email, or follow the [instructions to change the email address]({% link faqs/galaxy/user_preferences_manage_information.md %}) registered with your account! The confirmation email will be resent to your new address once you have changed it.
 
