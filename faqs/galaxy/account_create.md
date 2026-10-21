@@ -34,6 +34,6 @@ contributions:
 
    {% icon galaxy-info %} Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?
 
-   Please do **not** register again, but follow the [instructions to change the email address]({% link faqs/galaxy/user_preferences_manage_information.md %}) registered with your account! The confirmation email will be resent to your new address once you have changed it.
+   Please do **not** register again. Click **Resend Verification** in the banner to get a new confirmation email, or follow the [instructions to change the email address]({% link faqs/galaxy/user_preferences_manage_information.md %}) registered with your account! The confirmation email will be resent to your new address once you have changed it.
 
    Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.
