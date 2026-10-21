@@ -16,11 +16,9 @@ contributions:
     - [{{ server.name }}]({{ server.url }}) (**{{ server.id | upcase }}**)
     {% endfor %}
 
-2. Click on **"Login or Register"** in the masthead on the server.
+2. Click on **Register** in the masthead on the server.
 
    ![Login or Register on the top panel]({{site.baseurl}}/faqs/galaxy/images/login_register.png)
-
-3. On the login page, find the **Register here** link and click on it.
 
 5. Fill in the the registration form, then click on **Create**.
 
