@@ -8,7 +8,7 @@ contributors: [jennaj, bernandez]
 
 
 1. Log in to Galaxy
-2. Click your username in the top bar, then [**Preferences**](https://my.galaxy.training/?path=/user)
+2. Go to [**Top bar -> *your username* -> Preferences**](https://my.galaxy.training/?path=/user)
 3. Here you can update various preferences, such as:
    - {% icon pref-info %} Manage Information (change your registered email addresses or public name)
    - {% icon pref-password %} Change Password (change your login credentials)
