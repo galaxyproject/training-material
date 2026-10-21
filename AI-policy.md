@@ -6,22 +6,22 @@ The GTN is committed to providing high-quality human-written and human-curated t
 ## Rules
 
 - It is **not permitted** to use generative AI to:
-
   - create GTN content (tutorials, faqs, images, news posts, and any other user-facing content)
   - communicate about your contribution (GitHub PR descriptions, comments, issues, reviews, chat messages, etc)
 
-- All GTN contributions and communication must be in your own words.
-- LLMs may be used to answer questions, analyze, distill, refine, check, suggest, review. However we encourage contributors to avoid them in favour of [existing documentation](https://training.galaxyproject.org/training-material/topics/contributing/) and our [chat fora](https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im).
-- Since AI generated information is frequently misleading or false, we cannot supply support on anything referencing AI output.
-- For contributions to the **codebase** (`bin`, `_plugins`) you may be *assisted* by generative AI, under the following conditions:
+- LLMs **may be used** to answer questions, analyze, distill, refine, check, suggest, review.
+  - However, we encourage contributors to avoid them in favour of [existing documentation](https://training.galaxyproject.org/training-material/topics/contributing/) and our [chat forum](https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im).
+  - All GTN content and all communication must be in **your own words**.
 
+- For contributions to the **codebase** (`bin`, `_plugins`) you may be *assisted* by generative AI, under the following conditions:
   - You must **understand and take responsibility** for every line of code in your contribution.
   - You must be able to **answer technical questions in review** and make any requested changes.
   - You must **disclose and describe** the use of generative AI in your PR description.
-  - You must write code comments and documentation yourself. Describing not only what the code does, but why you chose to do it this way.
+  - You must write code comments and documentation, yourself. Describing not only what the code does, but why you chose to do it this way.
   - You must write the PR/issue descriptions and any other (GitHub) communications yourself.
 
 - Every **contributor is responsible** for ensuring that their contribution does not violate our policy or license
+- Since AI generated information is frequently misleading or false, we cannot offer support on anything referencing AI output.
 - Maintainers are encouraged to deprioritise or reject contributions that they suspect have been made in violation of this policy.
 
 
@@ -37,7 +37,7 @@ LLMs [distort our written language](https://arxiv.org/abs/2603.18161), reduce [l
 Diverse authors bring diverse viewpoints which we may not have considered and value in our didactics.
 LLMs by definition are homogeneous and homogenize all of the text they edit.
 
-### Contribute what you can, how you can, we're happy to have you join and want you to learn and grow!
+### GTN is all about community, we want you to learn and grow!
 
 If you are a **new contributor or not a native English speaker**, we understand you may be less confident about your contribution, but our human reviewers are here to guide you through the steps to improve both your contribution and your own skills and understanding. The GTN community is very international. Most contributors are not native English speakers. It is ok for GTN content not to be perfect English. Reviewers will check for typos and grammar mistakes. We much prefer your own (possibly imperfect) words, to LLM generated text.
 
@@ -45,7 +45,7 @@ We fully expect that new contributors will be less confident in their contributi
 
 Passing maintainer feedback to an LLM doesn’t help anyone grow, and does not sustain our community.
 
-### The GTN is an open, inclusive community
+### The GTN is about human interaction and collaboration
 
 Every discussion, issue, and pull request is read and reviewed by humans.
 It is a **boundary point at which people interact with each other and collaborate**.
@@ -53,9 +53,9 @@ As a community, we highly value this boundary as a place of collaboration and hu
 Low-effort, unqualified work disrespects this boundary and puts the burden of validation solely on the maintainer.
 We, as an open and inclusive community, would like to keep **our goal of growing and learning together** and from each other.
 
-### LLMs have negative impacts on our work
+### LLMs increase the burden on our volunteer maintainers and reviewers
 
-Contributors making use of generative AI tools oftentimes **greatly increase the maintainer burden** by not fully understanding the contents of their own contribution, not describing their contribution accurately or usefully in the PR/issue/commit message, and/or not thoroughly testing tutorials and ensuring it works as described.
+Contributors making use of generative AI tools oftentimes **greatly increase the maintainer burden** by not fully understanding the contents of their own contribution, not describing their contribution accurately/usefully in the PR/issue/commit message, not following up on review comments, and/or not thoroughly testing tutorials and ensuring it works as described.
 
 ### Are you an LLM user?
 
