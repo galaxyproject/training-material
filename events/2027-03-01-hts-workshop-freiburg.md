@@ -27,9 +27,7 @@ location:
   geo:
     lat: 47.993460
     lon: 7.845110
-  name: University of Freiburg
   address: Werthmannstrasse 4
-  postcode: 79098
   city: Freiburg
   country: Germany
 
