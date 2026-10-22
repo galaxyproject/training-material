@@ -1,6 +1,7 @@
 # GTN Generative AI Contributions Policy
 
-The GTN is committed to providing high-quality human-written and human-curated tutorials. As such, the use of generative AI tools to create GTN content is not allowed.
+The GTN is committed to providing high-quality human-written and human-curated tutorials.
+As such, the use of generative AI tools to create GTN training content is not allowed.
 
 
 ## Rules
@@ -20,7 +21,9 @@ The GTN is committed to providing high-quality human-written and human-curated t
   - You must write code comments and documentation, yourself. Describing not only what the code does, but why you chose to do it this way.
   - You must write the PR/issue descriptions and any other (GitHub) communications yourself.
 
-- Some parts of the GTN codebase are a mix of technical framework and user-facing content (e.g. _layouts folder). Please use your best judgment to adhere to the spirit of this policy when editing these files (and always disclose your AI usage in your PR description).
+- Some parts of the GTN codebase are a mix of technical framework and user-facing content (e.g. _layouts folder).
+  - Please use your best judgment to adhere to the spirit of this policy when editing these files (i.e. any time you are teaching or communicating with learners it should be in your own words, technical updates may be AI assisted under the conditions outlined above), and always disclose your AI usage in your PR description.
+  - If in doubt, please contact us on [Matrix](https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im) to discuss your planned contribution with us
 
 - Every **contributor is responsible** for ensuring that their contribution does not violate our policy or license
 - Since AI generated information is frequently misleading or false, we cannot offer support on anything referencing AI output.
