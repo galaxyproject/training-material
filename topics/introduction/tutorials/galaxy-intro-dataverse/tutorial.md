@@ -24,7 +24,7 @@ contributions:
 
 ## What is Dataverse?
 
-At its core, **[Dataverse](https://dataverse.org/)** is an open-source web application designed to share, preserve, cite, explore, and analyze research data. Developed and led by the [Institute for Quantitative Social Science (IQSS)](https://www.iq.harvard.edu/) at [Harvard University](https://www.harvard.edu/), it serves as a robust repository platform used by universities, research institutions, and laboratories worldwide to host data across all scientific disciplines from genomics and structural biology to the social sciences.
+At its core, **[Dataverse](https://dataverse.org/)** is an open-source web application designed to share, preserve, cite, explore, and analyze research data. Developed and led by the [Institute for Quantitative Social Science (IQSS)](https://www.iq.harvard.edu/) at [Harvard University](https://www.harvard.edu/), it serves as a robust repository platform used by universities, research institutions, and laboratories worldwide to host data across all scientific disciplines, from genomics and structural biology to the social sciences.
 
 For researchers, Dataverse acts as a digital archive that ensures data is not just stored, but made visible and accessible to the global scientific community. It automates the creation of standard academic citations and permanent identifiers, making data sharing an easy part of the research lifecycle.
 
@@ -55,8 +55,8 @@ By connecting Galaxy to Dataverse, researchers can directly export their finaliz
 
 ## How can you browse existing Dataverse repositories from within Galaxy?
 
-**Please note:** the Galaxy Dataverse integration is currently only available on [usegalaxy.eu](https://usegalaxy.eu).
-Galaxy has integrated Dataverse directly into its **File Sources (Remote Files)** framework. This allows researchers to search, browse, and import remote repository datasets directly into an active Galaxy history without downloading them locally first.
+**Please note:** The Galaxy Dataverse integration is currently only available on [usegalaxy.eu](https://usegalaxy.eu).
+Galaxy has integrated Dataverse directly into its **File Sources (Remote Files)** framework. This allows researchers to search, browse, and import datasets from remote repositories directly into an active Galaxy history without first downloading them locally.
 
 ### Method 1: Browsing Pre-configured Public Dataverses
 
@@ -67,14 +67,19 @@ Galaxy instances frequently maintain a list of pre-configured public repositorie
 > 1. Click the **Upload Data** icon at the top of the Galaxy tool panel.
 > 2. Inside the upload dialog box, select the **Choose from repository** button at the bottom.
 > 3. In the search/filter box at the top of the repository browser, type `Dataverse`.
-> 4. A list of globally available, pre-configured Dataverse instances will appear. Click on an instance to explore its public directories, datasets, and files. It will look similar to this:
+> 4. A list of globally available, pre-configured Dataverse instances will appear. It will look similar to this:
 >
 > ![Pre-Configured Dataverse](https://galaxyproject.org/images/news/2026-01-15-dataverse/preconfigured_dataverse.png)
 >
+> 5. Click an instance, such as **BSC**, to explore its public directories, datasets, and files of the Barcelona Supercomputing Centre's Dataverse.
 {: .hands_on}
 
-From here, you can select your instance and browse or search for existing files. **Note**: the search is case-sensitive. 
-If you have already found the file you want to work with, scroll down to "Importing Discovered Files into Your History".
+From here, you can browse for existing files or search a term in the search bar. **Note**: The search is case-sensitive.
+In the BSC Dataverse, search for, for example, _ Handwritten _.
+You will see a folder called _A Dataset for Handwritten Text Recognition in Medieval Notarial Charters Written on Parchment_.
+If you click the name, you can see the contents of that folder.
+
+If you have found the folder or file(s) you want to work with, scroll down to ["Importing Files to Galaxy"](#importing-files-to-galaxy).
 
 ### Method 2: Adding and Browsing a Custom Dataverse Repository
 
@@ -89,14 +94,14 @@ If you need to connect to an institutional Dataverse instance not listed by defa
 
 > <hands-on-title>Link the Repository in Galaxy</hands-on-title>
 >
-> 1. In Galaxy, navigate to the top menu and **click on your user name** and then **Preferences**.
+> 1. In Galaxy, navigate to the top menu and **click on your username** and then **Preferences**.
 > 2. Select **Manage your Repositories** and click the **Create** button.
 > 3. Select **Dataverse**.
 > 4. Complete the configuration form:
 >  * **Name:** A descriptive title (e.g., *My Institutional Dataverse*).
 >  * **Dataverse instance endpoint:** The full base URL of the repository (e.g., `https://dataverse.harvard.edu`).
->  * **API Token:** Paste the token generated in Step 1.
 >  * **Allow Galaxy to export data:** Set to **Yes** if you want the flexibility to push finalized Galaxy histories back to Dataverse later.
+>  * **API Token:** Paste the token generated on the Dataverse instance of your choice in Step 1.
 > 5. Click **Create**.
 >
 {: .hands_on}
@@ -105,24 +110,31 @@ The remote repository configuration menu looks like this:
 
 ![Remote Repositories](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_1.png)
 
-Your completed form could look like this (but with information of the desired Dataverse):
+Your completed form could look like this (but with information about the desired Dataverse):
 
 ![Remote Repositories filled form](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_2.png)
 
-After saving, your new entry appears in **My Repositories**.
+After saving, your new entry appears in **My Repositories** under the name you have selected.
 
 ![My Repositories](https://galaxyproject.org/images/news/2026-01-15-dataverse/bsc_dv_3.png)
 
+Now with your Dataverse all set, let's see how you can get your data into Galaxy.
+
+## Importing Files to Galaxy
+
+ Once the connection between Galaxy and the Dataverse instance of your choice is established (via Method 1 or Method 2), navigating and uploading the files follows a standardized routine.
+
 > <hands-on-title>Importing Discovered Files into Your History</hands-on-title>
 >
-> Once the connection is established (via Method 1 or Method 2), navigating and uploading the files follows a standardized routine:
->
-> 1. Open the **Upload Data** menu and click **Choose from repository**.
-> 2. Select your newly configured or pre-configured Dataverse source.
+> 1. Open the **Upload** menu in the activity bar, then click **Choose from repository**.
+> 2. Select your newly configured or pre-configured Dataverse source by typing the name in the search bar and clicking on it.
 > 3. **Browse or Search:** You can navigate through the hierarchical Dataverse collections or use the search filter for dataset names.
-> 4. **Select Files:** Once you find the correct dataset container, click into it, tick the checkbox next to the desired files and hit **Select**.
-> 5. **Execute Import:** The selected items will populate the standard Galaxy upload queue. Click **Start** to run the import process.
+> 4. **Select Files:** Once you find the correct dataset container, click into it, tick the checkbox next to the desired files or the checkbox next to _Label_ to select all files and hit **Select**.
+> 5. A new window appears, showing you how many files you selected. Click **Start** to run the import process and **Close** to close the upload window.
+> 6. The selected items will populate your Galaxy history.
 >
-> Once the progress bar turns green, the files will appear in the right-hand history panel as standard Galaxy datasets, ready to be routed into any analytical tool or workflow.
+> Once the progress bar turns green, the datasets are ready to be routed into any analytical tool or workflow.
 >
 {: .hands_on}
+
+{% snippet faqs/galaxy/histories_dataset_colors.md %}
