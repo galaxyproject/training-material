@@ -6,7 +6,7 @@ box_type: tip
 contributors: [hexylena]
 ---
 
-Writing bug reports is a good skill to have as bioinformaticians, and a key point is that you should include enough information from the first message to help the process of resolving your issue more efficient and a better experience for everyone.
+Writing bug reports is a good skill to have as bioinformaticians, and a key point is that you should include enough information from the first message to help make the process of resolving your issue more efficient and a better experience for everyone.
 
 **What to include**
 
@@ -25,7 +25,7 @@ It makes the process of answering 'bug reports' much smoother for us, as we will
 
 The people who provide support for Galaxy are largely volunteers in this community, so try and provide as much information up front to avoid wasting their time:
 
-> I encountered an issue: I was working on (this server> and trying to run (tool)+(version number) but all of the output files were empty. My username is jane-doe.
+> I encountered an issue: I was working on (this server) and trying to run (tool)+(version number) but all of the output files were empty. My username is jane-doe.
 >
 > Here is everything that I know:
 >

@@ -1025,8 +1025,8 @@ tools available for any scientific domain.
 >   {% snippet faqs/galaxy/galaxy_labs.md %}
 >
 > And the following GTN resources:
-> - [GTN Tutorials by Topic](https://training.galaxyproject.org)
-> - [GTN Learning Pathways](https://training.galaxyproject.org/learning-pathways)
+> - [GTN Tutorials by Topic]({% link index.md %})
+> - [GTN Learning Pathways]({% link learning-pathways/ %})
 >
 {: .comment}
 
@@ -1434,7 +1434,7 @@ Now that you have configured a data repository in your Galaxy account, you can a
 
 When you publish your analysis, you will have to cite the tools you used. Galaxy makes this easy for you:
 
-> <hands-on-title> Export Tool Citations </hands-on-title>
+> <hands-on-title> Export Tool References </hands-on-title>
 >
 > 1. Click on **History options** {% icon galaxy-history-options %}
 > 2. Select **Export Tool References**
