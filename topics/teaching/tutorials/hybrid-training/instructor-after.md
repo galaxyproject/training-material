@@ -1,0 +1,4 @@
+- Report any lesson errors or suggest improvements on GitHub
+- Give feedback on [Galaxy Training Material GitHub issue](https://github.com/galaxyproject/training-material/issues/1452)
+- Fill the instructor feedback form
+- Review feedback from helpers

@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSequences"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCount Table"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nTaxonomy"]
+  3[label="Remove.groups"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Cluster.split"]
+  3 -> 4 [label="fasta_out"]
+  3 -> 4 [label="count_out"]
+  3 -> 4 [label="taxonomy_out"]
+  5[label="Make.shared"]
+  3 -> 5 [label="count_out"]
+  4 -> 5 [label="otulist"]
+  6[label="Classify.otu"]
+  3 -> 6 [label="count_out"]
+  4 -> 6 [label="otulist"]
+  3 -> 6 [label="taxonomy_out"]
+  7[label="Count.groups"]
+  5 -> 7 [label="shared"]
+  8[label="Sub.sample"]
+  5 -> 8 [label="shared"]
+}

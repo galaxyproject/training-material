@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nFasta nucelotide file"]
+  1[label="Prodigal Gene Predictor "]
+  0 -> 1 [label="output"]
+  k351cf550c05d4bad9394fe9b45ef6298[color=lightseagreen,label="Output\nProtein fasta file"]
+  1 -> k351cf550c05d4bad9394fe9b45ef6298
+  2[label="Sanntis: Build Genbank "]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output_faa"]
+  k1b9f0275191a4e90b4b47b10475f4602[color=lightseagreen,label="Output\nGenbank file"]
+  2 -> k1b9f0275191a4e90b4b47b10475f4602
+  3[label="Regex Find And Replace"]
+  1 -> 3 [label="output_faa"]
+  ke41e8fb9c5f6425fa351f8fa92f7821d[color=lightseagreen,label="Output\nClean protein fasta file"]
+  3 -> ke41e8fb9c5f6425fa351f8fa92f7821d
+  4[label=" InterProScan"]
+  3 -> 4 [label="out_file1"]
+  k522b49db765041e7b88801bb3cb1b451[color=lightseagreen,label="Output\nTabular file (.tsv)"]
+  4 -> k522b49db765041e7b88801bb3cb1b451
+  5[label="Sanntis: identify biosynthetic gene clusters"]
+  2 -> 5 [label="output_sanntis_gb"]
+  4 -> 5 [label="outfile_tsv"]
+  kc96c8c7e0a504506a1449d941f50eb5e[color=lightseagreen,label="Output\n SMBGC Annotation"]
+  5 -> kc96c8c7e0a504506a1449d941f50eb5e
+}

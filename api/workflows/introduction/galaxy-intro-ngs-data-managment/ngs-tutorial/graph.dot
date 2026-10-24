@@ -1,0 +1,80 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAccessions"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nGenome"]
+  2[label="Download sequencing data"]
+  0 -> 2 [label="output"]
+  kceeab6ee59e94ea1830129e9763da7e7[color=lightseagreen,label="Output\nLog file"]
+  2 -> kceeab6ee59e94ea1830129e9763da7e7
+  kdc27aec897514877a7613e0df6196120[color=lightseagreen,label="Output\nUnpaired datasets"]
+  2 -> kdc27aec897514877a7613e0df6196120
+  kc5eb96e5d1514c569d496d38967846ef[color=lightseagreen,label="Output\nPaired-end datasets"]
+  2 -> kc5eb96e5d1514c569d496d38967846ef
+  k8e89df5903584ed89e734874fa63da74[color=lightseagreen,label="Output\nSingle-end datasets"]
+  2 -> k8e89df5903584ed89e734874fa63da74
+  3[label="Adapter trimming with fastp"]
+  2 -> 3 [label="list_paired"]
+  k6134ed2160d2446394ed90d405fa79c7[color=lightseagreen,label="Output\nPaired-end Collection"]
+  3 -> k6134ed2160d2446394ed90d405fa79c7
+  k23007acc0e394c79a501f7bfdbe4eca4[color=lightseagreen,label="Output\nReport in HTML format"]
+  3 -> k23007acc0e394c79a501f7bfdbe4eca4
+  kc0ae08ab59644e2491ea2b56592450fd[color=lightseagreen,label="Output\nReport in JSON format"]
+  3 -> kc0ae08ab59644e2491ea2b56592450fd
+  4[label="Map sequencing reads to reference genome with BWA-MEM"]
+  3 -> 4 [label="output_paired_coll"]
+  1 -> 4 [label="output"]
+  kc5884bbf7972402e9679bf112e435c5d[color=lightseagreen,label="Output\nMapping BAM output"]
+  4 -> kc5884bbf7972402e9679bf112e435c5d
+  5[label="Samtools view"]
+  4 -> 5 [label="bam_output"]
+  k4cd8f23cee1e4587b880a016bfda9b9a[color=lightseagreen,label="Output\nMapping SAM output"]
+  5 -> k4cd8f23cee1e4587b880a016bfda9b9a
+  6[label="Removing duplicate sequences originating from library preparation artifacts and sequencing artifacts with MarkDuplicates"]
+  5 -> 6 [label="outputsam"]
+  k8e8357a3d8e64a28a0009897240a6c7f[color=lightseagreen,label="Output\nMarkDuplicates BAM"]
+  6 -> k8e8357a3d8e64a28a0009897240a6c7f
+  k1d2eaa9f336a495482b0526da01d43eb[color=lightseagreen,label="Output\nMarkDuplicates Metrics"]
+  6 -> k1d2eaa9f336a495482b0526da01d43eb
+  7[label="Correcting the misalignments around insertions and deletions with Realign reads"]
+  6 -> 7 [label="outFile"]
+  1 -> 7 [label="output"]
+  kaf463107789c49cf8dfa37799b4bea9b[color=lightseagreen,label="Output\nRealigned reads BAM file"]
+  7 -> kaf463107789c49cf8dfa37799b4bea9b
+  8[label="Samtools stats"]
+  6 -> 8 [label="outFile"]
+  kc4dc38a6eb6b4a52b38ba88a73682928[color=lightseagreen,label="Output\nStatistics for BAM dataset"]
+  8 -> kc4dc38a6eb6b4a52b38ba88a73682928
+  9[label="Adding the indel qualities into our alignment file via Insert indel qualities"]
+  7 -> 9 [label="realigned"]
+  1 -> 9 [label="output"]
+  k6dee7ec99a2e48a69172fe5a1bb9f9b0[color=lightseagreen,label="Output\nRealigned BAM dataset with indel qualities"]
+  9 -> k6dee7ec99a2e48a69172fe5a1bb9f9b0
+  10[label="Summarizing the analyses with MultiQC"]
+  3 -> 10 [label="report_json"]
+  6 -> 10 [label="metrics_file"]
+  8 -> 10 [label="output"]
+  k8c8064a611fe4d20afa039dc8fbaa2b0[color=lightseagreen,label="Output\nMultiQC Stat table"]
+  10 -> k8c8064a611fe4d20afa039dc8fbaa2b0
+  kd83d789f67234360ac6947a20db5dd15[color=lightseagreen,label="Output\nMultiQC HTML report"]
+  10 -> kd83d789f67234360ac6947a20db5dd15
+  11[label="Calling the Variants using lofreq Call variants"]
+  9 -> 11 [label="output"]
+  1 -> 11 [label="output"]
+  ke6369b39d95c4c11870d855f833aa2bd[color=lightseagreen,label="Output\nAll called variants"]
+  11 -> ke6369b39d95c4c11870d855f833aa2bd
+  12[label="Annotating the variant effects with SnpEff eff"]
+  11 -> 12 [label="variants"]
+  kbbec359e3ccb41739fc36eff1edb0864[color=lightseagreen,label="Output\nHTML summary of results "]
+  12 -> kbbec359e3ccb41739fc36eff1edb0864
+  k1bab9bf487884c7ab12a11afceb90a54[color=lightseagreen,label="Output\nVariant dataset with added variant effects"]
+  12 -> k1bab9bf487884c7ab12a11afceb90a54
+  13[label="Creating table of variants using SnpSift Extract Fields"]
+  12 -> 13 [label="snpeff_output"]
+  k4bfe24cc6e2547adafd113b1729fea01[color=lightseagreen,label="Output\nVariant dataset with added variant effects in tabular format"]
+  13 -> k4bfe24cc6e2547adafd113b1729fea01
+  14[label="Collapsing the data into a single dataset"]
+  13 -> 14 [label="output"]
+  kdda400de846748618cf178594dce83a3[color=lightseagreen,label="Output\nSummarized variant analysis result dataset"]
+  14 -> kdda400de846748618cf178594dce83a3
+}

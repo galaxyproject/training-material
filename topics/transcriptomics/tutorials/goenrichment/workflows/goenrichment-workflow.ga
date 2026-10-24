@@ -1,0 +1,989 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "GO Enrichment Analysis Tutorial",
+  "format-version": "0.1",
+  "name": "GO Enrichment Workflow",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GO annotations Drosophila melanogaster"
+        }
+      ],
+      "label": "GO annotations Drosophila melanogaster",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 200
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GO annotations Drosophila melanogaster\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "44a4f678-6028-45fb-b5fc-59e6d6d30360",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GO"
+        }
+      ],
+      "label": "GO",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 320
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GO\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ae9b3261-ca22-4018-8774-169358633422",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 320
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c7 != \\\\\\\"NA\\\\\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "4589bad5-abab-462c-9d4f-50dbcfed0a58",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 440
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "543bc50d-14ee-49c2-ae6c-fd521cf80a5d",
+      "workflow_outputs": []
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 560
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "902fb644-df7a-411e-89c7-4641ddc4c8a6",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goslimmer/goslimmer/1.0.1",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "slim": {
+          "id": 6,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOSlimmer",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOSlimmer",
+          "name": "slim"
+        },
+        {
+          "description": "runtime parameter for tool GOSlimmer",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOSlimmer",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 680
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goslimmer/goslimmer/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "294de027cb5d",
+        "name": "goslimmer",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"slim\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "15095c54-b1e7-43f5-9700-fc7d53232d45",
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 920
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "a18b5380-53e9-4565-8c8b-9c8494840726",
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 8,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 800
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "d21a0eb7-f0f2-49c3-9d08-eeb0a83ebc85",
+      "workflow_outputs": []
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "annotation": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 9,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "689b8724-53da-4d04-be51-d1fbffdd8a0c",
+      "workflow_outputs": []
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "annotation": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 10,
+          "output_name": "out_file1"
+        },
+        "study": {
+          "id": 9,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 320
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "19212b8f-3f35-4277-9802-c6c9ea35f4b2",
+      "workflow_outputs": []
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "errors": null,
+      "id": 18,
+      "input_connections": {
+        "annotation": {
+          "id": 13,
+          "output_name": "output"
+        },
+        "go": {
+          "id": 6,
+          "output_name": "output"
+        },
+        "population": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "study": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "study"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "go"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "population"
+        },
+        {
+          "description": "runtime parameter for tool GOEnrichment",
+          "name": "annotation"
+        }
+      ],
+      "label": null,
+      "name": "GOEnrichment",
+      "outputs": [
+        {
+          "name": "mf_result",
+          "type": "tabular"
+        },
+        {
+          "name": "bp_result",
+          "type": "tabular"
+        },
+        {
+          "name": "cc_result",
+          "type": "tabular"
+        },
+        {
+          "name": "mf_graph",
+          "type": "png"
+        },
+        {
+          "name": "bp_graph",
+          "type": "png"
+        },
+        {
+          "name": "cc_graph",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 440
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "5ace5c7d1a86",
+        "name": "goenrichment",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"cutoff\": \"\\\"0.01\\\"\", \"__page__\": null, \"graph\": \"\\\"png\\\"\", \"study\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"relations\": \"\\\"false\\\"\", \"correction\": \"\\\"Benjamini-Hochberg\\\"\", \"go\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"singletons\": \"\\\"true\\\"\", \"summarize\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annotation\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"population\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.0.1",
+      "type": "tool",
+      "uuid": "6f8dc224-0781-4119-a4e5-96587d1a6622",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "trapnellPopulation.tab"
+        }
+      ],
+      "label": "trapnellPopulation.tab",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 440
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"trapnellPopulation.tab\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b9332a9d-0dee-4a27-826c-1213b93c9c20",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GO annotations Mus musculus"
+        }
+      ],
+      "label": "GO annotations Mus musculus",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 560
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GO annotations Mus musculus\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "623b33b8-5edb-4f85-b377-127d0659504e",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 4,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Mouse population"
+        }
+      ],
+      "label": "Mouse population",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 680
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Mouse population\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ea004077-e2c7-4e92-a003-ec25f25df0a0",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 5,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Mouse diff"
+        }
+      ],
+      "label": "Mouse diff",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 800
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Mouse diff\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "af1838d3-3af6-4e52-aa38-6ba38eae2c58",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 6,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GO Slim"
+        }
+      ],
+      "label": "GO Slim",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 920
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GO Slim\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "bc59fd06-ef94-46ea-a20b-b884f3b9a1b2",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 7,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "mouseUnderexpressed.txt"
+        }
+      ],
+      "label": "mouseUnderexpressed.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 1040
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"mouseUnderexpressed.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3d85962e-96c5-4152-962d-0cbb1757e2ed",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 8,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "mouseOverexpressed.txt"
+        }
+      ],
+      "label": "mouseOverexpressed.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 1160
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"mouseOverexpressed.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "a81fec4d-a0b7-4e26-b1be-55ae410e5b58",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c7 < 0.05\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "4a267ae5-ab4a-42c2-8abb-217e3c4eaad8",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "transcriptomics"
+  ],
+  "uuid": "9f788b06-3aab-425d-8a14-0eb903e17f3a",
+  "version": 1
+}

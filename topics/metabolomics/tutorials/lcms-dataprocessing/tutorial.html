@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Mass spectrometry: LC-MS data processing / Mass spectrometry: LC-MS data processing / Metabolomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Mass spectrometry: LC-MS data processing">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-07-23 08:55:13 +0000">
+<meta name="DC.creator" content="Mélanie Pétéra">
+<meta name="DC.creator" content="Workflow4Metabolomics core team"><meta name="description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Metabolomics / Mass spectrometry: LC-MS data processing / Hands-on: Mass spectrometry: LC-MS data processing">
+        <meta property="og:description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mass spectrometry: LC-MS data processing",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-07-23 08:55:13 +0000",
+  "datePublished": "2021-12-14 20:39:51 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    }
+  ],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00196",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metabolomics",
+    "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+    "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
+  },
+  "abstract": "Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.",
+  "learningResourceType": "e-learning",
+  "name": "Mass spectrometry: LC-MS data processing",
+  "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html",
+  "version": 9,
+  "timeRequired": "PT2H",
+  "teaches": "- To comprehend the key role of data processing.\n- To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.\n- To be familiar with the \"identify then perform\" approach necessary to deploy relevant data processing strategies.",
+  "keywords": [
+    "Metabolomics",
+    "metabolomics",
+    "lc-ms"
+  ],
+  "description": "## Abstract\n\nMetabolomics is a *-omic* science known for being one of the most closely related to phenotypes.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why should one consider performing data processing steps when dealing with Metabolomics data?\n - How to conduct LCMS-based untargeted metabolomic data processing using Galaxy?\n\n\n## Learning Objectives\n\n- To comprehend the key role of data processing.\n- To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.\n- To be familiar with the \"identify then perform\" approach necessary to deploy relevant data processing strategies.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/melpetera/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/melpetera/",
+      "name": "Mélanie Pétéra",
+      "image": "https://avatars.githubusercontent.com/melpetera",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/metabohub/",
+          "name": "MetaboHUB",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.metabohub.fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/inrae/",
+          "name": "National Research Institute for Agriculture, Food and Environment",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.inrae.fr/en"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/workflow4metabolomics/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/workflow4metabolomics/",
+      "name": "Workflow4Metabolomics core team",
+      "image": "https://avatars.githubusercontent.com/workflow4metabolomics",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/",
+      "name": "Melanie Föll",
+      "image": "https://avatars.githubusercontent.com/foellmelanie",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1887-7543",
+      "@id": "https://orcid.org/0000-0002-1887-7543"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "@id": "https://orcid.org/0000-0002-5192-126X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metabolomics",
+      "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3172",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3172",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3172"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/workflow4metabolomics",
+      "name": "Workflow4Metabolomics"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/workflow4metabolomics",
+      "name": "Workflow4Metabolomics"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/workflow4metabolomics",
+      "name": "Workflow4Metabolomics"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/workflow4metabolomics",
+      "name": "Workflow4Metabolomics"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/5179809",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/metabolomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Metabolomics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/metabolomics/faqs/" title="Check our FAQs for the Metabolomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-metabolomics">
+    <h1 data-toc-skip>Mass spectrometry: LC-MS data processing</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/melpetera/" class="contributor-badge contributor-melpetera"><img src="https://avatars.githubusercontent.com/melpetera?s=36" alt="Mélanie Pétéra avatar" width="36" class="avatar" />
+    Mélanie Pétéra</a><a href="/training-material/hall-of-fame/workflow4metabolomics/" class="contributor-badge contributor-workflow4metabolomics"><img src="https://avatars.githubusercontent.com/workflow4metabolomics?s=36" alt="Workflow4Metabolomics core team avatar" width="36" class="avatar" />
+    Workflow4Metabolomics core team</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			</td>
+	</tr>
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge contributor-badge-small contributor-foellmelanie"><img src="https://avatars.githubusercontent.com/foellmelanie?s=36" alt="Melanie Föll avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-badge-small contributor-pavanvidem"><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Why should one consider performing data processing steps when dealing with Metabolomics data?</p>
+</li>
+        
+        <li><p>How to conduct LCMS-based untargeted metabolomic data processing using Galaxy?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>To comprehend the key role of data processing.</p>
+</li>
+        
+        <li><p>To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.</p>
+</li>
+        
+        <li><p>To be familiar with the “identify then perform” approach necessary to deploy relevant data processing strategies.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/5179809">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			Galaxy France <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no" title="">
+			Galaxy Norway
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 23, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00196">https://gxy.io/GTN:T00196</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Metabolomics is a <em>-omic</em> science known for being one of the most closely related to phenotypes.
+It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.
+It focuses on studying the very small molecules which are called <em>metabolites</em>, to better understand matters linked to the metabolism.</p>
+
+<p>Metabolomics analyses can be quite complex to conduct, especially when dealing with untargeted approaches.
+<strong>Liquid-Chromatography Mass Spectrometry</strong> (LC-MS) is one of the three main technologies used to perform this kind of approach.
+Data analysis for this technology requires a large variety of steps, ranging from extracting information from the raw data to statistical analysis and annotation.
+One of these steps is called “data processing”. It takes place after the pre-processing step (extraction of the peak list from raw data) and before any statistical analysis.
+You can get an overview of a complete LC-MS untargeted metabolomic workflow by following <a href="/training-material/topics/metabolomics/tutorials/lcms/tutorial.html">the dedicated training material</a>.</p>
+
+<p>After the pre-processing step, what you have at your disposal is a list of ions (hereafter in the form of a “variableMetadata” file) and the corresponding intensities (“dataMatrix” file).
+What you may want now is to get some relevant information from your tables. However, your data may not be suitable yet for statistical analysis.
+What should you do to ensure the quality of your tables? This tutorial will show you what the usual quality steps are.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#overview-and-data-upload" id="markdown-toc-overview-and-data-upload">Overview and data upload</a>    <ol>
+      <li><a href="#galaxy-tools-workflow" id="markdown-toc-galaxy-tools-workflow">Galaxy tools’ workflow</a></li>
+      <li><a href="#dataset-description" id="markdown-toc-dataset-description">Dataset description</a></li>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+    </ol>
+  </li>
+  <li><a href="#removing-trash-signals" id="markdown-toc-removing-trash-signals">Removing “trash” signals</a>    <ol>
+      <li><a href="#filtering-signals-at-given-retention-times" id="markdown-toc-filtering-signals-at-given-retention-times">Filtering signals at given retention times</a></li>
+      <li><a href="#using-blanks-to-filter-noise-signals" id="markdown-toc-using-blanks-to-filter-noise-signals">Using blanks to filter noise signals</a></li>
+      <li><a href="#filtered-dataset-overview" id="markdown-toc-filtered-dataset-overview">Filtered dataset overview</a></li>
+    </ol>
+  </li>
+  <li><a href="#signal-drift-and-batch-effect-correction" id="markdown-toc-signal-drift-and-batch-effect-correction">Signal drift and batch effect correction</a>    <ol>
+      <li><a href="#optional-step-checking-batch-effect-on-data" id="markdown-toc-optional-step-checking-batch-effect-on-data">[Optional step] Checking batch effect on data</a></li>
+      <li><a href="#performing-the-correction-process" id="markdown-toc-performing-the-correction-process">Performing the correction process</a></li>
+    </ol>
+  </li>
+  <li><a href="#filtering-signals-of-insufficient-quality" id="markdown-toc-filtering-signals-of-insufficient-quality">Filtering signals of insufficient quality</a></li>
+  <li><a href="#study-specific-data-processing-example-normalising-data-according-to-a-non-analytical-effect" id="markdown-toc-study-specific-data-processing-example-normalising-data-according-to-a-non-analytical-effect">Study-specific data processing: example normalising data according to a non-analytical effect</a>    <ol>
+      <li><a href="#identifying-unwanted-variability" id="markdown-toc-identifying-unwanted-variability">Identifying unwanted variability</a></li>
+      <li><a href="#formalising-the-information" id="markdown-toc-formalising-the-information">Formalising the information</a></li>
+      <li><a href="#getting-rid-of-the-variability" id="markdown-toc-getting-rid-of-the-variability">Getting rid of the variability</a></li>
+      <li><a href="#checking-the-resulting-data" id="markdown-toc-checking-the-resulting-data">Checking the resulting data</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="overview-and-data-upload">Overview and data upload</h1>
+
+<p>Data processing covers a large range of actions. They can generally be described as transformation (<em>e.g.</em> normalisation) or filter (<em>e.g.</em> removal of unwanted ions).
+In this tutorial we will focus on three main types of processing:</p>
+<ul>
+  <li>Removing “trash” signals</li>
+  <li>Correcting intensities</li>
+  <li>Removing signals of insufficient quality</li>
+</ul>
+
+<h2 id="galaxy-tools-workflow">Galaxy tools’ workflow</h2>
+
+<p>The different Galaxy tools that will be used in this tutorial are given in the following workflow picture.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/tutorial-lcms-proc-wf.png" alt="The picture is composed of 3 main boxes linked by arrows from left to right. In each of the first and last boxes, labelled '3 tabulars', are found 3 files named sampleMetadata, variableMetadata and dataMatrix. In the middle box labelled 'Quality Control' is found the workflow used in this tutorial, represented as tiny boxes with tool names, linked with arrows following the tutorial order." width="2000" height="1096" loading="lazy" /><a target="_blank" href="../../images/tutorial-lcms-proc-wf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The full tutorial workflow</figcaption></figure>
+
+<p>All these modules are part of the <a href="http://workflow4metabolomics.org/">Wokflow4Metabolomics</a> tool suit (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).
+They are compatible with the whole data analysis solution maintained by the W4M team.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-workflow4metabolomics-public-history"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Workflow4Metabolomics public history</div>
+
+  <p>This training material can be followed running it on any Galaxy instance holding the Galaxy modules needed.
+Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
+you can find the entire history in the ‘published histories’ section of usegalaxy.fr:
+<a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a></p>
+
+</blockquote>
+
+<h2 id="dataset-description">Dataset description</h2>
+
+<p>To illustrate the steps in this tutorial, a dataset has been built purposely.
+It is composed of 3 files. They are text files of tables with tabulation as separator.</p>
+
+<p>The <em>dataMatrix</em> file is a table containing the intensities of measured variables (ions, in lines) for every samples (in column).
+The first column is for ions’ identifiers while the first line is for samples’ identifiers.</p>
+
+<p>The <em>variableMetadata</em> file is a table containing information about the ions.
+The first column is for ions’ identifiers while the other columns gather information about m/z and retention time (rt).</p>
+
+<p>The <em>sampleMetadata</em> file is a table containing information about the samples.
+The first column is for samples’ identifiers while the other columns gather analytical and biological information
+such as the order of injection in the analytical sequence and the biological groups of interest for the supposed study.</p>
+
+<p>The simulated design is composed of 30 biological samples (tagged “sample” in the <em>sampleType</em> column),
+completed with 8 quality-control pooled samples (tagged “pool” in the <em>sampleType</em> column)
+and 6 extraction solvent samples (tagged “blank” in the <em>sampleType</em> column).
+The samples have been supposedly injected in two distinct sequences (tagged “B1” and “B2” in the <em>batch</em> column),
+the injection order being given in the <em>injectionOrder</em> column.
+Two sample characteristics are given:</p>
+<ul>
+  <li>The <em>Group</em> column represents two groups “A” and “B”, supposedly two biological groups (<em>e.g.</em> phenotypes, treatment groups…).</li>
+  <li>The <em>Osmo</em> column represents a measurement of supposed osmolarity, imagining that the samples may be urine samples.</li>
+</ul>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>To perform the different exercices of this tutorial, you need to create a new history and upload the dedicated dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>Import the 3 starting files in your history. Two possibilities:
+      <ul>
+        <li>Option 1: from a shared data library (ask your instructor)</li>
+        <li>Option 2: from <a href="https://zenodo.org/record/5179809">Zenodo</a> using the URLs given below:</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5179809/files/Dataprocessing_dataMatrix.txt
+https://zenodo.org/record/5179809/files/Dataprocessing_sampleMetadata.txt
+https://zenodo.org/record/5179809/files/Dataprocessing_variableMetadata.txt
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the datasets for their names to be shorter: “dataMatrix”, “sampleMetadata”, “variableMetadata”.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the datatype is “tabular”. If not, you may change it.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history,
+this step corresponds to the datasets number 1 to 3.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="removing-trash-signals">Removing “trash” signals</h1>
+
+<p>Data are often affected by various sources of unwanted variability. This can be found in your tables in different ways,
+two common ones being the presence of unwanted ions, and the effect of biological or analytical variables on intensity measures.
+This unwanted information can limit the effectiveness of statistical methods, leading sometimes to difficulties in revealing investigated effects.
+Thus, identifying such variability can help analysing your data at its full potential.
+Yet, getting rid of such information may not be a trivial problem. It requires different elements to be completed successfully.</p>
+
+<p>In this section we will adress the question of “trash” signal filtering.
+By this we mean ions that are present in the extracted peak list we have, but that do not correspond to relevant compounds to analyse.
+This can be for example noise, or ions from compounds that are not present in the original biological samples.</p>
+
+<p>To make it clearer, we will illustrate this with two examples: a “simple” one first and a more advanced one in a second time.</p>
+
+<h2 id="filtering-signals-at-given-retention-times">Filtering signals at given retention times</h2>
+
+<p>When using a chromatography column for MS analysis, you may want to exclude some time ranges where you know the information found there is not of interest.
+For example, you may want to exclude the dead volume, a calibration zone at the begining or the end, or to exclude a column flush.</p>
+
+<p>In this tutorial, let’s suppose the data are from some LC-QTOF analysis with a dead volume between 0 and 0.4 minutes and a column flush from 16 minutes.
+Then we may want to exclude ions that may be found at theses specific retention time (rt) ranges.
+A quick check at the variableMetadata file reveals that a retention time column is available (“rt”) with values in minutes.
+We can then use this column to filter the dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-generic-filter-b-to-filter-ions-found-at-specific-retention-times"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Generic_filter</b> to filter ions found at specific retention times</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01" title="Generic_Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generic_Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.01)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: the <code class="language-plaintext highlighter-rouge">dataMatrix</code> file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: the <code class="language-plaintext highlighter-rouge">sampleMetadata</code> file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: the <code class="language-plaintext highlighter-rouge">variableMetadata</code> file</li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li>In <em>“Identify the parameter to filter “</em>:
+              <ul>
+                <li><em>“1: Identify the parameter to filter “</em>
+                  <ul>
+                    <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">rt</code></li>
+                    <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">extremity</code>
+                      <ul>
+                        <li><em>“Remove all values lower than”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+                        <li><em>“And upper than”</em>: <code class="language-plaintext highlighter-rouge">16.0</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history,
+this step corresponds to the datasets number 4 to 6.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool generates 3 tables. They correspond to the 3 original tables,
+except the content has been filtered according to the specified parameters.
+By “filtering”, it means removing from the dataset some variables (ions) and/or samples according to the defined filters.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What have changed between the 3 input tables and the 3 output ones?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The sampleMetadata output is identical to the input one since no filter on samples has been applied.
+ The variableMetadata output contains less lines than the input one: some ions has been removed from the table.
+The same happened with the dataMatrix table, corresponding ions being removed from the file.
+Thus, these two files went from 201 lines (header included) to 172 lines, meaning only 171 ions remained in the dataset.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>This was a relatively easy task to do. The key point to perform the filter was to know the ranges of rt that needed to be filter,
+since the information about rt values was already explicitly found in the dataset.
+However, sometimes filtering requires more steps to be able to perform the wanted processing.
+This will be illustrated with the next example.</p>
+
+<h2 id="using-blanks-to-filter-noise-signals">Using blanks to filter noise signals</h2>
+
+<p>As mentioned before, measured signals using mass spectrometry may not always be all of interest.
+Some can be noise, or compounds not characteristic of the analysed biological samples.
+There are several ways to reduce there impact on gathered data.
+But one key point is always, as a starting point, to identify the issue.</p>
+
+<p>In the previous example we knew there were retention time ranges of values where signals were not relevant.
+But they may also be some signals that represent noise, found at no specific retention times.
+So a question can be “how do we identify these signals?”.</p>
+
+<p>One possible procedure is the use of blanks to estimate the noise, as a reference.
+The idea is to compare blanks’ intensities with other samples’ intensities.
+If there is no subtantial difference, we can assume that the concerned signal is noise.</p>
+
+<p>Of course, to be able to do so, you need to inject reference blanks along with your biological samples to get these intensities in your dataMatrix.
+Thus, you need to anticipate it when you define your injection sequence.
+Ideally, the blanks to use are extraction blanks, but you can also use injection solvent depending on your protocols.</p>
+
+<p>When blanks are available in your dataset, another thing to consider is “how do I formalise the information needed to be able to filter?”.
+One common way to compare may be to set a minimum difference between means or medians, or to test for significant difference with a statistical test.
+In this tutorial, we will choose to calculate a mean fold change between blanks and non-blank samples, and to set a threshold value for filtering.</p>
+
+<p>The mean fold change (“fold”) for each ion can be calculated using the <strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-intensity-check-b-to-generate-the-information-needed-to-filter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Intensity Check</b> to generate the information needed to filter</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8" title="Intensity Check tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intensity Check</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.8)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: <code class="language-plaintext highlighter-rouge">GF_dataMatrix</code> (output of the previous <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_sampleMetadata</code> (output of the previous <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_variableMetadata</code> (output of the previous <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Computation method”</em>: <code class="language-plaintext highlighter-rouge">Between one class and all the remaining samples</code>
+          <ul>
+            <li><em>“Class column”</em>: <code class="language-plaintext highlighter-rouge">c5: sampleType</code></li>
+            <li><em>“Selected class”</em>: <code class="language-plaintext highlighter-rouge">blank</code></li>
+            <li><em>“Calculate the mean fold change”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“Where should the class be placed for the mean fold change calculation?”</em>: <code class="language-plaintext highlighter-rouge">Denominator (Bottom)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history,
+this step corresponds to the datasets number 7 and 8.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This module generates two outputs: a pdf file for plots (that is not of interest in our example)
+and a table corresponding to the variableMetadata file used as input, completed with new columns depending on the selected parameters.
+In our case, it generated a column named <em>fold_Other_VS_blank</em> that we will use for filtering.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What does a value of “4” mean in the <em>fold_Other_VS_blank</em> column?
+Remember that we used as parameter <em>“Selected class”</em>=<code class="language-plaintext highlighter-rouge">blank</code> and
+<em>“Where should the class be placed for the mean fold change calculation?”</em>=<code class="language-plaintext highlighter-rouge">Denominator (Bottom)</code>.</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Since <em>“Selected class”</em>=<code class="language-plaintext highlighter-rouge">blank</code>, the samples are devided in two groups: the blank samples on one hand
+and all the other samples on the other hand.
+To calculate a mean fold change (<em>i.e.</em> a ratio of means) between the two classes, we need to define which mean will be used as numerator
+and which one will be used as denominator. Since we defined that the selected class should be the denominator, the values we will get are
+(mean of non-blank samples)/(mean of blank samples).
+Thus, a value of “4” for a given ion means that the ion has a mean 4-times higher in non-blank samples compared to blank samples.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The <strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool generates additional information about your dataset, but do not perform any filter.
+We can now define a threshold for filtering, and use the <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool again to remove noise signal.
+Here we will use a threshold value of “4”. What we want is to remove ions having a fold value lower than 4,
+meaning that the mean values of biological samples’ intensities for theses ions are not sufficiently high compared to blanks to be considered
+to be resulting from relevant compounds.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-generic-filter-b-to-filter-ions-with-insuffisant-mean-contrast-with-blank-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Generic_filter</b> to filter ions with insuffisant mean contrast with blank samples</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01" title="Generic_Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generic_Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.01)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: <code class="language-plaintext highlighter-rouge">GF_dataMatrix</code> (output of the previous <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_sampleMetadata</code> (output of the previous <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">IC_GF_variableMetadata</code> (output of the previous <strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li>In <em>“Identify the parameter to filter “</em>:
+              <ul>
+                <li><em>“1: Insert Identify the parameter to filter “</em>
+                  <ul>
+                    <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">fold_Other_VS_blank</code></li>
+                    <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">lower</code>
+                      <ul>
+                        <li><em>“Remove all values lower than”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 9 to 11.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As for the previous use of <strong>Generic Filter</strong>, we now have a dataset filtered from noise signals.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is the current stage of our training dataset?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>From a dataset containing originally 200 ions, the two successive filters lead to a dataset containing only 131 ions.
+The number of samples did not change, so we still have 30 biological samples, 8 QC pools and 6 blanks.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>At that point we will not use the blank samples anymore. However, before removing them from the dataset, it is always interesting to
+get an overview of the dataset including blanks.</p>
+
+<h2 id="filtered-dataset-overview">Filtered dataset overview</h2>
+
+<p>The idea here is to have a glance at what the dataset looks like at a macro scale.
+For this tutorial, we consider that at this step what we have in our dataset are ions only resulting from compounds originally present in the biological samples.
+Thus, there are some assumptions we can begin to make, that we can try to check using graphical tools.</p>
+
+<p>Here, we will use a tool that is called <strong>Quality Metrics</strong> to have an overview of our dataset through the generation of a pdf file containing some plots.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-quality-metrics-b-to-get-an-overview-of-the-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Quality Metrics</b> to get an overview of the dataset</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8" title="Quality Metrics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quality Metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.8)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">GF_GF_dataMatrix</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_GF_sampleMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_IC_GF_variableMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Coefficient of Variation”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+        <li><em>“Advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 12 to 15.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This tool generates several outputs (some of them are going to be used in a later use of this module), however for now only the pdf output is of interest.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/lcmsproc_QM.png" alt="Screenshot of the PDF output from Quality Metrics. It is a composition of several distinct plots. In particular there are a PCA plot and a total intensity per sample plot." width="1302" height="827" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_QM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PDF output from Quality Metrics</figcaption></figure>
+
+<p>On the top left of the picture, we can see the two first components of a Principal Component Analysis (PCA) with the projection of samples on it, colored by sample type.
+We can see that the main variability in the dataset distinguishes the blank samples (on the left in black) from the other ones (red for pools and green for samples).
+This is awaited since blanks are supposed to have very low intensities compared to biological samples.
+This observation is consistant with the top middle plot which represents the sum of intensities for each sample (plotting according to the injection order),
+where blank samples have very low values.</p>
+
+<p>This kind of plots is a good way to detect samples that may have abnormally low profiles:
+if a sample is positioned at the same area as the blanks, it is suspicious and a special attention should be given to the concerned sample.</p>
+
+<p>In this tutorial dataset, no atypical sample is observed, so no special attention needs to be paid on specific samples.</p>
+
+<p>Since the blank samples are of no use anymore, we can remove them from the dataset.
+Again, this can be done running the <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool, using the <em>sampleType</em> column of the sampleMetadata table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-generic-filter-b-to-remove-blank-samples-from-the-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Generic_filter</b> to remove blank samples from the dataset</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01" title="Generic_Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generic_Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.01)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: <code class="language-plaintext highlighter-rouge">GF_GF_dataMatrix</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_GF_sampleMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">GF_IC_GF_variableMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li>In <em>“Removing a level in factor”</em>:
+              <ul>
+                <li><em>“1: Insert Removing a level in factor”</em>
+                  <ul>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">sampleType</code></li>
+                    <li><em>“Remove factor when”</em>: <code class="language-plaintext highlighter-rouge">blank</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>The tabular outputs of the previous <strong>Quality Metrics</strong> job are not needed here.
+This is why what we use as input here are the outputs from the last <strong>Generic Filter</strong> job.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 16 to 18.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This step leads to a dataset containing 131 ions and 38 samples (from which 8 pools).</p>
+
+<p>You may have noticed that from module to module, output names tend to become longer and longer.
+To prevent very long and not-so-informative names due to successive use of modules, we highly recommand to regularly rename the outputs.
+Here, we completed a first row of data processing with the filter of trash signals. Now is a good time for a little renaming.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-rename-the-last-3-tables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Rename the last 3 tables</div>
+
+  <ol>
+    <li>
+      <p>Rename the tables for their names to be shorter: “RT_blank_Filter_dataMatrix”, “RT_blank_Filter_sampleMetadata”, “RT_blank_Filter_variableMetadata”.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we are ready to investigate another type of data processing: correcting intensities.</p>
+
+<h1 id="signal-drift-and-batch-effect-correction">Signal drift and batch effect correction</h1>
+
+<p>Here we will illustrate an example of data processing that is not about filtering, but about correcting.
+Indeed, when it comes to performing statistics comparing biological samples, it is crucial for the intensity values used to be reflecting
+relevant variability between samples.</p>
+
+<p>In untargeted Metabolomics studies, we manipulate measures that are relative abundancies.
+Although we have no unit attached to the intensities, we at least assume that, for a given ion, an intensity value for one sample being higher
+than the one from another sample means that the compound from which the ion is generated is originally found in higher abundance in the biological sample from
+the first sample compared to the other.
+This assumption may seem trivial, but truth is it is not when dealing with LC-MS data.</p>
+
+<p>It is known that when injecting successively a large number of samples, the LC-MS system tends to get dirty. This may cause a measure drift.
+To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches and the source is cleaned between batches.
+Unfortunately, these signal drift and batch design can add significant variability in the data.
+It makes sample comparison complicated, since the assumption stated previously about abundance in biological samples may not be true anymore.
+In case data is impacted by these effects, we need a way to normalise the data to obtain something reliable for statistical analysis.</p>
+
+<h2 id="optional-step-checking-batch-effect-on-data">[Optional step] Checking batch effect on data</h2>
+
+<p>You may have noticed in the <strong>Quality Metrics</strong> output PDF that appart from blanks, samples seemed to be seperated in two groups.
+Truth is it is indeed. However, the best would be to confirm it, in particular by finding out what these groups are linked to.
+Here dices are already rolled, and given the fact that in this section we are adressing signal drift and batch effects,
+one could suppose that the groups may have something to do with it.</p>
+
+<p>Let’s confirm it by performing a PCA, with the specificity to colour the sample projections according to the supposed effect: the batch information.
+This can be done using the <strong>Multivariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-multivariate-b-to-get-a-coloured-score-plot-from-a-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Multivariate</b> to get a coloured score plot from a PCA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10" title="Multivariate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Multivariate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.10)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_dataMatrix</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_sampleMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_variableMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Number of predictive components”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Advanced graphical parameters”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Sample colors”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Amount by which plotting text should be magnified relative to the default”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+          </ul>
+        </li>
+        <li><em>“Advanced computational parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>Changing the <code class="language-plaintext highlighter-rouge">0.8</code> value to <code class="language-plaintext highlighter-rouge">0.4</code> makes the text size of labels on the score plot smaller. Since the plot box size by default is tiny, this enhances the readability of the plot.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 19 to 22.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of <strong>Multivariate</strong> we will be interested in here is only the PDF file (Multivariate_figure.pdf).
+Among the four plots displayed in the file, we can see at the bottom left corner that the first component clearly reveals two distinct groups.
+These groups perfectly match the batch information we coloured the sample projections with.</p>
+
+<p>This confirms that we indeed have at least a batch effect in the data.
+To note, this comment is relevant thanks to the fact that supposedly we randomised the injection sequence.
+This is essential to be able to efficiently separate any analytical effect from known biological variables when searching for effects.
+If you look at the sampleMetadata file we originally imported, you can notice that the biological group (<em>A</em> and <em>B</em>) are equally found in the two batches,
+with alternation all through the injection order.</p>
+
+<h2 id="performing-the-correction-process">Performing the correction process</h2>
+
+<p>We previously saw that in data processing issues, it is sometimes crucial to anticipate what needs to be done before defining the injection sequence.
+This is even more the case when dealing with batch effects and signal drifts.</p>
+
+<p>There is a strategy, described initially by Van Der Kloet in 2009 (<span class="citation"><a href="#VdK2009">van der Kloet FM <i>et al.</i> 2009</a></span>), that has made its way to nowadays procedures (<span class="citation"><a href="#Dunn2011">Dunn <i>et al.</i> 2011</a></span>).
+The idea is to model the signal drift and the batch effect level by using a reference that can be representative for every ions in the dataset.
+Indeed, signal drift and batch effects can have very different impacts accross ions in a same dataset, so it is crucial to have a reference that is reliable
+for each ion independantly.</p>
+
+<p>Here the “universal” reference is obtained by using samples that are made by pooling together an extract of every samples in study.
+Thus, these Quality-control pooled samples (‘pools’) contain all the compounds that are originally found in the samples, being a reference for a very wide range of ions.
+By injecting these pools all through the injection sequence of the study samples, we obtain a reference for which the main variability observed is composed of
+the analytical effects we want to correct, since biologically they are supposed to be identical.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-about-the-theory"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-theory" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details about the theory</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The procedure that is used to correct data in this tutorial is the following.</p>
+
+  <p>For each ion independently, the normalisation process works as described in the following picture:</p>
+
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/lcms_BC_theo.png" alt="An example plot with the normalisation formula. " width="1144" height="353" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> How this works</figcaption></figure>
+
+  <p>You can see a plot representing 6 sample measures (blue points) in a batch for a given extracted ion.
+The yellow line represents a model for the signal drift that can be used to normalise the data.
+This line is determined using the pools only (red squares).
+With the given formula, we can correct the signal drift.</p>
+
+  <p>This work has to be done for each batch.
+Thus, if your sequence is divided into several batches, the idea is to obtain something similar to the following picture:</p>
+
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/lcms_BC_theo2.png" alt="A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction, where the effects have been erased thanks to the correction process. " width="1193" height="694" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Before/after picture</figcaption></figure>
+
+</blockquote>
+
+<p>In this tutorial, we have all the information we need to perform the correction:</p>
+<ul>
+  <li>Pools representing the molecule diversity have been injected regularly all through the sequences.</li>
+  <li>They are numerous enough in each batch for the regression to be reliable (well, at least we have enough of them to perform a linear modeling).</li>
+  <li>The dataset contains the mandatory information needed in the sampleMetadata file: the injection order, the batches of analysis and the sample type (pool or sample).</li>
+</ul>
+
+<p>We can then use the <strong>Batch correction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool to perform the correction.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-batch-correction-b-to-correct-the-data-from-signal-drift-and-batch-effet"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Batch correction</b> to correct the data from signal drift and batch effet</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0" title="Batch_correction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Batch_correction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_dataMatrix</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_sampleMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_variableMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Type of regression model “</em>: <code class="language-plaintext highlighter-rouge">linear</code>
+          <ul>
+            <li><em>“Factor of interest “</em>: <code class="language-plaintext highlighter-rouge">Group</code></li>
+            <li><em>“Level of details for plots “</em>: <code class="language-plaintext highlighter-rouge">complete</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>The tabular outputs of the previous <strong>Multivariate</strong> job are not needed here.
+This is why what we use as input here are the outputs from the last <strong>Generic Filter</strong> job.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-7" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 23 to 25.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The tool generates 3 outputs:</p>
+<ul>
+  <li>a dataMatrix file containing the corrected intensities</li>
+  <li>a variableMetadata file corresponding to the input one completed with additional columns</li>
+  <li>a pdf file with graphics to visualise the impact of the correction process</li>
+</ul>
+
+<p>Depending on the regression model option chosen (linear/lowess/loess/all_loess_pool/all_loess_sample), the output details differ slightly.
+Indeed, the previously described algorithm has been adapted following two strategies: one for the linear/lowess/loess (3L) options,
+another for the all_loess_pool/all_loess_sample (all_loess) ones.</p>
+
+<p>The main differences between the two strategies are the following:</p>
+<ul>
+  <li>one part allows regression type choice and applies the normalisation depending on internal quality metrics</li>
+  <li>the other part offers the possibility to apply the correction without pool samples.
+For more information, do not hesitate to read the help section provided with the Galaxy tool.</li>
+</ul>
+
+<p>In this tutorial example, we used the <em>linear</em> option which is part of the 3L strategy.
+We could not use any of the other options because the other ones would need more pools per batch than what we have here.
+When using the 3L strategy, in the PDF file you can have various graphics depending on the <em>Level of details for plots</em> option you choose.
+Here we generated all the plots that are available. This means that the PDF file contains first one page per ion with before/after plots,
+plus 3 additional pages at the end that display overall before/after indicators (sum of intensities, PCA plots, pools’ coefficients of variation).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Look at the penultimate page of the PDF output (page n°133).
+This page represents before/after PCA plots with various colouring.
+We will only focus on the two first lines, in particular looking at the first column.
+The two corresponding plots represent PCA score plots before (first line) and after (second line) the correction process.
+The two plots are coloured according to the batch information (B1 and B2).
+What can you say about the batch effect after the correction process compared to before?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Compared to the batch effect that was highlighted as the main effect in the data before the correction process,
+we can see that after correction, the batch effect is no longer explaining the first PCA component.
+This result is awaited since the reduction of the batch effect is one of the aim of the Batch correction step.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Now that we corrected the data from the signal drift and batch effect, we consider that differences in intensity between samples
+can be attributed mostly to differences in concentration of original compounds.
+However, we know that what we converted to intensity values in our table is initially signal measurements, thus we suspect that
+intensities may be noisy at some point.</p>
+
+<h1 id="filtering-signals-of-insufficient-quality">Filtering signals of insufficient quality</h1>
+
+<p>Similarly to many measuring devices, values that are generated by LC-MS devices are subject to noise.
+In the specific case of untargeted Metabolomics, the values are relative and can have, in a single dataset, a very large range of scales.
+It is difficult to quantify the noise, even so it is crucial to have a minimum confidence when searching for subtile differences between groups of individuals.
+Thus, having a way to put appart variables (ions) that may be of insufficient quality is key to limit the risk of wrong conclusion while analysing the data.</p>
+
+<p>Beyond the issue of noise, the quality of the variables in one’s dataset is a key question. In particular, in untargeted Metabolomics the data has particularities that
+make the endpoint analyses complicated, such as the disproportion between sample size and variable number, the complex redundancy and the noise issue already mentioned.
+When quality indicators can be computed before any statistical analysis, it is a real advantage: it can improve the efficiency of later statistical analysis and
+also help to select good candidates in biomarker approaches.</p>
+
+<p>One common and powerful way to assess measurements quality is the use of pools.
+Indeed, now that the data is corrected for signal drift, we expect to have stable intensities within pools since there is no biological variability among them.
+We can evaluate the remaining variability in pools for each ion, and consider it to be noise and/or analytical effects that we may not have managed to remove for specific ions.
+This enables the use of quality thresholds to get rid of ions we consider not to be sufficiently reliable regarding intensity values.</p>
+
+<p>In this tutorial, we will illustrate the use of pools by computing coefficients of variation (CV).
+This metric allows to evaluate the variability accross samples independantly of the unit scale.
+This advantage enables the definition of a unique threshold value that can be applied to every ions whatever the scales.
+CV are computed for each ion in your dataset, so you can filter ions using the chosen threshold.
+Note: the greater the CV value, the greater the variability.</p>
+
+<p>The first use of CV we will illustrate here is the computation of CVs for the pools only. The idea here is to grasp the pool variability.
+It is expected that pools do not vary much since they correspond to the same biological content.
+Thus, if your pools vary too much, you can suspect that the corresponding ion is not reliable enough.</p>
+
+<p>The second use of CV we will use here is a comparison between pool CVs and sample CVs.
+Indeed, we expect sample CVs to be higher than pool CVs since they share the same noise and analytical variability but also carry biological variability.</p>
+
+<p>The <strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool provides different CV indicators depending on what is in your sample list.
+In particular, in the present case-study, it computes pool CVs along with a ratio between pool CVs and sample CVs.
+These two indicators are automatically calculated as long as the input datasets provide the needed information
+(a <em>sampleType</em> column in the sampleMetadata file with the information of <em>pool</em> and <em>sample</em>).
+Thus, for these two indicators the tool can be run without specific parameters to set.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-quality-metrics-b-to-compute-the-cv-indicators"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Quality Metrics</b> to compute the CV indicators</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8" title="Quality Metrics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quality Metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.8)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">BC_linear_RT_blank_Filter_dataMatrix</code> (output of the <strong>Batch_correction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">RT_blank_Filter_sampleMetadata</code> (output of the last <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">BC_linear_RT_blank_Filter_variableMetadata</code> (output of the <strong>Batch_correction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Coefficient of Variation”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+        <li><em>“Advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>You may have noticed that we already used this tool previously in the tutorial.
+Although CV columns were already available at that time, here you need to use this tool again since this time indicators will be computed on intensities
+corrected from the signal drifts and batch effects.
+Note that what we are going to use this time is the tabular output, but while you are at it you can always check the pdf file if you want.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-8" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 26 to 29.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The tool provides a variableMetadata tabular output, containing all the computed CV values.
+For now no filter has been applied on the dataset. To remove the ions of insufficient quality, you will need the <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool again.</p>
+
+<p>But first, you need to determine the thresholds you want to use.
+Here we have two indicators we want to use. One is the pool CVs, the other is the ratio between pool CVs and sample CVs.
+This means that we will need to set two distinct thresholds, and to add two numerical filters in <strong>Generic Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-generic-filter-b-to-filter-the-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Generic Filter</b> to filter the dataset</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01" title="Generic_Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generic_Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.01)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data Matrix file”</em>: <code class="language-plaintext highlighter-rouge">BC_linear_RT_blank_Filter_dataMatrix</code> (output of the <strong>Batch_correction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">QM_RT_blank_Filter_sampleMetadata</code> (output of the last <strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">QM_BC_linear_RT_blank_Filter_variableMetadata</code> (output of the last <strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li>In <em>“Identify the parameter to filter “</em>:
+              <ul>
+                <li><em>“1: Insert Identify the parameter to filter “</em>
+                  <ul>
+                    <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">poolCV_over_sampleCV</code></li>
+                    <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">upper</code>
+                      <ul>
+                        <li><em>“Remove all values upper than”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“2: Insert Identify the parameter to filter “</em>
+                  <ul>
+                    <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">pool_CV</code></li>
+                    <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">upper</code>
+                      <ul>
+                        <li><em>“Remove all values upper than”</em>: <code class="language-plaintext highlighter-rouge">0.3</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li>In <em>“Removing a level in factor”</em>:
+              <ul>
+                <li><em>“1: Insert Removing a level in factor”</em>
+                  <ul>
+                    <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">sampleType</code></li>
+                    <li><em>“Remove factor when”</em>: <code class="language-plaintext highlighter-rouge">pool</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>Here, we took the opportunity of this filter to remove the pools from the dataset.
+Indeed, pools will be no longer used in this tutorial’s steps, so we can remove them from the dataset.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename the output tables for their names to be shorter: “Filtered_dataMatrix”, “Filtered_sampleMetadata”, “Filtered_variableMetadata”.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-9"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-9" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 30 to 32.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the <em>0.3</em> threshold mean in the hands-on exercise you just executed?</li>
+    <li>What does the <em>1.0</em> threshold mean in the hands-on exercise you just executed?</li>
+    <li>How many variables are left in your dataset? How many samples?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The <em>0.3</em> value corresponds to the maximum value kept in the dataset (‘Interval of values to remove: <em>upper</em>’) regarding the
+<em>pool_CV</em> column in your <em>Variable metadata</em> file.
+Thus, ions with pool CV values superior to 0.3 are excluded from the dataset.
+To note, pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.</li>
+      <li>The <em>1.0</em> value corresponds to the maximum value kept in the dataset (‘Interval of values to remove: <em>upper</em>’) regarding the
+<em>poolCV_over_sampleCV</em> column in your <em>Variable metadata</em> file. This means that any ion with a pool CV / sample CV ratio above 1
+(<em>i.e.</em> a pool CV greater than the sample CV) is discarded from the dataset.</li>
+      <li>Filtering led to 102 ions and 30 samples.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Presented threshold values here are common thresholds in Metabolomics studies.
+Please note that thresholds should be chosen consistently regarding the LC-MS device caracteristics and the study objectives.
+Thus you may need to be more strict in some cases and less strict in others.
+However, being less strict than usual should always be appropriately justified.</p>
+
+<h1 id="study-specific-data-processing-example-normalising-data-according-to-a-non-analytical-effect">Study-specific data processing: example normalising data according to a non-analytical effect</h1>
+
+<p>The previous steps presented in this tutorial illustrated categories of data processing that need to be consider whatever the study in
+untargeted LC-MS Metabolomics projects. In some cases the decision may be not to take actions, but in all cases the issue has to be considered
+to apprehend the reliability of the data for further analyses.</p>
+
+<p>Nonetheless, each study is unique and specific issues can arise that would need some additional data processing steps that are very specific to the study.
+Thus, sticking to a standard data processing workflow may not be sufficient in some cases.
+For example, one commonly considered data processing step in biomarker discovery studies is the reduction of redundancy,
+which is a complex question that can be addressed using various strategies depending on the study objectives.</p>
+
+<p>In this section, we will illustrate an example of study-specific data processing that involves a normalisation of the dataset.
+This will follow the standard <em>Identify-&gt;Formalise-&gt;Handle</em> design that is common to any data processing approach.</p>
+
+<h2 id="identifying-unwanted-variability">Identifying unwanted variability</h2>
+
+<p>First thing is of course to identify an issue in the data that needs to be handled.
+In the previous steps, this was the “easy” part since we already had knowledge about what needed to be handled.
+We adressed well-known problems, for which solutions may not always be easy, but at least we know there is something.</p>
+
+<p>In study-specific data processing, it may not be that simple.
+Usually, to see something you need to search for it. This means you have hypotheses prior to the data analysis.
+However, sometimes unwanted variability is unexpected, making the search process difficult.</p>
+
+<p>Fortunately, whether you have hypotheses or not, there is a common starting point in Metabolomics that can help you see whether an issue seems to need special attention.
+This is the use of PCA, that we already saw in previous steps to highlight awaited effects.</p>
+
+<p>In this tutorial, we constructed the dataset so we already know what is the variability to identify.
+In a real project it can also be the case, or at least we can have hypotheses about effects we would not be supprised to observe.
+In this tutorial example, we considered samples as being urine samples.
+It is known that urine samples can vary a lot in total solute concentration, potentially limiting the possibility to detect specific biological effects.
+Thus, even if it may not be the case, we can wonder whether the variability of concentration may have a huge effect on the metabolomic dataset we have.
+This is why, while making a PCA, we may want to plot the first components and see whether the variability displayed seems to match the concentration.</p>
+
+<p>In the sampleMetadata file provided in this tutorial, you can find a column named <em>Osmo</em> that is meant to correspond to measures of osmolality,
+one way to represent the overall concentration of urine samples.
+Let’s try to colour the PCA score plots according to that variable. For this, we will use the <strong>Multivariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Galaxy module.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-multivariate-b-to-visualise-the-two-first-components-of-a-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Multivariate</b> to visualise the two first components of a PCA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10" title="Multivariate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Multivariate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.10)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_dataMatrix</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_sampleMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_variableMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Number of predictive components”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Advanced graphical parameters”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Sample colors”</em>: <code class="language-plaintext highlighter-rouge">Osmo</code></li>
+            <li><em>“Amount by which plotting text should be magnified relative to the default”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+          </ul>
+        </li>
+        <li><em>“Advanced computational parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-10" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 33 to 36.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Among the four output files generated by the tool, the one we are interested in is the <em>Multivariate_figure.pdf</em> file.
+The PCA scores plot representing the projection of samples on the two first components is located at the bottom left corner:</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/lcmsproc_osmo.png" alt="The picture represents the PCA scores plot of components t1 (32% of total variability) and t2 (9% of total variability) with sample labels coloured according to the values from the Osmo column of the sampleMetadata file. We observe a gradation in the colours of samples following the first bisector of the graphic." width="757" height="727" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_osmo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> PCA scores plot</figcaption></figure>
+
+<p>Taking into account that the PCA was computed on Unit-Variance-scaled data (see the <strong>Multivariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool’s help section for more details),
+this result confirms the impact of total concentration on our dataset.
+Since this effect in data is independant of the question of interest that we suppose we investigate in the study (in the case of this tutorial),
+we may want to get rid of this effect to prevent a power reduction in further statistical analysis.</p>
+
+<h2 id="formalising-the-information">Formalising the information</h2>
+
+<p>This step is essential to be able to perform any data processing action.
+At this step we have already identified some unwanted variability, however to get rid of it we need to formalise the information in a way or another.</p>
+
+<p>As an example, in the <em>Removing “trash” signals</em> section, we acknowledged the fact that the LC-MS device could detect signals even in samples that are not supposed to contain
+relevant biological compounds. This being identified, this knowledge alone is not sufficient to be able to handle the issue in the dataset.
+The solution we chose then was to use blank samples to represent the uninformative signals.
+Thus, the blank samples’ intensities are the formalisation of the unwanted variability identified.</p>
+
+<p>In this section’s example, the formalisation is already done: we have the <em>Osmo</em> column in our data, that furthermore enabled to identify the unwanted variability.
+Thus, we can move to the next step already. However please remember that this part is still mandatory in the process, even if sometimes it is straightforward.</p>
+
+<h2 id="getting-rid-of-the-variability">Getting rid of the variability</h2>
+
+<p>Now that the unwanted variability is identified and formalised, the next step is to apply an adequate procedure to handle it.</p>
+
+<p>Here we have a quantitative effect linked to the <em>Osmo</em> variable.
+There are plenty of ways to handle this kind of effect, and a proper approach would be first to study the impact of this effect on data in details,
+and then only to choose which data processing approach to use to efficiently correct this effect.</p>
+
+<p>In this tutorial, we assume the <em>Osmo</em> effect is a multiplicative one.
+This appears to be true in the dataset: the data was built especially for this tutorial so there is no surprise here.
+Then we can use a normalisation approach to handle the question.
+Please remember that this is a fake dataset used to illustrate the importance and philosophy of data processing for LC-MS untargeted Metabolomics analyses.
+For proper handling of urine concentration in one’s study, it may require more in-depth procedures depending on the protocole.</p>
+
+<p>The <strong>Normalization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Galaxy module enables to perform an adequate correction of this effect.
+The approach of this module is to apply the normalisation operation to each sample to make the data from all samples directly comparable with each other
+(to take into account variations of the overall concentrations of samples due to biological and technical reasons).
+It provides different normalisation strategies, some of them particularly of interest for NMR-based metabolomic datasets.
+In our example, what we are interested in is a normalisation based on the <em>Osmo</em> variable, which is one of the possibilities provided by the module.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-normalization-b-to-handle-the-total-concentration-effect"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Normalization</b> to handle the total concentration effect</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/normalization/normalization/1.0.7" title="Normalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Normalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.7)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix of preprocessed data”</em>: <code class="language-plaintext highlighter-rouge">Filtered_dataMatrix</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Normalization method”</em>: <code class="language-plaintext highlighter-rouge">Quantitative variable</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata matrix”</em>: <code class="language-plaintext highlighter-rouge">Filtered_sampleMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+            <li><em>“Name of the column of the numerical variable for normalization (weight, osmolality, …)”</em>: <code class="language-plaintext highlighter-rouge">Osmo</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-11"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-11" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 37 and 38.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With the parameter choices made here, the module generates two outputs: a log file and a dataMatrix file.
+The dataMatrix corresponds to the normalised intensities. This is what will be used in further analyses.</p>
+
+<h2 id="checking-the-resulting-data">Checking the resulting data</h2>
+
+<p>Now that the normalisation process has been applied, one may want to check the effect on data.
+Has the effect been entirely removed from the data? Can we see a significant reduction of it in the data?</p>
+
+<p>Similarly to the checks we could make in the context of signal drift and batch effect correction with before/after plots,
+it is wise to check the impact of any normalisation process on the dataset.
+This check can be conducted trying to highlight the unwanted effect the same way it was highlighted in the initial step.
+In our tutorial example we observed the <em>Osmo</em> effect on the two first components of a PCA.
+Thus, we can compute a similar PCA using the normalised intensities and see whether the two first components still cary the unwanted variability.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-multivariate-b-to-visualise-the-two-first-components-of-a-pca-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Multivariate</b> to visualise the two first components of a PCA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10" title="Multivariate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Multivariate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.10)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Normalization_dataMatrix</code> (output of the <strong>Normalization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_sampleMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_variableMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Number of predictive components”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Advanced graphical parameters”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Sample colors”</em>: <code class="language-plaintext highlighter-rouge">Osmo</code></li>
+            <li><em>“Amount by which plotting text should be magnified relative to the default”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+          </ul>
+        </li>
+        <li><em>“Advanced computational parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-12"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-12" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 39 to 42.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>When looking at the Scores plot available in the PDF output, we can see that the previously observed link between the colouring scale
+and the components’ coordinates is no longer obvious.
+We can then conclude that the <em>Osmo</em> effect has been notably reduced inside the dataset.</p>
+
+<p>It is even possible to see, on the first component, what seems to be a clear seperation of two groups of samples.
+Theses groups do not correspond to an <em>Osmo</em> effect: we can see that high and low values of <em>Osmo</em> are found in each group with balance.</p>
+
+<p>We could be curious and wonder whether these groups would reflect a biological state.
+In the sampleMetadata we have, there is a <em>Group</em> column, supposedly representing two biological groups A and B.
+Let’s see how theses groups are projected on the final PCA we have.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-b-multivariate-b-to-visualise-the-two-first-components-of-a-pca-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using <b>Multivariate</b> to visualise the two first components of a PCA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10" title="Multivariate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Multivariate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.10)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Normalization_dataMatrix</code> (output of the <strong>Normalization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_sampleMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Filtered_variableMetadata</code> (output of the last <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
+        <li><em>“Number of predictive components”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Advanced graphical parameters”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Sample colors”</em>: <code class="language-plaintext highlighter-rouge">Group</code></li>
+            <li><em>“Amount by which plotting text should be magnified relative to the default”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+          </ul>
+        </li>
+        <li><em>“Advanced computational parameters”</em>: <code class="language-plaintext highlighter-rouge">Use default</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>To run this exercice, you can choose to re-run the previous one and simply change the <em>“Sample colors”</em> parameter from <code class="language-plaintext highlighter-rouge">Osmo</code> to<code class="language-plaintext highlighter-rouge">Group</code>.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-comment-to-w4m-users-13"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-13" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comment to W4M users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing">GTN_LCMSprocessing</a> history, this step corresponds to the datasets number 43 to 46.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What major comment can you do when looking at the PCA scores plot obtain from the last hands-on exercise?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>We can see that the groups that seemed to be shown on the first PCA component match perfectly the biological categories available in the <em>Group</em>
+column of the sampleMetadata file.
+We could say that the normalisation process enabled to highlight a distinct effect of the biological groups.
+Note that it is possible that this effect would be already noticeable without the normalisation process,
+however the perfect separation on the first component after normalisation is promising to be able to extract
+clear information about the source of this separation.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Now that the dataset seems to be processed adequately, with no identified remaining unwanted main effect
+(the principal effect being the groups of interest for the study), we can consider the data processing of this dataset completed.
+This does not mean that further data processing steps could not be considered depending on the study objectives,
+but we reached the end of the example used to illustrate the meaning and importance of untargeted LC-MS metabolomic data processing
+through this tutorial.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data.
+In particular, the removing of “trash” signals, the signal drift and batch effect correction and the filtering of signals of insufficient quality
+are common aspects to consider when dealing with LC-MS data.
+Remember that depending on your context (type of samples, protocol specificities…) specific filters/normalisations may be needed, independently of standards ones.
+Once you complete your customed processing procedure, your tables are ready for biologically-oriented exploration!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Data processing is a key step in untargeted Metabolomics analyses. The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. In particular, blank filtering, pool variation study and signal drift correction are common aspects to consider when dealing with LC-MS.</p>
+</li>
+                        
+                        <li><p>Although some main steps are standard, various ways to combine tools exist. Remember that depending on your context (type of samples, protocol specificities…) specific filters/normalisations may be needed, independently of standards ones.</p>
+</li>
+                        
+                        <li><p>A variety of tools is available in Galaxy, but do not forget that you need appropriate knowledge to decide what to use depending on your data.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/metabolomics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="VdK2009">Kloet FM, van der, B. I, V. ER, and J. RH, 2009 <b>Analytical error reduction using single point calibration for accurate and precise metabolomic phenotyping</b>. Journal of proteome research 8: 5132–5141. <a href="https://doi.org/110.1021/pr900499r">110.1021/pr900499r</a></li>
+<li id="Dunn2011">Dunn, W. B., D. Broadhurst, P. Begley, E. Zelena, S. Francis-McIntyre <i>et al.</i>, 2011 <b>Procedures for large-scale metabolic profiling of serum and plasma using gas chromatography and liquid chromatography coupled to mass spectrometry</b>. Nature Protocols 6: 1060–1083. <a href="https://doi.org/10.1038/nprot.2011.335">10.1038/nprot.2011.335</a></li>
+<li id="Giacomoni2014">Giacomoni, F., G. L. Corguille, M. Monsoor, M. Landi, P. Pericard <i>et al.</i>, 2014 <b>Workflow4Metabolomics: a collaborative research infrastructure for computational metabolomics</b>. Bioinformatics 31: 1493–1495. <a href="https://doi.org/10.1093/bioinformatics/btu813">10.1093/bioinformatics/btu813</a></li>
+<li id="Guitton2017">Guitton, Y., M. Tremblay-Franco, G. L. Corguillé, J.-F. Martin, M. Pétéra <i>et al.</i>, 2017 <b>Create,  run,  share,  publish,  and reference your LC–MS,  FIA–MS,  GC–MS,  and NMR data analysis workflows with the Workflow4Metabolomics 3.0 Galaxy online infrastructure for metabolomics</b>. The International Journal of Biochemistry &amp; Cell Biology 93: 89–101. <a href="https://doi.org/10.1016/j.biocel.2017.07.002">10.1016/j.biocel.2017.07.002</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=metabolomics/lcms-dataprocessing"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=metabolomics/lcms-dataprocessing">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Mélanie Pétéra, Workflow4Metabolomics core team,  <b>Mass spectrometry: LC-MS data processing (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html">https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{metabolomics-lcms-dataprocessing,
+author = "Mélanie Pétéra and Workflow4Metabolomics core team",
+	title = "Mass spectrometry: LC-MS data processing (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: multivariate
+  owner: ethevenot
+  revisions: 5526f8258e8a
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: qualitymetrics
+  owner: ethevenot
+  revisions: acdf51018708
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: normalization
+  owner: marie-tremblay-metatoul
+  revisions: 221cbd549c40
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: batchcorrection
+  owner: melpetera
+  revisions: 23314e1192d4
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: generic_filter
+  owner: melpetera
+  revisions: cfd7c4aa5c26
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: intensity_checks
+  owner: melpetera
+  revisions: a31f3f802b2b
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>February 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Steps are well explained and detailed, tips are very useful in general
+					
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00196">gxy.io/GTN:T00196</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

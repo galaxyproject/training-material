@@ -1,0 +1,41 @@
+- doc: Test outline for Sanger1-:-From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST
+  job:
+    HCOI primers:
+      class: File
+      path: test-data/HCOI primers.fasta
+      filetype: fasta
+    LCOI primers:
+      class: File
+      path: test-data/LCOI primers.fasta
+      filetype: fasta
+    H sequences (Reverse):
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: B05_CHD8-III6brother-18R
+        path: test-data/H sequences (Reverse)_B05_CHD8-III6brother-18R.ab1
+      - class: File
+        identifier: D05_CHD8-III6mother-18R
+        path: test-data/H sequences (Reverse)_D05_CHD8-III6mother-18R.ab1
+      - class: File
+        identifier: F07_CHD8-III6-18R
+        path: test-data/H sequences (Reverse)_F07_CHD8-III6-18R.ab1
+    L sequences (Forward):
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: B05_CHD8-III6brother-18F
+        path: test-data/L sequences (Forward)_B05_CHD8-III6brother-18F.ab1
+      - class: File
+        identifier: C05_CHD8-III6mother-18F
+        path: test-data/L sequences (Forward)_C05_CHD8-III6mother-18F.ab1
+      - class: File
+        identifier: E07_CHD8-III6-18F
+        path: test-data/L sequences (Forward)_E07_CHD8-III6-18F.ab1
+  outputs: 
+    w_blast_output:
+      path: test-data/aligned_seqs.fasta
+    w_consensus_aligned_sequences:
+      path: test-data/blast.tabular

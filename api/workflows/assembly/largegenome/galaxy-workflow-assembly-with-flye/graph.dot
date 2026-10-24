@@ -1,0 +1,29 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nlong reads"]
+  1[label="Flye: assembly"]
+  0 -> 1 [label="output"]
+  k3960e31d7a9e400cbb21f6e47b75e649[color=lightseagreen,label="Output\nFlye assembly on input dataset(s) (consensus)"]
+  1 -> k3960e31d7a9e400cbb21f6e47b75e649
+  ke524f295a9574c91838cf8e98e809b6c[color=lightseagreen,label="Output\nFlye assembly on input dataset(s) (assembly_graph)"]
+  1 -> ke524f295a9574c91838cf8e98e809b6c
+  k48b854e2dd6e43458d0509abca6659da[color=lightseagreen,label="Output\nFlye assembly on input dataset(s) (Graphical Fragment Assembly)"]
+  1 -> k48b854e2dd6e43458d0509abca6659da
+  k8672c17271a7432c9679a8e37f36cf53[color=lightseagreen,label="Output\nFlye assembly on input dataset(s) (assembly_info)"]
+  1 -> k8672c17271a7432c9679a8e37f36cf53
+  2[label="Fasta statistics"]
+  1 -> 2 [label="consensus"]
+  3[label="Quast genome report"]
+  1 -> 3 [label="consensus"]
+  k17cdf8e08ad44570afae1861934fc678[color=lightseagreen,label="Output\nQuast on input dataset(s):  HTML report"]
+  3 -> k17cdf8e08ad44570afae1861934fc678
+  4[label="Bandage image: Flye assembly"]
+  1 -> 4 [label="assembly_gfa"]
+  ke66bd129146f48dc95b839a2a1ffb68d[color=lightseagreen,label="Output\nBandage Image on input dataset(s): Assembly Graph Image"]
+  4 -> ke66bd129146f48dc95b839a2a1ffb68d
+  5[label="Bar chart: show contig sizes"]
+  1 -> 5 [label="assembly_info"]
+  k6d0a4e23d6314e3789303d22fc91369b[color=lightseagreen,label="Output\nBar chart showing contig sizes"]
+  5 -> k6d0a4e23d6314e3789303d22fc91369b
+}

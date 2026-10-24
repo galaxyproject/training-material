@@ -1,0 +1,5691 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>GTN Contributor: Wendi Bacon</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="GTN Contributor: Wendi Bacon">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="GTN Contributor: Wendi Bacon">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/hall-of-fame/nomadscientist/index.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/hall-of-fame/nomadscientist/">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<script type="application/ld+json">
+	{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+    "@type": "CreativeWork"
+  },
+  "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+  "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+  "name": "Wendi Bacon",
+  "image": "https://avatars.githubusercontent.com/nomadscientist",
+  "description": "Senior Lecturer at The Open University",
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+      "legalName": "Galaxy Training Network",
+      "alternateName": "GTN",
+      "url": "https://training.galaxyproject.org",
+      "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+      "keywords": [
+        "galaxy",
+        "bioinformatics",
+        "training",
+        "fair",
+        "accessible"
+      ],
+      "status": "active",
+      "foundingDate": "2015-06-29"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ou/",
+      "name": "The Open University",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.open.ac.uk"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+      "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://galaxyproject.org/community/sig/singlecell/"
+    }
+  ],
+  "identifier": "https://orcid.org/0000-0002-8170-8806",
+  "@id": "https://orcid.org/0000-0002-8170-8806"
+}
+</script>
+
+<style type="text/css" media="all">
+.card-title {
+	font-size: 2rem;
+}
+
+</style>
+
+
+<section class="contributor-page contributor-nomadscientist">
+	<div class="stats">
+		<div class="row">
+			<div class="col-md-9">
+				<hgroup>
+					<h1>
+						Wendi Bacon
+					</h1>
+					
+				</hgroup>
+
+				
+				<p class="text-muted">
+					<p>Senior Lecturer at The Open University</p>
+
+				</p>
+				
+
+				
+
+				
+				
+				<h2>Affiliations</h2>
+				<div class="contributors-line">
+					<a href="/training-material/hall-of-fame/elixir-europe/" class="contributor-badge contributor-elixir-europe"><img src="/training-material/shared/images/elixir.png" alt="ELIXIR Europe avatar" width="36" class="avatar" />
+    ELIXIR Europe</a><a href="/training-material/hall-of-fame/ou/" class="contributor-badge contributor-ou"><img src="/training-material/shared/images/logos/logo_ou.png" alt="The Open University avatar" width="36" class="avatar" />
+    OU</a><a href="/training-material/hall-of-fame/spoc/" class="contributor-badge contributor-spoc"><img src="/training-material/shared/images/logos/spoc_hand.png" alt="🖖🏾Single-cell & sPatial Omics Community of practice avatar" width="36" class="avatar" />
+    🖖🏾SPOC</a>
+				</div>
+				
+
+				
+				
+				<h2>Former Affiliations</h2>
+				<div class="contributors-line">
+					<a href="/training-material/hall-of-fame/embl-ebi/" class="contributor-badge contributor-embl-ebi"><img src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/d0fccaa9dc8dc8615eb7146d6c5e96bd36f11f3a/EMBL_EBI_Logo_black.svg" alt="European Bioinformatics Institute avatar" width="36" class="avatar" />
+    EMBL-EBI</a>
+				</div>
+				
+
+				
+				
+
+				
+				
+
+				<h2>Contributions</h2>
+
+
+				<p class="text-muted">
+					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+
+                </p>
+
+
+  				
+				<h3 id="editorial-role">5 Editorial Roles</h3>
+				<p>This contributor has taken on additional responsibilities as an editor for the following topics. They are responsible for ensuring that the content is up to date, accurate, and follows GTN best practices.</p>
+				<ul>
+				
+					<li>
+						
+						Learning Pathway: <a href="/training-material/learning-pathways/beyond_single_cell.html">Applying single-cell RNA-seq analysis</a>
+						
+					</li>
+				
+					<li>
+						
+						Learning Pathway: <a href="/training-material/learning-pathways/deconvolution_projects.html">Bioinformatics Projects: Using deconvolution to get new insights from old bulk RNA-seq data</a>
+						
+					</li>
+				
+					<li>
+						
+						Learning Pathway: <a href="/training-material/learning-pathways/intro_single_cell.html">Introduction to Galaxy and Single Cell RNA Sequence analysis</a>
+						
+					</li>
+				
+					<li>
+						
+						Learning Pathway: <a href="/training-material/learning-pathways/onboarding-contributing.html">Onboarding for new contributors</a>
+						
+					</li>
+				
+					<li>
+						
+						Learning Pathway: <a href="/training-material/learning-pathways/reloaded_single_cell.html">Applying single-cell RNA-seq analysis in Coding Environments</a>
+						
+					</li>
+				
+				</ul>
+				
+
+				
+				<h3 id="tutorials">95 Tutorials</h3>
+				<ul>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/ecology">
+							Ecology
+						</a>
+						/
+						<a href="/training-material//topics/ecology/tutorials/remote-sensing/tutorial.html">
+						Sentinel 2 biodiversity
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+						Galaxy Basics for everyone
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/tutorial.html">
+						A short introduction to Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/fair">
+							FAIR Data, Workflows, and Research
+						</a>
+						/
+						<a href="/training-material//topics/fair/tutorials/fair-gtn/tutorial.html">
+						FAIR Galaxy Training Material
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-testing/tutorial.html">
+						Python - Testing
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-multiprocessing/tutorial.html">
+						Python - Multiprocessing
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-typing/tutorial.html">
+						Python - Type annotations
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-math/tutorial.html">
+						Python - Math
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-exceptions/tutorial.html">
+						Python - Try & Except
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-flow/tutorial.html">
+						Python - Flow Control
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-basics-recap/tutorial.html">
+						Python - Introductory Graduation
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-subprocess/tutorial.html">
+						Python - Subprocess
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-loops/tutorial.html">
+						Python - Loops
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-iterables/tutorial.html">
+						Python - Lists & Strings & Dictionaries
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-files/tutorial.html">
+						Python - Files & CSV
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-types/tutorial.html">
+						Python - Basic Types & Type Conversion
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-functions/tutorial.html">
+						Python - Functions
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-glob/tutorial.html">
+						Python - Globbing
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/galaxy-interface">
+							Using Galaxy and Managing your Data
+						</a>
+						/
+						<a href="/training-material//topics/galaxy-interface/tutorials/jupyterlab/tutorial.html">
+						JupyterLab in Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/dev">
+							Development in Galaxy
+						</a>
+						/
+						<a href="/training-material//topics/dev/tutorials/core-contributing/tutorial.html">
+						Contributing a New Feature to Galaxy Core
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/dev">
+							Development in Galaxy
+						</a>
+						/
+						<a href="/training-material//topics/dev/tutorials/tool-annotation/tutorial.html">
+						Adding and updating best practice metadata for Galaxy tools using the bio.tools registry
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/rendering_gtn/tutorial.html">
+						Preview the GTN website as you edit your training material
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/create-new-tutorial/tutorial.html">
+						Creating a new tutorial
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/learning-principles/tutorial.html">
+						Principles of learning and how they apply to training and teaching
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/github-contribution/tutorial.html">
+						Contributing to the Galaxy Training Network with GitHub
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">
+						Creating content in Markdown
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/updating_tutorial/tutorial.html">
+						Updating tool versions in a tutorial
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/create-new-topic/tutorial.html">
+						Including a new topic
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/community">
+							Galaxy Community Building
+						</a>
+						/
+						<a href="/training-material//topics/community/tutorials/community-tool-table/tutorial.html">
+						Creation of resources listing all the tools and their metadata relevant to your community
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/community">
+							Galaxy Community Building
+						</a>
+						/
+						<a href="/training-material//topics/community/tutorials/sig_define/tutorial.html">
+						What's a Special Interest Group?
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/community">
+							Galaxy Community Building
+						</a>
+						/
+						<a href="/training-material//topics/community/tutorials/sig_create/tutorial.html">
+						Creating a Special Interest Group
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/community">
+							Galaxy Community Building
+						</a>
+						/
+						<a href="/training-material//topics/community/tutorials/community_content/tutorial.html">
+						Creating community content
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/community">
+							Galaxy Community Building
+						</a>
+						/
+						<a href="/training-material//topics/community/tutorials/tools_subdomains/tutorial.html">
+						Make your tools available on your subdomain
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
+						Generating a single cell matrix using Alevin
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">
+						Filter, plot, and explore single cell RNA-seq data with Seurat
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">
+						Pre-processing of 10X Single-Cell ATAC-seq Datasets
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html">
+						Pre-processing of 10X Single-Cell RNA Datasets
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">
+						Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html">
+						Inferring single cell trajectories with Monocle3 (R)
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
+						Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html">
+						Single-cell ATAC-seq standard processing with SnapATAC2
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/alevin-commandline/tutorial.html">
+						Generating a single cell matrix using Alevin and combining datasets (bash + R)
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">
+						Inferring single cell trajectories with Scanpy (Python)
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music/tutorial.html">
+						Bulk RNA Deconvolution with MuSiC
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna_batch_correction/tutorial.html">
+						Batch Correction and Integration with Seurat or Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">
+						Scanpy Parameter Iterator
+						</a>
+						
+						
+						
+						
+	<abbr title="This person tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">⚙️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
+						Filter, plot and explore single-cell RNA-seq data with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/GO-enrichment/tutorial.html">
+						GO Enrichment Analysis on Single-Cell RNA-Seq Data
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html">
+						Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html">
+						Inferring single cell trajectories with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/EBI-retrieval/tutorial.html">
+						Importing files from public atlases
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">
+						Filter, plot, and explore single cell RNA-seq data with Seurat (R)
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">
+						Pre-processing of Single-Cell RNA Data
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-deconvolution-evaluate/tutorial.html">
+						Evaluating Reference Data for Bulk RNA Deconvolution
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">
+						Converting NCBI Data to the AnnData Format
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
+						Clustering 3K PBMCs with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-umis/tutorial.html">
+						Understanding Barcodes
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
+						Removing the effects of the cell cycle
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">
+						Combining single cell datasets after pre-processing
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
+						Inferring single cell trajectories with Monocle3
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">⚙️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">
+						Comparing inferred cell compositions using MuSiC deconvolution
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html">
+						Clustering 3K PBMCs with Seurat
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
+						Converting between common single cell data formats
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-plant/tutorial.html">
+						Analysis of plant scRNA-Seq Data with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html">
+						Breve introducción a Galaxy - en español
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+				</ul>
+				
+
+				
+				<h3 id="slides">18 Slides</h3>
+				<ul>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/introduction/slides.html">
+						Introduction to Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/slides.html">
+						A Short Introduction to Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/introduction/slides.html">
+						Overview of the Galaxy Training Material
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/contributing">
+							Contributing to the Galaxy Training Material
+						</a>
+						/
+						<a href="/training-material//topics/contributing/tutorials/github-contribution/slides.html">
+						Contributing with GitHub via command-line
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html">
+						Plates, Batches, and Barcodes
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-trajectories/slides.html">
+						Trajectory analysis
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-intro/slides.html">
+						An introduction to scRNA-seq data analysis
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/GO-enrichment/slides.html">
+						GO Enrichment Analysis on Single-Cell RNA-Seq Data
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html">
+						Automated Cell Annotation
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-data-formats/slides.html">
+						Single-cell Formats and Resources
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/slides_CAT_ES.html">
+						Una breve introducción a Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html">
+						Introducción al análisis de datos de scRNA-seq
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/slides_ES.html">
+						Una Breve Introducción a Galaxy
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-intro/slides_ES.html">
+						Una introducción al análisis de datos scRNA-seq
+						</a>
+						
+						
+						
+						
+	<abbr title="This person reviewed this material for accuracy and correctness">🧐</abbr>
+
+
+						
+						
+					</li>
+				
+				</ul>
+				
+
+				
+
+				
+				<h3 id="faqs">53 FAQs</h3>
+				<ul>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/add-toolshed-category-to-a-tool.html">
+						Add Toolshed category to a tool
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/faqs/alevin_version.html">
+						Why is Alevin is not working?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/faqs/alevin_version.html">
+						Why is Alevin is not working?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/amplification.html">
+						Why is amplification more of an issue in scRNA-seq than RNA-seq?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html">
+						AnnData Import/ AnnData Manipulate not working?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/codex.html">
+						How do I add my community to the Galaxy CoDex?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/community_activites_calendar.html">
+						How can I add my SIG meetings to the Galaxy Community Activities calendar?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/community_home.html">
+						How do I find the Community Home pages?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/datasets_change_datatype.html">
+						Cambiar el tipo de datos
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-de/datasets_import_via_link.html">
+						Importieren über Links
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/datasets_import_via_link.html">
+						Importación por medio de enlaces
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-it/datasets_import_via_link.html">
+						Importazione tramite link
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/datasets_import_via_link.html">
+						Importing via links
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/features_scratchbook.html">
+						Uso del scratchbook para ver varios conjuntos de datos
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty.html">
+						My Scanpy FindMarkers step is giving me an empty table
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/governance_gcb.html">
+						What's the Galaxy Community Board?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/governance_gcb_join.html">
+						How do I join the Galaxy Community Board?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/governance_structure.html">
+						What is the Galaxy Governance Structure?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/gtn-in-galaxy_mode-cs.html">
+						Using tutorial mode and the Case Study suite
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/gtn/gtn_example_histories.html">
+						Using Answer Key Histories
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/gtn/gtn_minor_correction.html">
+						Making a minor correction to any training material
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/histories_archive.html">
+						Archive a history
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-de/histories_create_new.html">
+						Erstellen eines neuen Verlaufs
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/histories_create_new.html">
+						Para la creación de un historial nuevo
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-it/histories_create_new.html">
+						Creare una nuova cronologia
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-fr/histories_create_new.html">
+						Créer un nouvel history
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/histories_create_new.html">
+						Creating a new history
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/histories_rename.html">
+						Cambiando el nombre de un historial
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/histories_sharing.html">
+						Compartiendo un historial
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/contributing/faqs/input-and-answer-keys.html">
+						Input Histories & Answer Keys
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/interactive_tools_jupyter_launch.html">
+						Launch JupyterLab
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/maintainer_home.html">
+						How do I find the Maintainer Home pages?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/matrix_news_bot.html">
+						How do I add a news feed to a Matrix channel?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/community/faqs/meeting_times.html">
+						How can I plan meetings across timezones?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/notebook_warning.html">
+						Notebook-based tutorials can give different outputs
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_fails.html">
+						On Scanpy PlotEmbed, the tool is failing
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_results_missing.html">
+						On the Scanpy PlotEmbed step, my object doesn’t have Il2ra or Cd8b1 or Cd8a etc.
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-umis/faqs/protocol.html">
+						How do I know what protocol my data was sequenced with?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-umis/faqs/r1r2.html">
+						Are Barcodes always on R1 and Sequence data on R2?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/request-galaxy-tools-on-a-specific-server.html">
+						Request Galaxy tools on a specific server
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/sc_version.html">
+						Why is my tool erroring as 'Above error raised while reading key '/layers' of type <class 'h5py._hl.group.Group'> from /.'
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/single_cell_omics.html">
+						Use our Single Cell Omics Lab
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/techniques.html">
+						Can RNA-seq techniques be applied to scRNA-seq?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/tools_rerun.html">
+						Para volver a ejecutar una herramienta
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-de/tutorial_mode.html">
+						Tutorial-Modus verwenden
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/tutorial_mode.html">
+						Utilizar modo tutorial
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-it/tutorial_mode.html">
+						Utilizzo della modalità tutorial
+						</a>
+						
+						
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy/tutorial_mode.html">
+						Using tutorial mode
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/umap_plot_errors.html">
+						The UMAP Plots errors out sometimes?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/umi.html">
+						Are UMIs not actually unique?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/single-cell/faqs/user_community_join.html">
+						How can I talk with other users?
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//topics/contributing/faqs/where-to-report.html">
+						Posting issues and ideas for the Galaxy Community
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//faqs/galaxy-es/workflows_extract_from_history.html">
+						Extraer un flujo de trabajo de tu historial
+						</a>
+						
+						
+						
+						
+					</li>
+				
+				</ul>
+				
+
+				
+				<h3 id="video-recordings">13 Video Recordings</h3>
+				<ul>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
+						Generating a single cell matrix using Alevin
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html">
+						Pre-processing of 10X Single-Cell RNA Datasets
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">
+						Inferring single cell trajectories with Scanpy (Python)
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music/tutorial.html">
+						Bulk RNA Deconvolution with MuSiC
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
+						Filter, plot and explore single-cell RNA-seq data with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
+						Clustering 3K PBMCs with Scanpy
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-umis/tutorial.html">
+						Understanding Barcodes
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">
+						Combining single cell datasets after pre-processing
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
+
+
+						
+						
+					</li>
+				
+				</ul>
+				
+
+				
+				<h3 id="events">9 Events</h3>
+				<ul>
+				
+					
+					<li>
+						<a href="/training-material//events/2024-06-18-FAIR-data-management.html">
+						FAIR data management in single-cell analysis
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations were responsible for organising an event">🎪</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2024-09-16-bioinfo_bootcamp-2024.html">
+						2024 Bioinformatics Bootcamp - The Open University
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations were responsible for organising an event">🎪</abbr>
+
+
+						
+						
+	<abbr title="These individuals taught at an event">🧑‍🏫</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2024-10-29-spoc-write-a-thon.html">
+						🖖🏾 SPOC Write-a-thon
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations were responsible for organising an event">🎪</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2024-12-06-spoc-cofest-2024.html">
+						Single-cell and sPatial Omics | Collaboration Fest
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations were responsible for organising an event">🎪</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2024-12-10-spoc-write-a-thonv2.html">
+						🖖🏾 SPOC II: the Write-a-Than
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals or organisations were responsible for organising an event">🎪</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2025-05-12-galaxy-academy-2025.html">
+						Galaxy Training Academy 2025
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals taught at an event">🧑‍🏫</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/2026-05-18-galaxy-academy.html">
+						Galaxy Training Academy 2026
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals taught at an event">🧑‍🏫</abbr>
+
+
+						
+						
+					</li>
+				
+					
+					<li>
+						<a href="/training-material//events/galaxy-academy-2024.html">
+						Galaxy Training Academy 2024
+						</a>
+						
+						
+						
+						
+	<abbr title="These individuals taught at an event">🧑‍🏫</abbr>
+
+
+						
+						
+					</li>
+				
+				</ul>
+				
+
+                
+                <br><br>
+		
+
+<h3> Your Contributor Card </h3>
+
+<!-- contributor card -->
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4" style="padding-right: 0;">
+      <img src="https://avatars.githubusercontent.com/nomadscientist?s=200" alt="Wendi Bacon avatar" width="200" class="avatar" />
+    </div>
+    <div class="col-md-8" style="padding-left: 0;">
+      <div class="card-body">
+        <h5 class="card-title"><a href="https://orcid.org/0000-0002-8170-8806" style="color: white"><i class="fab fa-orcid" aria-hidden="true"></i><span class="visually-hidden">orcid</span></a> Wendi Bacon</h5>
+        
+        
+        
+        <p class="card-text"><span class="label" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;">95 Tutorials</span> <span class="label" style="--color-primary: #f2c000; --color-darker: #d7ab00; --color-dimmed: #e5b600;">53 FAQs</span> <span class="label" style="--color-primary: #b8c3ff; --color-darker: #9bacff; --color-dimmed: #aab8ff;">21 News</span> <span class="label" style="--color-primary: #00decb; --color-darker: #00c6b5; --color-dimmed: #00d2c0;">18 Slides</span> <span class="label" style="--color-primary: #d3bbff; --color-darker: #c39fff; --color-dimmed: #cbadff;">13 Videos</span> <span class="label" style="--color-primary: #00dbed; --color-darker: #00c3d4; --color-dimmed: #00cfe0;">9 Events</span> <span class="label" style="--color-primary: #ffb4aa; --color-darker: #ff9382; --color-dimmed: #ffa397;">Editorial Board</span></p>
+        <p class="card-text"><small class="text-muted">GTN contributor since 2020-03</small></p>
+        <img src="/training-material/assets/images/GTN-60px.png" style="width: 2em; position: absolute; bottom: 0; right: 0.5em;" alt="GTN logo"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end contributor card -->
+
+                <h3> GitHub Activity</h4>
+                <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3Anomadscientist"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Issues Reported</a>
+
+		
+		<h4>154 Merged Pull Requests</h4>
+		<p>
+		See all of the
+                <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3Anomadscientist"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Pull Requests</a> and
+		<a href="https://github.com/galaxyproject/training-material/commits?author=nomadscientist"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Commits</a> by Wendi Bacon.
+		</p>
+		<ul>
+			
+			<li>
+				
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+
+				<a href="https://github.com/galaxyproject/training-material/pull/6940">Added a news post to cross-link to Galaxy Labs post & paper</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #cfbcff; --color-darker: #bda1ff; --color-dimmed: #c6afff;">news</div>
+				
+				
+			</li>
+			
+			<li>
+				
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+
+				<a href="https://github.com/galaxyproject/training-material/pull/6235">news post to support tiaas</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #cfbcff; --color-darker: #bda1ff; --color-dimmed: #c6afff;">news</div>
+				
+				
+			</li>
+			
+			<li>
+				
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+
+				<a href="https://github.com/galaxyproject/training-material/pull/6198">blog post on how ace the Community is</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #cfbcff; --color-darker: #bda1ff; --color-dimmed: #c6afff;">news</div>
+				
+				
+			</li>
+			
+			<li>
+				
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+
+				<a href="https://github.com/galaxyproject/training-material/pull/5866">Case Study 3 - Tutorial update</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</div>
+				
+				
+			</li>
+			
+			<li>
+				
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+
+				<a href="https://github.com/galaxyproject/training-material/pull/5842">Onboarding learning pathway</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">template-and-tools</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #ffaaf4; --color-darker: #ff82f1; --color-dimmed: #ff97f3;">Spocathon-HDR-ELIXIR</div>
+				
+				
+			</li>
+			
+		</ul>
+		
+
+		
+		<h4>Reviewed 112 PRs</h4>
+		<p>We love our community reviewing each other's work!</p>
+		<ul>
+			
+			<li>
+				
+
+				
+				<img src="https://github.com/MarisaJL.png?s=20" alt="MarisaJL" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+				<a href="https://github.com/galaxyproject/training-material/pull/6936">Create listing for Biofair training event</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">template-and-tools</div>
+				
+				
+			</li>
+			
+			<li>
+				
+
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+				<a href="https://github.com/galaxyproject/training-material/pull/5866">Case Study 3 - Tutorial update</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</div>
+				
+				
+			</li>
+			
+			<li>
+				
+
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+				<a href="https://github.com/galaxyproject/training-material/pull/5844">Github Desktop version of how to contribute</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #c7bfff; --color-darker: #b1a5ff; --color-dimmed: #bcb2ff;">dev</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #ffb59e; --color-darker: #ff956a; --color-dimmed: #ffa586;">introduction</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">template-and-tools</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #00e1a2; --color-darker: #00c990; --color-dimmed: #00d599;">faqs</div>
+				
+				
+			</li>
+			
+			<li>
+				
+
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+				<a href="https://github.com/galaxyproject/training-material/pull/5845">Combine 3 GTN website rendering tutorials into 1 CYOA</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">template-and-tools</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</div>
+				
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #cfbcff; --color-darker: #bda1ff; --color-dimmed: #c6afff;">news</div>
+				
+				
+			</li>
+			
+			<li>
+				
+
+				
+				<img src="https://github.com/nomadscientist.png?s=20" alt="nomadscientist" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				
+				<a href="https://github.com/galaxyproject/training-material/pull/5839">Spoc affiliation</a>
+
+				
+				
+				<div class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">template-and-tools</div>
+				
+				
+			</li>
+			
+
+		</ul>
+		
+
+                
+		
+
+				
+				<h3>News</h3>
+				<div class="newslist">
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2021/05/20/spanish_project_begins.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/topics/introduction/images/hello-languages.png" alt="Hello in many languages" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">¿Hablas español?: The first curated tutorial in Spanish!</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-badge-small contributor-beatrizserrano"><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/pclo/" class="contributor-badge contributor-badge-small contributor-pclo"><img src="https://avatars.githubusercontent.com/pclo?s=36" alt="Patricia Carvajal López avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/ales-ibt/" class="contributor-badge contributor-badge-small contributor-ales-ibt"><img src="https://avatars.githubusercontent.com/ales-ibt?s=36" alt="Alejandra Escobar-Zepeda avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            20 May 2021
+          </div>
+
+          <a href="/training-material/news/2021/05/20/spanish_project_begins.html">
+
+          
+            ¡El primer tutorial en español ya está disponible! Galaxy siempre ha tenido tutoriales traducidos automáticamente mediante Google-Translate, ahora nos estamos embarcando en un nuevo proyecto para estudiar la experiencia de aprendizaje con tutoriales en bioinformática traducidos por humanos. Nuestro objetivo es crear un paquete de tutoriales para el análisis de datos single-cell (célula única) en primera instancia, con el fin de estudiar su uso y utilidad en un taller para hablantes nativos de español. Agradecemos enormemente a las nuevas participantes @gtn:pclo y @gtn:ales-ibt (EMBL-EBI) así como a las miembros existentes de GTN @gtn:beatrizserrano (University of Freiburg), @gtn:shiltemann &amp; @gtn:hexylena (Erasmus-MC), por su arduo trabajo en este proyecto de traducción y mantenimiento y, por supuesto, a @gtn:nomadscientist (The Open University/EBI) como líder de proyecto.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb86b; --color-darker: #f29f00; --color-dimmed: #ffa91e;">new tutorial</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ded3; --color-darker: #00c5bc; --color-dimmed: #00d1c7;">español</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb59e; --color-darker: #ff956a; --color-dimmed: #ffa586;">introduction</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2022/11/18/singlecell.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/single_cell.png" alt="Pretty dots of different colours combined into two cell cluster plots on the sides. In the middle, a split violin plot showing the expression of unknown genes in blue on one side and the expression of the genes in an opposing sample in orange alongside. Snuck in between these three important plots is a PhD comic of data showing no trend, with the chat box “Hmm… I think there’s a clear trend happening here.”" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">New Topic: Single Cell Analysis!</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-badge-small contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            18 November 2022
+          </div>
+
+          <a href="/training-material/news/2022/11/18/singlecell.html">
+
+          
+            Single-cell analysis now has it’s own topic! These tutorials were previously part of the transcriptomics topic, but due to the amazing efforts by
+    Wendi Bacon,
+    Mehmet Tekmanand others, we now have so many single-cell analysis tutorials that they deserve their own dedicated topic! From introductory slides and practicals, to case study tutorials generating cell clusters and trajectories from raw sequencing files, and even a growing subtopic of smaller tips and tricks for adapting analysis to user needs, the single cell topic either has what you need or is working on it. Come learn or get involved!
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #c3c1ff; --color-darker: #aba8ff; --color-dimmed: #b7b4ff;">new topic</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2022/11/29/deconvolution.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/heatmap.png" alt="Heatmap with columns of cell types vs rows of inferred and actual cell type proportions for A and B samples. Cell colours are similar between actual and inferred." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">New Tutorial Suite: Deconvolution with MuSiC, from public data to disease interrogation!</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-badge-small contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            29 November 2022
+          </div>
+
+          <a href="/training-material/news/2022/11/29/deconvolution.html">
+
+          
+            The still new and shiny single-cell analysis topic now boasts a deconvolution tutorial suite! What does deconvolution do you ask? Well, in this context, it infers cell proportions from bulk RNA-seq data. You heard that correctly - instead of expensive new single-cell experiments, you can re-analyse old bulk RNA-seq data and estimate cell proportions. All you need is a reasonably good single cell dataset to use as a reference and you’re good to go! The tutorial suite shows you how to build your reference from publicly available single cell data, and apply analysis to some publicly available bulk RNA-seq data.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb86b; --color-darker: #f29f00; --color-dimmed: #ffa91e;">new tutorial</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #dac900; --color-darker: #c2b300; --color-dimmed: #cebe00;">transcriptomics</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2023/10/05/wendi.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material//assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">New Feature: Embeddable GTN Tutorial Lists and UseGalaxy Workflow List Widgets</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            5 October 2023
+          </div>
+
+          <a href="/training-material/news/2023/10/05/wendi.html">
+
+          
+            We at the GTN strive to bring you the most fun and fancy features we can in a completely static site! Today we’re addressing the question of Wendi Bacon who needed a solution for keeping her single cell subdomain up-to-date with all the latest happenings in the Single Cell world.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00e293; --color-darker: #00c983; --color-dimmed: #00d68b;">contrributing</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2023/10/12/sc_subdomain.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/2023-10-12-singlecell_subdomain.png" alt="screenshot of the Single Cell Omics subdomain page, with purple mastheader, Single Cell Tools categories along the side, and an updated logo combining the Single Cell Omics connected cells image with the Human Cell Atlas blue embyro logo" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Single cell subdomain re-launch: Unified and feedback-driven</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-badge-small contributor-pavanvidem"><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            12 October 2023
+          </div>
+
+          <a href="/training-material/news/2023/10/12/sc_subdomain.html">
+
+          
+            The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the single cell Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2023/12/22/single-cell.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/2023_dec_sc.png" alt="swirled cluster dots surround a circle of people all holding hands, looking towards the bright center (future)" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Galaxy Single-cell Community: Year in Review</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-badge-small contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-badge-small contributor-pavanvidem"><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            22 December 2023
+          </div>
+
+          <a href="/training-material/news/2023/12/22/single-cell.html">
+
+          
+            🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;">communications</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/01/17/sc-fair-data.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material//assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">FAIR Data management in single cell analysis</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-badge-small contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-badge-small contributor-hexhowells"><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            17 January 2024
+          </div>
+
+          <a href="/training-material/news/2024/01/17/sc-fair-data.html">
+
+          
+            New single cell section: Changing data formats &amp; preparing objects
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fcbc00; --color-darker: #e0a700; --color-dimmed: #eeb200;">data management</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb4ab; --color-darker: #ff9384; --color-dimmed: #ffa399;">data import</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #b4d400; --color-darker: #a0bc00; --color-dimmed: #aac800;">fair</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/01/29/simplified-gtn-news-submission-via-google-form.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material//assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Simplified GTN News submission via Google Form</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            29 January 2024
+          </div>
+
+          <a href="/training-material/news/2024/01/29/simplified-gtn-news-submission-via-google-form.html">
+
+          
+            Based on user feedback of the difficulties of the GTN news submission process we have significantly simplified and removed the need for manually editing a YAML file by providing a quick and easy Google Form
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/01/30/oembed-testing.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material//assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">GTN in Discourse</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/jennaj/" class="contributor-badge contributor-badge-small contributor-jennaj"><img src="https://avatars.githubusercontent.com/jennaj?s=36" alt="Jennifer Hillman-Jackson avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/martenson/" class="contributor-badge contributor-badge-small contributor-martenson"><img src="https://avatars.githubusercontent.com/martenson?s=36" alt="Martin Čech avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            30 January 2024
+          </div>
+
+          <a href="/training-material/news/2024/01/30/oembed-testing.html">
+
+          
+            Howdy teachers and support staff! We are exploring displaying GTN content directly in the Galaxy Help site, furthering the integration between the GTN and the Galaxy community infrastructure.
+When you paste a GTN Frequently Asked Questions URL into the Galaxy Discourse, it will now be rendered directly in Discourse!
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material//assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">From GTN Intern to Tutorial Author to Bioinformatician</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/Camila-goclowski/" class="contributor-badge contributor-badge-small contributor-Camila-goclowski"><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=36" alt="Camila Goclowski avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            13 June 2024
+          </div>
+
+          <a href="/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">
+
+          
+            With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffabf3; --color-darker: #ff83ef; --color-dimmed: #ff97f1;">training</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">education</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00dfc7; --color-darker: #00c6b1; --color-dimmed: #00d2bc;">trajectory</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #d3bbff; --color-darker: #c39fff; --color-dimmed: #cbadff;">user</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffabf0; --color-darker: #ff84eb; --color-dimmed: #ff98ed;">contributor</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/12/02/reviewing.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/reviewing.png" alt="A screenshot of the GTN's short introduction to Galaxy tutorial. There are two authors and two editors, but now shown is a new reviewers with 13 individuals, some overlapping with editors and authors." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Credit where it's due: GTN Reviewers in the spotlight</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            2 December 2024
+          </div>
+
+          <a href="/training-material/news/2024/12/02/reviewing.html">
+
+          
+            We would like to recognise and thank all of the reviewers who have contributed to the GTN tutorials; your efforts are greatly appreciated, and we are grateful for your contributions to the GTN community. Today, we are highlighting your efforts on every single learning material across the GTN.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00e38a; --color-darker: #00ca7b; --color-dimmed: #00d683;">gtn infrastructure</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #d2bcff; --color-darker: #c1a0ff; --color-dimmed: #c9aeff;">automation</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/12/06/spoc_cofest.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/2023_dec_sc.png" alt="swirled cluster dots surround a circle of people all holding hands, looking towards the bright center (future)" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">SPOC CoFest 2024: How did it go?</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            6 December 2024
+          </div>
+
+          <a href="/training-material/news/2024/12/06/spoc_cofest.html">
+
+          
+            First SPOC CoFest
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/12/18/spoc.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/spoc_images/2024_spoc.png" alt="A group of people standing along a staircase holding up the Vulcan salute for SPOC: 'Live long and prosper'. They look relatively happy. Taken at 2024 Galaxy Community Conference." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">🖖🏾Galaxy SPOC Community: Year in Review</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-badge-small contributor-pavanvidem"><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            18 December 2024
+          </div>
+
+          <a href="/training-material/news/2024/12/18/spoc.html">
+
+          
+            🚀 2024: A SPOC-tacular Year in Review 🌌
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;">communications</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2024/12/19/community_page.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/spoc_images/community_page.png" alt="four graphs showing increases over time: training materials including slides and tutorials; contributors; workflows; and other" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">GTN's Gift for 2024</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            19 December 2024
+          </div>
+
+          <a href="/training-material/news/2024/12/19/community_page.html">
+
+          
+            Community Pages
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb86b; --color-darker: #f29f00; --color-dimmed: #ffa91e;">new tutorial</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2025/02/14/spoc_hdr_cofest.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/2023_dec_sc.png" alt="swirled cluster dots surround a circle of people all holding hands, looking towards the bright center (future)" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">SPOC HDR UK ELIXIR-UK CoFest 2025: How did it go?</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-badge-small contributor-hexhowells"><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            14 February 2025
+          </div>
+
+          <a href="/training-material/news/2025/02/14/spoc_hdr_cofest.html">
+
+          
+            We held our second 🖖🏾SPOC CoFest, in the great tradition of the excellent CoFests organised in the GTN that welcomed @gtn:nomadscientist and many others into the community.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2025/03/03/deconvo-project.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/assets/images/wab-lp-deconvolution.png" alt="XY plot of actual versus inferred proportions, with coloured dots representing clusters and largely falling in a 1-1 slope" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bioinformatics Projects Pathway for Students: New insights from public data!</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            3 March 2025
+          </div>
+
+          <a href="/training-material/news/2025/03/03/deconvo-project.html">
+
+          
+            With a huge thanks to ELIXIR-UK’s DaSH Fellowship funding, we are delighted to present our new Learning Pathway, “Bioinformatics Projects: Using deconvolution to get new insights from old bulk RNA-seq”.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2025/03/07/ode_to_helena.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/wab-helena.png" alt="Three happy looking people on a beach with a ferris wheel in the background. Everyone is wearing glasses and clearly a nerd. The individuals are Helena, Saskia & Wendi" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">An Ode to Helena - from the 🥓Bacon Brigade</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-badge-small contributor-MarisaJL"><img src="https://avatars.githubusercontent.com/MarisaJL?s=36" alt="Marisa Loach avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-badge-small contributor-hexhowells"><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-badge-small contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/Camila-goclowski/" class="contributor-badge contributor-badge-small contributor-Camila-goclowski"><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=36" alt="Camila Goclowski avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            7 March 2025
+          </div>
+
+          <a href="/training-material/news/2025/03/07/ode_to_helena.html">
+
+          
+            @gtn:hexylena, as a key member of the phenomenally creative and passionate Galaxy Training Network team alongside @gtn:shiltemann and @gtn:bebatut, pioneered the concept of Training Infrastructure. In a world dominated by clunky virtual learning environments and expensive software, she built an open-source system that could seamlessly support individual users, trainers, and contributors across diverse disciplines and expertise levels.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2025/06/19/ode_to_community.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/spoc_images/2024_gcc_BB.png" alt="Four happy looking people on a stairwell wearing conference lanyards. They look nerdy and delighted, and it's not dissimilar to a family photo of awkward people who genuinely like each other. The individuals are Julia, Wendi, Marisa, and Morgan." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">An Ode to the Galaxy Community and all I learned</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            19 June 2025
+          </div>
+
+          <a href="/training-material/news/2025/06/19/ode_to_community.html">
+
+          
+            This is my ode to the Galaxy Community to say how grateful I have been for your welcome, your energy, and your support. I have learned so very, very much, about bioinformatics; about software development; and most of all, about open-source communities in this complex scientific world.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2025/07/03/bb-tiaas.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/spoc_images/2024_spoc_pretty.png" alt="A swirl of happy, psychedelic people holding up a Vulcan salute, surrounded by dots in different colours representing cells." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Scaling Up Hands-On Bioinformatics Training with TIAAS – An Open University Perspective</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            3 July 2025
+          </div>
+
+          <a href="/training-material/news/2025/07/03/bb-tiaas.html">
+
+          
+            Back in September 2024, we ran the Open University Bioinformatics Bootcamp—a free, five-day online course introducing students to the core tools and techniques used in single-cell biology. We were genuinely delighted by the level of interest: 120 students signed up, 100 showed up, and around 80 worked through the hands-on tutorials during the week. That’s a fantastic level of engagement, especially for a course that’s entirely optional and doesn’t count towards their degree.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #ffb4a6; --color-darker: #ff937a; --color-dimmed: #ffa491;">TIAAS</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="https://galaxyproject.org/news/2026-02-19-misconception-paper/">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/misconceptions.png" alt="graphic showing the 10 misconceptions and their rebuttals" loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">New Paper! Ten common misconceptions about Galaxy (and why they are wrong!)</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/sanjaysrikakulam/" class="contributor-badge contributor-badge-small contributor-sanjaysrikakulam"><img src="https://avatars.githubusercontent.com/sanjaysrikakulam?s=36" alt="Sanjay Kumar Srikakulam avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-badge-small contributor-paulzierep"><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-badge-small contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-badge-small contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hechth/" class="contributor-badge contributor-badge-small contributor-hechth"><img src="https://avatars.githubusercontent.com/hechth?s=36" alt="Helge Hecht avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/jdavcs/" class="contributor-badge contributor-badge-small contributor-jdavcs"><img src="https://avatars.githubusercontent.com/jdavcs?s=36" alt="John Davis avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge contributor-badge-small contributor-hrhotz"><img src="https://avatars.githubusercontent.com/hrhotz?s=36" alt="Hans-Rudolf Hotz avatar" width="36" class="avatar" /></a>
+          
+            <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-badge-small contributor-beatrizserrano"><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            23 February 2026
+          </div>
+
+          <a href="https://galaxyproject.org/news/2026-02-19-misconception-paper/">
+
+          
+            This is an external post, please follow the link to read it.
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #f0c100; --color-darker: #d6ac00; --color-dimmed: #e3b600;">paper</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+					
+					
+
+
+
+
+<div class="pathwayitem col-md-4">
+    <div class="card d-flex">
+       <a href="/training-material/news/2026/06/16/galaxy_labs.html">
+      <div class="d-flex align-items-center" style="height:200px;">
+      <img class="card-img-top pathwaycover" src="/training-material/news/images/2026_06_16-galaxy_labs.png" alt="A triangle showing individuals in 3 places, marked by a kangaroo, tea pot, and eagle, with a web browser shown in the middle." loading="lazy">
+      </div>
+      </a>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">GalaxyLabs paper is live! A love letter from the Galaxy Single-cell and sPatial Omics Community</h5>
+        <div class="card-text">
+          
+            <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a>
+          
+          <div class="text-muted">
+            16 June 2026
+          </div>
+
+          <a href="/training-material/news/2026/06/16/galaxy_labs.html">
+
+          
+            GalaxyLabs is an international effort to make sustainable, researcher-focused and community-curated interfaces across Galaxy, from Genomics to Single-cell analyses.
+
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
+        
+        
+        
+<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+        
+      </div>
+
+    </div>
+</div>
+
+
+
+				
+				</div>
+				
+			</div>
+
+			<div class="col-md-3">
+				<div>
+					<img src="https://avatars.githubusercontent.com/nomadscientist?s=200" alt="Wendi Bacon avatar" width="200" class="avatar" />
+				</div>
+
+				<div class="contact-items text-muted">
+					<i>GTN contributor since 2020-03</i>
+				</div>
+
+				<h2>External Links</h2>
+				
+
+				
+
+				
+				<div class="contact-items">
+					<a title="GitHub" href="https://github.com/nomadscientist">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> nomadscientist
+					</a>
+				</div>
+				
+
+				
+
+				
+
+				
+				<div class="contact-items">
+					<a title="E-mail" href="mailto:wendi.bacon@open.ac.uk">
+						<i class="far fa-envelope" aria-hidden="true"></i><span class="visually-hidden">email</span> wendi.bacon@open.ac.uk
+					</a>
+				</div>
+				
+
+				
+				<div class="contact-items">
+					<a title="matrix" href="https://matrix.to/#/@nomadscientist:matrix.org">
+						<i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> nomadscientist:matrix.org
+					</a>
+				</div>
+				
+
+				
+
+                
+
+				
+
+				
+				<div class="contact-items">
+					<a title="LinkedIn" href="https://www.linkedin.com/in/wendi-bacon-7462aa100">
+						<i class="fab fa-linkedin" aria-hidden="true"></i><span class="visually-hidden">linkedin</span> wendi-bacon-7462aa100
+					</a>
+				</div>
+				
+
+				
+				<div class="contact-items">
+					<a title="ORCID" href="https://orcid.org/0000-0002-8170-8806">
+						<i class="fab fa-orcid" aria-hidden="true"></i><span class="visually-hidden">orcid</span> 0000-0002-8170-8806
+					</a>
+				</div>
+				
+
+				
+				<div class="contact-items">
+					<img src="/training-material/assets/images/elixir/elixir-uk.svg" alt="elixir logo for United Kingdom">
+				</div>
+				
+
+				<p><b>Favourite Topics</b></p>
+				<canvas id="myChart" height="300px"></canvas>
+				<p><b>Favourite Formats</b></p>
+				<canvas id="slidesVsTutorials" height="300px"></canvas>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<script src="/training-material/assets/js/Chart.bundle.js"></script>
+
+<script>
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
+
+var topics = [
+
+	
+	
+	"Ecology",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"FAIR Data, Workflows, and Research",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Foundations of Data Science",
+
+	
+	
+	"Using Galaxy and Managing your Data",
+
+	
+	
+	"Development in Galaxy",
+
+	
+	
+	"Development in Galaxy",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Galaxy Community Building",
+
+	
+	
+	"Galaxy Community Building",
+
+	
+	
+	"Galaxy Community Building",
+
+	
+	
+	"Galaxy Community Building",
+
+	
+	
+	"Galaxy Community Building",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Single Cell",
+
+	
+	
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Single Cell",
+
+];
+
+var slidesVsTutos = [
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+	"Tutorials",
+
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+	"FAQs",
+
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+	"Slides",
+	
+
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+	"News Posts",
+
+
+]
+
+function foo(arr) {
+	var a = [], b = [], prev;
+
+	arr.sort();
+	for ( var i = 0; i < arr.length; i++ ) {
+		if ( arr[i] !== prev ) {
+			a.push(arr[i]);
+			b.push(1);
+		} else {
+			b[b.length-1]++;
+		}
+		prev = arr[i];
+	}
+
+	return [a, b];
+}
+
+out = foo(topics)
+
+function genColors(size) {
+	var o = [];
+	for(i = 0; i < size; i++){
+		o.push(`hsl(${ i * 360 / size }, 100%, 50%)`)
+	}
+	return o;
+}
+
+
+// Which topics
+var chart = new Chart(ctx, {
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
+	options: {
+		legend: {
+			display: false
+		}
+	}
+});
+
+out = foo(slidesVsTutos);
+// What material type
+var chart2 = new Chart(ctx2, {
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
+	options: {
+		legend: {
+			display: false
+		}
+	}
+});
+</script>
+
+
+<h3>Stats for materials contributed to by Wendi Bacon</h3>
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E/topics/ecology/tutorials/remote-sensing/tutorial.html|/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html|/topics/introduction/tutorials/galaxy-intro-short/tutorial.html|/topics/fair/tutorials/fair-gtn/tutorial.html|/topics/data-science/tutorials/python-testing/tutorial.html|/topics/data-science/tutorials/python-multiprocessing/tutorial.html|/topics/data-science/tutorials/python-typing/tutorial.html|/topics/data-science/tutorials/python-math/tutorial.html|/topics/data-science/tutorials/python-exceptions/tutorial.html|/topics/data-science/tutorials/python-flow/tutorial.html|/topics/data-science/tutorials/python-basics-recap/tutorial.html|/topics/data-science/tutorials/python-subprocess/tutorial.html|/topics/data-science/tutorials/python-loops/tutorial.html|/topics/data-science/tutorials/python-iterables/tutorial.html|/topics/data-science/tutorials/python-files/tutorial.html|/topics/data-science/tutorials/python-types/tutorial.html|/topics/data-science/tutorials/python-functions/tutorial.html|/topics/data-science/tutorials/python-glob/tutorial.html|/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html|/topics/dev/tutorials/core-contributing/tutorial.html|/topics/dev/tutorials/tool-annotation/tutorial.html|/topics/contributing/tutorials/rendering_gtn/tutorial.html|/topics/contributing/tutorials/create-new-tutorial/tutorial.html|/topics/contributing/tutorials/learning-principles/tutorial.html|/topics/contributing/tutorials/github-contribution/tutorial.html|/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html|/topics/contributing/tutorials/updating_tutorial/tutorial.html|/topics/contributing/tutorials/create-new-topic/tutorial.html|/topics/community/tutorials/community-tool-table/tutorial.html|/topics/community/tutorials/sig_define/tutorial.html|/topics/community/tutorials/sig_create/tutorial.html|/topics/community/tutorials/community_content/tutorial.html|/topics/community/tutorials/tools_subdomains/tutorial.html|/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html|/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html|/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html|/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html|/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html|/topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html|/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html|/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html|/topics/single-cell/tutorials/alevin-commandline/tutorial.html|/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html|/topics/single-cell/tutorials/bulk-music/tutorial.html|/topics/single-cell/tutorials/scrna_batch_correction/tutorial.html|/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html|/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html|/topics/single-cell/tutorials/GO-enrichment/tutorial.html|/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html|/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html|/topics/single-cell/tutorials/EBI-retrieval/tutorial.html|/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html|/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html|/topics/single-cell/tutorials/bulk-deconvolution-evaluate/tutorial.html|/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html|/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html|/topics/single-cell/tutorials/scrna-umis/tutorial.html|/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html|/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html|/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html|/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html|/topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.html|/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html|/topics/single-cell/tutorials/scrna-plant/tutorial.html|/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html|/topics/introduction/tutorials/introduction/slides.html|/topics/introduction/tutorials/galaxy-intro-short/slides.html|/topics/contributing/tutorials/introduction/slides.html|/topics/contributing/tutorials/github-contribution/slides.html|/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html|/topics/single-cell/tutorials/scrna-trajectories/slides.html|/topics/single-cell/tutorials/scrna-intro/slides.html|/topics/single-cell/tutorials/GO-enrichment/slides.html|/topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html|/topics/single-cell/tutorials/scrna-data-formats/slides.html|/topics/introduction/tutorials/galaxy-intro-short/slides_CAT_ES.html|/topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html|/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html|/topics/single-cell/tutorials/scrna-intro/slides_ES.html|/faqs/galaxy/add-toolshed-category-to-a-tool.html|/topics/single-cell/tutorials/scrna-case_alevin/faqs/alevin_version.html|/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/faqs/alevin_version.html|/topics/single-cell/faqs/amplification.html|/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html|/topics/community/faqs/codex.html|/topics/community/faqs/community_activites_calendar.html|/topics/community/faqs/community_home.html|/faqs/galaxy-es/datasets_change_datatype.html|/faqs/galaxy-de/datasets_import_via_link.html|/faqs/galaxy-es/datasets_import_via_link.html|/faqs/galaxy-it/datasets_import_via_link.html|/faqs/galaxy/datasets_import_via_link.html|/faqs/galaxy-es/features_scratchbook.html|/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty.html|/topics/community/faqs/governance_gcb.html|/topics/community/faqs/governance_gcb_join.html|/topics/community/faqs/governance_structure.html|/topics/single-cell/faqs/gtn-in-galaxy_mode-cs.html|/faqs/gtn/gtn_example_histories.html|/faqs/gtn/gtn_minor_correction.html|/faqs/galaxy/histories_archive.html|/faqs/galaxy-de/histories_create_new.html|/faqs/galaxy-es/histories_create_new.html|/faqs/galaxy-it/histories_create_new.html|/faqs/galaxy-fr/histories_create_new.html|/faqs/galaxy/histories_create_new.html|/faqs/galaxy-es/histories_rename.html|/faqs/galaxy-es/histories_sharing.html|/topics/contributing/faqs/input-and-answer-keys.html|/faqs/galaxy/interactive_tools_jupyter_launch.html|/topics/community/faqs/maintainer_home.html|/topics/community/faqs/matrix_news_bot.html|/topics/community/faqs/meeting_times.html|/topics/single-cell/faqs/notebook_warning.html|/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_fails.html|/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_results_missing.html|/topics/single-cell/tutorials/scrna-umis/faqs/protocol.html|/topics/single-cell/tutorials/scrna-umis/faqs/r1r2.html|/faqs/galaxy/request-galaxy-tools-on-a-specific-server.html|/topics/single-cell/faqs/sc_version.html|/topics/single-cell/faqs/single_cell_omics.html|/topics/single-cell/faqs/techniques.html|/faqs/galaxy-es/tools_rerun.html|/faqs/galaxy-de/tutorial_mode.html|/faqs/galaxy-es/tutorial_mode.html|/faqs/galaxy-it/tutorial_mode.html|/faqs/galaxy/tutorial_mode.html|/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/umap_plot_errors.html|/topics/single-cell/faqs/umi.html|/topics/single-cell/faqs/user_community_join.html|/topics/contributing/faqs/where-to-report.html|/faqs/galaxy-es/workflows_extract_from_history.html|/events/2024-06-18-FAIR-data-management.html|/events/2024-09-16-bioinfo_bootcamp-2024.html|/events/2024-10-29-spoc-write-a-thon.html|/events/2024-12-06-spoc-cofest-2024.html|/events/2024-12-10-spoc-write-a-thonv2.html|/events/2025-05-12-galaxy-academy-2025.html|/events/2026-05-18-galaxy-academy.html|/events/galaxy-academy-2024.html|/news/2021/05/20/spanish_project_begins.html|/news/2022/11/18/singlecell.html|/news/2022/11/29/deconvolution.html|/news/2023/10/05/wendi.html|/news/2023/10/12/sc_subdomain.html|/news/2023/12/22/single-cell.html|/news/2024/01/17/sc-fair-data.html|/news/2024/01/29/simplified-gtn-news-submission-via-google-form.html|/news/2024/01/30/oembed-testing.html|/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html|/news/2024/12/02/reviewing.html|/news/2024/12/06/spoc_cofest.html|/news/2024/12/18/spoc.html|/news/2024/12/19/community_page.html|/news/2025/02/14/spoc_hdr_cofest.html|/news/2025/03/03/deconvo-project.html|/news/2025/03/07/ode_to_helena.html|/news/2025/06/19/ode_to_community.html|/news/2025/07/03/bb-tiaas.html|/news/2026/02/23/common-misconceptions-about-galaxy.html|/news/2026/06/16/galaxy_labs.html&embed=true&theme=system&background=transparent&period=12mo" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/hall-of-fame/nomadscientist/index.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/hall-of-fame/nomadscientist/index.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

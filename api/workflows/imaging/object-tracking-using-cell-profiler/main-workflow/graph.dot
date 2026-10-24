@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Starting Modules"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput dataset"]
+  2[label="ColorToGray"]
+  0 -> 2 [label="output_pipeline"]
+  3[label="Unzip"]
+  1 -> 3 [label="output"]
+  4[label="IdentifyPrimaryObjects"]
+  2 -> 4 [label="output_pipeline"]
+  5[label="MeasureObjectSizeShape"]
+  4 -> 5 [label="output_pipeline"]
+  6[label="MeasureObjectIntensity"]
+  5 -> 6 [label="output_pipeline"]
+  7[label="TrackObjects"]
+  6 -> 7 [label="output_pipeline"]
+  8[label="OverlayOutlines"]
+  7 -> 8 [label="output_pipeline"]
+  9[label="Tile"]
+  8 -> 9 [label="output_pipeline"]
+  10[label="SaveImages"]
+  9 -> 10 [label="output_pipeline"]
+  11[label="ExportToSpreadsheet"]
+  10 -> 11 [label="output_pipeline"]
+  12[label="CellProfiler"]
+  3 -> 12 [label="unzipped"]
+  11 -> 12 [label="output_pipeline"]
+  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label="Output\nCellProfiler pipeline output files"]
+  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e
+}

@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ntranscriptome.tsv"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nproteome.tsv"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nmetabolome.tsv"]
+  3[label="multiGSEA"]
+  2 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  4[label="Filter"]
+  3 -> 4 [label="output"]
+  5[label="Search in textfiles"]
+  4 -> 5 [label="out_file1"]
+  k862ee6ead4c2456cb7556d9bafc9ac55[color=lightseagreen,label="Output\nFiltered output"]
+  5 -> k862ee6ead4c2456cb7556d9bafc9ac55
+}

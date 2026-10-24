@@ -1,0 +1,781 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "DIA Analysis Training using HEK Ecoli data in OSW",
+    "format-version": "0.1",
+    "name": "DIA_Analysis_OSW",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input exp. design annotation"
+                }
+            ],
+            "label": "Input exp. design annotation",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 646.1999969482422,
+                "height": 82.19999694824219,
+                "left": 490.5,
+                "right": 690.5,
+                "top": 564,
+                "width": 200,
+                "x": 490.5,
+                "y": 564
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a5d35883-fba0-4de7-a883-8bb6b2be333d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c5372600-b105-4692-8d32-60b4e882c235"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "iRTassays.tsv"
+                }
+            ],
+            "label": "iRTassays.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 184.8000030517578,
+                "height": 61.80000305175781,
+                "left": -1122.5,
+                "right": -922.5,
+                "top": 123,
+                "width": 200,
+                "x": -1122.5,
+                "y": 123
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "03ffba1e-879b-47ae-995d-ceb262b4ff4e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "8307748d-8fe6-4cee-8ac8-4d65bb598b0a"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Spectral library"
+                }
+            ],
+            "label": "Spectral library",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 426.1999969482422,
+                "height": 82.19999694824219,
+                "left": -1117.5,
+                "right": -917.5,
+                "top": 344,
+                "width": 200,
+                "x": -1117.5,
+                "y": 344
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a2c7f825-ad7c-4966-ad08-a1634f7b5453",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1caaf3b7-2710-4835-89da-816d079a9e8a"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "\"Input Dataset Collection\""
+                }
+            ],
+            "label": "\"Input Dataset Collection\"",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 469.1999969482422,
+                "height": 82.19999694824219,
+                "left": -1330.5,
+                "right": -1130.5,
+                "top": 387,
+                "width": 200,
+                "x": -1330.5,
+                "y": 387
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "e5b0dbc4-3478-4d5b-a220-ca720f06c787",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "dee72339-437a-4b71-8aab-85fce61e7369"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "bottom": 596.6000061035156,
+                "height": 113.60000610351562,
+                "left": -1122.5,
+                "right": -922.5,
+                "top": 483,
+                "width": 200,
+                "x": -1122.5,
+                "y": 483
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3cf310697624",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": \"true\", \"__current_case__\": 1, \"pick_peaks_ms_levels\": \"1-\", \"pick_peaks_algorithm\": \"vendor\"}, \"precursor_refinement\": {\"use_mzrefinement\": \"false\", \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": \"false\", \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": \"false\", \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": \"false\", \"__current_case__\": 1}, \"ms2deisotope\": \"false\", \"demultiplex\": {\"demultiplex_on\": \"true\", \"__current_case__\": 0, \"massError\": \"10.0\", \"massErrorUnits\": \"PPM\", \"nnlsMaxIter\": \"50\", \"nnlsEps\": \"1e-10\", \"demuxBlockExtra\": \"0.0\", \"variableFill\": \"false\", \"noSumNormalize\": \"true\", \"optimization\": \"overlap_only\", \"interpolateRT\": \"true\", \"noWeighting\": \"true\", \"minWindowSize\": \"0.2\"}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": \"false\", \"filter_ms_levels\": {\"do_ms_level_filter\": \"false\", \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": \"false\", \"scan_summing\": {\"do_scan_summing\": \"false\", \"__current_case__\": 0}, \"simAsSpectra\": \"true\", \"srmAsSpectra\": \"false\", \"acceptZeroLengthSpectra\": \"false\", \"ignoreUnknownInstrumentError\": \"true\", \"multi_run_output\": {\"do_multi_run_output\": \"false\", \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"license_agreement\": \"true\", \"output_type\": \"mzML\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"64\", \"binary_compression\": \"zlib\", \"gzip_compression\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.19052.1",
+            "type": "tool",
+            "uuid": "e83c6a83-748d-478f-a2cb-0992b2e8b780",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "0fd858b9-4bca-44c8-baa3-e0e50e45ac1d"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.5+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "in": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "tr": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "tr_irt": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool OpenSwathWorkflow",
+                    "name": "adv_opts_cond"
+                },
+                {
+                    "description": "runtime parameter for tool OpenSwathWorkflow",
+                    "name": "swath_windows_file"
+                },
+                {
+                    "description": "runtime parameter for tool OpenSwathWorkflow",
+                    "name": "tr_irt_nonlinear"
+                }
+            ],
+            "label": null,
+            "name": "OpenSwathWorkflow",
+            "outputs": [
+                {
+                    "name": "out_osw",
+                    "type": "osw"
+                },
+                {
+                    "name": "ctd_out",
+                    "type": "xml"
+                }
+            ],
+            "position": {
+                "bottom": 903.7999877929688,
+                "height": 540.7999877929688,
+                "left": -839.5,
+                "right": -639.5,
+                "top": 363,
+                "width": 200,
+                "x": -839.5,
+                "y": 363
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2aebe58de46e",
+                "name": "openms_openswathworkflow",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"Calibration\": {\"ms1_im_calibration\": \"false\", \"im_correction_function\": \"linear\", \"debug_im_file\": \"\", \"debug_mz_file\": \"\"}, \"Library\": {\"retentionTimeInterpretation\": \"iRT\", \"override_group_label_check\": \"false\", \"force_invalid_mods\": \"false\"}, \"OPTIONAL_OUTPUTS\": [\"out_osw_FLAG\", \"ctd_out_FLAG\"], \"RTNormalization\": {\"alignmentMethod\": \"linear\", \"outlierMethod\": \"none\", \"useIterativeChauvenet\": \"false\", \"RANSACMaxIterations\": \"1000\", \"RANSACMaxPercentRTThreshold\": \"3\", \"RANSACSamplingSize\": \"10\", \"estimateBestPeptides\": \"true\", \"InitialQualityCutoff\": \"0.5\", \"OverallQualityCutoff\": \"5.5\", \"NrRTBins\": \"10\", \"MinPeptidesPerBin\": \"1\", \"MinBinsFilled\": \"7\", \"lowess\": {\"span\": \"0.666666666666667\"}, \"b_spline\": {\"num_nodes\": \"5\"}}, \"Scoring\": {\"stop_report_after_feature\": \"5\", \"rt_normalization_factor\": \"100.0\", \"quantification_cutoff\": \"0.0\", \"write_convex_hull\": \"false\", \"spectrum_addition_method\": \"simple\", \"add_up_spectra\": \"1\", \"spacing_for_spectra_resampling\": \"0.005\", \"uis_threshold_sn\": \"0\", \"uis_threshold_peak_area\": \"0\", \"scoring_model\": \"default\", \"im_extra_drift\": \"0.0\", \"strict\": \"true\", \"TransitionGroupPicker\": {\"stop_after_feature\": \"-1\", \"min_peak_width\": \"5.0\", \"peak_integration\": \"original\", \"background_subtraction\": \"none\", \"recalculate_peaks\": \"true\", \"use_precursors\": \"false\", \"use_consensus\": \"true\", \"recalculate_peaks_max_z\": \"0.75\", \"minimal_quality\": \"-1.5\", \"resample_boundary\": \"15.0\", \"compute_peak_quality\": \"false\", \"compute_peak_shape_metrics\": \"false\", \"compute_total_mi\": \"false\", \"boundary_selection_method\": \"largest\", \"PeakPickerMRM\": {\"sgolay_frame_length\": \"11\", \"sgolay_polynomial_order\": \"3\", \"gauss_width\": \"30.0\", \"use_gauss\": \"false\", \"peak_width\": \"-1.0\", \"signal_to_noise\": \"0.1\", \"write_sn_log_messages\": \"false\", \"remove_overlapping_peaks\": \"true\", \"method\": \"corrected\"}, \"PeakIntegrator\": {\"integration_type\": \"intensity_sum\", \"baseline_type\": \"base_to_base\", \"fit_EMG\": \"false\"}}, \"DIAScoring\": {\"dia_extraction_window\": \"0.05\", \"dia_extraction_unit\": \"Th\", \"dia_centroided\": \"false\", \"dia_byseries_intensity_min\": \"300.0\", \"dia_byseries_ppm_diff\": \"10.0\", \"dia_nr_isotopes\": \"4\", \"dia_nr_charges\": \"4\", \"peak_before_mono_max_ppm_diff\": \"20.0\"}, \"EMGScoring\": {\"max_iteration\": \"10\"}, \"Scores\": {\"use_shape_score\": \"true\", \"use_coelution_score\": \"true\", \"use_rt_score\": \"true\", \"use_library_score\": \"true\", \"use_intensity_score\": \"true\", \"use_nr_peaks_score\": \"true\", \"use_total_xic_score\": \"true\", \"use_total_mi_score\": \"false\", \"use_sn_score\": \"true\", \"use_mi_score\": \"false\", \"use_dia_scores\": \"true\", \"use_ms1_correlation\": \"false\", \"use_sonar_scores\": \"false\", \"use_ion_mobility_scores\": \"false\", \"use_ms1_fullscan\": \"false\", \"use_ms1_mi\": \"true\", \"use_uis_scores\": \"false\"}}, \"adv_opts_cond\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"rt_norm\": {\"__class__\": \"RuntimeValue\"}, \"sort_swath_maps\": \"false\", \"enable_ms1\": \"true\", \"enable_ipf\": \"true\", \"out_chrom_type\": \"mzML\", \"min_upper_edge_dist\": \"0.0\", \"extra_rt_extraction_window\": \"100.0\", \"mz_extraction_window_unit\": \"ppm\", \"mz_extraction_window_ms1_unit\": \"ppm\", \"use_ms1_ion_mobility\": \"false\", \"matching_window_only\": \"false\", \"irt_mz_extraction_window\": \"10.0\", \"irt_mz_extraction_window_unit\": \"ppm\", \"irt_im_extraction_window\": \"-1.0\", \"min_rsq\": \"0.95\", \"min_coverage\": \"0.6\", \"split_file_input\": \"false\", \"use_elution_model_score\": \"false\", \"readOptions\": \"cacheWorkingInMemory\", \"mz_correction_function\": \"regression_delta_ppm\", \"extraction_function\": \"tophat\", \"batchSize\": \"1000\", \"ms1_isotopes\": \"3\", \"force\": \"false\", \"test\": \"False\"}, \"im_extraction_window_ms1\": \"-1.0\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"ion_mobility_window\": \"-1.0\", \"mz_extraction_window\": \"10.0\", \"mz_extraction_window_ms1\": \"10.0\", \"rt_extraction_window\": \"600.0\", \"sonar\": \"false\", \"swath_windows_file\": {\"__class__\": \"RuntimeValue\"}, \"tr\": {\"__class__\": \"ConnectedValue\"}, \"tr_irt\": {\"__class__\": \"ConnectedValue\"}, \"tr_irt_nonlinear\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "77259b26-ee12-4fff-a26b-4233bd95bf2c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_osw",
+                    "uuid": "263858ee-f576-4b39-9f4b-1487bf60212e"
+                },
+                {
+                    "label": null,
+                    "output_name": "ctd_out",
+                    "uuid": "7a6e422b-1246-4ed9-945e-fa215225e53a"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputs": {
+                    "id": 5,
+                    "output_name": "out_osw"
+                },
+                "template": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet merge",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "osw"
+                }
+            ],
+            "position": {
+                "bottom": 307.8000030517578,
+                "height": 184.8000030517578,
+                "left": -682.5,
+                "right": -482.5,
+                "top": 123,
+                "width": 200,
+                "x": -682.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "a67b508b1dc5",
+                "name": "pyprophet_merge",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"same_run\": \"false\", \"template\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.0",
+            "type": "tool",
+            "uuid": "cfe13aec-2644-4a6e-8a2b-d3dc6cd0aec8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "61dd81a7-9a2d-4e9b-b8cb-a93245e9dbbb"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet score",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "osw"
+                },
+                {
+                    "name": "score_report",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 399.3999938964844,
+                "height": 276.3999938964844,
+                "left": -462.5,
+                "right": -262.5,
+                "top": 123,
+                "width": 200,
+                "x": -462.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "77f068ba47dd",
+                "name": "pyprophet_score",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"apply_weights\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"conditional_classifier\": {\"classifier\": \"XGBoost\", \"__current_case__\": 1, \"xgb_autotune\": \"false\"}, \"group_id\": \"group_id\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"ipf_max_peakgroup_pep\": \"0.7\", \"ipf_max_peakgroup_rank\": \"1\", \"ipf_max_transition_isotope_overlap\": \"0.5\", \"ipf_min_transition_sn\": \"0.0\", \"level\": \"ms1ms2\", \"lfdr_adj\": \"1.5\", \"lfdr_eps\": \"1e-08\", \"lfdr_monotone\": \"true\", \"lfdr_transformation\": \"probit\", \"lfdr_truncate\": \"true\", \"parametric\": \"false\", \"pfdr\": \"false\", \"pi0_lambda_end\": \"0.5\", \"pi0_lambda_start\": \"0.1\", \"pi0_lambda_steps\": \"0.05\", \"pi0_method\": \"bootstrap\", \"pi0_smooth_df\": \"3\", \"pi0_smooth_log\": \"false\", \"ss_initial_fdr\": \"0.15\", \"ss_iteration_fdr\": \"0.05\", \"ss_main_score\": \"var_xcorr_shape\", \"ss_num_iter\": \"10\", \"test_mode\": \"false\", \"tric_chromprob\": \"false\", \"xeval_fraction\": \"0.5\", \"xeval_num_iter\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.2",
+            "type": "tool",
+            "uuid": "40fc02c5-56f8-4e65-9e52-cd59ed321f5b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "score_report",
+                    "uuid": "78b03dbb-9561-4ccb-aa47-5ab90bf063ef"
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "70ab8388-f777-4fd3-8b5b-e34ef9b351f3"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet peptide",
+            "outputs": [
+                {
+                    "name": "peptide_plots",
+                    "type": "pdf"
+                },
+                {
+                    "name": "output",
+                    "type": "osw"
+                }
+            ],
+            "position": {
+                "bottom": 348.6000061035156,
+                "height": 225.60000610351562,
+                "left": -242.5,
+                "right": -42.5,
+                "top": 123,
+                "width": 200,
+                "x": -242.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "4504b3bc1eed",
+                "name": "pyprophet_peptide",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"context\": \"experiment-wide\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lfdr_adj\": \"1.5\", \"lfdr_eps\": \"1e-08\", \"lfdr_monotone\": \"true\", \"lfdr_transformation\": \"probit\", \"lfdr_truncate\": \"true\", \"parametric\": \"false\", \"pfdr\": \"false\", \"pi0_lambda_end\": \"0.5\", \"pi0_lambda_start\": \"0.1\", \"pi0_lambda_steps\": \"0.05\", \"pi0_method\": \"bootstrap\", \"pi0_smooth_df\": \"3\", \"pi0_smooth_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.0",
+            "type": "tool",
+            "uuid": "e1f109cb-bc55-4b81-9f74-d9d02553a91b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a4dc51f3-11f6-457b-aff8-0ea597114b92"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptide_plots",
+                    "uuid": "f998ff80-a2ab-4b82-8b76-bb13ed2d207b"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet peptide",
+            "outputs": [
+                {
+                    "name": "peptide_plots",
+                    "type": "pdf"
+                },
+                {
+                    "name": "output",
+                    "type": "osw"
+                }
+            ],
+            "position": {
+                "bottom": 348.6000061035156,
+                "height": 225.60000610351562,
+                "left": -22.5,
+                "right": 177.5,
+                "top": 123,
+                "width": 200,
+                "x": -22.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "4504b3bc1eed",
+                "name": "pyprophet_peptide",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"context\": \"global\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lfdr_adj\": \"1.5\", \"lfdr_eps\": \"1e-08\", \"lfdr_monotone\": \"true\", \"lfdr_transformation\": \"probit\", \"lfdr_truncate\": \"true\", \"parametric\": \"false\", \"pfdr\": \"false\", \"pi0_lambda_end\": \"0.5\", \"pi0_lambda_start\": \"0.1\", \"pi0_lambda_steps\": \"0.05\", \"pi0_method\": \"bootstrap\", \"pi0_smooth_df\": \"3\", \"pi0_smooth_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.0",
+            "type": "tool",
+            "uuid": "68693bad-fc8d-4e7a-94aa-137d8dcb3d98",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d1fb3ae7-3b84-4be6-8bb1-126a181c9269"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptide_plots",
+                    "uuid": "bc401b01-b1a5-420a-a455-8fdd9cbc2b5c"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet protein",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "osw"
+                },
+                {
+                    "name": "protein_plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 348.6000061035156,
+                "height": 225.60000610351562,
+                "left": 197.5,
+                "right": 397.5,
+                "top": 123,
+                "width": 200,
+                "x": 197.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2320f48209fc",
+                "name": "pyprophet_protein",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"context\": \"experiment-wide\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lfdr_adj\": \"1.5\", \"lfdr_eps\": \"1e-08\", \"lfdr_monotone\": \"true\", \"lfdr_transformation\": \"probit\", \"lfdr_truncate\": \"true\", \"parametric\": \"false\", \"pfdr\": \"false\", \"pi0_lambda_end\": \"0.5\", \"pi0_lambda_start\": \"0.1\", \"pi0_lambda_steps\": \"0.05\", \"pi0_method\": \"bootstrap\", \"pi0_smooth_df\": \"3\", \"pi0_smooth_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.0",
+            "type": "tool",
+            "uuid": "e8bc07ea-ba5d-4e3d-b439-894a786d7a63",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c2b6fd5f-add6-477f-892f-e282df6345d0"
+                },
+                {
+                    "label": null,
+                    "output_name": "protein_plots",
+                    "uuid": "699f4df0-df42-4acb-bd74-74aad82f3040"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet protein",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "osw"
+                },
+                {
+                    "name": "protein_plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 348.6000061035156,
+                "height": 225.60000610351562,
+                "left": 417.5,
+                "right": 617.5,
+                "top": 123,
+                "width": 200,
+                "x": 417.5,
+                "y": 123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2320f48209fc",
+                "name": "pyprophet_protein",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"context\": \"global\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lfdr_adj\": \"1.5\", \"lfdr_eps\": \"1e-08\", \"lfdr_monotone\": \"true\", \"lfdr_transformation\": \"probit\", \"lfdr_truncate\": \"true\", \"parametric\": \"false\", \"pfdr\": \"false\", \"pi0_lambda_end\": \"0.5\", \"pi0_lambda_start\": \"0.1\", \"pi0_lambda_steps\": \"0.05\", \"pi0_method\": \"bootstrap\", \"pi0_smooth_df\": \"3\", \"pi0_smooth_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.0",
+            "type": "tool",
+            "uuid": "3d0fc6f5-1027-4074-bcd1-5f73b1493f5b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "protein_plots",
+                    "uuid": "168a4e50-79f9-458c-876a-79cb5cad5198"
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "ec047143-40ef-4061-8c1a-2fb6e81a6e62"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "conditional_swath2stats|study_design": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PyProphet export",
+            "outputs": [
+                {
+                    "name": "export_file",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary",
+                    "type": "pdf"
+                },
+                {
+                    "name": "peptide_signal",
+                    "type": "tabular"
+                },
+                {
+                    "name": "protein_signal",
+                    "type": "tabular"
+                },
+                {
+                    "name": "msstats_input",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 666.7999877929688,
+                "height": 530.7999877929688,
+                "left": 754.5,
+                "right": 954.5,
+                "top": 136,
+                "width": 200,
+                "x": 754.5,
+                "y": 136
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3cf580bf28e2",
+                "name": "pyprophet_export",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"osw\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"conditional_output\": {\"format\": \"legacy_merged\", \"__current_case__\": 1, \"transition_quant\": \"true\", \"max_transition_pep\": \"0.7\", \"ipf\": \"peptidoform\", \"ipf_max_peptidoform_pep\": \"0.4\", \"max_rs_peakgroup_qvalue\": \"0.05\", \"max_global_peptide_qvalue\": \"0.01\", \"max_global_protein_qvalue\": \"0.01\"}, \"conditional_swath2stats\": {\"swath2stats\": \"yes_swath2stats\", \"__current_case__\": 0, \"study_design\": {\"__class__\": \"ConnectedValue\"}, \"conditional_fdr_replica\": {\"calc_fdr_replica\": \"calc_fdr_replica_yes\", \"__current_case__\": 0, \"fft\": \"0.5\", \"n_range\": \"10.0\", \"fdr_target\": \"0.05\", \"n_replica\": \"2\"}, \"conditional_max_pep\": {\"filter_max_pep\": \"filter_max_pep_yes\", \"__current_case__\": 0, \"n_peptides_max\": \"10\"}, \"conditional_min_pep\": {\"filter_min_pep\": \"filter_min_pep_yes\", \"__current_case__\": 0, \"n_peptides_min\": \"2\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"peptide_error\": \"true\", \"protein_error\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4.1",
+            "type": "tool",
+            "uuid": "48d5be06-8816-4da4-a70d-12b5a219f07b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "msstats_input",
+                    "uuid": "e287c3d3-cb72-4d70-809b-acb86932a2db"
+                },
+                {
+                    "label": null,
+                    "output_name": "summary",
+                    "uuid": "f5be16a2-f5a0-4abb-807c-079bddfaeb5c"
+                },
+                {
+                    "label": null,
+                    "output_name": "export_file",
+                    "uuid": "6d808fed-9f94-4a95-a0ad-ce0f41170e69"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptide_signal",
+                    "uuid": "d044b25c-c339-4bdf-8c18-422a88f029b0"
+                },
+                {
+                    "label": null,
+                    "output_name": "protein_signal",
+                    "uuid": "d45a777c-0af4-4569-a427-8ae99e0314ff"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "protein_signal"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Select",
+                    "name": "input"
+                }
+            ],
+            "label": "Ecoli protein expression matrix",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 483.6000061035156,
+                "height": 113.60000610351562,
+                "left": 1058.5,
+                "right": 1258.5,
+                "top": 370,
+                "width": 200,
+                "x": 1058.5,
+                "y": 370
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"invert\": \"false\", \"pattern\": \"(ECOLI)|(Spike-in)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "5282f24d-8985-472e-9669-f5484a9a2594",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "26ace007-a011-453e-b37e-1a2056a6184b"
+                }
+            ]
+        }
+    },
+    "tags": ["proteomics"],
+    "uuid": "6b0469ba-c31f-435f-8732-b5a78f002d22",
+    "version": 7
+}

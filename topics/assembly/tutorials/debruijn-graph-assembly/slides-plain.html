@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: De Bruijn Graph Assembly / De Bruijn Graph Assembly / Assembly</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="De Bruijn Graph Assembly">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-09-23 08:03:57 +0000">
+<meta name="DC.creator" content="Simon Gladman"><meta name="description" content=".enlarge120[  # ***De novo* Genome Assembly**  ## **Part 2: De Bruijn Graph Assembly**  ]  #### With thanks to T Seemann, D Bulach, I Cooke and Simon Gladman --- .enlarge120[ # **de Bruijn Graphs** ] .pull-left[ * Named after Nicolaas Govert de Bruijn * Directed graph representing overlaps between sequences of symbols * Sequences can be reconstructed by moving between nodes in graph ] .pull-right[ .image-50[![black and white image of a man wearing glasses](../../images/debruijn.png)] ] --- .enlarge120[# **de Bruijn Graphs**  * A directed graph of sequences of symbols * Nodes in the graph are k-mers * Edges represent consecutive k-mers (which overlap by k-1 symbols) ] Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3 ![every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap.](../../images/debruijn01.png) --- .enlarge120[# **Producing sequences**  * Sequences of symbols are produced by moving through the graph ] ![Sa...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Assembly / De Bruijn Graph Assembly / Slides: De Bruijn Graph Assembly">
+        <meta property="og:description" content=".enlarge120[  # ***De novo* Genome Assembly**  ## **Part 2: De Bruijn Graph Assembly**  ]  #### With thanks to T Seemann, D Bulach, I Cooke and Simon Gladman --- .enlarge120[ # **de Bruijn Graphs** ] .pull-left[ * Named after Nicolaas Govert de Bruijn * Directed graph representing overlaps between sequences of symbols * Sequences can be reconstructed by moving between nodes in graph ] .pull-right[ .image-50[![black and white image of a man wearing glasses](../../images/debruijn.png)] ] --- .enlarge120[# **de Bruijn Graphs**  * A directed graph of sequences of symbols * Nodes in the graph are k-mers * Edges represent consecutive k-mers (which overlap by k-1 symbols) ] Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3 ![every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap.](../../images/debruijn01.png) --- .enlarge120[# **Producing sequences**  * Sequences of symbols are produced by moving through the graph ] ![Sa...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/assembly/tutorials/debruijn-graph-assembly/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/assembly/tutorials/debruijn-graph-assembly/slides.html">View markdown source on GitHub</a>
+	<h1>De Bruijn Graph Assembly</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" />
+    Simon Gladman</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What are the factors that affect genome assembly?</p>
+</li>
+		
+		<li><p>How does Genome assembly work?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Perform an optimised Velvet assembly with the Velvet Optimiser</p>
+</li>
+		
+		<li><p>Compare this assembly with those we did in the basic tutorial</p>
+</li>
+		
+		<li><p>Perform an assembly using the SPAdes assembler.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> May 24, 2017 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Sep 23, 2026 </div>
+
+	<hr />
+
+
+	<p>.enlarge120[</p>
+
+<h1 id="de-novo-genome-assembly"><strong><em>De novo</em> Genome Assembly</strong></h1>
+
+<h2 id="part-2-de-bruijn-graph-assembly"><strong>Part 2: De Bruijn Graph Assembly</strong></h2>
+
+<p>]</p>
+
+<h4 id="with-thanks-to-t-seemann-d-bulach-i-cooke-and-simon-gladman">With thanks to T Seemann, D Bulach, I Cooke and Simon Gladman</h4>
+<hr />
+<p>.enlarge120[</p>
+<h1 id="de-bruijn-graphs"><strong>de Bruijn Graphs</strong></h1>
+<p>]
+.pull-left[</p>
+<ul>
+  <li>Named after Nicolaas Govert de Bruijn</li>
+  <li>Directed graph representing overlaps between sequences of symbols</li>
+  <li>
+    <p>Sequences can be reconstructed by moving between nodes in graph
+]
+.pull-right[
+.image-50[<img src="../../images/debruijn.png" alt="black and white image of a man wearing glasses" />]
+]
+—
+.enlarge120[# <strong>de Bruijn Graphs</strong></p>
+  </li>
+  <li>A directed graph of sequences of symbols</li>
+  <li>Nodes in the graph are k-mers</li>
+  <li>
+    <p>Edges represent consecutive k-mers (which overlap by k-1 symbols)
+]
+Consider the 2 symbol alphabet (0 &amp; 1) de Bruijn Graph for k =3
+<img src="../../images/debruijn01.png" alt="every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap." />
+—
+.enlarge120[# <strong>Producing sequences</strong></p>
+  </li>
+  <li>Sequences of symbols are produced by moving through the graph
+]
+<img src="../../images/debruijn02.png" alt="Same graph as before with arrows listing a path through the graph. Nodes 111, 110, 100, and 000 combine into 111000." /></li>
+</ul>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="k-mers-------pull-rightimage-25"><strong>K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo" />]]</h1>
+
+<hr />
+
+<ul>
+  <li>To be able to use de Bruijn graphs, we need reads of length <strong>L</strong> to overlap by <strong>L-1</strong> bases.</li>
+  <li>Not all reads will overlap another read perfectly.
+    <ul>
+      <li>Read errors</li>
+      <li>Coverage “holes”</li>
+    </ul>
+  </li>
+  <li>Not all reads are the same length (depending on technology and quality cleanup)</li>
+</ul>
+
+<p><strong><em>To help us get around these problems, we use all k-length subsequences of the reads, these are the k-mers.</em></strong>
+]
+—
+.enlarge120[</p>
+<h1 id="what-are-k-mers-------pull-rightimage-25"><strong>What are K-mers?</strong>       .pull-right[.image-25[<img src="../../images/specialk.png" alt="Special K Logo" />]]]</h1>
+<p><img src="../../images/kmers01.png" alt="k=12 kmers show three sequences with length 12 overlapping. For k=5 10 different shorter sequences are shown." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
+<p><img src="../../images/ex1-1.png" alt="An example of happiness is given with 4 fragments, happi, pine, iness, appin." />
+—
+.enlarge120[</p>
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-1"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
+<p><img src="../../images/ex1-2.png" alt="all 4-mers are shown from those 5-mers, so happi becomes happ and appi. These are then uniqued." />
+—
+.enlarge120[</p>
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-2"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
+<p><img src="../../images/ex1-3.png" alt="A graph is drawn based on overlaps between those 4-mers." />
+—
+.enlarge120[</p>
+<h1 id="k-mers-de-bruijn-graph-------pull-rightimage-25-3"><strong>K-mers de Bruijn graph</strong>       .pull-right[.image-25[<img src="../../images/abc.png" alt="Wooden blocks with letters A, B, C." />]]]</h1>
+<p><img src="../../images/ex1-4.png" alt="The graph is collapsed into the word happiness, success." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="the-problem-of-repeats-------pull-rightimage-25"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
+<p><img src="../../images/ex2-1.png" alt="A second example with the word mississippi is shown. The fragments are now missis, ssissi, ssippi." />
+—
+.enlarge120[</p>
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-1"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
+<p><img src="../../images/ex2-2.png" alt="All 4-mers are generated so missis becomes miss, issi, and ssis. These are then uniqued to get 7 unique 4-mers." />
+—
+.enlarge120[</p>
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-2"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
+<p><img src="../../images/ex2-3.png" alt="A graph is generated but this graph is more complex and has a loop." />
+—
+.enlarge120[</p>
+<h1 id="the-problem-of-repeats-------pull-rightimage-25-3"><strong>The problem of repeats</strong>       .pull-right[.image-25[<img src="../../images/repeatlogo.png" alt="Repeat icon" />]]]</h1>
+<p><img src="../../images/ex2-4.png" alt="This graph is walked and now the results are shown, mississippi, mississississippi, or more could be found by following the loop repeatedly." />
+—
+.enlarge120[</p>
+<h1 id="different-k-------pull-rightimage-25"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
+<p><img src="../../images/ex2a-1.png" alt="The same mississippi example from the start." />
+—
+.enlarge120[</p>
+<h1 id="different-k-------pull-rightimage-25-1"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
+<p><img src="../../images/ex2a-2.png" alt="Instead of 4-mers, we now produce 5-mers." />
+—
+.enlarge120[</p>
+<h1 id="different-k-------pull-rightimage-25-2"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
+<p><img src="../../images/ex2a-3.png" alt="The graph is produced, and now there are two disconnected sets of nodes." />
+—
+.enlarge120[</p>
+<h1 id="different-k-------pull-rightimage-25-3"><strong>Different k</strong>       .pull-right[.image-25[<img src="../../images/bigk.png" alt="Letter K" />]]]</h1>
+<p><img src="../../images/ex2a-4.png" alt="When collapsing this graph we see two results, MISSISSIS and SSIPPI." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="choose-k-wisely-------pull-rightimage-25"><strong>Choose k wisely</strong>       .pull-right[.image-25[<img src="../../images/wisely.png" alt="An old man from some movie." />]]]</h1>
+
+<p>.enlarge120[</p>
+<ul>
+  <li>Lower k
+    <ul>
+      <li>More connections</li>
+      <li>Less chance of resolving small repeats</li>
+      <li>Higher k-mer coverage</li>
+    </ul>
+  </li>
+  <li>Higher k
+    <ul>
+      <li>Less connections</li>
+      <li>More chance of resolving small repeats</li>
+      <li>Lower k-mer coverage</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong><em>Optimum value for k will balance these effects.</em></strong></p>
+
+<h2>]</h2>
+<p>.enlarge120[</p>
+<h1 id="read-errors-------pull-rightimage-25"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Example 3, happiness again, with fragments happi, iness, aplin, pinet" />]
+<img src="../../images/blank.png" alt="Blank image" />
+—
+.enlarge120[</p>
+<h1 id="read-errors-------pull-rightimage-25-1"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
+<img src="../../images/ex3-2.png" alt="all 3-mers are produced" />
+—
+.enlarge120[</p>
+<h1 id="read-errors-------pull-rightimage-25-2"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
+<img src="../../images/ex3-3.png" alt="The three mers are collapsed into an overlap graph" />
+—
+.enlarge120[</p>
+<h1 id="read-errors-------pull-rightimage-25-3"><strong>Read errors</strong>       .pull-right[.image-25[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
+<p>.image-75[<img src="../../images/ex3-head.png" alt="Happiness example 5-mers" />]
+<img src="../../images/ex3-4.png" alt="The graph is coloured and six contigs are produced based on overlaps." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="more-coverage-------pull-rightimage-50"><strong>More coverage</strong>       .pull-right[.image-50[<img src="../../images/depthlogo.png" alt="hazard symbol" />]]]</h1>
+
+<p>.enlarge120[</p>
+<ul>
+  <li>Errors won’t be duplicated in every read</li>
+  <li>Most reads will be error free</li>
+  <li>We can count the frequency of each k-mer</li>
+  <li>Annotate the graph with the frequencies</li>
+  <li>Use the frequency data to clean the de Bruijn graph</li>
+</ul>
+
+<p><strong><em>More coverage depth will help overcome errors!</em></strong>
+]
+—
+.enlarge120[</p>
+<h1 id="read-errors-revisited-------pull-rightimage-50"><strong>Read errors revisited</strong>       .pull-right[.image-50[<img src="../../images/hazardsymbol.png" alt="hazard symbol" />]]]</h1>
+<p><img src="../../images/ex3a.png" alt="Same happiness example, all three mers are present, but now the counts are shown. One path has many more counts than the other. Text asks which path looks most valid? why?" /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="another-parameter---coverage-cutoff"><strong>Another parameter - coverage cutoff</strong>]</h1>
+
+<p>.enlarge120[</p>
+<ul>
+  <li>At what point is a low coverage indicative of an error?</li>
+  <li>Can we ignore low coverage nodes and paths?</li>
+  <li>This is a new assembly parameter</li>
+</ul>
+
+<p><strong><em>Coverage cutoff</em></strong>
+]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="de-bruijn-graph-assembly-process"><strong>de Bruijn graph assembly process</strong>]</h1>
+
+<p>.enlarge120[</p>
+<ol>
+  <li>Select a value for k</li>
+  <li>“Hash” the reads (make the kmers)</li>
+  <li>Count the kmers</li>
+  <li>Make the de Bruijn graph</li>
+  <li><strong>Perform graph simplification steps</strong> - use cov cutoff</li>
+  <li>Read off contigs from simplified graph</li>
+</ol>
+
+<p>]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="graph-simplification"><strong>Graph simplification</strong>]</h1>
+
+<h2 id="step-1-chain-merging">Step 1: Chain merging</h2>
+
+<p><img src="../../images/tipclipping.png" alt="Looking at a doubly connected graph with forward/reverse sequences and piles of overlaps. Nodes are connected with lines. One node is labelled as already merged, and two nodes sharing a prefix are labelled as further merging possible." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="graph-simplification-1"><strong>Graph simplification</strong>]</h1>
+
+<h2 id="step-2-tip-clipping">Step 2: Tip clipping</h2>
+
+<p><img src="../../images/shortnodes.png" alt="a graph with every node doubled for forward/reverse strands is shown, clip tips if the length of the tip of the node is less than 2 times k." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="graph-simplification-2"><strong>Graph simplification</strong>]</h1>
+
+<p>.pull-left[
+<img src="../../images/bubblemerging.png" alt="Three graphs are shown, B, C, and D. B is the most complex, C combines two nodes B and B prime, while D collapses even more nodes to further simplify the graph." />
+]
+.pull-right[</p>
+<h2 id="step-3-bubble-collapsing">Step 3: Bubble collapsing</h2>
+
+<ul>
+  <li>Detect redundant paths through graph</li>
+  <li>Compare the paths using sequence alignment</li>
+  <li>If similar, merge the paths</li>
+</ul>
+
+<p>.reduce70[Image: Zerbino &amp; Birney 2008]
+]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="graph-simplification-3"><strong>Graph simplification</strong></h1>
+
+<h2 id="step-4-remove-low-coverage-nodes">Step 4: Remove low coverage nodes</h2>
+
+<ul>
+  <li>Remove erroneous nodes and connections using the “coverage cutoff”</li>
+  <li>Genuine short nodes will have a high coverage</li>
+</ul>
+
+<h2 id="-1">]</h2>
+<p>.enlarge120[</p>
+<h1 id="make-contigs"><strong>Make contigs</strong></h1>
+
+<ul>
+  <li>Find an unbalanced node in the graph</li>
+  <li>Follow the chain of nodes and “read off” the bases to produce the contigs</li>
+  <li>Where there is an ambiguous divergence/convergence, stop the current contig and start a new one.</li>
+  <li>Re-trace the reads through the contigs to help with repeat resolution</li>
+</ul>
+
+<p>]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="velvet"><strong>Velvet</strong></h1>
+
+<p>Velvet has two separate programs:</p>
+
+<ul>
+  <li>Velveth
+    <ul>
+      <li>Makes the k-mers and</li>
+      <li>Efficiently counts (hashes) them</li>
+      <li>All in O(N) time</li>
+    </ul>
+  </li>
+  <li>Velvetg
+    <ul>
+      <li>Makes the graph - O(U) time. U = unique k-mers.</li>
+      <li>Simplifies it</li>
+      <li>Makes contigs - O(E) time. E = edges in graph</li>
+    </ul>
+  </li>
+</ul>
+
+<p>But: You need to choose <strong>k</strong> and <strong>c</strong> wisely!</p>
+
+<p>]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="velvet---paired-end-scaffolding"><strong>Velvet - Paired end scaffolding</strong></h1>
+
+<ul>
+  <li>Breadcrumb algorithm
+]</li>
+</ul>
+
+<p><img src="../../images/breadcrumb.png" alt="Two boxes A and B are at opposite ends, there are many nodes along a line between them, and some sitting outside of the graph or otherwise weirdly connected." /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="extensions-of-the-idea"><strong>Extensions of the idea</strong></h1>
+<p>]
+—
+.enlarge120[</p>
+<h1 id="spades-----pull-rightimage-50"><strong>SPAdes</strong>     .pull-right[.image-50[<img src="../../images/spades.png" alt="spades logo" />]]]</h1>
+
+<p>.enlarge120[</p>
+<ul>
+  <li>
+    <p>de Bruijn graph assembler by Pavel Pevzner’s group out of St. Petersburg</p>
+  </li>
+  <li>Uses multiple k-mers to build the graph
+    <ul>
+      <li>Graph has connectivity <strong>and</strong> specificity</li>
+      <li>Usually use a low, medium and high k-mer size together.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Performs error correction on the reads first</p>
+  </li>
+  <li>
+    <p>Maps reads back to the contigs and scaffolds as a check</p>
+  </li>
+  <li>
+    <p>Under active development</p>
+  </li>
+  <li>Much slower than Velvet</li>
+  <li>Should be used in preference to Velvet now.</li>
+</ul>
+
+<h2 id="-2">]</h2>
+<p>.enlarge120[</p>
+<h1 id="a-move-back-to-olc"><strong>A move back to OLC</strong>]</h1>
+
+<p>.pull-left[
+.enlarge120[</p>
+<ul>
+  <li>New long read technologies
+    <ul>
+      <li>PacBio and MinIon</li>
+    </ul>
+  </li>
+  <li>Assemblers: HGap, CANU
+    <ul>
+      <li>Use overlap, layout consensus approach</li>
+    </ul>
+  </li>
+  <li>CANU can perform hybrid assemblies with long and short reads
+]
+]</li>
+</ul>
+
+<p>.pull-right[
+<img src="../../images/minionpacbio.png" alt="image of a minion connected to a computer via a cable. Below a man stands next to a very large machine." />
+]
+—
+.enlarge120[# <strong>Bandage</strong></p>
+
+<ul>
+  <li>Assembly graph viewer and manipulator</li>
+  <li>Written by Ryan Wick of Centre for Systems Genomics - Uni. Melbourne, Australia
+]
+<img src="../../images/bandage.png" alt="A screenshot of the bandage gui showning drawing options on left and a middle window with a close up of a genome assembly graph." /></li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>We learned about how the choice of k-mer size will affect assembly outcomes</li>
+
+<li>We learned about the strategies that assemblers use to make reference genomes</li>
+
+<li>We performed a number of assemblies with Velvet and SPAdes.</li>
+
+<li>You should use SPAdes or another more modern assembler than Velvet for actual assemblies now.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/assembly/tutorials/debruijn-graph-assembly/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/assembly/tutorials/debruijn-graph-assembly/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

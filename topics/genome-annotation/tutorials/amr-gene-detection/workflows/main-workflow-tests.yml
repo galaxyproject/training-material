@@ -1,0 +1,37 @@
+- doc: Test for "Identification of AMR genes in an assembled bacterial genome"
+  job:
+    contigs:
+      class: File
+      location: https://zenodo.org/record/10572227/files/DRR187559_contigs.fasta
+      filetype: fasta
+    Input Paired End Reads Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: DRR187559_after_fastp
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_2.fastq.gz
+  outputs:
+    stararm_detailed_summary:
+      asserts:
+        has_text:
+          text: "saureus"
+    bakta_annotation_summary:
+      asserts:
+        has_text:
+          text: "contig00001"
+    bowtie_mapping_stats:
+      asserts:
+        has_n_lines:
+          n: 15
+    jbrowse_output:
+      asserts:
+        has_text:
+          text: "Bakta"

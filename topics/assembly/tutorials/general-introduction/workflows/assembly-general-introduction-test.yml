@@ -1,0 +1,23 @@
+---
+- doc: Test for the unicycler assembly general introduction workflow
+  job: assembly-general-introduction-job.yml
+  outputs:
+    fasta_stats_tabular:
+      asserts:
+        has_line:
+          line: 'GC_content	33.6'
+  outputs:
+    velvet_contigs:
+      asserts:
+        has_line:
+          line: '>NODE_1_length_933_cov_35.767418'
+    velvet_stats:
+      asserts:
+        has_text_matching:
+          expression: '1\s*933\s*2\s*1\s*0.000000\s*35.767417\s*32.496249\s*0.000000\s*0.000000\s*0.000000\s*0.000000\s*0.000000\s*0.000000\s*0\s*0\s*0\s*0\s*0'
+    quast_report_html:
+      asserts:
+        has_text:
+          text: '<html'
+
+

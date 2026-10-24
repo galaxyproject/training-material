@@ -1,0 +1,23 @@
+graph TD
+    Start(I have an image) --> Q1{Is it Microscopy?}
+    Q1 -- No --> Med[Medical Imaging: Use<br/>DICOM/HighDICOM tools]
+    Q1 -- Yes --> Q2{Imaging Type?}
+    Q2 --> Bright[Brightfield/Color<br/>IHC/H&E]
+    Q2 --> Fluor[Fluorescence Grayscale]
+    Bright --> Path[Pathology: Color<br/>Deconvolution]
+    Fluor --> Q3{Multi-channel?}
+    Q3 -- Single-channel (no) --> Analysis[Image Analysis]
+    Q3 -- Multi-channel (yes) --> Channel[Channel Selection]
+    Channel --> Analysis
+    Path --> Analysis
+    
+    style Start fill:#f9f,stroke:#333
+    style Q1 fill:#fff4dd,stroke:#d4a017
+    style Q2 fill:#fff4dd,stroke:#d4a017
+    style Q3 fill:#fff4dd,stroke:#d4a017
+    style Med fill:#e6e6fa,stroke:#8b7fb8
+    style Bright fill:#e6e6e6,stroke:#333
+    style Fluor fill:#e6e6e6,stroke:#333
+    style Path fill:#e6e6fa,stroke:#8b7fb8
+    style Analysis fill:#e6e6fa,stroke:#8b7fb8
+    style Channel fill:#e6e6fa,stroke:#8b7fb8

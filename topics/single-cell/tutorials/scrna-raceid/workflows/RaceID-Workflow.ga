@@ -1,0 +1,544 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Downstream Single-cell RNA analysis with RaceID",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-4181-2676",
+            "name": "Mehmet Tekman"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-7901-7109",
+            "name": "Alex Ostrovsky"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "RaceID Workflow",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Tabular Matrix"
+                }
+            ],
+            "label": "Tabular Matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 2.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ba3fe014-c728-486e-8ce4-55be24df0682",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "intable": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Initial processing using RaceID",
+            "outputs": [
+                {
+                    "name": "outtable",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 233.75,
+                "top": 1.25
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "43c146e25a43",
+                "name": "raceid_filtnormconf",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"filt\": {\"mintotal\": \"3000\", \"minexpr\": \"5\", \"minnumber\": \"5\", \"hist_geq_one\": false, \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"intable\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "6fd8dbde-93d2-4903-865f-78cc3c2fa299",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "358ddb8a-a6ca-4162-8d53-354902f905cf"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "68451b36-8875-45ca-bdb9-e315cc836e49"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "35505252-c65a-4572-9d66-b0e69893c01b"
+                },
+                {
+                    "label": null,
+                    "output_name": "outtable",
+                    "uuid": "d9293468-efef-4a10-89a6-0064a1740afd"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "inputrds": {
+                    "id": 1,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clustering using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                },
+                {
+                    "name": "outassignments",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outgenelist",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 481.25,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a4b734cd253b",
+                "name": "raceid_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"clust\": {\"metric\": \"pearson\", \"funcluster\": \"kmedoids\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"extra\": {\"tablelim\": \"25\", \"plotlim\": \"10\", \"foldchange\": \"1.0\", \"pvalue\": \"0.01\"}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"outlier\": {\"outminc\": \"5\", \"outlg\": \"2\", \"final\": false, \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"tsne\": {\"perplexity\": \"30\", \"knn\": \"10\", \"umap_nn\": \"15\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "ca88c6cb-03e0-400c-8942-4c7ac0545a67",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "48b02eb6-1b70-4d1f-a210-03aa93a189d8"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "e59d7dff-7e4b-42b4-ba62-09858f83c75c"
+                },
+                {
+                    "label": null,
+                    "output_name": "outassignments",
+                    "uuid": "2514a8cc-48a9-4cf2-9640-8663f81d6cd6"
+                },
+                {
+                    "label": null,
+                    "output_name": "outgenelist",
+                    "uuid": "b69f7d2f-4efe-41ca-ac2f-c74d45c2327e"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "68cbc6ab-4697-4042-b5a0-0d9cd842e09a"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage computation using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 740,
+                "top": 2.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "72979cac22b2",
+                "name": "raceid_trajectory",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"comppval\": {\"pthr\": \"0.01\", \"sensitive\": false}, \"compscore\": {\"nn\": \"1\", \"scthr\": \"0.0\"}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgraph\": {\"showcells\": false, \"scthr\": \"0.0\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"projback\": {\"pdishuf\": \"2000\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"projcell\": {\"knn\": \"3\", \"cthr\": \"5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"use_log\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "515732a4-cba5-402a-9cc8-11980c4815c6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "5de0f2cb-41a8-4278-8faa-20cdb534f3c4"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "91b567ed-cf6e-4ff4-a84d-186d49502dff"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 735,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41f34e925bd5",
+                "name": "raceid_inspectclusters",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"gois\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"clusts_plot\": \"\"}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "727ee241-4de7-408f-867a-fc1ed21c23cb",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "bf324238-9739-4960-90c0-2935d225bd42"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "051cbdaa-6513-4239-91b6-e22004f6469f"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 735,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41f34e925bd5",
+                "name": "raceid_inspectclusters",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"gois\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"inspect_goi_genes\": \"Gstm3, St3gal4, Gna11\", \"inspect_goi_cells\": \"\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "6db63f68-65bc-4bb5-96a2-9d3e75712287",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "3268d277-37a0-4081-ae95-8c7a83efb903"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "344cd8bc-01a1-4614-8def-806815a615af"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 996.25,
+                "top": 564.9999618530273
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41f34e925bd5",
+                "name": "raceid_inspectclusters",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"set_a\": {\"name_set\": \"Cells in 1\", \"meth\": {\"type\": \"cln\", \"__current_case__\": 0, \"selector\": \"1\"}}, \"set_b\": {\"name_set\": \"Cells in 3\", \"meth\": {\"type\": \"cln\", \"__current_case__\": 0, \"selector\": \"3\"}}, \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"gois\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "57c7332a-c6f5-484f-8a5c-d5467d320e72",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "8f9f3e29-3c56-4fcf-af0a-f2bea2c10234"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "d028c3e8-3acb-44ba-968a-74b1cdfb4bb1"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "inputrds": {
+                    "id": 3,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage Branch Analysis using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outdiffgenes",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1002.5,
+                "top": 3.75
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c8434a623268",
+                "name": "raceid_inspecttrajectory",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"trjfid\": {\"basic\": {\"doit\": \"no\", \"__current_case__\": 0}}, \"trjsid\": {\"basic\": {\"doit\": \"yes\", \"__current_case__\": 1, \"i\": \"3\", \"br\": \"1,3,5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "4a519b59-2319-4811-969e-3b872f95c377",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outdiffgenes",
+                    "uuid": "814ac5ce-500d-4ea2-bbc7-ab8c4f5d2962"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "4404cdf2-ee33-4e08-8fed-83b52bbfad88"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "1e19e4d3-802d-4713-b920-ba8264bce2d0"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "inputrds": {
+                    "id": 3,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage Branch Analysis using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1001.25,
+                "top": 330
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c8434a623268",
+                "name": "raceid_inspecttrajectory",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"trjfid\": {\"basic\": {\"doit\": \"yes\", \"__current_case__\": 1, \"cellsfromz\": \"1,3,5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}, \"som\": {\"doit\": \"no\", \"__current_case__\": 0}}}, \"trjsid\": {\"basic\": {\"doit\": \"no\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "883ffd05-1545-449f-8028-c45c0f9edfd5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "23f0fab3-0128-443a-a26a-a3e40cee4578"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "8ef7bad4-ff15-42d2-acc4-6c5bc5de89e4"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "transcriptomics",
+        "single-cell"
+    ],
+    "uuid": "f969d2cd-a16a-4a8e-b553-5d697b3ea961",
+    "version": 1
+}

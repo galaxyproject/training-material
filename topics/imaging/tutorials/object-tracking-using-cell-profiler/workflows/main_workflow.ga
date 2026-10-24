@@ -1,0 +1,660 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "example cellprofiler pipeline",
+    "format-version": "0.1",
+    "name": "CP_object_tracking_example",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Starting Modules",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": -322.8000030517578,
+                "height": 82.19999694824219,
+                "left": -391.5,
+                "right": -191.5,
+                "top": -405,
+                "width": 200,
+                "x": -391.5,
+                "y": -405
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "670975e92458",
+                "name": "cp_common",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"groups\": {\"con_groups\": {\"group_images\": \"Yes\", \"__current_case__\": 0, \"group_category\": \"field1\"}}, \"images\": {\"filter_images\": \"Images only\"}, \"metadata\": {\"con_metadata_extraction\": {\"extract\": \"Yes\", \"__current_case__\": 0, \"extraction_method\": [{\"__index__\": 0, \"metadata_extraction_method\": \"Extract from file/folder names\", \"con_metadata_source\": {\"metadata_source\": \"File name\", \"__current_case__\": 0, \"file_name_regex\": \"(?P<field1>.*)_(?P<field2>[a-zA-Z0-9]+)_(?P<field3>[a-zA-Z0-9]+)\"}, \"con_metadata_extract_from\": {\"extract_metadata_from\": \"Images matching a rule\", \"__current_case__\": 0, \"match_all_any\": \"and\", \"r_match\": [{\"__index__\": 0, \"con_match\": {\"rule_type\": \"file\", \"__current_case__\": 0, \"operator\": \"does\", \"contain\": \"containregexp\", \"match_value\": \"GFPHistone\"}}]}}]}}, \"nameandtypes\": {\"pixel_space\": {\"process_3d\": \"No\", \"__current_case__\": 1}, \"con_assign_a_name_to\": {\"assign_a_name_to\": \"Images matching rules\", \"__current_case__\": 1, \"r_match_rule\": [{\"__index__\": 0, \"match_all_any\": \"and\", \"r_match\": [{\"__index__\": 0, \"con_match\": {\"rule_type\": \"file\", \"__current_case__\": 0, \"operator\": \"does\", \"contain\": \"containregexp\", \"match_value\": \"GFPHistone\"}}], \"con_select_image_type\": {\"select_image_type\": \"Color image\", \"__current_case__\": 1, \"name_to_assign\": \"OrigColor\", \"con_set_intensity\": {\"set_intensity_range_from\": \"Image metadata\", \"__current_case__\": 1}}}], \"matching_method\": \"Metadata\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy1",
+            "type": "tool",
+            "uuid": "fb741c06-b744-4a07-882f-ebf3839bdd3d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "92a5ca6d-448d-4ed4-bd6d-0cd0a2802749"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 731.7833251953125,
+                "height": 82.20001220703125,
+                "left": 656.36669921875,
+                "right": 856.36669921875,
+                "top": 649.5833129882812,
+                "width": 200,
+                "x": 656.36669921875,
+                "y": 649.5833129882812
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ce4f26d4-cd5c-49a8-a434-31ff911bb1f6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3a620fc2-51b9-4d8a-b1c9-621e9cd47a0d"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 0,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ColorToGray",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": -282.9833221435547,
+                "height": 113.59999084472656,
+                "left": -160.5833282470703,
+                "right": 39.41667175292969,
+                "top": -396.58331298828125,
+                "width": 200,
+                "x": -160.5833282470703,
+                "y": -396.58331298828125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e8f822eeb9fd",
+                "name": "cp_color_to_gray",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_conversion_method\": {\"conversion_method\": \"Combine\", \"__current_case__\": 0, \"name_output_image\": \"OrigGray\", \"con_image_type\": {\"image_type\": \"RGB\", \"__current_case__\": 0, \"weight_red_channel\": \"1.0\", \"weight_green_channel\": \"1.0\", \"weight_blue_channel\": \"1.0\"}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_input_image\": \"OrigColor\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "a5cde14c-48f9-491e-a78c-296432463a67",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "37c9eb1f-cbc8-4a52-9f8a-fe8857f3240e"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unzip",
+            "outputs": [
+                {
+                    "name": "unzipped",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 756.3500061035156,
+                "height": 113.60000610351562,
+                "left": 931.6500244140625,
+                "right": 1131.6500244140625,
+                "top": 642.75,
+                "width": 200,
+                "x": 931.6500244140625,
+                "y": 642.75
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "38eec75fbe9b",
+                "name": "unzip",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"extract_options\": {\"extract_all\": \"True\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2",
+            "type": "tool",
+            "uuid": "616a5cfd-46bc-4f69-8f62-fb14f5e63ae9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "unzipped",
+                    "uuid": "0cd4640a-a52b-45aa-996f-75dbdaf29d46"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 2,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "IdentifyPrimaryObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": -91.13333129882812,
+                "height": 134,
+                "left": -62.100006103515625,
+                "right": 137.89999389648438,
+                "top": -225.13333129882812,
+                "width": 200,
+                "x": -62.100006103515625,
+                "y": -225.13333129882812
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "b6eec6087271",
+                "name": "cp_identify_primary_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_advanced\": {\"advanced\": \"Yes\", \"__current_case__\": 1, \"input_from_nat\": \"OrigGray\", \"name_to_be_identified\": \"Nuclei\", \"min_diameter\": \"30\", \"max_diameter\": \"9999\", \"discard_outside_border\": \"Yes\", \"discard_touching_border\": \"Yes\", \"con_threshold_strategy\": {\"threshold_strategy\": \"Global\", \"__current_case__\": 1, \"con_threshold_method\": {\"threshold_method\": \"Otsu\", \"__current_case__\": 0, \"con_threshold_class\": {\"threshold_class\": \"Three classes\", \"__current_case__\": 0, \"assign_pixel\": \"Background\"}, \"threshold_smoothing_scale\": \"1.3488\", \"threshold_correction_factor\": \"1.0\", \"threshold_lower\": \"0.01\", \"threshold_upper\": \"1.0\"}}, \"con_distinguish_clumped_objects\": {\"distinguish_clumped_objects\": \"Intensity\", \"__current_case__\": 1, \"con_dividing_lines\": {\"dividing_lines\": \"Intensity\", \"__current_case__\": 1, \"con_smoothing_filter\": {\"smoothing_filter\": \"Yes\", \"__current_case__\": 1}, \"con_min_distance\": {\"min_distance\": \"Yes\", \"__current_case__\": 1}, \"speed_up\": \"Yes\"}}, \"fill_hole\": \"After both thresholding and declumping\", \"con_handling_excessive\": {\"excessive_handling\": \"Continue\", \"__current_case__\": 1}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy1",
+            "type": "tool",
+            "uuid": "8b8c952e-c9f2-483b-84b9-365162987b51",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "1988a994-a7f4-4abf-b7dc-3cffcd7d0331"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 4,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MeasureObjectSizeShape",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 87.66667175292969,
+                "height": 134,
+                "left": 75.30000305175781,
+                "right": 275.3000030517578,
+                "top": -46.33332824707031,
+                "width": 200,
+                "x": 75.30000305175781,
+                "y": -46.33332824707031
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "acf3aa487283",
+                "name": "cp_measure_object_size_shape",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_object\": [{\"__index__\": 0, \"objects_to_measure\": \"Nuclei\"}], \"zernike_feature\": \"No\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "9366dc9d-f4aa-4930-b50d-e1bffe20da6e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "a4fc756b-790d-42e8-8637-2ac9a54caa01"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 5,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MeasureObjectIntensity",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 94.5,
+                "height": 134,
+                "left": 314.1166687011719,
+                "right": 514.1166687011719,
+                "top": -39.5,
+                "width": 200,
+                "x": 314.1166687011719,
+                "y": -39.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "407925835dd9",
+                "name": "cp_measure_object_intensity",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_image\": [{\"__index__\": 0, \"image_to_measure\": \"OrigGray\"}], \"rpt_object\": [{\"__index__\": 0, \"objects_to_measure\": \"Nuclei\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "47e32310-e656-411a-a34b-a80ef90b4596",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "83dd3bbf-cf0b-4581-a73e-dedf91383a61"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 6,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TrackObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 265.75,
+                "height": 134,
+                "left": 469.6333312988281,
+                "right": 669.6333312988281,
+                "top": 131.75,
+                "width": 200,
+                "x": 469.6333312988281,
+                "y": 131.75
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1fd453cd757b",
+                "name": "cp_track_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_tracking_method\": {\"tracking_method\": \"Overlap\", \"__current_case__\": 0, \"max_distance\": \"50\", \"con_filter_by_lifetime\": {\"filter_by_lifetime\": \"No\", \"__current_case__\": 1}, \"display_option\": \"Color and Number\", \"con_save_coded_img\": {\"save_coded_img\": \"Yes\", \"__current_case__\": 0, \"name_output_img\": \"TrackedCells\"}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"object_to_track\": \"Nuclei\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "39cf58a1-e5e5-4fd4-abc7-12fa772877e7",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "327ce30c-a4c9-4dff-99f1-cdcc82ce101d"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 7,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "OverlayOutlines",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 443.04998779296875,
+                "height": 134,
+                "left": 595.9666748046875,
+                "right": 795.9666748046875,
+                "top": 309.04998779296875,
+                "width": 200,
+                "x": 595.9666748046875,
+                "y": 309.04998779296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "91560258e972",
+                "name": "cp_overlay_outlines",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_blank_img\": {\"blank_img\": \"No\", \"__current_case__\": 1, \"image_to_outline\": \"OrigGray\", \"con_display_mode\": {\"display_mode\": \"Color\", \"__current_case__\": 0, \"rpt_obj_to_display\": [{\"__index__\": 0, \"obj_to_display\": \"Nuclei\", \"outline_color\": \"#ff0000\"}]}}, \"howto_outline\": \"Inner\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"OutlineImage\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "725e19a9-31dc-463f-ba04-9704626e6077",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "c0550e15-158b-4a4d-a1cc-a4877e1bb77a"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 8,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Tile",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 431.0166778564453,
+                "height": 113.59999084472656,
+                "left": 829.0999755859375,
+                "right": 1029.0999755859375,
+                "top": 317.41668701171875,
+                "width": 200,
+                "x": 829.0999755859375,
+                "y": 317.41668701171875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "878bafb411dd",
+                "name": "cp_tile",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_assembly_method\": {\"assembly_method\": \"Within cycles\", \"__current_case__\": 0, \"con_calc_no_row\": {\"calc_no_row\": \"No\", \"__current_case__\": 1, \"no_of_row\": \"1\"}, \"con_calc_no_cols\": {\"calc_no_cols\": \"Yes\", \"__current_case__\": 0}, \"corner_to_begin\": \"top left\", \"direction\": \"row\", \"meander_mode\": \"No\", \"rpt_additional_image\": [{\"__index__\": 0, \"additional_img\": \"OutlineImage\"}, {\"__index__\": 1, \"additional_img\": \"TrackedCells\"}]}, \"input_image\": \"OrigColor\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"output_image_name\": \"TiledImages\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "210b3d0d-1139-4934-886b-805c1fcfa3de",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "83dbb3d1-3126-4e95-a2ea-d8f9a6ed5722"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 9,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SaveImages",
+                    "name": "input_pipeline"
+                }
+            ],
+            "label": null,
+            "name": "SaveImages",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 591.4833374023438,
+                "height": 113.60000610351562,
+                "left": 887.566650390625,
+                "right": 1087.566650390625,
+                "top": 477.8833312988281,
+                "width": 200,
+                "x": 887.566650390625,
+                "y": 477.8833312988281
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "33f4fa1413fb",
+                "name": "cp_save_images",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_method_for_constructing\": {\"method_for_constructing\": \"From image filename\", \"__current_case__\": 0, \"name_for_file_prefix\": \"OrigColor\", \"con_append_suffix\": {\"append_suffix\": \"Yes\", \"__current_case__\": 0, \"text_to_append\": \"\"}}, \"con_type_of_image\": {\"type_of_image\": \"Image\", \"__current_case__\": 0, \"con_save_file_format\": {\"file_format\": \"png\", \"__current_case__\": 3}}, \"image_to_save\": \"TiledImages\", \"input_pipeline\": {\"__class__\": \"RuntimeValue\"}, \"overwrite_without_warning\": \"Yes\", \"record_info\": \"No\", \"when_to_save\": \"Every cycle\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy1",
+            "type": "tool",
+            "uuid": "86647f83-5316-4577-be99-1d966eb2f92a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "1c29a3c6-ebb0-4ece-b2cf-aeeb0cdf6e1e"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 10,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ExportToSpreadsheet",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 586.816650390625,
+                "height": 134,
+                "left": 1144.7833251953125,
+                "right": 1344.7833251953125,
+                "top": 452.816650390625,
+                "width": 200,
+                "x": 1144.7833251953125,
+                "y": 452.816650390625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "d0178bdcd00e",
+                "name": "cp_export_to_spreadsheet",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_metadata_column_to_object\": \"Yes\", \"calc_mean\": \"Yes\", \"calc_median\": \"No\", \"calc_standard_deviation\": \"No\", \"con_create_gene_pattern\": {\"create_gene_pattern\": \"No\", \"__current_case__\": 1}, \"con_export_all_measurements\": {\"__current_case__\": 1, \"export_all_measurements\": \"Yes\"}, \"con_prefix\": {\"add_prefix\": \"No\", \"__current_case__\": 1}, \"delimiter\": \"Comma (\\\",\\\")\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"overwrite_existing_file\": \"Yes\", \"represent_nan\": \"NaN\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy1",
+            "type": "tool",
+            "uuid": "c08309b4-101c-4150-bb88-c2856bb2636e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "52f72fd2-726e-40b1-b168-7396a64f7a16"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "con_input_type|input_images": {
+                    "id": 3,
+                    "output_name": "unzipped"
+                },
+                "pipeline": {
+                    "id": 11,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CellProfiler",
+            "outputs": [
+                {
+                    "name": "pipeline_output",
+                    "type": "input"
+                },
+                {
+                    "name": "logs",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 808.9333190917969,
+                "height": 174.39999389648438,
+                "left": 1371.8333740234375,
+                "right": 1571.8333740234375,
+                "top": 634.5333251953125,
+                "width": 200,
+                "x": 1371.8333740234375,
+                "y": 634.5333251953125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0e4dccaafef5",
+                "name": "cp_cellprofiler",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_input_type\": {\"input_type\": \"no\", \"__current_case__\": 0, \"input_images\": {\"__class__\": \"ConnectedValue\"}}, \"detailed_output\": \"true\", \"pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9+galaxy0",
+            "type": "tool",
+            "uuid": "da0bad08-2691-40e5-b2ae-24890ea16e7b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "logs",
+                    "uuid": "ca4a668b-b33c-41fa-a427-ad3b83c2d07f"
+                },
+                {
+                    "label": "CellProfiler pipeline output files",
+                    "output_name": "pipeline_output",
+                    "uuid": "dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "CellProfiler",
+        "imaging"
+    ],
+    "uuid": "5d01a2a6-fad3-4f01-811b-87e78624b983",
+    "version": 13
+}

@@ -1,0 +1,3602 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy Monitoring with Telegraf and Grafana / Galaxy Monitoring with Telegraf and Grafana / Galaxy Server Administration</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Galaxy Monitoring with Telegraf and Grafana">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-04-29 08:45:36 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Tomas Vondrak"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Server Administration / Galaxy Monitoring with Telegraf and Grafana / Hands-on: Galaxy Monitoring with Telegraf and Grafana">
+        <meta property="og:description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/admin/tutorials/monitoring/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Galaxy Monitoring with Telegraf and Grafana",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-04-29 08:45:36 +0000",
+  "datePublished": "2019-01-31 15:17:51 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00015",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server Administration",
+    "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "abstract": "Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.",
+  "learningResourceType": "e-learning",
+  "name": "Galaxy Monitoring with Telegraf and Grafana",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html",
+  "version": 56,
+  "timeRequired": "PT2H",
+  "teaches": "- Setup InfluxDB\n- Setup Telegraf\n- Setup Grafana\n- Create several charts",
+  "keywords": [
+    "Galaxy Server Administration",
+    "ansible",
+    "monitoring",
+    "git-gat"
+  ],
+  "description": "## Abstract\n\nMonitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to monitor Galaxy with Telegraf\n - How do I set up InfluxDB\n - How can I make graphs in Grafana?\n - How can I best alert on important metrics?\n\n\n## Learning Objectives\n\n- Setup InfluxDB\n- Setup Telegraf\n- Setup Grafana\n- Create several charts\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides.html",
+      "name": "Galaxy Monitoring with gxadmin",
+      "description": "Slides for 'Galaxy Monitoring with gxadmin' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html",
+      "name": "Galaxy Monitoring with gxadmin",
+      "description": "Hands-on for 'Galaxy Monitoring with gxadmin' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tomasvondrak/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tomasvondrak/",
+      "name": "Tomas Vondrak",
+      "image": "https://avatars.githubusercontent.com/tomasvondrak",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "name": "Simon Gladman",
+      "image": "https://avatars.githubusercontent.com/slugger70",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6100-4385",
+      "@id": "https://orcid.org/0000-0002-6100-4385"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "name": "Martin Čech",
+      "image": "https://avatars.githubusercontent.com/martenson",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9318-1781",
+      "@id": "https://orcid.org/0000-0002-9318-1781"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "name": "Lucille Delisle",
+      "image": "https://avatars.githubusercontent.com/lldelisle",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1964-4960",
+      "@id": "https://orcid.org/0000-0002-1964-4960"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "name": "Mira Kuntz",
+      "image": "https://avatars.githubusercontent.com/mira-miracoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4302-5091",
+      "@id": "https://orcid.org/0000-0003-4302-5091"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "@id": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9676-7032",
+      "@id": "https://orcid.org/0000-0002-9676-7032"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/earlham/",
+          "name": "Earlham Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.earlham.ac.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-steers/",
+          "name": "ELIXIR-STEERS",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/steers"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "@id": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/TKlingstrom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/TKlingstrom/",
+      "name": "Tomas Klingström",
+      "image": "https://avatars.githubusercontent.com/TKlingstrom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9504-1352",
+      "@id": "https://orcid.org/0000-0002-9504-1352"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pauldg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pauldg/",
+      "name": "Paul De Geest",
+      "image": "https://avatars.githubusercontent.com/pauldg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/vib/",
+          "name": "Vlaams Instituut voor Biotechnologie",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://vib.be"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8940-4946",
+      "@id": "https://orcid.org/0000-0002-8940-4946"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server Administration",
+      "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server Administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server Administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/monitoring/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/monitoring/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-admin">
+    <h1 data-toc-skip>Galaxy Monitoring with Telegraf and Grafana</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/tomasvondrak/" class="contributor-badge contributor-tomasvondrak"><img src="/training-material/assets/images/avatar.png" alt="Tomas Vondrak avatar" width="36" class="avatar" />
+    Tomas Vondrak</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-badge-small contributor-slugger70"><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/martenson/" class="contributor-badge contributor-badge-small contributor-martenson"><img src="https://avatars.githubusercontent.com/martenson?s=36" alt="Martin Čech avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-badge-small contributor-lldelisle"><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/mira-miracoli/" class="contributor-badge contributor-badge-small contributor-mira-miracoli"><img src="https://avatars.githubusercontent.com/mira-miracoli?s=36" alt="Mira Kuntz avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-badge-small contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-badge-small contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Marius van den Beek avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-badge-small contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/TKlingstrom/" class="contributor-badge contributor-badge-small contributor-TKlingstrom"><img src="https://avatars.githubusercontent.com/TKlingstrom?s=36" alt="Tomas Klingström avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/pauldg/" class="contributor-badge contributor-badge-small contributor-pauldg"><img src="https://avatars.githubusercontent.com/pauldg?s=36" alt="Paul De Geest avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to monitor Galaxy with Telegraf</p>
+</li>
+        
+        <li><p>How do I set up InfluxDB</p>
+</li>
+        
+        <li><p>How can I make graphs in Grafana?</p>
+</li>
+        
+        <li><p>How can I best alert on important metrics?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Setup InfluxDB</p>
+</li>
+        
+        <li><p>Setup Telegraf</p>
+</li>
+        
+        <li><p>Setup Grafana</p>
+</li>
+        
+        <li><p>Create several charts</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Galaxy Installation with Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Installation with Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/gxadmin/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Galaxy Monitoring with gxadmin</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Monitoring with gxadmin</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/monitoring/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/monitoring/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/admin/tutorials/monitoring/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/monitoring/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 73m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/monitoring/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 31, 2019 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 29, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00015">https://gxy.io/GTN:T00015</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 5 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 56 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#data-flow" id="markdown-toc-data-flow">Data Flow</a></li>
+  <li><a href="#infrastructure" id="markdown-toc-infrastructure">Infrastructure</a>    <ol>
+      <li><a href="#influxdb" id="markdown-toc-influxdb">InfluxDB</a></li>
+      <li><a href="#telegraf" id="markdown-toc-telegraf">Telegraf</a></li>
+    </ol>
+  </li>
+  <li><a href="#monitoring-with-grafana" id="markdown-toc-monitoring-with-grafana">Monitoring with Grafana</a>    <ol>
+      <li><a href="#grafana" id="markdown-toc-grafana">Grafana</a></li>
+      <li><a href="#importing-a-dashboard" id="markdown-toc-importing-a-dashboard">Importing a dashboard</a></li>
+      <li><a href="#setting-up-a-galaxy-dashboard" id="markdown-toc-setting-up-a-galaxy-dashboard">Setting up a Galaxy dashboard</a></li>
+      <li><a href="#styling" id="markdown-toc-styling">Styling</a></li>
+      <li><a href="#monitoring" id="markdown-toc-monitoring">Monitoring</a></li>
+    </ol>
+  </li>
+  <li><a href="#telegraf--gxadmin" id="markdown-toc-telegraf--gxadmin">Telegraf &amp; <code class="language-plaintext highlighter-rouge">gxadmin</code></a>    <ol>
+      <li><a href="#installing-gxadmin" id="markdown-toc-installing-gxadmin">Installing gxadmin</a></li>
+      <li><a href="#configuring-telegraf-for-gxadmin" id="markdown-toc-configuring-telegraf-for-gxadmin">Configuring Telegraf for gxadmin</a></li>
+    </ol>
+  </li>
+  <li><a href="#galaxy-job-radar" id="markdown-toc-galaxy-job-radar">Galaxy Job Radar</a>    <ol>
+      <li><a href="#how-to-join" id="markdown-toc-how-to-join">How to join</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reference-genomes/tutorial.html">             <div>Step 8</div>             <div>reference-genomes</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 9</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 10</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 11</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 12</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 13</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 14</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 15</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 16</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 17</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 18</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/sentry/tutorial.html">             <div>Step 19</div>             <div>sentry</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 20</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 21</div>             <div>beacon</div>         </a>     </li>           </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>This tutorial explicitly assumes you are starting with a setup like that created in the <em>Galaxy installation with Ansible</em> tutorial</p>
+
+<h1 id="data-flow">Data Flow</h1>
+
+<p>The monitoring setup we (UseGalaxy.*) use involves compute nodes collecting metrics and forwarding the data to a central collector. On each node we have a data collector running (Telegraf) which collects data from numerous sources before aggregating it and forwarding it onwards. On another, sometimes public, node we accept and collect all of these metrics (InfluxDB) and provide an interface to visualise and query that data (Grafana).</p>
+
+<p>For UseGalaxy.eu, we pre-install Telegraf on our compute node images. Whenever we launch new compute nodes, they automatically start sending data to our central collection point. Telegraf additionally provides a nice feature of aggregating metrics it collects, batching them up before sending them off to InfluxDB. Telegraf has built in data collectors, or can run command line scripts and tools which output specifically formatted data.</p>
+
+<p>Telegraf communicates with InfluxDB using a JSON based HTTP API, making it easy to write custom tooling to send data there, if need be. Grafana provides the visualisation component, the most interesting component for most consumers of the metrics and monitoring.</p>
+
+<h1 id="infrastructure">Infrastructure</h1>
+
+<p>Setting up the infrastructure is quite simple thanks to the automation provided by Ansible. We will first setup a playbook for a “monitoring” machine, which will collect and visualize our data using InfluxDB and Grafana. We will then expand the Galaxy playbook to include Telegraf on the machine to monitor both it and Galaxy itself. In this tutorial we will do everything on the same machine. In practice you can separate these services to different machines, if you wish. The only requirement is that Telegraf run on the machine from which you wish to collect data.</p>
+
+<h2 id="influxdb">InfluxDB</h2>
+
+<p><a href="https://www.influxdata.com/">InfluxDB</a> provides the data storage for monitoring. It is a Time Series Database (TSDB), so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as “retention policies”. Outside of this feature, it is a <a href="https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/">relatively normal database</a>.</p>
+
+<p>The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains <a href="https://docs.ansible.com/ansible/2.9/modules/list_of_database_modules.html#influxdb">several modules</a> you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml">their own role</a> for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-influxdb"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Setting up InfluxDB</div>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -42,3 +42,5 @@</span>
+   version: 1.8.0
+ - name: usegalaxy_eu.flower
+   version: 2.1.0
+<span class="gi">+- src: usegalaxy_eu.influxdb
++  version: v6.0.7
+</span>   
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How to read a Diff</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Install the role</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create a new playbook, <code class="language-plaintext highlighter-rouge">monitoring.yml</code> with the following:</p>
+
+      <div data-commit="Setup the monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/monitoring.yml
+</span><span class="p">@@ -0,0 +1,4 @@</span>
+<span class="gi">+- hosts: monitoring
++  become: true
++  roles:
++    - usegalaxy_eu.influxdb
+</span>   
+</code></pre></div>      </div>
+
+      <p>During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB, Sentry) on a separate host.</p>
+    </li>
+    <li>
+      <p>Edit the inventory file (<code class="language-plaintext highlighter-rouge">hosts</code>) an add a group for monitoring like:</p>
+
+      <div data-commit="Add the monitoring host" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/hosts
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -4,3 +4,5 @@</span> gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+ galaxyservers
+ [pulsarservers]
+ gat-0.oz.galaxy.training ansible_user=ubuntu
+<span class="gi">+[monitoring]
++gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+</span>   
+</code></pre></div>      </div>
+
+      <p><strong>Ensure that the hostname is the full hostname of your machine.</strong></p>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook monitoring.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This will setup an InfluxDB server listening on port <code class="language-plaintext highlighter-rouge">:8086</code>. The service is currently unauthenticated but it is only listening on <code class="language-plaintext highlighter-rouge">localhost</code> so it is less of a concern. The service can be authenticated and SSL configured quite easily but that is outside the scope of this tutorial.</p>
+
+<p>You can access the InfluxDB service by running the command <code class="language-plaintext highlighter-rouge">influx</code>.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">influx</span>
+<span class="n">Connected</span> <span class="k">to</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8086</span> <span class="k">version</span> <span class="mi">1</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">7</span>
+<span class="n">InfluxDB</span> <span class="n">shell</span> <span class="k">version</span><span class="p">:</span> <span class="mi">1</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">7</span>
+<span class="o">&gt;</span> <span class="k">show</span> <span class="n">databases</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">databases</span>
+<span class="n">name</span>
+<span class="c1">----</span>
+<span class="n">_internal</span>
+<span class="o">&gt;</span> <span class="n">use</span> <span class="n">_internal</span>
+<span class="k">Using</span> <span class="k">database</span> <span class="n">_internal</span>
+<span class="o">&gt;</span> <span class="k">show</span> <span class="n">measurements</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">measurements</span>
+<span class="n">name</span>
+<span class="c1">----</span>
+<span class="n">cq</span>
+<span class="k">database</span>
+<span class="n">httpd</span>
+<span class="n">queryExecutor</span>
+<span class="n">runtime</span>
+<span class="n">shard</span>
+<span class="n">subscriber</span>
+<span class="n">tsm1_cache</span>
+<span class="n">tsm1_engine</span>
+<span class="n">tsm1_filestore</span>
+<span class="n">tsm1_wal</span>
+<span class="k">write</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">influx</code> command provides command line access to InfluxDB in a similar fashion to <code class="language-plaintext highlighter-rouge">psql</code> for Postgresql. It provides commands like <code class="language-plaintext highlighter-rouge">show databases</code> and others, but we will not use this interface very often. Telegraf will automatically try to create any database needed, and no interaction is required to setup Grafana to talk to the database.</p>
+
+<h2 id="telegraf">Telegraf</h2>
+
+<p>We use <a href="https://github.com/influxdata/telegraf">Telegraf</a> for monitoring as it is incredibly easy to get started with, and it natively integrates with InfluxDB.</p>
+
+<h3 id="data-input">Data Input</h3>
+
+<p>Telegraf has extensive documentation on how to configure different types of monitoring, and it supports <a href="https://github.com/influxdata/telegraf#input-plugins">a huge array of inputs</a>. If Telegraf doesn’t support a specific data source you wish to query, you can write a bash script to query this data, and have Telegraf <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec">execute it regularly</a>. Telegraf supports several text formats here but the easiest to manage is the InfluxDB line protocol format. The InfluxDB format looks like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>weather,country=germany,city=freiburg temperature=25,wind=0 1453832006274169688
+weather,country=usa,city=state-college temperature=33,wind=10 1453832006274169688
+</code></pre></div></div>
+
+<p>The first portion is the metric name, in both of these cases <code class="language-plaintext highlighter-rouge">weather</code>. This is just a unique key for a metric which describes the data being collected. Telegraf commonly collects metrics like <code class="language-plaintext highlighter-rouge">cpu</code>, or <code class="language-plaintext highlighter-rouge">disk</code>, or <code class="language-plaintext highlighter-rouge">mem</code>. After the metric name, up to the first space are tags. Tags are used to store categorical data usually, something that is <a href="https://en.wikipedia.org/wiki/Continuous_or_discrete_variable">discrete</a> and <a href="https://en.wikipedia.org/wiki/Enumeration">enumerable</a>. If you’re interested in the weather you would collect some information from a particular city, and then <em>tag</em> these values with information about where they’re collected. After the space, are the various values or data points that are of interest. For weather this would be information like temperature, wind speed or direction, percentage cloud coverage, etc. After the final space is a timestamp, formatted as <a href="https://en.wikipedia.org/wiki/Unix_time">Unix epoch</a> with nanosecond precision.</p>
+
+<p>To apply this example to real world data, we’ll look at the some example output of the <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/disk"><code class="language-plaintext highlighter-rouge">disk</code> plugin</a>, which measures information about disks mounted to a server:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disk,device=devtmpfs,fstype=devtmpfs,host=stats.galaxyproject.eu,mode=rw,path=/dev free=952795136i,inodes_free=232283i,inodes_total=232616i,inodes_used=333i,total=952795136i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/dev/shm free=963690496i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=963690496i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run free=862007296i,inodes_free=234817i,inodes_total=235276i,inodes_used=459i,total=963690496i,used=101683200i,used_percent=10.551437460684472 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=ro,path=/sys/fs/cgroup free=963690496i,inodes_free=235260i,inodes_total=235276i,inodes_used=16i,total=963690496i,used=0i,used_percent=0 1564485157000000000
+disk,device=vda2,fstype=xfs,host=stats.galaxyproject.eu,mode=rw,path=/ free=6652604416i,inodes_free=6134444i,inodes_total=6290368i,inodes_used=155924i,total=12872298496i,used=6219694080i,used_percent=48.31844197780791 1564485157000000000
+disk,device=vdb,fstype=xfs,host=stats.galaxyproject.eu,mode=rw,path=/vdb free=2013384704i,inodes_free=1044728i,inodes_total=1048576i,inodes_used=3848i,total=2136997888i,used=123613184i,used_percent=5.78443173454367 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run/user/0 free=192741376i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=192741376i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run/user/1000 free=192741376i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=192741376i,used=0i,used_percent=0 1564485157000000000
+
+</code></pre></div></div>
+
+<p>Reformatting one of the lines to be a bit easier to read:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disk,
+	device=vdb,
+	fstype=xfs,
+	host=stats.galaxyproject.eu,
+	mode=rw,
+	path=/vdb
+
+	free=2013384704i,
+	inodes_free=1044728i,
+	inodes_total=1048576i,
+	inodes_used=3848i,
+	total=2136997888i,
+	used=123613184i,
+	used_percent=5.78443173454367
+
+	1564485157000000000
+</code></pre></div></div>
+
+<p>The plugin generates a line of output per disk. It is tagged with the <code class="language-plaintext highlighter-rouge">fstype</code>, the type of the filesystem (e.g. <code class="language-plaintext highlighter-rouge">ext3</code>/<code class="language-plaintext highlighter-rouge">ext4</code>/<code class="language-plaintext highlighter-rouge">xfs</code>/<code class="language-plaintext highlighter-rouge">autofs</code>/etc.), the mode by which the filesystem was mounted (<code class="language-plaintext highlighter-rouge">rw</code> or <code class="language-plaintext highlighter-rouge">ro</code>), and the path to which the filesystem was mounted. Then various numbers are collected, the <code class="language-plaintext highlighter-rouge">i</code> suffix meaning an <a href="https://en.wikipedia.org/wiki/Integer">integer</a>. Those without a suffix are <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">floats</a>. In this example, you can see that it is an <code class="language-plaintext highlighter-rouge">xfs</code> formatted device, available as vdb, mounted read-write on the path /vdb. Telegraf automatically tags values with the name of the host from which the data was collected.</p>
+
+<p>The values collected usually have quite self-explanatory names. Here there are <code class="language-plaintext highlighter-rouge">2013384704</code> bytes free on the disk, 1044728 <a href="https://en.wikipedia.org/wiki/Inode">inodes</a>, so many bytes total and used, and finally 5.784% disk usage.</p>
+
+<h3 id="gxadmin"><code class="language-plaintext highlighter-rouge">gxadmin</code></h3>
+
+<p>In the Galaxy world, the InfluxDB line protocol format and <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec">exec</a> plugin are commonly seen together in conjunction with <a href="https://github.com/usegalaxy-eu/gxadmin">gxadmin</a> to run various database queries, and store the results into InfluxDB.</p>
+
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> provides various commands to inspect the database like <code class="language-plaintext highlighter-rouge">gxadmin query queue-detail</code>. It was written such that many of the queries can be automatically formatted for consumption by InfluxDB:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gxadmin iquery queue-overview --short-tool-id
+queue-overview,tool_id=__SET_METADATA__,tool_version=1.0.1,state=new,handler=handler_main_9,destination_id=unknown,job_runner_name=unknown count=3
+queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.39.5.0,state=new,handler=handler_main_2,destination_id=unknown,job_runner_name=unknown count=1
+</code></pre></div></div>
+
+<p>If Telegraf runs this command in an exec block, the data will then be available for graphing. Here the only numeric value we’re collecting is the <em>count</em> of how many jobs of that type are currently running.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>queue-overview,
+	tool_id=__SET_METADATA__,
+	tool_version=1.0.1,
+	state=new,
+	handler=handler_main_9,
+	destination_id=unknown,
+	job_runner_name=unknown
+
+	count=3
+</code></pre></div></div>
+
+<p>We capture information about what tool is running, the job state, and where it is running. This will allow us to produce nice graphs of the current queue status, how many jobs are new or queued or running.</p>
+
+<h3 id="configuring-telegraf">Configuring Telegraf</h3>
+
+<p>Setting up Telegraf is again very simple. We just add a single role to our playbook and set some variables.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-dependencies"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Dependencies</div>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div data-commit="Add Telegraf requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -44,3 +44,7 @@</span>
+   version: 2.1.0
+ - src: usegalaxy_eu.influxdb
+   version: v6.0.7
+<span class="gi">+# Monitoring
++- name: dj-wasabi.telegraf
++  src: https://github.com/dj-wasabi/ansible-telegraf
++  version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the requirements</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add an entry to the <em>end</em> of your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook under <code class="language-plaintext highlighter-rouge">roles:</code></p>
+
+      <div data-commit="Add telegraf to the monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
+</span><span class="gi">+++ b/galaxy.yml
+</span><span class="p">@@ -49,6 +49,7 @@</span>
+     - usegalaxy_eu.rabbitmqserver
+     - galaxyproject.gxadmin
+     - galaxyproject.cvmfs
+<span class="gi">+    - dj-wasabi.telegraf
+</span>   post_tasks:
+     - name: Setup gxadmin cleanup task
+       ansible.builtin.cron:
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> and add the following variables:</p>
+
+      <div data-commit="Setup telegraf's variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
+</span><span class="gi">+++ b/group_vars/all.yml
+</span><span class="p">@@ -20,3 +20,28 @@</span> galaxy_job_metrics_plugins:
+   - type: env
+   - type: cgroup
+   - type: hostname
+<span class="gi">+
++# Telegraf
++telegraf_agent_package_state: latest
++
++# Configure the output to point to an InfluxDB
++# running on localhost, and # place data in the
++# database "telegraf" which will be created if need be.
++telegraf_agent_output:
++  - type: influxdb
++    config:
++    - urls = ["http://127.0.0.1:8086"]
++    - database = "telegraf"
++
++# The default plugins, applied to any telegraf-configured host
++telegraf_plugins_default:
++  - plugin: cpu
++  - plugin: disk
++  - plugin: kernel
++  - plugin: processes
++  - plugin: diskio
++  - plugin: mem
++  - plugin: system
++  - plugin: swap
++  - plugin: net
++  - plugin: netstat
+</span>   
+</code></pre></div>      </div>
+
+      <p>This configures telegraf to output to the configured influxdb server in the <code class="language-plaintext highlighter-rouge">telegraf</code> database. A number of plugins are enabled as <code class="language-plaintext highlighter-rouge">defaults</code> like cpu or disk or memory, all of which is generically interesting to observe, across every host.</p>
+
+      <p>Any host that we setup Telegraf on, will have this base configuration. If you are setting up multiple hosts to be monitored, you will need to put the full hostname (or IP address) where InfluxDB will be available in the <code class="language-plaintext highlighter-rouge">telegraf_agent_output</code>, rather than <code class="language-plaintext highlighter-rouge">127.0.0.1</code>. That way every host with Telegraf will send data to the correct location.</p>
+    </li>
+    <li>
+      <p>Now with the generic configuration applied to all of our hosts, we will apply some specific configuration to the Galaxy server.</p>
+
+      <p>Open your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code> file, and add the following variables at the end not under any category:</p>
+
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -331,3 +331,12 @@</span> flower_ui_users:
+<span class="err">
+</span> flower_environment_variables:
+   GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
+<span class="gi">+
++# Telegraf
++telegraf_plugins_extra:
++  listen_galaxy_routes:
++    plugin: "statsd"
++    config:
++      - service_address = ":8125"
++      - metric_separator = "."
++      - allowed_pending_messages = 10000
+</span>   
+</code></pre></div>      </div>
+
+      <p>We have configured the <code class="language-plaintext highlighter-rouge">statsd</code> plugin for telegraf, as we will use it to receive Galaxy timing data. <a href="https://github.com/statsd/statsd">StatsD</a> was an earlier time series database and had an associated line protocol with a different format. Telegraf supports data sent in this format, allowing us to reuse the long-present Galaxy support for this with our newer Telegraf/InfluxDB setup. Telegraf parses the data and converts it into a format that InfluxDB can understand.</p>
+    </li>
+    <li>
+      <p>Lastly, we need to enable Galaxy to send data to Telegraf:</p>
+
+      <p>In <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, edit the <code class="language-plaintext highlighter-rouge">galaxy_config</code> block, and add <code class="language-plaintext highlighter-rouge">statsd_host: localhost</code> and <code class="language-plaintext highlighter-rouge">statsd_influxdb: true</code> under the <code class="language-plaintext highlighter-rouge">galaxy</code> subsection. It should look like:</p>
+
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -116,6 +116,9 @@</span> galaxy_config:
+     celery_conf:
+       result_backend: "redis://localhost:6379/0"
+     enable_celery_tasks: true
+<span class="gi">+    # Monitoring
++    statsd_host: localhost
++    statsd_influxdb: true
+</span>   gravity:
+     process_manager: systemd
+     galaxy_root: "{{ galaxy_root }}/server"
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<h1 id="monitoring-with-grafana">Monitoring with Grafana</h1>
+
+<h2 id="grafana">Grafana</h2>
+
+<p><a href="https://grafana.com/">Grafana</a> provides a visual interface to our metrics. It includes a nice query builder that provides a uniform experience across multiple backend databases, along with many attractive graphing and other visualization options. Each page in the Grafana webserver display is called a “dashboard.” Dashboards can each have multiple visualizations and graphs, all responding to the data collected by InfluxDB. Another benefit of using Grafana is that many of the UseGalaxy.* servers share their dashboards publicly, and you can easily copy these and use them on your own server.</p>
+
+<p>There are some nice examples of dashboards available from the public Galaxies, we recommend that you peruse them to get an idea of the possibilities:</p>
+
+<ul>
+  <li><a href="https://stats.galaxyproject.eu/">UseGalaxy.eu</a></li>
+  <li><a href="https://stats.genome.edu.au/">UseGalaxy.org.au</a></li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-grafana"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Setting up Grafana</div>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div data-commit="Add grafana requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -48,3 +48,5 @@</span>
+ - name: dj-wasabi.telegraf
+   src: https://github.com/dj-wasabi/ansible-telegraf
+   version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+<span class="gi">+- src: cloudalchemy.grafana
++  version: 0.14.2
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the role</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add <code class="language-plaintext highlighter-rouge">cloudalchemy.grafana</code> to your <code class="language-plaintext highlighter-rouge">monitoring.yml</code> playbook:</p>
+
+      <div data-commit="Add grafana to monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/monitoring.yml
+</span><span class="gi">+++ b/monitoring.yml
+</span><span class="p">@@ -2,3 +2,4 @@</span>
+   become: true
+   roles:
+     - usegalaxy_eu.influxdb
+<span class="gi">+    - cloudalchemy.grafana
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit the file <code class="language-plaintext highlighter-rouge">group_vars/monitoring.yml</code> and set the following variables:</p>
+
+      <div data-commit="Configure Grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/group_vars/monitoring.yml
+</span><span class="p">@@ -0,0 +1,17 @@</span>
+<span class="gi">+grafana_url: "https://{{ inventory_hostname }}/grafana/"
++
++grafana_security:
++    # Please change at least the password to something more suitable
++    admin_user: admin
++    admin_password: password
++
++# These datasources will be automatically included into Grafana
++grafana_datasources:
++ - name: Galaxy
++   type: influxdb
++   access: proxy
++   url: http://127.0.0.1:8086
++   isDefault: true
++   version: 1
++   editable: false
++   database: telegraf
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the monitoring playbook:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook monitoring.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Update the nginx configuration in <code class="language-plaintext highlighter-rouge">templates/nginx/galaxy.j2</code> to include the following at the end, before the last curly brace</p>
+
+      <div data-commit="Setup nginx location for grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/galaxy.j2
+</span><span class="gi">+++ b/templates/nginx/galaxy.j2
+</span><span class="p">@@ -109,4 +109,9 @@</span> server {
+ 		proxy_set_header X-Forwarded-Host $host;
+ 		proxy_set_header X-Forwarded-Proto $scheme;
+ 	}
+<span class="gi">+
++	location /grafana/ {
++		proxy_pass http://127.0.0.1:3000/;
++		proxy_set_header Host $http_host;
++	}
+</span> }
+   
+</code></pre></div>      </div>
+
+      <p>Since we will setup everything on the same host, we will re-use the Nginx server we setup for Galaxy. If you had planned to run the Grafana and InfluxDB servers on a separate host, you would need to setup Nginx for this host separately.</p>
+    </li>
+    <li>
+      <p>Run the Galaxy playbook which includes Nginx:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This has now deployed Grafana on your domain under <code class="language-plaintext highlighter-rouge">/grafana/</code>, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.</p>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The stats have been collecting in InfluxDB for a few minutes, so now we will now configure Grafana with dashboards and alerting rules.</p>
+
+<h2 id="importing-a-dashboard">Importing a dashboard</h2>
+
+<p>For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice feature of Grafana that has really helped it spread in the Galaxy community, any cool thing one of us builds, everyone else can copy and build upon.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-a-dashboard"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import a dashboard</div>
+
+  <ol>
+    <li>
+      <p><a href="https://stats.galaxyproject.eu/d/000000023/node-detail-infrastructure?orgId=1">Visit UseGalaxy.eu’s Node Detail dashboard</a></p>
+    </li>
+    <li>
+      <p>Look for the sharing icon at the top and click it</p>
+    </li>
+    <li>
+      <p>Under the “Export” tab, click “Save to file”</p>
+    </li>
+    <li>
+      <p>On your own Grafana server, on the home page, hover over the <code class="language-plaintext highlighter-rouge">+</code> icon and use “Import” from the menu.</p>
+    </li>
+    <li>
+      <p>Click “Upload .json file” and select the json dashboard you downloaded</p>
+    </li>
+    <li>
+      <p>Click “Import”.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With this, your first dashboard should be live! You should see some data from your Galaxy instance, like CPU/load/memory/etc. This can give you a nice <code class="language-plaintext highlighter-rouge">htop</code> like view into your systems, all collected in one easy dashboard. At the top you will see a box labelled “Host” with a dropdown. If you have more systems, you can click here to select between different machines.</p>
+
+<h2 id="setting-up-a-galaxy-dashboard">Setting up a Galaxy dashboard</h2>
+
+<p>Importing dashboards is a good start, but it’s more interesting to create our own that’s personalised to our needs.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-dashboard"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create a dashboard</div>
+
+  <ol>
+    <li>
+      <p>Again find the <code class="language-plaintext highlighter-rouge">+</code> icon in Grafana and create a dashboard. This will bring you to a new screen</p>
+    </li>
+    <li>
+      <p>Click <em>Add Query</em>, and you will be dropped into the Grafana query builder</p>
+
+      <p><img src="../../images/grafana-query-builder.png" alt="Grafana query builder interface. " width="643" height="333" loading="lazy" /></p>
+
+      <p>This is the query builder interface. The interface somewhat resembles a SQL query, selecting data <em>from</em> a database, <em>where</em> it meets some condition, <em>select</em>ing some specific data, and <em>grouping by</em> time period. If this isn’t immediately clear how it behaves, hopefully it will become more clear once you have built some queries.</p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="language-plaintext highlighter-rouge">galaxy.</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="language-plaintext highlighter-rouge">field(mean)</code></li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“fill(null)”</em>: <code class="language-plaintext highlighter-rouge">fill(none)</code></li>
+            <li>add new (+): <code class="language-plaintext highlighter-rouge">tag(path)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="language-plaintext highlighter-rouge">[[tag_path]]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>At the top of the page it probably says “Last 6 hours”, click this to change to “Last 30 minutes”</p>
+    </li>
+    <li>
+      <p>Remember to save the dashboard (using the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> at the top), and give it a name like “Galaxy”</p>
+    </li>
+    <li>You can hit <kbd>Escape</kbd> to exit out of the graph editor, if need be.</li>
+  </ol>
+
+</blockquote>
+
+<p>This will track how long it takes the interface to respond on various web routes and API routes. The collection of individual points is a bit hard to interpret the “feeling” of, so it’s common to add a query like the <a href="https://en.wikipedia.org/wiki/Percentile">95th percentile</a> of requests. This is a value that is calculated from all of the data points collected. The 95th percentile means that 95% of requests are responded to more quickly than this value.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-a-second-query-to-an-existing-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add a second query to an existing graph</div>
+
+  <ol>
+    <li>
+      <p>The top of the graph is probably labelled “Panel Title”, unless you changed it. Click this to access a dropdown and click “Edit”</p>
+    </li>
+    <li>
+      <p>On the right side you will find a button <strong>Add Query</strong>, click it.</p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="language-plaintext highlighter-rouge">galaxy.</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="language-plaintext highlighter-rouge">field(mean)</code></li>
+            <li>add new (+): Selectors → percentile</li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“fill(null)”</em>: <code class="language-plaintext highlighter-rouge">fill(none)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="language-plaintext highlighter-rouge">percentile</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Remember to save the dashboard</p>
+    </li>
+    <li>
+      <p>You can hit <kbd>Escape</kbd> to exit out of the graph editor</p>
+    </li>
+    <li>At any time you can drag the bottom right corner of the graph to resize it as needed.</li>
+  </ol>
+
+</blockquote>
+
+<p>We should now have a graph that gives us not only individual data points, but also a more easily consumable overall representation. For many metrics there are so many data points individually collected that it can be overwhelming and so it is often useful to come up with an aggregate representation that summarises the points into a more easily consumed value. We will touch upon this again under the monitoring section.</p>
+
+<h2 id="styling">Styling</h2>
+
+<p>There is a significant amount of visual styling that one can do to the graphs to make data more or less prominent as you need.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/grafana-graph-sections.png" alt="Grafana graph configuration sections. " width="67" height="276" loading="lazy" /><a target="_blank" href="../../images/grafana-graph-sections.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Graph configuration sections, from top to bottom: data, visualisation, configuration, and alerting</figcaption></figure>
+
+<p>We will update the panel we’ve added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than “Panel Title”</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-styling-the-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Styling the graph</div>
+
+  <ol>
+    <li>
+      <p>Again edit the one graph we’ve added in our dashboard</p>
+    </li>
+    <li>
+      <p>On the left side, select the second icon, Visualisation</p>
+    </li>
+    <li>
+      <p>In the first section, we can edit some display attributes.</p>
+
+      <p>We are primarily interested in the 95th percentile line. Here we can change the display from points to lines or bars, change the tooltip that displays when we hover over the graph, among other facets.</p>
+
+      <ul>
+        <li>Click <strong>Add series override</strong>, click in the box that appears and type “percentile”, to find the series we created early. Select it when it appears. We can now apply custom styling to this series.</li>
+        <li>Click the “+” after the series override, and find <strong>“Color → change”</strong>, and choose a colour that you like.</li>
+        <li>Click the “+” again, and find <strong>“Line width → 5”</strong> to make the line more visible. This is the most important facet of the graph for us, so we can emphasise it through colour and size.</li>
+      </ul>
+    </li>
+    <li>
+      <p>In the second section, we can edit information about the Axes:</p>
+
+      <ul>
+        <li>Left Y
+          <ul>
+            <li><em>“Unit”</em>: Time → millisecond (ms)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This will cause the axis to display nicely at any scale. Before Grafana only knew it was a number, now it knows the type of number. If you have a request that takes 30 seconds, it will display as “30s” in Grafana, rather than “30000 ms”.</p>
+
+      <p>This section is also useful for setting the scale if your data is better viewed with a logarithmic scale, or forcing specific axis bounds. Commonly on graphs that show things like “disk usage percentage”, it can be useful to set the axis bounds to 0 and 100 to ensure that full context is available.</p>
+    </li>
+    <li>
+      <p>In the next section, “Legend” allows us to format the legend in more interesting ways.</p>
+
+      <ul>
+        <li>Options
+          <ul>
+            <li><em>“Show”</em>: yes</li>
+            <li><em>“As table”</em>: yes</li>
+            <li><em>“To right”</em>: yes</li>
+          </ul>
+        </li>
+        <li>Values
+          <ul>
+            <li><em>“Min”</em>: yes</li>
+            <li><em>“Max”</em>: yes</li>
+            <li><em>“Avg”</em>: yes</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Clicking on the headers of the table that has appeared, you can force it to be sorted by one column or another.</p>
+    </li>
+    <li>
+      <p>On the left side, select the third icon, “General”</p>
+
+      <ul>
+        <li><em>“Title”</em>: <code class="language-plaintext highlighter-rouge">Galaxy Request Times</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Save the dashboard</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Your graph should look something like the following:</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/grafana-graph-final.png" alt="Final graph. " width="945" height="346" loading="lazy" /><a target="_blank" href="../../images/grafana-graph-final.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The final graph should look something like this, but probably different based on the requests to your server. For this image the author made repeated, automated requests to Galaxy to produce more data points than might normally be present.</figcaption></figure>
+
+<h2 id="monitoring">Monitoring</h2>
+
+<p>Collecting all of this data is interesting to visualise but as an administrator you surely have more interesting things to do than to watch graphs all day. Many organisations like to display these dashboards on large monitors, but again this assumes someone is watching it. Everyone has better things to do with their time! So we will setup monitoring on the most important aspects of our system.</p>
+
+<p>Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts that are not actionable), or the users (unexpected/unnoticed downtime), is a very complex topic. Recommended reading here includes the <a href="https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/">monitoring chapter</a> of the Google SRE book <span class="citation"><a href="#Beyer:2016:SRE:3006357">Beyer <i>et al.</i> 2016</a></span> which can provide some general guidance on the topic and what metrics may be interesting or annoying to alert upon.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-no-generic-advice"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: No generic advice</div>
+  <p>We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.</p>
+</blockquote>
+
+<p>We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-an-alert-to-your-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add an alert to your graph</div>
+
+  <ol>
+    <li>
+      <p>Again edit the <code class="language-plaintext highlighter-rouge">Galaxy Request Times</code> graph</p>
+    </li>
+    <li>
+      <p>On the left side, select the last icon, Alerting</p>
+    </li>
+    <li>
+      <p>Click <strong>Create Alert</strong></p>
+
+      <p>Alerts consist of a <em>Rule</em>, with some name, evaluated every N seconds, for a period of time. The <em>for</em> can be an important parameter, which you can read more about <a href="https://grafana.com/docs/alerting/rules/">in the Grafana documentation</a>.</p>
+
+      <p>Under some <em>conditions</em>, this alert will activate. We will change the conditions of the alert here:</p>
+
+      <ul>
+        <li><em>“When”</em>: <code class="language-plaintext highlighter-rouge">avg()</code></li>
+        <li><em>“OF”</em>: <code class="language-plaintext highlighter-rouge">query(B, 1m, now)</code>, here we select query B, the 95th percentile track, and the average over 1 minute</li>
+        <li><em>“IS ABOVE”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+      </ul>
+
+      <p>We will not configure a notification channel in this tutorial. In practice, it is useful to do to ensure that the relevant people are notified automatically. If you and your team use <a href="https://grafana.com/docs/alerting/notifications/">one of the many services</a>, then you can configure this following their documentation.</p>
+    </li>
+    <li>
+      <p>Save the dashboard</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="telegraf--gxadmin">Telegraf &amp; <code class="language-plaintext highlighter-rouge">gxadmin</code></h1>
+
+<p>Via this setup using <code class="language-plaintext highlighter-rouge">systemd</code> we collect metrics about Galaxy request times. To get statistics about other Galaxy-specific metrics such as the job queue status, we need to use <code class="language-plaintext highlighter-rouge">gxadmin</code> to query the Galaxy database and configure Telegraf to consume this data. In this section we will setup gxadmin, and to configure Telegraf to have permissions to run it.</p>
+
+<h2 id="installing-gxadmin">Installing gxadmin</h2>
+
+<p>It’s simple to install gxadmin. Here’s how you do it, if you haven’t done it already:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-installing-gxadmin-and-configuring-telegraf"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Installing gxadmin and configuring Telegraf</div>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">galaxyproject.gxadmin</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.12</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the role with <code class="language-plaintext highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
+    </li>
+    <li>
+      <p>Add the role to your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook, it should come before the Telegraf role.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You can run the playbook now, or wait until you have configured Telegraf below:</p>
+
+<h2 id="configuring-telegraf-for-gxadmin">Configuring Telegraf for gxadmin</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configuring-telegraf"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Configuring Telegraf</div>
+
+  <ol>
+    <li>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/dbservers.yml</code>, we need to add some additional permissions to permit Telegraf to run <code class="language-plaintext highlighter-rouge">gxadmin</code>:</p>
+
+      <div data-commit="Configure database permissions for Telegraf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/dbservers.yml
+</span><span class="gi">+++ b/group_vars/dbservers.yml
+</span><span class="p">@@ -2,9 +2,16 @@</span>
+ # PostgreSQL
+ postgresql_objects_users:
+   - name: "{{ galaxy_user_name }}"
+<span class="gi">+  - name: telegraf
+</span> postgresql_objects_databases:
+   - name: "{{ galaxy_db_name }}"
+     owner: "{{ galaxy_user_name }}"
+<span class="gi">+postgresql_objects_privileges:
++  - database: galaxy
++    roles: telegraf
++    privs: SELECT
++    objs: ALL_IN_SCHEMA
++
+</span><span class="err">
+</span> # PostgreSQL Backups
+ postgresql_backup_dir: /data/backups
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, we need to configure Telegraf to run <code class="language-plaintext highlighter-rouge">gxadmin</code></p>
+
+      <p>Under <code class="language-plaintext highlighter-rouge">telegraf_plugins_extra</code>, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue</p>
+
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -343,3 +343,10 @@</span> telegraf_plugins_extra:
+       - service_address = ":8125"
+       - metric_separator = "."
+       - allowed_pending_messages = 10000
+<span class="gi">+  monitor_galaxy_queue:
++    plugin: "exec"
++    config:
++      - commands = ["/usr/bin/env PGDATABASE=galaxy /usr/local/bin/gxadmin iquery queue-overview --short-tool-id"]
++      - timeout = "10s"
++      - data_format = "influx"
++      - interval = "15s"
+</span>   
+</code></pre></div>      </div>
+
+      <p>This one is slightly more complex in the configuration. The command block does several things:</p>
+
+      <ul>
+        <li>it wraps the command with <code class="language-plaintext highlighter-rouge">env</code> which allows setting environment variables for a single command</li>
+        <li>It sets the <code class="language-plaintext highlighter-rouge">PGDATABASE</code> to the Galaxy database, by default the <code class="language-plaintext highlighter-rouge">psql</code> will try and connect to a database with the same name of the user. So the <code class="language-plaintext highlighter-rouge">telegraf</code> user will attempt to connect to a (non-existent) <code class="language-plaintext highlighter-rouge">telegraf</code> database.</li>
+        <li>Then it calls the gxadmin command <code class="language-plaintext highlighter-rouge">queue-overview</code>. By using <code class="language-plaintext highlighter-rouge">iquery</code> instead of <code class="language-plaintext highlighter-rouge">query</code>, the output is automatically converted to InfluxDB line protocol.</li>
+        <li>The command is run every 15 seconds, and has a timeout of 10 seconds. If the command fails to finish in 10 seconds, it will be killed.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Run the Galaxy playbook</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With this, Telegraf will start monitoring the Galaxy queue by calling the query every few seconds to check the status every 15 seconds. This monitoring <em>will</em> miss jobs that complete within the 15 second interval, but for most servers this is not an issue. Most jobs are running for more than 15 seconds, and if not, it still gives an accurate point-in-time view.</p>
+
+<p>We’ll now create a graph for this, just like the one on <a href="https://stats.galaxyproject.eu">stats.galaxyproject.eu</a></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-building-the-queue-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Building the queue graph</div>
+
+  <ol>
+    <li>
+      <p>Click the <strong>new graph</strong> button at the top of Grafana’s interface, and <em>Add a Query</em></p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="language-plaintext highlighter-rouge">queue-overview</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="language-plaintext highlighter-rouge">field(count)</code></li>
+            <li>add new (+): Aggregations → sum</li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“time(__interval)”</em>: <code class="language-plaintext highlighter-rouge">time(15s)</code>, because we set the interval to 15s</li>
+            <li>add new (+): <code class="language-plaintext highlighter-rouge">tag(tool_id)</code></li>
+            <li>add new (+): <code class="language-plaintext highlighter-rouge">tag(tool_version)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="language-plaintext highlighter-rouge">[[tag_tool_id]]/[[tag_tool_version]]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>In the second tab on the left, Visualisation:</p>
+
+      <p>Under the first section:</p>
+
+      <ul>
+        <li>Draw Modes:
+          <ul>
+            <li><em>“Bars”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+            <li><em>“Lines”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Points”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+          </ul>
+        </li>
+        <li>Mode Options:
+          <ul>
+            <li><em>“Staircase”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Stacking &amp; Null Value
+          <ul>
+            <li><em>“Stack”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Null Value”</em>: <code class="language-plaintext highlighter-rouge">null as zero</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Below, under the <em>Legend</em> section,</p>
+
+      <ul>
+        <li>Options:
+          <ul>
+            <li><em>“Show”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“As table”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“To Right”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Values:
+          <ul>
+            <li><em>“Max”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Avg”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Current”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Hide Series:
+          <ul>
+            <li><em>“With only nulls”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“With only zeros”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>In the third tab, General settings:</p>
+
+      <ul>
+        <li><em>“Title”</em>: <code class="language-plaintext highlighter-rouge">Galaxy Queue Overview</code></li>
+      </ul>
+    </li>
+    <li>You can hit <kbd>Escape</kbd> to exit out of the graph editor, and remember to save your dashboard.</li>
+  </ol>
+
+</blockquote>
+
+<p>Run some tools in Galaxy, try to generate a large number of jobs. It is relatively easy to upload a dataset, and then run the “Secure Hash / Message Digest” or another tool repeatedly, running it over every dataset in your history, repeating until you’ve generated a few dozen datasets. If you have a slower tool like <code class="language-plaintext highlighter-rouge">bwa</code> installed, this can be an option too.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/grafana-final-graph.png" alt="Final Graph. " width="1634" height="783" loading="lazy" /><a target="_blank" href="../../images/grafana-final-graph.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Final graphs generated from this tutorial.</figcaption></figure>
+
+<p>You can also import a <a href="/training-material/topics/admin/tutorials/monitoring/dashboard.json">copy of the dashboard</a>.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-time-to-git-commit"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Time to git commit</div>   <p>It’s time to commit your work! Check the status with</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status<br /></code></pre></div></div>   <p>Add your changed files with</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add ... # any files you see that are changed<br /></code></pre></div></div>   <p>And then commit it!</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit -m 'Finished Galaxy Monitoring with Telegraf and Grafana'<br /></code></pre></div></div> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-13">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-12...step-13#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="galaxy-job-radar">Galaxy Job Radar</h1>
+<p>Another possibility for data visualisation in Galaxy ecosystem is <a href="https://github.com/CESNET/gjr">Galaxy Job Radar</a> (GJR). GJR is a project that visualizes traffic between <a href="https://galaxyproject.org">Galaxy server</a> and its <a href="https://github.com/galaxyproject/pulsar">Pulsars</a>.</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/gjr_logo.png" alt="image. " width="827" height="468" loading="lazy" /><a target="_blank" href="../../images/gjr_logo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Logo of GJR project.</figcaption></figure>
+
+<p>Namely it shows jobs of a Galaxy instance, their distribution over Pulsar computational nodes, in which state they are and more. It supports both live view and history replay of traffic and past schedule evaluation.</p>
+
+<p><a href="https://www.cesnet.cz/en">CESNET</a> manages a central instance of GJR at <a href="https://gjr.metacentrum.cz">https://gjr.metacentrum.cz</a></p>
+
+<p><strong>Galaxy Job Radar admins invite any public Galaxy servers to join this effort and share the anonymous data about their jobs with the central instance.</strong></p>
+
+<h2 id="how-to-join">How to join</h2>
+
+<h3 id="summary">Summary</h3>
+
+<p><em>Start with writing us an email at galaxy@cesnet.cz that you’d like to join. First we will celebrate and then happily walk you through what needs to be done.</em></p>
+
+<ol>
+  <li>Your Galaxy needs to be sending data to your InfluxDB via <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles/usegalaxy-eu.job-radar-stats-influxdb">gxadmin scripts</a></li>
+  <li>You give us access to read the InfluxDB (we need: <code class="language-plaintext highlighter-rouge">influxdb_password_var_name;influxdb_host;influxdb_port;influxdb_username</code>) and some basic information about your server (we need: <code class="language-plaintext highlighter-rouge">name;lat;long;</code>)</li>
+  <li>You send us information about your Pulsar servers (we need: <code class="language-plaintext highlighter-rouge">galaxy;pulsar_id;lat;long;node_count;desc</code>)</li>
+  <li>Wait few days and your Galaxy and Pulsars show up at <a href="https://gjr.metacentrum.cz">https://gjr.metacentrum.cz</a></li>
+</ol>
+
+<h3 id="details">Details</h3>
+
+<p>GJR periodically requests data from each connected Galaxy through their own <code class="language-plaintext highlighter-rouge">InfluxDB</code> instance. Schema of this setup:</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/gjr_global_data_flow.png" alt="image. " width="983" height="849" loading="lazy" /><a target="_blank" href="../../images/gjr_global_data_flow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Flow of data from all connected Galaxy servers to shared InfluxDB.</figcaption></figure>
+
+<p>For this to work we need the contributors to run an InfluxDB, fill it periodically with anonymous new data (with <code class="language-plaintext highlighter-rouge">gxadmin</code> scripts below) and give us read access to this data on InfluxDB.</p>
+
+<p>Note: If you do not run InfluxDB for monitoring yet there is a Galaxy <a href="/training-material/topics/admin/#st-monitoring">training section</a> above available which will explain reasons and guide you through the setup.</p>
+
+<p>Simplified schema of the full setup:</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/gjr_local_data_flow.png" alt="image. " width="537" height="212" loading="lazy" /><a target="_blank" href="../../images/gjr_local_data_flow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> How collected Galaxy statistics are being visualized.</figcaption></figure>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Monitoring with Telegraf, InfluxDB, Grafana and Galaxy Job Radar can provide an easy solution to monitor your infrastructure. The UseGalaxy.* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.*, and then to extend them to your own needs. Galaxy Job Radar is experimental solution still under development and ongoing testing. Still it is valuable if you join it so that it can bring admins and users overall view of Galaxy jobs traffic accros the world.</p>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reference-genomes/tutorial.html">             <div>Step 8</div>             <div>reference-genomes</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 9</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 10</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 11</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 12</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 13</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 14</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 15</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 16</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 17</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 18</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/sentry/tutorial.html">             <div>Step 19</div>             <div>sentry</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 20</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 21</div>             <div>beacon</div>         </a>     </li>           </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Telegraf provides an easy solution to monitor servers</p>
+</li>
+                        
+                        <li><p>Galaxy can send metrics to Telegraf</p>
+</li>
+                        
+                        <li><p>Telegraf can run arbitrary commands like <code class="language-plaintext highlighter-rouge">gxadmin</code>, which provides influx formatted output</p>
+</li>
+                        
+                        <li><p>InfluxDB can collect metrics from Telegraf</p>
+</li>
+                        
+                        <li><p>Use Grafana to visualise these metrics, and monitor their values</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/admin/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Beyer:2016:SRE:3006357">Beyer, B., C. Jones, J. Petoff, and N. R. Murphy, 2016 <b>Site Reliability Engineering: How Google Runs Production Systems</b>. <i>O’Reilly Media, Inc.</i> <a href="https://landing.google.com/sre/sre-book/toc/index.html">https://landing.google.com/sre/sre-book/toc/index.html</a> ISBN: 149192912X, 9781491929124</li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>TSDB</dt>
+                    <dd>Time Series Database</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/monitoring"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/monitoring">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Helena Rasche, Tomas Vondrak,  <b>Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-monitoring,
+author = "Helena Rasche and Tomas Vondrak",
+	title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">2</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.5">1</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">2</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>October 2025</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: I like the flow of this tutorial.
+					<b>Disliked</b>: What needs to be improved is some apt repos are outdated the ansible roles needs to be modified, another thing is when connecting to db using gxadmin i observed the database name is hardcoded why? 
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The installation part was very clear and good to follow
+					<b>Disliked</b>: The Grafana part was difficult to follow because the version of the tutorial was different from the installed one
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Ansible instructions worked
+					<b>Disliked</b>: I found the content on Grafana and monitoring/alerts really confusing, it felt almost like it is for an older version of Grafana.
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00015">gxy.io/GTN:T00015</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/monitoring/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/admin/tutorials/monitoring/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

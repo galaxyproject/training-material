@@ -1,0 +1,514 @@
+{
+    "summary": {
+        "num_errors": 0,
+        "num_failures": 0,
+        "num_skips": 0,
+        "num_tests": 1
+    },
+    "tests": [
+        {
+            "data": {
+                "end_datetime": "2023-05-23T12:58:55.512894",
+                "inputs": {
+                    "bed_input": {
+                        "class": "File",
+                        "filetype": "bed",
+                        "path": "test-data/bed_input.bed"
+                    }
+                },
+                "invocation_details": {
+                    "details": {
+                        "error_message": "",
+                        "history_id": "6319feb850987869",
+                        "history_state": "ok",
+                        "invocation_id": "e503a471d9c08690",
+                        "invocation_state": "scheduled",
+                        "workflow_id": "89b73aeade6907c3"
+                    },
+                    "steps": {
+                        "0. bed_input": {
+                            "action": null,
+                            "id": "617a733c44b59295",
+                            "job_id": null,
+                            "jobs": [],
+                            "model_class": "WorkflowInvocationStep",
+                            "order_index": 0,
+                            "output_collections": {},
+                            "outputs": {
+                                "output": {
+                                    "id": "4838ba20a6d867652d680158431a5887",
+                                    "src": "hda",
+                                    "uuid": "e8c3d742-82c3-4198-bdad-6f53c8b0968d"
+                                }
+                            },
+                            "state": "scheduled",
+                            "subworkflow": null,
+                            "subworkflow_invocation_id": null,
+                            "update_time": "2023-05-23T10:57:22.722850",
+                            "workflow_step_id": "d546607f224ec11f",
+                            "workflow_step_label": "bed_input",
+                            "workflow_step_uuid": "5a36fad2-66c7-4b9e-8759-0fbcae9b8541"
+                        },
+                        "1. sort": {
+                            "action": null,
+                            "id": "8fc4d5a0c9a4c7d9",
+                            "job_id": "11ac94870d0bb33aea384e3b59049ec6",
+                            "jobs": [
+                                {
+                                    "command_line": "python '/opt/galaxy/server/tools/filters/sorter.py'  --input='/data/dnb08/galaxy_db/files/e/8/c/dataset_e8c3d742-82c3-4198-bdad-6f53c8b0968d.dat' --output='/data/jwd02f/main/060/156/60156695/outputs/galaxy_dataset_b1b25cd6-d65b-4674-96f5-47b75ba4385b.dat'    --key=1,1   --header 0",
+                                    "command_version": null,
+                                    "create_time": "2023-05-23T10:57:22.716705",
+                                    "dependencies": [
+                                        {
+                                            "cacheable": false,
+                                            "dependency_resolver": {
+                                                "auto_init": true,
+                                                "auto_install": false,
+                                                "can_uninstall_dependencies": true,
+                                                "ensure_channels": "conda-forge,bioconda",
+                                                "model_class": "CondaDependencyResolver",
+                                                "prefix": "/usr/local/tools/_conda",
+                                                "read_only": false,
+                                                "resolver_type": "conda",
+                                                "resolves_simple_dependencies": true,
+                                                "use_local": false,
+                                                "versionless": false
+                                            },
+                                            "dependency_type": "conda",
+                                            "environment_path": "/usr/local/tools/_conda/envs/mulled-v1-7f197292788ac0c39321dcb559c0e8de191431d8b9522034fbbe44259e040dee",
+                                            "exact": true,
+                                            "model_class": "MergedCondaDependency",
+                                            "name": "python",
+                                            "version": "3.8"
+                                        },
+                                        {
+                                            "cacheable": false,
+                                            "dependency_resolver": {
+                                                "auto_init": true,
+                                                "auto_install": false,
+                                                "can_uninstall_dependencies": true,
+                                                "ensure_channels": "conda-forge,bioconda",
+                                                "model_class": "CondaDependencyResolver",
+                                                "prefix": "/usr/local/tools/_conda",
+                                                "read_only": false,
+                                                "resolver_type": "conda",
+                                                "resolves_simple_dependencies": true,
+                                                "use_local": false,
+                                                "versionless": false
+                                            },
+                                            "dependency_type": "conda",
+                                            "environment_path": "/usr/local/tools/_conda/envs/mulled-v1-7f197292788ac0c39321dcb559c0e8de191431d8b9522034fbbe44259e040dee",
+                                            "exact": true,
+                                            "model_class": "MergedCondaDependency",
+                                            "name": "grep",
+                                            "version": "2.14"
+                                        },
+                                        {
+                                            "cacheable": false,
+                                            "dependency_resolver": {
+                                                "auto_init": true,
+                                                "auto_install": false,
+                                                "can_uninstall_dependencies": true,
+                                                "ensure_channels": "conda-forge,bioconda",
+                                                "model_class": "CondaDependencyResolver",
+                                                "prefix": "/usr/local/tools/_conda",
+                                                "read_only": false,
+                                                "resolver_type": "conda",
+                                                "resolves_simple_dependencies": true,
+                                                "use_local": false,
+                                                "versionless": false
+                                            },
+                                            "dependency_type": "conda",
+                                            "environment_path": "/usr/local/tools/_conda/envs/mulled-v1-7f197292788ac0c39321dcb559c0e8de191431d8b9522034fbbe44259e040dee",
+                                            "exact": true,
+                                            "model_class": "MergedCondaDependency",
+                                            "name": "sed",
+                                            "version": "4.4"
+                                        },
+                                        {
+                                            "cacheable": false,
+                                            "dependency_resolver": {
+                                                "auto_init": true,
+                                                "auto_install": false,
+                                                "can_uninstall_dependencies": true,
+                                                "ensure_channels": "conda-forge,bioconda",
+                                                "model_class": "CondaDependencyResolver",
+                                                "prefix": "/usr/local/tools/_conda",
+                                                "read_only": false,
+                                                "resolver_type": "conda",
+                                                "resolves_simple_dependencies": true,
+                                                "use_local": false,
+                                                "versionless": false
+                                            },
+                                            "dependency_type": "conda",
+                                            "environment_path": "/usr/local/tools/_conda/envs/mulled-v1-7f197292788ac0c39321dcb559c0e8de191431d8b9522034fbbe44259e040dee",
+                                            "exact": true,
+                                            "model_class": "MergedCondaDependency",
+                                            "name": "coreutils",
+                                            "version": "8.31"
+                                        }
+                                    ],
+                                    "exit_code": 0,
+                                    "external_id": "43631261",
+                                    "galaxy_version": "23.0",
+                                    "history_id": "6319feb850987869",
+                                    "id": "11ac94870d0bb33aea384e3b59049ec6",
+                                    "inputs": {
+                                        "input": {
+                                            "id": "4838ba20a6d867652d680158431a5887",
+                                            "src": "hda",
+                                            "uuid": "e8c3d742-82c3-4198-bdad-6f53c8b0968d"
+                                        }
+                                    },
+                                    "job_messages": [],
+                                    "job_metrics": [
+                                        {
+                                            "name": "hostname",
+                                            "plugin": "hostname",
+                                            "raw_value": "vgcnbwc-worker-c36m100-0658.novalocal",
+                                            "title": "hostname",
+                                            "value": "vgcnbwc-worker-c36m100-0658.novalocal"
+                                        },
+                                        {
+                                            "name": "galaxy_slots",
+                                            "plugin": "core",
+                                            "raw_value": "1.0000000",
+                                            "title": "Cores Allocated",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "name": "galaxy_memory_mb",
+                                            "plugin": "core",
+                                            "raw_value": "3891.0000000",
+                                            "title": "Memory Allocated (MB)",
+                                            "value": "3891"
+                                        },
+                                        {
+                                            "name": "start_epoch",
+                                            "plugin": "core",
+                                            "raw_value": "1684839451.0000000",
+                                            "title": "Job Start Time",
+                                            "value": "2023-05-23 12:57:31"
+                                        },
+                                        {
+                                            "name": "end_epoch",
+                                            "plugin": "core",
+                                            "raw_value": "1684839472.0000000",
+                                            "title": "Job End Time",
+                                            "value": "2023-05-23 12:57:52"
+                                        },
+                                        {
+                                            "name": "runtime_seconds",
+                                            "plugin": "core",
+                                            "raw_value": "21.0000000",
+                                            "title": "Job Runtime (Wall Clock)",
+                                            "value": "21 seconds"
+                                        },
+                                        {
+                                            "name": "cpuacct.usage",
+                                            "plugin": "cgroup",
+                                            "raw_value": "10216120799.0000000",
+                                            "title": "CPU Time",
+                                            "value": "10.216120799 seconds"
+                                        },
+                                        {
+                                            "name": "memory.failcnt",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Failed to allocate memory count",
+                                            "value": 0.0
+                                        },
+                                        {
+                                            "name": "memory.limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "4160749568.0000000",
+                                            "title": "Memory limit on cgroup (MEM)",
+                                            "value": "3.9 GB"
+                                        },
+                                        {
+                                            "name": "memory.max_usage_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "195665920.0000000",
+                                            "title": "Max memory usage (MEM)",
+                                            "value": "186.6 MB"
+                                        },
+                                        {
+                                            "name": "memory.memsw.limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "4219351040.0000000",
+                                            "title": "Memory limit on cgroup (MEM+SWP)",
+                                            "value": "3.9 GB"
+                                        },
+                                        {
+                                            "name": "memory.memsw.max_usage_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "195665920.0000000",
+                                            "title": "Max memory usage (MEM+SWP)",
+                                            "value": "186.6 MB"
+                                        },
+                                        {
+                                            "name": "memory.oom_control.oom_kill_disable",
+                                            "plugin": "cgroup",
+                                            "raw_value": "1.0000000",
+                                            "title": "OOM Control enabled",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "name": "memory.oom_control.under_oom",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Was OOM Killer active?",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "name": "memory.soft_limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Memory softlimit on cgroup",
+                                            "value": "0 bytes"
+                                        }
+                                    ],
+                                    "job_stderr": "",
+                                    "job_stdout": "",
+                                    "model_class": "Job",
+                                    "output_collections": {},
+                                    "outputs": {
+                                        "out_file1": {
+                                            "id": "4838ba20a6d8676544826d155a4512cf",
+                                            "src": "hda",
+                                            "uuid": "b1b25cd6-d65b-4674-96f5-47b75ba4385b"
+                                        }
+                                    },
+                                    "params": {
+                                        "__input_ext": "\"bed\"",
+                                        "__workflow_invocation_uuid__": "\"921bc4a6f95811eda031001e67d2ec02\"",
+                                        "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                        "column": "\"1\"",
+                                        "column_set": "[]",
+                                        "dbkey": "\"?\"",
+                                        "header_lines": "\"0\"",
+                                        "order": "\"ASC\"",
+                                        "style": "\"alpha\""
+                                    },
+                                    "state": "ok",
+                                    "stderr": "",
+                                    "stdout": "",
+                                    "tool_id": "sort1",
+                                    "tool_stderr": "",
+                                    "tool_stdout": "",
+                                    "traceback": null,
+                                    "update_time": "2023-05-23T10:57:54.083702",
+                                    "user_email": "hxr@informatik.uni-freiburg.de"
+                                }
+                            ],
+                            "model_class": "WorkflowInvocationStep",
+                            "order_index": 1,
+                            "output_collections": {},
+                            "outputs": {
+                                "out_file1": {
+                                    "id": "4838ba20a6d8676544826d155a4512cf",
+                                    "src": "hda",
+                                    "uuid": "b1b25cd6-d65b-4674-96f5-47b75ba4385b"
+                                }
+                            },
+                            "state": "scheduled",
+                            "subworkflow": null,
+                            "subworkflow_invocation_id": null,
+                            "update_time": "2023-05-23T10:57:54.059945",
+                            "workflow_step_id": "491a62386cb0c0ef",
+                            "workflow_step_label": "sort",
+                            "workflow_step_uuid": "0b6b3cda-c75f-452b-85b1-8ae4f3302ba4"
+                        },
+                        "2. change_case": {
+                            "action": null,
+                            "id": "a19ee1e43fcdd7e5",
+                            "job_id": "11ac94870d0bb33af133abcd9a625385",
+                            "jobs": [
+                                {
+                                    "command_line": "perl '/opt/galaxy/server/tools/filters/changeCase.pl' '/data/dnb08/galaxy_db/files/b/1/b/dataset_b1b25cd6-d65b-4674-96f5-47b75ba4385b.dat' 'c1' TAB up '/data/jwd05e/main/060/156/60156696/outputs/galaxy_dataset_bc30d497-36da-47e7-9688-1071076c1f83.dat'",
+                                    "command_version": null,
+                                    "create_time": "2023-05-23T10:57:22.807237",
+                                    "dependencies": [],
+                                    "exit_code": 0,
+                                    "external_id": "43631284",
+                                    "galaxy_version": "23.0",
+                                    "history_id": "6319feb850987869",
+                                    "id": "11ac94870d0bb33af133abcd9a625385",
+                                    "inputs": {
+                                        "input": {
+                                            "id": "4838ba20a6d8676544826d155a4512cf",
+                                            "src": "hda",
+                                            "uuid": "b1b25cd6-d65b-4674-96f5-47b75ba4385b"
+                                        }
+                                    },
+                                    "job_messages": [],
+                                    "job_metrics": [
+                                        {
+                                            "name": "hostname",
+                                            "plugin": "hostname",
+                                            "raw_value": "vgcnbwc-worker-c36m225-9442.novalocal",
+                                            "title": "hostname",
+                                            "value": "vgcnbwc-worker-c36m225-9442.novalocal"
+                                        },
+                                        {
+                                            "name": "galaxy_slots",
+                                            "plugin": "core",
+                                            "raw_value": "1.0000000",
+                                            "title": "Cores Allocated",
+                                            "value": "1"
+                                        },
+                                        {
+                                            "name": "galaxy_memory_mb",
+                                            "plugin": "core",
+                                            "raw_value": "3891.0000000",
+                                            "title": "Memory Allocated (MB)",
+                                            "value": "3891"
+                                        },
+                                        {
+                                            "name": "start_epoch",
+                                            "plugin": "core",
+                                            "raw_value": "1684839489.0000000",
+                                            "title": "Job Start Time",
+                                            "value": "2023-05-23 12:58:09"
+                                        },
+                                        {
+                                            "name": "end_epoch",
+                                            "plugin": "core",
+                                            "raw_value": "1684839509.0000000",
+                                            "title": "Job End Time",
+                                            "value": "2023-05-23 12:58:29"
+                                        },
+                                        {
+                                            "name": "runtime_seconds",
+                                            "plugin": "core",
+                                            "raw_value": "20.0000000",
+                                            "title": "Job Runtime (Wall Clock)",
+                                            "value": "20 seconds"
+                                        },
+                                        {
+                                            "name": "cpuacct.usage",
+                                            "plugin": "cgroup",
+                                            "raw_value": "9121135541.0000000",
+                                            "title": "CPU Time",
+                                            "value": "9.121135541 seconds"
+                                        },
+                                        {
+                                            "name": "memory.failcnt",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Failed to allocate memory count",
+                                            "value": 0.0
+                                        },
+                                        {
+                                            "name": "memory.limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "4160749568.0000000",
+                                            "title": "Memory limit on cgroup (MEM)",
+                                            "value": "3.9 GB"
+                                        },
+                                        {
+                                            "name": "memory.max_usage_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "189353984.0000000",
+                                            "title": "Max memory usage (MEM)",
+                                            "value": "180.6 MB"
+                                        },
+                                        {
+                                            "name": "memory.memsw.limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "9223372036854771712.0000000",
+                                            "title": "Memory limit on cgroup (MEM+SWP)",
+                                            "value": "8.0 EB"
+                                        },
+                                        {
+                                            "name": "memory.memsw.max_usage_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "189353984.0000000",
+                                            "title": "Max memory usage (MEM+SWP)",
+                                            "value": "180.6 MB"
+                                        },
+                                        {
+                                            "name": "memory.oom_control.oom_kill_disable",
+                                            "plugin": "cgroup",
+                                            "raw_value": "1.0000000",
+                                            "title": "OOM Control enabled",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "name": "memory.oom_control.under_oom",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Was OOM Killer active?",
+                                            "value": "No"
+                                        },
+                                        {
+                                            "name": "memory.soft_limit_in_bytes",
+                                            "plugin": "cgroup",
+                                            "raw_value": "0E-7",
+                                            "title": "Memory softlimit on cgroup",
+                                            "value": "0 bytes"
+                                        }
+                                    ],
+                                    "job_stderr": "",
+                                    "job_stdout": "",
+                                    "model_class": "Job",
+                                    "output_collections": {},
+                                    "outputs": {
+                                        "out_file1": {
+                                            "id": "4838ba20a6d867657f17417a8f581bbb",
+                                            "src": "hda",
+                                            "uuid": "bc30d497-36da-47e7-9688-1071076c1f83"
+                                        }
+                                    },
+                                    "params": {
+                                        "__input_ext": "\"bed\"",
+                                        "__workflow_invocation_uuid__": "\"921bc4a6f95811eda031001e67d2ec02\"",
+                                        "casing": "\"up\"",
+                                        "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                        "cols": "\"c1\"",
+                                        "dbkey": "\"?\"",
+                                        "delimiter": "\"TAB\""
+                                    },
+                                    "state": "ok",
+                                    "stderr": "",
+                                    "stdout": "",
+                                    "tool_id": "ChangeCase",
+                                    "tool_stderr": "",
+                                    "tool_stdout": "",
+                                    "traceback": null,
+                                    "update_time": "2023-05-23T10:58:33.530814",
+                                    "user_email": "hxr@informatik.uni-freiburg.de"
+                                }
+                            ],
+                            "model_class": "WorkflowInvocationStep",
+                            "order_index": 2,
+                            "output_collections": {},
+                            "outputs": {
+                                "out_file1": {
+                                    "id": "4838ba20a6d867657f17417a8f581bbb",
+                                    "src": "hda",
+                                    "uuid": "bc30d497-36da-47e7-9688-1071076c1f83"
+                                }
+                            },
+                            "state": "scheduled",
+                            "subworkflow": null,
+                            "subworkflow_invocation_id": null,
+                            "update_time": "2023-05-23T10:58:33.502719",
+                            "workflow_step_id": "276258e5fded6c3b",
+                            "workflow_step_label": "change_case",
+                            "workflow_step_uuid": "9698bcde-0729-48fe-b88d-ccfb6f6153b4"
+                        }
+                    }
+                },
+                "problem_log": "No log for this engine type.",
+                "start_datetime": "2023-05-23T12:56:36.505487",
+                "status": "success"
+            },
+            "doc": "Test outline for sort-and-change-case-(imported-from-uploaded-file)",
+            "has_data": true,
+            "id": "sort-and-change-case.ga_0",
+            "test_type": "galaxy_workflow"
+        }
+    ],
+    "version": "0.1"
+}

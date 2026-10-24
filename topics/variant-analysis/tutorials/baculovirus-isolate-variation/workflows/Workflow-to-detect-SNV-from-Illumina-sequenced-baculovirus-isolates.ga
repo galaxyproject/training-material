@@ -1,0 +1,1140 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This standard workflow determines SNV positions from baculovirus isolates using bcftools.",
+    "comments": [
+        {
+            "child_steps": [
+                0,
+                4,
+                2
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Reference genome"
+            },
+            "id": 0,
+            "position": [
+                0,
+                0
+            ],
+            "size": [
+                846,
+                451
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                1,
+                3
+            ],
+            "color": "red",
+            "data": {
+                "title": "Paired-end sequencing data"
+            },
+            "id": 1,
+            "position": [
+                72.30000000000001,
+                569.7
+            ],
+            "size": [
+                623,
+                509
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                5
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Mapping"
+            },
+            "id": 2,
+            "position": [
+                911.3,
+                435.2
+            ],
+            "size": [
+                371.4,
+                498.6
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                7,
+                6
+            ],
+            "color": "green",
+            "data": {
+                "title": "SNP determination"
+            },
+            "id": 3,
+            "position": [
+                1360,
+                217.39999999999998
+            ],
+            "size": [
+                576.4,
+                388.4
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                8,
+                9,
+                10,
+                11
+            ],
+            "color": "pink",
+            "data": {
+                "title": "VCF to table transformation"
+            },
+            "id": 4,
+            "position": [
+                2052.7,
+                226.2
+            ],
+            "size": [
+                794,
+                405
+            ],
+            "type": "frame"
+        },
+        {
+            "color": "none",
+            "data": {
+                "size": 2,
+                "text": "<br>"
+            },
+            "id": 5,
+            "position": [
+                2097.2,
+                572.4
+            ],
+            "size": [
+                177.3,
+                75.3
+            ],
+            "type": "text"
+        },
+        {
+            "child_steps": [
+                13
+            ],
+            "color": "none",
+            "data": {
+                "title": "SNV specificity determination"
+            },
+            "id": 6,
+            "position": [
+                2929,
+                230.9
+            ],
+            "size": [
+                369,
+                379
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                14,
+                15,
+                16,
+                17,
+                18,
+                19
+            ],
+            "color": "none",
+            "data": {
+                "title": "Visualisation - SNV specificity"
+            },
+            "id": 7,
+            "position": [
+                3399.5,
+                294.9
+            ],
+            "size": [
+                584,
+                488
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "J\u00f6rg T. Wennmann",
+            "url": "https://github.com/wennj/bacsnp"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Workflow to detect SNV from Illumina sequenced baculovirus isolates",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Exactly one reference genome.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Download reference genome in FASTA format from NCBI",
+            "name": "NCBI Accession Download",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                },
+                {
+                    "name": "error_log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 51.97404235866017,
+                "top": 78.5226373428506
+            },
+            "post_job_actions": {
+                "HideDatasetActionerror_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "error_log"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e063168e0a81",
+                "name": "ncbi_acc_download",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ignore_failed\": \"0\", \"molecule\": {\"select\": \"nucleotide\", \"__current_case__\": 0, \"format\": \"fasta\"}, \"query_source\": {\"select\": \"accession_list\", \"__current_case__\": 1, \"accession_list\": \"KM217575\"}, \"range\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.8+galaxy0",
+            "type": "tool",
+            "uuid": "b8790a27-af0a-4489-aab3-2cac05f4b8c2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Provide a dataset list of paired (forward and reverse) reads in fastq format.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/3.1.1+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Paired dataset collection in FASTQ format (downloaded from NCBI SRA)",
+            "name": "Download and Extract Reads in FASTQ",
+            "outputs": [
+                {
+                    "name": "list_paired",
+                    "type": "input"
+                },
+                {
+                    "name": "list_single",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 110.52949814353532,
+                "top": 656.7108223901228
+            },
+            "post_job_actions": {
+                "HideDatasetActionlist_single": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "list_single"
+                },
+                "RenameDatasetActionlist_paired": {
+                    "action_arguments": {
+                        "newname": "CpGV paired read list collection"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "list_paired"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/3.1.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "8848455c0270",
+                "name": "sra_tools",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"defline_seq\": \"@$ac.$sn[_$rn]/$ri\", \"minID\": null, \"maxID\": null, \"minlen\": null, \"split\": true, \"alignments\": \"both\", \"region\": null, \"matepairDist\": null, \"readfilter\": \"\", \"spotgroups\": null, \"clip\": false, \"skip_technical\": false, \"table\": \"\"}, \"input\": {\"input_select\": \"accession_number\", \"__current_case__\": 0, \"accession\": \"SRR31589148, SRR31589147, SRR31589146, SRR31679023\"}, \"outputformat\": \"fastqsanger.gz\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.1+galaxy1",
+            "type": "tool",
+            "uuid": "be719ef0-a527-46d6-80b4-cccc1fc9d4f9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "NCBI Download accepts multiple accession numbers and creates a list as output. Therefore, the Fasta files can contain multiple records. For this analysis just one reference genome is required and the list needs to be converted into one file.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_list": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Collapse Genbank file",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 311.15875979143607,
+                "top": 149.92439408317125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "30ca54a0-94eb-4628-9ec9-b517c738706c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "singlePaired|input_mate_pairs": {
+                    "id": 1,
+                    "output_name": "list_paired"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trim Galore!",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "Trim Galore!",
+            "outputs": [
+                {
+                    "name": "trimmed_reads_paired_collection",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 410.48360069763226,
+                "top": 800.6053145842966
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cd7e644cae1d",
+                "name": "trim_galore",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"params\": {\"settingsType\": \"custom\", \"__current_case__\": 1, \"quality\": \"30\", \"stringency\": \"1\", \"error_rate\": \"0.1\", \"min_length\": \"50\", \"clip_R1\": null, \"clip_R2\": null, \"report\": false, \"retain_unpaired\": {\"retain_unpaired_select\": \"no_output\", \"__current_case__\": 0}}, \"rrbs\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"singlePaired\": {\"sPaired\": \"paired_collection\", \"__current_case__\": 2, \"input_mate_pairs\": {\"__class__\": \"ConnectedValue\"}, \"trimming\": {\"trimming_select\": \"\", \"__current_case__\": 0}, \"trim1\": false, \"three_prime_clip_R1\": null, \"three_prime_clip_R2\": null}, \"trimming\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6.7+galaxy0",
+            "type": "tool",
+            "uuid": "106a4583-0095-4428-b353-3faeeea45652",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Provide a descriptive and unique name for the reference sequence.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Rename reference genome sequence header",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 563.203125,
+                "top": 215.90625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "CpGV-M reference"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"^>.*$\", \"replace_pattern\": \">CpGV-M \"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "e31b4710-7ddb-4cc4-b759-c6f338bbf6ce",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 3,
+                    "output_name": "trimmed_reads_paired_collection"
+                },
+                "reference_source|ref_file": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "fastq_input"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 990.2923885677378,
+                "top": 524.135658758059
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18",
+            "tool_shed_repository": {
+                "changeset_revision": "2477830927ec",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"fastq_input\": {\"fastq_input_selector\": \"paired_collection\", \"__current_case__\": 2, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"iset_stats\": \"\"}, \"output_sort\": \"coordinate\", \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}, \"index_a\": \"auto\"}, \"rg\": {\"rg_selector\": \"set_picard\", \"__current_case__\": 0, \"read_group_id_conditional\": {\"do_auto_name\": true, \"__current_case__\": 0}, \"read_group_sm_conditional\": {\"do_auto_name\": true, \"__current_case__\": 0}, \"read_group_lb_conditional\": {\"do_auto_name\": true, \"__current_case__\": 0}, \"PL\": \"ILLUMINA\", \"PU\": \"run\", \"CN\": null, \"DS\": null, \"PI\": null, \"DT\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.18",
+            "type": "tool",
+            "uuid": "74092913-3e4f-4038-aff5-0d0158587c2b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_mpileup/bcftools_mpileup/1.15.1+galaxy4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input|input_bams": {
+                    "id": 5,
+                    "output_name": "bam_output"
+                },
+                "reference_source|ref_file": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools mpileup",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools mpileup",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools mpileup",
+                    "name": "sec_subset"
+                }
+            ],
+            "label": null,
+            "name": "bcftools mpileup",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 1392.5970542735056,
+                "top": 290.4196989878777
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_mpileup/bcftools_mpileup/1.15.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "0a5dcc9a8ec2",
+                "name": "bcftools_mpileup",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"input_number\": \"multiple\", \"__current_case__\": 1, \"input_bams\": {\"__class__\": \"ConnectedValue\"}}, \"output_type\": \"v\", \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"sec_filtering\": {\"max_reads_per_bam\": \"1024\", \"ignore_overlaps\": false, \"skip_anomalous_read_pairs\": false, \"filter_by_flags\": {\"filter_flags\": \"nofilter\", \"__current_case__\": 1}, \"quality\": {\"quality_settings\": \"none\", \"__current_case__\": 1}, \"read_groups\": {\"read_groups_selector\": \"no_limit\", \"__current_case__\": 3}}, \"sec_indel\": {\"perform_indel_calling\": {\"perform_indel_calling_selector\": \"do_not_perform_indel_calling\", \"__current_case__\": 2}, \"ambig_reads\": null, \"indel_bias\": null, \"indel_size\": null}, \"sec_output_options\": {\"output_tags\": [\"DP\", \"DPR\"], \"gvcf\": \"\"}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"regions_overlap\": null, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}, \"targets_overlap\": null}, \"sec_subset\": {\"samples\": \"\", \"invert_samples\": false, \"samples_file\": {\"__class__\": \"RuntimeValue\"}, \"invert_samples_file\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy4",
+            "type": "tool",
+            "uuid": "6251f03d-bdfb-4696-b2eb-5746d7f817fb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_call/bcftools_call/1.15.1+galaxy5",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 6,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools call",
+                    "name": "sec_file_format"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools call",
+                    "name": "sec_file_format"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools call",
+                    "name": "sec_restrict"
+                }
+            ],
+            "label": null,
+            "name": "bcftools call",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 1689.1355214134753,
+                "top": 299.3540965143968
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_call/bcftools_call/1.15.1+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "07396b423218",
+                "name": "bcftools_call",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"output_type\": \"v\", \"sec_consensus_variant_calling\": {\"variant_calling\": {\"method\": \"multiallelic\", \"__current_case__\": 0, \"genotypes\": {\"constrain\": \"none\", \"__current_case__\": 0, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}, \"targets_overlap\": null}, \"prior_freqs\": \"\", \"prior\": \"0.0011\", \"gvcf\": null}}, \"sec_file_format\": {\"ploidy\": null, \"ploidy_file\": {\"__class__\": \"RuntimeValue\"}, \"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"regions_overlap\": null, \"samples\": \"\", \"invert_samples\": false, \"samples_file\": {\"__class__\": \"RuntimeValue\"}, \"invert_samples_file\": false}, \"sec_input_output\": {\"group_samples\": false, \"keep_alts\": true, \"format_fields\": \"\", \"keep_masked_ref\": false, \"skip_variants\": null, \"variants_only\": true, \"output_tags\": null}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"regions_overlap\": null, \"samples\": \"\", \"invert_samples\": false, \"samples_file\": {\"__class__\": \"RuntimeValue\"}, \"invert_samples_file\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy5",
+            "type": "tool",
+            "uuid": "5a537643-fa45-4b3a-adb8-dc56d5943879",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "bcftools_call_output",
+                    "output_name": "output_file",
+                    "uuid": "d8a45d4f-c8e4-40da-ba84-7ec13aa8ca4d"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "The VCF is converted to an easier to read table format.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": "VCF Transformation",
+            "name": "VCFtoTab-delimited:",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2091.8110123362394,
+                "top": 280.5728875702337
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Tab delimited VCF table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e92b3c0f9224",
+                "name": "vcf2tsv",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"g_option\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"null_filler\": \"NULL\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0_rc1+galaxy0",
+            "type": "tool",
+            "uuid": "582b47f8-eabf-4e8f-b93f-1be03d5169a4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "The DPR value is further decomposed for each position and isolate and attached to the table. Four additional columns are added to the table: ALLELE, DPR.ALLELE, REL.ALT and REL.ALT.0.05.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Relative allele frequency calculation",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2179.1210569016466,
+                "top": 487.31426030542065
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Relative allele frequency table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN { FS=\\\"\\\\t\\\"; OFS=\\\"\\\\t\\\" }\\nNR == 1 {\\n    # Rename \\\"SAMPLE\\\" to \\\"ISOLATE\\\" in the header\\n    for (i = 1; i <= NF; i++) {\\n        if ($i == \\\"SAMPLE\\\") $i = \\\"ISOLATE\\\";\\n    }\\n\\n    # Identify column indices based on updated header names\\n    for (i = 1; i <= NF; i++) {\\n        if ($i == \\\"POS\\\") pos_col = i;\\n        if ($i == \\\"ISOLATE\\\") isolate_col = i;\\n        if ($i == \\\"DP\\\") dp_col = i;\\n        if ($i == \\\"DPR\\\") dpr_col = i;\\n    }\\n\\n    # Check if all required columns are found\\n    if (!(pos_col && isolate_col && dp_col && dpr_col)) {\\n        print \\\"Error: One or more required columns (POS, ISOLATE, DP, DPR) are missing.\\\" > \\\"/dev/stderr\\\";\\n        exit 1;\\n    }\\n\\n    # Print the updated header\\n    print $0, \\\"ALLELE\\\", \\\"DPR.ALLELE\\\", \\\"REL.ALT\\\", \\\"REL.ALT.0.05\\\";\\n    next;\\n}\\n{\\n    # Create a unique key for position and isolate\\n    pos_isolate_key = $(pos_col) \\\"_\\\" $(isolate_col);\\n\\n    if (last_pos != $(pos_col)) {  # When a new position starts\\n        delete isolate_count;      # Reset the isolate counter\\n        last_pos = $(pos_col);     # Update the current position\\n    }\\n\\n    # Split the DPR column into values\\n    split($(dpr_col), dpr_values, \\\",\\\");\\n\\n    # Count occurrences of each isolate per position\\n    isolate_count[$(isolate_col)]++;\\n    dpr_index = isolate_count[$(isolate_col)] + 1;  # Index for the alternate allele (starting at 2)\\n\\n    # Check if the index is valid\\n    if (dpr_index <= length(dpr_values)) {\\n        allele = \\\"ALT\\\" (dpr_index - 1);            # Determine the allele\\n        dpr_value = dpr_values[dpr_index];         # Get the corresponding DPR value\\n        rel_alt = (dpr_value / $(dp_col));         # Calculate REL.ALT (DPR.ALLELE / DP)\\n        rel_alt_filtered = (rel_alt >= 0.05) ? rel_alt : 0;  # Filter REL.ALT values < 0.05\\n        print $0, allele, dpr_value, rel_alt, rel_alt_filtered;  # Output with new columns\\n    }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "f49d6516-ec89-49d4-91ae-ad16765594cb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 9,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2430.49697999397,
+                "top": 285.3979634310462
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "SRA names replaced"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"25\", \"find_pattern\": \"SRR31589148\", \"replace_pattern\": \"CpGV-M\"}, {\"__index__\": 1, \"column\": \"25\", \"find_pattern\": \"SRR31589147\", \"replace_pattern\": \"CpGV-S\"}, {\"__index__\": 2, \"column\": \"25\", \"find_pattern\": \"SRR31589146\", \"replace_pattern\": \"CpGV-E2\"}, {\"__index__\": 3, \"column\": \"25\", \"find_pattern\": \"SRR31679023\", \"replace_pattern\": \"CpGV-V15\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "e22af6e5-08a6-489d-80fb-b854cddd77c5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "vcf_table",
+                    "output_name": "outfile",
+                    "uuid": "186d4e5c-fceb-4031-b569-d84dbcd1c156"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "In this step the dataset is reduced to the first alternative nucleotide (ALT1) only. ",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Reduce dataset to ALT1",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2581.875442597716,
+                "top": 483.4771551027884
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Relative allele frequency table (ALT1 only)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c30=='ALT1'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "bee7e307-6eab-46fa-9d8f-255fd8b85f74",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "vcf_table_ALT1",
+                    "output_name": "out_file1",
+                    "uuid": "7ebeb330-a4df-4027-b636-daa0e5e39938"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "A general overview to access the isolates overall heterogeneity/homogeneity. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input1": {
+                    "id": 11,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "SNV plot",
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2915.2068503824494,
+                "top": 744.1555982886683
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "SNV plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "5298e06f14f9",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type_conditional\": {\"type_options\": \"points\", \"__current_case__\": 0, \"points\": {\"pointoptions\": \"default\", \"__current_case__\": 0}}, \"factor\": {\"factoring\": \"Multiple\", \"__current_case__\": 2, \"factorcol\": \"25\"}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"hideboth\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"out\": {\"unit_output_dim\": \"cm\", \"width_output_dim\": \"40.0\", \"height_output_dim\": \"12.0\", \"dpi_output_dim\": \"200.0\", \"additional_output_format\": \"none\"}, \"title\": \"SNV plot\", \"xlab\": \"Reference Genome Position of CpGV-M\", \"xplot\": \"2\", \"ylab\": \"Relative nucleotide frequency \", \"yplot\": \"32\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.4.0+galaxy1",
+            "type": "tool",
+            "uuid": "2d4b7a9a-82db-47df-9312-d4abe4731f2e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "The DPR value is further decomposed for each position and sample and attached to the table. Four additional columns are added to the table: ALLELE, DPR.ALLELE, REL.ALT and REL.ALT.0.05.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile": {
+                    "id": 11,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "SNV specificity calculation",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3009.6232364483394,
+                "top": 353.86594497196666
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "SNP specificity table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN { FS=\\\"\\\\t\\\"; OFS=\\\"\\\\t\\\" }\\nNR == 1 {\\n    # Dynamically find column indices based on header names\\n    for (i = 1; i <= NF; i++) {\\n        if ($i == \\\"POS\\\") pos_col = i;\\n        if ($i == \\\"ALLELE\\\") allele_col = i;\\n        if ($i == \\\"ISOLATE\\\") isolate_col = i;\\n        if ($i == \\\"REL.ALT.0.05\\\") rel_alt_col = i;\\n    }\\n\\n    # Check if all required columns were found\\n    if (!(pos_col && allele_col && isolate_col && rel_alt_col)) {\\n        print \\\"Error: Required columns (POS, ALLELE, ISOLATE, REL.ALT.0.05) are missing.\\\" > \\\"/dev/stderr\\\";\\n        exit 1;\\n    }\\n\\n    # Print the header and add the new SPEC column\\n    print $0, \\\"SPEC\\\";\\n    next;\\n}\\n\\n{\\n    # When reaching a new position, prepare the specificity\\n    if ($(pos_col) != current_pos) {\\n        # Assign the calculated specificity to all rows of the current position\\n        for (i in pos_lines) {\\n            # Add \\\"SNV specificity: \\\" before the specificity value\\n            final_spec = (specificity == \\\"\\\" ? \\\"0\\\" : \\\"SNV specificity: \\\" specificity);\\n            print pos_lines[i], final_spec;\\n        }\\n        # Reset variables for the new position\\n        delete pos_lines;\\n        specificity = \\\"\\\";\\n        current_pos = $(pos_col);\\n    }\\n\\n    # Save the current row for later\\n    pos_lines[NR] = $0;\\n\\n    # Conditions for calculating specificity\\n    if ($(allele_col) == \\\"ALT1\\\" && \\n        ($(isolate_col) == \\\"CpGV-E2\\\" || $(isolate_col) == \\\"CpGV-S\\\" || $(isolate_col) == \\\"CpGV-M\\\") && \\n        $(rel_alt_col) > 0) {\\n        # Concatenate isolate names with \\\" + \\\" if REL.ALT.0.05 > 0\\n        specificity = (specificity == \\\"\\\" ? $(isolate_col) : specificity \\\" + \\\" $(isolate_col));\\n    }\\n}\\n\\nEND {\\n    # Assign the specificity to the last position\\n    for (i in pos_lines) {\\n        # Add \\\"SNV specificity: \\\" before the specificity value\\n        final_spec = (specificity == \\\"\\\" ? \\\"0\\\" : \\\"SNV specificity: \\\" specificity);\\n        print pos_lines[i], final_spec;\\n    }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "c1a05c89-8f44-44b9-b124-936ef2cd6a0b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "vcf_table_ALT1_specificity",
+                    "output_name": "outfile",
+                    "uuid": "b2f9dabd-7bbf-4b96-a351-78a2b2552586"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3417.210882803981,
+                "top": 342.57137760182803
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "SNV table CpGV-V15"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c25=='CpGV-V15'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "381b5e09-902c-4b9a-b419-b9257b41ae30",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3418.897440760429,
+                "top": 457.84160606799094
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "SNV table CpGV-S"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c25=='CpGV-S'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "d20af343-abb4-4558-a3ce-67f58aff54e6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3419.9409153965685,
+                "top": 577.1832667659984
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "SNV table CpGV-E2"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c25=='CpGV-E2'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "bda70cdb-6fdd-41ff-bc22-a009f6a3c838",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "Creates a ggplot2 SNV plot for each SNV specificity.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input1": {
+                    "id": 14,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "ggplot2 V15 dotplot ",
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3707.5177745866044,
+                "top": 330.070454672173
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "SNV plot CpGV-V15"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "5298e06f14f9",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type_conditional\": {\"type_options\": \"points\", \"__current_case__\": 0, \"points\": {\"pointoptions\": \"default\", \"__current_case__\": 0}}, \"factor\": {\"factoring\": \"Multiple\", \"__current_case__\": 2, \"factorcol\": \"34\"}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"hideboth\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"out\": {\"unit_output_dim\": \"cm\", \"width_output_dim\": \"40.0\", \"height_output_dim\": \"12.0\", \"dpi_output_dim\": \"200.0\", \"additional_output_format\": \"none\"}, \"title\": \"Isolate CpGV-V15\", \"xlab\": \"Reference Genome Position of CpGV-M\", \"xplot\": \"2\", \"ylab\": \"Relative Nucleotide Frequency\", \"yplot\": \"32\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.4.0+galaxy1",
+            "type": "tool",
+            "uuid": "fa410722-3375-4593-b233-9e61a09ed13e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "Creates a ggplot2 SNV plot for each SNV specificity.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input1": {
+                    "id": 15,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "ggplot2 CpGV-S dotplot",
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3703.3115040991966,
+                "top": 456.151066107313
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "SNV plot CpGV-S"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "5298e06f14f9",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type_conditional\": {\"type_options\": \"points\", \"__current_case__\": 0, \"points\": {\"pointoptions\": \"default\", \"__current_case__\": 0}}, \"factor\": {\"factoring\": \"Multiple\", \"__current_case__\": 2, \"factorcol\": \"34\"}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"hideboth\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"out\": {\"unit_output_dim\": \"cm\", \"width_output_dim\": \"40.0\", \"height_output_dim\": \"12.0\", \"dpi_output_dim\": \"200.0\", \"additional_output_format\": \"none\"}, \"title\": \"Isolate CpGV-S\", \"xlab\": \"Reference Genome Position of CpGV-M\", \"xplot\": \"2\", \"ylab\": \"Relative Nucleotide Frequency\", \"yplot\": \"32\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.4.0+galaxy1",
+            "type": "tool",
+            "uuid": "ca3bde4a-244b-4466-b2d6-2d4bd64ccaeb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "Creates a ggplot2 SNV plot for each SNV specificity.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input1": {
+                    "id": 16,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "ggplot2 CpGV-E2 dotplot",
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3709.778191268429,
+                "top": 594.3725382735064
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "SNV plot CpGV-E2"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "5298e06f14f9",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type_conditional\": {\"type_options\": \"points\", \"__current_case__\": 0, \"points\": {\"pointoptions\": \"default\", \"__current_case__\": 0}}, \"factor\": {\"factoring\": \"Multiple\", \"__current_case__\": 2, \"factorcol\": \"34\"}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"hideboth\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"out\": {\"unit_output_dim\": \"cm\", \"width_output_dim\": \"40.0\", \"height_output_dim\": \"12.0\", \"dpi_output_dim\": \"200.0\", \"additional_output_format\": \"none\"}, \"title\": \"Isolate CpGV-E2\", \"xlab\": \"Reference Genome Position of CpGV-M\", \"xplot\": \"2\", \"ylab\": \"Relative Nucleotide Frequency\", \"yplot\": \"32\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.4.0+galaxy1",
+            "type": "tool",
+            "uuid": "9692760b-f4e7-4b1f-95b7-83308243c8ce",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "name:bacsnp",
+        "name:baculoviridae",
+        "name:baculovirus",
+        "name:naldv"
+    ],
+    "uuid": "d2208643-f8a8-47a9-8c68-13bac81bd14d",
+    "version": 54
+}

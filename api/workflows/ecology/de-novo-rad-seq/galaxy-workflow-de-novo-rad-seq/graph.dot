@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPopulation_map.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nBarcodes_SRR034310.tabular"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nSRR034310.fastq"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nref_genome_chromFa.tar"]
+  4[label="Stacks: process radtags"]
+  1 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  5[label="Stacks: process radtags"]
+  1 -> 5 [label="output"]
+  2 -> 5 [label="output"]
+  6[label="Stacks: process radtags"]
+  1 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  7[label="FastQC"]
+  2 -> 7 [label="output"]
+  8[label="Stacks: de novo map"]
+  4 -> 8 [label="demultiplexed"]
+  0 -> 8 [label="output"]
+  9[label="Stacks: populations"]
+  8 -> 9 [label="all_output"]
+  0 -> 9 [label="output"]
+}

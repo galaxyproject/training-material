@@ -1,0 +1,115 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nsingle fastqs"]
+  1[color=lightblue,label="ℹ️ Input Collection\npaired fastqs"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"]
+  3[label="Cutadapt: remove bad quality bp"]
+  0 -> 3 [label="output"]
+  4[label="Flatten paired collection for Falco"]
+  1 -> 4 [label="output"]
+  5[label="Cutadapt"]
+  1 -> 5 [label="output"]
+  6[label="STAR: map single reads"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="out1"]
+  7[label="Merge fastqs for Falco"]
+  4 -> 7 [label="output"]
+  0 -> 7 [label="output"]
+  8[label="Merge Cutadapt reports"]
+  5 -> 8 [label="report"]
+  3 -> 8 [label="report"]
+  9[label="STAR: map paired reads"]
+  2 -> 9 [label="output"]
+  5 -> 9 [label="out_pairs"]
+  10[label="count reads per gene for SR"]
+  6 -> 10 [label="mapped_reads"]
+  2 -> 10 [label="output"]
+  11[label="Falco"]
+  7 -> 11 [label="output"]
+  12[label="Combine cutadapt results"]
+  8 -> 12 [label="output"]
+  kcab760db5c9d4a3cb768998bfbac6b57[color=lightseagreen,label="Output\nmultiqc_cutadapt_html"]
+  12 -> kcab760db5c9d4a3cb768998bfbac6b57
+  13[label="Merge STAR logs"]
+  9 -> 13 [label="output_log"]
+  6 -> 13 [label="output_log"]
+  14[label="Merge STAR counts"]
+  6 -> 14 [label="reads_per_gene"]
+  9 -> 14 [label="reads_per_gene"]
+  15[label="Merge STAR BAM"]
+  6 -> 15 [label="mapped_reads"]
+  9 -> 15 [label="mapped_reads"]
+  k802017f4fb1a4243b50d2ed46f746f11[color=lightseagreen,label="Output\nSTAR_BAM"]
+  15 -> k802017f4fb1a4243b50d2ed46f746f11
+  16[label="merge coverage unique strand 1"]
+  6 -> 16 [label="signal_unique_str1"]
+  9 -> 16 [label="signal_unique_str1"]
+  17[label="merge coverage unique strand 2"]
+  6 -> 17 [label="signal_unique_str2"]
+  9 -> 17 [label="signal_unique_str2"]
+  18[label="count fragments per gene for PE"]
+  9 -> 18 [label="mapped_reads"]
+  2 -> 18 [label="output"]
+  k1527b5d7168149349d9e3a5f86ae0fee[color=lightseagreen,label="Output\nfeatureCounts_gene_length"]
+  18 -> k1527b5d7168149349d9e3a5f86ae0fee
+  19[label="Combine FastQC results"]
+  11 -> 19 [label="text_file"]
+  k791893e66e6549feb71f4a7b6482e0ce[color=lightseagreen,label="Output\nmultiqc_falco_html"]
+  19 -> k791893e66e6549feb71f4a7b6482e0ce
+  20[label="Combine STAR Results"]
+  13 -> 20 [label="output"]
+  k204e3f6c6f5446f0b07c1f31113265e7[color=lightseagreen,label="Output\nmultiqc_star_html"]
+  20 -> k204e3f6c6f5446f0b07c1f31113265e7
+  21[color=lightcoral,label="🛠️ Subworkflow\ncount STAR"]
+  2 -> 21 [label="output"]
+  14 -> 21 [label="output"]
+  kbd3388e65b454fdc97803efd1c34ebf8[color=lightseagreen,label="Output\ncounts_from_star_sorted"]
+  21 -> kbd3388e65b454fdc97803efd1c34ebf8
+  k5fee8aff402343f1a653f5af5357d798[color=lightseagreen,label="Output\ncounts_from_star"]
+  21 -> k5fee8aff402343f1a653f5af5357d798
+  k7b7c698b48084b45adf1686f8d273d18[color=lightseagreen,label="Output\nGene length"]
+  21 -> k7b7c698b48084b45adf1686f8d273d18
+  22[label="Run JBrowse2 to check BAM"]
+  15 -> 22 [label="output"]
+  2 -> 22 [label="output"]
+  23[color=lightcoral,label="🛠️ Subworkflow\nmore QC"]
+  2 -> 23 [label="output"]
+  15 -> 23 [label="output"]
+  k3375d63ccdc34fbb8a556f504c934918[color=lightseagreen,label="Output\nmultiqc_gene_body_cov_html"]
+  23 -> k3375d63ccdc34fbb8a556f504c934918
+  kb306cb12a2754c6db60947fdc208864b[color=lightseagreen,label="Output\nmultiqc_reads_per_chrom_html"]
+  23 -> kb306cb12a2754c6db60947fdc208864b
+  kf2eed352ca214d658810f5a1d3c282b4[color=lightseagreen,label="Output\nmultiqc_read_distrib_html"]
+  23 -> kf2eed352ca214d658810f5a1d3c282b4
+  k3ea82568569849a788fe91381070aac2[color=lightseagreen,label="Output\nmultiqc_dup_html"]
+  23 -> k3ea82568569849a788fe91381070aac2
+  24[color=lightcoral,label="🛠️ Subworkflow\nDetermine strandness"]
+  15 -> 24 [label="output"]
+  2 -> 24 [label="output"]
+  16 -> 24 [label="output"]
+  17 -> 24 [label="output"]
+  14 -> 24 [label="output"]
+  kfb810859f2d043f8ac7c5c714c5c6805[color=lightseagreen,label="Output\ninferexperiment"]
+  24 -> kfb810859f2d043f8ac7c5c714c5c6805
+  k105313d8e31a405d8fcdcc5fd93275e2[color=lightseagreen,label="Output\nmultiqc_star_counts_html"]
+  24 -> k105313d8e31a405d8fcdcc5fd93275e2
+  k9727824a3eb2443092d1b3c40c3041d1[color=lightseagreen,label="Output\npgt"]
+  24 -> k9727824a3eb2443092d1b3c40c3041d1
+  25[label="merge counts from featureCounts"]
+  10 -> 25 [label="output_short"]
+  18 -> 25 [label="output_short"]
+  kc82388f8cb094fdf8a0e03cdad579f37[color=lightseagreen,label="Output\nfeatureCounts"]
+  25 -> kc82388f8cb094fdf8a0e03cdad579f37
+  26[label="merge featureCounts summary"]
+  10 -> 26 [label="output_summary"]
+  18 -> 26 [label="output_summary"]
+  27[label="Sort counts to get gene with highest count on feature Counts"]
+  25 -> 27 [label="output"]
+  k6aeb4dd1445f4c66b1ce4bb8faac53db[color=lightseagreen,label="Output\nfeatureCounts_sorted"]
+  27 -> k6aeb4dd1445f4c66b1ce4bb8faac53db
+  28[label="Combine read asignments statistics"]
+  26 -> 28 [label="output"]
+  kfc72242af23c4ceb9a8b5280343ea5d6[color=lightseagreen,label="Output\nmultiqc_featureCounts_html"]
+  28 -> kfc72242af23c4ceb9a8b5280343ea5d6
+}

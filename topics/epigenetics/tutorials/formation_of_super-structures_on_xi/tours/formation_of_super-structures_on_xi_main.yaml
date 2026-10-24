@@ -1,0 +1,699 @@
+---
+id: formation_of_super-structures_on_xi
+name: Formation of the Super-Structures on the Inactive X
+description: >-
+  In this tutorial we will follow <a
+  href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et al.
+  (2018)</a> experiments to identify if there are differences in the H3K27me3,
+  H3K4me3 and CTCF between the X (active or inactive) chromosomes and the
+  potentially influenced genes (only use the wild type data).
+title_default: formation_of_super-structures_on_xi
+steps:
+  - title: ChIP-seq Quality Control
+    content: >-
+      We already checked the quality of the raw sequencing reads in the first
+      step. Now we would like to test the quality of the ChIP-seq preparation,
+      to know if our ChIP-seq samples are more enriched than the control (input)
+      samples.
+    backdrop: true
+  - title: Correlation between samples
+    content: >-
+      To assess the similarity between the replicates of the ChIP and the input,
+      respectively, it is a common technique to calculate the correlation of
+      read counts on different regions for all different samples. We expect that
+      the replicates of the ChIP-seq experiments should be clustered more
+      closely to each other than the replicates of the input sample. That is,
+      because the input samples should not have enriched regions included -
+      remember the immuno-precipitation step was skiped during the sample
+      preparation.<br><br> To compute the correlation between the samples we are
+      going to to use the QC modules of <a
+      href="http://deeptools.readthedocs.io/">deepTools</a>, a software package
+      for the QC, processing and analysis of NGS data. Before computing the
+      correlation a time consuming step is required, which is to compute the
+      read coverage (number of unique reads mapped at a given nucleotide) over a
+      large number of regions from each of the inputed BAM files. For this we
+      will use the tool <b>multiBamSummary</b> tool. Then, we use
+      <b>plotCorrelation</b> tool from deepTools to compute and visualize the
+      sample correlation. This is a fast process that allows to quickly try
+      different color combinations and outputs.
+    backdrop: true
+  - title: Correlation between samples
+    content: >-
+      Since in this tutorial we are interested in assessing H3K4me3, H3K27me3
+      and CTCF ChIP samples, the previous steps (quality control and mapping)
+      needs to be run on all the replicates of ChIP samples as well as the input
+      samples. To save time, we have already done that and you can now work
+      directly on the BAM files of the provided 8 samples. For simplicity, the
+      files include only the ChrX.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Create a new history for this exercise. Click on this button and then
+      "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import BAM files from <a
+      href="https://zenodo.org/record/1324070">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: The corresponding links should be provided in this field
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam
+      https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam
+      https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam
+      https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam
+      https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam
+      https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam
+      https://zenodo.org/record/1324070/files/wt_input_rep1.bam
+      https://zenodo.org/record/1324070/files/wt_input_rep2.bam
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something more meaningful<ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+      </ul>
+    position: left
+  - title: Correlation between samples
+    element: '#tool-search-query'
+    content: Search for 'multiBamSummary' tool.
+    placement: right
+    textinsert: multiBamSummary
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: Click on the 'multiBamSummary' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_multi_bam_summary%2Fdeeptools_multi_bam_summary%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Sample order matters”
+      to 'No'<ul> <li>"BAM/CRAM file” to the 8 imported BAM files</li></ul></li>
+      <li>"Choose computation mode” to 'Bins'<ul> <li>"Bin size in bp” to
+      '1000'</li> <li>"Distance between bins” to '500'</li></ul></li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: Correlation between samples
+    element: '#tool-search-query'
+    content: Search for 'plotCorrelation' tool.
+    placement: right
+    textinsert: plotCorrelation
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: Click on the 'plotCorrelation' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_correlation%2Fdeeptools_plot_correlation%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Matrix file from the
+      multiBamSummary tool” to 'correlation matrix' output from the previous
+      tool</li> <li>"Correlation method” to 'Pearson'</li> </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How are your samples clustered?</li>
+        <li>Does that correspond to your expectations?</li>
+      </ul>
+    backdrop: false
+  - title: IP strength estimation
+    content: >-
+      To evaluate the quality of the immuno-precipitation(IP) step, we can
+      compute the IP strength. It determines how well the signal in the ChIP-seq
+      sample can be differentiated from the background distribution of reads in
+      the control sample (‘input’). After all, around 90% of all DNA fragments
+      in a ChIP experiment will represent the genomic background.<br><br> To do
+      that we take the data from the <i>rep1</i> of the <i>wt_H3K4me3</i>
+      ChIP-seq sample and compare it with its corresponding input sample, using
+      <b>plotFingerprint</b> tool of deepTools. Similar to
+      <b>multiBamSummary</b> tool, <b>plotFingerprint</b> tool randomly samples
+      genome regions of a specified length (bins) and sums the per-base coverage
+      in the indexed BAM files that overlap with those regions. These coverage
+      values are then sorted according to their rank and the cumulative sum of
+      read counts is plotted.
+    backdrop: true
+  - title: IP strength estimation
+    element: '#tool-search-query'
+    content: Search for 'plotFingerprint' tool.
+    placement: right
+    textinsert: plotFingerprint
+  - title: IP strength estimation
+    element: '#tool-search'
+    content: Click on the 'plotFingerprint' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_fingerprint%2Fdeeptools_plot_fingerprint%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: IP strength estimation
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Sample order matters”
+      to 'No'<ul> <li>"BAM/CRAM file” to 'wt_input_rep1' and
+      'wt_H3K4me3_rep1'</li> </ul></li> <li>"Region of the genome to limit the
+      operation to” to 'chrX'</li> <li>"Show advanced options” to 'Yes'<ul>
+      <li>"Number of samples” to '10000'</li></ul></li> </ul>
+    position: right
+  - title: IP strength estimation
+    element: '#history-options-button'
+    content: >-
+      The plotFingerprint tool generates a fingerprint plot. You need to
+      intepret it to know the IP strength.
+    placement: left
+  - title: IP strength estimation
+    content: >-
+      An ideal ‘input’ with perfect uniform distribution of reads along the
+      genome (i.e. without enrichments in open chromatin) and infinite
+      sequencing coverage should generate a straight diagonal line. A very
+      specific and strong ChIP enrichment will be indicated by a prominent and
+      steep rise of the cumulative sum towards the highest rank. This means that
+      a big chunk of reads from the ChIP sample is located in few bins which
+      corresponds to high, narrow enrichments typically seen for transcription
+      factors.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What do you think about the quality of the IP for this experiment?</li></ul>
+    backdrop: false
+  - title: Normalization
+    content: >-
+      One of the goals in ChIP-seq data analysis is finding regions on the
+      genome which are enriched for the ChIP data of interest (regions with
+      significantly higher read coverage for the ChIP data comparing to its
+      corresponding input). In the following exercise we would like to know
+      where the H3K4me3 sites are. For this we need to extract which parts of
+      the genome have been enriched (i.e. more reads mapped) within the samples
+      that underwent immunoprecipitation. However, to reach a reliable
+      comparison the data needs to be normalized to remove any technical bias.
+      For the normalization we have two steps: <ul>
+        <li>Normalization by sequencing depth</li>
+        <li>Normalization by input file</li>
+      </ul> To learn how to do the normalization, we will take the
+      <b>wt_H3K4me3_rep1</b> sample as ChIP data and <b>wt_input_rep1</b> as
+      input.
+    backdrop: true
+  - title: Estimation of the sequencing depth
+    element: '#tool-search-query'
+    content: Search for 'IdxStats' tool.
+    placement: right
+    textinsert: IdxStats
+  - title: Estimation of the sequencing depth
+    element: '#tool-search'
+    content: Click on the 'IdxStats' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_idxstats%2Fsamtools_idxstats%2F2.0.1"]
+        .tool-old-link
+  - title: Estimation of the sequencing depth
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"BAM file” to
+      'wt_H3K4me3_rep1.bam' and 'wt_input_rep1.bam'</li> </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the output of <b>IdxStats</b>?</li>
+        <li>How many reads has been mapped on chrX for the input and for the ChIP-seq samples?</li>
+        <li>Why are the number of reads different? And what could be the impact of this difference?</li>
+      </ul>
+    backdrop: false
+  - title: Normalization
+    content: >-
+      The different samples have usually a different sequencing depth, i.e. a
+      different number of reads. These differences can bias the interpretation
+      of the number of reads mapped to a specific genome region. We first need
+      to make the samples comparable by normalizing the coverage by the
+      sequencing depth.<br><br> We are using <b>bamCoverage</b> tool. Given a
+      BAM file, this tool generates coverages by first calculating all the
+      number of reads (either extended to match the fragment length or not) that
+      overlap each bin in the genome and then normalizing with various options.
+      It produces a coverage file where for each bin the number of overlapping
+      reads (possibly normalized) is noted.
+    backdrop: true
+  - title: Coverage file normalization
+    element: '#tool-search-query'
+    content: Search for 'bamCoverage' tool.
+    placement: right
+    textinsert: bamCoverage
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: Click on the 'bamCoverage' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"BAM file” to
+      'wt_H3K4me3_rep1.bam' and 'wt_input_rep1.bam'</li> <li>"Bin size in bases”
+      to '25'</li> <li>"Scaling/Normalization method” to 'Normalize coverage to
+      1x'<ul> <li>"Effective genome size” to 'GRCm38/mm10
+      (2308125349)'</li></ul></li> <li>"Coverage file format” to 'bedgraph'</li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is a <i>bedgraph</i> file?</li>
+        <li>Which regions have the highest coverage in ChIP data and in the input?</li>
+      </ul>
+    backdrop: false
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: Re-run 'bamCoverage' tool with same parameters but <i>bigWig</i> format.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"BAM file” to
+      'wt_H3K4me3_rep1.bam' and 'wt_input_rep1.bam'</li> <li>"Bin size in bases”
+      to '25'</li> <li>"Scaling/Normalization method” to 'Normalize coverage to
+      1x'<ul> <li>"Effective genome size” to 'GRCm38/mm10
+      (2308125349)'</li></ul></li> <li>"Coverage file format” to 'bigWig'</li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is a bigWig file?</li>
+      </ul>
+    backdrop: false
+  - title: Coverage file normalization
+    element: '#history-options-button'
+    content: >-
+      Use <b>IGV</b> tool to inspect both signal coverages (input and ChIP
+      samples)
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>If you zoom to <i>chrX:151,385,260-152,426,526</i>, what do you observe?</li>
+      </ul>
+    backdrop: false
+  - title: Generation of input-normalized coverage files
+    content: >-
+      To extract only the information induced by the immunoprecipitation, we
+      normalize the coverage file for the sample that underwent
+      immunoprecipitation by the coverage file for the input sample. Here we use
+      the tool <b>bamCompare</b> tool which compare 2 BAM files while caring for
+      sequencing depth normalization.
+    backdrop: true
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search-query'
+    content: Search for 'bamCompare' tool.
+    placement: right
+    textinsert: bamCompare
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: Click on the 'bamCompare' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"First BAM file (e.g.
+      treated sample)” to 'wt_H3K4me3_rep1.bam'</li> <li>"Second BAM file (e.g.
+      control sample)" to 'wt_input_rep1.bam'</li> <li>"Bin size in bases” to
+      '50'</li> <li>"How to compare the two files” to 'Compute log2 of the
+      number of reads ratio</li> <li>"Coverage file format” to 'bedgraph'</li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What does a positive value or a negative value mean in the 4th column?</li>
+        <li>Which regions have the highest coverage in the ChIP data? and the lowest?</li>
+      </ul>
+    backdrop: false
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: Re-run 'bamCompare' tool but change the file format to <i>bigWig</i>
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"First BAM file (e.g.
+      treated sample)” to 'wt_H3K4me3_rep1.bam''</li> <li>"Second BAM file (e.g.
+      control sample)" to 'wt_input_rep1.bam'</li> <li>"Bin size in bases” to
+      '50</li> <li>"How to compare the two files” to 'Compute log2 of the number
+      of reads ratio</li> <li>"Coverage file format” to 'bigWig'</li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: IGV
+    element: '#history-options-button'
+    content: Inspect the log2 ratio in IGV
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How could you interpret the new track if you zoom to <i>chrX:151,385,260-152,426,526?</i></li>
+      </ul>
+    backdrop: false
+  - title: Detecting enriched regions (peak calling)
+    content: >-
+      We could see in the ChIP data some enriched regions (peaks). We now would
+      like to call these regions to obtain their coordinates, using <b>MACS2
+      callpeak</b>
+    backdrop: true
+  - title: Peak calling
+    element: '#tool-search-query'
+    content: Search for 'MACS2 callpeak' tool.
+    placement: right
+    textinsert: MACS2 callpeak
+  - title: Peak calling
+    element: '#tool-search'
+    content: Click on the 'MACS2 callpeak' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.4"]
+        .tool-old-link
+  - title: Peak calling
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Are you pooling
+      Treatment Files?” to 'No'<ul> <li>"ChIP-Seq Treatment File” to
+      'wt_H3K4me3_rep1.bam'</li></ul></li> <li>"Do you have a Control File?" to
+      'Yes'<ul> <li>"Are you pooling Treatment Files?” to 'No'<ul> <li>"ChIP-Seq
+      Treatment File” to 'wt_input_rep1.bam'</li></ul></li></ul></li>
+      <li>"Format of Input Files" to 'Paired-end BAM'</li> <li>"Effective genome
+      size” to 'M.musculus (1.87e9)</li> <li>"Outputs” to 'Summary page
+      (html)'</li> </ul>
+    position: right
+  - title: Peak calling
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the <i>(narrow Peaks)</i> file (output of MACS2 callpeak tool)
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which type of files were generated? What do they include?</li>
+      </ul>
+    backdrop: false
+  - title: Coverage file normalization
+    element: '#history-options-button'
+    content: Use <b>IGV</b> to inspect with the signal coverage and log2 ratio tracks
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peaks have been identified in <i>chrX:151,385,260-152,426,526</i> based on IGV?</li>
+        <li>What are the fold change of the peaks identified in <i>chrX:151,385,260-152,426,526</i>? Hint: using the BED file
+        <li>How many peaks have been identified on the full chromosome X? How many peaks have a fold change > 50?</li>
+      </ul>
+    backdrop: false
+  - title: Plot the signal between samples
+    content: >-
+      So far, we have normalized the data and identified peaks. Now, we would
+      like to visualize scores associated with certain genomic regions, for
+      example ChIP enrichment values around the TSS of genes. Moreover, we would
+      like to compare the enrichment of several ChIP samples (e.g. CTCF and
+      H3K4me3 )on the regions of interest.<br><br> Since we already generated
+      the required files for the H3K4me3 sample, let’s make them only for the
+      CTCF sample.
+    backdrop: true
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search-query'
+    content: Search for 'bamCompare' tool.
+    placement: right
+    textinsert: bamCompare
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search'
+    content: Click on the 'bamCompare' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"First BAM file (e.g.
+      treated sample)” to 'wt_CTCF_rep1.bam'</li> <li>"Second BAM file (e.g.
+      control sample)" to 'wt_input_rep1.bam'</li> <li>"Bin size in bases” to
+      '50'</li> <li>"How to compare the two files” to 'Compute log2 of the
+      number of reads ratio</li> <li>"Coverage file format” to 'bigwig'</li>
+      <li>"Region of the genome to limit the operation to” to 'chrX'</li> </ul>
+    position: right
+  - title: Rename the output data
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the output of <b>bamCompare</b> tool with the name of the sample
+    position: left
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search-query'
+    content: Search for 'MACS2 callpeak' tool.
+    placement: right
+    textinsert: MACS2 callpeak
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search'
+    content: Click on the 'MACS2 callpeak' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.4"]
+        .tool-old-link
+  - title: Prepare the peaks and data for CTCF
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Are you pooling
+      Treatment Files?” to 'No'<ul> <li>"ChIP-Seq Treatment File” to
+      'wt_CTCF_rep1.bam'</li></ul></li> <li>"Do you have a Control File?" to
+      'Yes'<ul> <li>"Are you pooling Treatment Files?” to 'No'<ul> <li>"ChIP-Seq
+      Treatment File” to 'wt_input_rep1.bam'</li></ul></li></ul></li>
+      <li>"Format of Input Files" to 'Paired-end BAM'</li> <li>"Effective genome
+      size” to 'M.musculus (1.87e9)</li> </ul>
+    position: right
+  - title: Prepare the peaks and data for CTCF
+    content: >-
+      We can now concatenate the MACS2 outputs with the location of the peaks
+      (concatenate the files and merge the overlapping regions) to obtain one
+      BED file corresponding to the coordinates of the interesting regions to
+      plot.
+    backdrop: true
+  - title: Prepare the peak coordinates
+    element: '#tool-search-query'
+    content: Search for 'Concatenate datasets' tool.
+    placement: right
+    textinsert: Concatenate datasets
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: Click on the 'Concatenate datasets' tool to open it.
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=cat1"] .tool-old-link'
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Concatenate Dataset”
+      to the output of MACS2 callpeak tool for <b>wt_CTCF_rep1</b></li>
+      <li>Click on "Insert Dataset"<ul> <li>"Select” to the output output of
+      MACS2 callpeak tool for <b>wt_H3K4me3_rep1</b></li></ul></li> </ul>
+    position: right
+  - title: Prepare the peak coordinates
+    element: '#tool-search-query'
+    content: Search for 'SortBED' tool.
+    placement: right
+    textinsert: SortBED
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: Click on the 'SortBED' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_sortbed%2F2.27.0.0"]
+        .tool-old-link
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Sort the following
+      bed,bedgraph,gff,vcf file" to the output of the previous tool</li> </ul>
+    position: right
+  - title: Prepare the peak coordinates
+    element: '#tool-search-query'
+    content: Search for 'MergeBED' tool.
+    placement: right
+    textinsert: MergeBED
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: Click on the 'MergeBED' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_mergebed%2F2.27.0.0"]
+        .tool-old-link
+  - title: Prepare the peak coordinates
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Sort the following
+      bed,bedgraph,gff,vcf file" to the output of the SortBED</li> </ul>
+    position: right
+  - title: Prepare the peak coordinates
+    content: >-
+      To plot the the peaks score on the region generated above (MergeBED
+      output) two tools from the <a
+      href="http://deeptools.readthedocs.io/">deepTools</a> package are
+      used:<ul> <li><b>computeMatrix</b> tool - it computes the signal on given
+      regions, using the bigwig coverage files from different samples.</li>
+      <li><b>plotHeatmap</b> tool - it plots heatMap of the signals using the
+      <b>computeMatrix</b> tool output.</li> </ul><br> Optionally, we can also
+      use <b>plotProfile</b> tool to create a profile plot from
+      <b>computeMatrix</b> tool output.
+    backdrop: true
+  - title: Plot the heatmap
+    element: '#tool-search-query'
+    content: Search for 'computeMatrix' tool.
+    placement: right
+    textinsert: computeMatrix
+  - title: Plot the heatmap
+    element: '#tool-search'
+    content: Click on the 'computeMatrix' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F3.1.2.0.0"]
+        .tool-old-link
+  - title: Plot the heatmap
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Select regions"<ul>
+      <li>“Regions to plot” to the output of MergeBED</li></ul></li> <li>"Sample
+      order matters” to 'No'<ul> <li>“Score file” to the 2 bigwig files
+      generated by bamCompare</li></ul></li> <li>“computeMatrix has two main
+      output options” to 'reference-point'<ul> <li>“The reference point for the
+      plotting” to 'center of region'</li> <li>“Distance upstream of the start
+      site of the regions defined in the region file” to '3000'</li>
+      <li>“Distance downstream of the end site of the given regions” to
+      '3000'</li></ul></li> </ul>
+    position: right
+  - title: Plot the heatmap
+    element: '#tool-search-query'
+    content: Search for 'plotHeatmap' tool.
+    placement: right
+    textinsert: plotHeatmap
+  - title: Plot the heatmap
+    element: '#tool-search'
+    content: Click on the 'plotHeatmap' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F3.1.2.0.1"]
+        .tool-old-link
+  - title: Plot the heatmap
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters<ul> <li>"Matrix file from the
+      computeMatrix tool" to 'Matrix' (output of computeMatrix)</li> <li>“Show
+      advanced options” to 'yes'<ul> <li>“Reference point label” to the right
+      label<ul> <li>“Did you compute the matrix with more than one groups of
+      regions?” to 'No, I used only one group'<ul> <li>“Clustering algorithm” to
+      'Kmeans clustering'</li> <li>“Number of clusters to compute” to
+      '2'</li></ul></li> </ul></li></ul></li> </ul>
+    position: right
+  - title: Plot the heatmap
+    element: '#history-options-button'
+    content: >-
+      Inspect the generated heatmap. When we look at this graph, it seems that
+      less but larger peaks are found for <i>H3K4me3_rep1</i> and that only few
+      peaks are shared.
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peaks have been found for <i>CTCF_rep1</i> and for <i>H3K4me3_rep1?</li>
+        <li>What are the mean width of the peaks for <i>CTCF_rep1</i> and for <i>H3K4me3_rep1</i>?</li>
+        <li>How many peaks are specific to <i>CTCF_rep1</i> or <i>H3K4me3_rep1</i>?</li>
+      </ul>
+    backdrop: false
+  - title: Plot the heatmap for all the samples
+    content: >-
+      So far, we have only analyzed 2 samples, but we can do the same for all
+      the 6 samples. Re-run the tools on the remaining files:<ul>
+        <li>bamCompare</li>
+        <li>MACS2 callpeak for each combination input - ChIP data</li>
+        <li>Concatenate datasets tail-to-head</li>
+        <li>SortBED</li>
+        <li>MergeBED</li>
+        <li>computeMatrix</li>
+        <li>plotHeatmap</li>
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peaks are found for the different samples?</li>
+        <li>How are the peaks?</li>
+        <li>How could be interpreted the peaks and read coverage in the <i>chrX:151,385,260-152,426,526</i> region?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      Along this tutorial, we learn how to extract peaks and coverage
+      information from raw data of ChIP experiments. This information can be
+      then related to the biology to answer the original question. We tried then
+      to relate the observed differences of peak and read coverage between
+      H3K27me3 and H3K4me3 to the known biology. We could go even further in the
+      analysis to reproduce the results of the original paper (e.g. by looking
+      at the bivalent genes, identifying the differences between Xa and Xi).
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.</li>
+        <li>Multiple normalization methods exists depending on the availability of input data.</li>
+        <li>Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.</li></ul>
+    backdrop: true

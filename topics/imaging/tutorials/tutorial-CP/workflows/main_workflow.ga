@@ -1,0 +1,1138 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Nucleoli segmentation and feature extraction using CellProfiler",
+    "format-version": "0.1",
+    "name": "CP_pipeline_IDR_training",
+    "steps": {
+        "0": {
+            "annotation": "Detail the metadata associated to the images that will be processed",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Starting modules",
+            "name": "Starting Modules",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "27396311a314",
+                "name": "cp_common",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"groups\": {\"con_groups\": {\"group_images\": \"Yes\", \"__current_case__\": 0, \"group_category\": \"field1\"}}, \"images\": {\"filter_images\": \"Images only\"}, \"metadata\": {\"con_metadata_extraction\": {\"extract\": \"Yes\", \"__current_case__\": 0, \"extraction_method\": [{\"__index__\": 0, \"metadata_extraction_method\": \"Extract from file/folder names\", \"con_metadata_source\": {\"metadata_source\": \"File name\", \"__current_case__\": 0, \"file_name_regex\": \"(?P<field1>.*)__(?P<field2>[a-zA-Z0-9]+)__(?P<field3>[a-zA-Z0-9]+)__(?P<field4>[a-zA-Z0-9]+)__(?P<field5>[a-zA-Z0-9]+)__(?P<field6>[a-zA-Z0-9]+)\"}, \"con_metadata_extract_from\": {\"extract_metadata_from\": \"All images\", \"__current_case__\": 1}}]}}, \"nameandtypes\": {\"pixel_space\": {\"process_3d\": \"No\", \"__current_case__\": 1}, \"con_assign_a_name_to\": {\"assign_a_name_to\": \"All images\", \"__current_case__\": 0, \"name_to_assign\": \"DNA\", \"con_select_image_type\": {\"select_image_type\": \"Grayscale image\", \"__current_case__\": 0, \"con_set_intensity\": {\"set_intensity_range_from\": \"Image metadata\", \"__current_case__\": 1}}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "9cb7aa2c-b60c-4a5b-9653-fa41ab465e94",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "6e8dc853-a475-401f-b276-c6ab024681fc"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Download images",
+            "name": "IDR Download",
+            "outputs": [
+                {
+                    "name": "out_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_tar",
+                    "type": "tar"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 241.25
+            },
+            "post_job_actions": {
+                "EmailActionout_log": {
+                    "action_arguments": {},
+                    "action_type": "EmailAction",
+                    "output_name": "out_log"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41",
+            "tool_shed_repository": {
+                "changeset_revision": "e08b1dc0480c",
+                "name": "idr_download_by_ids",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"channel\": \"Cy3\", \"clip_image\": {\"select\": \"\", \"__current_case__\": 0}, \"download_tar\": \"true\", \"frame\": \"0\", \"image_ids\": {\"source\": \"link\", \"__current_case__\": 0, \"id_spec\": \"http://idr.openmicroscopy.org/webclient/?show=image-295900|image-295905|image-295910|image-295918|image-295928|image-295934\"}, \"skip_failed\": \"true\", \"z_section\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.41",
+            "type": "tool",
+            "uuid": "682880bc-d35f-4f77-996e-7600de735da6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_log",
+                    "uuid": "ff013d1c-7570-4720-8b15-6689021807d5"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_tar",
+                    "uuid": "b94d5196-23db-4340-aa58-c082fc5ca449"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Incomplete nuclei that are touching the borders of the image are ignored and therefore, not segmented. It doesn't include the nuclei outside the diameter range either.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 0,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segment complete nuclei",
+            "name": "IdentifyPrimaryObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 272.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "52c01fb29b2a",
+                "name": "cp_identify_primary_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_advanced\": {\"advanced\": \"Yes\", \"__current_case__\": 1, \"input_from_nat\": \"DNA\", \"name_to_be_identified\": \"Nuclei\", \"min_diameter\": \"15\", \"max_diameter\": \"200\", \"discard_outside_border\": \"Yes\", \"discard_touching_border\": \"Yes\", \"con_threshold_strategy\": {\"threshold_strategy\": \"Global\", \"__current_case__\": 1, \"con_threshold_method\": {\"threshold_method\": \"Otsu\", \"__current_case__\": 0, \"con_threshold_class\": {\"threshold_class\": \"Two classes\", \"__current_case__\": 1}, \"threshold_smoothing_scale\": \"1.3488\", \"threshold_correction_factor\": \"0.9\", \"threshold_lower\": \"0.0\", \"threshold_upper\": \"1.0\"}}, \"con_distinguish_clumped_objects\": {\"distinguish_clumped_objects\": \"Shape\", \"__current_case__\": 0, \"con_dividing_lines\": {\"dividing_lines\": \"Shape\", \"__current_case__\": 0, \"con_smoothing_filter\": {\"smoothing_filter\": \"Yes\", \"__current_case__\": 1}, \"con_min_distance\": {\"min_distance\": \"Yes\", \"__current_case__\": 1}, \"speed_up\": \"Yes\"}}, \"fill_hole\": \"After both thresholding and declumping\", \"con_handling_excessive\": {\"excessive_handling\": \"Continue\", \"__current_case__\": 1}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "1614fb83-6565-4534-9a42-03e9d5c21a75",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "efff5d2f-aa7d-406a-8927-f373feb57837"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 2,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segmentation mask complete nuclei",
+            "name": "ConvertObjectsToImage",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 353.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "2690da374874",
+                "name": "cp_convert_objects_to_image",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_color_format\": {\"color_format\": \"Binary (black & white)\", \"__current_case__\": 0}, \"input_object\": \"Nuclei\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"MaskNuclei\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "dc500b23-6fb7-4daa-85f1-53f66b034826",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "3c7575e4-4094-4e19-9778-801325f82df9"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 3,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Label nuclei",
+            "name": "DisplayDataOnImage",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 434.25,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "4e12ef887a2a",
+                "name": "cp_display_data_on_image",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_display_mode\": {\"display_mode\": \"Text\", \"__current_case__\": 0, \"text_color\": \"#ff0000\", \"font_size\": \"11\", \"number_of_decimals\": \"0\", \"annotation_offset\": \"0\"}, \"con_display_obj_image\": {\"display_obj_image\": \"Object\", \"__current_case__\": 0, \"select_input_obj\": \"Nuclei\", \"con_obj_measurement_category\": {\"measurement_category\": \"Number\", \"__current_case__\": 0, \"measurement\": \"Object_Number\"}}, \"display_background_image\": \"Yes\", \"element_to_save\": \"Image\", \"image_to_display_measurements\": \"DNA\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"ImageDisplay\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "d74959c7-b1f5-47a4-8272-b3de8adaf04a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "113e8d23-a9e2-45a1-9d40-1e26d4f23456"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 4,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Save labelled nuclei",
+            "name": "SaveImages",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 515,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "a45d360ae9d9",
+                "name": "cp_save_images",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_method_for_constructing\": {\"method_for_constructing\": \"From image filename\", \"__current_case__\": 0, \"name_for_file_prefix\": \"DNA\", \"con_append_suffix\": {\"append_suffix\": \"Yes\", \"__current_case__\": 0, \"text_to_append\": \"_nucleiNumbers\"}}, \"con_type_of_image\": {\"type_of_image\": \"Image\", \"__current_case__\": 0, \"con_save_file_format\": {\"file_format\": \"tiff\", \"__current_case__\": 0, \"bit_depth\": \"8-bit integer\"}}, \"image_to_save\": \"ImageDisplay\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"overwrite_without_warning\": \"Yes\", \"record_info\": \"No\", \"when_to_save\": \"Every cycle\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "32d4b134-e681-484b-a46d-6fb511358a39",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "b1aa7814-3057-4f2f-8c8d-48aa7c1a7fa5"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 5,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Detect dark holes in nuclei",
+            "name": "EnhanceOrSuppressFeatures",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 595.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "3f9747bda8c4",
+                "name": "cp_enhance_or_suppress_features",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_enhance_suppress\": {\"select_operation\": \"Enhance\", \"__current_case__\": 0, \"con_feature_type\": {\"feature_type\": \"Dark holes\", \"__current_case__\": 2, \"min_hole_size\": \"1\", \"max_hole_size\": \"15\"}}, \"input_image\": \"DNA\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"DNAdarkholes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "2704e748-66d4-4a32-a9eb-459f65f58eb0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "fd53651d-06fb-4d6a-b65b-dd686dcb0fcc"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "The dark holes enhanced in the previous step are segmented only if they are inside a nuclei",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 6,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segment nucleoli that fall inside nuclei",
+            "name": "MaskImage",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 677.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "ca1421f7e3ed",
+                "name": "cp_mask_image",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_img_obj\": {\"img_obj\": \"Objects\", \"__current_case__\": 0, \"select_obj\": \"Nuclei\"}, \"input_image\": \"DNAdarkholes\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"invert_mask\": \"No\", \"name_output_image\": \"MaskDNAdarkholes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "32492729-4cd6-419e-9429-4fdf91410591",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "da3978ac-fb7a-4095-80d8-df2fad05b747"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "The segmentation only affects those inside the nuclei",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 7,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segment nucleoli",
+            "name": "IdentifyPrimaryObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 758.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "52c01fb29b2a",
+                "name": "cp_identify_primary_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_advanced\": {\"advanced\": \"Yes\", \"__current_case__\": 1, \"input_from_nat\": \"MaskDNAdarkholes\", \"name_to_be_identified\": \"Nucleoli\", \"min_diameter\": \"2\", \"max_diameter\": \"15\", \"discard_outside_border\": \"Yes\", \"discard_touching_border\": \"No\", \"con_threshold_strategy\": {\"threshold_strategy\": \"Global\", \"__current_case__\": 1, \"con_threshold_method\": {\"threshold_method\": \"Otsu\", \"__current_case__\": 0, \"con_threshold_class\": {\"threshold_class\": \"Two classes\", \"__current_case__\": 1}, \"threshold_smoothing_scale\": \"1.3488\", \"threshold_correction_factor\": \"0.9\", \"threshold_lower\": \"0.0\", \"threshold_upper\": \"1.0\"}}, \"con_distinguish_clumped_objects\": {\"distinguish_clumped_objects\": \"Shape\", \"__current_case__\": 0, \"con_dividing_lines\": {\"dividing_lines\": \"Shape\", \"__current_case__\": 0, \"con_smoothing_filter\": {\"smoothing_filter\": \"Yes\", \"__current_case__\": 1}, \"con_min_distance\": {\"min_distance\": \"Yes\", \"__current_case__\": 1}, \"speed_up\": \"Yes\"}}, \"fill_hole\": \"After both thresholding and declumping\", \"con_handling_excessive\": {\"excessive_handling\": \"Continue\", \"__current_case__\": 1}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "d9cd434a-3fca-4e45-8e73-6c8791af8304",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "dbf37c30-6e43-4d38-9584-b40946194283"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 8,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Convert the segmented nucleoli into an image",
+            "name": "ConvertObjectsToImage",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 839.25,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "2690da374874",
+                "name": "cp_convert_objects_to_image",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_color_format\": {\"color_format\": \"Binary (black & white)\", \"__current_case__\": 0}, \"input_object\": \"Nucleoli\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"MaskNucleoli\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "549c3604-1951-49d5-b170-de37f295f3ac",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "9082f1cc-35ee-4993-975e-592fe84143a9"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 9,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Combine masks (nuclei + nucleoli)",
+            "name": "GrayToColor",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 920,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "bbf1ef17c01b",
+                "name": "cp_gray_to_color",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_color_scheme\": {\"color_scheme\": \"RGB\", \"__current_case__\": 0, \"rgb_red\": \"MaskNucleoli\", \"rgb_red_weight\": \"0.8\", \"rgb_green\": \"Leave this black\", \"rgb_green_weight\": \"1.0\", \"rgb_blue\": \"MaskNuclei\", \"rgb_blue_weight\": \"0.5\"}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"CombinedMask\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "0e09f485-e2ff-4610-bf71-31cf1168ee6d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "1a8affd0-4d20-4335-845a-367f12879a2f"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 10,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Save combined segmentation masks",
+            "name": "SaveImages",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1000.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "a45d360ae9d9",
+                "name": "cp_save_images",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_method_for_constructing\": {\"method_for_constructing\": \"From image filename\", \"__current_case__\": 0, \"name_for_file_prefix\": \"DNA\", \"con_append_suffix\": {\"append_suffix\": \"Yes\", \"__current_case__\": 0, \"text_to_append\": \"_combinedMask\"}}, \"con_type_of_image\": {\"type_of_image\": \"Image\", \"__current_case__\": 0, \"con_save_file_format\": {\"file_format\": \"tiff\", \"__current_case__\": 0, \"bit_depth\": \"8-bit integer\"}}, \"image_to_save\": \"CombinedMask\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"overwrite_without_warning\": \"Yes\", \"record_info\": \"No\", \"when_to_save\": \"Every cycle\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "46a80d5c-29ee-45ae-9e5b-93099e8eadc2",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "5888c4cd-9a64-40f9-82c6-629f211fb04f"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "Incomplete nuclei that are touching the borders of the image are segmented, also the nuclei outside the diameter range.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 11,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segment all nuclei",
+            "name": "IdentifyPrimaryObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1081.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "52c01fb29b2a",
+                "name": "cp_identify_primary_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_advanced\": {\"advanced\": \"Yes\", \"__current_case__\": 1, \"input_from_nat\": \"DNA\", \"name_to_be_identified\": \"NucleiIncludingTouchingBorders\", \"min_diameter\": \"15\", \"max_diameter\": \"200\", \"discard_outside_border\": \"No\", \"discard_touching_border\": \"No\", \"con_threshold_strategy\": {\"threshold_strategy\": \"Global\", \"__current_case__\": 1, \"con_threshold_method\": {\"threshold_method\": \"Otsu\", \"__current_case__\": 0, \"con_threshold_class\": {\"threshold_class\": \"Two classes\", \"__current_case__\": 1}, \"threshold_smoothing_scale\": \"1.3488\", \"threshold_correction_factor\": \"0.9\", \"threshold_lower\": \"0.0\", \"threshold_upper\": \"1.0\"}}, \"con_distinguish_clumped_objects\": {\"distinguish_clumped_objects\": \"Shape\", \"__current_case__\": 0, \"con_dividing_lines\": {\"dividing_lines\": \"Shape\", \"__current_case__\": 0, \"con_smoothing_filter\": {\"smoothing_filter\": \"Yes\", \"__current_case__\": 1}, \"con_min_distance\": {\"min_distance\": \"Yes\", \"__current_case__\": 1}, \"speed_up\": \"Yes\"}}, \"fill_hole\": \"After both thresholding and declumping\", \"con_handling_excessive\": {\"excessive_handling\": \"Continue\", \"__current_case__\": 1}}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "b6f8fb6c-4278-4b17-ba76-c949f87fee51",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "c96b7030-c091-4961-801c-dc3e72b4a357"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 12,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Segmentation mask nucleoli including cells touching borders",
+            "name": "ConvertObjectsToImage",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1162.25,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "2690da374874",
+                "name": "cp_convert_objects_to_image",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_color_format\": {\"color_format\": \"Binary (black & white)\", \"__current_case__\": 0}, \"input_object\": \"NucleiIncludingTouchingBorders\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"Image_NucleiIncludingTouchingBorders\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "adc8a062-58ee-4285-a4f2-fcf423f30bdd",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "a9f1d26d-ad3d-4984-b15b-76d1e3309833"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 13,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Extract background",
+            "name": "ImageMath",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1243,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6d3851ac885f",
+                "name": "cp_image_math",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ignore_the_image_masks\": \"No\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"name_output_image\": \"BG\", \"operation\": {\"operation\": \"subtract\", \"__current_case__\": 1, \"first_image\": {\"image_or_measurement_first\": {\"image_or_measurement_first\": \"Image\", \"__current_case__\": 0, \"select_the_first_image\": \"DNA\"}, \"multiply_the_first_image_by\": \"1.0\"}, \"second_image\": {\"image_or_measurement_second\": {\"image_or_measurement_second\": \"Image\", \"__current_case__\": 0, \"select_the_second_image\": \"Image_NucleiIncludingTouchingBorders\"}, \"multiply_the_second_image_by\": \"1.0\"}, \"op_results\": {\"raise_the_power_of_the_result_by\": \"1.0\", \"multiply_the_result_by\": \"1.0\", \"add_to_result\": \"0.0\", \"set_values_less_than_0_equal_to_0\": \"Yes\", \"set_values_greater_than_1_equal_to_1\": \"Yes\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "549ce202-f817-48e7-90cb-2e3766c67e4b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "b64b6fc5-593f-4755-9531-3d4b2d47cc61"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "This step measures the granularity of the original image",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 14,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the image granularity",
+            "name": "MeasureGranularity",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1323.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "382413f8ec1d",
+                "name": "cp_measure_granularity",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_image\": [{\"__index__\": 0, \"image_to_measure\": \"DNA\", \"subsampling_factor_granularity\": \"0.25\", \"subsampling_factor_background_reduction\": \"0.25\", \"radius\": \"10\", \"range_granular_spectrum\": \"16\", \"rpt_object\": []}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "facc511c-7f3e-48bc-8330-e9bb5b4a6b1e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "b157d712-698d-46e6-b042-913748e44f89"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "This step measures the texture of the original image and nuclei in it",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 15,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the nuclei texture",
+            "name": "MeasureTexture",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1404.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "658a2a451aec",
+                "name": "cp_measure_texture",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_img_obj\": {\"img_obj\": \"Objects\", \"__current_case__\": 0, \"rpt_obj_to_measure\": [{\"__index__\": 0, \"obj_to_measure\": \"Nuclei\"}]}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_image_to_measure\": [{\"__index__\": 0, \"image_to_measure\": \"DNA\"}], \"rpt_scale_to_measure\": [{\"__index__\": 0, \"scale_to_measure\": \"3\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "ae3973f7-8c6e-410e-828a-633b59839fe6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "5d4d6e55-44cf-4611-bcd8-bda8a9df7286"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "This step measures the intensity of the original image and the nuclei",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 16,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the nuclei intensity",
+            "name": "MeasureObjectIntensity",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1485.25,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "b867e9317a06",
+                "name": "cp_measure_object_intensity",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_image\": [{\"__index__\": 0, \"image_to_measure\": \"DNA\"}], \"rpt_object\": [{\"__index__\": 0, \"objects_to_measure\": \"Nuclei\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "0ac29831-ed29-4294-95b5-ba2400408dab",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "d26c927d-f6c3-4c53-873b-015d8fe59d0f"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 17,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure size and shape of nuclei and nucleoli",
+            "name": "MeasureObjectSizeShape",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1566,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "5c9549983af8",
+                "name": "cp_measure_object_size_shape",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_object\": [{\"__index__\": 0, \"objects_to_measure\": \"Nuclei\"}, {\"__index__\": 1, \"objects_to_measure\": \"Nucleoli\"}], \"zernike_feature\": \"Yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "580e3cc4-48f3-48d2-9d69-8bb6c3d79be9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "289985e1-f94e-4223-bc1b-64ac4eadf40e"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 18,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Relate nucleoli with their parent nuclei",
+            "name": "RelateObjects",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1648,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "f3f45c42bc36",
+                "name": "cp_relate_objects",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"child_objects\": \"Nucleoli\", \"con_dist\": {\"calc_dist\": \"Both\", \"__current_case__\": 2, \"con_other_parent_dist\": {\"calc_dist_to_others\": \"No\", \"__current_case__\": 1}}, \"con_save_child\": {\"save_child_as_new\": \"Yes\", \"__current_case__\": 0, \"name_output\": \"RelateObjects\"}, \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"means_for_all\": \"Yes\", \"parent_objects\": \"Nuclei\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "d776a7aa-7154-401d-8ff5-15e986f29597",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "48df535c-abd3-423e-b6c4-e3e6a2579eb7"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 19,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the image quality",
+            "name": "MeasureImageQuality",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1728.75,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "08a2cf887a44",
+                "name": "cp_measure_image_quality",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"calc_for_images\": \"All loaded images\", \"calc_intensity_metrics\": \"Yes\", \"calc_saturation_metrics\": \"Yes\", \"con_calc_blur_metrics\": {\"calc_blur_metrics\": \"Yes\", \"__current_case__\": 0, \"rpt_blur_measurements\": [{\"__index__\": 0, \"blur_measurements\": \"20\"}]}, \"con_calc_threshold\": {\"calc_threshold\": \"Yes\", \"__current_case__\": 0, \"con_use_all_methods\": {\"use_all_methods\": \"No\", \"__current_case__\": 1, \"rpt_threshold_method\": [{\"__index__\": 0, \"con_threshold_methods\": {\"select_threshold_method\": \"Otsu\", \"__current_case__\": 0, \"otsu_weighted_entropy\": \"Weighted variance\", \"con_threshold_classes\": {\"threshold_classes\": \"Two classes\", \"__current_case__\": 1}}}]}}, \"include_rescaling_value\": \"Yes\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "3b81db10-c6dd-4ff0-8b2d-58ab00f80260",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "db6c90c4-44cd-405d-94f2-00f9c93a120c"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 20,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the area occupied by nuclei and nucleoli",
+            "name": "MeasureImageAreaOccupied",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1809.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "7a08edbc790e",
+                "name": "cp_measure_image_area_occupied",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_area\": [{\"__index__\": 0, \"con_area\": {\"objects_or_image\": \"Objects\", \"__current_case__\": 0, \"objects_to_measure\": \"Nuclei\"}}, {\"__index__\": 1, \"con_area\": {\"objects_or_image\": \"Objects\", \"__current_case__\": 0, \"objects_to_measure\": \"Nucleoli\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "3df981d5-142e-4cb5-b897-05afcb201811",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "58cdfb31-71f2-44ef-a385-f62188f8d2a3"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 21,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Measure the image intensity",
+            "name": "MeasureImageIntensity",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1891.5,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "2681008d726f",
+                "name": "cp_measure_image_intensity",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"rpt_intensity\": [{\"__index__\": 0, \"image_to_measure\": \"DNA\", \"con_intensity\": {\"only_from_objects\": \"No\", \"__current_case__\": 1}}, {\"__index__\": 1, \"image_to_measure\": \"DNA\", \"con_intensity\": {\"only_from_objects\": \"Yes\", \"__current_case__\": 0, \"input_objects\": \"Nuclei\"}}, {\"__index__\": 2, \"image_to_measure\": \"BG\", \"con_intensity\": {\"only_from_objects\": \"No\", \"__current_case__\": 1}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "5aa9619d-a11a-4b22-8d13-0b39eff4f665",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "64333743-a286-4ecb-85be-4203f31d566c"
+                }
+            ]
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input_pipeline": {
+                    "id": 22,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Export measurements",
+            "name": "ExportToSpreadsheet",
+            "outputs": [
+                {
+                    "name": "output_pipeline",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1972.25,
+                "top": 219
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "72a7f23f3a79",
+                "name": "cp_export_to_spreadsheet",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_metadata_column_to_object\": \"Yes\", \"calc_mean\": \"Yes\", \"calc_median\": \"Yes\", \"calc_standard_deviation\": \"Yes\", \"con_create_gene_pattern\": {\"create_gene_pattern\": \"No\", \"__current_case__\": 1}, \"con_export_all_measurements\": {\"export_all_measurements\": \"Yes\", \"__current_case__\": 1}, \"con_prefix\": {\"add_prefix\": \"No\", \"__current_case__\": 1}, \"delimiter\": \"Tab\", \"input_pipeline\": {\"__class__\": \"ConnectedValue\"}, \"overwrite_existing_file\": \"Yes\", \"represent_nan\": \"NaN\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "fe3256bd-e219-48ba-9588-87ccd061ce46",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pipeline",
+                    "uuid": "70625d77-224f-405a-ab93-3f55d644d9bd"
+                }
+            ]
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "con_input_type|input_images": {
+                    "id": 1,
+                    "output_name": "output_tar"
+                },
+                "pipeline": {
+                    "id": 23,
+                    "output_name": "output_pipeline"
+                }
+            },
+            "inputs": [],
+            "label": "Run CellProfiler",
+            "name": "CellProfiler",
+            "outputs": [
+                {
+                    "name": "pipeline_output",
+                    "type": "input"
+                },
+                {
+                    "name": "logs",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2053,
+                "top": 219
+            },
+            "post_job_actions": {
+                "EmailActionpipeline_output": {
+                    "action_arguments": {},
+                    "action_type": "EmailAction",
+                    "output_name": "pipeline_output"
+                },
+                "HideDatasetActionlogs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "logs"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9",
+            "tool_shed_repository": {
+                "changeset_revision": "fca368c99299",
+                "name": "cp_cellprofiler",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"con_input_type\": {\"input_type\": \"yes\", \"__current_case__\": 1, \"input_images\": {\"__class__\": \"ConnectedValue\"}}, \"detailed_output\": \"true\", \"pipeline\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.9",
+            "type": "tool",
+            "uuid": "5e893441-7a89-44ce-afe8-29959465f0ee",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "pipeline_output",
+                    "uuid": "30778509-8776-4c05-8d4e-6823532a9c41"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "CellProfiler",
+        "imaging"
+    ],
+    "uuid": "7feb2ec3-91f7-4de3-ada4-c173e0d401dc",
+    "version": 70
+}

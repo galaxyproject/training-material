@@ -1,0 +1,1506 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "WF for SIMORGH training",
+  "comments": [
+    {
+      "child_comments": [
+        1
+      ],
+      "child_steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        8,
+        11,
+        14,
+        19
+      ],
+      "color": "green",
+      "data": {
+        "title": "Frame"
+      },
+      "id": 0,
+      "position": [
+        0,
+        470
+      ],
+      "size": [
+        1240,
+        552.2
+      ],
+      "type": "frame"
+    },
+    {
+      "child_comments": [
+        3
+      ],
+      "child_steps": [
+        5,
+        6,
+        20
+      ],
+      "color": "blue",
+      "data": {
+        "title": "Frame"
+      },
+      "id": 2,
+      "position": [
+        1260,
+        230
+      ],
+      "size": [
+        240,
+        485.5
+      ],
+      "type": "frame"
+    },
+    {
+      "child_comments": [
+        5
+      ],
+      "child_steps": [
+        9,
+        10,
+        12,
+        13
+      ],
+      "color": "orange",
+      "data": {
+        "title": "Frame"
+      },
+      "id": 4,
+      "position": [
+        1510,
+        230
+      ],
+      "size": [
+        490,
+        343.5
+      ],
+      "type": "frame"
+    },
+    {
+      "child_comments": [
+        7,
+        8
+      ],
+      "child_steps": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "color": "yellow",
+      "data": {
+        "title": "Frame"
+      },
+      "id": 6,
+      "position": [
+        2060,
+        0
+      ],
+      "size": [
+        540,
+        840
+      ],
+      "type": "frame"
+    },
+    {
+      "color": "black",
+      "data": {
+        "bold": true,
+        "size": 2,
+        "text": "Colabfold prediction"
+      },
+      "id": 1,
+      "position": [
+        580,
+        510
+      ],
+      "size": [
+        360,
+        40
+      ],
+      "type": "text"
+    },
+    {
+      "color": "black",
+      "data": {
+        "bold": true,
+        "size": 2,
+        "text": "Inputs"
+      },
+      "id": 3,
+      "position": [
+        1310,
+        270
+      ],
+      "size": [
+        130,
+        40
+      ],
+      "type": "text"
+    },
+    {
+      "color": "black",
+      "data": {
+        "bold": true,
+        "size": 2,
+        "text": "PDB preprocessing"
+      },
+      "id": 5,
+      "position": [
+        1590,
+        270
+      ],
+      "size": [
+        320,
+        40
+      ],
+      "type": "text"
+    },
+    {
+      "color": "black",
+      "data": {
+        "bold": true,
+        "size": 2,
+        "text": "Simorgh<br>&nbsp; &nbsp; &nbsp;+<br>&nbsp;BBflow"
+      },
+      "id": 7,
+      "position": [
+        2100,
+        40
+      ],
+      "size": [
+        150,
+        110
+      ],
+      "type": "text"
+    },
+    {
+      "color": "black",
+      "data": {
+        "bold": true,
+        "size": 2,
+        "text": "Simorgh"
+      },
+      "id": 8,
+      "position": [
+        2400,
+        100
+      ],
+      "size": [
+        160,
+        50
+      ],
+      "type": "text"
+    }
+  ],
+  "format-version": "0.1",
+  "license": "MIT",
+  "name": "simorgh",
+  "readme": "Workflow related to the SIMORGH galaxy training. Comparing ligand-binding site predictions across different protein structure modalities using SIMORGH",
+  "report": {
+    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+  },
+  "steps": {
+    "0": {
+      "annotation": "fasta header",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Compose text parameter value",
+      "outputs": [
+        {
+          "name": "out1",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 20,
+        "top": 560
+      },
+      "post_job_actions": {
+        "HideDatasetActionout1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e188c9826e0f",
+        "name": "compose_text_param",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \">6N5J_1|Chains A, B|Signal recognition particle receptor FtsY|Escherichia coli (strain K12) (83333)\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "b50fe94b-4fe4-475a-855e-37df047b1eb6",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "fasta sequence line1",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Compose text parameter value",
+      "outputs": [
+        {
+          "name": "out1",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 20,
+        "top": 650
+      },
+      "post_job_actions": {
+        "HideDatasetActionout1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e188c9826e0f",
+        "name": "compose_text_param",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"GFARLKRSLLKTKENLGSGFISLFRGKKIDDDLFEELEEQLLIADVGVETTRKIITNLTEGASRKQLRDAEALYGLLKEE\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "eabce177-3f54-4929-8903-e9415f7e2cd9",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "fasta sequence line2",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Compose text parameter value",
+      "outputs": [
+        {
+          "name": "out1",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 20,
+        "top": 740
+      },
+      "post_job_actions": {
+        "HideDatasetActionout1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e188c9826e0f",
+        "name": "compose_text_param",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"MGEILAKVDEPLNVEGKAPFVILMVGVNGVGKTTTIGKLARQFEQQGKSVMLAAGDTFRAAAVEQLQVWGQRNNIPVIAQ\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "ba6c013e-26d1-4936-a55b-80d6dafe718d",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "fasta sequence line3",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Compose text parameter value",
+      "outputs": [
+        {
+          "name": "out1",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 20,
+        "top": 830
+      },
+      "post_job_actions": {
+        "HideDatasetActionout1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e188c9826e0f",
+        "name": "compose_text_param",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"HTGADSASVIFDAIQAAKARNIDVLIADTAGRLQNKSHLMEELKKIVRVMKKLDVEAPHEVMLTIDASTGQNAVSQAKLF\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "18b11373-4850-47c0-86d8-c904ef88dc57",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "fasta sequence line4",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Compose text parameter value",
+      "outputs": [
+        {
+          "name": "out1",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 20,
+        "top": 920
+      },
+      "post_job_actions": {
+        "HideDatasetActionout1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e188c9826e0f",
+        "name": "compose_text_param",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"HEAVGLTGITLTKLDGTAKGGVIFSVADQFGIPIRYIGVGERIEDLRPFKADDFIEALFARED\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "2a0964ca-409a-4f7d-8d72-9ebdc1ebdc22",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Get PDB file",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "pdb"
+        }
+      ],
+      "position": {
+        "left": 1280,
+        "top": 320
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput": {
+          "action_arguments": {
+            "newtype": "pdb"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output"
+        },
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "6N5J PDB"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        },
+        "TagDatasetActionoutput": {
+          "action_arguments": {
+            "tags": "name:apo"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "0a0ef624cb05",
+        "name": "get_pdb",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"pdb_id\": \"6N5J\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "7568558b-6189-4e61-8ce3-0ec0e1cd22b9",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Get PDB file",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "pdb"
+        }
+      ],
+      "position": {
+        "left": 1280,
+        "top": 440
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput": {
+          "action_arguments": {
+            "newtype": "pdb"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output"
+        },
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "6FQD PDB"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        },
+        "TagDatasetActionoutput": {
+          "action_arguments": {
+            "tags": "name:holo"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "0a0ef624cb05",
+        "name": "get_pdb",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"pdb_id\": \"6FQD\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "c6904546-88d8-4973-8f0d-6c876d32e4f2",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "Simorgh is not permitted for commercial work.",
+      "content_id": null,
+      "errors": null,
+      "id": 7,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Simorgh is not permitted for commercial work.",
+          "name": "I certify that I am NOT using this tool for commercial purposes."
+        }
+      ],
+      "label": "I certify that I am NOT using this tool for commercial purposes.",
+      "name": "Input parameter",
+      "outputs": [],
+      "position": {
+        "left": 1500,
+        "top": 0
+      },
+      "tool_id": null,
+      "tool_state": "{\"default\": false, \"validators\": [], \"parameter_type\": \"boolean\", \"optional\": false}",
+      "tool_version": null,
+      "type": "parameter_input",
+      "uuid": "03e9d7f8-3f2f-4095-89db-70adff35434d",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.11+galaxy0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "token_set_0|line": {
+          "id": 0,
+          "output_name": "out1"
+        },
+        "token_set_1|line": {
+          "id": 1,
+          "output_name": "out1"
+        },
+        "token_set_2|line": {
+          "id": 2,
+          "output_name": "out1"
+        },
+        "token_set_3|line": {
+          "id": 3,
+          "output_name": "out1"
+        },
+        "token_set_4|line": {
+          "id": 4,
+          "output_name": "out1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Create text file",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 270,
+        "top": 560
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutfile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.11+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "30b60202d990",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"token_set\": [{\"__index__\": 0, \"line\": {\"__class__\": \"ConnectedValue\"}, \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}, {\"__index__\": 1, \"line\": {\"__class__\": \"ConnectedValue\"}, \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}, {\"__index__\": 2, \"line\": {\"__class__\": \"ConnectedValue\"}, \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}, {\"__index__\": 3, \"line\": {\"__class__\": \"ConnectedValue\"}, \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}, {\"__index__\": 4, \"line\": {\"__class__\": \"ConnectedValue\"}, \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "9.11+galaxy0",
+      "type": "tool",
+      "uuid": "5253b130-7ce0-421d-8203-5f9e2ce84c67",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "pdb_input": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "PDBFixer",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "pdb"
+        }
+      ],
+      "position": {
+        "left": 1530,
+        "top": 320
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "6N5J PDB fixed"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "24bf162ef74b",
+        "name": "pdbfixer",
+        "owner": "chemteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"add_atoms\": \"heavy\", \"add_residues\": false, \"keep_heterogens\": \"none\", \"pdb_input\": {\"__class__\": \"ConnectedValue\"}, \"ph\": \"7.0\", \"replace_nonstandard\": true, \"solvent\": {\"box\": {\"water_box\": \"false\", \"__current_case__\": 1}, \"positive_ion\": \"Na+\", \"negative_ion\": \"Cl-\", \"ionic_strength\": \"0.0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.8.1+galaxy0",
+      "type": "tool",
+      "uuid": "b9178bbc-d6d2-47b0-8324-5602d240efcf",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "pdb_input": {
+          "id": 6,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "PDBFixer",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "pdb"
+        }
+      ],
+      "position": {
+        "left": 1530,
+        "top": 440
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "6FQD PDB fixed"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/pdbfixer/pdbfixer/1.8.1+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "24bf162ef74b",
+        "name": "pdbfixer",
+        "owner": "chemteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"add_atoms\": \"heavy\", \"add_residues\": false, \"keep_heterogens\": \"none\", \"pdb_input\": {\"__class__\": \"ConnectedValue\"}, \"ph\": \"7.0\", \"replace_nonstandard\": true, \"solvent\": {\"box\": {\"water_box\": \"false\", \"__current_case__\": 1}, \"positive_ion\": \"Na+\", \"negative_ion\": \"Cl-\", \"ionic_strength\": \"0.0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.8.1+galaxy0",
+      "type": "tool",
+      "uuid": "7563c40f-66b1-4433-b0bf-c4447da62be2",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.11+galaxy0",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "infile": {
+          "id": 8,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Replace Text",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 520,
+        "top": 560
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutfile": {
+          "action_arguments": {
+            "newtype": "fasta"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "outfile"
+        },
+        "RenameDatasetActionoutfile": {
+          "action_arguments": {
+            "newname": "FtsY.fasta"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.11+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "30b60202d990",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"X6N5J_1|Chains A\", \"replace_pattern\": \">6N5J_1|Chains A\", \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "9.11+galaxy0",
+      "type": "tool",
+      "uuid": "a33b201b-9d60-423e-b20a-cd0e39f9831b",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "12": {
+      "annotation": "remove chain A",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "infile": {
+          "id": 9,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Text reformatting",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1780,
+        "top": 320
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutfile": {
+          "action_arguments": {
+            "newname": "6N5J PDB fixed chainB"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "30b60202d990",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"code\": \"{\\n  rectype = substr($0,1,6)\\n  chain = substr($0,22,1)\\n  if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == \\\"A\\\") next\\n  print\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "9.11+galaxy0",
+      "type": "tool",
+      "uuid": "dec4c70f-3b27-4786-ad51-a616e20dc7f0",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "remove chain A",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "infile": {
+          "id": 10,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Text reformatting",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1780,
+        "top": 440
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutfile": {
+          "action_arguments": {
+            "newname": "6FQD PDB fixed chainB"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.11+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "30b60202d990",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"code\": \"{\\n  rectype = substr($0,1,6)\\n  chain = substr($0,22,1)\\n  if ((rectype ~ /^ATOM/ || rectype ~ /^HETATM/ || rectype ~ /^TER/) && chain == \\\"A\\\") next\\n  print\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "9.11+galaxy0",
+      "type": "tool",
+      "uuid": "6194128d-5def-4655-a08d-fe93be327d95",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/colabfold_msa/colabfold_msa/1.5.5+galaxy1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "query_type|input": {
+          "id": 11,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Colabfold MSA",
+          "name": "custom_template"
+        },
+        {
+          "description": "runtime parameter for tool Colabfold MSA",
+          "name": "query_type"
+        }
+      ],
+      "label": null,
+      "name": "Colabfold MSA",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "colab.tar"
+        }
+      ],
+      "position": {
+        "left": 770,
+        "top": 560
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/colabfold_msa/colabfold_msa/1.5.5+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "6fbd935575ce",
+        "name": "colabfold_msa",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"custom_template\": {\"__class__\": \"RuntimeValue\"}, \"pair_mode\": \"unpaired_paired\", \"query_type\": {\"select_query_type\": \"fasta\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"select_db\": {\"use_db\": \"yes\", \"__current_case__\": 1, \"msa_mode\": \"mmseqs2_uniref_env\"}}, \"templates\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.5.5+galaxy1",
+      "type": "tool",
+      "uuid": "5e5e3e50-129a-430f-86bc-2b5729983428",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "pdb": {
+          "id": 12,
+          "output_name": "outfile"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "bbflow_pdb",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2079.9999015444737,
+        "top": 159.9930546282368
+      },
+      "post_job_actions": {
+        "RenameDatasetActionbbflow_pdb": {
+          "action_arguments": {
+            "newname": "SIMORGH, BBflow - apo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "bbflow_pdb"
+        },
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - apo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - apo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"yes\", \"__current_case__\": 1, \"num_samples\": \"8\", \"timesteps\": \"20\", \"batch_size\": null, \"advanced\": {\"tag\": \"bbflow-multimer-0.2\", \"gamma_trans\": null, \"gamma_rots\": null}}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "1ca2a029-9bda-4047-bbc6-6cffeca3718e",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "viz_out_apo",
+          "output_name": "viz_out",
+          "uuid": "98192b3a-6b1a-41fe-896c-545f481e7236"
+        },
+        {
+          "label": "pdb_out_apo_multi",
+          "output_name": "pdb_out",
+          "uuid": "d64fa573-c930-42f8-acf8-6a395e56e8f4"
+        }
+      ]
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "pdb": {
+          "id": 12,
+          "output_name": "outfile"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2380,
+        "top": 160
+      },
+      "post_job_actions": {
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - apo-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - apo-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"no\", \"__current_case__\": 0}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "dff1130e-3814-4b98-816d-4c442a2f9236",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "pdb_out_apo_single",
+          "output_name": "pdb_out",
+          "uuid": "a2180ecf-683a-4d9b-9ff4-2350ea0e1769"
+        },
+        {
+          "label": "viz_out_apo_single",
+          "output_name": "viz_out",
+          "uuid": "0b0dff93-bb3c-4279-a648-5f905f8f705e"
+        }
+      ]
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "pdb": {
+          "id": 13,
+          "output_name": "outfile"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "bbflow_pdb",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2080,
+        "top": 390
+      },
+      "post_job_actions": {
+        "RenameDatasetActionbbflow_pdb": {
+          "action_arguments": {
+            "newname": "SIMORGH, BBflow - holo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "bbflow_pdb"
+        },
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - holo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - holo-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"yes\", \"__current_case__\": 1, \"num_samples\": \"8\", \"timesteps\": \"20\", \"batch_size\": null, \"advanced\": {\"tag\": \"bbflow-multimer-0.2\", \"gamma_trans\": null, \"gamma_rots\": null}}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "ede9f4d2-9c9f-4581-85bc-3848958b83f9",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "pdb_out_holo_multi",
+          "output_name": "pdb_out",
+          "uuid": "66dfb77e-d280-4830-84a6-43ffa177c39f"
+        },
+        {
+          "label": "viz_out_holo",
+          "output_name": "viz_out",
+          "uuid": "094ae5d1-7c52-4fe2-a8e3-9fcbd4bb4402"
+        }
+      ]
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 18,
+      "input_connections": {
+        "pdb": {
+          "id": 13,
+          "output_name": "outfile"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2380,
+        "top": 390
+      },
+      "post_job_actions": {
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - holo-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - holo-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"no\", \"__current_case__\": 0}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "f69a1b16-0e52-4ba9-bfe1-03378318bf06",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "pdb_out_holo_single",
+          "output_name": "pdb_out",
+          "uuid": "8c8aa601-6ccf-474e-8949-94c2a9a4f05f"
+        },
+        {
+          "label": "viz_out_holo_single",
+          "output_name": "viz_out",
+          "uuid": "cb3aaa62-d5a9-428b-ae69-b2db76e4056c"
+        }
+      ]
+    },
+    "19": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/colabfold_alphafold/colabfold_alphafold/1.5.5+galaxy1",
+      "errors": null,
+      "id": 19,
+      "input_connections": {
+        "input": {
+          "id": 14,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Colabfold Alphafold",
+      "outputs": [
+        {
+          "name": "png_files",
+          "type": "input"
+        },
+        {
+          "name": "json_files",
+          "type": "input"
+        },
+        {
+          "name": "pdb",
+          "type": "input"
+        },
+        {
+          "name": "a3m",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1020,
+        "top": 560
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/colabfold_alphafold/colabfold_alphafold/1.5.5+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "9d65257c56de",
+        "name": "colabfold_alphafold",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"advanced\": {\"num_recycles\": \"5\", \"recycle_early_stop_tolerance\": null, \"num_ensemble\": \"1\", \"random_seed\": \"42\", \"num_seeds\": null, \"num_models\": \"1\", \"max_msa\": \"512:1024\", \"use_dropout\": false, \"amber\": {\"use_amber\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"output_options\": {\"save_all\": false, \"save_recycles\": false, \"save_single_representations\": false, \"save_pair_representations\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.5.5+galaxy1",
+      "type": "tool",
+      "uuid": "ec2beded-e2b4-4d8d-a6b9-25b3fdb55892",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "20": {
+      "annotation": "",
+      "content_id": "__EXTRACT_DATASET__",
+      "errors": null,
+      "id": 20,
+      "input_connections": {
+        "input": {
+          "id": 19,
+          "output_name": "pdb"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Extract dataset",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "data"
+        }
+      ],
+      "position": {
+        "left": 1280,
+        "top": 560
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput": {
+          "action_arguments": {
+            "newtype": "pdb"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output"
+        },
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "FtsY Colabfold predicted"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        },
+        "TagDatasetActionoutput": {
+          "action_arguments": {
+            "tags": "name:colabfold"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "__EXTRACT_DATASET__",
+      "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "e440fcbe-2a50-4864-a35f-e20a981a77b1",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "21": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 21,
+      "input_connections": {
+        "pdb": {
+          "id": 20,
+          "output_name": "output"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "bbflow_pdb",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2080,
+        "top": 620
+      },
+      "post_job_actions": {
+        "RenameDatasetActionbbflow_pdb": {
+          "action_arguments": {
+            "newname": "SIMORGH, BBflow - colabfold-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "bbflow_pdb"
+        },
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - colabfold-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - colabfold-multi"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"yes\", \"__current_case__\": 1, \"num_samples\": \"8\", \"timesteps\": \"20\", \"batch_size\": null, \"advanced\": {\"tag\": \"bbflow-multimer-0.2\", \"gamma_trans\": null, \"gamma_rots\": null}}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "621629f3-d4ae-4f2a-9e92-acd221b7ead4",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "pdb_out_colabfold_multi",
+          "output_name": "pdb_out",
+          "uuid": "2e4f02ce-e6f2-4e35-aedb-eeb4c95197bc"
+        },
+        {
+          "label": "viz_out_colab",
+          "output_name": "viz_out",
+          "uuid": "03e6b954-dddc-4fec-b739-7d76f3553b86"
+        }
+      ]
+    },
+    "22": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "errors": null,
+      "id": 22,
+      "input_connections": {
+        "pdb": {
+          "id": 20,
+          "output_name": "output"
+        },
+        "when": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "SIMORGH",
+      "outputs": [
+        {
+          "name": "pdb_out",
+          "type": "pdb"
+        },
+        {
+          "name": "viz_out",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 2380,
+        "top": 620
+      },
+      "post_job_actions": {
+        "RenameDatasetActionpdb_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, Predicted Structure - colabfold-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "pdb_out"
+        },
+        "RenameDatasetActionviz_out": {
+          "action_arguments": {
+            "newname": "SIMORGH, visualization - colabfold-single"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "viz_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/simorgh/simorgh/1.0.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "7cbaa6fd99e8",
+        "name": "simorgh",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bbflow_condi\": {\"bbflow\": \"no\", \"__current_case__\": 0}, \"cluster_condi\": {\"cluster\": \"no\", \"__current_case__\": 0}, \"non_commercial_use\": true, \"pdb\": {\"__class__\": \"ConnectedValue\"}, \"viz_condi\": {\"visualize\": \"yes\", \"__current_case__\": 1, \"viz_style\": \"sphere\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0.1+galaxy1",
+      "type": "tool",
+      "uuid": "d73aa697-02f0-42d7-91dc-e5a4770e3d89",
+      "when": "$(inputs.when)",
+      "workflow_outputs": [
+        {
+          "label": "pdb_out_colabfold_single",
+          "output_name": "pdb_out",
+          "uuid": "2d59231a-ff61-4a63-9277-215064291bbc"
+        },
+        {
+          "label": "viz_out_colabfold_single",
+          "output_name": "viz_out",
+          "uuid": "37c50dfb-faa0-46f7-91da-faff9e12165d"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "Gtn",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "20fb7b82-3b74-45fb-8c36-212298bbb270",
+  "version": 17
+}

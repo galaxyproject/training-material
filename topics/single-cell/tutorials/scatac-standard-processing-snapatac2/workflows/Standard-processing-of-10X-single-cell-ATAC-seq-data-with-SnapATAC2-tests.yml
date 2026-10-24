@@ -1,0 +1,43 @@
+- doc: Test outline for Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2
+  job:
+    Fragment_file:
+      class: File
+      location: https://zenodo.org/records/12707159/files/atac_pbmc_5k_nextgem_fragments.tsv.gz
+      filetype: bed
+    chromosome_sizes.tabular:
+      class: File
+      location: https://zenodo.org/records/12707159/files/chrom_sizes.txt
+      filetype: tabular
+    gene_annotation:
+      class: File
+      location: https://zenodo.org/records/12707159/files/gencode.v46.annotation.gtf.gz
+      filetype: gtf
+    Bam-file:
+      class: File
+      location: https://zenodo.org/records/12707159/files/BAM_500-PBMC.bam
+      filetype: bam
+    Replace_file:
+      class: File
+      path: test-data/Replace_file.tabular
+      filetype: tabular
+    Keys for annotations of obs/cells or vars/genes: leiden, CD3D, CD8A, CD4, MS4A1,
+      NKG7, CD14, FCER1A
+  outputs:
+    plot log frag_size:
+      path: test-data/plot_log_frag_size.png
+    umap_marker-genes:
+      path: test-data/umap_marker-genes.png
+    leiden annotation:
+      path: test-data/leiden_annotation.tabular
+    general:
+      path: test-data/final_inspect_anndata.txt
+    plot frag_size:
+      path: test-data/plot_frag_size.png
+    plot tsse:
+      path: test-data/plot_tsse.png
+    umap_leiden-clusters:
+      path: test-data/umap_leiden-clusters.png
+    cell type annotation:
+      path: test-data/cell_type_annotation.tabular
+    umap_cell-type:
+      path: test-data/umap_cell-type.png

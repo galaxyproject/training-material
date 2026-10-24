@@ -1,0 +1,3115 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Ansible / Ansible / Galaxy Server Administration</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Ansible">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Server Administration / Ansible / Hands-on: Ansible">
+        <meta property="og:description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/admin/tutorials/ansible/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Ansible",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-06-14 09:56:50 +0000",
+  "datePublished": "2018-07-11 08:27:13 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00000",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server Administration",
+    "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "abstract": "# Overview",
+  "learningResourceType": "e-learning",
+  "name": "Ansible",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+  "version": 48,
+  "timeRequired": "PT60M",
+  "teaches": "- Learn Ansible basics\n- Write a simple role\n- Install a role from Ansible Galaxy (repository unrelated to the Galaxy Project)",
+  "keywords": [
+    "Galaxy Server Administration",
+    "ansible"
+  ],
+  "description": "## Abstract\n\n# Overview\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why Ansible?\n - How and when to use Ansible?\n - How to write a role?\n - How to leverage community build roles?\n\n\n## Learning Objectives\n\n- Learn Ansible basics\n- Write a simple role\n- Install a role from Ansible Galaxy (repository unrelated to the Galaxy Project)\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/vladvisan/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/vladvisan/",
+      "name": "Vlad Visan",
+      "image": "https://avatars.githubusercontent.com/vladvisan",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uga/",
+          "name": "Université Grenoble-Alpes",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.univ-grenoble-alpes.fr"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0007-0529-1002",
+      "@id": "https://orcid.org/0009-0007-0529-1002"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "name": "Martin Čech",
+      "image": "https://avatars.githubusercontent.com/martenson",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9318-1781",
+      "@id": "https://orcid.org/0000-0002-9318-1781"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/earlham/",
+          "name": "Earlham Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.earlham.ac.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-steers/",
+          "name": "ELIXIR-STEERS",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/steers"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "@id": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "name": "Simon Gladman",
+      "image": "https://avatars.githubusercontent.com/slugger70",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6100-4385",
+      "@id": "https://orcid.org/0000-0002-6100-4385"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "@id": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "@id": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "name": "Gianmauro Cuccuru",
+      "image": "https://avatars.githubusercontent.com/gmauro",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5335-545X",
+      "@id": "https://orcid.org/0000-0002-5335-545X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9676-7032",
+      "@id": "https://orcid.org/0000-0002-9676-7032"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "name": "John Davis",
+      "image": "https://avatars.githubusercontent.com/jdavcs",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1363-1245",
+      "@id": "https://orcid.org/0000-0002-1363-1245"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "name": "Lucille Delisle",
+      "image": "https://avatars.githubusercontent.com/lldelisle",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1964-4960",
+      "@id": "https://orcid.org/0000-0002-1964-4960"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "name": "Niall Beard",
+      "image": "https://avatars.githubusercontent.com/njall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server Administration",
+      "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server Administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server Administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/ansible/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/ansible/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-admin">
+    <h1 data-toc-skip>Ansible</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/vladvisan/" class="contributor-badge contributor-vladvisan"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/vladvisan?s=36" alt="Vlad Visan avatar" width="36" class="avatar" />
+    Vlad Visan</a></td>
+	</tr>
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/martenson/" class="contributor-badge contributor-badge-small contributor-martenson"><img src="https://avatars.githubusercontent.com/martenson?s=36" alt="Martin Čech avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-badge-small contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-badge-small contributor-slugger70"><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/vladvisan/" class="contributor-badge contributor-badge-small contributor-vladvisan"><img src="https://avatars.githubusercontent.com/vladvisan?s=36" alt="Vlad Visan avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-badge-small contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-badge-small contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gmauro/" class="contributor-badge contributor-badge-small contributor-gmauro"><img src="https://avatars.githubusercontent.com/gmauro?s=36" alt="Gianmauro Cuccuru avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-badge-small contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Marius van den Beek avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/jdavcs/" class="contributor-badge contributor-badge-small contributor-jdavcs"><img src="https://avatars.githubusercontent.com/jdavcs?s=36" alt="John Davis avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-badge-small contributor-lldelisle"><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/njall/" class="contributor-badge contributor-badge-small contributor-njall"><img src="https://avatars.githubusercontent.com/njall?s=36" alt="Niall Beard avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Why Ansible?</p>
+</li>
+        
+        <li><p>How and when to use Ansible?</p>
+</li>
+        
+        <li><p>How to write a role?</p>
+</li>
+        
+        <li><p>How to leverage community build roles?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn Ansible basics</p>
+</li>
+        
+        <li><p>Write a simple role</p>
+</li>
+        
+        <li><p>Install a role from Ansible Galaxy (repository unrelated to the Galaxy Project)</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/ansible/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/ansible/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/admin/tutorials/ansible/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/ansible/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 61m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/ansible/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 11, 2018 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00000">https://gxy.io/GTN:T00000</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.4</a> (0 recent ratings, 22 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 48 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="overview">Overview</h1>
+
+<p>In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Maybe even <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">install Galaxy using Ansible</a> or contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxy Project’s Ansible roles</a>.</p>
+
+<p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
+  <li><a href="#what-is-ansible" id="markdown-toc-what-is-ansible">What is Ansible?</a>    <ol>
+      <li><a href="#inventory-file" id="markdown-toc-inventory-file">Inventory file</a></li>
+      <li><a href="#roles" id="markdown-toc-roles">Roles</a></li>
+      <li><a href="#modules-and-tasks" id="markdown-toc-modules-and-tasks">Modules and Tasks</a></li>
+      <li><a href="#playbooks" id="markdown-toc-playbooks">Playbooks</a></li>
+      <li><a href="#variables" id="markdown-toc-variables">Variables</a></li>
+      <li><a href="#vaults" id="markdown-toc-vaults">Vaults</a></li>
+    </ol>
+  </li>
+  <li><a href="#your-first-playbook-and-first-role" id="markdown-toc-your-first-playbook-and-first-role">Your First Playbook and First Role</a>    <ol>
+      <li><a href="#a-basic-role" id="markdown-toc-a-basic-role">A Basic Role</a></li>
+      <li><a href="#facts" id="markdown-toc-facts">Facts</a></li>
+      <li><a href="#templates" id="markdown-toc-templates">Templates</a></li>
+    </ol>
+  </li>
+  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible Galaxy</a>    <ol>
+      <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
+    </ol>
+  </li>
+  <li><a href="#ansible-vault" id="markdown-toc-ansible-vault">Ansible Vault</a></li>
+  <li><a href="#other-stuff" id="markdown-toc-other-stuff">Other Stuff</a>    <ol>
+      <li><a href="#with-items" id="markdown-toc-with-items">With Items</a></li>
+      <li><a href="#when-changed" id="markdown-toc-when-changed">When Changed</a></li>
+      <li><a href="#notifying-handlers" id="markdown-toc-notifying-handlers">Notifying Handlers</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-operating-system-compatibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-operating-system-compatibility" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Operating system compatibility</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">usegalaxy.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="what-is-ansible">What is Ansible?</h1>
+
+<p>Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like Puppet. If you’ve used Puppet, Ansible doesn’t evaluate what changes need to be made and make those, it just runs through all of commands every time.</p>
+
+<p>Some terms that you should know first:</p>
+
+<dl>
+  <dt>Inventory file</dt>
+  <dd>An Ansible-specific file that defines the systems (“hosts”) and groups of hosts on which Ansible should operate.</dd>
+  <dt>Ansible module</dt>
+  <dd>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="language-plaintext highlighter-rouge">command</code> module which converts parameters like <code class="language-plaintext highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</dd>
+  <dt>Task</dt>
+  <dd>A call to an Ansible module that should be executed and the configuration for this module.</dd>
+  <dt>Role</dt>
+  <dd>A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a> (repository unrelated to the Galaxy Project).</dd>
+  <dt>Playbook</dt>
+  <dd>A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</dd>
+  <dt>Vault</dt>
+  <dd>An encrypted YAML file. You put your secrets here and then you can use them in tasks, roles and playbooks.</dd>
+</dl>
+
+<p>Looking at each of these briefly:</p>
+
+<h2 id="inventory-file">Inventory file</h2>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[webservers]</span>
+<span class="err">192.0.2.0</span>
+<span class="err">192.0.2.1</span>
+
+<span class="nn">[databases]</span>
+<span class="err">192.0.2.3</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
+</code></pre></div></div>
+
+<p>Here we’ve defined two groups of computers, <code class="language-plaintext highlighter-rouge">webservers</code> and <code class="language-plaintext highlighter-rouge">databases</code>. <code class="language-plaintext highlighter-rouge">ansible_user</code> is used to
+specify which user to connect with (you need to specify that if you SSH in with a username different
+than your current local user account’s name).</p>
+
+<p>As you can see, in this inventory we connect to multiple remote machines. This is common practice;
+Ansible playbooks are stored on your laptop or a build server, and from there Ansible connects out to the
+remote machines that are managed. The advantage of running remotely is that you can manage dozens of
+machines simultaneously, rather than just the local machine. This scaling out to N machines is one of
+the strengths of Ansible.</p>
+
+<p>Additionally, playbooks are often stored in Git or other version control repositories to ensure that
+if anything happens to the infrastructure you manage, you’ll still have a copy of the information
+required to rebuild everything with Ansible.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
+</blockquote>
+
+<h2 id="roles">Roles</h2>
+
+<p>We can look at the <a href="https://github.com/galaxyproject/ansible-cvmfs">ansible-cvmfs role</a> as an example for the layout of a role:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── defaults
+│   └── main.yml
+├── files
+│   ├── cvmfs_remount_sync.c
+│   ├── cvmfs_remount_sync.centos_6
+│   ├── cvmfs_remount_sync.centos_7
+│   └── ...
+├── handlers
+│   └── main.yml
+├── meta
+│   └── main.yml
+├── tasks
+│   ├── apache.yml
+│   ├── ...
+│   ├── main.yml
+│   └── ...
+├── templates
+│   ├── ...
+│   └── stratum1_squid.conf.j2
+└── vars
+    ├── ...
+    ├── main.yml
+    └── ...
+</code></pre></div></div>
+
+<p>These are the folders that are included in many complex roles. Simpler roles will often not need all of the folders.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Folder</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>defaults</td>
+      <td>Default values for variables the user can set (e.g. “version of software to install”).</td>
+    </tr>
+    <tr>
+      <td>files</td>
+      <td>These are files which should be copied as-is over to the remote location.</td>
+    </tr>
+    <tr>
+      <td>handlers</td>
+      <td>This is typically used for restarting processes.</td>
+    </tr>
+    <tr>
+      <td>meta</td>
+      <td>Only needed to publish your role to Ansible Galaxy (repository unrelated to the Galaxy Project).</td>
+    </tr>
+    <tr>
+      <td>tasks</td>
+      <td><strong>Always start reading here</strong>. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here (e.g. variables to load, handlers, files, templates).</td>
+    </tr>
+    <tr>
+      <td>templates</td>
+      <td>Files that are templated out with variables before being copied.</td>
+    </tr>
+    <tr>
+      <td>vars</td>
+      <td>Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions).</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-ansible-role-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-role-documentation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Ansible Role Documentation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>For more information check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html">the official documentation on this topic</a>.</p>
+</blockquote>
+
+<h2 id="modules-and-tasks">Modules and Tasks</h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">tasks/main.yml</code> file calls multiple Ansible modules to accomplish its goal. A typical tasks file looks like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Download cvmfs_preload utility when desired</span>
+  <span class="na">get_url</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">https://cvmrepo.web.cern.ch/cvmrepo/preload/cvmfs_preload</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">cvmfs_preload_path</span><span class="nv"> </span><span class="s">}}/cvmfs_preload"</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="m">755</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">cvmfs_preload_install | bool</span>
+
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Ensure AutoFS is enabled + running</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">autofs</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">started</span>
+</code></pre></div></div>
+
+<p>Here we have two tasks. Each has a <code class="language-plaintext highlighter-rouge">name</code> that will be shown to the person running the playbook.</p>
+
+<p>The first example invokes the <a href="https://docs.ansible.com/ansible/2.9/modules/get_url_module.html"><code class="language-plaintext highlighter-rouge">get_url</code></a> module with 5 arguments (<code class="language-plaintext highlighter-rouge">url</code>, <code class="language-plaintext highlighter-rouge">dest</code>, <code class="language-plaintext highlighter-rouge">owner</code>, <code class="language-plaintext highlighter-rouge">group</code> and <code class="language-plaintext highlighter-rouge">mode</code>). This will download a file from the location indicated in <code class="language-plaintext highlighter-rouge">url</code> to the directory specified by <code class="language-plaintext highlighter-rouge">dest</code>, change user and group ownerships to <code class="language-plaintext highlighter-rouge">root</code>, and change file permissions to <code class="language-plaintext highlighter-rouge">755</code> (as assigned by the <code class="language-plaintext highlighter-rouge">mode</code> argument). The <code class="language-plaintext highlighter-rouge">dest</code> parameter uses a <a href="http://jinja.pocoo.org/">Jinja2</a> template to evaluate the value of the variable <code class="language-plaintext highlighter-rouge">cvmfs_preload_path</code>. We can <a href="https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_preload_path">grep through</a> the repository and see that <code class="language-plaintext highlighter-rouge">defaults/main.yml</code> sets that to <code class="language-plaintext highlighter-rouge">/usr/bin</code> by default. We can override this if we need, we’ll come back to that later. The first task also has a <code class="language-plaintext highlighter-rouge">when</code> condition to ensure it only runs when the <code class="language-plaintext highlighter-rouge">cvmfs_preload_install</code> variable is set.</p>
+
+<p>The second invokes the <a href="https://docs.ansible.com/ansible/2.9/modules/service_module.html"><code class="language-plaintext highlighter-rouge">service</code></a> module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service <code class="language-plaintext highlighter-rouge">name: autofs</code> will be <code class="language-plaintext highlighter-rouge">enabled</code> and its <code class="language-plaintext highlighter-rouge">state</code> should be <code class="language-plaintext highlighter-rouge">started</code>.</p>
+
+<p><a href="https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html">Many modules</a> are available for you to use.</p>
+
+<h3 id="stylistic-choices">Stylistic Choices</h3>
+
+<p>Ansible accepts two ways to format tasks:</p>
+
+<p>YAML style:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">package_name</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">package_state</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div></div>
+
+<p>And an inline style.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">package name={{ package_name }} state={{ package_state }}</span>
+</code></pre></div></div>
+
+<p>Some groups prefer one style or another. You can mix both of these but you probably shouldn’t. In the YAML style the templated value needs to be quoted if the value after the colon starts with a <code class="language-plaintext highlighter-rouge">{</code> (see <a href="https://docs.ansible.com/ansible/9/playbook_guide/playbooks_variables.html#when-to-quote-variables-a-yaml-gotcha">this page</a> for more details ). The inline style does not require quoting of templated values.</p>
+
+<h2 id="playbooks">Playbooks</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CVMFS</span>
+  <span class="na">hosts</span><span class="pi">:</span> <span class="s">webservers</span>
+  <span class="na">vars</span><span class="pi">:</span>
+    <span class="na">cvmfs_numfiles</span><span class="pi">:</span> <span class="m">4096</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+</code></pre></div></div>
+
+<p>This is a quite minimal playbook. It selects a <code class="language-plaintext highlighter-rouge">hosts</code> group named <code class="language-plaintext highlighter-rouge">webservers</code>, overrides the variable <code class="language-plaintext highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-ansible-playbook-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-playbook-documentation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Ansible Playbook Documentation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>For more information check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html">the official documentation on this topic</a>.</p>
+</blockquote>
+
+<h3 id="philosophies">Philosophies</h3>
+
+<p>Different groups use playbooks differently. Here is a non-exhaustive list of ways that the author has seen playbooks used:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Use Cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A single playbook that does everything</td>
+      <td>Works well in cloud use cases where you would rather terminate a VM and just restart from nothing. If 100% of the tasks are idempotent (can be re-run without causing problems) then this can also work well for ensuring all machines that are managed are meeting your compliance standards.</td>
+    </tr>
+    <tr>
+      <td>Playbooks that execute one-off commands</td>
+      <td>Works well when you have commands that cannot safely be re-run (e.g. you are managing a repository on a remote machine and executing a ‘commit’ action.) Also works if you have multiple people who are responsible for managing a machine but you want to ensure exactly the same commands are run each time a task needs to be done, with no variation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="variables">Variables</h2>
+
+<p>There are a bunch of places variables can be set. <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable">The list is ridiculous.</a> Try and find a convention within your group and stick to that to help manage the chaos.</p>
+
+<p>There are some special places you can put variables that will be loaded automatically:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">group_vars/&lt;group_name&gt;.yml</code>: if you run a playbook which has <code class="language-plaintext highlighter-rouge">hosts: webservers</code>, and <code class="language-plaintext highlighter-rouge">group_vars/webservers.yml</code> exists, it will be loaded.</li>
+  <li><code class="language-plaintext highlighter-rouge">host_vars/&lt;host_name&gt;.yml</code>: if you run a playbook and it affects host (e.g.) <code class="language-plaintext highlighter-rouge">api01</code>, and <code class="language-plaintext highlighter-rouge">host_vars/api01.yml</code> exists, it will be loaded automatically.</li>
+</ul>
+
+<p>For a real-life example, UseGalaxy.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="language-plaintext highlighter-rouge">group_vars/</code> file.</p>
+
+<h2 id="vaults">Vaults</h2>
+
+<p><a href="https://docs.ansible.com/ansible/2.9/user_guide/vault.html"><code class="language-plaintext highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">UseGalaxy.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
+
+<h1 id="your-first-playbook-and-first-role">Your First Playbook and First Role</h1>
+
+<p>The above introduction was certainly not enough for you to feel confident in Ansible, so we will now build a small role and a playbook to run this role.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-safety-first"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Safety First</div>
+
+  <p>Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the command line, but scaled across N machines. Be very careful with the changes you plan to make.
+Ansible provides some flags which can help you identify changes before they’re made to production systems:</p>
+
+  <dl>
+    <dt><strong><code class="language-plaintext highlighter-rouge">--diff</code></strong></dt>
+    <dd>This will show the difference whenever a file is changed.</dd>
+    <dt><strong><code class="language-plaintext highlighter-rouge">--check</code></strong></dt>
+    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a downstream task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
+  </dl>
+
+  <p>In this tutorial we will write to files in <code class="language-plaintext highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements for Running This Tutorial</div>
+
+  <ol>
+    <li>
+      <p>You have <a href="https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html">Ansible installed</a> on the machine you will run this tutorial from</p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-running-ansible-on-remote-machine"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Running Ansible on remote machine</div>
+        <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <strong>not</strong> do that in this training.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Your <code class="language-plaintext highlighter-rouge">ansible</code> version is <code class="language-plaintext highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="language-plaintext highlighter-rouge">ansible --version</code></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="a-basic-role">A Basic Role</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-our-workspace"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Setting up our workspace</div>
+
+  <ol>
+    <li>
+      <p>In this training we will run Ansible on the machine it will modify. This is not best practice, but it is convenient for trainings. You should probably run this in a VM either on the Cloud or in VirtualBox or similar</p>
+
+      <p>All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup</p>
+    </li>
+    <li>
+      <p><strong>Create a directory named <code class="language-plaintext highlighter-rouge">intro</code> and <code class="language-plaintext highlighter-rouge">cd</code> into it.</strong></p>
+
+      <p>It’s good practice to keep your deployments separated.</p>
+    </li>
+    <li>
+      <p>Create your inventory file (named <code class="language-plaintext highlighter-rouge">hosts</code>) in this folder</p>
+
+      <ol>
+        <li>
+          <p>We will call our group <code class="language-plaintext highlighter-rouge">my_hosts</code></p>
+        </li>
+        <li>
+          <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
+
+          <blockquote class="solution">
+            <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <p>The file should look like:</p>
+
+            <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local ansible_user=ubuntu</span>
+</code></pre></div>            </div>
+          </blockquote>
+
+          <blockquote class="details">
+            <div class="box-title details-title" id="details-for-your-own-infrastructure-do-you-connect-as-a-different-user-password-ssh-key"><button class="gtn-boxify-button details" type="button" aria-controls="details-for-your-own-infrastructure-do-you-connect-as-a-different-user-password-ssh-key" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: For your own infrastructure, do you connect as a different user? Password? SSH key?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
+          </blockquote>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p>Create the roles directory, your role, and the tasks folder: <code class="language-plaintext highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
+    </li>
+    <li>
+      <p>Create a YAML file in that directory, <code class="language-plaintext highlighter-rouge">roles/my-role/tasks/main.yml</code> and open it for editing</p>
+    </li>
+    <li>
+      <p>Define a <code class="language-plaintext highlighter-rouge">copy</code> task like below:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy a file to the remote host</span>
+  <span class="na">copy</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">test.txt</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/tmp/test.txt</span>
+</code></pre></div>      </div>
+
+      <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/2.9/modules/copy_module.html"><code class="language-plaintext highlighter-rouge">copy</code></a> module in Ansible’s documentation.</p>
+
+      <blockquote class="details">
+        <div class="box-title details-title" id="details-ansible-module-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-module-documentation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Ansible Module Documentation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>You can usually find a module for most commands you will run in a shell, e.g. by searching the internet for “ansible copy file to server” or “ansible restart service”. If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/2.9/modules/command_module.html"><code class="language-plaintext highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Create a <code class="language-plaintext highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="language-plaintext highlighter-rouge">test.txt</code>, containing the content “Hello, Galaxy 🚀”</p>
+    </li>
+    <li>
+      <p>This is a complete role by itself and will copy the file <code class="language-plaintext highlighter-rouge">test.txt</code> from the <code class="language-plaintext highlighter-rouge">roles/my-role/files/</code> folder over to the target host and place it in <code class="language-plaintext highlighter-rouge">/tmp</code>.</p>
+    </li>
+    <li>
+      <p>Create and open <code class="language-plaintext highlighter-rouge">playbook.yml</code> file for editing in the <code class="language-plaintext highlighter-rouge">intro</code> directory you created. Place the following content in there:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">my-role</span>
+</code></pre></div>      </div>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>How does your file tree look now? Use <code class="language-plaintext highlighter-rouge">find</code> or <code class="language-plaintext highlighter-rouge">tree</code>.</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── hosts
+├── playbook.yml
+└── roles
+    └── my-role
+        ├── files
+        │   └── test.txt
+        └── tasks
+            └── main.yml
+</code></pre></div>          </div>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: Bash</div>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+TASK [my-role : Copy a file to the remote host] ********************************
+changed: [localhost]
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Login to the appropriate host (unless your host was <code class="language-plaintext highlighter-rouge">localhost</code>) and <code class="language-plaintext highlighter-rouge">cat /tmp/test.txt</code> to see that the change was made.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now that you’ve done this, here are some starting points for exploration:</p>
+
+<ul>
+  <li>Add more hosts, watch as Ansible executes over all of them in parallel.</li>
+  <li>Identify a task you do regularly, e.g. restarting a service. Find the Ansible service module and add that to your playbook.</li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-too-many-cows"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Too Many Cows?</div>
+  <p>If you’ve installed the <code class="language-plaintext highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="language-plaintext highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
+&lt; PLAY [my_hosts] &gt;
+ ----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ________________________
+&lt; TASK [Gathering Facts] &gt;
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="facts">Facts</h2>
+
+<p>In the last step of the last hands-on, you ran your playbook. The first <code class="language-plaintext highlighter-rouge">TASK</code> that was executed was not one that you had written, it reads:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+</code></pre></div></div>
+
+<p>The <a href="https://docs.ansible.com/ansible/2.9/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code></a> module runs by default for every host and gathers facts about the host.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-the-setup-module"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: The Setup Module</div>
+
+  <ol>
+    <li>
+      <p>Run the command <code class="language-plaintext highlighter-rouge">ansible -i hosts -m setup my_hosts | less</code>.</p>
+
+      <p>The <code class="language-plaintext highlighter-rouge">my_hosts</code> at the end of the command refers to the group we defined in our <code class="language-plaintext highlighter-rouge">hosts</code> inventory file.</p>
+    </li>
+    <li>
+      <p>Investigate the output. See what sort of information is made available to you.</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>What variable stores the OS name?</li>
+          <li>Where are all of the places that you can find your machine’s IP (v4) addresses?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>
+              <p>The OS name is stored in <code class="language-plaintext highlighter-rouge">ansible_distribution</code>. We saw <code class="language-plaintext highlighter-rouge">ansible_os_family</code> used above in the <code class="language-plaintext highlighter-rouge">ansible-cvmfs</code> role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
+            </li>
+            <li>
+              <p>Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:</p>
+
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">ansible_all_ipv4_addresses</code></li>
+                <li><code class="language-plaintext highlighter-rouge">ansible_default_ipv4.address</code></li>
+                <li><code class="language-plaintext highlighter-rouge">ansible_&lt;interface_name&gt;.ipv4</code></li>
+              </ul>
+            </li>
+          </ol>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="templates">Templates</h2>
+
+<p>Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance, deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, <code class="language-plaintext highlighter-rouge">when</code> statements (like the <a href="#modules-and-tasks">ansible-cvmfs example we saw earlier</a>). Additionally all of the variables you’ve defined are available as well.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-template-syntax"><button class="gtn-boxify-button details" type="button" aria-controls="details-template-syntax" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Template Syntax</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Templates end with the <code class="language-plaintext highlighter-rouge">.j2</code> suffix and use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the <code class="language-plaintext highlighter-rouge">.j2</code> suffix.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-variables-and-templates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Variables and Templates</div>
+
+  <ol>
+    <li>
+      <p>Create the directories: <code class="language-plaintext highlighter-rouge">roles/my-role/templates</code>, <code class="language-plaintext highlighter-rouge">roles/my-role/defaults</code></p>
+    </li>
+    <li>
+      <p>Create and edit a file for your role’s variables, <code class="language-plaintext highlighter-rouge">roles/my-role/defaults/main.yml</code></p>
+    </li>
+    <li>
+      <p>Insert the following content:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">server_name</span><span class="pi">:</span> <span class="s">Cats!</span>
+</code></pre></div>      </div>
+
+      <p>This will define a variable <code class="language-plaintext highlighter-rouge">server_name</code> that can then be used in templates.</p>
+    </li>
+    <li>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">roles/my-role/templates/test.ini.j2</code></p>
+    </li>
+    <li>
+      <p>Insert the following content:</p>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">{{ server_name }}</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">{{ ansible_default_ipv4.address }}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit <code class="language-plaintext highlighter-rouge">roles/my-role/tasks/main.yml</code> and append a new task to the end to template this file:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Template the configuration file</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">test.ini.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/tmp/test.ini</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook again.</p>
+    </li>
+    <li>
+      <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+
+          <p>The file should look like:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example]
+server_name = Cats!
+listen = 192.168.0.2
+</code></pre></div>          </div>
+          <p>Where the last line has the machine’s IP address.</p>
+        </blockquote>
+      </blockquote>
+
+      <p>Now that this has worked successfully, we will setup a <code class="language-plaintext highlighter-rouge">group_vars</code> folder
+to show how a person using <code class="language-plaintext highlighter-rouge">my-role</code> would override the <code class="language-plaintext highlighter-rouge">server_name</code> variable.</p>
+    </li>
+    <li>
+      <p>Create the folder <code class="language-plaintext highlighter-rouge">group_vars/</code> (in the root of your directory)</p>
+    </li>
+    <li>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">group_vars/my_hosts.yml</code></p>
+    </li>
+    <li>
+      <p>Insert the following:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">server_name</span><span class="pi">:</span> <span class="s">Dogs!</span>
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-variable-connection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-variable-connection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Variable connection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml <span class="nt">--check</span> <span class="nt">--diff</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-what-if-you-forget-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-forget-diff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: What if you forget `--diff`?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>   <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+TASK [my-role : Copy a file to the remote host] ********************************
+ok: [localhost]
+TASK [my-role : Template the configuration file] *******************************
+--- before: /tmp/test.ini
++++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
+@@ -1,3 +1,3 @@
+ [example]
+-server_name = Cats!
++server_name = Dogs!
+ listen = 192.168.0.25
+changed: [localhost]
+PLAY RECAP **********************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+</code></pre></div>        </div>
+        <p>Here you can see that the <code class="language-plaintext highlighter-rouge">server_name</code> value will be changed. Despite Ansible reporting <code class="language-plaintext highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the playbook again, without the <code class="language-plaintext highlighter-rouge">--check</code> flag to apply your changes.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-ansible-variable-templating"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Ansible Variable Templating</div>
+  <p>In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in the group variables file. Our templated variable looked like: <code class="language-plaintext highlighter-rouge">listen = {{ ansible_default_ipv4.address }}</code>.</p>
+
+  <p>It is common to see things like this in Ansible roles:</p>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">root_dir = /opt/my-app</span>
+<span class="s">config_dir = "{{ root_dir }}/config"</span>
+</code></pre></div>  </div>
+
+  <p>When Ansible runs:</p>
+
+  <ol>
+    <li>It collects variables defined in group variables and other places</li>
+    <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/2.9/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
+    <li>When multiple roles execute in a playbook:
+      <ol>
+        <li>Their defaults are added to the set of variables (the group variables having precedence over these variables)</li>
+        <li>They can also dynamically define more variables which may not be set until that role is run</li>
+      </ol>
+    </li>
+    <li>Before use (in templates, commands, etc.), variables are resolved to their final value</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="ansible-galaxy">Ansible Galaxy</h1>
+
+<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy (repository unrelated to the Galaxy Project) is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.</p>
+
+<p><strong>Warning</strong>: This will install Memcached on the target machine.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-installing-a-module-using-ansible-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Installing a module using ansible-galaxy</div>
+
+  <ol>
+    <li>
+      <p>Install the geerlingguy.memcached role with ansible-galaxy into your roles folder:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="se">\</span>
+    <span class="nt">-p</span> roles/ geerlingguy.memcached
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+          <p>This will install the new role into your <code class="language-plaintext highlighter-rouge">roles</code> folder, alongside your own role.</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- downloading role 'memcached', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-memcached/archive/1.1.0.tar.gz
+- extracting geerlingguy.memcached to /home/ubuntu/ansible/intro/roles/geerlingguy.memcached
+- geerlingguy.memcached (1.1.0) was installed successfully
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Edit your playbook.yml and add the role <code class="language-plaintext highlighter-rouge">geerlingguy.memcached</code> at the bottom, after <code class="language-plaintext highlighter-rouge">my-role</code></p>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>Did something go wrong?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
+The solution to this is to set <code class="language-plaintext highlighter-rouge">become: true</code>.</p>
+
+          <ol>
+            <li>Edit your playbook.yml
+              <ul>
+                <li>add <code class="language-plaintext highlighter-rouge">become: true</code> just below <code class="language-plaintext highlighter-rouge">hosts: my_hosts</code></li>
+              </ul>
+            </li>
+            <li>Run the playbook again</li>
+          </ol>
+
+          <p><code class="language-plaintext highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="language-plaintext highlighter-rouge">root</code>. If you want to become a different user, just set <code class="language-plaintext highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="language-plaintext highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
+
+          <blockquote class="details">
+            <div class="box-title details-title" id="details-ansible-become"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-become" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Ansible Become</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <p>See the <a href="https://docs.ansible.com/ansible/2.9/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="language-plaintext highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
+
+          </blockquote>
+
+          <blockquote class="tip">
+            <div class="box-title tip-title" id="tip-should-i-use-sudo-or-directly-login-as-root"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-should-i-use-sudo-or-directly-login-as-root" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Should I use sudo or directly login as root?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <p>This is often site-specific policy. If your site doesn’t have a dictated policy, then it’s generally preferable to not allow direct login as root, and login as a separate user.</p>
+          </blockquote>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="choosing-a-role">Choosing a Role</h2>
+
+<p>Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
+
+<ul>
+  <li>The name should match the software you are using (I.e. ignore a role named <code class="language-plaintext highlighter-rouge">stackstorm</code> when you are trying to set up <code class="language-plaintext highlighter-rouge">rabbitmq</code>. Ansible Galaxy does not have perfect search.)</li>
+  <li><code class="language-plaintext highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="language-plaintext highlighter-rouge">galaxyproject</code> and <code class="language-plaintext highlighter-rouge">usegalaxy_eu</code> roles.</li>
+  <li>Check the GitHub readme of each role you consider using. Look for:
+    <ul>
+      <li>Extensive documentation of all of the variables, their default values, and how they behave.</li>
+      <li>An example playbook using the role</li>
+    </ul>
+  </li>
+  <li>A large number of downloads is a good sign that other people found it useful</li>
+</ul>
+
+<p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="language-plaintext highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
+
+<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-galaxy install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles">galaxyproject</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">usegalaxy.eu</a></p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I know what I can do with a role? What variables are available?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, galaxyproject) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="ansible-vault">Ansible Vault</h1>
+
+<p>Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets. Ansible Vault is really useful to include encrypted secrets in your playbook repository.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-secrets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Setting up secrets</div>
+
+  <ol>
+    <li>
+      <p>Run <code class="language-plaintext highlighter-rouge">mkdir -p secret_group_vars</code></p>
+    </li>
+    <li>
+      <p>Now we’ll create a strong password: <code class="language-plaintext highlighter-rouge">openssl rand -base64 24 &gt; vault-password.txt</code></p>
+    </li>
+    <li>
+      <p>Run <code class="language-plaintext highlighter-rouge">ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt</code></p>
+
+      <p>This will open <code class="language-plaintext highlighter-rouge">secret_group_vars/all.yml</code> in your text editor.</p>
+    </li>
+    <li>
+      <p>In this file, enter the following contents and save it:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apikey</span><span class="pi">:</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>      </div>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>How does your file look? Is it readable? Run <code class="language-plaintext highlighter-rouge">cat secret_group_vars/all.yml</code></p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
+$ANSIBLE_VAULT;1.1;AES256
+64373665366130333437393639343534653134346538636239393363373062393830653333323966
+3134333366363130326139323162323131643763336236320a393262303938316262643764323862
+36393161666663353231366336613838633866323230303031313465646333613862363264323139
+3263383530626262370a666139666462663938343531656432353239346532316630366165376566
+34313765353766666330366632303836353863396430343264303032363739666139383830323565
+6133663637356331613062353834646561653366386665623930
+</code></pre></div>          </div>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Use the new variable in our <code class="language-plaintext highlighter-rouge">.ini</code> file from earlier. Edit <code class="language-plaintext highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="language-plaintext highlighter-rouge">apikey = {{ apikey }}</code></p>
+    </li>
+    <li>
+      <p>Add encrypted variable file to <code class="language-plaintext highlighter-rouge">playbook.yml</code></p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
+  <span class="s">...</span>
+  <span class="na">vars_files</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="s">secret_group_vars/all.yml</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Tell ansible where to find the decryption file. Create file <code class="language-plaintext highlighter-rouge">ansible.cfg</code> with content</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">[</span><span class="nv">defaults</span><span class="pi">]</span>
+<span class="s">vault_password_file=vault-password.txt</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+    <li>
+      <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: Bash</div>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+          <p>The file should look like:</p>
+
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Dogs!</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
+<span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or remove any secrets from the git history if you ever committed them in plain text). If you are storing your vault password in a file, remember to add it to your <code class="language-plaintext highlighter-rouge">.gitignore</code> (or VCS appropriate file.)</p>
+
+<h1 id="other-stuff">Other Stuff</h1>
+
+<p>Ansible has a huge array of features and we can’t cover them all. Some commonly used features are documented below:</p>
+
+<h2 id="with-items">With Items</h2>
+
+<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="language-plaintext highlighter-rouge">loop</code> construct</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
+  <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
+  <span class="na">loop</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">htop</span>
+    <span class="pi">-</span> <span class="s">git</span>
+    <span class="pi">-</span> <span class="s">vim</span>
+</code></pre></div></div>
+
+<p>This works for any task, not just package installation, if you have things you’d like to repeat.
+Note that for this task one would normally list multiple packages in the <code class="language-plaintext highlighter-rouge">name</code> parameter of the package module.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
+  <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">htop</span>
+      <span class="pi">-</span> <span class="s">git</span>
+      <span class="pi">-</span> <span class="s">vim</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
+</code></pre></div></div>
+
+<h2 id="when-changed">When Changed</h2>
+
+<p>Doing something only when a task is in the “changed” state is a common pattern. This is often used for reloading a service when some configuration files have changed.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy configuration file</span>
+  <span class="na">copy</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">main.conf</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/etc/service/main.conf</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+  <span class="na">register</span><span class="pi">:</span> <span class="s">service_conf</span>
+
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Restart the service</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">service</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">service_conf is changed</span>
+</code></pre></div></div>
+
+<h2 id="notifying-handlers">Notifying Handlers</h2>
+
+<p>Often you want to restart a service whenever something has changed, like above. But if you need to restart the service whenever one of many different tasks has changed, there is a simpler way than writing <code class="language-plaintext highlighter-rouge">when: a.changed or b.changed or c.changed or ...</code></p>
+
+<p>First, move the restarting or reloading of the service into the <code class="language-plaintext highlighter-rouge">handlers/main.yml</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">restart service</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">service</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
+
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">reload httpd</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">httpd</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">reloaded</span>
+</code></pre></div></div>
+
+<p>Now you can change your task definitions:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy configuration file</span>
+  <span class="na">copy</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">main.conf</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/etc/service/main.conf</span>
+    <span class="s">owner:</span><span class="nv"> </span><span class="s">"root"</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s2">"</span><span class="s">root"</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0644"</span>
+  <span class="na">notify</span><span class="pi">:</span> <span class="s1">'</span><span class="s">restart</span><span class="nv"> </span><span class="s">service'</span>
+</code></pre></div></div>
+
+<p>We no longer <code class="language-plaintext highlighter-rouge">register</code> the command, instead the <code class="language-plaintext highlighter-rouge">notify</code> attribute automatically marks that the appropriate handler should be called <em>at the end of the playbook run</em>. Additionally, tasks from outside of this role can use the same <code class="language-plaintext highlighter-rouge">notify</code>. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Ansible lets you do system administration at scale</p>
+</li>
+                        
+                        <li><p>Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/admin/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/ansible"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/ansible">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Helena Rasche, Saskia Hiltemann,  <b>Ansible (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-ansible,
+author = "Helena Rasche and Saskia Hiltemann",
+	title = "Ansible (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">14</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.35714285714285715">5</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.14285714285714285">2</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.07142857142857142">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>April 2025</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Simple, informative, you guys are great. I see great potential for my current job as a sys admin, as well
+					<b>Disliked</b>: Only thing, maybe put a link to the youtube video - https://www.youtube.com/watch?v=2KdT0sYKUeE&list=PLNFLKDpdM3B9aiB2rLaAIVdjIos4rc9-y&index=4  It gives more confidence running this with company
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The straightforward pedagogical approach
+					<b>Disliked</b>: I think it is perfect as is 
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					
+					<b>Disliked</b>: For me it is not clear wether the apikey example use of vaults is the best. Might it be better to set an example about ssh passwords to connect remote servers?
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Really clearly written and well explained, including details that can go wrong or be confusing (the cowsay bit gave me a chuckle). Not overwhelming, unlike some other tutorials I tried. 
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>February 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It gave an excellent crash course in Ansible and how best to use it in Galaxy
+					<b>Disliked</b>: Possibly one or two links to other Ansible resources in the docco, but can't think of anything else.
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The incremental approach to a rather complex system
+					<b>Disliked</b>: I was confused at first by the "service" service. More real, less abstract examples would be clearer, IMO
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					
+					<b>Disliked</b>: specifiying that all commands (including andible-galaxy) should be rin in the `intro` directory, I had to rsync my new `~/roles` folder to intro
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It is easy to follow
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Clear examples
+					<b>Disliked</b>: More information on using git repos with ansible would be helpful
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: This is something new. I enjoyed it. 
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: All of it
+					<b>Disliked</b>: Looks very good, with basic sample tasks.
+				</li>
+				
+		    </ul>
+		    
+		    <b>February 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Step-by-Step guide, simple and well informative
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2019</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Examples and documentation are easy to follow
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2018</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: TEST
+					<b>Disliked</b>: TEST
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: excellent intro, thanks!
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>October 2018</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It's easy to follow.
+					<b>Disliked</b>: For clean Ubuntu 18.04 Ansible couldn't find python (it was not installed, weird), so it crashed. There should be rule added to check and install python if it is not installed. Refer to this solution - https://gist.github.com/gwillem/4ba393dceb55e5ae276a87300f6b8e6f.
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00000">gxy.io/GTN:T00000</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/ansible/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/admin/tutorials/ansible/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

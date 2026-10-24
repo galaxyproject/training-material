@@ -1,0 +1,3288 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Identifying tuberculosis transmission links: from SNPs to transmission clusters / Identifying tuberculosis transmission links: from SNPs to transmission clusters / Evolution</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identifying tuberculosis transmission links: from SNPs to transmission clusters">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-05-26 11:18:27 +0000">
+<meta name="DC.creator" content="Galo A. Goig">
+<meta name="DC.creator" content="Daniela Brites">
+<meta name="DC.creator" content="Christoph Stritt"><meta name="description" content="phylogenetics">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Evolution / Identifying tuberculosis transmission links: from SNPs to transmission clusters / Hands-on: Identifying tuberculosis transmission links: from SNPs to transmission clusters">
+        <meta property="og:description" content="phylogenetics">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/evolution/tutorials/mtb_transmission/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-05-26 11:18:27 +0000",
+  "datePublished": "2022-03-16 08:35:43 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00145",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Evolution",
+    "description": "phylogenetics",
+    "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+  },
+  "abstract": "In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.",
+  "learningResourceType": "e-learning",
+  "name": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
+  "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html",
+  "version": 13,
+  "timeRequired": "PT2H",
+  "teaches": "- Create a SNP alignment\n- Calculate pairwise SNP distances between MTB samples\n- Identify transmission clusters based on SNP distances\n- Study the emergence and spread of drug resistance based on transmission analysis.",
+  "keywords": [
+    "Evolution",
+    "prokaryote",
+    "one-health",
+    "microgalaxy"
+  ],
+  "description": "## Abstract\n\nIn a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Learning Objectives\n\n- Create a SNP alignment\n- Calculate pairwise SNP distances between MTB samples\n- Identify transmission clusters based on SNP distances\n- Study the emergence and spread of drug resistance based on transmission analysis.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html",
+      "name": "M. tuberculosis Variant Analysis",
+      "description": "Hands-on for 'M. tuberculosis Variant Analysis' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/GaloGS/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/GaloGS/",
+      "name": "Galo A. Goig",
+      "image": "https://avatars.githubusercontent.com/GaloGS",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+      "name": "Daniela Brites",
+      "image": "https://avatars.githubusercontent.com/dbrites",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+      "name": "Christoph Stritt",
+      "image": "https://avatars.githubusercontent.com/cstritt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/esg4stars/",
+          "name": "ESG4Stars",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://cordis.europa.eu/project/id/101290798"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "@id": "https://orcid.org/0000-0002-9464-6640"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/GaloGS/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/GaloGS/",
+      "name": "Galo A. Goig",
+      "image": "https://avatars.githubusercontent.com/GaloGS",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+      "name": "Peter van Heusden",
+      "image": "https://avatars.githubusercontent.com/pvanheus",
+      "description": "Research at the South African National Bioinformatics Institute",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6553-5274",
+      "@id": "https://orcid.org/0000-0001-6553-5274"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+      "name": "Christoph Stritt",
+      "image": "https://avatars.githubusercontent.com/cstritt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "name": "Lucille Delisle",
+      "image": "https://avatars.githubusercontent.com/lldelisle",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1964-4960",
+      "@id": "https://orcid.org/0000-0002-1964-4960"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Evolution",
+      "description": "phylogenetics",
+      "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3299",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3299",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3299"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0622",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0622"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3301",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3301"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3324",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3324"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2885",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2885",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2885"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bcftools",
+      "name": "BCFtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bcftools",
+      "name": "BCFtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/samtools",
+      "name": "SAMtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/snippy",
+      "name": "snippy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/snippy",
+      "name": "snippy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/combat-tb_workbench",
+      "name": "COMBAT-TB Workbench"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/combat-tb_workbench",
+      "name": "COMBAT-TB Workbench"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/combat-tb_workbench",
+      "name": "COMBAT-TB Workbench"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/tb-profiler",
+      "name": "tb-profiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/trimmomatic",
+      "name": "Trimmomatic"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/6010176",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/evolution" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Evolution
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/evolution/faqs/" title="Check our FAQs for the Evolution topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/mtb_transmission/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-evolution">
+    <h1 data-toc-skip>Identifying tuberculosis transmission links: from SNPs to transmission clusters</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/GaloGS/" class="contributor-badge contributor-GaloGS"><img src="https://avatars.githubusercontent.com/GaloGS?s=36" alt="Galo A. Goig avatar" width="36" class="avatar" />
+    Galo A. Goig</a><a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge contributor-dbrites"><img src="https://avatars.githubusercontent.com/dbrites?s=36" alt="Daniela Brites avatar" width="36" class="avatar" />
+    Daniela Brites</a><a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=36" alt="Christoph Stritt avatar" width="36" class="avatar" />
+    Christoph Stritt</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
+    Wolfgang Maier</a></td>
+	</tr>
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/GaloGS/" class="contributor-badge contributor-badge-small contributor-GaloGS"><img src="https://avatars.githubusercontent.com/GaloGS?s=36" alt="Galo A. Goig avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-badge-small contributor-pvanheus"><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Peter van Heusden avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-badge-small contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=36" alt="Christoph Stritt avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-badge-small contributor-lldelisle"><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-badge-small contributor-wm75"><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Create a SNP alignment</p>
+</li>
+        
+        <li><p>Calculate pairwise SNP distances between MTB samples</p>
+</li>
+        
+        <li><p>Identify transmission clusters based on SNP distances</p>
+</li>
+        
+        <li><p>Study the emergence and spread of drug resistance based on transmission analysis.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Using dataset collections</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: M. tuberculosis Variant Analysis</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6010176">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/evolution/tutorials/mtb_transmission/workflows/" title="Identifying tuberculosis transmission links: from SNPs to transmission clusters workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/evolution/tutorials/mtb_transmission/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 16, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 26, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00145">https://gxy.io/GTN:T00145</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (3 recent ratings, 14 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.</p>
+
+<p>This tutorial guides you through transmission cluster identification from preprocessed whole-genome sequencing data of MTB strains. It consists of two parts:</p>
+
+<ol>
+  <li>
+    <p>Part one starts from per-sample lists of mutations/variants (in <em>variant call format</em>, VCF), as derived from sequencing data through mapping of sequenced reads to a reference genome followed by variant calling. From the lists of variants, more specifically from the single nucleotide variants found for every sample, you will construct a sample distance matrix and identify likely transmission clusters based on overall sample similarity.</p>
+  </li>
+  <li>
+    <p>Part two starts with drug-resistance profiles of the same samples and combines these profiles with the cluster information obtained in part one to enable reasoning about the validity of identified clusters and about evolution of drug resistance in the samples.</p>
+  </li>
+</ol>
+
+<p>Both the lists of variants and the drug-resistance reports for all samples have been pre-generated for you, and can simply be imported into Galaxy from public sources.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-origin-of-the-input-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Origin of the input data</div>
+
+  <p>This tutorial does <em>not</em> discuss the analysis steps that lead from sequencing data to lists of variants, nor the generation of drug-resistance profiles with the tool TB-Profiler. These topics are covered in the separate tutorial <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">M. tuberculosis Variant Analysis</a> instead.</p>
+
+  <p>If, after working through this and the other tutorial, you would like to combine the two to perform the complete analysis from sequenced reads to transmission clusters for the 20 samples used here, you can find their raw sequencing data in this <a href="https://zenodo.org/record/5911437">Zenodo record</a>, and two Galaxy workflows to process the data into VCFs and to generate drug-resistance profiles as <a href="./workflows">supplementary material</a> to this tutorial.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-recommended-background-information"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Recommended background information</div>
+
+  <p>A series of webinars has been produced alongside this tutorial to provide some theoretical background for the topics touched here. Specifically, these are:</p>
+
+  <ul>
+    <li><a href="https://youtu.be/Ddwt-_gQR2M"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Drug resistance prediction</a></li>
+    <li><a href="https://youtu.be/1ps_o5rpnmw"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Phylogenetic mutations</a></li>
+    <li><a href="https://youtu.be/l4cPUECJ7VU"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> The concept of clustering</a></li>
+    <li><a href="https://youtu.be/kKNgmpy1N94"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Genetic distance thresholds</a></li>
+  </ul>
+
+  <p>Watching at least some of them before or after doing the tutorial is highly recommended.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants" id="markdown-toc-analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants">Analysis Part 1: Identification of transmission clusters from per-sample variants</a>    <ol>
+      <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
+      <li><a href="#generate-a-snp-alignment" id="markdown-toc-generate-a-snp-alignment">Generate a SNP alignment</a></li>
+      <li><a href="#identify-transmission-clusters" id="markdown-toc-identify-transmission-clusters">Identify transmission clusters</a></li>
+    </ol>
+  </li>
+  <li><a href="#analysis-part-2-combining-cluster-information-with-drug-resistance-reports" id="markdown-toc-analysis-part-2-combining-cluster-information-with-drug-resistance-reports">Analysis Part 2: Combining cluster information with drug-resistance reports</a>    <ol>
+      <li><a href="#get-the-data-1" id="markdown-toc-get-the-data-1">Get the data</a></li>
+      <li><a href="#summarize-the-data" id="markdown-toc-summarize-the-data">Summarize the data</a></li>
+      <li><a href="#combine-the-drug-resistance-and-the-cluster-tables" id="markdown-toc-combine-the-drug-resistance-and-the-cluster-tables">Combine the drug-resistance and the cluster tables</a></li>
+    </ol>
+  </li>
+  <li><a href="#interpretation-of-results" id="markdown-toc-interpretation-of-results">Interpretation of results</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#bonus" id="markdown-toc-bonus">Bonus</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants">Analysis Part 1: Identification of transmission clusters from per-sample variants</h1>
+
+<h2 id="get-the-data">Get the data</h2>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the Galaxy history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Give the history a suitable name</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">MTB transmission clusters tutorial</code></li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">MTB transmission clusters tutorial</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As mentioned in the introduction, mapping and variant calling have already be performed for the 20 samples
+that we need to analyze. The result of this preprocessing are 20 VCF files that describe the mutations found
+for each of the samples, and which we now need to import into Galaxy.</p>
+
+<p>The fastest way to do so, which lets us build a collection from the 20 datasets with correctly named elements (corresponding to the sample identifiers) directly during data upload is through the so-called <em>Rule-based uploader</em>. The Galaxy training material has dedicated tutorials, <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Rule Based Uploader</a> and <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html">Rule Based Uploader Advanced</a>, that introduce this powerful feature in detail.</p>
+
+<p>For the purpose of this tutorial, it is enough if you simply follow the step-by-step instructions provided here exactly.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Import the following files from <a href="https://zenodo.org/record/6010176">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.vcf
+https://zenodo.org/record/6010176/files/ERR181435.vcf
+https://zenodo.org/record/6010176/files/ERR2659153.vcf
+https://zenodo.org/record/6010176/files/ERR2704678.vcf
+https://zenodo.org/record/6010176/files/ERR2704679.vcf
+https://zenodo.org/record/6010176/files/ERR2704687.vcf
+https://zenodo.org/record/6010176/files/ERR313115.vcf
+https://zenodo.org/record/6010176/files/ERR551620.vcf
+https://zenodo.org/record/6010176/files/ERR5987300.vcf
+https://zenodo.org/record/6010176/files/ERR5987352.vcf
+https://zenodo.org/record/6010176/files/ERR6362078.vcf
+https://zenodo.org/record/6010176/files/ERR6362138.vcf
+https://zenodo.org/record/6010176/files/ERR6362139.vcf
+https://zenodo.org/record/6010176/files/ERR6362156.vcf
+https://zenodo.org/record/6010176/files/ERR6362253.vcf
+https://zenodo.org/record/6010176/files/ERR6362333.vcf
+https://zenodo.org/record/6010176/files/ERR6362484.vcf
+https://zenodo.org/record/6010176/files/ERR6362653.vcf
+https://zenodo.org/record/6010176/files/SRR13046689.vcf
+https://zenodo.org/record/6010176/files/SRR998584.vcf
+</code></pre></div>      </div>
+
+      <ol>
+        <li>Copy the links above</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
+        <li>In the top row of tabs select <strong>Rule-based</strong></li>
+        <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>Paste the copied links into the text field on the right</li>
+        <li>Click <strong>Build</strong> to bring up the <em>Rule Builder</em> dialog</li>
+        <li>Click on the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> next to <strong>Rules</strong> in the left panel of the window</li>
+        <li>
+          <p>In the text field, erase the prefilled content and copy/paste the following rule definition into it instead:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "rules": [
+    {
+      "type": "add_column_basename",
+      "target_column": 0
+    },
+    {
+      "type": "add_column_substr",
+      "target_column": 1,
+      "length": 4,
+      "substr_type": "drop_suffix"
+    }
+  ],
+  "mapping": [
+    {
+      "type": "url",
+      "columns": [
+        0
+      ]
+    },
+    {
+      "type": "list_identifiers",
+      "columns": [
+        2
+      ],
+      "editing": false
+    }
+  ]
+}
+</code></pre></div>          </div>
+        </li>
+        <li>Click on <strong>Apply</strong></li>
+        <li>In the bottom row of options, change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">vcf</code></li>
+        <li>Set the name of the new collection to <code class="language-plaintext highlighter-rouge">MTB sample variants</code></li>
+        <li>Click on <strong>Upload</strong></li>
+      </ol>
+
+      <p>It is ok to continue with the next step even while the upload of this data is still ongoing.
+Just click on the <strong>Close</strong> button of the information pop-up window if it is still open when you are ready to proceed.</p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference genome that was used for SNP calling from:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
+</code></pre></div>      </div>
+
+      <p>and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-a-snp-alignment">Generate a SNP alignment</h2>
+
+<p>In this tutorial we aim to calculate the genetic differences (in SNPs) between pairs of MTB genomes.
+To do so, we need to compare, between each pair of genomes (thus pairwise), the nucleotides that are
+observed at each position. Each time we find a different nucleotide at a given position, we will sum
+1 SNP of genetic distance. For example, if two strains have a genetic distance of 5 SNPs, that would
+mean that their respective genomes are almost identical, except for 5 positions along all the genome
+in which they have different nucleotides.</p>
+
+<p>To do such calculation we need to first build an alignment of all the genomes (a multiple-sequence alignment, or MSA).
+Afterwards, we will use specific software to analyze this MSA, count SNPs, and thus calculate the genetic distance between each pair of samples.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
+
+<h3 id="generate-complete-genomes">Generate complete genomes</h3>
+
+<p>The first step to generate the genomes MSA will be… to get the complete genomes of our samples!
+In the <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB Variant Analysis tutorial</a> we have analyzed short-read high-throughput sequencing data (Illumina) to
+obtain the respective VCF files that describe the mutations found in each of our samples, as compared
+to the reference genome. We can now use these VCF files to build the complete genome of each of our
+samples.</p>
+
+<h4 id="filter-vcf-files-for-epidemiologicalphylogenetic-investigation">Filter VCF files for epidemiological/phylogenetic investigation</h4>
+<p>Interpreting <strong>mixed calls</strong> or <strong>indels</strong> in phylogenetic/epidemiological applications can be very
+complicated. That is the reason why we typically use alignments that only contain <strong>fixed SNPs</strong>.</p>
+
+<p>Thus, the first step in this tutorial will be to filter the VCFs so we are sure that
+they only contain <strong>fixed SNPs</strong>, which we (somewhat arbitrarily) define as those single-nucleotide variants that are observed at an allele frequency of 90% or greater. We will be using the tool <strong>TB Variant Filter</strong> for this task.</p>
+
+<p><em>Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>P</strong>olymorphism and <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>V</strong>ariant, respectively.</em></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-vcf-files-for-epidemiological-investigation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Filter VCF files for epidemiological investigation</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0" title="TB Variant Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.6+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">MTB variants per sample</code>; the uploaded collection of VCF datasets</li>
+        <li><em>“Filters to apply”</em>: <code class="language-plaintext highlighter-rouge">Only accept SNVs</code>, <code class="language-plaintext highlighter-rouge">Filter variants by percentage alt allele</code></li>
+        <li><em>“Show options for the filters”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Minimum alternate allele percentage to accept”</em>: <code class="language-plaintext highlighter-rouge">90.0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p><strong>TB Variant Filter</strong> reads the VCF and output only SNPs that have, at least, 90% frequency.
+How can the software extract such information from the VCF datasets?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>That information is contained, for each mutation, in the VCF:</p>
+      <ul>
+        <li>The <code class="language-plaintext highlighter-rouge">TYPE</code> field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)</li>
+        <li>You can look for other types of mutations like insertions (TYPE=ins)</li>
+        <li>The <code class="language-plaintext highlighter-rouge">AF</code> field within the INFO string describes the estimated <strong>A</strong>llele <strong>F</strong>requency</li>
+        <li>In the absence of the <code class="language-plaintext highlighter-rouge">AF</code> field, the allele frequency can be calculated as: <code class="language-plaintext highlighter-rouge">AO</code> (alternate allele observations) / <code class="language-plaintext highlighter-rouge">DP</code> (depth of reads at the variant site)</li>
+      </ul>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h4 id="reconstruct-the-complete-genome-of-each-sample">Reconstruct the complete genome of each sample</h4>
+<p>Our new collection of VCF datasets now only contains <strong>fixed SNPs</strong> that were found in the genome of the respective strains.
+Genomic positions not in the VCF mean that, at that particular position, the strain has the
+same nucleotide than the reference genome. Knowing this information, one could reconstruct the
+complete genome of each strain pretty easily. From the first to the last position in the genome,
+one would put the same nucleotide than in the reference if that position is not in the VCF, or the
+SNP described in the VCF otherwise. This is exactly what the tool <strong>bcftools consensus</strong> will do for us,
+given the reference genome and the VCF of the strain we want to reconstruct the genome for.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-reconstruct-the-complete-genome-of-each-sample"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Reconstruct the complete genome of each sample</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="bcftools consensus tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools consensus</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF/BCF Data”</em>: the collection of filtered variants per sample; output of <strong>TB Variant Filter</strong></li>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: the uploaded MTB ancestor reference fasta dataset (the reference genome that was used for SNP-calling)</li>
+            <li><em>“Set output FASTA ID from name of VCF”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
+SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
+insert in the genome?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The behaviour of bcftools consensus in this case can be specified with the option <code class="language-plaintext highlighter-rouge">--haplotype</code>
+For example, we can set <code class="language-plaintext highlighter-rouge">haplotype=2</code> so the second allele will be used… wait… what?</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-second-allelle"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Second allelle!?</div>
+
+  <p>What do you think that things like “second allele” or “<em>The</em> alterntive allele” mean here?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
+human genomes. That means that these programs have in mind that the genomes
+are diploid and thus each posible position in the genome has two possible alleles. In
+bacterial genomics, in contrast, we are <strong>always sequencing a population</strong> of cells with
+potential genetic diversity (with the exception of single-cell sequencing).
+That does not mean that we cannot use this type of software, we can (and we do!) but it is
+good to know what they are meant for, and their possible limitations.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="multiple-sequence-alignment-msa-of-all-genomes">Multiple-sequence alignment (MSA) of all genomes</h3>
+
+<p>Multiple sequence alignment is a process in which multiple DNA, RNA or protein sequences are arranged
+to find regions of similarity that are supposed to reflect the consequences of different evolutionary
+processes (Figure 1). MSAs are used to test hypotheses about these evolutionary processes and to infer phylogenetic
+relationships, and for these reasons we build MSA for sequences for which we already assume some sort
+of evolutionary relationship. You will learn more on MSAs and phylogenetic inference in the next
+tutorial.</p>
+
+<p>Building MSAs of several complete genomes can be a complicated process and computationally demanding. To perform
+such a task there are many software packages available like <strong>Muscle</strong>, <strong>MAFFT</strong> or <strong>Clustal</strong>, just to mention some.
+Which one are we going to use in this tutorial? Well, we are going to use a trick. We are going to
+just stack one genome on top of each other within a text file. (More on why we can do this below).</p>
+
+<p>Our aim is to generate a <strong>multifasta</strong> dataset in which the genomes of our samples are aligned.
+Something that looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;Sample 1
+TTGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
+&gt;Sample 2
+ATGACCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACGC...
+&gt;Sample 3
+TTCGTTCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACG...
+</code></pre></div></div>
+
+<p>This could be done manually, by copy-pasting all genomes in a single text file.
+However we can do the same with a specific command that <em>concatenates</em> datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-concatenate-genomes-to-build-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Concatenate genomes to build a MSA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to concatenate”</em>: the collection of consensus genomes; output of <strong>bcftools consensus</strong></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we have a multifasta file, where <strong>each position of each genome corresponds to the same position
+of the rest of genomes in the file</strong>. This can be seen and used as a multiple-sequence alignment of
+all of our genomes! However, it is important that you understand the following question…</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
+many software packages to perform such task. How is it possible that we were able to build a MSA by just
+stacking genomes one on top of each other? Can you think about what makes our case special, so we can
+just use this “trick”?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>We have generated the complete genome of each sample by substituting in the reference genome
+those <strong>SNPs</strong> that we found in that said sample (described in the VCF). Remember that <strong>we
+removed indels from the VCF when filtering!</strong> Because the complete genomes we generated do not
+contain insertions or deletions, ALL the genomes have the same length (the length of the
+reference genome) and each nucleotide corresponds to the same genomic coordinate (the one
+also in the reference genome). So we are not aligning genomes <em>per se</em> and, knowing this, we
+can build a MSA by just stacking genomes that <strong>are the same length »AND« have the same coordinates</strong>.</p>
+  </blockquote>
+
+</blockquote>
+
+<h3 id="remove-invariant-positions">Remove invariant positions</h3>
+
+<p>We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
+analysis. Although we could already use this MSA for such analysis, it is common practice to remove
+the invariant sites from the alignment. Think that our file now contains 20 genomes of 4.4 Mb each.
+MTB genomes have a very low genetic diversity, meaning that in reality, there are only some hundreds or
+thousands of SNPs <em>in total</em>, because the genomes are &gt;99% identical between them. Identical positions
+in a MSA provide no information, so we can remove those and
+generate a <strong>SNP alignment</strong> that only contain variant positions with phylogenetic information. By
+doing this, we will generate a much smaller file, that will be easier to handle by downstream applications.</p>
+
+<p>We can exemplify this with a couple of pictures:</p>
+
+<p>In the following picture, a polymorphic position in the alignment (SNP)
+is highlighted in blue and green. Invariant positions are not highlighted and have an asterisc <code class="language-plaintext highlighter-rouge">*</code>
+on the upper part of the alignment. Most of the MSA is composed of these invariant positions, making
+our file larger than necessary.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
+
+<p>After removing invariant positions, we end up with a SNP alignment like the following.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="./images/SNP_MSA.png" alt="MSA of 5 MTB genomes. " width="626" height="129" loading="lazy" /><a target="_blank" href="./images/SNP_MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A SNP alignment where all positions are polymorphic</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-removing-invariant-sites-from-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Removing invariant sites from a MSA</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0" title="Finds SNP sites tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Finds SNP sites</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: the concatenated consensus genomes; output of <strong>Concatenate datasets</strong></li>
+        <li><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Sequence alignment / VCF</code>
+          <ul>
+            <li><em>“Output formats”</em>: <code class="language-plaintext highlighter-rouge">Multi-FASTA alignment file</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In SNP alignments you have to <strong>bear in mind that positions do not longer correspond to genomic
+coordinates</strong>, meaning that two contiguous nucleotides may correspond to coordinates thousands of
+positions apart.</p>
+
+<h2 id="identify-transmission-clusters">Identify transmission clusters</h2>
+
+<h3 id="calculate-pairwise-snp-distances">Calculate pairwise SNP distances</h3>
+
+<p>Now we are all set to calculate pairwise SNP distances between samples and decide whether two
+patients are within the same transmission cluster or not. Having a SNP alignment, this is fairly
+easy. We will use <strong>SNP distance matrix</strong>, that will generate a matrix with pairwise SNP distances.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Distance matrix from SNP alignment.</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.8.2+galaxy0" title="SNP distance matrix tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SNP distance matrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: the concatenated SNP sites-only sequences; output of <strong>Finds SNP sites</strong></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+    <p>Have a look at the distance matrix to make sure you understand the whole process. Given that
+we only have 20 samples, you could already spot some samples that are involved in the same
+transmission chain (samples with a small number of SNPs between them as explained below).</p>
+  </blockquote>
+
+</blockquote>
+
+<h3 id="determine-transmission-clusters-based-on-a-snp-threshold">Determine transmission clusters based on a SNP threshold</h3>
+
+<p>Now that we have a distance matrix that describes the SNP distance between each pair of samples, we
+could already describe the transmission clusters based on a <strong>SNP threshold</strong>, as <a href="https://youtu.be/kKNgmpy1N94">explained in the
+respective webinar</a> . If two samples are at a distance below that threshold, we will say that they
+belong to the same transmission cluster, because they are close enough genetically speaking. Again,
+we could do this manually, but we are doing bioinformatics, and we want to be able to do the same
+analysis regardless of whether we are analyzing two or two million samples. Also, <strong>note that two samples
+that are dozens of SNPs apart may belong to the same transmission cluster</strong> if there are other samples
+linking them in between as exemplified in the picture below.</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="./images/Cluster.png" alt="MSA of 5 MTB genomes. " width="1350" height="739" loading="lazy" /><a target="_blank" href="./images/Cluster.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-very-important-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Very Important Question</div>
+
+  <ol>
+    <li>In the image above exemplifying a transmission cluster, the distance between samples A and E is
+17 SNPs. Being the other pairwise distances in the figure the same,
+would it be possible that the distance between A and E is different?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The figure used above as an example is a <strong>flagrant oversimplification</strong>. In the figure not all pairwise
+distances are represented (for example between sample A and C).
+Most importantly you have to remember that <strong>transmission clusters do not reflect transmission
+events</strong>.
+In fact it may happen that transmission does not happen within the cluster we are analyzing!
+For example, when a patient that is not sampled is the source of infection of all the cases in
+the cluster (may be a superspreading event). You have to consider that, taking into account the
+same SNP distances, another possible (yet still oversimplified) scenario could be…</li>
+    </ol>
+    <figure id="figure-5" style="max-width: 90%;"><img src="./images/Cluster2.png" alt="MSA of 5 MTB genomes. " width="1755" height="1240" loading="lazy" /><a target="_blank" href="./images/Cluster2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
+  </blockquote>
+</blockquote>
+
+<h3 id="determine-transmission-clusters">Determine transmission clusters</h3>
+<p>The Galaxy team has implemented a tool that reads a SNP distance matrix like the one we just calculated and 
+assigns clusters based on a distance threshold. We will use this tool to perform a clustering with a threshold
+of 12 SNPs.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Distance matrix from SNP alignment.</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/clustering_from_distmat/clustering_from_distmat/1.1.1" title="Distance matrix-based hierarchical clustering tool metadata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Distance matrix-based hierarchical clustering tool metadata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Distance matrix”</em>: SNP distance matrix; output of <strong>SNP distance matrix</strong></li>
+        <li><em>“Clustering method”</em>: UPGMA (scipy ‘average’ method)</li>
+        <li><em>“Generate cluster assignments?”</em>: Yes, and use distance threshold to divide into clusters
+          <ul>
+            <li><em>“Distance threshold for sample clustering”</em>: <strong>12</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Answer</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>We have found two transmission clusters with respective IDs 1 and 2. Transmission cluster 1
+is composed of two samples,<em>ERR5987352</em> and <em>ERR6362484</em> , linked by recent transmission and transmission cluster 2 of three samples, <em>ERR6362138</em>, <em>ERR6362156</em> and <em>ERR6362253</em>.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Let’s assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
+belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
+ ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><strong>NO</strong></p>
+
+    <p>Isolation dates have been used traditionally to define <strong>index cases</strong> within transmission clusters
+under the assumption that the most likely scenario is the first isolated sample to be the
+source of transmission. Today we know that this assumption often leads
+to misidentification of index cases. <strong>Remember:</strong> we cannot rule out the possibility
+that patients within the cluster were infected by an index case that was not sampled.</p>
+
+    <p>Read <span class="citation"><a href="#Xu_2019">Xu <i>et al.</i> 2019</a></span> for more information on this topic.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="analysis-part-2-combining-cluster-information-with-drug-resistance-reports">Analysis Part 2: Combining cluster information with drug-resistance reports</h1>
+
+<p>Although we have stressed the fact that <strong>clustering cannot be used to delineate
+transmission events</strong>, clustering is very useful to investigate outbreaks and determine which cases are
+involved in the same transmission chain. We can leverage this information to investigate the relationship
+between tuberculosis transmission and particular biological or clinical traits.</p>
+
+<p>In this part of the tutorial, we will investigate the emergence and spread of drug resistance based
+on our clustering analysis.</p>
+
+<h2 id="get-the-data-1">Get the data</h2>
+
+<p>The <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB Variant Analysis tutorial</a>
+demonstrates the use of <strong>TB-profiler</strong> to generate a report with determinants of drug resistance of a
+particular MTB strain, and predict its genotypic drug susceptibility. We have done <strong>exactly the same</strong>
+for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler reports for
+all of them.</p>
+
+<p>Like in part 1, we can use Galaxy’s rule-based uploader functionality to upload the data, build a collection from it and name its elements correctly, all in one step.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Import the TB-profiler reports for the samples</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR2659153.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR2704678.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR2704679.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR2704687.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR313115.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR551620.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR5987300.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR5987352.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362078.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362138.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362139.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362156.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362253.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362333.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362484.TBprof.txt
+https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
+https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
+https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
+</code></pre></div>      </div>
+
+      <ol>
+        <li>Copy the links above</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
+        <li>In the top row of tabs select <strong>Rule-based</strong></li>
+        <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>Paste the copied links into the text field on the right</li>
+        <li>Click <strong>Build</strong> to bring up the <em>Rule Builder</em> dialog</li>
+        <li>Click on the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> next to <strong>Rules</strong> in the left panel of the window</li>
+        <li>
+          <p>In the text field, erase the prefilled content and copy/paste the following rule definition into it instead:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "rules": [
+    {
+      "type": "add_column_basename",
+      "target_column": 0
+    },
+    {
+      "type": "add_column_substr",
+      "target_column": 1,
+      "length": 11,
+      "substr_type": "drop_suffix"
+    }
+  ],
+  "mapping": [
+    {
+      "type": "url",
+      "columns": [
+        0
+      ]
+    },
+    {
+      "type": "list_identifiers",
+      "columns": [
+        2
+      ],
+      "editing": false
+    }
+  ]
+}
+</code></pre></div>          </div>
+        </li>
+        <li>Click on <strong>Apply</strong></li>
+        <li>In the bottom row of options, change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">txt</code></li>
+        <li>Set the name of the new collection to <code class="language-plaintext highlighter-rouge">TB profiler reports</code></li>
+        <li>Click on <strong>Upload</strong></li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="summarize-the-data">Summarize the data</h2>
+
+<p>TB-profiler reports are very useful and comprehensive, and we will use them to better investigate
+drug resistance in our dataset. However, it is always useful to summarize the data on a per-sample basis,
+on a table, so we can quickly check which strains are, for example, MDR, an which are susceptible to antibiotics.
+We would like to generate a table like the following:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sample</th>
+      <th>DR profile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample A</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>Sample B</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>Sample C</td>
+      <td>MDR</td>
+    </tr>
+    <tr>
+      <td>Sample Z</td>
+      <td>XDR</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>and merge this with the tabular per-sample cluster report that we have generated in the first part of the tutorial.</p>
+
+<p>If we take a look at a TB profiler report we can see that there is one line describing the genotypic drug susceptibility.
+Let’s have a look at the first part of the TB-profiler report for sample ERR6362653:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+TBProfiler report
+=================
+
+The following report has been generated by TBProfiler.
+
+Summary
+-------
+ID: tbprofiler
+Date: Fri Jan 28 13:14:47 2022
+Strain: lineage2.2.1
+Drug-resistance: MDR
+
+Lineage report
+--------------
+Lineage	Estimated Fraction	Family	Spoligotype	Rd
+lineage2	1.000	East-Asian	Beijing	RD105
+lineage2.2	0.996	East-Asian (Beijing)	Beijing-RD207	RD105;RD207
+lineage2.2.1	0.999	East-Asian (Beijing)	Beijing-RD181	RD105;RD207;RD181
+</code></pre></div></div>
+
+<p>As you can see, this strain is multi-drug resistant as indicated by (<code class="language-plaintext highlighter-rouge">Drug-resistance: MDR</code>)
+We could then look for this information in each TB-profiler report and generate this table manually,
+for example in a spreadsheet. However this is not feasible when analyzing hundreds or thousands of samples
+(and very <strong>error-prone!</strong>).</p>
+
+<p>A far more scalable approach is to combine Galaxy tools to automate the necessary data processing steps for us.</p>
+
+<h3 id="select-the-line-containing-the-drug-resistance-profile-in-the-report-of-every-sample">Select the line containing the drug resistance profile in the report of every sample</h3>
+
+<p><strong>grep</strong> is used to search patterns of text within text files. Each time <strong>grep</strong> finds that
+pattern, it will print as a result <strong>the complete line</strong> containing such pattern.</p>
+
+<p>If we use <strong>grep</strong> to search for the pattern “<code class="language-plaintext highlighter-rouge">Drug-resistance:</code>”, in a TB-profiler file, we will get
+as output the complete line, for example <code class="language-plaintext highlighter-rouge">Drug-resistance: MDR</code></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-only-drug-resistance-lines-from-tb-profiler-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep only `Drug-resistance:` lines from TB-profiler reports</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the uploaded collection of TB-profiler reports</li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance:</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="collapse-collection-into-a-table-with-each-line-prepended-with-a-sample-name">Collapse collection into a table with each line prepended with a sample name</h3>
+
+<p>Next, we want to turn the collection of single-line datasets we just created into a single two-column table with
+one column of sample IDs and another one with the corresponding drug resistance status.</p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepend-the-sample-name-to-the-dr-profile"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepend the sample name to the DR profile</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: the collection of single-line drug-resistance reports; output of <strong>Select lines</strong></li>
+        <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Where to add dataset name”</em>: <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="clean-up-the-table">Clean up the table</h3>
+
+<p>In this step we will use a simple tool that searches and replaces text to remove the redundant string “Drug-resistance: “ from our table by replacing it with <em>nothing</em>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-removing-redundant-content"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Removing redundant content</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Single file</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li>
+                  <p><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance: </code></p>
+
+                  <p>Note the space at the end of the pattern!</p>
+                </li>
+                <li>
+                  <p><em>“Replace with”</em>: leave this field empty</p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Once the tool has finished running, change the format of the output to <strong>tabular</strong></p>
+
+      <p>Though by now the content of the dataset looks like a nice table, Galaxy still thinks it is in general <strong>txt</strong> format because the original TB-profiler reports were of that format.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many MDR strains did we find in the dataset?</li>
+    <li>What does it mean to be Pre-MDR?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Eight MDR strains, three of which are pre-XDR because they have additional resistance to fluoroquinolones. (You can look into details by looking into the TB profiler reports).</li>
+      <li>As MDR means to be resistant to INH and RIF, pre-MDR means to be either INH-monoresistant or RIF-monoresistant.
+If we have a look at the respective TB-profiler reports, we can see that these three strains are RIF-monoresistant.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="combine-the-drug-resistance-and-the-cluster-tables">Combine the drug-resistance and the cluster tables</h2>
+
+<p>The two tables we have generated in the two parts of the tutorial share a sample column, which we can use now to join the two tables.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-joining-tables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Joining tables</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join two files tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: transmission clusters report; output of <em>Distance matrix-based hierarchial clustering</em></li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: final drug-resistance report; output of <strong>Replace Text</strong> above</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="interpretation-of-results">Interpretation of results</h1>
+
+<p>Now that we have performed a clustering analysis and know which DR mutations each strain carries,
+we can try to answer a series of questions about how DR may have been emerging and spreading in our study
+population.</p>
+
+<p>The final combined table you generated and that we are going to base some questions on, should look similar to this one (header added and sample order rearranged for clarity here):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sample</th>
+      <th>Cluster_id</th>
+      <th>DR profile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ERR1203059</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR181435</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR2659153</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR2704678</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR2704679</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR2704687</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR313115</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR551620</td>
+      <td>-</td>
+      <td>MDR</td>
+    </tr>
+    <tr>
+      <td>ERR5987300</td>
+      <td>-</td>
+      <td>Pre-XDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362078</td>
+      <td>-</td>
+      <td>MDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362139</td>
+      <td>-</td>
+      <td>Pre-MDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362333</td>
+      <td>-</td>
+      <td>Pre-XDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362653</td>
+      <td>-</td>
+      <td>MDR</td>
+    </tr>
+    <tr>
+      <td>SRR13046689</td>
+      <td>-</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <td>SRR998584</td>
+      <td>-</td>
+      <td>Sensitive</td>
+    </tr>
+    <tr>
+      <td>ERR5987352</td>
+      <td>1</td>
+      <td>Pre-MDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362484</td>
+      <td>1</td>
+      <td>Pre-MDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362138</td>
+      <td>2</td>
+      <td>MDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362156</td>
+      <td>2</td>
+      <td>Pre-XDR</td>
+    </tr>
+    <tr>
+      <td>ERR6362253</td>
+      <td>2</td>
+      <td>MDR</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Assuming that we have a very good sampling of the outbreak. Which strains <strong>may</strong> represent instances
+of <em>de novo</em> evolution of drug resistance and which ones instances of <em>transmitted</em> (primary) resistance?
+Remember that you can look at the TB-profiler reports of independent samples for detailed information.</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>In a simplistic scenario, we could consider clustered strains as instances of transmission and
+unclustered strains as instances of de novo evolution of DR. Thus, we see that for example there
+are three MDR strains (ERR551620, ERR6362078, ERR6362653) that are unclustered and therefore may
+represent cases in which drug resistance evolved independently as a consequence of treatment within the respective
+patients. However you need to always bear in mind that, although <strong>within our population</strong> those MDR
+strains do not seem to be linked to transmission, this does NOT rule out the possibility that
+some of these patients were infected with an MDR strain somewhere else, or that other cases from the cluster where simply not sampled.</p>
+
+    <p>When looking at clustered strains, distinguishing between transmitted and <em>de-novo</em> may be tricky. Note
+that, for example, for the two RIF-monoresistant strains linked within the same transmission
+cluster there are, at least, a couple of possible scenarios: one in which a RIF-monoresistant strain
+evolved in one patient and was transmitted to the other patient afterwards, and one in which both
+were infected with the same RIF-monoresistant strain from a third patient that we have not sampled.
+We need to note that, in the first scenario, drug resistance evolved <em>de novo</em> in one patient,
+and was <em>transmitted</em> to the other patient, whereas in the second scenario drug resistance was
+<em>transmitted</em> in both cases.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>The same principles as explained above apply to the three MDR strains that are
+within the same transmission cluster. In this case, however, there is one strain that shows clear
+evidence of <em>de-novo</em> evolution of DR. Do you know which strain and why?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
+a look at the TB profiler report, we can see that this strain carries an additional mutation in
+<em>gyrA</em> that confers resistance to fluoroquinolones. This is compatible with an scenario in which
+fluoroquinolone resistance evolved independently within this patient after being infected with
+the MDR strain.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>There is one strain with a DR profile “other”, because it is only resistant to pyrazinamide. This
+strain is not within a transmission cluster. Therefore, we might conclude that pyrazinamide resistance
+most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment, but we would be wrong. Do you know why?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
+within our population. However, if we have a look at the TB-profiler report, we observe that this
+is a <em>M. bovis</em> strain, many of which are known to be intrinsically resistant to PZA.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is it possible to find, in the same transmission cluster, two RIF-monoresistant strains that
+carry different rpoB mutations?</li>
+    <li>Is it possible to find, in the same transmission cluster, strains of different MTB sublineages?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Yes, it is <strong>possible</strong>. In that scenario, the <strong>same susceptible strain</strong> would <strong>recently</strong>
+have been transmitted to two patients, and RIF resistance would have evolved <strong>independently</strong> in both.</li>
+      <li>No, by definition. Remember that clustering is based on a threshold that we set of genetic
+distance measured in SNPs. We want to cluster samples that are genetically so similar that we
+can consider them as the same genotype, that is to say, as the same strain. Two different
+sublineages, by definition, do not belong to the same genotype and will have a distance in SNPs
+between them well beyond any SNP threshold we could use.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You have learned how to perform a clustering analysis to identify patients that are linked by events of
+<strong>recent transmission</strong>. Clustering analysis is very useful in outbreak investigation and
+can also be used to describe the emergence and spread of drug-resistance within a population. You have
+also learned, however, that interpreting clustering results requires careful considerations, given the
+limitations of the methodology. Clustering analysis is better complemented with phylogenetic analysis,
+which may help overcome some of these limitations.</p>
+
+<p>In the following tutorial you will perform a phylogenetic analysis of these same 20 strains.</p>
+
+<h1 id="bonus">Bonus</h1>
+
+<p>You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
+the reference genome, standing out from the rest of strains. This strain is a <em>M. canettii</em> strain,
+that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let’s find out
+in the follow-up tutorial <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html">Tree thinking for tuberculosis evolution and epidemiology</a>.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Clustering is a useful tool to detect transmission links between patients and oubreak investigation.</p>
+</li>
+                        
+                        <li><p>Clustering can be used to investigate the transmission of certain traits, like drug resistance.</p>
+</li>
+                        
+                        <li><p>Clustering does not provide information about particular transmission events nor their directionality (who infected whom).</p>
+</li>
+                        
+                        <li><p>Clustering is very much influenced by sampling. Lower sampling proportions and shorter sampling timeframes lead to lower clustering rates that shoud not be confounded with lack of transmission.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/evolution/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Xu_2019">Xu, Y., I. Cancino-Muñoz, M. Torres-Puente, L. M. Villamayor, R. Borrás <i>et al.</i>, 2019 <b>High-resolution mapping of tuberculosis transmission: Whole genome sequencing and phylogenetic modelling of a cohort from Valencia Region, Spain</b> (M. B. Murray, Ed.). PLoS Med Medicine 16: e1002961. <a href="https://doi.org/10.1371/journal.pmed.1002961">10.1371/journal.pmed.1002961</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=evolution/mtb_transmission"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=evolution/mtb_transmission">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Galo A. Goig, Daniela Brites, Christoph Stritt,  <b>Identifying tuberculosis transmission links: from SNPs to transmission clusters (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{evolution-mtb_transmission,
+author = "Galo A. Goig and Daniela Brites and Christoph Stritt",
+	title = "Identifying tuberculosis transmission links: from SNPs to transmission clusters (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/mtb_transmission/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_consensus
+  owner: iuc
+  revisions: da0bf365652d
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_consensus
+  owner: iuc
+  revisions: a87ae767b01d
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: clustering_from_distmat
+  owner: iuc
+  revisions: f8ee933de3ca
+  tool_panel_section_label: Statistics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: samtools_view
+  owner: iuc
+  revisions: 0dbf49c414ae
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snippy
+  owner: iuc
+  revisions: c9a8ef2aa380
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snippy
+  owner: iuc
+  revisions: '08d22d220254'
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snp_dists
+  owner: iuc
+  revisions: 1959cc43b414
+  tool_panel_section_label: Phylogenetics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snp_dists
+  owner: iuc
+  revisions: f78492521996
+  tool_panel_section_label: Phylogenetics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snp_sites
+  owner: iuc
+  revisions: 67ef1dddcad9
+  tool_panel_section_label: Phylogenetics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tb_variant_filter
+  owner: iuc
+  revisions: 3b1e7c170b10
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tb_variant_filter
+  owner: iuc
+  revisions: e7aff4a85df5
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tb_variant_filter
+  owner: iuc
+  revisions: ee4a90760848
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tbprofiler
+  owner: iuc
+  revisions: 809dfc93d593
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: add_input_name_as_column
+  owner: mvdbeek
+  revisions: 8061668d0868
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: trimmomatic
+  owner: pjbriggs
+  revisions: d94aff5ee623
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">8</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.625">5</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.125">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>June 2026</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Navigating through the platform, and finding solutions to some problem along
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>May 2026</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The hand-on and explanations were easy to follow. I could visualize my output was quite exciting. 
+					<b>Disliked</b>: I absolutely enjoyed the hands-on as I did not require assistance
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The standard process
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>June 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Tools for identification of drug resistance and generating transmission cluster pattern
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>October 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Very clear tutorial
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It was great to see that I achieved results by following the tutorial.
+					<b>Disliked</b>: In Part-1 Rstudio step was difficult to understand for me.
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: All except the R studio that is not yet clear
+					<b>Disliked</b>: Rstudio
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: This hands on tutorial made me understands some of the concepts raised in the webnar
+					<b>Disliked</b>: A note on the estimated run time of the on the provided data, this will help to know if i have done something wrong.
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00145">gxy.io/GTN:T00145</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/mtb_transmission/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/evolution/tutorials/mtb_transmission/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

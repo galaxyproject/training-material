@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nannotation.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ncounts.txt"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nmt_controls.txt"]
+  3[label="Scater: Calculate QC metrics"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Library QC"]
+  3 -> 4 [label="output_loom"]
+  k57113c0af62242df8a5b5bc4329d64d4[color=lightseagreen,label="Output\nlib_qc_plot"]
+  4 -> k57113c0af62242df8a5b5bc4329d64d4
+  5[label="Filter SCE"]
+  3 -> 5 [label="output_loom"]
+  k6d503142e29b4c139773c8176419dfb6[color=lightseagreen,label="Output\noutput_loom"]
+  5 -> k6d503142e29b4c139773c8176419dfb6
+  6[label="Filtered Library QC"]
+  5 -> 6 [label="output_loom"]
+  kf7783f97b1084850ac08fc7d0769e8d8[color=lightseagreen,label="Output\nfiltered_lib_qc_plot"]
+  6 -> kf7783f97b1084850ac08fc7d0769e8d8
+  7[label="PCA Plot"]
+  5 -> 7 [label="output_loom"]
+  k4ca6aec710244988b975428cfa7603ed[color=lightseagreen,label="Output\npca_plot"]
+  7 -> k4ca6aec710244988b975428cfa7603ed
+}

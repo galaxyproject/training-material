@@ -1,0 +1,39 @@
+- doc: Test outline for BiaPy
+  job:
+    Input a BiaPy YAML configuration file:
+      class: File
+      path: test-data/Input a BiaPy YAML configuration file.yaml
+      filetype: yaml
+    Input the image ground truth:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 01_raw_mask.tiff
+        path: test-data/Input the image ground truth_01_raw_mask.tiff
+      - class: File
+        identifier: 02_raw_mask
+        path: test-data/Input the image ground truth_02_raw_mask.tiff
+    Input the test data:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 01_raw_image
+        path: test-data/Input the test data_01_raw_image.tiff
+      - class: File
+        identifier: 02_raw_image
+        path: test-data/Input the test data_02_raw_image.tiff
+  outputs:
+    predictions_post_proc:
+      element_tests:
+        test-0:
+          path: test-data/predictions_post_proc_test-0.tiff
+        test-1:
+          path: test-data/predictions_post_proc_test-1.tiff
+    html:
+      element_tests:
+        01_raw_image:
+          path: test-data/html_01_raw_image.html
+        02_raw_image:
+          path: test-data/html_02_raw_image.html

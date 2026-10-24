@@ -1,0 +1,16 @@
+- doc: Test the Ecology yolo predict deepsea
+  job:
+     # Simple explicit Inputs
+     Image file with Buccinidae:
+        class: File
+        path: test-data/dataset_seanoe_101899_images_Images_MOMAR_20141223235225.jpg
+        filetype: jpg
+     Buccinidae model file:
+        class: File
+        path: test-data/Buccinidae-detection.pt
+        filetype: pt
+  outputs:
+    overlay_results:
+      path: test-data/dataset_seanoe_101899_images_Images_MOMAR_20141223235225_out.jpg
+      compare: image_diff
+      filetype: jpg

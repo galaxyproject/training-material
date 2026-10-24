@@ -1,0 +1,97 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmelanoma_roi.spatialdata.zip"]
+  1[label="initial Anndata table"]
+  0 -> 1 [label="output"]
+  2[label="Inspect AnnData"]
+  1 -> 2 [label="result_adata"]
+  3[label="Inspect AnnData"]
+  1 -> 3 [label="result_adata"]
+  4[label="QC metrics before filtering"]
+  1 -> 4 [label="result_adata"]
+  k480e466a0f3840d8a1449544b85e7bf0[color=lightseagreen,label="Output\nQC metrics before filtering"]
+  4 -> k480e466a0f3840d8a1449544b85e7bf0
+  5[label="Violin_Plots_before_filteration"]
+  4 -> 5 [label="anndata_out"]
+  k6cc6c8efec554fad9cec19ee7a046689[color=lightseagreen,label="Output\nViolin_Plots_before_filteration"]
+  5 -> k6cc6c8efec554fad9cec19ee7a046689
+  6[label="Scatter plot before filtering"]
+  4 -> 6 [label="anndata_out"]
+  k68b0cadd79b3436ab8efff785b7b2659[color=lightseagreen,label="Output\nScatter plot before filtering"]
+  6 -> k68b0cadd79b3436ab8efff785b7b2659
+  7[label="SpatialData with QC metrics"]
+  0 -> 7 [label="output"]
+  4 -> 7 [label="anndata_out"]
+  8[label="Scanpy filter Minimum genes expressed"]
+  4 -> 8 [label="anndata_out"]
+  k47b830049657421faf26fff91e232ff2[color=lightseagreen,label="Output\nFilter minimum genes expressed"]
+  8 -> k47b830049657421faf26fff91e232ff2
+  9[label="Spatial Plot total_counts before filtering"]
+  7 -> 9 [label="spatialdata_output"]
+  k0d65f5393c534486bf8634446d2f0130[color=lightseagreen,label="Output\nSpatial Plot total_counts before filtering"]
+  9 -> k0d65f5393c534486bf8634446d2f0130
+  10[label="Spatial Plot n_genes_by_counts before filtering"]
+  7 -> 10 [label="spatialdata_output"]
+  k7efe5b5ccef34d16b7b3ad219e5f308b[color=lightseagreen,label="Output\nSpatial Plot n_genes_by_counts before filtering"]
+  10 -> k7efe5b5ccef34d16b7b3ad219e5f308b
+  11[label="Inspect AnnData"]
+  8 -> 11 [label="anndata_out"]
+  12[label="Filter minimum number of counts of gene expressed"]
+  8 -> 12 [label="anndata_out"]
+  k3eeec312343d45dc861e8b2897774a73[color=lightseagreen,label="Output\nFilter minimum number of counts of gene expressed"]
+  12 -> k3eeec312343d45dc861e8b2897774a73
+  13[label="Inspect AnnData"]
+  12 -> 13 [label="anndata_out"]
+  14[label="Filter minimum number of cells expressed"]
+  12 -> 14 [label="anndata_out"]
+  kb7fd86f9614c40e7bcfeadf512b7d8f8[color=lightseagreen,label="Output\nFilter minimum number of cells expressed"]
+  14 -> kb7fd86f9614c40e7bcfeadf512b7d8f8
+  15[label="Filter genes based on number of cells or counts Minimum number of counts"]
+  14 -> 15 [label="anndata_out"]
+  kb94fe64d2fc64f038fe4bd912045d7e2[color=lightseagreen,label="Output\nFilter genes based on number of cells or counts Minimum number of counts"]
+  15 -> kb94fe64d2fc64f038fe4bd912045d7e2
+  16[label="Inspect AnnData"]
+  15 -> 16 [label="anndata_out"]
+  17[label="Filter maximum number of counts"]
+  15 -> 17 [label="anndata_out"]
+  kcda1adb3249e4c419964c7108943e2c1[color=lightseagreen,label="Output\nFilter maximum number of counts"]
+  17 -> kcda1adb3249e4c419964c7108943e2c1
+  18[label="Filter maximum number of genes expressed"]
+  17 -> 18 [label="anndata_out"]
+  k17e8e16ffba2449ead0cc12df7691a94[color=lightseagreen,label="Output\nFilter maximum number of genes expressed"]
+  18 -> k17e8e16ffba2449ead0cc12df7691a94
+  19[label="Inspect AnnData"]
+  18 -> 19 [label="anndata_out"]
+  20[label="Filter cell_area more than 10"]
+  18 -> 20 [label="anndata_out"]
+  kacc71f7ef1324bd29e53877e8770171b[color=lightseagreen,label="Output\nFilter cell_area more than 10"]
+  20 -> kacc71f7ef1324bd29e53877e8770171b
+  21[label="Filter cell_area less than 400"]
+  20 -> 21 [label="anndata_out"]
+  kca03e4838b0f44cbb3aee15689b6f2c3[color=lightseagreen,label="Output\nFilter cell_area less than 400"]
+  21 -> kca03e4838b0f44cbb3aee15689b6f2c3
+  22[label="Filtered AnnData table"]
+  21 -> 22 [label="anndata_out"]
+  k608700013a7c4fbbab6b970421fd652e[color=lightseagreen,label="Output\nFiltered AnnData table"]
+  22 -> k608700013a7c4fbbab6b970421fd652e
+  23[label="Violin_Plots_after_filteration"]
+  22 -> 23 [label="anndata_out"]
+  k99276f465390444691252254860a5f4a[color=lightseagreen,label="Output\nViolin_Plots_after_filteration"]
+  23 -> k99276f465390444691252254860a5f4a
+  24[label="Scatter plot after filtering"]
+  22 -> 24 [label="anndata_out"]
+  k7bca78a99ce94ec49780edb169e1f0a8[color=lightseagreen,label="Output\nScatter plot after filtering"]
+  24 -> k7bca78a99ce94ec49780edb169e1f0a8
+  25[label="SpatialData Operations"]
+  0 -> 25 [label="output"]
+  22 -> 25 [label="anndata_out"]
+  26[label="Spatial Plot total_counts after filtering"]
+  25 -> 26 [label="spatialdata_output"]
+  k53ce37a0b4b74cae815e7d559f9ffbcc[color=lightseagreen,label="Output\nSpatial Plot after filtering"]
+  26 -> k53ce37a0b4b74cae815e7d559f9ffbcc
+  27[label="Spatial Plot table_processed after filtering"]
+  25 -> 27 [label="spatialdata_output"]
+  k7bca9117c8ca4e9094606654be842c12[color=lightseagreen,label="Output\nSpatial Plot table_processed after filtering"]
+  27 -> k7bca9117c8ca4e9094606654be842c12
+}

@@ -1,0 +1,37 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nImage to Upload in OMERO"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nTarget Dataset"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nOMERO server address"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nSelect Metadata Type"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nMetadata File"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nROIs File"]
+  6[label="OMERO Image Import"]
+  1 -> 6 [label="output"]
+  0 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  k062f153f4e6447dba940eb552e6aae56[color=lightseagreen,label="Output\nimage_upload_log"]
+  6 -> k062f153f4e6447dba940eb552e6aae56
+  7[label="Convert"]
+  6 -> 7 [label="log"]
+  8[label="Replace Text"]
+  7 -> 8 [label="out_file1"]
+  9[label="Split file"]
+  8 -> 9 [label="outfile"]
+  10[label="Parse parameter value"]
+  9 -> 10 [label="list_output_tab"]
+  11[label="OMERO Metadata Import"]
+  4 -> 11 [label="output"]
+  3 -> 11 [label="output"]
+  10 -> 11 [label="integer_param"]
+  2 -> 11 [label="output"]
+  k8fbe8e5a921444f0ab1f5dc421963754[color=lightseagreen,label="Output\nmetadata_import_log"]
+  11 -> k8fbe8e5a921444f0ab1f5dc421963754
+  12[label="OMERO ROI Import"]
+  10 -> 12 [label="integer_param"]
+  5 -> 12 [label="output"]
+  2 -> 12 [label="output"]
+  k7b584a96912c4f7499013d233b47f502[color=lightseagreen,label="Output\nlog"]
+  12 -> k7b584a96912c4f7499013d233b47f502
+}

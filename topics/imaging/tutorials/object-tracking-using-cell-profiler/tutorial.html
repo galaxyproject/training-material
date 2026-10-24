@@ -1,0 +1,3386 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Object tracking using CellProfiler / Object tracking using CellProfiler / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Object tracking using CellProfiler">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-10-20 11:07:05 +0000">
+<meta name="DC.creator" content="Yi Sun">
+<meta name="DC.creator" content="Beatriz Serrano-Solano">
+<meta name="DC.creator" content="Jean-Karim Hériché">
+<meta name="DC.creator" content="Anne Fouilloux"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Object tracking using CellProfiler / Hands-on: Object tracking using CellProfiler">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Object tracking using CellProfiler",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-10-20 11:07:05 +0000",
+  "datePublished": "2021-03-17 18:17:34 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fiesta/",
+      "name": "FAIR Image Analysis across Sciences",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://oscars-project.eu/projects/fair-image-analysis-across-sciences"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101129751",
+      "url": "https://cordis.europa.eu/project/id/101129751",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Open Science Clusters' Action for Research & Society",
+        "description": "The OSCARS project has received funding from the European Commission’s Horizon Europe Research and Innovation programme under grant agreement No. 101129751\n",
+        "url": "https://oscars-project.eu/",
+        "logo": "/training-material/shared/images/logos/OSCARS-logo-EUflag.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:T00182",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g.,. However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.",
+  "learningResourceType": "e-learning",
+  "name": "Object tracking using CellProfiler",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html",
+  "version": 15,
+  "timeRequired": "PT1H",
+  "teaches": "- Segment fluorescent objects using CellProfiler in Galaxy\n- Track objects over multiple frames using CellProfiler in Galaxy\n- Reuse the same CellProfiler tracking pipeline on an Earth-observation time series (cross-discipline reuse)",
+  "keywords": [
+    "Imaging",
+    "Isolated object tracking",
+    "Multi-channel image",
+    "Earth observation"
+  ],
+  "description": "## Abstract\n\nMost biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g.,. However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to segment and track objects in fluorescence time-lapse microscopy images?\n - Can the same workflow be reused on data from another discipline, such as Earth observation (tracking atmospheric rivers)?\n\n\n## Learning Objectives\n\n- Segment fluorescent objects using CellProfiler in Galaxy\n- Track objects over multiple frames using CellProfiler in Galaxy\n- Reuse the same CellProfiler tracking pipeline on an Earth-observation time series (cross-discipline reuse)\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html",
+      "name": "Creating, Editing and Importing Galaxy Workflows",
+      "description": "Hands-on for 'Creating, Editing and Importing Galaxy Workflows' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/",
+      "name": "Yi Sun",
+      "image": "https://avatars.githubusercontent.com/sunyi000",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "@id": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "name": "Jean-Karim Hériché",
+      "image": "https://avatars.githubusercontent.com/jkh1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "name": "Anne Fouilloux",
+      "image": "https://avatars.githubusercontent.com/annefou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1784-2920",
+      "@id": "https://orcid.org/0000-0002-1784-2920"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "@id": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "@id": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/4567084",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Object tracking using CellProfiler</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/sunyi000/" class="contributor-badge contributor-sunyi000"><img src="https://avatars.githubusercontent.com/sunyi000?s=36" alt="Yi Sun avatar" width="36" class="avatar" />
+    Yi Sun</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
+    Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/jkh1/" class="contributor-badge contributor-jkh1"><img src="https://avatars.githubusercontent.com/jkh1?s=36" alt="Jean-Karim Hériché avatar" width="36" class="avatar" />
+    Jean-Karim Hériché</a><a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
+    Anne Fouilloux</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-badge-small contributor-beatrizserrano"><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-badge-small contributor-kostrykin"><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to segment and track objects in fluorescence time-lapse microscopy images?</p>
+</li>
+        
+        <li><p>Can the same workflow be reused on data from another discipline, such as Earth observation (tracking atmospheric rivers)?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Segment fluorescent objects using CellProfiler in Galaxy</p>
+</li>
+        
+        <li><p>Track objects over multiple frames using CellProfiler in Galaxy</p>
+</li>
+        
+        <li><p>Reuse the same CellProfiler tracking pipeline on an Earth-observation time series (cross-discipline reuse)</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Creating, Editing and Importing Galaxy Workflows</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/4567084">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/" title="Object tracking using CellProfiler workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			Galaxy Australia <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be" title="">
+			Galaxy Belgium <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			Galaxy Main (US)
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 17, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 20, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00182">https://gxy.io/GTN:T00182</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. <span class="citation"><a href="#Neumann2010">Neumann <i>et al.</i> 2010</a></span>, <span class="citation"><a href="#Heriche2014">Hériché <i>et al.</i> 2014</a></span>). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.</p>
+
+<p>To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time-lapse recording of one mitosis of a syncytial blastoderm stage <em>Drosophila</em> embryo expressing a GFP-histone gene that labels chromatin.</p>
+
+<p>Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-prerequisites"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-prerequisites" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Prerequisites</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>It is expected that you are already familiar with the Galaxy interface and the workflow editor. If this is not the case, we recommend you to complete the requirements listed at the start of this tutorial.</p>
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-important-information-cellprofiler-in-galaxy"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Important information: CellProfiler in Galaxy</div>
+  <p>The Galaxy <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0" title="CellProfiler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CellProfiler</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span>  tool takes two inputs: a CellProfiler pipeline and an image collection.
+Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:</p>
+  <ul>
+    <li>The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.</li>
+    <li>Modules used by the pipeline aren’t available in Galaxy.</li>
+    <li>Parameters for some CellProfiler modules are limited/constrained compared to the stand-alone version, most notably:
+      <ul>
+        <li>Parameters require manual input from the user whereas, in the stand-alone version, some modules can inherit parameter values from other modules.</li>
+        <li>Input and output file locations are set by Galaxy and can’t be set by the user.</li>
+        <li>Metadata extraction from file names is limited to a set of fixed patterns.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#create-a-cellprofiler-pipeline-in-galaxy" id="markdown-toc-create-a-cellprofiler-pipeline-in-galaxy">Create a CellProfiler pipeline in Galaxy</a>    <ol>
+      <li><a href="#create-a-new-workflow" id="markdown-toc-create-a-new-workflow">Create a new workflow</a></li>
+      <li><a href="#read-the-images" id="markdown-toc-read-the-images">Read the images</a></li>
+      <li><a href="#get-the-metadata" id="markdown-toc-get-the-metadata">Get the metadata</a></li>
+      <li><a href="#convert-the-images-to-grayscale" id="markdown-toc-convert-the-images-to-grayscale">Convert the images to grayscale</a></li>
+      <li><a href="#segmentation" id="markdown-toc-segmentation">Segmentation</a></li>
+      <li><a href="#feature-extraction" id="markdown-toc-feature-extraction">Feature extraction</a></li>
+      <li><a href="#track-the-objects" id="markdown-toc-track-the-objects">Track the objects</a></li>
+      <li><a href="#visualize-results" id="markdown-toc-visualize-results">Visualize results</a></li>
+      <li><a href="#save-the-images-and-features" id="markdown-toc-save-the-images-and-features">Save the images and features</a></li>
+    </ol>
+  </li>
+  <li><a href="#run-the-pipeline-with-cellprofiler" id="markdown-toc-run-the-pipeline-with-cellprofiler">Run the pipeline with <strong>CellProfiler</strong></a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<p>The <strong>same</strong> CellProfiler tracking pipeline can be applied to time series from very different scientific domains. This tutorial can be followed with a <strong>bioimaging</strong> dataset (dividing cell nuclei in a fluorescence microscopy recording) or an <strong>Earth-observation</strong> dataset (atmospheric rivers in a climate-reanalysis time series). The pipeline is the same in both paths — you build it once, exactly the same way; only the input data and a few names (the object name and the file-name marker) change. Choose the path that interests you most.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Pick a dataset: a fluorescence-microscopy recording of dividing cell nuclei, or a climate-reanalysis time series of atmospheric rivers. You build and run the <em>same</em> CellProfiler pipeline either way.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Bioimaging" onclick="cyoaChoice('Bioimaging', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Bioimaging</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Earth" onclick="cyoaChoice('Earth', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Earth</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Bioimaging", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Earth">
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-tracking-atmospheric-rivers-with-a-cell-tracking-pipeline"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Tracking atmospheric rivers with a cell-tracking pipeline</div>
+
+    <p>In the Earth-observation path we reuse this <strong>same</strong> CellProfiler object-tracking pipeline — built to follow dividing nuclei — to detect and track <strong>atmospheric rivers</strong>: long, narrow filaments of intense water-vapour transport in the atmosphere (the “rivers in the sky” that deliver much of the world’s extreme rainfall). This is a cross-discipline experiment from the <a href="https://oscars-project.eu/projects/fair-image-analysis-across-sciences">OSCARS-FIESTA</a> project. Why does it work? An atmospheric river is a <strong>bright, elongated filament on a dark background</strong> in a map of vertically integrated vapour transport (IVT) — morphologically much like the bright nuclei the pipeline was built for. A river that intensifies, drifts and splits over time is the climate-science analogue of a dividing nucleus, so the same <em>segment-then-link-by-overlap</em> approach tracks it. The preprocessing notebooks, the full Galaxy run provenance, and a citable archive are in the <a href="https://github.com/annefou/fiesta-galaxy-cellprofiler-eo">OSCARS-FIESTA example repository</a>.</p>
+  </blockquote>
+
+</div>
+
+<h1 id="get-data">Get data</h1>
+
+<div class="Bioimaging">
+
+  <p>This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early <em>Drosophila</em> embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
+The images are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.</p>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/object-tracking-using-cell-profiler/Dividing_nuclei.gif" alt="Dividing nuclei. " width="542" height="264" loading="lazy" /><a target="_blank" href="../../images/object-tracking-using-cell-profiler/Dividing_nuclei.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Time lapse recording of anaphase nuclei in a Drosophila embryo.</figcaption></figure>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-data-upload-bioimaging"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload — bioimaging</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial.
+When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the files from <a href="https://zenodo.org/record/4567084">Zenodo</a> or from
+the shared data library.
+        <ul>
+          <li><strong>Important:</strong> If setting the type to ‘Auto-detect’, make sure that after upload, the datatype is set to zip.</li>
+        </ul>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4567084/files/drosophila_sample.zip
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the file to drosophila_embryo.zip</li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <p>This path uses a time series of <strong>atmospheric-river</strong> activity over the North Pacific during an early-February 2017 event. Each frame is a map of the vertically integrated water-vapour transport (IVT) magnitude from the ERA5 climate reanalysis, rendered so that the atmospheric river appears as a bright filament on a dark background — one frame every 6 hours. The frames are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.</p>
+
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/object-tracking-using-cell-profiler/input_atmospheric_river_eo.png" alt="An atmospheric river in an ERA5 IVT field. " width="963" height="543" loading="lazy" /><a target="_blank" href="../../images/object-tracking-using-cell-profiler/input_atmospheric_river_eo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> One frame of the ERA5 IVT magnitude over the North Pacific: a bright atmospheric-river filament transporting water vapour towards North America, on a dark background.</figcaption></figure>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-data-upload-earth-observation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload — Earth observation</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial.
+When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the atmospheric-river IVT frames from Zenodo.
+        <ul>
+          <li><strong>Important:</strong> If setting the type to ‘Auto-detect’, make sure that after upload, the datatype is set to zip.</li>
+        </ul>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/20813832/files/npacific_ivt_frames.zip
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the file to npacific_ivt_frames.zip</li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-how-the-atmospheric-river-frames-were-prepared"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  How the atmospheric-river frames were prepared</div>
+    <p>The frames come from the ERA5 reanalysis <span class="citation"><a href="#Hersbach2020">Hersbach <i>et al.</i> 2020</a></span> accessed through the public, anonymous ARCO-ERA5 archive. For each 6-hourly time step we took the eastward and northward vertically integrated vapour-transport components and combined them into the IVT magnitude, IVT = √(u² + v²), over the North Pacific (2 – 11 February 2017). Each field was rescaled to an 8-bit image (bright river on dark background) and written as a three-channel PNG named <code class="language-plaintext highlighter-rouge">NPacific_IVT_0000.png</code>, <code class="language-plaintext highlighter-rouge">NPacific_IVT_0001.png</code>, … so the filename carries the time index — exactly the structure the <em>Metadata</em> step below expects. These frames are archived on Zenodo <span class="citation"><a href="#fouilloux2026npacificivt">Fouilloux 2026</a></span>; the preprocessing notebooks, the full Galaxy run provenance, and a citable software archive are in the <a href="https://github.com/annefou/fiesta-galaxy-cellprofiler-eo">OSCARS-FIESTA example repository</a>.</p>
+  </blockquote>
+
+</div>
+
+<h1 id="create-a-cellprofiler-pipeline-in-galaxy">Create a CellProfiler pipeline in Galaxy</h1>
+
+<p>In this section, we will build a CellProfiler pipeline from scratch in Galaxy.
+We need to:</p>
+<ul>
+  <li>Read the images and the metadata</li>
+  <li>Convert the colour images to grayscale</li>
+  <li>Segment the objects (nuclei / atmospheric rivers)</li>
+  <li>Extract features from the segmented objects</li>
+  <li>Perform tracking</li>
+  <li>Produce some useful output files</li>
+</ul>
+
+<p>A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1" title="Starting modules tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Starting modules</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> tool and end with the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0" title="CellProfiler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CellProfiler</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span>  tool.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png" alt="Image of the workflow. " width="1467" height="771" loading="lazy" /><a target="_blank" href="../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Overview of the CellProfiler pipeline using Galaxy tools.</figcaption></figure>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-about-the-pipeline-steps"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-pipeline-steps" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details about the pipeline steps</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.</li>
+    <li>CellProfiler is designed to work primarily with grayscale images. Since we don’t need the colour information, we convert colour images to grayscale type.</li>
+    <li>Segmentation means identifying the objects in each image. In CellProfiler, this is done by thresholding the intensity level in each image.</li>
+    <li>When we perform tracking we’re usually interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore, for each segmented object, we compute some features, i.e. numerical descriptors of some properties of the object.</li>
+    <li>Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series.</li>
+  </ul>
+
+</blockquote>
+
+<p>The pipeline you build is the <strong>same</strong> for both paths. Only two pieces of text differ, depending on which dataset you chose:</p>
+
+<div class="Bioimaging">
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-names-to-use-in-the-bioimaging-path"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Names to use in the bioimaging path</div>
+    <ul>
+      <li>The <strong>file-name marker</strong> used to recognise and order the images is <code class="language-plaintext highlighter-rouge">GFPHistone</code>.</li>
+      <li>The <strong>object name</strong> we give the segmented objects is <code class="language-plaintext highlighter-rouge">Nuclei</code> (and the tracked image is <code class="language-plaintext highlighter-rouge">TrackedNuclei</code>).</li>
+    </ul>
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-names-to-use-in-the-earth-observation-path"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Names to use in the Earth-observation path</div>
+    <ul>
+      <li>The <strong>file-name marker</strong> used to recognise and order the images is <code class="language-plaintext highlighter-rouge">IVT</code>.</li>
+      <li>The <strong>object name</strong> we give the segmented objects is <code class="language-plaintext highlighter-rouge">Rivers</code> (and the tracked image is <code class="language-plaintext highlighter-rouge">TrackedRivers</code>).</li>
+    </ul>
+  </blockquote>
+
+</div>
+
+<h2 id="create-a-new-workflow">Create a new workflow</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-a-new-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Creating a new workflow</div>
+  <ol>
+    <li>
+      <p>Create a new workflow</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong>Workflow</strong> on the top bar</li>   <li>Click the new workflow <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the workflow editor for that workflow</li>   <li>Need more help? Please see the <em>How to make a workflow subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The next steps will add new tools using the workflow editor.
+Remember to save the workflow when done (or anytime) to not lose your input parameters.</p>
+
+<h2 id="read-the-images">Read the images</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-reading-images"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Reading images</div>
+
+  <ol>
+    <li>
+      <p>Add Inputs → <strong>Input Dataset</strong> to the workflow</p>
+    </li>
+    <li>
+      <p>Add <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Unzip</strong> with the following parameter:</p>
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Extract single file”</em>: <code class="language-plaintext highlighter-rouge">All files</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="get-the-metadata">Get the metadata</h2>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>The Starting modules tool combines four CellProfiler modules that are always used together at the start of a pipeline. These modules are:</p>
+  <ul>
+    <li>Images</li>
+    <li>Metadata</li>
+    <li>NamesAndTypes</li>
+    <li>Groups</li>
+  </ul>
+</blockquote>
+
+<div class="Bioimaging">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-getting-metadata-bioimaging"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Getting metadata — bioimaging</div>
+
+    <ol>
+      <li>
+        <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1" title="Starting modules tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Starting modules</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:</p>
+
+        <ul>
+          <li>Images
+            <ul>
+              <li><em>“Do you want to filter only the images?”</em>: <code class="language-plaintext highlighter-rouge">Select the images only</code></li>
+            </ul>
+          </li>
+          <li>Metadata
+            <ul>
+              <li>
+                <p><em>“Do you want to extract the metadata?”</em>: <code class="language-plaintext highlighter-rouge">Yes, specify metadata</code></p>
+
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert new metadata
+                    <ul>
+                      <li><em>“Metadata extraction method”</em>: <code class="language-plaintext highlighter-rouge">Extract from file/folder names</code></li>
+                      <li><em>“Metadata source”</em>: <code class="language-plaintext highlighter-rouge">File name</code></li>
+                      <li><em>“Select the pattern to extract metadata from the file name”</em>: <code class="language-plaintext highlighter-rouge">field1_field2_field3</code></li>
+                      <li>
+                        <p><em>“Extract metadata from”</em>: <code class="language-plaintext highlighter-rouge">Images matching a rule</code></p>
+
+                        <ul>
+                          <li><em>“Match the following rules”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+                          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert filtering rules:
+                            <ul>
+                              <li><em>“Select the filtering criteria”</em>: <code class="language-plaintext highlighter-rouge">File</code></li>
+                              <li><em>"”operator</em>: <code class="language-plaintext highlighter-rouge">Does</code></li>
+                              <li><em>“contain”</em>: <code class="language-plaintext highlighter-rouge">Contain regular expression</code></li>
+                              <li><em>“match_value”</em>: <code class="language-plaintext highlighter-rouge">GFPHistone</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>NamesAndTypes
+            <ul>
+              <li><em>“Process 3D”</em>: <code class="language-plaintext highlighter-rouge">No, do not process 3D data</code></li>
+              <li><em>“Assign a name to”</em>: <code class="language-plaintext highlighter-rouge">Give images one of several names depending on the metadata</code>
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert another image:
+                    <ul>
+                      <li><em>“Match the following rules”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+                      <li>
+                        <p><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert rule:</p>
+
+                        <ul>
+                          <li>
+                            <p><em>“Select rule criteria”</em>: <code class="language-plaintext highlighter-rouge">File</code></p>
+
+                            <ul>
+                              <li><em>“operator”</em>: <code class="language-plaintext highlighter-rouge">Does</code></li>
+                              <li><em>“contain”</em>: <code class="language-plaintext highlighter-rouge">Contain regular expression</code></li>
+                              <li><em>“match_value”</em>: <code class="language-plaintext highlighter-rouge">GFPHistone</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><em>“Select the image type”</em>: <code class="language-plaintext highlighter-rouge">Color image</code></li>
+                      <li><em>“Name to assign these images”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+                      <li><em>“Set intensity range from”</em>: <code class="language-plaintext highlighter-rouge">Image metadata</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Image matching method”</em>: <code class="language-plaintext highlighter-rouge">Metadata</code></li>
+            </ul>
+          </li>
+          <li>Groups
+            <ul>
+              <li><em>“Do you want to group your images?”</em>: <code class="language-plaintext highlighter-rouge">Yes, group the images</code></li>
+              <li><em>“Metadata category”</em>: <code class="language-plaintext highlighter-rouge">field1</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How are we capturing metadata and what type of metadata are we getting?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is “DrosophilaEmbryo”, “GFPHistone” and numbers with leading zeros. These three fields represent respectively the sample identifier, the marker visualized in the image and the index in the time series.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-getting-metadata-earth-observation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Getting metadata — Earth observation</div>
+
+    <ol>
+      <li>
+        <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1" title="Starting modules tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Starting modules</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:</p>
+
+        <ul>
+          <li>Images
+            <ul>
+              <li><em>“Do you want to filter only the images?”</em>: <code class="language-plaintext highlighter-rouge">Select the images only</code></li>
+            </ul>
+          </li>
+          <li>Metadata
+            <ul>
+              <li>
+                <p><em>“Do you want to extract the metadata?”</em>: <code class="language-plaintext highlighter-rouge">Yes, specify metadata</code></p>
+
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert new metadata
+                    <ul>
+                      <li><em>“Metadata extraction method”</em>: <code class="language-plaintext highlighter-rouge">Extract from file/folder names</code></li>
+                      <li><em>“Metadata source”</em>: <code class="language-plaintext highlighter-rouge">File name</code></li>
+                      <li><em>“Select the pattern to extract metadata from the file name”</em>: <code class="language-plaintext highlighter-rouge">field1_field2_field3</code></li>
+                      <li>
+                        <p><em>“Extract metadata from”</em>: <code class="language-plaintext highlighter-rouge">Images matching a rule</code></p>
+
+                        <ul>
+                          <li><em>“Match the following rules”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+                          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert filtering rules:
+                            <ul>
+                              <li><em>“Select the filtering criteria”</em>: <code class="language-plaintext highlighter-rouge">File</code></li>
+                              <li><em>"”operator</em>: <code class="language-plaintext highlighter-rouge">Does</code></li>
+                              <li><em>“contain”</em>: <code class="language-plaintext highlighter-rouge">Contain regular expression</code></li>
+                              <li><em>“match_value”</em>: <code class="language-plaintext highlighter-rouge">IVT</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>NamesAndTypes
+            <ul>
+              <li><em>“Process 3D”</em>: <code class="language-plaintext highlighter-rouge">No, do not process 3D data</code></li>
+              <li><em>“Assign a name to”</em>: <code class="language-plaintext highlighter-rouge">Give images one of several names depending on the metadata</code>
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert another image:
+                    <ul>
+                      <li><em>“Match the following rules”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+                      <li>
+                        <p><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert rule:</p>
+
+                        <ul>
+                          <li>
+                            <p><em>“Select rule criteria”</em>: <code class="language-plaintext highlighter-rouge">File</code></p>
+
+                            <ul>
+                              <li><em>“operator”</em>: <code class="language-plaintext highlighter-rouge">Does</code></li>
+                              <li><em>“contain”</em>: <code class="language-plaintext highlighter-rouge">Contain regular expression</code></li>
+                              <li><em>“match_value”</em>: <code class="language-plaintext highlighter-rouge">IVT</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><em>“Select the image type”</em>: <code class="language-plaintext highlighter-rouge">Color image</code></li>
+                      <li><em>“Name to assign these images”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+                      <li><em>“Set intensity range from”</em>: <code class="language-plaintext highlighter-rouge">Image metadata</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Image matching method”</em>: <code class="language-plaintext highlighter-rouge">Metadata</code></li>
+            </ul>
+          </li>
+          <li>Groups
+            <ul>
+              <li><em>“Do you want to group your images?”</em>: <code class="language-plaintext highlighter-rouge">Yes, group the images</code></li>
+              <li><em>“Metadata category”</em>: <code class="language-plaintext highlighter-rouge">field1</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How are we capturing metadata and what type of metadata are we getting?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is “NPacific”, “IVT” and numbers with leading zeros. These three fields represent respectively the region identifier, the variable visualized in the image (the integrated vapour transport) and the index in the time series.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How will CellProfiler form a temporal sequence?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Images will be grouped based on field1 which here is the sample/region identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="convert-the-images-to-grayscale">Convert the images to grayscale</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-colour-to-grayscale-conversion"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Colour to grayscale conversion</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0" title="ColorToGray tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ColorToGray</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Select the input CellProfiler pipeline”</em>: Connect output of <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to input of <span><strong>ColorToGray</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span></li>
+        <li><em>“Enter the name of the input image”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+        <li><em>“Conversion method”</em>: <code class="language-plaintext highlighter-rouge">Combine</code>
+          <ul>
+            <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+            <li><em>“Image type”</em>: <code class="language-plaintext highlighter-rouge">RGB</code>
+              <ul>
+                <li><em>“Relative weight of the red channel”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                <li><em>“Relative weight of the green channel”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                <li><em>“Relative weight of the blue channel”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="segmentation">Segmentation</h2>
+
+<p>The first step to track objects starts with the identification of those objects on the images.</p>
+
+<div class="Bioimaging">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-nuclei-segmentation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Nuclei segmentation</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1" title="IdentifyPrimaryObjects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IdentifyPrimaryObjects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>ColorToGray</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Use advanced settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes, use advanced settings</code>
+            <ul>
+              <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+              <li><em>“Enter the name of the primary objects to be identified”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
+              <li><em>“Typical minimum diameter of objects, in pixel units (Min)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+              <li><em>“Typical maximum diameter of objects, in pixel units (Max)”</em>: <code class="language-plaintext highlighter-rouge">9999</code></li>
+              <li><em>“Discard objects outside diameter range?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Discard objects touching the border of the image?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Threshold strategy”</em>: <code class="language-plaintext highlighter-rouge">Global</code>
+                <ul>
+                  <li><em>“Thresholding method”</em>: <code class="language-plaintext highlighter-rouge">Otsu</code>
+                    <ul>
+                      <li><em>“Two-class or three-class thresholding?”</em>: <code class="language-plaintext highlighter-rouge">Three classes</code>
+                        <ul>
+                          <li><em>“Assign pixels in the middle intensity class to the foreground or the background?”</em>: <code class="language-plaintext highlighter-rouge">Background</code></li>
+                        </ul>
+                      </li>
+                      <li><em>Threshold smoothing scale”</em>: <code class="language-plaintext highlighter-rouge">1.3488</code></li>
+                      <li><em>Threshold correction factor”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                      <li><em>Lower bound on threshold”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+                      <li><em>Upper bound on threshold”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Method to distinguish clumped objects”</em>: <code class="language-plaintext highlighter-rouge">Intensity</code>
+                <ul>
+                  <li><em>“Method to draw dividing lines between clumped objects”</em>: <code class="language-plaintext highlighter-rouge">Intensity</code>
+                    <ul>
+                      <li><em>“Automatically calculate size of smoothing filter for declumping?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Automatically calculate minimum allowed distance between local maxima?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Speed up by using lower-resolution mage to find local maxima?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Fill holes in identified objects”</em>: <code class="language-plaintext highlighter-rouge">After both thresholding and declumping</code></li>
+              <li><em>“Handling of objects if excessive number of objects identified”</em>: <code class="language-plaintext highlighter-rouge">Continue</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-atmospheric-river-segmentation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Atmospheric-river segmentation</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1" title="IdentifyPrimaryObjects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IdentifyPrimaryObjects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>ColorToGray</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Use advanced settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes, use advanced settings</code>
+            <ul>
+              <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+              <li><em>“Enter the name of the primary objects to be identified”</em>: <code class="language-plaintext highlighter-rouge">Rivers</code></li>
+              <li><em>“Typical minimum diameter of objects, in pixel units (Min)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+              <li><em>“Typical maximum diameter of objects, in pixel units (Max)”</em>: <code class="language-plaintext highlighter-rouge">9999</code></li>
+              <li><em>“Discard objects outside diameter range?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Discard objects touching the border of the image?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Threshold strategy”</em>: <code class="language-plaintext highlighter-rouge">Global</code>
+                <ul>
+                  <li><em>“Thresholding method”</em>: <code class="language-plaintext highlighter-rouge">Otsu</code>
+                    <ul>
+                      <li><em>“Two-class or three-class thresholding?”</em>: <code class="language-plaintext highlighter-rouge">Three classes</code>
+                        <ul>
+                          <li><em>“Assign pixels in the middle intensity class to the foreground or the background?”</em>: <code class="language-plaintext highlighter-rouge">Background</code></li>
+                        </ul>
+                      </li>
+                      <li><em>Threshold smoothing scale”</em>: <code class="language-plaintext highlighter-rouge">1.3488</code></li>
+                      <li><em>Threshold correction factor”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                      <li><em>Lower bound on threshold”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+                      <li><em>Upper bound on threshold”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Method to distinguish clumped objects”</em>: <code class="language-plaintext highlighter-rouge">Intensity</code>
+                <ul>
+                  <li><em>“Method to draw dividing lines between clumped objects”</em>: <code class="language-plaintext highlighter-rouge">Intensity</code>
+                    <ul>
+                      <li><em>“Automatically calculate size of smoothing filter for declumping?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Automatically calculate minimum allowed distance between local maxima?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Speed up by using lower-resolution mage to find local maxima?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><em>“Fill holes in identified objects”</em>: <code class="language-plaintext highlighter-rouge">After both thresholding and declumping</code></li>
+              <li><em>“Handling of objects if excessive number of objects identified”</em>: <code class="language-plaintext highlighter-rouge">Continue</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<h2 id="feature-extraction">Feature extraction</h2>
+
+<p>Once the objects of interest are identified, we extract features, i.e. numerical descriptors of object properties. We do this because we may be interested in analysing the evolution of these properties over time or want to use them in the tracking procedure to match objects over time.</p>
+
+<div class="Bioimaging">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-shape-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Shape features</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0" title="MeasureObjectSizeShape tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MeasureObjectSizeShape</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>In <em>“new object”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new object”</em>
+                <ul>
+                  <li><em>“Enter the name of the object to measure”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Calculate the Zernike features?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-intensity-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Intensity features</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0" title="MeasureObjectIntensity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MeasureObjectIntensity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>MeasureObjectSizeShape</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>In <em>“new image”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
+                <ul>
+                  <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>In <em>“new object”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new object”</em>
+                <ul>
+                  <li><em>“Enter the name of the objects to measure”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-shape-features-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Shape features</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0" title="MeasureObjectSizeShape tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MeasureObjectSizeShape</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>In <em>“new object”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new object”</em>
+                <ul>
+                  <li><em>“Enter the name of the object to measure”</em>: <code class="language-plaintext highlighter-rouge">Rivers</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Calculate the Zernike features?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-intensity-features-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Intensity features</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0" title="MeasureObjectIntensity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MeasureObjectIntensity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>MeasureObjectSizeShape</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>In <em>“new image”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
+                <ul>
+                  <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>In <em>“new object”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new object”</em>
+                <ul>
+                  <li><em>“Enter the name of the objects to measure”</em>: <code class="language-plaintext highlighter-rouge">Rivers</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<h2 id="track-the-objects">Track the objects</h2>
+
+<p>With the objects and the relevant features measured, we are now ready to start the tracking step!</p>
+
+<div class="Bioimaging">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-object-tracking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Object tracking</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0" title="TrackObjects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TrackObjects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>MeasureObjectIntensity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Enter the name of the objects to track”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
+          <li><em>“Choose a tracking method”</em>: <code class="language-plaintext highlighter-rouge">Overlap</code>
+            <ul>
+              <li><em>“Maximum pixel distance to consider matches”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+              <li><em>“Filter objects by lifetime?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              <li><em>“Select display option?”</em>: <code class="language-plaintext highlighter-rouge">Color and Number</code></li>
+              <li><em>“Save color-coded image?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">TrackedNuclei</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-object-tracking-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Object tracking</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0" title="TrackObjects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TrackObjects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>MeasureObjectIntensity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Enter the name of the objects to track”</em>: <code class="language-plaintext highlighter-rouge">Rivers</code></li>
+          <li><em>“Choose a tracking method”</em>: <code class="language-plaintext highlighter-rouge">Overlap</code>
+            <ul>
+              <li><em>“Maximum pixel distance to consider matches”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+              <li><em>“Filter objects by lifetime?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              <li><em>“Select display option?”</em>: <code class="language-plaintext highlighter-rouge">Color and Number</code></li>
+              <li><em>“Save color-coded image?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">TrackedRivers</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<h2 id="visualize-results">Visualize results</h2>
+
+<p>To make sure that the tracking has gone as expected, we will have a look at the original images together with the results of the segmentation step. And we will visualize them together (in tiles) for easier comparison.</p>
+
+<div class="Bioimaging">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualize-segmentation-outcome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualize segmentation outcome</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0" title="OverlayOutlines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OverlayOutlines</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>TrackObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Display outlines on a blank image?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+            <ul>
+              <li><em>“Enter the name of image on which to display outlines”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+              <li><em>“Outline display mode”</em>: <code class="language-plaintext highlighter-rouge">Color</code>
+                <ul>
+                  <li>In <em>“Outline”</em>:
+                    <ul>
+                      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Outline”</em>
+                        <ul>
+                          <li><em>“Enter the name of the objects to display”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
+                          <li><em>“Select outline color”</em>: <span style="background-color:#ff0000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (red)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">OutlineImage</code></li>
+          <li><em>“How to outline”</em>: <code class="language-plaintext highlighter-rouge">Inner</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-tiling-images"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Tiling images</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0" title="Tile tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tile</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>OverlayOutlines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Enter the name of an input image”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+          <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">TiledImages</code></li>
+          <li><em>“Tile assembly method”</em>: <code class="language-plaintext highlighter-rouge">Within cycles</code>
+            <ul>
+              <li><em>“Automatically calculate number of rows?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+                <ul>
+                  <li><em>“Final number of rows”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                </ul>
+              </li>
+              <li><em>“Automatically calculate number of columns?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Image corner to begin tiling”</em>: <code class="language-plaintext highlighter-rouge">top left</code></li>
+              <li><em>“Direction to begin tiling”</em>: <code class="language-plaintext highlighter-rouge">row</code></li>
+              <li><em>“Use meander mode?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              <li>In <em>“Another image”</em>:
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Another image”</em>
+                    <ul>
+                      <li><em>“Enter the name of an additional image to tile”</em>: <code class="language-plaintext highlighter-rouge">OutlineImage</code></li>
+                    </ul>
+                  </li>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Another image”</em>
+                    <ul>
+                      <li><em>“Enter the name of an additional image to tile”</em>: <code class="language-plaintext highlighter-rouge">TrackedNuclei</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualize-segmentation-outcome-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualize segmentation outcome</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0" title="OverlayOutlines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OverlayOutlines</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>TrackObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Display outlines on a blank image?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+            <ul>
+              <li><em>“Enter the name of image on which to display outlines”</em>: <code class="language-plaintext highlighter-rouge">OrigGray</code></li>
+              <li><em>“Outline display mode”</em>: <code class="language-plaintext highlighter-rouge">Color</code>
+                <ul>
+                  <li>In <em>“Outline”</em>:
+                    <ul>
+                      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Outline”</em>
+                        <ul>
+                          <li><em>“Enter the name of the objects to display”</em>: <code class="language-plaintext highlighter-rouge">Rivers</code></li>
+                          <li><em>“Select outline color”</em>: <span style="background-color:#ff0000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (red)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">OutlineImage</code></li>
+          <li><em>“How to outline”</em>: <code class="language-plaintext highlighter-rouge">Inner</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-tiling-images-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Tiling images</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0" title="Tile tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tile</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>OverlayOutlines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Enter the name of an input image”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+          <li><em>“Name the output image”</em>: <code class="language-plaintext highlighter-rouge">TiledImages</code></li>
+          <li><em>“Tile assembly method”</em>: <code class="language-plaintext highlighter-rouge">Within cycles</code>
+            <ul>
+              <li><em>“Automatically calculate number of rows?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+                <ul>
+                  <li><em>“Final number of rows”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                </ul>
+              </li>
+              <li><em>“Automatically calculate number of columns?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              <li><em>“Image corner to begin tiling”</em>: <code class="language-plaintext highlighter-rouge">top left</code></li>
+              <li><em>“Direction to begin tiling”</em>: <code class="language-plaintext highlighter-rouge">row</code></li>
+              <li><em>“Use meander mode?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+              <li>In <em>“Another image”</em>:
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Another image”</em>
+                    <ul>
+                      <li><em>“Enter the name of an additional image to tile”</em>: <code class="language-plaintext highlighter-rouge">OutlineImage</code></li>
+                    </ul>
+                  </li>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Another image”</em>
+                    <ul>
+                      <li><em>“Enter the name of an additional image to tile”</em>: <code class="language-plaintext highlighter-rouge">TrackedRivers</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<h2 id="save-the-images-and-features">Save the images and features</h2>
+
+<p>The tiled images and the features computed in previous steps are now exported to the Galaxy history ready to be analyzed.</p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-the-images"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Save the images</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1" title="SaveImages tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SaveImages</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>Tile</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Select the type of image to save”</em>: <code class="language-plaintext highlighter-rouge">Image</code>
+          <ul>
+            <li><em>“Saved the format to save the image(s)”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+          </ul>
+        </li>
+        <li><em>“Enter the name of the image to save”</em>: <code class="language-plaintext highlighter-rouge">TiledImages</code></li>
+        <li><em>“Select method for constructing file names”</em>: <code class="language-plaintext highlighter-rouge">From image filename</code>
+          <ul>
+            <li><em>“Enter the image file name”</em>: <code class="language-plaintext highlighter-rouge">OrigColor</code></li>
+            <li><em>“Append a suffix to the image file name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“Text to append to the image file name”</em>: <code class="language-plaintext highlighter-rouge">_tile</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Overwrite existing files without warning?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“When to save”</em>: <code class="language-plaintext highlighter-rouge">Every cycle</code></li>
+        <li><em>“Record the file and path information to the saved image?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-export-tabular-data-to-character-delimited-text-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Export tabular data to character-delimited text files</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1" title="ExportToSpreadsheet tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ExportToSpreadsheet</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: output of <strong>SaveImages</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Select the column delimiter”</em>: <code class="language-plaintext highlighter-rouge">Comma (",")</code></li>
+        <li><em>“Add a prefix to file names?”</em>: <code class="language-plaintext highlighter-rouge">Do not add prefix to the file name</code></li>
+        <li><em>“Overwrite existing files without warning”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Add image metadata columns to your object data file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Representation of Nan/Inf”</em>: <code class="language-plaintext highlighter-rouge">NaN</code></li>
+        <li><em>“Calculate the per-image mean values for object measurements?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Calculate the per-image median values for object measurements?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Calculate the per-image standard deviation values for object measurements?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Create a GenePattern GCT file?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>By default all measurement types are exported.
+This is in contrast to the stand-alone version of CellProfiler which allows choosing which measurement types to save.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="run-the-pipeline-with-cellprofiler">Run the pipeline with <strong>CellProfiler</strong></h1>
+
+<p>As mentioned in the introduction, the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0" title="CellProfiler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CellProfiler</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span>  takes as input the pipeline that we have been assembling over this tutorial and the input data. We are now ready to finally run CellProfiler!</p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-running-the-pipeline-with-cellprofiler"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Running the pipeline with CellProfiler</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0" title="CellProfiler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CellProfiler</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy0)</span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pipeline file”</em>: `output of <strong>ExportToSpreadsheet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Are the input images packed into a tar archive?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Images”</em>: output of <strong>Unzip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Detailed logging file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Run the workflow.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Running a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <strong>Workflows</strong> on the <strong>Activity Bar</strong> on the left.</li>   <li>At the top of the resulting page you will have the option to switch between the <em>My workflows</em>, <em>Workflows shared with me</em> and <em>Public workflows</em> tabs.</li>   <li>Select the tab you want to see all workflows in that category</li>   <li>     <p>Search for your desired workflow.</p>     <p><img src="/training-material/topics/climate/images/bgc_calib/bgc_workflow.png" alt="Select workflow" width="15%" /></p>   </li>   <li>Click on the workflow name: a pop-up window opens with a preview of the workflow.</li>   <li>To run it directly: click <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run</strong> (top-right). This will take you to the <em>workflow run form</em>.</li>   <li>Configure the workflow     <ul>       <li><strong>Send results to a new history</strong>: if enabled, will send the results to a new history instead of your current active history. You can provide a name for the new history here as well.</li>       <li><strong>Re-use jobs with identical parameters</strong>. This will check if any identical jobs have already been run before, and save compute time and energy by re-using the previous results. Great to use if you previously ran (part of) this workflow on the same data already.</li>     </ul>   </li>   <li>     <p>Set the workflow parameters (e.g. input data)</p>   </li>   <li>     <p><strong>Recommended</strong>: click <strong>Import</strong> (left of Run) to make your own local copy under <em>Workflows / My Workflows</em>.</p>   </li>   <li>Click on <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run Workflow</strong> in the upper right corner to start the workflow.</li>   <li>You will now see the <em>workflow invocation</em> page showing the progress of your workflow. This page can always be accessed via <i class="fas fa-list" aria-hidden="true"></i><span class="visually-hidden">galaxy-panelview</span> <strong>Workflow invocations</strong> on the Activity bar (left-hand menu).     <ul>       <li>If you sent the results to a new history, you can view this history by clicking on the <i class="fas fa-hdd" aria-hidden="true"></i><span class="visually-hidden">galaxy-histories-activity</span> history link in the top left corner of the workflow invocation page.</li>     </ul>   </li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>If the pipeline fails, inspect the CellProfiler log file for clues about errors.
+A common source of errors is not providing the correct information to a module such as pointing a CellProfiler module at a non-existent dataset (e.g. with a typo in the name).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<div class="Bioimaging">
+
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png" alt="Sample output. " width="1627" height="809" loading="lazy" /><a target="_blank" href="../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Sample of images produced by the pipeline.</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many nuclei have been tracked?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Five objects were detected but only four of these were nuclei.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How could we get rid of tracks that don’t correspond to nuclei?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>Objects that are not nuclei appear to be transient so one solution would be to require the tracks to have a minimal length. This can be done using the <em>“Filter objects by lifetime”</em> parameter of the TrackObjects module.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>Where is the data needed to plot change in nuclei eccentricity over time?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>The data is in the csv file called Nuclei in the CellProfiler pipeline output data set.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+
+<div class="Earth">
+
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/object-tracking-using-cell-profiler/output_atmospheric_river_tracking_eo.png" alt="Atmospheric-river tracking output. " width="1926" height="362" loading="lazy" /><a target="_blank" href="../../images/object-tracking-using-cell-profiler/output_atmospheric_river_tracking_eo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Sample output for the Earth-observation path, for one frame: the input IVT field (left), the identified atmospheric rivers outlined in red (middle), and the tracked rivers colour-coded and numbered (right). Each colour/number is followed across the time series.</figcaption></figure>
+
+  <p>The pipeline outlines the atmospheric-river filaments and links them across the 6-hourly frames, assigning each a track number — exactly as it links dividing nuclei across microscopy frames.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>Where is the data needed to plot how an atmospheric river’s length changes over time?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>The data is in the csv file called Rivers in the CellProfiler pipeline output data set: each row is one river in one frame, with its shape measurements (e.g. major axis length) and its TrackObjects label, so you can follow a single track over time.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-is-this-a-scientifically-valid-atmospheric-river-tracker"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Is this a scientifically valid atmospheric-river tracker?</div>
+    <p>This tutorial shows that the <em>method</em> transfers: the same segment-then-link-by-overlap pipeline detects and tracks atmospheric rivers. It uses CellProfiler’s generic intensity thresholding, <strong>not</strong> the established meteorological criteria <span class="citation"><a href="#Guan2015">Guan and Waliser 2015</a></span> (e.g. an IVT threshold plus a length &gt; 2000 km and length-to-width &gt; 2 geometry test). In the <a href="https://github.com/annefou/fiesta-galaxy-cellprofiler-eo">OSCARS-FIESTA study</a>, the same overlap-tracking approach with those criteria applied recovered five distinct atmospheric-river tracks over this ten-day window and followed one persistent river for about five and a half days. That repository (with a citable archive and a full provenance trail) is the place to go for a quantitative atmospheric-river analysis.</p>
+  </blockquote>
+
+</div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We’ve run a CellProfiler pipeline on Galaxy to segment and track objects in a time series, exported images to visually inspect the outcome, and saved tables of computed object features in comma-separated text files for future analysis.</p>
+
+<p>You also saw that the <strong>same pipeline</strong> can be applied to data from a completely different discipline: a pipeline built to track dividing nuclei in fluorescence microscopy was reused — only its object name and file-name marker retargeted — to detect and track atmospheric rivers in a climate-reanalysis time series. A “bright objects that move, merge and split on a dark background” problem looks the same to CellProfiler whether the objects are nuclei under a microscope or rivers of water vapour seen from space. This kind of cross-discipline reuse is exactly what FAIR, well-described Galaxy workflows make possible.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images</p>
+</li>
+                        
+                        <li><p>The same Galaxy CellProfiler pipeline can track objects across scientific domains — here a nucleus-tracking pipeline is reused, with only its parameters retargeted, to track atmospheric rivers in climate reanalysis data</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Neumann2010">Neumann, B., T. Walter, J.-K. Hériché, J. Bulkescher, H. Erfle <i>et al.</i>, 2010 <b>Phenotypic profiling of the human genome by time-lapse microscopy reveals cell division genes</b>. Nature 464: 721–727. <a href="https://doi.org/10.1038/nature08869">10.1038/nature08869</a></li>
+<li id="Heriche2014">Hériché, J.-K., J. G. Lees, I. Morilla, T. Walter, B. Petrova <i>et al.</i>, 2014 <b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b> (D. G. Drubin, Ed.). Molecular Biology of the Cell 25: 2522–2536. <a href="https://doi.org/10.1091/mbc.e13-04-0221">10.1091/mbc.e13-04-0221</a></li>
+<li id="Guan2015">Guan, B., and D. E. Waliser, 2015 <b>Detection of atmospheric rivers: Evaluation and application of an algorithm for global studies</b>. Journal of Geophysical Research: Atmospheres 120: 12514–12535. <a href="https://doi.org/10.1002/2015JD024257">10.1002/2015JD024257</a></li>
+<li id="Hersbach2020">Hersbach, H., B. Bell, P. Berrisford, S. Hirahara, A. Horányi <i>et al.</i>, 2020 <b>The ERA5 global reanalysis</b>. Quarterly Journal of the Royal Meteorological Society 146: 1999–2049. <a href="https://doi.org/10.1002/qj.3803">10.1002/qj.3803</a></li>
+<li id="fouilloux2026npacificivt">Fouilloux, A., 2026 <b>Atmospheric-river IVT frames (North Pacific, Feb 2017) – Galaxy CellProfiler object-tracking tutorial data</b>. Data set. <a href="https://doi.org/10.5281/zenodo.20813831">10.5281/zenodo.20813831</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/object-tracking-using-cell-profiler"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/object-tracking-using-cell-profiler">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Yi Sun, Beatriz Serrano-Solano, Jean-Karim Hériché, Anne Fouilloux,  <b>Object tracking using CellProfiler (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-object-tracking-using-cell-profiler,
+author = "Yi Sun and Beatriz Serrano-Solano and Jean-Karim Hériché and Anne Fouilloux",
+	title = "Object tracking using CellProfiler (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/oscars/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logos/OSCARS-logo-EUflag.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">OSCARS</div>
+			<div class="description">
+			The OSCARS project has received funding from the European Commission’s Horizon Europe Research and Innovation programme under grant agreement No. 101129751
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/fiesta/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logos/logo-FIESTA.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">OSCARS-FIESTA</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: cp_cellprofiler
+  owner: bgruening
+  revisions: 0e4dccaafef5
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_color_to_gray
+  owner: bgruening
+  revisions: e8f822eeb9fd
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_common
+  owner: bgruening
+  revisions: 670975e92458
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_export_to_spreadsheet
+  owner: bgruening
+  revisions: d0178bdcd00e
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_measure_object_intensity
+  owner: bgruening
+  revisions: 407925835dd9
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_measure_object_size_shape
+  owner: bgruening
+  revisions: acf3aa487283
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_overlay_outlines
+  owner: bgruening
+  revisions: 91560258e972
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_save_images
+  owner: bgruening
+  revisions: 33f4fa1413fb
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_tile
+  owner: bgruening
+  revisions: 443638c10c61
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_track_objects
+  owner: bgruening
+  revisions: 1fd453cd757b
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: unzip
+  owner: imgteam
+  revisions: 38eec75fbe9b
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00182">gxy.io/GTN:T00182</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

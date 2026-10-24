@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Learning Pathways</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/learning-pathways/">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Learning Pathways">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-09-17 10:10:23 +0000"><meta name="description" content="Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Learning Pathways">
+        <meta property="og:description" content="Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/learning-pathways/index.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/learning-pathways/">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  
+  <h1>Learning Pathways</h1>
+  
+
+  
+<p>Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.</p>
+
+<p>Explore all pathways below, or jump directly to a section:</p>
+
+<ul>
+  <li><a href="#for-scientists">For Scientists</a></li>
+  <li><a href="#for-teachers-developers-and-system-administrators">For Teachers, Developers and System Administrators</a></li>
+</ul>
+
+<h2 id="for-scientists">For Scientists</h2>
+
+<!-- list all available pathways as cards  -->
+<div class="pathwaylist row">
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro-to-galaxy-and-genomics.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introduction to Galaxy and Sequence analysis</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Galaxy and analysis of sequencing data.
+You will learn how to use Galaxy for analysis, and will be guided through the most common
+first steps of any genome analysis; quality control and a mapping or assembly of your genomic
+sequences.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb59e; --color-darker: #ff956a; --color-dimmed: #ffa586;">introduction</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #bec2ff; --color-darker: #a4aaff; --color-dimmed: #b1b6ff;">sequence-analysis</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffaedb; --color-darker: #ff89ce; --color-dimmed: #ff9cd4;">assembly</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/epigenetics-from-zero.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/chipseq-viz.png" alt="Plot of ChIP-Seq signal from multiple samples across a genome region" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Epigenetics data analysis with Galaxy</h5>
+        <p class="card-text">
+          Familiarize yourself with the Galaxy user interface and its most important features,
+then move on to analysis of genomic interval and deep-sequencing data
+with tools and tool suites like MACS2, bedtools and deepTools.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #e5b4ff; --color-darker: #dd94ff; --color-dimmed: #e1a4ff;">genomic-intervals</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #94db00; --color-darker: #83c300; --color-dimmed: #8bcf00;">epigenetics</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introduction to Galaxy and Single Cell RNA Sequence analysis</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data. You will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You’ll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/amr-gene-detection.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Detection of AMR genes in bacterial genomes</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #b0c6ff; --color-darker: #8dafff; --color-dimmed: #9fbaff;">amr</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffbb03; --color-darker: #e3a600; --color-dimmed: #f1b000;">bacteria</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;">microgalaxy</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #8ddc00; --color-darker: #7dc400; --color-dimmed: #85d000;">one-health</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb5a0; --color-darker: #ff946d; --color-dimmed: #ffa588;">microbiome</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/beyond_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Applying single-cell RNA-seq analysis</h5>
+        <p class="card-text">
+          Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb77e; --color-darker: #fb9a00; --color-dimmed: #ffa852;">intermediate</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/biont-python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/BioNT_Logo.png" alt="BioNT logo a blue had with the text BioNT" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">From Zero To Hero with Python</h5>
+        <p class="card-text">
+          Data analysis and programming are high-demand fields, making them particularly attractive to job seekers and employees across various industries and academic institutions. Are you eager to acquire the foundational skills of coding using the Python programming language? The BioNT consortium is offering a training curriculum for job seekers, SME employers, and everyone who would like to gain new skills in...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #afc6ff; --color-darker: #8ab0ff; --color-dimmed: #9dbbff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #90cdff; --color-darker: #47baff; --color-dimmed: #72c3ff;">programming</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb59e; --color-darker: #ff956a; --color-dimmed: #ffa586;">introduction</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/climate-learning.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/galaxy_climate.png" alt="Image of the earth surrounded by a bar colors representing Earth's increasing temperatures." loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Discovering Galaxy through climate analysis</h5>
+        <p class="card-text">
+          How to have a complete overview of how Galaxy works going from the user welcome page to use batch tools and finishing by conducting interactive analysis. These set of 3 Climate tutorials allow you to understand and see plenty of the multiple features of Galaxy and learning about the cool subject of climate analysis.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb77b; --color-darker: #f99b00; --color-dimmed: #ffa84b;">climate</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/clinical-metaproteomics.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/shared/images/proteomics.png" alt="image of a 3D protein folding structure" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Clinical metaproteomics workflows within Galaxy</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of how to perform metaproteomics analysis of the clinical data within the Galaxy platform. You will learn how to use Galaxy for analysis and will be guided through the most common first steps of any metaproteomics database generation to searching the database, verifying the proteins/peptides, and data analysis.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #cbbeff; --color-darker: #b7a3ff; --color-dimmed: #c1b1ff;">proteomics</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/deconvolution_projects.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-lp-deconvolution.png" alt="XY plot of actual versus inferred proportions, with coloured dots representing clusters and largely falling in a 1-1 slope" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bioinformatics Projects: Using deconvolution to get new insights from old bulk RNA-seq data</h5>
+        <p class="card-text">
+          Are you an educator looking for project ideas for students to practice independent enquiry and research skills? Are you a student looking for a project idea? Look no more - here, you will find a learning pathway of tutorials that can guide you through the skills to find old data and transform it into new results! To be clear, we...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #85dd00; --color-darker: #76c500; --color-dimmed: #7dd100;">advanced</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/fair-training.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">FAIR Data Management</h5>
+        <p class="card-text">
+          The FAIR data management training learning pathway teaches you how to organise, describe, and store research data according to the FAIR principles (Findable, Accessible, Interoperable, Reusable).
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #b4d400; --color-darker: #a0bc00; --color-dimmed: #aac800;">fair</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00dce0; --color-darker: #00c4c7; --color-dimmed: #00d0d4;">dmp</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fcbc00; --color-darker: #e0a700; --color-dimmed: #eeb200;">data management</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00d9fe; --color-darker: #00c1e2; --color-dimmed: #00cdf0;">data stewardship</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/genome-annotation-eukaryote.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/gga.png" alt="Galaxy Genome Annotation logo" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Genome annotation for eukaryotes</h5>
+        <p class="card-text">
+          Learn how to annotate an eukaryotic genome sequence: identify repeated regions, find the position and function of genes, and even set up a manual curation environment with Apollo.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #a5d700; --color-darker: #93c000; --color-dimmed: #9ccb00;">genome-annotation</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #4fe300; --color-darker: #45ca00; --color-dimmed: #4ad700;">eukaryote</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/genome-annotation-prokaryote.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/gga.png" alt="Galaxy Genome Annotation logo" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Genome annotation for prokaryotes</h5>
+        <p class="card-text">
+          Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #a5d700; --color-darker: #93c000; --color-dimmed: #9ccb00;">genome-annotation</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #c8bfff; --color-darker: #b3a5ff; --color-dimmed: #beb2ff;">prokaryote</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro-to-galaxy-and-ecology.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/galaxy-e-logo.png" alt="Drawing of an Ecological System" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introduction to Galaxy and Ecological data analysis</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Galaxy and analysis of ecological data.
+You will learn how to use Galaxy for analysis, and will be guided through the common
+steps of biodiversity data analysis: download, check, filter and explore biodiversity data and analyze abundance data through modeling.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffaaf7; --color-darker: #ff81f5; --color-dimmed: #ff96f6;">ecology</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro-to-r-and-ml.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">From R to Machine Learning; an introductory course</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Machine Learning using R.
+Initially you will learn how to code in R within the Galaxy platform, gaining some
+familiarity into how to wrangle and analyze data. Then, you will be guided through
+the various types of Machine Learning techniques, developing some simple models using R.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #d7ca00; --color-darker: #bfb400; --color-dimmed: #cbbf00;">statistics</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f6f900; --color-darker: #dbde00; --color-dimmed: #e9eb00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/machine-learning.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Machine learning</h5>
+        <p class="card-text">
+          This learning path teaches machine learning from simple concepts to complex ones. You start with a basic introduction to Machine learning. Then you move to different aspects of supervised machine learning such as classification and regression. Further topics introduce you to deep learning concepts such as convolutional and recurrent neural networks and conclue with fine-tuning a large language like model...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e299; --color-darker: #00c988; --color-dimmed: #00d690;">machine learning</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/mags.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/mags_icon.png" alt="MAG logo" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Building and Annotating Metagenome-Assembled Genomes (MAGs) from Metagenomics Reads</h5>
+        <p class="card-text">
+          This learning path will guide you through the process of constructing and analyzing Metagenome-Assembled Genomes (MAGs) using the Galaxy platform. You will explore the key steps involved in transforming raw metagenomic data into high-quality MAGs, from preprocessing to functional annotation. By the end of this path, you will be able to: List and describe the essential steps in MAGs construction,...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb5a0; --color-darker: #ff946d; --color-dimmed: #ffa588;">microbiome</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/metagenomics.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/microgalaxy-logo.png" alt="microgalaxy logo" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Metagenomics data processing and analysis for microbiome</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Galaxy and analysis of metagenomics data.
+You will learn how to use Galaxy for analysis, and will be guided through the common
+steps of microbiome data analysis: quality control, taxonomic profiling, taxonomic binning, assembly, functional profiling, and also some applications
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb5a0; --color-darker: #ff946d; --color-dimmed: #ffa588;">microbiome</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/ml-using-python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/shared/images/elixir.png" alt="ELIXIR logo" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Artificial Intelligence and Machine Learning in Life Sciences using Python</h5>
+        <p class="card-text">
+          Artificial intelligence (AI) has permeated our lives, transforming how we live and work. Over the past few years, a rapid and disruptive acceleration of progress in AI has occurred, driven by significant advances in widespread data availability, computing power and machine learning. Remarkable strides were made in particular in the development of foundation models - AI models trained on extensive...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f0fb00; --color-darker: #d5df00; --color-dimmed: #e2ed00;">elixir</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #45d6ff; --color-darker: #00c0e8; --color-dimmed: #00ccf6;">ai</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #aac7ff; --color-darker: #81b2ff; --color-dimmed: #96bcff;">ml</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/neoantigen.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/shared/images/neoantigen_lp.png" alt="image of neoantigen mutation" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Neoantigen discovery using the iPepGen pipeline</h5>
+        <p class="card-text">
+          This learning path introduces a comprehensive immunopeptidogenomics (iPepGen) workflow for neoantigen discovery using label-free mass spectrometry data. The modules guide you through fusion and variant database generation, peptide identification with FragPipe, peptide validation using PepQuery2, and immunogenicity assessment through HLA binding predictions and IEDB screening.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb77e; --color-darker: #fb9a00; --color-dimmed: #ffa852;">intermediate</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;">immunopeptidomics</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffaeda; --color-darker: #ff89cd; --color-dimmed: #ff9cd3;">cancer</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e380; --color-darker: #00ca71; --color-dimmed: #00d779;">proteogenomics</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #b8c3ff; --color-darker: #9bacff; --color-dimmed: #aab8ff;">label-free</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/proteogenomics.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/shared/images/proteomics.png" alt="image of a 3D protein folding structure" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Proteogenomics</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of how to perform proteogenomics analysis of the Mass spectrometry data within the Galaxy platform. You will learn how to use Galaxy for analysis and will be guided through the most common first steps of any proteogenomics database generation to searching the database, followed by novel peptide data analysis.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff0c5; --color-darker: #f7d400; --color-dimmed: #ffe272;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #cbbeff; --color-darker: #b7a3ff; --color-dimmed: #c1b1ff;">proteomics</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introductory Python</h5>
+        <p class="card-text">
+          This is an introductory course of Python, as it was taught in Avans Hogeschool in the Netherlands.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #afc6ff; --color-darker: #8ab0ff; --color-dimmed: #9dbbff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #faabff; --color-darker: #f984ff; --color-dimmed: #f998ff;">real-course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f6f900; --color-darker: #dbde00; --color-dimmed: #e9eb00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/reloaded_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Applying single-cell RNA-seq analysis in Coding Environments</h5>
+        <p class="card-text">
+          Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will perform this analysis in coding environments hosted on Galaxy, instead of Galaxy’s button-based tool...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #85dd00; --color-darker: #76c500; --color-dimmed: #7dd100;">advanced</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/sql.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introductory SQL</h5>
+        <p class="card-text">
+          This is an introductory course of SQL, as it was taught in Avans Hogeschool in the Netherlands.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #afc6ff; --color-darker: #8ab0ff; --color-dimmed: #9dbbff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #faabff; --color-darker: #f984ff; --color-dimmed: #f998ff;">real-course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f6f900; --color-darker: #dbde00; --color-dimmed: #e9eb00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+</div>
+
+<h2 id="for-teachers-developers-and-system-administrators">For Teachers, Developers and System Administrators</h2>
+
+<!-- list all available pathways as cards  -->
+<div class="pathwaylist row">
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/onboarding-contributing.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Onboarding for new contributors</h5>
+        <p class="card-text">
+          This learning path aims to teach you how to contribute to GTN training materials. From editing typos to rendering test GTN sites, you will progress from being a user to a contributor.
+For support throughout these tutorials, join our Galaxy training network on Matrix to ask questions!
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb59e; --color-darker: #ff956a; --color-dimmed: #ffa586;">introduction</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00ddd9; --color-darker: #00c5c1; --color-dimmed: #00d1cd;">contributing</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffabee; --color-darker: #ff84e9; --color-dimmed: #ff98ec;">cofest</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/admin-training.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/gat.png" alt="GTN Logo on a spiral galaxy background with text galaxy admin training" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Admin Training Course</h5>
+        <p class="card-text">
+          Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
+will guide you through all the steps required to setup your own Galaxy server with Ansible,
+configuring it, and making it production ready.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffafd5; --color-darker: #ff8ac5; --color-dimmed: #ff9dcd;">Galaxy administrators</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb77b; --color-darker: #f99b00; --color-dimmed: #ffa84b;">5-day course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e291; --color-darker: #00ca80; --color-dimmed: #00d688;">admin</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/dev_tools_training.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/galaxy_subdomain.png" alt="Image of a researcher or developer on a computer thinking of building a community." loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Tool development for a nice &amp; shiny subdomain</h5>
+        <p class="card-text">
+          Discover Galaxy’s communities and learn how to  create your subdomain and enrich it by writing, testing and submiting your tools on Galaxy. This learning pathway
+will guide you through all the steps required to build a tool for Galaxy with Planemo for batch tools and how write an interactive tool.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb961; --color-darker: #eea100; --color-dimmed: #fdab00;">subdomain</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb693; --color-darker: #ff964e; --color-dimmed: #ffa675;">tool development</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #edb1ff; --color-darker: #e78eff; --color-dimmed: #eaa0ff;">3-day course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #c7bfff; --color-darker: #b1a5ff; --color-dimmed: #bcb2ff;">dev</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/sig-and-codex-creation.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Creation of a Community CoDex and lab (and optionally of a Special Interest Group (SIG))</h5>
+        <p class="card-text">
+          The Galaxy Communities Dock or Galaxy CoDex is a centralized repository that ensures the versioning and documentation of the community components (Batut et al., 2024; Nasr et al., 2024). The codex is composed of : A GitHub repository specific to each community with curated lists of tools, workflows and tutorials relevant to the community. For example : The curated resources...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #e1b6ff; --color-darker: #d797ff; --color-dimmed: #dca7ff;">codex</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffabed; --color-darker: #ff84e7; --color-dimmed: #ff99ea;">lab</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f8acff; --color-darker: #f685ff; --color-dimmed: #f799ff;">sig</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/train-the-trainers.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy" />
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Train the Trainers</h5>
+        <p class="card-text">
+          This pathway introduces trainers to learning principles, training techniques, lesson, session, course, and material design as well as assessment and feedback. This is has been developed for by trainers in the bioinformatics but is suitable for all trainers and educators in higher education.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffabf3; --color-darker: #ff83ef; --color-dimmed: #ff97f1;">training</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fface9; --color-darker: #ff86e2; --color-dimmed: #ff9ae5;">trainers</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #afd500; --color-darker: #9cbd00; --color-dimmed: #a5c900;">teaching</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb0ce; --color-darker: #ff8cbb; --color-dimmed: #ff9fc4;">community</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/learning-pathways/index.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/learning-pathways/index.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

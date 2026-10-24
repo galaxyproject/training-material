@@ -1,0 +1,456 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Analysis of MD trajectories using MDAnalysis, generating a Ramachandran plot and various timeseries.",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Chris Barnett"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Analysis using MDAnalysis",
+    "steps": {
+        "0": {
+            "annotation": "DCD input",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "DCD input",
+                    "name": "DCD input"
+                }
+            ],
+            "label": "DCD input",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 403.7499745686849,
+                "height": 46.34999084472656,
+                "left": 821.3333333333334,
+                "right": 971.3333333333334,
+                "top": 357.3999837239583,
+                "width": 150,
+                "x": 821.3333333333334,
+                "y": 357.3999837239583
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "148360ef-fd61-4c7a-8618-b9236f50a707",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c85a8a7f-a07f-4e95-a7bc-3162a3268838"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "PDB input",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "PDB input",
+                    "name": "PDB input"
+                }
+            ],
+            "label": "PDB input",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 503.7499745686849,
+                "height": 46.34999084472656,
+                "left": 821.3333333333334,
+                "right": 971.3333333333334,
+                "top": 457.3999837239583,
+                "width": 150,
+                "x": 821.3333333333334,
+                "y": 457.3999837239583
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "25160e20-09db-4c55-b86b-c6a8d9a48d7d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3b27e298-e57d-4270-9309-211fe201d1a2"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_rdf/mdanalysis_rdf/0.19",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "dcdin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pdbin": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool RDF Analysis",
+                    "name": "dcdin"
+                },
+                {
+                    "description": "runtime parameter for tool RDF Analysis",
+                    "name": "pdbin"
+                }
+            ],
+            "label": null,
+            "name": "RDF Analysis",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "rdf_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 92.49999491373697,
+                "height": 146.09999084472656,
+                "left": 1109.3333333333333,
+                "right": 1259.3333333333333,
+                "top": -53.599995930989586,
+                "width": 150,
+                "x": 1109.3333333333333,
+                "y": -53.599995930989586
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_rdf/mdanalysis_rdf/0.19",
+            "tool_shed_repository": {
+                "changeset_revision": "49dac57d004a",
+                "name": "mdanalysis_rdf",
+                "owner": "chemteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dcdin\": {\"__class__\": \"RuntimeValue\"}, \"end\": \"5.0\", \"name1\": \"OE2\", \"name2\": \"C1\", \"nbins\": \"100\", \"pdbin\": {\"__class__\": \"RuntimeValue\"}, \"resid1\": \"212\", \"resid2\": \"3\", \"segid1\": \"PRO\", \"segid2\": \"HET\", \"start\": \"0.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.19",
+            "type": "tool",
+            "uuid": "07498fa6-c71c-48fe-9e80-590b6a320dc8",
+            "workflow_outputs": [
+                {
+                    "label": "RDF Analysis plot",
+                    "output_name": "rdf_plot",
+                    "uuid": "ab90456f-d7ae-4fb1-ba2f-978a59791acc"
+                },
+                {
+                    "label": "RDF Analysis raw data",
+                    "output_name": "output",
+                    "uuid": "1ee2fe4a-0e50-4a4f-828e-3b60d75120e7"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.19",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "dcdin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pdbin": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cosine Content",
+                    "name": "dcdin"
+                },
+                {
+                    "description": "runtime parameter for tool Cosine Content",
+                    "name": "pdbin"
+                }
+            ],
+            "label": null,
+            "name": "Cosine Content",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cosout",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 325.49999491373694,
+                "height": 146.09999084472656,
+                "left": 1109.3333333333333,
+                "right": 1259.3333333333333,
+                "top": 179.4000040690104,
+                "width": 150,
+                "x": 1109.3333333333333,
+                "y": 179.4000040690104
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.19",
+            "tool_shed_repository": {
+                "changeset_revision": "ebeb72aa39a8",
+                "name": "mdanalysis_cosine_analysis",
+                "owner": "chemteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"components\": \"3\", \"dcdin\": {\"__class__\": \"RuntimeValue\"}, \"index\": \"0\", \"pdbin\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.19",
+            "type": "tool",
+            "uuid": "0947c650-cd50-44ce-a3e3-b3bfdcd2074e",
+            "workflow_outputs": [
+                {
+                    "label": "Cosine Content raw data",
+                    "output_name": "output",
+                    "uuid": "5ca6c423-961b-4a55-a821-794a0d311e41"
+                },
+                {
+                    "label": "Cosine Content plot",
+                    "output_name": "cosout",
+                    "uuid": "7854cbf9-187f-4117-b494-73a5a404d06f"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_ramachandran_plot/mdanalysis_ramachandran_plot/0.1.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "dcdin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pdbin": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Ramachandran Plots",
+                    "name": "dcdin"
+                },
+                {
+                    "description": "runtime parameter for tool Ramachandran Plots",
+                    "name": "pdbin"
+                }
+            ],
+            "label": null,
+            "name": "Ramachandran Plots",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "ramachandran_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 558.4999745686848,
+                "height": 146.09999084472656,
+                "left": 1109.3333333333333,
+                "right": 1259.3333333333333,
+                "top": 412.3999837239583,
+                "width": 150,
+                "x": 1109.3333333333333,
+                "y": 412.3999837239583
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_ramachandran_plot/mdanalysis_ramachandran_plot/0.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "d710c7f00ae6",
+                "name": "mdanalysis_ramachandran_plot",
+                "owner": "chemteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dcdin\": {\"__class__\": \"RuntimeValue\"}, \"pdbin\": {\"__class__\": \"RuntimeValue\"}, \"phi\": {\"segid1\": \"HET\", \"resid1\": \"3\", \"name1\": \"O5\", \"segid2\": \"HET\", \"resid2\": \"3\", \"name2\": \"C1\", \"segid3\": \"HET\", \"resid3\": \"2\", \"name3\": \"O4\", \"segid4\": \"HET\", \"resid4\": \"2\", \"name4\": \"C4\"}, \"psi\": {\"segid1\": \"HET\", \"resid1\": \"3\", \"name1\": \"C1\", \"segid2\": \"HET\", \"resid2\": \"2\", \"name2\": \"O4\", \"segid3\": \"HET\", \"resid3\": \"2\", \"name3\": \"C4\", \"segid4\": \"HET\", \"resid4\": \"2\", \"name4\": \"C3\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.3",
+            "type": "tool",
+            "uuid": "9a734458-4df3-4dca-820a-d6550466c839",
+            "workflow_outputs": [
+                {
+                    "label": "Ramachandran Plot",
+                    "output_name": "ramachandran_plot",
+                    "uuid": "aa7afa97-8be6-4e6b-ad2c-5715f3c10362"
+                },
+                {
+                    "label": "Ramachandran Plot raw data",
+                    "output_name": "output",
+                    "uuid": "178f112a-eb0b-4299-aff5-69efd9ffb52b"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_distance/mdanalysis_distance/0.19",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "dcdin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pdbin": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Distance Analysis",
+                    "name": "dcdin"
+                },
+                {
+                    "description": "runtime parameter for tool Distance Analysis",
+                    "name": "pdbin"
+                }
+            ],
+            "label": null,
+            "name": "Distance Analysis",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "distance_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 806.7999776204427,
+                "height": 161.39999389648438,
+                "left": 1109.3333333333333,
+                "right": 1259.3333333333333,
+                "top": 645.3999837239584,
+                "width": 150,
+                "x": 1109.3333333333333,
+                "y": 645.3999837239584
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_distance/mdanalysis_distance/0.19",
+            "tool_shed_repository": {
+                "changeset_revision": "489b25966bb9",
+                "name": "mdanalysis_distance",
+                "owner": "chemteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dcdin\": {\"__class__\": \"RuntimeValue\"}, \"name1\": \"OE2\", \"name2\": \"C1\", \"pdbin\": {\"__class__\": \"RuntimeValue\"}, \"resid1\": \"212\", \"resid2\": \"3\", \"segid1\": \"PRO\", \"segid2\": \"HET\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.19",
+            "type": "tool",
+            "uuid": "959e239a-6421-4144-9ac2-703c9fdda4eb",
+            "workflow_outputs": [
+                {
+                    "label": "Distance Analysis raw data",
+                    "output_name": "output",
+                    "uuid": "eac670fb-f01e-49cd-a103-828a15149f48"
+                },
+                {
+                    "label": "Distance Analysis plot",
+                    "output_name": "distance_plot",
+                    "uuid": "6605884d-7bfa-4f43-bbc6-2352256d2bc7"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_dihedral/mdanalysis_dihedral/0.19",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "dcdin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pdbin": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Dihedral Analysis",
+                    "name": "dcdin"
+                },
+                {
+                    "description": "runtime parameter for tool Dihedral Analysis",
+                    "name": "pdbin"
+                }
+            ],
+            "label": null,
+            "name": "Dihedral Analysis",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "dihedral_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 1059.7999776204429,
+                "height": 161.39999389648438,
+                "left": 1109.3333333333333,
+                "right": 1259.3333333333333,
+                "top": 898.3999837239584,
+                "width": 150,
+                "x": 1109.3333333333333,
+                "y": 898.3999837239584
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_dihedral/mdanalysis_dihedral/0.19",
+            "tool_shed_repository": {
+                "changeset_revision": "554f60da9c8f",
+                "name": "mdanalysis_dihedral",
+                "owner": "chemteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dcdin\": {\"__class__\": \"RuntimeValue\"}, \"name1\": \"OE2\", \"name2\": \"C1\", \"name3\": \"C2\", \"name4\": \"C3\", \"pdbin\": {\"__class__\": \"RuntimeValue\"}, \"resid1\": \"212\", \"resid2\": \"3\", \"resid3\": \"3\", \"resid4\": \"3\", \"segid1\": \"PRO\", \"segid2\": \"HET\", \"segid3\": \"HET\", \"segid4\": \"HET\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.19",
+            "type": "tool",
+            "uuid": "a13f23a8-7b55-4c6f-bb7c-4b26ae064a40",
+            "workflow_outputs": [
+                {
+                    "label": "Dihedral Analysis plot",
+                    "output_name": "dihedral_plot",
+                    "uuid": "755dbb99-3e3e-425b-a4b2-e375df6e39b4"
+                },
+                {
+                    "label": "Dihedral Analysis raw data",
+                    "output_name": "output",
+                    "uuid": "e0234472-cc44-483e-997b-8b0e0719c8d7"
+                }
+            ]
+        }
+    },
+    "tags": ["computational-chemistry"],
+    "uuid": "55895c85-64c0-4221-9011-c261517078dd",
+    "version": 3
+}
+

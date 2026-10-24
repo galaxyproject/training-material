@@ -1,0 +1,425 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-0419-6832",
+            "name": "Deepti Varshney"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-3803-468X",
+            "name": "Saskia Hiltemann"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Identification and Evolutionary Analysis of Transcription-Associated Proteins",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset Collection"
+                }
+            ],
+            "label": "Input Dataset Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "0e4b48c0-8d27-490e-89cd-16b28f0aa3e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/tapscan/tapscan_classify/4.76+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "protein_fasta_in": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TAPScan Classify",
+            "outputs": [
+                {
+                    "name": "taps_detected",
+                    "type": "tabular"
+                },
+                {
+                    "name": "taps_family_counts",
+                    "type": "tabular"
+                },
+                {
+                    "name": "taps_detected_extra",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 220,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/tapscan/tapscan_classify/4.76+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c4f865bd101a",
+                "name": "tapscan",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"domtblout\": false, \"protein_fasta_in\": {\"__class__\": \"ConnectedValue\"}, \"protein_fasta_in|__identifier__\": \"ARATH.fa\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.76+galaxy0",
+            "type": "tool",
+            "uuid": "12a567ae-4140-42af-bd02-44a86edc82b0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "taps_detected"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c2=='Aux/IAA'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"ARATH.fa\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "63f824e0-f84c-48d3-9640-8a217486297d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 660,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"ARATH.fa\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "99828f72-ef2a-4404-b73f-e7976b383325",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 880,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"ARATH.fa\", \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "bab9ae6b-5e4a-4c50-b032-bdfa0259bde0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "header_criteria|identifiers": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                },
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter FASTA",
+                    "name": "header_criteria"
+                }
+            ],
+            "label": null,
+            "name": "Filter FASTA",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1100,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "dff7df6fcab5",
+                "name": "filter_by_fasta_ids",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dedup\": false, \"header_criteria\": {\"header_criteria_select\": \"id_list\", \"__current_case__\": 1, \"identifiers\": {\"__class__\": \"ConnectedValue\"}, \"id_regex\": {\"find\": \"beginning\", \"__current_case__\": 0}}, \"header_criteria|identifiers|__identifier__\": \"ARATH.fa\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"ARATH.fa\", \"output_discarded\": false, \"sequence_criteria\": {\"sequence_criteria_select\": \"\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3",
+            "type": "tool",
+            "uuid": "98c976c4-f292-4d5a-9e63-524c9033c096",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input|batches_0|inputs": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MAFFT",
+            "outputs": [
+                {
+                    "name": "outputAlignment",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1320,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "1233363389c1",
+                "name": "mafft",
+                "owner": "rnateam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"anysymbol\": true, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"datatype_selection\": {\"datatype\": \"--amino\", \"__current_case__\": 2, \"scoring_matrix\": {\"type\": \"--bl\", \"__current_case__\": 0, \"coefficient\": \"62\"}, \"fmodel\": false, \"gap_costs\": {\"use_defaults\": \"no\", \"__current_case__\": 1, \"ep\": \"0.0\", \"op\": \"1.53\"}}, \"flavour\": {\"type\": \"mafft --auto\", \"__current_case__\": 0}, \"input\": {\"mapping\": \"merge\", \"__current_case__\": 1, \"batches\": [{\"__index__\": 0, \"inputs\": {\"__class__\": \"ConnectedValue\"}}]}, \"outputFormat\": \"\", \"reorder\": true, \"treeout\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "7.526+galaxy1",
+            "type": "tool",
+            "uuid": "8c018e26-6673-467a-bf93-62531e1c9dcd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/trimal/trimal/1.5.0+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "in": {
+                    "id": 6,
+                    "output_name": "outputAlignment"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "trimAl",
+            "outputs": [
+                {
+                    "name": "trimmed_output",
+                    "type": "input"
+                },
+                {
+                    "name": "html_summary",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1540,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/trimal/trimal/1.5.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e379c0202766",
+                "name": "trimal",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"out_format_selector\": \"\", \"resoverlap\": null, \"seqoverlap\": null, \"statistics\": false, \"trimming_mode\": {\"mode_selector\": \"custom\", \"__current_case__\": 7, \"gapthreshold\": \"0.5\", \"simthreshold\": \"0.001\", \"conthreshold\": null, \"cons\": \"50\", \"clusters\": null, \"maxidentity\": null, \"w\": null, \"gw\": null, \"sw\": null, \"cw\": null}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.0+galaxy1",
+            "type": "tool",
+            "uuid": "eee895d2-a172-4249-a13b-f0bcbb690863",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quicktree/quicktree/2.5+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_type|input_file": {
+                    "id": 7,
+                    "output_name": "trimmed_output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Quicktree",
+                    "name": "input_type"
+                }
+            ],
+            "label": null,
+            "name": "Quicktree",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "newick"
+                }
+            ],
+            "position": {
+                "left": 1760,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quicktree/quicktree/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5c2ac7f640ab",
+                "name": "quicktree",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"boot\": \"100\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_type\": {\"format\": \"align\", \"__current_case__\": 0, \"input_file\": {\"__class__\": \"ConnectedValue\"}}, \"kimura\": false, \"output_type\": \"tree_out\", \"upgma\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5+galaxy0",
+            "type": "tool",
+            "uuid": "430bd806-d536-4dc6-99c0-cde6c428e530",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ete_treeviewer/ete_treeviewer/3.1.3+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "align|input_alignment": {
+                    "id": 7,
+                    "output_name": "trimmed_output"
+                },
+                "input_tree": {
+                    "id": 8,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ETE tree viewer",
+                    "name": "align"
+                }
+            ],
+            "label": null,
+            "name": "ETE tree viewer",
+            "outputs": [
+                {
+                    "name": "output_tree_image",
+                    "type": "svg"
+                }
+            ],
+            "position": {
+                "left": 1980,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ete_treeviewer/ete_treeviewer/3.1.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2d4402c70eed",
+                "name": "ete_treeviewer",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"align\": {\"align_choice\": \"yes\", \"__current_case__\": 0, \"input_alignment\": {\"__class__\": \"ConnectedValue\"}, \"alg_type\": \"condensed\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_tree\": {\"__class__\": \"ConnectedValue\"}, \"ncbitaxa\": true, \"output_format\": \"png\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.3+galaxy0",
+            "type": "tool",
+            "uuid": "7f1e9d1b-6f39-454f-8cf5-5f7e444cf855",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "sequence-analysis"
+    ],
+    "uuid": "2be762a6-b9c7-4219-b126-07fd5f06b59a",
+    "version": 2
+}

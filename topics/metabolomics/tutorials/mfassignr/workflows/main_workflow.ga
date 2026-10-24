@@ -1,0 +1,655 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow can be used to assign multi-element molecular formulas to ultrahigh resolution mass spectra.",
+    "comments": [
+        {
+            "child_steps": [
+                0
+            ],
+            "color": "black",
+            "data": {
+                "title": "Data input"
+            },
+            "id": 0,
+            "position": [
+                0,
+                0
+            ],
+            "size": [
+                241,
+                140
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                1,
+                3,
+                2
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Noise estimation"
+            },
+            "id": 1,
+            "position": [
+                348,
+                244
+            ],
+            "size": [
+                264,
+                476
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                4
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Identify isotope masses"
+            },
+            "id": 2,
+            "position": [
+                697,
+                89.80000000000001
+            ],
+            "size": [
+                230,
+                230
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                5
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Assign MF with CHO"
+            },
+            "id": 3,
+            "position": [
+                677.2,
+                342.3
+            ],
+            "size": [
+                287,
+                382
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6,
+                7,
+                8
+            ],
+            "color": "green",
+            "data": {
+                "title": "Recalibrate mass lists"
+            },
+            "id": 4,
+            "position": [
+                1107.7,
+                15.299999999999997
+            ],
+            "size": [
+                288,
+                805
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Final MF assignment"
+            },
+            "id": 5,
+            "position": [
+                1489.6,
+                179.3
+            ],
+            "size": [
+                248,
+                324
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "RECETOX, MUNI"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0003-4407-3917",
+            "name": "Kristina Gomoryova"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6744-996X",
+            "name": "Helge Hecht"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Molecular formula assignment and recalibration with MFAssignR package.",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Input dataframe. First column should be \"mass\", second \"intensity\"; third column is optional, can contain retention time.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input dataframe. First column should be \"mass\", second \"intensity\"; third column is optional, can contain retention time.",
+                    "name": "Feature table"
+                }
+            ],
+            "label": "Feature table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20.722428168473613,
+                "top": 35.56639227541686
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fcc8eb67-4aef-4ed4-8d00-d5603131e039",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_kmdnoise/mfassignr_kmdnoise/1.1.1+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR KMDNoise",
+            "outputs": [
+                {
+                    "name": "Noise",
+                    "type": "txt"
+                },
+                {
+                    "name": "KMD_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 381.45761500999197,
+                "top": 279.3607701387419
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionNoise": {
+                    "action_arguments": {
+                        "newtype": "data"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "Noise"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_kmdnoise/mfassignr_kmdnoise/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a9fba8378048",
+                "name": "mfassignr_kmdnoise",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lower_x\": null, \"lower_y\": \"0.05\", \"upper_x\": null, \"upper_y\": \"0.2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "e5dc09a4-27a1-45dd-8c6c-f8cfaed1b7d0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_histnoise/mfassignr_histnoise/1.1.1+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR HistNoise",
+            "outputs": [
+                {
+                    "name": "Noise",
+                    "type": "txt"
+                },
+                {
+                    "name": "Hist_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 381.61885362491375,
+                "top": 432.7274738253477
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_histnoise/mfassignr_histnoise/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e93401e2ad89",
+                "name": "mfassignr_histnoise",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"SN\": \"0.0\", \"__input_ext\": \"input\", \"bin\": \"0.01\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "69fdb789-5f2e-4426-9b00-f3b96f3337c1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_snplot/mfassignr_snplot/1.1.1+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR SNplot",
+            "outputs": [
+                {
+                    "name": "SNplot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 380.70411426014505,
+                "top": 584.6734944229745
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_snplot/mfassignr_snplot/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ccd9b0c1aee6",
+                "name": "mfassignr_snplot",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cut\": \"2076.0\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mass\": \"301.0\", \"window_x\": \"50.0\", \"window_y\": \"10.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "c943b725-dfa9-4945-9fcf-00b36c3d1603",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "SNplot",
+                    "output_name": "SNplot",
+                    "uuid": "74da5be7-06ed-475c-a95a-813cc74dd124"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_isofiltr/mfassignr_isofiltr/1.1.1+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "peaks": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR IsoFiltR",
+            "outputs": [
+                {
+                    "name": "mono_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "iso_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 708.8095774014687,
+                "top": 128.31920737363302
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_isofiltr/mfassignr_isofiltr/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ef0388b42f7a",
+                "name": "mfassignr_isofiltr",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"Carberr\": \"5.0\", \"Carbrat\": \"60.0\", \"SN\": \"346.0\", \"Sulferr\": \"5.0\", \"Sulfrat\": \"30.0\", \"peaks\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "4695ae7d-10eb-4c2c-af1c-66e2ebc2a59f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassigncho/mfassignr_mfassignCHO/1.1.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_iso": {
+                    "id": 4,
+                    "output_name": "iso_out"
+                },
+                "input_mono": {
+                    "id": 4,
+                    "output_name": "mono_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR MFAssignCHO",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "Unambig",
+                    "type": "tabular"
+                },
+                {
+                    "name": "Ambig",
+                    "type": "tabular"
+                },
+                {
+                    "name": "None",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 723.6847827217902,
+                "top": 394.23195370689723
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassigncho/mfassignr_mfassignCHO/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b92c9388240a",
+                "name": "mfassignr_mfassigncho",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"highMW\": \"1000.0\", \"input_iso\": {\"__class__\": \"ConnectedValue\"}, \"input_mono\": {\"__class__\": \"ConnectedValue\"}, \"ionmode\": \"neg\", \"kmdn\": \"346.0\", \"lowMW\": \"50.0\", \"ppm_err\": \"3\", \"sn_ratio\": \"6.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "f941cfae-b191-4ddb-bb75-89c39fa98937",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "plots",
+                    "output_name": "plots",
+                    "uuid": "36722438-d25d-4107-87fa-3340ac8f55f6"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recallist/mfassignr_recallist/1.1.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "Unambig"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR RecalList",
+            "outputs": [
+                {
+                    "name": "recal_series",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1145.1670537096545,
+                "top": 66.04237413370643
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recallist/mfassignr_recallist/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1104682fb7cc",
+                "name": "mfassignr_recallist",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "b78721d9-ee06-41ca-9325-91cfb5771e0e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "recal_series",
+                    "output_name": "recal_series",
+                    "uuid": "96ae5d5e-fc6d-4523-a3ad-fdc2dc9fab45"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "mfassignr_findRecalSeries",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 6,
+                    "output_name": "recal_series"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR FindRecalSeries",
+            "outputs": [
+                {
+                    "name": "final_series",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1148.6859001197604,
+                "top": 236.61397143358516
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_findrecalseries/mfassignr_findRecalSeries/1.1.2+galaxy1",
+            "tool_state": "{\"abundance_score_threshold\": \"100.0\", \"coverage_threshold\": \"90\", \"fill_series\": false, \"global_max\": \"1000.0\", \"global_min\": \"0.0\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"number_of_combinations\": \"5\", \"peak_distance_threshold\": \"2.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy1",
+            "type": "tool",
+            "uuid": "918875b6-a887-4b74-ae93-cb7731354178",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "final_series",
+                    "output_name": "final_series",
+                    "uuid": "65060598-3645-458d-82cd-0613189020f3"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recal/mfassignr_recal/1.1.1+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "Unambig"
+                },
+                "isopeaks": {
+                    "id": 4,
+                    "output_name": "iso_out"
+                },
+                "peaks": {
+                    "id": 4,
+                    "output_name": "mono_out"
+                },
+                "series": {
+                    "id": 7,
+                    "output_name": "final_series"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR Recal",
+            "outputs": [
+                {
+                    "name": "Mono",
+                    "type": "tabular"
+                },
+                {
+                    "name": "Iso",
+                    "type": "tabular"
+                },
+                {
+                    "name": "Recalibrants",
+                    "type": "tabular"
+                },
+                {
+                    "name": "MZplot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1150.4323125115475,
+                "top": 407.8103528452024
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recal/mfassignr_recal/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3ea8ed561c5a",
+                "name": "mfassignr_recal",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"CalPeak\": \"150.0\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"ionmode\": \"neg\", \"isopeaks\": {\"__class__\": \"ConnectedValue\"}, \"kmdn\": \"346.0\", \"mzRange\": \"50.0\", \"peaks\": {\"__class__\": \"ConnectedValue\"}, \"series\": {\"__class__\": \"ConnectedValue\"}, \"sn_ratio\": \"6.0\", \"step_H2\": \"5.0\", \"step_O\": \"3.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "03886d6b-1391-4b41-a516-4b851d316ab2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MZplot",
+                    "output_name": "MZplot",
+                    "uuid": "1f370a51-f49b-476f-ad9e-09b69a168158"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassign/mfassignr_mfassign/1.1.1+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_iso": {
+                    "id": 8,
+                    "output_name": "Iso"
+                },
+                "input_mono": {
+                    "id": 8,
+                    "output_name": "Mono"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MFAssignR MFAssign",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "Unambig",
+                    "type": "tabular"
+                },
+                {
+                    "name": "Ambig",
+                    "type": "tabular"
+                },
+                {
+                    "name": "None",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1508.2656180624788,
+                "top": 211.38219988304257
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassign/mfassignr_mfassign/1.1.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d2bad53dd220",
+                "name": "mfassignr_mfassign",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"highMW\": \"1000.0\", \"input_iso\": {\"__class__\": \"ConnectedValue\"}, \"input_mono\": {\"__class__\": \"ConnectedValue\"}, \"ionmode\": \"neg\", \"kmdn\": \"346.0\", \"lowMW\": \"50.0\", \"ppm_err\": \"3\", \"sn_ratio\": \"6.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy0",
+            "type": "tool",
+            "uuid": "a428de87-e2de-4f65-b21b-df08fbabf33f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "None",
+                    "output_name": "None",
+                    "uuid": "0b738f04-c31c-4949-890d-00e15b465187"
+                },
+                {
+                    "label": "Ambig",
+                    "output_name": "Ambig",
+                    "uuid": "cafc72e0-b9d0-4eb1-a8a1-9f87ea72690e"
+                },
+                {
+                    "label": "Unambig",
+                    "output_name": "Unambig",
+                    "uuid": "378afd46-c896-4393-9e6c-c379609a39d1"
+                },
+                {
+                    "label": "plots",
+                    "output_name": "plots",
+                    "uuid": "7456324f-04c0-4573-8abf-fda0567b7732"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "metabolomics",
+        "recalibration",
+        "noiseestimation",
+        "formulaassignment"
+    ],
+    "uuid": "e820bc94-8679-4b0d-8a65-31e177d18eaa",
+    "version": 13
+}

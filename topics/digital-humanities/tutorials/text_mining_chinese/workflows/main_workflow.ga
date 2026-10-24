@@ -1,0 +1,784 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "V 20 Renamed several output datasets in workflow",
+    "comments": [
+        {
+            "child_steps": [
+                0,
+                1
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Text upload"
+            },
+            "id": 0,
+            "position": [
+                0,
+                45
+            ],
+            "size": [
+                239,
+                440
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                11
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Results sorted from the most frequently appearing characters to those that appear the least"
+            },
+            "id": 9,
+            "position": [
+                1672.6000000000001,
+                123
+            ],
+            "size": [
+                220,
+                362
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                10
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Visualisation of results in a wordcloud"
+            },
+            "id": 8,
+            "position": [
+                1483.3000000000002,
+                623.8
+            ],
+            "size": [
+                255,
+                259
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Summarising and quantifying the results. How often did what symbol appear?"
+            },
+            "id": 7,
+            "position": [
+                1447,
+                122.6
+            ],
+            "size": [
+                211,
+                363
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                8
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Select only uncensored characters for visualisation"
+            },
+            "id": 6,
+            "position": [
+                1212.2,
+                622.1
+            ],
+            "size": [
+                224,
+                261
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                7
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Conversion step for further processing"
+            },
+            "id": 5,
+            "position": [
+                1208.4,
+                120.6
+            ],
+            "size": [
+                226,
+                367
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Extraction of lines censored with symbol \u00d7 and their counterparts in the second text"
+            },
+            "id": 4,
+            "position": [
+                915.8,
+                0
+            ],
+            "size": [
+                259,
+                487
+            ],
+            "type": "frame"
+        },
+        {
+            "color": "none",
+            "data": {
+                "text": "Tutorial available:\n\nhttps://gxy.io/GTN:T00530"
+            },
+            "id": 3,
+            "position": [
+                84.5,
+                610.3
+            ],
+            "size": [
+                204,
+                87
+            ],
+            "type": "markdown"
+        },
+        {
+            "child_steps": [
+                4,
+                5
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Comparison of the two texts"
+            },
+            "id": 2,
+            "position": [
+                611.1,
+                3.5000000000000018
+            ],
+            "size": [
+                261,
+                484
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                3
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Text cleaning and layout unification of the uploaded texts for easier comparison"
+            },
+            "id": 1,
+            "position": [
+                289.79999999999995,
+                2.3000000000000007
+            ],
+            "size": [
+                249,
+                488
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9536-5587",
+            "name": "Daniela Schneider"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Text-Mining Differences in Chinese Newspaper Articles",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Upload the censored text containing replacement characters like \u2018\u00d7\u2019.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload the censored text containing replacement characters like \u2018\u00d7\u2019.",
+                    "name": "Input censored text"
+                }
+            ],
+            "label": "Input censored text",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20.97533849988666,
+                "top": 134.54099627023058
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "dac86ce1-b481-46e0-ae1a-9d1943f1a328",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Upload the uncensored text without replacement characters.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload the uncensored text without replacement characters.",
+                    "name": "Input uncensored text "
+                }
+            ],
+            "label": "Input uncensored text ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 21.69201330457416,
+                "top": 308.49100847726174
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "7b604b7b-b700-4472-b574-8ec55dc59ba2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "This step uses Regular Expressions to delete all empty spaces (\\s) and show only one character per line (\\1\\n).\n\nThe result is a cleaned and reformatted text showing only one character per line.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Preprocessing of censored text",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 320.2629513331822,
+                "top": 113.51291398807597
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Cleaned censored text"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"\\\\r\", \"replace_pattern\": null, \"sed_options\": \":a;N;$!ba;\"}, {\"__index__\": 1, \"find_pattern\": \"\\\\n\", \"replace_pattern\": null, \"sed_options\": \"\"}, {\"__index__\": 2, \"find_pattern\": \"\\\\s\", \"replace_pattern\": \"\", \"sed_options\": \"\"}, {\"__index__\": 3, \"find_pattern\": \"(.)\", \"replace_pattern\": \"\\\\1\\\\n\", \"sed_options\": \"\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "7a765a1c-be84-45ad-838e-58f9d703512c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "This step uses Regular Expressions to delete all empty spaces (\\s) and show only one character per line (\\1\\n).\n\nThe result is a cleaned and reformatted text showing only one character per line.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Preprocessing of uncensored text",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 315.93582466670443,
+                "top": 287.74466315483704
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Cleaned uncensored text"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"\\\\r\", \"replace_pattern\": null, \"sed_options\": \":a;N;$!ba;\"}, {\"__index__\": 1, \"find_pattern\": \"\\\\n\", \"replace_pattern\": null, \"sed_options\": \"\"}, {\"__index__\": 2, \"find_pattern\": \"\\\\s\", \"replace_pattern\": \"\", \"sed_options\": \"\"}, {\"__index__\": 3, \"find_pattern\": \"(.)\", \"replace_pattern\": \"\\\\1\\\\n\", \"sed_options\": \"\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "85a1f86d-ff89-4cd7-b14d-0b4d113ff761",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "The diff tool compares the two cleaned texts. This version (HTML version) creates an HTML file, which colour codes differences as additions (green) or extractions (red) when comparing the texts.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "outfile"
+                },
+                "input2": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Comparison with diff - user version",
+            "name": "diff",
+            "outputs": [
+                {
+                    "name": "diff_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "html_file",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 643.3833374023437,
+                "top": 57.627145019240196
+            },
+            "post_job_actions": {
+                "HideDatasetActiondiff_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "diff_file"
+                },
+                "RenameDatasetActionhtml_file": {
+                    "action_arguments": {
+                        "newname": "Comparison - HTML version"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "be2d899bf34a",
+                "name": "diff",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"report_format\": {\"report_format_select\": \"html\", \"__current_case__\": 2, \"unified\": \"3\", \"output_format\": \"side-by-side\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.10+galaxy1",
+            "type": "tool",
+            "uuid": "ef5da48f-601e-4108-8740-4778f83b5426",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "The diff tool compares the two cleaned texts. This version of the output (raw output) is used for the further steps of the analysis. It is less intuitive for users. Therefore, the second diff below includes a more visual version of the output (HTML).",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "outfile"
+                },
+                "input2": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Comparison with diff - computer version",
+            "name": "diff",
+            "outputs": [
+                {
+                    "name": "diff_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 643.9333862304687,
+                "top": 279.9937832028339
+            },
+            "post_job_actions": {
+                "RenameDatasetActiondiff_file": {
+                    "action_arguments": {
+                        "newname": "Comparison - computer version"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "diff_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "be2d899bf34a",
+                "name": "diff",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"report_format\": {\"report_format_select\": \"txt_columns\", \"__current_case__\": 1}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.10+galaxy1",
+            "type": "tool",
+            "uuid": "e3a3ad39-15bd-40c3-8226-a6f35a154d92",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "This step selects all lines from the diff file that contain the censorship symbol \u00d7.",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "diff_file"
+                }
+            },
+            "inputs": [],
+            "label": "Select only censored lines",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 935.2793539047241,
+                "top": 200.00515790472375
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Selected lines"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"keep_header\": false, \"pattern\": \"\\u00d7\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "3bcdbf04-9fe2-49a1-875c-96ed65f86743",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "This step unifies the formatting and adds potentially missing columns, should lines extracted before coming up empty in the second text. This ensures the proper number of columns and allows the smooth running of the next steps.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1220.7445263453894,
+                "top": 252.66921917857107
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Censored lines"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "61f9ddbc63ca",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"avoid_scientific_notation\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": false, \"non_computable\": {\"action\": \"--non-computable-blank\", \"__current_case__\": 3}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"c9\", \"add_column\": {\"mode\": \"R\", \"__current_case__\": 2, \"pos\": \"9\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1+galaxy0",
+            "type": "tool",
+            "uuid": "51d55250-60d0-4bd1-9f8c-0f45815befe0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "This step selects only column 9, which contains the uncensored characters from text two. The result is only one column with different rows of Chinese characters. \n\nThis step allows scaling words by frequency the word cloud in the next step. meaning characters that appear more often appear bigger, making the results evident at first sight.",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1224.0671800885882,
+                "top": 721.6116452314445
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Uncensored characters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c9\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "96a0b94b-6bb4-40ff-ae31-8db437d7026d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "This step sums up how often which character appeared in the table before.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "in_file": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1451.699209215105,
+                "top": 248.1488553912807
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file": {
+                    "action_arguments": {
+                        "newname": "Quantified Results"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "aaafc0ac4dd2",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"grouping\": \"9\", \"header_in\": false, \"header_out\": false, \"ignore_case\": false, \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"narm\": false, \"need_sort\": true, \"operations\": [{\"__index__\": 0, \"op_name\": \"count\", \"op_column\": \"9\"}], \"print_full_line\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.9+galaxy0",
+            "type": "tool",
+            "uuid": "e9c7b1a1-db93-4991-9b48-e9b3bda75edc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "This step shows, which characters were censored in the first text. The bigger the word, the more often it appeared in the text.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "text": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Generate a word cloud",
+                    "name": "stopwords"
+                }
+            ],
+            "label": null,
+            "name": "Generate a word cloud",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1510.1501888820103,
+                "top": 705.0035403329543
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Wordcloud of uncensored characters"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "45c4cc885ddb",
+                "name": "wordcloud",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"background_options\": {\"mode\": \"RGB\", \"__current_case__\": 0, \"background_color\": \"#000000\", \"cloud_shape\": {\"cloud_shape_options\": \"rectangle\", \"__current_case__\": 0}}, \"color_choice\": {\"color_option\": \"colormap\", \"__current_case__\": 2, \"colormap\": null}, \"font_step\": \"1\", \"fonts\": {\"fonts_selector\": \"cached\", \"__current_case__\": 1, \"fonts_select\": \"NotoSansTCVariableFont\"}, \"height\": \"200\", \"include_numbers\": false, \"margin\": \"2\", \"max_font_size\": null, \"max_words\": \"200\", \"min_font_size\": \"8\", \"min_word_length\": \"0\", \"no_collocations\": false, \"no_normalize_plurals\": false, \"prefer_horizontal\": \"1.0\", \"random_state\": \"10\", \"relative_scaling\": \"0.9\", \"repeat\": false, \"scale\": \"1.0\", \"stopwords\": {\"__class__\": \"RuntimeValue\"}, \"text\": {\"__class__\": \"ConnectedValue\"}, \"width\": \"400\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.9.6+galaxy0",
+            "type": "tool",
+            "uuid": "da09e429-e183-4a05-abe2-ef64ade25fce",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output_graphic",
+                    "output_name": "output",
+                    "uuid": "0e468eb9-b68c-4840-b5e7-12cbf29e0c9c"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "Sorts the quantified results from those appearing most to those appearing least. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 9,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Sort",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1683.9089326267977,
+                "top": 260.7309613928842
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Sorted Results"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"header\": \"0\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"2\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"r\", \"style\": \"n\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "cb4d10bf-0c4d-4666-b7ff-4cf3e5729f8f",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "Humanities",
+        "comparison",
+        "text",
+        "diff",
+        "text_mining",
+        "DigitalHumanities",
+        "Chinese-language"
+    ],
+    "uuid": "12ace041-e874-485e-a239-19545370802b",
+    "version": 32
+}

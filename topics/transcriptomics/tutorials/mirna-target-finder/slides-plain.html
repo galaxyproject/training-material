@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Whole transcriptome analysis of Arabidopsis thaliana / Whole transcriptome analysis of Arabidopsis thaliana / Transcriptomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Whole transcriptome analysis of Arabidopsis thaliana">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-08-08 14:58:07 +0000">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+<meta name="DC.creator" content="Pavankumar Videm"><meta name="description" content="# Introduction  ??? - Let's start with the introduction.  ---  ## Introduction: plant response to stress  ![plant response to stress]({% link topics/transcriptomics/images/transcriptomics_images/plant_stress_response.png %})  ??? - As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. - Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes. - These molecules constitute complex signaling networks, endowing with the ability to respond to a variable natural environment.  ---  ## Introduction: role of brassinosteroids  ![role of brassinosteroids]({% link topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png %})  ??? - Brassinosteroids are a group of plan...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Transcriptomics / Whole transcriptome analysis of Arabidopsis thaliana / Slides: Whole transcriptome analysis of Arabidopsis thaliana">
+        <meta property="og:description" content="# Introduction  ??? - Let's start with the introduction.  ---  ## Introduction: plant response to stress  ![plant response to stress]({% link topics/transcriptomics/images/transcriptomics_images/plant_stress_response.png %})  ??? - As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. - Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes. - These molecules constitute complex signaling networks, endowing with the ability to respond to a variable natural environment.  ---  ## Introduction: role of brassinosteroids  ![role of brassinosteroids]({% link topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png %})  ??? - Brassinosteroids are a group of plan...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/transcriptomics/tutorials/mirna-target-finder/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/mirna-target-finder/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/mirna-target-finder/slides.html">View markdown source on GitHub</a>
+	<h1>Whole transcriptome analysis of Arabidopsis thaliana</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a>
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Apr 16, 2021 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 8, 2024 </div>
+
+	<hr />
+
+
+	<h1 id="introduction">Introduction</h1>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let’s start with the introduction.</li>
+</ul>
+
+<hr />
+
+<h2 id="introduction-plant-response-to-stress">Introduction: plant response to stress</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/plant_stress_response.png" alt="plant response to stress" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects.</li>
+  <li>Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes.</li>
+  <li>These molecules constitute complex signaling networks, endowing with the ability to respond to a variable natural environment.</li>
+</ul>
+
+<hr />
+
+<h2 id="introduction-role-of-brassinosteroids">Introduction: role of brassinosteroids</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png" alt="role of brassinosteroids" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Brassinosteroids are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress.</li>
+  <li>Structurally, brassinosteroids are polyhydroxylated sterol derivatives with close similarity to animal hormones.</li>
+  <li>Brassinosteroids have the ability to stimulate plant growth, influencing germination, rhizogenesis, flowering, senescence, abscission and ripening processes.</li>
+  <li>In addition, several experimental results have demonstrated their ability to confer resistance to several types of abiotic and biotic stresses, such as heat, cold, salinity and drought.</li>
+</ul>
+
+<hr />
+
+<h2 id="introduction-plant-micrornas">Introduction: plant microRNAs</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/plant_mirna_synthesis_simple.png" alt="plant microRNAs" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>miRNAs, mainly 20–22 nucleotide small RNAs, are characterized for regulating gene expression at the post-transcriptional level.</li>
+  <li>
+    <p>miRNAs are distinguished from other small RNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus.</p>
+  </li>
+  <li>The pre miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form an RNA-induced silencing complex. The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.</li>
+</ul>
+
+<hr />
+
+<h2 id="introduction-mirnas-as-master-regulators">Introduction: miRNAs as master regulators</h2>
+
+<ul>
+  <li>
+    <p>Multiple miRNA genes are regulated under given environmental conditions</p>
+  </li>
+  <li>
+    <p>Computational predictions estimate that each miRNA regulates hundreds of genes</p>
+  </li>
+  <li>
+    <p>The majority of plant miRNAs regulate genes encoding for transcription factors</p>
+  </li>
+  <li>
+    <p>Targets include not only mRNAs but also long noncoding RNAs</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Four factors determine that miRNAs are considered master regulators.</li>
+  <li>The first one is that multiple miRNA genes are regulated under given environmental conditions.</li>
+  <li>The second one is that computational predictions estimate that each miRNA regulates hundreds of genes.</li>
+  <li>The third factor is that the majority of plant miRNAs regulate genes encoding for transcription factors.</li>
+  <li>And the last one is that targets include not only mRNAs but also long noncoding RNAs.</li>
+</ul>
+
+<hr />
+
+<h1 id="experimental-design">Experimental design</h1>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>We will now introduce the experimental design on which the analysis is based.</li>
+</ul>
+
+<hr />
+
+<h2 id="experimental-design-1">Experimental design</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/miRNA_pipeline.png" alt="Experimental design" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>As shown here, we can divide the analysis into three stages. Differential expression analysis of miRNAs, differential expression analysis of mRNAs, and miRNA target identification.</li>
+  <li>The starting hypothesis is that there should be sequence complementarity between upregulated miRNAs and downregulated mRNAs signifying miRNA regulation.</li>
+</ul>
+
+<hr />
+
+<h1 id="background-on-data-and-tools">Background on data and tools</h1>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Now we will provide some details about the data and the tools that are used in this tutorial.</li>
+</ul>
+
+<hr />
+
+<h2 id="background-on-data">Background on data</h2>
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/plant_rnaseq_data.png" alt="Background on data" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pubmed/24867218"><em>E Oh, Elife, 2014</em></a> and <a href="https://www.ncbi.nlm.nih.gov/pubmed/32648234"><em>SY Park, Genes Genomics, 2020</em></a>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>For the miRNA-Seq data analysis we will use a total of 6 samples. Three of which are mock-treated biological replicates and the remaining three are the biological replicates of brassinosteroid treatment.</li>
+  <li>From mRNA-Seq data we have two replicates of each condition.</li>
+  <li>In order to simplify the analysis, the biological replicates will be grouped in Galaxy into data collections.</li>
+  <li>Collections allow to combine numerous datasets in a single entity that can be easily manipulated.</li>
+</ul>
+
+<hr />
+
+<h2 id="tools-used-in-the-analysis">Tools used in the analysis</h2>
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/plant_rnaseq_tools.png" alt="Tools used in the analysis" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Now we will look at the tools that are used in the tutorial.</li>
+  <li>We categorize both the miRNA and mRNA sequencing data analysis into three analysis stages, namely quality assessment, quantification and differential expression.</li>
+  <li>On the left side you can see the tools used for miRNA-Seq data analysis and on the right side, tools for mRNA-Seq data analysis.</li>
+  <li>We first assess the quality of the raw sequencing reads using FastQC and MultiQC.</li>
+  <li>FastQC is used to quality control checks on raw sequencing data from individual samples. MultiQC allows aggregating the results generated by FastQC across several samples into a single report.</li>
+  <li>Trim Galore is a wrapper tool around cutadapt and FastQC to consistently apply quality and adapter trimming on FASTQ files.</li>
+  <li>To carry out miRNA quantification, we will use two modules belonging to the MiRDeep2 tool: MiRDeep2 mapper and MiRDeep2 quantifier.</li>
+  <li>We will use Salmon for mRNA quantification.</li>
+  <li>For the differential expression analysis, we will use DESeq2, a package for differential expression analysis of count data based on the negative binomial distribution.</li>
+  <li>Finally, we will use the TargetFinder tool for miRNA target prediction.</li>
+</ul>
+
+<hr />
+
+<h2 id="background-on-tools">Background on tools</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/plant_rnaseq_tools.png" alt="Tools used in the analysis" /></p>
+
+<ul>
+  <li>In mRNA-Seq data analysis:
+    <ul>
+      <li>No adapter clipping!</li>
+      <li>No base-to-base alignment!</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>If you observe, the adapter clipping step by Trim Galore is not included in the mRNA-Seq data analysis!</li>
+  <li>There is also no additional mapping step!</li>
+  <li>The reason behind this is the usage of the Salmon tool.</li>
+  <li>Salmon quantifies the transcripts or genes without requiring to align the reads base-by-base to the reference.</li>
+  <li>Because of the working principle of Salmon, we gain little to no advantage of clipping the adapters from the reads.</li>
+</ul>
+
+<hr />
+
+<h3 id="salmon-overview">Salmon overview</h3>
+
+<p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/salmon_steps.jpg" alt="Salmon overview" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pubmed/28263959"><em>Patro, Nat Methods, 2017</em></a>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Overview of Salmon mapping and quantification.</li>
+  <li>Salmon accepts either raw or aligned reads.</li>
+  <li>When raw reads are provided, Salmon uses its lightweight, ultra-fast mapping model called “quasi-mapping” for further abundance estimation.</li>
+  <li>Then an online inference algorithm estimates initial expression levels and model parameters.</li>
+  <li>Following that, an offline inference module learns the background bias models from the initial abundance estimates and corrects the effective transcript lengths.</li>
+  <li>Finally, an expectation-maximization algorithm is used to estimate the relative abundances.</li>
+</ul>
+
+<hr />
+
+<h3 id="salmon-quasi-mapping">Salmon quasi-mapping</h3>
+
+<p><img src="../../images/transcriptomics_images/salmon_quasialignment.png" alt="Salmon quasi-mapping" /></p>
+
+<p>.footnote[<a href="https://www.ncbi.nlm.nih.gov/pubmed/27307617"><em>Srivastava, Bioinformatics, 2016</em></a>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Now we will look into some details about quasi-mapping.</li>
+  <li>Quasi-mapping allows quantification without generating any intermediate alignment files.</li>
+  <li>It is faster than conventional mapping and saves a considerable amount of time and space.</li>
+  <li>The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array of the transcriptome, and a hash table that maps each k-mer in transcriptome to its suffix array interval.</li>
+  <li>During the quasi-mapping procedure, a read is scanned from left to right until a k-mer is encountered that appears in the hash table.</li>
+  <li>That k-mer is looked up in the hash table and the suffix array intervals are retrieved.</li>
+  <li>Then, the maximal mappable prefix is computed by finding the longest substring of the read that matches the reference suffixes.</li>
+  <li>Owing to sequencing errors, the maximal mappable prefix may not span the complete read. In this case, the next informative position is determined. The next informative position is the position on the read that has a unique matching base on the reference transcripts after a mismatch or a deletion.</li>
+  <li>Suffix array search continues from k-bases before the next informative position.</li>
+  <li>Finally, for each read, the algorithm reports the transcripts it mapped to, location, and strand information.</li>
+  <li>This figure is an illustration of the quasi-mapping of a read using k=3. Hash table lookup of k-mer A T T returns the suffix array interval b and e.</li>
+  <li>The current k-mer and its matching suffix intervals are colored in green.</li>
+  <li>The base G at position 6 has a mismatch with the C on reference transcripts, representing a possible sequencing error.</li>
+  <li>Hence, the first five bases A T T G A is the maximal mappable prefix and the suffix array interval of this maximal mappable prefix is b’ and e’.</li>
+  <li>A T T G A C T A which is in the red colored box is the longest common prefix of the suffix array interval c and e’. So the next informative position on the read is the 9th base T.</li>
+  <li>In the end, the read in the above example most likely map to the suffix array at e’.</li>
+</ul>
+
+<hr />
+
+<h3 id="salmon-advantages-and-limitations">Salmon advantages and limitations</h3>
+
+<ul>
+  <li>Adapter clipping can be skipped</li>
+  <li>Consider trimming low-quality reads</li>
+  <li>Fast and accurate quantification</li>
+  <li>Suitable for well-annotated organisms</li>
+  <li>Cannot be used to detect or annotate novel isoforms/transcripts</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Salmon has several advantages and few limitations over the traditional alignment methods.</li>
+  <li>Salmon provides fast and accurate quantification.</li>
+  <li>Since the k-mers which contain the adapter sequences are not present in the transcriptome index from which the hash table is generated, the adapters are not mapped.</li>
+  <li>If there is no significant amount of adapters present in the reads, adapter clipping can safely be skipped.</li>
+  <li>However, it is always good to trim the low-quality reads.</li>
+  <li>Because of the large memory footprints of hash tables and suffix arrays, generally, transcriptome FASTA file is used for Salmon quantification instead of whole genome FASTA file.</li>
+  <li>Therefore, it is advisable to use this tool on well-annotated organisms.</li>
+</ul>
+
+<hr />
+
+<h3 id="plant-small-rna-target-prediction-using-targetfinder">Plant small RNA target prediction using TargetFinder</h3>
+
+<ul>
+  <li>Inputs
+    <ul>
+      <li>Small RNA sequence</li>
+      <li>FASTA-formated target sequence database file</li>
+    </ul>
+  </li>
+  <li>Uses Smith-Waterman algorithm to align query small RNA sequence to the target sequence database</li>
+  <li>Penalty of 1 for mismatches, single-nucleotide gaps, or single-nucleotide bulges</li>
+  <li>Penalty of 0.5 G U base pairs</li>
+  <li>Doubled penalty scores at positions 2-13 relative to the 5’ end of the small RNA query sequence</li>
+  <li>Duplexes with the following characteristics are rejected:
+    <ul>
+      <li>more than one single-nucleotide bulge or gap</li>
+      <li>more than seven total mismatches, G:U base pairs, bulges and gaps</li>
+      <li>more than four total mismatches or four total G:U base pairs</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Now we will look at some important details about miRNA target identification in plants.</li>
+  <li>In animals, usually, base pairing in the seed region of the miRNA, that is 2 to 8 bases, is enough for target recognition.</li>
+  <li>Plant miRNAs require more stringent base pairing. Generally, a near-perfect pairing in 5 prime region and a substantial pairing in 3 prime region is necessary.</li>
+  <li>Due to this strict pairing mechanism, plant miRNAs have a significantly less number of target genes.</li>
+  <li>For this reason, we use a plant-specific miRNA target prediction algorithm called TargetFinder.</li>
+  <li>TargetFinder takes a small RNA sequence and a FASTA formatted file of the target sequence database.</li>
+  <li>It uses the popular Smith-Watermann local alignment algorithm for aligning small RNA sequence to the target sequence database.</li>
+  <li>A penalty of 1 is added for each mismatch, gap, and bulge, and 0.5 for non-canonical G U base pairing.</li>
+  <li>These penalties are doubled from positions 2 to 13.</li>
+  <li>It allows at most one single-nucleotide bulge or gap in the duplex.</li>
+  <li>If the sum of mismatches, G U base pairs, bulges, and gaps of a duplex is more than 7, then it is discarded.</li>
+  <li>Duplexes with more than four total mismatches or four total G U base pairs are also discarded.</li>
+</ul>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/transcriptomics/tutorials/mirna-target-finder/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/transcriptomics/tutorials/mirna-target-finder/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

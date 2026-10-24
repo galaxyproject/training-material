@@ -1,0 +1,433 @@
+---
+id: iwtomics_galaxy
+name: IWTomics Tour
+description: An interactive tour for the Interval-Wise Testing for omics data (IWTomics) tool for Galaxy
+title_default: "Welcome to IWTomics"
+
+steps:
+    - title: "Welcome to IWTomics"
+      content: "IWTomics is a tool to statistically evaluate differences in genomic features between groups of regions along the genome. This tour will guide you through a real data example. Please follow the instructions (interaction is required)."
+      backdrop: true
+
+    - title: "Upload data"
+      element: ".upload-button"
+      intro: "Upload BED files with the groups of regions to be compared, and TXT files with the corresponding genomic feature measurements."
+      position: "right"
+      postclick:
+          - ".upload-button"
+          - "#btn-new"
+
+    - title: "Upload data"
+      element: ".upload-text-content:first"
+      intro: "ETn example: real data from Campos-Sànchez et al. (2016). Upload 'Fixed ETn' and 'Control' regions, as well as 'Recombination Hotspot' content."
+      position: "top"
+      textinsert: |
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/DESCRIPTION.txt
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/ETn_fixed.bed
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/Control.bed
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/Recombination_hotspots.txt
+
+    - title: "Select automatic file type"
+      element: ".upload-extension:first"
+      intro: "INTERACTION REQUIRED: Select 'Auto-detect' type, then click 'Next'."
+      position: "top"
+
+    - title: "Start uploading data"
+      element: "#btn-start"
+      intro: "Upload files into Galaxy history."
+      position: "top"
+      postclick:
+          - "#btn-start"
+
+    - title: "Wait"
+      element: ".upload-text-content:first"
+      intro: "Wait until this block is green, then click 'Next'."
+      position: "bottom"
+      postclick:
+          - "#btn-reset"
+          - "#btn-new"
+
+    - title: "Upload data"
+      element: ".upload-text-content:first"
+      intro: "ETn example: real data from Campos-Sànchez et al. (2016). Upload header files for regions and features."
+      position: "top"
+      textinsert: |
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/regions_header.tabular
+        https://zenodo.org/api/files/1a11420c-337d-462a-b0bc-e2cb767ce2fa/features_header.tabular
+
+    - title: "Select header file type"
+      element: ".upload-extension:first"
+      intro: "INTERACTION REQUIRED: Select 'tabular' type, then click 'Next'."
+      position: "top"
+
+    - title: "Start uploading header files"
+      element: "#btn-start"
+      intro: "Upload files into Galaxy history."
+      position: "top"
+      postclick:
+          - "#btn-start"
+
+    - title: "Close upload/download manager"
+      element: "#btn-close"
+      intro: "Close the upload manager with this button or with a click outside of the manager window."
+      position: "top"
+      postclick:
+          - "#btn-close"
+
+    - title: "Description File"
+      element: "#current-history-panel .list-item:eq(5)"
+      intro: "DESCRIPTION.txt contains a description of the ETn dataset. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Fixed ETn Regions"
+      element: "#current-history-panel .list-item:eq(4)"
+      intro: "ETn_fixed.bed contains genomic coordinates of 1296 64-kb regions flanking fixed ETn elements (elements of the Early Transposon family of active Endogenous Retroviruses in mouse). Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Control Regions"
+      element: "#current-history-panel .list-item:eq(3)"
+      intro: "Control.bed contains genomic coordinates of 1142 64-kb regions that do not overlap ETn flanking regions. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Recombination Hotspot Content"
+      element: "#current-history-panel .list-item:eq(2)"
+      intro: "Recombination_hotspots.txt contains genomic coordinates of 2438 64-kb regions (Fixed ETn and Control regions) and, for each of them, the recombination hotspot content measured in 64 1-kb windows. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Region Header"
+      element: "#current-history-panel .list-item:eq(1)"
+      intro: "regions.header contains an identifier for each region dataset and the name to be used in the output. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Feature Header"
+      element: "#current-history-panel .list-item:eq(0)"
+      intro: "features.header contains an identifier for each feature and the name to be used in the output. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Search for the IWTomics suite"
+      element: "#tool-search-query"
+      intro: "INTERACTION REQUIRED: Write 'IWTomics' in the search field. The IWTomics suite contains three tools: 'Load, Smooth and Plot', 'Test and Plot', and 'Plot with Threshold on Test Scale'. Those tools should be used sequentially. Click 'Next' to continue the tour."
+      position: "right"
+
+    - title: "Select 'Load, Smooth and Plot' tool"
+      element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_loadandplot%2Fiwtomics_loadandplot%2F1.0.0.0"]'
+      intro: "Select the first tool 'Load, Smooth and Plot'."
+      position: "right"
+      postclick:
+          - 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_loadandplot%2Fiwtomics_loadandplot%2F1.0.0.0"]'
+
+    - title: "'Load, Smooth and Plot' tool"
+      content: "'Load, Smooth and Plot' tool imports the genomic region datasets and the corresponding feature measurements."
+      backdrop: true
+
+    - title: "Select region datasets"
+      element: 'div[tour_id$="regions"]'
+      intro: "INTERACTION REQUIRED: select the two region datasets 'ETn_fixed.bed' and 'Control.bed', then click 'Next'."
+      position: "bottom"
+
+    - title: "Select region header"
+      element: 'div[tour_id$="regionsheader"]'
+      intro: "INTERACTION REQUIRED: select the region header file 'regions_header.tabular', then click 'Next'."
+      position: "bottom"
+
+    - title: "Select feature datasets"
+      element: 'div[tour_id$="features"]'
+      intro: "INTERACTION REQUIRED: select the feature file 'Recombination_hotspot.txt', then click 'Next'."
+      position: "bottom"
+
+    - title: "Select feature header"
+      element: 'div[tour_id$="featuresheader"]'
+      intro: "INTERACTION REQUIRED: select the feature header file 'features_header.tabular', then click 'Next'"
+      position: "top"
+
+    - title: "Select start positions"
+      element: 'div[tour_id$="zerobased"]'
+      intro: "Start positions are 0-based in this example."
+      position: "top"
+
+    - title: "Select smoothing"
+      element: 'div[tour_id$="conditionaltype|smoothing"]'
+      intro: "Select the type of smoothing to be applied to the feature curves. Default is 'No' smoothing. Other choices include 'Local Polynomials', 'Gaussian Kernel', and 'B-Splines'."
+      position: "top"
+
+    - title: "Select region alignment"
+      element: 'div[tour_id$="conditionaltype|alignment"]'
+      intro: "Select region alignment. Default is 'Center', that alignes regions on their central position. Other choices include 'Left', 'Right', and 'Scale' alignments ('Scale' can only be used if smoothing is applied). In this example all regions have the same length, so the four alignment types are equivalent."
+      position: "top"
+
+    - title: "Plot the mean curves"
+      element: 'div[tour_id$="plotres|average"]'
+      intro: "If 'Yes' is selected, a mean feature curve is plotted for each region dataset."
+      position: "top"
+
+    - title: "Plot sample size in each position"
+      element: 'div[tour_id$="plotres|size"]'
+      intro: "If 'Yes' is selected, an heatmap with the sample size in each position is plotted for each region dataset."
+      position: "top"
+
+    - title: "Select plot type"
+      element: 'div[tour_id$="plotres|conditionalplottype|plottype"]'
+      intro: "Select the graphical representation type: 'Pointwise quantile curves (boxplot)' or 'Curves (aligned)'. In this example we draw a pointwise boxplot."
+      position: "top"
+
+    - title: "Select probabilities"
+      element: 'div[tour_id$="plotres|conditionalplottype|probabilitiessection|prob0"]'
+      intro: "Select the probabilities corresponding to the quantile curves to be drawn. Default option is 0.25, 0.50, and 0.75."
+      position: "top"
+
+    - title: "Execute 'Load, Smooth and Plot' tool"
+      element: '#execute'
+      intro: "Execute the tool."
+      position: "right"
+      postclick:
+          - '#execute'
+
+    - title: "Wait"
+      content: "Wait until the results are created, then click 'Next'."
+      backdrop: true
+
+    - title: "IWTomicsData Object"
+      element: "#current-history-panel .list-item:eq(3)"
+      intro: "This is an RData with the IWTomicsData object, that stores the aligned genomic region datasets, and their associated feature measurements."
+      position: "left"
+
+    - title: "Region Dataset IDs"
+      element: "#current-history-panel .list-item:eq(2)"
+      intro: "Region Dataset IDs contains the region datasets identifiers. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Feature IDs"
+      element: "#current-history-panel .list-item:eq(1)"
+      intro: "Feature IDs contains the feature identifiers. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Plotted Data"
+      element: "#current-history-panel .list-item:eq(0)"
+      intro: "Plotted Data is a PDF with the pointwise boxplots. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "'Load, Smooth and Plot' completed"
+      content: "The 'Load, Smooth and Plot' tool demonstration is completed. Click 'Next' to continue with the tool 'Test and Plot'."
+      backdrop: true
+
+    - title: "Select 'Test and Plot' tool"
+      element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_testandplot%2Fiwtomics_testandplot%2F1.0.0.0"]'
+      intro: "Select 'Test and Plot' tool."
+      position: "right"
+      postclick:
+          - 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_testandplot%2Fiwtomics_testandplot%2F1.0.0.0"]'
+
+    - title: "'Test and Plot' tool"
+      content: "'Test and Plot' tool statistically evaluates differences in feature measurements between pairs of genomic region datasets. In particular, it implements the Interval-Wise Testing for omics data."
+      backdrop: true
+
+    - title: "Select IWTomicsData object"
+      element: 'div[tour_id$="rdata"]'
+      intro: "INTERACTION REQUIRED: select the IWTomicsData Object created by 'Load, Smooth and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select region dataset IDs"
+      element: 'div[tour_id$="regionids"]'
+      intro: "INTERACTION REQUIRED: select the Region Dataset IDs created by 'Load, Smooth and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select feature IDs"
+      element: 'div[tour_id$="featureids"]'
+      intro: "INTERACTION REQUIRED: select the Feature IDs created by 'Load, Smooth and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select regions for Interval-Wise Testing"
+      element: 'div[tour_id$="regionssection|regions_0|region0"]'
+      intro: "INTERACTION REQUIRED: select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting 'ETn_fixed' (select it as 'Region 1') to 'Control' (select it as 'Region 2'), then click 'Next'."
+      position: "top"
+
+    - title: "Select features"
+      element: 'div[tour_id$="featureslist"]'
+      intro: "INTERACTION REQUIRED: select feature measurements to be tested. In this example, select 'Recomb_hot' feature, then click 'Next'."
+      position: "top"
+
+    - title: "Select test statistics"
+      element: 'div[tour_id$="conditionalstatistics|statistics"]'
+      intro: "Select the test statistics to be employed in the test. Default is 'Mean difference'. Other choices are 'Median difference', 'Variance ratio', and 'Quantile difference(s)'."
+      position: "top"
+
+    - title: "Select number of permutations"
+      element: 'div[tour_id$="permutations"]'
+      intro: "Select number of permutations to be used to compute p-values."
+      position: "top"
+
+    - title: "Select alpha"
+      element: 'div[tour_id$="plotres|alpha"]'
+      intro: "Select the level alpha of the test (significance level of the test)."
+      position: "top"
+
+    - title: "Plot the mean curves"
+      element: 'div[tour_id$="plotres|average"]'
+      intro: "If 'Yes' is selected, a mean feature curve is plotted for each region dataset."
+      position: "top"
+
+    - title: "Plot sample size in each position"
+      element: 'div[tour_id$="plotres|size"]'
+      intro: "If 'Yes' is selected, an heatmap with the sample size in each position is plotted for each region dataset."
+      position: "top"
+
+    - title: "Select plot type"
+      element: 'div[tour_id$="plotres|conditionalplottype|plottype"]'
+      intro: "Select the graphical representation type: 'Pointwise quantile curves (boxplot)' or 'Curves (aligned)'. In this example we draw a pointwise boxplot."
+      position: "top"
+
+    - title: "Select probabilities"
+      element: 'div[tour_id$="plotres|conditionalplottype|probabilitiessection|prob0"]'
+      intro: "Select the probabilities corresponding to the quantile curves to be drawn. Default option is 0.25, 0.50, and 0.75."
+      position: "top"
+
+    - title: "Select summary plot"
+      element: 'div[tour_id$="plotsum|conditionalgroupby|groupby"]'
+      intro: "Select the summary plot to be drawn. Default is 'No plot'. Other choices are a summary plot for each test ('Group by test') and a summary plot for each feature ('Group by feature'). In this example we are performing only one test on one feature, so we select 'No plot'."
+      position: "top"
+
+    - title: "Execute 'Test and Plot' tool"
+      element: '#execute'
+      intro: "Execute the tool."
+      position: "right"
+      postclick:
+          - '#execute'
+
+    - title: "Wait"
+      content: "Wait until the results are created, then click 'Next'."
+      backdrop: true
+
+    - title: "Adjusted p-value Matrix"
+      element: "#current-history-panel .list-item:eq(5)"
+      intro: "This is a TXT file with an adjusted p-value matrix for every test performed. Each matrix contains a p-value curve (row) for every scale considered in the test. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Plotted Test Results"
+      element: "#current-history-panel .list-item:eq(4)"
+      intro: "Plotted Test Results is a PDF file with the plotted test results. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Summary Plot"
+      element: "#current-history-panel .list-item:eq(3)"
+      intro: "If a summary plot was selected in 'Test and Plot' tool, this is a PDF file with the summary plot. If 'No plot' was selected, this is empty."
+      position: "left"
+
+    - title: "IWTomicsData Object with Test Results"
+      element: "#current-history-panel .list-item:eq(2)"
+      intro: "This is an RData with the IWTomicsData Object with the test results."
+      position: "left"
+
+    - title: "Test IDs"
+      element: "#current-history-panel .list-item:eq(1)"
+      intro: "Test IDs contains the test identifiers. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Feature IDs"
+      element: "#current-history-panel .list-item:eq(0)"
+      intro: "Feature IDs contains the feature identifiers. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "'Test and Plot' completed"
+      content: "The 'Test and Plot' tool demonstration is completed. Click 'Next' to continue with the tool 'Plot with Threshold on Test Scale'."
+      backdrop: true
+
+    - title: "Select 'Plot with Threshold on Test Scale' tool"
+      element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_plotwithscale%2Fiwtomics_plotwithscale%2F1.0.0.0"]'
+      intro: "Select 'Plot with Threshold on Test Scale' tool."
+      position: "right"
+      postclick:
+          - 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_plotwithscale%2Fiwtomics_plotwithscale%2F1.0.0.0"]'
+
+    - title: "'Plot with Threshold on Test Scale' tool"
+      content: "'Plot with Threshold on Test Scale' tool allows to select the scale for the Interval-Wise Testing results."
+      backdrop: true
+
+    - title: "Select IWTomicsData object with test results"
+      element: 'div[tour_id$="rdata"]'
+      intro: "INTERACTION REQUIRED: select the IWTomicsData Object with Test Results created by 'Test and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select test IDs"
+      element: 'div[tour_id$="testids"]'
+      intro: "INTERACTION REQUIRED: select the Test IDs created by 'Test and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select feature IDs"
+      element: 'div[tour_id$="featureids"]'
+      intro: "INTERACTION REQUIRED: select the Feature IDs created by 'Test and Plot' tool, then click 'Next'."
+      position: "bottom"
+
+    - title: "Select scale"
+      element: 'div[tour_id$="scalesection|thresholdontestscale_0|test"]'
+      intro: "INTERACTION REQUIRED: select the scale to be used in Interval-Wise Testing results and plot. First, select the test identifier 'ETn_fixed vs Control', then click 'Next'."
+      position: "top"
+
+    - title: "Select scale"
+      element: 'div[tour_id$="scalesection|thresholdontestscale_0|feature"]'
+      intro: "INTERACTION REQUIRED: select the feature identifier 'Recomb_hot', then click 'Next'."
+      position: "top"
+
+    - title: "Select scale"
+      element: 'div[tour_id$="scalesection|thresholdontestscale_0|scale"]'
+      intro: "INTERACTION REQUIRED: select the scale '8' (8-kb scale) for the test and feature selected above, then click 'Next'."
+      position: "top"
+
+    - title: "Select alpha"
+      element: 'div[tour_id$="plotres|alpha"]'
+      intro: "Select the level alpha of the test (significance level of the test)."
+      position: "top"
+
+    - title: "Plot the mean curves"
+      element: 'div[tour_id$="plotres|average"]'
+      intro: "If 'Yes' is selected, a mean feature curve is plotted for each region dataset."
+      position: "top"
+
+    - title: "Plot sample size in each position"
+      element: 'div[tour_id$="plotres|size"]'
+      intro: "If 'Yes' is selected, an heatmap with the sample size in each position is plotted for each region dataset."
+      position: "top"
+
+    - title: "Select plot type"
+      element: 'div[tour_id$="plotres|conditionalplottype|plottype"]'
+      intro: "Select the graphical representation type: 'Pointwise quantile curves (boxplot)' or 'Curves (aligned)'. In this example we draw a pointwise boxplot."
+      position: "top"
+
+    - title: "Select probabilities"
+      element: 'div[tour_id$="plotres|conditionalplottype|probabilitiessection|prob0"]'
+      intro: "Select the probabilities corresponding to the quantile curves to be drawn. Default option is 0.25, 0.50, and 0.75."
+      position: "top"
+
+    - title: "Select summary plot"
+      element: 'div[tour_id$="plotsum|conditionalgroupby|groupby"]'
+      intro: "Select the summary plot to be drawn. Default is 'No plot'. Other choices are a summary plot for each test ('Group by test') and a summary plot for each feature ('Group by feature'). In this example we are performing only one test on one feature, so we select 'No plot'."
+      position: "top"
+
+    - title: "Execute 'Plot with Threshold on Test Scale' tool"
+      element: '#execute'
+      intro: "Execute the tool."
+      position: "right"
+      postclick:
+          - '#execute'
+
+    - title: "Wait"
+      content: "Wait until the results are created, then click 'Next'."
+      backdrop: true
+
+    - title: "Adjusted p-value"
+      element: "#current-history-panel .list-item:eq(2)"
+      intro: "This is a TXT file with an adjusted p-value curve for every test performed at the selected scale. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Plotted Test Results"
+      element: "#current-history-panel .list-item:eq(1)"
+      intro: "Plotted Test Results is a PDF file with the plotted test results, at the selected scale. Click on the eye symbol to inspect it."
+      position: "left"
+
+    - title: "Summary Plot"
+      element: "#current-history-panel .list-item:eq(0)"
+      intro: "If a summary plot was selected in 'Test and Plot' tool, this is a PDF file with the summary plot. If 'No plot' was selected, this is empty."
+      position: "left"
+
+    - title: "End of the tour"
+      content: "IWTomics tour is completed. Enjoy!"
+      backdrop: true

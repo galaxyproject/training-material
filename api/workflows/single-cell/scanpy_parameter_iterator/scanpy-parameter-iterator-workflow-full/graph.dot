@@ -1,0 +1,65 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nScanpy RunPCA: AnnData object"]
+  1[label="ParameterIterator n-neighbors"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nScanpy ComputeGraph on data X and data Y: Graph object AnnData"]
+  3[label="ParameterIterator perplexity"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nScanpy RunUMAP on data X: UMAP object AnnData"]
+  5[label="ParameterIterator resolution"]
+  6[label="Scanpy ComputeGraph"]
+  0 -> 6 [label="output"]
+  1 -> 6 [label="parameter_iteration"]
+  k1e60c7cd7e02450fa403f3df1e548757[color=lightseagreen,label="Output\nScanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)"]
+  6 -> k1e60c7cd7e02450fa403f3df1e548757
+  7[label="Scanpy RunTSNE"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="parameter_iteration"]
+  k15143fea5e2b4b25b5d10726da910f67[color=lightseagreen,label="Output\nScanpy RunTSNE on collection X: tSNE object AnnData (perplexity)"]
+  7 -> k15143fea5e2b4b25b5d10726da910f67
+  8[label="Scanpy FindCluster"]
+  4 -> 8 [label="output"]
+  5 -> 8 [label="parameter_iteration"]
+  k6fdddfe7c4da442186a09819ce4c769c[color=lightseagreen,label="Output\nScanpy FindCluster on collection X: Clusters AnnData (resolution)"]
+  8 -> k6fdddfe7c4da442186a09819ce4c769c
+  9[label="Scanpy RunTSNE"]
+  6 -> 9 [label="output_h5ad"]
+  k7c988247b1674733859ffcd582f91959[color=lightseagreen,label="Output\nScanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)"]
+  9 -> k7c988247b1674733859ffcd582f91959
+  10[label="Scanpy RunUMAP"]
+  7 -> 10 [label="output_h5ad"]
+  k1f5abfa2845c47639f87e4b167aa7bc8[color=lightseagreen,label="Output\nScanpy RunUMAP on collection X: UMAP object AnnData (perplexity)"]
+  10 -> k1f5abfa2845c47639f87e4b167aa7bc8
+  11[label="Scanpy PlotEmbed"]
+  8 -> 11 [label="output_h5ad"]
+  k99185d1e047f47f2908107506e1c17df[color=lightseagreen,label="Output\nresolution_pca_plots"]
+  11 -> k99185d1e047f47f2908107506e1c17df
+  12[label="Scanpy PlotEmbed"]
+  8 -> 12 [label="output_h5ad"]
+  k65d7b619865940089e56db21fda6ce8c[color=lightseagreen,label="Output\nresolution_umap_plots"]
+  12 -> k65d7b619865940089e56db21fda6ce8c
+  13[label="Scanpy PlotEmbed"]
+  8 -> 13 [label="output_h5ad"]
+  kbdcaf8375fc44024a87aeabfa0110127[color=lightseagreen,label="Output\nresolution_tsne_plots"]
+  13 -> kbdcaf8375fc44024a87aeabfa0110127
+  14[label="Scanpy RunUMAP"]
+  9 -> 14 [label="output_h5ad"]
+  k8a0b3d69e7df4977b8ebec478b914a26[color=lightseagreen,label="Output\nScanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)"]
+  14 -> k8a0b3d69e7df4977b8ebec478b914a26
+  15[label="Scanpy FindCluster"]
+  10 -> 15 [label="output_h5ad"]
+  kc2e0d48f9f0e44528fb5e78420578c65[color=lightseagreen,label="Output\nScanpy FindCluster on collection X: Clusters AnnData (perplexity)"]
+  15 -> kc2e0d48f9f0e44528fb5e78420578c65
+  16[label="Scanpy FindCluster"]
+  14 -> 16 [label="output_h5ad"]
+  kc952b32e99d54b94a6d7be59439c4dca[color=lightseagreen,label="Output\nScanpy FindCluster on collection X: Clusters AnnData (n-neighbours)"]
+  16 -> kc952b32e99d54b94a6d7be59439c4dca
+  17[label="Scanpy PlotEmbed"]
+  15 -> 17 [label="output_h5ad"]
+  k44c0ec07b64e428f92545217e8041416[color=lightseagreen,label="Output\nperplexity_plots"]
+  17 -> k44c0ec07b64e428f92545217e8041416
+  18[label="Scanpy PlotEmbed"]
+  16 -> 18 [label="output_h5ad"]
+  k0b30f5738ebd45829bcd58ba5c778658[color=lightseagreen,label="Output\nn-neighbors_plots"]
+  18 -> k0b30f5738ebd45829bcd58ba5c778658
+}

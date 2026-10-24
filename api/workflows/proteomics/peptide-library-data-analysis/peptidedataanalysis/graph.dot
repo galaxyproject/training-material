@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="PDAUG Peptide Data Access"]
+  1[label="PDAUG TSVtoFASTA"]
+  0 -> 1 [label="output1"]
+  2[label="PDAUG Peptide Sequence Analysis"]
+  1 -> 2 [label="output3"]
+  1 -> 2 [label="output2"]
+  3[label="PDAUG Sequence Property Based Descriptors"]
+  1 -> 3 [label="output2"]
+  4[label="PDAUG Sequence Property Based Descriptors"]
+  1 -> 4 [label="output3"]
+  5[label="PDAUG Fisher’s Plot"]
+  1 -> 5 [label="output3"]
+  1 -> 5 [label="output2"]
+  6[label="AMP"]
+  3 -> 6 [label="output1"]
+  7[label="TMP"]
+  4 -> 7 [label="output1"]
+  8[label="PDAUG Merge Dataframes"]
+  6 -> 8 [label="OutFile1"]
+  7 -> 8 [label="OutFile1"]
+  9[label="PDAUG Basic Plots"]
+  8 -> 9 [label="output1"]
+}

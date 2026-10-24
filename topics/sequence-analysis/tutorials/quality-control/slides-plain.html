@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Quality Control / Quality Control / Sequence Analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Quality Control">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-12-02 14:33:40 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Anthony Bretaudeau">
+<meta name="DC.creator" content="Alexandre Cormier">
+<meta name="DC.creator" content="Laura Leroi">
+<meta name="DC.creator" content="Erwan Corre">
+<meta name="DC.creator" content="Stéphanie Robin"><meta name="description" content="# Why Quality Control?  ???  Potential audience poll ideas:  - Sequenced something or assembled a genome or transcriptome? - Can guess why we need to do QC on our data?  Comments:  - Process of removing low quality sequences that might corrupt downstream analyses - Some assemblers like Spades have an auto-correction process and ask for raw data  ---  ### Where is my data coming from?  ![Cartoon of different types of sequencing and where they appear in the genome. Bisulfite and ChIP-Seq have arrows pointing to nucleosomes. DNaseq-seq points to the region between nucleosomes. Hi-C and ChIA-PET point to the long range chromatin interactions. RNA-Seq points to a subset of the genome showing a promoter and transcribed region.](../../images/ecker_2012.png)  [*Ecker et al, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pubmed/22955614)  ???  - Many sequencing techniques - [Huge diversity in protocols](https://www.illumina.com/science/sequencing-method-explorer.html) - Knowledge about source o...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Sequence Analysis / Quality Control / Slides: Quality Control">
+        <meta property="og:description" content="# Why Quality Control?  ???  Potential audience poll ideas:  - Sequenced something or assembled a genome or transcriptome? - Can guess why we need to do QC on our data?  Comments:  - Process of removing low quality sequences that might corrupt downstream analyses - Some assemblers like Spades have an auto-correction process and ask for raw data  ---  ### Where is my data coming from?  ![Cartoon of different types of sequencing and where they appear in the genome. Bisulfite and ChIP-Seq have arrows pointing to nucleosomes. DNaseq-seq points to the region between nucleosomes. Hi-C and ChIA-PET point to the long range chromatin interactions. RNA-Seq points to a subset of the genome showing a promoter and transcribed region.](../../images/ecker_2012.png)  [*Ecker et al, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pubmed/22955614)  ???  - Many sequencing techniques - [Huge diversity in protocols](https://www.illumina.com/science/sequencing-method-explorer.html) - Knowledge about source o...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/sequence-analysis/tutorials/quality-control/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/sequence-analysis/tutorials/quality-control/slides.html">View markdown source on GitHub</a>
+	<h1>Quality Control</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
+    Alexandre Cormier</a><a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
+    Laura Leroi</a><a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/r1corre?s=36" alt="Erwan Corre avatar" width="36" class="avatar" />
+    Erwan Corre</a><a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=36" alt="Stéphanie Robin avatar" width="36" class="avatar" />
+    Stéphanie Robin</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Swathi266/" class="contributor-badge contributor-Swathi266"><img src="https://avatars.githubusercontent.com/Swathi266?s=36" alt="Swathi Nataraj avatar" width="36" class="avatar" />
+    Swathi Nataraj</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How to control quality of NGS data?</p>
+</li>
+		
+		<li><p>What are the quality parameters to check for each dataset?</p>
+</li>
+		
+		<li><p>How to improve the quality of a sequence dataset?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Manipulate FASTQ files</p>
+</li>
+		
+		<li><p>Control quality from a FASTQ file for short and long reads</p>
+</li>
+		
+		<li><p>Use FastQC/NanoPlot/PycoQC</p>
+</li>
+		
+		<li><p>Understand output</p>
+</li>
+		
+		<li><p>Use tools for quality correction</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Oct 4, 2016 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Dec 2, 2024 </div>
+
+	<hr />
+
+
+	<h1 id="why-quality-control">Why Quality Control?</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Potential audience poll ideas:</p>
+
+<ul>
+  <li>Sequenced something or assembled a genome or transcriptome?</li>
+  <li>Can guess why we need to do QC on our data?</li>
+</ul>
+
+<p>Comments:</p>
+
+<ul>
+  <li>Process of removing low quality sequences that might corrupt downstream analyses</li>
+  <li>Some assemblers like Spades have an auto-correction process and ask for raw data</li>
+</ul>
+
+<hr />
+
+<h3 id="where-is-my-data-coming-from">Where is my data coming from?</h3>
+
+<p><img src="../../images/ecker_2012.png" alt="Cartoon of different types of sequencing and where they appear in the genome. Bisulfite and ChIP-Seq have arrows pointing to nucleosomes. DNaseq-seq points to the region between nucleosomes. Hi-C and ChIA-PET point to the long range chromatin interactions. RNA-Seq points to a subset of the genome showing a promoter and transcribed region." /></p>
+
+<p><small><a href="https://www.ncbi.nlm.nih.gov/pubmed/22955614"><em>Ecker et al, Nature, 2012</em></a></small></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Many sequencing techniques</li>
+  <li><a href="https://www.illumina.com/science/sequencing-method-explorer.html">Huge diversity in protocols</a></li>
+  <li>Knowledge about source of data (+expectations of how it looks) is important in QC process</li>
+  <li>What is/isn’t normal for your data</li>
+</ul>
+
+<p>Segue: Might be concerned about different processing for each</p>
+
+<hr />
+
+<h3 id="from-experiments-to-data">From experiments to data</h3>
+
+<p><img src="../../images/from_exp_to_data.png" alt="RNA Seq, Exome Seq, ChIP-Seq, and DNA-Seq all point to a large sequencing box and produce files. Then come bioinformatic analysis, namely quality control, on all of the different types." /></p>
+
+<p>Quality control = First step of the bioinformatics analyses</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>But no matter what technique used, same file format</li>
+  <li>Always should go through QC</li>
+</ul>
+
+<p>Segue: So let’s look at how that data is stored</p>
+
+<hr />
+
+<h3 id="sequences-fasta">Sequences: FASTA</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;Identifier1 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+&gt;Identifier2 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XX
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>familiar if you’ve seen genomic data before</li>
+  <li>Starts with greater-than sign</li>
+  <li>Then an identifier with no spaces</li>
+  <li>Everything after a space is a comment</li>
+  <li>Newline</li>
+  <li>Everything up to next greater-than is sequence data (wrapping unnecessary)</li>
+</ul>
+
+<p>Segue: But this is just sequence, and we have data from a sequencer, which includes quality</p>
+
+<hr />
+
+<h3 id="sequences-fastq">Sequences: FASTQ</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Identifier1 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+@Identifier2 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Four lines</li>
+  <li>@ + identifier on first line, just like fasta</li>
+  <li>sequence</li>
+  <li>+</li>
+  <li>quality score characters</li>
+</ul>
+
+<p>Segue: so what do the quality chars mean?</p>
+
+<hr />
+
+<h3 id="quality-score">Quality score</h3>
+
+<p>Measure of the quality of the identification of the nucleobases <br />generated by automated DNA sequencing</p>
+
+<p><small></small></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phred Quality Score</th>
+      <th>Probability of incorrect base call</th>
+      <th>Base call accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>1 in 10</td>
+      <td>90%</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>1 in 100</td>
+      <td>99%</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>1 in 1000</td>
+      <td>99.9%</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>1 in 10,000</td>
+      <td>99.99%</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>1 in 100,000</td>
+      <td>99.999%</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>1 in 1,000,000</td>
+      <td>99.9999%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&lt;/small&gt;</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Logarithmic scale</li>
+</ul>
+
+<hr />
+
+<h3 id="quality-score-1">Quality score</h3>
+
+<p><img src="../../images/quality_score.png" alt="Graph of quality score vs probability of misidentification. There are two lines, red shows -10log(p) while solexa has a different formula" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Solexa uses slightly different measure</li>
+</ul>
+
+<hr />
+
+<h3 id="quality-score-encoding">Quality score encoding</h3>
+
+<p>.image-100[
+<img src="../../../sequence-analysis/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina" />
+]</p>
+
+<p>.pull-bottom[</p>
+<ul>
+  <li>Quality score (Q) is encoded as <a href="https://www.ascii-code.com/characters">ASCII characters</a></li>
+  <li>Formula to find the probability of error \(P = 10 ^{-Q/10}\)</li>
+  <li><a href="https://drive5.com/usearch/manual/quality_score.html">ASCII base 33</a> is now almost universally used. ASCII 33 is the first “normal” ASCII character.</li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Earlier saw sequence + quality were same length of text</li>
+  <li>Each score encoded as a single character</li>
+  <li>Uses ASCII (common computer encoding, maps numbers to characters)</li>
+  <li>Each technology has a different mapping</li>
+  <li>Mostly see illumina 1.8 these days, others only if historical</li>
+</ul>
+
+<hr />
+
+<h2 id="pacbio-hifi-vs-clr">PacBio HiFi <em>vs</em> CLR</h2>
+
+<p><img src="../../images/quality-control/pacbio_hifi_vs_clr.png" alt="Comparison between PacBio HiFi and CLR sequencing methods" /></p>
+
+<ul>
+  <li><strong>HiFi (CCS)</strong>: 99%+ accurate read achieved by multiple passes of the polymerase over a <strong>single molecule</strong></li>
+  <li><strong>CLR</strong>: 90% accurate read from <strong>multiples molecules</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>HiFi read is the result of a consensus of subreads from the same molecule (i.e. multiple pass over the same molecule). It’s imply to have shorter sequences to allow multiple pass on a single molecule by the polymerase.</li>
+  <li>CLR read come from a single pass from a single molecule. It’s allow to have longer reads but with a lower read quality. Warning: Absence of encoded quality since Sequel I into fastq files with CLR.</li>
+</ul>
+
+<hr />
+
+<h2 id="identifying-potential-quality-issues">Identifying Potential Quality Issues</h2>
+
+<hr />
+
+<h2 id="fastqc">FastQC</h2>
+
+<p>A versatile tool for short and long reads quality control</p>
+
+<hr />
+
+<h3 id="fastqc-1">FastQC</h3>
+
+<p><img src="../../../sequence-analysis/images/fastqc-report.png" alt="Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Analyses your fastq files</li>
+  <li>Has many modules</li>
+  <li>
+    <p>They report on different aspects of the sequence</p>
+  </li>
+  <li>Modules include:
+    <ul>
+      <li>Basic Statistics</li>
+      <li>Per base sequence quality</li>
+      <li>Per sequence quality scores</li>
+      <li>Per base sequence content</li>
+      <li>Per base GC content</li>
+      <li>Per sequence GC content</li>
+      <li>Per base N content</li>
+      <li>Sequence Length Distribution</li>
+      <li>Sequence Duplication Levels</li>
+      <li>Overrepresented sequences</li>
+      <li>Kmer Content</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="quality-score-per-base">Quality score: Per-base</h3>
+
+<p><img src="../../../sequence-analysis/images/per_base_sequence_quality_good.png" alt="Fastqc quality score plot, most results are in the green region but the box portion of the box and whisker plot start to dip into the yellow, medium quality (less than 30) region near 34+ base position in read. The whiskers begin extending to the red region (less than 20) by base 31 and get progressively worse." /></p>
+
+<p><i class="fa fa-thumbs-up"></i> Good quality score</p>
+
+<hr />
+
+<h3 id="per-base-quality">Per-base Quality</h3>
+
+<p><img src="../../images/per_base_sequence_quality_bad.png" alt="Fastqc quality score plot, most results are in the green region up until 30. The whiskers extend to the yellow region from the start, and after base 30 get progressively worse, goign to the worst possible score by the end. The boxes cover the yellow region by base 40." /></p>
+
+<p><i class="fa fa-thumbs-down"></i> Bad quality score</p>
+
+<hr />
+
+<h3 id="per-base-quality---nanopore">Per-base Quality - Nanopore</h3>
+
+<p><img src="../../images/per_base_sequence_quality_nanopore.png" alt="A graph for Nanopore reads (R9.4) basecalled with guppy. Almost all bases are in the red region below 20." /></p>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Nanopore reads have an higher error rate, around 5% while it’s ~0.5% for Illumina</li>
+  <li>Q10 -&gt; Q14 with recent versions of Guppy</li>
+  <li>Q20+ with new sequencing kit by the end of 2021 (new chemistry)</li>
+</ul>
+
+<hr />
+
+<h3 id="per-base-quality---pacbio-hifi">Per-base Quality - PacBio HiFi</h3>
+
+<p><img src="../../images/per_base_sequence_quality_pacbio_hifi_good.png" alt="A graph for PacBio HiFi reads. All reads are in the green region and quality score are encoded up to 92." /></p>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good quality score</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>
+    <h2 id="pacbio-encodes-quality-with-a-higher-range-than-illumina-to-increase-precision-in-base-quality-assessment">PacBio encodes quality with a higher range than Illumina to increase precision in base quality assessment</h2>
+  </li>
+</ul>
+
+<h3 id="per-base-quality---pacbio-clr">Per-base Quality - PacBio CLR</h3>
+
+<p><img src="../../images/per_base_sequence_quality_pacbio_clr.png" alt="A graph for PacBio CLR reads. It's empty as quality is set to 0 for all bases!" /></p>
+
+<p>Quality information is “absent” for CLR reads since Sequel I. Quality for each base is automatically set to 0 (i.e. “!”)!</p>
+
+<hr />
+
+<h3 id="per-sequence-quality">Per-sequence Quality</h3>
+
+<p><img src="../../images/per_sequence_quality.png" alt="A per-sequence quality showing quality score distribution histogram with average quality per read plotted. Most reads pile up around quality 30, but another peak appears at 17. very few reads have quality less than 10." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For Illumina, the pic should be near 30</li>
+  <li>For Nanopore, the pic is generally between 10 and 12. It depends on pore (R9 vs R10) and basecaller version and models (fast, hac, sup).</li>
+  <li>For PacBio HiFi, the pic should be near 90.</li>
+</ul>
+
+<hr />
+
+<h3 id="per-tile-quality">Per-tile Quality</h3>
+
+<p><img src="../../images/per_tile_quality.png" alt="A heatmap with several red and green squares, but overall largely blue." /></p>
+
+<p><span>Speaker Notes</span>
+In Illumina libraries, the original sequence identifier is retained. Encoded in these is the flowcell tile from which each read came.</p>
+
+<p>There might be transient problems such as bubbles going through the flowcell, or more permanent problems such as smudges on the flowcell, or debris inside the flowcell lane.</p>
+
+<p>This graph will only appear with Illumina libraries which retain their original sequence identifiers. The graph allows to check the quality scores from each tile across all bases, to see if there was a loss in quality associated with only one portion of the flowcell. The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at or below the average for that base in the run, and hot colours to indicate that a tile had worse quality reads than other tiles for that base. In the example below you can see that certain tiles show consistently poor quality. A good plot should be blue all over.</p>
+
+<hr />
+
+<h3 id="per-base-sequence-content">Per-base Sequence Content</h3>
+
+<p><img src="../../images/per_base_sequence_content.png" alt="A line chart mapping sequence content across all bases with % of the four nucleotides plotted. The graph starts off very jagged and stabilises by base 12." /></p>
+
+<p><span>Speaker Notes</span>
+The per-base sequence content highlights the proportion of each base in each position of a sequence for which each of the four DNA bases have been called. In a random library there would be little to no difference between the different bases of a sequence run. The relative amount of each base should reflect the overall amount of these bases, but in any case they should not be hugely imbalanced from one another. It is worth noting that some types of libraries will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming with random hexamers (including nearly all RNA-Seq libraries) and those which were fragmented using transposases, inherit an intrinsic bias in the positions at which the reads start. This bias does not concern an absolute sequence, but instead provides an enrichment of a number of different K-mers at the 5’ end of the reads. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the downstream analysis. It will however produce a warning or error in this module.</p>
+
+<p>There are a number of common scenarios for these issues:</p>
+
+<ul>
+  <li>Over-represented sequences</li>
+  <li>Biased fragmentation</li>
+  <li>Biased composition libraries</li>
+  <li>Aggressive adapter trimming</li>
+</ul>
+
+<hr />
+
+<h3 id="per-sequence-gc-content">Per-sequence GC content</h3>
+
+<p><img src="../../images/per_sequence_GC_content.png" alt="A line chart showing mean GC content and threoretical distribution as largely overlapping peaks." /></p>
+
+<p><span>Speaker Notes</span>
+The GC content distribution of most samples should follow a normal distribution. In some cases, a bi-modal distribution can be observed, especially for metagenomic data sets. An unusually shaped distribution could indicate a contaminated library or some other kinds of biased subset. A normal distribution which is shifted indicates some systematic bias which is independent of base position. Such a systematic bias creating a shifted normal distribution won’t be flagged as an error, since the tool cannot guess what the provided genome’s GC content should be.</p>
+
+<p>Issues in the GC content distribution usually indicate a problem with the library. Sharp peaks on an otherwise smooth distribution are normally the result of a specific contaminant (adapter dimers for example), which may well be picked up by the over-represented sequences module. Broader peaks may represent contamination with a different species.</p>
+
+<hr />
+
+<h3 id="per-base-n-content">Per-base N content</h3>
+
+<p><img src="../../images/per_base_N_content.png" alt="A line graph of N content across all bases. It shows several peaks to 65 at specific positions and goes to 100 near the end." /></p>
+
+<p><span>Speaker Notes</span>
+Sequences can contain the ambiguous base N for positions that could not be identified as a particular base. A high number of Ns can be a sign for a low quality sequence or even dataset. If no quality scores are available, the sequence quality can be inferred from the percent of Ns found in a sequence or dataset.</p>
+
+<p>If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base call. It’s not unusual to see a very low proportion of Ns appearing in a sequence, especially nearer the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.</p>
+
+<hr />
+
+<h3 id="sequence-length-distribution">Sequence length distribution</h3>
+
+<p><img src="../../images/sequence_length_distribution.png" alt="A graph with a single peak at 75, and 0 outside of this region." /></p>
+
+<p><span>Speaker Notes</span>
+Some high throughput sequencers generate sequence fragments of uniform length, while others can output reads of wildly varying lengths. The length distribution can be then used as quality measure. You would expect a normal distribution for the best result. However, most sequencing results show a slowly increasing and then a steep falling distribution.</p>
+
+<p>FastQC generates a graph showing the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.</p>
+
+<p>This module will raise a warning if all sequences are not the same length. This module will raise an error if any of the sequences have zero length.</p>
+
+<hr />
+
+<h3 id="sequence-length-distribution---pacbio--nanopore">Sequence length distribution - PacBio / Nanopore</h3>
+
+<p><img src="../../images/sequence_length_distribution_long-reads.png" alt="A graph with a main peak around 15,000bp for PacBio HiFi run." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>For long reads, the distribution is much more important and depends on the fragment size selection, primers, DNA weight and quality, etc</p>
+
+<hr />
+
+<h3 id="duplicated-sequences">Duplicated sequences</h3>
+
+<p><img src="../../images/sequence_duplication_levels.png" alt="Two line graphs, deduplicated sequences in red, and total sequences in blue. They start off near 100 and go rapidly to zero by sequence duplication level 2 and 3." /></p>
+
+<p><span>Speaker Notes</span>
+This quality check module counts the degree of duplication for every sequence in the library, and creates a plot showing the relative number of sequences with different degrees of duplication:</p>
+<ul>
+  <li>the blue line represents the full sequence set, showing how its duplication levels are distributed;</li>
+  <li>the red line represents the de-duplicated sequences, plotting the proportions of deduplicated sequence sets which come from different duplication levels in the original data.</li>
+</ul>
+
+<p>In genomic projects, sequence duplication is investigated. Duplicated sequences can arise when there are too few fragments present at any stage prior to sequencing.</p>
+
+<p>This module issues a warning if non-unique sequences make up for more than 20% of the total sequences. An error is raised instead if non-unique sequences make up for more than 50% of the total.</p>
+
+<hr />
+
+<h3 id="tag-sequences-adapter-contamination">Tag sequences: Adapter contamination</h3>
+
+<p><img src="../../images/adapter_content.png" alt="The graph shows a line at zero for the five possible datasets." /></p>
+
+<p><span>Speaker Notes</span>
+Tag sequences are artifacts at the ends of sequence reads such as multiplex identifiers, adapters, and primer sequences that were introduced during pre-amplification with primer-based methods. The base frequencies across the reads present an easy way to check for tag sequences. If the distribution seems uneven (high frequencies for certain bases over several positions), it could indicate some residual tag sequences. This doesn’t indicate a problem as such - just that the sequences will need to be adapter trimmed before proceeding with any downstream analysis.</p>
+
+<p>To investigate tag or adapter content, FastQC generates a plot showing a cumulative percentage count of the proportion of the library which has seen each of the adapter sequences at each position. Once a sequence has been seen in a read it is counted as being present right through to the end of the read so the percentages you see will only increase as the read length goes on.</p>
+
+<hr />
+
+<h3 id="tag-sequences-k-mer-content">Tag sequences: K-mer content</h3>
+
+<p><img src="../../images/kmer_content.png" alt="several peaks are visible on the log2 obs/exp graph of different k-mers at different positions in the read." /></p>
+
+<p><span>Speaker Notes</span>
+Another way to find tag sequences is to look at the K-mer content, and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.</p>
+
+<p>K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution.</p>
+
+<p>Over-represented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment.</p>
+
+<hr />
+
+<h2 id="nanoplot">NanoPlot</h2>
+
+<p>A quality control tool for long reads (Nanopore/PacBio)</p>
+
+<hr />
+
+<h3 id="nanoplot-report">NanoPlot report</h3>
+
+<p><img src="../../images/nanoplot_report.png" alt="Header of a NanoPlot html report " /></p>
+
+<p>Qscores (Qx): it is the average per-base error probability, expressed on the log (Phred) scale</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Analyses your fastq/bam files</li>
+  <li>
+    <p>Reports on different aspects of the reads</p>
+  </li>
+  <li>Modules include:
+    <ul>
+      <li>Summary Statistics
+        <ul>
+          <li>Mean / Median / N50 reads length</li>
+          <li>Mean / Median / N50 reads quality</li>
+          <li>Number of reads</li>
+          <li>Total of bases generated</li>
+        </ul>
+      </li>
+      <li>Plots (depends on parameters)
+        <ul>
+          <li>Histogram of read lengths</li>
+          <li>Yield by length</li>
+          <li>Read lengths vs Average read quality</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="read-length-vs-read-quality-score-qscores">Read length <em>vs</em> Read quality score (Qscores)</h3>
+
+<p><img src="../../images/LengthvsQualityScatterPlot_dot.png" alt="Distribution for HiFi reads with a default filter &gt;= Q20 " /></p>
+
+<p>Each dot represents a read. In the case of PacBio HiFi, the minimum Qscore is fixed to 20 which explains the absence of any dot under this score.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This plot give a 2D visualisation of quality score for reads according to reads length. It allows to detect bias quickly and easily.</p>
+
+<hr />
+
+<h3 id="histogram-of-read-length">Histogram of read length</h3>
+
+<p><img src="../../images/HistogramReadlength.png" alt="Distribution around 15 / 20kb in HiFi mode " /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>It’s a similar representation as FastQC sequence length distribution.
+The length distribution can then be used as quality measure, as you would expect a normal distribution for the best result.
+Also, at least for PacBio HiFi, the pic should be centered near 15kb.</p>
+
+<hr />
+
+<h3 id="run-yield-by-length">Run yield by Length</h3>
+
+<p><img src="../../images/Yield_By_Length.png" alt="Yield for HiFi run " /></p>
+
+<p>This plot shows the total number of bases read in the run, as a function of the length of the read that contained them. The Y-axis is scaled based on the quantity of data in the fastq/a that was analyzed (20Gbp in this example).</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Very long reads represent only a small part of the total bases pairs generated.</li>
+  <li>In case of HiFi reads, the contribution of long reads starts to decrease after 10kb and 50% of the data correspond to the N50.</li>
+  <li>Used to evaluate the contribution of each size fraction</li>
+</ul>
+
+<hr />
+
+<h2 id="pycoqc">PycoQC</h2>
+
+<p>An interactive quality control tool for basecalled Nanopore data</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Analyse your run after basecalling</li>
+  <li>Has many modules</li>
+  <li>Dynamics plot</li>
+  <li>
+    <p>They report on different aspects of the sequence</p>
+  </li>
+  <li>Modules include:
+    <ul>
+      <li>Basic Statistics</li>
+      <li>Basecalled reads length</li>
+      <li>Basecalled reads PHRED quality</li>
+      <li>Basecalled reads length vs reads PHRED quality</li>
+      <li>Output reads over experiment time</li>
+      <li>Read length over experiment time</li>
+      <li>Read quality over experiment time</li>
+      <li>Channel activity over time</li>
+      <li>Number of reads per barcode (optional)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="general-and-basecalled-summary">General and basecalled summary</h3>
+
+<p><img src="../../images/general_run_summary-pycoqc.png" alt="General summary about a Nanopore run from PycoQC. It includes general information about the run itself (duration, channels, run ids and barcode in case of barcoded runs)." />
+<img src="../../images/basecall_summary-pycoqc.png" alt="General summary about the reads." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The 2 tables give general information about the run itself like the duration of the run, the number of active channels (pores), run ids and number of barcodes if necessary.
+It also provides information about the reads themself, like the total reads, bases, N50, median and median PHRED score.
+Reads with a Qscore &gt;= 7 (default with Guppy) are marked as “Pass”</p>
+
+<hr />
+
+<h3 id="basecalled-reads-length">Basecalled reads length</h3>
+
+<p><img src="../../images/basecalled_reads_length-pycoqc.png" alt="A graph with a read length distribution between 200bp and 150kbp." /></p>
+
+<hr />
+
+<h3 id="basecalled-reads-phred-quality-qscores">Basecalled reads PHRED quality (Qscores)</h3>
+
+<p><img src="../../images/basecalled_reads_PHRED_quality-pycoqc.png" alt="A graph of PHRED quality (Qscore) with a distribution centered around 10." /></p>
+
+<p>Reminder: Qscores is the average per-base error probability, expressed on the log (Phred) scale</p>
+
+<hr />
+
+<h3 id="basecalled-reads-length-vs-reads-phred-quality-qscores">Basecalled reads length <em>vs</em> reads PHRED quality (Qscores)</h3>
+
+<p><img src="../../images/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Standard distribution for Nanopore reads." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>As for NanoPlot, this representation give a 2D visualisation of quality score for reads according to reads length.
+It allows to detect bias quickly and easily.</p>
+
+<hr />
+
+<h3 id="output-over-experiment-time">Output over experiment time</h3>
+
+<p><img src="../../images/output_over_experiment_time-pycoqc.png" alt="Sequenced reads over time for a single run." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This representation gives information about sequenced reads over the time.</p>
+<ul>
+  <li>Each pic indicates a new loading of the flow cell (3 + the first load).</li>
+  <li>The contribution in total reads for each “refuel”.</li>
+  <li>The production of reads is decreasing over time:
+    <ul>
+      <li>Most of material (DNA/RNA) is sequenced</li>
+      <li>Saturation of pores</li>
+      <li>Material degradation</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>In this example, the contribution of refuling is very low and it can be considered as a bad run.</li>
+</ul>
+
+<p>Unlike all other technologies, with Nanopore you can refuel the flow cell with biological material without needing to make another run.</p>
+
+<hr />
+
+<h3 id="read-length-over-experiment-time">Read length over experiment time</h3>
+
+<p><img src="../../images/read_length_over_experiment_time-pycoqc.png" alt="Read length during an experiment." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The read length over experiment time should be stable.
+It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.</p>
+
+<hr />
+
+<h3 id="read-quality-over-experiment-time">Read quality over experiment time</h3>
+
+<p><img src="../../images/read_quality_over_experiment_time-pycoqc.png" alt="Read quality over the time." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The read quality should be stable over the time.</p>
+
+<hr />
+
+<h3 id="channel-activity-over-time">Channel activity over time</h3>
+
+<p><img src="../../images/channel_activity_over_time-pycoqc.png" alt="View of the activity of each pore from the flow cell over the time." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>It gives an overview of available pores, pore usage during the experiment and shows if the loading of the flow cell is good (almost all pores are used).
+In this case, the run can be considered bad as the number of used pores is decreasing over the time.</p>
+
+<hr />
+
+<h2 id="improving-the-quality-of-sequences">Improving the quality of sequences</h2>
+
+<ul>
+  <li>Filtering of sequences
+    <ul>
+      <li>with small mean quality score</li>
+      <li>too small</li>
+      <li>with too many N bases</li>
+      <li>based on their GC content</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>Cutting/Trimming sequences
+    <ul>
+      <li>from low quality score parts</li>
+      <li>tails</li>
+      <li>…</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Trimming is not always recommended (e.g. see Spades documentation)</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Run quality control on every sequencing dataset before any other analyses</li>
+
+<li>Choose QC parameters carefully</li>
+
+<li>Re-run FastQC to check the impact of the quality control</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/gallantries/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Gallantries</div>
+			<div class="description">
+			This project (2020-1-NL01-KA203-064717) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
+
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/sequence-analysis/tutorials/quality-control/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/sequence-analysis/tutorials/quality-control/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>

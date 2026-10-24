@@ -1,0 +1,41 @@
+- doc: Test outline for Hybrid-Genome-Assembly-Tutorial-Workflow
+  job:
+    reference_genome.fasta:
+      location: https://zenodo.org/records/15756328/files/reference_genome.fasta
+      class: File
+      filetype: fasta
+    illumina_reads_1.fastq:
+      location: https://zenodo.org/records/15756328/files/illumina_reads_1.fastq
+      class: File
+      filetype: fastqsanger
+    illumina_reads_2.fastq:
+      location: https://zenodo.org/records/15756328/files/illumina_reads_2.fastq
+      class: File
+      filetype: fastqsanger
+    nanopore_reads.fastq:
+      location: https://zenodo.org/records/15756328/files/nanopore_reads.fastq
+      class: File
+      filetype: fastq
+  outputs:
+    busco_sum_ref:
+      path: test-data/busco_sum_ref.txt
+      has_text:
+        text: "Assembly Statistics:"
+    report_html_raw_assembly:
+      path: test-data/report_html_raw_assembly.html
+    busco_sum_raw_assembly:
+      path: test-data/busco_sum_raw_assembly.txt
+      has_text:
+        text: "Assembly Statistics:"
+    report_html_unicy_assembly:
+      path: test-data/report_html_unicy_assembly.html
+    busco_sum_unicy_assembly:
+      path: test-data/busco_sum_unicy_assembly.txt
+      has_text:
+        text: "Assembly Statistics:"
+    report_html_polish_assembly:
+      path: test-data/report_html_polish_assembly.html
+    busco_sum_polish_assembly:
+      path: test-data/busco_sum_polish_assembly.txt
+      has_text:
+        text: "Assembly Statistics:"

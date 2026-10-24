@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nCopper-out.cell"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCopper.den_fmt"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nCopper.castep"]
+  3[label="PyMuonSuite AIRSS UEP Optimise"]
+  2 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  kf3be7cd2397449f2aa0e96c79b4ab34c[color=lightseagreen,label="Output\nAll muons in host material"]
+  3 -> kf3be7cd2397449f2aa0e96c79b4ab34c
+  4[label="PyMuonSuite AIRSS Cluster"]
+  3 -> 4 [label="uep_results"]
+}

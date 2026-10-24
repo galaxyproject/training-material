@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Introduction to climate data / Introduction to climate data / Earth Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6db0efbfbc7ff05e2a78d0015d6aaec71996e110",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/introduction/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to climate data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-07-13 17:51:55 +0000">
+<meta name="DC.creator" content="Anne Fouilloux">
+<meta name="DC.creator" content="Jean Iaquinta"><meta name="description" content="# What do we mean by  Climate ?  *[Wikipedia](https://en.wikipedia.org/wiki/Climate)*:  Climate is defined as the **average state** of everyday’s weather condition **over a period of 30 years**. It is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and other meteorological variables in a given region over long periods of time.  ![Climate word cloud](../../images/word_cloud.png  Word cloud of climate words and phrases )  ??? - Before we start to dig into climate data, let's define the word  climate . - If we read the definition on wikipedia, we have: climate is defined as the average state of everyday’s weather condition over a period of 30 years. - The time period of 30 years may be discussed.  - Some scientists would refer to 20 years. Anyway, the idea is that climate is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Earth Data Science / Introduction to climate data / Slides: Introduction to climate data">
+        <meta property="og:description" content="# What do we mean by  Climate ?  *[Wikipedia](https://en.wikipedia.org/wiki/Climate)*:  Climate is defined as the **average state** of everyday’s weather condition **over a period of 30 years**. It is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and other meteorological variables in a given region over long periods of time.  ![Climate word cloud](../../images/word_cloud.png  Word cloud of climate words and phrases )  ??? - Before we start to dig into climate data, let's define the word  climate . - If we read the definition on wikipedia, we have: climate is defined as the average state of everyday’s weather condition over a period of 30 years. - The time period of 30 years may be discussed.  - Some scientists would refer to 20 years. Anyway, the idea is that climate is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/climate/tutorials/introduction/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/introduction/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/climate/tutorials/introduction/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to climate data</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
+    Anne Fouilloux</a><a href="/training-material/hall-of-fame/j34ni/" class="contributor-badge contributor-j34ni"><img src="https://avatars.githubusercontent.com/j34ni?s=36" alt="Jean Iaquinta avatar" width="36" class="avatar" />
+    Jean Iaquinta</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Oct 11, 2020 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jul 13, 2026 </div>
+
+	<hr />
+
+
+	<h1 id="what-do-we-mean-by-climate">What do we mean by “Climate”?</h1>
+
+<p><em><a href="https://en.wikipedia.org/wiki/Climate">Wikipedia</a></em>: 
+Climate is defined as the <strong>average state</strong> of everyday’s weather condition <strong>over a period of 30 years</strong>.
+It is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and other meteorological variables in a given region over long periods of time.</p>
+
+<p><img src="../../images/word_cloud.png" alt="Climate word cloud" title="Word cloud of climate words and phrases" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Before we start to dig into climate data, let’s define the word “climate”.</li>
+  <li>If we read the definition on wikipedia, we have: climate is defined as the average state of everyday’s weather condition over a period of 30 years.</li>
+  <li>The time period of 30 years may be discussed.</li>
+  <li>
+    <h2 id="some-scientists-would-refer-to-20-years-anyway-the-idea-is-that-climate-is-measured-by-assessing-the-patterns-of-variation-in-terms-of-temperature-humidity-atmospheric-pressure-wind-precipitation-atmospheric-particle-count-and-other-meteorological-variables-in-a-given-region-over-long-periods-of-time">Some scientists would refer to 20 years. Anyway, the idea is that climate is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and other meteorological variables in a given region over long periods of time.</h2>
+  </li>
+</ul>
+
+<h1 id="weather-versus-climate">Weather versus climate</h1>
+
+<p><em>Climate differs from weather, in that weather only describes the short-term conditions of these variables in a given region.</em></p>
+
+<p><img src="../../images/weather_versus_climate.png" alt="Weather versus Climate" title="Differences between weather and climate" /></p>
+
+<p>Watch <a href="https://youtu.be/e0vj-0imOLw">this Video</a> to get an illustration of the difference between climate and weather.</p>
+
+<p><em>Source</em>: <a href="https://youtu.be/e0vj-0imOLw">Animated short on statistics</a> from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>There is often a confusion among the general public between the notions of “weather” and “climate”.</li>
+  <li>It is therefore important to clarify the differences between short-term (weather) versus long-term variations (climate).</li>
+  <li>And, local or regional (weather) versus global scales (climate).</li>
+  <li>We also want to provide indications about what can be expected regarding weather.</li>
+  <li>We can ask questions such as: is it going to rain tomorrow in a particular region?</li>
+  <li>For climate, the question could be: what is the global temperature trend?</li>
+</ul>
+
+<hr />
+
+<h1 id="types-of-climate-data-resources">Types of climate data resources</h1>
+
+<ul>
+  <li><strong>Observations</strong>: usually the most reliable, but there are little actual observations at the scale of climate and covering a large area;</li>
+  <li><strong>Re-analyses</strong>: these combine observations with numerical models to produce “best estimates” of climate variables;</li>
+  <li><strong>Climate models</strong>: climate variables produced by numerical simulations only.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>We briefly introduce in this slide the 3 different types of climate data resources available to scientists:</li>
+  <li>Later, in this presentation, we will explain what can be used depending on the time period of interest and application.</li>
+  <li>Observations are usually the most reliable source of data, but there are little actual observations at the scale of climate and covering a large area;</li>
+  <li>Re-analyses combine observations with numerical models to produce “best estimates” of climate variables;</li>
+  <li>
+    <h2 id="climate-models-for-which-climate-variables-are-produced-by-numerical-simulations-only">Climate models for which climate variables are produced by numerical simulations only.</h2>
+  </li>
+</ul>
+
+<h2 id="what-is-available-for-the-period-of-time-you-are-interested-in">What is available for the period of time you are interested in?</h2>
+
+<p><img src="../../images/climate_data_types.png" alt="Climate data types" title="Different climate data type and their main characteristics" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The first thing to consider when looking for climate data is time.</li>
+  <li>That can be past climate or present days or future climate.</li>
+  <li>For past climate and present days, information can be available from several sources.</li>
+  <li>For future climate, only numerical climate models can be of any use, since there has not yet been any actual observation made
+in the future or any re-analysis using these.</li>
+</ul>
+
+<hr />
+
+<h2 id="direct-observations--">Direct observations     <img src="../../images/observation_type.png" alt="Observations" title="Show observations are always in the past" /></h2>
+
+<ul>
+  <li>Measurements (from ground stations, buoys, satellites, etc.) of one or more physical variables (temperature, humidity, wind, etc.) at one or more particular times and places.</li>
+</ul>
+
+<p><img src="../../images/WMO_global_observing_system.png" alt="WMO global observing system" title="The World Meteorological Organisation Global Observing System" /></p>
+
+<p><em>Source</em>: https://uls.climate.copernicus.eu</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>These direct observations correspond to the most common type of physical variables such as temperature, wind, rainfall, etc.</li>
+  <li>Such observations can be collected using measuring instruments.</li>
+  <li>Notice that this category also includes remotely sensed data like satellite imagery or radar although these can be subject to complex data processing before they can be of any use.</li>
+</ul>
+
+<hr />
+
+<h2 id="indirect-observations--">Indirect observations     <img src="../../images/observation_type.png" alt="Observations" title="Show observations are always in the past" /></h2>
+
+<p>They are derived from other observations, including:</p>
+<ul>
+  <li>ice cores</li>
+  <li>lake sediments</li>
+  <li>tree rings</li>
+</ul>
+
+<p>These indirect observations are sometimes referred to as “climate proxies”.</p>
+
+<p><img src="../../images/frost_rings_375.jpg" alt="Tree rings" title="Show two distorted rings from a Siberian pine" /></p>
+
+<p><em>Source</em>: https://www.earth.columbia.edu</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>As opposed to the direct observations mentioned in the previous slide, “proxies” are somehow related to climate but in a rather intricate manner.</li>
+  <li>In addition, they can also be influenced by other factors.</li>
+  <li>For example the growth of trees depends on the amount of heat and nutrients and water available although the exact relationship is not straightforward.</li>
+  <li>And the growth of trees also depends for example on the location or exposition, on possible insects or animals attacks or diseases, which are even less predictable.</li>
+  <li>On this picture, we have two rings from a Siberian pine in Mongolia that are clearly distorted.</li>
+  <li>That was linked to a particularly cold winter after a volcanic eruption which caused a drastic cooling in the northern hemisphere that froze sap in the cells during the growing season.</li>
+  <li>This particular event dated around 536 Common Era.</li>
+</ul>
+
+<hr />
+
+<h1 id="reanalysis--">Reanalysis            <img src="../../images/reanalysis_type.png" alt="Re-analysis" title="Show re-analysis data are always in the past" /></h1>
+
+<ul>
+  <li>A climate re-analysis is produced by combining numerical models with observations so it can only provide information about the past climate. 
+It contains estimates of the air temperature, wind at different altitudes, rainfall, soil moisture content, etc.</li>
+  <li>The estimates are produced for all locations on Earth, and they span a long time period that can extend back decades or more.</li>
+</ul>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/FAGobvUGl24" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>As opposed to observations which are not available for every location on the planet or at any given time, re-analyses fill these gaps by using complex numerical forecast models and data assimilation schemes.</li>
+  <li>It is a bit like re-making a weather forecast for last Monday.</li>
+  <li>But at the same time, re-adjusting the model outputs knowing what the weather was actually like that particular day using existing observations.</li>
+  <li>So using the combined observation and model information, the weather is inferred for the following day, and so on and so forth.</li>
+  <li>One could argue that there is not much point in predicting last week’s weather, since it already happened and everybody knows about it now.</li>
+  <li>Although knowing what the weather was like last week or last year cannot be of any help to make any decision a posteriori, it is extremely relevant for those who try to understand past events.</li>
+  <li>For instance for scientists to improve the models and include features which were not adequately represented.</li>
+  <li>Re-analysis provide continuous and consistent data, with a fine temporal and spatial resolution.</li>
+  <li>It is generally the best choice when a high degree of confidence is expected.</li>
+  <li>Bear in mind that they are often referred as observations even if we know now that it is not really true!</li>
+  <li>
+    <h2 id="you-can-watch-the-video-that-is-linked-on-this-slide-for-getting-more-information">You can watch the video that is linked on this slide for getting more information.</h2>
+  </li>
+</ul>
+
+<h1 id="what-is-a-model">What is a model?</h1>
+
+<p>Numerical models are a mathematical representation of the climate developed by scientists to understand and predict the climate system.</p>
+
+<p><img src="../../images/AtmosphericModelSchematic.png" alt="Atmospheric Model Schematic" title="Illustrate the notion of numerical climate model" /></p>
+
+<p><em>Source</em>: <a href="https://www.climate.gov/maps-data/primer/climate-models">https://www.climate.gov/maps-data/primer/climate-models</a></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Climate models exploit numerical algorithms and high performance computers to solve mathematical equations that describe the physics of the 
+atmosphere, hydrosphere, cryosphere, land surfaces and biosphere.</li>
+  <li>These models help scientists to better understand how the Earth system works and how climate changes, or assess the impact of human activities and
+events like volcanic eruptions.</li>
+  <li>Also useful to quantify the effectiveness of mitigation measures.</li>
+</ul>
+
+<hr />
+
+<h1 id="climate-models--">Climate Models            <img src="../../images/model_type.png" alt="Climate model type" title="climate models cover both past and future" /></h1>
+
+<p>Various types of models are used for different aspects of the climate. 
+All have different ways to represent the real world, depending on how researchers prioritize and perform these simplifications (in terms of parameterizations, etc.) in the numerical climate model.</p>
+
+<h2 id="how-good-are-climate-models">How good are climate models?</h2>
+
+<p>Climate models are continuously improving but they still have biases and weaknesses, also some models perform “better” in the atmosphere, 
+others in the hydrosphere, etc.
+As a result, a single climate simulation cannot be considered as providing the “truth”.
+Usually a good overview can be obtained when considering several model “families” rather than any single model, or several model run in slightly 
+different conditions (also called “ensemble runs”).</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Various types of models are used for different aspects of the climate.</li>
+  <li>The physics equations for each model component such as atmosphere, hydrosphere, cryosphere, etc. are solved for each grid cell and appropriate time steps.</li>
+  <li>Simplifications, called parameterizations, are also made to include processes which are too complex to put into equations or would require too much computational resources to be explicitly resolved, or involve scales much smaller than the model grid.</li>
+  <li>All climate models have different ways to represent the real world, depending on how researchers prioritize and perform these simplifications in terms of parameterizations in the numerical climate model.</li>
+  <li>Climate models are continuously improving but they still have biases and weaknesses, also some models perform better in the atmosphere, others in the hydrosphere, etc.</li>
+  <li>As a result, a single climate simulation cannot be considered as providing the truth.</li>
+  <li>Usually a good overview can be obtained when considering several model families rather than any single model, or several model run in slightly different conditions.</li>
+  <li>This is what we call ensemble runs.</li>
+</ul>
+
+<hr />
+
+<h1 id="climate-prediction-vs-projection">Climate prediction <em>vs.</em> projection</h1>
+
+<h2 id="climate-prediction">Climate prediction</h2>
+
+<p>A <strong>climate prediction</strong> (or climate forecast) is an attempt to produce an estimate of the actual evolution of the natural climate in the future, for example, at seasonal, inter-annual or long-term time scales.</p>
+
+<h2 id="climate-projections">Climate projections</h2>
+
+<p><strong>Climate projections</strong> are distinct from climate predictions in that projections depend upon emission/concentration/radiative forcing <strong>scenarios</strong>, which are based on assumptions concerning, for example, future socio-economic and technological developments that may or may not be realized and are therefore subject to substantial uncertainty.</p>
+
+<p>Within the Coupled Model Intercomparison Project (CMIP), now in its 6th phase, project simulations of the 
+research community provide model output that will fuel climate research and climate impact studies for the 
+next 5 to 10 years, while its careful analysis will form the basis for future climate assessments.</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>A climate prediction or climate forecast is an attempt to produce an estimate of the actual evolution of the natural climate in the future.</li>
+  <li>For example, to provide a climate prediction at seasonal, inter-annual or long-term time scales.</li>
+  <li>Climate projections are distinct from climate predictions in that projections depend upon emission, concentration, radiative forcing scenarios, which are based on assumptions.</li>
+  <li>For example, we can make assumptions on future socio-economic and technological developments that may or may not be realized and are therefore subject to substantial uncertainty.</li>
+  <li>Within the Coupled Model Intercomparison Project C M I P , now in its 6th phase, project simulations of the research community provide model output that will fuel climate research and climate impact studies for the next 5 to 10 years.</li>
+  <li>
+    <h2 id="in-addition-its-careful-analysis-will-form-the-basis-for-future-climate-assessments">In addition, its careful analysis will form the basis for future climate assessments.</h2>
+  </li>
+</ul>
+
+<h1 id="shared-socio-economic-pathway-ssp-">Shared Socio-economic Pathway (SSP) <img src="../../images/climate_type_ssp.png" alt="Climate model type" title="climate models cover both past and future" /></h1>
+
+<p><strong>= societal development pathway</strong></p>
+
+<p>The SSPs were developed as a joint community effort and describe global developments that
+together would lead to different challenges for mitigation and adaptation to climate change.
+SSPs comprise <strong>five alternative</strong> narratives that describe the main characteristics of the
+pathways in qualitative terms as well as quantitative descriptions for key elements including
+population, economic growth and urbanization.</p>
+
+<p>Different pathways are defined by the magnitude of the challenges a future society
+would face in adapting to or mitigating climate change if that socioeconomic pathway was pursued.</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The shared socio-economic pathway, also called S S P, were developed as a joint community effort and describe global developments that together would lead to different challenges for mitigation and adaptation to climate change.</li>
+  <li>S S Ps comprise five alternative narratives that describe the main characteristics of the pathways in qualitative terms as well as quantitative descriptions for key elements including population, economic growth and urbanization.</li>
+  <li>
+    <h2 id="different-pathways-are-defined-by-the-magnitude-of-the-challenges-a-future-society-would-face-in-adapting-to-or-mitigating-climate-change-if-that-socioeconomic-pathway-was-pursued">Different pathways are defined by the magnitude of the challenges a future society would face in adapting to or mitigating climate change if that socioeconomic pathway was pursued.</h2>
+  </li>
+</ul>
+
+<h2 id="ssps-and-shared-policy-assumptions-spas">SSPs and Shared Policy Assumptions (SPAs)</h2>
+
+<ul>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP1:_Sustainability_(Taking_the_Green_Road)">SSP1 Sustainability</a>: Taking the Green Road e.g. low challenges to mitigation and adaptation</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP2:_Middle_of_the_road)">SSP2 Middle of the Road</a>:  Medium challenges to mitigation and adaptation</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP3:_Regional_rivalry_(A_Rocky_Road)">SSP3 Regional Rivalry</a>: A Rocky Road e.g high challenges to mitigation and adaptation</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP4:_Inequality_(A_Road_Divided)">SSP4 Inequality</a>: A Road Divided e.g. low challenges to mitigation, high challenges to adaptation</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP5:_Fossil-Fueled_Development_(Taking_the_Highway)">SSP5 Fossil-fueled Development</a>: Taking the Highway e.g. high challenges to mitigation, low challenges to adaptation</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let’s have a look at these different S S Ps and Shared Policy Assumptions.</li>
+  <li>S S P 1 Sustainability is also referenced as “Taking the Green Road”.</li>
+  <li>The world shifts gradually, but pervasively, toward a more sustainable path, emphasizing more inclusive development that respects perceived environmental boundaries.</li>
+  <li>This path leads to low challenges to mitigation and adaptation.</li>
+  <li>S S P 2 or called “Middle of the road”.</li>
+  <li>The world follows a path in which social, economic, and technological trends do not shift markedly from historical patterns.</li>
+  <li>Development and income growth proceeds unevenly, with some countries making relatively good progress while others fall short of expectations</li>
+  <li>This path leads to Medium challenges to mitigation and adaptation.</li>
+  <li>S S P 3 Regional rivalry, also called: a Rocky Road.</li>
+  <li>A resurgent nationalism, concerns about competitiveness and security, and regional conflicts push countries to increasingly focus on domestic or, at most, regional issues.</li>
+  <li>A low international priority for addressing environmental concerns leads to strong environmental degradation in some regions.</li>
+  <li>This path leads to High challenges to mitigation and adaptation.</li>
+  <li>S S P 4 Inequality; also called “a Road Divided”.</li>
+  <li>Highly unequal investments in human capital, combined with increasing disparities in economic opportunity and political power, lead to increasing inequalities and stratification both across and within countries.</li>
+  <li>This path leads to Low challenges to mitigation but high challenges to adaptation.</li>
+  <li>S S P 5 Fossil-Fueled Development, also called “Taking the Highway”.</li>
+  <li>This world places increasing faith in competitive markets, innovation and participatory societies to produce rapid technological progress and development of human capital as the path to sustainable development. Global markets are increasingly integrated.</li>
+  <li>Local environmental problems like air pollution are successfully managed.</li>
+  <li>There is faith in the ability to effectively manage social and ecological systems, including by geo-engineering if necessary.</li>
+  <li>
+    <h2 id="this-path-leads-to-high-challenges-to-mitigation-and-low-challenges-to-adaptation">This path leads to High challenges to mitigation and low challenges to adaptation</h2>
+  </li>
+</ul>
+
+<h2 id="ssps-and-shared-policy-assumptions-spas-1">SSPs and Shared Policy Assumptions (SPAs)</h2>
+
+<p><img src="../../images/SSP_scenarios.png" alt="Shared Socio-economic Pathway and Shared POLicy Assumptions" title="Scenarios with different SSPs and SPAs" /></p>
+
+<p>Source: https://www.becc.lu.se/sites/becc.lu.se/files/climate_modelling_ralf_doscher.pdf</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>This slide contains the same information as the previous one.</li>
+  <li>It shows the 5 different pathways.</li>
+  <li>On the vertical axis, the mitigation challenges resulting in the adoption of one path or another are highlighted.</li>
+  <li>On the horizontal axis, the resulting adaptation challenges are shown.</li>
+  <li>
+    <h2 id="now-it-is-clearer-why-we-called-s-s-p-2-the-middle-of-the-road">Now it is clearer why we called S S P 2 the “middle of the road”.</h2>
+  </li>
+</ul>
+
+<h1 id="where-to-start-to-get-climate-data">Where to start to get climate data?</h1>
+
+<p><em>There is a wealth of data and information available on the <strong>web</strong> about the past, current and future climate.</em></p>
+
+<p><strong>Not all of it is up-to-date and trustworthy</strong></p>
+
+<ul>
+  <li>Check the provenance and data provider credentials</li>
+</ul>
+
+<p><strong>Not all the variables/parameters are necessarily relevant for your study</strong></p>
+
+<ul>
+  <li>Prioritize the use of <a href="https://gcos.wmo.int/en/essential-climate-variables/about">Essential Climate Variables</a> (as we know they critically contribute to the characterization of Earth’s climate).</li>
+</ul>
+
+<p><strong>Not all the variables are reliable</strong></p>
+
+<ul>
+  <li>For instance, temperature is usually reliable but precipitation is more difficult to estimate</li>
+  <li>Prioritize observations and re-analyses for past climate</li>
+</ul>
+
+<p><strong>Prefer authoritative data providers</strong></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Where to start to get climate data?</li>
+  <li>There is a wealth of data and information available on the web about the past, current and future climate.</li>
+  <li>Not all of it is up-to-date and trustworthy!</li>
+  <li>Check the provenance and data provider credentials</li>
+  <li>Not all the variables and parameters are necessarily relevant for your study</li>
+  <li>Prioritize the use of Essential Climate Variables as we know they critically contribute to the characterization of Earth’s climate.</li>
+  <li>Not all the variables are reliable!</li>
+  <li>For instance, temperature is usually reliable but precipitation is more difficult to estimate.</li>
+  <li>Prioritize observations and re-analyses for past climate.</li>
+  <li>Prefer authoritative data providers!</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/climate/tutorials/introduction/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/climate/tutorials/introduction/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6db0efbfbc7ff05e2a78d0015d6aaec71996e110">6db0efb</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

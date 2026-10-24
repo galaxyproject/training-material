@@ -1,0 +1,62 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput genomes as collection"]
+  1[label="Replace Text"]
+  0 -> 1 [label="output"]
+  k6a2d3fcdb5574440910db4c537feef20[color=lightseagreen,label="Output\nheaders_shortened"]
+  1 -> k6a2d3fcdb5574440910db4c537feef20
+  2[label="RepeatMasker"]
+  1 -> 2 [label="outfile"]
+  k1db6607a343a4a619a3b43101eb8223b[color=lightseagreen,label="Output\nrepeat_masked"]
+  2 -> k1db6607a343a4a619a3b43101eb8223b
+  3[label="Funannotate predict annotation"]
+  2 -> 3 [label="output_masked_genome"]
+  k642c1c0982f44ef4bd53d14a583044e2[color=lightseagreen,label="Output\nfunannotate_predicted_proteins"]
+  3 -> k642c1c0982f44ef4bd53d14a583044e2
+  4[label="Extract ORF"]
+  3 -> 4 [label="annot_gbk"]
+  k07fb8c04990e4bc7b6079c4161b4786d[color=lightseagreen,label="Output\nextracted_ORFs"]
+  4 -> k07fb8c04990e4bc7b6079c4161b4786d
+  5[label="Regex Find And Replace"]
+  4 -> 5 [label="aa_output"]
+  k8dc378a8d48542df83226cf8230257a0[color=lightseagreen,label="Output\nsample_names_to_headers"]
+  5 -> k8dc378a8d48542df83226cf8230257a0
+  6[label="Collapse Collection"]
+  5 -> 6 [label="out_file1"]
+  ke9a554594a2c42388494e99ec67307ea[color=lightseagreen,label="Output\nproteomes_to_one_file"]
+  6 -> ke9a554594a2c42388494e99ec67307ea
+  7[label="Proteinortho"]
+  5 -> 7 [label="out_file1"]
+  kee688b7a2a9e4480a27adb8cf795b635[color=lightseagreen,label="Output\nProteinortho on input dataset(s): orthology-groups"]
+  7 -> kee688b7a2a9e4480a27adb8cf795b635
+  8[label="Busco"]
+  5 -> 8 [label="out_file1"]
+  9[label="Filter"]
+  7 -> 9 [label="proteinortho"]
+  10[label="Proteinortho grab proteins"]
+  6 -> 10 [label="output"]
+  9 -> 10 [label="out_file1"]
+  k8625e8b1e3af4afabf851a3258cbbfb2[color=lightseagreen,label="Output\nProteinortho_extract_by_orthogroup"]
+  10 -> k8625e8b1e3af4afabf851a3258cbbfb2
+  11[label="Regex Find And Replace"]
+  10 -> 11 [label="listproteinorthograbproteins"]
+  kb072d32ef7254833af0b74f4df526d9a[color=lightseagreen,label="Output\nfasta_header_cleaned"]
+  11 -> kb072d32ef7254833af0b74f4df526d9a
+  12[label="ClustalW"]
+  11 -> 12 [label="out_file1"]
+  kf704b4b2521443938a856274bda27c8c[color=lightseagreen,label="Output\nClustalW on input dataset(s): clustal"]
+  12 -> kf704b4b2521443938a856274bda27c8c
+  13[label="ClipKIT. Alignment trimming software for phylogenetics."]
+  12 -> 13 [label="output"]
+  k37092981191a44138f6051802dd95f9c[color=lightseagreen,label="Output\nTrimmed alignment."]
+  13 -> k37092981191a44138f6051802dd95f9c
+  14[label="PhyKit - Alignment-based functions"]
+  13 -> 14 [label="trimmed_output"]
+  k09ad25e3cd684fb49c573e79212b8e01[color=lightseagreen,label="Output\nConcatenated fasta alignment file"]
+  14 -> k09ad25e3cd684fb49c573e79212b8e01
+  k1d546e4c7e3c499d870c4846feb7a46d[color=lightseagreen,label="Output\nA partition file ready for input into RAxML or IQ-tree"]
+  14 -> k1d546e4c7e3c499d870c4846feb7a46d
+  k26846814d43a4ce79f26cfb70f184dce[color=lightseagreen,label="Output\nAn occupancy file that summarizes the taxon occupancy per sequence"]
+  14 -> k26846814d43a4ce79f26cfb70f184dce
+}
