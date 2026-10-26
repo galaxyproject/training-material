@@ -1530,8 +1530,8 @@ DESeq2 requiere proporcionar para cada factor, recuentos de muestras en cada cat
 >      - {% icon param-file %} *"Fichero a procesar "*: salida de **Extraer identificadores de elementos** {% icon tool %}
 >      - En *"Replacement "*:
 >         - En *"1: Replacement "*
->            - *"Find pattern "*: `(.*)_(.*)_(.*)`
->            - *"Replace with "*: `\1_\2_\3\tgroup:\2\tgroup:\3`
+>            - *"Find pattern "*: `^([^_]+)_([^_]+)_([^_]+)(_.+)?$`
+>            - *"Replace with "*: `\1_\2_\3\4\tgroup:\2\tgroup:\3`
 > 
 >    Este paso crea 2 columnas adicionales con el tipo de tratamiento y secuenciación que pueden utilizarse con la herramienta {% tool [Tag elements](__TAG_FROM_FILE__) %} tool
 > 
