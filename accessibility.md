@@ -29,6 +29,8 @@ We aim for WCAG 2.0 AA compliance (AAA where possible), under the default theme 
 - For our automated slides, we provide perfectly captioned content
 - SRT files and a transcript are provided of the slides.
 - No other sounds are used anywhere on the site.
+- Video recordings of GTN tutorials, endorsed on GTN pages, are required to be captioned. Where they aren't, that is indicated and out of our control (hosted by a non-cooperative account).
+- If you notice any issues in subtitles, please let us know! Everyone is welcome to [contact us however suits them](#contact) to report this.
 
 ### Mobility
 
