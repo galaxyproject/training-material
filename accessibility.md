@@ -2,6 +2,8 @@
 layout: doc
 title: GTN Accessibility Policy
 subtitle: We are committed to making our content accessible to all learners.
+contributions:
+    authorship: [hexylena]
 ---
 
 ## Accessibility
