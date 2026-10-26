@@ -1,0 +1,33 @@
+name: PR Description Validator
+
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  validate-pr-description:
+    name: Validate PR Description
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up workspace
+      uses: actions/checkout@v2
+
+    - name: Validate PR Description
+      run: |
+        # Ensure jq is installed
+        sudo apt-get install jq
+
+        # Fetch PR description using jq
+        PR_DESCRIPTION=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
+        KEYWORD="I have read and complied with"
+
+        # Check for the required keyword in the PR description
+        if [[ $PR_DESCRIPTION != *"$KEYWORD"* ]]; then
+          echo "Your PR description has removed the CONTRIBUTOR checklist, please edit your PR description and add it back:"
+          echo ""
+          echo "**FOR CONTRIBUTORS: Please check all that apply**"
+          echo "- [ ] I have read and complied with the GTN's [AI Policy](https://github.com/galaxyproject/training-material/blob/main/AI-policy.md)"
+          echo "- [ ] I have checked that all images in this PR are allowed to be re-hosted in the GTN (or there are no images in this PR)"
+          echo ""
+          exit 1
+        fi
