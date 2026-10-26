@@ -58,7 +58,7 @@ We should ONLY be using new_material (if at all possible.)
     {% endif %}
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
-    {% include _includes/contributors-line.html page=page %}
+    {% include _includes/contributors-line.html page=page humansonly=true %}
 
     <blockquote class="overview">
         <div id="overview-box" class="box-title">{{ locale['overview'] | default: "Overview"}}</div>
@@ -188,7 +188,7 @@ We should ONLY be using new_material (if at all possible.)
 	{% if feedback_count > 0 %}
 	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating_recent:own_material_id }}</a> ({{ site | get_feedback_count_recent: own_material_id }} recent ratings, {{ feedback_count }} all time)</div>
 	{% endif %}
-	<div><strong>{% icon version %} {{ locale['revision'] | default: "Revision" }}:</strong> {{ page | get_version_number }} </div>
+	<div><strong>{% icon version %} {{ locale['revision'] | default: "Revision" }}:</strong> <a href="{{ site.github_repository }}/commits/{{ site.github_repository_branch }}/{{ page.path }}">{{ page | get_version_number }}</a></div>
 
     </blockquote>
     </section>
@@ -341,7 +341,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <p>Check your understanding with these quizzes</p>
                     {% for q in own_material.quiz %}
                     <h2>{{ q.title }}</h2>
-                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true %}</div>
+                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true humansonly=true %}</div>
                     <ul>
                         <li>
                             <a href="{% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ q.path }}">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.

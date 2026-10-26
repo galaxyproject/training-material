@@ -1,17 +1,20 @@
 ---
-layout: base
-title: GTN Accessibility
+layout: doc
+title: GTN Accessibility Policy
+subtitle: We are committed to making our content accessible to all learners.
 ---
 
 ## Accessibility
 
-The Galaxy Training Network is committed to making its content accessible to all learners, including those with disabilities. While we are a volunteer organisation, we are constantly working to ensure that our training materials are accessible to everyone, regardless of their abilities or background. We use a variety of accessibility features and tools, including alt text, closed captioning, and automated testing, to make our content accessible to all learners.
+The Galaxy Training Network is committed to making its content accessible to all learners, regardless of disability status. We follow the social model of disability; everyone should be able to use the resources on our pages, and if they aren't, then it's a problem with our site.
+
+While we are a volunteer organisation, we are constantly working to ensure that our training materials are accessible to everyone, regardless of their abilities or background. We use a variety of accessibility features and tools, including alt text, closed captioning, and automated testing, to make our content accessible to all learners.
 
 We aim for WCAG 2.0 AA compliance (AAA where possible), under the default theme and styling of the GTN. We are investigating our Section 508 compliance.
 
-### Accessibility Features
+## Accessibility Features
 
-#### Visual
+### Visual
 
 - Screen reader support[^screenreader]
 - Dark mode support (including dim and fully "lights out") via the Extras menu
@@ -19,7 +22,7 @@ We aim for WCAG 2.0 AA compliance (AAA where possible), under the default theme 
 
 [^screenreader]: One of our developers uses a screenreader, not full time, but on a regular basis.
 
-#### Auditory
+### Auditory
 
 - For our automated slides, we provide perfectly captioned content
 - SRT files and a transcript are provided of the slides.
@@ -31,22 +34,22 @@ If you record a training video for the GTN, you will receive a link to an auto-g
 
 We are exploring ways to let the community help improve captions on existing videos as well. If you're interested in contributing, reach out via the contact channels below — we'd love to have your help!
 
-#### Mobility
+### Mobility
 
-- None
+- None applicable
 
-#### Cognitive
+### Cognitive
 
 - No animations are present
 - No videos auto-play
 - No sounds are present (excepting videos)
 
 
-### Contact
+## Contact
 
 We know accessibility is an on-going process and there will always be work to do and improvements to be made. If you need support or would like to provide feedback you can contact us on [GitHub issues](https://github.com/galaxyproject/training-material/issues/new), [Matrix](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im), or via [email](mailto:galaxytrainingnetwork@gmail.com), whichever is most accessible for you. We take all your feedback and suggestions seriously, honestly, and with care.
 
-### Additional Features
+## Additional Features
 
 Auto-expanding boxes:
 :  Tutorials can be viewed with all boxes automatically expanded, just add `?expand-all=true` to the URL of the page you are visiting.

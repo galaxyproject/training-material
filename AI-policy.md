@@ -1,7 +1,13 @@
-# GTN Generative AI Contributions Policy
-
-The GTN is committed to providing high-quality human-written and human-curated tutorials.
-As such, the use of generative AI tools to create GTN training content is not allowed.
+---
+layout: doc
+title: GTN GenAI Policy
+subtitle: |
+    The GTN is committed to providing high-quality human-written and human-curated tutorials.
+    As such, the use of generative AI tools to create GTN training content is not allowed.
+contributions:
+    authorship: [shiltemann, hexylena]
+    reviewing: [bebatut, bgruening]
+---
 
 
 ## Rules
@@ -20,6 +26,7 @@ As such, the use of generative AI tools to create GTN training content is not al
   - You must **disclose and describe** the use of generative AI in your PR description.
   - You must write code comments and documentation, yourself. Describing not only what the code does, but why you chose to do it this way.
   - You must write the PR/issue descriptions and any other (GitHub) communications yourself.
+  - See the [FAQ](#why-a-technical-codebase-exception) for rationale
 
 - Some parts of the GTN codebase are a mix of technical framework and user-facing content (e.g. _layouts folder).
   - Please use your best judgment to adhere to the spirit of this policy when editing these files; i.e. any time you are teaching or communicating with learners it should be in your own words, technical updates may be AI assisted under the conditions outlined above.
@@ -62,12 +69,17 @@ We, as an open and inclusive community, would like to keep **our goal of growing
 
 Contributors making use of generative AI tools oftentimes **greatly increase the maintainer burden** by not fully understanding the contents of their own contribution, not describing their contribution accurately/usefully in the PR/issue/commit message, not following up on review comments, and/or not thoroughly testing tutorials and ensuring it works as described.
 
+### Why a technical codebase exception?
+
+While we have strong beliefs around prose text and the deleterious effects of LLMs on prose, we have come to accept that the framework (`bin/`, `_plugins/`) is potentially different. Different to the prose, as well as to other codebases. It is rarely read by humans, it is of low quality to start with, it is not meant to be reusable or reused, it is for all intents and purposes an art project showcasing how much can be accomplished with how little, how few resources, how little investment, making the bare minimum change required to achieve a goal.
+
+We have received a handful of LLM supported contributions to this portion of the repository which have not challenged our viewpoints significantly due to how small the patches were. Our ethical, moral, and legal issues with the use of this technology remain, and in this area we are complicit in tolerating their use.
+
 ### Are you an LLM user?
 
 Then an LLM-free GTN benefits you!
 The GTN tutorials serve as a high-quality information source for Galaxy AI solutions such as the Galaxy chatbot.
 As such, to prevent model collapse, we must prevent the use of LLM generated text in the GTN.
-
 
 ## Societal Motivation
 
@@ -83,3 +95,15 @@ This AI Policy is heavily inspired by:
 - [LLVM AI Tool Use Policy](https://llvm.org/docs/AIToolPolicy.html)
 - [The Carpentries Generative AI Contributions Policy](https://docs.carpentries.org/policies/genai-policy.html)
 - [rust-lang/rust LLM policy](https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/)
+
+
+## Frequently Asked Questions
+
+### Are LLMs used for review?
+
+No; all contributions are peer reviewed. LLMs definitionally cannot be a human's peer, they would not be sufficient for peer review.
+
+### I disagree with this policy
+
+If you think you have a good case for why it should be changed, you may make it to us via github issue.
+Human authorship is a point about which we feel very strongly.

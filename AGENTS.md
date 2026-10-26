@@ -1,3 +1,8 @@
+---
+layout: base
+title: GTN AGENTS.md
+---
+
 # Prose Contributions
 
 You MUST NOT generate any content or prose in the following directories:
