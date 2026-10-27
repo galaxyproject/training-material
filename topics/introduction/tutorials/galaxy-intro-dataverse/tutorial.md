@@ -40,7 +40,7 @@ This flexible hierarchy means a single institution can manage its entire data ou
 
 ## Why Use Dataverse?
 
-Dataverse is built from the ground up around the **[FAIR Data Principles** (Findable, Accessible, Interoperable, and Reusable)](https://www.go-fair.org/fair-principles/). It achieves this through several important features:
+Dataverse is built from the ground up around the **FAIR** [Data Principles (Findable, Accessible, Interoperable, and Reusable)](https://www.go-fair.org/fair-principles/). It achieves this through several important features:
 
 * **[Persistent Identifiers](https://en.wikipedia.org/wiki/Persistent_identifier):** Every time a dataset is published, Dataverse automatically assigns it a [Digital Object Identifier (DOI)](https://en.wikipedia.org/wiki/Digital_object_identifier). This ensures the dataset can be permanently cited in academic journals, giving authors proper academic credit.
 * **Rich Metadata Standards:** Dataverse enforces standard metadata schemas (like [Dublin Core](https://en.wikipedia.org/wiki/Dublin_Core) or [DDI](https://ddialliance.org/ddi-codebook)) and offers domain-specific metadata fields (such as life sciences or geospatial data). This makes your data highly searchable and discoverable by global search engines like Google Dataset Search.
