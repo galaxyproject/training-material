@@ -49,6 +49,17 @@ We should ONLY be using new_material (if at all possible.)
 
 <article class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
+
+    {% if page.hands_on == "external" %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">External Tutorial</h4>
+        <p>Oops! The this is not the tutorial you are looking for, please go to the <a href="{{page.hands_on_url}}">external tutorial</a> to find it.</p>
+
+        <p> If you reached this page there was likely a bug somewhere on the GTN, please consider reporting it on <a href="https://github.com/galaxyproject/training-material/issues">GitHub</a> or <a href="https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im">Matrix chat</a></p>
+    </div>
+    {% endif %}
+
+
     {% if page.draft %}
     <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Under Development!</h4>
