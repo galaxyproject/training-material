@@ -74,7 +74,7 @@ Galaxy instances frequently maintain a list of pre-configured public repositorie
 > 5. Click an instance, such as **BSC**, to explore its public directories, datasets, and files of the Barcelona Supercomputing Centre's Dataverse.
 {: .hands_on}
 
-From here, you can browse for existing files or search a term in the search bar. **Note**: The search is case-sensitive.
+From here, you can browse for existing files or search a term in the search bar. 
 In the BSC Dataverse, search for, for example, _ Handwritten _.
 You will see a folder called _A Dataset for Handwritten Text Recognition in Medieval Notarial Charters Written on Parchment_.
 If you click the name, you can see the contents of that folder.
