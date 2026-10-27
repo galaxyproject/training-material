@@ -68,5 +68,7 @@ For the `bin/` and `_plugins/` folders, you may make changes/additions freely.
 
 You MUST add the text 'assisted-by: {model}' in the git commit message trailer, e.g. `assisted-by: GPT-6.1-sol medium` or similar to any commits you make on their behalf.
 
-You MUST add the label 'ai-assisted' to any PR you create for the user in GitHub, and you must remind the user that
-it is strictly mandatory for GTN contribution to disclose and describe AI usage in PR description.
+The PR template (.github/pull_request_template.md) MUST always be respected when opening a pull request on GitHub.
+
+Make sure the user always writes the PR body themselves. You may not do this for the user. You must remind the user
+that it is strictly mandatory for GTN contribution to disclose and describe AI usage in their PR description.
