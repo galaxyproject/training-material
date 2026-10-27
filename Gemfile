@@ -26,7 +26,7 @@ gem 'fastimage'
 gem 'commander'
 
 # RO-Crates
-gem 'rubyzip', '~> 2.3.0'
+gem 'rubyzip', '~> 3.4.0'
 
 # Documentation
 gem 'rdoc', '~> 6.7'

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Clustering in Machine Learning'
-zenodo_link: https://zenodo.org/record/3813447
+zenodo_link: 'https://zenodo.org/record/3813447'
 questions:
 - How to use clustering algorithms to categorize data in different clusters
 objectives:

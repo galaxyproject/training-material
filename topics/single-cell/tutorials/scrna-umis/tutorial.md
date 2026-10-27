@@ -6,7 +6,7 @@ priority: 2
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-umis/tutorial
 
-zenodo_link: "https://zenodo.org/record/2573177"
+zenodo_link: 'https://zenodo.org/record/2573177'
 tags:
 - single-cell
 questions:

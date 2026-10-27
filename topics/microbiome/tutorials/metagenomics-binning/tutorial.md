@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Binning of metagenomic sequencing data
-zenodo_link: https://zenodo.org/records/17661262
+zenodo_link: 'https://zenodo.org/record/17661262'
 level: Intermediate
 questions:
 - What is metagenomic binning refers to?

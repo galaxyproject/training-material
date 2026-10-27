@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Long non-coding RNAs (lncRNAs) annotation with FEELnc
-zenodo_link: https://zenodo.org/records/11367439
+zenodo_link: 'https://zenodo.org/record/11367439'
 tags:
 - eukaryote
 questions:

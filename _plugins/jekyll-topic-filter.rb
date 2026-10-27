@@ -1084,6 +1084,22 @@ module Gtn
       # If there is nothing with that topic name, try generating it by tags.
       resource_pages = materials.select { |x| (x['tags'] || []).include?(topic_name) } if resource_pages.empty?
 
+
+      # add crosstopic tutorials defined for a topic (outside of a subtopic)
+      crosstopic_tutorials = site.data[topic_name]["crosstopic_tutorials"]
+      if crosstopic_tutorials
+        materials = process_pages(site, site.pages)
+        crosstopic_tutorials.each do |tuto|
+          addtutorial = materials.select { |x| x['topic_name'] == tuto["topic"] && x['tutorial_name'] == tuto["tutorial"] }
+          if tuto["priority"]
+            addtutorial[0]['priority'] = tuto["priority"]
+          end
+          resource_pages += addtutorial
+        end
+      end
+
+
+
       # The complete resources we'll return is the introduction slides first
       # (EDIT: not anymore, we rely on prioritisation!)
       # and then the rest of the pages.

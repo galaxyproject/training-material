@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Clinical Metaproteomics 4: Quantitation"
-zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
+zenodo_link: 'https://zenodo.org/record/10105821'
 questions:
 - How to perform quantitation?
 objectives:
@@ -33,6 +33,7 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-quantitation/tutorial
+- /topics/microbiome/tutorials/clinical-mp-4-quantitation/tutorial
 
 recordings:
 - captioners:

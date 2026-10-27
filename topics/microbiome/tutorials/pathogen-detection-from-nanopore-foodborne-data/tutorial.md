@@ -11,7 +11,7 @@ tags:
 - Heatmap
 - cyoa
 level: Introductory
-zenodo_link: https://zenodo.org/record/11222469
+zenodo_link: 'https://zenodo.org/record/11222469'
 questions:
 - What are the preprocessing steps to prepare ONT sequencing data for further analysis?
 - How to identify pathogens using sequencing data?

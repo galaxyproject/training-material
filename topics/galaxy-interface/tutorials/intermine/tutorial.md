@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "InterMine integration with Galaxy"
-zenodo_link: "https://zenodo.org/record/3407174"
+zenodo_link: 'https://zenodo.org/record/3407174'
 questions:
     - How to export your query results from your InterMine of choice to Galaxy?
     - How to export a list of identifiers from Galaxy to your InterMine of choice?

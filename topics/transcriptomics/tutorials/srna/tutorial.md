@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Differential abundance testing of small RNAs"
-zenodo_link: "https://zenodo.org/record/826906"
+zenodo_link: 'https://zenodo.org/record/826906'
 questions:
   - "What small RNAs are expressed?"
   - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"

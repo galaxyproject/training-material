@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
+subtopic: hybrid-assembly
 zenodo_link: 'https://zenodo.org/record/3732359'
 questions:
   - How can a genome of interest be assembled against a background of contaminating reads from other genomes?
