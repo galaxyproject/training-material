@@ -497,7 +497,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 > <hands-on-title>Recompute and visualise post-filter QC</hands-on-title>
 >
 > 1. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum spots expressed per gene`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum counts per gene`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >        - *"Name of kind of values in X"*: `counts`
 >        - *"The kind of thing the variables are"*: `genes`
@@ -540,7 +540,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
 >        - *"Color column"*: `total_counts`
 >        - *"Scale factor"*: `1.0`
->        - *"Table name"*: `table_qc`
+>        - *"Table name"*: `table_qc_filtered`
 >    - In *"Plot Display Parameters"*:
 >        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
 >        - *"Legend location"*: `Right margin`
@@ -557,7 +557,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
 >        - *"Color column"*: `n_genes_by_counts`
 >        - *"Scale factor"*: `1.0`
->        - *"Table name"*: `table_qc`
+>        - *"Table name"*: `table_qc_filtered`
 >    - In *"Plot Display Parameters"*:
 >        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
 >        - *"Legend location"*: `Right margin`
@@ -783,7 +783,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. A
 >  Rename the generated file `AnnData with leiden_res_0.4`.
 >
 > 2. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with leiden_res_0.4`
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - *"Coarseness of the clustering"*: `0.8`
 >        - *"Key under which to add the cluster labels"*: `leiden_res_0.8`
@@ -793,7 +793,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. A
 >
 >  Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8`.
 > 3. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8`
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - *"Coarseness of the clustering"*: `1.2`
 >        - *"Key under which to add the cluster labels"*: `leiden_res_1.2`
