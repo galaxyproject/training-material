@@ -1,4 +1,9 @@
-# Security Policy
+---
+layout: doc
+title: GTN Security Policy
+contributions:
+    authorship: [hexylena]
+---
 
 ## Supported Versions
 
