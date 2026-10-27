@@ -99,39 +99,31 @@ class: center, middle, inverse
   {% endif %}
 {% endif %}
 <br/>
-<br/>
 
 # {{ page.title | default: topic.title }}
 
 <br/>
 <br/>
 
-{% include _includes/contributors-line.html page=page authorsonly=true humansonly=true %}
+{% include _includes/contributors-line.html page=page authorsonly=true %}
 
-<!-- modified date -->
-<div class="footnote" style="bottom: 8em;">
+<!-- footnotes -->
+<div class="footnote" style="bottom: 4em;">
   {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
-  {% if page.short_id %}{% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>{% endif %}
-</div>
+  {% if page.short_id %}| {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>{% endif %}
 
-
-<!-- other slide formats (video and plain-text) -->
-<div class="footnote" style="bottom: 5em;">
 {% if page.video %}
-  {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
+  | {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a>
 {% endif %}
 
-{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a> |
+| {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
 
 {% if page.recordings %}
-{% include _includes/resource-recordings.html label="Recordings" %}
+| {% include _includes/resource-recordings.html label="Recordings" %}
 {% endif %}
 
-
-
-
+| Human authored (<a href="{% link AI-policy.md %}">GTN AI Policy</a>)
 </div>
-
 
 <!-- usage tips -->
 <div class="footnote" style="bottom: 2em;">
