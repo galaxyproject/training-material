@@ -163,7 +163,7 @@ Inside the object, that distinction appears in which elements exist. The capture
 > | `V1_Breast_Cancer_Block_A_Section_1_image.tif` | The full-resolution H&E image |
 > | `tissue_hires_image.png`, `tissue_lowres_image.png` | Downsampled images used for most plotting |
 >
-> 1. Import:
+> 1. Import the data needed to build the SpatialData object from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
 >    {{ page.zenodo_link }}/files/V1_Breast_Cancer_Block_A_Section_1_filtered_feature_bc_matrix.h5
@@ -174,7 +174,7 @@ Inside the object, that distinction appears in which elements exist. The capture
 >    {{ page.zenodo_link }}/files/scalefactors_json.json
 >    ```
 >
-> 2. {% tool [SpatialData IO](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_io/spatialdata_io/0.8.0+galaxy0) %} with the following parameters:
+> 2. Run {% tool [SpatialData IO](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_io/spatialdata_io/0.8.0+galaxy0) %} with the following parameters:
 >    - *"Spatial Technology"*: `10x Genomics Visium`
 >        - *"Dataset identifier"*: `V1_Breast_Cancer_Block_A_Section_1`
 >        - {% icon param-file %} *"feature BC matrix (Counts file)"*: `V1_Breast_Cancer_Block_A_Section_1_filtered_feature_bc_matrix.h5`
@@ -196,14 +196,14 @@ The Scanpy tools work on AnnData, the container that pairs an expression matrix 
 
 > <hands-on-title>Export and inspect the AnnData table</hands-on-title>
 >
-> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 1. Run {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Export the table of a SpatialData object to anndata`
 >        - *"Table name"*: `table`
 >
-> 2. Rename the generated file `Initial AnnData table`.
+>  Rename the generated file `Initial AnnData table`.
 >
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Initial AnnData table`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -237,7 +237,7 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 
 > <hands-on-title>Compute QC metrics</hands-on-title>
 >
-> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+> Run 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Initial AnnData table`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >        - *"Name of kind of values in X"*: `counts`
@@ -246,9 +246,9 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >        - *"Use 'raw' attribute of input if present"*: `No`
 >        - *"Compute log1p transformed annotations"*: `Yes`
 >
-> 2. Rename the generated file `QC metrics before filtering`.
+>  Rename the generated file `QC metrics before filtering`.
 >
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -260,11 +260,11 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >
 > The plots below show the shape of each distribution. If you want the summary values behind them, export the observation table and summarise it.
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
-> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: the observation table from the previous step
 >    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `Yes`
@@ -281,7 +281,7 @@ For this section the median `total_counts` is **20,761.5** and the median `n_gen
 
 > <hands-on-title>Visualise QC metrics</hands-on-title>
 >
-> 1. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"x coordinate"*: `total_counts`
@@ -290,7 +290,7 @@ For this section the median `total_counts` is **20,761.5** and the median `n_gen
 >
 >    Rename the output `Scatter plot before filtering`.
 >
-> 2. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -308,13 +308,13 @@ The distributions show how unusual a spot is, but not where it sits. Before remo
 
 > <hands-on-title>Map the QC metrics onto histology</hands-on-title>
 >
-> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 1. Run {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Import anndata table to a SpatialData object`
 >        - {% icon param-file %} *"annotated data object to add"*: `QC metrics before filtering`
 >        - *"Table name"*: `table_qc`
 >
-> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+> 2. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: output of **SpatialData Operations** {% icon tool %}
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
@@ -331,7 +331,22 @@ The distributions show how unusual a spot is, but not where it sits. Before remo
 >
 >    Rename the output `Spatial Plot total_counts before filtering`.
 >
-> 3. Repeat **SpatialData Plot** with *"Color column"*: `n_genes_by_counts` and rename the output `Spatial Plot n_genes_by_counts before filtering`.
+> 3. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: output of **SpatialData Operations** {% icon tool %}
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `n_genes_by_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>    Rename the output `Spatial Plot n_genes_by_counts before filtering`.
 >
 {: .hands_on}
 
@@ -361,13 +376,13 @@ Filtering proceeds in two stages: first the spots that carry too little signal t
 
 > <hands-on-title>Remove spots with very low detected-gene complexity</hands-on-title>
 >
-> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
 >            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `500`
 >
-> 2. Rename the generated file `Filter minimum genes expressed per spot`.
+> Rename the generated file `Filter minimum genes expressed per spot`.
 >
 {: .hands_on}
 
@@ -375,15 +390,15 @@ The tool label says **cell** because `pp.filter_cells` operates on AnnData obser
 
 > <hands-on-title>Remove spots with very low total counts</hands-on-title>
 >
-> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum genes expressed per spot`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of counts`
 >            - *"Minimum number of counts required for a cell to pass filtering"*: `1000`
 >
-> 2. Rename the generated file `Filter minimum counts per spot`.
+>  Rename the generated file `Filter minimum counts per spot`.
 >
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum counts per spot`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -411,23 +426,23 @@ The tool label says **cell** because `pp.filter_cells` operates on AnnData obser
 
 > <hands-on-title>Remove genes detected in too few spots</hands-on-title>
 >
-> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum counts per spot`
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
-> 2. Rename the generated file `Filter minimum spots expressed per gene`.
+> Rename the generated file `Filter minimum spots expressed per gene`.
 >
-> 3. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum spots expressed per gene`
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of counts`
 >            - *"Minimum number of counts required for a gene to pass filtering"*: `3`
 >
-> 4. Rename the generated file `Filter minimum counts per gene`.
+> Rename the generated file `Filter minimum counts per gene`.
 >
-> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+> 3. Run {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum counts per gene`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -481,7 +496,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 
 > <hands-on-title>Recompute and visualise post-filter QC</hands-on-title>
 >
-> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filter minimum spots expressed per gene`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >        - *"Name of kind of values in X"*: `counts`
@@ -490,19 +505,66 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Use 'raw' attribute of input if present"*: `No`
 >        - *"Compute log1p transformed annotations"*: `Yes`
 >
-> 2. Rename the generated file `QC metrics after filtering`.
+> Rename the generated file `QC metrics after filtering`.
 >
-> 3. Repeat the Scanpy scatter plot from the pre-filter section on this object and rename it `Scatter plot after filtering`.
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
+>        - *"x coordinate"*: `total_counts`
+>        - *"y coordinate"*: `n_genes_by_counts`
+>        - *"Color by"*: `pct_counts_in_top_50_genes`
 >
-> 4. Repeat the two-panel Scanpy violin plot for `n_genes_by_counts, total_counts` and rename it `Violin plots after filtering`.
+>    Rename the output `Scatter plot after filtering`.
 >
-> 5. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 3. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
+>        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
+>            - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts`
+>        - In *"Violin plot attributes"*:
+>            - *"Display keys in multiple panels"*: `Yes`
+>
+>    Rename the output `Violin plots after filtering`.
+>
+> 4. Run {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Import anndata table to a SpatialData object`
 >        - {% icon param-file %} *"annotated data object to add"*: `QC metrics after filtering`
 >        - *"Table name"*: `table_qc_filtered`
 >
-> 6. Plot `total_counts` and `n_genes_by_counts` over the Visium shapes with the same SpatialData Plot settings used before filtering, changing *"Table name"* to `table_qc_filtered`. Rename the two outputs `Spatial Plot total_counts after filtering` and `Spatial Plot n_genes_by_counts after filtering`.
+> 5. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: output of **SpatialData Operations** {% icon tool %}
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `total_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>    Rename the output `Spatial Plot total_counts after filtering`.
+>
+> 6. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: output of **SpatialData Operations** {% icon tool %}
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `n_genes_by_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>    Rename the output `Spatial Plot n_genes_by_counts after filtering`.
 >
 {: .hands_on}
 
@@ -518,19 +580,19 @@ Count depth differs between spots. `pp.normalize_total` rescales each spot so th
 
 > <hands-on-title>Normalise and log-transform the filtered expression matrix</hands-on-title>
 >
-> 1. {% tool [Scanpy normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
 >        - *"Target sum"*: `10000.0`
 >        - *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
-> 2. Rename the generated file `Normalised AnnData`.
+>  Rename the generated file `Normalised AnnData`.
 >
-> 3. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Normalised AnnData`
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
 >
-> 4. Rename the generated file `Log-normalised AnnData`.
+> Rename the generated file `Log-normalised AnnData`.
 >
 {: .hands_on}
 
@@ -538,7 +600,7 @@ Highly variable genes (HVGs) are genes whose between-spot variation is high rela
 
 > <hands-on-title>Identify highly variable genes</hands-on-title>
 >
-> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Log-normalised AnnData`
 >    - *"Method used for filtering"*: `Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'`
 >        - *"Choose the flavor for identifying highly variable genes"*: `Cell Ranger`
@@ -546,13 +608,12 @@ Highly variable genes (HVGs) are genes whose between-spot variation is high rela
 >        - *"Number of bins for binning the mean gene expression"*: `20`
 >        - *"Inplace subset to highly-variable genes"*: `No`
 >
-> 2. Rename the generated file `AnnData with HVGs`.
+> Rename the generated file `AnnData with HVGs`.
 >
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
 >    - *"Method used for plotting"*: `Preprocessing: Plot dispersions versus means for genes, using 'pl.highly_variable_genes'`
 >
->    Rename the output `Plot HVGs`.
 >
 {: .hands_on}
 
@@ -580,7 +641,7 @@ The graph built from those components connects spots whose expression profiles a
 
 > <hands-on-title>Run the main PCA</hands-on-title>
 >
-> 1. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
 >    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
 >        - *"Number of principal components to compute"*: `50`
@@ -588,9 +649,9 @@ The graph built from those components connects spots whose expression profiles a
 >        - *"Zero center"*: `Yes`
 >        - *"Data type of the output"*: `float32`
 >
-> 2. Rename the generated file `AnnData with PCA`.
+> Rename the generated file `AnnData with PCA`.
 >
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
@@ -607,16 +668,29 @@ In the reference object, `total_counts` correlates with PC1 at approximately **â
 >
 > Start from `AnnData with HVGs` again. This is a parallel branch; do not use `AnnData with PCA` as the regression input.
 >
-> 1. {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
+> 2. Run {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData regressed for total_counts`
 >    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
 >        - *"Keys for observation annotation on which to regress on"*: `total_counts`
 >
-> 2. Rename the generated file `AnnData regressed for total_counts`.
+> Rename the generated file `AnnData regressed for total_counts`.
 >
-> 3. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} on `AnnData regressed for total_counts` with the same PCA parameters used above. Rename the result `PCA after regression AnnData`.
+> 3. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData regressed for total_counts`
+>    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
+>        - *"Number of principal components to compute"*: `50`
+>        - *"Change to use different initial states for the optimization"*: `0`
+>        - *"Zero center"*: `Yes`
+>        - *"Data type of the output"*: `float32`
 >
-> 4. Plot that PCA with the same three colour fields and rename the output `Plot PCA after regression`.
+> Rename the generated file `PCA after regression AnnData`.
+>
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `PCA after regression AnnData`
+>    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
+>
+>    Rename the output `Plot PCA after regression`.
 >
 {: .details}
 
@@ -658,7 +732,7 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 
 > <hands-on-title>Compute the neighbourhood graph and UMAP</hands-on-title>
 >
-> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
 >    - *"Method used for inspecting"*: `Compute a neighborhood graph of observations, using 'pp.neighbors'`
 >        - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `15`
@@ -667,18 +741,18 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 >        - *"Distance metric"*: `euclidean`
 >        - *"Numpy random seed"*: `0`
 >
-> 2. Rename the generated file `Compute a neighborhood graph of observations`.
+>  Rename the generated file `Compute a neighborhood graph of observations`.
 >
-> 3. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Compute a neighborhood graph of observations`
 >    - *"Method used"*: `Embed the neighborhood graph using UMAP, using 'tl.umap'`
 >        - *"Minimum distance"*: `0.5`
 >        - *"Spread"*: `1.0`
 >        - *"Random state"*: `0`
 >
-> 4. Rename the generated file `AnnData with UMAP`.
+>  Rename the generated file `AnnData with UMAP`.
 >
-> 5. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 3. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
@@ -697,7 +771,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. A
 
 > <hands-on-title>Cluster the expression-neighbour graph</hands-on-title>
 >
-> 1. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - *"Coarseness of the clustering"*: `0.4`
@@ -706,18 +780,34 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. A
 >        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
 >        - *"Random state"*: `0`
 >
-> 2. Rename the generated file `AnnData with leiden_res_0.4`.
+>  Rename the generated file `AnnData with leiden_res_0.4`.
 >
-> 3. Repeat **Scanpy cluster, embed** on that output with resolution `0.8` and key `leiden_res_0.8`, keeping the same weights, iterations and random state. Rename the result `AnnData with Leiden comparison 0.4 and 0.8`.
+> 2. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
+>        - *"Coarseness of the clustering"*: `0.8`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_0.8`
+>        - *"Use weights from knn graph?"*: `Yes`
+>        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
+>        - *"Random state"*: `0`
 >
-> 4. Repeat the job on that output with resolution `1.2` and key `leiden_res_1.2`. Rename the result `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`.
+>  Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8`.
+> 3. Run {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
+>        - *"Coarseness of the clustering"*: `1.2`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_1.2`
+>        - *"Use weights from knn graph?"*: `Yes`
+>        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
+>        - *"Random state"*: `0`
 >
-> 5. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>  Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`.
+>
+> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden_res_0.4,leiden_res_0.8,leiden_res_1.2`
 >
->    Rename the output `Plot Leiden comparison`.
 >
 {: .hands_on}
 
@@ -775,7 +865,7 @@ This is the step where a numbered group starts to mean something biological. How
 
 > <hands-on-title>Rank genes for the selected partition</hands-on-title>
 >
-> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >        - *"Get ranked genes as a Tabular file?"*: `True`
@@ -786,9 +876,9 @@ This is the step where a numbered group starts to mean something biological. How
 >            - *"Correction method"*: `Benjamini-Hochberg`
 >            - *"Use tie correction for 'wilcoxon' scores"*: `No`
 >
-> 2. Rename the AnnData output `AnnData with markers` and the table output `Rank genes for characterizing groups`.
+>  Rename the AnnData output `AnnData with markers` and the table output `Rank genes for characterizing groups`.
 >
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with markers`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes, using 'pl.rank_genes_groups'`
 >        - *"Number of genes to show"*: `20`
@@ -796,7 +886,6 @@ This is the step where a numbered group starts to mean something biological. How
 >        - *"Number of panels per row"*: `4`
 >        - *"Share the y-axis across panels"*: `Yes`
 >
->    Rename the output `Plot ranking of genes`.
 >
 {: .hands_on}
 
@@ -869,7 +958,7 @@ This is where a sequencing-based analysis diverges structurally from an imaging-
 
 > <hands-on-title>Build the Visium spatial-neighbour graph</hands-on-title>
 >
-> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with markers`
 >    - *"Operation"*: `Create a graph from spatial coordinates (gr.spatial_neighbors)`
 >        - *"Spatial key"*: `spatial`
@@ -880,7 +969,7 @@ This is where a sequencing-based analysis diverges structurally from an imaging-
 >        - *"Set diagonal"*: `No`
 >        - *"Key added"*: `spatial`
 >
-> 2. Rename the generated file `AnnData with spatial neighbours`.
+> Rename the generated file `AnnData with spatial neighbours`.
 >
 {: .hands_on}
 
@@ -892,31 +981,30 @@ Centrality scores summarise how each group sits in the spatial graph: how many n
 
 > <hands-on-title>Calculate group-level spatial statistics</hands-on-title>
 >
-> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with spatial neighbours`
 >    - *"Operation"*: `Compute centrality scores per cluster or cell type (gr.centrality_scores)`
 >        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
 >        - *"Connectivity key"*: `spatial_connectivities`
 >
-> 2. Rename the generated file `AnnData with centrality scores`.
+> Rename the generated file `AnnData with centrality scores`.
 >
-> 3. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with centrality scores`
 >    - *"Operation"*: `Plot centrality scores (pl.centrality_scores)`
 >        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
 >
->    Rename the output `Plot Centrality Scores`.
 >
-> 4. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+> 3. Run {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with centrality scores`
 >    - *"Operation"*: `Compute neighborhood enrichment by permutation test (gr.nhood_enrichment)`
 >        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
 >        - *"Connectivity key"*: `spatial_connectivities`
 >        - *"Number of permutations"*: `1000`
 >
-> 5. Rename the generated file `AnnData with neighborhood enrichment`.
+> Rename the generated file `AnnData with neighborhood enrichment`.
 >
-> 6. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
+> 4. Run {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with neighborhood enrichment`
 >    - *"Operation"*: `Plot neighborhood enrichment (pl.nhood_enrichment)`
 >        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
@@ -924,7 +1012,6 @@ Centrality scores summarise how each group sits in the spatial graph: how many n
 >        - *"Annotate cells"*: `No`
 >        - *"Color map"*: `viridis`
 >
->    Rename the output `Plot Neighborhood Enrichment`.
 >
 {: .hands_on}
 
@@ -964,7 +1051,7 @@ Moran's I asks whether expression values for a gene are spatially autocorrelated
 
 > <hands-on-title>Calculate Moran's I</hands-on-title>
 >
-> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with neighborhood enrichment`
 >    - *"Operation"*: `Calculate Global Autocorrelation Statistic (Moranâ€™s I or Geary's C) (gr.spatial_autocorr)`
 >        - *"Connectivity key"*: `spatial_connectivities`
@@ -975,7 +1062,7 @@ Moran's I asks whether expression values for a gene are spatially autocorrelated
 >        - *"Two tailed"*: `No`
 >        - *"Use raw counts"*: `No`
 >
-> 2. Rename the generated file `AnnData with Moran's I`.
+> Rename the generated file `AnnData with Moran's I`.
 >
 {: .hands_on}
 
@@ -1004,7 +1091,7 @@ To do this we import the AnnData table carrying the Squidpy results back into th
 
 > <hands-on-title>Visualise a high-scoring gene on the tissue</hands-on-title>
 >
-> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 1. Run {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Import anndata table to a SpatialData object`
 >        - {% icon param-file %} *"annotated data object to add"*: `AnnData with Moran's I`
@@ -1012,7 +1099,7 @@ To do this we import the AnnData table carrying the Squidpy results back into th
 >
 >    Rename the generated file `SpatialData with Moran's I`.
 >
-> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+> 2. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `SpatialData with Moran's I`
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
@@ -1027,7 +1114,6 @@ To do this we import the AnnData table carrying the Squidpy results back into th
 >        - *"Enable colorbars?"*: `Yes`
 >        - *"Image format"*: `JPG`
 >
-> 3. Rename the plot output `Plot spatial Morans clusters`.
 >
 {: .hands_on}
 
@@ -1075,7 +1161,7 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 
 > <hands-on-title>Transfer adult-breast reference labels to the spots</hands-on-title>
 >
-> 1. {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} with the following parameters:
+> 1. Run {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input AnnData file"*: `AnnData with Moran's I`
 >    - *"Model source"*: `Use a cached model`
 >        - *"Choose CellTypist model"*: `cell types from the adult human breast (v1)`
@@ -1086,7 +1172,6 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 >        - *"Reference column in AnnData.obs for dotplot"*: `leiden_res_0.8`
 >        - *"Prediction to plot"*: `predicted_labels`
 >
-> 2. Rename the AnnData output `CellTypist-annotated AnnData` and the plot output `Plot CellTypist predicted labels`.
 >
 {: .hands_on}
 
@@ -1142,7 +1227,7 @@ LIANA combines ligand-receptor resources and inference methods to rank expressio
 
 > <hands-on-title>Rank candidate ligand-receptor pairs</hands-on-title>
 >
-> 1. {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellTypist-annotated AnnData`
 >    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
 >        - *"Group By"*: `leiden_res_0.8`
@@ -1161,7 +1246,7 @@ LIANA combines ligand-receptor resources and inference methods to rank expressio
 >        - *"Number of permutations"*: `1000`
 >        - *"Random seed"*: `1337`
 >
-> 2. Rename the generated file `Final LIANA AnnData`.
+> Rename the generated file `Final LIANA AnnData`.
 >
 {: .hands_on}
 
@@ -1213,13 +1298,13 @@ Everything computed so far lives in the AnnData table: quality-control fields, P
 
 > <hands-on-title>Create the final processed SpatialData object</hands-on-title>
 >
-> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 1. Run {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Import anndata table to a SpatialData object`
 >        - {% icon param-file %} *"annotated data object to add"*: `Final LIANA AnnData`
 >        - *"Table name"*: `table_processed`
 >
-> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+> 2. Run {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: output of **SpatialData Operations** {% icon tool %}
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
@@ -1233,7 +1318,7 @@ Everything computed so far lives in the AnnData table: quality-control fields, P
 >        - *"Legend location"*: `Right margin`
 >        - *"Enable colorbars?"*: `Yes`
 >
-> 3. Rename the plot output `Plot spatial clusters`.
+> Rename the plot output `Plot spatial clusters`.
 >
 {: .hands_on}
 
