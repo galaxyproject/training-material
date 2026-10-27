@@ -669,7 +669,7 @@ In the reference object, `total_counts` correlates with PC1 at approximately **â
 > Start from `AnnData with HVGs` again. This is a parallel branch; do not use `AnnData with PCA` as the regression input.
 >
 > 2. Run {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData regressed for total_counts`
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
 >    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
 >        - *"Keys for observation annotation on which to regress on"*: `total_counts`
 >
@@ -767,7 +767,7 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 
 Leiden clustering partitions a graph into communities ({% cite Traag2019Leiden %}). The resolution controls how readily larger communities are subdivided. No single resolution is intrinsically correct: the useful question is whether an extra split produces stable and interpretable expression programmes or merely fragments an already coherent group.
 
-The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. Additional 0.6 and 1.0 runs were used during validation of the choice but are not extra tutorial steps.
+The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 
 > <hands-on-title>Cluster the expression-neighbour graph</hands-on-title>
 >
@@ -820,20 +820,6 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**. A
 | 1.2 | 15 | 471 spots | Finer; existing groups subdivide further |
 
 A useful resolution is not the one whose UMAP looks most attractive. Here the 0.4 and 0.8 partitions have an **adjusted Rand index of 0.653**, and the 0.8 and 1.2 partitions an **ARI of 0.735**. Neither pair is close to identical, so the choice of resolution genuinely changes the partition rather than relabelling it. Weighted graph modularity rises from **0.735** at 0.4 to **0.783** at 0.8 and then stops improving, sitting at 0.783 again at 1.2. PCA-space silhouette peaks at 0.8 as well.
-
-> <details-title>Quantitative checks used to support the resolution choice</details-title>
->
-> These diagnostics support interpretation; they do not select a biological resolution automatically. Silhouette was calculated in PCA space rather than from UMAP distances.
->
-> | Resolution | ARI versus 0.8 | Weighted modularity | PCA-space silhouette |
-> | ---: | ---: | ---: | ---: |
-> | 0.4 | 0.653 | 0.735 | +0.109 |
-> | 0.8 | â€” | 0.783 | +0.121 |
-> | 1.2 | 0.735 | 0.783 | +0.114 |
->
-> Resolution 0.8 is the only one of the three that is best on both criteria: it has the highest weighted modularity and the highest PCA-space silhouette. The 1.2 run adds three more groups without improving modularity at all and with a slightly lower silhouette, so the extra splits are not buying better-separated structure. That makes the biological content of the additional groups the deciding evidence rather than the group count itself.
->
-{: .details}
 
 One transition is especially informative. At resolution 0.4 a single group labelled `0` holds **1,354 spots**, more than a third of the section. At 0.8 it separates into three: **575 spots stay in group `0`, 573 form group `1` and 167 form group `9`**. The ranked genes below show that this is not arbitrary fragmentation. The three products carry a mixed stromal and plasma-cell programme, a plasma-cell-dominated programme, and a myofibroblast and perivascular programme respectively, which are distinct compartments of the tumour microenvironment that the coarser partition had merged into one.
 
