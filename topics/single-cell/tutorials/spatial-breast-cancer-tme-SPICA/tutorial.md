@@ -356,7 +356,7 @@ The distributions show how unusual a spot is, but not where it sits. Before remo
 >
 > 1. Why is `n_genes_by_counts` expected to increase with `total_counts` but not in a perfectly linear way?
 > 2. Why is a spatial map useful before removing a low-count tail?
-> 3. The minimum is 524 counts, while the later count threshold is 1,000. Does that mean every spot below 1,000 is necessarily a technical failure?
+> 3. The minimum is 578 counts, while the later count threshold is 1,000. Does that mean every spot below 1,000 is necessarily a technical failure?
 >
 > > <solution-title></solution-title>
 > >
@@ -666,9 +666,7 @@ In the reference object, `total_counts` correlates with PC1 at approximately **â
 
 > <details-title>Optional: regress total counts and compare the PCA</details-title>
 >
-> Start from `AnnData with HVGs` again. This is a parallel branch; do not use `AnnData with PCA` as the regression input.
->
-> 2. Run {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
 >    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
 >        - *"Keys for observation annotation on which to regress on"*: `total_counts`
@@ -1214,7 +1212,7 @@ LIANA combines ligand-receptor resources and inference methods to rank expressio
 > <hands-on-title>Rank candidate ligand-receptor pairs</hands-on-title>
 >
 > 1. Run {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `CellTypist-annotated AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `The output of CellTypist step`
 >    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
 >        - *"Group By"*: `leiden_res_0.8`
 >        - *"Interaction source"*: `Use built-in database`
@@ -1314,7 +1312,7 @@ The tissue view is the final consistency check. A UMAP group that looked coheren
 
 > <question-title>Integrate all four sources of evidence</question-title>
 >
-> Consider group `11`: marker ranking supports a lymphoid aggregate; CellTypist matches most of its spots to `CD8-activated`; neighbourhood enrichment shows non-random adjacency with group `0`; LIANA returns lymphoid-organising chemokines; and the final map shows where those 16 spots sit on the tissue. Which result should be treated as the "ground truth" label?
+> Consider group `11`: marker ranking supports a lymphoid aggregate; CellTypist matches 7 of its 16 spots to `CD8-activated`; neighbourhood enrichment shows non-random adjacency with group `0`; LIANA returns lymphoid-organising chemokines; and the final map shows where those 16 spots sit on the tissue. Which result should be treated as the "ground truth" label?
 >
 > > <solution-title></solution-title>
 > >
