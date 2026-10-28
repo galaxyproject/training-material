@@ -111,42 +111,43 @@ tree identifier.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
-> 2. Open the **Upload** activity (called **Beta Upload** on some servers), then select
->    **Choose Remote Files**.
+> 2. Import the file from its persistent download address:
 >
->    ![Galaxy upload panel listing import methods, including Choose Remote Files](../../images/3dtrees/upload_pannel.png "Open the remote-file browser from the upload panel")
+>    ```
+>    https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
+>    ```
 >
-> 3. Search for `recherche`, then open **Recherche Data Gouv**.
-> 4. Search for `pic`, then open **Données lidar acquises par drone au pied du Pic St Loup (34)**.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="laz" %}
 >
->    ![Remote-file browser showing the Pic Saint-Loup LiDAR dataset in Recherche Data Gouv](../../images/3dtrees/rdg_repo.png "Open the Pic Saint-Loup dataset")
->
-> 5. Select only `Strip-20210804-150144_D.las`, then select **Start**.
->
->    > <tip-title>No Recherche Data Gouv source on your server?</tip-title>
+>    > <comment-title>Why the laz datatype for a LAS file?</comment-title>
 >    >
->    > Use **Paste Links/URLs** in the upload panel instead and paste this address:
+>    > The file is a LAS file, but the Standardization tool currently only offers datasets of type
+>    > `laz` in its form. It reads LAS content correctly, and it writes a real LAZ file that all
+>    > later steps use.
+>    {: .comment}
+>
+>    > <tip-title>Browsing the repository instead</tip-title>
 >    >
->    > ```
->    > https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
->    > ```
+>    > Galaxy Europe can also browse the dataset: in **Upload**, select **Choose from repository**,
+>    > open **Recherche Data Gouv**, search for `pic` and open
+>    > **Données lidar acquises par drone au pied du Pic St Loup (34)**. In our test this import
+>    > stopped early and produced a file of only 187 MB, without an error. If you use it, check that
+>    > the dataset is 476.9 MB before you continue.
 >    >
->    > Set the datatype to `las` and the name to `Strip-20210804-150144_D.las`.
+>    > ![Repository browser showing the four LAS files of the Pic Saint-Loup dataset](../../images/3dtrees/rdg_files.png "The four flight-area files in Recherche Data Gouv. Only file D is needed")
 >    {: .tip}
 >
-> 6. Wait for the dataset to turn green in the history.
+> 3. Wait for the dataset to turn green in the history, then expand it and check that its size is
+>    **476.9 MB**. A smaller file means the download stopped early; delete it and import it again.
 >
->    > <tip-title>Check the file type</tip-title>
->    >
->    > Check that Galaxy recognizes the datatype as **las**.
->    >
->    > {% snippet faqs/galaxy/datasets_change_datatype.md datatype="las" %}
->    {: .tip}
+>    ![Galaxy history with the dataset Strip-20210804-150144_D.las, 476.9 MB, format laz](../../images/3dtrees/data_inhistory.png "The imported file D in the history")
 >
-> 7. Rename the dataset to `Strip-20210804-150144_D.las` if the import did not preserve its
->    filename. Do not build a four-file collection for this tutorial.
+> 4. Rename the dataset to `Strip-20210804-150144_D.las` and check that its datatype is `laz`.
+>    Do not build a four-file collection for this tutorial; we use only file D.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Strip-20210804-150144_D.las" box_type="none" %}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="laz" %}
 {: .hands_on}
 
 
@@ -165,6 +166,8 @@ covered by the survey. This helps prevent file-format problems later; it does no
 > 1. {% tool [3DTrees: LAS/LAZ Standardization](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy0) %} with the following parameters:
 >    - *"Mode"*: `Single File Standardization`
 >        - {% icon param-file %} *"Point Cloud File"*: `Strip-20210804-150144_D.las`
+>
+>    ![Standardization form with Mode set to Single File Standardization and Strip-20210804-150144_D.las as the point cloud file](../../images/3dtrees/standardization_form.png "The Standardization form for file D")
 >
 >    Three outputs appear in the history: `standardized` (LAZ), `metadata` (JSON), and
 >    `convex_hull` (GeoJSON).
@@ -290,6 +293,8 @@ Subsampling still takes place; you do not need multiple tiles to continue.
 >                    - *"Voxel size (cm)"*: `10`
 >                - *"Format"*: `LAZ`
 >
+>    ![SmartTile form with Task Tile and subsample, input standardized, buffered spatial tiles, tile length 300 m, buffer 20 m, and one subsampled output at 10 cm in LAZ format](../../images/3dtrees/smarttile_tile_form.png "SmartTile set up to tile and subsample file D at 10 cm")
+>
 >    Three outputs appear in the history:
 >    - `Tiles, output 1`: the point cloud subsampled at 10 cm, one file per processing unit
 >    - `Tiling preview`: a map of the processing units
@@ -334,14 +339,17 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 > <hands-on-title>Predict trees on the coarse point cloud</hands-on-title>
 >
 > 1. {% tool [3Dtrees: SegmentAnyTree](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Dataset"*: `Tiles, output 1` (output of **3DTrees: SmartTile** {% icon tool %})
+>    - {% icon param-collection %} *"Input Dataset"*: `Tiles, output 1` (output of **3DTrees: SmartTile** {% icon tool %})
 >    - *"Predicted instance dimension name"*: `PredInstance_SAT`
 >    - *"Predicted semantic dimension name"*: `PredSemantic_SAT`
 >
 >    Select the collection with the {% icon param-collection %} **Dataset collection** button so
 >    Galaxy runs SAT on each processing unit. Keep the default dimension names: the merge and
 >    Potree steps look for `PredInstance_SAT`. Processing time depends on the data and on server
->    availability.
+>    availability. In our run on Galaxy Europe, the job waited about an hour for a GPU and then ran
+>    for about 20 minutes.
+>
+>    ![SegmentAnyTree form with the collection Tiles, output 1 selected, mapped over the tool, and the dimension names PredInstance_SAT and PredSemantic_SAT](../../images/3dtrees/segmentanytree_form.png "SegmentAnyTree runs once per processing unit")
 >
 >    > <comment-title>What SAT adds to the point cloud</comment-title>
 >    >
@@ -392,8 +400,11 @@ cloud, but does not independently predict or validate every added point.
 >        - *"Remap target"*: `Original files`
 >            - {% icon param-file %} *"Original LAZ/LAS files"*: `standardized` (output of **3DTrees: LAS/LAZ Standardization** {% icon tool %})
 >
+>    ![SmartTile form with Task Filter / merge segmented tiles, Processed Files as segmented tiles, voxel size 10 cm, instance dimension PredInstance_SAT, the tile bounds JSON, and Remap target Original files with standardized selected](../../images/3dtrees/smarttile_merge_form.png "SmartTile set up to merge the predictions and transfer them to file D")
+>
 >    Two collections appear in the history: `Merged tiles`, the filtered predictions at 10 cm, and
->    `Originals with predictions`, file D at full resolution with the predictions added.
+>    `Originals with predictions`, file D at full resolution with the predictions added. In our run,
+>    this step took about 50 minutes.
 >
 >    > <comment-title>Instance dimension</comment-title>
 >    >
@@ -419,18 +430,28 @@ look for missed trees, trees joined together, or one tree split into several ins
 >    - *"Generate interactive Viewer"*: `Yes`
 >    - *"Special Coloring"*: `Enabled`
 >        - *"Special Coloring Instance Attributes"*: `PredInstance_SAT`
+>        - *"Write Special Coloring JSON"*: `Yes`
 >
-> 2. When the tool finishes, open the **Potree Visualization** HTML output using its view icon.
-> 3. Inspect a few neighboring trees from above and from the side, for example the areas of
->    close-ups A and B. Colour the points by the special instance colouring, then by the tree/non-tree
->    classes in `PredSemantic_SAT`.
+> 2. When the tool finishes, open the **Potree Visualization** HTML output using its
+>    {% icon galaxy-eye %} eye icon. Loading the viewer can take a minute.
+> 3. The viewer opens with the points coloured by `coloring_id_sat`: each predicted tree has its own
+>    colour, and points that belong to no tree are grey.
+>
+>    ![Potree view of file D from above, with predicted trees in different colours](../../images/3dtrees/potree_instances.png "Predicted trees coloured by coloring_id_sat")
+>
+> 4. Inspect a few neighbouring trees from above and from the side, for example the areas of
+>    close-ups A and B. To see the tree/non-tree classes, open **Scene** in the menu on the left,
+>    click the point cloud `potree-vis`, and set **Attribute** to `PredSemantic_SAT`.
+>
+>    ![Potree view of file D coloured by PredSemantic_SAT, with tree points and non-tree points in two colours](../../images/3dtrees/potree_semantic.png "Tree and non-tree points from PredSemantic_SAT")
 >
 >    > <comment-title>Special colouring</comment-title>
 >    >
->    > Tree IDs are just numbers, so colouring them directly often gives neighbouring trees almost
->    > the same colour. **Special Coloring** assigns a small set of colours so that nearby trees get
->    > different ones. The colours represent identifiers, not species or confidence. This file has no
->    > RGB colours, so the instance and class views are the main ones to compare.
+>    > Tree IDs are just numbers, so colouring `PredInstance_SAT` directly gives most neighbouring
+>    > trees almost the same colour. **Special Coloring** adds `coloring_id_sat`, which gives nearby
+>    > trees different colours from a small palette, and **Write Special Coloring JSON** tells the
+>    > viewer which colour to use for each value. The colours represent identifiers, not species or
+>    > confidence.
 >    {: .comment}
 >
 {: .hands_on}
