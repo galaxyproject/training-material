@@ -1,0 +1,26 @@
+title: Why use overlapping processing tiles?
+contributors:
+- kgerb
+- Marie59
+questions:
+- title: Why is a buffer useful when a tree crosses a processing boundary?
+  answers:
+  - It gives the model points from beyond the tile edge, so trees near the edge keep their context.
+  - It removes duplicate trees from the result.
+  - It reduces the number of points to process.
+  - It guarantees that every tree is completely inside one tile.
+  correct: It gives the model points from beyond the tile edge, so trees near the edge keep their context.
+  timeout: 45
+  type: choose-1
+- title: What happens when you make the buffer wider? Select all that apply.
+  answers:
+  - The model gets more context around trees near the tile edges.
+  - More points are repeated in neighbouring tiles, so processing takes longer.
+  - The same tree is more likely to be predicted in neighbouring tiles.
+  - The predictions become correct everywhere.
+  correct:
+  - The model gets more context around trees near the tile edges.
+  - More points are repeated in neighbouring tiles, so processing takes longer.
+  - The same tree is more likely to be predicted in neighbouring tiles.
+  timeout: 45
+  type: choose-many

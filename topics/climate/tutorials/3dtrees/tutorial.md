@@ -45,7 +45,7 @@ canopy gaps, and changes in forest structure. To study individual trees, we firs
 the points that belong to each tree. This is called *individual-tree segmentation*.
 
 This tutorial is for interested beginners, ecology students, and ecologists. You will use the
-3Dtrees tools in Galaxy to prepare one point cloud and predict individual trees with
+3Dtrees tools ({% cite Gerberding2026 %}) in Galaxy to prepare one point cloud and predict individual trees with
 SegmentAnyTree (SAT) ({% cite Wielgosz2024 %}). At the end, you will have a point cloud with tree
 labels and an interactive Potree view for inspecting the results in your browser.
 
@@ -140,7 +140,7 @@ tree identifier.
 > 3. Wait for the dataset to turn green in the history, then expand it and check that its size is
 >    **476.9 MB**. A smaller file means the download stopped early; delete it and import it again.
 >
->    ![Galaxy history with the dataset Strip-20210804-150144_D.las, 476.9 MB, format laz](../../images/3dtrees/data_inhistory.png "The imported file D in the history")
+>    ![Galaxy history with the dataset Strip-20210804-150144_D.las, 476.9 MB, format laz](../../images/3dtrees/data_inhistory.png "The imported file D in the history"){: width="35%"}
 >
 > 4. Rename the dataset to `Strip-20210804-150144_D.las` and check that its datatype is `laz`.
 >    Do not build a four-file collection for this tutorial; we use only file D.
@@ -180,25 +180,16 @@ covered by the survey. This helps prevent file-format problems later; it does no
 >
 {: .hands_on}
 
-> <question-title>Why standardize a point cloud?</question-title>
+{% include _includes/quiz.html id="standardization.yaml" %}
+
+> <details-title>Explanation: Why standardize a point cloud?</details-title>
 >
-> Select all correct statements.
+> Standardization checks the file and writes a consistent LAZ file, a metadata summary and a
+> footprint. Tree identifiers are created later by the segmentation model. Standardization cannot
+> prove that those predictions are accurate, and it does not turn separate flight areas into one
+> continuous survey.
 >
-> - [ ] It checks file information and prepares a consistent format for the next tools.
-> - [ ] It creates a summary and a footprint of the input.
-> - [ ] It assigns every tree a unique identifier.
-> - [ ] It proves that later segmentation results are accurate.
-> - [ ] It turns unrelated flight areas into one continuous survey.
->
-> > <solution-title></solution-title>
-> >
-> > The first two statements are correct. Tree identifiers are created later by the segmentation
-> > model. Standardization cannot prove that those predictions are accurate or make separate flight
-> > areas into one continuous survey.
-> >
-> {: .solution}
->
-{: .question}
+{: .details}
 
 # Get a first impression with overview images
 
@@ -246,25 +237,16 @@ height above the ground.
 >
 {: .details}
 
-> <question-title>What can the overview tell you?</question-title>
+{% include _includes/quiz.html id="overview.yaml" %}
+
+> <details-title>Explanation: What can the overview tell you?</details-title>
 >
-> 1. Which view helps you spot canopy gaps, and which helps you see vegetation above the ground?
-> 2. Compare close-ups A and B. In which one do you expect individual trees to be harder to
->    separate, and why?
+> The top view shows gaps in the canopy. A section view shows how the points are arranged above
+> the ground. In close-up B, the lower crowns touch each other and form an almost continuous canopy,
+> so there are few gaps to show where one tree ends and the next begins. Keep both areas in mind
+> when you inspect the predictions in Potree.
 >
-> > <solution-title></solution-title>
-> >
-> > 1. The top view helps reveal gaps in the canopy. A side view shows the vertical arrangement of
-> >    points above the ground. These images give a first impression; they do not yet identify
-> >    trees.
-> > 2. Close-up B. Its crowns are lower and touch each other, forming an almost continuous canopy,
-> >    so there are few gaps to mark where one tree ends and the next begins. In close-up A, taller
-> >    crowns are separated by gaps. Keep these areas in mind when you inspect the predictions in
-> >    Potree.
-> >
-> {: .solution}
->
-{: .question}
+{: .details}
 
 # Prepare the data for segmentation
 
@@ -309,21 +291,16 @@ Subsampling still takes place; you do not need multiple tiles to continue.
 >
 {: .hands_on}
 
-> <question-title>Why use overlapping processing tiles?</question-title>
+{% include _includes/quiz.html id="tiles.yaml" %}
+
+> <details-title>Explanation: Why use overlapping processing tiles?</details-title>
 >
-> 1. Why is a buffer useful when a tree crosses a processing boundary?
-> 2. What trade-off is introduced by increasing the buffer width?
+> A buffer gives the model points from beyond the tile edge, which reduces the chance of cutting
+> off a tree's surroundings, but it cannot guarantee that every tree is complete. A wider buffer
+> gives more context but repeats more points, so processing takes longer and the same tree may be
+> predicted in neighbouring tiles. The merge step removes those duplicates.
 >
-> > <solution-title></solution-title>
-> >
-> > 1. It gives the model points from beyond the tile edge, reducing the chance of cutting off a
-> >    tree's surrounding context. A buffer does not guarantee that every tree is fully included.
-> > 2. A wider buffer provides more context, but repeats more points and increases processing work.
-> >    The same tree may then be predicted in neighboring tiles.
-> >
-> {: .solution}
->
-{: .question}
+{: .details}
 
 # Identify individual trees with SegmentAnyTree
 
@@ -360,20 +337,15 @@ Ground points belong to the non-tree class; SAT does not provide a detailed vege
 >
 {: .hands_on}
 
-> <question-title>Instance and semantic predictions</question-title>
+{% include _includes/quiz.html id="predictions.yaml" %}
+
+> <details-title>Explanation: Instance and semantic predictions</details-title>
 >
-> 1. Two neighboring crowns are both predicted as trees but have different `PredInstance_SAT` values.
->    What does each prediction dimension tell you?
-> 2. Are `PredSemantic_SAT` and `PredInstance_SAT` measured directly by the LiDAR sensor?
+> `PredSemantic_SAT` describes the class (tree or non-tree). `PredInstance_SAT` identifies the
+> individual tree. Both are predictions that SegmentAnyTree adds to the point cloud; the LiDAR
+> sensor does not measure them.
 >
-> > <solution-title></solution-title>
-> >
-> > 1. `PredSemantic_SAT` describes the class. `PredInstance_SAT` identifies the individual tree.
-> > 2. No. SAT adds them to the point cloud as predictions.
-> >
-> {: .solution}
->
-{: .question}
+{: .details}
 
 # Combine predictions and transfer them to the original points
 
@@ -456,39 +428,16 @@ look for missed trees, trees joined together, or one tree split into several ins
 >
 {: .hands_on}
 
-> <question-title>Does the segmentation look plausible?</question-title>
+{% include _includes/quiz.html id="potree.yaml" %}
+
+> <details-title>Explanation: Does the segmentation look plausible?</details-title>
 >
-> Tick the observations that would support a plausible segmentation.
+> Colours that follow single crowns, different colours on neighbouring crowns, and ground points in
+> the non-tree class all support a plausible result. Straight cuts along processing boundaries and
+> one colour across unrelated crowns suggest errors. Potree helps you find visible problems, but it
+> does not calculate segmentation accuracy: that needs independently labelled reference trees.
 >
-> - [ ] Most instance colors follow recognizable tree crowns rather than scattered patches.
-> - [ ] Neighboring, visibly separate crowns usually have different instance identifiers.
-> - [ ] Visible ground points are generally assigned to the non-tree class in `PredSemantic_SAT`.
-> - [ ] Large numbers of crowns are split exactly along straight processing boundaries.
-> - [ ] One instance identifier spans many unrelated crowns.
->
-> Why is this only a visual inspection and not a quantitative accuracy analysis? Select all correct
-> statements.
->
-> - [ ] A result can look plausible and still contain missed, merged, or split trees.
-> - [ ] This exercise does not compare predictions with independently labelled reference trees.
-> - [ ] Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> - [ ] Potree automatically proves that every displayed tree is correct.
->
-> > <solution-title></solution-title>
-> >
-> > In the first list, the first three observations support a plausible result. Straight splits at
-> > processing boundaries and one ID covering unrelated crowns suggest errors.
-> >
-> > - [x] A result can look plausible and still contain missed, merged, or split trees.
-> > - [x] This exercise does not compare predictions with independently labelled reference trees.
-> > - [x] Measuring accuracy requires reference labels and a method for comparing them with predictions.
-> > - [ ] Potree automatically proves that every displayed tree is correct.
-> >
-> > Potree helps you find visible problems. It does not calculate segmentation accuracy for you.
-> >
-> {: .solution}
->
-{: .question}
+{: .details}
 
 > <warning-title>Results depend on the input</warning-title>
 >
