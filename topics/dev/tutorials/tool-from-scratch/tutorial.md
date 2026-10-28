@@ -24,6 +24,7 @@ contributors:
   - astrovsky01
   - davebx
   - bernt-matthias
+  - lissandrakruse
 
 
 recordings:
@@ -469,20 +470,22 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 
 ## Initializing a Tool Wrapper
 
-Initializing a tool wrapper to be run in Galaxy is simple
+We can develop a wrapper in a standalone directory; an existing Galaxy installation is not required.
+Planemo can start a temporary Galaxy instance later when we test or serve the tool.
+Keep the same terminal open so that the Planemo virtual environment remains active.
 
 > <hands-on-title>Creating a Tool Wrapper Skeleton</hands-on-title>
-> 1. Go to the "tools" directory in your Galaxy instance.
-> 2. Make a new directory for tools you will be wrapping.
+> 1. Choose a workspace outside the Bioconda recipe repository used above.
+> 2. Create a new directory for this exercise. The commands below use `~/galaxy-tool-dev/bellerophon`;
+>    use an empty directory so that you do not overwrite an existing wrapper.
 > 3. Use `planemo` to initialize a new tool wrapper with basic formatting.
 >     - Here we will be using bellerophon, but the parameters can be set for any tool.
 >     - The tool ID is the internal reference id for the tool, and may contain no spaces or capitalized letters
 >     - The tool name is the text that will be visible to the user.
 >
 >     ```bash
->     cd galaxy/tools
->     mkdir -p myTools/bellerophon
->     cd myTools/bellerophon
+>     mkdir -p ~/galaxy-tool-dev/bellerophon
+>     cd ~/galaxy-tool-dev/bellerophon
 >     planemo tool_init --id bellerophon --name bellerophon
 >     ```
 >
@@ -506,6 +509,33 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >    ```
 >
 {: .hands_on}
+
+> <hands-on-title>Check the generated wrapper</hands-on-title>
+>
+> 1. In the same directory, confirm that the wrapper exists and ask Planemo to check it:
+>
+>    ```bash
+>    pwd
+>    ls bellerophon.xml
+>    planemo lint bellerophon.xml
+>    ```
+>
+>    `pwd` should end in `galaxy-tool-dev/bellerophon`, and `ls` should print `bellerophon.xml`.
+>    The linter will report problems and return a non-zero exit code at this stage: the generated
+>    skeleton still contains `TODO` placeholders and has no tests. This is expected for the skeleton,
+>    and does not mean that Planemo failed to install.
+>
+> 2. Continue with the sections below to complete the wrapper, then rerun `planemo lint bellerophon.xml`.
+>    Linting checks the tool definition; it does not execute the tool. After adding the test case and
+>    its files in `test-data/`, follow the testing section to run `planemo test bellerophon.xml`.
+{: .hands_on}
+
+> <tip-title>Recovering your working directory</tip-title>
+>
+> If you open a new terminal, activate the Planemo virtual environment again (`. ~/.venv/bin/activate`
+> if you used the path above), then run `cd ~/galaxy-tool-dev/bellerophon` before continuing.
+> If `ls bellerophon.xml` reports that the file is missing, check your directory before rerunning `tool_init`.
+{: .tip}
 
 ## Galaxy Tool Wrappers
 
