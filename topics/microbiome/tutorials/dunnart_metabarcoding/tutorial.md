@@ -300,7 +300,7 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 10. {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}:
->    - *"Input Collection"*: `trimmed sequences flattened`
+>    - *"Input Collection"*: `trimmed pairs flattened`
 >    - *"How should the new labels be specified?"*: `Map original identifiers to new ones using a two-column table`
 >        - *"Identifier mapping"*: `identifier mapping`
 >
@@ -458,7 +458,7 @@ https://view.qiime2.org/visualization/?src=https://zenodo.org/records/23175186/f
 >         - *"input: Metadata"*: `Metadata from TSV`
 >         - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the output to: `summary_table.qzv`
+> 2. **Rename** {% icon galaxy-pencil %} the `summary` output to: `summary_table.qzv`
 >
 > 3. Visualisation: Feature/ASV summary
 >   - Download `summary_table.qzv ` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
@@ -539,7 +539,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >
 > 1. {% tool [qiime2 taxa filter-table](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__taxa__filter_table/qiime2__taxa__filter_table/2026.1.0+q2galaxy.2026.1.0) %}:
 >   - *"table: FeatureTable[Frequency¹ \| PresenceAbsence²]"*: `dada2out_table.qza`
->   - *"taxonomy: FeatureData[Taxonomy]"*: `classification.qza`
+>   - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
 >   - *"Click here for additional options"*
 >      - *"exclude: Str"*: `Provide a value`
 >      - *"exclude"*: `Mitochondria,Chloroplast`
@@ -553,7 +553,7 @@ Filter out reads classified as mitochondria and chloroplast. Unassigned ASVs are
 >         - *"metadata: Metadata"*: `Metadata from TSV`
 >         - *"Metadata Source"*: `dunnart_metadata.tsv`
 >
-> 4. **Rename** {% icon galaxy-pencil %} the output to: `summary_filtered.qzv`
+> 4. **Rename** {% icon galaxy-pencil %} the `summary` output to: `summary_filtered.qzv`
 >
 > 5. Visualisation: Filtered Summary
 >   - Download `summary_filtered.qzv` to your local computer and view in [QIIME 2 View](https://view.qiime2.org) (q2view).
@@ -802,16 +802,16 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 > <hands-on-title>Differential Abundance Tests</hands-on-title>
 >
 > 1. {% tool [qiime2 composition ancombc2](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2/qiime2__composition__ancombc2/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
->   - *"table: FeatureTable[Frequency]"*: `unweighted_unifrac_distance_matrix.qza`
+>   - *"table: FeatureTable[Frequency]"*: `16s_table_filtered.qza`
 >   - *"1: metadata: Metadata"*
 >     - *"metadata: Metadata"*: `Metadata from TSV`
 >     - *"Metadata Source"*: `dunnart_metadata.tsv`
 >   - *"fixed_effects_formula: Str"*: `Captivity`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the `ancombc2_results.qza` output to: `ancombc2-results.qza`
+> 2. **Rename** {% icon galaxy-pencil %} the `qiime2 ... ancombc2_results.qza` output to: `ancombc2_results.qza`
 >
 > 1. {% tool [qiime2 composition ancombc2-visualizer](toolshed.g2.bx.psu.edu/repos/q2d2/qiime2__composition__ancombc2_visualizer/qiime2__composition__ancombc2_visualizer/2026.1.0+0.g4b3aa86.dirty-q2galaxy.2026.1.0) %}:
->   - *"data: FeatureData[ANCOMBC2Output]"*: `ancombc2-results.qza`
+>   - *"data: FeatureData[ANCOMBC2Output]"*: `ancombc2_results.qza`
 >   - *"Click here for additional options"*
 >     - *"taxonomy: FeatureData[Taxonomy]"*: `taxonomy_classification.qza`
 >
