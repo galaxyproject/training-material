@@ -63,6 +63,8 @@ This tutorial covers how to perform a metabarcoding analysis of 16S V4 region (v
 
 When using other marker genes or other regions of the 16S gene (i.e. not the 16S V4 region), some tool input parameters will need to be changed to apply to the data being analysed (e.g. primers used in {% tool Cutadapt %} and the sequence truncation lengths used in {% tool qiime2 dada2 denoise-paired %}) and the classifier used for taxonomic assignment will need to be trained using the reference taxonomy database of interest (e.g. [SILVA](https://www.arb-silva.de/), [HOMD](https://www.homd.org/), [PR2](https://pr2-database.org/), [UNITE](https://unite.ut.ee/), [GTDB](https://gtdb.ecogenomic.org)).
 
+This Galaxy tutorial based on material from the [Metabarcoding of bacteria in dunnart faecal samples across Australia (wild + captive)](https://mbite.mdhs.unimelb.edu.au/qiime2_dunnart/aio.html) tutorial and workshop created by [Melbourne Bioinformatics](https://mdhs.unimelb.edu.au/melbournebioinformatics) at the University of Melbourne.
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
@@ -105,7 +107,7 @@ Quantitative Insights Into Microbial Ecology 2 ([QIIME 2](https://www.nature.com
 
 ### Viewing QIIME2 visualisations
 
-In order to use [QIIME 2 View](https://view.qiime2.org) to visualise your files, you will need to use a Google Chrome or Mozilla Firefox web browser (not in private browsing). As this tutorial uses Galaxy Australia, you will need to download the visual files (*.qzv) to your local computer and view them in [QIIME 2 View](https://view.qiime2.org) (q2view).
+In order to use [QIIME 2 View](https://view.qiime2.org) to visualise your files, you will need to use a Google Chrome or Mozilla Firefox web browser (not in private browsing). As this tutorial uses Galaxy Australia, you will need to download the visual files (`.qzv`) to your local computer and view them in [QIIME 2 View](https://view.qiime2.org) (q2view).
 
 We will be doing this step multiple times throughout this workshop to view visualisation files as they are generated.
 
@@ -114,9 +116,6 @@ We will be doing this step multiple times throughout this workshop to view visua
 > Within Galaxy, the {% tool QIIME vizualisation extractor %} tool can be used to view QIIME2 `.qzv` visualisation files. However, some QIIME2 visualisation files will not properly display or will lose some of the visualisation's interactive features.
 >
 {: .comment}
-
-This Galaxy tutorial based on material from the [Metabarcoding of bacteria in dunnart faecal samples across Australia (wild + captive)](https://mbite.mdhs.unimelb.edu.au/qiime2_dunnart/aio.html) tutorial and workshop created by [Melbourne Bioinformatics](https://mdhs.unimelb.edu.au/melbournebioinformatics) at the University of Melbourne.
-
 
 # Data upload
 
