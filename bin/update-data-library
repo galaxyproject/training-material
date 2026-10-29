@@ -38,6 +38,10 @@ def parse_zenodo_id_formats(link)
   # https://doi.org/10.5281/zenodo.3732358#.X0X0X0X0X0X
   #
   link = link.split('#')[0]
+  if link.nil? or link.empty?
+    puts "Skipping empty Zenodo link"
+    return
+  end
   if link.match(/doi:/) || link.match(/^10.5281/) || link.match(/doi.org/)
     link.split('.')[-1]
   else
@@ -53,13 +57,22 @@ def update_tutorial(path, zenodo_id)
 end
 
 def update_data_library(path, topic, tutorial, zenodo_record)
+
   zenodo_id = zenodo_record['id'].to_s
   zenodo_files = zenodo_record.fetch('files', []).map do |f|
     official_extension = f['type']
 
     link = f['links']['self'].sub(%r{/content$}, '')
-    unofficial_extension = link.split('.')[-1]
+
+    # try a two-part extension, eg. fastq.gz
+    unofficial_extension = link.split('.')[-2..-1].join(".")
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+
+    # if no match, use only last part
+    if ext.nil?
+      unofficial_extension = link.split('.')[-1]
+      ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+    end
 
     # Example:
     # https://zenodo.org/api/records/10870107/files/elem_s2_r1.fq.gz/content
@@ -69,17 +82,21 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     # puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
     # puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
     # puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
-    warn "Unknown file type: #{f['type']}. Consider adding this to shared/datatypes.yaml" if ext.nil?
+    warn "Unknown file type: #{f['type']} (in #{path}). Consider adding this to shared/datatypes.yaml" if ext.nil? and not f['type'].nil?
 
     {
       'url' => real_link,
       'src' => 'url',
       'ext' => ext || f['type'],
       'info' => "https://doi.org/10.5281/zenodo.#{zenodo_id}",
-      # 'checksum' => f['checksum'],
-      # 'key' => f['key'],
+      'md5sum' => f['checksum'].sub('md5:',''),
+      #'key' => f['key'],
     }
   end
+
+  tutorial_name = tutorial['name']
+  tutorial_path = tutorial['path'].sub('.md','.html')
+  topic_name = topic['name']
 
   library = {
     'destination' => {
@@ -90,9 +107,14 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     },
     'items' => [
       'name' => topic['name'],
-      'description' => topic['description'],
+      'topic_id' => topic['topic_id'],
+      'description' => "Tutorial input datasets for GTN topic '#{topic_name}'",
+      'topic_readme' => topic['description'],
       'items' => [
         'name' => tutorial['name'],
+        'tutorial_id' => tutorial['tutorial_id'],
+        'description' => "Input datasets for '#{tutorial_name}'",
+        'tutorial_readme' => "This folder contains input datasets for the GTN tutorial '[#{tutorial_name}](https://training.galaxyproject.org/#{tutorial_path})'",
         'items' => [
           'name' => "DOI: 10.5281/zenodo.#{zenodo_id}",
           'description' => 'latest',
@@ -102,7 +124,7 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     ]
   }
   data_library_path = data_library_for_tutorial(path)
-  puts "Writing data library to #{data_library_path}"
+  #puts "Writing data library to #{data_library_path}"
   File.write(data_library_path, library.to_yaml)
 end
 
@@ -134,6 +156,10 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
     warn "Zenodo ID has changed from #{datalibrary_zenodo_id} to #{new_zenodo_id}, updating the data library"
     update_data_library(path, topic, tutorial, zenodo_record)
   end
+
+  rescue JSON::ParserError
+    warn "Error with Zenodo ID, ensure that it is correct, and points at a specific version. (#{path})"
+
 end
 
 def data_library_for_tutorial(path)
@@ -149,10 +175,12 @@ end
 def parse_metadata(path)
   parts = path.to_s.split('/')
   topic_id = parts[1]
+  tutorial_id = parts[3]
+
   topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"), permitted_classes: [Date])
   tutorial_metadata = YAML.load_file(path, permitted_classes: [Date])
-  topic = { 'name' => topic_metadata['title'], 'description' => topic_metadata['summary'] }
-  tutorial = { 'name' => tutorial_metadata['title'] }
+  topic = { 'name' => topic_metadata['title'], 'topic_id' => topic_id, 'description' => topic_metadata['summary'] }
+  tutorial = { 'name' => tutorial_metadata['title'], 'tutorial_id' => tutorial_id, 'path' => path }
   [topic, tutorial]
 end
 
@@ -163,9 +191,9 @@ command :update do |c|
   c.option '--fragile', 'Exit quickly if the data library already exists'
   c.action do |args, options|
     path = Pathname.new(args.first).cleanpath
+    puts "--> Checking tutorial: #{path}"
     zenodo_id = parse_tutorial_for_zenodo_link(path).to_s
     if zenodo_id.nil? || zenodo_id.empty?
-      warn "Could not parse zenodo ID from #{path}"
       exit 0
     end
 

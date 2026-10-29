@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Clean and manage Sanger sequences from raw files to aligned consensus'
-zenodo_link: https://zenodo.org/records/7104640
+zenodo_link: 'https://zenodo.org/record/7104640'
 questions:
 - How to clean Sanger sequencing files?
 objectives:

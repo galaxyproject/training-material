@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes
-zenodo_link: "https://zenodo.org/records/14845698"
+zenodo_link: 'https://zenodo.org/record/14845698'
 level: Introductory
 questions:
 - What are pan-specific primers and primer schemes and why are they important?

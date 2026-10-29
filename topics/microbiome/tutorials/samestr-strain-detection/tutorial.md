@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Detection of shared microbial strains with SameStr
 level: Intermediate
-zenodo_link: https://zenodo.org/records/20745835
+zenodo_link: 'https://zenodo.org/record/20745835'
 questions:
 - How can shared microbial strains between metagenomic samples be identified?
 - What information is needed to determine whether two samples share the same strain rather than just the same species?

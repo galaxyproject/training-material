@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: Analysing Solar Eclipse Frequency with a Galaxy Workflow
-lang: en
+zenodo_link: 'https://zenodo.org/record/22912793'
+
 level: Intermediate
 questions:
 - How can we identify groups of solar eclipses above a user-defined observable magnitude
@@ -171,7 +172,7 @@ You can upload data in various ways. Here are some examples:
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the desired `.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
+> 2. Import the `Amarnasolec05mittlere.txt` eclipse file from your local computer, or retrieve it directly from the [DaSCH repository](https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original):
 >
 >    ```
 >    https://ingest.dasch.swiss/projects/0868/assets/0V3H7UR6naZ-rOIyKnuP8An/original
@@ -277,18 +278,21 @@ groups can be identified.
 
 > <hands-on-title> Sort the eclipses chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Filter on dataset` (output of **Filter** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `1`
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Filter on dataset` (output of **Filter** {% icon tool %})
+>    - *"Number of header lines"*: `1`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
+>
 >
 >    > <comment-title> </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -372,18 +376,21 @@ The grouping destroyed the chronological order and some eclipses are listed more
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Text reformatting on dataset` (output of **Text reformatting** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `0`
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Text reformatting on dataset` (output of **Text reformatting** {% icon tool %})
+>    - *"Number of header lines"*: `0`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
+>
 >
 >    > <comment-title> About the output </comment-title>
 >    > The configured numeric ascending sorts in this order:
@@ -420,32 +427,35 @@ Because the duplicate-removal step does not preserve chronological order, the re
 
 > <hands-on-title> Sort chronologically </hands-on-title>
 >
-> 1. {% tool [Sort data in ascending or descending order](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Dataset"*: `Unique on dataset` (output of **Unique** {% icon tool %})
->    - *"on column"*: `c1`
->    - *"everything in"*: `Ascending order`
->    - In *"Column selection"*:
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c2`
->            - *"everything in"*: `Ascending order`
->        - {% icon param-repeat %} *"Insert Column selection"*
->            - *"on column"*: `c3`
->            - *"everything in"*: `Ascending order`
->    - *"Number of header lines to skip"*: `0`
-We have already used this tool in a previous step with similar parameters.
-You can redo all the input steps by step, or you can rerun the earlier sort tool:
-
-{% snippet faqs/galaxy/tools_rerun.md %}
-
-That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
-
->    > <comment-title>Details about the sorting </comment-title>
->    > The configured numeric ascending sorts in this order:
->    > 1. Column 1: Year (`Y`)
->    > 2. Column 2: Month (`M`)
->    > 3. Column 3: Day (`D`).
->    > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
->    {: .comment}
+> 1. {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.11+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `Unique on dataset` (output of **Unique** {% icon tool %})
+>    - *"Number of header lines"*: `0`
+>    - *"1: Column Selections"*
+>      - *"Sort on column"*: `c1`
+>      - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"2: Column Selections"*
+>        - *"Sort on column"*: `c2`
+>        - *"in"*: `Ascending order`
+>    - {% icon param-repeat %} Insert Column selections
+>      - *"3: Column Selections"*
+>        - *"Sort on column"*: `c3`
+>        - *"in"*: `Ascending order`
+>
+> We have already used this tool in a previous step with similar parameters.
+> You can redo all the input steps by step, or you can rerun the earlier sort tool:
+>
+> {% snippet faqs/galaxy/tools_rerun.md %}
+>
+> That way, you can save some clicks. But make sure to select the output of **Unique** and set *"Number of header lines to skip"* to `0`.
+>
+> > <comment-title>Details about the sorting </comment-title>
+> > The configured numeric ascending sorts in this order:
+> > 1. Column 1: Year (`Y`)
+> > 2. Column 2: Month (`M`)
+> > 3. Column 3: Day (`D`).
+> > This produces the final dataset which is a chronological list of eclipses that satisfy the magnitude threshold and belong to at least one qualifying group
+> {: .comment}
 >
 {: .hands_on}
 

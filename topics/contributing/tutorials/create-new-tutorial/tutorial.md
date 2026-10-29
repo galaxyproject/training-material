@@ -36,9 +36,9 @@ recordings:
 
 
 
-Galaxy is a great solution to train bioinformatics concepts:
+Galaxy is a great solution to teach scientific data analysis concepts:
 
-- numerous bioinformatics tools are available (over 8,000 in the ToolShed)
+- numerous analysis tools are available (over 8,000 in the ToolShed)
 - it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
@@ -75,15 +75,15 @@ We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.
 > 1. Search for **Copernicus** on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it has been placed
 >
-> > <solution-title></solution-title>
-> > There are a couple of steps to reaching the answer:
-> > 1. Search for `Copernicus`
-> > 2. Press the <kbd>Enter</kbd> key to search
-> > 3. Click on the result named `c3s`
-> > 4. At the bottom of this page, there is a box labelled "Categories"
-> >
-> > It is placed in one category: "Climate Analysis"
-> {: .solution}
+>    > <solution-title></solution-title>
+>    > There are a couple of steps to reaching the answer:
+>    > 1. Search for `Copernicus`
+>    > 2. Press the <kbd>Enter</kbd> key to search
+>    > 3. Click on the result named `c3s`
+>    > 4. At the bottom of this page, there is a box labelled "Categories"
+>    >
+>    > It is placed in one category: "Climate Analysis"
+>    {: .solution}
 >
 > 3. Look if the categories fit to existing topics in the Galaxy Training Material
 {: .hands_on}
@@ -126,7 +126,15 @@ Once the topic has been chosen, we can create the tutorial. An ideal tutorial in
 - a YAML file `data-library.yaml`  with the links to the input data needed for the tutorial
 
 The most important file is the `tutorial.md`, where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of a new tutorial.
-The `data-library.yaml` is used by Galaxy servers to create a *Shared Data Library* containing your tutorial data, allowing you quicker access during training courses. If you have defined a `zenodo_link` in your tutorial metadata, then the `data-library.yaml` file will be automatically added by one of the GTN GitHub Actions if it is missing, so there is no need to add it yourself. 
+The `data-library.yaml` is used by Galaxy servers to create a *Shared Data Library* containing your tutorial data, allowing you quicker access during training courses. If you have defined a `zenodo_link` in your tutorial metadata, then the `data-library.yaml` file will be automatically added by one of the GTN GitHub Actions if it is missing, so there is no need to add it yourself.
+
+The **easiest way to start a tutorial, is by creating a Galaxy workflow**, and then using that to create a tutorial skeleton with all hands-on boxes already created for you. This is what we will do in the next section.
+
+**Note:** Not all tutorials are based on a Galaxy workflow (e.g. Galaxy dev/admin tutorials, or non-Galaxy tutorials). In this case you can start with our tutorial template folder
+1. Copy the folder [`tutorial-template`](https://github.com/galaxyproject/training-material/tree/main/tutorial-template) from the root of the GTN repository to the topic of your choice
+   - copy it to `topics/<topic name>/tutorials/`
+2. Rename the folder to fit your tutorial
+3. Edit the `tutorial.md` file inside this folder
 
 # Create the workflow
 
@@ -135,6 +143,9 @@ Our tutorials try to follow the "learn by doing" approach; they combine both the
 Most tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.
 
 Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one, but at least the major steps should be included. It helps to get a direction for the tutorial, but also to generate a skeleton of the tutorial, as we will see later.
+
+
+
 
 > <comment-title>Use tools that are available on the ToolShed</comment-title>
 > We recommend using tools in your workflows, especially for training, that are available on the Galaxy ToolShed.

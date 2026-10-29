@@ -11,7 +11,7 @@ tags:
     - viz
     - cyoa
 level: Intermediate
-zenodo_link: https://zenodo.org/records/10405036
+zenodo_link: 'https://zenodo.org/record/10405036'
 questions:
     - Which pathways are affected in this COVID-19 study?
     - How can I visualise the results of a differential expression analysis in the MINERVA Platform?

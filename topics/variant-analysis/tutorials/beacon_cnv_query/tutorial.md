@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Querying the University of Bradford GDC Beacon Database for Copy Number Variants (CNVs)"
-zenodo_link: 'https://zenodo.org/records/10658688'
+zenodo_link: 'https://zenodo.org/record/10658688'
 subtopic: 'data-management'
 priority: 1
 questions:

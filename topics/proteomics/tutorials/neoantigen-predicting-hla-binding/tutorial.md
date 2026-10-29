@@ -6,7 +6,7 @@ redirect_from:
 
 
 title: "Neoantigen 5a: Predicting HLA Binding"
-zenodo_link: 'https://zenodo.org/records/14375917'
+zenodo_link: 'https://zenodo.org/record/14375917'
 questions:
 - How can we predict the neoantigens presented by tumor cells?
 - How does the HLA genotype affect the immune response to cancer?
