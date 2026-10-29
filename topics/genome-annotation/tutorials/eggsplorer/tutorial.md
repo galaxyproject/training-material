@@ -37,6 +37,13 @@ edam_ontology:
   - topic_0085
   - topic_3301
   - topic_0092
+abbreviations:
+  COG: Clusters of Orthologous Genes
+  GO: Gene Ontology
+  KEGG: Kyoto Encyclopedia of Genes and Genomes
+  KO: KEGG Orthology
+  EC: Enzyme Commission
+  CAZy: Carbohydrate-Active enZYmes
 ---
 
 A bacterial proteome contains thousands of proteins. When a new bacterial genome is sequenced, we can annotate its proteins with **eggNOG-mapper** {% cite Cantalapiedra2021 %}, which predicts their functions through annotation transfer from orthologous proteins in the eggNOG database {% cite HuertaCepas2019 %}. **Eggsplorer** {% cite Baev2026 %} can summarize the resulting annotations in an interactive report.
@@ -85,7 +92,7 @@ The **NCBI Datasets Genomes** tool {% cite OLeary2024 %} retrieves the protein s
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The example dataset should contains 5479 protein sequences, each introduced by a `>` header.
+> > 1. The example dataset should contains 5572 protein sequences, each introduced by a `>` header.
 > >
 > {: .solution}
 >
@@ -105,8 +112,6 @@ eggNOG-mapper identifies related proteins and transfers functional annotations. 
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.13+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Fasta sequences to annotate"*: `NCBI Genome Datasets: protein fasta` (output of **NCBI Datasets Genomes** {% icon tool %})
 >    - *"Version of eggNOG Database"*: select an available version and record it for reproducibility
->    - In *"Output Options"*:
->        - *"Exclude header lines and stats from output files"*: `Yes`
 >
 >    > <comment-title>Runtime</comment-title>
 >    > Runtime depends on the computational resources and workload of the Galaxy server.
@@ -135,9 +140,6 @@ Use the **annotations** output (`*.emapper.annotations`) for Eggsplorer.
 > 1. {% tool [Eggsplorer](toolshed.g2.bx.psu.edu/repos/galaxyp/eggsplorer/eggsplorer/1.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"eggNOG-mapper annotations"*: the `annotations` output of **eggNOG Mapper** {% icon tool %}
 >    - *"Sample name"*: `Pseudomonas aeruginosa PAO1` (the title of the report; if left empty, the dataset name is used)
->    - *"Add KofamScan KO assignments as a second source?"*: `No`
->    - *"Number of items in 'top' charts"*: `25`
->    - *"Report language"*: `English`
 >    - *"Also output summary tables"*: `Yes`
 >
 > 2. Open the report with the {% icon galaxy-eye %} icon
@@ -177,7 +179,7 @@ The taxonomy section shows the taxonomic levels used for annotation transfer. In
 
 ## COG and GO
 
-**COG categories** group proteins by function {% cite Tatusov2000 %}. Hover over the chart to see the category names and counts.
+**COG categories** group proteins by function {% cite Tatusov2000 %}. Clusters of Orthologous Groups (COG) is a database and classification system, developed at NCBI, that groups proteins from completely sequenced genomes into orthologous clusters, each assigned to a functional category. It is used to infer protein function by transferring annotation from well-characterized organisms to newly sequenced ones. Hover over the chart to see the category names and counts.
 
 > <question-title></question-title>
 >
@@ -303,7 +305,7 @@ The searchable gene table links the report summaries to individual protein annot
 
 # Conclusion
 
-This workflow combines proteome retrieval, eggNOG-mapper annotation and functional profiling with Eggsplorer. Predicted functions should be interpreted alongside their supporting protein annotations. The report describes genomic functional potential rather than activity under specific biological conditions.
+In this tutorial we downloaded the proteome of *Pseudomonas aeruginosa* PAO1 from NCBI with a single accession, annotated all its proteins with eggNOG-mapper and summarised the annotation with Eggsplorer.  The report shows the **potential** of the genome, inferred by orthology; it does not show which genes are expressed under a given condition. The same workflow can be run on any bacterial proteome: one from NCBI, as here, or the proteins predicted by Bakta or Prokka for your own genome assembly. 
 
 > <comment-title>Citing Eggsplorer</comment-title>
 >
