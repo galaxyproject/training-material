@@ -3,20 +3,24 @@ contributors:
 - kgerb
 - Marie59
 questions:
-- title: Two neighbouring crowns are both predicted as trees but have different PredInstance_SAT values. What does that mean?
+- title: Two neighbouring crowns are both predicted as vegetation but have different PredInstance_SAT values. What does that mean?
   answers:
-  - They have the same class (tree) but are two different individual trees.
+  - They have the same class (vegetation) but are two different individual trees.
   - They are the same tree, split into two classes.
-  - One of them is ground and the other is a tree.
+  - One of them is ground and the other is vegetation.
   - They belong to different tree species.
-  correct: They have the same class (tree) but are two different individual trees.
+  correct: They have the same class (vegetation) but are two different individual trees.
   timeout: 45
   type: choose-1
-- title: Where do PredSemantic_SAT and PredInstance_SAT come from?
+- title: Which analyses need the individual-tree instances (PredInstance_SAT)? Select all that apply.
   answers:
-  - The LiDAR scanner measures them during the flight.
-  - SegmentAnyTree predicts them and adds them to the point cloud.
-  - The Standardization tool computes them from the file header.
-  correct: SegmentAnyTree predicts them and adds them to the point cloud.
-  timeout: 30
-  type: choose-1
+  - Predicting the species of each tree
+  - Measuring the height of each tree
+  - Counting the trees in the survey area
+  - Mapping where there is vegetation at all
+  correct:
+  - Predicting the species of each tree
+  - Measuring the height of each tree
+  - Counting the trees in the survey area
+  timeout: 45
+  type: choose-many

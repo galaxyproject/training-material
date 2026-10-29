@@ -11,7 +11,7 @@ questions:
 objectives:
 - Explain what a LiDAR point cloud represents
 - Standardize and prepare one LAS file for tree segmentation
-- Distinguish tree/non-tree classes from individual-tree identifiers
+- Distinguish vegetation/non-vegetation classes from individual-tree identifiers
 - Inspect tree predictions and identify obvious visual problems
 time_estimation: 3H
 subtopic: analysing
@@ -22,7 +22,7 @@ tags:
 - lidar
 key_points:
 - LiDAR records the 3D structure of vegetation and terrain
-- SegmentAnyTree predicts tree and non-tree points and assigns an ID to each predicted tree
+- SegmentAnyTree separates vegetation from non-vegetation points and assigns an ID to each predicted tree
 - Visual inspection can reveal obvious problems but is not a quantitative accuracy assessment
 contributions:
   authorship:
@@ -204,8 +204,12 @@ writes a clean LAZ file that the following tools can rely on. It does not detect
 
 > <details-title>Explanation: Why standardize a point cloud?</details-title>
 >
-> Standardization makes the file consistent and describes it. Tree identifiers come later from the
-> segmentation model, and no file check can prove that those predictions are right.
+> For file D, the tool checks for example that the bounding box and point count in the header match
+> the points, that the coordinate reference system (RGF93 / Lambert-93) is valid and in metres, that
+> the points lie on land, and that the file follows the LAS/LAZ format conventions. It stores the
+> results in `metadata` (point count, bounding box, coordinate reference system and attributes,
+> before and after standardization) and the survey outline in `convex_hull`. Tree identifiers are
+> not part of this step; they come from the segmentation model.
 >
 {: .details}
 
@@ -298,7 +302,7 @@ SmartTile prepares the point cloud for the model in two ways:
 SegmentAnyTree is a deep-learning model trained on laser scans of many forest types
 ({% cite Wielgosz2024 %}). It adds two values to each point:
 
-- `PredSemantic_SAT`, the *semantic* class: tree or non-tree (for example ground).
+- `PredSemantic_SAT`, the *semantic* class: vegetation or non-vegetation (for example ground).
 - `PredInstance_SAT`, the *instance*: an identifier shared by all points of one predicted tree.
 
 Two neighbouring trees therefore have the same class but different instance identifiers.
@@ -324,8 +328,9 @@ Two neighbouring trees therefore have the same class but different instance iden
 
 > <details-title>Explanation: Instance and semantic predictions</details-title>
 >
-> The class says *what* a point is, the instance says *which* tree it belongs to. Both are model
-> predictions: the scanner only measures positions and intensities.
+> In this tutorial, the semantic class separates vegetation from non-vegetation, and the instance
+> identifies the individual tree. The instances are what make tree-based studies possible:
+> predicting the species of each tree, measuring tree height or crown size, or counting trees.
 >
 {: .details}
 
@@ -379,15 +384,15 @@ predicted trees: are there missed trees, trees joined together, or trees split i
 >    **Special Coloring** adds `coloring_id_sat`, which gives nearby trees clearly different colours.
 >
 > 2. Open the **Potree Visualization** output with its {% icon galaxy-eye %} eye icon. Loading can
->    take a minute. Each predicted tree has its own colour; non-tree points are grey.
+>    take a minute. Each predicted tree has its own colour; points that belong to no tree are grey.
 >
 >    ![Potree view of file D from above, with predicted trees in different colours](../../images/3dtrees/potree_instances.png "Predicted trees coloured by coloring_id_sat")
 >
 > 3. Look at a few neighbouring trees from above and from the side, for example around close-ups A
->    and B. To see the tree/non-tree classes instead, open **Scene** in the menu on the left, click
+>    and B. To see the vegetation/non-vegetation classes instead, open **Scene** in the menu on the left, click
 >    the point cloud `potree-vis`, and set **Attribute** to `PredSemantic_SAT`.
 >
->    ![Potree view of file D coloured by PredSemantic_SAT, with tree points and non-tree points in two colours](../../images/3dtrees/potree_semantic.png "Tree and non-tree points from PredSemantic_SAT")
+>    ![Potree view of file D coloured by PredSemantic_SAT, with vegetation and non-vegetation points in two colours](../../images/3dtrees/potree_semantic.png "Vegetation and non-vegetation points from PredSemantic_SAT")
 >
 {: .hands_on}
 
@@ -395,7 +400,7 @@ predicted trees: are there missed trees, trees joined together, or trees split i
 
 > <details-title>Explanation: Does the segmentation look plausible?</details-title>
 >
-> Colours that follow single crowns and differ between neighbours, and ground in the non-tree class,
+> Colours that follow single crowns and differ between neighbours, and ground in the non-vegetation class,
 > suggest a good result. Straight cuts along tile borders or one colour across several crowns
 > suggest errors. A plausible picture is not proof, though: measuring accuracy needs trees that were
 > labelled independently, for example in the field.
