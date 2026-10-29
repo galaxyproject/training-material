@@ -355,12 +355,6 @@ file, which keeps all its original attributes.
 >
 >    ![SmartTile form with Task Filter / merge segmented tiles, Processed Files as segmented tiles, voxel size 10 cm, instance dimension PredInstance_SAT, the tile bounds JSON, and Remap target Original files with standardized selected](../../images/3dtrees/smarttile_merge_form.png "SmartTile set up to merge the predictions and transfer them to file D")
 >
->    > <warning-title>Change the instance dimension</warning-title>
->    >
->    > The default **Instance dimension** is `PredInstance`. Set it to `PredInstance_SAT`, or
->    > SmartTile will not find the tree identifiers.
->    {: .warning}
->
 >    The result, `Originals with predictions`, is file D at full resolution with both predictions
 >    added. In our run this step took about 50 minutes.
 >
