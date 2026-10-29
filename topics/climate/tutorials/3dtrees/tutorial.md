@@ -30,6 +30,9 @@ contributions:
   - Marie59
   funding:
   - dataterra
+  testing:
+  - yvanlebras
+  - PaulineSGN
 requirements:
 - type: internal
   topic_name: introduction
