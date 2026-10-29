@@ -132,6 +132,7 @@ LAZ is its compressed version.
 >    >
 >    > You can also select **Choose from repository** in **Upload**, open **Recherche Data Gouv**,
 >    > search for `pic` and open **Données lidar acquises par drone au pied du Pic St Loup (34)**.
+>    > Note that there is 4 datafiles on the repository, only one file is needed for the tuto.
 >    > In our test, this import stopped at 187 MB without an error, so check the file size
 >    > afterwards.
 >    >
