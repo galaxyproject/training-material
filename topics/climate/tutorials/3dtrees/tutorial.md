@@ -171,13 +171,13 @@ LAZ is its compressed version.
 The following sections go through the 3Dtrees workflow step by step, from a raw point cloud to
 individual trees.
 
-> <details-title>What is 3Dtrees?</details-title>
+> <details-title>What is 3Dtrees.earth?</details-title>
 >
-> [3Dtrees](https://3dtrees.earth/) is a community building a global forest reference: researchers
+> [3Dtrees.earth](https://3dtrees.earth/) is a community building a global forest reference: researchers
 > share high-quality 3D forest data to advance science, AI and sustainability. It is part of
 > [NFDI4Earth](https://www.nfdi4earth.de/).
 >
-> ![3Dtrees logo](../../images/3dtrees/3dtrees.png "3Dtrees"){: style="width: 160px; max-width: 100%;"}
+> ![3Dtrees.earth logo](../../images/3dtrees/3dtrees.png "3Dtrees.earth"){: style="width: 160px; max-width: 100%;"}
 >
 {: .details}
 
