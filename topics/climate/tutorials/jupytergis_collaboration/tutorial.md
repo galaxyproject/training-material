@@ -11,10 +11,14 @@ objectives:
 - Work together on GIS files and notebooks with live updates.
 - Use follow mode to monitor collaborator activities.
 - Add annotations and comments to provide context, ask questions, or share insights.
+tags:
+  - interactive-tools
+  - GIS
 time_estimation: 30M
-contributors:
-- elifsu-simula
-- annefou
+contributions:
+  authorship:
+    - elifsu-simula
+    - annefou
 recordings:
 - youtube_id: l3U6c_VOgnU
   length: 7M

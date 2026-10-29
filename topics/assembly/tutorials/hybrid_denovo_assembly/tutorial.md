@@ -144,8 +144,9 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1) %}:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2) %}:
 >    - *"Sequences to analyse"*: `reference_genome.fasta`
+>    - *"Cached database with lineage"*: `All odb10 2026-03-19-213122`
 >    - *"Mode"*:
 >      - *"Select a gene predictor"*: `Augustus`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
@@ -174,6 +175,12 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 > {: .solution}
 > 
 {: .question}
+
+> <comment-title>BUSCO Databases</comment-title>
+> - The available lineages and number of BUSCO genes that will be compared in a chosen lineage will depend on the selected BUSCO database.
+> - For example, for the `Bacillales` lineage used in this tutorial, the `All odb10 2026-03-19-213122` database contains 450 BUSCO genes, while the `All odb12 2026-03-20-145944` database contains 429 BUSCO genes. The `Busco v5 Lineage Datasets` database does not include BUSCO genes for the `Bacillales` lineage.
+> - Care should always be taken to select a BUSCO database that contains the lineage of interest and use a consistent database when comparing BUSCO results.
+{: .comment}
 
 
 ## Draft assembly with Flye + Nanopore reads
@@ -207,8 +214,9 @@ We need to check if our assembly is good quality or not. It is paramount that ge
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1) %}:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2) %}:
 >    - *"Sequences to analyse"*: `Flye: Assembly`
+>    - *"Cached database with lineage"*: `All odb10 2026-03-19-213122`
 >    - *"Mode"*:
 >      - *"Select a gene predictor"*: `Augustus`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`

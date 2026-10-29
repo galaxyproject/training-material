@@ -9,6 +9,9 @@ description: |
 
 type: use  # 'use' for science topics, or admin-dev or instructors
 tags: [some, keywords, here, gtn-topic-id ]
+topics:  # list the relevant GTN topics here, e.g. single-cell, proteomics, .. The learning pathway will be shown on those topic pages
+  - example
+
 editorial_board:
 - shiltemann
 

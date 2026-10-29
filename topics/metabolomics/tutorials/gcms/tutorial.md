@@ -36,7 +36,12 @@ contributions:
   funding:
     - metabohub
     - rfmf
-    
+tags:
+  - metabolomics
+  - exposomics
+  - gc-ms
+edam_ontology:
+  - topic_3172
 --- 
 
 You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes. Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules which are called *metabolites*, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake since it requires several critical steps which still have some major bottlenecks. Metabolomics is still quite a young science, and has many kinds of specific challenges.

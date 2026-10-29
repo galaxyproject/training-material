@@ -206,7 +206,7 @@ module Gtn
       out.delete('__OTHER__') if out.key?('__OTHER__') && out['__OTHER__']['materials'].empty?
 
       out.each do |_k, v|
-        v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
+        v['materials'].sort_by! { |m| [m.fetch('priority', 999), m['title']] }
       end
 
       out
@@ -1087,7 +1087,7 @@ module Gtn
       # The complete resources we'll return is the introduction slides first
       # (EDIT: not anymore, we rely on prioritisation!)
       # and then the rest of the pages.
-      resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
+      resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 999) }
 
       Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
 
@@ -1106,7 +1106,7 @@ module Gtn
       # The complete resources we'll return is the introduction slides first
       # (EDIT: not anymore, we rely on prioritisation!)
       # and then the rest of the pages.
-      resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
+      resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 999) }
 
       Jekyll.logger.error "Error? Could not find any relevant tagged pages for #{topic_name}" if resource_pages.empty?
 
@@ -1274,7 +1274,7 @@ module Gtn
     #   [#<DateTime: 2019-02-16T21:04:07+01:00 ((2458531j,72247s,0n),+3600s,2299161j)>,
     #    "slides",
     #    #<Jekyll::Page @relative_path="topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html">,
-    #    ["single-cell"]]] 
+    #    ["single-cell"]]]
     def self.all_date_sorted_resources(site)
       cache.getset('all_date_sorted_resources') do
         self._all_date_sorted_resources(site)
@@ -1301,7 +1301,7 @@ module Gtn
           (t['recordings'] || []).map do |r|
             url = '/' + t.path.gsub(/tutorial(_[A_Z_]*)?.(html|md)$/, 'recordings/')
             url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
-            attr = {'title' => "Recording of " + t['title'], 
+            attr = {'title' => "Recording of " + t['title'],
                     'contributors' => r['speakers'] + (r['captions'] || []),
                     'content' => "A #{r['length']} long recording is now available."}
 
@@ -1316,7 +1316,7 @@ module Gtn
           (s['recordings'] || []).map do |r|
             url = '/' + s.path.gsub(/slides(_[A_Z_]*)?.(html|md)$/, 'recordings/')
             url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
-            attr = {'title' => "Recording of " + s['title'], 
+            attr = {'title' => "Recording of " + s['title'],
                     'contributors' => r['speakers'] + (r['captions'] || []),
                     'content' => "A #{r['length']} long recording is now available."}
             obj = objectify(attr, url, s.path)
@@ -1348,7 +1348,7 @@ module Gtn
           'description' => wf_data['annotation'],
           'tags' => wf_data['tags'],
           'contributors' => wf_data.fetch('creator', []).map do |c|
-            matched = site.data['contributors'].select{|k, v| 
+            matched = site.data['contributors'].select{|k, v|
               v.fetch('orcid', "does-not-exist") == c.fetch('identifier', "").gsub('https://orcid.org/', '')
             }.first
             if matched

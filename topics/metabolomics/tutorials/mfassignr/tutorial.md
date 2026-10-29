@@ -26,7 +26,13 @@ contributions:
   - KristinaGomoryova
   - hechth
   - skschum
-
+tags:
+  - metabolomics
+  - exposomics
+  - lc-ms
+  - gc-ms
+edam_ontology:
+  - topic_3172
 ---
 
 This training covers the multi-element molecular formula (MF) assignment using the MFAssignR tool. It was originally developed by {% cite Schum2020 %} for the analysis of untargeted mass spectrometry data coming from complex environmental mixtures. The package contains several functions including noise assessment, isotope filtering, internal mass recalibration, and formula assignment. 

@@ -17,6 +17,7 @@ time_estimation: 3H
 subtopic: analysing
 tags:
 - earth-system
+- forest
 - land
 - lidar
 key_points:
@@ -27,6 +28,8 @@ contributions:
   authorship:
   - kgerb
   - Marie59
+  funding:
+  - dataterra
 requirements:
 - type: internal
   topic_name: introduction
@@ -43,7 +46,8 @@ out which points belong to which tree. This step is called *individual-tree segm
 
 In this tutorial, you will use the 3Dtrees tools ({% cite Gerberding2026 %}) in Galaxy to prepare
 one drone LiDAR point cloud, predict individual trees with SegmentAnyTree (SAT)
-({% cite Wielgosz2024 %}), and inspect the result in an interactive 3D viewer.
+({% cite Wielgosz2024 %}), and inspect the result in an interactive 3D viewer. The workflow was
+built by the 3Dtrees community, and the data are part of the THEIA data hub.
 
 > <tip-title>New to Galaxy?</tip-title>
 >
@@ -88,6 +92,22 @@ LAZ is its compressed version.
 >
 {: .details}
 
+> <details-title>What is THEIA?</details-title>
+>
+> The dataset is part of THEIA, the data and services hub for continental surfaces of the
+> [Data Terra research infrastructure](https://www.data-terra.org/). The
+> [THEIA catalogue](https://catalogue.theia.data-terra.org/) collects metadata from thematic and
+> institutional repositories, including the INRAE repository that hosts this dataset.
+>
+> ![THEIA logo](../../images/3dtrees/theia.png "THEIA"){: style="width: 200px; max-width: 100%;"}
+>
+{: .details}
+
+{% include _includes/cyoa-choices.html option1="Get data" option2="History" default="Get data"
+       text="Import the data yourself, or start from a prepared history if the import does not work." %}
+
+<div class="Get-data" markdown="1">
+
 > <hands-on-title>Import file D</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
@@ -129,7 +149,39 @@ LAZ is its compressed version.
 >
 {: .hands_on}
 
-# Standardize the point cloud
+</div>
+
+<div class="History" markdown="1">
+
+> <hands-on-title>Import the prepared history</hands-on-title>
+>
+> 1. Open the history [Pic Saint Loup](https://earth-system.usegalaxy.eu/u/marie.josse/h/pic-saint-loup)
+>    and select **Import this history** at the top right. It contains file D.
+> 2. Change the datatype of `Strip-20210804-150144_D.las` to `laz`, so the Standardization tool
+>    can use it.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="laz" %}
+>
+{: .hands_on}
+
+</div>
+
+# Discover the 3Dtrees workflow
+
+The following sections go through the 3Dtrees workflow step by step, from a raw point cloud to
+individual trees.
+
+> <details-title>What is 3Dtrees?</details-title>
+>
+> [3Dtrees](https://3dtrees.earth/) is a community building a global forest reference: researchers
+> share high-quality 3D forest data to advance science, AI and sustainability. It is part of
+> [NFDI4Earth](https://www.nfdi4earth.de/).
+>
+> ![3Dtrees logo](../../images/3dtrees/3dtrees.png "3Dtrees"){: style="width: 160px; max-width: 100%;"}
+>
+{: .details}
+
+## Standardize the point cloud
 
 Scanners and processing software store point clouds in slightly different ways. The Standardization
 tool checks the file header, spatial bounds, point density and coordinate reference system, and
@@ -157,7 +209,7 @@ writes a clean LAZ file that the following tools can rely on. It does not detect
 >
 {: .details}
 
-# Get a first impression with overview images
+## Get a first impression with overview images
 
 Before predicting trees, look at the data. The Overviews tool draws images that open directly in
 Galaxy: top views show the extent of the survey and gaps in the canopy, section views show the
@@ -202,7 +254,7 @@ can see: the whole north--south section at true scale, and two close-ups.
 >
 {: .details}
 
-# Prepare the data for segmentation
+## Prepare the data for segmentation
 
 SmartTile prepares the point cloud for the model in two ways:
 
@@ -241,7 +293,7 @@ SmartTile prepares the point cloud for the model in two ways:
 >
 {: .details}
 
-# Identify individual trees with SegmentAnyTree
+## Identify individual trees with SegmentAnyTree
 
 SegmentAnyTree is a deep-learning model trained on laser scans of many forest types
 ({% cite Wielgosz2024 %}). It adds two values to each point:
@@ -277,7 +329,7 @@ Two neighbouring trees therefore have the same class but different instance iden
 >
 {: .details}
 
-# Combine the predictions and transfer them to the original points
+## Combine the predictions and transfer them to the original points
 
 SmartTile now puts the tiles back together. Using the tile layout, it keeps each tree only in the
 tile that owns it and joins trees cut by tile borders. With **Remap target** set to the original
@@ -309,7 +361,7 @@ file, which keeps all its original attributes.
 >
 {: .hands_on}
 
-# Inspect the result in Potree
+## Inspect the result in Potree
 
 Potree shows the point cloud in 3D in your browser, so you can rotate and zoom to check the
 predicted trees: are there missed trees, trees joined together, or trees split into pieces?
@@ -366,3 +418,11 @@ You turned one drone LiDAR file into a point cloud in which every point carries 
 and, for tree points, a tree identifier, and you checked the result in 3D. The predictions depend
 on forest type, point density and survey method, so always inspect them before using them for
 ecological analysis.
+
+# Acknowledgements
+
+This work is part of the collaboration between the EOSC node Data Terra and NFDI4Earth.
+
+![EOSC node Data Terra logo](../../images/3dtrees/eosc.png "EOSC node Data Terra"){: style="width: 200px; max-width: 100%;"}
+![Data Terra logo](../../images/3dtrees/dataterra.png "Data Terra"){: style="width: 140px; max-width: 100%;"}
+![NFDI4Earth logo](../../images/3dtrees/nfdi4earth.png "NFDI4Earth"){: style="width: 200px; max-width: 100%;"}

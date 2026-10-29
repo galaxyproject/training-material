@@ -8,7 +8,8 @@ description: |
 
 tags: [python, programming, introduction, beginner]
 type: use
-
+topics:
+  - data-science
 
 cover-image: assets/images/BioNT_Logo.png
 cover-image-alt: BioNT logo a blue had with the text BioNT

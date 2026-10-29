@@ -2,6 +2,9 @@
 layout: learning-pathway
 tags: [beginner, statistics, data-science]
 type: use
+topics:
+  - data-science
+  - statistics
 
 editorial_board:
 - fpsom

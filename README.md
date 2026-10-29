@@ -12,6 +12,8 @@ The content of the material is developed in Markdown and a templating system ([J
 
 Do you want to help with this project? Have a question? Please have a look at our [tutorials dedicating to training material development](https://training.galaxyproject.org/training-material/topics/contributing) and our [Contributing FAQs](https://training.galaxyproject.org/training-material/faqs/gtn/#contributors).
 
+New contributors can get started with our [onboarding learning pathway](https://training.galaxyproject.org/training-material/learning-pathways/onboarding-contributing.html).
+
 If you want to build the GTN website yourself, for example to preview your tutorial, please have a look at one of the following tutorials:
 - [Running the GTN website online using GitHub CodeSpaces](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-codespaces/tutorial.html) (online, no installation required)
 - [Running the GTN website locally using the command line](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html) (on your own machine)

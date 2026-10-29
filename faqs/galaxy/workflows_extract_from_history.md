@@ -12,15 +12,16 @@ contributors: [shiltemann,hexylena,nsoranzo]
 
    This will make the creation of the workflow easier.
 
-2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 
    ![`Extract Workflow` entry in the history options menu]({% link topics/introduction/images/history_menu_extract_workflow.png %})
 
    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 
-3. Replace the **Workflow name** to something more descriptive.
+3. Replace the **Workflow name** to something more descriptive. {% if include.workflow-name %}For example `{{include.workflow-name}}`. {% endif %}
 
 4. **Rename** each workflow input in the boxes at the top of the second column.
+   {% if include.rename-inputs %}- {{include.rename-inputs }}{% endif %}
 
 5. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 

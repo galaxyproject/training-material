@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Sentinel 5P data visualisation
-subtopic: introduction
+subtopic: analysing
 questions:
 - How to visualise volcanoes with Sentinel 5 data ?
 - How can we see the evolution of sulfur dioxide and aerosol index through time?
@@ -20,6 +20,7 @@ key_points:
 - Study volcano activity 
 tags:
   - earth-system
+  - atmosphere
   - volcano
   - satellite data
 contributions:

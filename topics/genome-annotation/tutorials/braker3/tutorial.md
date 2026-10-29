@@ -36,12 +36,16 @@ contributions:
   authorship:
     - rlibouba
     - abretaud
+  editing:
+    - tflowers15
   reviewing:
     - deeptivarshney
     - shiltemann
-
   funding:
     - eurosciencegateway
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 
 requirements:
  - type: internal
@@ -85,9 +89,7 @@ To annotate our genome using Braker3, we will use the following files:
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
 >    https://zenodo.org/records/14770765/files/genome.fasta
@@ -97,7 +99,6 @@ To annotate our genome using Braker3, we will use the following files:
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -120,7 +121,7 @@ Here's how to run STAR with this specific parameter (**"Read alignement tags to 
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `rnaseq_R1.fq.gz` (Input dataset)
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `rnaseq_R2.fq.gz` (Input dataset)
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `genome_masked.fasta` (Input dataset)
+>        - {% icon param-file %} *"Select a reference genome"*: `genome.fasta` (Input dataset)
 >        - *"Length of the SA pre-indexing string"*: `11`
 >    - In *"BAM output format specification"*:
 >        - In *"Read alignement tags to include in the BAM output"*:
@@ -132,9 +133,9 @@ Here's how to run STAR with this specific parameter (**"Read alignement tags to 
 
 We now have the following required inputs:
 
-- A masked genome in FASTA format
-- RNAseq sequence alignments in BAM format
-- Protein annotation in FASTA format
+- A masked genome in FASTA format: `genome.fasta`
+- RNAseq sequence alignments in BAM format: `RNASeq.bam`
+- Protein annotation in FASTA format: `protein_sequences.fasta`
 
 With these files, We can run [**Braker3**](https://github.com/Gaius-Augustus/BRAKER) to perform the structural annotation of the genome.
 
@@ -142,10 +143,10 @@ With these files, We can run [**Braker3**](https://github.com/Gaius-Augustus/BRA
 > <hands-on-title>Genome annotation with Braker3</hands-on-title>
 >
 > 1. {% tool [Braker3](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to annotate"*: `genome_masked.fasta` (Input dataset)
+>    - {% icon param-file %} *"Assembly to annotate"*: `genome.fasta` (Input dataset)
 >    - *"Species name"*: `Mucor mucedo`
->    - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark"*: `rnaseq.bam` (Input dataset)
->    - {% icon param-file %} *"Proteins to map to genome"*: `SwissProt_subset.fasta` (Input dataset)
+>    - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark"*: `RNASeq.bam` (Input dataset)
+>    - {% icon param-file %} *"Proteins to map to genome"*: `protein_sequences.fasta` (Input dataset)
 >    - {% icon param-file %} *"Fungal genome"*: select `Yes`
 >    - *"Output format"*: `GFF3`
 >
@@ -182,8 +183,8 @@ So first generate these sequences:
 > 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: output of {% tool [Braker](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0) %}
 >    - In *"Reference Genome"* select: `From your history` (Input dataset)
->    - *"Genome Reference Fasta"*: `masked genome` (Input dataset)
->    - In *"Select fasta outputs"* select: `fasta file with spliced exons for each GFF transcript (-y)`
+>    - *"Genome Reference Fasta"*: `genome.fasta` (Input dataset)
+>    - In *"Select fasta outputs"* select: `protein fasta file with the translation of CDS for each record (-y)`
 >    - *"full GFF attribute preservation (all attributes are shown)"*: `Yes`
 >    - *"decode url encoded characters within attributes"*: `Yes`
 >    - *"warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records"*: `Yes`
@@ -218,7 +219,7 @@ The parameters for running BUSCO on the masked genome:
 > <hands-on-title>BUSCO in genome mode</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `masked genome` (Input dataset)
+>    - {% icon param-file %} *"Sequences to analyse"*: `genome.fasta` (Input dataset)
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >        - *"Lineage"*: `Mucorales`
@@ -280,7 +281,7 @@ This browser enables you to navigate along the chromosomes of the genome and vie
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `genome_masked.fasta` (Input dataset)
+>        - {% icon param-file %} *"Select the reference genome"*: `genome.fasta` (Input dataset)
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Annotation`

@@ -73,6 +73,9 @@ answer_histories:
 - label: "usegalaxy.org.au"
   history: https://usegalaxy.org.au/u/armin.dadras/h/update-the-workflow-of-the-galaxy-basics-for-genomics
   date: 2025-02-04
+
+tags:
+- galaxy-intro
 ---
 
 

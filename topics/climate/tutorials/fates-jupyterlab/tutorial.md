@@ -46,8 +46,9 @@ key_points:
 - Model analysis
 tags:
   - interactive-tools
-contributors:
-- annefou
+contributions:
+  authorship:
+    - annefou
 
 ---
 

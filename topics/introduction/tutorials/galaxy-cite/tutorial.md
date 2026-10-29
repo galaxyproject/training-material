@@ -53,8 +53,8 @@ Citing Galaxy comes in two main actions:
 ## Citing Galaxy Project
 Please cite Galaxy Project’s primary publication: 
 
-- ***The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update***
-  - Nucleic Acids Research, Volume 52, Issue W1, 5 July 2024, Pages W83–W94, [https://doi.org/10.1093/nar/gkae410](https://doi.org/10.1093/nar/gkae410)
+- ***Galaxy for accessible, reproducible, and collaborative data analyses: 2026 update***
+  - Nucleic Acids Research, Volume 54, Issue W1, 7 July 2026, Pages W105–W116, [https://doi.org/10.1093/nar/gkag469](https://doi.org/10.1093/nar/gkag469)
 
 This is also found on the Galaxy Project Hub with more specific examples of how to cite individual aspects of Galaxy Project - [https://galaxyproject.org/citing-galaxy/](https://galaxyproject.org/citing-galaxy/)
 
@@ -81,7 +81,7 @@ Each public Galaxy service is provided through a complex mixture of funding, gov
 **Acknowledgement** statements for the four main `usegalaxy.*` services can be found using the following links:
 
 - Galaxy Australia - [https://site.usegalaxy.org.au/about#acknowledgement-statement](https://site.usegalaxy.org.au/about#acknowledgement-statement)
-- Galaxy Europe - [https://usegalaxy-eu.github.io/about](https://usegalaxy-eu.github.io/about)
+- Galaxy Europe - [https://galaxyproject.org/eu/about/#acknowledgement](https://galaxyproject.org/eu/about/#acknowledgement)
 - Galaxy France - [https://www.france-bioinformatique.fr/en/services/acknowledgement/](https://www.france-bioinformatique.fr/en/services/acknowledgement/)
 - Galaxy Main - [https://usegalaxy.org/#about](https://usegalaxy.org/#about)
 

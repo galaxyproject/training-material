@@ -32,6 +32,8 @@ contributions:
     - annefou
   editing:
     - kostrykin
+  infrastructure:
+    - anuprulez
   funding:
     - nfdi4bioimage
     - deNBI
