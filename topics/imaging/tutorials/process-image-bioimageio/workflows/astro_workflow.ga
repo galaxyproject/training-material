@@ -1,0 +1,433 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                0
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Prepare input data and model"
+            },
+            "id": 0,
+            "position": [
+                0.0,
+                138.5
+            ],
+            "size": [
+                242.1,
+                301.3
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                4
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Analyse"
+            },
+            "id": 1,
+            "position": [
+                360.9,
+                7.300000000000011
+            ],
+            "size": [
+                492.7,
+                336.2
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                8,
+                3,
+                5,
+                6,
+                7
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Post-process"
+            },
+            "id": 2,
+            "position": [
+                881.6,
+                0.0
+            ],
+            "size": [
+                862.3,
+                517.3
+            ],
+            "type": "frame"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "BMZ with Euclid image",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Model, e.g. from BioImage.io",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Model, e.g. from BioImage.io",
+                    "name": "nucleisegmentationboundarymodel.pt"
+                }
+            ],
+            "label": "nucleisegmentationboundarymodel.pt",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 22.07775310449614,
+                "top": 178.4852924102821
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1d8bde6f-9439-447d-b8fc-0f339459e9aa",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Input image",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input image",
+                    "name": "Euclid_Deep_Field_South_16x_zoom-grey-20p.tiff"
+                }
+            ],
+            "label": "Euclid_Deep_Field_South_16x_zoom-grey-20p.tiff",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 19.964697922800312,
+                "top": 317.26016567402496
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "51323505-c819-42e8-983a-f602018d697f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_image_file": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_imaging_model": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Process image using a BioImage.IO model",
+            "outputs": [
+                {
+                    "name": "output_predicted_image",
+                    "type": "tiff"
+                },
+                {
+                    "name": "output_predicted_image_matrix",
+                    "type": "npy"
+                }
+            ],
+            "position": {
+                "left": 380.934805739491,
+                "top": 47.347969485307814
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "d5233b9d32bb",
+                "name": "bioimage_inference",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_image_file\": {\"__class__\": \"ConnectedValue\"}, \"input_image_input_axes\": \"bcyx\", \"input_image_input_size\": \"768,432,1,1\", \"input_imaging_model\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.4.1+galaxy3",
+            "type": "tool",
+            "uuid": "8c6f2ec6-81ab-4898-8e66-f22fe0b57172",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/imagemagick_image_convert/imagemagick_image_convert/7.1.2-2+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert image format",
+            "outputs": [
+                {
+                    "name": "splitted_pdf",
+                    "type": "input"
+                },
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1231.5458758314767,
+                "top": 332.9970240191595
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/imagemagick_image_convert/imagemagick_image_convert/7.1.2-2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "9bb86931b7b1",
+                "name": "imagemagick_image_convert",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"output_format\": \"png\", \"palette\": {\"palette_select\": \"no\", \"__current_case__\": 2}, \"resize\": \"100\", \"transformations\": null, \"trimming\": {\"trimming_select\": \"no\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "7.1.2-2+galaxy2",
+            "type": "tool",
+            "uuid": "fc53237a-6de3-4b35-8b4e-ee82d8ffc5a0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output_predicted_image"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 633.6199930471851,
+                "top": 90.23188463309218
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2ee04d2ebdcf",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"offset\": \"-0.2\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "d9ec479f-5950-4f8e-8694-ca220eaaf974",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split image along axes",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 901.6017785354627,
+                "top": 39.99295638571965
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "7191fd16988f",
+                "name": "split_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"axis\": \"C\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"count\": null, \"input\": {\"__class__\": \"ConnectedValue\"}, \"offset\": \"0\", \"squeeze\": false, \"step\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.3.5+galaxy1",
+            "type": "tool",
+            "uuid": "60e729f8-d28d-4ec5-90c3-ad91ca3a2ce8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 989.4710667122467,
+                "top": 241.60843981287803
+            },
+            "post_job_actions": {},
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "9af34784-9cb4-4d75-b4b9-b2bd37b8b35d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.49+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert image format",
+            "outputs": [
+                {
+                    "name": "splitted_pdf",
+                    "type": "input"
+                },
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1238.7501598105011,
+                "top": 110.69411047234054
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.49+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0648279794e5",
+                "name": "graphicsmagick_image_convert",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"output_format\": \"png\", \"palette\": {\"palette_select\": \"no\", \"__current_case__\": 2}, \"resize\": \"100.0\", \"transformations\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3.49+galaxy0",
+            "type": "tool",
+            "uuid": "66aee9c8-8a5a-41ed-9c82-51751ad66685",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_segmentation_mask/ip_overlay_segmentation/0.0.7",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_image": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "input_mask": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Overlay Segmentation Mask",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1523.9100376434185,
+                "top": 193.41949794095706
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_segmentation_mask/ip_overlay_segmentation/0.0.7",
+            "tool_shed_repository": {
+                "changeset_revision": "22e573b7dcb1",
+                "name": "overlay_segmentation_mask",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"greyscale\": true, \"input_image\": {\"__class__\": \"ConnectedValue\"}, \"input_mask\": {\"__class__\": \"ConnectedValue\"}, \"label_option\": {\"label\": false, \"__current_case__\": 0}, \"stroke_color\": \"#ff0000\", \"thickness\": \"0.3\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.0.7",
+            "type": "tool",
+            "uuid": "6cc90673-694a-451f-958f-55d77df4be3a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "cf2046f9-241c-4854-a2b7-01d871bbe8f0"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "739a5048-5725-4628-a4e3-2c4d3012bccb",
+    "version": 1
+}
