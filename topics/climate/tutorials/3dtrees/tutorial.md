@@ -202,7 +202,7 @@ writes a clean LAZ file that the following tools can rely on. It does not detect
 
 {% include _includes/quiz.html id="standardization.yaml" %}
 
-> <details-title>Explanation: Why standardize a point cloud?</details-title>
+> <solution-title>Why standardize a point cloud?</solution-title>
 >
 > For file D, the tool checks for example that the bounding box and point count in the header match
 > the points, that the coordinate reference system (RGF93 / Lambert-93) is valid and in metres, that
@@ -211,7 +211,7 @@ writes a clean LAZ file that the following tools can rely on. It does not detect
 > before and after standardization) and the survey outline in `convex_hull`. Tree identifiers are
 > not part of this step; they come from the segmentation model.
 >
-{: .details}
+{: .solution}
 
 ## Get a first impression with overview images
 
@@ -250,13 +250,13 @@ can see: the whole north--south section at true scale, and two close-ups.
 
 {% include _includes/quiz.html id="overview.yaml" %}
 
-> <details-title>Explanation: What can the overview tell you?</details-title>
+> <solution-title>What can the overview tell you?</solution-title>
 >
 > Gaps are easiest to see from above, layers from the side. Where crowns touch, as in close-up B,
 > there is no gap to mark where one tree ends, so separating trees is harder. Look at both areas
 > again in the final viewer.
 >
-{: .details}
+{: .solution}
 
 ## Prepare the data for segmentation
 
@@ -289,13 +289,13 @@ SmartTile prepares the point cloud for the model in two ways:
 
 {% include _includes/quiz.html id="tiles.yaml" %}
 
-> <details-title>Explanation: Why use overlapping processing tiles?</details-title>
+> <solution-title>Why use overlapping processing tiles?</solution-title>
 >
 > The buffer gives trees at the edge of a tile their surroundings, but it repeats points: a wider
 > buffer costs more time and makes it more likely that a tree is predicted twice. The merge step
 > later keeps each tree only once.
 >
-{: .details}
+{: .solution}
 
 ## Identify individual trees with SegmentAnyTree
 
@@ -326,13 +326,13 @@ Two neighbouring trees therefore have the same class but different instance iden
 
 {% include _includes/quiz.html id="predictions.yaml" %}
 
-> <details-title>Explanation: Instance and semantic predictions</details-title>
+> <solution-title>Instance and semantic predictions</solution-title>
 >
 > In this tutorial, the semantic class separates vegetation from non-vegetation, and the instance
 > identifies the individual tree. The instances are what make tree-based studies possible:
 > predicting the species of each tree, measuring tree height or crown size, or counting trees.
 >
-{: .details}
+{: .solution}
 
 ## Combine the predictions and transfer them to the original points
 
@@ -392,14 +392,14 @@ predicted trees: are there missed trees, trees joined together, or trees split i
 
 {% include _includes/quiz.html id="potree.yaml" %}
 
-> <details-title>Explanation: Does the segmentation look plausible?</details-title>
+> <solution-title>Does the segmentation look plausible?</solution-title>
 >
 > Colours that follow single crowns and differ between neighbours, and ground in the non-vegetation class,
 > suggest a good result. Straight cuts along tile borders or one colour across several crowns
 > suggest errors. A plausible picture is not proof, though: measuring accuracy needs trees that were
 > labelled independently, for example in the field.
 >
-{: .details}
+{: .solution}
 
 # Next steps
 
