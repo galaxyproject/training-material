@@ -75,7 +75,7 @@ built by the 3Dtrees community, and the data are part of the THEIA data hub.
 
 The data were collected by drone over a Mediterranean oak forest near Pic Saint-Loup in southern
 France ({% cite Alleaume2021 %}). The dataset has four files, one per flight area. We use only the
-smallest, `Strip-20210804-150144_D.las` (477 MB). LAS is a common file format for LiDAR points;
+smallest, `Strip-20210804-150144_D.las` (476,9 MB). LAS is a common file format for LiDAR points;
 LAZ is its compressed version.
 
 > <details-title>About the Pic Saint-Loup dataset</details-title>
@@ -132,9 +132,9 @@ LAZ is its compressed version.
 >    >
 >    > You can also select **Choose from repository** in **Upload**, open **Recherche Data Gouv**,
 >    > search for `pic` and open **Données lidar acquises par drone au pied du Pic St Loup (34)**.
->    > Note that there is 4 datafiles on the repository, only one file is needed for the tuto.
+>    > Note that there is 4 datafiles on the repository, only one file, `Strip-20210804-150144_D.las`, is used for the tuto.
 >    > In our test, this import stopped at 187 MB without an error, so check the file size
->    > afterwards.
+>    > is 476,9 Mb afterwards.
 >    >
 >    > ![Repository browser showing the four LAS files of the Pic Saint-Loup dataset](../../images/3dtrees/rdg_files.png "The four flight-area files. Only file D is needed")
 >    {: .tip}
