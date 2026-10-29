@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to Metabarcoding using QIIME 2"
-zenodo_link: "https://doi.org/10.5281/zenodo.21614437"
+zenodo_link: "https://doi.org/10.5281/zenodo.21614436"
 questions:
   - Why is the fat-tailed dunnart a useful system for investigating host-associated microbiomes in a conservation context?
   - How might captivity alter the gut microbiome?
@@ -55,7 +55,7 @@ tags:
 
 ---
 
-This tutorial covers how to perform a metabarcoding analysis of 16S V4 region (variable region 4) rRNA gene amplicon data from marsupial-associated bacteria in dunnart faecal samples using QIIME 2 tools and compares samples collected from wild and captive fat-tailed dunnarts. The analysis presented in this tutorial can be generalised and applied to amplicon data for other commonly sequenced marker genes/regions, e.g.:
+This tutorial covers how to perform a metabarcoding analysis of 16S V4 region (variable region 4) rRNA gene amplicon data from marsupial-associated bacteria in fat-tailed dunnart faecal samples using QIIME 2 tools. The analysis presented in this tutorial can be generalised and applied to amplicon data for other commonly sequenced marker genes/regions, e.g.:
   - ITS1/ITS2 (Fungi)​
   - 18S rRNA (Eukaryotes)​
   - CO1 (Animals, especially insects)​
@@ -111,7 +111,7 @@ We will be doing this step multiple times throughout this workshop to view visua
 
 > <comment-title>The QIIME vizualisation extractor Tool</comment-title>
 >
-> Within Galaxy, the **QIIME vizualisation extractor** tool can be used to view QIIME2 `.qzv` visualisation files. However, some QIIME2 visualisation files will not properly display or will lose some of the visualisation's interactive features.
+> Within Galaxy, the {% tool QIIME vizualisation extractor %} tool can be used to view QIIME2 `.qzv` visualisation files. However, some QIIME2 visualisation files will not properly display or will lose some of the visualisation's interactive features.
 >
 {: .comment}
 
@@ -178,9 +178,9 @@ Here, the data files (two per sample, i.e. forward and reverse reads `R1` and `R
 
 These sequences still have the primers attached and must be removed prior to denoising.
 
-For this workshop, we perform primer trimming using the **Cutadapt** tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using **Cutadapt**, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
+For this workshop, we perform primer trimming using the {% tool Cutadapt %} tool in Galaxy. Amplicons were generated using standard 16S rRNA gene primers for the v4 region, and the reads returned from the sequencer therefore include these primer sequences at the 5′ ends. Using {% tool Cutadapt %}, the specified primer sequence and any bases upstream of the match are removed, with an error rate of 0.10 to balance sensitivity of primer detection with specificity of trimming. Degenerate bases in the primers are accommodated using wildcard matching, and any reads lacking the expected primer sequences are discarded to minimise inclusion of off-target amplification products. A modest 3′ quality trimming threshold (Phred score = 20) is also applied to remove low-quality bases prior to downstream denoising.
 
-It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone **Cutadapt** tool instead of **qiime2 cutadapt trim-paired** because the QIIME2 implementation does not have the *"NextSeq trimming"* parameter (the `--nextseq-trim` flag if running **Cutadapt** via command line), which is specifically designed to remove these artificial poly-G tails.
+It is important to note that these data were generated on an Illumina NextSeq platform, which uses 2-colour chemistry and can produce artificial poly-G tails at the ends of reads under low-signal conditions. We use standalone {% tool Cutadapt %} tool instead of {% tool qiime2 cutadapt trim-paired %} because the QIIME2 implementation does not have the *"NextSeq trimming"* parameter (the `--nextseq-trim` flag if running {% tool Cutadapt %} via command line), which is specifically designed to remove these artificial poly-G tails.
 
 > <hands-on-title>Run Cutadapt</hands-on-title>
 >
@@ -223,9 +223,9 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 >
 > > <details-title>Alternately running qiime2 cutadapt trim-paired</details-title>
 > >
-> > The following step shows the tool set up for running **qiime2 cutadapt trim-paired** to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone **Cutadapt** (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
+> > The following step shows the tool set up for running {% tool qiime2 cutadapt trim-paired %} to perform a simplified trimming approach without the *"NextSeq trimming"* option. However, for production analyses of NextSeq data, best practice is to perform trimming with the standalone {% tool Cutadapt %} (including *"NextSeq trimming"*) prior to importing reads into QIIME 2, as this improves removal of sequencing artefacts and can enhance downstream denoising and taxonomic resolution.
 > >
-> > Note, **qiime2 cutadapt trim-paired** requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by **Cutadapt**. A QIIME2 artefact can be created from a dataset collection using **qiime2 tools import** as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-a-qiime2-artefact).
+> > Note, {% tool qiime2 cutadapt trim-paired %} requires the input reads to be stored as a single QIIME2 artefact (e.g. `combined.qza`), not a dataset collection as used by {% tool Cutadapt %}. A QIIME2 artefact can be created from a dataset collection using {% tool qiime2 tools import %} as shown below in [Hands On: Create QIIME2 Artefact]({% link topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.md %}#hands-on-create-a-qiime2-artefact).
 > >
 > > > <hands-on-title>Run Cutadapt</hands-on-title>
 > > >
@@ -253,7 +253,7 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 > <comment-title>Quality Control</comment-title>
 >
-> When processing your own data, you should inspect the quality of your datasets before and after running **Cutadapt** in order to determine the parameters to set for **Cutadapt** and then to ensure that **Cutadapt** has adequately cleaned your data. These quality control steps can be done using the tools **FastQC** and **MultiQC**. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
+> When processing your own data, you should inspect the quality of your datasets before and after running {% tool Cutadapt%} in order to determine the parameters to set for {% tool Cutadapt %} and then to ensure that {% tool Cutadapt %} has adequately cleaned your data. These quality control steps can be done using the tools {% tool FastQC %} and {% tool MultiQC %}. The tutorial [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) describes these tools and the output QC plots the tools produce.
 >
 {: .comment}
 
@@ -261,9 +261,9 @@ It is important to note that these data were generated on an Illumina NextSeq pl
 
 QIIME2 requires `.fastq.gz` sequence datasets to follow the CASAVA file naming format (`SampleID_FWDXX-REVXX_L001_R[1 or 2]_001.fastq`, e.g. `D01_FWD09_REV01_L001_R1_001.fastq.gz`) in order to import `.fastq.gz` sequence datasets into the QIIME2 artefact format (`.qza`), which is the data format used by the QIIME2 suite of tools. Generally a single `.qza` QIIME2 artefact will be created that contains all of the `.fastq.gz` sample datasets to be processed.
 
-In Galaxy, the `.fastq.gz` datasets can be provided as an input to the import tool, **qiime2 tools import**, either as individual datasets (although this requires manually specifying each dataset to be included) or as a dataset collection (recommended method). The input dataset collection must be a list collection even when using paired-end reads.
+In Galaxy, the `.fastq.gz` datasets can be provided as an input to the import tool, {% tool qiime2 tools import %}, either as individual datasets (although this requires manually specifying each dataset to be included) or as a dataset collection (recommended method). The input dataset collection must be a list collection even when using paired-end reads.
 
-The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by **Cutadapt** to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
+The following steps reformat the paired-end collection of `.fastq.gz` trimmed sequences produced by {% tool Cutadapt %} to a flat list collection and rename the datasets within the list collection to satisfy the CASAVA format requirements.
 
 > <hands-on-title>Prepare Collection for QIIME2</hands-on-title>
 >
@@ -295,7 +295,7 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 > 8. **Rename** {% icon galaxy-pencil %} the output to: `identifier mapping`
 >
-> 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the default output format of **Paste** is `txt`).
+> 9. **Change** {% icon galaxy-pencil %} the `identifier mapping` datatype/format to `tabular` (the default output format of {% tool Paste %} is `txt`).
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
@@ -308,7 +308,7 @@ The following steps reformat the paired-end collection of `.fastq.gz` trimmed se
 >
 {: .hands_on}
 
-Once the collection of trimmed `.fastq.gz` sequences is correctly named to import into QIIME2, we use the **qiime2 tools import** tool to create a single QIIME2 artefact file (`.qza`) containing all the trimmed sequences.
+Once the collection of trimmed `.fastq.gz` sequences is correctly named to import into QIIME2, we use the {% tool qiime2 tools import %} tool to create a single QIIME2 artefact file (`.qza`) containing all the trimmed sequences.
 
 > <hands-on-title>Create a QIIME2 Artefact</hands-on-title>
 >
@@ -378,7 +378,7 @@ In the following command, a pooling method (*"pooling_method"*) of `pseudo` is s
 
 > <comment-title>Precomputed DADA2 Denoising Results</comment-title>
 >
-> The following DADA2 denoising step can take a long time to run (~1h). You can either wait for this step to run or import the results from a previous run of **qiime2 dada2 denoise-paired**.
+> The following DADA2 denoising step can take a long time to run (~1h). You can either wait for this step to run or import the results from a previous run of {% tool qiime2 dada2 denoise-paired %}.
 >
 > > <hands-on-title>Import denoised dataset files</hands-on-title>
 > >
@@ -795,7 +795,7 @@ Next, we’ll analyse sample composition in the context of categorical metadata 
 
 ### ANCOM-BC2 Differential Abundance
 
-Finally, we'll do differential abundance testing with ANCOM-BC2. ANCOM-BC2 is a compositionally-aware linear regression model that allows testing for differentially abundant features across sample groups while also implementing bias correction. This can be accessed using the **qiime2 composition ancombc2** tool.
+Finally, we'll do differential abundance testing with ANCOM-BC2. ANCOM-BC2 is a compositionally-aware linear regression model that allows testing for differentially abundant features across sample groups while also implementing bias correction. This can be accessed using the {% tool qiime2 composition ancombc2 %} tool.
 
 We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Captivity. If you had more than two treatments, you can specify a reference level to define what each group is compared against (*"reference_levels: List[Str]"*: `Captivity::Wild`). This is not necessary when you just have two groups.
 
@@ -827,7 +827,7 @@ We’ll apply ANCOM-BC2 to see which ASV are differentially abundant across Capt
 
 You need to export your ASV table, taxonomy table, and tree file for analyses in R. Many file formats can be accepted.
 
-The tool for exporting QIIME2 artefacts to standard formats, **qiime2 tools export**, requires the user to specify the type and format of `.qza` artefact. When running the tool manually (selecting from the tool panel and specifying the input dataset to be exported), these fields will pre-fill with the correct values for the selected dataset.
+The tool for exporting QIIME2 artefacts to standard formats, {% tool qiime2 tools export %}, requires the user to specify the type and format of `.qza` artefact. When running the tool manually (selecting from the tool panel and specifying the input dataset to be exported), these fields will pre-fill with the correct values for the selected dataset.
 
 However, when creating a workflow, the `.qza` type and format cannot be pre-filled and the tool step in the workflow will provide free-text boxes in which the user must provide the correct type and format. The easiest way to determine the type and format is to run the tool manually with an example of the expected input `.qza` and note and copy the type and format that are pre-filled into the tool in the workflow.
 
