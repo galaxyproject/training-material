@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Metabarcoding of bacteria in dunnart faecal samples across Australia (wild + captive) using QIIME 2"
+title: "Introduction to Metabarcoding using QIIME 2"
 zenodo_link: "https://doi.org/10.5281/zenodo.21614437"
 questions:
   - Why is the fat-tailed dunnart a useful system for investigating host-associated microbiomes in a conservation context?
@@ -55,6 +55,23 @@ tags:
 
 ---
 
+This tutorial covers how to perform a metabarcoding analysis of 16S V4 region (variable region 4) rRNA gene amplicon data from marsupial-associated bacteria in dunnart faecal samples using QIIME 2 tools and compares samples collected from wild and captive fat-tailed dunnarts. The analysis presented in this tutorial can be generalised and applied to amplicon data for other commonly sequenced marker genes/regions, e.g.:
+  - ITS1/ITS2 (Fungi)​
+  - 18S rRNA (Eukaryotes)​
+  - CO1 (Animals, especially insects)​
+  - 12S rRNA (Vertebrates)​
+
+When using other marker genes or other regions of the 16S gene (i.e. not the 16S V4 region), some tool input parameters will need to be changed to apply to the data being analysed (e.g. primers used in {% tool Cutadapt %} and the sequence truncation lengths used in {% tool qiime2 dada2 denoise-paired %}) and the classifier used for taxonomic assignment will need to be trained using the reference taxonomy database of interest (e.g. [SILVA](https://www.arb-silva.de/), [HOMD](https://www.homd.org/), [PR2](https://pr2-database.org/), [UNITE](https://unite.ut.ee/), [GTDB](https://gtdb.ecogenomic.org)).
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 # Background
 
 What is the influence of captivity on gut microbiota of the fat-tailed dunnart?
@@ -100,14 +117,6 @@ We will be doing this step multiple times throughout this workshop to view visua
 
 This Galaxy tutorial based on material from the [Metabarcoding of bacteria in dunnart faecal samples across Australia (wild + captive)](https://mbite.mdhs.unimelb.edu.au/qiime2_dunnart/aio.html) tutorial and workshop created by [Melbourne Bioinformatics](https://mdhs.unimelb.edu.au/melbournebioinformatics) at the University of Melbourne.
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will deal with:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 # Data upload
 
