@@ -81,7 +81,7 @@ The **NCBI Datasets Genomes** tool {% cite OLeary2024 %} retrieves the protein s
 
 > <question-title></question-title>
 >
-> 1. How many proteins are in the FASTA file?
+> 1. How many proteins are there in the FASTA file?
 >
 > > <solution-title></solution-title>
 > >
