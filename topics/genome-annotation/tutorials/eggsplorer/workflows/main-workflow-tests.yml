@@ -1,0 +1,22 @@
+- doc: Pseudomonas aeruginosa PAO1 from its RefSeq accession
+  job:
+    Assembly accession: GCF_000006765.1
+  outputs:
+    genome_data_report:
+      asserts:
+        has_text:
+          text: "GCF_000006765.1"
+    emapper_annotations:
+      element_tests:
+        GCF_000006765.1:
+          asserts:
+            has_text:
+              text: "nosZ"
+    eggsplorer_report:
+      element_tests:
+        GCF_000006765.1:
+          asserts:
+            - that: has_text
+              text: '"proteins":5479'
+            - that: has_text
+              text: "Diderm envelope"
