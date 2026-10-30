@@ -144,12 +144,12 @@ Use the **annotations** output (`*.emapper.annotations`) for Eggsplorer.
 >
 > 2. Open the report with the {% icon galaxy-eye %} icon
 >
-{: .hands_on}
-
-> <tip-title>If the charts do not appear</tip-title>
+>    > <tip-title>If the charts do not appear</tip-title>
+>    >
+>    > Download the HTML report with the {% icon galaxy-save %} icon and open it in your browser. Galaxy may block the JavaScript needed for the charts. The report can be opened offline.
+>    {: .tip}
 >
-> Download the HTML report with the {% icon galaxy-save %} icon and open it in your browser. Galaxy may block the JavaScript needed for the charts. The report can be opened offline.
-{: .tip}
+{: .hands_on}
 
 The **summary tables** contain counts and scores for further analysis in Galaxy.
 
