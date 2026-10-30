@@ -10,15 +10,15 @@ contributors: [jennaj, garimavs]
     - **Red Error Datasets**:
         - Refer to the [Troubleshooting errors]({% link faqs/galaxy/analysis_troubleshooting.md %}) FAQ for red error in datasets.
     - **Unexpected results in Green Success Dataset**:
-        - To resolve it you may be asked to send in a shared history link and possibly a shared workflow link. For sharing your history, refer to this [these instructions]({% link faqs/galaxy/histories_sharing.md %}).
+        - To resolve it you may be asked to send in a shared history link and possibly a shared workflow link. For sharing your history, refer to [these instructions]({% link faqs/galaxy/histories_sharing.md %}).
         - To reach our support team, visit [Support FAQs]({% link faqs/galaxy/ %}#support).
     - **Functionality problems**:
         - Using [Galaxy Help](https://help.galaxyproject.org/) is the best way to get help in most cases.
         - If the problem is more complex, email a description of the problem and how to reproduce it.
     - **Administrative problems**:
         - If the problem is present in your own Galaxy, the administrative configuration may be a factor.
-        - For the fastest help directly from the development community, admin issues can be alternatively reported to the mailing list or the GalaxyProject [Gitter channel](https://gitter.im/galaxyproject/Lobby).
+        - For the fastest help directly from the development community, admin issues can be alternatively reported to the [mailing list](https://galaxyproject.org/mailing-lists) or the GalaxyProject [Matrix channel](https://matrix.to/#/#galaxyproject_Lobby:gitter.im).
 
 - For **Security Issues**, do not report them via GitHub. Kindly disclose these as explained in this [document](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md).
-- For **Bug Reporting**, create a Github issue. Include the steps mentioned [in these instructions]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}).
-- Search the [GTN Search](https://training.galaxyproject.org/search) to find prior Q & A, FAQs, tutorials, and other documentation across all Galaxy resources, to verify in case your issue was already faced by someone.
+- For **Bug Reporting**, create a [Github issue](https://github.com/galaxyproject/galaxy/issues). Include the steps mentioned [in these instructions]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}).
+- Search the [Galaxy Help](https://help.galaxyproject.org/) forum for prior Q & A, and the [GTN Search]({% link search2.html %}) for FAQs and tutorials, to verify in case your issue was already faced by someone.
