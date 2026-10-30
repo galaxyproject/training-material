@@ -4,8 +4,7 @@ description: This FAQ demonstrates how to choose which activities are shown in t
 box_type: tip
 layout: faq
 contributors: [nekrut]
-redirect_from:
-  - faqs/galaxy/activit_bar_how_to_enable
+redirect_from: [/faqs/galaxy/activit_bar_how_to_enable]
 ---
 
 The Activity Bar is always shown on the left of the Galaxy interface. To choose which activities it shows:
