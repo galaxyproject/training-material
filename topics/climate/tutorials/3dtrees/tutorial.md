@@ -188,7 +188,7 @@ writes a clean LAZ file that the following tools can rely on. It does not detect
 
 > <hands-on-title>Standardize file D</hands-on-title>
 >
-> 1. {% tool [3DTrees: LAS/LAZ Standardization](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy0) %} with the following parameters:
+> 1. {% tool [3DTrees: LAS/LAZ Standardization](toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy1) %} with the following parameters:
 >    - *"Mode"*: `Single File Standardization`
 >        - {% icon param-file %} *"Point Cloud File"*: `Strip-20210804-150144_D.las`
 >
