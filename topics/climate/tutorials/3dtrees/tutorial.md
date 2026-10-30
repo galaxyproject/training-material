@@ -117,7 +117,7 @@ LAZ is its compressed version.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
-> 2. Import the file from this address, with **Type** set to `laz`:
+> 2. Import the file from this address:
 >
 >    ```
 >    https://entrepot.recherche.data.gouv.fr/api/access/datafile/121030
@@ -127,8 +127,7 @@ LAZ is its compressed version.
 >
 >    > <comment-title>Why laz for a LAS file?</comment-title>
 >    >
->    > The Standardization tool currently only lists `laz` datasets. It reads the LAS content
->    > correctly and writes a real LAZ file for all later steps.
+>    > The Standardization reads the LAS and LAZ (LAS being a compressed LAZ file) content correctly and writes a real LAZ file for all later steps.
 >    {: .comment}
 >
 >    > <tip-title>Browsing the repository instead</tip-title>
@@ -161,10 +160,6 @@ LAZ is its compressed version.
 >
 > 1. Open the history [Pic Saint Loup](https://earth-system.usegalaxy.eu/u/marie.josse/h/pic-saint-loup)
 >    and select **Import this history** at the top right. It contains file D.
-> 2. Change the datatype of `Strip-20210804-150144_D.las` to `laz`, so the Standardization tool
->    can use it.
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="laz" %}
 >
 {: .hands_on}
 
