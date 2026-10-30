@@ -11,13 +11,16 @@ questions:
   - "How do I display images in Galaxy?"
   - "How do I filter images in Galaxy?"
   - "How do I segment simple images in Galaxy?"
+  - "Can the same image analysis workflow be reused on data from another discipline, such as Earth observation?"
 objectives:
   - "How to handle images in Galaxy."
   - "How to perform basic image processing in Galaxy."
+  - "Reuse the same segment-and-count workflow on an Earth observation image (cross-discipline reuse)."
 key_points:
 - The **Image Info** tool can provide valuable metadata information of an image.
 - TIFF files cannot viewed directly in most web browser, so a visualization plugin must be used.
 - For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.
+- The same threshold–label–count workflow can be applied across scientific domains—here a cell-counting workflow is reused unchanged to count supraglacial melt ponds in a Sentinel-2 satellite image.
 time_estimation: "1H"
 follow_up_training:
   -
@@ -31,9 +34,12 @@ contributions:
     - shiltemann
     - kostrykin
     - dianichj
+    - annefou
   funding:
     - deNBI
     - elixir-europe
+    - oscars
+    - fiesta
 tags:
   - Image segmentation
   - Image thresholding
@@ -41,6 +47,7 @@ tags:
   - Object counting
   - Overlay
   - Fluorescence microscopy
+  - Earth observation
 
 ---
 
@@ -58,15 +65,19 @@ This tutorial shows how to use Galaxy to perform basic image analysis tasks such
 >
 {: .agenda}
 
+The same Galaxy image analysis workflow can be applied to images from very different scientific domains. To account for that, this tutorial can be followed using an image either from a **Bioimaging** dataset (cell nuclei, fluorescence microscopy) or from **Earth observation** (supraglacial melt ponds in a Sentinel-2 satellite scene). The analysis steps are identical, the only differences concern the input images and the interpretation of parameters. Choose the data that better suits your needs:
+
+{% include _includes/cyoa-choices.html option1="Bioimaging" option2="Earth observation" default="Bioimaging" text="Choose the image data to work with. The image data from the **Bioimaging** dataset contains fluorescence microscopy images of DAPI-stained cell nuclei. The **Earth observation** image is a Sentinel-2 water-index image of Greenland supraglacial melt ponds. The analysis workflow is the same for both." %}
+
 # Getting Data
 
-The dataset required for this tutorial is available from [Zenodo]({{ page.zenodo_link }}) and
-contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information]({{ page.zenodo_link }})). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+<div class="Bioimaging" markdown="1">
 
-Our objective is to automatically count the number of cells contained in this image. In order to achieve this, we will enhance the quality of the image, automatically detect the nuclei and segment the nuclei and count them.
+The bioimaging dataset required for this tutorial is available from [Zenodo]({{ page.zenodo_link }}) and contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information]({{ page.zenodo_link }})). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
+Our objective is to automatically count the number of cells contained in an image. In order to achieve this, we will enhance the quality of the image, automatically detect and segment the nuclei, and finally count them.
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Bioimaging Data Upload</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
@@ -93,6 +104,46 @@ Our objective is to automatically count the number of cells contained in this im
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 {: .hands_on}
 
+</div>
+
+<div class="Earth-observation" markdown="1">
+
+The dataset for the Earth observation path is a single-band 16-bit **water-index image** derived from a Sentinel-2 satellite scene of the Greenland ice sheet, in which supraglacial melt ponds appear as bright objects.
+
+Our objective is to automatically count the number of melt ponds in the satellite image. In order to achieve this, we will enhance the quality of the image, automatically detect and segment the ponds, and finally count them.
+
+> <hands-on-title>Earth Observation Data Upload</hands-on-title>
+>
+> 1. If you are logged in, create a new history for this tutorial
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the Sentinel-2 melt-pond water-index image from [Zenodo](https://doi.org/10.5281/zenodo.20960690).
+>    - **Important:** Choose the type of data as `tiff`.
+>
+>    ```
+>    https://zenodo.org/records/20960690/files/melt_ponds_water_index.tif
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename {% icon galaxy-pencil %} the dataset to `input.tiff`
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+{: .hands_on}
+
+> <comment-title> Counting melt ponds with a cell-counting workflow </comment-title>
+>
+> In the Earth observation path, we reuse *the same* segment-and-count workflow that was built for counting of stained cell nuclei to count *supraglacial melt ponds* on the Greenland ice sheet. This is a cross-discipline experiment from the [OSCARS-FIESTA](https://oscars-project.eu/projects/fair-image-analysis-across-sciences) project. Why does it work? Melt ponds have a high ice-adapted water index, so in a water-index image they appear as *bright blobs on a darker background*, which is the same characteristic that is exploited for segmenting cell nuclei. Because every step of the workflow relies only on this contrast, it can be applied to the satellite image without modification. Only two things are specific to Earth observation: how the input image is produced (a water index computed from two spectral bands of the satellite scene, instead of a fluorescence channel recorded by the microscope), and what the threshold separates (open water from ice, instead of nuclei from background).
+{: .comment}
+
+> <comment-title> How the satellite image was prepared </comment-title>
+>
+> The image is a single-band ice-adapted normalised-difference water index, NDWI<sub>ice</sub> = (blue − red)/(blue + red) {% cite Williamson2018 %}, computed from a Sentinel-2 Level-2A scene (tile T22WEV, 2019-07-23) over the south-west Greenland ablation zone and rescaled to 16-bit so that melt ponds are bright. The preprocessing notebooks, the full Galaxy run provenance, the validation against an independently published lake map, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo).
+{: .comment}
+
+</div>
+
 
 # Image Metadata Extraction
 
@@ -107,12 +158,12 @@ Now, we can extract metadata from an image.
 >    > <question-title></question-title>
 >    >
 >    > 1. What is the datatype?
->    > 2. What are the pixel dimentions?
+>    > 2. What are the pixel dimensions?
 >    > 3. How many bits per pixel are used?
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. TIFF
->    > > 2. 1344x1024
+>    > > 2. 1344×1024 (bioimaging data) or 1000×1000 (Earth observation data)
 >    > > 3. 16
 >    > {: .solution }
 >    {: .question}
@@ -130,14 +181,24 @@ Not all tools can handle all image formats. Especially proprietary microscope im
 
 Your image should look something like this:
 
+<div class="Bioimaging" markdown="1">
 ![raw input image](../../images/imaging-introduction/tiffviewer_input.png){: width="75%"}
+</div>
+
+<div class="Earth-observation" markdown="1">
+![raw melt-pond water-index image](../../images/imaging-introduction/melt_ponds_input.png){: width="75%"}
+</div>
 
 > <question-title></question-title>
 >
 > The image now displays in Galaxy as a grayscale image. The lowest intensity values are shown as black and the highest intensity values as white. But what range of intensity values do those correspond to?
 >
 > > <solution-title></solution-title>
-> > The original image is 16-bit and the intensity values of the image (33069 to 36863, where 33069 corresponds to black and 36863 corresponds to white) only span about 6% of the range that can be represented using 16 bits (0 to 65535). For direct visual inspection of the image, Galaxy automatically performs a _windowing operation_ on the intensity values of the image, so that intensity values that are not present in the image do not get encoded in the color values. This strongly enhances visual recognisability of the image (compared to encoding 0 as black and 65535 as white without using windowing for the intensity values). Other visualization tools might not apply windowing automatically and will require explicit normalization of the image intensity histogram.
+> > The original image is 16-bit and the intensity values of the image only span a small fraction of the range that can be represented using 16 bits (0 to 65535):
+> > - **Bioimaging data:** 33069 to 36863 (33069 corresponds to black and 36863 corresponds to white), about 6% of the range.
+> > - **Earth observation data:** 32000 to 38000 (32000 corresponds to black and 38000 corresponds to white), about 9% of the range.
+> >
+> > For direct visual inspection of the image, Galaxy automatically performs a _windowing operation_ on the intensity values of the image, so that intensity values that are not present in the image do not get encoded in the color values. This strongly enhances visual recognisability of the image (compared to encoding 0 as black and 65535 as white without using windowing for the intensity values). Other visualization tools might not apply windowing automatically and will require explicit normalization of the image intensity histogram.
 > {: .solution }
 {: .question}
 
@@ -155,9 +216,17 @@ Next we will normalize the histogram to improve the contrast. We do this using a
 
 Your image should now look something like this:
 
+<div class="Bioimaging" markdown="1">
 ![viz_normalized output image](../../images/imaging-introduction/viz_normalized.png){: width="75%"}
 
-We can now clearly make out the presence of the stained nuclei. Next we will automatically detect these features and segment the image.
+We can now clearly make out the stained nuclei. Next we will automatically detect these features and segment the image.
+</div>
+
+<div class="Earth-observation" markdown="1">
+![normalised melt-pond water index](../../images/imaging-introduction/melt_ponds_normalized.png){: width="75%"}
+
+We can now clearly make out the melt ponds. Next we will automatically detect these features and segment the image.
+</div>
 
 # Image Filtering
 
@@ -179,12 +248,24 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 
 Your image should now look something like this:
 
+<div class="Bioimaging" markdown="1">
 ![viz_smoothed_normalized output image](../../images/imaging-introduction/viz_smoothed_normalized.png){: width="75%"}
+</div>
+
+<div class="Earth-observation" markdown="1">
+![smoothed normalised melt-pond water index](../../images/imaging-introduction/melt_ponds_smoothed_normalized.png){: width="75%"}
+</div>
 
 
 # Segmentation
 
-Objects of interest like nuclei can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.
+<div class="Bioimaging" markdown="1">
+Objects of interest like cell nuclei can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.
+</div>
+
+<div class="Earth-observation" markdown="1">
+Objects of interest like melt ponds can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.
+</div>
 
 > <hands-on-title>Segment image</hands-on-title>
 >
@@ -211,8 +292,13 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    > >    - {% icon param-file %} *"Input image"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %})
 >    > >    - *"Histogram equalization algorithm"*: `CLAHE`
 >    > >
->    > >    The information contained in the original image has now become visible to the human eye:
+>    > >    The information contained in the original image has now become visible to the human eye.
+>    > >
+>    > >    **Bioimaging data:**
 >    > >    ![normalized viz_segmented file](../../images/imaging-introduction/viz_segmented.png)
+>    > >
+>    > >    **Earth observation data:**
+>    > >    ![normalized melt-pond label map](../../images/imaging-introduction/melt_ponds_segmented.png)
 >    > >
 >    > {: .solution }
 >    {: .question}
@@ -235,20 +321,29 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    > How many objects were segmented?
 >    >
 >    > > <solution-title></solution-title>
->    > >  The {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} tool counted 425 objects.
+>    > >  The {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} tool counted:
+>    > >  - **Bioimaging data:** 425 nuclei.
+>    > >  - **Earth observation data:** 13 melt ponds, that are the major supraglacial lakes. A single Gaussian-smoothing + Otsu pass detects the large lakes; the full workflow in the [example repository](https://github.com/annefou/fiesta-galaxy-meltponds-eo) (median denoising and the literature water-index threshold) resolves the smaller ponds too, about 90 in this scene.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
 The resulting image should look something like this:
 
+<div class="Bioimaging" markdown="1">
 ![segmentation mask output image](../../images/imaging-introduction/viz_segmentation_mask.png){: width="75%"}
 
 We see the segmentation mask overlayed; each detected object (nucleus) is labeled with its ID value.
+</div>
 
-We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.
+<div class="Earth-observation" markdown="1">
+![melt-pond segmentation overlay](../../images/imaging-introduction/melt_ponds_segmentation_mask.png){: width="75%"}
+
+We see the detected supraglacial melt ponds outlined (red contours) on the water-index image.
+</div>
 
 # Conclusion
 
+With the help of just a few simple steps, we were able to detect the locations of the objects of interest, and count them.
 
-In this exercise you imported images into Galaxy, extracted meta information from an image, learned how to visualize microscopy images, filtered the image, and segmented cells using Galaxy.
+In this exercise you imported images into Galaxy, extracted meta information from an image, learned how to visually inspect images, filtered the image, and segmented and counted objects using Galaxy. You also saw that the same workflow can be used across different scientific disciplines, including bioimaging and Earth observation.
