@@ -211,7 +211,7 @@ The cell diagram displays predicted cellular components: respiration at the top,
 > <question-title></question-title>
 >
 > 1. Find type I secretion (T1SS). What is the completeness score?
-> 2. Open its details. Which KO is missing?
+> 2. Find again the T1SS in "Metabolic function completeness" section, click it and see the details. Which KO is missing?
 >
 > > <solution-title></solution-title>
 > >
