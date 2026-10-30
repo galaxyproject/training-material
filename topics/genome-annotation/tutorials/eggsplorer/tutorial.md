@@ -250,12 +250,12 @@ The cycle diagrams connect individual functions into pathways. Follow the arrows
 
 > <question-title></question-title>
 >
-> 1. Trace the pathway from nitrate to nitrogen gas in the nitrogen cycle. Are all four steps supported?
-> 2. Find *nitrogen fixation* in the metabolic function details. Were any of its required KOs found?
+> 1. Trace the pathway from nitrate (NO<sub>3</sub><sup>-</sup>) to nitrogen gas (N<sub>2</sub>) in the nitrogen cycle. Are all four steps supported?
+> 2. Find *nitrogen fixation* (N<sub>2</sub> → NH<sub>4</sub><sup>+</sup>) in the metabolic function details. Were any of its required KOs found?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Yes. Nitrate reduction, nitrite reduction, nitric oxide reduction and nitrous-oxide reduction all have corrected scores of 1.00. Together they support a prediction of complete denitrification.
+> > 1. Yes. Nitrate reduction (NO<sub>3</sub><sup>-</sup> → NO<sub>2</sub><sup>-</sup>), nitrite reduction (NO<sub>2</sub><sup>-</sup> → NO), nitric oxide reduction (NO → N<sub>2</sub>O) and nitrous-oxide reduction (N<sub>2</sub>O → N<sub>2</sub>) all have corrected scores of 1.00. Together they support a prediction of complete denitrification.
 > > 2. No. Its score is 0, with no assignments for the required nitrogenase KOs. Nitrogen fixation and denitrification are different processes.
 > >
 > {: .solution}
