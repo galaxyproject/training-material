@@ -114,7 +114,7 @@ eggNOG-mapper identifies related proteins and transfers functional annotations. 
 >    - *"Version of eggNOG Database"*: select an available version and record it for reproducibility
 >
 >    > <comment-title>Runtime</comment-title>
->    > Runtime depends on the computational resources and workload of the Galaxy server.
+>    > Runtime depends on the computational resources and workload of the Galaxy server. Bacterial genomes should take around 30-50 min depending on the genome size. 
 >    {: .comment}
 >
 {: .hands_on}
