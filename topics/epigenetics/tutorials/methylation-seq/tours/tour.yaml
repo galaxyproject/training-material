@@ -1,0 +1,414 @@
+---
+id: epigenetics-methylation-seq
+name: Galaxy Tour
+description: In this tour we will perform the methylation and metric extraction and detect differentially methylated regions (DMRs).
+title_default: epigenetics-methylation-seq
+steps:
+  - title: DNA Methylation data analysis
+    content: >-
+      In this tour we will perform the methylation and metric extraction and detect differentially methylated regions (DMRs).
+    backdrop: true
+  - title: Step 1. Load  data and quality control
+    element: '#shared .dropdown a[href$="/library/index"]'
+    content: >-
+      We load now the example dataset which will be used for the tutorial. Click on Shared Data.
+    placement: right
+  - title: Step 2. Load  data and quality control
+    element: 'li a[href$="/library/list"]'
+    content: In the dropdown menu click on Data Libraries. In the new window search for MethylSeq_2017. Select the uploaded datasets subset_1.fastq.gz and subset_2.fastq.gz as the fastq files.
+    placement: right
+  - title: Estimating quality with FastQC
+    content: >-
+      To estimate sequence quality and treatments to do on the data we will use FastQC open-source tool.
+      For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
+    backdrop: true
+  - title: Step 3. Estimating quality with FastQC
+    element: '#tool-search-query'
+    content: 'Search for FastQC tool'
+    placement: right
+    textinsert: 'fastQC'
+  - title: Step 4. Estimating quality with FastQC
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+  - title: Step 5. Estimating quality with FastQC
+    element: '#tool-search'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Step 6. Estimating quality with FastQC
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Inspect the FastQC report on the webpage <ul>
+        <li>have a closer look at ‘Per base sequence content’</li>
+      </ul>
+    position: left
+  - title: Questions. Estimating quality with FastQC
+    content: |-
+      Inspect the FastQC report on the webpage  <ul>
+        <li>Note the GC distribution and percentage of “T” and “C”. Why is this so weird?</li>
+        <li>Is everything as expected?</li>
+      </ul>
+    backdrop: true
+  - title: Alignment
+    content: We will map now the imported dataset against a reference genome.
+    backdrop: true
+  - title: Step 7. Mapping with bwameth
+    element: '#tool-search-query'
+    content: 'Search for bwameth tool'
+    placement: right
+    textinsert: 'bwameth'
+  - title: Step 8. Mapping with bwameth
+    element: '#tool-search'
+    content: Click on the "bwameth" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwameth%2Fbwameth%2F0.2.0.3"]
+  - title: Step 9. Mapping with bwameth
+    element: '#tool-search'
+    content: |-
+      Execute the tool on two imported datasets with  <ul>
+        <li>"Select a genome reference from your history or a built-in index?"to "Use a built-in index"</li>
+        <li>Set the human genome to "hg38"</li>
+        <li>Set the option "Is this library mate-paired?" to "Paired-end"</li>
+      </ul>
+    position: left
+  - title: Mapping with bwameth
+    content: Please notice that depending on your system this computation can take some time. If you want to skip this, we provide for you a precomputed alignment. Import aligned_subset.bam to your history.
+    backdrop: true
+  - title: Questions. Mapping with bwameth
+    content: |-
+      <ul>
+        <li>Why we need other alignment tools for bisulfite sequencing data?</li>
+      </ul>
+    backdrop: true
+  - title: Methylation bias
+    content: We will extract the methylation on the resulting BAM file of the alignment step.
+    backdrop: true
+  - title: Step 10. Methylation bias
+    element: '#tool-search-query'
+    content: 'Search for MethylDackel tool'
+    placement: right
+    textinsert: 'MethylDackel'
+  - title: Step 11. Methylation bias
+    element: '#tool-search'
+    content: Click on the "MethylDackel" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fpileometh%2Fpileometh%2F0.3.0"]
+  - title: Step 12. Methylation bias
+    element: '#center-panel'
+    content: |-
+      Execute the tool on two imported datasets with  <ul>
+        <li>Set "Load reference genome from"to "Local cache"</li>
+        <li>Set for the "Using reference genome" to "hg38"</li>
+        <li>Select for the option "sorted_alignments.bam" the computed bam file of step 9 of the bwameth alignment.</li>
+        <li>Set "What do you want to do?" to "Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images"</li>
+        <li>Set the parameters "keepSingleton" and "keepDiscordant" to Yes</li>
+      </ul>
+    position: left
+  - title: Remarks. Methylation bias
+    content: |-
+      Note that biases of less than 5% can be ignored due to the fact that 5% difference is well within the range of biological insignificance.
+    backdrop: true
+  - title: Questions. Methylation bias
+    content: |-
+      Inspect the results<ul>
+        <li>Consider the original top strand output. Is there a methylation bias?</li>
+        <li>If we would trim, what would be the start and the end positions?</li>
+      </ul>
+    backdrop: true
+  - title: Step 13. Methylation extraction with MethylDackel
+    element: '#tool-search-query'
+    content: 'Search for MethylDackel tool'
+    placement: right
+    textinsert: 'MethylDackel'
+  - title: Step 14. Methylation extraction with MethylDackel
+    element: '#tool-search'
+    content: Click on the "MethylDackel" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fpileometh%2Fpileometh%2F0.3.0"]
+  - title: Step 15. Methylation extraction with MethylDackel
+    element: '#center-panel'
+    content: |-
+      Execute the tool on the datasets with  <ul>
+        <li>Set "Load reference genome from"to "Local cache"</li>
+        <li>Set for the "Using reference genome" to "hg38"</li>
+        <li>Select for the option "sorted_alignments.bam" the computed bam file of step 9 of the bwameth alignment.</li>
+        <li>Set "What do you want to do?" to "Extract methylation metrics from an alignment file in BAM/CRAN format"</li>
+        <li>Set "Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics" to Yes</li>
+        <li> Set the parameter "fraction" to Yes</li>
+      </ul>
+    position: left
+  - title: Visualization
+    content: We will visualize the example with the help of deepTools.
+    backdrop: true
+  - title: Step 16. Visualization
+    element: '#tool-search-query'
+    content: 'Search for Wig/BedGraph-to-bigWig tool'
+    placement: right
+    textinsert: 'Wig/BedGraph-to-bigWig'
+  - title: Step 17. Visualization
+    element: '#tool-search'
+    content: Click on the "Wig/BedGraph-to-bigWig" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=wig_to_bigWig"]'
+  - title: Step 18. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool on two imported datasets with  default settings.
+    position: left
+  - title: Questions
+    content: The execution fails. Do you have an idea why?
+    backdrop: true
+  - title: Step 19. Visualization
+    element: '#tool-search-query'
+    content: 'Search for tail tool'
+    placement: right
+    textinsert: 'tail'
+  - title: Step 20. Visualization
+    element: '#tool-search'
+    content: Click on the "Select last lines from a dataset (tail)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_tail_tool%2F1.1.0"]
+  - title: Step 21. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool on the datasets with  <ul>
+        <li>Use the mode "Operation" the value "Keep everything from this line on" and choose "2" as a value.</li>
+      </ul>
+    position: left
+  - title: Step 22. Visualization
+    element: '#tool-search-query'
+    content: 'Search for awk tool'
+    placement: right
+    textinsert: 'awk'
+  - title: Step 23. Visualization
+    element: '#tool-search'
+    content: Click on the "Text reformatting with awk" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_awk_tool%2F1.1.0"]
+  - title: Step 24. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Use as AWK Program: 'BEGIN{OFS="\t"}{print $1, $2, $3, $4}'</li>
+      </ul>
+    position: left
+  - title: Step 25. Visualization
+    element: '#tool-search-query'
+    content: 'Search for computeMatrix tool'
+    placement: right
+    textinsert: 'computeMatrix'
+  - title: Step 26. Visualization
+    element: '#tool-search'
+    content: Click on the "computeMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F2.5.1.1.0"]
+  - title: Step 27. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Use the file 'CpGIslands.bed' as 'Regions to plot'</li>
+        <li>and the in the previous step created bigwig file as the 'score file'</li>
+        <li>Use for the option 'computeMatrix has two main output options' the value 'reference-point'.</li>
+      </ul>
+    position: left
+  - title: Step 28. Visualization
+    element: '#tool-search-query'
+    content: 'Search for plotProfile tool'
+    placement: right
+    textinsert: 'plotProfile'
+  - title: Step 29. Visualization
+    element: '#tool-search'
+    content: Click on the "plotProfile" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_profile%2Fdeeptools_plot_profile%2F2.5.1.1.0"]
+  - title: Step 30. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Choose for 'Matrix file from the computeMatrix tool' the file computed at step 27</li>
+      </ul>
+    position: left
+  - title: Step 31. Visualization
+    content: Import from the data library the files NB1_CpG.meth.bedGraph
+    backdrop: true
+  - title: Step 32. Visualization
+    element: '#tool-search-query'
+    content: 'Search for Wig/BedGraph-to-bigWig tool'
+    placement: right
+    textinsert: 'Wig/BedGraph-to-bigWig'
+  - title: Step 33. Visualization
+    element: '#tool-search'
+    content: Click on the "Wig/BedGraph-to-bigWig" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=wig_to_bigWig"]
+  - title: Step 34. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool on the imported file with  default settings.
+    position: left
+  - title: Questions
+    content: The execution fails. Do you have an idea why?
+  - title: Visualization
+    content: Every chromosome is named different, the list to transfer the ensembl notation to ucsc notation is having more than 500 entries. To convert it you can use the tool Replace column.
+    backdrop: true
+  - title: Step 35. Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload the conversion file. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Step 36. Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Step 37. Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: Insert the link here.<br> The input is available on <a
+      href="https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt">link</a> in the tutorial. Right click it and then "Copy Link Address"
+    placement: right
+    textinsert: >-
+      https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt
+  - title: Step 38. Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Step 39. Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Step 40. Visualization
+    element: '#tool-search-query'
+    content: Search for 'replace column' tool
+    placement: right
+    textinsert: 'replace column'
+  - title: Step 41. Visualization
+    element: '#tool-search'
+    content: Click on the "Replace column" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Freplace_column_by_key_value_file%2Freplace_column_with_key_value_file%2F0.1"]
+  - title: Step 42. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Choose for "File in which you want to replace some values" the bedGraph file</li>
+        <li>Choose for "Replace information file" the new imported file.</li>
+        <li>Choose for "Which column should be replaced?" the value "1"</li>
+        <li>Choose for "Skip this many starting lines" the value "1"</li>
+        <li>Set "Delimited by" to "Tab"</li>
+      </ul>
+    position: left
+  - title: Visualization
+    content: In case this tool is not available in your galaxy instance, we precomputed the files for you. Please import NB1_CpG.meth_ucsc.bedGraph, NB2_CpG.meth_ucsc.bedGraph, BT089_CpG.meth_ucsc.bedGraph, BT126_CpG.meth_ucsc.bedGraph and BT198_CpG.meth_ucsc.bedGraph.
+    backdrop: true
+  - title: Step 43. Visualization
+    element: '#tool-search-query'
+    content: 'Search for computeMatrix tool'
+    placement: right
+    textinsert: 'computeMatrix'
+  - title: Step 44. Visualization
+    element: '#tool-search'
+    content: Click on the "computeMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F2.5.1.1.0"]
+  - title: Step 45. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Use the file 'CpGIslands.bed' as 'Regions to plot'</li>
+        <li>and the in the previous step created bigwig file as the 'score file'</li>
+        <li>Use for the option 'computeMatrix has two main output options' the value 'reference-point'.</li>
+      </ul>
+    position: left
+  - title: Step 46. Visualization
+    element: '#tool-search-query'
+    content: 'Search for plotProfile tool'
+    placement: right
+    textinsert: 'plotProfile'
+  - title: Step 47. Visualization
+    element: '#tool-search'
+    content: Click on the "plotProfile" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_profile%2Fdeeptools_plot_profile%2F2.5.1.1.0"]
+  - title: Step 48. Visualization
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Choose for 'Matrix file from the computeMatrix tool' the file computed at step 27</li>
+      </ul>
+    position: left
+  - title: Metilene
+    content: |-
+      With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.
+    backdrop: true
+  - title: Metilene
+    content: |-
+      Import from the data library if you have not the files NB1_CpG.meth.bedGraph, NB2_CpG.meth.bedGraph, BT089_CpG.meth.bedGraph, BT126_CpG.meth.bedGraph and BT198_CpG.meth.bedGraph.
+    backdrop: true
+  - title: Step 49. Metilene
+    element: '#tool-search-query'
+    content: 'Search for metilene tool'
+    placement: right
+    textinsert: 'metilene'
+  - title: Step 50. Metilene
+    element: '#tool-search'
+    content: Click on the "metilene" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Fmetilene%2Fmetilene%2F0.2.6.1"]
+  - title: Step 51. Metilene
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Choose for the first option "Input group 1" the imported files starting with NB</li>
+        <li>Choose for the first option "Input group 2" the imported files starting with BT</li>
+        <li>Select for the option "BED file containing regions of interest" the imported BAM file CpGIslands.bed</li>
+      </ul>
+    position: left
+  - title: Questions. Metilene
+    content: |-
+      Have a look at the produced pdf document. What is the data showing?
+    backdrop: true
+  - title: Key Points
+    content: |-
+      <ul>
+        <li>The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA.</li>
+        <li>If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong.</li>
+        <li>To get useful results you need -- data, data and data!</li>
+      </ul>
+    backdrop: true

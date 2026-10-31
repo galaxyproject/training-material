@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Ocean's variables study / Ocean's variables study / Earth Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Ocean's variables study">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-05-10 09:13:11 +0000">
+<meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to access, analyze, and visualize Earth data using Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Earth Data Science / Ocean's variables study / Hands-on: Ocean's variables study">
+        <meta property="og:description" content="Learn to access, analyze, and visualize Earth data using Galaxy.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/climate/tutorials/ocean-variables/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Ocean's variables study",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-05-10 09:13:11 +0000",
+  "datePublished": "2023-11-29 17:38:31 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101058785",
+      "url": "https://cordis.europa.eu/project/id/101058785",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Fair-Ease",
+        "description": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.\n",
+        "url": "https://fairease.eu/",
+        "logo": "/training-material/assets/images/fair_ease_colour.png"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101057388",
+      "url": "https://cordis.europa.eu/project/id/101057388",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "EuroScienceGateway",
+        "description": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.\n",
+        "url": "https://galaxyproject.org/projects/esg/",
+        "logo": "/training-material/assets/images/eurosciencegateway.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:T00376",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Earth Data Science",
+    "description": "Learn to access, analyze, and visualize Earth data using Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+  },
+  "abstract": "Through this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool.",
+  "learningResourceType": "e-learning",
+  "name": "Ocean's variables study",
+  "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html",
+  "version": 5,
+  "timeRequired": "PT1H",
+  "teaches": "- Deals with ODV collection with data originating from Emodnet chemistry\n- Visualise ocean variables to study climate changes",
+  "keywords": [
+    "Earth Data Science",
+    "earth-system",
+    "ocean",
+    "netcdf data"
+  ],
+  "description": "## Abstract\n\nThrough this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to process extract ocean's variables?\n - How to use ODV collections?\n - How to create climatological estimates?\n\n\n## Learning Objectives\n\n- Deals with ODV collection with data originating from Emodnet chemistry\n- Visualise ocean variables to study climate changes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/dataterra/",
+          "name": "DATA TERRA",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.data-terra.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gaiadata/",
+          "name": "Gaia Data",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.gaia-data.org/"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0008-0622-604X",
+      "@id": "https://orcid.org/0009-0008-0622-604X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/dataterra/",
+          "name": "DATA TERRA",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.data-terra.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gaiadata/",
+          "name": "Gaia Data",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.gaia-data.org/"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0008-0622-604X",
+      "@id": "https://orcid.org/0009-0008-0622-604X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Earth Data Science",
+      "description": "Learn to access, analyze, and visualize Earth data using Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Earth Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Earth Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/ocean-variables/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/ocean-variables/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-climate">
+    <h1 data-toc-skip>Ocean's variables study</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-badge-small contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to process extract ocean’s variables?</p>
+</li>
+        
+        <li><p>How to use ODV collections?</p>
+</li>
+        
+        <li><p>How to create climatological estimates?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Deals with ODV collection with data originating from Emodnet chemistry</p>
+</li>
+        
+        <li><p>Visualise ocean variables to study climate changes</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/climate/tutorials/ocean-variables/workflows/" title="Ocean's variables study workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/climate/tutorials/ocean-variables/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 29, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 10, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00376">https://gxy.io/GTN:T00376</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/climate/tutorials/ocean-variables/tutorial.md">5</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Through this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool.
+In the second part, you will learn how to use DIVAnd using the inputs the outputs from ODV.</p>
+
+<p>Ocean Data View (ODV) is a software package for the interactive exploration, analysis and visualization of oceanographic and other geo-referenced profile, time-series, trajectory,
+or sequence data. To know more about ODV go check the <a href="https://odv.awi.de/">official page</a></p>
+
+<p>DIVAnd (Data-Interpolating Variational Analysis in n dimensions) performs an n-dimensional variational analysis/gridding of arbitrarily located observations.
+Observations will be interpolated/analyzed on a curvilinear grid in 1, 2, 3 or more dimensions. See the <a href="https://gher-uliege.github.io/DIVAnd-presentation/#1">official page</a></p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#manage-your-data" id="markdown-toc-manage-your-data">Manage your data</a></li>
+  <li><a href="#import-and-launch-the-workflow" id="markdown-toc-import-and-launch-the-workflow">Import and launch the workflow</a></li>
+  <li><a href="#workflow-human-in-the-loop" id="markdown-toc-workflow-human-in-the-loop">Workflow human in the loop</a>    <ol>
+      <li><a href="#ocean-data-view-managing-an-interactive-tool" id="markdown-toc-ocean-data-view-managing-an-interactive-tool">Ocean Data view: Managing an interactive tool</a></li>
+      <li><a href="#divand-data-interpolating-variational-analysis-in-n-dimensions" id="markdown-toc-divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</a></li>
+      <li><a href="#bonus-even-more-odv" id="markdown-toc-bonus-even-more-odv">BONUS: Even more ODV</a></li>
+    </ol>
+  </li>
+  <li><a href="#managing-odv-galaxy-interactive-tool" id="markdown-toc-managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</a></li>
+  <li><a href="#ocean-data-view" id="markdown-toc-ocean-data-view">Ocean Data View</a>    <ol>
+      <li><a href="#visualise-your-data-1" id="markdown-toc-visualise-your-data-1">Visualise your Data</a></li>
+      <li><a href="#subset-data-1" id="markdown-toc-subset-data-1">Subset Data</a></li>
+      <li><a href="#save-data-1" id="markdown-toc-save-data-1">Save Data</a></li>
+    </ol>
+  </li>
+  <li><a href="#divand-data-interpolating-variational-analysis-in-n-dimensions-1" id="markdown-toc-divand-data-interpolating-variational-analysis-in-n-dimensions-1">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</a>    <ol>
+      <li><a href="#get-the-bathymetry" id="markdown-toc-get-the-bathymetry">Get the Bathymetry</a></li>
+      <li><a href="#use-divand" id="markdown-toc-use-divand">Use DIVAnd</a></li>
+      <li><a href="#launch-divand" id="markdown-toc-launch-divand">Launch DIVAnd</a></li>
+    </ol>
+  </li>
+  <li><a href="#bonus-even-more-odv-1" id="markdown-toc-bonus-even-more-odv-1">BONUS: Even more ODV</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#extra-information" id="markdown-toc-extra-information">Extra information</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-some-complementary-information-about-your-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-some-complementary-information-about-your-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Some complementary information about your data </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets
+EMODnet Chemistry aims to provide access to marine chemistry datasets and derived data products concerning eutrophication, acidity, and contaminants. The importance of the selected substances and other parameters relates to the Marine Strategy Framework Directive (MSFD). This aggregated dataset contains all unrestricted EMODnet Chemistry data on eutrophication and acidity and covers the Mediterranean Sea. Data were aggregated and quality controlled by the ‘Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HCMR/HNODC)’ in Greece. To get more ODV collection and other data please  <a href="https://sextant.ifremer.fr/eng/Data/Catalogue#/search?isTemplate=n&amp;from=1&amp;to=30&amp;sortBy=dateStamp&amp;sortOrder=desc&amp;languageStrategy=searchInDetectedLanguage&amp;any=EMODnet%20Chemistry">search the sextant catalogue</a> or the <a href="https://emodnet-chemistry.webodv.awi.de/">EMODnet Chemistry catalogue</a>.</p>
+
+  <p>ITS-90 water temperature and water body salinity variables have also been included (‘as are’) to complete the eutrophication and acidity data. If you use these variables for calculations, please refer to SeaDataNet for the quality flags: https://www.seadatanet.org/Products/Aggregated-datasets.</p>
+
+  <p>Regional datasets concerning eutrophication and acidity are automatically harvested, and the resulting collections are aggregated and quality-controlled using ODV Software and following a common methodology for all sea regions <span class="citation"><a href="#emodnet">Lipizer <i>et al.</i> 2023</a></span>. Parameter names are based on P35 vocabulary, which relates to EMODnet Chemistry aggregated parameter names and is available at: https://vocab.nerc.ac.uk/search_nvs/P35/.</p>
+
+  <p>When not present in the original data, water body nitrate plus nitrite was calculated by summing all nitrate and nitrite parameters. The same procedure was applied for water body dissolved inorganic nitrogen (DIN), which was calculated by summing all nitrate, nitrite, and ammonium parameters. Concentrations per unit mass were converted to a unit volume using a constant density of 1.025 kg/L. <span class="citation"><a href="#hcmrdata">Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HCMR/HNODC) 2022</a></span></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoatutorialstyle">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Do you want to run the workflow or to discover the tools one by one ?</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1tutorialstyle" type="radio" name="cyoatutorialstyle" value="Tools" onclick="cyoaChoice('Tools', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt1tutorialstyle" class="select btn btn-secondary">Tools</label>
+	
+	
+		<input id="cyoa-opt2tutorialstyle" type="radio" name="cyoatutorialstyle" value="Workflow" onclick="cyoaChoice('Workflow', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt2tutorialstyle" class="select btn btn-secondary">Workflow</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("tools", "gtn-cyoatutorialstyle");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Workflow">
+
+  <h1 id="manage-your-data">Manage your data</h1>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-prepare-your-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare your history</div>
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial and give it a name (for example “Ocean’s variables”) for you to find it again later if needed.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Import an ODV collection as a zip folder.</p>
+
+        <p>Use this link <code class="language-plaintext highlighter-rouge">https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code> in the folowing instructions.
+And <strong>Name</strong> it <strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Get the Bathymetry
+First you need to download a bathymetry file you can use this link <a href="https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download">https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download</a> with the folowing Hands-on box where you can name this dataset <strong>bathymetry.nc</strong></p>
+      </li>
+    </ol>
+
+    <!--SNIPPET-->
+    <blockquote class="hands-on">   <div class="box-title hands-on-title" id="hands-on-importing-via-links"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing via links</div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <p>Check that the file is in netcdf !</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+  </blockquote>
+
+  <h1 id="import-and-launch-the-workflow">Import and launch the workflow</h1>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-import-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import the workflow</div>
+    <ul>
+      <li>Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+      <li>Option 1: use the URL
+  	- Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import at the top-right of the screen
+  	- Paste the URL of the workflow into the box labelled “Archived Workflow URL” <code class="language-plaintext highlighter-rouge">https://earth-system.usegalaxy.eu/u/marie.josse/w/oceans-var-v2</code></li>
+      <li>Option 2: use the workflow name
+  	- Click on <strong>Public workflows</strong> at the top-right of the screen
+        <ul>
+          <li>Search for <strong>Ocean’s variables 2.0</strong></li>
+          <li>In the workflow preview box click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import</li>
+        </ul>
+      </li>
+      <li>Click the Import workflow button</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run the workflow</div>
+    <ul>
+      <li>Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+      <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (Run workflow) button next to your workflow</li>
+      <li>/!\ Select <strong>Yes</strong> for <strong>Workflow semi automatic</strong></li>
+      <li>Configure the workflow as needed with the 2 datasets you uploaded right before (<strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong> and <strong>gebco_30sec_8.nc</strong></li>
+      <li>Click the Run Workflow button at the top-right of the screen</li>
+      <li>You may have to refresh your history to see the queued jobs</li>
+    </ul>
+  </blockquote>
+
+  <h1 id="workflow-human-in-the-loop">Workflow human in the loop</h1>
+
+  <p>Now you’ve got your workflow running, however this workflow is composed of both interactive and non interactive tools. Thus, for the interactive tools we need you !</p>
+
+  <h2 id="ocean-data-view-managing-an-interactive-tool">Ocean Data view: Managing an interactive tool</h2>
+  <p>ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
+This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
+
+  <p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your history you want to use in ODV,
+then press the <strong>execute</strong> button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
+Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on
+the tool in the history.</p>
+
+  <p>Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
+the “Project” Menu tab.</p>
+
+  <p>To get in the interactive tool do the folowing</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to <strong>Interactive Tools</strong> on the <strong>Activity Bar</strong> on the left</li>   <li>If your <strong>Activity Bar</strong> does not show the <strong>Interactive Tools</strong> <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">galaxy-interactive-tool</span> icon, make sure you are logged in first.</li>   <li>Wait for ODV to be in the <strong>running</strong> state (Job Info).</li>   <li>You might need to wait a bit until your interactive tool is loaded and ready for you.</li>   <li>Click on ODV     <ul>       <li>Wait until the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon next to the tool name appears; otherwise, you will run into an error message.</li>       <li>Clicking on the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon will open it in a new tab</li>     </ul>   </li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+  <h3 id="visualise-your-data">Visualise your Data</h3>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+    <p><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-odv-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-loading-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Loading data</div>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a folder open it (double clicking)</li>
+      <li>Select the file with a .odv extension
+ <img src="../../images/ocean_var/select_data.png" alt="Screenshot of what your pop-up screen should be like when selecting the right data. " width="632" height="439" loading="lazy" /></li>
+      <li>Click on <strong>Open</strong> in the bottom right</li>
+    </ol>
+
+    <p>There your data should be opening an you can now visualise them!</p>
+  </blockquote>
+  <p><img src="../../images/ocean_var/visualise_data.png" alt="Visualistation on an ODV map of the ODV collection. " width="1917" height="1032" loading="lazy" /></p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>What are the longitude and latitude of the red dot?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>On the to right window you can read Longitude 34°E and Latitude 32.332°N.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <h3 id="subset-data">Subset Data</h3>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-subset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create a subset</div>
+    <ol>
+      <li>On the left smaller map right click and select <strong>Zoom</strong></li>
+      <li>Then move your cursor on the map you should see a red rectangle moving along</li>
+      <li>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
+ <img src="../../images/ocean_var/select_subset.png" alt="Selection on the map of the part of the data that you want to analyse. " width="1073" height="932" loading="lazy" /></li>
+      <li>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.
+ <img src="../../images/ocean_var/subset.png" alt="Result of the subsetting and how the maps should look now. " width="1918" height="1035" loading="lazy" /></li>
+    </ol>
+
+    <p>Here you have created a a subset of your data.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-change-your-visualisation-properties"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Go to the central map</li>
+      <li>Click right and select <strong>Properties…</strong></li>
+      <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 50, and click <strong>OK</strong>
+<img src="../../images/ocean_var/size_dots.png" alt="Image on how to change the size of your dots. " width="658" height="653" loading="lazy" /></li>
+    </ol>
+
+    <p>You can now see bigger dots representing your data.
+<img src="../../images/ocean_var/big_dots.png" alt="Image of your maps after the increase of the dots' size. " width="1916" height="965" loading="lazy" /></p>
+
+    <p>If you already saved it once you just have to click left on the save icon (top left) when it’s red.</p>
+  </blockquote>
+
+  <h3 id="save-data">Save Data</h3>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoasavedata">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1savedata" type="radio" name="cyoasavedata" value="xview" onclick="cyoaChoice('xview', 'gtn-cyoasavedata')" />
+		<label for="cyoa-opt1savedata" class="select btn btn-secondary">xview</label>
+	
+	
+		<input id="cyoa-opt2savedata" type="radio" name="cyoasavedata" value="png" onclick="cyoaChoice('png', 'gtn-cyoasavedata')" />
+		<label for="cyoa-opt2savedata" class="select btn btn-secondary">png</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("png", "gtn-cyoasavedata");
+		})
+	</script>
+	
+</blockquote>
+
+  <div class="xview">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-view"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Save your subset view</div>
+      <ol>
+        <li>On the top left of your screen, you can see a red save button. Right-click on it.</li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and <strong>Save</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+  <div class="png">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Save your subset map</div>
+      <ol>
+        <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)</li>
+        <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extract-your-variables-in-netcdf-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract your variables in netcdf data</div>
+    <p>Now we want to extract and save the right parameters of your data in netcdf format.</p>
+    <ol>
+      <li>Go to the the left and click on <strong>Export</strong>, <strong>Data</strong> and <strong>NetCDF File…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>Click <strong>Save</strong></li>
+      <li>A new pop-up window opens “Select Extended Metadata Variables for Export” Let the 56 items selected and click <strong>OK</strong></li>
+      <li>“Select Data Variables for Export”  <code class="language-plaintext highlighter-rouge">here you need to select 1: Depth[m]</code>, ̀<code class="language-plaintext highlighter-rouge">4: Water body dissolved oxygen concentration [umol/l]</code>, <code class="language-plaintext highlighter-rouge">6: Water body phosphate [umol/l]</code> and click <strong>OK</strong>
+ <img src="../../images/ocean_var/select_var.png" alt="Screenshot of the variables one needs to select. " width="911" height="812" loading="lazy" /></li>
+      <li>“NetCDF File Properties” change the <strong>Longitude range</strong> to <code class="language-plaintext highlighter-rouge">[-180 ... 180] degrees_E</code>, then select <code class="language-plaintext highlighter-rouge">Export metadata quality flags</code> and <code class="language-plaintext highlighter-rouge">Export data quality flags</code> and <strong>OK</strong>.</li>
+      <li>And <strong>OK</strong> again</li>
+    </ol>
+
+    <p>You now know how to export and save the right variables on ODV to netCDF data.</p>
+  </blockquote>
+
+  <p>Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-exit-odv-and-go-back-on-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exit ODV and go back on Galaxy</div>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+
+    <p>You can now go back to your Galaxy instance.</p>
+  </blockquote>
+
+  <h2 id="divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</h2>
+  <p>You can see now in your Galaxy history that ODV turned green and that the folowing step launched itself.
+This tool DIVAnd is not interactive. It will create a climatology in netcdf that will then be used as input in the next step which is ODV again.
+Once, DIVAnd finished ODV get started and there we need you again !</p>
+
+  <h2 id="bonus-even-more-odv">BONUS: Even more ODV</h2>
+
+  <p>Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))</p>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-open-your-netcdf-data-in-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Open your Netcdf data in ODV</div>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to <strong>Interactive Tools</strong> on the <strong>Activity Bar</strong> on the left</li>   <li>If your <strong>Activity Bar</strong> does not show the <strong>Interactive Tools</strong> <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">galaxy-interactive-tool</span> icon, make sure you are logged in first.</li>   <li>Wait for ODV to be in the <strong>running</strong> state (Job Info).</li>   <li>You might need to wait a bit until your interactive tool is loaded and ready for you.</li>   <li>Click on ODV     <ul>       <li>Wait until the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon next to the tool name appears; otherwise, you will run into an error message.</li>       <li>Clicking on the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon will open it in a new tab</li>     </ul>   </li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a file open it (double clicking)</li>
+      <li>Click on <strong>Open</strong> in the bottom right. Then click on <strong>Next</strong> until you can click on <strong>Finish</strong> you can keep everything by default.</li>
+    </ol>
+
+    <p>There your data should be opening and you can now visualise them!
+<img src="../../images/ocean_var/med_view.png" alt="Image of what the netcdf files look like when opening with ODV. " width="1838" height="936" loading="lazy" /></p>
+
+  </blockquote>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-your-phosphate-variable"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualise your Phosphate variable</div>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 SURFACE Window”
+ <img src="../../images/ocean_var/surface_window.png" alt="Create a surface plot for the phosphate. " width="591" height="598" loading="lazy" /></li>
+      <li>Press right on the new plot and select <strong>Properties…</strong>
+ <img src="../../images/ocean_var/properties.png" alt="Going to the properties of the plot. " width="1538" height="914" loading="lazy" /></li>
+      <li>In the tab “Display Style” increase the “Symbol size” to 22 for instance</li>
+      <li>In the tab “Color Mapping” increase the level of the “Median” part and lower the “Nonlinearity” such as in the following picture
+ <img src="../../images/ocean_var/colors.png" alt="Balance the colors of the map to better visualise the Phosphate repartition. " width="659" height="652" loading="lazy" /></li>
+      <li>
+        <p>Then, click on <strong>OK</strong>, and you can see the Phosphate repartition.</p>
+      </li>
+      <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+    </ol>
+
+    <p>If you want to have a visualisation of the Phosphate according to the depth, you can do the following.</p>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 STATION Window” in the new tab, in the plot press enter on your keyboard.</li>
+      <li>Same as before to save it, click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+    </ol>
+
+    <p>You can now safely exit ODV.</p>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+  </blockquote>
+</div>
+
+<div class="Tools">
+  <h1 id="managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</h1>
+
+  <p>ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
+This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
+
+  <p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your history you want to use in ODV,
+then press the <strong>execute</strong> button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
+Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on
+the tool in the history.</p>
+
+  <p>Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
+the “Project” Menu tab.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Log in to Galaxy</div>
+      <ol>
+        <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+        <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+        <li>On the top panel go to <strong>Login or Register</strong></li>
+      </ol>
+
+    </blockquote>
+
+    <p>The Galaxy homepage is divided into three panels:</p>
+    <ul>
+      <li>Tools on the left</li>
+      <li>Viewing panel in the middle</li>
+      <li>History of analysis and files on the right</li>
+    </ul>
+
+    <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+    <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-deploy-your-own-odv-instance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Deploy your own ODV instance</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial and give it a name (for example “Ocean’s variables”) for you to find it again later if needed.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Import an ODV collection as a zip folder.</p>
+
+        <p>Use this link <code class="language-plaintext highlighter-rouge">https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code> in the folowing instructions.
+And <strong>Name</strong> it <strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are an ODV collection in a zip folder</code></li>
+          <li><em>“ODV collection in a zip folder.”</em>: <code class="language-plaintext highlighter-rouge">Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code></li>
+        </ul>
+
+        <p><img src="../../images/ocean_var/launching_odv.png" alt="Screenshot of what parameters to input in ODV before running the tool. " width="1920" height="804" loading="lazy" /></p>
+      </li>
+      <li>Click on <strong>Run Tool</strong></li>
+    </ol>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to <strong>Interactive Tools</strong> on the <strong>Activity Bar</strong> on the left</li>   <li>If your <strong>Activity Bar</strong> does not show the <strong>Interactive Tools</strong> <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">galaxy-interactive-tool</span> icon, make sure you are logged in first.</li>   <li>Wait for ODV to be in the <strong>running</strong> state (Job Info).</li>   <li>You might need to wait a bit until your interactive tool is loaded and ready for you.</li>   <li>Click on ODV     <ul>       <li>Wait until the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon next to the tool name appears; otherwise, you will run into an error message.</li>       <li>Clicking on the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon will open it in a new tab</li>     </ul>   </li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+  </blockquote>
+
+  <h1 id="ocean-data-view">Ocean Data View</h1>
+  <h2 id="visualise-your-data-1">Visualise your Data</h2>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+    <p><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-odv-disconnected-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-loading-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Loading data</div>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a folder open it (double clicking)</li>
+      <li>Select the file with a .odv extension
+ <img src="../../images/ocean_var/select_data.png" alt="Screenshot of what your pop-up screen should be like when selecting the right data. " width="632" height="439" loading="lazy" /></li>
+      <li>Click on <strong>Open</strong> in the bottom right</li>
+    </ol>
+
+    <p>There your data should be opening an you can now visualise them!</p>
+  </blockquote>
+  <p><img src="../../images/ocean_var/visualise_data.png" alt="Visualistation on an ODV map of the ODV collection. " width="1917" height="1032" loading="lazy" /></p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>What are the longitude and latitude of the red dot?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>On the to right window you can read Longitude 34°E and Latitude 32.332°N.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <h2 id="subset-data-1">Subset Data</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-subset-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create a subset</div>
+    <ol>
+      <li>On the left smaller map right click and select <strong>Zoom</strong></li>
+      <li>Then move your cursor on the map you should see a red rectangle moving along</li>
+      <li>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
+ <img src="../../images/ocean_var/select_subset.png" alt="Selection on the map of the part of the data that you want to analyse. " width="1073" height="932" loading="lazy" /></li>
+      <li>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.
+ <img src="../../images/ocean_var/subset.png" alt="Result of the subsetting and how the maps should look now. " width="1918" height="1035" loading="lazy" /></li>
+    </ol>
+
+    <p>Here you have created a a subset of your data.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-change-your-visualisation-properties-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Go to the central map</li>
+      <li>Click right and select <strong>Properties…</strong></li>
+      <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 50, and click <strong>OK</strong>
+<img src="../../images/ocean_var/size_dots.png" alt="Image on how to change the size of your dots. " width="658" height="653" loading="lazy" /></li>
+    </ol>
+
+    <p>You can now see bigger dots representing your data.
+<img src="../../images/ocean_var/big_dots.png" alt="Image of your maps after the increase of the dots' size. " width="1916" height="965" loading="lazy" /></p>
+
+    <p>If you already saved it once you just have to click left on the save icon (top left) when it’s red.</p>
+  </blockquote>
+
+  <h2 id="save-data-1">Save Data</h2>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoasavedata2">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1savedata2" type="radio" name="cyoasavedata2" value="xview" onclick="cyoaChoice('xview', 'gtn-cyoasavedata2')" />
+		<label for="cyoa-opt1savedata2" class="select btn btn-secondary">xview</label>
+	
+	
+		<input id="cyoa-opt2savedata2" type="radio" name="cyoasavedata2" value="png" onclick="cyoaChoice('png', 'gtn-cyoasavedata2')" />
+		<label for="cyoa-opt2savedata2" class="select btn btn-secondary">png</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("png", "gtn-cyoasavedata2");
+		})
+	</script>
+	
+</blockquote>
+
+  <div class="xview">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-view-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Save your subset view</div>
+      <ol>
+        <li>On the top left of your screen, you can see a red save button. Right-click on it.</li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and <strong>Save</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+  <div class="png">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-map-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Save your subset map</div>
+      <ol>
+        <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)</li>
+        <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extract-your-variables-in-netcdf-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract your variables in netcdf data</div>
+    <p>Now we want to extract and save the right parameters of your data in netcdf format.</p>
+    <ol>
+      <li>Go to the the left and click on <strong>Export</strong>, <strong>Data</strong> and <strong>NetCDF File…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>Click <strong>Save</strong></li>
+      <li>A new pop-up window opens “Select Extended Metadata Variables for Export” Let the 56 items selected and click <strong>OK</strong></li>
+      <li>“Select Data Variables for Export”  <code class="language-plaintext highlighter-rouge">here you need to select 1: Depth[m]</code>, ̀<code class="language-plaintext highlighter-rouge">4: Water body dissolved oxygen concentration [umol/l]</code>, <code class="language-plaintext highlighter-rouge">6: Water body phosphate [umol/l]</code> and click <strong>OK</strong>
+ <img src="../../images/ocean_var/select_var.png" alt="Screenshot of the variables one needs to select. " width="911" height="812" loading="lazy" /></li>
+      <li>“NetCDF File Properties” change the <strong>Longitude range</strong> to <code class="language-plaintext highlighter-rouge">[-180 ... 180] degrees_E</code>, then select <code class="language-plaintext highlighter-rouge">Export metadata quality flags</code> and <code class="language-plaintext highlighter-rouge">Export data quality flags</code> and <strong>OK</strong>.</li>
+      <li>And <strong>OK</strong> again</li>
+    </ol>
+
+    <p>You now know how to export and save the right variables on ODV to netCDF data.</p>
+  </blockquote>
+
+  <p>Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-exit-odv-and-go-back-on-galaxy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exit ODV and go back on Galaxy</div>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+
+    <p>You can now go back to your Galaxy instance.
+Now, after waiting for everything to turn green in your history, you can see 2 new outputs
+<img src="../../images/ocean_var/history.png" alt="Screenshot of the 2 new outputs present in your galaxy History. " width="301" height="430" loading="lazy" /></p>
+
+    <p>In the history panel in the output <strong>ODV all outputs</strong> click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of your output.</p>
+
+    <p>You can now visualize the outputs in Galaxy middle panel.</p>
+
+    <p><img src="../../images/ocean_var/text.png" alt="Screenshot of the text output showing the variables selected. " width="1915" height="691" loading="lazy" />
+<img src="../../images/ocean_var/galaxy_output.png" alt="Image in the middle pannel of the map. " width="1614" height="1026" loading="lazy" /></p>
+  </blockquote>
+
+  <h1 id="divand-data-interpolating-variational-analysis-in-n-dimensions-1">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</h1>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-check-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Check Datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Go to your output ‘data_from_Eutrophication_Med_profiles_2022_unrestricted’</p>
+
+    <p>Check if the datatype is <strong>netcdf</strong> if not :</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select  your desired datatype  from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoauserlevel">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a 'Choose Your Own Tutorial' (CYOT) section (also known as 'Choose Your Own Analysis' (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>If you want the easiest tutorial possible choose New user. If you feel that you need more flexibility on the DIVAnd parameters choose Experimented user.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1userlevel" type="radio" name="cyoauserlevel" value="New-user" onclick="cyoaChoice('New-user', 'gtn-cyoauserlevel')" />
+		<label for="cyoa-opt1userlevel" class="select btn btn-secondary">New-user</label>
+	
+	
+		<input id="cyoa-opt2userlevel" type="radio" name="cyoauserlevel" value="Experimented-user" onclick="cyoaChoice('Experimented-user', 'gtn-cyoauserlevel')" />
+		<label for="cyoa-opt2userlevel" class="select btn btn-secondary">Experimented-user</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("New-user", "gtn-cyoauserlevel");
+		})
+	</script>
+	
+</blockquote>
+
+  <div class="New-user">
+
+    <p>You chose New user ! Thus, you’ll be running a batch tool, you just have to fill in the input like explained below.</p>
+
+    <h2 id="get-the-bathymetry">Get the Bathymetry</h2>
+    <p>First you need to download a bathymetry file you can use this link <a href="https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download">https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download</a> with the folowing Hands-on box where you can name this dataset <strong>bathymetry.nc</strong></p>
+
+    <!--SNIPPET-->
+    <blockquote class="hands-on">   <div class="box-title hands-on-title" id="hands-on-importing-via-links-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing via links</div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <p>Check that the file is in netcdf !</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <h2 id="use-divand">Use DIVAnd</h2>
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-create-a-climatology"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Create a climatology</div>
+
+      <ol>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0" title="DIVAnd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DIVAnd</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your netcdf data”</em>: <code class="language-plaintext highlighter-rouge">ODV netcdf outputs</code> (output of <strong>Ocean Data View</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your bathymetry netcdf file”</em>: <code class="language-plaintext highlighter-rouge">bathymetry.nc</code></li>
+            <li><em>“Input longitude min (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">19.0</code></li>
+            <li><em>“Input longitude max (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+            <li><em>“Input latitude min (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">32.0</code></li>
+            <li><em>“Input latitude max (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">38.0</code></li>
+            <li><em>“Input starting date”</em>: <code class="language-plaintext highlighter-rouge">1950-01-01</code></li>
+            <li><em>“Input ending date”</em>: <code class="language-plaintext highlighter-rouge">2017-12-31</code></li>
+            <li><em>“Write the name of the variable of the analysis”</em>: <code class="language-plaintext highlighter-rouge">phosphate</code></li>
+            <li><em>“Minimum of the salinity”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Maximum of the salinity”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+          </ul>
+        </li>
+        <li><strong>Run Tool</strong></li>
+        <li>After a couple minutes an <code class="language-plaintext highlighter-rouge">DIVAnd netcdf output</code> output will appear green in your history.</li>
+        <li>Check that your data are in netcdf format with <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>, it should be <code class="language-plaintext highlighter-rouge">netcdf</code></li>
+      </ol>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </blockquote>
+  </div>
+
+  <div class="Experimented-user">
+
+    <p>You chose Experimented user ! Thus, you’ll be launching a Jupyterlab and you’ll need to interact with it.</p>
+
+    <h2 id="launch-divand">Launch DIVAnd</h2>
+
+    <p>Use ODV outputs as DIVAnd input.</p>
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-run-divannd"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run DIVANnd</div>
+
+      <ol>
+        <li>Use <span class="tool" data-tool="interactive_tool_divand" title="DIVAnd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DIVAnd</strong></span> with the following parameters:
+          <ul>
+            <li><em>“Do you already have a notebook”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
+            <li><em>“Include data into the environment”</em>: <code class="language-plaintext highlighter-rouge">ODV netcdf outputs</code> (output of <strong>Ocean Data View</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Run tool</strong></p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to <strong>Interactive Tools</strong> on the <strong>Activity Bar</strong> on the left</li>   <li>If your <strong>Activity Bar</strong> does not show the <strong>Interactive Tools</strong> <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">galaxy-interactive-tool</span> icon, make sure you are logged in first.</li>   <li>Wait for DIVAnd to be in the <strong>running</strong> state (Job Info).</li>   <li>You might need to wait a bit until your interactive tool is loaded and ready for you.</li>   <li>Click on DIVAnd     <ul>       <li>Wait until the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon next to the tool name appears; otherwise, you will run into an error message.</li>       <li>Clicking on the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon will open it in a new tab</li>     </ul>   </li> </ol> </blockquote>
+          <p><!--END_SNIPPET--></p>
+        </li>
+      </ol>
+    </blockquote>
+
+    <blockquote class="hands-on">
+      <div class="box-title hands-on-title" id="hands-on-navigate-the-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Navigate the jupyterlab</div>
+      <ol>
+        <li>Once in the Jupyterlab, go to the <strong>Notebooks</strong> folder.</li>
+        <li>There open a terminal window and write :
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p><strong>Run the entire notebook.</strong></p>
+
+          <p>In the first ‘outputs’ folder (at the root of the Jupyterlab folders), you should now have one netcdf file “Water_body_Phosphate_Mediterranean”.</p>
+
+          <p>So, you can now properly close the Jupyter notebook.</p>
+        </li>
+        <li>On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.</li>
+        <li>Go back to your Galaxy instance.</li>
+      </ol>
+    </blockquote>
+
+    <p>After a couple of minutes, your outputs should appear in your Galaxy history.</p>
+  </div>
+
+  <h1 id="bonus-even-more-odv-1">BONUS: Even more ODV</h1>
+
+  <p>Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))</p>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-open-your-netcdf-data-in-odv-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Open your Netcdf data in ODV</div>
+    <p><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:</p>
+    <ul>
+      <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are Netcdf or text tabular files</code></li>
+      <li><em>“Netcdf or tabular text file. For text file, odv format is recommanded.”</em>: <code class="language-plaintext highlighter-rouge">DIVAnd netcdf outputs</code> (output of <strong>DIVAnd</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    </ul>
+
+    <p>Click on <strong>Run Tool</strong></p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to <strong>Interactive Tools</strong> on the <strong>Activity Bar</strong> on the left</li>   <li>If your <strong>Activity Bar</strong> does not show the <strong>Interactive Tools</strong> <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">galaxy-interactive-tool</span> icon, make sure you are logged in first.</li>   <li>Wait for ODV to be in the <strong>running</strong> state (Job Info).</li>   <li>You might need to wait a bit until your interactive tool is loaded and ready for you.</li>   <li>Click on ODV     <ul>       <li>Wait until the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon next to the tool name appears; otherwise, you will run into an error message.</li>       <li>Clicking on the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">external-link</span> icon will open it in a new tab</li>     </ul>   </li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a file open it (double clicking)</li>
+      <li>Click on <strong>Open</strong> in the bottom right. Then click on <strong>Next</strong> until you can click on <strong>Finish</strong> you can keep everything by default.</li>
+    </ol>
+
+    <p>There your data should be opening and you can now visualise them!
+<img src="../../images/ocean_var/med_view.png" alt="Image of what the netcdf files look like when opening with ODV. " width="1838" height="936" loading="lazy" /></p>
+
+  </blockquote>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-your-phosphate-variable-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualise your Phosphate variable</div>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 SURFACE Window”
+ <img src="../../images/ocean_var/surface_window.png" alt="Create a surface plot for the phosphate. " width="591" height="598" loading="lazy" /></li>
+      <li>Press right on the new plot and select <strong>Properties…</strong>
+ <img src="../../images/ocean_var/properties.png" alt="Going to the properties of the plot. " width="1538" height="914" loading="lazy" /></li>
+      <li>In the tab “Display Style” increase the “Symbol size” to 22 for instance</li>
+      <li>In the tab “Color Mapping” increase the level of the “Median” part and lower the “Nonlinearity” such as in the following picture
+ <img src="../../images/ocean_var/colors.png" alt="Balance the colors of the map to better visualise the Phosphate repartition. " width="659" height="652" loading="lazy" /></li>
+      <li>
+        <p>Then, click on <strong>OK</strong>, and you can see the Phosphate repartition.</p>
+      </li>
+      <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>
+        <p>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</p>
+
+        <p>If you want to have a visualisation of the Phosphate according to the depth, you can do the following.</p>
+      </li>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 STATION Window” in the new tab, in the plot press enter on your keyboard.</li>
+      <li>Same as before to save it, click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>
+        <p>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</p>
+
+        <p>You can now safely exit ODV.</p>
+      </li>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+  </blockquote>
+
+</div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Great you now know how to extract ocean variables from an ODV collection and use these extracted data in DIVAnd.
+From there you can grid the phosphate variable on the subset extracted create a netcdf file and visualise it on ODV again.
+We finished with the last results visible on the galaxy instance in the output <strong>ODV all outputs</strong> :
+<img src="../../images/ocean_var/phosphate_map.png" alt="Resulting map of the Phoshate variable repartition in the Mediterranean sea. " width="1841" height="941" loading="lazy" />
+<img src="../../images/ocean_var/phosphate_graph.png" alt="Resulting graph of the phosphate variable according to the depth. " width="1842" height="936" loading="lazy" /></p>
+
+<h1 id="extra-information">Extra information</h1>
+
+<p>Coming up soon even more tutorials on and other Earth-System related trainings. Keep an <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> open if you are interested!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Manage ODV collection’s data.</p>
+</li>
+                        
+                        <li><p>Learn to extract data and visualize them on ODV</p>
+</li>
+                        
+                        <li><p>Learn to chain ODV and DIVAnd</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/climate/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="hcmrdata">Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HCMR/HNODC), 2022 <b>Mediterranean Sea - Eutrophication and Acidity aggregated datasets 1911/2022 v2022</b>. <a href="https://doi.org/10.13120">10.13120</a></li>
+<li id="emodnet">Lipizer, M., E. Molina Jack M., K. Wesslander, L. Fyrberg, M. Tsompanou <i>et al.</i>, 2023 <b>EMODnet Chemistry Regional sea eutrophication data collection and Quality Control loop</b>. <a href="https://doi.org/10.13120/8XM0-5M67">10.13120/8XM0-5M67</a> <a href="https://nodc.ogs.it/catalogs/doidetails?doi=10.13120/8xm0-5m67">https://nodc.ogs.it/catalogs/doidetails?doi=10.13120/8xm0-5m67</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/ocean-variables"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/ocean-variables">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse,  <b>Ocean's variables study (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{climate-ocean-variables,
+author = "Marie Josse",
+	title = "Ocean's variables study (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/fairease/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/fair_ease_colour.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Fair-Ease</div>
+			<div class="description">
+			FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/eurosciencegateway/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/eurosciencegateway.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EuroScienceGateway</div>
+			<div class="description">
+			EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: divand_full_analysis
+  owner: ecology
+  revisions: 462a44dfd3c4
+  tool_panel_section_label: Climate Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00376">gxy.io/GTN:T00376</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/ocean-variables/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/climate/tutorials/ocean-variables/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

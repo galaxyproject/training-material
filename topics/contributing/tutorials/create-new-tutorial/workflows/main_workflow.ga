@@ -1,0 +1,115 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Retrieve climate data from Copernicus",
+    "format-version": "0.1",
+    "name": "Retrieve climate data from Copernicus",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "API Request file"
+                }
+            ],
+            "label": "API Request file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 421.6999969482422,
+                "height": 82.19999694824219,
+                "left": 497,
+                "right": 697,
+                "top": 339.5,
+                "width": 200,
+                "x": 497,
+                "y": 339.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a74c9437-9abe-4b6b-9a1d-ddea0a243565",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9b185f3d-97a2-4857-b174-839d9be57c90"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/c3s/c3s/0.1.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "is_file|api_req_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Copernicus Climate Data Store",
+                    "name": "is_file"
+                }
+            ],
+            "label": null,
+            "name": "Copernicus Climate Data Store",
+            "outputs": [
+                {
+                    "name": "request",
+                    "type": "txt"
+                },
+                {
+                    "name": "ofilename",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "bottom": 494.5,
+                "height": 144,
+                "left": 909,
+                "right": 1109,
+                "top": 350.5,
+                "width": 200,
+                "x": 909,
+                "y": 350.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/c3s/c3s/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "250554670f72",
+                "name": "c3s",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"is_file\": {\"has_req\": \"yes\", \"__current_case__\": 0, \"api_req_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "5e0cad3c-826e-4e7c-8844-7a7e903f15cb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "ofilename",
+                    "uuid": "a56ccd61-78ca-4bb8-beb3-785955f2831e"
+                },
+                {
+                    "label": null,
+                    "output_name": "request",
+                    "uuid": "62ec4f99-49f4-4a36-ab50-82567abcfa51"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "contributing"
+    ],
+    "uuid": "ea08534c-93ea-4b29-a32a-5297e7499dab",
+    "version": 2
+}

@@ -1,0 +1,95 @@
+- doc: Test outline for ChIP-seq:formation_of_super_structures_on_xi
+  job:
+    wt_input_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_input_rep1.bam.bam
+      filetype: bam
+    wt_H3K4me3_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam.bam
+      filetype: bam
+    wt_CTCF_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam.bam
+      filetype: bam
+    wt_H3K27me3_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam.bam
+      filetype: bam
+    wt_input_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_input_rep2.bam.bam
+      filetype: bam
+    wt_H3K4me3_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam.bam
+      filetype: bam
+    wt_CTCF_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam.bam
+      filetype: bam
+    wt_H3K27me3_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam.bam
+      filetype: bam
+    Input Paired End Reads Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: wt_H3K4me3
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+  outputs:
+    wt_H3K4me3_CTCF_rep1_mergebed:
+      asserts:
+        has_n_lines:
+          n: 3105
+        has_text_matching: 
+          expression: 'X\t3810380\t3810602'
+          expression: 'X\t170022130\t170022607'
+    wt_all_mergebed:
+      asserts:
+        has_n_lines:
+          n: 3869
+        has_text_matching: 
+          expression: 'X\t3402493\t3402819'
+          expression: 'X\t170022130\t170022607'
+    wt_H3K4me3_CTCF_rep1_heatmap:
+      asserts:
+        has_image_width: 
+          value: 3622
+        has_image_height: 
+          value: 2559
+        has_size:
+          value: 4082188
+          delta: 40000
+    wt_all_heatmap:
+      asserts:
+        has_image_width: 
+          value: 1259
+        has_image_height: 
+          value: 2559
+        has_size:
+          value: 1245154
+          delta: 10000
+    wt_H3K4me3_rep1_trim_galore:
+      element_tests:
+        wt_H3K4me3:
+          asserts:
+            has_text_matching: 
+              expression: 'Reads with adapters:\s+1,010'
+            has_text:
+              text: '1569 (3.14%)'
+    mapping_stats:
+      element_tests:
+        wt_H3K4me3:
+          asserts:
+            has_text:
+              text: '98.64% overall alignment rate'

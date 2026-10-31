@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Principles of learning and how they apply to training and teaching / Principles of learning and how they apply to training and teaching / Contributing to the Galaxy Training Material</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Principles of learning and how they apply to training and teaching">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-03-11 17:21:16 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Fotis E. Psomopoulos">
+<meta name="DC.creator" content="Allegra Via">
+<meta name="DC.creator" content="Patricia Palagi">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+<meta name="DC.creator" content="ELIXIR Goblet Train the Trainers"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Contributing to the Galaxy Training Material / Principles of learning and how they apply to training and teaching / Hands-on: Principles of learning and how they apply to training and teaching">
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/contributing/tutorials/learning-principles/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Instructors"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Principles of learning and how they apply to training and teaching",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-03-11 17:21:16 +0000",
+  "datePublished": "2022-09-23 10:02:09 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "2020-1-NL01-KA203-064717",
+      "url": "https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+        "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+        "url": "https://www.erasmusplus.nl",
+        "logo": "https://gallantries.github.io/assets/images/gallantries-logo.png"
+      },
+      "startDate": "2020-09-01",
+      "endDate": "2023-09-30"
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:T00067",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Contributing to the Galaxy Training Material",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+  },
+  "abstract": "In this tutorial we will discuss the principles of learning",
+  "learningResourceType": "e-learning",
+  "name": "Principles of learning and how they apply to training and teaching",
+  "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html",
+  "version": 17,
+  "timeRequired": "PT2H",
+  "teaches": "- Describe how learning works according to a few learning models\n- Explain how learning models can help you improve your teaching in the classroom\n- List learning strategies and principles suggested by evidence-based research results",
+  "keywords": [
+    "Contributing to the Galaxy Training Material",
+    "elixir",
+    "train-the-trainers"
+  ],
+  "description": "## Abstract\n\nIn this tutorial we will discuss the principles of learning\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are the main principles that drive learning?\n - How can these principles be applied to training and teaching?\n\n\n## Learning Objectives\n\n- Describe how learning works according to a few learning models\n- Explain how learning models can help you improve your teaching in the classroom\n- List learning strategies and principles suggested by evidence-based research results\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "@id": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Senior Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ou/",
+          "name": "The Open University",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.open.ac.uk"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "@id": "https://orcid.org/0000-0002-8170-8806"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Contributing to the Galaxy Training Material",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/learning-principles/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-contributing">
+    <h1 data-toc-skip>Principles of learning and how they apply to training and teaching</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
+    Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/allegravia/" class="contributor-badge contributor-allegravia"><img src="https://avatars.githubusercontent.com/allegravia?s=36" alt="Allegra Via avatar" width="36" class="avatar" />
+    Allegra Via</a><a href="/training-material/hall-of-fame/ppalagi/" class="contributor-badge contributor-ppalagi"><img src="https://avatars.githubusercontent.com/ppalagi?s=36" alt="Patricia Palagi avatar" width="36" class="avatar" />
+    Patricia Palagi</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/elixir-goblet-ttt/" class="contributor-badge contributor-elixir-goblet-ttt"><img src="/training-material/shared/images/elixir.png" alt="ELIXIR Goblet Train the Trainers avatar" width="36" class="avatar" />
+    Goblet</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-badge-small contributor-nomadscientist"><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the main principles that drive learning?</p>
+</li>
+        
+        <li><p>How can these principles be applied to training and teaching?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Describe how learning works according to a few learning models</p>
+</li>
+        
+        <li><p>Explain how learning models can help you improve your teaching in the classroom</p>
+</li>
+        
+        <li><p>List learning strategies and principles suggested by evidence-based research results</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 23, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00067">https://gxy.io/GTN:T00067</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/contributing/tutorials/learning-principles/tutorial.md">17</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In this tutorial we will discuss the principles of learning</p>
+
+<blockquote class="quote">
+  <p><em>Learning results from what the student does and thinks and only from what the student does and thinks. The teacher can advance learning only by influencing what the student does to learn</em></p>
+
+  <p><a href="https://en.wikipedia.org/wiki/Herbert_A._Simon">H.A. Simon</a> (one of the founders of the field of <a href="https://en.wikipedia.org/wiki/Cognitive_science">Cognitive Science</a> and Nobel Laureate)</p>
+</blockquote>
+
+<p>This quotation from Herbert A. Simon clearly indicates that we cannot talk about teaching, teaching practices or effective teaching techniques if we don’t understand first how people learn.</p>
+
+<p>In this lesson, we want to share with you what we have collectively learnt about how learning works. Our knowledge in the field of cognition and learning comes from diving into pedagogical and cognitive research results, reading books such as <a href="https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101">“How Learning Works”</a> (<span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span>) or <a href="https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555">“Small Teaching”</a> (<span class="citation"><a href="#smallTeaching2021">Lang 2021</a></span>) and many others, studying research articles published in the field of cognitive science and educational psychology, attending instructor training courses (like this one), and - last but not least - from our own experience as both instructors/teachers, learners, and passionate observers of learning processes and teaching practices.</p>
+
+<p>Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works (<span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span>, <span class="citation"><a href="#smallTeaching2021">Lang 2021</a></span>), have a look at the <a href="http://swcarpentry.github.io/instructor-training/">Software Carpentry Instructor training materials</a> and explore the material available through the <a href="https://elixir-europe.org/platforms/training/train-the-trainer">ELIXIR Train-the-Trainer course</a>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-sources"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Sources</div>
+
+  <p>This tutorial is significantly based on <span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span>, session one
+of ELIXIR-GOBLET Train the Trainer curriculum.</p>
+</blockquote>
+
+<!--## Instruction design in 5 Phases
+
+So how can we now use the knowledge we have gathered during this time in the course? Here we will go through the Instructional design in 5 phases and explain why learning outcomes (to articulate and specify these) is so important for the curricula and the course design process.
+
+<figure id="figure-1" style="max-width: 90%;"><img src="images/PhasesInstructionalDesign.png"  alt="A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process."  width="1280" height=720 loading="lazy"><a target="_blank" href="images/PhasesInstructionalDesign.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br/><br/><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75</figcaption></figure>
+
+1. **Writing LOs**: Important to build the training
+2. **Selection learning experiences**: Focus on LOs
+3. **Selection of content relevant to LOs**: we usually (traditionally) starting by the contentm, but here only 3rd step
+4. **Develop assessment**
+
+    Example: formative assessment as the previous challenge
+
+5. **Evaluation** of your training
+
+    Example
+    * Final exams at university
+    * Final feedback
+-->
+
+<h1 id="how-do-people-learn">How do people learn?</h1>
+
+<p>So let’s start with “How do people learn and how does learning work”</p>
+
+<h2 id="general-definition-of-learning">General definition of learning</h2>
+
+<p>(Relatively) permanent changes in behaviour, skills, knowledge, or attitudes resulting from identifiable psychological or social experiences.</p>
+
+<ul>
+  <li>A key feature of learning: permanence</li>
+  <li>The change has to last</li>
+  <li>Changes do not count as learning if they are temporary</li>
+  <li>Example: learning a phone number</li>
+</ul>
+
+<p>Why is it important to learn about how people learn?</p>
+
+<ul>
+  <li>It is common to confuse our effort (i.e. our teaching) with what learners get from our efforts (i.e. their learning)
+    <ul>
+      <li>We usually assume learners learnt</li>
+      <li>Nevertheless, the distinction between learning and teaching is especially important for teachers to remember and it is essential that teachers become aware of the fact that the way they think about learning affects the way they teach and that the very circumstances of teaching can influence teachers’ perceptions of learning, and therefore also influence how they teach.</li>
+      <li>For example, imagine that a cognitive scientist convinced you that people don’t retain anything of what you tell them after 20 minutes of passively listening to you. Would you keep lecturing for more than 20 minutes?</li>
+      <li>And how would you teach if, in contrast, you assumed that the mind is a vessel to be filled?</li>
+      <li>Moreover, most teachers tend to think that what is taught is equivalent to what is learned, namely that what they teach is the same as what students understand or retain of what they teach  (even though most of them know that assuming this is a mistake and that teaching and learning can be quite different).</li>
+    </ul>
+  </li>
+  <li>Learning how learning works helps clarify this distinction</li>
+  <li>The way we think about learning affects the way we teach</li>
+  <li>Understanding  how people learn makes you a more aware and therefore better teacher</li>
+  <li>You  can use such knowledge to improve your day-to-day teaching</li>
+</ul>
+
+<p>According the <strong>Meaningful Learning Theory</strong>, developed by the psychologist David Ausubel, meaningful learning generally arises from a process of learning to learn. He considers that if meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.</p>
+
+<h2 id="learning-metaphors-theories-and-models">Learning metaphors, theories and models</h2>
+
+<p>Learning - similarly to thinking - is a complex process that requires multiple approaches spanning many different disciplines, ideas, theories and models to be understood.</p>
+
+<p>Many learning theories, models, concept and ideas from from the <strong>Science of Learning</strong>, <strong>Educational Psychology</strong>, and the <strong>Cognitive Sciences</strong> are relevant to classrooms, in that they describe at least some of what usually happens there and offer guidance for assisting learning.</p>
+
+<p>This session will provide you with some understanding of how learning works but it is far from being exhaustive. In particular, we will present and discuss learning models, concepts and perspectives that are important for you to know as they suggest things that you might do in your classroom to make learners’ learning more productive and your teaching more effective and mindful.</p>
+
+<p>A metaphor is a word from one thematic domain that has been embedded in another one, thus entering a network of new linguistic relations. This is, indeed, what metaphors are all about: they are transplants from one discourse to another. They are a source of new ways of seeing things. “Metaphors of learning” are a source of new ways of seeing learning.</p>
+
+<p>We can use metaphors to shape and reveal our way of thinking about learning and, therefore, shape our actions as teachers.</p>
+
+<hr />
+
+<blockquote class="quote" author="Plutard">
+  <p>A mind is a fire to be kindled, not a vessel to be filled</p>
+
+</blockquote>
+
+<hr />
+
+<p>How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? You are likely to spend your time in the class at the blackboard, trying to ‘transmit’ to the students your own knowledge.</p>
+
+<!--
+
+
+<blockquote class="comment" id="learning-metaphors-yaml">
+	<div class="box-title comment-title">
+		<i class="far fa-comment-dots" aria-hidden="true"></i>
+		Quiz: Learning metaphors
+	</div>
+
+
+
+	
+	<form class="quiz-learning-metaphors-yaml question-1">
+	<b class="question-title"><span class="result"></span> Question 1: Think about the following metaphors "A mind is a fire to be kindled". How this metaphors may affect your way of teaching?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-learning-metaphors-yaml question-2">
+	<b class="question-title"><span class="result"></span> Question 2: Think about the following metaphors "Teaching is growing a garden". How this metaphors may affect your way of teaching?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+
+<div class="quiz-results" aria-live="polite" role="status">
+</div>
+
+<button type="submit" class="btn btn-primary" id="check-answers"  onclick="checkQuiz('learning-metaphors-yaml')">Check Answers</button>
+</blockquote>
+
+<script>
+function checkQuiz(id){
+	var quiz = document.getElementById(id);
+	var correct = 0;
+	var total = document.querySelectorAll(`#${id} form`).length;
+	var questions = document.querySelectorAll(`#${id} form`);
+	for (var i = 0; i < questions.length; i++) {
+		var question = questions[i];
+		var answer = question.querySelectorAll("li.answer");
+		// Only grade completed questions.
+
+		var any_wrong = false;
+		var any_selected = [...answer].map(e => e.querySelector("input").checked).includes(true);
+		// Loop over the inputs for this question
+		if (any_selected) {
+			question.querySelectorAll("input").forEach((input) => {
+				if (input.checked != input.classList.contains('correct')) {
+					any_wrong = true;
+				}
+			});
+
+			answer.forEach((li) => {
+				li.querySelector('.result').innerHTML = li.classList.contains('correct') ? "✅" : "❌";
+			});
+
+			if (any_wrong) {
+				question.querySelector(".result").innerHTML = "❌";
+			} else {
+				question.querySelector(".result").innerHTML = "✅";
+				correct++;
+			}
+		} else {
+			question.querySelector(".result").innerHTML = "❓";
+		}
+	}
+	var result = correct / total * 100;
+	quiz.querySelector('.quiz-results').innerHTML = `<p>You got ${correct} out of ${total} correct (${parseInt(result)}%)</p>`;
+}
+</script>
+-->
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-learning-metaphors-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-5-min"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Learning metaphors - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 5 min</div>
+
+  <ol>
+    <li>Think about the following metaphors “A mind is a fire to be kindled”. How this metaphors may affect your way of teaching?</li>
+    <li>Think about the following metaphors “Teaching is growing a garden”. How this metaphors may affect your way of teaching?</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="metaphors-define-the-role-of-the-teacher-and-the-learners">Metaphors define the role of the teacher and the learners</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metaphor</th>
+      <th>Teacher</th>
+      <th>Learner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Learning is knowledge transfer</td>
+      <td>Defines, develops and prepares contents</td>
+      <td>Receivers and memorizes</td>
+    </tr>
+    <tr>
+      <td>Learning metaphors</td>
+      <td>Prepares the environment, guides the exploration</td>
+      <td>Explores, works on information, attributes meanings</td>
+    </tr>
+    <tr>
+      <td>Learning is participation in social practices</td>
+      <td>Community that shares activities and social practices</td>
+      <td>As teacher</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="learning-theories">Learning theories</h1>
+
+<p>Learning theories describes how students receive, process, and retain knowledge during learning. However, there is no single one theory (as in physics for example). There is a massive catalogue of learning theories out there and there is no universal theory of learning.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="images/LearningTheories.png" alt="The figure shows a dendrogram of the main learning theories that are currently available. The information is organized across four main levels; the Scientific Discipline (such as Organization, Education, Philosophy, etc), the Learning Theorists (such as Montessori and Bloom), the Learning Paradigms (such as Behaviourism, Constructivism), and the key concepts." width="1600" height="1088" loading="lazy" /><a target="_blank" href="images/LearningTheories.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> This is a diagram representing the landscape of many known learning theories available.</figcaption></figure>
+
+<p>Philosphers and researchers from multiple disciplnes have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the <a href="http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap">HoTEL</a> (Holistic approach to Technology-Enhanced Learning) website. But which should we rely on? Which should we learn, teach and apply?</p>
+
+<p>There is no universal theory of learning, but there are interesting elements for classroom teaching in many different theories There are elements of truth in different theories, and <strong>evidence-based</strong> research results that support learning principles recognized and applied today. In this sense there are interesting elements for a teacher in many different theories.</p>
+
+<p>In the following sections we will explore the most important learning theories.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-principal-learning-theories"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Principal learning theories</div>
+
+  <p>We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners’ learning.</p>
+
+  <h4 id="behaviourist-learning-theory">Behaviourist Learning Theory</h4>
+
+  <p><strong>Behaviorism</strong> is a psychological movement that posits behavior should be studied as a natural science akin to fields like chemistry or physics. It conceives learning as changes in overt behavior. In this context, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment.</p>
+
+  <p>An important concept from this theory is <strong>operant conditioning</strong>, a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.</p>
+
+  <p>This theory is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently. According to the behaviorist perspective on learning, the instructor assumes a dominant role within the classroom, exerting complete control over the learning process. Evaluation of learning is carried out by the teacher, who determines what is considered correct or incorrect.</p>
+
+  <h4 id="cognitivist-learning-theory">Cognitivist Learning Theory</h4>
+
+  <p>Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes (<span class="citation"><a href="#Wu1998">Wu <i>et al.</i> 1998</a></span>, <span class="citation"><a href="#Chandler2004">Chandler 2004</a></span>).</p>
+
+  <p><strong>Cognitivism</strong> emerged in the 1950s as a response to Behaviorism, which was deemed inadequate in explaining cognition. <strong>Cognitive Learning Theory</strong> aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process (<span class="citation"><a href="#Qin2009">Qin 2009</a></span>, <span class="citation"><a href="#vanderVeer1988">van der Veer and Felt 1988</a></span>), with a special focus on the processing of information. Two important theories derive from this one: <strong>Information Processing Theory</strong> and <strong>Cognitive load theory</strong>:</p>
+
+  <p>The <strong>Information Processing Theory</strong> describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory (<span class="citation"><a href="#Gentner2014">Gentner and Stevens 2014</a></span>). According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge (<span class="citation"><a href="#Chandler2004">Chandler 2004</a></span>, <span class="citation"><a href="#Herring1993">Herring 1993</a></span>, <span class="citation"><a href="#Yilmaz2011">Yilmaz 2011</a></span>).</p>
+
+  <p>On the other hand, <strong>Cognitive Load Theory</strong> seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity (<span class="citation"><a href="#Fori2012">Forišek and Steinová 2012</a></span>, <span class="citation"><a href="#Via2013">Via <i>et al.</i> 2013</a></span>, <span class="citation"><a href="#Kats2010">Kats 2010</a></span>, <span class="citation"><a href="#Wright2010">Wright <i>et al.</i> 2010</a></span>). An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process (<span class="citation"><a href="#Aidi2009">Aidi 2009</a></span>).</p>
+
+  <h4 id="constructivist-learning-theory">Constructivist Learning Theory</h4>
+
+  <p><strong>Constructivism</strong> holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of information is assimilated and deposited into a network of previously existing knowledge and experiences  (<span class="citation"><a href="#Abbot1999">Abbot and Ryand 1999</a></span>). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with <strong>psychological constructivism</strong> and Lev Vigotsky with <strong>social constructivism</strong>.</p>
+
+  <p>From the perspective of <strong>psychological constructivism</strong>, learning is fundamentally a personal matter. It maintains the idea that the individual, both through cognitive and social aspects of knowledge as well as affective ones, is not a mere product of the environment or a simple result of his or her internal dispositions, but a construction of his or her own that is produced day by day as a result of the interaction between these two factors. The driving force of this activity would be cognitive conflict; in any constructivist activity there must be a circumstance that shakes the previous structures of knowledge and forces a rearrangement of the old knowledge in order to assimilate the new.</p>
+
+  <p>According to the <strong>social approach of Lev Vigotsky</strong>, learning is that process in which the individual assimilates certain historical-cultural experience at the same time as he/she appropriates it, which requires an active subject who gives meaning to this experience, transforming it into his/her subjectivity (<span class="citation"><a href="#RodrguezRuiz2005">Ruiz Mayra Rodrı́guez and Garcı́a Emilio Garcı́a-Merás 2005</a></span>).</p>
+
+  <p>The aim of Vigotsky’s theory is to discover and stimulate the <strong>zone of potential development</strong> or zone of proximal development in each student, which is defined as the distance between the actual level of development, determined by the ability to independently solve a problem, and the level of development potential, determined through solving a problem in collaboration with a more able peer (<span class="citation"><a href="#Moreira1997">Moreira 1997</a></span>).</p>
+
+  <p>For Vigotsky, cognitive development cannot be understood without reference to the social, historical and cultural context in which it occurs. According to this author, higher mental processes (thought, language,voluntary behaviour) have their origin in social processes; cognitive development would be the conversion of social relations into mental functions (<span class="citation"><a href="#Moreira1997">Moreira 1997</a></span>).</p>
+
+  <h4 id="critical-learning-theory">Critical Learning Theory</h4>
+
+  <p>The <strong>Critical Learning Theory</strong>, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that thought must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool. According to <span class="citation"><a href="#Marcuse1964">Marcuse 1964</a></span>, critical thinking aims to define the irrational character of established rationality.</p>
+
+  <p>According this theory, learning occurs when the learning process induces a shift in the student’s frame of reference. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.</p>
+
+  <p>Critical Learning Theory emphasises two elements: the importance of the subjective role of each learner in finding meaning for him/herself, and how social and economic conditions constrain and distort the social construction of meaning (<span class="citation"><a href="#Giroux2018">Giroux 2004</a></span>).</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-how-do-you-go-about-learning-something-new-how-do-you-approach-learning-new-things-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-5-min"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: How do you go about learning something new? / How do you approach learning new things? - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 5 min</div>
+
+  <ul>
+    <li>Order the following approaches (from the most to the less effective one) for you when you want to learn something new
+      <ul>
+        <li>Read about it</li>
+        <li>Attend a training session !</li>
+        <li>Have a go ?</li>
+        <li>Do, reflect, process, further understand?</li>
+      </ul>
+    </li>
+    <li>Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism) in your way of learning.</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="principal-learning-theories-practical-examples">Principal learning theories: practical examples</h1>
+
+<p>In this section we will introduce some examples of practical applications from the different learning theories:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Learning theory</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Behaviorist</td>
+      <td>Dreyfuss model for skill acquisition.</td>
+    </tr>
+    <tr>
+      <td>Cognitivist</td>
+      <td>Human Memory and Learning from cognitive sciences</td>
+    </tr>
+    <tr>
+      <td>Constructivist</td>
+      <td>Bloom’s Taxonomy</td>
+    </tr>
+    <tr>
+      <td>Critical</td>
+      <td>The hidden curriculum</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="behaviorist-learning-theory-dreyfuss-model-for-skill-acquisition">Behaviorist Learning theory: Dreyfuss model for skill acquisition</h2>
+
+<p>The Dreyfus model of skill acquisition presents a framework illustrating the process by which learners acquire skills through a combination of formal instruction and dedicated practice. It was presented by Hubert and Stuart Dreyfus in 1980 in a report on their research at the University of California, Berkeley, Operations Research Center for the United States Air Force Office of Scientific Research. Hubert Lederer Dreyfus (1929-2017) was a prominent American philosopher and a professor of philosophy. His areas of expertise encompassed phenomenology, existentialism, and the philosophy of psychology, literature, and artificial intelligence, exploring their profound philosophical implications. Stuart E. Dreyfus holds the position of professor emeritus in the Industrial Engineering and Operations Research Department at the University of California.</p>
+
+<p>The Dreyfus model for skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="./images/DreyfussModel.png" alt="A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition." width="1280" height="720" loading="lazy" /><a target="_blank" href="./images/DreyfussModel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Dreyfuss model</figcaption></figure>
+
+<p>The stages follow a progression from rigid adherence (novice) to rules to an intuitive mode of reasoning based on tacit knowledge “silent knowledge” (expert).</p>
+
+<p>The fundamental idea is that when teaching a concept, you have to tailor the style of teaching to where the learner is in their understanding and that progression follows a common pattern. Early stages of learning focus on concrete steps to imitate, the focus then shifts to understanding principles and finally into self-directed innovation.</p>
+
+<p>The skill level is tied to a mental function transitioning from recollection (non-situational or situational), recognition (decomposed or holistic), decision (analytical or intuitive), and awareness (monitoring or absorbed)</p>
+
+<h3 id="example-of-dreyfus-model-the-carpentries">Example of Dreyfus model: the Carpentries</h3>
+
+<p>The Carpentries (a global organization building global capacity in essential data and computational skills for research) uses the Dreyfus model as its global <a href="https://carpentries.github.io/instructor-training/02-practice-learning/index.html#the-acquisition-of-skill">approach</a> for skill acquisition:</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="./images/DreyfussModelCarpentries.jpg" alt="A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert." width="1432" height="840" loading="lazy" /><a target="_blank" href="./images/DreyfussModelCarpentries.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Carpentries build on the Dreyfus model. Source: The Carpentries Instructor training</figcaption></figure>
+
+<ul>
+  <li>
+    <p><strong>Novice</strong>: someone who does not know what they do not know, i.e., they do not yet know what the key ideas in the domain are or how they relate. Novices may have difficulty formulating questions, or may ask questions that seem irrelevant or off-topic as they rely on prior knowledge, without knowing what is or is not related yet.</p>
+
+    <p>Example: A novice learner in a Carpentries workshop might never have heard of the bash shell, and therefore may have no understanding of how it relates to their file system or other programs on their computer.</p>
+  </li>
+  <li>
+    <p><strong>Competent practitioner</strong>: someone who has enough understanding for everyday purposes. They will not know all the details of how something works and their understanding may not be entirely accurate, but it is sufficient for completing normal tasks with normal effort under normal circumstances.</p>
+
+    <p>Example: A competent practitioner in a Carpentries workshop might have used the shell before and understand how to move around directories and use individual programs, but they might not understand how they can fit these programs together to build scripts and automate large tasks.</p>
+  </li>
+  <li>
+    <p><strong>Expert</strong>: someone who can easily handle situations that are out of the ordinary.</p>
+
+    <p>Example: An expert in a Carpentries workshop may have experience writing and running shell scripts and, when presented with a problem, immediately sees how these skills can be used to solve the problem.</p>
+  </li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-the-carpentries"><button class="gtn-boxify-button details" type="button" aria-controls="details-the-carpentries" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: The Carpentries</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p><a href="https://carpentries.org/">The Carpentries</a> was started by Greg Wilson and Brent Gorda and they coined the term “The Carpentries” for enabling researchers to do “computational thinking” and use tools of computation effectively.</p>
+
+  <p>The Style of the Carpentries are that teachers are where the learners are e.g. by doing live-coding together.</p>
+</blockquote>
+
+<h2 id="cognitivist-learning-theory-memory-and-learning">Cognitivist Learning Theory: Memory and learning</h2>
+
+<p>In a simple model from cognitive science, learning happens when information moves from <strong>working memory</strong> to <strong>long-term memory</strong>. This process can be impacted by <strong>environment</strong></p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="./images/HowMemoryWorks.png" alt="A figure showning a simple representation of how memory works. The main interaction is between the two central boxes, representing the working memory and the long-term memory. The working memory maintain the active consiousness, when paying attention to the envnironment, and is extremely fast but rather limited in capacity (experiments have shown that it can keep track of 7+/-2 items). The long-term memory is much larger in capacity, but it's significantly slower to access - using a process called &quot;remembering&quot;. At the same time, the process of depositing information from the working memory into the long-term memory, is the learning process.). " width="921" height="406" loading="lazy" /><a target="_blank" href="./images/HowMemoryWorks.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Simple model (brain is much more complex)</figcaption></figure>
+
+<!--1. Environment
+2. Working memory
+3. Long-term memory
+4. Working memory: fast
+	* Ex: phone number
+5. Long term: slow
+	* How much effort to remember a full poem-->
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-how-short-is-your-short-term-memory-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-10-min"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: How short is your short term memory? - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 10 min</div>
+
+  <p>Based on <span class="citation"><a href="#Willingham2009">Willingham 2009</a></span>.</p>
+
+  <ol>
+    <li>
+      <p>Read the following letter combination:</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-hide"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hide" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Hide</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p><code class="language-plaintext highlighter-rouge">APH D BDN A CKG B DCI A</code></p>
+
+      </blockquote>
+    </li>
+    <li>Hide them after 10 seconds</li>
+    <li>Take a piece of paper and write what you remember</li>
+    <li>Unhide them after 2 minutes</li>
+    <li>
+      <p>Check how many consecutive letters you can remember</p>
+    </li>
+    <li>
+      <p>Read the following letter combination</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-hide-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hide-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Hide</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p><code class="language-plaintext highlighter-rouge">A   PHD   B   DNA   C   KGB   D   CIA</code></p>
+
+      </blockquote>
+    </li>
+    <li>Hide them after 10 seconds</li>
+    <li>Take a piece of paper and write what you remember</li>
+    <li>Unhide them after 2 minutes</li>
+    <li>Check how many consecutive letters you can remember</li>
+  </ol>
+
+</blockquote>
+
+<!--
+
+
+<blockquote class="comment" id="short-term-memory-yaml">
+	<div class="box-title comment-title">
+		<i class="far fa-comment-dots" aria-hidden="true"></i>
+		Quiz: How short is your short term memory?
+	</div>
+
+
+
+	
+	<form class="quiz-short-term-memory-yaml question-1">
+	<b class="question-title"><span class="result"></span> Question 1: Read and try to remember the following letter combination `APH D BDN A CKG B DCI A`</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-1-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-1-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-1-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-1-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-2">
+	<b class="question-title"><span class="result"></span> Question 2: Take a piece of paper and write what you remember</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-2-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-2-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-2-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-2-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-3">
+	<b class="question-title"><span class="result"></span> Question 3: Answer `APH D BDN A CKG B DCI A`. How many consecutive letters you can remember?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-4">
+	<b class="question-title"><span class="result"></span> Question 4: Read and try to remember the following letter combination `A   PHD   B   DNA   C   KGB   D   CIA`</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-4-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-4-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-4-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-4-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-5">
+	<b class="question-title"><span class="result"></span> Question 5: Take a piece of paper and write what you remember</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-5-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-5-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-5-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-5-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-6">
+	<b class="question-title"><span class="result"></span> Question 6: Answer `A   PHD   B   DNA   C   KGB   D   CIA`. How many consecutive letters you can remember?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+
+<div class="quiz-results" aria-live="polite" role="status">
+</div>
+
+<button type="submit" class="btn btn-primary" id="check-answers"  onclick="checkQuiz('short-term-memory-yaml')">Check Answers</button>
+</blockquote>
+
+<script>
+function checkQuiz(id){
+	var quiz = document.getElementById(id);
+	var correct = 0;
+	var total = document.querySelectorAll(`#${id} form`).length;
+	var questions = document.querySelectorAll(`#${id} form`);
+	for (var i = 0; i < questions.length; i++) {
+		var question = questions[i];
+		var answer = question.querySelectorAll("li.answer");
+		// Only grade completed questions.
+
+		var any_wrong = false;
+		var any_selected = [...answer].map(e => e.querySelector("input").checked).includes(true);
+		// Loop over the inputs for this question
+		if (any_selected) {
+			question.querySelectorAll("input").forEach((input) => {
+				if (input.checked != input.classList.contains('correct')) {
+					any_wrong = true;
+				}
+			});
+
+			answer.forEach((li) => {
+				li.querySelector('.result').innerHTML = li.classList.contains('correct') ? "✅" : "❌";
+			});
+
+			if (any_wrong) {
+				question.querySelector(".result").innerHTML = "❌";
+			} else {
+				question.querySelector(".result").innerHTML = "✅";
+				correct++;
+			}
+		} else {
+			question.querySelector(".result").innerHTML = "❓";
+		}
+	}
+	var result = correct / total * 100;
+	quiz.querySelector('.quiz-results').innerHTML = `<p>You got ${correct} out of ${total} correct (${parseInt(result)}%)</p>`;
+}
+</script>
+-->
+
+<p>The amount of space in working memory does not depend on the number of letters. It depends on the <strong>number of meaningful objects</strong>. In the 2nd round, the meaning of the words (long-term memory) or connecting words with a story helps to remember. It make room in working memory.</p>
+
+<p>To facilitate learning, we as instructors have to make room in working memory.</p>
+
+<h3 id="what-can-we-do-to-make-room-in-working-memory">What can we do to make room in working memory?</h3>
+
+<!--
+
+
+<blockquote class="comment" id="short-term-memory-yaml">
+	<div class="box-title comment-title">
+		<i class="far fa-comment-dots" aria-hidden="true"></i>
+		Quiz: How short is your short term memory?
+	</div>
+
+
+
+	
+	<form class="quiz-short-term-memory-yaml question-1">
+	<b class="question-title"><span class="result"></span> Question 1: Read and try to remember the following letter combination `APH D BDN A CKG B DCI A`</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-1-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-1-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-1-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-1-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-2">
+	<b class="question-title"><span class="result"></span> Question 2: Take a piece of paper and write what you remember</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-2-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-2-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-2-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-2-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-3">
+	<b class="question-title"><span class="result"></span> Question 3: Answer `APH D BDN A CKG B DCI A`. How many consecutive letters you can remember?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-4">
+	<b class="question-title"><span class="result"></span> Question 4: Read and try to remember the following letter combination `A   PHD   B   DNA   C   KGB   D   CIA`</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-4-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-4-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-4-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-4-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-5">
+	<b class="question-title"><span class="result"></span> Question 5: Take a piece of paper and write what you remember</b>
+
+	
+
+		
+		<ul>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-5-1" name="answer" value="Yes" class="answer-input "/>
+			
+
+			<label for="a-5-1">Yes</label>
+		</li>
+		<li class="answer ">
+			<span class="result"></span>
+			
+			<input type="radio" id="a-5-2" name="answer" value="No" class="answer-input "/>
+			
+
+			<label for="a-5-2">No</label>
+		</li>
+		
+		</ul>
+		
+	</form>
+
+	
+	<form class="quiz-short-term-memory-yaml question-6">
+	<b class="question-title"><span class="result"></span> Question 6: Answer `A   PHD   B   DNA   C   KGB   D   CIA`. How many consecutive letters you can remember?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+
+<div class="quiz-results" aria-live="polite" role="status">
+</div>
+
+<button type="submit" class="btn btn-primary" id="check-answers"  onclick="checkQuiz('short-term-memory-yaml')">Check Answers</button>
+</blockquote>
+
+<script>
+function checkQuiz(id){
+	var quiz = document.getElementById(id);
+	var correct = 0;
+	var total = document.querySelectorAll(`#${id} form`).length;
+	var questions = document.querySelectorAll(`#${id} form`);
+	for (var i = 0; i < questions.length; i++) {
+		var question = questions[i];
+		var answer = question.querySelectorAll("li.answer");
+		// Only grade completed questions.
+
+		var any_wrong = false;
+		var any_selected = [...answer].map(e => e.querySelector("input").checked).includes(true);
+		// Loop over the inputs for this question
+		if (any_selected) {
+			question.querySelectorAll("input").forEach((input) => {
+				if (input.checked != input.classList.contains('correct')) {
+					any_wrong = true;
+				}
+			});
+
+			answer.forEach((li) => {
+				li.querySelector('.result').innerHTML = li.classList.contains('correct') ? "✅" : "❌";
+			});
+
+			if (any_wrong) {
+				question.querySelector(".result").innerHTML = "❌";
+			} else {
+				question.querySelector(".result").innerHTML = "✅";
+				correct++;
+			}
+		} else {
+			question.querySelector(".result").innerHTML = "❓";
+		}
+	}
+	var result = correct / total * 100;
+	quiz.querySelector('.quiz-results').innerHTML = `<p>You got ${correct} out of ${total} correct (${parseInt(result)}%)</p>`;
+}
+</script>
+-->
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-how-can-you-avoid-to-overload-learners-working-memory-i-class-quot-fas-fa-info-circle-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-details-span-5-min-groups-of-2-3-persons"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: How can you avoid to overload learners working memory?  - *<i class=&quot;fas fa-info-circle&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>details</span> 5 min - Groups of 2/3 persons*</div>
+
+  <ul>
+    <li>Discuss one thing a teacher could do to avoid overloading their students’ working memory</li>
+    <li>Write your proposal in the shared notes</li>
+  </ul>
+</blockquote>
+
+<p>What can we do to make room in working memory?</p>
+<ul>
+  <li>
+    <p>Chunking</p>
+
+    <p>Example: Short theoretical sessions alternated with practical sessions to allow the processing of the material</p>
+  </li>
+  <li>
+    <p>Avoid extraneous <strong>cognitive load</strong></p>
+
+    <p>Example: Avoid too crowded slides</p>
+  </li>
+</ul>
+
+<h3 id="cognitive-load">Cognitive load</h3>
+
+<p>There are 3 cognitive loads recognized by cognitive science:</p>
+
+<ul>
+  <li><strong>Intrinsic cognitive load</strong>: effort associated with a specific topic.</li>
+  <li><strong>Germane cognitive load</strong>: the (desirable) mental effort required to create linkages between new information and old.</li>
+  <li><strong>Extraneous cognitive load:</strong> everything else that distracts or gets in the way. It refers to the way information or tasks are presented to a learner.</li>
+</ul>
+
+<h3 id="attention-split-effect">Attention split effect</h3>
+
+<p>Split-attention occurs when learners are required to <strong>split their attention</strong> between <strong>at least two sources of information</strong> that have been separated either spatially or temporally</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extraneous-cognitive-load-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-10-min-groups-of-2-3-persons"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extraneous cognitive load - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 10 min - Groups of 2/3 persons</div>
+
+  <ul>
+    <li>Pick one task you teach in your lessons/courses</li>
+    <li>Think and discuss within the room about the following questions
+      <ul>
+        <li>What would be the extraneous load in performing this tak?</li>
+        <li>How can you avoid it?</li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="six-strategies-for-effective-learning-from-cognitive-psychology">Six strategies for effective learning from cognitive psychology</h3>
+
+<p><strong>Six strategies for effective learning</strong> (from “Understanding how we learn” <span class="citation"><a href="#weinstein2018understanding">Weinstein <i>et al.</i> 2018</a></span>) are based on evidence from cognitive research.</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="./images/StrategiesEffectiveLearning.png" alt="Six circles representing the six Strategies for Effective Learning." width="1285" height="887" loading="lazy" /><a target="_blank" href="./images/StrategiesEffectiveLearning.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Six Strategies for Effective Learning <span class="citation"><a href="#weinstein2018understanding">Weinstein <i>et al.</i> 2018</a></span> Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, &amp; Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) / [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).</figcaption></figure>
+
+<ul>
+  <li>
+    <p><strong>Spaced practice</strong>: Creating a study schedule that spreads study activities out over time</p>
+
+    <p>Spaced practice is the exact opposite of cramming. When you cram, you study for a long, intense period of time close to an exam. When you space your learning, you take that same amount of study time, and spread it out across a much longer period of time. Doing it this way, that same amount of study time will produce more <em>long-lasting learning.</em></p>
+  </li>
+  <li>
+    <p><strong>Interleaving</strong>: Switching between topics while studying</p>
+
+    <p>You shouldn’t study one idea, topic, or type of problem for too long. Instead, you should change it up often. Especially good for problem-solving topics like bioinformatics. Then you should jump from one topic to another and go back to the previous one, with the aim of developing the connections among topics.</p>
+  </li>
+  <li>
+    <p><strong>Elaboration</strong>: Asking and explaining why and how things work</p>
+
+    <p>It can be used to mean a lot of different things. It involves explaining and describing ideas with many details. Elaboration also involves making connections among ideas you are trying to learn and connecting the material to your own experiences, memories, and day-to-day life.</p>
+  </li>
+  <li>
+    <p><strong>Concrete examples</strong>: When studying / explaining abstract concepts, illustrating them with specific examples</p>
+
+    <p>The idea is to take an abstract concept and use real world examples to increase understanding and 2 examples are better than 1.</p>
+  </li>
+  <li>
+    <p><strong>Dual coding</strong>: Combining worlds with visuals</p>
+
+    <p>Dual coding is combining words and visuals such as pictures, diagrams, graphic organizers, and so on. The idea is to provide two different representations of the information, both visual and verbal. Adding visuals to a verbal description can make the presented ideas more concrete, and provides two ways of understanding the presented ideas. The visuals should be meaningful.</p>
+  </li>
+  <li>
+    <p><strong>Retrieval practice</strong>: Bringing learned information to mind from long term memory</p>
+
+    <p>Concept maps are examples of a retrieval practice when you bring out knowledge/memories from long-term memory</p>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-how-do-you-understand-the-6-strategies-for-effective-learning-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-15-min-groups-of-2-persons"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: How do you understand the 6 strategies for effective learning? - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 15 min - Groups of 2 persons</div>
+
+  <ul>
+    <li>Pick up one strategy per group</li>
+    <li>Discuss about the strategy
+      <ul>
+        <li>Did you understand it the same way?</li>
+        <li>Do you have any questions?</li>
+      </ul>
+    </li>
+    <li>Find out an example on how you would implement it as a teacher/instructor (what would you do as a teacher in order to facilitate learning based on the strategy at hand)</li>
+  </ul>
+</blockquote>
+
+<p>We highly recommend to look at the materials in a book and a website and blog as they are intended to teach about principles of learning and to provide teachers and students with flexible guiding principles to guide learning and studying. In <a href="/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html">“Training techniques to enhance learner participation and engagement” tutorial</a>, a number of teaching practices are described. You should try to reconnect them to these learning strategies, i.e. try to understand how the proposed teaching practices facilitate learning based on these six strategies.</p>
+
+<h3 id="seven-learning-principles-from-cognitive-sciences">Seven learning principles from cognitive sciences</h3>
+
+<p>From <a href="https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer">“How Learning works”</a> <span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span></p>
+
+<ul>
+  <li>
+    <p><strong>Principle P1</strong>: Students’ <strong>prior knowledge</strong> can help or hinder learning.</p>
+
+    <p>Hindrances include prior knowledge which may be accurate but insufficient to support learning new material. Inappropriate for the specific class, thus distorting comprehension of new material; or, completely inaccurate.</p>
+  </li>
+  <li>
+    <p><strong>Principle P2</strong>: How students <strong>organise knowledge</strong> influences how they learn and apply what they know.</p>
+
+    <p>Generally, people organize knowledge “as a function of their experience, the nature of their knowledge, and the role that that knowledge plays in their lives”</p>
+  </li>
+  <li>
+    <p><strong>Principle P3</strong>: Students <strong>motivation</strong> determines, directs and sustains what they do learn.</p>
+
+    <p><span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span> define motivation as “the personal investment that an individual has in reaching a desired state or outcome” and identify three core concepts for understanding motivation</p>
+    <ul>
+      <li>the subjective value of a goal</li>
+      <li>the expectancies for successfully reaching the goal</li>
+      <li>??</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Principle P4</strong>: To develop mastery, students must acquire <strong>component skills</strong>, practice <strong>integrating</strong> them, and  know when to <strong>apply</strong> what they have learned</p>
+
+    <p>Mastery refers to “the attainment of a high degree of competence with a particular area”. It could be either beneficial or detrimental.</p>
+  </li>
+  <li>
+    <p><strong>Principle P5</strong>: <strong>Goal-directed</strong> practice coupled with <strong>targeted feedback</strong> enhances the quality of students’ learning</p>
+
+    <p>Learning and performance are advanced when students employ a methodology that</p>
+    <ul>
+      <li>focuses on a specific performance goal</li>
+      <li>pinpoints a suitable level of challenge relative to students’ current performance,</li>
+      <li>is in an amount and frequency sufficient to meet the performance criteria.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Principle P6</strong>: Students’ current level of development interacts with the <strong>social, emotional, and intellectual climate</strong> of the course to impact learning</p>
+
+    <p><span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span> maintain that “student-centered teaching requires us to teach students, not content”.</p>
+  </li>
+  <li>
+    <p><strong>Principle P7</strong>: To become self-directed learners, students must learn to <strong>monitor and adjust</strong> their approaches to learning.</p>
+
+    <p>This principle relates to metacognition, or “the process of reflecting on and directing one’s own thinking”. You can find more information on the connection of metacognition to student learning and performance here <span class="citation"><a href="#Stanton2021">Stanton <i>et al.</i> 2021</a></span>.</p>
+
+    <p>Students develop metacognitive skills by learning to</p>
+    <ul>
+      <li>assess the task at hand,</li>
+      <li>evaluate their own strengths and weaknesses,</li>
+      <li>plan appropriate approaches to complete the task,</li>
+      <li>apply strategies to monitor their performance, while making adjustments to the selected approach.</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- 
+> <div class="box-title hands-on-title" id="hands-on-how-do-you-understand-the-7-principles-of-learning-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-15-min-groups-of-2-3-person"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: How do you understand the 7 principles of learning?  - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 15 min - Groups of 2/3 person</div>
+>
+> * Read and reflect together the principles
+> * Pick one principle that is not (fully) clear to you
+> * Ask one question about this principle
+> * Write here any insights/thoughts/comments to share from your breakout room
+{: .hands_on}-->
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-resources-to-learn-more-about-the-cognitive-learning-theory"><button class="gtn-boxify-button details" type="button" aria-controls="details-resources-to-learn-more-about-the-cognitive-learning-theory" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Resources to learn more about the Cognitive Learning Theory</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>There is a great deal of literature on how learning works.</p>
+
+  <p>The reason why we mention these three books is that they show how to integrate effective, research based strategies for learning into classroom practice.</p>
+
+  <p>Educational practice usually does not rely on research findings. People tend to rely on their intuitions about what’s best for learning. But relying on intuition may be a bad idea for teachers and learners alike.</p>
+
+  <ul>
+    <li>
+      <p><a href="https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101">“How Learning Works”</a> (<span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span>)</p>
+
+      <p>This book presents a set of evidence-based principles for how to help people learn that is grounded in cognitive theory (that is, the science of instruction). It tries to help teachers understand how research in the science of learning can improve their reaching.</p>
+
+      <p>The book is organised around seven learning principles. Each principle is based on research evidence from the science of learning and the science of instruction.</p>
+    </li>
+    <li>
+      <p><a href="https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555">“Small Teaching”</a> (<span class="citation"><a href="#smallTeaching2021">Lang 2021</a></span>)</p>
+
+      <p>Cognitive psychologists, neuroscientists, and biologists all have produced a revealing body of research over the past several decades on how human beings learn, but often translating these findings into the classroom is overwhelming for busy instructors.</p>
+
+      <p>“Small Teaching” bridges the gap between research and practice  by providing a fully developed strategy for making deliberate, structured, and incremental steps towards tuning into how students are hardwired to learn.</p>
+
+      <p>The book introduces small activities that require minimal preparation and grading. The models presented are specifically designed to be used as both one-time experiences to innovate a course session or unit plan as well as a menu of options that can be combined into an entirely new teaching approach.</p>
+    </li>
+    <li>
+      <p>“Understanding how we learn” <span class="citation"><a href="#weinstein2018understanding">Weinstein <i>et al.</i> 2018</a></span></p>
+
+      <p>By the “learning scientists” Weinstein and Sumeracki (and illustrated by Oliver Caviglioli), the books examines the cognitive psychology’s application to education</p>
+
+      <p>It is designed to convey the concepts of research to the reality of an instructor’s classroom. The book proposes 6 strategies for effective learning (based on evidence from cognitive research). It is structured in four parts:</p>
+      <ul>
+        <li>Evidence-based education and the science of learning</li>
+        <li>Basics of human cognitive processes</li>
+        <li>Strategies for effective learning</li>
+        <li>Tips for students, teachers, and parents</li>
+      </ul>
+    </li>
+    <li>
+      <p><a href="https://carpentries.github.io/instructor-training/">The Carpentries Instructor Training materials</a></p>
+
+      <p>The Carpentries is a community of volunteers teaching computational and data management skills worldwide. The community also developed training materials to teach pedagogical skills. Much of the GTN TtT was inspired by the pedagogical materials from the Carpentries and the ELIXIR TtT.</p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<!-- 
+> <div class="box-title hands-on-title" id="hands-on-what-is-learning-in-your-opinion-experience-how-does-learning-occur-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-5-min"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: What is learning in your opinion/experience? How does learning occur? - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 5 min</div>
+>
+> _Break-out_ room (2 ppl per room)
+>
+> We follow the first challenge with another one. Now IN PAIRS in breakout rooms (Zoom). Here the reflection is on LEARNING and what learning is in your experience. Write your thoughts, one or more sentences, in the shared Google Doc.
+> 	* Discuss your reflections on learning and what learning is in your experience
+>	* Write here any insights/thoughts/comments to share from your breakout room
+{: .hands_on} -->
+
+<h2 id="constructivist-learning-theory-the-blooms-taxonomy">Constructivist Learning Theory: The Bloom’s Taxonomy</h2>
+
+<p>And one of the most used “models” or concepts is the one based on the Bloom’s six categories of cognitive skills. This tool is important to develop training, but not only.</p>
+
+<p><strong>Bloom’s taxonomy</strong> is a set of six categories of cognitive skills, that are accompanied by actionable verb.</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="./images/bloomsTaxonomyPyramid.png" alt="The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating." width="847" height="622" loading="lazy" /><a target="_blank" href="./images/bloomsTaxonomyPyramid.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/</figcaption></figure>
+
+<p>From bottom to top:</p>
+<ul>
+  <li><strong>Remembering (original Knowledge):</strong> involves recognizing or remembering facts, terms, basic concepts, or answers without necessarily understanding what they mean.</li>
+  <li><strong>Understand (original comprehension):</strong> involves demonstrating an understanding of facts and ideas by organizing, summarizing, translating, generalizing, giving descriptions, and stating the main ideas.</li>
+  <li><strong>Apply/Application:</strong> involves using acquired knowledge—solving problems in new situations by applying acquired knowledge, facts, techniques and rules. Learners should be able to use prior knowledge to solve problems, identify connections and relationships and how they apply in new situations.</li>
+  <li><strong>Analyze:</strong> involves examining and breaking information into component parts, determining how the parts relate to one another, identifying motives or causes, making inferences, and finding evidence to support generalizations.</li>
+  <li><strong>Evaluate:</strong> involves presenting and defending opinions by making judgments about information, the validity of ideas, or quality of work based on a set of criteria</li>
+  <li><strong>Create (original synthesize):</strong>involves building a structure or pattern from diverse elements; it also refers to the act of putting parts together to form a whole.</li>
+</ul>
+
+<p>It is important to highlight that, under this framework, <strong>critical thinking is considered a combination of analyzing, evaluating and creating</strong>, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners’ level of complexity of thinking as well as experience.</p>
+
+<p>What are the uses of this tool?</p>
+<ul>
+  <li>For learners
+    <ul>
+      <li>Help to structure their knowledge</li>
+    </ul>
+  </li>
+  <li>For instructors
+    <ul>
+      <li>Knowing at which level of cognitive complexity you want to teach</li>
+      <li>
+        <p>Write Learning Outcomes</p>
+
+        <figure id="figure-8" style="max-width: 90%;"><img src="./images/bloomsTaxonomy.png" alt="6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make &amp; defend judgements, assess theories &amp; outcomes) with critique, compare ideas, solve, recommend, rate. " width="1090" height="536" loading="lazy" /><a target="_blank" href="./images/bloomsTaxonomy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> ACTION verbs express levels of cognitive complexity</figcaption></figure>
+      </li>
+      <li>Design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc</li>
+      <li>Assess learning (taking place during curricula or course and after)</li>
+      <li>Align instruction with learners’ level of complexity of thinking as well as experience.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="critical-learning-theory-the-hidden-curriculum-theory">Critical Learning Theory: The Hidden Curriculum Theory</h2>
+
+<p>The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum, relying on the organisational aspects of classroom life that are generally not perceived by either students or teachers (<span class="citation"><a href="#Giroux2018">Giroux 2004</a></span>).</p>
+
+<p>According the Hidden Curriculum Theory, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the communicative systems. Through the hidden curriculum, students would internalise values that emphasise respect for authority, punctuality, cleanliness, docility and conformity (<span class="citation"><a href="#Giroux2018">Giroux 2004</a></span>). It considers that elements such as exposure to a core of common subjects would lead to a dissolution of individuality in the mass, in the collective, to a standardisation and homogenisation of psychologies (<span class="citation"><a href="#Olivo2005">Olivo 2005</a></span>).</p>
+
+<p>According the Hidden Curriculum Theory, if there is really an interest in <strong>fostering critical thinking</strong>, the <strong>discursive mode that should dominate in the classroom should be the interrogative one</strong>. It considers that questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down (<span class="citation"><a href="#Sztajnszrajber2013">Sztajnszrajber 2013</a></span>).</p>
+
+<p>According this theory, technological tools, due to their design, do not act just as neutral means for transmitting information, but they also transmit values and habits of thought (<span class="citation"><a href="#Anders1980">Anders 1980</a></span>). As <span class="citation"><a href="#Giroux2018">Giroux 2004</a></span> notes, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence.</p>
+
+<h1 id="mental-models">Mental models</h1>
+
+<p><strong>Mental model</strong> is a collection of concepts and facts, along with the relationships between those concepts, that a person has about a topic or field. It is how people organize their knowledge</p>
+
+<p>You can think of mental models as a graph with nodes (facts, concepts) and edges (connections), as seen in the figure of the mental model of animals below:</p>
+
+<figure id="figure-9" style="max-width: 90%;"><img src="./images/animalMentalModel.png" alt="A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box &quot;animal&quot; is connected to the entities &quot;eats&quot;, &quot;breathes&quot; and &quot;can move&quot;, as well as sub-entities, such as &quot;bird&quot; and &quot;fish&quot;. Each one of these, in turn, is connected to even more specific sub-entities (such as &quot;penguin&quot; for &quot;bird&quot; and &quot;salmon&quot; for &quot;fish&quot;)." width="635" height="357" loading="lazy" /><a target="_blank" href="./images/animalMentalModel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> mental model of animals</figcaption></figure>
+
+<p>The mental model of an expert in any given subject will be far larger and more complex than that of a novice, including both more concepts and more detailed and numerous relationships. Linking with Dreyfus model:</p>
+
+<ul>
+  <li>A novice has a minimal mental model of surface features of the domain. Inaccuracies based on limited prior knowledge may interfere with adding new information. Predictions are likely to borrow heavily from mental models of other domains which seem superficially similar.</li>
+  <li>A competent practitioner has a mental model that is useful for everyday purposes. Most new information they are likely to encounter will fit well with their existing model. Even though many potential elements of their mental model may still be missing or wrong, predictions about their area of work are usually accurate.</li>
+  <li>An expert has a densely populated and connected mental model that is especially good for problem solving. They quickly connect concepts that others may not see as being related. They may have difficulty explaining how they are thinking in ways that do not rely on other features unique to their own mental model.</li>
+</ul>
+
+<h2 id="misconceptions">Misconceptions</h2>
+
+<ul>
+  <li><strong>Simple factual errors</strong>: These are the easiest to correct.</li>
+  <li><strong>Broken models</strong>: We can address these by having learners reason through examples to see contradictions.</li>
+  <li><strong>Fundamental beliefs</strong>: These beliefs are deeply connected to the learner’s social identity and are the hardest to change.</li>
+</ul>
+
+<h1 id="teaching-or-training">Teaching or training?</h1>
+
+<!--
+
+
+<blockquote class="comment" id="teaching-or-training-yaml">
+	<div class="box-title comment-title">
+		<i class="far fa-comment-dots" aria-hidden="true"></i>
+		Quiz: Teaching or training?
+	</div>
+
+
+
+	
+	<form class="quiz-teaching-or-training-yaml question-1">
+	<b class="question-title"><span class="result"></span> Question 1: Based on your experience, what are the differences between teaching and training?</b>
+
+	
+
+		
+		<ul>
+		
+		</ul>
+		
+	</form>
+
+
+<div class="quiz-results" aria-live="polite" role="status">
+</div>
+
+<button type="submit" class="btn btn-primary" id="check-answers"  onclick="checkQuiz('teaching-or-training-yaml')">Check Answers</button>
+</blockquote>
+
+<script>
+function checkQuiz(id){
+	var quiz = document.getElementById(id);
+	var correct = 0;
+	var total = document.querySelectorAll(`#${id} form`).length;
+	var questions = document.querySelectorAll(`#${id} form`);
+	for (var i = 0; i < questions.length; i++) {
+		var question = questions[i];
+		var answer = question.querySelectorAll("li.answer");
+		// Only grade completed questions.
+
+		var any_wrong = false;
+		var any_selected = [...answer].map(e => e.querySelector("input").checked).includes(true);
+		// Loop over the inputs for this question
+		if (any_selected) {
+			question.querySelectorAll("input").forEach((input) => {
+				if (input.checked != input.classList.contains('correct')) {
+					any_wrong = true;
+				}
+			});
+
+			answer.forEach((li) => {
+				li.querySelector('.result').innerHTML = li.classList.contains('correct') ? "✅" : "❌";
+			});
+
+			if (any_wrong) {
+				question.querySelector(".result").innerHTML = "❌";
+			} else {
+				question.querySelector(".result").innerHTML = "✅";
+				correct++;
+			}
+		} else {
+			question.querySelector(".result").innerHTML = "❓";
+		}
+	}
+	var result = correct / total * 100;
+	quiz.querySelector('.quiz-results').innerHTML = `<p>You got ${correct} out of ${total} correct (${parseInt(result)}%)</p>`;
+}
+</script>
+-->
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-teaching-or-training-i-class-quot-fas-fa-hourglass-half-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-time-span-15-min"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Teaching or training?  - <i class=&quot;fas fa-hourglass-half&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>time</span> 15 min</div>
+
+  <ul>
+    <li>Based on your experience, what are the differences between teaching and training?</li>
+    <li>Write your reflexions in the shared notes</li>
+  </ul>
+</blockquote>
+
+<figure id="figure-10" style="max-width: 90%;"><img src="./images/teachingVStraining.png" alt="A cartoon showing one of the differences between teaching and training. One the left side, the teacher is showing the information on a blackboards - in training, the instructor is showing, in practice, how this can be applied." width="1024" height="737" loading="lazy" /><a target="_blank" href="./images/teachingVStraining.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A cartoon showing one of the differences between teaching and training. Source: [Open Science Training Handbook](https://www.fosteropenscience.eu/content/open-science-training-handbook)</figcaption></figure>
+
+<p>Teaching is more theoretical and abstract, while training (when done well) is more hands-on and practical.</p>
+
+<p>Teaching seeks to impart knowledge and provide information, while training is intended to develop abilities.</p>
+
+<ul>
+  <li><strong>Teach</strong>: to provide knowledge, instruction or information</li>
+  <li><strong>Train</strong>: to develop abilities through practice with instruction or supervision</li>
+</ul>
+
+<p>For example, it is possible to teach someone about buoyancy, fluid dynamics, water displacement and coastline safety, but that knowledge will not make them a good swimmer. Specific, practical and applied training is necessary to use abstract knowledge to learn or master a skill. In many cases, teaching and training are complementary. Vocational training programs often combine teaching and training quite nicely.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>After going through the theory of learning with the 6 strategies and the Ambrose 7 principles as well as the differences between teaching and training, the next step is to understand how these elements can be applied in designing an effective curriculum developmental trajectory.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Teaching and training is not only a matter of knowledge</p>
+</li>
+                        
+                        <li><p>Educators help learners, specially novices, build and develop mental models</p>
+</li>
+                        
+                        <li><p>Educators help learners make connections</p>
+</li>
+                        
+                        <li><p>Educators should be aware of the limitations of expertise, e.g. the expert blind spot or fluid representations</p>
+</li>
+                        
+                        <li><p>Educators should detect and remediate misconceptions</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/contributing/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    
+                    <h2>Learning metaphors</h2>
+                    <div class="contributors-line"><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/learning_metaphors.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/learning_metaphors.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>How can you avoid to overload learners working memory?</h2>
+                    <div class="contributors-line"><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/overloading_short_term_memory.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/overloading_short_term_memory.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>How short is your short term memory?</h2>
+                    <div class="contributors-line"><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/short_term_memory.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/short_term_memory.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Teaching or training?</h2>
+                    <div class="contributors-line"><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/teaching_or_training.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/teaching_or_training.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Identify observable and non observable actions (verbs)</h2>
+                    <div class="contributors-line"><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/verbs.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/learning-principles/quiz/verbs.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Marcuse1964">Marcuse, H., 1964 <b>One-Dimensional Man</b>. <i>Routledge</i>. <a href="https://doi.org/10.4324/9780203995211">10.4324/9780203995211</a></li>
+<li id="Anders1980">Anders, G., 1980 <b>Die Antiquiertheit des Menschen, Bd. I: Über die Seele im Zeitalter der zweiten industriellen Revolution</b>. <i>C.H.Beck</i>. <a href="https://www.chbeck.de/anders-antiquiertheit-menschen-bd-i-ueber-seele-zeitalter-zweiten-industriellen-revolution/product/11782">https://www.chbeck.de/anders-antiquiertheit-menschen-bd-i-ueber-seele-zeitalter-zweiten-industriellen-revolution/product/11782</a></li>
+<li id="vanderVeer1988">Veer, G. C. van der, and M. A. M. Felt, 1988 <b>Development of Mental Models of an Office System: A Field Study on an Introductory Course</b>. Human-Computer Interaction 250–272. <a href="https://doi.org/10.1007/978-3-642-73402-1_16">10.1007/978-3-642-73402-1_16</a></li>
+<li id="Herring1993">Herring, M. C., 1993 <b>Design and training for implementation of constructivist-based distance learning environments</b>. <a href="https://doi.org/10.31274/rtd-180813-13483">10.31274/rtd-180813-13483</a></li>
+<li id="Moreira1997">Moreira, M. A., 1997 <b>Meaningful learning: a subjacent concept</b>. Actas del Encuentro Internacional sobre el Aprendizaje Significativo 19–44. <a href="https://www.if.ufrgs.br/ moreira/apsigsubesp.pdf">https://www.if.ufrgs.br/ moreira/apsigsubesp.pdf</a></li>
+<li id="Wu1998">Wu, C.-C., N. B. Dale, and L. J. Bethel, 1998 <b>Conceptual models and cognitive learning styles in teaching recursion</b>. ACM SIGCSE Bulletin 30: 292–296. <a href="https://doi.org/10.1145/274790.274315">10.1145/274790.274315</a></li>
+<li id="Abbot1999">Abbot, J., and T. Ryand, 1999 <b> Constructing knowledge, reconstructing schooling</b>. Educational Leadership 57: 66–69. <a href="http://www.savie.ca/sage/articles/1080_000_abbott_1999.pdf">http://www.savie.ca/sage/articles/1080_000_abbott_1999.pdf</a></li>
+<li id="Chandler2004">Chandler, P., 2004 <b>The crucial role of cognitive processes in the design of dynamic visualizations</b>. Learning and Instruction 14: 353–357. <a href="https://doi.org/10.1016/j.learninstruc.2004.06.009">10.1016/j.learninstruc.2004.06.009</a></li>
+<li id="Giroux2018">Giroux, H., 2004 <b>Educational foundations: An anthology of critical readings</b>. <i>SAGE Publications</i>. <a href="https://doi.org/10.1177/01614681061080052">10.1177/01614681061080052</a></li>
+<li id="Olivo2005">Olivo, G., 2005 <b>El enigma de la docilidad: Sobre la implicación de la Escuela en el exterminio global de la dissention y de la diferencia</b>. <i>Virus Editorial</i>. <a href="https://www.viruseditorial.net/ca/libreria/libros/84/el-enigma-de-la-docilidad">https://www.viruseditorial.net/ca/libreria/libros/84/el-enigma-de-la-docilidad</a></li>
+<li id="RodrguezRuiz2005">Ruiz Mayra Rodrı́guez, and Garcı́a Emilio Garcı́a-Merás, 2005 <b>Las estrategias de aprendizaje y sus particulariades en lenguas extranjeras</b>. Revista Iberoamericana de Educación 36: 1–10. <a href="https://doi.org/10.35362/rie3642807">10.35362/rie3642807</a></li>
+<li id="Aidi2009">Aidi, X., 2009 <b>Cognitive Overload and Its Countermeasures from the Angle of Information Processing</b>. 2009 Third International Symposium on Intelligent Information Technology Application. <a href="https://doi.org/10.1109/iita.2009.278">10.1109/iita.2009.278</a></li>
+<li id="Qin2009">Qin, H., 2009 <b>Teaching computational thinking through bioinformatics to biology students</b>. Proceedings of the 40th ACM technical symposium on Computer science education. <a href="https://doi.org/10.1145/1508865.1508932">10.1145/1508865.1508932</a></li>
+<li id="Willingham2009">Willingham, D. T., 2009 <b>Why Don’t Students Like School?: A Cognitive Scientist Answers Questions About How the Mind Works and What It Means for Your Classroom.</b> <i>Jossey-Bass</i>. <a href="https://books.google.ie/books?hl=en&lr=&id=zCQqEAAAQBAJ&oi=fnd&pg=PR1&dq=Why+Don%27t+Students+Like+School%3F:+A+Cognitive+Scientist+&ots=Hha3EFloDF&sig=ECJXgc3ZScpu73cXhezfl7qwcF4&redir_esc=y#v=onepage&q=Why%20Don’t%20Students%20Like%20School%3F%3A%20A%20Cognitive%20Scientist&f=false">https://books.google.ie/books?hl=en&lr=&id=zCQqEAAAQBAJ&oi=fnd&pg=PR1&dq=Why+Don%27t+Students+Like+School%3F:+A+Cognitive+Scientist+&ots=Hha3EFloDF&sig=ECJXgc3ZScpu73cXhezfl7qwcF4&redir_esc=y#v=onepage&q=Why%20Don’t%20Students%20Like%20School%3F%3A%20A%20Cognitive%20Scientist&f=false</a></li>
+<li id="ambrose2010learning">Ambrose, S. A., M. W. Bridges, M. DiPietro, M. C. Lovett, and M. K. Norman, 2010 <b>How learning works: Seven research-based principles for smart teaching</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="Kats2010">Kats, Y. (Ed.), 2010 <b>Learning Management System Technologies and Software Solutions for Online Teaching</b>. <i>IGI Global</i>. <a href="https://doi.org/10.4018/978-1-61520-853-1">10.4018/978-1-61520-853-1</a></li>
+<li id="Wright2010">Wright, V. A., B. W. Vaughan, T. Laurent, R. Lopez, C. Brooksbank <i>et al.</i>, 2010 <b>Bioinformatics training: selecting an appropriate learning content management system–an example from the European Bioinformatics Institute</b>. Briefings in Bioinformatics 11: 552–562. <a href="https://doi.org/10.1093/bib/bbq023">10.1093/bib/bbq023</a></li>
+<li id="Yilmaz2011">Yilmaz, K., 2011 <b>The Cognitive Perspective on Learning: Its Theoretical Underpinnings and Implications for Classroom Practices</b>. The Clearing House: A Journal of Educational Strategies,  Issues and Ideas 84: 204–212. <a href="https://doi.org/10.1080/00098655.2011.568989">10.1080/00098655.2011.568989</a></li>
+<li id="Fori2012">Forišek, M., and M. Steinová, 2012 <b>Metaphors and analogies for teaching algorithms</b>. Proceedings of the 43rd ACM technical symposium on Computer Science Education. <a href="https://doi.org/10.1145/2157136.2157147">10.1145/2157136.2157147</a></li>
+<li id="Sztajnszrajber2013">Sztajnszrajber, D., 2013 <b>¿Para qué sirve la filosofía?</b> <i>Booklet</i>. <a href="https://www.planetadelibros.com/libro-para-que-sirve-la-filosofia/117353">https://www.planetadelibros.com/libro-para-que-sirve-la-filosofia/117353</a></li>
+<li id="Via2013">Via, A., T. Blicher, E. Bongcam-Rudloff, M. D. Brazas, C. Brooksbank <i>et al.</i>, 2013 <b>Best practices in bioinformatics training for life scientists</b>. Briefings in Bioinformatics 14: 528–537. <a href="https://doi.org/10.1093/bib/bbt043">10.1093/bib/bbt043</a></li>
+<li id="Gentner2014">Gentner, D., and A. L. Stevens (Eds.), 2014 <b>Mental Models</b>. <i>Psychology Press</i>. <a href="https://doi.org/10.4324/9781315802725">10.4324/9781315802725</a></li>
+<li id="weinstein2018understanding">Weinstein, Y., M. Sumeracki, and O. Caviglioli, 2018 <b>Understanding how we learn: A visual guide</b>. <i>Routledge</i>.</li>
+<li id="via2020course">Via, A., P. M. Palagi, J. M. Lindvall, R. E. Tractenberg, T. K. Attwood <i>et al.</i>, 2020 <b>Course design: Considerations for trainers–a Professional Guide</b>. F1000Research 9:</li>
+<li id="smallTeaching2021">Lang, J. M., 2021 <b>Small Teaching</b>. <i>Jossey-Bass</i>. <a href="https://books.google.ie/books?id=k8E4EAAAQBAJ&lpg=PR1&ots=i2Ut5NPUC7&lr&pg=PR1#v=onepage&q&f=false">https://books.google.ie/books?id=k8E4EAAAQBAJ&lpg=PR1&ots=i2Ut5NPUC7&lr&pg=PR1#v=onepage&q&f=false</a></li>
+<li id="Stanton2021">Stanton, J. D., A. J. Sebesta, and J. Dunlosky, 2021 <b>Fostering Metacognition to Support Student Learning and Performance</b>. CBE—Life Sciences Education 20: fe3. PMID: 33797282. <a href="https://doi.org/10.1187/cbe.20-12-0289">10.1187/cbe.20-12-0289</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=contributing/learning-principles"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=contributing/learning-principles">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bérénice Batut, Fotis E. Psomopoulos, Allegra Via, Patricia Palagi, Cristóbal Gallardo, elixir-goblet-ttt,  <b>Principles of learning and how they apply to training and teaching (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{contributing-learning-principles,
+author = "Bérénice Batut and Fotis E. Psomopoulos and Allegra Via and Patricia Palagi and Cristóbal Gallardo and elixir-goblet-ttt",
+	title = "Principles of learning and how they apply to training and teaching (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/gallantries/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Gallantries</div>
+			<div class="description">
+			This project (2020-1-NL01-KA203-064717) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
+
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+                <blockquote class="agenda">
+                    <div class="box-title">Developing GTN training material</div>
+                    This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                    
+                    <ol>
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/introduction/slides.html">Overview of the Galaxy Training Material</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/rendering_gtn/tutorial.html">Preview the GTN website as you edit your training material</a></li>
+                                
+                        
+                    
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/meta-analysis-data/tutorial.html">Single Cell Publication - Data Analysis</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/meta-analysis-plot/tutorial.html">Single Cell Publication - Data Plotting</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/fair-gtn/tutorial.html">FAIR Galaxy Training Material</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/updating_tutorial/tutorial.html">Updating tool versions in a tutorial</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-contribution/tutorial.html">Contributing to the Galaxy Training Network with GitHub</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">Updating diffs in admin training</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/python/tutorial.html">Teaching Python</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+                                
+                        
+                    
+                    </ol>
+                </blockquote>
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>July 2025</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It is detailed and well structured. It brought concepts from many different knowledge pools together in one place for the training.
+					<b>Disliked</b>: I am satisfied with every aspect.
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00067">gxy.io/GTN:T00067</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/learning-principles/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/contributing/tutorials/learning-principles/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

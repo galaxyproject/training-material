@@ -1,0 +1,327 @@
+---
+id: metagenomics-general-tutorial-shotgun
+name: Analyses of metagenomics data - Shotgun metagenomics data analyses
+description: 'In this tour, we will use analyze shotgun datasets from soil samples.'
+title_default: metagenomics-general-tutorial-amplicon
+steps:
+  - title: Analyses of metagenomics data - Amplicon data analyses
+    content: >-
+      In shotgun data, full genomes of the micro-organisms in the environment
+      are sequenced (not only the 16S or 18S). We can then have access to the
+      rRNA (only a small part of the genomes), but also to the genes of the
+      micro-organisms. Using this information, we can try to answer to questions
+      "What are the micro-organisms doing?" in addition to the question "What
+      micro-organisms are present?".<br><br> In this second part, we will use a
+      metagenomic sample of the Pampas Soil (<a
+      href="https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0">SRR606451</a>).
+    backdrop: true
+  - title: Create a new history
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Data upload
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: 'We need now to upload the input data. So, open the upload box'
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Data upload
+    element: '#btn-new'
+    content: >-
+      Our input datasets are available online on <a
+      href="https://zenodo.org/record/815875">Zenodo</a>. To import them, click
+      on "Paste/Fetch data"
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Data upload
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the input file: SRR606451_pampa.fasta.<br><br> You can
+      extract this information from <a
+      href="https://zenodo.org/record/815875">Zenodo</a> with right click on the
+      interesting dataset and then "Copy Link Address"
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/SRR606451_pampa.fasta
+  - title: Data upload
+    element: '#btn-start'
+    content: Click on "Start" to upload the data into your Galaxy history.
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Data upload
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them<br><br> For each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol>
+    position: left
+  - title: Extraction of taxonomic information
+    content: >-
+      As for amplicon data, we can extract taxonomic and community structure
+      information from shotgun data. Different approaches can be used: <ul>
+        <li>Same approaches as for amplicon data with identification and classification of OTUs. Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such an approach is not the most statistically supported</li>
+        <li>Assignation of taxonomy on the whole sequences using databases with marker genes</li>
+      </ul> In this tutorial, we use the second approach with MetaPhlAn2. This
+      tools is using a database of ~1M unique clade-specific marker genes (not
+      only the rRNA genes) identified from ~17,000 reference (bacterial,
+      archeal, viral and eukaryotic) genomes.
+    backdrop: true
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '#tool-search-query'
+    content: Search for the "MetaPhlAN2" and click on the "MetaPhlAN2" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmetaphlan2%2Fmetaphlan2%2F2.6.0.0"]
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Input file" to the imported file</li>
+        <li>"MetaPhlAn2 clade-specific marker genes" to "locally cached"</li>
+        <li>"Cached database with clade-specific marker genes" to "MetaPhlAn2 clade-specific marker genes"</li>
+      </ul>
+    position: left
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '.history-right-panel .list-items > *:first'
+    content: This step may take a couple of minutes<br><br> 3 files are generated
+    position: left
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The first file is a BIOM file with the community structure information in
+      BIOM format. It can be used then by mothur and other tools requiring
+      community structure information in BIOM format.
+    position: left
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The second file is a SAM file with the results of the mapping of the
+      sequences on the reference database.
+    position: left
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The last file (the one we will use later) is a tabular file with the
+      community structure.<br> Each line contains a taxa and its relative
+      abundance found for our sample. The file starts with high level taxa
+      (kingdom: "k__") and go to more precise taxa.
+    position: left
+  - title: Taxonomic assignation with MetaPhlAn2
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      <ul>
+        <li>What is the most precise level we have access to with MetaPhlAn2?</li>
+        <li>What are the two orders found in our sample?</li>
+        <li>What is the most abundant family in our sample?</li>
+      </ul>
+    position: left
+  - title: Interactive visualization with KRONA
+    element: '#tool-search-query'
+    content: >-
+      Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM
+      file, we want to visualize and explore the community structure with
+      KRONA.<br> Search and open the "Format MetaPhlAn2 output for Krona" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmetaphlan2krona%2Fmetaphlan2krona%2F2.6.0.0"]
+  - title: Interactive visualization with KRONA
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Input file" to the community profile output of "MetaPhlAn2"</li>
+      </ul>
+    position: left
+  - title: Interactive visualization with KRONA
+    element: '#tool-search-query'
+    content: Search "KRONA pie chart" and open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Ftaxonomy_krona_chart%2Ftaxonomy_krona_chart%2F2.6.1"]
+  - title: Interactive visualization with KRONA
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"What is the type of your input data" to "MetaPhlan"</li>
+        <li>"Input file" to the output of "Format MetaPhlAn2"</li>
+      </ul>
+    position: left
+  - title: Interactive visualization with KRONA
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the interactive visualization of the community structure
+    position: left
+  - title: Extraction of functional information
+    content: >-
+      We would like now to answer the question "What are the micro-organisms
+      doing?" or "Which functions are done by the micro-organisms in the
+      environment?".<br><br> In the shotgun data, we have access to the
+      sequences from the full genome, with gene sequences then. We use that to
+      identify the genes, associate them to a function, build pathways, etc to
+      investigate the functional part of the community.
+    backdrop: true
+  - title: Metabolism function identification
+    element: '#tool-search-query'
+    content: Search and open the "HUMAnN2" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann2%2Fhumann2%2F0.9.9.0"]
+  - title: Metabolism function identification
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Input sequence file" to the imported sequence file
+        <li>"Use of a custom taxonomic profile" to "Yes"
+        <li>"Taxonomic profile file" to the community profile output of "MetaPhlAn2"
+        <li>"Nucleotide database" to "Locally cached"
+        <li>"Nucleotide database" to "Full"
+        <li>"Protein database" to "Locally cached"
+        <li>"Protein database" to "Full UniRef50"
+        <li>"Search for uniref50 or uniref90 gene families?" to "uniref50"
+        <li>"Database to use for pathway computations" to "MetaCyc"
+        <li>"Advanced Options"
+        <li>"Remove stratification from output" to "Yes"</li>
+      </ul>
+    placement: left
+  - title: Metabolism function identification
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: This step is long (1 or 2 hours) so we generated the output for you!
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+      - '#btn-new'
+  - title: Metabolism function identification
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the files started with "humann2" from <a
+      href="https://zenodo.org/record/815875">Zenodo</a>, start the upload and
+      close the window<br> We recommend you to rename the dataset
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
+      https://zenodo.org/record/815875/files/humann2_pathways_abundance.tsv
+      https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
+    postclick:
+      - '#btn-start'
+      - '#btn-close'
+  - title: Metabolism function identification
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      HUMAnN2 generates 3 files.<br>
+
+      The first file is a file with the abundance of gene families.<br> Gene
+      family abundance is reported in RPK (reads per kilobase) units to
+      normalize for gene length. It reflects the relative gene (or transcript)
+      copy number in the community.<br> "UNMAPPED" value is the total number of
+      reads which remain unmapped after both alignment steps (nucleotide and
+      translated search). Since other gene features in the table are quantified
+      in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of
+      length 1 kilobase recruiting all reads that failed to map to known
+      sequences.
+    position: left
+  - title: Metabolism function identification
+    element: '.history-right-panel .list-items > *:first'
+    content: How many gene families and pathways have been identified?
+    position: left
+  - title: Metabolism function identification
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The two other files are related to the found pathways with their coverage
+      and abundance.<br> Pathway coverage provides an alternative description of
+      the presence (1) and absence (0) of pathways in a community, independent
+      of their quantitative abundance.
+    position: left
+  - title: Normalize the gene family abundances
+    element: '#tool-search-query'
+    content: >-
+      The RPK for the gene families are quite difficult to interpret in term of
+      relative abundance. We decide then to normalize the values.<br><br> Search
+      and open the "Renormalize a HUMAnN2 generated table" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann2_renorm_table%2Fhumann2_renorm_table%2F0.9.9.0"]
+  - title: Normalize the gene family abundances
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Gene/pathway table" to the gene family table generated with "HUMAnN2"
+        <li>"Normalization scheme" to "Relative abundance"
+        <li>"Normalization level" to "Normalization of all levels by community total"</li>
+      </ul>
+    placement: left
+  - title: Normalize the gene family abundances
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      <ul> <li>Which percentage of sequences has not be assigned to a gene
+      family?</li> <li>What is the most abundant gene family?</li> </ul>
+    placement: left
+  - title: Regroup the gene families into GO terms
+    element: '#tool-search-query'
+    content: >-
+      With the HUMAnN2 output, we have access to UniRef50 gene families.
+      However, the names can remains cryptic and sometimes we would like a more
+      general view about the functions. HUMAnN proposes a tool to regroup the
+      gene families into different meta-groups: GO (Gene Ontology), EC,
+      etc.<br><br> Search and open "Regroup a HUMAnN2 generated table by
+      features"
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann2_regroup_table%2Fhumann2_regroup_table%2F0.9.9.0"]
+  - title: Regroup the gene families into GO terms
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Gene/pathway table" to the gene family table generated with "HUMAnN2"
+        <li>"How to combine grouped features?" to "Sum"
+        <li>"Use built-in grouping options?" to "Yes"
+        <li>"Gene family type" to "UniRef50 gene families"
+        <li>"Grouping options" to "UniRef50 gene families into GO"
+      </ul>
+    placement: left
+  - title: Regroup the gene families into GO terms
+    element: '#tool-search-query'
+    content: Search and open the "Renormalize a HUMAnN2 generated table" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann2_renorm_table%2Fhumann2_renorm_table%2F0.9.9.0"]
+  - title: Normalize the gene family abundances
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Gene/pathway table" to the gene family table generated with "Regroup"
+        <li>"Normalization scheme" to "Relative abundance"
+        <li>"Normalization level" to "Normalization of all levels by community total"</li>
+      </ul>
+    placement: left
+  - title: Normalize the gene family abundances
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      What is the most abundant GO term? What is related to in <a
+      href="http://www.geneontology.org/">Gene Ontology</a>?
+    placement: left
+  - title: Analyses of metagenomics data - Shotgun metagenomics data analyses
+    content: >-
+      With the previous analyses, we investigate "Which micro-organims are
+      present in my sample?" and "What function are done by the micro-organisms
+      in my sample?". We can go further in these analyses (for example with
+      combination of functional and taxonomic results). We did not detail that
+      in this tutorial but you can found more analyses in our tutorials on
+      shotgun metagenomic data analyses.
+    backdrop: true

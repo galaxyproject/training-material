@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy Tabular Learner - Building a Model using Chowell clinical data / Galaxy Tabular Learner - Building a Model using Chowell clinical data / Statistics and Machine Learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Galaxy Tabular Learner - Building a Model using Chowell clinical data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
+<meta name="DC.creator" content="Paulo Cilas Morais Lyra Junior">
+<meta name="DC.creator" content="Junhao Qiu">
+<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and Machine Learning / Galaxy Tabular Learner - Building a Model using Chowell clinical data / Hands-on: Galaxy Tabular Learner - Building a Model using Chowell clinical data">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/loris_model/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Galaxy Tabular Learner - Building a Model using Chowell clinical data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-09-23 07:25:04 +0000",
+  "datePublished": "2024-12-13 13:25:07 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00525",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and Machine Learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "In this tutorial, we will build a new immunotherapy-response classifier with Galaxy Tabular Learner using a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types. The goal is to accurately predict patient responses to the treatment.",
+  "learningResourceType": "e-learning",
+  "name": "Galaxy Tabular Learner - Building a Model using Chowell clinical data",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/tutorial.html",
+  "version": 5,
+  "timeRequired": "PT1H",
+  "teaches": "- Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.\n- Build a Machine Learning model using Tabular Learner in Galaxy.\n- Evaluate the model for robustness by comparing it with the original LORIS LLR6 model published by Chang et al., 2024.",
+  "keywords": [
+    "Statistics and Machine Learning",
+    "LORIS Score Model",
+    "Machine Learning",
+    "Tabular Learner"
+  ],
+  "description": "## Abstract\n\nIn this tutorial, we will build a new immunotherapy-response classifier with Galaxy Tabular Learner using a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types. The goal is to accurately predict patient responses to the treatment.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can the Tabular Learner in Galaxy be used to reconstruct the LORIS LLR6 logistic regression model described by Chang et al. (2024) using the same dataset and predictor set?\n - How should the decision-threshold parameter be configured in Tabular Learner (default versus optimized, and the selection criterion) to align predictions with the intended clinical operating point?\n - Which components of the Tabular Learner report best support a transparent comparison between the Galaxy-built model and the performance reported in the LORIS paper?\n\n\n## Learning Objectives\n\n- Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.\n- Build a Machine Learning model using Tabular Learner in Galaxy.\n- Evaluate the model for robustness by comparing it with the original LORIS LLR6 model published by Chang et al., 2024.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "name": "Paulo Cilas Morais Lyra Junior",
+      "image": "https://avatars.githubusercontent.com/paulocilasjr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4403-6684",
+      "@id": "https://orcid.org/0000-0002-4403-6684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "name": "Junhao Qiu",
+      "image": "https://avatars.githubusercontent.com/qchiujunhao",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0005-4322-3401",
+      "@id": "https://orcid.org/0009-0005-4322-3401"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "name": "Jeremy Goecks",
+      "image": "https://avatars.githubusercontent.com/jgoecks",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4583-5226",
+      "@id": "https://orcid.org/0000-0002-4583-5226"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "name": "Paulo Cilas Morais Lyra Junior",
+      "image": "https://avatars.githubusercontent.com/paulocilasjr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4403-6684",
+      "@id": "https://orcid.org/0000-0002-4403-6684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2068-4695",
+      "@id": "https://orcid.org/0000-0002-2068-4695"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "name": "Teresa Müller",
+      "image": "https://avatars.githubusercontent.com/teresa-m",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/stardast/",
+          "name": "STARDAST",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://doi.org/10.3030/101268773"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1252-9684",
+      "@id": "https://orcid.org/0000-0003-1252-9684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "name": "Junhao Qiu",
+      "image": "https://avatars.githubusercontent.com/qchiujunhao",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0005-4322-3401",
+      "@id": "https://orcid.org/0009-0005-4322-3401"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "@id": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and Machine Learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/13885908",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and Machine Learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and Machine Learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/loris_model/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/loris_model/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Galaxy Tabular Learner - Building a Model using Chowell clinical data</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/paulocilasjr/" class="contributor-badge contributor-paulocilasjr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulocilasjr?s=36" alt="Paulo Cilas Morais Lyra Junior avatar" width="36" class="avatar" />
+    Paulo Cilas Morais Lyra Junior</a><a href="/training-material/hall-of-fame/qchiujunhao/" class="contributor-badge contributor-qchiujunhao"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/qchiujunhao?s=36" alt="Junhao Qiu avatar" width="36" class="avatar" />
+    Junhao Qiu</a><a href="/training-material/hall-of-fame/jgoecks/" class="contributor-badge contributor-jgoecks"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jgoecks?s=36" alt="Jeremy Goecks avatar" width="36" class="avatar" />
+    Jeremy Goecks</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/paulocilasjr/" class="contributor-badge contributor-badge-small contributor-paulocilasjr"><img src="https://avatars.githubusercontent.com/paulocilasjr?s=36" alt="Paulo Cilas Morais Lyra Junior avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-badge-small contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-badge-small contributor-teresa-m"><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/qchiujunhao/" class="contributor-badge contributor-badge-small contributor-qchiujunhao"><img src="https://avatars.githubusercontent.com/qchiujunhao?s=36" alt="Junhao Qiu avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/cumbof/" class="contributor-badge contributor-badge-small contributor-cumbof"><img src="https://avatars.githubusercontent.com/cumbof?s=36" alt="Fabio Cumbo avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can the Tabular Learner in Galaxy be used to reconstruct the LORIS LLR6 logistic regression model described by Chang et al. (2024) using the same dataset and predictor set?</p>
+</li>
+        
+        <li><p>How should the decision-threshold parameter be configured in Tabular Learner (default versus optimized, and the selection criterion) to align predictions with the intended clinical operating point?</p>
+</li>
+        
+        <li><p>Which components of the Tabular Learner report best support a transparent comparison between the Galaxy-built model and the performance reported in the LORIS paper?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.</p>
+</li>
+        
+        <li><p>Build a Machine Learning model using Tabular Learner in Galaxy.</p>
+</li>
+        
+        <li><p>Evaluate the model for robustness by comparing it with the original LORIS LLR6 model published by Chang et al., 2024.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/loris_model/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/13885908">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/loris_model/workflows/" title="Galaxy Tabular Learner - Building a Model using Chowell clinical data workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/loris_model/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/statistics/tutorials/loris_model/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/statistics/tutorials/loris_model/recordings/index.html#tutorial-recording-7-may-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2025) - 24m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/statistics/tutorials/loris_model/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 13, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00525">https://gxy.io/GTN:T00525</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.5</a> (2 recent ratings, 4 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/loris_model/tutorial.md">5</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In this tutorial, we will build a new immunotherapy-response classifier with Galaxy Tabular Learner using a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types. The goal is to accurately predict patient responses to the treatment.</p>
+
+<p>Rather than re-implementing the original LORIS pipeline, we treat the published LORIS LLR6 logistic regression model as a benchmark and use the Tabular Learner report to confirm model quality and to understand where and why results differ (<span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span>).</p>
+
+<p>We will follow three steps: (i) upload the preprocessed training and test tables to Galaxy, (ii) run Tabular Learner to train and select a best model, and (iii) compare discrimination, calibration, and threshold-dependent behavior against the LORIS LLR6 reference using the interactive report.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/loris_tutorial/tutorial_schema.png" alt="schema of the whole process of training model and test." style="width: 60%; display: block; margin-left: auto; margin-right: auto;" width="697" height="916" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/tutorial_schema.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of the process steps to obtain the model from the Chowell dataset.</figcaption></figure>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#dataset-composition-features-to-train-the-model" id="markdown-toc-dataset-composition-features-to-train-the-model">Dataset composition (features) to train the model</a>    <ol>
+      <li><a href="#tmb-tumor-mutation-burden" id="markdown-toc-tmb-tumor-mutation-burden">TMB (Tumor mutation burden)</a></li>
+      <li><a href="#systemic-therapy-history" id="markdown-toc-systemic-therapy-history">Systemic Therapy History</a></li>
+      <li><a href="#albumin" id="markdown-toc-albumin">Albumin</a></li>
+      <li><a href="#cancer-type" id="markdown-toc-cancer-type">Cancer Type</a></li>
+      <li><a href="#nlr-blood-neutrophillymphocyte-ratio" id="markdown-toc-nlr-blood-neutrophillymphocyte-ratio">NLR (blood neutrophil–lymphocyte ratio)</a></li>
+      <li><a href="#age" id="markdown-toc-age">Age</a></li>
+      <li><a href="#response" id="markdown-toc-response">Response</a></li>
+    </ol>
+  </li>
+  <li><a href="#model-architecture-selection-process" id="markdown-toc-model-architecture-selection-process">Model Architecture Selection Process</a></li>
+  <li><a href="#prepare-environment-and-get-the-data" id="markdown-toc-prepare-environment-and-get-the-data">Prepare environment and get the data</a></li>
+  <li><a href="#using-tabular-learner-tool" id="markdown-toc-using-tabular-learner-tool">Using Tabular Learner Tool</a></li>
+  <li><a href="#tool-output-files" id="markdown-toc-tool-output-files">Tool output files</a></li>
+  <li><a href="#tabular-learner-model-report" id="markdown-toc-tabular-learner-model-report">Tabular Learner Model Report</a></li>
+  <li><a href="#benchmarking-tabular-learner-against-the-loris-llr6-model" id="markdown-toc-benchmarking-tabular-learner-against-the-loris-llr6-model">Benchmarking Tabular Learner against the LORIS LLR6 model</a>    <ol>
+      <li><a href="#classification-algorithms" id="markdown-toc-classification-algorithms">Classification Algorithms</a></li>
+      <li><a href="#hyperparameters" id="markdown-toc-hyperparameters">Hyperparameters</a></li>
+      <li><a href="#model-evaluation-metrics" id="markdown-toc-model-evaluation-metrics">Model Evaluation Metrics</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-background"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background</div>
+
+  <p>The <a href="https://github.com/rootchang/LORIS/blob/main/02.Input/AllData.xlsx">LORIS dataset</a> contains clinical, pathologic, and genomic features from a diverse cohort of patients, providing a foundation for robust analysis and model development. The raw dataset (xlsx) includes 10 distinct cohorts:</p>
+
+  <p>Chowell_train, 2) Chowell_test, 3) MSK1, 4) MSK2, 5) Kato_panCancer, 6) Shim_NSCLC, 7) Vanguri_NSCLC, 8) Ravi_NSCLC, 9) Pradat_panCancer, 10) MSK_nonICB.</p>
+
+  <p>To keep this tutorial concise, we will focus on the Chowell_train cohort for model training and the Chowell_test cohort for testing the PanCancer model.</p>
+
+</blockquote>
+
+<h1 id="dataset-composition-features-to-train-the-model">Dataset composition (features) to train the model</h1>
+
+<p>Before we begin the hands-on session, here’s a brief explanation of the features we’ll be using. These features were selected based on the findings of Chang et al. (2024), who identified them as the most important for training the model.</p>
+
+<p>It’s important to note that other features were tested in different combinations and model architectures. However, the authors concluded that the six features selected are the most valuable for achieving the best model performance.</p>
+
+<h2 id="tmb-tumor-mutation-burden">TMB (Tumor mutation burden)</h2>
+<p>Tumor mutation burden (TMB) is defined as the total number of somatic mutations within a specified region of the tumor genome. It has been recognized as a biomarker for predicting the efficacy of immune checkpoint blockade (ICB) in solid tumors. The <a href="https://www.fda.gov/">U.S. Food and Drug Administration</a> (FDA) has approved a threshold of 10 mutations per megabase (mut/Mb) as a biomarker for response to ICB treatment.</p>
+
+<p>In this dataset, TMB values range from 0 to over 368 mutations per megabase, with some extreme values, such as 368.6 and 93.5. To mitigate the influence of these outliers, TMB values will be truncated at 50 mut/Mb, meaning any value exceeding 50 will be capped at 50. This is crucial because extreme TMB values can disproportionately skew the model’s learning process, leading to unreliable predictions.</p>
+
+<h2 id="systemic-therapy-history">Systemic Therapy History</h2>
+<p>This feature is a binary variable that indicates whether a patient received chemotherapy or targeted therapy prior to immunotherapy. It is coded as 1 if the patient had undergone such treatments before starting immunotherapy, and 0 if they had not.</p>
+
+<h2 id="albumin">Albumin</h2>
+<p>The albumin feature represents the albumin levels measured in patients, which is an important biomarker often associated with nutritional status and liver function. The values are measured in grams per deciliter (g/dL) and typically range between 2.1 and 4.9 g/dL in the dataset. Higher levels of albumin are generally associated with better overall health and can serve as an indicator of a patient’s ability to recover or respond to treatments like immunotherapy.</p>
+
+<h2 id="cancer-type">Cancer Type</h2>
+<p>The CancerType feature represents the type of cancer diagnosed in each patient, which can vary significantly across the dataset. Common types include Non-Small Cell Lung Cancer (NSCLC), Small Cell Lung Cancer (SCLC), Melanoma, Endometrial cancer, and other cancer types such as Gastric, Colorectal, Renal, and Breast cancer. This feature is critical for understanding the heterogeneity of the patient cohort and may influence treatment decisions, response rates, and outcomes.</p>
+
+<p>Incorporating this feature into a machine learning model requires translating the categorical CancerType into one-hot encoded variables. Each cancer type will be represented as a binary feature (0 or 1), with each type becoming a separate column in the dataset. This enables the model to interpret the presence or absence of a specific cancer type for each patient.</p>
+
+<h2 id="nlr-blood-neutrophillymphocyte-ratio">NLR (blood neutrophil–lymphocyte ratio)</h2>
+<p>The neutrophil–lymphocyte ratio (NLR), a biomarker derived from the ratio of neutrophils to lymphocytes in the blood, is increasingly used in cancer research due to its association with inflammation and immune response. It can serve as a prognostic factor in various cancer types. Higher NLR values often indicate a poorer prognosis, potentially reflecting a more aggressive disease or impaired immune response.</p>
+
+<p>In this dataset, NLR values range, for example, from 0.8 to 88, with several extreme outliers. To address this, NLR values will be truncated at 25, meaning any value above 25 will be capped at 25. This truncation is important for preventing extreme outliers from disproportionately influencing the machine learning model.</p>
+
+<h2 id="age">Age</h2>
+<p>In predictive models for patient outcomes, age is a crucial feature because it is often correlated with various health factors and disease risks. As people age, their immune systems, metabolism, and ability to recover from illnesses may change, influencing how they respond to treatments, medications, or disease progression. Including age as a feature helps models account for the biological changes that occur over time and can improve the accuracy of predictions across different age groups.</p>
+
+<p>However, there are limits to how predictive age might be, particularly for extreme values. For example, patients over a certain age may share similar health characteristics, and further increases in age may not significantly add predictive value. Truncating age to a maximum value (like 85) helps avoid overemphasizing small differences between very old patients, where the added predictive power might be negligible.</p>
+
+<h2 id="response">Response</h2>
+<p>The Response feature is a categorical target variable indicating whether patients benefited from immune checkpoint blockade (ICB) therapy, classified as 0 (no benefit) or 1 (benefit). The model is trained using all previous features to predict patient outcomes when ICB is chosen as the treatment.</p>
+
+<h1 id="model-architecture-selection-process">Model Architecture Selection Process</h1>
+
+<p>In the article (<span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span>), the model was trained using different architectures, including Decision Tree, Random Forest, Logistic Regression, and XGBoost, using the scikit-learn framework (full code is available here: <a href="https://github.com/rootchang/LORIS/tree/main/code">Chang et al., github repo</a>. In the end, the best model architecture was a Logistic LASSO (Least Absolute Shrinkage and Selection Operator) Regression model, fitting the six features discussed above. This model was named LLR6.</p>
+
+<p>It is important to note that Tabular Learner has the capability of training different model architectures, just as was done by Chang et al., 2024, but automatically.There are two options:</p>
+<ol>
+  <li><strong>Tool-selected best model</strong>: let Tabular Learner compare candidate classifiers and select the strongest performer under its evaluation protocol.</li>
+  <li><strong>Model specific</strong>: if you want a model family, restrict the candidate list to specific algorithms via the tool option: <code class="language-plaintext highlighter-rouge">Only Select Classification Models if you don't want to compare all models,</code>.</li>
+</ol>
+
+<p>Since the purpose of this tutorial is not to replicate the exact model, we will not use the model specific option. Instead, we will train all candidate models. We therefore expect to obtain results similar to those reported by Chang et al., with logistic regression performing best among the models evaluated.</p>
+
+<h1 id="prepare-environment-and-get-the-data">Prepare environment and get the data</h1>
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-preprocessing-the-raw-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Preprocessing the raw data</div>
+
+  <p>The raw data published by (<span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span>) can be found here: 
+<a href="https://github.com/rootchang/LORIS/blob/main/02.Input/AllData.xlsx">LORIS raw dataset</a></p>
+
+  <p>We preprocessed the raw data using a Python script to:
+1) Extract the <code class="language-plaintext highlighter-rouge">Chowell_train</code> and <code class="language-plaintext highlighter-rouge">Chowell_test</code> tab from the excel file.
+2) Select the 7 features (<code class="language-plaintext highlighter-rouge">TMB</code>, <code class="language-plaintext highlighter-rouge">Systemic Therapy History</code>, <code class="language-plaintext highlighter-rouge">Albumin</code>, <code class="language-plaintext highlighter-rouge">Cancer Type</code>, <code class="language-plaintext highlighter-rouge">NLR</code>, <code class="language-plaintext highlighter-rouge">Age</code>, and <code class="language-plaintext highlighter-rouge">Response</code>) important for building the model.
+3) Truncate the values for <code class="language-plaintext highlighter-rouge">Age</code>, <code class="language-plaintext highlighter-rouge">NLR</code>, and <code class="language-plaintext highlighter-rouge">TMB</code>.
+4) Encode <code class="language-plaintext highlighter-rouge">Cancer Type</code> using one-hot encoding. 
+5) Save the dataset as a .tsv file.</p>
+
+  <p>A Jupyter notebook for preprocessing can be found at Dockstore: <a href="https://dockstore.org/notebooks/github.com/paulocilasjr/pycaret-use-case/preprocessing:main?tab=info">LORIS_preprocessing</a></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-environment-and-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Environment and Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>LORIS model classifier</em>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the files from Zenodo or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13885908/files/Chowell_train_Response.tsv
+https://zenodo.org/records/13885908/files/Chowell_test_Response.tsv
+</code></pre></div>      </div>
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-data-type"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-data-type" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Data Type</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Leave the <code class="language-plaintext highlighter-rouge">Type</code> field as <code class="language-plaintext highlighter-rouge">Auto-Detect</code> when uploading (it’s the default).</p>
+
+      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the data format assigned for the file is <code class="language-plaintext highlighter-rouge">tabular</code>.
+If it is not, follow the Changing the datatype tip.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add a tag (<code class="language-plaintext highlighter-rouge">#LORIS_model_dataset</code>) to the dataset corresponding to <code class="language-plaintext highlighter-rouge">Chowell_train_Response.tsv</code> and <code class="language-plaintext highlighter-rouge">Chowell_test_Response.tsv</code>
+This is important to trace back on what dataset the model was built on.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="using-tabular-learner-tool">Using Tabular Learner Tool</h1>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-1-train-a-tabular-learner-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Run 1: train a Tabular Learner model</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/tabular_learner/tabular_learner/0.1.3" title="Tabular Learner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular Learner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Dataset (CSV or TSV)”</em>: <code class="language-plaintext highlighter-rouge">Chowell_train_Response.tsv</code></li>
+        <li><em>“Do you have a separate test dataset?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test Dataset (CSV or TSV)”</em>: <code class="language-plaintext highlighter-rouge">Chowell_test_Response.tsv</code></li>
+        <li><em>“Select the target column”</em>: <code class="language-plaintext highlighter-rouge">C22: Response</code></li>
+        <li><em>“Task”</em>: <code class="language-plaintext highlighter-rouge">Classification</code></li>
+      </ul>
+    </li>
+    <li>Run the tool</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-2-re-evaluate-at-a-selected-decision-threshold"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Run 2: Re-evaluate at a selected decision threshold</div>
+
+  <p>Threshold-dependent metrics (accuracy, precision, recall, F1, MCC) change when the probability cutoff changes. For a transparent comparison to LORIS LLR6, do the following:</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/tabular_learner/tabular_learner/0.1.3" title="Tabular Learner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular Learner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Dataset (CSV or TSV)”</em>: <code class="language-plaintext highlighter-rouge">Chowell_train_Response.tsv</code></li>
+        <li><em>“Do you have a separate test dataset?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test Dataset (CSV or TSV)”</em>: <code class="language-plaintext highlighter-rouge">Chowell_test_Response.tsv</code></li>
+        <li><em>“Select the target column”</em>: <code class="language-plaintext highlighter-rouge">C22: Response</code></li>
+        <li><em>“Task”</em>: <code class="language-plaintext highlighter-rouge">Classification</code></li>
+        <li><em>“Customize Default Settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Classification Probability Threshold”</em>: <code class="language-plaintext highlighter-rouge">0.25</code></li>
+      </ul>
+    </li>
+    <li>Run the tool</li>
+  </ol>
+</blockquote>
+
+<h1 id="tool-output-files">Tool output files</h1>
+<p>After training and testing your model, you should see two new files in your history list:</p>
+
+<ul>
+  <li>
+    <p>Tabular Learner Best Model: An HDF5 file (<code class="language-plaintext highlighter-rouge">.h5</code>) that stores the serialized best model (and preprocessing) so it can be reused without retraining.</p>
+  </li>
+  <li>
+    <p>Tabular Learner Model Report: An interactive HTML report with sortable tables and plots summarizing setup, validation, test results, and feature importance.</p>
+  </li>
+</ul>
+
+<p>A hidden CSV with the best model’s hyperparameters (<code class="language-plaintext highlighter-rouge">best_model.csv</code>) is also produced; show hidden datasets if you want to download it.</p>
+
+<p>For this tutorial, we will focus on the Tabular Learner Model Report.</p>
+
+<h1 id="tabular-learner-model-report">Tabular Learner Model Report</h1>
+<p>The Tabular Learner HTML report provides a comprehensive, browser-ready overview of the trained model and its evaluation, including performance on the training, validation, and test data. The report consists of four tabs: Model Config Summary, Validation Summary, Test Summary, and Feature Importance.</p>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/loris_tutorial/report_tabs.png" alt="report tabs. " width="808" height="200" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/report_tabs.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Tabs in the Tabular Learner Report</figcaption></figure>
+
+<p>Below is a brief explanation of the content in each tab of the report.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-model-config-summary-tab"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-model-config-summary-tab" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Model Config Summary Tab</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Dataset Overview (classification only): Counts and percentages of each label in the train/validation/test splits.</li>
+    <li>Performance Summary (classification only): Train/validation/test metrics computed for the best model, using the selected probability threshold when applicable.</li>
+    <li>Setup Parameters: Records the key run settings (target column, train size, normalization, feature selection, cross validation, outlier/multicollinearity handling, polynomial features, class-imbalance handling, model list, and probability threshold).</li>
+    <li>Best Model Hyperparameters: The final parameter values for the selected model.</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-validation-summary-tab"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-validation-summary-tab" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Validation Summary Tab</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Train &amp; Validation Summary: A sortable table comparing all candidate models on cross-validation metrics; includes a tuning summary when hyperparameter tuning is enabled.</li>
+    <li>Diagnostic Plots (vary by task and model availability): Learning curve, validation curve, calibration curve (classification), threshold plot (classification), and dimensionality-reduction or feature-selection visuals (e.g., t-SNE, manifold, RFE).</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-test-summary-tab"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-test-summary-tab" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Test Summary Tab</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Test Metrics Table: Holdout/test performance for the selected model.</li>
+    <li>Classification Plots: Confusion matrix, per-class report, ROC and PR curves (optionally annotated at the chosen threshold), lift curve, and cumulative precision.</li>
+    <li>Regression Plots: Residuals plot and prediction error distribution, plus a preview of true vs. predicted values.</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-feature-importance-tab"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-feature-importance-tab" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Feature Importance Tab</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Model-based Importance: Feature importance from the selected model (tree-based or coefficient-based when supported), with a SHAP summary plot to show global impact.</li>
+    <li>SHAP and Permutation Importance: Mean absolute SHAP impact and permutation importance derived from the explainer.</li>
+    <li>Partial Dependence Plots (PDPs): Per-feature effect plots to show how individual features influence predictions.</li>
+    <li>Feature Scope Table: Reports how many transformed features are used in SHAP when feature caps are applied.</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="benchmarking-tabular-learner-against-the-loris-llr6-model">Benchmarking Tabular Learner against the LORIS LLR6 model</h1>
+
+<p>The objective of this use case is to build a <strong>new</strong> model with Tabular Learner under a standardized Galaxy workflow and then use the published LORIS LLR6 model as a <strong>benchmark baseline</strong> (<span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span>). Because both approaches use the same cohort split and predictor set, agreement in threshold-independent metrics (ROC-AUC, PR-AUC) supports model fidelity, while any differences in threshold-dependent metrics can often be explained by distinct probability cutoffs, calibration, or regularization choices recorded in the report.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-robustness-definition"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-robustness-definition" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Robustness definition </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Some evidence is considered robust if it holds up across reasonable variations in analysis, while fragile evidence depends heavily on specific analytical choices, such as the inclusion or exclusion of certain observations or covariates.</p>
+
+  <p>Robustness, therefore, refers to assessing the reliability of previous findings by applying different analytical approaches to the same dataset.&gt;</p>
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/loris_tutorial/robustness.png" alt="table showing the difference of robustness to the others analysis. " width="2947" height="449" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/robustness.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Comparison of Robustness, Reproducibility, Generalizability, and Replicability Based on Data and Method Variations</figcaption></figure>
+
+</blockquote>
+
+<h2 id="classification-algorithms">Classification Algorithms</h2>
+<p>A key feature of Tabular Learner is its capability to train and compare multiple models with minimal code. By default, Tabular Learner evaluates a diverse range of algorithms, including linear models, tree-based models, and ensemble methods, ranking these models based on their performance. The primary metric used to determine the best-performing model is the accuracy.</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/loris_tutorial/model_comparison.png" alt="Comparison results on the cross-validation set. " width="749" height="1178" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/model_comparison.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Comparison of Model Performance Metrics Across Algorithms</figcaption></figure>
+
+<p>In many runs of this use case, logistic regression ranks among the top-performing models, consistent with the LORIS LLR6 baseline.</p>
+
+<h2 id="hyperparameters">Hyperparameters</h2>
+<p>The model from <span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span> for the Pan-Cancer LLR6 model has the following hyperparameters set: C = 0.1, Class Weight = Balanced, L1 ratio = 1, max iter = 100, Penalty = Elasticnet, Solver = Saga.</p>
+
+<p>The hyperparameter search performed by Galaxy-Tabular Learner resulted in slightly different settings for the model: C = 1.0, Class Weight = None, L1 ratio = None, max iter = 1000, Penalty = L2, Solver = LBFGS.</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/loris_tutorial/hyperparameters.png" alt="Model hyperparameters table. " width="750" height="710" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/hyperparameters.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Table showing the hyperparameters set for the selected model</figcaption></figure>
+
+<p>The differences found in the hyperparameters guide the analysis towards testing the robustness of the LORIS Score proposed by <span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-hyperparameters-meaning"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Hyperparameters meaning</div>
+
+  <p><em>Penalty</em> - Defines the type of regularization applied to the model to prevent overfitting. Options for linear and logistic regression are: <code class="language-plaintext highlighter-rouge">L1</code>, <code class="language-plaintext highlighter-rouge">L2</code>, and <code class="language-plaintext highlighter-rouge">Elasticnet</code>. Briefly, L1 (Lasso Regression) removes less important features, helping to overcome overfitting as well as performing dimension reduction. However, when most features (variables) in the model are useful, L2 (Ridge Regression) is used. Elasticnet regularization combines both L1 and L2, addressing multicollinearity while also enabling feature selection. When Elasticnet is selected, it opens the L1 Ratio parameter.</p>
+
+  <p><em>L1-Ratio</em> - Controls the balance between L1 and L2 penalties. A value of <code class="language-plaintext highlighter-rouge">1</code> uses purely L1 regularization, which encourages sparsity. A value of <code class="language-plaintext highlighter-rouge">0</code> uses purely L2.</p>
+
+  <p><em>C</em> - Is the inverse of the regularization strength. A smaller C (like <code class="language-plaintext highlighter-rouge">0.1</code>) implies stronger regularization, which prevents overfitting by penalizing large coefficients and also makes the model simpler (smaller coefficients). In contrast, higher values make the model more complex.</p>
+
+  <p><em>Solver</em> - Specifies the optimization algorithm used for fitting the model. <code class="language-plaintext highlighter-rouge">SAGA</code> is well-suited for large datasets and supports the Elasticnet penalty. It is also effective for sparse data and is fast for L1. <code class="language-plaintext highlighter-rouge">LBFGS</code> is a quasi-Newton optimization algorithm, efficient for smaller datasets, supports L2 regularization, but does not support Elasticnet.</p>
+
+  <p><em>Class Weight</em> - Is used to handle imbalanced classes by adjusting the weight associated with each class. Balanced adjusts these weights inversely proportional to class frequencies in the data, giving more weight to the minority class.</p>
+
+  <p><em>Max Iter</em> - Specifies the <code class="language-plaintext highlighter-rouge">maximum number</code> of iterations the solver will run before stopping. If convergence is achieved earlier, it will stop; if not, you may need to increase the value.</p>
+
+</blockquote>
+
+<h2 id="model-evaluation-metrics">Model Evaluation Metrics</h2>
+
+<p>When comparing Tabular Learner models to LORIS LLR6, separate metrics into two groups and compare both runs of Tabular Learner:</p>
+
+<ol>
+  <li><strong>Threshold-independent (primary for benchmarking)</strong>
+    <ul>
+      <li><strong>ROC-AUC</strong> and <strong>PR-AUC</strong> summarize discrimination across all thresholds. In this use case, both Tabular Learner runs show stronger discrimination than LLR6 (AUC 0.76 vs 0.72; AUPRC 0.55 vs 0.53), and the two runs are identical on these metrics because the underlying model and data did not change.</li>
+    </ul>
+  </li>
+  <li><strong>Threshold-dependent (report with the chosen cutoff)</strong>
+    <ul>
+      <li><strong>Accuracy and F1</strong> shift when the probability cutoff changes. Moving from 0.50 (Run 1) to 0.25 (Run 2) lowers accuracy (0.79 → 0.67) but improves F1 (0.42 → 0.52).</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The table below summarizes the key numbers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Threshold</th>
+      <th>Accuracy</th>
+      <th>ROC-AUC</th>
+      <th>PR-AUC</th>
+      <th>F1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LLR6 (reference)</td>
+      <td>0.30</td>
+      <td>0.68</td>
+      <td>0.72</td>
+      <td>0.53</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <td>Tabular Learner Run 1</td>
+      <td>0.50</td>
+      <td>0.80</td>
+      <td>0.76</td>
+      <td>0.55</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <td>Tabular Learner Run 2</td>
+      <td>0.25</td>
+      <td>0.67</td>
+      <td>0.76</td>
+      <td>0.55</td>
+      <td>0.52</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Use the following report components to interpret differences:</p>
+
+<ul>
+  <li><strong>Model Config Summary</strong>: confirm the split strategy, evaluation protocol, selected model, and tuned hyperparameters.</li>
+  <li><strong>ROC and PR curves</strong>: compare discrimination against the published baseline without relying on a specific threshold.</li>
+  <li><strong>Calibration plot and probability diagnostics</strong>: determine whether predicted probabilities are systematically over- or under-confident.</li>
+  <li><strong>Threshold plot (precision/recall/F1 vs cutoff)</strong>: select and justify an operating point (for example, maximize F1, or prioritize recall for clinical sensitivity).</li>
+  <li><strong>Confusion matrix and classification report</strong>: quantify how the chosen cutoff changes false positives and false negatives.</li>
+</ul>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/loris_tutorial/test_metrics_results.png" alt="Bar chart comparing LLR6 metrics vs. Tabular Learner (threshold = 0.25). " width="6000" height="4500" loading="lazy" /><a target="_blank" href="../../images/loris_tutorial/test_metrics_results.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Comparison of LLR6 model metrics and Tabular Learner model metrics at a 0.25 threshold.</figcaption></figure>
+
+<ul>
+  <li>
+    <p>Accuracy
+Accuracy measures the proportion of correct predictions among all predictions. In our experiments, Tabular Learner Run 1 achieved the highest accuracy (0.80), substantially higher than the published reference model LLR6 (0.68) and Run 2 (0.67). This indicates that, at its selected operating threshold, Run 1 produced more correct classifications overall. However, because accuracy depends on the chosen cutoff and can be influenced by class imbalance, it should be interpreted alongside threshold-dependent metrics (e.g., F1) and threshold-independent metrics (e.g., ROC-AUC, PR-AUC).</p>
+  </li>
+  <li>
+    <p>Area Under the Curve (AUC)
+ROC-AUC summarizes discrimination across all possible thresholds. Both Tabular Learner runs show higher ROC-AUC (0.76) than the published LLR6 baseline (0.72), indicating improved ability to rank positives above negatives irrespective of where the cutoff is set. Despite Run 1 having much higher accuracy than Run 2, their identical ROC-AUC suggests that the key difference is likely where the decision threshold was placed, rather than a large difference in underlying separability.</p>
+  </li>
+  <li>
+    <p>Precision-Recall AUC (AUPRC)
+Precision-Recall AUC (AUPRC or PR-AUC) is often more informative than ROC-AUC when positives are relatively rare. Both Tabular Learner runs have PR-AUC = 0.55, slightly higher than the reference (0.53), suggesting a modest improvement in performance in the precision–recall tradeoff over the baseline, independent of a single threshold choice.</p>
+  </li>
+  <li>
+    <p>Threshold selection and F1 (Run 1 vs Run 2 vs reference)
+The threshold determines the balance between false positives and false negatives. Although Run 1 attains higher accuracy, it has a lower F1 (0.42) than Run 2 (0.52) and the reference LLR6 (0.53). This pattern is consistent with Run 1 using a more conservative cutoff (0.50), which typically increases true negatives (improving accuracy) but can reduce recall and harm F1 if positives are missed. In contrast, Run 2 uses a lower threshold (0.25), which generally increases sensitivity and can improve F1 by capturing more positives, even if it introduces more false positives and lowers overall accuracy.The comparison between the Tabular Learner and Scikit-learn models demonstrates consistent performance across multiple evaluation metrics, such as accuracy, AUC, and F1 score. The slight differences in the results reflect the inherent flexibility of the LORIS Score, showing that a model built using two different frameworks—Tabular Learner and Scikit-learn—can still yield comparable performance.</p>
+  </li>
+</ul>
+
+<p>Compared to the published model, our runs demonstrate that while discrimination (ROC-AUC/PR-AUC) is slightly improved, the choice of threshold materially changes the reported point metrics. Therefore, differences in accuracy and F1 across Run 1, Run 2, and LLR6 should be interpreted primarily as different operating points on similar underlying probability rankings, rather than as contradictions in model quality.</p>
+
+<p>Overall, these results emphasize that (1) ROC-AUC and PR-AUC support comparability with, and slight improvement over, the published baseline, and (2) threshold selection must be explicitly justified because it can shift the balance between accuracy and clinically relevant sensitivity/precision, leading to substantially different conclusions from the same model outputs.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>In this tutorial, we demonstrated how to use the Galaxy-Tabular Learner Tool to build a machine learning model for ICB treatment patient selection using clinical data. We followed a structured approach consisting of:</p>
+<ul>
+  <li>Uploading datasets (.tsv)</li>
+  <li>Running the Tabular Learner</li>
+  <li>Evaluating the model’s performance using the metrics published by <span class="citation"><a href="#Chang2024">Chang <i>et al.</i> 2024</a></span> as the gold standard.</li>
+</ul>
+
+<p>Throughout the process, we showcased how Tabular Learner simplifies the complexities of machine learning workflows, making them more accessible and efficient for users. Additionally, we explored the robustness of the LORIS Score by building a Logistic Regression model with different hyperparameters.</p>
+
+<p>By the end of this tutorial, you should have a solid understanding of how to deploy a traditional machine learning model using tabular data and effectively interpret its results.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Use the Galaxy Tabular Learner to reconstruct a LORIS-style model (LLR6) from the same cohort and predictor set described by Chang et al. (2024).</p>
+</li>
+                        
+                        <li><p>Validate model fidelity and robustness by comparing discrimination, calibration, and threshold-dependent performance from the Tabular Learner report against the metrics reported for LORIS LLR6 in Chang et al. (2024).</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Chang2024">Chang, T.-G., Y. Cao, H. J. Sfreddo, S. R. Dhruba, S.-H. Lee <i>et al.</i>, 2024 <b>LORIS robustly predicts patient outcomes with immune checkpoint blockade therapy using common clinical,  pathologic and genomic features</b>. Nature Cancer 5: 1158–1175. <a href="https://doi.org/10.1038/s43018-024-00772-7">10.1038/s43018-024-00772-7</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/loris_model"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/loris_model">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Paulo Cilas Morais Lyra Junior, Junhao Qiu, Jeremy Goecks,  <b>Galaxy Tabular Learner - Building a Model using Chowell clinical data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-loris_model,
+author = "Paulo Cilas Morais Lyra Junior and Junhao Qiu and Jeremy Goecks",
+	title = "Galaxy Tabular Learner - Building a Model using Chowell clinical data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/loris_model/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/loris_model/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: tabular_learner
+  owner: goeckslab
+  revisions: edd515746388
+  tool_panel_section_label: Machine Learning
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.3333333333333333">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>May 2026</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: very comprehensive and easy to follow 
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Simplicity 
+					<b>Disliked</b>: Diagrams can be improved for better understanding
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00525">gxy.io/GTN:T00525</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/loris_model/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/loris_model/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

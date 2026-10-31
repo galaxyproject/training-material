@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Python - Warm-up for statistics and machine learning / Python - Warm-up for statistics and machine learning / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Python - Warm-up for statistics and machine learning">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-03-11 17:21:16 +0000">
+<meta name="DC.creator" content="Wandrille Duchemin"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Python - Warm-up for statistics and machine learning / Hands-on: Python - Warm-up for statistics and machine learning">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Python - Warm-up for statistics and machine learning",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-03-11 17:21:16 +0000",
+  "datePublished": "2025-03-11 17:21:16 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00485",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "abstract": "> <div class="box-title agenda-title" id="agenda-1">Agenda</div>",
+  "learningResourceType": "e-learning",
+  "name": "Python - Warm-up for statistics and machine learning",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- to do",
+  "keywords": [
+    "Foundations of Data Science",
+    "elixir",
+    "ai-ml",
+    "work-in-progress",
+    "jupyter-notebook"
+  ],
+  "description": "## Abstract\n\n> <div class="box-title agenda-title" id="agenda-2">Agenda</div>\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - to do\n\n\n## Learning Objectives\n\n- to do\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wandrilled/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wandrilled/",
+      "name": "Wandrille Duchemin",
+      "image": "https://avatars.githubusercontent.com/wandrilled",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml.ipynb",
+      "name": "Jupyter Notebook (with Solutions)"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml-course.ipynb",
+      "name": "Jupyter Notebook (without Solutions)"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-data-science">
+    <h1 data-toc-skip>Python - Warm-up for statistics and machine learning</h1>
+
+    
+
+
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/wandrilled/" class="contributor-badge contributor-wandrilled"><img src="https://avatars.githubusercontent.com/wandrilled?s=36" alt="Wandrille Duchemin avatar" width="36" class="avatar" />
+    Wandrille Duchemin</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>to do</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>to do</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml.ipynb" title="Jupyter Notebook" alt="Python - Warm-up for statistics and machine learning Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			UseGalaxy.ca
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 11, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00485">https://gxy.io/GTN:T00485</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.md">1</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-warmup-stat-ml%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-python-warmup-stat-ml.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/data-science-python-warmup-stat-ml-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-3">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#basic-python" id="markdown-toc-basic-python">Basic python</a></li>
+  <li><a href="#numpy-and-vectorized-operations" id="markdown-toc-numpy-and-vectorized-operations">numpy and vectorized operations</a></li>
+  <li><a href="#basic-plotting" id="markdown-toc-basic-plotting">Basic plotting</a></li>
+  <li><a href="#exercise-0001--bringing-together-numpy-and-matplotlib" id="markdown-toc-exercise-0001--bringing-together-numpy-and-matplotlib">Exercise 00.01 : bringing together numpy and matplotlib</a></li>
+  <li><a href="#generating-random-numbers" id="markdown-toc-generating-random-numbers">Generating random numbers</a></li>
+  <li><a href="#statistical-testing" id="markdown-toc-statistical-testing">Statistical testing</a></li>
+  <li><a href="#bringing-together-numpy-numpyrandom-and-matplotlib" id="markdown-toc-bringing-together-numpy-numpyrandom-and-matplotlib">Bringing together numpy, numpy.random, and matplotlib</a></li>
+  <li><a href="#the-briefest-intro-to-pandas" id="markdown-toc-the-briefest-intro-to-pandas">The briefest intro to pandas</a></li>
+  <li><a href="#exercise-0002--tying-everything-together" id="markdown-toc-exercise-0002--tying-everything-together">Exercise 00.02 : tying everything together</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="basic-python">Basic python</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="sh">'</span><span class="s">is odd</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="sh">'</span><span class="s">is even</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 is even
+1 is odd
+4 is even
+9 is odd
+16 is even
+25 is odd
+36 is even
+49 is odd
+64 is even
+81 is odd
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># list comprehension is a very fine way of compressing all this
+</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">]</span>
+
+<span class="n">Xeven</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">]</span>
+<span class="n">Xodd</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">]</span>
+
+
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">X    </span><span class="sh">'</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">Xeven</span><span class="sh">'</span><span class="p">,</span> <span class="n">Xeven</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">Xodd </span><span class="sh">'</span><span class="p">,</span> <span class="n">Xodd</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X     [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+Xeven [0, 4, 16, 36, 64]
+Xodd  [1, 9, 25, 49, 81]
+</code></pre></div></div>
+
+<p><a href="#top">back to the top</a></p>
+
+<h2 id="numpy-and-vectorized-operations">numpy and vectorized operations</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">X_array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 0  1  4  9 16 25 36 49 64 81]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">X_array</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 0.   0.5  2.   4.5  8.  12.5 18.  24.5 32.  40.5]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="n">X_array</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="n">np</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">X_array</span> <span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1.00000000e+00 2.71828183e+00 5.45981500e+01 8.10308393e+03
+ 8.88611052e+06 7.20048993e+10 4.31123155e+15 1.90734657e+21
+ 6.23514908e+27 1.50609731e+35]
+[      -inf 0.         1.38629436 2.19722458 2.77258872 3.21887582
+ 3.58351894 3.8918203  4.15888308 4.39444915]
+
+
+/tmp/ipykernel_490123/2855859755.py:2: RuntimeWarning: divide by zero encountered in log
+  print( np.log(X_array ) )
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">shape</span><span class="sh">'</span> <span class="p">,</span> <span class="n">X_array</span><span class="p">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">mean </span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">X_array</span><span class="p">)</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">standard deviation</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">X_array</span><span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shape (10,)
+mean  28.5
+standard deviation 26.852374196707448
+</code></pre></div></div>
+
+<h3 id="linspace-and-arange">linspace and arange</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">linspace 0,2,9 :</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">linspace -0.5,0.5,11 :</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">linspace 10,0,11 :</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linspace 0,2,9 :	[0.   0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ]
+linspace -0.5,0.5,11 :	[-0.5 -0.4 -0.3 -0.2 -0.1  0.   0.1  0.2  0.3  0.4  0.5]
+linspace 10,0,11 :	[10.  9.  8.  7.  6.  5.  4.  3.  2.  1.  0.]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">arange 0,2,0.1 :</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">arange -1,1,0.125 :</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.125</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">"</span><span class="s">arange 10,2 :</span><span class="sh">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span> <span class="p">)</span> <span class="c1"># reverse does not work!
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arange 0,2,0.1 :	[1.5 1.6 1.7 1.8 1.9]
+arange -1,1,0.125 :	[-1.    -0.875 -0.75  -0.625 -0.5   -0.375 -0.25  -0.125  0.     0.125
+  0.25   0.375  0.5    0.625  0.75   0.875]
+arange 10,2 :	[]
+</code></pre></div></div>
+
+<h2 id="basic-plotting">Basic plotting</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="adding-color-symbols-">Adding color, symbols, …</h3>
+
+<p><code class="language-plaintext highlighter-rouge">matplotlib</code> offers many options to customize the appearance of your plot.</p>
+
+<p>Here are the (some) common arguments to <code class="language-plaintext highlighter-rouge">plot()</code> (which can also be applied to many other graphical representations):</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">color</code> : could be given as a (red,green,blue) tuple, a <a href="https://matplotlib.org/3.1.0/gallery/color/named_colors.html">name</a>, a hex code, …  (see <a href="https://matplotlib.org/tutorials/colors/colors.html">Something better here</a> for all the options)</li>
+  <li><code class="language-plaintext highlighter-rouge">marker</code> : symbols for the data point. <code class="language-plaintext highlighter-rouge">'.'</code> is a point, <code class="language-plaintext highlighter-rouge">'v'</code> a down triangle, … see <a href="https://matplotlib.org/3.3.3/api/markers_api.html#module-matplotlib.markers">Something better here</a> for the list of possibilities.</li>
+  <li><code class="language-plaintext highlighter-rouge">linestyle</code> : style of the line. <code class="language-plaintext highlighter-rouge">'-'</code> is solid, <code class="language-plaintext highlighter-rouge">'--'</code> is dashed, <code class="language-plaintext highlighter-rouge">''</code> for no line. See <a href="https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/linestyles.html">Something better here</a> for more options</li>
+  <li><code class="language-plaintext highlighter-rouge">linewidth</code> : width of the lines</li>
+  <li><code class="language-plaintext highlighter-rouge">markersize</code> : size of the markers</li>
+</ul>
+
+<p>You are invited to experiment and explore these options. Here are a few examples:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># green, dashed line, with circle markers
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">)</span>
+
+<span class="c1"># blue triangle with no line
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">)</span>
+
+<span class="c1"># solid orange line
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Note that:</p>
+<ul>
+  <li>you can call plot several time in a row to make several lines appear (only <code class="language-plaintext highlighter-rouge">plt.show()</code> causes the figure to appear)</li>
+  <li>the frame of the picture automatically adjust to what it needs to show</li>
+</ul>
+
+<h3 id="multiple-subplots">multiple subplots</h3>
+
+<p>Now would normally be when we show you how to add labels, titles and legends to figures.</p>
+
+<p>However, the way <code class="language-plaintext highlighter-rouge">matplotlib</code> is built, it is actually a bit more efficient to first learn how to create multiple subplots.</p>
+
+<p>Creating multiple plots is possible with the function <code class="language-plaintext highlighter-rouge">plt.subplots()</code>.
+Amon its many arguments, it takes:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nrows</code> : number of subplot rows</li>
+  <li><code class="language-plaintext highlighter-rouge">ncols</code> : number of subplot columns</li>
+  <li><code class="language-plaintext highlighter-rouge">figsize</code> : tuple (width,height) of the figure</li>
+</ul>
+
+<p>This function creates a Figure and an Axes object.
+The Axes object can be either :</p>
+<ul>
+  <li>a simple Axe is there is 1 row and 1 columns</li>
+  <li>a list of Axe objects if there is 1 row and multiple columns, or 1 column and multiple rows</li>
+  <li>a list of lists of Axes objects if there is multiple rows and multiple columns</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c1"># subplots returns a Figure and an Axes object
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 2 columns and 1 row
+</span>
+<span class="c1"># ax is a list with two objects. Each object correspond to 1 subplot
+</span>
+<span class="c1"># accessing to the first column ax[0]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">)</span>
+
+<span class="c1"># accessing to the second column ax[1]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Notice how we call <code class="language-plaintext highlighter-rouge">ax[0].plot(...)</code> instead of <code class="language-plaintext highlighter-rouge">plt.plot(...)</code> to specify in which subplots we want to plot.</p>
+
+<h3 id="multiple-subplots---continued">multiple subplots - continued</h3>
+
+<p>Let’s see the same thing with several lines and several columns</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># 2 columns and 2 rows, and we also set the figure size
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># ax is a list of two lists with two objects each.
+</span>
+<span class="c1"># accessing to the first row, first column : ax[0][0]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">)</span>
+
+<span class="c1"># accessing to the first row, second column : ax[0][1]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">)</span>
+
+<span class="c1"># accessing to the second row, first column : ax[1][0]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span> <span class="p">)</span>
+
+<span class="c1"># accessing to the first row, second column : ax[1][1]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y4</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">teal</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-.</span><span class="sh">'</span> <span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="setting-up-labels">setting up labels</h3>
+
+<p>To set the labels at the x-axis, y-axis and title, we use the method of the Axe object:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.set_xlabel(...)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.set_ylabel(...)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.set_title(...) </code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># subplots returns a Figure and an Axes object
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span> <span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># 2 columns and 1 row
+</span>
+
+<span class="c1"># accessing to the first column ax[0]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">x-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">y-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">'</span><span class="s">plot 1</span><span class="sh">'</span><span class="p">)</span>
+
+
+<span class="c1"># accessing to the second column ax[1]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">x-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">y-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">'</span><span class="s">plot 2</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>setting up a legend</strong></p>
+
+<p>Each element we add to the figure using <code class="language-plaintext highlighter-rouge">plot()</code> can be given a label using the <code class="language-plaintext highlighter-rouge">label</code> argument.
+Then, a legend may be added to the figure using the <code class="language-plaintext highlighter-rouge">legend()</code> method.</p>
+
+<p>This <code class="language-plaintext highlighter-rouge">legend()</code> method can take a <code class="language-plaintext highlighter-rouge">loc</code> argument that specifies where it should be plotted. 
+Possible values for this argument are: <code class="language-plaintext highlighter-rouge">'best' , 'upper right' , 'upper left' , 'lower left' , 'lower right' , 'right' , 'center left' , 'center right' , 'lower center' , 'upper center' , 'center'</code> (the default is <code class="language-plaintext highlighter-rouge">best</code>).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># 2 columns and 1 row
+</span>
+<span class="c1"># NB : with 1 col and 1 row, ax is directly the sole subplot we have
+#      so to call it we just use ax.plot , ax.set_xlabel , ...
+</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sh">'</span><span class="s">line A</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span>  <span class="mi">8</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sh">'</span><span class="s">line B</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sh">'</span><span class="s">line C</span><span class="sh">'</span> <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">x-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">y-axis label</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">'</span><span class="s">plot with a legend</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1">#adding a legend in the upper right
+</span><span class="n">ax</span><span class="p">.</span><span class="nf">legend</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span><span class="sh">'</span><span class="s">upper right</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<h3 id="additional--writing-a-figure-to-a-file">additional : writing a figure to a file</h3>
+
+<p>Writing a matplotlib figure to a file can be achieved simply by replacing the call to <code class="language-plaintext highlighter-rouge">plt.show()</code> to <code class="language-plaintext highlighter-rouge">plt.savefig(...)</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">plt.savefig</code> takes a number of argument, the most commons are :</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fname</code> : name of the file to write the figure. The extension is used to determine the output format (.pdf,.png, .jpg , .svg ,  …). Many formats are supported, you can get a list with this command : <code class="language-plaintext highlighter-rouge">plt.gcf().canvas.get_supported_filetypes()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dpi</code> : dots per inches , useful to set-up when saving to raster formats (ie., pixel-based such as png or jpeg). The actual size of the image is set using the argument <code class="language-plaintext highlighter-rouge">figsize</code> of <code class="language-plaintext highlighter-rouge">plt.subplots()</code></li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>in a jupyter notebook the figure will still be shown, whereas in a standard .py script it will not appear on screen.</p>
+
+</blockquote>
+
+<p>Here is a demonstration. Apply in on your side and verify that the file <code class="language-plaintext highlighter-rouge">testPlot.png</code> was created:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c1"># subplots returns a Figure and an Axes object
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">)</span> <span class="c1"># 2 columns and 1 row
+</span>
+<span class="c1"># ax is a list with two objects. Each object correspond to 1 subplot
+</span>
+<span class="c1"># accessing to the first column ax[0]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">)</span>
+
+<span class="c1"># accessing to the second column ax[1]
+</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">''</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">orange</span><span class="sh">'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="sh">'</span><span class="s">-</span><span class="sh">'</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span> <span class="sh">'</span><span class="s">testPlot.png</span><span class="sh">'</span> <span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">90</span>  <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="exercise-0001--bringing-together-numpy-and-matplotlib">Exercise 00.01 : bringing together numpy and matplotlib</h2>
+
+<p>Numpy arrays can be plotted as if they were lists.</p>
+
+<ol>
+  <li>plot x and y, where:
+    <ul>
+      <li>y = 1/(1+exp(-x))</li>
+      <li>x varies between -5 and 5 (plotting around a 100 points should suffice).</li>
+    </ul>
+  </li>
+  <li><strong>Bonus :</strong> plot multiples lines : y = 1/(1+exp(-x*b)) , for the following values of b: 0.5 , 1 , 2 , 4.
+    <ul>
+      <li>x still varies between -5 and 5 (plotting around a 100 points should suffice).</li>
+      <li>put a legend in your plot</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<p>You can load the solution directly in this notebook by uncommenting and running the following line:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r -8 solutions/solution_00_01.py
+</span></code></pre></div></div>
+
+<p>bonus question solution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 9- solutions/solution_00_01.py
+</span></code></pre></div></div>
+
+<h2 id="generating-random-numbers">Generating random numbers</h2>
+
+<h3 id="the-basics">the basics</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy.random</span> <span class="k">as</span> <span class="n">rd</span>
+
+<span class="c1"># random floats between 0 and 1
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span> <span class="n">rd</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.6696103730869407
+0.7426639266737763
+0.6767219223242785
+0.8602105555191791
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="n">rd</span><span class="p">.</span><span class="nf">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span> <span class="c1"># draw directly 10 numbers
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0.37971723 0.80354745 0.4168427  0.70867247 0.17547126 0.43760884
+ 0.75933345 0.06571168 0.45772397 0.67191214]
+</code></pre></div></div>
+
+<h3 id="setting-the-seed-pseudorandomness-and-reproducibility">setting the seed: pseudorandomness and reproducibility</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rd</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># setting the seed to 42
+</span><span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">1st draw</span><span class="sh">'</span> <span class="p">,</span> <span class="n">rd</span><span class="p">.</span><span class="nf">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">2nd draw</span><span class="sh">'</span> <span class="p">,</span> <span class="n">rd</span><span class="p">.</span><span class="nf">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">rd</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">after resetting seed</span><span class="sh">'</span> <span class="p">,</span> <span class="n">rd</span><span class="p">.</span><span class="nf">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1st draw [0.37454012 0.95071431 0.73199394 0.59865848 0.15601864]
+2nd draw [0.15599452 0.05808361 0.86617615 0.60111501 0.70807258]
+after resetting seed [0.37454012 0.95071431 0.73199394 0.59865848 0.15601864]
+</code></pre></div></div>
+
+<h3 id="beyond-the-uniform-distribution">beyond the uniform distribution</h3>
+
+<p>numpy offers you quite a large <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/routines.random.html#distributions">set of distributions you can draw from</a>.</p>
+
+<p>Let’s look at the normal distribution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">normalDraw</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1000</span> <span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">mean </span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span> <span class="n">normalDraw</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">stdev</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span> <span class="n">normalDraw</span> <span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mean  0.025354699638558926
+stdev 1.0003731428167348
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">normalDraw2</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span> <span class="n">loc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">300</span> <span class="p">)</span> <span class="c1"># loc chnages the location (mean), and scale changes the standard deviation
+</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">mean </span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span> <span class="n">normalDraw2</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">stdev</span><span class="sh">'</span> <span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span> <span class="n">normalDraw2</span> <span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mean  -1.9773491637651965
+stdev 2.964622032924749
+</code></pre></div></div>
+
+<p>of course, we could want to plot these drawn numbers:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span> <span class="n">normalDraw</span>  <span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">loc=0  , scale=1</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span> <span class="n">normalDraw2</span> <span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">loc=-2 , scale=3</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="statistical-testing">Statistical testing</h2>
+
+<p><code class="language-plaintext highlighter-rouge">numpy.random</code> let’s you draw random numbers ;
+<code class="language-plaintext highlighter-rouge">scipy.stats</code> implements the probability density functions, and Percent point function, as well as the most statistical tests.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">scipy.stats</span> <span class="k">as</span> <span class="n">stats</span>
+
+<span class="c1"># plotting the probability density function for 1 of the random draw we just made:
+</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1001</span><span class="p">)</span>
+
+<span class="n">normPDF</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">norm</span><span class="p">.</span><span class="nf">pdf</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span> <span class="n">normalDraw2</span> <span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">random draw</span><span class="sh">'</span> <span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span> <span class="c1"># don't forget density=True
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">normPDF</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">PDF</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We can also get the expected quantiles of a distribution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">95% quantile of a Chi-square distribution with 3 degrees of freedom:</span><span class="sh">'</span><span class="p">,</span> <span class="n">stats</span><span class="p">.</span><span class="n">chi2</span><span class="p">.</span><span class="nf">ppf</span><span class="p">(</span><span class="mf">0.95</span> <span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">fraction of a Chi-square distribution with 3 degrees of freedom above of equal to 5</span><span class="sh">'</span> <span class="p">,</span>  
+      <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="p">.</span><span class="n">chi2</span><span class="p">.</span><span class="nf">cdf</span><span class="p">(</span> <span class="mi">5</span> <span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>95% quantile of a Chi-square distribution with 3 degrees of freedom: 7.814727903251179
+fraction of a Chi-square distribution with 3 degrees of freedom above of equal to 5 0.17179714429673354
+</code></pre></div></div>
+
+<p>And you can apply some classical statistical tests:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t-test of independance between two random samples:
+</span><span class="n">rd</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">73</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">67</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">54</span> <span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">testStat</span> <span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="nf">ttest_ind</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span> <span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># equal variance : Student's t-test ; unequal : Welch's
+#almost all of these stat functions return the same test-statistic , pvalue tuple
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">result of the t-test</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="se">\t</span><span class="s">t:</span><span class="sh">'</span><span class="p">,</span><span class="n">testStat</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="se">\t</span><span class="s">p-value:</span><span class="sh">'</span><span class="p">,</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>result of the t-test
+    t: 0.26673986193074073
+    p-value: 0.7901311339594405
+</code></pre></div></div>
+
+<h3 id="what-is-our-conclusion-for-these-tests-results-what-do-you-think-about-this">What is our conclusion for these tests results? What do you think about this?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># Kolmogorov-smirnov test for a chi-square distribution
+</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">chisquare</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">13</span> <span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">43</span><span class="p">)</span>
+
+
+<span class="c1"># kstest expect as second argument the cdf function of the reference distribution
+# this is how to handle the fact that me must set an argument (degree of freedom)
+</span><span class="n">refDistribution</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="nf">chi2</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">13</span><span class="p">).</span><span class="n">cdf</span>
+
+<span class="n">testStat</span> <span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="nf">kstest</span><span class="p">(</span> <span class="n">sample</span> <span class="p">,</span> <span class="n">refDistribution</span> <span class="p">)</span>
+<span class="c1"># alternative : 
+# testStat , pval = stats.kstest( sample , lambda x : stats.chi2.cdf(x , df=13 ) )
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">result of the Kolmogorov-Smirnov test comparing our sample to a Chi-square distribution with 13 degrees of freedom</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="se">\t</span><span class="s">K:</span><span class="sh">'</span><span class="p">,</span><span class="n">testStat</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="se">\t</span><span class="s">p-value:</span><span class="sh">'</span><span class="p">,</span><span class="n">pval</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>result of the Kolmogorov-Smirnov test comparing our sample to a Chi-square distribution with 13 degrees of freedom
+    K: 0.12249766392962913
+    p-value: 0.5003109000967569
+</code></pre></div></div>
+
+<p>If you are interested, this <a href="https://machinelearningmastery.com/statistical-hypothesis-tests-in-python-cheat-sheet/">webpage</a> references all implemented tests, with examples.</p>
+
+<p><a href="#top">back to the top</a></p>
+
+<h2 id="bringing-together-numpy-numpyrandom-and-matplotlib">Bringing together numpy, numpy.random, and matplotlib</h2>
+
+<p>The random generation function return a numpy array, meaning it is fairly trivial to combine it with other arrays:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># combining 
+</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">170</span> <span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">23</span> <span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">y_theoretical</span> <span class="o">=</span> <span class="mf">0.75</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">100</span> <span class="c1"># simple linear relationship : y = a * x + b
+</span>
+<span class="n">measurement_noise</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># some noise associated to the measure
+</span>
+<span class="n">y_observed</span> <span class="o">=</span> <span class="n">y_theoretical</span> <span class="o">+</span> <span class="n">measurement_noise</span> <span class="c1"># observed = expected + noise
+</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y_theoretical</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sh">'</span><span class="s">expected</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y_observed</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span> <span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sh">''</span> <span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sh">'</span><span class="s">observed</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="the-briefest-intro-to-pandas">The briefest intro to pandas</h2>
+
+<p><code class="language-plaintext highlighter-rouge">pandas</code> is a powerful library when doing data analysis, especially in the forms of table.</p>
+
+<p>Basically, it reimplements R data.frame as a DataFrame object and ties together neatly with the libraries we’ve just seen.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+    
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_table</span><span class="p">(</span> <span class="sh">'</span><span class="s">data/beetle.csv</span><span class="sh">'</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span> <span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span> <span class="p">)</span> <span class="c1"># pandas automatically detects header.
+</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dose</th>
+      <th>nexp</th>
+      <th>ndied</th>
+      <th>prop</th>
+      <th>nalive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>49.1</td>
+      <td>59</td>
+      <td>6</td>
+      <td>0.102</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>53.0</td>
+      <td>60</td>
+      <td>13</td>
+      <td>0.217</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>56.9</td>
+      <td>62</td>
+      <td>18</td>
+      <td>0.290</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>60.8</td>
+      <td>56</td>
+      <td>28</td>
+      <td>0.500</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>64.8</td>
+      <td>63</td>
+      <td>52</td>
+      <td>0.825</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Nrows</span><span class="p">,</span> <span class="n">Ncols</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">shape</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">number of rows:</span><span class="sh">'</span><span class="p">,</span><span class="n">Nrows</span><span class="p">,</span> <span class="sh">'</span><span class="s">number of columns:</span><span class="sh">'</span><span class="p">,</span> <span class="n">Ncols</span> <span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span> <span class="sh">'</span><span class="s">column names</span><span class="sh">'</span> <span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>number of rows: 8 number of columns: 5
+column names Index(['dose', 'nexp', 'ndied', 'prop', 'nalive'], dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dose</th>
+      <th>nexp</th>
+      <th>ndied</th>
+      <th>prop</th>
+      <th>nalive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>8.000000</td>
+      <td>8.000000</td>
+      <td>8.000000</td>
+      <td>8.000000</td>
+      <td>8.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>62.800000</td>
+      <td>60.125000</td>
+      <td>36.375000</td>
+      <td>0.602000</td>
+      <td>23.750000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>9.599702</td>
+      <td>2.232071</td>
+      <td>22.557466</td>
+      <td>0.367937</td>
+      <td>21.985385</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>49.100000</td>
+      <td>56.000000</td>
+      <td>6.000000</td>
+      <td>0.102000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>55.925000</td>
+      <td>59.000000</td>
+      <td>16.750000</td>
+      <td>0.271750</td>
+      <td>4.750000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>62.800000</td>
+      <td>60.000000</td>
+      <td>40.000000</td>
+      <td>0.662500</td>
+      <td>19.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>69.675000</td>
+      <td>62.000000</td>
+      <td>54.750000</td>
+      <td>0.919500</td>
+      <td>44.750000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>76.500000</td>
+      <td>63.000000</td>
+      <td>61.000000</td>
+      <td>1.000000</td>
+      <td>53.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># select a single column:
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">dose</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1    49.1
+2    53.0
+3    56.9
+4    60.8
+5    64.8
+6    68.7
+7    72.6
+8    76.5
+Name: dose, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span> <span class="p">[</span><span class="sh">'</span><span class="s">ndied</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">nalive</span><span class="sh">'</span><span class="p">]</span> <span class="p">]</span> <span class="c1"># select several columns
+</span></code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ndied</th>
+      <th>nalive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>18</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>52</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>53</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>61</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>60</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="plotting-dataframe-columns">Plotting DataFrame Columns</h3>
+
+<p>Because <code class="language-plaintext highlighter-rouge">DataFrame</code> columns are iterable, they can seamlessly be given as argument to <code class="language-plaintext highlighter-rouge">plot()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># plotting the column dose along the x-axis and prop along the y-axis
+# I use the + marker, with a teal color.
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">dose</span><span class="sh">'</span><span class="p">]</span> <span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">prop</span><span class="sh">'</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">teal</span><span class="sh">'</span> <span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sh">''</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">+</span><span class="sh">'</span> <span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span> <span class="sh">'</span><span class="s">dose</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span> <span class="sh">'</span><span class="s">proportion of dead</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>DataFrame column can be manipulated like numpy array:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">## we can combine columns using normal operators
+</span><span class="n">Odds</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">nalive</span><span class="sh">'</span><span class="p">]</span> <span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">ndied</span><span class="sh">'</span><span class="p">]</span> <span class="c1"># the odds of being alive is nalive / ndead
+</span>
+<span class="c1">## adding a new column to the DataFrame is trivial:
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">Odds</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Odds</span>
+
+
+<span class="c1">## we can also apply numpy function to them
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">logOdds</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">Odds</span><span class="sh">'</span><span class="p">]</span> <span class="p">)</span>
+
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">dose</span><span class="sh">'</span><span class="p">]</span> <span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">logOdds</span><span class="sh">'</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">teal</span><span class="sh">'</span> <span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sh">''</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="sh">'</span><span class="s">+</span><span class="sh">'</span> <span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span> <span class="sh">'</span><span class="s">dose</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span> <span class="sh">'</span><span class="s">log Odds</span><span class="sh">'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<h2 id="exercise-0002--tying-everything-together">Exercise 00.02 : tying everything together</h2>
+
+<ol>
+  <li>Read the file <code class="language-plaintext highlighter-rouge">'data/kyphosis.csv'</code>.</li>
+  <li>how many columns are there ?</li>
+  <li>What is the maximum Age ?</li>
+  <li>create a new column <code class="language-plaintext highlighter-rouge">Stop</code> , corresponding to the addition of columns <code class="language-plaintext highlighter-rouge">'Start'</code> and <code class="language-plaintext highlighter-rouge">'Number'</code></li>
+  <li>plot the relationship between <code class="language-plaintext highlighter-rouge">'Age'</code> and <code class="language-plaintext highlighter-rouge">'Number'</code> (bonus point : use colors to indicate the presence or absence of kyphosis ).</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<p>Solutions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r -7 solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 8-9 solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 11-12 solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 14-15 solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 17-22 solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %load  -r 24- solutions/solution_00_02.py
+</span></code></pre></div></div>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>to do</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/data-science/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=data-science/python-warmup-stat-ml"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=data-science/python-warmup-stat-ml">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Wandrille Duchemin,  <b>Python - Warm-up for statistics and machine learning (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-python-warmup-stat-ml,
+author = "Wandrille Duchemin",
+	title = "Python - Warm-up for statistics and machine learning (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00485">gxy.io/GTN:T00485</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

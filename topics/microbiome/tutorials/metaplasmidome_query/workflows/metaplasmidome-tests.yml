@@ -1,0 +1,73 @@
+- doc: Test outline for Query-a-metaplasmidome-database-to-identify-and-annotate-plasmids-in-metagenomes
+  job:
+    Metaplasmidome sequences:
+      class: File
+      path: https://zenodo.org/records/14501567/files/air_metaplasmidome.fasta.gz
+      filetype: fasta.gz
+    Raw metagenomics data:
+      class: File
+      path: https://zenodo.org/records/14501567/files/air_metagenome_assemblies.fasta.gz
+      filetype: fasta.gz
+    Metaplasmidome predicted CDS:
+      class: File
+      path: https://zenodo.org/records/14501567/files/air_metaplasmidome_annotations.gff
+      filetype: gff3
+    PFAM:
+      class: File
+      path: https://zenodo.org/records/14501567/files/KOsignificatifNR.tsv
+      filetype: tabular
+    KEGG Ortogolog:
+      class: File
+      path: https://zenodo.org/records/14501567/files/KOsignificatifNR.tsv
+      filetype: tabular
+  outputs:
+    Metagenome sequences identified as plasmids:
+      asserts:
+        has_text:
+          text: ">SRR17300466_100021"
+    Metagenomes identified as plasmids:
+      asserts:
+        has_text:
+          text: "SRR17300667-707"
+        has_text:
+          text: "SRR17300492_244288"
+        has_n_lines:
+          n: 5250
+        has_n_columns:
+          n: 3
+    CDS in metagenomes identified as plasmids:
+      asserts:
+        has_text:
+          text: "SRR17300466_10187"
+        has_text:
+          text: "BAFOEJEB_01977"
+        has_text:
+          text: "serS_2"
+        has_n_lines:
+          n: 26330
+        has_n_columns:
+          n: 4
+    CDS in metagenomes identified as plasmids + KO + PFAM:
+      asserts:
+        has_text:
+          text: "SRR17300466_10187"
+        has_text:
+          text: "BAFOEJEB_01977"
+        has_text:
+          text: "serS_2"
+        has_text:
+          text: "K07393"
+        has_text:
+          text: "PF00115.23"
+        has_n_lines:
+          n: 26330
+        has_n_columns:
+          n: 9
+    CDS annotation overview per metagenomic sequences:
+      asserts:
+        has_text:
+          text: "SRR17300466_100021"
+        has_n_lines:
+          n: 4034
+        has_n_columns:
+          n: 5

@@ -1,0 +1,5295 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Using Galaxy and Managing your Data</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/maintainer.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-07-03 09:40:05 +0000"><meta name="description" content="A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Using Galaxy and Managing your Data">
+        <meta property="og:description" content="A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/maintainer.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/maintainer.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+<h1>Using Galaxy and Managing your Data — Editorial Board Home</h1>
+
+This is a new, experimental "Editorial Board Home" for a given topic. It is intended to provide a single place for maintainers and editorial board members to find out key information about their topic and identify action items.
+
+<h2>Editorial Board</h2>
+
+
+
+
+
+<a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
+    Teresa Müller</a><a href="/training-material/hall-of-fame/jennaj/" class="contributor-badge contributor-jennaj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jennaj?s=36" alt="Jennifer Hillman-Jackson avatar" width="36" class="avatar" />
+    Jennifer Hillman-Jackson</a><a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge contributor-delphine-l"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/delphine-l?s=36" alt="Delphine Lariviere avatar" width="36" class="avatar" />
+    Delphine Lariviere</a>
+
+
+<h2>Action Items</h2>
+
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Item</th>
+			<th>Status</th>
+			<th>Why you should do this</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Summary</td>
+			<td> Done ✅ </td>
+			<td>Provide a sufficiently detailed summary of the topic to let learners know what they're learning about in this topic.</td>
+		</tr>
+		<tr>
+			<td>Sufficient Editorial Board Members</td>
+			<td> Done ✅ (3 members)</td>
+			<td>Having multiple people sharing the burden of being responsible for a specific topic can reduce board member burn-out in the long term.</td>
+		</tr>
+		<tr>
+			<td>Enable Subtopics</td>
+			<td> Done ✅ </td>
+			<td>Subtopics help organize the content and make it easier to navigate.</td>
+		</tr>
+		<tr>
+			<td>Annotate Funders</td>
+			<td> Done ✅ (15 funders)</td>
+			<td>By annotating the funders of your topic's materials, you make it easier to write your grant reports later</td>
+		</tr>
+		<tr>
+			<td>Learning Pathway CTA</td>
+			<td> Pending ❌ </td>
+			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
+		</tr>
+		<tr>
+			<td>Review Feedback Received</td>
+			<td> Ongoing 🔁 </td>
+			<td> Review all <a href="https://training.galaxyproject.org/feedback#topic-using-galaxy-and-managing-your-data" >feedback received for the Using Galaxy and Managing your Data topic</a> and create GitHub issues or PRs where needed. </td>
+		</tr>
+		<tr>
+			<td>Review open Pull Requests</td>
+			<td> Ongoing 🔁 </td>
+			<td> View all <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+is%3Aopen+label%3Agalaxy-interface" >open PRs in the Using Galaxy and Managing your Data topic</a> and review, comment and merge!</td>
+		</tr>
+		<tr>
+			<td>Review open GitHub Issues</td>
+			<td> Ongoing 🔁 </td>
+			<td> View all <a href="https://github.com/galaxyproject/training-material/issues?q=is%3Aissue%20state%3Aopen%20label%3Agalaxy-interface" >open issues related to the Using Galaxy and Managing your Data topic</a> and comment, fix, or ask others for help!</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<h2>Topic Materials</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th scope="col">Material</th>
+			<th scope="col">Contributions v2 <a href="/training-material/topics/contributing/faqs/new-contributions.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Pre-requisites <a href="/training-material/topics/contributing/faqs/why-prerequisites.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Follow up trainings</th>
+			<th scope="col">Data on Zenodo</th>
+			<th scope="col">Notebook</th>
+			<th scope="col">Server Compatibility</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting data into Galaxy</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-get-data-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html">Importing (uploading) data from Onedata</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-onedata-remote-import-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/introduction/tutorials/galaxy-intro-dataverse/tutorial.html">Introduction to the Dataverse Integration in Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#introduction-galaxy-intro-dataverse-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/onedata-byos/tutorial.html">Onedata user-owned storage</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-onedata-byos-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Rule Based Uploader</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-upload-rules-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html">Rule Based Uploader: Advanced</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-upload-rules-advanced-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html">SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-ncbi-sarf-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/search/tutorial.html">Searching Your History</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-search-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">Understanding Galaxy history system</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-history-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/group-tags/tutorial.html">Group tags for complex experimental designs</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-group-tags-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">Name tags for following complex histories</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-name-tags-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using dataset collections</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-collections-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-fairification/tutorial.html">Annotate, prepare tests and publish Galaxy workflows in workflow registries</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-fairification-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">Automating Galaxy workflows using the command line</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-automation-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">Creating high resolution images of Galaxy Workflows</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-posters-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">Creating, Editing and Importing Galaxy Workflows</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-editor-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">Extracting Workflows from Histories</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-history-to-workflow-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html">Galaxy workflows in Dockstore</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-galaxy-on-dockstore-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using Workflow Parameters</a></th>
+			<td> ❌ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-parameters-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">Workflow Reports</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-workflow-reports-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/intermine/tutorial.html">InterMine integration with Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-intermine-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html">JupyterLab in Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-jupyterlab-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html">RStudio in Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-rstudio-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.html">Use Jupyter notebooks in Galaxy</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-galaxy-intro-jupyter-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html">Downloading and Deleting Data in Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-download-delete-data-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html">Exporting to Onedata remote</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-onedata-remote-export-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/iiif/tutorial.html">Accessing IIIF from within Galaxy</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-iiif-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html">Getting started with Onedata distributed storage</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-onedata-getting-started-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html">Submitting sequence data to ENA</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galaxy-interface-upload-data-to-ena-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+	</tbody>
+</table>
+
+<h2>Topic Workflows</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th>Material</th>
+			<th>Workflow</th>
+
+			<th>Updated</th>
+			<th>Version</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">Automating Galaxy workflows using the command line</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.html">vcf2lineage</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">Creating, Editing and Importing Galaxy Workflows</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/main_workflow.html">Tutorial workflow</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">Creating, Editing and Importing Galaxy Workflows</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/subworkflow.html">Subworkflow</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using Workflow Parameters</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/workflows/cut_n_lines.html">Select First N Lines</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">Workflow Reports</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.html">GTN Training: Workflow Reports - Galaxy 101 For Everyone</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>2 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">Workflow Reports</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/workflows/workflow_reports_final_workflow.html">GTN Training: Workflow Reports</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/intermine/tutorial.html">InterMine integration with Galaxy</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/workflows/main_workflow.html">Intermine import/export</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html">Submitting sequence data to ENA</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.html">GTN_ENA_upload_workflow</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	</tbody>
+</table>
+
+
+
+<div id="galaxy-interface-get-data-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-get-data-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-get-data-label">Current Server Compatibility table for "Getting data into Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-onedata-remote-import-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-onedata-remote-import-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-onedata-remote-import-label">Current Server Compatibility table for "Importing (uploading) data from Onedata"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="introduction-galaxy-intro-dataverse-compat" class="modal" tabindex="-1" aria-labelledby="introduction-galaxy-intro-dataverse-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="introduction-galaxy-intro-dataverse-label">Current Server Compatibility table for "Introduction to the Dataverse Integration in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-onedata-byos-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-onedata-byos-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-onedata-byos-label">Current Server Compatibility table for "Onedata user-owned storage"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-upload-rules-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-upload-rules-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-upload-rules-label">Current Server Compatibility table for "Rule Based Uploader"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-upload-rules-advanced-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-upload-rules-advanced-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-upload-rules-advanced-label">Current Server Compatibility table for "Rule Based Uploader: Advanced"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-ncbi-sarf-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-ncbi-sarf-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-ncbi-sarf-label">Current Server Compatibility table for "SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</th>
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						9.5+galaxy3, 
+						
+						0.1.1, 
+						
+						9.3+galaxy1, 
+						
+						9.5+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.1.1
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5</th>
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.1.5+galaxy2, 
+						
+						1.2+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.5
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</th>
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</th>
+			
+				
+					<td class="exact">
+						3.0.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.0.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.0.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.3.1, 
+						
+						3.3.0, 
+						
+						3.3.2, 
+						
+						3.1.1, 
+						
+						3.2.0, 
+						
+						3.0.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.3.0, 
+						
+						3.3.2, 
+						
+						3.1.2
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.3.1, 
+						
+						3.3.0, 
+						
+						3.3.2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.0.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.3.0
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19</th>
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.5covid19
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0</th>
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.0.5+galaxy0, 
+						
+						3.1.1+galaxy0, 
+						
+						3.1.1+galaxy1, 
+						
+						2.10.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.11.0+galaxy1
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0</th>
+			
+				
+					<td class="inexact">
+						
+						3.0.8+galaxy0, 
+						
+						3.0.5+galaxy3, 
+						
+						3.0.8+galaxy1, 
+						
+						3.0.5+galaxy0, 
+						
+						3.1.0+galaxy0, 
+						
+						3.1.1+galaxy0, 
+						
+						3.0.10+galaxy0, 
+						
+						3.1.0+galaxy1, 
+						
+						3.0.3+galaxy0, 
+						
+						3.1.1+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.0.5+galaxy0, 
+						
+						3.1.1+galaxy0, 
+						
+						3.1.1+galaxy1, 
+						
+						2.10.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.11.0+galaxy0
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-search-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-search-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-search-label">Current Server Compatibility table for "Searching Your History"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-history-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-history-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-history-label">Current Server Compatibility table for "Understanding Galaxy history system"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-group-tags-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-group-tags-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-group-tags-label">Current Server Compatibility table for "Group tags for complex experimental designs"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-name-tags-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-name-tags-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-name-tags-label">Current Server Compatibility table for "Name tags for following complex histories"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-collections-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-collections-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-collections-label">Current Server Compatibility table for "Using dataset collections"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</th>
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.7.18, 
+						
+						0.7.17.2, 
+						
+						0.7.19
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.7.17.1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.7.17.2
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1</th>
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.1.5+galaxy2, 
+						
+						2.1.5+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.1.5+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.1.5+galaxy2
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0</th>
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy0
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</th>
+			
+				
+					<td class="exact">
+						4.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0, 
+						
+						4.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0, 
+						
+						4.2
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0
+						
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-fairification-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-fairification-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-fairification-label">Current Server Compatibility table for "Annotate, prepare tests and publish Galaxy workflows in workflow registries"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</th>
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3</th>
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.11+galaxy0
+						
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-automation-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-automation-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-automation-label">Current Server Compatibility table for "Automating Galaxy workflows using the command line"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10</th>
+			
+				
+					<td class="exact">
+						1.10
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.10
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.10
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.10
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.15.1+galaxy4, 
+						
+						1.10+galaxy1, 
+						
+						1.22+galaxy0, 
+						
+						1.24+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.15.1+galaxy4, 
+						
+						1.15.1+galaxy3, 
+						
+						1.22+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.10
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.10+galaxy1
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1</th>
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</th>
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.2.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3</th>
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.3.2+galaxy0, 
+						
+						0.23.2+galaxy0, 
+						
+						0.23.4+galaxy0, 
+						
+						1.0.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1+galaxy3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.23.2+galaxy0
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</th>
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.27+galaxy3, 
+						
+						1.33+galaxy0, 
+						
+						1.33+galaxy3, 
+						
+						1.11+galaxy1, 
+						
+						1.35+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.27+galaxy4
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.11+galaxy0
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/2.3.8</th>
+			
+				
+					<td class="exact">
+						2.3.8
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.3.8
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.3.8
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.11+galaxy0, 
+						
+						4.3+galaxy1, 
+						
+						4.3.4+galaxy3, 
+						
+						4.1.2+galaxy0, 
+						
+						4.3.2+galaxy2, 
+						
+						4.0.5+galaxy0, 
+						
+						4.0.5+galaxy2, 
+						
+						4.2+galaxy0, 
+						
+						3.1.16+galaxy0, 
+						
+						3.1.20+galaxy0, 
+						
+						4.3+galaxy2, 
+						
+						3.1.19+galaxy0, 
+						
+						3.1.17+galaxy1, 
+						
+						3.1.14+galaxy0, 
+						
+						4.3.4+galaxy2, 
+						
+						3.1.4+galaxy1, 
+						
+						4.1.1+galaxy0, 
+						
+						4.4+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						4.3+galaxy1, 
+						
+						4.3.4+galaxy3, 
+						
+						4.3.2+galaxy2, 
+						
+						4.3.4+galaxy2, 
+						
+						4.4+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						4.3+galaxy1, 
+						
+						4.3.4+galaxy3, 
+						
+						4.3+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.3.8
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1</th>
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.3+t.galaxy1
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</th>
+			
+				
+					<td class="exact">
+						4.2
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.2
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0, 
+						
+						4.1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						4.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.1.0
+						
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-posters-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-posters-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-posters-label">Current Server Compatibility table for "Creating high resolution images of Galaxy Workflows"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.40+galaxy0</th>
+			
+				
+					<td class="exact">
+						1.3.40+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.3.46+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.3.46+galaxy0, 
+						
+						1.3.45+galaxy0, 
+						
+						1.3.31, 
+						
+						1.3.31+galaxy1, 
+						
+						1.3.43+galaxy0, 
+						
+						1.3.45+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.3.40+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.3.43+galaxy0
+						
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-editor-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-editor-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-editor-label">Current Server Compatibility table for "Creating, Editing and Importing Galaxy Workflows"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">Paste1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Show beginning1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-history-to-workflow-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-history-to-workflow-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-history-to-workflow-label">Current Server Compatibility table for "Extracting Workflows from Histories"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-galaxy-on-dockstore-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-galaxy-on-dockstore-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-galaxy-on-dockstore-label">Current Server Compatibility table for "Galaxy workflows in Dockstore"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-parameters-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-parameters-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-parameters-label">Current Server Compatibility table for "Using Workflow Parameters"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-workflow-reports-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-workflow-reports-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-workflow-reports-label">Current Server Compatibility table for "Workflow Reports"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">Cut1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Grouping1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Remove beginning1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">csv_to_tabular</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.9+galaxy0, 
+						
+						1.8+galaxy0, 
+						
+						1.0.6
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.1.0+galaxy2
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0</th>
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.4.0+galaxy1, 
+						
+						3.5.1+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.4.0+galaxy1, 
+						
+						3.5.1+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.3.5+galaxy0
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">upload1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-intermine-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-intermine-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-intermine-label">Current Server Compatibility table for "InterMine integration with Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">intermine</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1</th>
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-jupyterlab-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-jupyterlab-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-jupyterlab-label">Current Server Compatibility table for "JupyterLab in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_jupyter_notebook</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-rstudio-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-rstudio-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-rstudio-label">Current Server Compatibility table for "RStudio in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_rstudio</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-galaxy-intro-jupyter-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-galaxy-intro-jupyter-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-galaxy-intro-jupyter-label">Current Server Compatibility table for "Use Jupyter notebooks in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_jupyter_notebook</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-download-delete-data-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-download-delete-data-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-download-delete-data-label">Current Server Compatibility table for "Downloading and Deleting Data in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-onedata-remote-export-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-onedata-remote-export-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-onedata-remote-export-label">Current Server Compatibility table for "Exporting to Onedata remote"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-iiif-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-iiif-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-iiif-label">Current Server Compatibility table for "Accessing IIIF from within Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-onedata-getting-started-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-onedata-getting-started-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-onedata-getting-started-label">Current Server Compatibility table for "Getting started with Onedata distributed storage"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="galaxy-interface-upload-data-to-ena-compat" class="modal" tabindex="-1" aria-labelledby="galaxy-interface-upload-data-to-ena-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galaxy-interface-upload-data-to-ena-label">Current Server Compatibility table for "Submitting sequence data to ENA"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_consensus_submit/4.3.0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						4.3.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2</th>
+			
+				
+					<td class="exact">
+						0.3.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.5.3, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.11.0+galaxy0, 
+						
+						0.10.0+galaxy1, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0, 
+						
+						0.10.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.5.3, 
+						
+						0.3.1, 
+						
+						0.4.1, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0, 
+						
+						0.10.0+galaxy0, 
+						
+						0.7.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.3.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.7.1</th>
+			
+				
+					<td class="inexact">
+						
+						0.3, 
+						
+						0.5.3, 
+						
+						0.3.1, 
+						
+						0.4.1, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.11.0+galaxy0, 
+						
+						0.3.2, 
+						
+						0.10.0+galaxy1, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.5.3, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.11.0+galaxy0, 
+						
+						0.10.0+galaxy1, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0, 
+						
+						0.10.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.5.3, 
+						
+						0.3.1, 
+						
+						0.4.1, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0, 
+						
+						0.10.0+galaxy0, 
+						
+						0.7.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.3, 
+						
+						0.5.3, 
+						
+						0.3.1, 
+						
+						0.4.1, 
+						
+						0.6.0, 
+						
+						0.3.3, 
+						
+						0.10.2+galaxy0, 
+						
+						0.7.5+galaxy1, 
+						
+						0.8.0+galaxy0, 
+						
+						0.6.3+galaxy0, 
+						
+						0.6.1, 
+						
+						0.7.1+galaxy1, 
+						
+						0.11.0+galaxy0, 
+						
+						0.3.2, 
+						
+						0.4.3, 
+						
+						0.7.3+galaxy1, 
+						
+						0.9.0+galaxy0, 
+						
+						0.10.0+galaxy0, 
+						
+						0.7.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+td.exact, td.local {
+	background-color: var(--feedback-color);
+	color: black;
+}
+td.inexact {
+	background-color: var(--solution-color);
+	color: black;
+}
+
+/* https://adrianroselli.com/2020/01/fixed-table-headers.html */
+
+table.compat th[scope=row] {
+  background-color: var(--color-background);
+}
+
+table.scroll-header th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-background);
+}
+table.scroll-row th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: end;
+}
+</style>
+
+
+<h2>Your topic's Workflow Testing Results</h2>
+
+Coming Soon™
+
+<h2>Learning Pathways using materials from this Topic</h2>
+
+
+
+
+<div class="pathwaylist row">
+
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/admin-training.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/gat.png" alt="GTN Logo on a spiral galaxy background with text galaxy admin training" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Admin Training Course</h5>
+        <p class="card-text">
+          Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
+will guide you through all the steps required to setup your own Galaxy server with Ansible,
+configuring it, and making it production ready.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffbcdb; --color-darker: #ff97ca; --color-dimmed: #ffaad2;">Galaxy administrators</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffc295; --color-darker: #ffa332; --color-dimmed: #ffb36f;">5-day course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00ec97; --color-darker: #00d286; --color-dimmed: #00df8e;">admin</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/beyond_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Applying single-cell RNA-seq analysis</h5>
+        <p class="card-text">
+          Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffc297; --color-darker: #ffa33d; --color-dimmed: #ffb373;">intermediate</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e7d5; --color-darker: #00cebe; --color-dimmed: #00dbc9;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/biont-python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/BioNT_Logo.png" alt="BioNT logo a blue had with the text BioNT" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">From Zero To Hero with Python</h5>
+        <p class="card-text">
+          Data analysis and programming are high-demand fields, making them particularly attractive to job seekers and employees across various industries and academic institutions. Are you eager to acquire the foundational skills of coding using the Python programming language? The BioNT consortium is offering a training curriculum for job seekers, SME employers, and everyone who would like to gain new skills in...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #bbceff; --color-darker: #97b7ff; --color-dimmed: #aac3ff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #a4d4ff; --color-darker: #66c0ff; --color-dimmed: #88caff;">programming</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffc0ae; --color-darker: #ffa07d; --color-dimmed: #ffb097;">introduction</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff2ce; --color-darker: #f9d600; --color-dimmed: #ffe483;">beginner</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introduction to Galaxy and Single Cell RNA Sequence analysis</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data. You will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You’ll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff2ce; --color-darker: #f9d600; --color-dimmed: #ffe483;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e7d5; --color-darker: #00cebe; --color-dimmed: #00dbc9;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/reloaded_single_cell.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/wab-annotatedcells-2.png" alt="Image of cells in different coloured clusters" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Applying single-cell RNA-seq analysis in Coding Environments</h5>
+        <p class="card-text">
+          Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will perform this analysis in coding environments hosted on Galaxy, instead of Galaxy’s button-based tool...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #8be600; --color-darker: #7bcd00; --color-dimmed: #83da00;">advanced</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #00e7d5; --color-darker: #00cebe; --color-dimmed: #00dbc9;">single-cell</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+
+</div>
+
+<details>
+	<summary>Statistics for your Learning Pathways</summary>
+
+	<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7Elearning-pathways/admin-training.html|learning-pathways/beyond_single_cell.html|learning-pathways/biont-python.html|learning-pathways/intro_single_cell.html|learning-pathways/io2.html|learning-pathways/reloaded_single_cell.html&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+	<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+	<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>
+</details>
+
+<h2>Events using materials from this Topic</h2>
+
+TODO once this is merged:
+https://github.com/galaxyproject/training-material/pull/4963
+
+<h2 id="statistics-for-your-materials">Statistics For Your Materials</h2>
+
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E%2Ftopics%2Fgalaxy-interface%2F&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/maintainer.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/galaxy-interface/maintainer.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

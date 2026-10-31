@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPathway SBML"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nHost taxon ID"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nEnzyme taxon IDs"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nLinkers and user parts"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nDNA-Bot settings"]
+  5[label="Selenzyme"]
+  2 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  k54b833faec4f458ab08523211f4e56ca[color=lightseagreen,label="Output\nUniprot IDs"]
+  5 -> k54b833faec4f458ab08523211f4e56ca
+  6[label="BasicDesign"]
+  3 -> 6 [label="output"]
+  5 -> 6 [label="uniprot_ids"]
+  7[label="DNA-Bot"]
+  4 -> 7 [label="output"]
+  6 -> 7 [label="Constructs"]
+  6 -> 7 [label="User parts plate"]
+  6 -> 7 [label="Biolegio plate"]
+}

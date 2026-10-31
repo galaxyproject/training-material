@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: RO-Crate - Introduction / RO-Crate - Introduction / FAIR Data, Workflows, and Research</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/Apache-2.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="RO-Crate - Introduction">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.creator" content="Stian Soiland-Reyes">
+<meta name="DC.creator" content="Peter Sefton"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAIR Data, Workflows, and Research / RO-Crate - Introduction / Hands-on: RO-Crate - Introduction">
+        <meta property="og:description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/fair/tutorials/ro-crate-intro/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "RO-Crate - Introduction",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-04-08 10:30:29 +0000",
+  "datePublished": "2023-05-23 10:15:15 +0000",
+  "copyrightNotice": "© Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors",
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101057388",
+      "url": "https://cordis.europa.eu/project/id/101057388",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "EuroScienceGateway",
+        "description": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.\n",
+        "url": "https://galaxyproject.org/projects/esg/",
+        "logo": "/training-material/assets/images/eurosciencegateway.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:T00348",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "abstract": "This tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.",
+  "learningResourceType": "e-learning",
+  "name": "RO-Crate - Introduction",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html",
+  "version": 5,
+  "timeRequired": "PT30M",
+  "teaches": "- Construct an RO-Crate by hand using JSON\n- Describe each part of the Research Object\n- Learn basic JSON-LD to create FAIR metadata\n- Connect different parts of the Research Object using identifiers",
+  "keywords": [
+    "FAIR Data, Workflows, and Research"
+  ],
+  "description": "## Abstract\n\nThis tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How do I package data in a FAIR way?\n - How can I list the authors of individual files?\n - Can I use multiple licenses in the same data package?\n - How can I visualize JSON-LD metadata?\n\n\n## Learning Objectives\n\n- Construct an RO-Crate by hand using JSON\n- Describe each part of the Research Object\n- Learn basic JSON-LD to create FAIR metadata\n- Connect different parts of the Research Object using identifiers\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    "Files and folder organization",
+    "Familiarity with JSON file format and editor/IDE",
+    {
+      "@type": "CreativeWork",
+      "url": "https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/",
+      "name": "An overview of the RO-Crate concept and its implementations"
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/cli-basics/tutorial.html",
+      "name": "CLI basics",
+      "description": "Hands-on for 'CLI basics' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/stain/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/stain/",
+      "name": "Stian Soiland-Reyes",
+      "image": "https://avatars.githubusercontent.com/stain",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9842-9718",
+      "@id": "https://orcid.org/0000-0001-9842-9718"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/",
+      "name": "Peter Sefton",
+      "image": "https://avatars.githubusercontent.com/ptsefton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3545-944X",
+      "@id": "https://orcid.org/0000-0002-3545-944X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/",
+      "name": "Martin Čech",
+      "image": "https://avatars.githubusercontent.com/martenson",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9318-1781",
+      "@id": "https://orcid.org/0000-0002-9318-1781"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dadrasarmin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dadrasarmin/",
+      "name": "Armin Dadras",
+      "image": "https://avatars.githubusercontent.com/dadrasarmin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7649-2388",
+      "@id": "https://orcid.org/0000-0001-7649-2388"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/fair" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> FAIR Data, Workflows, and Research
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/fair/faqs/" title="Check our FAQs for the FAIR Data, Workflows, and Research topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/ro-crate-intro/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-fair">
+    <h1 data-toc-skip>RO-Crate - Introduction</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/stain/" class="contributor-badge contributor-stain"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stain?s=36" alt="Stian Soiland-Reyes avatar" width="36" class="avatar" />
+    Stian Soiland-Reyes</a><a href="/training-material/hall-of-fame/ptsefton/" class="contributor-badge contributor-ptsefton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/ptsefton?s=36" alt="Peter Sefton avatar" width="36" class="avatar" />
+    Peter Sefton</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/martenson/" class="contributor-badge contributor-badge-small contributor-martenson"><img src="https://avatars.githubusercontent.com/martenson?s=36" alt="Martin Čech avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/dadrasarmin/" class="contributor-badge contributor-badge-small contributor-dadrasarmin"><img src="https://avatars.githubusercontent.com/dadrasarmin?s=36" alt="Armin Dadras avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do I package data in a FAIR way?</p>
+</li>
+        
+        <li><p>How can I list the authors of individual files?</p>
+</li>
+        
+        <li><p>Can I use multiple licenses in the same data package?</p>
+</li>
+        
+        <li><p>How can I visualize JSON-LD metadata?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Construct an RO-Crate by hand using JSON</p>
+</li>
+        
+        <li><p>Describe each part of the Research Object</p>
+</li>
+        
+        <li><p>Learn basic JSON-LD to create FAIR metadata</p>
+</li>
+        
+        <li><p>Connect different parts of the Research Object using identifiers</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+      <li>
+        Files and folder organization
+      </li>
+    
+
+    
+      <li>
+        Familiarity with JSON file format and editor/IDE
+      </li>
+    
+
+    
+      <li>
+        <a href="https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/">An overview of the RO-Crate concept and its implementations</a>
+      </li>
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: CLI basics</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/index.html#tutorial-recording-14-april-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (April 2023) - 17m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			UseGalaxy.ca
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 23, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+		© Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors.
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="https://spdx.org/licenses/Apache-2.0">Apache-2.0</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00348">https://gxy.io/GTN:T00348</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/fair/tutorials/ro-crate-intro/tutorial.md">5</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial assumes you have already completed <a href="https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/">An overview of the RO-Crate concept and its implementations</a> and have a basic understanding of working with JSON.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#making-a-folder-into-an-ro-crate" id="markdown-toc-making-a-folder-into-an-ro-crate">Making a folder into an RO-Crate</a></li>
+  <li><a href="#json-ld-preamble" id="markdown-toc-json-ld-preamble">JSON-LD preamble</a></li>
+  <li><a href="#ro-crate-metadata-descriptor" id="markdown-toc-ro-crate-metadata-descriptor">RO-Crate Metadata descriptor</a></li>
+  <li><a href="#ro-crate-root" id="markdown-toc-ro-crate-root">RO-Crate Root</a></li>
+  <li><a href="#describing-the-root-entity" id="markdown-toc-describing-the-root-entity">Describing the root entity</a></li>
+  <li><a href="#about-cross-references" id="markdown-toc-about-cross-references">About cross-references</a></li>
+  <li><a href="#data-entities" id="markdown-toc-data-entities">Data entities</a></li>
+  <li><a href="#contextual-entities" id="markdown-toc-contextual-entities">Contextual entities</a></li>
+  <li><a href="#detailing-licenses" id="markdown-toc-detailing-licenses">Detailing licenses</a></li>
+  <li><a href="#author" id="markdown-toc-author">Author</a></li>
+  <li><a href="#validating-and-visualizing" id="markdown-toc-validating-and-visualizing">Validating and visualizing</a></li>
+  <li><a href="#advanced-converting-json-ld-to-triples" id="markdown-toc-advanced-converting-json-ld-to-triples">Advanced: Converting JSON-LD to triples</a></li>
+  <li><a href="#html-preview" id="markdown-toc-html-preview">HTML preview</a></li>
+  <li><a href="#advanced-generating-html-preview" id="markdown-toc-advanced-generating-html-preview">Advanced: Generating HTML preview</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
+  <li><a href="#copyright-and-license" id="markdown-toc-copyright-and-license">Copyright and license</a>    <ol>
+      <li><a href="#changes" id="markdown-toc-changes">Changes</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<p>In this tutorial, meant to be read along with the <a href="https://www.researchobject.org/ro-crate/1.1/">RO-Crate specification</a>, we’ll walk through the initial steps for creating a basic RO-Crate. You are invited to replicate the below steps on your local computer.</p>
+
+<h2 id="making-a-folder-into-an-ro-crate">Making a folder into an RO-Crate</h2>
+
+<p>In the simplest form, to describe some data on disk, an <em>RO-Crate Metadata File</em> is placed in a folder alongside a set of files or folders.</p>
+
+<p>First create a new folder <code class="language-plaintext highlighter-rouge">crate1/</code> and add a single file <code class="language-plaintext highlighter-rouge">data.csv</code> to represent our dataset:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Date","Minimum temperature (°C)","Maximum temperature (°C)","Rainfall (mm)"
+2022-02-01,16.0,28.4,0.6
+2022-02-02,16.3,17.2,12.4
+</code></pre></div></div>
+
+<p>Next, to turn this folder into an RO-Crate we need to add the <em>RO-Crate Metadata File</em>, which has a fixed filename.
+Create the file <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> using <a href="https://code.visualstudio.com/">Visual Studio Code</a> or your favourite editor, then add the following JSON:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@graph"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Your folder should now look like this:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/crate1-folders.svg" type="image/svg+xml" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. "><img src="../../images/ro-crate-intro/crate1-folders.png" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. " />Folder listing of crate1, including data.csv and ro-crate-metadata.json.</object></div><a target="_blank" href="../../images/ro-crate-intro/crate1-folders.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code></figcaption></figure>
+
+<p>The presence of the reserved <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> filename means that <code class="language-plaintext highlighter-rouge">crate1</code> (and its children) can now be considered to be an <strong>RO-Crate</strong>. We call the top-level folder of the crate for the <strong>RO-Crate Root</strong> and can now refer to its content with relative file paths.</p>
+
+<p>We also need to make some declaration within the JSON file to turn it into a valid <em>RO-Crate Metadata Document</em>, explained in the next session.</p>
+
+<h2 id="json-ld-preamble">JSON-LD preamble</h2>
+
+<p>The preamble of <code class="language-plaintext highlighter-rouge">@context</code> and <code class="language-plaintext highlighter-rouge">@graph</code> are JSON-LD structures that help provide global identifiers to the JSON keys and types used in the rest of the RO-Crate document. These will largely map to definitions in the <a href="http://schema.org/">schema.org</a> vocabulary, which can be used by RO-Crate extensions to provide additional metadata beyond the RO-Crate specifications. It is this feature of JSON-LD that helps make RO-Crate extensible for many different purposes – this is explored further in the specification’s <a href="https://www.researchobject.org/ro-crate/1.1/appendix/jsonld.html">appendix on JSON-LD</a>. In short, only JSON keys (<em>properties</em>) and types defined this way can be used within the RO-Crate Metadata Document.</p>
+
+<p>However, in the general case it should be sufficient to follow the RO-Crate JSON examples directly without deeper JSON-LD understanding. The RO-Crate Metadata Document contains a flat list of <em>entities</em> as JSON objects in the <code class="language-plaintext highlighter-rouge">@graph</code> array. These entities are cross-referenced using <code class="language-plaintext highlighter-rouge">@id</code> identifiers, rather than being deeply nested. This is one major difference from JSON structures you may have experienced before.  The <code class="language-plaintext highlighter-rouge">@type</code> keyword associates an object with a predefined type from the JSON-LD context. Almost any property can alternatively be used with an <code class="language-plaintext highlighter-rouge">[]</code> array to provide multiple values.</p>
+
+<p>The rest of this tutorial, and indeed most of the <a href="https://www.researchobject.org/ro-crate/1.1/">RO-Crate specification</a>, specify which entities can be added to the <code class="language-plaintext highlighter-rouge">@graph</code> array.</p>
+
+<h2 id="ro-crate-metadata-descriptor">RO-Crate Metadata descriptor</h2>
+
+<p>The first JSON-LD <em>entity</em> to add has the <code class="language-plaintext highlighter-rouge">@id</code> value of <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> to describe the JSON file itself:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ro-crate-metadata.json"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1"</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This required entity, known as the <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html#ro-crate-metadata-file-descriptor">RO-Crate Metadata Descriptor</a>, helps this file self-identify as an RO-Crate Metadata Document, which is conforming to (<code class="language-plaintext highlighter-rouge">conformsTo</code>) the RO-Crate specification version 1.1. Notice that the <code class="language-plaintext highlighter-rouge">conformsTo</code> URL corresponds to the <code class="language-plaintext highlighter-rouge">@context</code> URL version-wise, but they have two different functions. The context brings the defined terms into the metadata document, while the conformance declares which RO-Crate conventions of using those terms are being followed.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-ro-crate-versions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ro-crate-versions" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: RO-Crate versions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>This tutorial is written for RO-Crate 1.1, the RO-Crate website will list the <a href="https://www.researchobject.org/ro-crate/specification.html">current specification version</a> – RO-Crates can generally be upgraded to newer versions following <a href="https://semver.org/">semantic versioning</a> conventions, but check the <a href="https://www.researchobject.org/ro-crate/1.1/appendix/changelog.html">change log</a> for any important changes. The next development version of the specification, indicated with a <code class="language-plaintext highlighter-rouge">-DRAFT</code> status, may still be subject to changes and should only be used with caution.</p>
+</blockquote>
+
+<h2 id="ro-crate-root">RO-Crate Root</h2>
+
+<p>Next we’ll add another entity to the <code class="language-plaintext highlighter-rouge">@graph</code> array, to describe the <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html#direct-properties-of-the-root-data-entity">RO-Crate Root</a>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>By convention, in RO-Crate the <code class="language-plaintext highlighter-rouge">@id</code> value of  <code class="language-plaintext highlighter-rouge">./</code> means that this entity describes the folder in which the RO-Crate metadata file is located. This reference from <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> is therefore semantically marking the <code class="language-plaintext highlighter-rouge">crate1</code> folder as being the RO-Crate Root.</p>
+
+<p class="note">This example is a folder-based RO-Crate stored on disk, and therefore absolute paths are avoided, e.g. in case the root folder is moved or archived as a ZIP file. If the crate is being served from a Web service, such as a data repository or database where files are not organized in folders, then the <code class="language-plaintext highlighter-rouge">@id</code> might be an absolute URI instead of <code class="language-plaintext highlighter-rouge">./</code> – this is one reason why we point to the root entity from the metadata descriptor, see section <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html">Root Data Entity</a> for details.</p>
+
+<h2 id="describing-the-root-entity">Describing the root entity</h2>
+
+<p>When describing the <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html#direct-properties-of-the-root-data-entity">root entity</a>, the properties generally apply to the whole of the crate. For instance it is a good idea to give a description of why these resources are gathered in a crate, as well as giving the crate a name and license for FAIR reuse and citation.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Try to add the <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">description</code> and <code class="language-plaintext highlighter-rouge">datePublished</code> properties, and for <code class="language-plaintext highlighter-rouge">license</code> as a cross-reference, use <a href="https://spdx.org/licenses/">SPDX</a> license list to find the identifier for Creative Commons Zero or another license of your choice:</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example crate"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I created this example by following the tutorial"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"datePublished"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-22T12:03:00+0100"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-license-identifiers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-license-identifiers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: License identifiers</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In the above solution, the identifier for CC0-1.0 <a href="http://spdx.org/licenses/CC0-1.0">http://spdx.org/licenses/CC0-1.0</a> is slightly
+different from their listed web page URI <a href="https://spdx.org/licenses/CC0-1.0.html">https://spdx.org/licenses/CC0-1.0.html</a> – the former
+is chosen to align with <a href="https://github.com/spdx/license-list-data/tree/main/jsonld">SPDX JSON-LD identifiers</a>,
+which unfortunately are not shown directly on their website as <em>permalinks</em>.
+It is not a requirement in RO-Crate to use permalinks for <code class="language-plaintext highlighter-rouge">@id</code> of entities like licenses,
+it is nevertheless best practice to propagate permalinks where known.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-choosing-a-license"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-a-license" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Choosing a license</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Choosing a license appropriate for your dataset can be non-trivial, particularly if third-party data/software and multiple organizations are involved. See <a href="https://faircookbook.elixir-europe.org/content/recipes/reusability/ATI-licensing.html">FAIR Cookbook on licensing</a>. It is worth noting that an RO-Crate permits data entities to have a <code class="language-plaintext highlighter-rouge">license</code> different from the overall Crate license. It is still recommended to choose an overall Crate license that can legally apply across all the content in the RO-Crate Root.</p>
+</blockquote>
+
+<h2 id="about-cross-references">About cross-references</h2>
+
+<p>In a RO-Crate Metadata Document, entities are cross-referenced using <code class="language-plaintext highlighter-rouge">@id</code> reference objects, rather than using deeply nested JSON objects.
+In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity to reference any other entity, and RO-Crate consumers can directly find all the descriptions of a given entity as a single JSON object.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/introduction-figure-1.svg" type="image/svg+xml" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description."><img src="../../images/ro-crate-intro/introduction-figure-1.png" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." />JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.</object></div><a target="_blank" href="../../images/ro-crate-intro/introduction-figure-1.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Consider the root Data Entity <code class="language-plaintext highlighter-rouge">./</code>, and add such a cross-reference to the file <code class="language-plaintext highlighter-rouge">data.csv</code> using the <em>property</em> called <code class="language-plaintext highlighter-rouge">hasPart</code>:</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>The RO-Crate root is always typed <code class="language-plaintext highlighter-rouge">Dataset</code>, though <code class="language-plaintext highlighter-rouge">@type</code> may in some cases have additional types by using a JSON array instead of a single value.  Most entities can have such more specific types, e.g. chosen from <a href="https://schema.org/docs/full.html">schema.org type list</a>.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <ol>
+    <li>Navigate the schema.org type list to find a subtype of <code class="language-plaintext highlighter-rouge">CreativeWork</code> that is suitable for a learning resource..</li>
+    <li>Modify the root entity’s <code class="language-plaintext highlighter-rouge">@type</code> to be an array.</li>
+    <li>Add the type name for learning resource at the end of the array.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LearningResource"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>The root has several metadata properties that describe the RO-Crate as a whole, considering it as a Research Object of collected resources. The section on <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html">root data entity</a> details further the required and recommended properties of the root <code class="language-plaintext highlighter-rouge">./</code>.</p>
+
+<h2 id="data-entities">Data entities</h2>
+
+<p>A main type of resources collected in a Research Object is <em>data</em> – simplifying, we can consider data as any kind of file that can be opened in other programs. These are aggregated by the Root Dataset with the <code class="language-plaintext highlighter-rouge">hasPart</code> property. In this example we have an array with a single value, a reference to the entity describing the file <code class="language-plaintext highlighter-rouge">data.csv</code>.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-referencing-external-resources"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-referencing-external-resources" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Referencing external resources</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>RO-Crates can also contain data entities that are folders and Web resources, as well as non-File data like online databases – see section on <a href="https://www.researchobject.org/ro-crate/1.1/data-entities.html">data entities</a>.</p>
+</blockquote>
+
+<p>We should now be able to follow the <code class="language-plaintext highlighter-rouge">@id</code> reference for the corresponding <em>data entity</em> JSON block for our CSV file, which we need to add to the <code class="language-plaintext highlighter-rouge">@graph</code> of the RO-Crate Metadata Document.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Add a declaration for the CSV file as new entity with <code class="language-plaintext highlighter-rouge">@type</code> declared as <code class="language-plaintext highlighter-rouge">File</code>.</li>
+    <li>Give the file a human-readable <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">description</code> to detail it as <em>Rainfall data for Katoomba in NSW Australia, captured February 2022</em>.</li>
+    <li>To add this is a CSV file, declare the <code class="language-plaintext highlighter-rouge">encodingFormat</code> as the appropriate <a href="https://www.iana.org/assignments/media-types/#text">IANA media type</a> string.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall Katoomba 2022-02"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall data for Katoomba, NSW Australia February 2022"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"encodingFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/csv"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<p>It is recommended that every entity has a human-readable <code class="language-plaintext highlighter-rouge">name</code>; as shown in the above example, this does not need to match the filename/identifier. The <code class="language-plaintext highlighter-rouge">encodingFormat</code> indicates the media file type so that consumers of the crate can open <code class="language-plaintext highlighter-rouge">data.csv</code> in an appropriate program, and can be particularly important for less common file extensions frequently encounted in outputs from research software and instruments.</p>
+
+<p>For more information on describing files and folders, including their recommended and required attributes, see section on <a href="https://www.researchobject.org/ro-crate/1.1/data-entities.html">data entities</a>.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Consider if the file content of <code class="language-plaintext highlighter-rouge">data.csv</code> is not covered by our overall license (CC0), but <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0</a> (which only permits non-commercial use)</li>
+    <li>To override, add an  <code class="language-plaintext highlighter-rouge">license</code> cross-reference property on this particular data entity</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall Katoomba 2022-02"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall data for Katoomba, NSW Australia February 2022"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"encodingFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/csv"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h2 id="contextual-entities">Contextual entities</h2>
+
+<p>Entities that we have added under <code class="language-plaintext highlighter-rouge">hasPart</code> are considered <em>data entities</em>, while entities only referenced from those are considered <em>contextual entities</em> – they help explain the crate and its content.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-adding-entities-to-the-json-array"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-entities-to-the-json-array" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Adding entities to the JSON array</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>You may have noticed we’re adding incrementally to the <code class="language-plaintext highlighter-rouge">@graph</code> array. It is important to remember the <code class="language-plaintext highlighter-rouge">,</code> between each entity, <strong>except</strong> for the final entity in the JSON array; and likewise for the properties within the JSON object for each entity. This is an artefact of the strict <a href="https://www.json.org/">JSON</a> file format rules to simplify parsing. The order of the entities within the <code class="language-plaintext highlighter-rouge">@graph</code> JSON-LD array and the order of the keys within a JSON object is <em>not significant</em>. The <em>graph</em> content is given by the <code class="language-plaintext highlighter-rouge">@id</code> cross-references.</p>
+</blockquote>
+
+<p>You may notice the subtle difference between a <em>data entity</em> that is conceptually part of the RO-Crate and is file-like (containing bytes), while a <em>contextual entity</em> is a representation of a real-life organization that can’t be downloaded: following the URL, we would only get its <em>description</em>. The section <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html">contextual entities</a> explores several of the entities that can be added to the RO-Crate to provide it with a <strong>context</strong>, for instance how to link to authors and their affiliations.  Simplifying slightly, a data entity is referenced from <code class="language-plaintext highlighter-rouge">hasPart</code> in a <code class="language-plaintext highlighter-rouge">Dataset</code>, while a contextual entity is referenced using any other defined property.</p>
+
+<h2 id="detailing-licenses">Detailing licenses</h2>
+
+<p>We have previously declared two different <code class="language-plaintext highlighter-rouge">license</code> cross-references. While following the URLs in this case explain the licenses well, it is also best practice to include a very brief summary of contextual entities in the RO-Crate Metadata Document. This is more important if the cross-reference do not use a permalink and may change over time. As a minimum, each referenced entity should have a <code class="language-plaintext highlighter-rouge">@type</code> and <code class="language-plaintext highlighter-rouge">name</code> property. It is also possible to add <code class="language-plaintext highlighter-rouge">url</code> for more information</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Add a contextual entity for each of the two licenses, see the <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#licensing-access-control-and-copyright">licensing</a> section for details:</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC BY-NC-SA 4.0 International"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC0-1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Zero v1.0 Universal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/publicdomain/zero/1.0/"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>An additional exercise is to try to unify the two entites so that both use spdx identifiers, remembering to update the corresponding <code class="language-plaintext highlighter-rouge">license</code> cross-references when changing the <code class="language-plaintext highlighter-rouge">@id</code>. However, not all licenses have a direct SPDX identifier.</p>
+
+<h2 id="author">Author</h2>
+
+<p>Moving back to the RO-Crate root <code class="language-plaintext highlighter-rouge">./</code>, let’s specify who are the authors of the crate.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Add yourself as an <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#people"><code class="language-plaintext highlighter-rouge">author</code></a> of the crate using the type <code class="language-plaintext highlighter-rouge">Person</code></li>
+    <li>Include your preferred name.</li>
+    <li>If you don’t have an <a href="https://orcid.org/">ORCID</a>, you may use either the URL of your main home page at your institution, or a crate-local identifier like <code class="language-plaintext highlighter-rouge">#alice</code>.</li>
+    <li>Include your <code class="language-plaintext highlighter-rouge">affiliation</code> as a string value.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">},</span><span class="w">
+  </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"affiliation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brown University"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-who-can-be-authors-of-an-ro-crate"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-who-can-be-authors-of-an-ro-crate" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Who can be authors of an RO-Crate?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>When we say someone is an author of a crate, it means they have contributed something substansively to its content (typically the data). Agreement on what is considered authorship on a dataset can be tricky; you may decide some people would be better represented as <code class="language-plaintext highlighter-rouge">contributor</code>. One advantage of RO-Crate is that authorship can be declared explicitly also on each data entity, so it can be clearer where each person have contributed (e.g. a statistician is author of an R script).  This means that generally the authors of the crate can be a broader, more inclusive list than perhaps traditionally recognized as academic authorship.</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>“Unroll” your <code class="language-plaintext highlighter-rouge">affiliation</code> of the person as cross-reference to another contextual entity, typed as an <code class="language-plaintext highlighter-rouge">Organization</code>.</li>
+    <li>You can use <a href="https://ror.org/">ROR</a> to find an identifier for most educational/research institutions, or you can use the main web page of your organization as its <code class="language-plaintext highlighter-rouge">@id</code>.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Organization"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brown University"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.brown.edu/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>The reuse of existing identifiers is important for both persons and organization from a FAIR perspective, as their names may not be globally unique.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Now imagine you are going to publish the RO-Crate on your institution’s web pages.</li>
+    <li>Cross-reference the same Organization entity with <code class="language-plaintext highlighter-rouge">publisher</code> from the RO-Crate Root entitity:</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h2 id="validating-and-visualizing">Validating and visualizing</h2>
+
+<p>As we made this RO-Crate Metadata File by hand, it’s good to check for any JSON errors, such as missing/extra <code class="language-plaintext highlighter-rouge">,</code> or unclosed <code class="language-plaintext highlighter-rouge">"</code> quotes. Try pasting the file content into the <a href="https://json-ld.org/playground/">JSON-LD Playground</a>. It should show up any errors, for example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JSON markup - SyntaxError: JSON.parse: expected `','` or `']'` after array element
+at line 29 column 5 of the JSON data
+</code></pre></div></div>
+
+<p>Modify the JSON file in your editor to fix any such errors. You can also use editor commands such as <em>Format Document</em> to ensure you have consistent spacing, indentation and brackets.</p>
+
+<p>If the document passes without errors in the JSON-LD Playground, you should see output under <em>Expanded</em> looking something like:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ro-crate-metadata.json"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"http://schema.org/CreativeWork"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"http://schema.org/about"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"http://purl.org/dc/terms/conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"http://schema.org/Dataset"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This verbose listing of the JSON-LD shows how the <code class="language-plaintext highlighter-rouge">@context</code> has correctly expanded the keys, but is not particularly readable. Try the <em>Visualized</em> tab to see an interactive rendering of the entities:</p>
+
+<p><img src="../../images/ro-crate-intro/jsonld-playground-visualized.png" alt="Visualized in the JSON-LD Playground. " width="1344" height="764" loading="lazy" /></p>
+
+<p>As the RO-Crate Metadata Document is valid JSON-LD it is also possible to process it using Linked Data technologies such as triple stores and SPARQL queries. It is beyond the scope of this tutorial to explain this aspect fully, but interested readers should consider how to <a href="https://www.researchobject.org/ro-crate/1.1/appendix/relative-uris.html">handle relative URI references</a>.
+As an example, try the <em>Table</em> button and notice that the entities with relative identifiers are not included. This is because when converting to RDF you need absolute URIs which do not readily exist when a crate is stored on disk, we’ve not decided where the crate is to be published yet.</p>
+
+<h2 id="advanced-converting-json-ld-to-triples">Advanced: Converting JSON-LD to triples</h2>
+
+<p>Try modify the graph’s <code class="language-plaintext highlighter-rouge">@context</code> within the <a href="https://json-ld.org/playground/">JSON-LD Playground</a> (don’t modify the <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> on disk), and revisit the <em>Table</em> rendering.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nl">"@base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arcp://uuid,deffa754-c764-4e04-aabf-e600c6200553/"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../../images/ro-crate-intro/jsonld-playground-table.png" alt="Triples table in the JSON-LD Playground. " width="1074" height="996" loading="lazy" /></p>
+
+<p>Above <code class="language-plaintext highlighter-rouge">arcp://uuid,deffa754-c764-4e04-aabf-e600c6200553/</code> is a randomly generated identifier to represent the RO-Crate root, and now the JSON-LD Playground can show all the triples from the metadata file. You can likewise use the <em>N-Quads</em> button to convert the metadata file to the <a href="http://www.w3.org/TR/n-quads/">RDF N-Quads</a> format. Most RDF libraries and stores have JSON-LD support, but may need to specify a base URI as we did above, making a new UUID for each imported RO-Crate.</p>
+
+<h2 id="html-preview">HTML preview</h2>
+
+<p>An RO-Crate can be distributed on disk, in a packaged format such as a zip file or disk image, or placed on a static website. In any of these cases, an RO-Crate can have an accompanying HTML version (<code class="language-plaintext highlighter-rouge">ro-crate-metadata.html</code>) designed to be human-readable.</p>
+
+<p><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " width="1044" height="1027" loading="lazy" /></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Try navigating the <a href="rainfall-1.2.1/ro-crate-preview.html">preview of the running example</a> and find:</p>
+
+  <ol>
+    <li>What is the license of the rainfall CSV?</li>
+    <li>What is the affiliation of the crate’s author?</li>
+    <li>What does the Validity Check inspect</li>
+    <li>What is not covered by this check?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>CC BY-NC-SA 4.0 International</li>
+      <li>Brown University</li>
+      <li>The context, and for root dataset: existance, valid identifier, name, description, license and date published.</li>
+      <li>The other entities were not checked, e.g. the <code class="language-plaintext highlighter-rouge">affiliation</code> of the author.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="advanced-generating-html-preview">Advanced: Generating HTML preview</h2>
+
+<p>If you have <a href="https://nodejs.org/">Node JS</a> installed, you can install and try the <a href="https://www.npmjs.com/package/ro-crate-html">ro-crate-html</a> tool on your <code class="language-plaintext highlighter-rouge">crate1</code> folder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i <span class="nt">-g</span> ro-crate-html
+rochtml crate1/ro-crate-metadata.json
+</code></pre></div></div>
+
+<p>Or if you have <a href="https://www.docker.com/">Docker</a>, something like:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull simleo/rochtml
+docker run <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/crate <span class="nt">-it</span> simleo/rochtml <span class="nt">-c</span> ro-crate-preview_files /crate/ro-crate-metadata.json
+</code></pre></div></div>
+
+<p>The above will generate a <code class="language-plaintext highlighter-rouge">ro-crate-preview.html</code> file within your RO-Crate Root. Experiment with modifying the Metadata file and re-generating the HTML preview to see how your rendering differs from the <a href="rainfall-1.2.1/ro-crate-preview.html">running example</a>.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>You have completed making a basic RO-Crate. You may try any of the following:</p>
+
+<ul>
+  <li>Add and describe additional data entities, adding additional properties for <a href="https://www.researchobject.org/ro-crate/1.1/data-entities.html">data entities</a></li>
+  <li>Follow the RO-Crate specification for additional <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html">contextual entities</a> you can add to the crate</li>
+  <li>Try briefly describing <a href="https://www.researchobject.org/ro-crate/1.1/provenance.html">provenance</a> or <a href="https://www.researchobject.org/ro-crate/1.1/workflows.html">software</a> for any additional data entities you have added.</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-complete-ro-crate-metadata-document"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Complete RO-Crate Metadata Document</div>
+
+  <p>The final RO-Crate Metadata Document constructed in this tutorial should look something like:</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"@graph"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ro-crate-metadata.json"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1"</span><span class="p">},</span><span class="w">
+      </span><span class="nl">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LearningResource"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example dataset for RO-Crate specification"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Official rainfall readings for Katoomba, NSW 2022, Australia"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"datePublished"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-22T12:03:00+0100"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">},</span><span class="w">
+      </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall Katoomba 2022-02"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall data for Katoomba, NSW Australia February 2022"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"encodingFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/csv"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC BY-NC-SA 4.0 International"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC0-1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Zero v1.0 Universal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/publicdomain/zero/1.0/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"affiliation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Organization"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brown University"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.brown.edu/"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h1 id="copyright-and-license">Copyright and license</h1>
+
+<p>© Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors.</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+
+<p>http://www.apache.org/licenses/LICENSE-2.0</p>
+
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+
+<h2 id="changes">Changes</h2>
+
+<p>This tutorial has been adapted from the revised <a href="https://www.researchobject.org/ro-crate/1.2-DRAFT/introduction.html">RO-Crate introduction for 1.2</a> by Stian Soiland-Reyes. Changes include:</p>
+<ul>
+  <li>Rewriting to tutorial style with exercises</li>
+  <li>Adaptation to Galaxy Training Material rendering</li>
+  <li>Explicit links to RO-Crate specifications</li>
+  <li>Example changed to different organization and license</li>
+</ul>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>RO-Crate provides a structure to make FAIR data packages</p>
+</li>
+                        
+                        <li><p>schema.org in JSON-LD provides a controlled vocabulary for FAIR metadata</p>
+</li>
+                        
+                        <li><p>Each entity of the crate is described separately</p>
+</li>
+                        
+                        <li><p>Cross-references between entities create a graph</p>
+</li>
+                        
+                        <li><p>The RO-Crate specification recommends which types and keys to use</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/fair/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>FAIR</dt>
+                    <dd>Findable, Accessible, Interoperable, Reusable; a set of principles for publishing research data and metadata</dd>
+                    
+                    <dt>JSON</dt>
+                    <dd>JavaScript Object Notation, a generic structured text-based data format</dd>
+                    
+                    <dt>JSON-LD</dt>
+                    <dd>JSON Linked Data, a way to express Linked Data (RDF) using regular JSON</dd>
+                    
+                    <dt>RO-Crate</dt>
+                    <dd>Research Object Crate; a way to package research data with structured FAIR metadata</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/ro-crate-intro"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/ro-crate-intro">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Stian Soiland-Reyes, Peter Sefton,  <b>RO-Crate - Introduction (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{fair-ro-crate-intro,
+author = "Stian Soiland-Reyes and Peter Sefton",
+	title = "RO-Crate - Introduction (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/eurosciencegateway/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/eurosciencegateway.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EuroScienceGateway</div>
+			<div class="description">
+			EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Do you want to extend your knowledge?</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+
+                    </ul>
+                </blockquote>
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00348">gxy.io/GTN:T00348</a></li>
+					
+
+					
+					<li>© Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors</li>
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/Apache-2.0">
+							Content licensed under Apache-2.0
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/ro-crate-intro/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/fair/tutorials/ro-crate-intro/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

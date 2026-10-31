@@ -1,0 +1,3293 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Introduction to Genomics and Galaxy / Introduction to Genomics and Galaxy / Introduction to Galaxy Analyses</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to Genomics and Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-05-17 19:42:00 +0000">
+<meta name="DC.creator" content="Dave Clements">
+<meta name="DC.creator" content="Cristóbal Gallardo"><meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Introduction to Galaxy Analyses / Introduction to Genomics and Galaxy / Hands-on: Introduction to Genomics and Galaxy">
+        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/introduction/tutorials/galaxy-intro-strands/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to Genomics and Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-05-17 19:42:00 +0000",
+  "datePublished": "2017-10-18 16:00:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+      "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.denbi.de/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
+    }
+  ],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00191",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Introduction to Galaxy Analyses",
+    "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/introduction/"
+  },
+  "abstract": "This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.",
+  "learningResourceType": "e-learning",
+  "name": "Introduction to Genomics and Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html",
+  "version": 43,
+  "timeRequired": "PT2H30M",
+  "teaches": "- Learn some of the basic concepts of genomics and bioinformatics\n- Familiarize yourself with the basics of Galaxy",
+  "keywords": [
+    "Introduction to Galaxy Analyses"
+  ],
+  "description": "## Abstract\n\nThis practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Do genes on opposite strands ever overlap?  If so, how often?\n\n\n## Learning Objectives\n\n- Learn some of the basic concepts of genomics and bioinformatics\n- Familiarize yourself with the basics of Galaxy\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "@id": "https://orcid.org/0000-0002-9970-6657"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+          "name": "Muséum national d'Histoire naturelle",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/dataterra/",
+          "name": "DATA TERRA",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.data-terra.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moorev/",
+          "name": "MOOREV",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://moorev.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fnso2019/",
+          "name": "OpenMetaPaper",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ouvrirlascience.fr/national-fund-for-open-science/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "@id": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sebastian-schaaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sebastian-schaaf/",
+      "name": "Sebastian Schaaf",
+      "image": "https://avatars.githubusercontent.com/sebastian-schaaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/earlham/",
+          "name": "Earlham Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.earlham.ac.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-steers/",
+          "name": "ELIXIR-STEERS",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/steers"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "@id": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "name": "Gildas Le Corguillé",
+      "image": "https://avatars.githubusercontent.com/lecorguille",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+      "name": "Peter van Heusden",
+      "image": "https://avatars.githubusercontent.com/pvanheus",
+      "description": "Research at the South African National Bioinformatics Institute",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6553-5274",
+      "@id": "https://orcid.org/0000-0001-6553-5274"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "@id": "https://orcid.org/0000-0002-9970-6657"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sandygudie/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sandygudie/",
+      "name": "Goodnews Sandy",
+      "image": "https://avatars.githubusercontent.com/sandygudie",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "name": "Niall Beard",
+      "image": "https://avatars.githubusercontent.com/njall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "name": "Maria Doyle",
+      "image": "https://avatars.githubusercontent.com/mblue9",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4847-8436",
+      "@id": "https://orcid.org/0000-0003-4847-8436"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bx-python",
+      "name": "bx-python"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/introduction" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Introduction to Galaxy Analyses
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/introduction/faqs/" title="Check our FAQs for the Introduction to Galaxy Analyses topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-introduction">
+    <h1 data-toc-skip>Introduction to Genomics and Galaxy</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tnabtaf?s=36" alt="Dave Clements avatar" width="36" class="avatar" />
+    Dave Clements</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-badge-small contributor-yvanlebras"><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/sebastian-schaaf/" class="contributor-badge contributor-badge-small contributor-sebastian-schaaf"><img src="https://avatars.githubusercontent.com/sebastian-schaaf?s=36" alt="Sebastian Schaaf avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-badge-small contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-badge-small contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-badge-small contributor-pvanheus"><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Peter van Heusden avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-badge-small contributor-tnabtaf"><img src="https://avatars.githubusercontent.com/tnabtaf?s=36" alt="Dave Clements avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/sandygudie/" class="contributor-badge contributor-badge-small contributor-sandygudie"><img src="https://avatars.githubusercontent.com/sandygudie?s=36" alt="Goodnews Sandy avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/njall/" class="contributor-badge contributor-badge-small contributor-njall"><img src="https://avatars.githubusercontent.com/njall?s=36" alt="Niall Beard avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-badge-small contributor-mblue9"><img src="https://avatars.githubusercontent.com/mblue9?s=36" alt="Maria Doyle avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Do genes on opposite strands ever overlap?  If so, how often?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn some of the basic concepts of genomics and bioinformatics</p>
+</li>
+        
+        <li><p>Familiarize yourself with the basics of Galaxy</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/workflows/" title="Introduction to Genomics and Galaxy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/recordings/index.html#tutorial-recording-18-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 1h30m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 1h30m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			Galaxy Main (US) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			Galaxy Australia <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			Galaxy France <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ch" title="">
+			Galaxy Switzerland <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be" title="">
+			Galaxy Belgium <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no" title="">
+			Galaxy Norway
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 18, 2017 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00191">https://gxy.io/GTN:T00191</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 92 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">43</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-audience"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Audience</h3>
+  <p>This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren’t new to bioinformatics you can just do the items listed in the Hands-On boxes (<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span>), or you can try one of the <a href="/training-material/topics/introduction/index.html">other introductory tutorials</a>.</p>
+
+  <p>This tutorial teaches the same basic content as <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">Galaxy 101</a>, but requires less knowledge of biology to understand the questions this tutorial addresses.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#get-human-data" id="markdown-toc-get-human-data">Get human data</a>    <ol>
+      <li><a href="#get-data-into-galaxy" id="markdown-toc-get-data-into-galaxy">Get data into Galaxy</a></li>
+      <li><a href="#examine-the-data" id="markdown-toc-examine-the-data">Examine the data</a></li>
+      <li><a href="#naming" id="markdown-toc-naming">Naming</a></li>
+    </ol>
+  </li>
+  <li><a href="#weve-got-the-data---whats-our-plan-for-answering-the-question" id="markdown-toc-weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</a>    <ol>
+      <li><a href="#split-the-genes-into-forward-and-reverse-datasets" id="markdown-toc-split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</a></li>
+      <li><a href="#check-for-overlaps" id="markdown-toc-check-for-overlaps">Check for overlaps</a></li>
+    </ol>
+  </li>
+  <li><a href="#results-and-final-steps" id="markdown-toc-results-and-final-steps">Results and final steps.</a>    <ol>
+      <li><a href="#combine-forward-and-reverse-overlapping-genes-into-one-dataset" id="markdown-toc-combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</a></li>
+      <li><a href="#visualize-the-overlapping-genes" id="markdown-toc-visualize-the-overlapping-genes">Visualize the overlapping genes</a></li>
+      <li><a href="#do-we-have-a-problem" id="markdown-toc-do-we-have-a-problem">Do we have a problem?</a></li>
+      <li><a href="#walk-through-the-workflow-tutorial" id="markdown-toc-walk-through-the-workflow-tutorial">Walk through the workflow tutorial</a></li>
+    </ol>
+  </li>
+  <li><a href="#rerun-analysis-with-exon-data" id="markdown-toc-rerun-analysis-with-exon-data">Rerun analysis with exon data</a>    <ol>
+      <li><a href="#get-the-exon-data" id="markdown-toc-get-the-exon-data">Get the exon data</a></li>
+      <li><a href="#rerun-the-analysis-this-time-on-exons" id="markdown-toc-rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</a></li>
+      <li><a href="#are-we-done" id="markdown-toc-are-we-done">Are we done?</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-requirements"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements</div>
+
+  <p>To run this practical you will need</p>
+
+  <ol>
+    <li>An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.</li>
+    <li>A web browser. <a href="https://www.mozilla.org/firefox">Firefox</a> and <a href="https://www.google.com/chrome/">Google Chrome</a> work well, as does <a href="https://www.apple.com/safari/">Safari</a>.  Internet Explorer is known to have issues with Galaxy so avoid using that.</li>
+    <li>Access to a Galaxy instance.  Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use <a href="https://usegalaxy.org">usegalaxy.org</a>.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-our-motivating-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Our Motivating Question</div>
+  <p><em>I wonder if genes on opposite strands ever overlap with each other, and if so, how common is that?</em></p>
+</blockquote>
+
+<p>To explore this question we need a basic understanding of <em>genomes, chromosomes, strands,</em> and  <em>genes.</em></p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-definitions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Definitions 1</div>
+
+  <ul>
+    <li>
+      <p><strong>Genome</strong></p>
+
+      <p>The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person’s chromosomes.</p>
+    </li>
+    <li>
+      <p><strong>Chromosome</strong></p>
+
+      <p>The largest unit of DNA organization in an organism.  Humans have two copies of 23 chromosomes.  Chromosomes are <em>linear</em> in humans, and all animals and plants.  (Bacteria have <em>circular</em> chromosomes.)</p>
+    </li>
+    <li>
+      <p><strong>Strand</strong></p>
+
+      <p>Chromosomes are <em>double-stranded</em>.  One is the forward strand, is typically drawn on top, and moves from left to right. The other, reverse strand, is typically drawn on the bottom and moves from right to left.  Genes can occur on either strand.  A single gene will have parts on only one stand.</p>
+    </li>
+    <li>
+      <p><strong>Gene</strong></p>
+
+      <p>“What is a gene?” is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.</p>
+    </li>
+  </ul>
+
+  <p>Graphically, the human genome can be shown as the chromosomes that are in it:</p>
+
+  <p><img src="../../images/human_genome_chroms.png" alt="Human genome consists of 23 (pairs of) chromosomes. " width="794" height="329" loading="lazy" /></p>
+
+  <p>And here’s a representation of a chromosome, strands, and genes on the chromosome.</p>
+
+  <p><img src="../../images/chromosome_strands_genes.png" alt="Chromosomes are double stranded and have forward and reverse strands; strands have genes on them. " width="794" height="487" loading="lazy" /></p>
+</blockquote>
+
+<p>The question we are asking looks like:</p>
+
+<p><img src="../../images/do_genes_on_opposite_strands_ever_overlap.png" alt="Does a situation like this exist?" width="794" height="233" loading="lazy" /></p>
+
+<p><em>Non-overlapping genes are common.  How common are overlapping genes?</em></p>
+
+<h1 id="get-human-data">Get human data</h1>
+
+<p>To answer this question we need to know where genes start and stop on human chromosomes.  That seems like a simple question, but if you are new to bioinformatics it’s actually a hard question to answer.  Web searches will land you at any number of useful places on the web, but without a lot of background knowledge it’s hard to know what you want:  <em>What’s the difference between sequence and annotation?  What are FASTA, BED, GTF, GFF3, and VCF?  What are GRCh37, GRCh38, hg19, and hg38 (and what happened to hg20 through hg37 - are they okay)?</em></p>
+
+<p>It turns out that for this particular question (and for many others), most <strong>Galaxy</strong> instances can help us find this information.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Log in to Galaxy</div>
+  <p>In your web browser, <em>go to</em> <strong>your Galaxy instance</strong> and <em>log in or register</em>.</p>
+</blockquote>
+
+<p>The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, tool forms, and dataset content.</p>
+
+<p><img src="../../images/galaxy_interface.png" alt="Galaxy interface showing history panel on the right, tools panel on the left and main panel at the center. " width="1918" height="1025" loading="lazy" /></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-start-with-an-empty-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Start with an empty history</div>
+
+  <ul>
+    <li>
+      <p>At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h2 id="get-data-into-galaxy">Get data into Galaxy</h2>
+
+<p>There are <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">many ways to get data into a Galaxy instance</a>. We are going to use the <strong>Get Data</strong> toolbox in the <strong>Tools</strong> panel on the left.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-open-get-data-toolbox"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Open Get Data toolbox</div>
+
+  <ol>
+    <li>
+      <p><em>Click</em> on the <strong>Get Data</strong> toolbox to expand it.</p>
+
+      <p><img src="../../images/getdata.PNG" alt="The Get Data toolbox. " width="289" height="397" loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <strong>Get Data</strong> toolbox contains a list of data sources that this Galaxy instance can get data directly from.  <strong>Upload file</strong> is quite useful for getting data from your computer or from the web (see the <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting data into Galaxy slides</a>).  Today we are going to use the <strong>UCSC Main table browser</strong>.</p>
+
+<h3 id="get-genes">Get genes</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-go-to-ucsc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Go to UCSC</div>
+
+  <ol>
+    <li>
+      <p><em>Click</em> on the tool <span><strong>UCSC Main table browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> to go to UCSC.</p>
+
+      <p><img src="../../images/101_01.png" alt="Click on UCSC Main table browser. " width="376" height="151" loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This will take you to the UCSC Table Browser:</p>
+
+<p><img src="../../images/ucsc_table_browser_w_default_settings.png" alt="UCSC table browser tool, first screen for genes. " width="1017" height="688" loading="lazy" /></p>
+
+<p>The <a href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a> provides access to all the data that is shown in the <a href="https://genome.ucsc.edu/cgi-bin/hgGateway">UCSC Genome Browser</a> (see box below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.</p>
+
+<p>The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want. In particular, the human genome at version hg38 is already preselected. If the human genome was not what we are interested in, or if we were interested in a different version of it, we could click on <code class="language-plaintext highlighter-rouge">Select dataset</code> near the top of the screen to change the default, but for our purpose we only have to verify that what is selected is:</p>
+
+<ul>
+  <li><strong>Assembly:</strong> <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
+  <li><strong>Group:</strong> <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
+  <li><strong>Track:</strong> <code class="language-plaintext highlighter-rouge">GENCODE V49</code></li>
+  <li><strong>Table:</strong> <code class="language-plaintext highlighter-rouge">knownGene</code></li>
+</ul>
+
+<p>Here, <strong>Assembly</strong> asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting <code class="language-plaintext highlighter-rouge">hg38</code>, which is also an up to date one.)  <strong>Group</strong> is set to <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code> which sounds like what we want. So far so good.</p>
+
+<p><strong>Track</strong> has a bewildering list of options. UCSC suggests <code class="language-plaintext highlighter-rouge">GENCODE V49</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
+
+<blockquote class="quote">
+  <p>The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence…</p>
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-all-gencode-is-different-from-gencode"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: ALL GENCODE is different from GENCODE</div>
+  <p><strong>Warning</strong> Any recent GENCODE version, V49 or higher, will do for this tutorial though exact numbers calculated in some of the steps will depend on the exact version of the track. Do not, however, select any ALL GENCODE version or you will end up with entirely wrong input data!</p>
+</blockquote>
+
+<p>Time for a few more definitions.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-definitions-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Definitions 2</div>
+
+  <ul>
+    <li>
+      <p><strong>Reference genome</strong></p>
+
+      <p>A reference genome is the <em>genome of a single individual</em> that has been thoroughly studied, to the point that we know exactly what most of that individual’s DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.</p>
+    </li>
+    <li>
+      <p><strong>Sequence</strong></p>
+
+      <p>A genome’s sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, “What’s the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?”</p>
+    </li>
+    <li>
+      <p><strong>Genome/Gene annotation</strong></p>
+
+      <p>The sequence tells us what DNA is where, but it doesn’t tell us anything about the function of that DNA.  <em>Annotation</em> is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>The <strong>track</strong> option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren’t even genes or gene predictions.)</p>
+
+<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="language-plaintext highlighter-rouge">GENCODE V49</code> or whatever version is the latest GENCODE when you are doing this tutorial.</p>
+
+<p>So far we haven’t changed <em>anything</em> from the defaults.  Lets change something.  The default  <strong>region</strong> is the whole genome, which can be done, but it’s a lot of information. For this exercise lets use just one (small) chromosome.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-limit-the-region-and-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Limit the region and get the data.</div>
+
+  <ol>
+    <li>Say that we just want chromosome 22
+      <ul>
+        <li>For <strong>region</strong> select <code class="language-plaintext highlighter-rouge">position</code>.</li>
+        <li>In the text box next to <code class="language-plaintext highlighter-rouge">position</code> enter <code class="language-plaintext highlighter-rouge">chr22</code> (case matters).</li>
+      </ul>
+
+      <p><img src="../../images/ucsc_tb_set_region_chr22.png" alt="Change the region. " width="530" height="83" loading="lazy" /></p>
+    </li>
+    <li>
+      <p><em>Click</em> the <strong>get output</strong> button.</p>
+
+      <p>And, that doesn’t actually get us the output. It sends us to a second UCSC page that asks us exactly what we want.</p>
+
+      <p><img src="../../images/ucsc_tb_2nd_page_whole_gene.png" alt="UCSC Table Browser 2nd page. " width="1157" height="647" loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Under <strong>Create one BED record per</strong> make sure that <strong>Whole Gene</strong> is selected.</p>
+    </li>
+    <li><em>Click</em> the <strong>Send query to Galaxy</strong> button at the bottom of the form.</li>
+  </ol>
+</blockquote>
+
+<p>This returns us to Galaxy, first displaying a big green box (that’s good!) and then returning us to the view we started with (if that doesn’t happen, hit the <em>Back</em> button of your browser several/probably three times until you’re back at the regular view of Galaxy). An item should now appear in your history, the dataset from UCSC.</p>
+
+<h3 id="history-item-status">History item status</h3>
+
+<p>Watch your new history item.  It will go through three statuses before it’s done.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Icon</th>
+      <th>Meaning</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Grey</strong></td>
+      <td>Clock</td>
+      <td>Item is waiting to start (waiting for data transfer to start)</td>
+      <td><img src="../../images/status_queued.png" alt="Status: Queued. " width="250" height="38" loading="lazy" /></td>
+    </tr>
+    <tr>
+      <td><strong>Yellow</strong></td>
+      <td>Spinner</td>
+      <td>Item is running (data is actively being transferred).</td>
+      <td><img src="../../images/status_running.png" alt="Status: Running. " width="250" height="38" loading="lazy" /></td>
+    </tr>
+    <tr>
+      <td><strong>Green</strong></td>
+      <td>None</td>
+      <td>Item has finished successfully (data transfer complete).</td>
+      <td><img src="../../images/status_finished_success.png" alt="Status: Successfully finished. " width="250" height="38" loading="lazy" /></td>
+    </tr>
+    <tr>
+      <td><strong>Red</strong></td>
+      <td>Cross</td>
+      <td>The job has failed. There can be <a href="https://galaxyproject.org/support/tool-error/">many reasons</a>.</td>
+      <td><img src="../../images/status_failed.png" alt="Status: Failed. " width="250" height="38" loading="lazy" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can find more information in the <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">Undestanding Galaxy history system</a> training.</p>
+
+<h2 id="examine-the-data">Examine the data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-look-at-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Look at the data.</div>
+  <p>Once the dataset is green, <em>click</em> on the dataset name (something like <strong>UCSC Main on Human…</strong>)</p>
+</blockquote>
+
+<p>This expands the dataset and shows you information about it, and a preview of its contents.</p>
+
+<p><img src="../../images/genes_human_chr22_preview.png" alt="Preview of the data from UCSC Table Browser. " width="545" height="351" loading="lazy" /></p>
+
+<p>From this preview we can obtain a huge amount of useful information:</p>
+<ol>
+  <li>The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.</li>
+  <li>The dataset is in <strong>BED</strong> format, one of several standards for representing genome annotation.  We got BED format because BED was preselected as the output format in the UCSC table browser.</li>
+  <li>The dataset’s “database” is <strong>hg38</strong>.  This says which revision of the reference genome this data maps too.  hg38 is the latest human reference genome.  hg38 was also selected by default in UCSC.</li>
+  <li>Finally, it shows us the first 5 rows in the dataset.</li>
+</ol>
+
+<p>The dataset preview is informative, but you can’t see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-look-at-all-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Look at all the data.</div>
+  <ol>
+    <li>
+      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to view the contents of the dataset. This displays all of the data.</p>
+
+      <p><img src="../../images/genes_human_chr22_dataset_view.png" alt="Full dataset in central panel. " width="991" height="594" loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Use the side scroll bars to move through the file.</p>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many columns include the BED file?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>Our BED file includes 12 columns, on which the information about the genes distribution along the genome in the chromosome 12 is summarized.</p>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-additional-information-about-bed-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-information-about-bed-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Additional information about BED files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p><a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.</p>
+
+  <p>We care about columns 1, 2, 3, and 6:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Column Name</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Chromosome</td>
+        <td>The name of the chromosome this gene is on.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Start</td>
+        <td>Where on the chromosome the gene starts.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>End</td>
+        <td>Where on the chromosome the gene ends.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Strand</td>
+        <td>Which strand the gene is on.  <code class="language-plaintext highlighter-rouge">+</code> means forward (top, left to right), <code class="language-plaintext highlighter-rouge">-</code> means reverse (bottom, right to left)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>See the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED format description at UCSC</a> for a full description of all the columns.</p>
+
+</blockquote>
+
+<h2 id="naming">Naming</h2>
+
+<p>Galaxy allows you to name your analyses (your histories) and your datasets.  We only have one history (“Unnamed history”) and one dataset (“UCSC Main on Human:…”) so far, but it’s a good idea to</p>
+
+<ol>
+  <li>Always name your histories</li>
+  <li>Name your input and final output datasets, and any significant intermediate datasets.</li>
+</ol>
+
+<p>You don’t have to do this.  Galaxy is quite happy for you to have an infinite number of “Unnamed history” histories, and to have all your datasets be obscurely named.  However, once you’ve run your first 5 unnamed analyses, all with obscurely named datasets, you’ll might wish you would have named everything.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-name-your-stuff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Name your stuff</div>
+
+  <ol>
+    <li><strong>Name your history</strong> to be meaningful and easy to find.
+      <ul>
+        <li><em>Click</em> on the title of the history and enter something like <strong>Intro - Strands</strong> as the name.  Hit the <code class="language-plaintext highlighter-rouge">enter</code> key on your keyboard to save it.
+<img src="/training-material/shared/images/rename_history.png" alt="Rename the history. " width="308" height="340" loading="lazy" /></li>
+      </ul>
+    </li>
+    <li><strong>Rename your dataset</strong>
+      <ul>
+        <li><em>Click</em> on the <strong>pencil icon</strong> to edit the dataset attributes.</li>
+        <li>In the next screen change the name of the dataset to something like <code class="language-plaintext highlighter-rouge">Genes</code> or <code class="language-plaintext highlighter-rouge">Genes chr22</code>.</li>
+        <li><em>Click</em> the <strong>Save</strong> button at the bottom of the screen.</li>
+      </ul>
+
+      <p>Your history should now look something like this:</p>
+
+      <p><img src="../../images/genes_human_chr22_rename.png" alt="Rename dataset. " width="721" height="950" loading="lazy" /></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</h1>
+
+<p>You have to know what’s possible, before you can build a plan.  If you don’t have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don’t have any experience with tools, then think about how you might solve it manually, using pencil and paper (it may help to assume you have an infinite supply of helpers to do the pencil and paper work).</p>
+
+<p>Here’s how we’ll answer this question:</p>
+
+<ol>
+  <li>Split the genes dataset in two: one for genes on the forward strand, and one for genes on the reverse strand.</li>
+  <li>Compare the two datasets to see which ones, if any, overlap.</li>
+  <li>Check how many (or what percentage) of our genes overlap with another gene.</li>
+</ol>
+
+<p>It turns out that all of these steps are easy in Galaxy!</p>
+
+<h2 id="split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</h2>
+
+<p>How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And <em>whoa! There are over 40 toolboxes, and several hundred tools.</em> How are we going to find a tool that can do the split?</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-searching-for-and-launching-a-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Searching for and launching a tool</div>
+
+  <ol>
+    <li>Try the <strong>tools search box</strong>.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.</li>
+    <li>If you haven’t already searched with it, <em>enter</em> <code class="language-plaintext highlighter-rouge">filter</code> in the <strong>tool search box</strong>.  Among the results you should see
+      <ul>
+        <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions.</li>
+        <li>That might work.</li>
+      </ul>
+    </li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> to open the Filter tool in the central panel.</li>
+    <li>Take a look at the <strong>Syntax</strong> and <strong>Example</strong> sections to understand what the tool does.</li>
+  </ol>
+
+  <p><img src="../../images/filter_tool_defaults.png" alt="The Filter Tool form. " width="883" height="417" loading="lazy" /></p>
+</blockquote>
+
+<p>It doesn’t say anything about <strong>Filter</strong> being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let’s do that.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-the-filter-tool-to-get-genes-on-the-forward-strand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run the Filter tool to get genes on the forward strand.</div>
+
+  <ul>
+    <li>
+      <p>The filter tool has 3 fields:</p>
+
+      <ol>
+        <li><strong>Dataset</strong>: This pulldown will list any dataset from your history that this tool can work on.  In your case that’s probably only one dataset. <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“filter”</em>: <code class="language-plaintext highlighter-rouge">Genes chr22</code> .</li>
+        <li><strong>Condition</strong>: this free text field is where we specify which records we want in the output dataset. Put in <em>“Condition”</em>:  <code class="language-plaintext highlighter-rouge">c6 == "+" </code> .
+ This specifies that column 6 (the strand) must be equal to (<code class="language-plaintext highlighter-rouge">==</code> is Python for <em>is equal to</em>) a plus sign.</li>
+        <li>
+          <p><em>“Header lines to skip”</em>:  <code class="language-plaintext highlighter-rouge">0 </code></p>
+
+          <p>Our dataset does not have any header lines.</p>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p>Finally, <em>click</em> the <strong>Execute</strong> button.</p>
+
+      <p><img src="../../images/filter_tool_forward_strand_genes_only.png" alt="Run the Filter tool to get only the forward strand genes. " width="724" height="337" loading="lazy" /></p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>This adds another dataset to your history. This one should contain only genes on the forward strand.  Once the dataset is green, click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to confirm this. We also recommend that you rename this dataset to something like <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> (remember how?).</p>
+
+<p>Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-genes-on-the-reverse-strand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get genes on the reverse strand</div>
+
+  <p><strong>Method 1</strong></p>
+
+  <ol>
+    <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset did not: a looping arrow.</li>
+    <li><em>Click</em> the <strong>looping arrow</strong> (“Run this job again”) icon.  This won’t actually run the job again.  What it will do is bring up the Filter tool form with <em>the exact same settings that were used to produce this dataset.</em></li>
+    <li>Rerun <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> but with
+      <ul>
+        <li><em>“Condition”</em>:  <code class="language-plaintext highlighter-rouge">c6 == "-" </code></li>
+      </ul>
+    </li>
+    <li><em>Click</em> the <strong>Run Tool</strong> button.</li>
+  </ol>
+
+  <p><strong>Method 2</strong></p>
+  <ol>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> in the tool panel to open the Filter tool in the central panel.</li>
+    <li><em>Fill</em> the form as before, <em>except</em>:
+      <ul>
+        <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
+        <li><em>Set</em> <strong>Condition</strong> to <code class="language-plaintext highlighter-rouge">c6 == "-"</code>.</li>
+      </ul>
+    </li>
+    <li><em>Click</em> the <strong>Run Tool</strong> button.</li>
+  </ol>
+
+  <p><strong>Both Methods</strong></p>
+  <ol>
+    <li><em>Rename</em> your new dataset to something like <code class="language-plaintext highlighter-rouge">Genes, reverse strand</code></li>
+  </ol>
+</blockquote>
+
+<p>The rerun button can be a huge help as you run more complex tools.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-empty-result"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Empty result?</div>
+
+  <p>If you used Method 2 and didn’t explicitly set the dataset, then you ran Filter on the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset. None of the genes in the forward strand dataset have “-“ in column 6 so all of them were filtered out from the result.</p>
+
+  <p>Try again and set the dataset to your <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</p>
+</blockquote>
+
+<p>Your history should now have (at least) 3 datasets in it, with names like:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Genes chr22</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Genes, forward strand</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Genes, reverse strand</code></li>
+</ul>
+
+<p>The number of genes in the <code class="language-plaintext highlighter-rouge">forward</code> plus <code class="language-plaintext highlighter-rouge">reverse</code> datasets should be the same as in the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.  If they aren’t can you figure out why?</p>
+
+<h2 id="check-for-overlaps">Check for overlaps</h2>
+
+<p>Genes are an example of a <em>genomic interval</em>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-definitions-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Definitions 3</div>
+
+  <ul>
+    <li><strong>Genomic interval</strong>
+In Galaxy, a <em>genomic interval</em> is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.</li>
+  </ul>
+</blockquote>
+
+<p>Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-genomic-interval-tools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Genomic Interval Tools</div>
+
+  <ul>
+    <li>The next step is finding overlapping intervals, so type <code class="language-plaintext highlighter-rouge">interval</code> in the tool search box. There are many results from this search, so you might want to click the <em>Show sections</em> button to see which sections the tools are organised into.</li>
+    <li><em>Explore</em> the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.</li>
+  </ul>
+</blockquote>
+
+<p>Although there are the bedtools (section <strong>BED</strong>) and a section <strong>Operate on Genomic Intervals</strong> offering promising tools, the simple <strong>Intersect</strong> tool under <strong>Text Manipulation</strong> appears sufficient.  Let’s try <strong>Intersect</strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-genomic-interval-tools-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Genomic Interval Tools</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0" title="Intersect tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with the following parameters:
+      <ul>
+        <li><em>“Return”</em>:  <code class="language-plaintext highlighter-rouge">Overlapping Intervals</code>.
+This looks like it might return whole genes, while <code class="language-plaintext highlighter-rouge">Overlapping pieces</code> may return only the parts that overlap.  We suspect that whole genes might be more useful.</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span><em>“of”</em>:  <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> (the first dataset)</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“that intersect”</em> : <code class="language-plaintext highlighter-rouge">Genes, reverse strand</code> (the second dataset)</li>
+        <li>
+          <p><em>“for at least”</em>: <code class="language-plaintext highlighter-rouge">1</code></p>
+
+          <p>This will return genes with even just one position overlapping.</p>
+        </li>
+        <li><em>Click</em> <strong>Run Tool</strong>.</li>
+      </ul>
+
+      <p><img src="../../images/genes_human_intersect_strands.png" alt="Run Intersect. " width="1195" height="515" loading="lazy" /></p>
+    </li>
+    <li>
+      <p>Now repeat the intersect, but make the first dataset be the reverse genes, and the second be the forward genes.</p>
+    </li>
+    <li>Finally give both of the new datasets meaningful names, like <code class="language-plaintext highlighter-rouge">Overlapping forward genes</code> and <code class="language-plaintext highlighter-rouge">Overlapping reverse genes</code></li>
+  </ol>
+</blockquote>
+
+<h1 id="results-and-final-steps">Results and final steps.</h1>
+
+<p>At this point we <em>could</em> say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the <code class="language-plaintext highlighter-rouge">Overlapping forward</code> and <code class="language-plaintext highlighter-rouge">Overlapping reverse</code> datasets with the number of genes in the full <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset, and <em>conclude that overlapping genes on opposite strands are actually pretty common.</em></p>
+
+<p>However, before we rush off to publish our conclusions, let’s</p>
+
+<ol>
+  <li>Get both the forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and</li>
+  <li><em>Visualize</em> our new dataset, just to double-check our results.</li>
+</ol>
+
+<h2 id="combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</h2>
+
+<p>What tool can we use to combine the two datasets into one?  Try <em>searching</em> for <code class="language-plaintext highlighter-rouge">combine</code> or <code class="language-plaintext highlighter-rouge">join</code> or <code class="language-plaintext highlighter-rouge">stack</code> in the tool search box.  You’ll find lots of tools, but none of them do what we want to do. <em>Some times you just have to manually look through toolboxes to find what you need.</em>  Where should we look?  It’s probably not <strong>Get Data</strong> or <strong>Send Data</strong>, but it could easily be in any of the next 4 toolboxes: <strong>Lift-Over, Collection Operations, Text Manipulation, or Datamash</strong>.</p>
+
+<p>It turns out that <strong>Lift-Over</strong> and <strong>Collection Operations</strong> are not what we want. (But, take a look at them: if you are going to work with genomic data it won’t take long before you’ll need both.)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-concatenate-two-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Concatenate two datasets</div>
+
+  <ol>
+    <li><em>Open</em> the <strong>Text Manipulation</strong> toolbox.</li>
+    <li>Near the top of the toolbox is <strong>Concatenate multiple datasets or collections</strong>. <em>Click</em> on it. Lets try that tool.</li>
+    <li><span class="tool" data-tool="cat1" title="Concatenate multiple datasets or collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate multiple datasets or collections</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Overlapping reverse genes</code>.</li>
+        <li><em>“Dataset</em>”</li>
+      </ul>
+      <ul>
+        <li>
+          <p>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em></p>
+
+          <p>This adds a second dataset pull-down menu to the form.</p>
+        </li>
+        <li>
+          <p>In <em>“1: Dataset”</em>:</p>
+          <ul>
+            <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">Overlapping forward genes</code> as the second dataset.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><em>Click</em> <strong>Run Tool</strong></li>
+    <li><em>Rename</em> the resulting dataset something informative like <code class="language-plaintext highlighter-rouge">Overlapping genes</code></li>
+  </ol>
+</blockquote>
+
+<p>Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.</p>
+
+<p>As the name of the tool suggests, it has simply taken the second input and glued it to the end of the first input to form the new dataset. Now all reverse-strand genes are listed before the forward-strand genes, independent of their genomic location. While that’s not necessarily a problem, it may be nicer to sort the genes back into the position-based order we originally obtained them in.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-sort-the-overlapping-genes-by-genomic-position"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Sort the overlapping genes by genomic position</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy3)</span> data in ascending or descending order with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">Overlapping genes</code>.</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column selections”</em>:</li>
+      </ul>
+      <ul>
+        <li>In <em>“1: Column selections”</em>:
+          <ul>
+            <li><em>“Sort on column”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+            <li><em>“using sort flavor”</em>: <code class="language-plaintext highlighter-rouge">Natural/Version sort (-V)</code></li>
+          </ul>
+        </li>
+        <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em></li>
+        <li>In <em>“2: Column selections”</em>:
+          <ul>
+            <li><em>“Sort on column”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+            <li><em>“using sort flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
+          </ul>
+        </li>
+        <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em></li>
+        <li>In <em>“3: Column selections”</em>:
+          <ul>
+            <li><em>“Sort on column”</em>: <code class="language-plaintext highlighter-rouge">Column 3</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+            <li><em>“using sort flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><em>Click</em> <strong>Run Tool</strong></li>
+    <li><em>Rename</em> the resulting dataset to, for example, <code class="language-plaintext highlighter-rouge">Overlapping genes sorted</code></li>
+  </ol>
+</blockquote>
+
+<p>We now have a new dataset with the genes sorted first by chromosome (which is not strictly necessary in our case because we know all genes are from the same chromosome chr22, but is important, of course, in the general case), then by start position on the chromosome and, finally, by end position (in case that’s needed to break ties).</p>
+
+<h2 id="visualize-the-overlapping-genes">Visualize the overlapping genes</h2>
+
+<p>Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include <strong>IGB, IGV,</strong> and <strong>UCSC main.</strong>  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let’s visualize the data at UCSC, using the UCSC <em>Genome</em> Browser.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-display-data-in-genome-browser"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Display data in Genome Browser</div>
+
+  <ol>
+    <li>Click on your <code class="language-plaintext highlighter-rouge">Overlapping genes sorted</code> dataset in your history panel. This will show the dataset preview in the history panel.</li>
+    <li>Click to expand the dataset, if it isn’t already, so that you can see the dataset metadata and additional actions like Visualize.</li>
+    <li>Click on the <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
+    <li>Click on the <strong>display at UCSC (main)</strong> link that appears in the blue box at the top of the screen.
+<img src="/training-material/topics/introduction/images/101_displayucsc.png" alt="visualisation options are shown in Galaxy's middle panel. " width="657" height="315" loading="lazy" /></li>
+  </ol>
+
+  <p>Possibly after some delay, this will launch a new window, showing UCSC’s Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.</p>
+
+  <p><img src="../../images/ucsc_gb_genes_strands_overlapping.png" alt="UCSC Genome Browser. " width="982" height="297" loading="lazy" /></p>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-background-ucsc-genome-browser"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: UCSC Genome Browser</div>
+
+  <ul>
+    <li>
+      <p><em>Genome browsers</em> are software for viewing genomic information graphically.  The <a href="https://genome.ucsc.edu/cgi-bin/hgGateway">UCSC Genome Browser</a> (and most genome browsers) typically display different types of <em>annotation</em> about a region of a genome.  This is displayed as a stack of <em>tracks</em> and each track contains a different type of information.</p>
+    </li>
+    <li>
+      <p>Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)</p>
+    </li>
+    <li>
+      <p>The UCSC Genome Browser has information on over 100 animals, and their <a href="http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2">Archaeal Genome Browser</a> has genomic information on well over 100 microbial species.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (<strong>User Track / User Supplied Track</strong>). That track shows a line of small black boxes, sometimes connected with a line.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-zoom-in-on-an-area-of-the-chromosome-that-shows-a-set-of-linked-black-boxes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Zoom in on an area of the chromosome that shows a set of linked black boxes</div>
+  <p>To zoom in,</p>
+  <ul>
+    <li><em>Click</em> on the <strong>Scale</strong> track (the top track) just to the left of the start of the black boxes.</li>
+    <li>Now <em>drag</em> the mouse across the Scale track to just to the right of the  black boxes and let go.
+<img src="../../images/ucsc_gb_zoom_by_drag.png" alt="Zoom by clicking and dragging on the Scale track. " width="967" height="66" loading="lazy" /></li>
+    <li>A window pops up describing several ways to interact with the browser.  Just <em>click</em> the <strong>Zoom In</strong> button at the bottom.</li>
+    <li>This redraws the window, this time zoomed in to what you highlighted.</li>
+    <li>Continue to zoom in until you have the set of linked black boxes you picked centered on the screen.</li>
+    <li>Once you are as zoomed as you want to be, click on one of the linked boxes.  This will expand the track:
+<img src="../../images/ucsc_gb_zoom_to_1_gene.png" alt="One gene, fully zoomed and expanded. " width="957" height="250" loading="lazy" /></li>
+  </ul>
+</blockquote>
+
+<p>The black boxes connected by lines represent genes, and each set of connected boxes is a single gene (actually, a single transcript of a gene).  Take a close look at the top several tracks.</p>
+
+<ul>
+  <li>It looks like we preserved the gene definitions just fine.</li>
+  <li>It looks like, sure enough, there are overlapping genes here, and they are on opposite sides.  The arrows on the connecting lines tell us which strand the gene is on.</li>
+</ul>
+
+<p>Um, <em>what’s up with the boxes and the lines connecting them?</em></p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-definitions-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Definitions 4</div>
+
+  <ul>
+    <li><strong>Exon</strong>
+In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called <em>exons</em>.</li>
+  </ul>
+</blockquote>
+
+<p>As you may have guessed (or already knew): The black boxes are exons.  <em>Genes</em> are defined as <em>covering the entire area from the first black box to the last connected black box.</em></p>
+
+<h2 id="do-we-have-a-problem">Do we have a problem?</h2>
+
+<p><em>Maybe.</em></p>
+
+<p>Our <em>ad hoc</em> review of identified overlapping genes in the UCSC Genome Browser has <em>(or should have!)</em> confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that.  So, our conclusion appears solid: A significant percentage of genes <em>do</em> overlap with other genes on the opposite strand.</p>
+
+<p>But, our conclusion may not be as <em>significant</em> as we had hoped. If only parts of genes, the exons, make stuff in our bodies, then should we have run this analysis on just the exons rather then the entire genes?  Probably.</p>
+
+<p>Let’s refine our question slightly</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-our-revised-motivating-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Our Revised Motivating Question</div>
+  <p><em>I wonder if <strong>exons</strong> on opposite strands ever overlap with each other, and if so, how common is that?</em></p>
+</blockquote>
+
+<h3 id="so-i-have-to-do-this-all-over-again-but-with-exons">So, I have to do this all over again, but with exons?</h3>
+
+<p><em>Well, yes and no.</em>  We will have to run the analysis again, this time on exons instead of whole genes. But we won’t have to manually recreate every step of our analysis. Galaxy enables us to create a reusable <em>workflow</em> from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.</p>
+
+<h2 id="walk-through-the-workflow-tutorial">Walk through the workflow tutorial</h2>
+
+<p>Run the <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">Create a reusable workflow from a history</a> tutorial for how to do this, <em>and then come back here to run your newly created workflow with the exon data.</em></p>
+
+<h1 id="rerun-analysis-with-exon-data">Rerun analysis with exon data</h1>
+
+<p>We want to run the same analysis, but this time only look for overlaps that happen in <em>exons</em>, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let’s start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-history-that-contains-some-data-from-current-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create a new history that contains some data from current history</div>
+
+  <ol>
+    <li><em>Click</em> on <i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> <strong>History options</strong> at the top of the history panel.</li>
+    <li><em>Select</em> the <strong>Copy Datasets</strong> option from the pull down menu.  This launches the copy datasets form.</li>
+    <li>Under <strong>Source History:</strong>, <em>select</em> the dataset(s) you want to copy to the new history.
+      <ul>
+        <li>In our case, we only want the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
+      </ul>
+    </li>
+    <li>Under <strong>Destination History</strong> enter an informative history name in the <strong>New history named:</strong> box.
+      <ul>
+        <li>For example, <code class="language-plaintext highlighter-rouge">Exon overlaps on opposite strands</code>
+<img src="../../images/copy_datasets_to_new_history.png" alt="Copy only the Genes chr22  dataset to the new history. " width="962" height="350" loading="lazy" /></li>
+      </ul>
+    </li>
+    <li><em>Click</em> the <strong>Copy History Items</strong> button to create your new history.
+      <ul>
+        <li>This creates a new history (with the copied dataset) and throws up a green box saying:
+“1 dataset copied to 1 history: <code class="language-plaintext highlighter-rouge">name you gave your new history</code>.”</li>
+      </ul>
+    </li>
+    <li>The history name is a link. <em>Click</em> on it.</li>
+  </ol>
+</blockquote>
+
+<h2 id="get-the-exon-data">Get the exon data</h2>
+
+<p>And your new history appears in the history panel with the copied <em>genes</em> dataset. What we need is <em>exons</em>. How can we get the exon information? There are two relatively easy ways to get this information, one of which will be very familiar.</p>
+
+<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v41, and just <code class="language-plaintext highlighter-rouge">chr22</code>. The second form is what changes. Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
+
+<p>The second method is to use the <strong>Gene BED To Exon/Intron/Codon BED expander</strong> tool in the <strong>Operate on Genomic Intervals</strong> toolbox to extract the exon information from the genes BED file we already have. (<em>Of course!</em> you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-the-exon-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get the exon data</div>
+
+  <ol>
+    <li>Get the exon information, either by revisiting UCSC, or by using the <span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED expander tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene BED To Exon/Intron/Codon BED expander</strong></span> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
+    <li>Give the resulting dataset a meaningful name.</li>
+  </ol>
+</blockquote>
+
+<p>If you got the data from UCSC it will look something like this:
+<img src="../../images/101_exons.png" alt="Contents of the exons dataset from UCSC. " width="632" height="278" loading="lazy" /></p>
+
+<p>Your history should now have two datasets: one describing entire genes, and one describing just the exons.</p>
+
+<h2 id="rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</h2>
+
+<p>When you did the <em>History to Workflow</em> tutorial you created a new workflow that was then added to your list of defined workflows.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-the-workflow-on-the-exon-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run the workflow on the exon data.</div>
+
+  <ol>
+    <li>
+      <p><em>Click</em> the <strong>Workflow</strong> tab in the menu at the top of the Galaxy page.</p>
+
+      <p>This lists all of your defined workflows, including the one you just created.</p>
+    </li>
+    <li>
+      <p><em>Click</em> on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (Run workflow) button next to your workflow.</p>
+
+      <p>This launches the workflow run form (which you also saw when testing this workflow)</p>
+    </li>
+    <li>
+      <p><em>Select</em> <strong>No</strong> under <strong>Send results to a new history</strong></p>
+
+      <p>If you do not see this option displayed, <em>click</em> on <strong>Expand to full workflow form</strong> to reveal it.</p>
+    </li>
+    <li><em>Set</em> the first (and only) input dataset to the <code class="language-plaintext highlighter-rouge">Exons</code> dataset, using the pull-down menu.</li>
+    <li><em>Click</em> the <strong>Run workflow</strong> button.</li>
+  </ol>
+</blockquote>
+
+<p>And Galaxy launches the workflow and says (in a nice big green box) something like:</p>
+
+<blockquote class="quote">
+  <p>You can check the status of queued jobs and view the resulting data by refreshing the History pane.</p>
+</blockquote>
+
+<p>Which in this case <em>is the truth</em>.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you’ll see is a stack of history steps that will go from queued to running to done as you watch them.</p>
+
+<p>All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is it a smaller percentage than we saw for whole genes?</p>
+
+<h2 id="are-we-done">Are we done?</h2>
+
+<p>Probably.  Note that we can no longer say what percentage of <em>genes</em> overlap.  We <em>can</em> say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn’t and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in Galaxy!</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-why-not-use-excel"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-not-use-excel" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why not use Excel?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You could just as easily use Excel to answer the same question, and if the goal is to learn how to use a tool, then either tool would be great! But what if you are working on a question where your analysis matters? Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?</p>   <p>In these cases your analysis, <em>and the ability to reproduce it exactly</em>, is vitally important, and Excel won’t help you here. It doesn’t track changes and it offers very little insight to others on how you got from your initial data to your conclusions.</p>   <p>Galaxy, on the other hand, <em>automatically records every step of your analysis.</em> And when you are done, you can share your analysis with anyone. You can even include a link to it in a paper (or your acceptance speech). In addition, you can create a reusable workflow from your analysis that others (or yourself) can use on other datasets.</p>   <p>Another challenge with spreadsheet programs is that they don’t scale to support <em>next generation sequencing (NGS)</em> datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size. Excel has been used for large datasets, but you’ll often find that learning a new tool gives you significantly more ability to scale up, and scale out your analyses.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Galaxy provides an easy-to-use graphical user interface for often complex command-line tools</p>
+</li>
+                        
+                        <li><p>Galaxy keeps a full record of your analysis in a history</p>
+</li>
+                        
+                        <li><p>Workflows enable you to repeat your analysis on different data</p>
+</li>
+                        
+                        <li><p>Galaxy can connect to external sources for data import and visualization purposes</p>
+</li>
+                        
+                        <li><p>Galaxy provides ways to share your results and methods with others</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/introduction/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-strands"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-strands">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Dave Clements, Cristóbal Gallardo,  <b>Introduction to Genomics and Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{introduction-galaxy-intro-strands,
+author = "Dave Clements and Cristóbal Gallardo",
+	title = "Introduction to Genomics and Galaxy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/deNBI/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/deNBI.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">de.NBI</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/uni-freiburg/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">UFR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/introduction/tutorials/galaxy-intro-strands/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: ddf54b12c295
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: ab83aa685821
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: intersect
+  owner: devteam
+  revisions: 69c10b56f46d
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">70</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.2571428571428571">18</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.014285714285714285">1</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">2 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.04285714285714286">3</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+		    
+		    <b>May 2026</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: I like where visualize overlapping data with the gene 
+					<b>Disliked</b>: n/A
+				</li>
+				
+		    </ul>
+		    
+		    <b>September 2025</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					
+					<b>Disliked</b>: The tutorial was good but the intersect tool did not work on the eu server. 
+				</li>
+				
+		    </ul>
+		    
+		    <b>October 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Easy to follow, not complicated tasks, not too long to do
+					<b>Disliked</b>: the 'Rerun analysis with exon data' could be explained in more detail step by step. I've done multiple tutorials with adding workflows to history so I don't know which workflow you meant to input 'exon'. Being more specific would be more helpful, but overall a good tutorial!
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: great for using the same things again
+					<b>Disliked</b>: a bit to similar to intro for genetics
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Detailed guideline
+					<b>Disliked</b>: I used GENECODE v44 to get Chr22 data, but at the visualization step, I cannot see the name of genes and their exon/intron structures. I saw "region_xx" instead. The other thing is that when I used the "Gene BED to Exon/Intron/Codon BED expander", I cannot see the Name column as [GeneName_CDS_x_...]. Could you please check them? Thank you very much.
+				</li>
+				
+		    </ul>
+		    
+		    <b>September 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The ease of flow
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>May 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Everything!
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Things were clearly explained. It was a comprehensive introduction to Galaxy. I really learnt a lot. 
+					<b>Disliked</b>: I think for an introduction to Galaxy, everything was covered really well. 
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: the try one and see approach
+					<b>Disliked</b>: a little more time on the USC graphic--juat a little, I know its a whole course alone,but a little more time spent in the different lines available and options would be nice.
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The explanation and details
+					<b>Disliked</b>: It's awesome
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: My first time working with genomic tools. 
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>August 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Biological explanations after a command. 
+					<b>Disliked</b>: I think its great, but one improviment is add more image from Galaxy. 
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Most of the explanations and step were explained well but many icons in Galaxy have changed .  An update will be appreciated.  If USC browser is the main source , please have a detailed tutorial what all that stuff means .  Thanks
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>May 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It explained everything in simple language!!
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>April 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: interactive
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It's easy, indexing and saving history is great tool
+					<b>Disliked</b>: Maybe, in this tutorial, using colors for different strand genes would be more easy to see in genome browser later
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: the fact that it gave definitions for things that could be unknown
+					<b>Disliked</b>: not really much. maybe make similar tutorials but for larger jobs
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: It was written clearly
+					<b>Disliked</b>: One place I think it could be improved would be on Create a reusable workflow from a history, under the Test Workflow part 2 (Examine the workflow run form) wasn't clear as the others and found it to be confusing.
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: Detailed description
+					<b>Disliked</b>: All are ecxellent
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: The detailed description 
+					<b>Disliked</b>: I think that all are perfect
+				</li>
+				
+		    </ul>
+		    
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00191">gxy.io/GTN:T00191</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

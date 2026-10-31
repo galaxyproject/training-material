@@ -1,0 +1,111 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nEST and/or cDNA"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nProtein sequences"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nGenome sequence"]
+  3[label="Maker"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  4[label="Fasta Statistics"]
+  2 -> 4 [label="output"]
+  k2d3829e6f5b946d183e317efff814e09[color=lightseagreen,label="Output\nFasta Statistics on input dataset(s): Fasta summary stats"]
+  4 -> k2d3829e6f5b946d183e317efff814e09
+  5[label="Busco"]
+  2 -> 5 [label="output"]
+  ka15e121423a2484b9c751635fcd61fe3[color=lightseagreen,label="Output\nBUSCO: short summary"]
+  5 -> ka15e121423a2484b9c751635fcd61fe3
+  k7806088df65743899d546a3bdfa233b2[color=lightseagreen,label="Output\nBUSCO: list of missing ortholog genes"]
+  5 -> k7806088df65743899d546a3bdfa233b2
+  k6a27d0f6d83c42b1a7af5f99ba5debe2[color=lightseagreen,label="Output\nBUSCO: full table"]
+  5 -> k6a27d0f6d83c42b1a7af5f99ba5debe2
+  6[label="Train Augustus"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output_gff"]
+  7[label="Genome annotation statistics"]
+  3 -> 7 [label="output_gff"]
+  2 -> 7 [label="output"]
+  k2bed9aa65f22494d9caaf0ece8464f15[color=lightseagreen,label="Output\nGenome annotation statistics: graphs (first round)"]
+  7 -> k2bed9aa65f22494d9caaf0ece8464f15
+  k71d41ce2e90d435b9b64ab4320524770[color=lightseagreen,label="Output\nGenome annotation statistics: summary (first round)"]
+  7 -> k71d41ce2e90d435b9b64ab4320524770
+  8[label="gffread"]
+  3 -> 8 [label="output_gff"]
+  2 -> 8 [label="output"]
+  9[label="Train SNAP"]
+  2 -> 9 [label="output"]
+  3 -> 9 [label="output_gff"]
+  10[label="Busco"]
+  8 -> 10 [label="output_exons"]
+  ka79ab19d980242ca8ffa8c197a16c8b8[color=lightseagreen,label="Output\nBusco summary first round"]
+  10 -> ka79ab19d980242ca8ffa8c197a16c8b8
+  11[label="Maker"]
+  6 -> 11 [label="output_tar"]
+  9 -> 11 [label="output"]
+  2 -> 11 [label="output"]
+  3 -> 11 [label="output_full"]
+  12[label="gffread"]
+  11 -> 12 [label="output_gff"]
+  2 -> 12 [label="output"]
+  13[label="Train Augustus"]
+  2 -> 13 [label="output"]
+  11 -> 13 [label="output_gff"]
+  k42d5aadd3a8c441d913fee8745a99b0b[color=lightseagreen,label="Output\nAugus: trained model"]
+  13 -> k42d5aadd3a8c441d913fee8745a99b0b
+  14[label="Genome annotation statistics"]
+  11 -> 14 [label="output_gff"]
+  2 -> 14 [label="output"]
+  k9def2c6efd3c4969b5d4d13c187c1144[color=lightseagreen,label="Output\nGenome annotation statistics: graphs (second round)"]
+  14 -> k9def2c6efd3c4969b5d4d13c187c1144
+  k61f7a150a4a246b189f52170d466656e[color=lightseagreen,label="Output\nGenome annotation statistics: summary (second round)"]
+  14 -> k61f7a150a4a246b189f52170d466656e
+  15[label="Train SNAP"]
+  2 -> 15 [label="output"]
+  11 -> 15 [label="output_gff"]
+  k458887f706614bdeab1a875aac6caed8[color=lightseagreen,label="Output\nSNAP: trained model"]
+  15 -> k458887f706614bdeab1a875aac6caed8
+  16[label="Busco"]
+  12 -> 16 [label="output_exons"]
+  kf52b1b410ea54384bd434927273c909c[color=lightseagreen,label="Output\nBusco summary second round"]
+  16 -> kf52b1b410ea54384bd434927273c909c
+  17[label="Maker"]
+  13 -> 17 [label="output_tar"]
+  15 -> 17 [label="output"]
+  2 -> 17 [label="output"]
+  11 -> 17 [label="output_full"]
+  18[label="Map annotation ids"]
+  17 -> 18 [label="output_gff"]
+  k63575dcf54d14cb1b5fba2810b4da807[color=lightseagreen,label="Output\nMap annotation ids: renamed GFF"]
+  18 -> k63575dcf54d14cb1b5fba2810b4da807
+  19[label="JBrowse"]
+  2 -> 19 [label="output"]
+  3 -> 19 [label="output_gff"]
+  18 -> 19 [label="renamed"]
+  11 -> 19 [label="output_gff"]
+  3 -> 19 [label="output_evidences"]
+  11 -> 19 [label="output_evidences"]
+  17 -> 19 [label="output_evidences"]
+  k5a38ae83e17745f3aa9f4c1844584fa5[color=lightseagreen,label="Output\nJBrowse: report"]
+  19 -> k5a38ae83e17745f3aa9f4c1844584fa5
+  20[label="gffread"]
+  18 -> 20 [label="renamed"]
+  2 -> 20 [label="output"]
+  k52fcac23b6124377a19a2e3b667a23e3[color=lightseagreen,label="Output\nGffread: exons"]
+  20 -> k52fcac23b6124377a19a2e3b667a23e3
+  k5c47c25e0ddb4adea5d0873ff4add28c[color=lightseagreen,label="Output\nGffread: translation of cds"]
+  20 -> k5c47c25e0ddb4adea5d0873ff4add28c
+  k84d9183b9589464b9f824dae7f87133e[color=lightseagreen,label="Output\nGffread: cds"]
+  20 -> k84d9183b9589464b9f824dae7f87133e
+  21[label="Genome annotation statistics"]
+  18 -> 21 [label="renamed"]
+  2 -> 21 [label="output"]
+  kf5d4a6bf1ff8435a80847921e25bff3a[color=lightseagreen,label="Output\nGenome annotation statistics: graphs (third round)"]
+  21 -> kf5d4a6bf1ff8435a80847921e25bff3a
+  k5a863bd410f24ac881b6ce8b7f663e42[color=lightseagreen,label="Output\nGenome annotation statistics: summary (third round)"]
+  21 -> k5a863bd410f24ac881b6ce8b7f663e42
+  22[label="Busco"]
+  20 -> 22 [label="output_exons"]
+  k0bc78676eecc4168894d34c4ca07cdf3[color=lightseagreen,label="Output\nBusco summary final round"]
+  22 -> k0bc78676eecc4168894d34c4ca07cdf3
+}

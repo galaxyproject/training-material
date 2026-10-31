@@ -1,0 +1,76 @@
+---
+- doc: Test outline for TB-Variant-Analysis-v1.0
+  job:
+    Reference Genome:
+      class: File
+      location: https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
+      filetype: genbank
+    Reads:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: 018-1
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/3960260/files/018-1_1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
+      - class: Collection
+        type: paired
+        identifier: 004-2
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
+    Minimum variant allele frequency: '0.9'
+    Minimum depth of coverage: '10'
+    Additional BWA-MEM options: null
+  outputs:
+    report_output:
+      element_tests:
+        018-1:
+          asserts:
+            has_text:
+              text: 'unclassified'
+        004-2:
+          asserts:
+            has_text:
+              text: 'unclassified'
+    snpvcf:
+      element_tests:
+        018-1:
+          asserts:
+            has_text:
+              text: '13460'
+        004-2:
+          asserts:
+            has_text:
+              text: '13460'
+    variants_report_html:
+      element_tests:
+        018-1:
+          asserts:
+            has_text:
+              text: 'Leu558Leu'
+        004-2:
+          asserts:
+            has_text:
+              text: 'Leu161Leu'
+    drug_resistance_report_html:
+      element_tests:
+        018-1:
+          asserts:
+            has_text:
+              text: 'Isoniazid'
+        004-2:
+          asserts:
+            has_text:
+              text: 'Ser315Thr'
+

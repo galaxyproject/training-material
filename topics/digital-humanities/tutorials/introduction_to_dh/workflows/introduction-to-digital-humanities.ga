@@ -1,0 +1,735 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "22_04_30: WF Update\n\nThe workflow serves as a short introduction to Galaxy for users from the Humanities who mostly work with texts. ",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9536-5587",
+            "name": "Daniela Schneider"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Introduction to DH in Galaxy",
+    "readme": "The workflow compares two texts, visualises the differences with 'diff' and a wordcloud and extracts selected passaged for further analysis.\n\n# Intention\nThis workflow aims to familiarise new users who mainly analyse texts with Galaxy. The workflow cleans and then compares two texts in various ways to show some of Galaxy's functionalities. It also extracts notable passages for further analysis.\n\n# Inputs\nPlease upload two texts that you want to compare, both as .txt files.\n\n# Analysis\nUpload the two texts you want to compare.\n\n## Text cleaning \nTo compare both texts most effectively, we want to unify them as much as possible. Therefore, some text cleaning and rearranging is necessary.\n\nBoth texts contain their source in the first line, which is removed in the first step.\nUsing regular expressions, all punctuation from both texts is removed for an easier word-by-word comparison.\nFor a swift comparison of both semi-cleaned texts, we use the Line/Word/Character count to see how many lines and characters both texts comprise.\n\n## Generating a Word Cloud\nThe word cloud of both texts separately gives us an idea of the most common themes in the respective texts. \n\n## Rearranging inputs\nThe easiest way to compare two texts here is by comparing them word by word, side by side.\nTherefore, we use regular expressions again to rearrange the inputs so that the texts contain one word per line.\n\n## Comparing the texts word by word\nThe diff-tool shows both texts side by side with additions in green and removals in red. We can see the differences between the two texts by comparing them on a word level.\n\n## Extracting notable lines\nThe word cloud showed that \"death\" is prominent in one of the texts. We therefore extract lines from both texts containing this word. It could be used for further comparison and close reading.\n",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Upload a text as a .txt file that you want to compare to another text.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload a text as a .txt file that you want to compare to another text.",
+                    "name": "Input Text one"
+                }
+            ],
+            "label": "Input Text one",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 265.699951171875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ac30a596-9226-4abc-962a-335742ae64a1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Upload a second text as a .txt file that you want to compare to the first text.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload a second text as a .txt file that you want to compare to the first text.",
+                    "name": "Input Text two"
+                }
+            ],
+            "label": "Input Text two",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 5.199951171875,
+                "top": 437.2831571350098
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "69ff3c09-73e6-4854-90fb-73d426eb1b9d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Remove Hyperlink Poem One",
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 231.199951171875,
+                "top": 265.699951171875
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Poem One without Hyperlink"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"__input_ext\": \"txt\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "a1352a6e-a8bd-4827-b32f-6536af9ee684",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Remove Hyperlink Poem Two",
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 229.199951171875,
+                "top": 437.2831571350098
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Poem Two without Hyperlink"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"__input_ext\": \"txt\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "1df8a274-21df-4cdf-92cf-a91b2c7b627f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Remove Punctuation Poem One",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 468,
+                "top": 236.8665771484375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem One without Punctuation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"[[:punct:]]\", \"replace_pattern\": null, \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "fd4a3437-9437-41a0-8966-792b053ba329",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Break Poem One into sentences",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 731.7999267578125,
+                "top": 298.26666259765625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem One - Sentence per line"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"\\\\.\", \"replace_pattern\": \"\\\\.\\\\n\", \"is_regex\": true, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "f2f5561f-cacd-462f-8f91-43116d9a27b6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Remove Punctuation Poem Two",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 467.9998779296875,
+                "top": 548.6863952941894
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem Two without Punctuation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"[[:punct:]]\", \"replace_pattern\": null, \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "8d6c08a1-f32b-46d4-8e33-9e1b7616b25f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Break Poem Two into sentences",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 730.4000244140625,
+                "top": 468.0999755859375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem Two - Sentence per line"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"\\\\.\", \"replace_pattern\": \"\\\\.\\\\n\", \"is_regex\": true, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "1c99b380-5529-47a0-ba9c-5da799af7f16",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "text": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Generate a word cloud",
+                    "name": "stopwords"
+                }
+            ],
+            "label": "Generate the first WordCloud",
+            "name": "Generate a word cloud",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 731,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Wordcloud Poem One"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "45c4cc885ddb",
+                "name": "wordcloud",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"background_options\": {\"mode\": \"RGB\", \"__current_case__\": 0, \"background_color\": \"#000000\", \"cloud_shape\": {\"cloud_shape_options\": \"rectangle\", \"__current_case__\": 0}}, \"color_choice\": {\"color_option\": \"colormap\", \"__current_case__\": 2, \"colormap\": null}, \"font_step\": \"1\", \"fonts\": {\"fonts_selector\": \"none\", \"__current_case__\": 0}, \"height\": \"200\", \"include_numbers\": false, \"margin\": \"2\", \"max_font_size\": null, \"max_words\": \"200\", \"min_font_size\": \"4\", \"min_word_length\": \"0\", \"no_collocations\": false, \"no_normalize_plurals\": false, \"prefer_horizontal\": \"0.9\", \"random_state\": \"10\", \"relative_scaling\": \"0.8\", \"repeat\": false, \"scale\": \"1.0\", \"stopwords\": {\"__class__\": \"RuntimeValue\"}, \"text\": {\"__class__\": \"ConnectedValue\"}, \"width\": \"400\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.9.6+galaxy0",
+            "type": "tool",
+            "uuid": "6aad8d6c-f70d-4ace-94d5-97ae0ac9887b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "WordCloud01",
+                    "output_name": "output",
+                    "uuid": "56f52608-c40a-468a-bfd2-e6718cc436db"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Replace Space with linebreak Poem One",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 731.5999755859375,
+                "top": 153.09994506835938
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem One - Word per line"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"ea4f317c735d11f0a231b42e99728f38\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"\\\\s\", \"replace_pattern\": \"\\\\n\", \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "659de05b-4a10-47e6-bafa-d8831ca7bf26",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Extract Specific Sentences from Poem One",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1119,
+                "top": 238.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Extracted Sentences Poem One"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"case_sensitive\": \"-i\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"death\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "4c58dd61-241e-4da7-a138-af25db260432",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output01",
+                    "output_name": "output",
+                    "uuid": "0d463da6-de82-4130-a113-9cf527acdca1"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Replace Space with linebreak Poem Two",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 728.800048828125,
+                "top": 588.0999755859375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Poem Two - Word per line"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"ea4f317c735d11f0a231b42e99728f38\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"\\\\s\", \"replace_pattern\": \"\\\\n\", \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "03134dd2-8f54-4fae-b9e0-efd171904a36",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "text": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Generate a word cloud",
+                    "name": "stopwords"
+                }
+            ],
+            "label": "Generate a second WordCloud",
+            "name": "Generate a word cloud",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 731.5999755859375,
+                "top": 728.2999877929688
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Wordcloud Poem Two"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "45c4cc885ddb",
+                "name": "wordcloud",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"background_options\": {\"mode\": \"RGB\", \"__current_case__\": 0, \"background_color\": \"#000000\", \"cloud_shape\": {\"cloud_shape_options\": \"rectangle\", \"__current_case__\": 0}}, \"color_choice\": {\"color_option\": \"colormap\", \"__current_case__\": 2, \"colormap\": null}, \"font_step\": \"1\", \"fonts\": {\"fonts_selector\": \"none\", \"__current_case__\": 0}, \"height\": \"200\", \"include_numbers\": false, \"margin\": \"2\", \"max_font_size\": null, \"max_words\": \"200\", \"min_font_size\": \"4\", \"min_word_length\": \"0\", \"no_collocations\": false, \"no_normalize_plurals\": false, \"prefer_horizontal\": \"0.9\", \"random_state\": \"10\", \"relative_scaling\": \"0.8\", \"repeat\": false, \"scale\": \"1.0\", \"stopwords\": {\"__class__\": \"RuntimeValue\"}, \"text\": {\"__class__\": \"ConnectedValue\"}, \"width\": \"400\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.9.6+galaxy0",
+            "type": "tool",
+            "uuid": "2cd39fd9-e089-4afd-9f7b-b10fd1aee6bd",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "WordCloud02",
+                    "output_name": "output",
+                    "uuid": "70815cdd-a460-4d5e-8923-e9842b618393"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Extract Specific Sentences from Poem Two",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1121.6160192633288,
+                "top": 588.5099871369032
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Extracted Sentences Poem Two"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"case_sensitive\": \"-i\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"death\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "47214f3b-aae1-47db-9fc9-9e6d35c4d0e8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output02",
+                    "output_name": "output",
+                    "uuid": "8cad2dd7-d6b6-4320-860c-f9125cf77bef"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input1": {
+                    "id": 9,
+                    "output_name": "outfile"
+                },
+                "input2": {
+                    "id": 11,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Compare the texts",
+            "name": "diff",
+            "outputs": [
+                {
+                    "name": "diff_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "html_file",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 979.199951171875,
+                "top": 394.6666259765625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "be2d899bf34a",
+                "name": "diff",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"report_format\": {\"report_format_select\": \"html\", \"__current_case__\": 2, \"unified\": \"3\", \"output_format\": \"side-by-side\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.10+galaxy1",
+            "type": "tool",
+            "uuid": "ea7d649a-1edb-4e92-817d-bc6bf22970a0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "html_file",
+                    "output_name": "html_file",
+                    "uuid": "22682b82-6f29-43e3-a649-b411e42d5cd2"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "Introduction",
+        "DH",
+        "DigitalHumanities",
+        "textcleaning"
+    ],
+    "uuid": "5eda276e-8a59-4e44-a606-9048cd64763a",
+    "version": 24
+}

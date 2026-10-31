@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data / Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Nadia Goué">
+<meta name="DC.creator" content="Didier Debroas"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data / Hands-on: Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/microbiome/tutorials/metaplasmidome_query/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-09-23 07:25:04 +0000",
+  "datePublished": "2025-01-07 17:38:25 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00501",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Microbiome",
+    "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+  },
+  "abstract": "Identifying and annotating mobile genetic elements (MGE) in metagenomic data can be tricky. To facilitate the process, we can use existing and custom annotated mobile genetic element database.",
+  "learningResourceType": "e-learning",
+  "name": "Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data",
+  "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html",
+  "version": 3,
+  "timeRequired": "PT1H",
+  "teaches": "- Perform metagenomics read mapping against mobile genetic element database.\n- Evaluate the distribution of mapping scores to identify high-quality alignments.\n- Evaluate plasmid coverage to determine effective filtering thresholds.\n- Filter alignments based on plasmid coverage and mapping quality.\n- Justify the filtering thresholds chosen for identifying plasmid sequences.\n- Generate a curated table of plasmid sequences and convert it into a FASTA file for further analysis.\n- Use tools to process sequences, ensuring data is sorted, deduplicated, and formatted correctly.\n- Annotate features on the identified plasmids using mobile genetic element database annotations.\n- Construct a final annotated dataset integrating genetic element information for downstream applications.",
+  "keywords": [
+    "Microbiome"
+  ],
+  "description": "## Abstract\n\nIdentifying and annotating mobile genetic elements (MGE) in metagenomic data can be tricky. To facilitate the process, we can use existing and custom annotated mobile genetic element database.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can we use an existing database annotated database to identify and annotate genetic elements in metagenomics data?\n\n\n## Learning Objectives\n\n- Perform metagenomics read mapping against mobile genetic element database.\n- Evaluate the distribution of mapping scores to identify high-quality alignments.\n- Evaluate plasmid coverage to determine effective filtering thresholds.\n- Filter alignments based on plasmid coverage and mapping quality.\n- Justify the filtering thresholds chosen for identifying plasmid sequences.\n- Generate a curated table of plasmid sequences and convert it into a FASTA file for further analysis.\n- Use tools to process sequences, ensuring data is sorted, deduplicated, and formatted correctly.\n- Annotate features on the identified plasmids using mobile genetic element database annotations.\n- Construct a final annotated dataset integrating genetic element information for downstream applications.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/",
+      "name": "Nadia Goué",
+      "image": "https://avatars.githubusercontent.com/nagoue",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2750-1473",
+      "@id": "https://orcid.org/0000-0003-2750-1473"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/debroas/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/debroas/",
+      "name": "Didier Debroas",
+      "image": "https://avatars.githubusercontent.com/debroas",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Microbiome",
+      "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3697"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0622",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0622"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3301",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3301"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0798",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0798",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0798"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/ggplot2",
+      "name": "ggplot2"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/minimap2",
+      "name": "Minimap2"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/14501567",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/microbiome" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Microbiome
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/metaplasmidome_query/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-microbiome">
+    <h1 data-toc-skip>Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/nagoue/" class="contributor-badge contributor-nagoue"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nagoue?s=36" alt="Nadia Goué avatar" width="36" class="avatar" />
+    Nadia Goué</a><a href="/training-material/hall-of-fame/debroas/" class="contributor-badge contributor-debroas"><img src="https://avatars.githubusercontent.com/debroas?s=36" alt="Didier Debroas avatar" width="36" class="avatar" />
+    Didier Debroas</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can we use an existing database annotated database to identify and annotate genetic elements in metagenomics data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Perform metagenomics read mapping against mobile genetic element database.</p>
+</li>
+        
+        <li><p>Evaluate the distribution of mapping scores to identify high-quality alignments.</p>
+</li>
+        
+        <li><p>Evaluate plasmid coverage to determine effective filtering thresholds.</p>
+</li>
+        
+        <li><p>Filter alignments based on plasmid coverage and mapping quality.</p>
+</li>
+        
+        <li><p>Justify the filtering thresholds chosen for identifying plasmid sequences.</p>
+</li>
+        
+        <li><p>Generate a curated table of plasmid sequences and convert it into a FASTA file for further analysis.</p>
+</li>
+        
+        <li><p>Use tools to process sequences, ensuring data is sorted, deduplicated, and formatted correctly.</p>
+</li>
+        
+        <li><p>Annotate features on the identified plasmids using mobile genetic element database annotations.</p>
+</li>
+        
+        <li><p>Construct a final annotated dataset integrating genetic element information for downstream applications.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/14501567">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/microbiome/tutorials/metaplasmidome_query/workflows/" title="Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/microbiome/tutorials/metaplasmidome_query/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			Galaxy France <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 7, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00501">https://gxy.io/GTN:T00501</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/tutorials/metaplasmidome_query/tutorial.md">3</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Identifying and annotating mobile genetic elements (MGE) in metagenomic data can be tricky. To facilitate the process, we can use existing and custom annotated mobile genetic element database.</p>
+
+<p>The <em>metaplasmidome</em> refers to the collection of all plasmids present within a given environment, typically identified through metagenomic sequencing. Plasmids are extrachromosomal genetic elements that often carry genes associated with antibiotic resistance, virulence, or metabolic functions, making them crucial for microbial adaptability. In the context of metagenomics, plasmids are identified alongside chromosomal DNA.</p>
+
+<p>A common step in metaplasmidome analysis is searching sequencing reads against known plasmid databases to detect plasmid sequences within a metagenome, allowing researchers to map the diversity and abundance of plasmids in various environments.</p>
+
+<p>In this tutorial, we use a metaplasmidome database built from public air metagenomes and query it with assembled air metagenome data. A similar approach can be used for other mobile genetic elements.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-how-was-built-the-air-metaplasmidome-database"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-was-built-the-air-metaplasmidome-database" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: How was built the air metaplasmidome database?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The air metaplasmidome is available from Zenodo (<span class="citation"><a href="#debroas_2024_11124657">DEBROAS 2024</a></span>) and was built from metagenomic data selected in Web of Science (Clarivate) on October 2022 using keywords: <code class="language-plaintext highlighter-rouge">txid655179[Organism:noexp] AND metagenome [Filter]; AIR Metagenome; Air microbiome; Troposphere; Aerosol; Atmosphere</code>. Data were manually curated to remove sequencing originated from metabarcoding data (i.e., 16S). The assembled data supplied by MetaSUB consortium (<span class="citation"><a href="#danko2021global">Danko <i>et al.</i> 2021</a></span>) when available was used for air metagenome in the built environments.</p>
+
+  <p>Plasmid contents were predicted using the assembled data. Metagenomes sequencing by Illumina (paired-illumina reads) were assembled by using MEGAHIT 1.2.9 with metalarge option (<span class="citation"><a href="#li2015">Li <i>et al.</i> 2015</a></span>) after cleaning data with bbduk2 (qtrim=rl trimq=28 minlen=25 maq=20 ktrim=r k=25 mink=11 and a list of adaptators to remove) from <a href="https://jgi.doe.gov/data-and-tools/software-tools/bbtools/">bbtools suite</a></p>
+
+  <p>Plasmids were predicted for each assembling by using PlasSuite scripts describing in-depth in Hilpert et al. <span class="citation"><a href="#hilpert2021reconstruction">Hilpert <i>et al.</i> 2021</a></span> <span class="citation"><a href="#hennequin2022plasmidome">Hennequin <i>et al.</i> 2022</a></span> and available on <a href="https://github.com/meb-team/PlasSuite/">GitHub</a>. Briefly, contigs were analyzed using both reference-based and reference-free approaches. The databases employed included those for chromosomes (archaea and bacteria) and plasmids from NCBI, as well as the MOB-suite tool (<span class="citation"><a href="#robertson2018mob">Robertson and Nash 2018</a></span>), SILVA (<span class="citation"><a href="#quast2012silva">Quast <i>et al.</i> 2012</a></span>) and phylogenetic markers harbored by chromosomes (<span class="citation"><a href="#wu2013systematic">Wu <i>et al.</i> 2013</a></span>). Two reference-free methods were applied to contigs that were not affiliated with chromosomes (discarded) or plasmids (retained in the first step): PlasFlow (<span class="citation"><a href="#krawczyk2018plasflow">Krawczyk <i>et al.</i> 2018</a></span>) and PlasClass (<span class="citation"><a href="#pellow2020plasclass">Pellow <i>et al.</i> 2020</a></span>). Viruses were removed by using <a href="https://github.com/ablab/viralVerify">viralVerify</a> (<span class="citation"><a href="#antipov2020metaviral">Antipov <i>et al.</i> 2020</a></span>) that provides in parallel provide plasmid/non-plasmid classification.</p>
+
+  <p>Eukaryotes contaminants were removed by aligning the sequences against NT databases and human chromosomes (GRCh38) with minimap2 with -x asm5 option (<span class="citation"><a href="#li2018minimap2">Li 2018</a></span>). Contigs mapping with an identity of 95% and a coverage of 80% were removed.  the final plasmidome set was clustered by mmseqs (<span class="citation"><a href="#mirdita2019mmseqs2">Mirdita <i>et al.</i> 2019</a></span>) with 80% of coverage and 90% of identity (–min-seq-id 0.90 -c 0.8 –cov-mode 1 –cluster-mode 2 –alignment-mode 3 –kmer-per-seq-scale 0.2).</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#galaxy-and-data-preparation" id="markdown-toc-galaxy-and-data-preparation">Galaxy and data preparation</a></li>
+  <li><a href="#read-mapping-against-the-metaplasmidome-database" id="markdown-toc-read-mapping-against-the-metaplasmidome-database">Read mapping against the metaplasmidome database</a></li>
+  <li><a href="#exploration-of-the-mapping-results" id="markdown-toc-exploration-of-the-mapping-results">Exploration of the mapping results</a></li>
+  <li><a href="#filtering" id="markdown-toc-filtering">Filtering</a></li>
+  <li><a href="#extract-sequences-mapping-to-plasmids" id="markdown-toc-extract-sequences-mapping-to-plasmids">Extract sequences mapping to plasmids</a>    <ol>
+      <li><a href="#create-the-table-with-air-metagenomes-identified-as-plasmids" id="markdown-toc-create-the-table-with-air-metagenomes-identified-as-plasmids">Create the table with air metagenomes identified as plasmids</a></li>
+      <li><a href="#create-the-fasta-file-with-air-metagenomes-identified-as-plasmids" id="markdown-toc-create-the-fasta-file-with-air-metagenomes-identified-as-plasmids">Create the FASTA file with air metagenomes identified as plasmids</a></li>
+    </ol>
+  </li>
+  <li><a href="#annotate-features-on-the-identified-plasmids" id="markdown-toc-annotate-features-on-the-identified-plasmids">Annotate features on the identified plasmids</a>    <ol>
+      <li><a href="#extract-the-cds" id="markdown-toc-extract-the-cds">Extract the CDS</a></li>
+      <li><a href="#add-ko-and-pfam-annotation" id="markdown-toc-add-ko-and-pfam-annotation">Add KO and PFAM annotation</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-and-data-preparation">Galaxy and data preparation</h1>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new history and import the data (plasmidome database and query metagenomes) into it.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-galaxy-and-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare Galaxy and data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the metaplasmidome reference database from <a href="https://zenodo.org/record/14501567">Zenodo</a> or from
+the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14501567/files/air_metaplasmidome.fasta.gz
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename <code class="language-plaintext highlighter-rouge">Air plasmidome database</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the reads to query against the reference database from <a href="https://zenodo.org/record/14501567">Zenodo</a> or from
+the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14501567/files/air_metagenome_assemblies.fasta.gz
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Rename <code class="language-plaintext highlighter-rouge">Air metagenomes</code></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many reads are in the query dataset?</li>
+    <li>How many plasmid sequences are in the metaplasmidome database?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>16,637 sequences</li>
+      <li>674,495 sequences</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="read-mapping-against-the-metaplasmidome-database">Read mapping against the metaplasmidome database</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-map-reads-against-metaplasmidome-database"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Map reads against metaplasmidome database</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.28+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">metaplasmidome database</code></li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">query</code></li>
+            <li><em>“Select a profile of preset options”</em>: <code class="language-plaintext highlighter-rouge">Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Set advanced output options”</em>:
+          <ul>
+            <li><em>“Select an output format”</em>: <code class="language-plaintext highlighter-rouge">PAF</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>PAF is the default output format of minimap2. It is TAB-delimited with each line consisting of the following predefined fields:</p>
+<ol>
+  <li>Query sequence name</li>
+  <li>Query sequence length</li>
+  <li>Query start coordinate (0-based)</li>
+  <li>Query end coordinate (0-based)</li>
+  <li><code class="language-plaintext highlighter-rouge">+</code> if query/target on the same strand and <code class="language-plaintext highlighter-rouge">-</code> if opposite</li>
+  <li>Target sequence name</li>
+  <li>Target sequence length</li>
+  <li>Target start coordinate on the original strand</li>
+  <li>Target end coordinate on the original strand</li>
+  <li>Number of matching bases in the mapping</li>
+  <li>Number bases, including gaps, in the mapping</li>
+  <li>Mapping quality</li>
+</ol>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many lines are in the file?</li>
+    <li>Can a query sequence be found several times in the target?</li>
+    <li>Are all alignments of good quality?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>29,796 lines</li>
+      <li>There are 16,637 query sequences. Several query sequences are found several times in the file: SRR17300492_75807 is found 16 times. It means they have been mapped to several locations or sequences in the target.</li>
+      <li>The first alignment (SRR17300492_75807 mapping on SRR17300667-707) has a score of 60, the highest Phred score. The third alignment has a score of 0, so not good.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="exploration-of-the-mapping-results">Exploration of the mapping results</h1>
+
+<p>Let’s look at the distribution of the mapping score (column 12)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-score-distribution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Plot score distribution</div>
+
+  <ol>
+    <li>
+      <p>Change datatype to tabular</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select  your desired datatype  from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c12</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: Output of <strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.4.0+galaxy0" title="Histogram with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Input should have column headers - these will be the columns that are plotted * “</em>: Output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Score</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Distribution</code></li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Legend options”</em>: <code class="language-plaintext highlighter-rouge">Hide legend</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="./images/mapping_score_histogram.png" alt="Distribution of mapping quality score (on x-axis, value between 0 and 60) with density (y-axis). " width="2100" height="2100" loading="lazy" /></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Are all alignments of good quality?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>There is a pic at 60 but many alignments have a score below 40.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We should remove alignments with a score below 40. Before that, let’s look at the plasmid coverage. We first need to compute it, i.e. the ratio between the number of matching bases in the mapping (Column 10) and plasmid length (target sequence length - Column 7).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compute-plasmid-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Compute plasmid coverage</div>
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1-c12</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: Output of <strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: Output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Expressions”</em>:
+          <ul>
+            <li><em>“Add expression”</em>: <code class="language-plaintext highlighter-rouge">float(c10)/float(c7)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">Mapping stats + plasmid coverage</code></li>
+  </ol>
+</blockquote>
+
+<p>A new column has been added (column 13) with the plasmid coverage. Let’s now plot its distribution.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-plasmid-coverage-distribution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Plot plasmid coverage distribution</div>
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c13</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Mapping stats + plasmid coverage</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.4.0+galaxy0" title=" Histogram with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong> Histogram with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Input should have column headers - these will be the columns that are plotted * “</em>: Output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Plasmid coverage</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Distribution</code></li>
+        <li><em>“Bin width for plotting”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Legend options”</em>: <code class="language-plaintext highlighter-rouge">Hide legend</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="./images/plasmid_coverage_histogram.png" alt="Distribution of plasmid coverage (on x-axis, value between 0 and 1) with density (y-axis). " width="2100" height="2100" loading="lazy" /></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the distribution of the plasmid coverage?</li>
+    <li>What could be a good threshold to filter?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>There are 2 peaks: one around 0 (i.e. no plasmid coverage) that slowly decreases until 0.8 and a pic at 1 (full plasmid coverage)</li>
+      <li>0.8 seems to be a breaking point and could be a good value to filter.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="filtering">Filtering</h1>
+
+<p>We will now filter the alignment to keep only the ones with a plasmid coverage (column 13) of at least 0.8, i.e. a read mapping to a plasmid covering at least 80% of the plasmid.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-alignments-based-on-plasmid-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Filter alignments based on plasmid coverage</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Mapping stats + plasmid coverage</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c13&gt;=0.8</code></li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">Alignments with plasmid coverage &gt;= 0.8</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many lines have been kept?</li>
+    <li>Which percentage of lines does that correspond to?</li>
+    <li>What does the distribution of the mapping score look like for these alignments?</li>
+    <li>Is there any extra filter we should do on the data?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>5,577 (over the 29,796)</li>
+      <li>18.73%</li>
+      <li>
+        <p>To plot the distribution of the mapping score for filtered alignments, we need to run the series of tools as done earlier:</p>
+
+        <ol>
+          <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with:
+            <ul>
+              <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c12</code></li>
+              <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Alignments with plasmid coverage &gt;= 0.8</code></li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.4.0+galaxy0" title="Histogram with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy0)</span> with the following parameters:
+            <ul>
+              <li><em>“Input should have column headers - these will be the columns that are plotted * “</em>: Output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Score</code></li>
+              <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Distribution</code></li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Legend options”</em>: <code class="language-plaintext highlighter-rouge">Hide legend</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+        <p><img src="./images/mapping_score_histogram_after_coverage_filtering.png" alt="Distribution of mapping quality score (on x-axis, value between 0 and 60) with density (y-axis). " width="2100" height="2100" loading="lazy" /></p>
+
+        <p>Most of the alignments are of good quality (pic at 60). There is also a pic at 0, meaning that some alignments are of bad quality</p>
+      </li>
+      <li>It might be good to add a filter on the score.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>After filtering on the plasmid coverage, we also add a filter on the score to be sure that we keep only the best alignments (i.e. a score - column 12 - of at least 40).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-alignments-based-on-score"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Filter alignments based on score</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Alignments with plasmid coverage &gt;= 0.8</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c12&gt;=40</code></li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">Alignments with plasmid coverage &gt;= 0.8 and score &gt;= 40</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many lines have been kept?</li>
+    <li>Which percentage of lines does that correspond to?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>5,249 (over the 5,577)</li>
+      <li>94.12%</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="extract-sequences-mapping-to-plasmids">Extract sequences mapping to plasmids</h1>
+
+<p>Let’s now extract the sequences mapping to plasmids (coverage higher than 80%).</p>
+
+<p>First, we need to extract the names of the reads (in <code class="language-plaintext highlighter-rouge">air metagenomes</code>) mapping to plasmids in the metaplasmidome database. For that, we need to extract column 1 (query names, i.e. names of reads in <code class="language-plaintext highlighter-rouge">Air metagenomes</code>) and 6 (reference names, i.e. names of sequences in <code class="language-plaintext highlighter-rouge">Air plasmidome database</code>).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-sequences-matching-to-plasmids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get sequences matching to plasmids</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c6</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Alignments with plasmid coverage &gt;= 0.8 and score &gt;= 40</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename to <code class="language-plaintext highlighter-rouge">Names for alignments with plasmid coverage &gt;= 0.8 and score &gt;= 40</code></p>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Second, we need to convert the <code class="language-plaintext highlighter-rouge">Air metagenomes</code> FASTA file to a tabular so we can join it with <code class="language-plaintext highlighter-rouge">Names for alignments with plasmid coverage &gt;= 0.8 and score &gt;= 40</code></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-query-sequence-as-a-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get query sequence as a table</div>
+
+  <ol>
+    <li><span class="tool" data-tool="CONVERTER_fasta_to_tabular" title="Convert FASTA to Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert FASTA to Tabular</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta file”</em>: <code class="language-plaintext highlighter-rouge">Air metagenomes</code></li>
+      </ul>
+    </li>
+    <li>Rename to <code class="language-plaintext highlighter-rouge">Air metagenome as table</code></li>
+  </ol>
+</blockquote>
+
+<p>Let’s now join the 2 datasets on the names of the reads in <code class="language-plaintext highlighter-rouge">air metagenomes</code> so column 1 in <code class="language-plaintext highlighter-rouge">Names for alignments with plasmid coverage &gt;= 0.8 and score &gt;= 40</code> and column 1 in <code class="language-plaintext highlighter-rouge">Air metagenome as table</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-sequences-matching-to-plasmids-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get sequences matching to plasmids</div>
+
+  <ol>
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: output of <strong>Convert FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We have now a table with 4 columns: names of the reads in <code class="language-plaintext highlighter-rouge">air metagenomes</code>, names of sequences in the reference database, names of the reads in <code class="language-plaintext highlighter-rouge">air metagenomes</code>, sequence of reads in <code class="language-plaintext highlighter-rouge">air metagenomes</code>. We will now create 2 outputs:</p>
+<ul>
+  <li>A table with metaplasmidome database sequence name, metagenomic sequence names and the metagenomic sequences</li>
+  <li>A FASTA file with metagenomic sequences</li>
+</ul>
+
+<h2 id="create-the-table-with-air-metagenomes-identified-as-plasmids">Create the table with air metagenomes identified as plasmids</h2>
+
+<p>Let’s remove the duplicated column (column 3) and reorganize the columns</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-non-duplicated-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep non duplicated columns</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c1,c4</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Let’s now add column names to the generated table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-column-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add column names</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3" title="Add Header tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add Header</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><em>“List of Column headers”</em>: <code class="language-plaintext highlighter-rouge">Metaplasmidome database sequence name,Metagenomic sequence name,Metagenomic sequence</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data File (tab-delimted)”</em>: output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="create-the-fasta-file-with-air-metagenomes-identified-as-plasmids">Create the FASTA file with air metagenomes identified as plasmids</h2>
+
+<p>We can now generate a FASTA file with the identified sequences.</p>
+
+<p>From the output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, let’s keep only metagenomic sequence names and the metagenomic sequences and remove duplicated sequences</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-unique-metagenomic-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep unique metagenomic sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c4</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“with flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.3+galaxy1" title="Unique occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique occurrences of each record</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many lines have been kept?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>4,055 (over 5,249)</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We have now a table with unique metagenomic sequences. Let’s transform it into a FASTA file.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-to-a-fasta-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Convert to a FASTA file</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: output of <strong>Unique occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+      </ul>
+    </li>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Air metagenome sequences identified as plasmids</code></li>
+  </ol>
+</blockquote>
+
+<h1 id="annotate-features-on-the-identified-plasmids">Annotate features on the identified plasmids</h1>
+
+<p>Let’s now annotate features on the identified plasmids. For that, we will use the annotation of the air metaplasmidome sequences that have been done with Prokka (citation) and assume that the annotations are similar for the identified plasmids.</p>
+
+<p>We will import the GFF generated by Prokka.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-the-gff-with-metaplasmidome-reference-database-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import the GFF with metaplasmidome reference database annotation</div>
+
+  <ol>
+    <li>
+      <p>Import the metaplasmidome reference database annotation from <a href="https://zenodo.org/record/14501567">Zenodo</a> or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14501567/files/air_metaplasmidome_annotations.gff
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Inspect it.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This file is a GFF: it describes genes and other features of DNA, RNA and protein sequences. It is a tab-delimited file with 9 fields per line:</p>
+
+<ol>
+  <li><strong>seqid</strong>: The name of the sequence where the feature is located.</li>
+  <li><strong>source</strong>: The algorithm or procedure that generated the feature.</li>
+  <li><strong>type</strong>: The feature type name, like “gene” or “exon”.</li>
+  <li><strong>start</strong>: Genomic start of the feature, with a 1-base offset.</li>
+  <li><strong>end</strong>: Genomic end of the feature, with a 1-base offset.</li>
+  <li><strong>score</strong>: Numeric value that generally indicates the confidence of the source in the annotated feature.</li>
+  <li><strong>strand</strong>: Single character that indicates the strand of the feature.</li>
+  <li><strong>phase</strong>: Phase of CDS features.</li>
+  <li><strong>attributes</strong>: A list of tag-value pairs separated by a semicolon with additional information about the feature.</li>
+</ol>
+
+<p>The <strong>seqid</strong> corresponds here to the ID of the sequences in the metaplasmidome reference database. So to filter, we need to compare <code class="language-plaintext highlighter-rouge">Metaplasmidome database sequence name</code> in <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code>
+to <strong>seqid</strong> by joining the 2 datasets on column 1.</p>
+
+<p>The file has with ~85 Million lines but many are comments (lines starting with <code class="language-plaintext highlighter-rouge">##</code>).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many features are in the GFF file?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>2,951,015 features</p>
+
+    <p>To get this number, we run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/count_gff_features/count_gff_features/0.2" title="Count GFF Features tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count GFF Features</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:</p>
+    <ul>
+      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF Dataset to Filter”</em>: imported GFF</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s now filter the GFF to keep only information related to the sequences matching to plasmids. 
+For that, we join the GFF on the SeqID column (column 1) with the <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code> file on the ` Metaplasmidome database sequence name` (Column 1)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-information-about-the-sequences-matching-to-plasmids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract information about the sequences matching to plasmids</div>
+
+  <ol>
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: imported GFF</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code></li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many lines have been kept?</li>
+    <li>Why is there more lines than in the <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code> file?</li>
+    <li>What are the columns?</li>
+    <li>Which columns should we keep if we want to keep the Metagenomic sequence name, the feature and the attributes?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>26k+ lines</li>
+      <li>Some sequences (e.g. SRR17300493-2380) have several lines: several features (CDS, rRNA, etc) annotated on it</li>
+      <li>The 9 columns of the GFF file + the 3 columns of the <code class="language-plaintext highlighter-rouge">Air metagenomes identified as plasmids</code> file</li>
+      <li>Columns to keep:
+        <ol>
+          <li>Metagenomic sequence name (Column 11)</li>
+          <li>Feature (Column 3)</li>
+          <li>Attributes (Column 9)</li>
+        </ol>
+      </li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s now cut the columns.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-cut-and-filter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Cut and filter</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c11,c3,c9</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What are the different identified features?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Using <span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span> to group and count on 2nd column, we find 26,329 CDS and 307 tRNA.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="extract-the-cds">Extract the CDS</h2>
+
+<p>Let’s filter to keep only the CDS and extract the gene names.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-cds"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep CDS</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2=='CDS'</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<p>We have now a file with 26,329 lines. The 2nd column is not useful so we will remove it. Column 3 (<strong>atributes</strong> in GFF) lists tag-value pairs separated by a semicolon with additional information about the feature.
+The first lines seems to be hypothetical proteins. If we scroll down, we can find some annotated genes (with <code class="language-plaintext highlighter-rouge">gene</code> keyword).</p>
+
+<p>It would be good to create a tabular file with:</p>
+<ol>
+  <li>Metagenomic sequence name</li>
+  <li>Gene ID</li>
+  <li>Gene name</li>
+  <li>Gene product</li>
+</ol>
+
+<p>As not all genes are annotated (with <code class="language-plaintext highlighter-rouge">gene</code> keyword), we first need to split the file between hypothetical proteins and annotated genes and process the two generated files independently.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-cds-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep CDS</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c3</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2021.04.19.1" title="Filter by keywords and/or numerical value tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter by keywords and/or numerical value</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2021.04.19.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of last <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Does file contain header? “</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>In <em>Filter by keywords</em>:
+          <ul>
+            <li><em>“Column number on which to apply the filter”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+            <li>In <code class="language-plaintext highlighter-rouge">Enter keywords</code>:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">copy/paste</code></li>
+                <li><em>“Copy/paste keywords to find (keep or discard)”</em>: <code class="language-plaintext highlighter-rouge">gene=</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the generated files</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many lines have been kept (non-hypothetical proteins) and how many have been discarded (hypothetical proteins)?</li>
+    <li>Which information do we have for the 2nd identified gene?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>There are:
+        <ul>
+          <li>25,001 hypothetical proteins CDS (lines in the discarded lines file)</li>
+          <li>1,329 annotated CDS (lines in the other file)</li>
+        </ul>
+      </li>
+      <li>For the 2nd gene, the column 3 is <code class="language-plaintext highlighter-rouge">ID=BAFOEJEB_01977;eC_number=1.8.5.7;Name=yqjG_1;dbxref=COG:COG0435;gene=yqjG_1;inference=ab initio prediction:Prodigal:2.6,similar to AA sequence:UniProtKB:P42620;locus_tag=BAFOEJEB_01977;product=Glutathionyl-hydroquinone reductase YqjG</code>, which mean:
+        <ul>
+          <li>Gene name is <code class="language-plaintext highlighter-rouge">yqjG_1</code></li>
+          <li>The product is <code class="language-plaintext highlighter-rouge">Glutathionyl-hydroquinone reductase YqjG</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s extract gene ID, gene name and the product in different columns from the annotated gene output and add a header to the file.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-annotated-cds-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the annotated CDS file</div>
+
+  <ol>
+    <li>
+      <p>Change annotated CDS output of <strong>Filter by keywords</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> datatype to tabular</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select  your desired datatype  from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Filter by keywords</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>Replacement</em>:
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">ID=([^;]*);.*;gene=([^;]*).*;product=([^;]*).*</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\\1\t\\2\t\\3</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3" title="Add Header tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add Header</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><em>“List of Column headers”</em>: <code class="language-plaintext highlighter-rouge">Metagenomic sequence name,Gene ID,Gene name,Gene product</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data File (tab-delimited)”</em>: output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Let’s now prepare the hypothetical protein CDS file</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-hypothetical-cds-gene-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the hypothetical CDS gene file</div>
+
+  <ol>
+    <li>
+      <p>Change hypothetical CDS gene output of <strong>Filter by keywords</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> datatype to tabular</p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:</p>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Filter by keywords</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>Replacement</em>:
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">ID=([^;]*);.*</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\\1\t\t</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We can now merge both files.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-concatenate-the-annotated-and-hypothetical-protein-gene-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Concatenate the annotated and hypothetical protein gene files</div>
+
+  <ol>
+    <li><span class="tool" data-tool="cat1" title="Concatenate multiple datasets or collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate multiple datasets or collections</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: output of <strong>Add Header</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>Dataset</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of last <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">CDS in metagenomes identified as plasmids</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="add-ko-and-pfam-annotation">Add KO and PFAM annotation</h2>
+
+<p>Let’s expand annotation with <strong><a href="https://www.genome.jp/kegg/ko.html">KO</a> (KEGG Orthology)</strong> (<span class="citation"><a href="#kanehisa2016kegg">Kanehisa <i>et al.</i> 2016</a></span>), a database of molecular functions
+represented in terms of functional orthologs, and <strong><a href="http://pfam.xfam.org/">PFAM</a></strong> (<span class="citation"><a href="#mistry2021pfam">Mistry <i>et al.</i> 2021</a></span>), a large collection of protein families. The files are</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-ko-and-pfam-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import KO and PFAM annotations</div>
+
+  <ol>
+    <li>
+      <p>Import the KO and PFAM annotations from <a href="https://zenodo.org/record/14501567">Zenodo</a> or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14501567/files/KOsignificatifNR.tsv
+https://zenodo.org/records/14501567/files/pfamsignificatifNR.tsv
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Inspect both files</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Both are tabular files with several columns including the gene ID, KO/PFAM ID, and some extra annotation.
+Let’s now join the files with <code class="language-plaintext highlighter-rouge">Annotated genes in air metagenomes sequences identified as plasmids</code> to extend the annotations using gene ID.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-join-with-ko-and-pfam-annotation-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Join with KO and PFAM annotation files</div>
+
+  <ol>
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Annotated genes in air metagenomes sequences identified as plasmids</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: imported KO file</li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><em>“Keep lines of first input that do not join with second input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the generated file</p>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1-c4,c7,c11</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: imported PFAM file</li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Keep lines of first input that do not join with second input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the generated file</p>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1-c6,c9,c10,c25</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1" title="Select last lines from a dataset (tail) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset (tail)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from lines on</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3" title="Add Header tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add Header</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><em>“List of Column headers”</em>: <code class="language-plaintext highlighter-rouge">Metagenomic sequence name,Gene ID,Gene name,Gene product,KO ID,KO annotation,PFAM name,PFAM ID,PFAM annotation</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data File (tab-delimited)”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">CDS in metagenomes identified as plasmids + KO + PFAM</code></li>
+  </ol>
+</blockquote>
+
+<p>Let’s look at the KO and PFAM statistics.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many genes have been extended with KO information?</li>
+    <li>How many different KO are found?</li>
+    <li>Which KO is the most found?</li>
+    <li>How many genes have been extended with PFAM information?</li>
+    <li>How many different PFAM are found?</li>
+    <li>Which PFAM is the most found?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Using <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with <code class="language-plaintext highlighter-rouge">c5!='.'</code>, we find that 426 CDS (1.62%) have been extended with KO information.</li>
+      <li>277 KO (<span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span> to group and count on 5th column)</li>
+      <li>K14572 (Ribosome biogenesis in eukaryotes) is found 9 times (<span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> by descending order on the <strong>Group data by a column</strong> output on column 2)</li>
+      <li>4,817 CDS (18.29%) have been extended with PFAM information (<span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with <code class="language-plaintext highlighter-rouge">c8!='.'</code> on <code class="language-plaintext highlighter-rouge">CDS + KO + PFAM</code>)</li>
+      <li>410 PFAM (<span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span> to group and count on 8th column)</li>
+      <li>PF00961.22 (Cytochrome c oxidase subunit 1) is found 89 times (<span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> by descending order)</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s extract an overview of the annotations per metagenomic sequence by grouping on the 1st column and counting the number of distinct values on gene ID, gene name, KO ID, PFAM ID.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-annotation-per-metagenomic-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Annotation per metagenomic sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">CDS + KO + PFAM</code></li>
+        <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li>In <em>“Operation”</em>:
+          <ul>
+            <li>In <em>“1: Operation”</em>:
+              <ul>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count distinct</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+              </ul>
+            </li>
+            <li>In <em>“2: Operation”</em>:
+              <ul>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count distinct</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+              </ul>
+            </li>
+            <li>In <em>“3: Operation”</em>:
+              <ul>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count distinct</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 5</code></li>
+              </ul>
+            </li>
+            <li>In <em>“4: Operation”</em>:
+              <ul>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count distinct</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 8</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1" title="Select last lines from a dataset (tail) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset (tail)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from lines on</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/estrain/add_column_headers/add_column_headers/0.1.3" title="Add Header tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add Header</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
+      <ul>
+        <li><em>“List of Column headers”</em>: <code class="language-plaintext highlighter-rouge">Metagenomic sequence name,Number of CDS,Number of annotated CDS,Number of associated KO,Number of associated PFAM</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data File (tab-delimited)”</em>: output of <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">CDS annotation overview per metagenomic sequences</code></li>
+  </ol>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Leveraging annotated mobile genetic element databases, such as the metaplasmidome, is essential for identifying and characterizing plasmids and other genetic elements in metagenomic data.</p>
+</li>
+                        
+                        <li><p>Effective filtering based on plasmid coverage and mapping quality is critical to ensure the reliability and accuracy of extracted sequences.</p>
+</li>
+                        
+                        <li><p>Generating well-organized outputs, such as FASTA files and annotated tables, is vital for downstream analysis and collaborative research.</p>
+</li>
+                        
+                        <li><p>Annotating genetic features on identified plasmids enhances understanding of their biological roles, such as antibiotic resistance or virulence.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/microbiome/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/microbiome#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="quast2012silva">Quast, C., E. Pruesse, P. Yilmaz, J. Gerken, T. Schweer <i>et al.</i>, 2012 <b>The SILVA ribosomal RNA gene database project: improved data processing and web-based tools</b>. Nucleic acids research 41: D590–D596. <a href="https://doi.org/10.1093/nar/gks1219">10.1093/nar/gks1219</a></li>
+<li id="wu2013systematic">Wu, D., G. Jospin, and J. A. Eisen, 2013 <b>Systematic identification of gene families for use as “markers” for phylogenetic and phylogeny-driven ecological studies of bacteria and archaea and their major subgroups</b>. PloS one 8: e77033. <a href="https://doi.org/10.1371/journal.pone.0077033">10.1371/journal.pone.0077033</a></li>
+<li id="li2015">Li, D., C.-M. Liu, R. Luo, K. Sadakane, and T.-W. Lam, 2015 <b>MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph</b>. Bioinformatics 31: 1674–1676. <a href="https://doi.org/10.1093/bioinformatics/btv033">10.1093/bioinformatics/btv033</a></li>
+<li id="kanehisa2016kegg">Kanehisa, M., Y. Sato, M. Kawashima, M. Furumichi, and M. Tanabe, 2016 <b>KEGG as a reference resource for gene and protein annotation</b>. Nucleic acids research 44: D457–D462. <a href="https://doi.org/10.1093/nar/gkv1070">10.1093/nar/gkv1070</a></li>
+<li id="krawczyk2018plasflow">Krawczyk, P. S., L. Lipinski, and A. Dziembowski, 2018 <b>PlasFlow: predicting plasmid sequences in metagenomic data using genome signatures</b>. Nucleic acids research 46: e35–e35. <a href="https://doi.org/10.1093/nar/gkx1321">10.1093/nar/gkx1321</a></li>
+<li id="li2018minimap2">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b>. Bioinformatics 34: 3094–3100. <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a></li>
+<li id="robertson2018mob">Robertson, J., and J. H. E. Nash, 2018 <b>MOB-suite: software tools for clustering, reconstruction and typing of plasmids from draft assemblies</b>. Microbial genomics 4: e000206. <a href="https://doi.org/10.1099/mgen.0.000206">10.1099/mgen.0.000206</a></li>
+<li id="mirdita2019mmseqs2">Mirdita, M., M. Steinegger, and J. Söding, 2019 <b>MMseqs2 desktop and local web server app for fast, interactive sequence searches</b>. Bioinformatics 35: 2856–2858. <a href="https://doi.org/10.1093/bioinformatics/bty1057">10.1093/bioinformatics/bty1057</a></li>
+<li id="antipov2020metaviral">Antipov, D., M. Raiko, A. Lapidus, and P. A. Pevzner, 2020 <b>Metaviral SPAdes: assembly of viruses from metagenomic data</b>. Bioinformatics 36: 4126–4129. <a href="https://doi.org/10.1093/bioinformatics/btaa490">10.1093/bioinformatics/btaa490</a></li>
+<li id="pellow2020plasclass">Pellow, D., I. Mizrahi, and R. Shamir, 2020 <b>PlasClass improves plasmid sequence classification</b>. PLoS computational biology 16: e1007781. <a href="https://doi.org/10.1371/journal.pcbi.1007781">10.1371/journal.pcbi.1007781</a></li>
+<li id="danko2021global">Danko, D., D. Bezdan, E. E. Afshin, S. Ahsanuddin, C. Bhattacharya <i>et al.</i>, 2021 <b>A global metagenomic map of urban microbiomes and antimicrobial resistance</b>. Cell 184: 3376–3393. <a href="https://doi.org/10.1016/j.cell.2021.05.002">10.1016/j.cell.2021.05.002</a></li>
+<li id="hilpert2021reconstruction">Hilpert, C., G. Bricheux, and D. Debroas, 2021 <b>Reconstruction of plasmids by shotgun sequencing from environmental DNA: which bioinformatic workflow?</b> Briefings in bioinformatics 22: bbaa059. <a href="https://doi.org/10.1093/bib/bbaa059">10.1093/bib/bbaa059</a></li>
+<li id="mistry2021pfam">Mistry, J., S. Chuguransky, L. Williams, M. Qureshi, G. A. Salazar <i>et al.</i>, 2021 <b>Pfam: The protein families database in 2021</b>. Nucleic acids research 49: D412–D419. <a href="https://doi.org/10.1093/nar/gkaa913">10.1093/nar/gkaa913</a></li>
+<li id="hennequin2022plasmidome">Hennequin, C., C. Forestier, O. Traore, D. Debroas, and G. Bricheux, 2022 <b>Plasmidome analysis of a hospital effluent biofilm: Status of antibiotic resistance</b>. Plasmid 122: 102638. <a href="https://doi.org/10.1016/j.plasmid.2022.102638">10.1016/j.plasmid.2022.102638</a></li>
+<li id="debroas_2024_11124657">DEBROAS, D., 2024 <b>Plasmids Identified in Air Metagenomes</b>. <a href="https://doi.org/10.5281/zenodo.11124657">10.5281/zenodo.11124657</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/metaplasmidome_query"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/metaplasmidome_query">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bérénice Batut, Nadia Goué, Didier Debroas,  <b>Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html">https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{microbiome-metaplasmidome_query,
+author = "Bérénice Batut and Nadia Goué and Didier Debroas",
+	title = "Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/metaplasmidome_query/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: column_maker
+  owner: devteam
+  revisions: aff5135563c6
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: count_gff_features
+  owner: devteam
+  revisions: 188392a0d0a8
+  tool_panel_section_label: Statistics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: histogram
+  owner: devteam
+  revisions: 6f134426c2b0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tabular_to_fasta
+  owner: devteam
+  revisions: 0a7799698fe5
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: add_column_headers
+  owner: estrain
+  revisions: ff2acdb98a74
+  tool_panel_section_label: Microbiome
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ggplot2_histogram
+  owner: iuc
+  revisions: b0d96516e6a5
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: minimap2
+  owner: iuc
+  revisions: 5cc34c3f440d
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: proteore_filter_keywords_values
+  owner: proteore
+  revisions: 98cb671a92eb
+  tool_panel_section_label: Microbiome
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00501">gxy.io/GTN:T00501</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/metaplasmidome_query/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/tutorials/metaplasmidome_query/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,39 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPredicted taxon relative abundances"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nGene Family abundance"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nPathway abundance"]
+  3[label="Cut"]
+  0 -> 3 [label="output"]
+  4[label="Renormalize"]
+  1 -> 4 [label="output"]
+  5[label="Regroup"]
+  1 -> 5 [label="output"]
+  6[label="Renormalize"]
+  2 -> 6 [label="output"]
+  7[label="Replace"]
+  4 -> 7 [label="output"]
+  8[label="Rename features"]
+  5 -> 8 [label="output"]
+  9[label="Split a HUMAnN table"]
+  5 -> 9 [label="output"]
+  k7aba96f3164841268e58ca10cbd2e46d[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Stratified table"]
+  9 -> k7aba96f3164841268e58ca10cbd2e46d
+  k2c36dc3359814b2cb615a1677002e007[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"]
+  9 -> k2c36dc3359814b2cb615a1677002e007
+  10[label="Unpack pathway abundances"]
+  4 -> 10 [label="output"]
+  6 -> 10 [label="output"]
+  11[label="Combination of taxonomic and metabolic assignations for gene families"]
+  7 -> 11 [label="outfile"]
+  3 -> 11 [label="out_file1"]
+  k46161015b2db4241846e27dd803b0fb3[color=lightseagreen,label="Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"]
+  11 -> k46161015b2db4241846e27dd803b0fb3
+  12[label="Select"]
+  8 -> 12 [label="output"]
+  13[label="Select"]
+  8 -> 13 [label="output"]
+  14[label="Select"]
+  8 -> 14 [label="output"]
+}

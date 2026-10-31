@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Introduction to Microbiome Analysis / Introduction to Microbiome Analysis / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/introduction/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to Microbiome Analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-08-08 14:17:35 +0000">
+<meta name="DC.creator" content="Paul Zierep">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="## Microbiome Analysis  ???  - Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat. - This analysis aims to understand the composition, diversity, and functions of these microbial communities.  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ???  - Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility. - It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes. - Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications. - DNA-based microbiome analysis is mainly based on two techniques: A...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Introduction to Microbiome Analysis / Slides: Introduction to Microbiome Analysis">
+        <meta property="og:description" content="## Microbiome Analysis  ???  - Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat. - This analysis aims to understand the composition, diversity, and functions of these microbial communities.  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ???  - Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility. - It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes. - Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications. - DNA-based microbiome analysis is mainly based on two techniques: A...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/microbiome/tutorials/introduction/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/introduction/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/microbiome/tutorials/introduction/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to Microbiome Analysis</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
+    Paul Zierep</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jun 22, 2017 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 8, 2024 </div>
+
+	<hr />
+
+
+	<h2 id="microbiome-analysis">Microbiome Analysis</h2>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat.</li>
+  <li>This analysis aims to understand the composition, diversity, and functions of these microbial communities.</li>
+</ul>
+
+<hr />
+
+<h2 id="overview">Overview</h2>
+
+<ul>
+  <li>Why study the microbiome?</li>
+  <li>2 different approaches
+    <ul>
+      <li>Amplicon sequencing</li>
+      <li>Shotgun sequencing</li>
+    </ul>
+  </li>
+  <li>Analysis pipelines</li>
+  <li>Visualisation options</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility.</li>
+  <li>It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes.</li>
+  <li>Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications.</li>
+  <li>DNA-based microbiome analysis is mainly based on two techniques: Amplicon sequencing and Shotgun sequencing.</li>
+  <li>Microbiome analysis required sophisticated analysis pipelines for the processing and the interpretation of the sequence data.</li>
+</ul>
+
+<hr />
+
+<h2 id="why-study-the-microbiome">Why study the microbiome?</h2>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>Health care research</li>
+  <li>Humans are full of microorganisms</li>
+  <li>Skin, gut, oral cavity, nasal cavity, eyes, ..</li>
+  <li>Affects health, drug efficacy, etc</li>
+</ul>
+
+<p>]
+.pull-right[</p>
+
+<p>.image-100[ <img src="../../images/human_microbiome.png" alt="image of a human with lines leading from various points on the body to pie charts of bacteria distribution" /> ]</p>
+
+<p>]</p>
+
+<ul>
+  <li>Sometimes referred to as your <strong>second genome</strong></li>
+  <li>~10 times more cells than you</li>
+  <li>~100 times more genes than you</li>
+  <li>~1000s different species</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The term “second genome” refers to the vast collection of microbial genes present in and on the human body, which outnumber human genes by about 100 to 1.</li>
+  <li>This microbial genetic material plays a crucial role in various physiological processes, such as digestion, immunity, and even mental health, making it an integral part of our overall genetic makeup and health.</li>
+</ul>
+
+<hr />
+<h2 id="why-study-the-microbiome-1">Why study the microbiome?</h2>
+
+<ul>
+  <li>Environmental studies
+    <ul>
+      <li>Microbes in the soil affect plants and animals</li>
+      <li>Improve agriculture</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-75[ <img src="../../images/environmentalstudies.png" alt="Rhizodeposition: image of a tree converting sun and CO2 into fixed carbon used as food for soil microbes." /> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In environmental studies, the microbiome refers to the diverse communities of microorganisms living in various environments such as soil, water, and plants.</li>
+  <li>These microbial communities are critical for ecosystem functions like nutrient cycling, soil fertility, pollutant degradation, and plant health, thus playing a vital role in maintaining environmental balance and sustainability.</li>
+</ul>
+
+<hr />
+
+<h2 id="types-of-microbiome-analysis">Types of microbiome analysis</h2>
+
+<p>.image-75[ <img src="../../images/Experimental-workflows-for-mainstream-omics-analysis-types-Arrow-colours-indicate-omics.png" alt="Experimental-workflows-for-mainstream-omics" /> ]</p>
+
+<p>.footnote[Image source: <a href="https://doi.org/10.1039/D3MO00089C">10.1039/D3MO00089C</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Meta-omics refers to a suite of high-throughput techniques used to study various aspects of microbial communities in an integrated way, providing a comprehensive view of their functions, structures, and interactions.</li>
+  <li>Metagenomics involves sequencing the entire genetic material from a microbial community, offering insights into the diversity, composition, and potential functions of the microorganisms.</li>
+  <li>Metatranscriptomics examines RNA transcripts to assess gene expression and microbial responses to environmental changes.</li>
+  <li>Metametabolomics analyzes the small molecules produced by microbial metabolism to understand their metabolic activities and interactions.</li>
+  <li>Metaproteomics focuses on studying microbial proteins to uncover their roles, expression levels, and interactions.</li>
+  <li>Amplicon sequencing, though more targeted, involves sequencing specific genetic regions to profile microbial diversity and abundance.</li>
+</ul>
+
+<hr />
+
+<h2 id="shotgun-vs-amplicon">Shotgun vs Amplicon</h2>
+
+<p>.pull-left[</p>
+
+<p>.image-75[ <img src="../../images/puzzles-shotgun.png" alt="jigsaw puzzle image illustrating shotgun sequencing approach" /> ]</p>
+
+<p><strong>Shotgun Sequencing</strong></p>
+<ul>
+  <li>Sequence all DNA</li>
+  <li>More information</li>
+  <li>Higher complexity</li>
+  <li>Higher cost
+]</li>
+</ul>
+
+<p>.pull-right[</p>
+
+<p>.image-75[ <img src="../../images/puzzles-amplicon.png" alt="jigsaw puzzle image illustrating amplicon sequencing approach" /> ]</p>
+
+<p><strong>Amplicon Sequencing</strong></p>
+<ul>
+  <li>Sequence only specific gene</li>
+  <li>No functional information</li>
+  <li>Less complex to analyse</li>
+  <li>Cheaper
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Shotgun sequencing analyzes the entire genetic material in a sample, providing comprehensive and detailed information about microbial community structure and function, but it is complex and costly.</li>
+  <li>Amplicon sequencing targets specific regions of microbial DNA, such as the 16S rRNA gene, offering a cost-effective and simpler method for profiling microbial communities, though it lacks detailed functional insights and is subject to amplification bias.</li>
+  <li>Shotgun sequencing is ideal for detailed metabolic and functional studies, while amplicon sequencing is suitable for assessing microbial composition and diversity.</li>
+</ul>
+
+<hr />
+
+<h2 id="amplicon">Amplicon</h2>
+
+<ul>
+  <li>Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)</li>
+  <li>Amplify gene of specific taxonomic group, i.e. not host or environment</li>
+</ul>
+
+<p><img src="../../images/16S_gene.png" alt="left is picture of e. coli ribosome with &quot;so much rna&quot; written, right is the RNA structure in a diagram" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing is a targeted approach that focuses on sequencing specific genetic regions to identify and analyze microbial communities.</li>
+  <li>For bacteria, the 16S rRNA gene is commonly targeted, while the 18S rRNA gene is used for eukaryotes, and the ITS region is targeted for fungi.</li>
+  <li>This method allows for efficient and cost-effective profiling of microbial composition and diversity by amplifying and sequencing these specific genetic markers.</li>
+</ul>
+
+<hr />
+
+<h2 id="amplicon-1">Amplicon</h2>
+
+<ul>
+  <li>Highly conserved gene: easy to target across all bacteria</li>
+  <li>With variable regions: distinguish between genus</li>
+</ul>
+
+<p><img src="../../images/16S_variableregions.jpg" alt="line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The 16S rRNA gene used in amplicon sequencing for bacteria consists of both conserved and variable regions.</li>
+  <li>The conserved regions are highly similar across different bacterial species, providing anchor points for primers used in sequencing.</li>
+  <li>The variable (V) regions, on the other hand, are more diverse and unique to different species, allowing for the differentiation and identification of bacteria within a sample.</li>
+  <li>Sequencing these V regions enables researchers to profile the bacterial community and understand its composition and diversity.</li>
+</ul>
+
+<hr />
+
+<h2 id="amplicon-2">Amplicon</h2>
+
+<ul>
+  <li>Pros
+    <ul>
+      <li>Well-established</li>
+      <li>Inexpensive ($50-$100/sample)</li>
+    </ul>
+  </li>
+  <li>Cons</li>
+  <li>V-region choice can bias results</li>
+  <li>Is based on a very well conserved gene, making it hard to resolve species and strains</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing is cost-effective and simpler than other methods, making it accessible for routine studies and straightforward to analyze due to its focus on specific genetic regions.</li>
+  <li>However, it has limitations, such as only providing information about the targeted regions, which may miss some microbial diversity and functional insights.</li>
+  <li>Additionally, the method can introduce amplification biases and may not differentiate closely related species or strains effective</li>
+</ul>
+
+<hr />
+
+<h2 id="shotgun-metagenomics">Shotgun metagenomics</h2>
+
+<ul>
+  <li>
+    <p>Aims to sequence the “whole” metagenome</p>
+  </li>
+  <li>Pros:
+    <ul>
+      <li>Not biased by amplicon primer set</li>
+      <li>Not limited by conservation of the amplicon</li>
+      <li>Can also provide functional information</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Environmental contamination, including host</li>
+      <li>More expensive ($1000+/sample)</li>
+      <li>Complex data analysis
+        <ul>
+          <li>Requires high performance computing, high memory, high compute capacity</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Shotgun metagenomics is a comprehensive approach to analyzing microbial communities by sequencing all the genetic material present in a sample, rather than focusing on specific regions.</li>
+  <li>This technique involves fragmenting the entire DNA from a sample, sequencing these fragments, and then using computational tools to assemble and analyze the data.</li>
+  <li>By capturing the complete genetic makeup of all microorganisms, including bacteria, archaea, viruses, and eukaryotes, shotgun metagenomics provides detailed insights into the diversity, composition, and functional potential of microbial communities.</li>
+  <li>This method allows for a broad and deep understanding of microbial interactions and functions, though it is often more complex and costly compared to targeted sequencing approaches.</li>
+  <li>Additionally, shotgun metagenomics can be affected by host contamination, which may complicate the interpretation of microbial data.</li>
+</ul>
+
+<hr />
+
+<h2 id="end-to-end">End-to-End</h2>
+
+<p><img src="../../images/16S_end-to-end.png" alt="graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)" /></p>
+
+<p>Every step in this process can have serious impact on the results</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In end-to-end metagenomic workflows, every step—from sample collection to data analysis—can significantly impact the final results.</li>
+  <li>Sample collection methods can introduce biases or contaminants, affecting the accuracy of microbial representation.</li>
+  <li>During DNA extraction, variations in protocols or efficiencies can alter the quantity and quality of genetic material obtained.</li>
+  <li>Sequencing technologies and their associated errors can introduce noise or gaps in the data.</li>
+  <li>Data processing, including assembly and annotation, relies on computational tools and databases that may -influence the interpretation of microbial diversity and functions.</li>
+  <li>Finally, the integration and analysis of results can be affected by the algorithms used and the quality of the reference databases.</li>
+  <li>Each of these steps must be carefully controlled and standardized to ensure reliable and reproducible outcomes in metagenomic studies.</li>
+</ul>
+
+<hr />
+
+<h2 id="bioinformatics">Bioinformatics</h2>
+
+<p><img src="../../images/so_much_data.png" alt="cartoon titled drowned in NGS data with a man covered in messy data." /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Roche 454 GS:    ~ 100.000 reads
+Illumina MiSeq:  ~ 25.000.000 reads
+Shotgun:             ~ ? reads
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In metagenomics, “drowning in NGS data” refers to the overwhelming volume of data generated by next-generation sequencing technologies.</li>
+  <li>This issue arises because NGS can produce vast amounts of sequence reads from complex microbial communities in a single experiment, creating challenges in data management, processing, and interpretation.</li>
+  <li>Managing and organizing this massive data set requires substantial computational resources, while analyzing it involves quality control, read assembly, taxonomic classification, and functional annotation, all of which add complexity and computational demands.</li>
+  <li>Extracting meaningful biological insights from such extensive data requires advanced bioinformatics expertise to navigate potential noise and errors and to ensure that findings are robust and reproducible.</li>
+</ul>
+
+<hr />
+
+<h2 id="analysis-pipelines">Analysis pipelines</h2>
+
+<p><img src="../../images/metagenomics_pipeline.png" alt="comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment." /></p>
+
+<p>Amplicon analysis variants:</p>
+
+<ul>
+  <li>OTU: operational taxonomic units</li>
+  <li>ASV: amplicon sequence variants</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing focuses on specific genetic regions, such as the 16S rRNA gene for bacteria, offering a cost-effective and simpler pipeline that provides insights into microbial community composition but may miss broader diversity and functional details.</li>
+  <li>In contrast, shotgun metagenomics sequences all genetic material, delivering a comprehensive view of microbial diversity and functional potential, though it requires more complex and expensive analysis.</li>
+  <li>Operational Taxonomic Units (OTUs) group sequences based on similarity, which can obscure finer taxonomic distinctions and is often used in amplicon pipelines.</li>
+  <li>Amplicon Sequence Variants (ASVs) represent exact sequences without grouping, offering higher resolution and more accurate taxonomic identification, and are increasingly used in modern amplicon pipelines for greater precision in microbial profiling.</li>
+</ul>
+
+<hr />
+
+<h2 id="pre-processing">Pre-processing</h2>
+
+<p><img src="../../images/preprocessing.png" alt="fastqc plot with regions labelled good, okay, and bad based on the plot's colour" /></p>
+
+<ul>
+  <li>There are a lot of ways to filter and trim your data</li>
+  <li>Trade-off between quality and amount of information retained</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Preprocessing in metagenomics involves a series of steps to prepare raw sequencing data for analysis, including quality control, trimming of low-quality sequences, removal of contaminants, and filtering out redundant or erroneous data.</li>
+  <li>This stage is crucial for ensuring that the data used for downstream analysis is accurate and reliable.</li>
+  <li>The trade-off between quality and amount of information retained is a key consideration in preprocessing.</li>
+  <li>On one hand, stringent quality control measures improve the accuracy of the data by removing errors and contaminants, but this can also lead to the loss of some useful information, particularly from low-abundance or poorly sequenced organisms.</li>
+  <li>On the other hand, retaining more data might include lower-quality sequences or noise, which can complicate data analysis and interpretation.</li>
+  <li>Balancing these factors involves optimizing preprocessing steps to retain the most informative and accurate data while minimizing errors and maintaining sufficient coverage for meaningful analysis.</li>
+</ul>
+
+<hr />
+
+<h2 id="otu-clustering--denoising">OTU Clustering / Denoising</h2>
+
+<p>.pull-left[
+OTU clustering:</p>
+
+<ul>
+  <li>Cluster on 97% sequence similarity for genus-level differentiation</li>
+  <li>OTUs depend on the data set: no comparability of data sets</li>
+</ul>
+
+<p>.image-75[ <img src="../../images/otu.png" alt="tree with clusters around the leaves labelled OTUs and 97% identity threshold" /> ]</p>
+
+<p>]</p>
+
+<p>.pull-right[
+ASV Denoising:</p>
+
+<ul>
+  <li>Discriminate sequence variations from sequencing errors</li>
+  <li>Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly</li>
+</ul>
+
+<p>.image-90[ <img src="../../images/clustering.png" alt="DNA sequences with hierarchical clustering shown" /> ]</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>OTU clustering groups similar sequence reads into Operational Taxonomic Units based on a predefined similarity threshold, which can simplify the data but may mask finer taxonomic differences and reduce resolution by lumping closely related species together.</li>
+  <li>In contrast, ASV denoising involves identifying and retaining exact sequence variants without grouping, providing higher resolution and more precise taxonomic identification by distinguishing unique sequences and reducing errors, though it requires more sophisticated algorithms and computational resources.</li>
+</ul>
+
+<hr />
+
+<h2 id="chimera-removal">Chimera Removal</h2>
+
+<ul>
+  <li>During PCR multiple sequences can combine to form a hybrid</li>
+  <li>Must be removed from your data for better results</li>
+</ul>
+
+<p><img src="../../images/chimeras.png" alt="aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Chimera removal is a crucial step in microbiome data processing that involves identifying and eliminating chimeric sequences—artificial DNA sequences that arise from the incorrect joining of two or more distinct sequences during PCR amplification.</li>
+  <li>These chimeras can distort the representation of microbial communities by introducing erroneous sequences that do not reflect actual biological entities.</li>
+  <li>The removal of chimeric sequences is essential for ensuring accurate and reliable results in downstream analyses, such as taxonomic classification and diversity assessment.</li>
+</ul>
+
+<hr />
+
+<h2 id="search-marker-database-and-taxonomy-assignment">Search marker database and taxonomy assignment</h2>
+
+<ul>
+  <li>Homology with reference databases
+    <ul>
+      <li>
+        <p>Amplicon</p>
+
+        <p><img src="../../images/silva-greengenes.png" alt="graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)" /></p>
+      </li>
+      <li>
+        <p>Shotgun: MetaPhlAn2 database</p>
+        <ul>
+          <li>~1M unique clade-specific marker genes</li>
+          <li>~17,000 reference genomes (bacterial and archaeal, viral and eukaryotic)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Accuracy depends on quality and completeness of database used</li>
+  <li>Databases are inevitable incomplete</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In microbiome studies, searching a marker database involves comparing sequencing data to a reference database to identify microbial sequences.</li>
+  <li>For example, in amplicon sequencing, sequences might be compared to the SILVA database, which contains rRNA gene sequences, to classify microorganisms based on known genetic markers.</li>
+  <li>In shotgun metagenomics, the MetaPhlAn database can be used, which contains unique marker genes for various microorganisms, enabling precise taxonomy assignment and detailed profiling of the microbial community.</li>
+</ul>
+
+<hr />
+
+<h2 id="search-functional-database">Search functional database</h2>
+
+<ul>
+  <li>Databases to identify gene families
+    <ul>
+      <li>UniRef50</li>
+      <li>UniRef90</li>
+    </ul>
+  </li>
+  <li>Grouping in other functional categories
+    <ul>
+      <li>MetaCyc Reactions</li>
+      <li>KEGG Orthogroups (KOs)</li>
+      <li>Pfam domains</li>
+      <li>Level-4 enzyme commission (EC) categories</li>
+      <li>EggNOG (including COGs)</li>
+      <li>Gene Ontology (GO)</li>
+      <li>Informative GO</li>
+    </ul>
+  </li>
+  <li>Pathway reconstruction</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For functional analysis, researchers can use databases like UniRef50 and UniRef90, which cluster sequences into representative sets to help identify proteins and their functions.</li>
+  <li>MetaCyc Reactions provides detailed information on metabolic pathways and enzymatic reactions, allowing the identification of metabolic capabilities within the microbiome.</li>
+  <li>EggNOG offers orthologous group annotations, helping to predict gene functions and evolutionary relationships.</li>
+  <li>These functional databases provide deeper insights into the biological roles and potential activities of the microbial community, complementing the taxonomic data.</li>
+</ul>
+
+<hr />
+
+<h2 id="results-otu-table">Results: OTU table</h2>
+
+<p><img src="../../images/otutable.png" alt="screenshot of an excel table" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The results of microbiome studies are typically compiled into a comprehensive summary such as an OTU table or a similar data structures.</li>
+  <li>In this table, each row represents an OTU, while each column represents a different sample analyzed.</li>
+  <li>The cells within the table contain values indicating the abundance of each OTU in each sample, often presented as counts or relative frequencies.</li>
+  <li>This format provides a detailed overview of the microbial community composition across multiple samples, allowing researchers to compare diversity and abundance patterns, and perform statistical analyses to assess differences between sample groups, microbial diversity, and correlations with environmental or health-related variables.</li>
+  <li>Comparable tables for other modality of microbiome studies are taxonomy tables, gene tables and pathway tables.</li>
+</ul>
+
+<hr />
+
+<h2 id="results-visualizations">Results: Visualizations</h2>
+
+<ul>
+  <li><strong>Krona</strong>
+    <ul>
+      <li>interactive exploration of sample taxonomy</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/krona_lacto.png" alt="doughnut plot with bands for each kingdom, down to genus, species" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Visualizations of microbiome data are crucial for several reasons.</li>
+  <li>They transform complex, high-dimensional data into interpretable and accessible formats, allowing researchers to quickly grasp the composition and diversity of microbial communities.</li>
+  <li>Krona is a visualization tool used to explore microbiome data from an OTU table interactively.</li>
+  <li>First, the OTU table, with taxonomic classifications and abundance data, is formatted into a compatible file for Krona.</li>
+  <li>The software then processes this file to create an interactive, multi-layered pie chart where each layer represents different taxonomic levels, such as phylum, class, order, family, genus, and species.</li>
+  <li>Users can click on segments to drill down into lower taxonomic levels, with the segment sizes indicating the relative abundance of each taxon.</li>
+  <li>This allows for intuitive and interactive exploration of the microbial community structure, making it easy to identify patterns and differences across samples.</li>
+</ul>
+
+<hr />
+
+<h2 id="results-visualizations-1">Results: Visualizations</h2>
+
+<ul>
+  <li><strong>Phinch</strong>
+    <ul>
+      <li>BIOM file input</li>
+      <li>various visualizations</li>
+      <li>multi-sample data</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../../../shared/images/phinch_overviewpage.png" alt="screenshot of phinch website showing multiple plot types" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Phinch is another powerful tool for visualizing microbiome data, offering interactive and customizable charts that help in exploring complex datasets.</li>
+</ul>
+
+<hr />
+
+<h2 id="differential-analyses">Differential analyses</h2>
+
+<p><img src="../../images/maaslin2.jpg" alt="Maaslin2 Example" /></p>
+
+<p>.footnote[<em>Figure taken from: https://doi.org/10.1101/2021.01.20.427420</em>]
+<span>Speaker Notes</span></p>
+
+<ul>
+  <li>Differential microbiome analysis using tools like MaAsLin2 involves comparing microbial community profiles between different groups or conditions to identify significant differences in microbial abundance or diversity.</li>
+  <li>MaAsLin2 uses linear models to handle complex, high-dimensional data and adjust for potential confounders, providing robust statistical insights into which microbes are differentially abundant.</li>
+  <li>This analysis helps in understanding how microbial shifts correlate with various factors, such as disease states or environmental changes, thereby uncovering potential biomarkers and functional implications.</li>
+</ul>
+
+<hr />
+
+<h2 id="diversity">Diversity</h2>
+
+<p><img src="../../images/diversity_differences.png" alt="Diversity Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Alpha diversity measures the diversity within a single sample, reflecting the number of species and their relative abundances.</li>
+  <li>Beta diversity compares microbial communities between samples, highlighting differences in species composition and abundance.</li>
+  <li>Together, these metrics provide insights into both the internal diversity of communities and how they vary across different conditions.</li>
+</ul>
+
+<hr />
+
+<h2 id="assembly">Assembly</h2>
+
+<p><img src="../../images/individual-assembly.png" alt="Assembly Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Microbiome assembly involves reconstructing the complete genomes of microorganisms from sequencing data to understand their functional potential and diversity.</li>
+</ul>
+
+<hr />
+
+<h2 id="binning">Binning</h2>
+
+<p><img src="../../images/binning.png" alt="Binning Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>After the initial assembly of contigs from sequencing data, binning helps to differentiate and categorize these contigs based on their genetic similarity, coverage, and other characteristics, effectively reconstructing individual microbial genomes from the mixed sample.</li>
+</ul>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/microbiome/tutorials/introduction/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/microbiome/tutorials/introduction/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,54 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nBUSCO lineage"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nGenome sequence masked"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nAlignments from RNA-seq"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nProtein sequences"]
+  4[label=" Fasta Statistics "]
+  1 -> 4 [label="output"]
+  k4c11da0f57a5475184f9c6d4e1325602[color=lightseagreen,label="Output\nfasta stats genome"]
+  4 -> k4c11da0f57a5475184f9c6d4e1325602
+  5[label="BUSCO on the genome sequences"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  k88d4ce85b45d40a285a0ee4af20b70aa[color=lightseagreen,label="Output\nbusco table genome"]
+  5 -> k88d4ce85b45d40a285a0ee4af20b70aa
+  k8d39ad7fb6c74b29b225c0c9e842f528[color=lightseagreen,label="Output\nbusco sum genome"]
+  5 -> k8d39ad7fb6c74b29b225c0c9e842f528
+  kc2f275c1dc944914a3b24683f5f742a3[color=lightseagreen,label="Output\nbusco image genome"]
+  5 -> kc2f275c1dc944914a3b24683f5f742a3
+  kfacba50ab7d0426a9fe562871940f5c9[color=lightseagreen,label="Output\nbusco missing genome"]
+  5 -> kfacba50ab7d0426a9fe562871940f5c9
+  ke44bfb0631df434ebd12b3ff7aef73ae[color=lightseagreen,label="Output\nbusco gff genome"]
+  5 -> ke44bfb0631df434ebd12b3ff7aef73ae
+  6[label="Braker3"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  k4c56d329a4d340e5b0e70062256caf13[color=lightseagreen,label="Output\nbraker gff"]
+  6 -> k4c56d329a4d340e5b0e70062256caf13
+  7[label="GFFRead"]
+  6 -> 7 [label="output_gff"]
+  1 -> 7 [label="output"]
+  k68c2a3ebd2ce432eb1a9e83680eb22d8[color=lightseagreen,label="Output\npredicted proteins"]
+  7 -> k68c2a3ebd2ce432eb1a9e83680eb22d8
+  8[label="JBrowse"]
+  1 -> 8 [label="output"]
+  6 -> 8 [label="output_gff"]
+  kc25c544310b5478fa04b26c98383090a[color=lightseagreen,label="Output\njbrowse"]
+  8 -> kc25c544310b5478fa04b26c98383090a
+  9[label="BUSCO on the predicted protein sequences"]
+  7 -> 9 [label="output_pep"]
+  0 -> 9 [label="output"]
+  kcb6b286cba1148e9b4dd96a0e6da011b[color=lightseagreen,label="Output\nbusco image predicted proteins"]
+  9 -> kcb6b286cba1148e9b4dd96a0e6da011b
+  k7b588cd31d62487d979a3da07e2441c7[color=lightseagreen,label="Output\nbusco gff predicted proteins"]
+  9 -> k7b588cd31d62487d979a3da07e2441c7
+  k73725e327d7242a6b2982e8c18ecc870[color=lightseagreen,label="Output\nbusco sum predicted proteins"]
+  9 -> k73725e327d7242a6b2982e8c18ecc870
+  k54997a8e055542d7938cfd8a3fd0caf0[color=lightseagreen,label="Output\nbusco missing predicted proteins"]
+  9 -> k54997a8e055542d7938cfd8a3fd0caf0
+  kaa85c4a17d8948f1900a77508af8d600[color=lightseagreen,label="Output\nbusco table predicted proteins"]
+  9 -> kaa85c4a17d8948f1900a77508af8d600
+}

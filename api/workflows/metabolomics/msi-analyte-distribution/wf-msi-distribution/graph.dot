@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nUploaded Composite Dataset imzml"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nAnnotation"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nm/z features"]
+  3[label="MSI Qualitycontrol"]
+  0 -> 3 [label="output"]
+  4[label="MSI plot spectra"]
+  0 -> 4 [label="output"]
+  5[label="MSI filtering"]
+  0 -> 5 [label="output"]
+  6[label="MSI plot spectra"]
+  0 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  7[label="MSI data exporter"]
+  5 -> 7 [label="outfile_imzml"]
+  8[label="MSI mz images"]
+  2 -> 8 [label="output"]
+  5 -> 8 [label="outfile_imzml"]
+  9[label="Filter"]
+  7 -> 9 [label="feature_output"]
+  10[label="MSI mz images"]
+  9 -> 10 [label="out_file1"]
+  5 -> 10 [label="outfile_imzml"]
+}

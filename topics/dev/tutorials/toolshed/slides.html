@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Tool Shed: sharing Galaxy tools</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/toolshed/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Tool Shed: sharing Galaxy tools">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 09:43:48 +0000">
+<meta name="DC.creator" content="Anthony Bretaudeau">
+<meta name="DC.creator" content="Loraine Guéguen">
+<meta name="DC.creator" content="Stéphanie Legras">
+<meta name="DC.creator" content="Bérénice Batut">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Tool Shed: sharing Galaxy tools">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/toolshed/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Tool Shed: sharing Galaxy tools",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2022-10-18 09:43:48 +0000",
+  "datePublished": "2017-06-12 08:10:40 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:S00052",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "## 1. What is a Tool Shed?",
+  "learningResourceType": "slides",
+  "name": "Tool Shed: sharing Galaxy tools",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/toolshed/slides.html",
+  "version": 15,
+  "timeRequired": "PT3H",
+  "teaches": "- Discover what is a Tool Shed\n- Be able to install tools and workflows from a Tool Shed into a Galaxy instance\n- Be able to publish tools with Planemo",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\n## 1. What is a Tool Shed?\n\n\n## Questions this  will address\n\n - What is a Tool Shed?\n - How to install tools and workflows from a Tool Shed into a Galaxy instance?\n - What are the Tool Shed repository types?\n - How to publish with Planemo?\n\n\n## Learning Objectives\n\n- Discover what is a Tool Shed\n- Be able to install tools and workflows from a Tool Shed into a Galaxy instance\n- Be able to publish tools with Planemo\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "@id": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/",
+      "name": "Loraine Guéguen",
+      "image": "https://avatars.githubusercontent.com/loraine-gueguen",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/slegras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/slegras/",
+      "name": "Stéphanie Legras",
+      "image": "https://avatars.githubusercontent.com/slegras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/earlham/",
+          "name": "Earlham Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.earlham.ac.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-steers/",
+          "name": "ELIXIR-STEERS",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/steers"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "@id": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "@id": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "name": "Gildas Le Corguillé",
+      "image": "https://avatars.githubusercontent.com/lecorguille",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "name": "Niall Beard",
+      "image": "https://avatars.githubusercontent.com/njall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/toolshed/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+
+# Tool Shed: sharing Galaxy tools
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a>
+			<li>
+				<a href="/training-material/hall-of-fame/loraine-gueguen/" class="contributor-badge contributor-loraine-gueguen"><img src="https://avatars.githubusercontent.com/loraine-gueguen?s=36" alt="Loraine Guéguen avatar" width="36" class="avatar" />
+    Loraine Guéguen</a>
+			<li>
+				<a href="/training-material/hall-of-fame/slegras/" class="contributor-badge contributor-slegras"><img src="https://avatars.githubusercontent.com/slegras?s=36" alt="Stéphanie Legras avatar" width="36" class="avatar" />
+    Stéphanie Legras</a>
+			<li>
+				<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- footnotes -->
+<div class="footnote" style="bottom: 4em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  | <i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:S00052">gxy.io/GTN:S00052</a>
+
+
+
+| <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+
+
+
+| Human authored (<a href="/training-material/AI-policy.html">GTN AI Policy</a>)
+</div>
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is a Tool Shed?
+
+- How to install tools and workflows from a Tool Shed into a Galaxy instance?
+
+- What are the Tool Shed repository types?
+
+- How to publish with Planemo?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Discover what is a Tool Shed
+
+- Be able to install tools and workflows from a Tool Shed into a Galaxy instance
+
+- Be able to publish tools with Planemo
+
+
+---
+
+
+## 1. What is a Tool Shed?
+
+![toolshed logo with a shed over the words galaxy tool shed](../../images/toolShed.jpg)
+
+---
+
+### ![same logo](../../images/toolShed.jpg) = Galaxy App Store
+
+---
+
+### ![same logo again](../../images/toolShed.jpg) = Galaxy App Store
+
+- Galaxy tools
+- ~~Recipes for installing and compiling tools~~,
+- Data Managers,
+- Custom datatypes,
+- Exported workflows.
+
+---
+
+### ![same logo again](../../images/toolShed.jpg) = Galaxy App Store
+
+- For Galaxy administrators, facilitates:
+  - **installing/updating** tools
+
+- For tool developers, facilitates:
+  - **sharing** of Galaxy utilities
+  - **versioning**
+
+---
+
+### Available Tool Sheds
+
+- [Galaxy community Tool Shed](https://toolshed.g2.bx.psu.edu/) -&gt; Main Tool Shed
+- [Galaxy community test Tool Shed](https://testtoolshed.g2.bx.psu.edu/) -&gt; Sandbox for testing
+- [List of public Tool Sheds](https://galaxyproject.org/toolshed/public-toolsheds/)
+
+---
+
+### Tool Shed interface
+
+![toolshed interface with categories, description, and number of repositories called out with arrows](../../images/main_toolShed_ss.png)
+
+---
+
+### Example of tool
+
+![view of a repository in the toolshed showing a lot of metadata](../../images/exampletool_ss.png)
+
+---
+
+## 2. Installing tools from a Tool Shed
+
+---
+
+### Connect your Galaxy to a Tool Shed
+
+- Only for third party toolsheds (Main and Test by default)
+- Add `&lt;tool_shed /&gt;` block in `config/tool_sheds_conf.xml`
+- Restart Galaxy
+
+---
+
+### Install a tool from the Tool Shed
+
+- Go to the admin interface and click on &quot;Search Tool Shed&quot;
+![admin interface of galaxy with an arrow to search tool shed](../../images/admin_searchtoolshed_ss.png)
+- Select a Tool Shed
+
+![arrow to galaxy main toolshed button in older versions of galaxy](../../images/goToToolshed_ss.png)
+
+---
+
+### Install a tool from the Tool Shed
+
+- Search your tool
+![toolshed search interface with arrows to the search box and one of the results, trinity](../../images/searchTool_ss.png)
+
+---
+
+### Install a tool from the Tool Shed
+
+- Types of repository&lt;/span&gt;
+  - &lt;span style=&quot;color:orange&quot;&gt; Tools (`$name`)&lt;/span&gt;
+  - &lt;span style=&quot;color:blue&quot;&gt; Tool suites (`suite_$name`)&lt;/span&gt;
+  - &lt;span style=&quot;color:red&quot;&gt; Tool dependencies (`package_$name_$version`)&lt;/span&gt; (gradually removed, replaced by Conda dependencies)
+![screenshot with multiple search results called out with boxes for the above types](../../images/typeOfRep_ss.png)
+
+---
+
+### Install a tool from the Tool Shed
+
+![trinity button showing a dropdown with preview and install](../../images/goToToolInstall_ss.png)
+- Install the tool
+![toolshed page with a button install to galaxy](../../images/launchInstallTool_ss.png)
+
+---
+
+### Install a tool from the Tool Shed
+
+- Install the tool
+![another screenshot of a form with checkboxes for dependcy options](../../images/installTool_ss.png)
+- &lt;span style=&quot;font-size:70%&quot;&gt; Selecting Tool Shed AND conda will make Galaxy to install both&lt;/span&gt;
+- &lt;span style=&quot;font-size:70%&quot;&gt; Recommended: use conda &lt;/span&gt;
+
+---
+
+### Install a tool from the Tool Shed
+
+- Check
+![admin interface of galaxy with monitor installing repositories called out](../../images/monitor_installing_toolshed_rep.png)
+
+---
+
+### Manage installed tools
+
+- Admin &gt; Manage installed tools
+![admin interface with manage installed tools menu item called out](../../images/manage_installed_tools.png)
+![various icons used to indicate tool state](../../images/repStatus_ss.png)
+
+---
+
+### Manage installed tools
+
+- Click on the name of a tool
+- Manage and browse the repository
+![yet another toolshed interface screenshot with the repository actions menu shown](../../images/managed_an_installed_tool.png)
+
+---
+
+## Tips: How to install workflows
+
+---
+
+###  How to install a workflow?
+
+- Admin &gt; Search Tool Shed
+- Search the workflow
+  1. ![the interface is identical to the tool install interface](../../images/toolshedWorkflow_ss.png)
+  2. ![a graph with two nodes, input dataset and fastqc](../../images/schemaWorkflow_ss.png)
+- &lt;span style=&quot;font-size:70%&quot;&gt; Tools can come with the workflow if they are not yet installed &lt;/span&gt;
+
+---
+
+### How to install a workflow?
+
+![galaxy workflow list showing no workflows](../../images/workflowNotInstalled_ss.png)
+- No workflow?
+
+---
+
+###  How to install a workflow?
+
+![the installed WF is found in the manage installed tools menu](../../images/workflowInstalled_ss.png)
+- Click on the imported workflow
+
+---
+
+###  How to install a workflow?
+
+![contents of the repository section lists fastqc, a link to click on](../../images/makeAvailableWorkflow_ss.png)
+- Click on the workflow at the bottom of the “Contents of this repository” section
+
+---
+
+###  How to install a workflow?
+
+- Repository Actions &gt; Import workflow to Galaxy
+
+![clicking on that brings you to a view of the workflow, and you can click import to galaxy on the top right](../../images/exportWorkflow_ss.png)
+
+---
+
+###  How to install a workflow?
+
+![it appears in the workflow menu](../../images/workflowOK_ss.png)
+- Done!
+
+---
+
+## 3. Tool Shed repository types
+
+---
+
+### 3.1 Tool with dependencies
+
+---
+
+###  Tool with dependencies
+
+![tool folder with python script, xml, and test-data is put in an archive and uploaded to the TS.](../../images/toolshedPackage.png)
+
+---
+
+### 3.2 Tool suite
+
+#### Group of related repositories
+
+---
+
+###  Tool suite
+
+![multiple wrappers in a single tool archive](../../images/toolSuite.png)
+
+- Works but no way to install a single tool
+
+---
+
+###  Tool suite
+
+![phylogeny pipeline containing 4 tools](../../images/toolsuite2.png)
+
+- One repository per individual tool
+- A special &apos;Tool suite&apos; repository listing the individual repositories
+
+---
+
+###  Tool suite
+
+- relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
+- -&gt; One XML file
+```xml
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;repositories description=&quot;Pipeline phylogeny&quot;&gt;
+   &lt;repository toolshed=&quot;https://testtoolshed.g2.bx.psu.edu&quot;
+     name=&quot;fasta_to_phylip&quot; owner=&quot;gandres&quot; changeset_revision=&quot;a895633568&quot; /&gt;
+   &lt;repository name=&quot;mafft&quot; owner=&quot;gandres&quot; /&gt;
+   &lt;repository name=&quot;phyml&quot; owner=&quot;gandres&quot; /&gt;
+[…]
+&lt;/repositories&gt;
+```
+No need to write it yourself, Planemo does it for you
+
+---
+
+###  Tool suite
+
+![phylogeny suite gets uploaded to the TS](../../images/toolsuite3.png)
+
+---
+
+### 3.3 Workflow
+
+---
+
+
+###  Workflow
+![the four tools from the phylogeny pipeline are connected as a workflow](../../images/workflow.png)
+- A succession of tools to perform a complete analysis
+
+---
+
+###  Workflow
+
+- In galaxy
+
+![same workflow with galaxy ui](../../images/galaxyWorkflowEx.png)
+
+---
+
+###  Workflow
+
+![extract workflow menu from galaxy](../../images/shareWorkflow.png)
+
+- You get a file: Galaxy-Workflow-NAME.ga
+
+---
+
+###  Workflow
+
+- You have your file Galaxy-Workflow-NAME.ga
+- How to automatically install the tools used in the workflow?
+  - -&gt; `repository_dependencies.xml`
+```xml
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;repositories description=&quot;Phylogeny workflow&quot;&gt;
+   &lt;repository name=&quot;suite_phylogeny&quot; owner=&quot;galaxy&quot; /&gt;
+&lt;/repositories&gt;
+```
+
+---
+
+###  Workflow
+
+![phylogeny workflow is uploaded to the TS](../../images/workflowRepDep.png)
+
+---
+
+###  Workflow
+
+![the workflow points at the tool suite which points at tools](../../images/workflowRepDep2.png)
+
+- **Everything must be on the same toolshed**
+
+---
+
+## Tips
+
+### What about tools working with *.loc files or new datatypes
+
+---
+
+### Tools with `*.loc` files or new datatypes
+
+- add them to the Tool Shed repository.
+- `*.loc` files and `datatypes` files should be provided as `*.sample` file in a `tool-data` directory.
+- `tool-data/*.loc.sample` files come along with `tool_data_table_conf.xml.sample`.
+
+Their content or the file themselves are put to the right location on tool set up.
+
+---
+
+### Tools with *.loc files or new datatypes
+
+![toolshed interface showing some files](../../images/repWithLoc_ss.png)
+
+&lt;span style=&quot;font-size:60%&quot;&gt;`tool_data_table_conf.xml.sample`&lt;/span&gt;
+```xml
+&lt;tables&gt;
+	&lt;!-- Locations of indexes in the Bowtie2 mapper format --&gt;
+	&lt;table name=&quot;bowtie2_indexes&quot; comment_char=&quot;#&quot;&gt;
+		&lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+		&lt;file path=&quot;tool-data/bowtie2_indices.loc&quot; /&gt;
+	&lt;/table&gt;
+&lt;/tables&gt;
+```
+&lt;span style=&quot;font-size:60%&quot;&gt;On install, the content of the file and the right
+path to the *.loc file is added to `shed_tool_data_table_conf.xml`&lt;/span&gt;
+
+---
+
+## 4. Publishing with Planemo
+
+---
+
+&lt;i class=&quot;fas fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;warning&lt;/span&gt; *There are automated ways to publish to a ToolShed using GitHub and Continuous Integration*
+
+[Check out these slides, &quot;Publishing tools&quot; section](/training-material/topics/dev/tutorials/tool-integration/slides.html)
+
+---
+
+### Configure the target Tool Shed
+
+```bash
+planemo config_init
+```
+- Creates `.planemo.yml` file in your home directory:
+
+```yml
+## Planemo Global Configuration File.
+## Everything in this file is completely optional - these values can all be
+## configured via command line options for the corresponding commands.
+## [...]
+sheds:
+     toolshed:
+           #key: &quot;&lt;TODO&gt;&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+     testtoolshed:
+           #key: &quot;&lt;TODO&gt;&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+     local:
+           #key: &quot;&lt;TODO&gt;&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+```
+
+---
+
+### Configure the target Tool Shed
+
+- Add your Tool Shed API key in `.planemo.yml`
+
+```yml
+## Planemo Global Configuration File.
+## Everything in this file is completely optional - these values can all be
+## configured via command line options for the corresponding commands.
+## [...]
+sheds:
+     toolshed:
+           key: &quot;xxxxxxxxxmytoolshedAPIkeyxxxxxxx&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+     testtoolshed:
+           #key: &quot;&lt;TODO&gt;&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+     local:
+           #key: &quot;&lt;TODO&gt;&quot;
+           #email: &quot;&lt;TODO&gt;&quot;
+           #password: &quot;&lt;TODO&gt;&quot;
+```
+
+---
+
+### Configure repository
+
+```bash
+planemo shed_init --name=&quot;tandem_repeats_finder_2&quot;
+                     --owner=&quot;gandres&quot;
+                     --description=&quot;Tandem Repeats Finder description&quot;
+                     --long_description=&quot;A long long description.&quot;
+                     --category=&quot;Sequence Analysis&quot;
+                     [--remote_repository_url=&lt;URL to .shed.yml on github&gt;]
+                     [--homepage_url=&lt;Homepage for tool.&gt;]
+```
+- Creates `.shed.yml` file in the current repository (tool repository):
+
+```yml
+categories: [Sequence Analysis]
+description: Tandem Repeats Finder description
+long_description: A long long description.
+name: tandem_repeats_finder_2
+owner: gandres
+```
+
+---
+
+### Configure repository
+
+#### Naming conventions
+&lt;small&gt;
+
+| Repository Type | Recommended Name         | Examples                 |
+| --------------- |--------------------------| -------------------------|
+| Data Managers   | `data_manager_$name`     | `data_manager_bowtie2`   |
+| Packages        | `package_$name_$version` | `package_aragorn_1_2_36` |
+| Tool Suites     | `suite_$name`            | `suite_samtools`         |
+| Tools           | `$name`                  | `stringle`, `bowtie2`    |
+
+&lt;/small&gt;
+&lt;span style=&quot;color:red&quot;&gt;Planemo will determine the repository type based on these conventions&lt;/span&gt;
+
+---
+
+### Configure repository
+
+- Tools and tool suite `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+
+- Example: `trinity/.shed.yml`
+
+```yml
+[...]
+auto_tool_repositories:
+    name_template: &quot;&quot;
+    description_template: &quot; (from the Trinity tool suite)&quot;
+suite:
+    name: &quot;suite_trinity&quot;
+    description: Trinity tools to assemble transcript sequences from Illumina RNA-Seq data.
+```
+
+---
+
+### Check
+
+```bash
+planemo shed_lint --tools
+```
+```bash
+Linting repository […]/tandem_repeats_finder
+Applying linter expansion... CHECK
+.. INFO: Included files all found.
+Applying linter tool_dependencies_xsd... CHECK
+.. INFO: tool_dependencies.xml found and appears to be valid XML
+Applying linter tool_dependencies_actions... CHECK
+.. INFO: Parsed tool dependencies.
+Applying linter repository_dependencies... CHECK
+.. INFO: No repository_dependencies.xml, skipping.
+Applying linter shed_yaml... CHECK
+.. INFO: .shed.yml found and appears to be valid YAML.
+Applying linter readme... CHECK
+.. INFO: No README found skipping.
++Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
+[…]
+```
+
+---
+
+### Create repository
+
+```bash
+planemo shed_create --shed_target testtoolshed
+```
+- Don&apos;t forget **--shed_target**. Default is main toolshed
+
+---
+
+### Create repository
+
+```bash
+planemo shed_create --shed_target testtoolshed
+```
+```bash
+Repository created
+cd &apos;[…]/tandem_repeats_finder&apos; &amp;&amp; git rev-parse HEAD
+Repository tandem_repeats_finder_2 updated successfully.
+```
+![an image of a toolshed metadata from the planemo uploaded data](../../images/shedCreate.png)
+
+---
+
+### Update repository
+
+```bash
+planemo shed_diff --shed_target testtoolshed
+
+```
+```bash
+wget -q --recursive -O - &apos;https://testtoolshed.g2.bx.psu.edu/repository/download?repository_id=6306166e4da9a8bf&amp;changeset_revision=default&amp;file_type=gz&apos; | tar -xzf - -C /tmp/tool_shed_diff_DMcOrR/_testtoolshed_ --strip-components 1
+mkdir &quot;/tmp/tool_shed_diff_DMcOrR/_local_&quot;; tar -xzf &quot;/tmp/tmp5ousfg&quot; -C &quot;/tmp/tool_shed_diff_DMcOrR/_local_&quot;; rm -rf /tmp/tmp5ousfg
+cd &quot;/tmp/tool_shed_diff_DMcOrR&quot;; diff -r _local_ _testtoolshed_
+diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
+41d40
+&lt;     &lt;param name=&quot;fileout_label2&quot; type=&quot;text&quot; value=&quot;Unused&quot; label=&quot;none&quot; help=&quot;Output name for files&quot; /&gt;
+```
+- The repository needs to be updated
+
+---
+
+### Update repository
+
+```bash
+planemo shed_update --check_diff --shed_target testtoolshed
+
+```
+```bash
+wget -q --recursive -O - &apos;https://testtoolshed.g2.bx.psu.edu/repository/download?repository_id=6306166e4da9a8bf&amp;changeset_revision=default&amp;file_type=gz&apos; | tar -xzf - -C /tmp/tool_shed_diff_DMcOrR/_testtoolshed_ --strip-components 1
+mkdir &quot;/tmp/tool_shed_diff_DMcOrR/_local_&quot;; tar -xzf &quot;/tmp/tmp5ousfg&quot; -C &quot;/tmp/tool_shed_diff_DMcOrR/_local_&quot;; rm -rf /tmp/tmp5ousfg
+cd &quot;/tmp/tool_shed_diff_DMcOrR&quot;; diff -r _local_ _testtoolshed_
+diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
+41d40
+&lt;     &lt;param name=&quot;fileout_label2&quot; type=&quot;text&quot; value=&quot;Unused&quot; label=&quot;none&quot; help=&quot;Output name for files&quot; /&gt;
+Repository tandem_repeats_finder updated successfully.
+Repository metadata updated.
+```
+- The repository has been updated
+
+---
+
+### Update repository
+```bash
+planemo shed_update --check_diff --shed_target testtoolshed
+
+```
+![tool shed info with revision circled](../../images/checkToolUpdate.png)
+
+- The repository has been updated
+
+---
+
+![planemo logo](../../images/planemo-logo.png)
+#### Publishing to the Tool Shed
+
+![planemo shed_init creates a repo, shed_lint checks, and shed_create/shed_update uploads to the TS](../../images/planemo_toolshed_publishing.png)
+
+---
+
+![planemo logo again](../../images/planemo-logo.png)
+
+&gt; Command-line utilities to assist in building and publishing Galaxy tools.
+
+---
+
+![and again](../../images/planemo-logo.png)
+
+![larger graph with local development, toolshed, conda, and galaxy and various lines between them.](../../images/big_picture.png)
+
+---
+
+![planemo logo again](../../images/planemo-logo.png)
+
+#### Checklist (3/3)
+
+- Initiate the `.shed.yml` file with
+```bash
+planemo shed_init
+```
+- Create the repository on ToolShed with
+```bash
+planemo shed_create
+```
+- Install and test the wrapper on a Galaxy instance
+- Improve the wrapper and push modification on toolshed
+```bash
+planemo shed_update
+```
+
+---
+
+## References
+
+- [ToolShed](https://galaxyproject.org/toolshed/tour/)
+- [Install tools from the ToolShed](https://galaxyproject.org/admin/tools/add-tool-from-toolshed-tutorial/)
+- [Publish tools with Planemo](https://planemo.readthedocs.io/en/latest/)
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+![picture indicating exercise](../../images/exercise.png)
+
+---
+
+###  Hands-on
+
+#### The goal
+Publish your tool (seqtk_seq) in your local toolshed with Planemo
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+#### Step 1: Start and configure your toolshed
+- Start your toolshed (in galaxy home directory):
+```bash
+./run_tool_shed.sh
+```
+- Toolshed available at `http://localhost:9009`
+&lt;aside class=&quot;notes&quot;&gt;
+login: galaxy/azerty
+&lt;/aside&gt;
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+#### Step 2: Use planemo to publish your tool
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+#### Step 2: Use planemo to publish your tool
+
+```bash
+planemo config_init
+```
+  - Creates file `.planemo.yml` in your home directory.
+
+```yml
+[...]  local:
+#key: &quot;&lt;TODO&gt;&quot;
+email: &quot;galaxy@localhost.fr&quot;
+password: &quot;azerty&quot;
+```
+```bash
+planemo shed_init --name=seqtk_seq --owner=galaxy --description=&quot;common transformation of FASTA/Q&quot; --category=&quot;Fasta Manipulation&quot;
+```
+```bash
+planemo shed_lint .
+```
+```bash
+planemo shed_create --shed_target local
+```
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+#### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
+
+---
+
+&lt;hands-on-title&gt;Hands-on&lt;/hands-on-title&gt;
+
+#### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
+
+```bash
+planemo shed_diff --shed_target local
+```
+```bash
+planemo shed_update --check_diff --shed_target local
+```
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Use Planemo
+
+- Contribute to the Main Tool Shed
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/loraine-gueguen/" class="contributor-badge contributor-loraine-gueguen"><img src="https://avatars.githubusercontent.com/loraine-gueguen?s=36" alt="Loraine Guéguen avatar" width="36" class="avatar" />
+    Loraine Guéguen</a><a href="/training-material/hall-of-fame/slegras/" class="contributor-badge contributor-slegras"><img src="https://avatars.githubusercontent.com/slegras?s=36" alt="Stéphanie Legras avatar" width="36" class="avatar" />
+    Stéphanie Legras</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-badge-small contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-badge-small contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-badge-small contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/njall/" class="contributor-badge contributor-badge-small contributor-njall"><img src="https://avatars.githubusercontent.com/njall?s=36" alt="Niall Beard avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+	
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+        
+    </body>
+</html>

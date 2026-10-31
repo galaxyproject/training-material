@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: An introduction to get started in genome assembly and annotation / An introduction to get started in genome assembly and annotation / Assembly</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="An introduction to get started in genome assembly and annotation">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-09-23 08:03:57 +0000">
+<meta name="DC.creator" content="Alexandre Cormier">
+<meta name="DC.creator" content="Laura Leroi"><meta name="description" content="# The truth about bioinformatics  .image-100[   ![Bioinformatics is not just about pushing a button and getting your result](../../images/genome_assembly_introduction/the_truth_about_bioinformatics.jpg) ]  ---  # Let's start with some important definitions  .image-40[   ![Importance to speak the same language](../../images/genome_assembly_introduction/bulle-bd.png) ]  --- .left[ **Contig**: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly **gaps**).  **Scaffold**: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a **supercontig**, though this terminology is rarely used nowadays.  **Assembly**: a set of contigs or scaffolds. ]  .image-60[   ![Illustration of the working principle of scaffolding](../../images/genome_assembly_introduction/scaffolding.png) ]  ---  .left[ **Haplotig**: a contig that comes from the same haplotype. In an unphased a...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Assembly / An introduction to get started in genome assembly and annotation / Slides: An introduction to get started in genome assembly and annotation">
+        <meta property="og:description" content="# The truth about bioinformatics  .image-100[   ![Bioinformatics is not just about pushing a button and getting your result](../../images/genome_assembly_introduction/the_truth_about_bioinformatics.jpg) ]  ---  # Let's start with some important definitions  .image-40[   ![Importance to speak the same language](../../images/genome_assembly_introduction/bulle-bd.png) ]  --- .left[ **Contig**: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly **gaps**).  **Scaffold**: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a **supercontig**, though this terminology is rarely used nowadays.  **Assembly**: a set of contigs or scaffolds. ]  .image-60[   ![Illustration of the working principle of scaffolding](../../images/genome_assembly_introduction/scaffolding.png) ]  ---  .left[ **Haplotig**: a contig that comes from the same haplotype. In an unphased a...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/assembly/tutorials/get-started-genome-assembly/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/assembly/tutorials/get-started-genome-assembly/slides.html">View markdown source on GitHub</a>
+	<h1>An introduction to get started in genome assembly and annotation</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
+    Alexandre Cormier</a><a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
+    Laura Leroi</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=36" alt="Stéphanie Robin avatar" width="36" class="avatar" />
+    Stéphanie Robin</a><a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/r1corre?s=36" alt="Erwan Corre avatar" width="36" class="avatar" />
+    Erwan Corre</a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>Definitions of bioinformatics terms for assembly and annotation</p>
+</li>
+		
+		<li><p>What are the guidelines before starting a Genome Assembly and Annotation project?</p>
+</li>
+		
+		<li><p>What file formats are used for assembly and annotation?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Nov 30, 2021 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Sep 23, 2026 </div>
+
+	<hr />
+
+
+	<h1 id="the-truth-about-bioinformatics">The truth about bioinformatics</h1>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/the_truth_about_bioinformatics.jpg" alt="Bioinformatics is not just about pushing a button and getting your result" />
+]</p>
+
+<hr />
+
+<h1 id="lets-start-with-some-important-definitions">Let’s start with some important definitions</h1>
+
+<p>.image-40[
+  <img src="../../images/genome_assembly_introduction/bulle-bd.png" alt="Importance to speak the same language" />
+]</p>
+
+<hr />
+<p>.left[
+<strong>Contig</strong>: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly <strong>gaps</strong>).</p>
+
+<p><strong>Scaffold</strong>: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a <strong>supercontig</strong>, though this terminology is rarely used nowadays.</p>
+
+<p><strong>Assembly</strong>: a set of contigs or scaffolds.
+]</p>
+
+<p>.image-60[
+  <img src="../../images/genome_assembly_introduction/scaffolding.png" alt="Illustration of the working principle of scaffolding" />
+]</p>
+
+<hr />
+
+<p>.left[
+<strong>Haplotig</strong>: a contig that comes from the same haplotype. In an unphased assembly, a contig may join alleles from different parental haplotypes in a diploid or polyploid genome.</p>
+
+<p><strong>Primary assembly</strong>: a complete assembly with long stretches of phased blocks.</p>
+
+<p><strong>Alternate assembly</strong>: an incomplete assembly consisting of haplotigs in heterozygous regions. An alternate assembly always accompanies a primary assembly. It is not useful by itself as it is fragmented and incomplete.</p>
+
+<p><strong>Haplotype-resolved assembly</strong>: sets of complete assemblies consisting of haplotigs, representing an entire diploid/polyploid genome.
+]</p>
+
+<p>.image-60[
+  <img src="../../images/genome_assembly_introduction/assemblies_definitions.png" alt="Illustration of the assembly types" />
+]</p>
+
+<hr />
+
+<p>.left[
+<strong>Telomere to telomere</strong>: An assembly where each chromosome is fully phased and assembled without gaps.</p>
+
+<p><strong>Linkage group</strong>: a set of contigs or scaffolds ordered and oriented using a collection of genes that are inferred to be located together on a single chromosome because of the pattern of their inheritance.
+]</p>
+
+<p>.image-20[
+  <img src="../../images/genome_assembly_introduction/linkage_map.png" alt="Example of linkage map from JCVI" />
+]</p>
+
+<hr />
+
+<p>.left[
+<strong>Coverage in terms of redundancy (A)</strong>: number of reads that align to, or “cover,” a known reference. It describes how often, in average, a reference sequence is covered by bases from the reads.</p>
+
+<p><strong>Coverage in terms of the percentage coverage of a reference by reads (B)</strong>: E.g. if 90% of a reference is covered by reads (and 10% not) it is a 90% coverage.</p>
+
+<p><strong>Sequencing depth (C)</strong>: total number of usable reads from the sequencing machine.
+]</p>
+
+<p>.image-80[
+  <img src="../../images/genome_assembly_introduction/comparison-coverage-and-sequencing-depth.gif" alt="Illustration of coverage and depth" />
+]</p>
+
+<hr />
+
+<h1 id="assembly-and-annotation-in-a-ideal-world">Assembly and annotation in a ideal world</h1>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/assembly_dream.png" alt="The perfect assembly dream" />
+]</p>
+
+<hr />
+
+<h1 id="key-concepts-for-assembly-and-annotation">Key concepts for assembly and annotation</h1>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/assembly_and_annotation_simplified_overview.png" alt="Assembly and annotation overview" />
+]</p>
+
+<hr />
+
+<h1 id="steps-before-starting-a-genome-project">Steps before starting a genome project</h1>
+
+<p>.left[</p>
+<ul>
+  <li>
+    <p>Step 1: Build a broad community of collaborators for the project, if possible</p>
+  </li>
+  <li>
+    <p>Step 2: Gather information about the target genome</p>
+  </li>
+  <li>
+    <p>Step 3: Select the best possible DNA source and an optimal extraction procedure</p>
+  </li>
+  <li>
+    <p>Step 5: Choose an appropriate sequencing technology</p>
+  </li>
+  <li>
+    <p>Step 6: Check the computational resources requirements and availability
+]</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="build-a-wide-community-for-the-project-if-its-possible">Build a wide community for the project (<em>if it’s possible</em>)</h3>
+
+<p>.left[
+The aim of a genome project is to <strong>sequence the entire target genome</strong> for a wide <strong>range of genomics applications</strong>.
+]</p>
+
+<p>.left[
+<strong>Analyses</strong>, <strong>reanalyses</strong> and <strong>integration</strong> of genomic and other phenotype information are required:
+]</p>
+
+<ul>
+  <li><strong>Facilities:</strong> Wet lab, sequencing, bioinformatics,…</li>
+  <li><strong>Personnel:</strong> Highly skilled</li>
+  <li><strong>Software:</strong> Knowledge intensive</li>
+</ul>
+
+<p>.left[
+<i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> The cost of data storage, maintenance, transfer, and analysis are likely to be significant and will represent an increasing proportion of overall sequencing costs in the future.
+]</p>
+
+<hr />
+
+<h3 id="genome-information-genome-size">Genome information: Genome size</h3>
+
+<p>.pull-left[
+<strong>How to collect informations?</strong></p>
+
+<ul>
+  <li>Experimentally : Flow cytometry</li>
+  <li>Databases:
+    <ul>
+      <li>Fungi: <a href="http://www.zbi.ee/fungalgenomesize">http://www.zbi.ee/fungalgenomesize</a></li>
+      <li>Animals: <a href="http://www.genomesize.com">http://www.genomesize.com</a></li>
+      <li>Plants: <a href="http://data.kew.org/cvalues">http://data.kew.org/cvalues </a></li>
+    </ul>
+  </li>
+  <li>Bibliography
+]</li>
+</ul>
+
+<p>.pull-right[
+.image-100[
+  <img src="../../images/genome_assembly_introduction/genomes-size.png" alt="variation in estimated genome sizes in base pairs" />
+]]</p>
+
+<p>.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]</p>
+
+<hr />
+
+<h3 id="genome-information-gc-content">Genome information: GC content</h3>
+
+<p>.pull-left[
+<strong>Why?</strong></p>
+
+<p>.left[
+Sequencing is not random!
+GC and AT rich regions are under-represented.
+]</p>
+
+<p><strong>How to solve?</strong></p>
+<ul>
+  <li>Chemistry quirks</li>
+  <li>Increase the sequencing depth</li>
+  <li>Technologies combination (long and short reads)
+]</li>
+</ul>
+
+<p>.pull-right[
+.image-100[
+  <img src="../../images/genome_assembly_introduction/coverage-x-GC.png" alt="Sequencing coverage by GC content" />
+]]</p>
+
+<p>.footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]</p>
+
+<hr />
+
+<h3 id="genome-information-ploidy-level">Genome information: Ploidy level</h3>
+
+<p>.pull-right[
+.image-55[
+  <img src="../../images/genome_assembly_introduction/ploidy.png" alt="Heterozigous genotype" />
+]]</p>
+
+<p>.pull-left[</p>
+
+<p><strong>Ploidy (N):</strong></p>
+
+<p>Number of sets of chromosomes in a cell</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Organism</th>
+      <th style="text-align: center">Ploidy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Bacteria</td>
+      <td style="text-align: center">1N</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Human, mouse, rat</td>
+      <td style="text-align: center">2N</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Amphibians (<em>Xenopus</em>)</td>
+      <td style="text-align: center">2N to 12N</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Plants (wheat)</td>
+      <td style="text-align: center">6N</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Autopolyploid</strong></td>
+      <td style="text-align: center">.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Hybrids</strong></td>
+      <td style="text-align: center">.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]</p>
+
+<p><strong>Higher ploidy -&gt; harder to assemble =&gt; Increase of sequencing depth</strong></p>
+
+<p>.footnote[Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones &amp; Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).]</p>
+
+<hr />
+
+<h3 id="genome-information-heterozygosity-level">Genome information: Heterozygosity level</h3>
+
+<p>.pull-left[
+.left[
+<strong>Heterozygous:</strong> Locus-specific,  diploid (2N) organism has two different alleles of a particular gene at the same locus
+]]</p>
+
+<p>.pull-right[
+.image-100[
+  <img src="../../images/genome_assembly_introduction/heterozygous.jpg" alt="Heterozigous genotype" />
+]]</p>
+
+<p>.left[
+<strong>Heterozygosity</strong> is a metric used to indicate the probability that an individual is heterozygous for a particular allele
+]</p>
+
+<p><strong>Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth</strong></p>
+
+<p>.footnote[https://www.genome.gov/genetics-glossary/heterozygous]</p>
+
+<hr />
+
+<h3 id="genome-information-heterozygosity-level-1">Genome information: Heterozygosity level</h3>
+
+<p>.image-125[
+  <img src="../../images/genome_assembly_introduction/phased-assemblies.png" alt="Concepts in phased assemblies" />
+]</p>
+
+<p>.footnote[Heng Li’s blog: lh3.github.io/2021/04/17/concepts-in-phased-assemblies]</p>
+
+<hr />
+
+<h3 id="genome-information-complexity-aka-repeats-elements">Genome information: Complexity aka repeats elements</h3>
+
+<p>.left[
+<strong>It is impossible to resolve repeats of length L unless you have reads longer than L</strong>
+]</p>
+
+<p>Most common source of assembly errors:</p>
+
+<p>.pull-left[
+.image-65[
+  <img src="../../images/genome_assembly_introduction/collapsed-consensus.png" alt="Collapsed consensus from repeat copies" />
+]]</p>
+
+<p>.pull-right[
+.image-65[
+  <img src="../../images/genome_assembly_introduction/excision-rearrangement-consensus.png" alt="Collapsed, excision and rearrangement consensus" />
+]]</p>
+
+<hr />
+
+<h3 id="genome-information-others">Genome information: Others</h3>
+
+<ul>
+  <li><strong>Karyotype:</strong> chromosome number</li>
+  <li><strong>Sex chromosome system:</strong> None, XY, ZW, UV,…</li>
+  <li><strong>Purity:</strong> possible presence of contaminants and/or symbionts?</li>
+  <li>Is there any other <strong>useful data (NCBI, SRA, ENA, etc)</strong> that could improve my assembly?</li>
+</ul>
+
+<hr />
+
+<h3 id="genome-information-tips">Genome information: Tips</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li><strong>Flow cytometry</strong> :
+    <ul>
+      <li>Genome size</li>
+      <li>Ploidy level</li>
+    </ul>
+  </li>
+  <li><strong>k-mer frequency from Illumina reads</strong> :
+    <ul>
+      <li>Genome size</li>
+      <li>Ploidy level</li>
+      <li>GC content</li>
+      <li>Heterozygosity</li>
+      <li>Repeats composition
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="the-best-possible-dna">The best possible DNA</h3>
+
+<p>.left[
+Select the best possible DNA source and extraction method.
+The extraction of <strong>high-quality DNA</strong> is the <strong>most important</strong> aspect of a successful genome project</p>
+
+<p>The <strong>lack of a good starting material</strong> will limit the choice of sequencing technology and  <strong>affect the quality of data obtained</strong>
+]</p>
+
+<hr />
+
+<h3 id="the-best-possible-dna-chemical-purity-of-dna">The best possible DNA: Chemical purity of DNA</h3>
+
+<p>.left[
+<strong>Sample-related contaminants:</strong></p>
+<ul>
+  <li>Polysaccharides</li>
+  <li>Proteoglycans</li>
+  <li>Proteins</li>
+  <li>Secondary metabolites</li>
+  <li>Polyphenols</li>
+  <li>Humic acids</li>
+  <li>Pigments</li>
+  <li>Etc,…</li>
+</ul>
+
+<p>All these contaminants <strong>can affect the efficiency of library preparation</strong>, regardless of the technology, and this is especially true <strong>for PCR-free libraries</strong> (PacBio and ONT)
+]</p>
+
+<hr />
+
+<h3 id="the-best-possible-dna-quantity-of-dna">The best possible DNA: Quantity of DNA</h3>
+
+<p>.left[
+Different technologies require different amount of DNA:</p>
+<ul>
+  <li>Illumina and 10x &gt; 3 ng</li>
+  <li>BioNano &gt; 200 ng</li>
+  <li>ONT &gt; 1 μg</li>
+  <li>Hi-C &gt; 5 μg</li>
+  <li>PacBio &gt; 15 μg
+]</li>
+</ul>
+
+<hr />
+
+<h3 id="the-best-possible-dna-structural-integrity-of-dna">The best possible DNA: Structural integrity of DNA</h3>
+
+<p>.left[
+High Molecular Weight (<strong>HMW</strong>) for Nanopore/PacBio (obtained mainly from fresh material)
+]</p>
+
+<hr />
+
+<h3 id="the-best-possible-dna-tips">The best possible DNA: Tips</h3>
+
+<p>.left[</p>
+<ul>
+  <li>Many <strong>DNA extraction protocol</strong> are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)</li>
+  <li><strong>Keep DNA samples</strong> from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc</li>
+  <li>Use a <strong>single individual</strong> and sequence a <strong>haploid, a highly inbred diploid</strong> organism, or an <strong>isogenic</strong> individual
+]</li>
+</ul>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology">Appropriate sequencing technology</h3>
+
+<p>.left[
+This mainly <strong>depends on the quantity and quality of DNA as well as the cost of the experiment</strong> but many parameters need to be considered before performing an NGS experiment:</p>
+
+<ul>
+  <li>Short <strong>versus</strong> long reads or <strong>both</strong></li>
+  <li>Read length</li>
+  <li>Read quality/error rate</li>
+  <li>Genome read coverage/depth</li>
+  <li>Library preparation</li>
+  <li>Downstream applications
+]</li>
+</ul>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-assembly">Appropriate sequencing technology: Assembly</h3>
+
+<p>.left[</p>
+<ul>
+  <li><strong>Illumina or MGI:</strong> short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions</li>
+  <li><strong>IonTorrent:</strong> short reads (up to 500bp) with medium quality reads</li>
+  <li><strong>Nanopore:</strong> long reads (average ~15kbp) with low quality reads. Errors are not randomly distributed!</li>
+  <li><strong>PacBio:</strong>
+    <ul>
+      <li>CLR: long reads (average ~20kbp) with low quality reads</li>
+      <li>HiFi: long reads (average ~15kbp) with high quality reads
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-scaffolding">Appropriate sequencing technology: Scaffolding</h3>
+
+<p>.left[</p>
+<ul>
+  <li><strong>Hi-C:</strong> <strong>restriction enzyme fragmentation</strong> (single, multiples sites or DNAse). Need huge amount of coverage.
+    <ul>
+      <li>Phase Genomics</li>
+      <li>Dovetail Genomics</li>
+      <li>Arima Genomics</li>
+    </ul>
+  </li>
+  <li>Optical mapping: technique to physically locate specific enzymes restriction sites or sequence motifs to produce DNA sequence fingerprints.
+    <ul>
+      <li>BioNano</li>
+      <li>BGI</li>
+    </ul>
+  </li>
+  <li>Mate pair (deprecated)</li>
+  <li>BAC/YAC/Fosmids (deprecated)
+]</li>
+</ul>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-1">Appropriate sequencing technology</h3>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/sequencing-technologies.png" alt="Several sequencing technologies" />
+]</p>
+
+<p>.footnote[Stark, R., Grzelak, M. &amp; Hadfield, J. RNA sequencing: the teenage years. Nat Rev Genetics 20, 631–656 (2019).]</p>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-short-vs-long-reads">Appropriate sequencing technology: Short vs long reads</h3>
+
+<p>.pull-left[
+<strong>Short reads platforms</strong>:
+Highest sequencing depth but shorter reads
+]</p>
+
+<p>.pull-rigth[
+.image-40[
+  <img src="../../images/genome_assembly_introduction/short-read-sequencing-platforms-specifications.png" alt="Reads accuracy distribution" />
+]]</p>
+
+<p>.pull-left[
+<strong>Long reads platforms</strong>:
+Longer reads but less sequencing depth
+]</p>
+
+<p>.pull-rigth[
+.image-40[
+  <img src="../../images/genome_assembly_introduction/long-read-sequencing-platforms-specifications.png" alt="Reads accuracy distribution" />
+]]</p>
+
+<p>.footnote[Kanzi, A. M. et al. Next Generation Sequencing and Bioinformatics Analysis of Family Genetic Inheritance. Frontiers Genetics 11, 544162 (2020).]</p>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-short-vs-long-reads-1">Appropriate sequencing technology: Short vs long reads</h3>
+
+<p>.pull-left[
+<strong>Reads accuracy differs depending on the sequencing technology:</strong></p>
+<ul>
+  <li>Illumina and PacBio HiFi: more accurate</li>
+  <li>ONT and PacBio CLR: less accurate (but longer)
+]</li>
+</ul>
+
+<p>.pull-rigth[
+.image-40[
+  <img src="../../images/genome_assembly_introduction/reads-accuracy-distribution.png" alt="Reads accuracy distribution" />
+]]</p>
+
+<hr />
+
+<h3 id="appropriate-sequencing-technology-coverage-versus-depth">Appropriate sequencing technology: Coverage versus depth</h3>
+
+<p>.left[
+<strong>Coverage in terms of redundancy</strong></p>
+
+<p><strong>Coverage in terms of the percentage coverage of a reference by reads</strong></p>
+
+<p>Intuitively, increase sequencing depth should increase both types of coverage.
+]</p>
+
+<p>.image-40[
+  <img src="../../images/genome_assembly_introduction/coverage-x-GC.png" alt="Sequencing coverage by GC content" />
+]</p>
+
+<p>.footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]</p>
+
+<hr />
+
+<h3 id="computational-resources-and-requirements">Computational resources and requirements</h3>
+
+<p>.left[
+To be successful, you must have <strong>sufficient computing resources (CPUS, RAM, walltime and storage)</strong>.</p>
+<ul>
+  <li>The resources needed are <strong>different</strong> for each step:
+    <ul>
+      <li>Assembly</li>
+      <li>Annotation</li>
+      <li>Other analysis tools</li>
+    </ul>
+  </li>
+  <li>For genome <strong>assembly:</strong>
+    <ul>
+      <li>Running times and RAM increase with data <strong>type</strong> and <strong>amount</strong></li>
+      <li>More data for large genomes, increase <strong>runtime/RAM/Storage</strong></li>
+      <li>Most of tools <strong>run</strong> on a <strong>single node</strong>: they are parallelized but not distributed</li>
+    </ul>
+  </li>
+  <li>For genome <strong>annotation:</strong>
+    <ul>
+      <li>Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed</li>
+      <li>Annotation process can be parallelized and distributed
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="typical-sequencing-strategies-bacterial-genomes">Typical sequencing strategies: Bacterial genomes</h3>
+
+<p>.left[</p>
+<ul>
+  <li>PacBio CLR or Oxford Nanopore reads at 40-50x coverage, self-correction and/or hybrid correction (using Illumina data)</li>
+  <li>Illumina 2x250bp paired-end reads from MiSeq
+]</li>
+</ul>
+
+<hr />
+
+<h3 id="typical-sequencing-strategies-larger-genomes">Typical sequencing strategies: Larger genomes</h3>
+
+<p>.left[</p>
+<ul>
+  <li>PacBio CLR or Oxford Nanopore reads at 100x coverage, hybrid correction using Illumina data and scaffolding using Hi-C</li>
+  <li>PacBio HiFi reads at 30x coverage and scaffolding using Hi-C</li>
+  <li>PacBio HiFi reads at 30x coverage, 120x Oxford Nanopore ultra long reads
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="bioinformatics-data-formats">Bioinformatics data formats</h1>
+
+<p>.left[
+<strong>FASTA</strong>: a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes.
+]</p>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/fasta_format.png" alt="Fasta format description" />
+]
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span></p>
+
+<p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
+
+<hr />
+
+<h1 id="bioinformatics-data-formats-1">Bioinformatics data formats</h1>
+
+<p>.left[
+<strong>FASTQ</strong>: a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores (Phred). Both the sequence letter and quality score are each encoded with a single ASCII character for brevity. It’s the standard sequencing output for Illumina and MGI sequencers.
+]</p>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/fastq_format.png" alt="Fastq format description" />
+]
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span></p>
+
+<p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
+
+<hr />
+
+<h1 id="bioinformatics-data-formats-2">Bioinformatics data formats</h1>
+
+<p>.left[
+<strong>FAST5</strong>: the standard sequencing output for Oxford Nanopore sequencers. It is based on the hierarchical data format HDF5 format which enables storage of large and complex data. In contrast to fasta and fastq files a FAST5 file is binary and can not be opened with a normal text editor. Data stored in nanopore FAST5 files can contain the sequence of a read in fastq format (after basecalling), the raw signal of the pore as well as several log files and other information
+]</p>
+
+<p>.image-100[
+  <img src="../../images/genome_assembly_introduction/fast5_hdfViewer.png" alt="Interactive view of a Fast5 with HDFview" />
+]</p>
+
+<hr />
+
+<h1 id="bioinformatics-data-formats-3">Bioinformatics data formats</h1>
+
+<p><strong>SAM (Sequence Alignment Map)</strong>: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.</p>
+
+<p><strong>BAM (Binary Alignment Map)</strong>: the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the SAM format. It’s the standard sequencing output for PacBio sequencers.</p>
+
+<p><strong>CRAM (Compressed Reference-oriented Alignment Map)</strong>: a compressed columnar file format for storing biological sequences aligned to a reference sequence.</p>
+
+<p>.pull-left[
+.image[
+  <img src="../../images/genome_assembly_introduction/sam_format.png" alt="SAM format description" />
+]]</p>
+
+<p>.pull-right[
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span>
+]</p>
+
+<p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>We learned the definitions of bioinformatics terms used in genomes assembly and annotation</li>
+
+<li>We have seen the bioinformatics file formats used for these analyses</li>
+
+<li>We learned the importance of preparing the project to ensure its success</li>
+
+<li>We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+<h2 id="bibliography">References</h2>
+<ol class="bibliography"><li id="datacompression2016">Hosseini, M., D. Pratas, and A. Pinho, 2016 <b>A Survey on Data Compression Methods for Biological Sequences</b>. Information 7: 56. <a href="https://doi.org/10.3390/info7040056">10.3390/info7040056</a></li></ol>
+
+
+
+
+
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/gallantries/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Gallantries</div>
+			<div class="description">
+			This project (2020-1-NL01-KA203-064717) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
+
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/assembly/tutorials/get-started-genome-assembly/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/assembly/tutorials/get-started-genome-assembly/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

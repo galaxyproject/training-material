@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nSingle-End FASTQs"]
+  1[color=lightblue,label="ℹ️ Input Collection\nPaired-End FASTQs"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nMycobacterium_tuberculosis_ancestral_reference.gbk"]
+  3[label="Trimmomatic"]
+  0 -> 3 [label="output"]
+  4[label="Trimmomatic"]
+  1 -> 4 [label="output"]
+  5[label="Mapping and variant calling of SINGLE END FASTQs with snippy"]
+  3 -> 5 [label="fastq_out"]
+  2 -> 5 [label="output"]
+  6[label="Mapping and variant calling of PAIRED END FASTQs with snippy"]
+  4 -> 6 [label="fastq_out_paired"]
+  2 -> 6 [label="output"]
+  7[label="Merge PE/SE VCFs in a single collection with all samples"]
+  5 -> 7 [label="snpvcf"]
+  6 -> 7 [label="snpvcf"]
+  8[label="Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler"]
+  5 -> 8 [label="snpsbam"]
+  6 -> 8 [label="snpsbam"]
+  9[label="TB Variant Filter"]
+  7 -> 9 [label="output"]
+}

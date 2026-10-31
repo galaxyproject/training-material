@@ -1,0 +1,53 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ntrain clinincal data"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ntest clinincal data"]
+  2[color=lightblue,label="ℹ️ Input Dataset\ntrain omics 1"]
+  3[color=lightblue,label="ℹ️ Input Dataset\ntest omics 1"]
+  4[color=lightblue,label="ℹ️ Input Dataset\ntrain omics 2"]
+  5[color=lightblue,label="ℹ️ Input Dataset\ntest omics 2"]
+  6[label="Flexynesis"]
+  5 -> 6 [label="output"]
+  4 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  0 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  k5791b446d5ab4647a04fd96daa9f615b[color=lightseagreen,label="Output\nflexynesis output"]
+  6 -> k5791b446d5ab4647a04fd96daa9f615b
+  7[label="Extract test embeddings"]
+  6 -> 7 [label="results"]
+  8[label="Louvain clustering"]
+  7 -> 8 [label="output"]
+  1 -> 8 [label="output"]
+  k344ac3872dfa46298c033d5b336420da[color=lightseagreen,label="Output\nlouvain clustering"]
+  8 -> k344ac3872dfa46298c033d5b336420da
+  9[label="Dimred true value"]
+  7 -> 9 [label="output"]
+  1 -> 9 [label="output"]
+  k9ba13d6c2caf4625bde6874da3516cf6[color=lightseagreen,label="Output\numap - true_value"]
+  9 -> k9ba13d6c2caf4625bde6874da3516cf6
+  10[label="Get optimal clusters"]
+  7 -> 10 [label="output"]
+  8 -> 10 [label="util_out"]
+  ke12faae219cd478e951d541769ab0988[color=lightseagreen,label="Output\nk-means clustering"]
+  10 -> ke12faae219cd478e951d541769ab0988
+  11[label="Label concordance true vs louvain"]
+  10 -> 11 [label="util_out"]
+  k1cd385d5ed0b43449a5cffebaae59349[color=lightseagreen,label="Output\nconcordance plot"]
+  11 -> k1cd385d5ed0b43449a5cffebaae59349
+  12[label="compute ami_ari true vs lovain"]
+  10 -> 12 [label="util_out"]
+  k727d1cdef4a54ddf8e173aa117f61b68[color=lightseagreen,label="Output\namir_ari true vs louvain"]
+  12 -> k727d1cdef4a54ddf8e173aa117f61b68
+  13[label="compute ami_ari true vs optimal_cluster"]
+  10 -> 13 [label="util_out"]
+  k7b904d9ae082460ebd2e3f18b27dc3dc[color=lightseagreen,label="Output\namir_ari true vs k-means"]
+  13 -> k7b904d9ae082460ebd2e3f18b27dc3dc
+  14[label="Dimred louvain"]
+  7 -> 14 [label="output"]
+  10 -> 14 [label="util_out"]
+  k6346a63ffd0644ad93b342b41675d1a5[color=lightseagreen,label="Output\numap - louvain"]
+  14 -> k6346a63ffd0644ad93b342b41675d1a5
+}

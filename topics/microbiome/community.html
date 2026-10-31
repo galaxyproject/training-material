@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/community.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-12-19 14:39:45 +0000"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/community.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/community.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+<h1>Microbiome — Community Home</h1>
+
+This is a new, experimental "Community Home" for a given topic. It is intended to highlight community contributions over the years to a topic!
+
+
+<style>
+:root {--stat-box-color-news: hsl(40, 100%, 85%);--stat-box-color-events: hsl(80, 100%, 85%);--stat-box-color-learning-pathways: hsl(120, 100%, 85%);--stat-box-color-tutorials: hsl(160, 100%, 85%);--stat-box-color-slides: hsl(200, 100%, 85%);--stat-box-color-recordings: hsl(240, 100%, 85%);--stat-box-color-faqs: hsl(280, 100%, 85%);--stat-box-color-workflows: hsl(320, 100%, 85%);--stat-box-color-grants: hsl(360, 100%, 85%);--stat-box-color-organisations: hsl(400, 100%, 85%);--stat-box-color-contributors: hsl(440, 100%, 85%);}
+</style>
+
+
+
+
+<div class="row">
+	<div class="col-md-6">
+		<figure>
+			<canvas id="materials-over-time" height="250"></canvas>
+			<figcaption>Materials Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="contributors-over-time" height="250"></canvas>
+			<figcaption>Contributors Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="workflows-over-time" height="250"></canvas>
+			<figcaption>Workflows Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="other-over-time" height="250"></canvas>
+			<figcaption>Other Contributions Over Time</figcaption>
+		</figure>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2026 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">6</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/2027-03-01-hts-workshop-freiburg.html">Workshop on high-throughput sequencing data analysis with Galaxy</a></li>
+				
+				<li><a href="/training-material/events/2026-05-18-galaxy-academy.html">Galaxy Training Academy 2026</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/dunnart_metabarcoding/tutorial.html">Introduction to Metabarcoding using QIIME 2</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/samestr-strain-detection/tutorial.html">Detection of shared microbial strains with SameStr</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of Remove contamination and host reads</a></li>
+				
+				<li><a href="/training-material">Recording of Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads</a></li>
+				
+				<li><a href="/training-material">Recording of Assembly of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material">Recording of Binning of metagenomic sequencing data</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Metabarcoding Dunnart QIIME2 Analysis</a></li>
+				
+				<li><a href="/training-material">SamestrGal</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@laurageissler</a></li>
+				
+				<li><a href="/training-material">@gkphilip</a></li>
+				
+				<li><a href="/training-material">@egmg726</a></li>
+				
+				<li><a href="/training-material">@adungan31</a></li>
+				
+				<li><a href="/training-material">@xens25</a></li>
+				
+				<li><a href="/training-material">@gdefazio</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2025 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-learning-pathways);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Learning Pathways
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">6</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">10</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-organisations);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Organisations
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">7</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/2026-03-09-hts-workshop-freiburg.html">Workshop on high-throughput sequencing data analysis with Galaxy</a></li>
+				
+				<li><a href="/training-material/events/2025-06-10-mtb-ngs.html">Mycobacterium tuberculosis complex NGS made easy</a></li>
+				
+				<li><a href="/training-material/events/2025-06-30-hts-workshop-freiburg.html">From Data to Discovery: Metagenomics, RNA-Seq - NGS Bioinformatics with Galaxy</a></li>
+				
+				<li><a href="/training-material/events/2025-05-12-galaxy-academy-2025.html">Galaxy Training Academy 2025</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Learning Pathways</h3>
+				<ul>
+				
+				<li><a href="/training-material/learning-pathways/mags.html">Building and Annotating Metagenome-Assembled Genomes (MAGs) from Metagenomics Reads</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/host-removal/tutorial.html">Remove contamination and host reads</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mags-building/tutorial.html">Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metasbt/tutorial.html">Indexing and profiling microbes with MetaSBT</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mgnify-amplicon/tutorial.html">MGnify v5.0 Amplicon Pipeline</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metaplasmidome_query/tutorial.html">Query an annotated mobile genetic element database to identify and annotate genetic elements (e.g. plasmids) in metagenomics data</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of Taxonomic Profiling and Visualization of Metagenomic Data</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/minimum_mag_length.html">Minimum MAG length</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/minimum_mag_completeness_percentage.html">Minimum MAG completeness percentage</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/maximum_mag_contamination_percentage.html">Maximum MAG contamination percentage</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/checkm_checkm2.html">CheckM2 vs CheckM</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/ani_dereplication_threshold.html">ANI threshold for dereplication</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/ani.html">Average Nucleotide Identity (ANI): A Measure of Genomic Similarity</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Host contamination removal</a></li>
+				
+				<li><a href="/training-material">Metagenomic Binning</a></li>
+				
+				<li><a href="/training-material">MGnify amplicon summary tables</a></li>
+				
+				<li><a href="/training-material">MGnify's amplicon pipeline v5.0 - rRNA prediction</a></li>
+				
+				<li><a href="/training-material">MGnify's amplicon pipeline v5.0 - Quality control SE</a></li>
+				
+				<li><a href="/training-material">MGnify's amplicon pipeline v5.0 - Quality control PE</a></li>
+				
+				<li><a href="/training-material">MGnify's amplicon pipeline v5.0 - ITS</a></li>
+				
+				<li><a href="/training-material">MGnify's amplicon pipeline v5.0</a></li>
+				
+				<li><a href="/training-material">MAPseq to ampvis2</a></li>
+				
+				<li><a href="/training-material">Query a metaplasmidome database to identify and annotate plasmids in metagenomes</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Organisations</h3>
+				<ul>
+				
+				<li><a href="/training-material">@deKCD</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@mthang</a></li>
+				
+				<li><a href="/training-material">@vinisalazar</a></li>
+				
+				<li><a href="/training-material">@santamccloud</a></li>
+				
+				<li><a href="/training-material">@ogerdfx</a></li>
+				
+				<li><a href="/training-material">@Tarnima-Omara</a></li>
+				
+				<li><a href="/training-material">@tflowers15</a></li>
+				
+				<li><a href="/training-material">@dadrasarmin</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2024 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-news);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					News
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-learning-pathways);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Learning Pathways
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">6</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">8</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+				
+
+				<h3>News</h3>
+				<ul>
+				
+				<li><a href="/training-material/news/2024/07/08/4th-mycobamycobacterium-tuberculosis-complex-ngs-made-easy.html">4th Mycobacterium tuberculosis complex NGS made easy</a></li>
+				
+				<li><a href="/training-material/news/2024/06/06/dada2-tutorial.html">New Galaxy training: Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/2025-03-10-hts-workshop-freiburg.html">Workshop on high-throughput sequencing data analysis with Galaxy</a></li>
+				
+				<li><a href="/training-material/events/2024-07-22-freiburg-july.html">Workshop on high-throughput sequencing data analysis with Galaxy</a></li>
+				
+				<li><a href="/training-material/events/galaxy-academy-2024.html">Galaxy Training Academy 2024</a></li>
+				
+				<li><a href="/training-material/events/2024-06-10-mtb-ngs.html">Mycobacterium tuberculosis complex NGS made easy</a></li>
+				
+				<li><a href="/training-material/events/2023-10-02-mtb-ngs.html">Mycobacterium tuberculosis complex NGS made easy</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Learning Pathways</h3>
+				<ul>
+				
+				<li><a href="/training-material/learning-pathways/amr-gene-detection.html">Detection of AMR genes in bacterial genomes</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html">Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/diversity/tutorial.html">Calculating α and β diversity from microbiome taxonomic data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html">Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/qiime2-moving-pictures/tutorial.html">QIIME 2 Moving Pictures</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/qiime2-cancer-microbiome-intervention/tutorial.html">QIIME 2 Cancer Microbiome Intervention</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a></li>
+				
+				<li><a href="/training-material">Recording of Binning of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material">Recording of Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a></li>
+				
+				<li><a href="/training-material">Recording of Calculating α and β diversity from microbiome taxonomic data</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Workflow for Identifying MF from ITS2 sequencing using LotuS2 - tutorial example run'</a></li>
+				
+				<li><a href="/training-material">Calculating diversity from microbiome taxonomic data</a></li>
+				
+				<li><a href="/training-material">Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a></li>
+				
+				<li><a href="/training-material">Taxonomy Profiling and Visualization with Krona</a></li>
+				
+				<li><a href="/training-material">Pathogen Detection PathoGFAIR Samples Aggregation and Visualisation</a></li>
+				
+				<li><a href="/training-material">Allele-based Pathogen Identification</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@debroas</a></li>
+				
+				<li><a href="/training-material">@sujaikumar</a></li>
+				
+				<li><a href="/training-material">@igormakunin</a></li>
+				
+				<li><a href="/training-material">@bethanmanley</a></li>
+				
+				<li><a href="/training-material">@RZ9082</a></li>
+				
+				<li><a href="/training-material">@natalie-wa</a></li>
+				
+				<li><a href="/training-material">@clsiguret</a></li>
+				
+				<li><a href="/training-material">@minamehr</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2023 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-news);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					News
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-learning-pathways);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Learning Pathways
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">3</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">7</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">10</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-grants);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Grants
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+				
+
+				<h3>News</h3>
+				<ul>
+				
+				<li><a href="/training-material/news/2023/01/26/pathogen-detection-tutorial.html">New Tutorial: Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Learning Pathways</h3>
+				<ul>
+				
+				<li><a href="/training-material/learning-pathways/metagenomics.html">Metagenomics data processing and analysis for microbiome</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metagenomics-binning/tutorial.html">Binning of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/taxonomic-profiling/tutorial.html">Taxonomic Profiling and Visualization of Metagenomic Data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of 16S Microbial Analysis with mothur (short)</a></li>
+				
+				<li><a href="/training-material">Recording of Metatranscriptomics analysis using microbiome RNA-seq data (short)</a></li>
+				
+				<li><a href="/training-material">Recording of Metatranscriptomics analysis using microbiome RNA-seq data</a></li>
+				
+				<li><a href="/training-material">Recording of Taxonomic Profiling and Visualization of Metagenomic Data</a></li>
+				
+				<li><a href="/training-material">Recording of Identification of the micro-organisms in a beer using Nanopore sequencing</a></li>
+				
+				<li><a href="/training-material">Recording of Assembly of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material">Recording of Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/workflow_and_isolations.html">Do the pipelines work with both isolates and direct from raw meat? or only isolate?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/worflow_and_sequencing_techniques.html">Can we also use this workflow on Illumina raw reads?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/variant_calling_quality.html">Can we use snippy pipeline instead for the phylogenetic analysis?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/remaining_human_sequences.html">Isn't it awkward to find so many humans sequences there, since we filter for them before?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/kalamri_database_filtering.html">Is there a way to filter on the Kalimari database?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/importing_genomes.html">From where can I import other genomes?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_removal.html">For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_filtering_filter.html">What does `^.*Gallus|Homo|Bos.*$` mean?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/compining_fastq_files_of_one_sample.html">After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/kraken.html">Kraken2 and the k-mer approach for taxonomy classification</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Taxonomic Profiling and Visualization of Metagenomic Data</a></li>
+				
+				<li><a href="/training-material">Gene-based Pathogen Identification</a></li>
+				
+				<li><a href="/training-material">Nanopore Preprocessing</a></li>
+				
+				<li><a href="/training-material">workflow-generate-dataset-for-assembly-tutorial</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Grants</h3>
+				<ul>
+				
+				<li><a href="/training-material">@eosc-life</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@katherine-d21</a></li>
+				
+				<li><a href="/training-material">@dechendb</a></li>
+				
+				<li><a href="/training-material">@npechl</a></li>
+				
+				<li><a href="/training-material">@sophia120199</a></li>
+				
+				<li><a href="/training-material">@paulzierep</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2022 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">6</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metagenomics-assembly/tutorial.html">Assembly of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/beer-data-analysis/tutorial.html">Identification of the micro-organisms in a beer using Nanopore sequencing</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/faqs/taxon.html">What is Taxonomy?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mothur-miseq-sop/faqs/input_not_found.html">The input for a tool is not listed in the dropdown</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/vsearch.html">Why don't we perform the V-Search dereplication step of ASaiM for metatrascriptomic data?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/single_end.html">Can this ASaiM workflow be used for single-end data?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/multiple_inputs.html">Can we use the ASaiM-MT workflow on multiple input files at the same time?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/fastq_interlacer_vs_joiner.html">Why do we use FASTQ interlacer and not the FASTQ joiner?</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Assembly of metagenomic sequencing data</a></li>
+				
+				<li><a href="/training-material">Identification of the micro-organisms in a beer using Nanopore sequencing</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@deeptivarshney</a></li>
+				
+				<li><a href="/training-material">@teresa-m</a></li>
+				
+				<li><a href="/training-material">@chensy96</a></li>
+				
+				<li><a href="/training-material">@plushz</a></li>
+				
+				<li><a href="/training-material">@abueg</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2021 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of Introduction to Microbiome Analysis</a></li>
+				
+				<li><a href="/training-material">Recording of Metatranscriptomics analysis using microbiome RNA-seq data (short)</a></li>
+				
+				<li><a href="/training-material">Recording of Antibiotic resistance detection</a></li>
+				
+				<li><a href="/training-material">Recording of 16S Microbial Analysis with mothur (short)</a></li>
+				
+				<li><a href="/training-material">Recording of Metatranscriptomics analysis using microbiome RNA-seq data</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mothur-miseq-sop/faqs/more_info.html">Where can I read more about this analysis?</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mothur-miseq-sop/faqs/adapting_to_different_data.html">How can I adapt this tutorial to my own data?</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@EngyNasr</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2020 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-slides);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Slides
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-grants);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Grants
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/nanopore-16S-metagenomics/tutorial.html">16S Microbial analysis with Nanopore data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics-short/tutorial.html">Metatranscriptomics analysis using microbiome RNA-seq data (short)</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Slides</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/slides.html">Introduction to metatranscriptomics</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Training: 16S rRNA Analysis with Nanopore Sequencing Reads</a></li>
+				
+				<li><a href="/training-material">Workflow 3: Functional Information (quick)</a></li>
+				
+				<li><a href="/training-material">Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 3: Functional Information</a></li>
+				
+				<li><a href="/training-material">Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 2: Community profile</a></li>
+				
+				<li><a href="/training-material">Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 1: Preprocessing</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Grants</h3>
+				<ul>
+				
+				<li><a href="/training-material">@gallantries</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@gallardoalba</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2019 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">3</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">9</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">7</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/tutorial.html">Metatranscriptomics analysis using microbiome RNA-seq data</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/plasmid-metagenomics-nanopore/tutorial.html">Antibiotic resistance detection</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mothur-miseq-sop-short/tutorial.html">16S Microbial Analysis with mothur (short)</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Metatranscriptomics analysis using microbiome RNA-seq data</a></li>
+				
+				<li><a href="/training-material">Copy Of GTN Training - Antibiotic Resistance Detection</a></li>
+				
+				<li><a href="/training-material">Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 5: OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 2: Data Cleaning And Chimera Removal [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				<li><a href="/training-material">Workflow 1: Quality Control [Galaxy Training: 16S Microbial Analysis With Mothur]</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@bedroesb</a></li>
+				
+				<li><a href="/training-material">@nagoue</a></li>
+				
+				<li><a href="/training-material">@emmaleith</a></li>
+				
+				<li><a href="/training-material">@nuwang</a></li>
+				
+				<li><a href="/training-material">@pravs3683</a></li>
+				
+				<li><a href="/training-material">@fpsom</a></li>
+				
+				<li><a href="/training-material">@njall</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2018 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Amplicon Tutorial</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@jraysajulga</a></li>
+				
+				<li><a href="/training-material">@willemdek11</a></li>
+				
+				<li><a href="/training-material">@blankenberg</a></li>
+				
+				<li><a href="/training-material">@subinamehta</a></li>
+				
+				<li><a href="/training-material">@cumbof</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2017 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-slides);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Slides
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-organisations);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Organisations
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">13</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/general-tutorial/tutorial.html">Analyses of metagenomics data - The global picture</a></li>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/mothur-miseq-sop/tutorial.html">16S Microbial Analysis with mothur (extended)</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Slides</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/microbiome/tutorials/introduction/slides.html">Introduction to Microbiome Analysis</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">WGS Part In "Analyses Of Metagenomics Data - The Global Picture"</a></li>
+				
+				<li><a href="/training-material">Training: 16S rRNA Sequencing With Mothur: Main Tutorial</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Organisations</h3>
+				<ul>
+				
+				<li><a href="/training-material">@elixir-europe</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@wm75</a></li>
+				
+				<li><a href="/training-material">@willdurand</a></li>
+				
+				<li><a href="/training-material">@tnabtaf</a></li>
+				
+				<li><a href="/training-material">@timothygriffin</a></li>
+				
+				<li><a href="/training-material">@shiltemann</a></li>
+				
+				<li><a href="/training-material">@pratikdjagtap</a></li>
+				
+				<li><a href="/training-material">@nsoranzo</a></li>
+				
+				<li><a href="/training-material">@hrhotz</a></li>
+				
+				<li><a href="/training-material">@hexylena</a></li>
+				
+				<li><a href="/training-material">@bgruening</a></li>
+				
+				<li><a href="/training-material">@bernt-matthias</a></li>
+				
+				<li><a href="/training-material">@bebatut</a></li>
+				
+				<li><a href="/training-material">@annasyme</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<h2>Cumulative Data as CSV</h2>
+<pre>
+year,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026
+news,0,0,0,0,0,0,0,0,1,3,3,3
+events,0,0,0,0,0,0,0,0,0,5,9,11
+learning-pathways,0,0,0,0,0,0,0,0,1,2,3,3
+tutorials,0,0,2,2,5,7,7,9,12,17,22,24
+slides,0,0,1,1,1,2,2,2,2,2,2,2
+recordings,0,0,0,0,0,0,5,5,12,16,17,21
+faqs,0,0,0,0,0,0,2,8,18,18,24,24
+workflows,0,0,2,3,12,17,17,19,23,29,39,41
+grants,0,0,0,0,0,1,1,1,2,2,2,2
+organisations,0,0,1,1,1,1,1,1,1,1,2,2
+contributors,0,0,13,18,25,26,27,32,37,45,52,58
+
+
+</pre>
+
+
+
+
+<style>
+.stat-box {
+	text-align: center;
+	border: 2px solid var(--border);
+	margin: 0.25em;
+	padding: 0.5em;
+	background: var(--stat-box-color);
+}
+.col-md-8 .row .col-md-12 h3:first-child {
+	margin-top: 0;
+}
+
+body[data-brightness="dark"] .stat-box {
+	background: none;
+	border: 2px solid var(--stat-box-color);
+}
+
+figure {
+	margin: 0.25em;
+	padding: 0.25em;
+
+	figcaption {
+		text-align: center;
+	}
+}
+
+.stat-box .title {
+	font-size: 300%;
+	font-weight: 900;
+}
+.year {
+	font-size: 500%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+<!-- use chart.js for graphs -->
+<script src="/training-material/assets/js/Chart.bundle.js"></script>
+
+<script>
+const style = getComputedStyle(document.body);
+const totals = {"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":2,"x":"2017-01-01"},{"y":3,"x":"2018-01-01"},{"y":12,"x":"2019-01-01"},{"y":17,"x":"2020-01-01"},{"y":17,"x":"2021-01-01"},{"y":19,"x":"2022-01-01"},{"y":23,"x":"2023-01-01"},{"y":29,"x":"2024-01-01"},{"y":39,"x":"2025-01-01"},{"y":41,"x":"2026-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":2,"x":"2017-01-01"},{"y":2,"x":"2018-01-01"},{"y":5,"x":"2019-01-01"},{"y":7,"x":"2020-01-01"},{"y":7,"x":"2021-01-01"},{"y":9,"x":"2022-01-01"},{"y":12,"x":"2023-01-01"},{"y":17,"x":"2024-01-01"},{"y":22,"x":"2025-01-01"},{"y":24,"x":"2026-01-01"}],"events":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":5,"x":"2024-01-01"},{"y":9,"x":"2025-01-01"},{"y":11,"x":"2026-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":13,"x":"2017-01-01"},{"y":18,"x":"2018-01-01"},{"y":25,"x":"2019-01-01"},{"y":26,"x":"2020-01-01"},{"y":27,"x":"2021-01-01"},{"y":32,"x":"2022-01-01"},{"y":37,"x":"2023-01-01"},{"y":45,"x":"2024-01-01"},{"y":52,"x":"2025-01-01"},{"y":58,"x":"2026-01-01"}],"recordings":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":5,"x":"2022-01-01"},{"y":12,"x":"2023-01-01"},{"y":16,"x":"2024-01-01"},{"y":17,"x":"2025-01-01"},{"y":21,"x":"2026-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":2,"x":"2021-01-01"},{"y":8,"x":"2022-01-01"},{"y":18,"x":"2023-01-01"},{"y":18,"x":"2024-01-01"},{"y":24,"x":"2025-01-01"},{"y":24,"x":"2026-01-01"}],"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"},{"y":3,"x":"2026-01-01"}],"organisations":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"},{"y":3,"x":"2026-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":2,"x":"2020-01-01"},{"y":2,"x":"2021-01-01"},{"y":2,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}]};
+
+const options = {
+	scales: {
+		yAxes: [{
+			ticks: {
+				beginAtZero: true
+			}
+		}],
+		xAxes: [{
+			type: 'time',
+			time: {
+				displayFormats:{month:'YYYY'},
+				unit: 'year',
+				distribution: 'linear'
+			}
+		}]
+	},
+	legend: {
+		display: true
+	},
+}
+
+function getStyleDarker(type, darker){
+	if (darker) {
+		return style.getPropertyValue(`--stat-box-color-${type}`).replaceAll('85%', '50%');
+	} else {
+		return style.getPropertyValue(`--stat-box-color-${type}`);
+	}
+}
+
+
+new Chart('materials-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.slides,
+				label: 'Slides',
+				borderColor: getStyleDarker("slides", true),
+				backgroundColor: getStyleDarker("slides", false),
+			},
+			{
+				data: totals.tutorials,
+				label: 'Tutorials',
+				borderColor: getStyleDarker("tutorials", true),
+				backgroundColor: getStyleDarker("tutorials", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('contributors-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.grants,
+				label: 'Grants',
+				borderColor: getStyleDarker("grants", true),
+				backgroundColor: getStyleDarker("grants", false),
+			},
+			{
+				data: totals.organisations,
+				label: 'Organisations',
+				borderColor: getStyleDarker("organisations", true),
+				backgroundColor: getStyleDarker("organisations", false),
+			},
+			{
+				data: totals.contributors,
+				label: 'Contributors',
+				borderColor: getStyleDarker("contributors", true),
+				backgroundColor: getStyleDarker("contributors", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('workflows-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.workflows,
+				label: 'Workflows',
+				borderColor: getStyleDarker("workflows", true),
+				backgroundColor: getStyleDarker("workflows", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('other-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.news,
+				label: 'News',
+				borderColor: getStyleDarker("news", true, true),
+				backgroundColor: getStyleDarker("news", true, false),
+				backgroundColor: getStyleDarker("news", false),
+			},
+			{
+				data: totals.events,
+				label: 'Events',
+				borderColor: getStyleDarker("events", true),
+				backgroundColor: getStyleDarker("events", false),
+			},
+			{
+				data: totals['learning-pathways'],
+				label: 'Learning Pathways',
+				borderColor: getStyleDarker("learning-pathways", true),
+				backgroundColor: getStyleDarker("learning-pathways", false),
+			},
+			{
+				data: totals.recordings,
+				label: 'Recordings',
+				borderColor: getStyleDarker("recordings", true),
+				backgroundColor: getStyleDarker("recordings", false),
+			},
+			{
+				data: totals.faqs,
+				label: 'Faqs',
+				borderColor: getStyleDarker("faqs", true),
+				backgroundColor: getStyleDarker("faqs", false),
+			},
+		]
+	},
+	options: options
+});
+
+
+</script>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/community.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/community.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,7 @@
+- Decide on the order of the lessons and who will teach which modules
+- Help the organizer set up the workshop webpage
+- Share emergency contact information with the organizer in case of last minute changes
+- Review the training material and suggest changes at max 2 days before
+- Make sure good quality wifi or wired internet connection in the room
+- Prepare microphone/headphones
+- Help organizer to create the recap slides for the end of each day (including newly learned file formats, usual HTS data analysis workflow)

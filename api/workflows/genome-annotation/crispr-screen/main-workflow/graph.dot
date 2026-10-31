@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nbroadgpp-brunello-library-contents.csv"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCalabrese_SetA_Guides_Reference.csv"]
+  2[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  3[label="FastQC"]
+  2 -> 3 [label="output"]
+  4[label="Cutadapt"]
+  2 -> 4 [label="output"]
+  5[label="MultiQC"]
+  3 -> 5 [label="text_file"]
+  6[label="MAGeCK count"]
+  4 -> 6 [label="out1"]
+  7[label="MAGeCKs test"]
+  6 -> 7 [label="counts"]
+}

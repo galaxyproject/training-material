@@ -1,0 +1,393 @@
+﻿---
+id: ref-based-rad-seq
+name: RAD-Seq Reference-based data analysis
+description: >-
+  The goal of this tutorial is to re-analyze the threespine stickleback
+  <i>Gasterosteus aculeatus</i> from the study of <a
+  href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe
+  et al. 2010</a>, at least until the population genomics statistics calculation
+  step using STACKS pipeline.
+title_default: ''
+steps:
+  - title: Introduction
+    content: >-
+      The goal of this tutorial is to re-analyze the threespine stickleback
+      <i>Gasterosteus aculeatus</i> from the study of <a
+      href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe
+      et al. 2010</a>, at least until the population genomics statistics
+      calculation step using STACKS pipeline.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In the study of <a
+      href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe
+      et al. 2010</a>, a genome scan of nucleotide diversity and differentiation
+      in natural populations of threespine stickleback Gasterosteus aculeatus
+      was conducted. Authors used Illumina-sequenced RAD tags to identify and
+      type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100
+      individuals from two oceanic and three freshwater populations.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      We here proposed to re-analyze these data at least until the population
+      genomics statistics calculation step using STACKS pipeline. Gasterosteus
+      aculeatus draft genome will be used here as reference genome. In a
+      reference-based RAD-seq data analysis, the reads are aligned (or mapped)
+      against a reference genome to constrain our analysis to focus on already
+      discovered loci. A de-novo approach can also be conducted (see <a
+      href="http://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html">de_novo
+      tutorial</a>, enhancing discoverability of new loci of interest but also
+      of false positive one).
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    content: >-
+      The original data is available at NCBI SRA ENA under accession number <a
+      href="https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310">SRR034310</a>
+      as part of the NCBI SRA ENA study accession number <a
+      href="https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747">SRP001747</a>.
+      <br><br>We will look at the first run SRR034310 out of seven which
+      includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8
+      from Rabbit Slough (oceanic). We will download the reads directly from SRA
+      and the remaining data (i.e reference genome, population map file, and
+      barcodes file) from <a
+      href="https://zenodo.org/record/1134547#.WkugUjfjJXI">Zenodo</a>.
+    backdrop: true
+  - title: Upload Reads from SRA
+    element: '#tool-search-query'
+    content: Search for "EBI SRA" tool
+    placement: right
+    textinsert: EBI SRA
+  - title: Upload Reads from SRA
+    element: '#tool-search'
+    content: Click on the "EBI SRA" tool to open it
+    placement: right
+  - title: Upload Reads from SRA
+    content: >-
+      <ul> <li>Select the Run from the results of the search for SRR034310
+      (which will present you 1 Experiment (SRX015877) and 1 Run
+      (SRR034310)).</li> <li>Click the link in the column FASTQ files (Galaxy)
+      of the results table</li> <li>This will redirect to the Galaxy website and
+      start the download.</li> </ul>
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here from <a
+      href="https://zenodo.org/record/1134547#.WkugUjfjJXI">zenodo</a>.
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and change the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something meaningful.<br><br>As we know here
+      that the datatype is fastqsanger, we can directly change it through the
+      upcoming method. Normally, you need to execute FastQGroomer to be sure to
+      have a correct fastqsanger file format. And if you don’t know how your
+      quality score is encoded on raw fastQ files, please, use the FastQC tool
+      to determine it!<ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Change the datatype in "Datatype" to `fastqsanger.gz`</li>
+        <li>Edit the “Database/Build” to select `stickleback`</li>
+      </ul>
+    position: left
+  - title: Demultiplexing reads
+    content: >-
+      For demultiplexing, we use the Process Radtags tool from <a
+      href="https://www.g3journal.org/content/1/3/171.full">STACKS</a>.
+    backdrop: true
+  - title: Demultiplexing reads
+    element: '#tool-search-query'
+    content: Search for "process radtags" tool
+    placement: right
+    textinsert: process radtags
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: Click on the "Stacks process radtags" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_procrad%2Fstacks_procrad%2F1.46.0"]
+        .tool-old-link
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Single-end or paired-end reads files" to `Single-end`</li>
+        <li>"singles-end reads infile(s)" to `SRR034310.fastq(.gz)`</li>
+        <li>"Barcode file" to `Barcodes_SRR034310.tabular`</li>
+        <li>"Number of enzymes" to `One`</li>
+        <li>"Enzyme" to `sbfI`</li>
+        <li>"Capture discarded reads to a file" to `Yes`</li>
+        <li>"Output format" to `fastq`</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: >-
+      <ul> <li>How many reads were on the original dataset?</li> <li>How many
+      are kept?</li> <li>Can you try to explain the reason why we loose a lot of
+      reads here?</li> <li>What kind of information this result gives concerning
+      the upcoming data analysis and the barcodes design in general?</li> </ul>
+    backdrop: false
+  - title: Demultiplexing reads
+    content: >-
+      In order to obtain results of higher quality we will play with the
+      advanced options.
+    backdrop: true
+  - title: Demultiplexing reads
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Click on the 'Run this job again' button to open the settings window with
+      the same parameters
+    position: left
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the same parameters, adding:
+      <ul>
+        <li>Click on `Advanced options'</li>
+        <li>"Discard reads with low quality scores" to `Yes`</li>
+        <li>"Set the score limit. If the average score within the sliding window drops below this value, the read is discarded (default 10)" to `10`</li>
+      </ul>
+    position: left
+  - title: Demultiplexing reads
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Click on the 'Run this job again' button to open the settings window with
+      the same parameters
+    position: left
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the same parameters, adding:
+      <ul>
+        <li>Click on `Advanced options'</li>
+        <li>"Discard reads with low quality scores" to `Yes`</li>
+        <li>"Set the score limit. If the average score within the sliding window drops below this value, the read is discarded (default 10)" to `20`</li>
+      </ul>
+    position: left
+  - title: Demultiplexing reads
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      You should have three `result.log with Stacks: process radtags` files in
+      your history for each different score we used. Copy the interesting files
+      from each and we should upload them as one file with Galaxy Upload
+      Manager.
+    position: left
+  - title: Uploading the new file
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input file
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input file
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Paste the copied lines here:<br><br>quality Retained Reads  Low Quality
+      Ambiguous Barcodes  Ambiguous RAD-Tag Total<br>20  2980543   5158988
+      626265    129493    8895289<br>10  7373160   766371    626265    129493
+      8895289<br>nolimit 8139531   0   626265    129493    8895289
+    placement: right
+  - title: Uploading the input file
+    content: Click on the "Settings" wheel and choose `Convert spaces to tabs`
+    backdrop: false
+  - title: Uploading the input file
+    element: '#btn-start'
+    content: Click on "Start" to start loading the file to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input file
+    element: '#btn-close'
+    content: Hit the close button to close this window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Uploading the input file
+    element: '.history-right-panel .list-items > *:first'
+    content: You can hit the 'Visualize' button and open 'Charts' to plot the data
+    position: left
+  - title: Quality control
+    content: >-
+      For quality control, we use similar tools as described in <a
+      href="http://training.galaxyproject.org/training-material/topics/sequence-analysis/">NGS-QC
+      tutorial</a>: <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>.
+    backdrop: true
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for "FastQC" tool
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.67"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: Execute the tool with default parameters.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the read length?</li></ul>
+    backdrop: false
+  - title: Quality control
+    content: >-
+      Note the quality drop at bases 5-10 which are the cut site of the RADSeq
+      protocol (TGCAGG). This is caused by the extremely uneven distribution the
+      sequencer observes TGCAGG in lockstep on all spots/clusters, i.e. all
+      clusters light up at the same time. Therefore the sequencer can not be
+      sure that each spot/cluster is correct which is expressed by the lower
+      quality score. Usually PhiX is added to reduce this problem, but in the
+      publication it is not stated if and to which extent this was done here.
+      Still, approximately ~99% of the cases match nucleotide expected for the
+      cut site sequence.<br><br> As there is a draft genome for <i>Gasterosteus
+      aculeatus</i>, we can use this information and map the sequences on this
+      genome to identify polymorphism.
+    backdrop: true
+  - title: Mapping
+    content: >-
+      To make sense of the reads, their positions within <i>Gasterosteus
+      aculeatus</i> genome must be determined. This process is known as aligning
+      or ‘mapping’ the reads to the reference genome. <br><br>Here we will use
+      BWA. BWA is a fast light-weighted tool that aligns relatively short
+      sequences (queries) to a sequence database (large), such as the human
+      reference genome. It is developed by Heng Li at the Sanger Institute.
+    backdrop: true
+  - title: Mapping
+    element: '#tool-search-query'
+    content: Search for "Map with BWA" tool
+    placement: right
+    textinsert: Map with BWA
+  - title: Mapping
+    element: '#tool-search'
+    content: Click on the "Map with BWA" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa%2F0.7.17.4"]
+        .tool-old-link
+  - title: Mapping
+    element: '#tool-search'
+    content: |-
+      Execute the tool with following parameters:<ul>
+        <li>"Will you select a reference genome from your history or use a built-in index?" to `Use a genome from history and build index`</li>
+        <li>"Use the following dataset as the reference sequence" to `Reference_genome_11_chromosomes.fasta`</li>
+        <li>"Select input type" to `Single-end`</li>
+        <li>"Select fastq dataset" to one dataset collection containing the demultiplexed</li>
+        </ul>
+    position: left
+  - title: SNP calling from radtags
+    content: >-
+      We next want to run Stacks on the freshwater and oceanic
+      populations.<br><br> Run `Stacks: Reference map` Galaxy tool. This program
+      will run pstacks, cstacks, and sstacks using a perl scrip (ref_map.pl) on
+      the members of the population, accounting for the alignments of each read.
+    backdrop: true
+  - title: SNP calling from radtags
+    element: '#tool-search-query'
+    content: Search for "Stacks Reference map" tool
+    placement: right
+    textinsert: Stacks Reference map
+  - title: SNP calling from radtags
+    element: '#tool-search'
+    content: Click on the "Stacks Reference map" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_refmap%2Fstacks_refmap%2F1.46.0"]
+        .tool-old-link
+  - title: SNP calling from radtags
+    element: '#tool-search'
+    content: |-
+      Execute the tool with following parameters:<ul>
+        <li>"Select your usage:" to `population`</li>
+        <li>"Files containing an individual sample from a population" to data collection of mapped reads</li>
+        <li>"Specify a population map" to `Population_map.txt`</li>
+        <li>"Minimum depth of coverage" to `3`</li>
+        </ul>
+    position: left
+  - title: SNP calling from radtags
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once Stacks has completed running, investigate the output files: `Summary
+      from Stacks ref_map.log with Stacks` and `Catalog haplotypes (*)` (snps,
+      alleles and tags).
+    position: left
+  - title: Calculate population genomics statistics
+    element: '.history-right-panel .list-items > *:first'
+    content: 'Run the last step of <b>Stacks: Reference map</b> pipeline.'
+    position: left
+  - title: Calculate population genomics statistics
+    element: '#tool-search'
+    content: |-
+      Execute the tool with following parameters:<ul>
+        <li>"Input type" to `Stacks output`</li>
+        <li>"Output from previous Stacks pipeline steps (e.g. denovo_map or refmap)" to `Full output from ref_map`</li>
+        <li>"Specify a population map" to `Population_map.txt`</li>
+        <li>"Minimum percentage of individuals in a population required to process a locus for that population" to `0.75`</li>
+        <li>"Output results in Variant Call Format (VCF)" to `Yes`</li>
+        <li>"Output results in Structure Format" to `Yes`</li>
+        <li>"Enable SNP and haplotype-based F statistics" to `Yes`</li>
+        </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the maximum value of Fst at any SNP?</li>
+        <li>How many SNPs reach this Fst value?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      In this tutorial, we have analyzed real RAD sequencing data to extract
+      useful information, such as which loci are candidate regarding the genetic
+      differentiation between freshwater and oceanic Stickelback populations. To
+      answer these questions, we analyzed RAD sequence datasets using a
+      reference-based RAD-seq data analysis approach.
+    backdrop: true

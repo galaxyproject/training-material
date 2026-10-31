@@ -1,0 +1,73 @@
+title: SQL Advanced Recap
+contributors:
+- hexylena
+
+questions:
+- title: How do you find the number of records in a query result?
+  answers:
+    - count(name)
+    - count(*)
+    - sum(id)
+    - max(id)
+  correct:
+    - count(name)
+    - count(*)
+  timeout: 20
+  type: choose-many
+
+- title: How do you do a Pivot Table in SQL?
+  answers:
+    - where
+    - pivot
+    - order by
+    - group by
+  correct: group by
+  timeout: 20
+  type: choose-1
+
+- title: What is (generally) the correct ordering of keywords
+  answers:
+   - SELECT, FROM, JOIN, ORDER BY, WHERE
+   - SELECT, ORDER BY, FROM, JOIN, WHERE
+   - SELECT, FROM, JOIN, WHERE, ORDER BY
+   - SELECT, WHERE, FROM, JOIN, ORDER BY
+  correct: SELECT, FROM, JOIN, WHERE, ORDER BY
+  timeout: 20
+  type: choose-1
+
+- title: A foreign key is a value from one table, that uniquely identifies a record
+  answers:
+    - 'True'
+    - 'False'
+  correct: 'False'
+  timeout: 20
+  type: choose-1
+
+- title: Which of these joins is NOT valid
+  image: /training-material/topics/data-science/images/carpentries-sql/sql-join-structure.svg
+  answers:
+    - Select * From P as P1 Join P as P2 on P1.id = P2.id
+    - SELECT * From P Join Q Join V on P.id = Q.person and Q.taken = V.id
+    - SELECT * From S join Q on S.name=V.dated and V.site = Q.quant
+    - SELECT * From S Join V on S.name = V.site
+  correct: SELECT * From S join Q on S.name=V.dated and V.site = Q.quant
+  timeout: 60
+  type: choose-1
+
+- title: Which of these would make a BAD primary key
+  answers:
+    - An integer ID in a table of Courses
+    - A BSN in a table of People
+    - A human name in a table of People
+    - A video ID in a table of YoutubeVideos
+  correct: A human name in a table of People
+  timeout: 30
+  type: choose-1
+
+- title: A primary key is a value, or combination of values, that uniquely identifies each record in a table.
+  answers:
+    - 'True'
+    - 'False'
+  correct: 'True'
+  timeout: 20
+  type: choose-1

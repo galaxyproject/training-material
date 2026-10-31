@@ -1,0 +1,3382 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates / Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates / Variant Analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-02-24 15:19:25 +0000">
+<meta name="DC.creator" content="Jörg Wennmann"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Variant Analysis / Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates / Hands-on: Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates">
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-02-24 15:19:25 +0000",
+  "datePublished": "2025-02-24 15:19:25 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00528",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+  },
+  "abstract": "Baculoviruses of the family *Baculoviridae* are among the most intensively ",
+  "learningResourceType": "e-learning",
+  "name": "Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates",
+  "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Understand the significance of SNVs.\n- Determine variable SNV positions for multiple isolates using a common reference genome.\n- Transform the output (VCF file) to a readable table format.\n- Interpret the SNV data to analyse the intra-isolate variability of baculoviruses.",
+  "keywords": [
+    "Variant Analysis"
+  ],
+  "description": "## Abstract\n\nBaculoviruses of the family *Baculoviridae* are among the most intensively \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can the genetic variability of a baculovirus isolate be analysed?\n - How can single nucleotide variants (SNVs) be identified across multiple isolates?\n - How can SNVs be used as markers to analyse the composition of baculovirus isolates?\n\n\n## Learning Objectives\n\n- Understand the significance of SNVs.\n- Determine variable SNV positions for multiple isolates using a common reference genome.\n- Transform the output (VCF file) to a readable table format.\n- Interpret the SNV data to analyse the intra-isolate variability of baculoviruses.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wennj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wennj/",
+      "name": "Jörg Wennmann",
+      "image": "https://avatars.githubusercontent.com/wennj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3060-8992",
+      "@id": "https://orcid.org/0000-0003-3060-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wennj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wennj/",
+      "name": "Jörg Wennmann",
+      "image": "https://avatars.githubusercontent.com/wennj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3060-8992",
+      "@id": "https://orcid.org/0000-0003-3060-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/esg4stars/",
+          "name": "ESG4Stars",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://cordis.europa.eu/project/id/101290798"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "@id": "https://orcid.org/0000-0002-9464-6640"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/trim_galore",
+      "name": "Trim Galore"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bwa",
+      "name": "BWA"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/vcflib",
+      "name": "Vcflib"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bcftools",
+      "name": "BCFtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bcftools",
+      "name": "BCFtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/ggplot2",
+      "name": "ggplot2"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/ncbi_resources",
+      "name": "NCBI Resources"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/sra-tools",
+      "name": "SRA Software Toolkit"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Variant Analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/variant-analysis/faqs/" title="Check our FAQs for the Variant Analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-variant-analysis">
+    <h1 data-toc-skip>Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/wennj/" class="contributor-badge contributor-wennj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wennj?s=36" alt="Jörg Wennmann avatar" width="36" class="avatar" />
+    Jörg Wennmann</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/wennj/" class="contributor-badge contributor-badge-small contributor-wennj"><img src="https://avatars.githubusercontent.com/wennj?s=36" alt="Jörg Wennmann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-badge-small contributor-wm75"><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can the genetic variability of a baculovirus isolate be analysed?</p>
+</li>
+        
+        <li><p>How can single nucleotide variants (SNVs) be identified across multiple isolates?</p>
+</li>
+        
+        <li><p>How can SNVs be used as markers to analyse the composition of baculovirus isolates?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the significance of SNVs.</p>
+</li>
+        
+        <li><p>Determine variable SNV positions for multiple isolates using a common reference genome.</p>
+</li>
+        
+        <li><p>Transform the output (VCF file) to a readable table format.</p>
+</li>
+        
+        <li><p>Interpret the SNV data to analyse the intra-isolate variability of baculoviruses.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Quality Control</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Quality Control</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Mapping</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Mapping</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/workflows/" title="Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			Galaxy Main (US) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			Galaxy Australia <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			Galaxy France <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be" title="">
+			Galaxy Belgium <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ch" title="">
+			Galaxy Switzerland
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 24, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 24, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00528">https://gxy.io/GTN:T00528</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 2 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.md">1</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Baculoviruses of the family <em>Baculoviridae</em> (<span class="citation"><a href="#Harrison2018">Harrison <i>et al.</i> 2018</a></span>) are among the most intensively 
+studied viruses, not only because of their widespread application in biotechnology as protein expression 
+systems, medicine, and as biological insecticides (<span class="citation"><a href="#RodrguezHernndez2023">Rodríguez-Hernández <i>et al.</i> 2023</a></span>, 
+<span class="citation"><a href="#Cox2021">Cox <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Grzywacz2017">Grzywacz and Moore 2017</a></span>, <span class="citation"><a href="#Eberle2012">Eberle <i>et al.</i> 2012</a></span>, <span class="citation"><a href="#vanOers2011">van Oers 2011</a></span>). 
+Like all members of the class <em>Naldaviricetes</em>, 
+baculoviruses have large circular dsDNA genomes that, in the family <em>Baculoviridae</em>, 
+range from 90 to 180 kbp and can encode up to 180 open reading frames (ORFs). 
+A detailed description of the biology of the Baculoviridae family can be found in the
+official report of the International Committee on Taxonomy of Viruses (ICTV) (<span class="citation"><a href="#Harrison2018">Harrison <i>et al.</i> 2018</a></span>). A detailed summary can also be found on the <a href="https://ictv.global/">website of the ICTV</a>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-a-baculovirus-genome"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  A Baculovirus Genome</div>
+
+  <p>The genome of the isolate Autographa californica multiple nucleopolyhedrovirus isolate C6 (AcMNPV-C6)
+(family <em>Baculoviridae</em>, genus <em>Alphabaculovirus</em>, species <em>Alphabaculovirus aucalifornicae</em>) is one of the 
+best-studied baculovirus genomes and is 133,894 bp long (<span class="citation"><a href="#Ayres1994">Ayres <i>et al.</i> 1994</a></span>). 
+It is the first fully sequenced genome of baculoviruses and today hundreds of genomes are fully sequenced
+and publically available at NCBI Genbank. The genome of AcMNPV-C6 encodes for 154 open reading frames (ORF)
+in both forward and reverse orientation (see figure). 
+So far, 38 ORFs were identified, which are encoded by all baculoviruses sequenced to date and are 
+called baculovirus core genes. In addition to the core genes, genes were found 
+that are encoded by baculoviruses from the genera <em>Alphabaculovirus</em> and <em>Betabaculovirus</em>.</p>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="https://ictv.global/sites/default/files/inline-images/7651.ODD.Baculo.Fig2.v2.png" alt="Alternative text. " loading="lazy" /><a target="_blank" href="https://ictv.global/sites/default/files/inline-images/7651.ODD.Baculo.Fig2.v2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Figure: Schematic representation of the AcMNPV-C6 genome. ORFs and their orientation are indicated by arrows. (Figure from <span class="citation"><a href="#ICTV_AcMNPV_genome_figure">on Taxonomy of Viruses (ICTV)</a></span>)</figcaption></figure>
+
+</blockquote>
+
+<p>The genome size makes it difficult to study genetic variation within a baculovirus isolate, 
+especially since the most commonly used sequencing technique (Illumina sequencing) 
+generates only short reads and requires genome assembly. 
+Since an isolate represents a population of viruses and their genomes that differ genetically from one another, 
+the complexity of the analysis is further increased. 
+Typically, genome assemblies are performed that lead to the generation of a consensus sequence, 
+which usually reflects the majority of the sequenced virus population and intends to represent the entire isolate.
+The problem is that the consensus sequence can mask genetic variability.
+Tools for haplotype-sensitive assembly are available but so far have been established for viruses 
+with a relatively short genome but not for baculoviruses or other large dsDNA viruses. 
+Using Nanopore sequencing, it is possible to sequence significiant fragments of baculovirus genomes 
+to determine major haplotypes (<span class="citation"><a href="#Wennmann2024">Wennmann <i>et al.</i> 2024</a></span>).</p>
+
+<p>SNVs have been proven as a powerful tool for analyzing the genetic variability of sequenced baculovirus isolates (<span class="citation"><a href="#Fan2020">Fan <i>et al.</i> 2020</a></span>).
+SNVs are particularly useful for the analysis of intra-isolate specific
+variation, as many bioinformatic workflows and tools are established for SNV determination 
+and processing. For the identification of SNVs, Illumina sequencing data is mostly used, 
+as this sequencing technique provides highly accurate reads with a very low probability 
+of sequencing error. The data is usually provided and stored in FASTQ format.</p>
+
+<p>When a baculovirus isolate is sequenced, a dataset of sequence reads is 
+obtained that consists of a multitude of fragmented genomes and the exact reconstruction 
+of individual whole genomes is no longer possible. However, variable SNV positions can 
+be used as markers to count the frequency of the nucleotides that occur in the SNV positions. 
+The determination of the nucleotides is only possible because not one but many genomes 
+were sequenced. Therefore, the SNVs reflect the genetic variability of the isolate itself. 
+Although deletions and insertions can also occur, these are not covered in this tutorial.</p>
+
+<p>When multiple baculovirus isolates have been sequenced, SNV positions can be determined 
+that are specific to only certain isolates. These specific SNV markers can then be used 
+to identify an isolate based on sequencing data only, even when the isolate is present 
+in a mixture with other isolates. To enable this identification of baculovirus isolates, 
+SNV positions must be determined across multiple isolates using a common reference sequence. 
+This reference serves as an anchor for the detected SNV positions and must be chosen with care. 
+Based on the reference and the SNVs, SNV specificities can be determined for individual isolates.</p>
+
+<p>The tutorial presented here aims to explain…</p>
+<ul>
+  <li>the criteria for a suitable reference genome,</li>
+  <li>a workflow that can be used to call SNVs across multiple sequenced baculovirus isolates,</li>
+  <li>what is meant by SNV specificities and</li>
+  <li>how to determine the composition of an isolate based on other previously sequenced baculovirus isolates.</li>
+</ul>
+
+<p>The workflow is based on sequencing data from the Cydia pomonella granulovirus (CpGV) 
+(family <em>Baculoviridae</em>, genus <em>Betabaculovirus</em>). CpGV is used commercially in agriculture 
+for the biological control of larvae of the codling moth (<em>Cydia pomonella</em>), which cause 
+significant losses to fruit crops, such as apples and pears.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#dataset-preparation" id="markdown-toc-dataset-preparation">Dataset Preparation</a>    <ol>
+      <li><a href="#reference-genome-from-ncbi-genbank" id="markdown-toc-reference-genome-from-ncbi-genbank">Reference Genome from NCBI Genbank</a></li>
+      <li><a href="#paired-end-sequencing-data-from-ncbi-sra" id="markdown-toc-paired-end-sequencing-data-from-ncbi-sra">Paired-end Sequencing Data from NCBI SRA</a></li>
+    </ol>
+  </li>
+  <li><a href="#read-preprocessing-and-quality-control" id="markdown-toc-read-preprocessing-and-quality-control">Read Preprocessing and Quality Control</a></li>
+  <li><a href="#mapping-of-reads-to-the-reference-genome" id="markdown-toc-mapping-of-reads-to-the-reference-genome">Mapping of Reads to the Reference Genome</a></li>
+  <li><a href="#snp-calling-and-variant-detection" id="markdown-toc-snp-calling-and-variant-detection">SNP Calling and Variant Detection</a></li>
+  <li><a href="#vcf-to-table-transformation" id="markdown-toc-vcf-to-table-transformation">VCF to Table Transformation</a>    <ol>
+      <li><a href="#replace-sra-names-with-virus-abbreviations" id="markdown-toc-replace-sra-names-with-virus-abbreviations">Replace SRA Names with Virus Abbreviations</a></li>
+      <li><a href="#reduce-complexity-of-snv-table-to-first-alternative" id="markdown-toc-reduce-complexity-of-snv-table-to-first-alternative">Reduce Complexity of SNV Table to First Alternative</a></li>
+    </ol>
+  </li>
+  <li><a href="#visualizing-snv-variability-across-isolates" id="markdown-toc-visualizing-snv-variability-across-isolates">Visualizing SNV Variability Across Isolates</a></li>
+  <li><a href="#snv-specificity-determination" id="markdown-toc-snv-specificity-determination">SNV Specificity Determination</a></li>
+  <li><a href="#visualization-of-variable-snv-positions-by-specificity" id="markdown-toc-visualization-of-variable-snv-positions-by-specificity">Visualization of Variable SNV Positions by Specificity</a>    <ol>
+      <li><a href="#determining-the-potential-components-of-a-mixed-isolate" id="markdown-toc-determining-the-potential-components-of-a-mixed-isolate">Determining the Potential Components of a Mixed Isolate</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="dataset-preparation">Dataset Preparation</h1>
+
+<p>Let’s start at the very beginning with a new history and a detailed description 
+of the sequencing datasets as well as the reference sequence. 
+We will also have a closer look at the Illumina sequencing datasets, what we 
+know so far about them and what we can expect from the analysis. By doing this, 
+we will work our way towards our goal step by step.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the Galaxy history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="reference-genome-from-ncbi-genbank">Reference Genome from NCBI Genbank</h2>
+
+<p>Selecting the right or most suitable reference sequence is important if not critical for the entire analysis. The reference genome used in this tutorial is the Cydia pomonella granulovirus (Mexican isolate, CpGV-M). The function of the reference is to act as an anchor point to link detected SNV positions in all sequenced and analyzed isolates. Selecting a correct reference genome is critical because it must be as closely related as possible to the sequenced isolates. Therefore, it is best to use a reference from the same species that has been well analyzed by previous studies or the scientific community.  The following step will download the NCBI Accession Number <code class="language-plaintext highlighter-rouge">KM217575</code>, which corresponds to the <code class="language-plaintext highlighter-rouge">Cydia pomonella granulovirus isolate CpGV-M, complete genome</code>. It will later serve as the reference genome for the detection of SNV positions.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-reference-genome-download"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Reference genome download</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0" title="NCBI Accession Download tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI Accession Download</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.8+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Select source for IDs”</em>: <code class="language-plaintext highlighter-rouge">Direct Entry</code>
+          <ul>
+            <li><em>“ID List”</em>: <code class="language-plaintext highlighter-rouge">KM217575</code></li>
+          </ul>
+        </li>
+        <li><em>“Molecule Type”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide</code></li>
+        <li><em>“File Format”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-use-a-single-reference-genome-only"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Use a single reference genome only!</div>
+        <p><strong>The NCBI Accession Download</strong> tool accepts multiple NCBI accession numbers as input, which should be avoided, otherwise the workflow will fail. If you still want to use multiple reference genomes, then I recommend to run the entire workflow for each reference genome separately.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">NCBI Accession Download on: Downloaded files</code> (output of <strong>NCBI Accession Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-collapse-genbank-files"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Collapse Genbank files</div>
+        <p><strong>NCBI Accession Download</strong> accepts multiple accession numbers and creates a list as output. 
+Therefore, its output can contain multiple records. For this analysis just one reference genome
+is required and the list needs to be converted into a single file.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the collapsed collection containing the single reference genome; output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;.*$</code></li>
+            <li><em>“Replace with:”</em>: <code class="language-plaintext highlighter-rouge">&gt;CpGV-M </code></li>
+          </ul>
+        </li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-the-tool-does"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  What the tool does...</div>
+        <p>The find pattern <code class="language-plaintext highlighter-rouge">^&gt;.*$</code> searches for the <code class="language-plaintext highlighter-rouge">&gt;</code> and all characters that follow.
+Then everything (the entire line) is replaced by <code class="language-plaintext highlighter-rouge">&gt;CpGV-M</code>.</p>
+      </blockquote>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-why-we-change-the-name"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Why we change the name...</div>
+        <p>The reference genome is stored in a single file in FASTA format. After downloading from NCBI, the name of the reference is <code class="language-plaintext highlighter-rouge">&gt;KM217575.1 Cydia pomonella granulovirus isolate CpGV-M, complete genome</code>. The name is very long and can cause issues during later analysis (in R or Python). Therefore, I recommend to replace the name with the <strong>Replace text in entire line</strong> tool.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="paired-end-sequencing-data-from-ncbi-sra">Paired-end Sequencing Data from NCBI SRA</h2>
+
+<p>The tutorial is based on Illumina data sets from several isolates of the Cydia pomonella granulovirus (CpGV). 
+The CpGV is one of the most well-studied baculoviruses because many isolates have been sequenced and sequence 
+data sets are available at NCBI Genbank and NCBI SRA. We will use four CpGV isolates to decipher their 
+intra-isolate specific variation and try to draw conclusions about the isolate’s homogeneity or heterogeneity. 
+We will also encounter a mixed isolate (a more or less clean mixture of other previously sequenced CpGV isolates) 
+and learn how to recognize it. In addition, we will learn how to determine the composition 
+of this mixed isolate based on other sequenced CpGV isolates.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-detailed-cpgv-isolate-information"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Detailed CpGV Isolate Information</div>
+
+  <p>For those who want to delve deeper into the data sets, I have provided a table with links to NCBI SRA and related publications.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Isolate</th>
+        <th style="text-align: center">NCBI Genbank</th>
+        <th style="text-align: center">NCBI SRA</th>
+        <th style="text-align: center">Reference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">CpGV-M</td>
+        <td style="text-align: center">KM217575</td>
+        <td style="text-align: center"><a href="https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589148">SRR31589148</a></td>
+        <td style="text-align: center"><span class="citation"><a href="#Wennmann2020">Wennmann <i>et al.</i> 2020</a></span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">CpGV-S</td>
+        <td style="text-align: center">KM217573</td>
+        <td style="text-align: center"><a href="https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589147">SRR31589147</a></td>
+        <td style="text-align: center"><span class="citation"><a href="#Wennmann2020">Wennmann <i>et al.</i> 2020</a></span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">CpGV-E2</td>
+        <td style="text-align: center">KM217577</td>
+        <td style="text-align: center"><a href="https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589146">SRR31589146</a></td>
+        <td style="text-align: center"><span class="citation"><a href="#Alletti2017">Gueli Alletti <i>et al.</i> 2017</a></span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">CpGV-V15</td>
+        <td style="text-align: center">No assembly available</td>
+        <td style="text-align: center"><a href="https://www.ncbi.nlm.nih.gov/sra/SRX27041396">SRR31679023</a></td>
+        <td style="text-align: center"><span class="citation"><a href="#Fan2020">Fan <i>et al.</i> 2020</a></span></td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>Follow the steps below to download the four Illumina datasets published at NCBI SRA.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-ncbi-sra-data-download"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: NCBI SRA Data Download</div>
+
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/3.1.1+galaxy1" title="Download and Extract Reads in FASTQ format from NCBI SRA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Download and Extract Reads in FASTQ format from NCBI SRA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> with the following parameters:</p>
+
+  <ul>
+    <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">SRR accession</code></li>
+    <li><em>Accession</em>: <code class="language-plaintext highlighter-rouge">SRR31589146, SRR31589147, SRR31589148, SRR31679023</code></li>
+    <li><em>Select output format</em>: <code class="language-plaintext highlighter-rouge">gzip compressed fastq</code></li>
+    <li>Click Run Tool</li>
+  </ul>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-take-a-cup-of-coffee"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Take a cup of coffee</div>
+    <p>Downloading the data from NCBI SRA may take a while.
+It is a good opportunity to have a cup of coffee or tea.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="read-preprocessing-and-quality-control">Read Preprocessing and Quality Control</h1>
+
+<p>After the reference genome and the paired-end Illumina reads are loaded in the history, 
+it is time to start the analysis. First, the reads need to be adapter trimmed and
+quality filtered.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-learn-more-about-quality-of-reads"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-learn-more-about-quality-of-reads" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Learn more about quality of reads!</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Before and after trimming, it is usually a good idea to check the quality of the reads using FASTQC. 
+However, we will omit this step here. 
+If you are interested in learning more about read quality, I recommend the check the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Galaxy Training Quality Control</a> tutorial.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0" title="Trim Galore! tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trim Galore!</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6.7+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Is this library paired- or single-end?”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a paired collection”</em>: <code class="language-plaintext highlighter-rouge">Paired-end data (fastq-dump)</code> (output of <strong>Download and Extract Reads in FASTQ format from NCBI SRA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Advanced settings”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+            <li><em>“Discard reads that became shorter than length N”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+            <li><em>“specify if you would like to retain unpaired reads”</em>: <code class="language-plaintext highlighter-rouge">Do not output unpaired reads</code></li>
+          </ul>
+        </li>
+        <li><em>“RRBS specific settings”</em>: <code class="language-plaintext highlighter-rouge">Use defaults (no RRBS)</code></li>
+        <li><em>“Trimming settings”</em>: <code class="language-plaintext highlighter-rouge">Use defaults</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="mapping-of-reads-to-the-reference-genome">Mapping of Reads to the Reference Genome</h1>
+
+<p>Now the filtered reads of the individual isolates are mapped independently against the CpGV-M reference. 
+The key is that each isolate is mapped separately against the identical reference genome, so that in the end we get a Binary Alignment Mapping (BAM) file for each isolate.
+After that, everything we do with the sequence data is linked to the common reference.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-read-mapping-using-bcftools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Read mapping using bcftools</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.18)</span> with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: the renamed reference genome in FASTA format, output of <strong>Replace Text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a paired collection”</em>: the trimmed paired read collection, generated as output of <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (Picard style)</code>
+          <ul>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="snp-calling-and-variant-detection">SNP Calling and Variant Detection</h1>
+
+<p>The key part of the analysis is the determination of variable SNV positions, which is carried out in the following step. 
+Insertions/Deletions (indels) are deliberately omitted because they are not relevant for this analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-variable-snv-positions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Variable SNV positions</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_mpileup/bcftools_mpileup/1.15.1+galaxy4" title="bcftools mpileup tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools mpileup</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy4)</span> with the following parameters:
+      <ul>
+        <li><em>“Alignment Inputs”</em>: <code class="language-plaintext highlighter-rouge">Multiple BAM/CRAMs</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BAM/CRAMs”</em>: the BAM file collection; output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome Reference”</em>: the renamed reference genome in FASTA format, output of <strong>Replace Text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li>In <em>“Indel Calling”</em>:
+          <ul>
+            <li><em>“Perform INDEL calling”</em>: <code class="language-plaintext highlighter-rouge">Do not perform INDEL calling</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Input Filtering Options”</em>:
+          <ul>
+            <li><em>“Max reads per BAM”</em>: <code class="language-plaintext highlighter-rouge">1024</code></li>
+            <li><em>“Set filter by flags”</em>: <code class="language-plaintext highlighter-rouge">Do not filter</code></li>
+            <li><em>“Quality Options”</em>: <code class="language-plaintext highlighter-rouge">defaults</code></li>
+            <li><em>“Select read groups to include or exclude”</em>: <code class="language-plaintext highlighter-rouge">use defaults</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Restrict to”</em>:
+          <ul>
+            <li><em>“Regions”</em>: <code class="language-plaintext highlighter-rouge">Do not restrict to Regions</code></li>
+            <li><em>“Targets”</em>: <code class="language-plaintext highlighter-rouge">Do not restrict to Targets</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><em>“Optional tags to output”</em>: <code class="language-plaintext highlighter-rouge">DP (Number of high-quality bases)</code></li>
+            <li><em>“Optional tags to output”</em>: <code class="language-plaintext highlighter-rouge">DPR (Number of high-quality bases for each observed allele)</code></li>
+          </ul>
+        </li>
+        <li><em>“Output type”</em>: <code class="language-plaintext highlighter-rouge">uncompressed VCF</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-bcftools-mpileup-does"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  What bcftools mpileup does...</div>
+        <p>bcftools mpileup calculates the nucleotide coverage for each position in the reference genome based on the input BAM files. It enables preparation for variant analysis.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_call/bcftools_call/1.15.1+galaxy5" title="bcftools call tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools call</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy5)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF/BCF Data”</em>: the uncompressed VCF file; output of <strong>bcftools mpileup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Restrict to”</em>:
+          <ul>
+            <li><em>“Regions”</em>: <code class="language-plaintext highlighter-rouge">Do not restrict to Regions</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Consensus/variant calling Options”</em>:
+          <ul>
+            <li><em>“Calling method”</em>: <code class="language-plaintext highlighter-rouge">Multiallelic and rare-variant caller</code>
+              <ul>
+                <li><em>“Constrain”</em>: <code class="language-plaintext highlighter-rouge">Do not constrain</code>
+                  <ul>
+                    <li><em>“Targets”</em>: <code class="language-plaintext highlighter-rouge">Do not restrict to Targets</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“File format Options”</em>:
+          <ul>
+            <li><em>“Regions”</em>: <code class="language-plaintext highlighter-rouge">Do not restrict to Regions</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Input/output Options”</em>:
+          <ul>
+            <li><em>“Keep alts”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output variant sites only”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><em>“Output type”</em>: <code class="language-plaintext highlighter-rouge">uncompressed VCF</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-bcftools-call-does"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  What bcftools call does...</div>
+        <p>bcftools call performs the actual variant detection. It removes non variant and keeps variant sites only.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>What you get is a file in Variant Call Format (VCF), which can be difficult to understand at first glance. It is important to note that the file begins with a large header, lines that begin with two hashtags (##), which contain details of the analysis and the data set. After the header, there is a table with a line that contains the column names. This line begins with just one hashtag (#). After that, the results are displayed in a tab-separated format. In our VCF example, some columns have the following abbreviations and meanings (I just selected a few that are important to us in this tutorial):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Fixed fields</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>CHROM</strong></td>
+      <td style="text-align: left">Chromosome (name of the reference, in our case CpGV-M)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>POS</strong></td>
+      <td style="text-align: left">Position (position in the reference genome)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>REF</strong></td>
+      <td style="text-align: left">Nucleotide of the Referance at the corresponding position (POS)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>ALT</strong></td>
+      <td style="text-align: left">Alternative nucleotides detected at this position in the sequencing data.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>FORMAT</strong></td>
+      <td style="text-align: left">Describes the content of the <em>sample column</em> reported in the VCF file. In our case GT:PL:DP:DPR.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>SRR31589146</strong></td>
+      <td style="text-align: left">1st isolate: The results for the sequence data SRR31589146 in the format specified in FORMAT.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>SRR31589147</strong></td>
+      <td style="text-align: left">2nd isolate: The results for the sequence data SRR31589147 in the format specified in FORMAT.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>SRR31589148</strong></td>
+      <td style="text-align: left">3rd isolate: The results for the sequence data SRR31589148 in the format specified in FORMAT.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>SRR31679023</strong></td>
+      <td style="text-align: left">4th isolate: The results for the sequence data SRR31679023 in the format specified in FORMAT.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To understand how the data is stored, we have to look at FORMAT in detail. This is where two values are of great importance: DP and DPR.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Genotype field</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>DP</strong></td>
+      <td style="text-align: left">Read depth (number of nucleotides) at this position for this isolate.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>DPR</strong></td>
+      <td style="text-align: left">The read depth for each allele. Here, the first value corresponds to the reference nucleotide (REF), the second to the first possible allele (ALT1), the second to the second possible allele (ALT2) and the third value to the last possible allele (ALT3).</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-dpr-functional-but-deprecated"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: DPR functional, but deprecated</div>
+  <p>If you start <strong>bcftools mpileup</strong> with the <em>Optional tags to output</em> <code class="language-plaintext highlighter-rouge">DPR (Number of high-quality bases for each observed allele)</code> option, you will see a warning in the information panel of the VCF file: <code class="language-plaintext highlighter-rouge">[warning] tag DPR functional but deprecated. Please switch to AD in future.</code> At the time of writing this tutorial, I was using DPR. It works the same way with <em>Optional tags to output</em> option <code class="language-plaintext highlighter-rouge">AD</code> (instead of DPR), but you will need to adjust something later in the workflow. The tutorial will be switched to AD in the near future. For now, we stick with DPR.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-learn-more-about-variant-analysis-on-diploid-and-non-diploid-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-learn-more-about-variant-analysis-on-diploid-and-non-diploid-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Learn more about variant analysis on diploid and non-diploid data!</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Also take a look at other tutorials that deal with non-diploid (but also diploid) data sets to perform a variant analysis. Broadening your horizons is always important. I recommend the check the tutorials on …</p>
+  <ul>
+    <li><a href="/training-material/topics/variant-analysis/tutorials/dip/tutorial.html">Calling variants in diploid systems</a> and.</li>
+    <li><a href="/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html">Calling variants in non-diploid systems</a>.</li>
+  </ul>
+
+  <p>Maybe later? Then let’s continue.</p>
+</blockquote>
+
+<h1 id="vcf-to-table-transformation">VCF to Table Transformation</h1>
+
+<p>Now we come to an exciting part, because we have all the information we need to analyse the genetic variation within the sequenced virus isolates. The data is only hidden in the VCF file and is difficult for the beginner in bioinformatics to see. We have the positions (<code class="language-plaintext highlighter-rouge">POS</code>), which were detected as variable in the virus isolates. In addition, we know the number of all reads (and thus also nucleotides) in these positions (represented by <code class="language-plaintext highlighter-rouge">DP</code>). By using <code class="language-plaintext highlighter-rouge">DPR</code>, we obtain information on how often the alleles (the four possible nucleotides) occur at a particular position. To analyse <code class="language-plaintext highlighter-rouge">DP</code> and <code class="language-plaintext highlighter-rouge">DPR</code>, we first have to access it because the information is hidden in each <em>sample column</em> in the <code class="language-plaintext highlighter-rouge">FORMAT</code> genotype data. If we look at the first position <code class="language-plaintext highlighter-rouge">POS = 246</code> in sample column <code class="language-plaintext highlighter-rouge">SRR31589146</code>, the following data is visible:   <br />
+<code class="language-plaintext highlighter-rouge">1/1:255,134,0,255,255,255,255,255,255,255:886:107,773,6,0</code>.<br />
+The information provided by the FORMAT field explains the division of the data by colons: <code class="language-plaintext highlighter-rouge">GT:PL:DP:DPR</code>.</p>
+
+<p>We can break it down like this…</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">FORMAT genotype field</th>
+      <th style="text-align: left">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">GT</td>
+      <td style="text-align: left">1/1</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">PL</td>
+      <td style="text-align: left">255,134,0,255,255,255,255,255,255,255</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">DP</td>
+      <td style="text-align: left">886</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">DPR</td>
+      <td style="text-align: left">107,773,6,0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>GT = Genotype information, which cannot be used with virus isolates!<br />
+PL = Phred-scaled genotype likelihood (also not useable for us, because we do not have a diploid organism!)</p>
+
+<p>DPR can be broken down even further, since the individual values, which are separated by commas this time, can be assigned to the reference or the alternative nucleotides. In a virus isolate, four nucleotides (A, T, G and C) can theoretically occur at each position. One nucleotide defines the reference, leaving three alternatives: first (<code class="language-plaintext highlighter-rouge">ALT1</code>), second (<code class="language-plaintext highlighter-rouge">ALT2</code>) and third (<code class="language-plaintext highlighter-rouge">ALT3</code>) alternative.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">CHROM</th>
+      <th style="text-align: center">POS</th>
+      <th style="text-align: center">DP</th>
+      <th style="text-align: center">DPR</th>
+      <th style="text-align: center">ALT1</th>
+      <th style="text-align: center">ALT2</th>
+      <th style="text-align: center">ALT3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">CpGV-M</td>
+      <td style="text-align: center">246</td>
+      <td style="text-align: center">886</td>
+      <td style="text-align: center">107,773,6,0</td>
+      <td style="text-align: center">773</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If we now divide the absolute frequencies of <code class="language-plaintext highlighter-rouge">ALT1 = 773</code>, <code class="language-plaintext highlighter-rouge">ALT2 = 6</code> and <code class="language-plaintext highlighter-rouge">ALT3 = 0</code> by <code class="language-plaintext highlighter-rouge">DP = 886</code>, we get the relative frequencies (<code class="language-plaintext highlighter-rouge">REL.ALT</code>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">ALLELE</th>
+      <th style="text-align: center">REL.ALT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">ALT1</td>
+      <td style="text-align: center">0.87246</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ALT2</td>
+      <td style="text-align: center">0.00677201</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ALT3</td>
+      <td style="text-align: center">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-transfrom-vcf-to-tab-delimited-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Transfrom VCF to tab-delimited table</div>
+
+  <ol class="code-in">
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0" title="VCFtoTab-delimited: tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VCFtoTab-delimited:</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0_rc1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select VCF dataset to convert”</em>: the filtered VCF file; output of <strong>bcftools call</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Fill empty fields with”</em>: <code class="language-plaintext highlighter-rouge">NULL</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-an-easier-to-read-table"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  An easier-to-read table</div>
+        <p>This tool creates a table from the VCF file. The columns are tab-delimited. Take a look at the table and see if it is now easier to read. It can also be imported to R/RStudio/Excel more easily.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1" title="Text reformatting with awk tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting with awk</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the tab-delimited VCF table; output of <strong>VCFtoTab-delimited</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“AWK Program”</em>: <em>Paste the code from the code box below.</em>
+          <blockquote>
+            <div class="box-title code-in-title" id="code-in-awk"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: awk</div>
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BEGIN { FS="\t"; OFS="\t" }
+NR == 1 {
+
+    # Rename "SAMPLE" to "ISOLATE" in the header
+    for (i = 1; i &lt;= NF; i++) {
+        if ($i == "SAMPLE") $i = "ISOLATE";
+    }
+    # Identify column indices based on header names
+    for (i = 1; i &lt;= NF; i++) {
+        if ($i == "POS") pos_col = i;
+        if ($i == "ISOLATE") isolate_col = i;
+        if ($i == "DP") dp_col = i;
+        if ($i == "DPR") dpr_col = i;
+    }
+    # Check if all required columns are found
+    if (!(pos_col &amp;&amp; isolate_col &amp;&amp; dp_col &amp;&amp; dpr_col)) {
+        print "Error: One or more required columns (POS, ISOLATE, DP, DPR) are missing." &gt; "/dev/stderr";
+        exit 1;
+    }
+    # Print the new header
+    print $0, "ALLELE", "DPR.ALLELE", "REL.ALT", "REL.ALT.0.05";
+    next;
+}
+{
+    # Create a unique key for position and isolate
+    pos_isolate_key = $(pos_col) "_" $(isolate_col);
+
+    if (last_pos != $(pos_col)) {  # When a new position starts
+        delete isolate_count;      # Reset the isolate counter
+        last_pos = $(pos_col);     # Update the current position
+    }
+
+    # Split the DPR column into values
+    split($(dpr_col), dpr_values, ",");
+
+    # Count occurrences of each isolate per position
+    isolate_count[$(isolate_col)]++;
+    dpr_index = isolate_count[$(isolate_col)] + 1;  # Index for the alternate allele (starting at 2)
+
+    # Check if the index is valid
+    if (dpr_index &lt;= length(dpr_values)) {
+        allele = "ALT" (dpr_index - 1);            # Determine the allele
+        dpr_value = dpr_values[dpr_index];         # Get the corresponding DPR value
+        rel_alt = (dpr_value / $(dp_col));         # Calculate REL.ALT (DPR.ALLELE / DP)
+        rel_alt_filtered = (rel_alt &gt;= 0.05) ? rel_alt : 0;  # Filter REL.ALT values &lt; 0.05
+        print $0, allele, dpr_value, rel_alt, rel_alt_filtered;  # Output with new columns
+    }
+}
+</code></pre></div>            </div>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <ul>
+    <li>Click Run Tool</li>
+  </ul>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-create-allele-and-rel-alt-columns"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Create ALLELE and REL.ALT columns</div>
+    <p>The <strong>Text reformatting with awk</strong> tool allows the use of AWK code. AWK is for text processing and to performing complex tasks on data sets (such as tab-delimited files). We will come across AWK scripts again later. Here is a brief summary of what it does:</p>
+    <ul>
+      <li>Splitting <code class="language-plaintext highlighter-rouge">DPR</code> data into separate allele counts.</li>
+      <li>Calculating the relative allele frequencies (<code class="language-plaintext highlighter-rouge">REL.ALT</code>) for each allele.</li>
+      <li>Filtering out relative frequencies below a threshold of 0.05 and storing the result in <code class="language-plaintext highlighter-rouge">REL.ALT.0.05</code>.</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>The output table is complex and shows the relative frequency (<code class="language-plaintext highlighter-rouge">REL.ALT</code>) for each of the three alternative alleles/nucleotides (<code class="language-plaintext highlighter-rouge">ALT1</code>, <code class="language-plaintext highlighter-rouge">ALT2</code> and <code class="language-plaintext highlighter-rouge">ALT3</code>) in each position (<code class="language-plaintext highlighter-rouge">POS</code>) and sequenced CpGV isolate (<code class="language-plaintext highlighter-rouge">ISOLATE</code>). In column <code class="language-plaintext highlighter-rouge">REL.ALT.0.05</code>, values of the <code class="language-plaintext highlighter-rouge">REL.ALT &lt; 0.05</code> were set to 0 to set a threshold. We will see later why this is sometimes important.</p>
+
+<p>Below is the table with selected relevant columns only. <code class="language-plaintext highlighter-rouge">REL</code> and <code class="language-plaintext highlighter-rouge">ALT</code> show the reference and alternative nucleotide, respectively.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>CHROM</th>
+      <th>POS</th>
+      <th>REF</th>
+      <th>ALT</th>
+      <th>ISOLATE</th>
+      <th>DP</th>
+      <th>DPR</th>
+      <th>ALLELE</th>
+      <th>DPR.ALLELE</th>
+      <th>REL.ALT</th>
+      <th>REL.ALT.0.05</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>SRR31589146</td>
+      <td>886</td>
+      <td>107,773,6,0</td>
+      <td>ALT1</td>
+      <td>773</td>
+      <td>0.87246</td>
+      <td>0.873446</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>G</td>
+      <td>SRR31589146</td>
+      <td>886</td>
+      <td>107,773,6,0</td>
+      <td>ALT2</td>
+      <td>6</td>
+      <td>0.00677201</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>A</td>
+      <td>SRR31589146</td>
+      <td>886</td>
+      <td>107,773,6,0</td>
+      <td>ALT3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>SRR31589147</td>
+      <td>881</td>
+      <td>5,875,1,0</td>
+      <td>ALT1</td>
+      <td>875</td>
+      <td>0.99319</td>
+      <td>0.994305</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>G</td>
+      <td>SRR31589147</td>
+      <td>881</td>
+      <td>5,875,1,0</td>
+      <td>ALT2</td>
+      <td>1</td>
+      <td>0.00113507</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>A</td>
+      <td>SRR31589147</td>
+      <td>881</td>
+      <td>5,875,1,0</td>
+      <td>ALT3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>SRR31589148</td>
+      <td>935</td>
+      <td>800,133,1,1</td>
+      <td>ALT1</td>
+      <td>133</td>
+      <td>0.142246</td>
+      <td>0.142398</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>G</td>
+      <td>SRR31589148</td>
+      <td>935</td>
+      <td>800,133,1,1</td>
+      <td>ALT2</td>
+      <td>1</td>
+      <td>0.00106952</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>A</td>
+      <td>SRR31589148</td>
+      <td>935</td>
+      <td>800,133,1,1</td>
+      <td>ALT3</td>
+      <td>1</td>
+      <td>0.00106952</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>SRR31679023</td>
+      <td>839</td>
+      <td>42,797,0,0</td>
+      <td>ALT1</td>
+      <td>797</td>
+      <td>0.94994</td>
+      <td>0.950296</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>G</td>
+      <td>SRR31679023</td>
+      <td>839</td>
+      <td>42,797,0,0</td>
+      <td>ALT2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>A</td>
+      <td>SRR31679023</td>
+      <td>839</td>
+      <td>42,797,0,0</td>
+      <td>ALT3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="replace-sra-names-with-virus-abbreviations">Replace SRA Names with Virus Abbreviations</h2>
+
+<p>One thing that stands out are the NCBI SRA numbers in the ISOLATE column, which have been automatically extracted from the NCBI SRA datasets. Since it is difficult to remember which virus isolate is behind which number, we can replace these accession numbers with proper names, e.g. virus isolate abbreviations. This makes the table even easier to read and later we can use the information directly to display the SNV positions.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-replace-sra-accession-numbers-by-virus-isolate-abbreviations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Replace SRA accession numbers by virus isolate abbreviations</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the reformatted VCF table; output of <strong>Text reformatting with awk:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c25</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">SRR31589148</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">CpGV-M</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c25</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">SRR31589147</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">CpGV-S</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c25</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">SRR31589146</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">CpGV-E2</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c25</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">SRR31679023</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">CpGV-V15</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-what-is-replaced-by-what"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: What is replaced by what?</div>
+        <ol>
+          <li>Can you say which SRA number was replaced by which isolate abbreviation?
+            <blockquote class="solution">
+              <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <ul>
+                <li>SRR31589148 was replaced by CpGV-M</li>
+                <li>SRR31589147 was replaced by CpGV-S</li>
+                <li>SRR31589146 was replaced by CpGV-E2</li>
+                <li>SRR31679023 was replaced by CpGV-V15</li>
+              </ul>
+            </blockquote>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="reduce-complexity-of-snv-table-to-first-alternative">Reduce Complexity of SNV Table to First Alternative</h2>
+
+<p>Based on the SNV table, we can see that three possible nucleotides (alleles) occur in most positions. After filtering with a minimum threshold of REL.ALT &gt; 0.05, many relative frequencies of ALT2 and ALT3 are set to zero. At least it is visible that in the vast majority of positions only the first alternative has a value of &gt; 0.05. Thus, two nucleotides usually occur in the detected SNV positions: the reference nucleotide (REF) and the nucleotide of the first alternative (ALT1). We want to reduce the complexity of the data set and only consider ALT1 in the further course of this tutorial.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-keep-only-alt1-and-remove-alt2-and-alt3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Keep only ALT1 and remove ALT2 and ALT3</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the VCF table with the replaced isolate abbreviations; output of <strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c30=='ALT1'</code></li>
+        <li><em>“Numbers of header ines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-how-can-you-check-whether-only-two-nucleotides-occur-mostly-per-snv-position"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: How can you check whether only two nucleotides occur (mostly) per SNV position?</div>
+        <p>Think about an option how the occurance of one, two, three or four nucleotides per SNV position can be analyzed.</p>
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <p>When looking only at a table with several columns and numbers, it is difficult to understand that mainly a reference and one alternative nucleotide were detected in the SNV positions. 
+One way to examine the frequency of a second or third alternative nucleotide is to filter the table with <code class="language-plaintext highlighter-rouge">c30=='ALT2'</code> or <code class="language-plaintext highlighter-rouge">c30=='ALT3'</code> instead of <code class="language-plaintext highlighter-rouge">c30=='ALT1'</code>.
+The resulting table can be used to create a distribution over the <code class="language-plaintext highlighter-rouge">REL.ALT</code> values in column 32 (<code class="language-plaintext highlighter-rouge">c32</code>).</p>
+
+          <p>You can perform this analysis by using the following tools: <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, <strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract column 32 (<code class="language-plaintext highlighter-rouge">c32</code>), which corresponds to <code class="language-plaintext highlighter-rouge">REL.ALT</code>
+and <strong>Histogram with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+          <p>This task is left to you as a small challenge, if you like. It is up to you to familiarise yourself with the individual tools,
+but it could be worth it, as it could help you understand why we do not consider ALT2 and ALT3 further in the next steps.</p>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-be-careful-when-removing-data"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Be careful when removing data!</div>
+        <p>The data sets used here have already been analysed extensively and for this tutorial only the first alternative nucleotide (allele) is sufficient to explain the further workflow. Always be sure what you are doing when you remove data! Always ask yourself if you are allowed to do it and what the consequences might be.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="visualizing-snv-variability-across-isolates">Visualizing SNV Variability Across Isolates</h1>
+
+<p>The final table should be much easier to read and contain all the information we need to perform an analysis of the intra-isolate specific variability. Here is a short overview of the final table (selected columns) and its first three SNV positions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>CHROM</th>
+      <th>POS</th>
+      <th>REF</th>
+      <th>ALT</th>
+      <th>ISOLATE</th>
+      <th>DP</th>
+      <th>DPR</th>
+      <th>ALLELE</th>
+      <th>DPR.ALLELE</th>
+      <th>REL.ALT</th>
+      <th>REL.ALT.0.05</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>CpGV-E2</td>
+      <td>886</td>
+      <td>107,773,6,0</td>
+      <td>ALT1</td>
+      <td>773</td>
+      <td>0.87246</td>
+      <td>0.87246</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>CpGV-S</td>
+      <td>881</td>
+      <td>5,875,1,0</td>
+      <td>ALT1</td>
+      <td>875</td>
+      <td>0.99319</td>
+      <td>0.99319</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>CpGV-M</td>
+      <td>935</td>
+      <td>800,133,1,1</td>
+      <td>ALT1</td>
+      <td>133</td>
+      <td>0.142246</td>
+      <td>0.142246</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>246</td>
+      <td>C</td>
+      <td>T</td>
+      <td>CpGV-V15</td>
+      <td>839</td>
+      <td>42,797,0,0</td>
+      <td>ALT1</td>
+      <td>797</td>
+      <td>0.94994</td>
+      <td>0.94994</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>249</td>
+      <td>A</td>
+      <td>C</td>
+      <td>CpGV-E2</td>
+      <td>888</td>
+      <td>106,780,1</td>
+      <td>ALT1</td>
+      <td>780</td>
+      <td>0.878378</td>
+      <td>0.878378</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>249</td>
+      <td>A</td>
+      <td>C</td>
+      <td>CpGV-S</td>
+      <td>881</td>
+      <td>2,879,0</td>
+      <td>ALT1</td>
+      <td>879</td>
+      <td>0.99773</td>
+      <td>0.99773</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>249</td>
+      <td>A</td>
+      <td>C</td>
+      <td>CpGV-M</td>
+      <td>938</td>
+      <td>799,139,0</td>
+      <td>ALT1</td>
+      <td>139</td>
+      <td>0.148188</td>
+      <td>0.148188</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>249</td>
+      <td>A</td>
+      <td>C</td>
+      <td>CpGV-V15</td>
+      <td>843</td>
+      <td>48,793,2</td>
+      <td>ALT1</td>
+      <td>793</td>
+      <td>0.940688</td>
+      <td>0.940688</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>564</td>
+      <td>T</td>
+      <td>C</td>
+      <td>CpGV-E2</td>
+      <td>964</td>
+      <td>98,856,9,1</td>
+      <td>ALT1</td>
+      <td>856</td>
+      <td>0.887967</td>
+      <td>0.887967</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>564</td>
+      <td>T</td>
+      <td>C</td>
+      <td>CpGV-S</td>
+      <td>947</td>
+      <td>1,940,6,0</td>
+      <td>ALT1</td>
+      <td>940</td>
+      <td>0.992608</td>
+      <td>0.992608</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>564</td>
+      <td>T</td>
+      <td>C</td>
+      <td>CpGV-M</td>
+      <td>976</td>
+      <td>821,154,1,0</td>
+      <td>ALT1</td>
+      <td>154</td>
+      <td>0.157787</td>
+      <td>0.157787</td>
+    </tr>
+    <tr>
+      <td>CpGV-M</td>
+      <td>564</td>
+      <td>T</td>
+      <td>C</td>
+      <td>CpGV-V15</td>
+      <td>880</td>
+      <td>33,846,1,0</td>
+      <td>ALT1</td>
+      <td>846</td>
+      <td>0.961364</td>
+      <td>0.961364</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We can now start the first visualisation and create a plot for each CpGV isolate (<code class="language-plaintext highlighter-rouge">ISOLATE</code>), plotting the position of the SNV (<code class="language-plaintext highlighter-rouge">POS</code>) against the relative frequency of the alternative nucleotide (<code class="language-plaintext highlighter-rouge">REL.ALT</code>). Note that we are not using the REL.ALT threshold values because we want to look at the unfiltered data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-snv-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: SNV plot</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1" title="Scatterplot with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scatterplot with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input in tabular format”</em>: the ALT1-filtered VCF table; output of <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">SNV plot</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Reference Genome Position of CpGV-M</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Relative Nucleotide Frequency </code></li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Points only (default)</code>
+              <ul>
+                <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+              </ul>
+            </li>
+            <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">Plot multiple groups of data on individual plots</code>
+              <ul>
+                <li><em>“column differentiating the different groups”</em>: <code class="language-plaintext highlighter-rouge">25</code></li>
+              </ul>
+            </li>
+            <li><em>“Axis title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Grid lines”</em>: <code class="language-plaintext highlighter-rouge">Hide major and minor grid lines</code></li>
+            <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Unit of output dimensions”</em>: <code class="language-plaintext highlighter-rouge">Centimeters (cm)</code></li>
+            <li><em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">20.0</code></li>
+            <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">12.0</code></li>
+            <li><em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">200.0</code></li>
+          </ul>
+        </li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-column-names-and-numbers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Column names and numbers</div>
+        <p>To provide ggplot2 with the data for the X- and Y-axis, column numbers must be passed to the function. You have to check which column numbers the columns <code class="language-plaintext highlighter-rouge">POS</code> and <code class="language-plaintext highlighter-rouge">REL.ALT</code> have. In addition, ggplot2 offers the option of splitting the data according to <code class="language-plaintext highlighter-rouge">ISOLATE</code>, to obtain a separate plot for each value in ISOLATE.</p>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">POS</code> = column 2</li>
+          <li><code class="language-plaintext highlighter-rouge">REL.ALT</code> = column 32</li>
+          <li><code class="language-plaintext highlighter-rouge">ISOLATE</code> = column 25</li>
+        </ul>
+        <figure id="figure-2" style="max-width: 90%;"><img src="../../images/baculovirus-isolate-variation/galaxy_vcf_table_column_numbers_names.png" alt="VCF tab-delimited table with column names and numbers. " width="1002" height="660" loading="lazy" /><a target="_blank" href="../../images/baculovirus-isolate-variation/galaxy_vcf_table_column_numbers_names.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Section of the VCF table with column numbers and names.</figcaption></figure>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As a result, we get a SNV plot that shows the relative frequency of the first alternative nucleotide in all variable SNV positions. Before we have a closer look at the data, we have to remember that all the sequencing data (= the reads) were mapped during this workflow against the reference genome of CpGV-M. For that reason, all isolates are compared to the genome of CpGV-M. We see that CpGV-E2 has a heterogeneous SNV pattern. CpGV-M appears homogeneous but with relatively few genetic variation – but keep in mind that the sequence data of CpGV-M was mapped against its own reference, which is why one might assume less variability. For CpGV-S, the variability is also homogeneous, but many SNV positions have a nucleotide frequency close to one. This could indicate that the isolate is homogeneous but different from the reference CpGV-M. For isolate CpGV-V15, a SNV cloud occurs at approximately 0.5 (50%), which could indicate a mixed isolate. By “mixed”, it is meant that two or more (homogenous) isolates occur in a certain ratio in this isolate.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/baculovirus-isolate-variation/snp_plot.png" alt="SNV plot. " width="1574" height="944" loading="lazy" /><a target="_blank" href="../../images/baculovirus-isolate-variation/snp_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Single nucleotide variant (SNV) plot of all variable positions in the sequenced CpGV isolates CpGV-E2 (top left), CpGV-M (top right), CpGV-S (bottom left) and CpGV-V15 (bottom right). Each point represents the relative frequency of the first alternative nucleotide (allele).</figcaption></figure>
+
+<h1 id="snv-specificity-determination">SNV Specificity Determination</h1>
+
+<p>Now we come to the last but most complex section of this tutorial - determining SNV specificities. We have seen that CpGV-V15 is a mixed isolate. Now we want to find out which isolates were mixed and how this SNV pattern can be explained. In the next step, we will consider  SNV positions as markers and look for SNV positions that are only variable for one or more sequenced isolates of CpGV. If a SNV position is only variable for CpGV-S (i.e. the relative frequency is greater than 0; <code class="language-plaintext highlighter-rouge">REL.ALT &gt; 0</code>) but is equal to zero for the other isolates, then this position is a marker for CpGV-S, or specific for CpGV-S. Since we cannot perform this determination by hand for all positions, I have written a small program implemented in the <strong>Text reformatting with awk</strong> tool that does the work for us.</p>
+
+<p>Before we get started, I would like to explain specificity in more detail using an example. First, we decide that we want to determine the specificities for the SNV positions for the following isolates:</p>
+<ul>
+  <li>CpGV-M</li>
+  <li>CpGV-S</li>
+  <li>CpGV-E2.</li>
+</ul>
+
+<p>Isolate CpGV-V15 is not included in the analysis of SNV specificity determination because we want to explain its composition later with the other data sets.</p>
+
+<p>The principle behind SNV specificities and how they are determined can be explained by the table below. In the first position 249, all isolates (CpGV-E2, CpGV-S and CpGV-M) have a relative nucleotide frequency &gt; 0. This means that all three sequenced isolates have an alternative nucleotide at this position, with frequencies of 14.7%, 88% and &gt;99% for CpGV-M, CpGV-E2 and CpGV-S, respectively. The remaining percentages are the reference nucleotide. Note that I am using the <code class="language-plaintext highlighter-rouge">REL.ALT.0.05</code> values, which are based on the threshold of 0.05 (values &lt; 0.05 were set to zero). By this, the tutorial is simplified. Position 249 is thus variable for all three sequenced isolates and therefore specific for <code class="language-plaintext highlighter-rouge">CpGV-E2 + CpGV-S + CpGV-M</code>.
+In the second position 603, only CpGV-E2 has an alternative nucleotide, its <code class="language-plaintext highlighter-rouge">REL.ALT.0.05 &gt; 0</code>. The isolates of CpGV-S and CpGV-M show no variability in position 603 and are therefore identical to the reference. Thus, <code class="language-plaintext highlighter-rouge">position 603 is specific for CpGV-E2</code>. If we apply the same logic to positions 1278 and 6393, we can see that <code class="language-plaintext highlighter-rouge">position 1278 is specific for CpGV-S</code> and <code class="language-plaintext highlighter-rouge">position 6393 is specific for CpGV-E2 and CpGV-S</code>.<br />
+If we now wanted to detect specifically isolate CpGV-S and CpGV-E2 in a mixture, positions 603 and 1278 could serve as markers.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>POS</th>
+      <th>REL.ALT0.05 (CpGV-E2)</th>
+      <th>REL.ALT0.05 (CpGV-S)</th>
+      <th>REL.ALT0.05 (CpGV-M)</th>
+      <th>SNV Specificity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>249</td>
+      <td>0.878378</td>
+      <td>0.99773</td>
+      <td>0.148188</td>
+      <td>CpGV-E2 + CpGV-S + CpGV-M</td>
+    </tr>
+    <tr>
+      <td>603</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>CpGV-E2</td>
+    </tr>
+    <tr>
+      <td>1278</td>
+      <td>0</td>
+      <td>0.998963</td>
+      <td>0</td>
+      <td>CpGV-S</td>
+    </tr>
+    <tr>
+      <td>6393</td>
+      <td>0.98847</td>
+      <td>0.997783</td>
+      <td>0</td>
+      <td>CpGV-E2 + CpGV-S</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let us run the tool below to determine the SNV specificities of our dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-snv-specificity-determination"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SNV specificity determination</div>
+
+  <ol class="code-in">
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1" title="Text reformatting with awk tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting with awk</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the ALT1-filtered VCF table; output of <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“AWK Program”</em>: <em>Paste the code from the code box below.</em>
+          <blockquote>
+            <div class="box-title code-in-title" id="code-in-awk-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: awk</div>
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BEGIN { FS="\t"; OFS="\t" }
+NR == 1 {
+    # Dynamically find column indices based on header names
+    for (i = 1; i &lt;= NF; i++) {
+        if ($i == "POS") pos_col = i;
+        if ($i == "ALLELE") allele_col = i;
+        if ($i == "ISOLATE") isolate_col = i;
+        if ($i == "REL.ALT.0.05") rel_alt_col = i;
+    }
+
+    # Check if all required columns were found
+    if (!(pos_col &amp;&amp; allele_col &amp;&amp; isolate_col &amp;&amp; rel_alt_col)) {
+        print "Error: Required columns (POS, ALLELE, ISOLATE, REL.ALT.0.05) are missing." &gt; "/dev/stderr";
+        exit 1;
+    }
+
+    # Print the header and add the new SPEC column
+    print $0, "SPEC";
+    next;
+}
+
+{
+    # When reaching a new position, prepare the specificity
+    if ($(pos_col) != current_pos) {
+        # Assign the calculated specificity to all rows of the current position
+        for (i in pos_lines) {
+            # Add "SNV specificity: " before the specificity value
+            final_spec = (specificity == "" ? "0" : "SNV specificity: " specificity);
+            print pos_lines[i], final_spec;
+        }
+        # Reset variables for the new position
+        delete pos_lines;
+        specificity = "";
+        current_pos = $(pos_col);
+    }
+
+    # Save the current row for later
+    pos_lines[NR] = $0;
+
+    # Conditions for calculating specificity
+    if ($(allele_col) == "ALT1" &amp;&amp; 
+        ($(isolate_col) == "CpGV-E2" || $(isolate_col) == "CpGV-S" || $(isolate_col) == "CpGV-M") &amp;&amp; 
+        $(rel_alt_col) &gt; 0) {
+        # Concatenate isolate names with " + " if REL.ALT.0.05 &gt; 0
+        specificity = (specificity == "" ? $(isolate_col) : specificity " + " $(isolate_col));
+    }
+}
+
+END {
+    # Assign the specificity to the last position
+    for (i in pos_lines) {
+        # Add "SNV specificity: " before the specificity value
+        final_spec = (specificity == "" ? "0" : "SNV specificity: " specificity);
+        print pos_lines[i], final_spec;
+    }
+}
+</code></pre></div>            </div>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <ul>
+    <li>Click Run Tool</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="visualization-of-variable-snv-positions-by-specificity">Visualization of Variable SNV Positions by Specificity</h1>
+
+<p>Now, the VCF table has an additional column called <code class="language-plaintext highlighter-rouge">SPEC</code>, which indicates the SNV specificity for each position. This allows us to create a special SNV plot for each isolate. The special thing about this is that a separate plot is created for each isolate and each specificity. Since we can only look at each isolate individually, we first have to filter out the data for one isolate, we start with CpGV-S. After that, a plot is created for each SNV specificity for the CpGV-S isolate.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-data-for-one-isolate-only"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract data for one isolate only</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the VCF table with determined SNV specificities; output of <strong>Text reformatting with awk</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c25=='CpGV-S'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-filtering-the-cpgv-s-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Filtering the CpGV-S data</div>
+
+        <p>The VCF SNV table is reduced to the data of CpGV-S. This is done by filtering on column 25 (ISOLATE).</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1" title="Scatterplot with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scatterplot with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input in tabular format”</em>: the VCF table for CpGV-S; output of <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Isolate CpGV-S</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Reference Genome Position of CpGV-M</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Relative Nucleotide Frequency</code></li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Points only (default)</code>
+              <ul>
+                <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+              </ul>
+            </li>
+            <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">Plot multiple groups of data on individual plots</code>
+              <ul>
+                <li><em>“column differentiating the different groups”</em>: <code class="language-plaintext highlighter-rouge">34</code></li>
+              </ul>
+            </li>
+            <li><em>“Axis title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Grid lines”</em>: <code class="language-plaintext highlighter-rouge">Hide major and minor grid lines</code></li>
+            <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Unit of output dimensions”</em>: <code class="language-plaintext highlighter-rouge">Centimeters (cm)</code></li>
+            <li><em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+            <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">12.0</code></li>
+            <li><em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">200.0</code></li>
+          </ul>
+        </li>
+        <li>Click Run Tool</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Let us now look at the result for isolate CpGV-S. We can see that all CpGV-E2 specific SNV positions have a frequency equal or close to zero. This makes sense, since we are looking at the isolate CpGV-S and the CpGV-E2 specific SNV markers should not indicate the presence of CpGV-E2. The situation is different for the SNV positions that are solely or in combination with another isolate specific for CpGV-S: here the frequency is close to 1. This also makes sense, since these markers indicate the presence of CpGV-S, which is the case. The few SNV positions that are specific for CpGV-M also do not indicate the presence of CpGV-M.</p>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/baculovirus-isolate-variation/SNV_specificity_plot_CpGV-S.png" alt="SNV specificity plot for CpGV-S. " width="2362" height="944" loading="lazy" /><a target="_blank" href="../../images/baculovirus-isolate-variation/SNV_specificity_plot_CpGV-S.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> SNV specificity plot for the sequenced CpGV-S isolate.</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-can-you-run-the-same-analysis-for-cpgv-e2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Can you run the same analysis for CpGV-E2?</div>
+
+  <p>Extract the data subset for CpGv-E2 and create the SNV specificity plot. Can you interpret and understand the result?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-extract-data-for-cpgv-e2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract data for CpGV-E2</div>
+
+      <ol>
+        <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the VCF table with determined SNV specificities; output of <strong>Text reformatting with awk</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c25=='CpGV-E2'</code></li>
+            <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li>Click Run Tool</li>
+          </ul>
+        </li>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1" title="Scatterplot with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scatterplot with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy1)</span> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input in tabular format”</em>: the VCF table for CpGV-E2; output of <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
+            <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Isolate CpGV-E2</code></li>
+            <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Reference Genome Position of CpGV-M</code></li>
+            <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Relative Nucleotide Frequency</code></li>
+            <li>In <em>“Advanced options”</em>:
+              <ul>
+                <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Points only (default)</code>
+                  <ul>
+                    <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+                  </ul>
+                </li>
+                <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">Plot multiple groups of data on individual plots</code>
+                  <ul>
+                    <li><em>“column differentiating the different groups”</em>: <code class="language-plaintext highlighter-rouge">34</code></li>
+                  </ul>
+                </li>
+                <li><em>“Axis title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+                <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+                <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+                <li><em>“Grid lines”</em>: <code class="language-plaintext highlighter-rouge">Hide major and minor grid lines</code></li>
+                <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code></li>
+              </ul>
+            </li>
+            <li>In <em>“Output Options”</em>:
+              <ul>
+                <li><em>“Unit of output dimensions”</em>: <code class="language-plaintext highlighter-rouge">Centimeters (cm)</code></li>
+                <li><em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+                <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">12.0</code></li>
+                <li><em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">200.0</code></li>
+              </ul>
+            </li>
+            <li>Click Run Tool</li>
+          </ul>
+        </li>
+      </ol>
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="determining-the-potential-components-of-a-mixed-isolate">Determining the Potential Components of a Mixed Isolate</h2>
+
+<p>To create an SNV specificity plot for the isolate CpGV-V15, we proceed in exactly the same way as described above. Unfold the tip box if you are unsure how to create the SNV plot for CpGV-V15.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-creating-cpgv-v15-snv-specificity-plot"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-cpgv-v15-snv-specificity-plot" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Creating CpGV-V15 SNV specificity plot </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the VCF table with determined SNV specificities; output of <strong>Text reformatting with awk</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c25=='CpGV-V15'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click Run Tool</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1" title="Scatterplot with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scatterplot with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input in tabular format”</em>: the VCF table for CpGV-V15; output of <strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Isolate CpGV-V15</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Reference Genome Position of CpGV-M</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Relative Nucleotide Frequency</code></li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Points only (default)</code>
+              <ul>
+                <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+              </ul>
+            </li>
+            <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">Plot multiple groups of data on individual plots</code>
+              <ul>
+                <li><em>“column differentiating the different groups”</em>: <code class="language-plaintext highlighter-rouge">34</code></li>
+              </ul>
+            </li>
+            <li><em>“Axis title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+            <li><em>“Grid lines”</em>: <code class="language-plaintext highlighter-rouge">Hide major and minor grid lines</code></li>
+            <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Unit of output dimensions”</em>: <code class="language-plaintext highlighter-rouge">Centimeters (cm)</code></li>
+            <li><em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+            <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">12.0</code></li>
+            <li><em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">200.0</code></li>
+          </ul>
+        </li>
+        <li>Click Run Tool</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Although we have determined the SNV specificities using CpGV-M, CpGV-S and CpGV-E2, we can transfer this information to CpGV-V15 because all isolates were mapped against the common reference of CpGV-M. Because of this, we can look at the relative abundance of the CpGV-E2 and CpGV-S markers (= SNV positions) in the CpGV-V15 isolate. Let’s look at the result for CpGV-V15 (Fig. 5).</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/baculovirus-isolate-variation/SNV_specificity_plot_CpGV-V15.png" alt="SNV specificity plot for CpGV-V15. " width="2362" height="944" loading="lazy" /><a target="_blank" href="../../images/baculovirus-isolate-variation/SNV_specificity_plot_CpGV-V15.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Deciphering the composition of the isolate CpGV-V15 by using SNV specificities.</figcaption></figure>
+
+<p>Most of the SNV positions specific for CpGV-E2 have a frequency of around 0.5 (50%) (Fig. 5, SNV specificity: CpGV-E2). Looking at the positions specific to CpGV-S, we also see a SNV cloud at around 0.5 (50 %) (Fig. 5, SNV specificity: CpGV-S). From these two observations, we can conclude that CpGV-E2 and CpGV-S occur at a ratio of 50% each. As a control, we look at the markers (SNV positions) that are specific for both CpGV-E2 and CpGV-S (Fig. 5, SNV specificity: CpGV-E2 + CpGV-S). Here we see that most SNV positions have a relative frequency of ~1 (100%). This also makes sense, because if CpGV-V15 is a mixture of CpGV-E2 and CpGV-S, then the markers that indicate both isolates should be at 100%, which is the case. Based on the SNV analysis, it can be concluded that CpGV-V15 is mainly a mixture of CpGV-S and CpGV-E2.</p>
+
+<p>The same analysis was carried out in more detail with significantly more isolates and it was concluded that CpGV-V15 is a mixture of CpGV-S (49%), CpGV-E2 (42%) and CpGV-M (7%) (<span class="citation"><a href="#Fan2020">Fan <i>et al.</i> 2020</a></span>).</p>
+
+<p>The analysis presented in this tutorial is a simplification of the experiment from the publication <span class="citation"><a href="#Fan2020">Fan <i>et al.</i> 2020</a></span> and <span class="citation"><a href="#Wennmann2020">Wennmann <i>et al.</i> 2020</a></span> and is intended to help explain the procedure.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Four Illumina sequencing data sets from isolates of a large dsDNA virus (Cydia pomonella granulovirus, family <em>Baculoviridae</em>) were used to demonstrate how insight can be gained into intra-isolate specific genetic variability. SNVs were identified as markers to assess the homogeneity and heterogeneity of these sequenced CpGV isolates. The relative frequency with which alternative nucleotides occur at each variable SNV position was also used to assign SNV specificities, i.e. to identify them as markers for one or a combination of isolates. The markers were used to decipher the composition of a mixed isolate and to estimate its composition.<br />
+This tutorial provides a basis for understanding the complexity behind isolates, which represent virus populations, and how consensus sequences, often generated by sequencing and genome assembly, can mask genetic variability. The tutorial also includes a complete Galaxy workflow that includes all the steps described above. It is intended to help you create your own workflow for your own data.</p>
+
+<p>Please leave me a comment if you liked the workflow or have any questions. I would love to hear your feedback.</p>
+
+<p>Have fun analysing your own data and good luck with your research.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Baculovirus isolates are heterogeneous and show genetic variability.</p>
+</li>
+                        
+                        <li><p>Some SNV positions occur only in certain isolates and are therefore specific to that isolate.</p>
+</li>
+                        
+                        <li><p>SNV specificities can be used as markers to identify isolates and determine mixtures.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/variant-analysis/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Ayres1994">Ayres, M. D., S. C. Howard, J. Kuzio, M. Lopez-Ferber, and R. D. Possee, 1994 <b>The Complete DNA Sequence of Autographa californica Nuclear Polyhedrosis Virus</b>. Virology 202: 586–605. <a href="https://doi.org/10.1006/viro.1994.1380">10.1006/viro.1994.1380</a></li>
+<li id="vanOers2011">Oers, M. M. van, 2011 <b>Opportunities and challenges for the baculovirus expression system</b>. Journal of Invertebrate Pathology 107: S3–S15. <a href="https://doi.org/10.1016/j.jip.2011.05.001">10.1016/j.jip.2011.05.001</a></li>
+<li id="Eberle2012">Eberle, K. E., J. A. Jehle, and J. Huber, 2012 <b>Microbial control of crop pests using insect viruses.</b>, pp. 281–298 <span style="font-style: normal">in</span> <i>Integrated pest management: principles and practice</i>, <i>CABI</i>. <a href="https://doi.org/10.1079/9781845938086.0281">10.1079/9781845938086.0281</a> ISBN: 9781780640020</li>
+<li id="Grzywacz2017">Grzywacz, D., and S. Moore, 2017 <b>Production,  Formulation,  and Bioassay of Baculoviruses for Pest Control</b>, pp. 109–124 <span style="font-style: normal">in</span> <i>Microbial Control of Insect and Mite Pests</i>, <i>Elsevier</i>. <a href="https://doi.org/10.1016/b978-0-12-803527-6.00007-x">10.1016/b978-0-12-803527-6.00007-x</a> ISBN: 9780128035276</li>
+<li id="Alletti2017">Gueli Alletti, G., A. Sauer, B. Weihrauch, E. Fritsch, K. Undorf-Spahn <i>et al.</i>, 2017 <b>Using Next Generation Sequencing to Identify and Quantify the Genetic Composition of Resistance-Breaking Commercial Isolates of Cydia pomonella Granulovirus</b>. Viruses 9: 250. <a href="https://doi.org/10.3390/v9090250">10.3390/v9090250</a></li>
+<li id="Harrison2018">Harrison, R. L., E. A. Herniou, J. A. Jehle, D. A. Theilmann, J. P. Burand <i>et al.</i>, 2018 <b>ICTV Virus Taxonomy Profile: Baculoviridae</b>. Journal of General Virology 99: 1185–1186. <a href="https://doi.org/10.1099/jgv.0.001107">10.1099/jgv.0.001107</a></li>
+<li id="Fan2020">Fan, J., J. A. Jehle, and J. T. Wennmann, 2020 <b>Population structure of Cydia pomonella granulovirus isolates revealed by quantitative analysis of genetic variation</b>. Virus Evolution 7: <a href="https://doi.org/10.1093/ve/veaa073">10.1093/ve/veaa073</a></li>
+<li id="Wennmann2020">Wennmann, J. T., J. Fan, and J. A. Jehle, 2020 <b>Bacsnp: Using Single Nucleotide Polymorphism (SNP) Specificities and Frequencies to Identify Genotype Composition in Baculoviruses</b>. Viruses 12: 625. <a href="https://doi.org/10.3390/v12060625">10.3390/v12060625</a></li>
+<li id="Cox2021">Cox, S. J. D., A. N. Gonzalez-Beltran, B. Magagna, and M.-C. Marinescu, 2021 <b>Ten simple rules for making a vocabulary FAIR</b> (S. Markel, Ed.). PLOS Computational Biology 17: e1009041. <a href="https://doi.org/10.1371/journal.pcbi.1009041">10.1371/journal.pcbi.1009041</a></li>
+<li id="RodrguezHernndez2023">Rodríguez-Hernández, A. P., D. Martínez-Flores, A. Cruz-Reséndiz, T. Padilla-Flores, R. González-Flores <i>et al.</i>, 2023 <b>Baculovirus Display of Peptides and Proteins for Medical Applications</b>. Viruses 15: 411. <a href="https://doi.org/10.3390/v15020411">10.3390/v15020411</a></li>
+<li id="Wennmann2024">Wennmann, J. T., F.-S. Lim, S. Senger, M. Gani, J. A. Jehle <i>et al.</i>, 2024 <b>Haplotype determination of the Bombyx mori nucleopolyhedrovirus by Nanopore sequencing and linkage of single nucleotide variants</b>. Journal of General Virology 105: <a href="https://doi.org/10.1099/jgv.0.001983">10.1099/jgv.0.001983</a></li>
+<li id="ICTV_AcMNPV_genome_figure">Viruses (ICTV), I. C. on Taxonomy of <b>Genome mag of Autographa californica multiple nucleopolyhedrovirus isolate C6 (Figure 2)</b>. <a href="https://ictv.global/sites/default/files/inline-images/7651.ODD.Baculo.Fig2.v2.png">https://ictv.global/sites/default/files/inline-images/7651.ODD.Baculo.Fig2.v2.png</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>CpGV</dt>
+                    <dd>Cydia pomonella granulovirus</dd>
+                    
+                    <dt>NCBI</dt>
+                    <dd>National Center for Biotechnology Information</dd>
+                    
+                    <dt>ORF</dt>
+                    <dd>open reading frame</dd>
+                    
+                    <dt>SNV</dt>
+                    <dd>Single nucleotide variant</dd>
+                    
+                    <dt>SRA</dt>
+                    <dd>Sequence Read Archive</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=variant-analysis/baculovirus-isolate-variation"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=variant-analysis/baculovirus-isolate-variation">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Jörg Wennmann,  <b>Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{variant-analysis-baculovirus-isolate-variation,
+author = "Jörg Wennmann",
+	title = "Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: 86755160afbf
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: trim_galore
+  owner: bgruening
+  revisions: cd7e644cae1d
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa
+  owner: devteam
+  revisions: 4a196b9c72c2
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: vcf2tsv
+  owner: devteam
+  revisions: e92b3c0f9224
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_call
+  owner: iuc
+  revisions: '07396b423218'
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_mpileup
+  owner: iuc
+  revisions: 0a5dcc9a8ec2
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ggplot2_point
+  owner: iuc
+  revisions: 5298e06f14f9
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ncbi_acc_download
+  owner: iuc
+  revisions: e063168e0a81
+  tool_panel_section_label: Get Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sra_tools
+  owner: iuc
+  revisions: 2b2eb47e8e84
+  tool_panel_section_label: Get Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">2</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00528">gxy.io/GTN:T00528</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

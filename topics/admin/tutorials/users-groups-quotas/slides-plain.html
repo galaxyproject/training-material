@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: User, Role, Group, Quota, and Authentication managment / User, Role, Group, Quota, and Authentication managment / Galaxy Server Administration</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/users-groups-quotas/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="User, Role, Group, Quota, and Authentication managment">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-08-08 16:03:22 +0000">
+<meta name="DC.creator" content="Nate Coraor">
+<meta name="DC.creator" content="Björn Grüning">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="# Users  ???  Users  ---  ## User Control  option | description ---- | ---- `require_login` | Prevent anonymous access. `show_welcome_with_login` | Show welcome page next to login page. `allow_user_creation` | Allow user registration. When False, admins must create users; often coupled with `require_login`. `allow_user_dataset_purge` | Users can purge (permanently delete) their datasets. `api_allow_run_as` | List of email addresses of API users who can make calls on behalf of other users. `expose_dataset_path` | Users to see the full path of datasets via the  View Details  option in the history.  .footnote[.center[options in `galaxy.yml`]]  ???  - These options let you control user login. - For example, are anonymous users permitted? - Are users able to register themselves? - Are users able to purge datasets themselves? - All of these are questions you will need to consider. - The API allow run as option can be useful if you have an external system submitting jobs to Galaxy on behal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Server Administration / User, Role, Group, Quota, and Authentication managment / Slides: User, Role, Group, Quota, and Authentication managment">
+        <meta property="og:description" content="# Users  ???  Users  ---  ## User Control  option | description ---- | ---- `require_login` | Prevent anonymous access. `show_welcome_with_login` | Show welcome page next to login page. `allow_user_creation` | Allow user registration. When False, admins must create users; often coupled with `require_login`. `allow_user_dataset_purge` | Users can purge (permanently delete) their datasets. `api_allow_run_as` | List of email addresses of API users who can make calls on behalf of other users. `expose_dataset_path` | Users to see the full path of datasets via the  View Details  option in the history.  .footnote[.center[options in `galaxy.yml`]]  ???  - These options let you control user login. - For example, are anonymous users permitted? - Are users able to register themselves? - Are users able to purge datasets themselves? - All of these are questions you will need to consider. - The API allow run as option can be useful if you have an external system submitting jobs to Galaxy on behal...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/admin/tutorials/users-groups-quotas/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/users-groups-quotas/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/users-groups-quotas/slides.html">View markdown source on GitHub</a>
+	<h1>User, Role, Group, Quota, and Authentication managment</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
+    Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
+    Björn Grüning</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How does Galaxy manage users and groups?</p>
+</li>
+		
+		<li><p>How can I assign Quotas to specific users/groups?</p>
+</li>
+		
+		<li><p>How should I manage groups vs roles</p>
+</li>
+		
+		<li><p>What authentication methods are available?</p>
+</li>
+		
+		<li><p>How is dataset privacy managed?</p>
+</li>
+		
+		<li><p>Authentication Systems, what is available and how can I enable it?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn the Galaxy user/group management and assign Quotas.</p>
+</li>
+		
+		<li><p>Understand the Role Based Access Control (RBAC) of Galaxy.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jan 7, 2018 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 8, 2024 </div>
+
+	<hr />
+
+
+	<h1 id="users">Users</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Users</p>
+
+<hr />
+
+<h2 id="user-control">User Control</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">require_login</code></td>
+      <td>Prevent anonymous access.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">show_welcome_with_login</code></td>
+      <td>Show welcome page next to login page.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allow_user_creation</code></td>
+      <td>Allow user registration. When False, admins must create users; often coupled with <code class="language-plaintext highlighter-rouge">require_login</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allow_user_dataset_purge</code></td>
+      <td>Users can purge (permanently delete) their datasets.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">api_allow_run_as</code></td>
+      <td>List of email addresses of API users who can make calls on behalf of other users.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">expose_dataset_path</code></td>
+      <td>Users to see the full path of datasets via the “View Details” option in the history.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>These options let you control user login.</li>
+  <li>For example, are anonymous users permitted?</li>
+  <li>Are users able to register themselves?</li>
+  <li>Are users able to purge datasets themselves?</li>
+  <li>All of these are questions you will need to consider.</li>
+  <li>The API allow run as option can be useful if you have an external system submitting jobs to Galaxy on behalf of your users.</li>
+</ul>
+
+<hr />
+
+<h2 id="user-activation">User Activation</h2>
+
+<p>Require verification that a user’s email is real. You must enable SMTP first.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user_activation_on</code></td>
+      <td>Require users to click link in email before running jobs.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">activation_grace_period</code></td>
+      <td>Time (hours) that a user can ‘explore’ Galaxy before activation lockout.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">inactivity_box_content</code></td>
+      <td>Message provided to non-activated users.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">email_domain_blocklist_file</code></td>
+      <td>Defines domains in XXX.YYY format that will be rejected as user emails.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Whenever a user registers, user activation settings control how this process happens</li>
+  <li>If you want to require activation they cannot run tools until they receive the confirmation email</li>
+  <li>If you want to prevent users registering from specific domains</li>
+</ul>
+
+<hr />
+
+<h2 id="admin-control">Admin Control</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">admin_users</code></td>
+      <td>Comma-separated list of admin users’ emails.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allow_user_deletion</code></td>
+      <td>Admins can delete users.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allow_user_impersonation</code></td>
+      <td>Admins can become other users. Great for debugging / user assistance.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bootstrap_admin_api_key</code></td>
+      <td>Admin super-key allows many API admin actions without having a real admin user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In the ansible galaxy training, you set the admin_users variable to define an admin email</li>
+  <li>User impersonation is a very commonly used feature</li>
+  <li>It allows admins to debug issues in their users’ histories</li>
+  <li>A bootstrap api key cannot be used for every task an admin API key can be used for</li>
+  <li>This is because it is not tied to an individual user</li>
+</ul>
+
+<hr />
+
+<h2 id="user-privacy">User Privacy</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">expose_user_name</code></td>
+      <td>Users can view other registered usernames.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">expose_user_email</code></td>
+      <td>Users can view other registered emails.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">new_user_dataset_access_role_default_private</code></td>
+      <td>Newly created datasets are private to the creating user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>These options control if the username or email are shown as a dropdown in the sharing menus</li>
+  <li>The option “new user dataset access role default private” is important</li>
+  <li>By default when users share by link, all datasets are public</li>
+  <li>When you set this option, datasets are private, even though the history is shared via link</li>
+  <li>Users will complain when it doesn’t work, and have to be educated to click the appropriate buttons</li>
+</ul>
+
+<hr />
+
+<h1 id="roles-and-groups">Roles and Groups</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Roles and Groups</p>
+
+<hr />
+
+<h3 id="role-based-access-control-rbac">Role Based Access Control (RBAC)</h3>
+
+<p><strong>Admin</strong> can:</p>
+<ul>
+  <li>create roles (each user automatically has their own ‘private’ role)</li>
+  <li>create groups</li>
+  <li>assign roles to groups</li>
+  <li>assign users to groups</li>
+  <li>assign groups to roles</li>
+  <li>assign users to roles</li>
+  <li>assign permission sets to roles</li>
+  <li>assign permission sets to groups</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy uses RBAC for permissions in many places</li>
+  <li>Roles can be created, and assigned permissions</li>
+  <li>Roles and groups behave similarly, grouping users together and granting permissions</li>
+</ul>
+
+<hr />
+
+<h2 id="dataset-roles">Dataset Roles</h2>
+
+<p>.left-column50[
+<strong>manage permissions</strong></p>
+<ul>
+  <li>Users who have associated role on a dataset can manage the roles associated it.</li>
+</ul>
+
+<p><strong>access</strong></p>
+<ul>
+  <li>Users having associated role can use/view/download a dataset for analysis. Users must have every role associated with a dataset in order to access it</li>
+</ul>
+
+<p><strong>new_user_dataset_access_role_default_private</strong> (<code class="language-plaintext highlighter-rouge">galaxy.yml</code>)</p>
+<ul>
+  <li>When this is set, datasets are private by default.
+]</li>
+</ul>
+
+<p>.right-column50[.middle[.image-90[
+<img src="../../images/dataset_roles.png" alt="User_roles" />
+]]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The manage permission controls which accounts can manage permissions of datasets</li>
+  <li>Access permission is those who can see and work with the data</li>
+  <li>These can be controlled in the permissions menu of datasets</li>
+  <li>Or more generally at the history level</li>
+  <li>Users must have every role listed in order to access that dataset</li>
+  <li>This leads to the odd case where users wish to share with multiple groups</li>
+  <li>But by adding more roles, it becomes unavailable to everyone</li>
+</ul>
+
+<hr />
+
+<h2 id="library-roles">Library Roles</h2>
+
+<p>.left-column50[</p>
+<ul>
+  <li><strong>access library</strong>: Restrict access to this library to only users having associated role</li>
+  <li><strong>manage library permissions</strong>: Users having associated role can manage roles associated with permissions on this library item</li>
+  <li><strong>add library item</strong>: Users having associated role can add library items to this library item</li>
+  <li><strong>modify library item</strong>: Users having associated role can modify this library item
+]
+.left-column50[.image-90[
+<img src="../../images/Library_roles.png" alt="Library_roles" />
+]]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Access library permits users with any of the listed roles to access the library</li>
+  <li>No roles means a public library</li>
+  <li>Generally the last three are set to the same values, unless you have complicated requirements</li>
+  <li>In the library management, someone with any subset of the roles listed may make changes</li>
+  <li>This is very different from dataset permission management, where users must have every role</li>
+</ul>
+
+<hr />
+
+<h1 id="quotas">Quotas</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Quotas</p>
+
+<hr />
+
+<h2 id="quotas-1">Quotas</h2>
+
+<p>Used to control user disk usage.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enable_quotas</code></td>
+      <td>Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Must create quotas in admin interface before any quota will be enforced, otherwise ‘unlimited’</p>
+
+<p>Amounts:</p>
+<ul>
+  <li>Examples: “10000MB”, “99 gb”, “0.2T”, “unlimited”</li>
+  <li>= / + / -</li>
+</ul>
+
+<p>Default for user class:</p>
+<ul>
+  <li>None (No)</li>
+  <li>Unregistered Users</li>
+  <li>Registered Users</li>
+</ul>
+
+<p>or associated with Groups or Users</p>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>You can enable quotas in your galaxy.yml file</li>
+  <li>When the user has more data than their quotum permits, they are prevented from starting new jobs.</li>
+  <li>many sites setup a “quote increase request” form, to let users request increases for specific, temporary projects</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+
+<h2 id="quota-details">Quota Details</h2>
+
+<ul>
+  <li>Quotas can be set for Users, or all users of a Group</li>
+  <li>But it is not a “group quota”</li>
+  <li>The quota is applied to individual users</li>
+</ul>
+
+<p>Storage</p>
+
+<ul>
+  <li>Quotas are stored in the DB tables <code class="language-plaintext highlighter-rouge">galaxy_user</code>, <code class="language-plaintext highlighter-rouge">galaxy_group</code>, and <code class="language-plaintext highlighter-rouge">quota</code></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Quotas can be set for Users or Groups</li>
+  <li>But it is applied individually, as users may receive multiple quota changes</li>
+  <li>E.g. a user working for two groups, might receive two different quota increases</li>
+</ul>
+
+<hr />
+
+<h2 id="quota-automation">Quota Automation</h2>
+
+<ul>
+  <li>There is currently no quota automation.</li>
+  <li>Some individuals have written their own quota automation but it is quite ugly (<a href="https://github.com/usegalaxy-eu/quota-sync">usegalaxy-eu/quota-sync</a>)</li>
+  <li>Could be nicer with a lot of work</li>
+  <li>Quotas are like group/user management: not managed by files, only within UI/API</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Quotas can be managed through the API</li>
+  <li>Some people want to automate this process, but it needs more work.</li>
+</ul>
+
+<hr />
+
+<h1 id="authentication-systems">Authentication Systems</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Authentication Systems</p>
+
+<hr />
+
+<h2 id="ldap--ad">LDAP / AD</h2>
+
+<ul>
+  <li>Galaxy can be configured to use LDAP or Active Directory for authentication</li>
+  <li>There is a config file named <code class="language-plaintext highlighter-rouge">config/auth_conf.xml</code></li>
+  <li>User login then triggers an LDAP search for the user
+    <ul>
+      <li>(optional) Galaxy binds with some bind credentials</li>
+      <li>Searches for the user DN</li>
+      <li>Re-binds with the user DN and password</li>
+      <li>If the user is found, they are logged in</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>LDAP and Active Directory can be used as an authentication method</li>
+  <li>This is done through the auth_conf.xml file</li>
+  <li>When the user logs in, the LDAP server is queried for the user</li>
+</ul>
+
+<hr />
+
+<h2 id="shibboleth-cas">Shibboleth, CAS</h2>
+
+<ul>
+  <li>Many alternative authentication systems are widely used at universities and organisations</li>
+  <li>Galaxy itself does not natively support these systems</li>
+  <li>However, you can use a proxy to authenticate users</li>
+  <li>nginx and apache have modules for both of these methods</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Shibboleth and CAS are commonly used at some universities</li>
+  <li>While Galaxy does not natively support these, you can use a proxy to authenticate users</li>
+  <li>Nginx and apache both support this</li>
+</ul>
+
+<hr />
+
+<h2 id="oidc">OIDC</h2>
+
+<ul>
+  <li>Galaxy can be configured to use OpenID Connect for authentication</li>
+  <li>There are two configuration files:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">config/oidc_backends_config.xml</code></li>
+      <li><code class="language-plaintext highlighter-rouge">config/oidc_config.xml</code></li>
+    </ul>
+  </li>
+  <li>Supports a variety of providers:
+    <ul>
+      <li>Google</li>
+      <li>Custos</li>
+      <li>Globus</li>
+      <li>ORCID</li>
+      <li>LS Login (Elixir AAI)</li>
+      <li>KeyCloack</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>OIDC is a common authentication method</li>
+  <li>There are two configuration files required for this</li>
+  <li>Galaxy supports a variety of providers</li>
+  <li>OIDC means you as an administrator don’t have to worry about validating the account, or storing passwords</li>
+</ul>
+
+<hr />
+
+<h2 id="built-in-authentication">Built in Authentication</h2>
+
+<ul>
+  <li>Galaxy has it’s own authentication system</li>
+  <li>Enabled by default</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">password_expiration_period</code></td>
+      <td>Days before requiring a user to change password. (<a href="https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines">NIST recommends not requiring password changes.</a>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">session_duration</code></td>
+      <td>Minutes before invaliding a user’s session, requiring re-login.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy has it’s own authentication system</li>
+  <li>There are some options are related to IT security policies</li>
+  <li>Check with your local IT authority for best practices for your organisation</li>
+  <li>Please consider not setting a password expiration period, as NIST recommends against it</li>
+</ul>
+
+<hr />
+
+<h2 id="others-remote_user">Others (<code class="language-plaintext highlighter-rouge">REMOTE_USER</code>)</h2>
+
+<ul>
+  <li>For all other authentication systems</li>
+  <li>If your authentication system provides a username in some secure way to the webserver</li>
+  <li>Then you can use it to authenticate users</li>
+  <li>The webserver must set the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header</li>
+  <li>Galaxy will <strong>trust</strong> this header</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you use a different authentication system than one previously mentioned</li>
+  <li>and your users are authenticated in some manner through your webserver/proxy</li>
+  <li>Then you can take advantage of <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> authentication</li>
+  <li>It is a very simple authentication method, the webserver sets a header, and galaxy implicitly trusts it.</li>
+</ul>
+
+<hr />
+
+<h3 id="remote-user-security">Remote User (Security)</h3>
+
+<ul>
+  <li>If you have local users on the Galaxy head node</li>
+  <li>Then please set <code class="language-plaintext highlighter-rouge">remote_user_secret</code></li>
+  <li>This will send an additional secret header to Galaxy that will be validated</li>
+  <li>Otherwise local users can <code class="language-plaintext highlighter-rouge">curl</code> your Galaxy server, and impersonate any user.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>An important aspect for security is that if you have local users on the Galaxy head node</li>
+  <li>Then you should set the <code class="language-plaintext highlighter-rouge">remote_user_secret</code> option, to prevent them impersonating other users</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Galaxy has a powerful user and group managment system that can be utilized for Quota management.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/admin/tutorials/users-groups-quotas/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/admin/tutorials/users-groups-quotas/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

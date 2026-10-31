@@ -1,0 +1,59 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput Molecules with SMILES and NAME without a header."]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nNumber of conformers to generate"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nOptimization Levels"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nQC Method"]
+  4[label="Cut SMILES column"]
+  0 -> 4 [label="output"]
+  5[label="Cut NAME column"]
+  0 -> 5 [label="output"]
+  6[label="Split file"]
+  4 -> 6 [label="output"]
+  7[label="Split file"]
+  5 -> 7 [label="output"]
+  8[label="Parse parameter value"]
+  7 -> 8 [label="list_output_tab"]
+  9[label="Convert compounds from SMILES to SDF and add the name as title."]
+  8 -> 9 [label="text_param"]
+  6 -> 9 [label="list_output_tab"]
+  10[label="Merge the individual SDF files"]
+  9 -> 10 [label="outfile"]
+  11[label="Generate conformers"]
+  10 -> 11 [label="out_file1"]
+  1 -> 11 [label="output"]
+  kf4f8881ecd6442ae84351288e4e473b5[color=lightseagreen,label="Output\nconformer_output"]
+  11 -> kf4f8881ecd6442ae84351288e4e473b5
+  12[label="Molecular format conversion "]
+  11 -> 12 [label="outfile"]
+  k5dcb6f0262c94f439810a10052b59b41[color=lightseagreen,label="Output\nXYZ output"]
+  12 -> k5dcb6f0262c94f439810a10052b59b41
+  13[label="xTB molecular optimization"]
+  12 -> 13 [label="file_outputs"]
+  2 -> 13 [label="output"]
+  k01a9a1afe225461394f9dfdad37c93a2[color=lightseagreen,label="Output\noptimized output"]
+  13 -> k01a9a1afe225461394f9dfdad37c93a2
+  14[label="QCxMS neutral run"]
+  3 -> 14 [label="output"]
+  13 -> 14 [label="output"]
+  ke6e6a07bd4784a87b49142abee9094b1[color=lightseagreen,label="Output\n[.in] output"]
+  14 -> ke6e6a07bd4784a87b49142abee9094b1
+  k969b3e2ffbee48f9829ac0032580e6f8[color=lightseagreen,label="Output\n[.xyz] output"]
+  14 -> k969b3e2ffbee48f9829ac0032580e6f8
+  kdc4811ad6cff42cca2f852ab585f47fe[color=lightseagreen,label="Output\n[.start] output"]
+  14 -> kdc4811ad6cff42cca2f852ab585f47fe
+  15[label="QCxMS production run"]
+  14 -> 15 [label="coords1"]
+  14 -> 15 [label="coords2"]
+  14 -> 15 [label="coords3"]
+  kfc53168a99f8441c93252d812bf03100[color=lightseagreen,label="Output\nres output"]
+  15 -> kfc53168a99f8441c93252d812bf03100
+  16[label="Filter failed datasets"]
+  15 -> 16 [label="res_files"]
+  17[label="QCxMS get results"]
+  12 -> 17 [label="file_outputs"]
+  16 -> 17 [label="output"]
+  kd81bf92a604c46b986a9bf3c2281ebcb[color=lightseagreen,label="Output\nMSP output"]
+  17 -> kd81bf92a604c46b986a9bf3c2281ebcb
+}

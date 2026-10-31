@@ -1,0 +1,16 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nMock Count Table"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nMock Sequences"]
+  2[label="Dist.seqs"]
+  1 -> 2 [label="output"]
+  3[label="Cluster"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="out_dist"]
+  4[label="Make.shared"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="otulist"]
+  5[label="Rarefaction.single"]
+  4 -> 5 [label="shared"]
+}

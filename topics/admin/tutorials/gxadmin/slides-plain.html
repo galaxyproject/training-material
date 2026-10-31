@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Galaxy Monitoring with gxadmin / Galaxy Monitoring with gxadmin / Galaxy Server Administration</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Galaxy Monitoring with gxadmin">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-11-13 10:42:44 +0000">
+<meta name="DC.creator" content="Nate Coraor">
+<meta name="DC.creator" content="Björn Grüning">
+<meta name="DC.creator" content="Simon Gladman">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for:  - Debugging - Reporting - Analytics  But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from our Galaxy in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_tim...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Server Administration / Galaxy Monitoring with gxadmin / Slides: Galaxy Monitoring with gxadmin">
+        <meta property="og:description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for:  - Debugging - Reporting - Analytics  But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from our Galaxy in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_tim...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/admin/tutorials/gxadmin/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/gxadmin/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/gxadmin/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Monitoring with gxadmin</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
+    Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
+    Björn Grüning</a><a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" />
+    Simon Gladman</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is gxadmin</p>
+</li>
+		
+		<li><p>What can it do?</p>
+</li>
+		
+		<li><p>How to write a query?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn gxadmin basics</p>
+</li>
+		
+		<li><p>See some queries and learn how they help debug production issues</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Apr 26, 2019 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Nov 13, 2025 </div>
+
+	<hr />
+
+
+	<h1 id="database-queries">Database Queries</h1>
+
+<p>Sometimes it’s the best way to get the exact data you need</p>
+
+<p>Can be very useful for:</p>
+
+<ul>
+  <li>Debugging</li>
+  <li>Reporting</li>
+  <li>Analytics</li>
+</ul>
+
+<p>But consider using <a href="https://github.com/usegalaxy-eu/gxadmin"><code class="language-plaintext highlighter-rouge">gxadmin</code></a> and sharing your SQL</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Admins often need to run database queries.</li>
+  <li>Debugging the live application in production is difficult, but running queries is easy.</li>
+  <li>Additionally running SQL queries is commonly used for debuggin and reporting and analytics.</li>
+  <li>The community collects queries we commonly use in a program called gxadmin.</li>
+</ul>
+
+<hr />
+<h1 id="database-queries-1">Database Queries</h1>
+
+<p>“Can you send me the number of jobs per day/state from our Galaxy in September and October?”</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+  <span class="n">date_trunc</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="k">AS</span> <span class="k">month</span><span class="p">,</span>
+  <span class="n">j</span><span class="p">.</span><span class="k">state</span><span class="p">,</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="k">state</span><span class="p">)</span> <span class="k">AS</span> <span class="n">job_count</span>
+<span class="k">FROM</span> <span class="n">job</span> <span class="n">j</span>
+<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+  <span class="k">ON</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span> <span class="o">!=</span> <span class="s1">'monitor@bx.psu.edu'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">month</span><span class="p">,</span>
+         <span class="n">j</span><span class="p">.</span><span class="k">state</span>
+<span class="k">HAVING</span> <span class="n">date_trunc</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="s1">'2016-09-01'</span>
+<span class="k">AND</span> <span class="n">date_trunc</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="s1">'2016-11-01'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">month</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="k">state</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We often get requests like how many jobs were run in a time period, and did they finish successfully.</li>
+  <li>So we write some SQL like this.</li>
+  <li>As an admin, you’ll want to understand SQL.</li>
+</ul>
+
+<hr />
+<h1 id="database-queries-2">Database Queries</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">        month        |  state  | job_count
+---------------------+---------+-----------
+ 2016-09-01 00:00:00 | deleted |     11369
+ 2016-09-01 00:00:00 | error   |     15375
+ 2016-09-01 00:00:00 | new     |      1179
+ 2016-09-01 00:00:00 | ok      |    165963
+ 2016-09-01 00:00:00 | paused  |       933
+ 2016-09-01 00:00:00 | waiting |         9
+ 2016-10-01 00:00:00 | deleted |     13190
+ 2016-10-01 00:00:00 | error   |     12539
+ 2016-10-01 00:00:00 | new     |      1183
+ 2016-10-01 00:00:00 | ok      |    167547
+ 2016-10-01 00:00:00 | paused  |       645
+ 2016-10-01 00:00:00 | queued  |        75
+ 2016-10-01 00:00:00 | running |        36
+ 2016-10-01 00:00:00 | waiting |        17
+(14 rows)
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here is the output of such a query.</li>
+  <li>SQL is very powerful for extracting data and graphs for reporting.</li>
+</ul>
+
+<hr />
+<h1 id="gxadmin">gxadmin</h1>
+
+<ul>
+  <li>It’s unpleasant to write queries every time you need them.</li>
+  <li>So the community collects SQL in the <code class="language-plaintext highlighter-rouge">gxadmin</code> project.</li>
+  <li>It’s a fancy bash script full of SQL and some magic ✨</li>
+  <li><a href="https://github.com/galaxyproject/gxadmin">github.com/galaxyproject/gxadmin</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We often re-run the same queries.</li>
+  <li>gxadmin makes it easier by storing the useful queries.</li>
+  <li>Everyonede is welcome to contribute to it.</li>
+</ul>
+
+<hr />
+<h1 id="database-queries-3">Database Queries</h1>
+
+<p>“I need a list of owners for all installed tools and the number of their repos”</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin query ts-repos
+</code></pre></div></div>
+
+<p><strong>OR</strong></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+  <span class="n">u</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">r_count</span>
+<span class="k">FROM</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+<span class="k">JOIN</span> <span class="n">repository</span> <span class="n">r</span>
+  <span class="k">ON</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">user_id</span>
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="n">r</span><span class="p">.</span><span class="n">deleted</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">r_count</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">12</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>However, some of these queries we run over and over.</li>
+  <li>And those we include in gxadmin.</li>
+  <li>This way every admin has access to all of the interesting queries we run.</li>
+  <li>And we don’t get repetitive strain injury typing SQL.</li>
+</ul>
+
+<hr />
+<h1 id="database-queries-4">Database Queries</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">                 username                 | r_count
+------------------------------------------+---------
+ iuc                                      |     571
+ devteam                                  |     366
+ bgruening                                |      95
+ galaxyp                                  |      87
+ jjohnson                                 |      46
+ xuebing                                  |      40
+ peterjc                                  |      39
+ rnateam                                  |      33
+ anton                                    |      32
+ nml                                      |      32
+ yhoogstrate                              |      31
+ iracooke                                 |      30
+(12 rows)
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Example output from the previous query.</li>
+</ul>
+
+<hr />
+
+<h1 id="database-queries-5">Database Queries</h1>
+
+<p>“What is the status of this job”</p>
+
+<p><em>Lots</em> of SQL or: <code class="language-plaintext highlighter-rouge">gxadmin report job-info &lt;job-id&gt;</code></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Galaxy Job 5132146
+<span class="go">
+Property      | Value
+------------- | -----
+         Tool | toolshed.g2.bx.psu.edu/repos/bgruening/canu/canu/1.7
+        State | running
+      Handler | handler_main_2
+      Created | 2019-04-20 11:04:40.854975+02 (3 days 03:35:04.881599 ago)
+Job Runner/ID | condor / 568537
+        Owner | e08d6c893f5
+
+</span><span class="gp">#</span><span class="c"># Destination Parameters</span>
+<span class="go">
+Key                     |   Value
+---                     |   ---
+description             |   `canu`
+priority                |   `-128`
+request_cpus            |   `20`
+request_memory          |   `64G`
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Another extremely common query is: what is the status of this job?</li>
+  <li>There is a gxadmin command which aggregates information about jobs.</li>
+  <li>This can help you debug job failure to run issues.</li>
+</ul>
+
+<hr />
+
+<h1 id="database-queries-6">Database Queries</h1>
+
+<p>“Get me a list of recently registered users”</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin query latest-users
+</code></pre></div></div>
+
+<p><strong>OR</strong></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+	<span class="n">id</span><span class="p">,</span>
+	<span class="n">create_time</span> <span class="k">AT</span> <span class="nb">TIME</span> <span class="k">ZONE</span> <span class="s1">'UTC'</span> <span class="k">as</span> <span class="n">create_time</span><span class="p">,</span>
+	<span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">disk_usage</span><span class="p">)</span> <span class="k">as</span> <span class="n">disk_usage</span><span class="p">,</span>
+	<span class="n">username</span><span class="p">,</span>
+	<span class="n">email</span><span class="p">,</span>
+	<span class="n">active</span>
+<span class="k">FROM</span> <span class="n">galaxy_user</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">create_time</span> <span class="k">desc</span>
+<span class="k">LIMIT</span> <span class="mi">40</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Another common query, who has recently joined our server?</li>
+  <li>This is an easy command to write, but it is also included in gxadmin.</li>
+</ul>
+
+<hr />
+
+<h1 id="database-queries-7">Database Queries</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+  id  |          create_time   | disk_usage |  username   |    email    |    groups    | active
+------+------------------------+------------+-------------+-------------+--------------+--------
+ 5581 | 2019-04-23 14:53:58+02 |            | xxx         | xxx         |              | t
+ 5580 | 2019-04-23 11:25:03+02 | 1222 MB    | xxx         | xxx         |              | t
+ 5579 | 2019-04-23 10:40:30+02 | 841 MB     | xxx         | xxx         |              | t
+ 5578 | 2019-04-23 10:31:50+02 |            | xxx         | xxx         |              | t
+ 5577 | 2019-04-23 10:27:21+02 | 0 bytes    | xxx         | xxx         |              | t
+ 5576 | 2019-04-23 10:07:53+02 |            | xxx         | xxx         |              | t
+ 5575 | 2019-04-23 09:04:40+02 | 2011 MB    | xxx         | xxx         | training-gqa | t
+ 5574 | 2019-04-23 09:01:58+02 | 296 MB     | xxx         | xxx         |              | t
+ 5573 | 2019-04-23 08:58:42+02 | 605 MB     | xxx         | xxx         |              | t
+ 5572 | 2019-04-23 08:58:17+02 | 1762 MB    | xxx         | xxx         | training-gqa | t
+ 5571 | 2019-04-23 08:56:11+02 | 0 bytes    | xxx         | xxx         |              | f
+ 5570 | 2019-04-23 08:55:57+02 | 1759 MB    | xxx         | xxx         | training-gqa | t
+ 5569 | 2019-04-23 08:43:21+02 | 1621 MB    | xxx         | xxx         |              | t
+ 5568 | 2019-04-23 07:48:38+02 |            | xxx         | xxx         |              | t
+ 5567 | 2019-04-23 05:12:43+02 |            | xxx         | xxx         |              | t
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Example output of the previous query.</li>
+  <li>With SQL you can choose just the columns or data that is relevant to you.</li>
+  <li>This may not be so easily available in the interface.</li>
+</ul>
+
+<hr />
+
+<h1 id="tabular-output">Tabular Output</h1>
+
+<p>Converting SQL query output to tabular and other formats</p>
+
+<pre><code class="language-SQL">COPY (...) to STDOUT with CSV DELIMITER E'\t'
+</code></pre>
+
+<p><strong>or</strong></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin query ...
+<span class="gp">$</span><span class="w"> </span>gxadmin tsvquery ...
+<span class="gp">$</span><span class="w"> </span>gxadmin csvquery ...
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>However to reuse this data in other applications, the postgres format is not convenient.</li>
+  <li>There is special syntax you can use to output CSV.</li>
+  <li>gxadmin includes query variants to do this as well.</li>
+</ul>
+
+<hr />
+
+<h1 id="monitoring">Monitoring</h1>
+
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> can also produce Influx-formatted output, which Telegraf can consume:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin iquery queue
+<span class="go">queue,tool_id=ncbi_blastx_wrapper/0.3.1,state=running count=76
+queue,tool_id=rna_star/2.6.0b-2,state=queued count=36
+queue,tool_id=rna_star/2.6.0b-2,state=running count=15
+queue,tool_id=unicycler/0.4.7.0,state=running count=10
+queue,tool_id=hisat2/2.1.0+galaxy4,state=running count=9
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For monitoring, many galaxy sites use Influx DB.</li>
+  <li>gxadmin supports exporting influx compatible format.</li>
+  <li>This makes it easy to add new data and graphs to your monitoring.</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>gxadmin is a tool to run common database queries useful for Galaxy admins</li>
+
+<li>new queries are welcome, easy to contribute and share</li>
+
+<li>explore queries at https://galaxyproject.github.io/gxadmin</li>
+
+<li>contribute queries at https://github.com/usegalaxy-eu/gxadmin</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/admin/tutorials/gxadmin/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/admin/tutorials/gxadmin/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

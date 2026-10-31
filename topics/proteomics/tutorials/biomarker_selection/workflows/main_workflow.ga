@@ -1,0 +1,525 @@
+{
+  "uuid": "6f39fd73-55c5-4554-840e-9c840ef71697",
+  "tags": [
+    "proteomics"
+  ],
+  "format-version": "0.1",
+  "name": "'Biomarkers4Paris' Workflow",
+  "version": 0,
+  "steps": {
+    "0": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+      "tool_version": "2019.02.27",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {},
+      "tool_state": "{\"input\": \"{\\\"__current_case__\\\": 0, \\\"data_source\\\": \\\"IHC\\\", \\\"level\\\": [\\\"High\\\", \\\"Medium\\\"], \\\"normal_tissue\\\": [\\\"heart muscle\\\"], \\\"reliability\\\": [\\\"Enhanced\\\", \\\"Supported\\\"]}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "id": 0,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "3e65e0249976",
+        "name": "proteore_tissue_specific_expression_data",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "a92e9fb4-cd3c-417f-bb46-072ea6e38e4d",
+      "errors": null,
+      "name": "Build tissue-specific expression dataset",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 10
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+      "type": "tool"
+    },
+    "1": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+      "tool_version": "2019.02.27",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {},
+      "tool_state": "{\"input\": \"{\\\"__current_case__\\\": 1, \\\"data_source\\\": \\\"RNAseq\\\", \\\"sample\\\": [\\\"heart muscle\\\"]}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "id": 1,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "3e65e0249976",
+        "name": "proteore_tissue_specific_expression_data",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "550b1a21-1d6c-4b7a-80f9-b78f6a0e0333",
+      "errors": null,
+      "name": "Build tissue-specific expression dataset",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 130,
+        "left": 10
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+      "type": "tool"
+    },
+    "2": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "tool_version": "2019.03.05",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "kept_lines"
+        },
+        {
+          "type": "tsv",
+          "name": "discarded_lines"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 1
+        }
+      },
+      "tool_state": "{\"sort\": \"{\\\"__current_case__\\\": 1, \\\"sort_bool\\\": \\\"false\\\"}\", \"__page__\": null, \"input1\": \"null\", \"keyword\": \"[]\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"value\": \"[{\\\"__index__\\\": 0, \\\"ncol\\\": \\\"c4\\\", \\\"operator\\\": \\\"Equal-or-lower\\\", \\\"value\\\": \\\"10.0\\\"}]\", \"header\": \"\\\"true\\\"\", \"operator\": \"\\\"OR\\\"\", \"operation\": \"\\\"discard\\\"\", \"values_range\": \"[]\"}",
+      "id": 2,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "33ca9ba2495a",
+        "name": "proteore_filter_keywords_values",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "d6758464-c2a7-42bb-8b71-dc595b899264",
+      "errors": null,
+      "name": "Filter by keywords and/or numerical value",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 230
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "type": "tool"
+    },
+    "3": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2018.12.18",
+      "tool_version": "2018.12.18",
+      "outputs": [
+        {
+          "type": "html",
+          "name": "output_summary"
+        },
+        {
+          "type": "tsv",
+          "name": "output_text"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "series_0|se|file": {
+          "output_name": "output",
+          "id": 0
+        },
+        "series_1|se|file": {
+          "output_name": "kept_lines",
+          "id": 2
+        }
+      },
+      "tool_state": "{\"series\": \"[{\\\"__index__\\\": 0, \\\"se\\\": {\\\"__current_case__\\\": 0, \\\"file\\\": null, \\\"header\\\": \\\"true\\\", \\\"input\\\": \\\"file\\\", \\\"name\\\": \\\"heart IHC\\\", \\\"ncol\\\": \\\"c1\\\"}}, {\\\"__index__\\\": 1, \\\"se\\\": {\\\"__current_case__\\\": 0, \\\"file\\\": null, \\\"header\\\": \\\"true\\\", \\\"input\\\": \\\"file\\\", \\\"name\\\": \\\"heart RNAseq\\\", \\\"ncol\\\": \\\"c1\\\"}}]\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "id": 3,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "d1fd04dcb13a",
+        "name": "proteore_venn_diagram",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "564866e3-b4ae-4964-8f0b-e2deef9a59dc",
+      "errors": null,
+      "name": "Venn diagram",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 450
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2018.12.18",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
+      "tool_version": "1.0.0",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input": {
+          "output_name": "output_text",
+          "id": 3
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"complement\": \"\\\"\\\"\", \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": [\\\"3\\\"]}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+      "id": 4,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "288462ec2630",
+        "name": "text_processing",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "5ec837e0-94ba-4f19-a740-f239e68398aa",
+      "errors": null,
+      "name": "Cut",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 670
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
+      "type": "tool"
+    },
+    "5": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "tool_version": "2019.03.05",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "kept_lines"
+        },
+        {
+          "type": "tsv",
+          "name": "discarded_lines"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 4
+        }
+      },
+      "tool_state": "{\"sort\": \"{\\\"__current_case__\\\": 1, \\\"sort_bool\\\": \\\"false\\\"}\", \"__page__\": null, \"input1\": \"null\", \"keyword\": \"[{\\\"__index__\\\": 0, \\\"k\\\": {\\\"__current_case__\\\": 0, \\\"kw\\\": \\\"text\\\", \\\"txt\\\": \\\"NA\\\"}, \\\"match\\\": \\\"true\\\", \\\"ncol\\\": \\\"c1\\\"}]\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"value\": \"[]\", \"header\": \"\\\"true\\\"\", \"operator\": \"\\\"OR\\\"\", \"operation\": \"\\\"discard\\\"\", \"values_range\": \"[]\"}",
+      "id": 5,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "33ca9ba2495a",
+        "name": "proteore_filter_keywords_values",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "fb0624ce-4fd9-458d-be25-37948cdcce74",
+      "errors": null,
+      "name": "Filter by keywords and/or numerical value",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 890
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "type": "tool"
+    },
+    "6": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
+      "tool_version": "2019.03.07",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "inputtype|genelist": {
+          "output_name": "kept_lines",
+          "id": 5
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"inputtype\": \"{\\\"__current_case__\\\": 1, \\\"column\\\": \\\"c1\\\", \\\"filetype\\\": \\\"file_all\\\", \\\"genelist\\\": null, \\\"header\\\": \\\"true\\\"}\", \"options\": \"{\\\"hpaparams\\\": [\\\"Gene\\\", \\\"Gene description\\\", \\\"RNA tissue category\\\", \\\"RNA TS TPM\\\"]}\"}",
+      "id": 6,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "dbeabf9bf091",
+        "name": "proteore_expression_rnaseq_abbased",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "8f9576b6-f63e-4430-bfb1-c011635d4496",
+      "errors": null,
+      "name": "Add expression data",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 1110
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
+      "type": "tool"
+    },
+    "7": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "tool_version": "2019.03.05",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "kept_lines"
+        },
+        {
+          "type": "tsv",
+          "name": "discarded_lines"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 6
+        }
+      },
+      "tool_state": "{\"sort\": \"{\\\"__current_case__\\\": 1, \\\"sort_bool\\\": \\\"false\\\"}\", \"__page__\": null, \"input1\": \"null\", \"keyword\": \"[{\\\"__index__\\\": 0, \\\"k\\\": {\\\"__current_case__\\\": 0, \\\"kw\\\": \\\"text\\\", \\\"txt\\\": \\\"enriched enhanced\\\"}, \\\"match\\\": \\\"false\\\", \\\"ncol\\\": \\\"c4\\\"}]\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"value\": \"[]\", \"header\": \"\\\"true\\\"\", \"operator\": \"\\\"OR\\\"\", \"operation\": \"\\\"keep\\\"\", \"values_range\": \"[]\"}",
+      "id": 7,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "33ca9ba2495a",
+        "name": "proteore_filter_keywords_values",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "3977bb07-b572-49f1-aa9a-bd05c6a2b823",
+      "errors": null,
+      "name": "Filter by keywords and/or numerical value",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 1330
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "type": "tool"
+    },
+    "8": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.01.28",
+      "tool_version": "2019.01.28",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input|file": {
+          "output_name": "kept_lines",
+          "id": 7
+        }
+      },
+      "tool_state": "{\"input\": \"{\\\"__current_case__\\\": 1, \\\"file\\\": null, \\\"header\\\": \\\"true\\\", \\\"ids\\\": \\\"file\\\", \\\"ncol\\\": \\\"c1\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"species\": \"{\\\"__current_case__\\\": 0, \\\"idto\\\": {\\\"idtypeout\\\": [\\\"UniProt-AC\\\", \\\"UniProt-ID\\\"]}, \\\"idtypein\\\": \\\"Ensembl_Gene\\\", \\\"mapping_file\\\": \\\"Human\\\"}\", \"__page__\": null}",
+      "id": 8,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "b6607b7e683f",
+        "name": "proteore_id_converter",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "e1777c44-a1d4-44e4-8711-b96739c4464e",
+      "errors": null,
+      "name": "ID Converter",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 1550
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.01.28",
+      "type": "tool"
+    },
+    "9": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_prot_features/prot_features/2019.01.18",
+      "tool_version": "2019.01.18",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "inputtype|genelist": {
+          "output_name": "output",
+          "id": 8
+        }
+      },
+      "tool_state": "{\"idtype\": \"\\\"Uniprot_AC\\\"\", \"Nextprot_params\": \"{\\\"diseases_info\\\": \\\"true\\\", \\\"localization\\\": [\\\"SubcellLocations\\\"], \\\"pc_features\\\": [\\\"TMDomains\\\"]}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"inputtype\": \"{\\\"__current_case__\\\": 1, \\\"column\\\": \\\"c6\\\", \\\"filetype\\\": \\\"file\\\", \\\"genelist\\\": null, \\\"header\\\": \\\"true\\\"}\"}",
+      "id": 9,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "8df559ad14a7",
+        "name": "proteore_prot_features",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "764b708a-0aca-43e2-acad-ef3e90312bc5",
+      "errors": null,
+      "name": "Add protein features",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 1770
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_prot_features/prot_features/2019.01.18",
+      "type": "tool"
+    },
+    "10": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "tool_version": "2019.03.05",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "kept_lines"
+        },
+        {
+          "type": "tsv",
+          "name": "discarded_lines"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 9
+        }
+      },
+      "tool_state": "{\"sort\": \"{\\\"__current_case__\\\": 0, \\\"reversed_sort\\\": \\\"true\\\", \\\"sort_bool\\\": \\\"true\\\", \\\"sort_column\\\": \\\"c5\\\"}\", \"__page__\": null, \"input1\": \"null\", \"keyword\": \"[{\\\"__index__\\\": 0, \\\"k\\\": {\\\"__current_case__\\\": 0, \\\"kw\\\": \\\"text\\\", \\\"txt\\\": \\\"cytoplasm cytosol\\\"}, \\\"match\\\": \\\"false\\\", \\\"ncol\\\": \\\"c9\\\"}]\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"value\": \"[{\\\"__index__\\\": 0, \\\"ncol\\\": \\\"c8\\\", \\\"operator\\\": \\\"Equal\\\", \\\"value\\\": \\\"0.0\\\"}]\", \"header\": \"\\\"true\\\"\", \"operator\": \"\\\"AND\\\"\", \"operation\": \"\\\"keep\\\"\", \"values_range\": \"[]\"}",
+      "id": 10,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "33ca9ba2495a",
+        "name": "proteore_filter_keywords_values",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "6c53bf8c-7bf2-4775-8ca7-77d46665b40f",
+      "errors": null,
+      "name": "Filter by keywords and/or numerical value",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 1990
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "type": "tool"
+    },
+    "11": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_ms_observation_pepatlas/retr_pepatlas1/2019.02.01.1",
+      "tool_version": "2019.02.01.1",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input|file": {
+          "output_name": "kept_lines",
+          "id": 10
+        }
+      },
+      "tool_state": "{\"atlas\": \"[\\\"tool-data/Human_Heart_2014-08.tsv\\\", \\\"tool-data/Human_Plasma_non_glyco_2017-04.tsv\\\"]\", \"input\": \"{\\\"__current_case__\\\": 1, \\\"file\\\": null, \\\"header\\\": \\\"true\\\", \\\"ids\\\": \\\"file\\\", \\\"ncol\\\": \\\"c6\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "id": 11,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "299eb4a62e0c",
+        "name": "proteore_ms_observation_pepatlas",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "73c29649-1855-41e4-bdb6-ecbd2ff460d1",
+      "errors": null,
+      "name": "Get MS/MS observations in tissue/fluid",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 2210
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_ms_observation_pepatlas/retr_pepatlas1/2019.02.01.1",
+      "type": "tool"
+    },
+    "12": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "tool_version": "2019.03.05",
+      "outputs": [
+        {
+          "type": "tsv",
+          "name": "kept_lines"
+        },
+        {
+          "type": "tsv",
+          "name": "discarded_lines"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 11
+        }
+      },
+      "tool_state": "{\"sort\": \"{\\\"__current_case__\\\": 1, \\\"sort_bool\\\": \\\"false\\\"}\", \"__page__\": null, \"input1\": \"null\", \"keyword\": \"[{\\\"__index__\\\": 0, \\\"k\\\": {\\\"__current_case__\\\": 0, \\\"kw\\\": \\\"text\\\", \\\"txt\\\": \\\"NA\\\"}, \\\"match\\\": \\\"true\\\", \\\"ncol\\\": \\\"c12\\\"}]\", \"chromInfo\": \"\\\"/home/proteore/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"value\": \"[]\", \"header\": \"\\\"true\\\"\", \"operator\": \"\\\"OR\\\"\", \"operation\": \"\\\"discard\\\"\", \"values_range\": \"[]\"}",
+      "id": 12,
+      "tool_shed_repository": {
+        "owner": "proteore",
+        "changeset_revision": "33ca9ba2495a",
+        "name": "proteore_filter_keywords_values",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "bbbcc761-18cb-49fc-8858-51043c10f54d",
+      "errors": null,
+      "name": "Filter by keywords and/or numerical value",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 10,
+        "left": 2430
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+      "type": "tool"
+    }
+  },
+  "annotation": "Biomarker candidate identification",
+  "a_galaxy_workflow": "true"
+}

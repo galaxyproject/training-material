@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nHEK_Ecoli_exp_design.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\niRTassays.tsv"]
+  2[color=lightblue,label="ℹ️ Input Collection\nFASTA collection"]
+  3[color=lightblue,label="ℹ️ Input Collection\nDDA_data collection"]
+  4[label="MaxQuant"]
+  2 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  5[label="Filter"]
+  4 -> 5 [label="evidence"]
+  6[label="Filter"]
+  4 -> 6 [label="msms"]
+  7[label="diapysef library generation"]
+  5 -> 7 [label="out_file1"]
+  1 -> 7 [label="output"]
+  6 -> 7 [label="out_file1"]
+  8[label="OpenSwathAssayGenerator"]
+  7 -> 8 [label="output_tabular"]
+  9[label="OpenSwathDecoyGenerator"]
+  8 -> 9 [label="out"]
+  10[label="TargetedFileConverter"]
+  9 -> 10 [label="out"]
+}

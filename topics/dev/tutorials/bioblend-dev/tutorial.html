@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Contributing to BioBlend as a developer / Contributing to BioBlend as a developer / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Contributing to BioBlend as a developer">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.creator" content="Erik Schill">
+<meta name="DC.creator" content="Simon Bray"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Contributing to BioBlend as a developer / Hands-on: Contributing to BioBlend as a developer">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/bioblend-dev/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Contributing to BioBlend as a developer",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2023-11-09 08:55:09 +0000",
+  "datePublished": "2021-05-25 10:02:52 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00112",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "BioBlend is a Python library to enable simple interaction with Galaxy via the command line or scripts.",
+  "learningResourceType": "e-learning",
+  "name": "Contributing to BioBlend as a developer",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html",
+  "version": 8,
+  "timeRequired": "PT3H",
+  "teaches": "- Learn the basics behind BioBlend and the Galaxy API from a developer perspective.\n- Learn how to implement a simple method in BioBlend.\n- Learn how to run the BioBlend test suite.",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nBioBlend is a Python library to enable simple interaction with Galaxy via the command line or scripts.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to get started making contributions to BioBlend?\n\n\n## Learning Objectives\n\n- Learn the basics behind BioBlend and the Galaxy API from a developer perspective.\n- Learn how to implement a simple method in BioBlend.\n- Learn how to run the BioBlend test suite.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    "Basic command line knowledge",
+    "Familiarity with git and access to a GitHub account",
+    "Familiarity with the Python programming language",
+    "Familiarity with HTTP methods and JavaScript Object Notation (JSON)"
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/",
+      "name": "Erik Schill",
+      "image": "https://avatars.githubusercontent.com/rikeshi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/",
+      "name": "Simon Bray",
+      "image": "https://avatars.githubusercontent.com/simonbray",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/",
+      "name": "Erik Schill",
+      "image": "https://avatars.githubusercontent.com/rikeshi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/",
+      "name": "Simon Bray",
+      "image": "https://avatars.githubusercontent.com/simonbray",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "@id": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/",
+      "name": "Gildas Le Corguillé",
+      "image": "https://avatars.githubusercontent.com/lecorguille",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/bioblend-dev/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-dev">
+    <h1 data-toc-skip>Contributing to BioBlend as a developer</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Erik Schill avatar" width="36" class="avatar" />
+    Erik Schill</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Simon Bray avatar" width="36" class="avatar" />
+    Simon Bray</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-badge-small contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Erik Schill avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-badge-small contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Simon Bray avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-badge-small contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-badge-small contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to get started making contributions to BioBlend?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn the basics behind BioBlend and the Galaxy API from a developer perspective.</p>
+</li>
+        
+        <li><p>Learn how to implement a simple method in BioBlend.</p>
+</li>
+        
+        <li><p>Learn how to run the BioBlend test suite.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+      <li>
+        Basic command line knowledge
+      </li>
+    
+
+    
+      <li>
+        Familiarity with git and access to a GitHub account
+      </li>
+    
+
+    
+      <li>
+        Familiarity with the Python programming language
+      </li>
+    
+
+    
+      <li>
+        Familiarity with HTTP methods and JavaScript Object Notation (JSON)
+      </li>
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/dev/tutorials/bioblend-dev/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 25, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00112">https://gxy.io/GTN:T00112</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/dev/tutorials/bioblend-dev/tutorial.md">8</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>BioBlend (<span class="citation"><a href="#Sloggett2013">Sloggett <i>et al.</i> 2013</a></span>) is a Python library to enable simple interaction with Galaxy (<span class="citation"><a href="#Afgan2018">Afgan <i>et al.</i> 2018</a></span>) via the command line or scripts.</p>
+
+<p>Galaxy is a data analysis platform for accessible, reproducible and transparent computational research. It includes a web interface through which users can design and perform tasks in a visual and interactive manner. The Galaxy server also exposes this functionality through its REST-based Application Programming Interface (API).</p>
+
+<p>Computer programs can communicate with the Galaxy server through this <abbr title="Application Programming Interface">API</abbr> and perform similar tasks as can be achieved manually via the web interface. The program sends a network request to a URL of an <abbr title="Application Programming Interface">API</abbr> endpoint. The server then computes the result for this request and sends back a response to the program.</p>
+
+<p>BioBlend provides classes and methods that handle the specific details of this communication for Python programs. Similar libraries also exist for interacting with Galaxy via other programming languages:</p>
+
+<ul>
+  <li>blend4j (Java): <a href="https://github.com/galaxyproject/blend4j">https://github.com/galaxyproject/blend4j</a></li>
+  <li>blend4php (PHP): <a href="https://github.com/galaxyproject/blend4php">https://github.com/galaxyproject/blend4php</a></li>
+  <li>clj-blend (Clojure): <a href="https://github.com/chapmanb/clj-blend">https://github.com/chapmanb/clj-blend</a></li>
+</ul>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will learn the basics of BioBlend development:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#development-on-github" id="markdown-toc-development-on-github">Development on GitHub</a>    <ol>
+      <li><a href="#contributing-on-github" id="markdown-toc-contributing-on-github">Contributing on GitHub</a></li>
+    </ol>
+  </li>
+  <li><a href="#downloading-galaxy-and-bioblend" id="markdown-toc-downloading-galaxy-and-bioblend">Downloading Galaxy and BioBlend</a></li>
+  <li><a href="#interacting-with-the-api" id="markdown-toc-interacting-with-the-api">Interacting with the API</a>    <ol>
+      <li><a href="#structure-of-the-galaxy-api" id="markdown-toc-structure-of-the-galaxy-api">Structure of the Galaxy API</a></li>
+      <li><a href="#core-concepts-of-the-galaxy-interface" id="markdown-toc-core-concepts-of-the-galaxy-interface">Core concepts of the Galaxy interface</a></li>
+      <li><a href="#structure-of-the-bioblend-library" id="markdown-toc-structure-of-the-bioblend-library">Structure of the BioBlend library</a></li>
+    </ol>
+  </li>
+  <li><a href="#communicating-with-the-galaxy-api" id="markdown-toc-communicating-with-the-galaxy-api">Communicating with the Galaxy API</a></li>
+  <li><a href="#creating-a-simple-bioblend-method" id="markdown-toc-creating-a-simple-bioblend-method">Creating a simple BioBlend method</a>    <ol>
+      <li><a href="#identifying-the-relevant-galaxy-endpoint" id="markdown-toc-identifying-the-relevant-galaxy-endpoint">Identifying the relevant Galaxy endpoint</a></li>
+    </ol>
+  </li>
+  <li><a href="#running-the-bioblend-tests" id="markdown-toc-running-the-bioblend-tests">Running the BioBlend tests</a>    <ol>
+      <li><a href="#running-the-tests-directly" id="markdown-toc-running-the-tests-directly">Running the tests directly</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="development-on-github">Development on GitHub</h1>
+
+<p>Galaxy and BioBlend are developed as open source projects on GitHub and contributions are welcome!</p>
+
+<p>The GitHub repositories can be found at:</p>
+<ul>
+  <li>Galaxy: <a href="https://github.com/galaxyproject/galaxy">https://github.com/galaxyproject/galaxy</a></li>
+  <li>BioBlend: <a href="https://github.com/galaxyproject/bioblend">https://github.com/galaxyproject/bioblend</a></li>
+</ul>
+
+<h2 id="contributing-on-github">Contributing on GitHub</h2>
+
+<p>To contribute to BioBlend, a GitHub account is required.</p>
+
+<p>Changes are proposed via a Pull Request (PR). This allows the project maintainers to review the changes and suggest improvements.</p>
+
+<p>The general steps are as follows:</p>
+
+<ol>
+  <li>Fork the BioBlend repository</li>
+  <li>Make changes in a new branch</li>
+  <li>Open a pull request for this branch in the upstream BioBlend repository</li>
+</ol>
+
+<p>It is generally a good idea to enable the “Allow edits and access to secrets by maintainers” option for the <abbr title="Pull Request">PR</abbr>. Enabling this option gives maintainers more freedom to help out.</p>
+
+<h1 id="downloading-galaxy-and-bioblend">Downloading Galaxy and BioBlend</h1>
+
+<p>Now we are ready to set up our development environment! Since BioBlend communicates with the Galaxy <abbr title="Application Programming Interface">API</abbr>, we must also set up a local Galaxy server in order to test BioBlend functionality.
+We use the <a href="https://git-scm.com">git</a> versioning tool to download the repositories.</p>
+
+<p>For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will prompt for credentials every time. See the <a href="https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub Docs</a> for information on setting up an SSH key.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-downloading-repositories"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Downloading repositories</div>
+  <p>Download Galaxy and set it up as a local repository:</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:galaxyproject/galaxy.git
+</code></pre></div>  </div>
+
+  <p>Likewise, download BioBlend:</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:galaxyproject/bioblend.git
+</code></pre></div>  </div>
+
+  <p>If you have already forked these repositories, you probably want to replace the links in the commands above to point to the forks.</p>
+</blockquote>
+
+<h1 id="interacting-with-the-api">Interacting with the API</h1>
+
+<h2 id="structure-of-the-galaxy-api">Structure of the Galaxy API</h2>
+
+<p>The source code for the <abbr title="Application Programming Interface">API</abbr> endpoints is contained in various files under <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api">lib/galaxy/webapps/galaxy/api/</a> in the Galaxy source code. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the <code class="language-plaintext highlighter-rouge">DatasetsController</code> class in the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L33">datasets.py</a> file.</p>
+
+<p>Additionally, the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/buildapp.py">buildapp.py</a> file contains a complete listing of all the endpoints.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+  <p>Different versions of Galaxy differ in the functionality that is implemented. The development version is named <code class="language-plaintext highlighter-rouge">dev</code> and includes the most recent changes. Release versions are named according to their release date. These Galaxy releases can be accessed via git branches, e.g. <code class="language-plaintext highlighter-rouge">release_20.01</code>. At the time of writing BioBlend supports Galaxy releases 17.09 and later, although some functionality is not supported by all of these versions.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-going-deeper-into-the-galaxy-back-end-code"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-going-deeper-into-the-galaxy-back-end-code" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Going deeper into the Galaxy back-end code</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The various Galaxy <abbr title="Application Programming Interface">API</abbr> methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the Galaxy <abbr title="Application Programming Interface">API</abbr>. These endpoint methods handle the incoming requests from BioBlend.</p>
+
+  <p>A focus for development of the Galaxy <abbr title="Application Programming Interface">API</abbr> is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the <abbr title="Application Programming Interface">API</abbr> endpoint method is moved to a corresponding manager class. This approach separates the <abbr title="Application Programming Interface">API</abbr> more cleanly from internal functionality. The manager classes should contain as much of the functionality as possible. An example is the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26"><code class="language-plaintext highlighter-rouge">DatasetManager</code></a>, referenced to regularly by the <code class="language-plaintext highlighter-rouge">DatasetsController</code> which is exposed directly to the <abbr title="Application Programming Interface">API</abbr>.</p>
+
+  <p>At the time of writing this transition is ongoing. Therefore, source code of methods for one controller might look and function differently than those of another controller. This might be encountered when debugging a failing request in BioBlend.</p>
+
+</blockquote>
+
+<h2 id="core-concepts-of-the-galaxy-interface">Core concepts of the Galaxy interface</h2>
+
+<p>This section provides brief descriptions of the core concepts of the Galaxy interface, from the perspective of a BioBlend/Galaxy developer, rather than the typical Galaxy user. This list is by no means complete, but it should help those not already familiar with Galaxy.</p>
+
+<p>BioBlend provides separate clients for interacting with each of these entities. For example, the BioBlend client for jobs is the <code class="language-plaintext highlighter-rouge">JobsClient</code> class. The source code for each <code class="language-plaintext highlighter-rouge">Client</code> can be found under <a href="https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy">bioblend/galaxy/</a>.</p>
+
+<!-- This is the syntax for a definition list in markdown, it's semantically the most correct option here -->
+
+<dl>
+  <dt>Tool</dt>
+  <dd>A Galaxy tool packages a particular piece of scientific software, keeping track of its required dependencies. It also contains additional metadata such as the BibTex references to the associated research paper(s). Tools generally take datasets and/or dataset collections as inputs and produce new datasets and/or collections as outputs.</dd>
+  <dt>Dataset</dt>
+  <dd>A dataset represents digital data that can serve as input for a job. It can be associated with (contained in) a history or a library. A dataset can be shared between users. Each time a dataset is copied between histories or libraries, a new History Dataset Association (HDA) or Library Dataset Association (LDA) is created. This naming scheme is used internally by the Galaxy relational database, but the terms might be encountered during BioBlend development as well.</dd>
+  <dt>Dataset Collection</dt>
+  <dd>A dataset collection represents a group of related datasets. Like a dataset, it can be associated with a history or a library. Each time it is copied or shared, a new History Dataset Collection Association (HDCA) or a Library Dataset Collection Association (LDCA) is created.<br /><br />There are two kinds of dataset collections, <code class="language-plaintext highlighter-rouge">list</code> and <code class="language-plaintext highlighter-rouge">paired</code>. The former is a simple list of elements. The latter has a particular application in bioinformatics; it contains only two elements, corresponding to the <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> strands of a piece of DNA.<br /><br /> Collection elements can be other collections; in other words, collections can be nested. These are designated (for example) as <code class="language-plaintext highlighter-rouge">list:list</code> or <code class="language-plaintext highlighter-rouge">list:paired</code>.</dd>
+  <dt>Job</dt>
+  <dd>Jobs are associated with the execution of a tool on the Galaxy server. Each dataset is created by running a tool and therefore has an associated job. The computation of each step in a workflow has an associated job as well.<br /><br />Jobs run as background processes on the Galaxy server. This is relevant because reading results before the appropriate jobs have finished can lead to missing data in the output. BioBlend methods must handle this by waiting for relevant jobs to finish before returning a response to the user.<br /><br />Job creation can be different when dealing with dataset collections. If a tool input receives a collection instead of a dataset, it will create a separate job for each element, resulting in an output collection with the same structure as the input. This is referred to as ‘mapping over’ a collection.</dd>
+  <dt>History</dt>
+  <dd>A history represents a container that keeps track of actions performed on its contents. Datasets are associated with a particular history; tools and workflows also need to be run in a particular history, which keeps track of the outputs produced by each of the resulting jobs or invocations. While the history is a very important concept to users of the graphical user interface, as it provides a constantly visible workspace to organize individual analyses or projects, it is slightly less relevant for BioBlend users.</dd>
+  <dt>Workflow</dt>
+  <dd>A workflow represents a computation pipeline, made up of multiple tools chained together. It is created and contained in a history. A workflow is comprised of steps, which can be either inputs or tools. Its structure can be imagined as a directed graph of nodes that process inputs and pass on their outputs to the next nodes. The initial input to a workflow is commonly one or multiple datasets or dataset collections, as well as input parameters.</dd>
+  <dt>Invocation</dt>
+  <dd>Just like a job represents a tool executed on certain inputs, an invocation represents the execution of a workflow on specified inputs and with certain specified parameters. Every invocation corresponds to only one workflow, and every step of the workflow has an associated invocation step. Each invocation step has jobs associated with it.</dd>
+  <dt>Library</dt>
+  <dd>A library represents a container for datasets and dataset collections. Datasets that are contained in a library can be shared between multiple Galaxy users.</dd>
+</dl>
+
+<h2 id="structure-of-the-bioblend-library">Structure of the BioBlend library</h2>
+
+<p>BioBlend methods for the Galaxy API are associated with the various <code class="language-plaintext highlighter-rouge">Clients</code> already mentioned, stored under <a href="https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy">bioblend/galaxy/</a> in the BioBlend GitHub repository. The functionality for each Galaxy entity is in a separate folder. For example, the methods for interacting with workflows are stored under <a href="https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy/workflows">bioblend/galaxy/workflows</a> in the <code class="language-plaintext highlighter-rouge">WorkflowsClient</code> class.</p>
+
+<p>The tests for these methods are stored under <a href="https://github.com/galaxyproject/bioblend/tree/main/bioblend/_tests">tests/</a>. For example, the tests related to workflows are in the file <a href="https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyWorkflows.py">tests/TestGalaxyWorkflows.py</a>.</p>
+
+<p>The classic approach for accessing the Galaxy API is using the various clients and their methods. Each of these methods corresponds to one of the API endpoints. They send a request to the Galaxy server and return a Python object representing the parsed JSON response. Alternatively, there is also BioBlend.objects (<span class="citation"><a href="#Leo2014">Leo <i>et al.</i> 2014</a></span>), which provides an object-oriented API. Interaction with the API occurs via wrapper classes. These wrappers represent entity instances and provide methods to interact with and manipulate them. For example, a wrapper could represent a single workflow.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-what-is-the-difference-between-bioblend-and-bioblend-objects"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: What is the difference between BioBlend and BioBlend.objects?</div>
+
+  <p>Look at the following code:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># classic BioBlend
+</span><span class="kn">from</span> <span class="n">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">galaxy_key</span><span class="p">)</span>
+<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_workflows</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">wf_dict</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">))</span>
+
+<span class="c1"># BioBlend.objects
+</span><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">galaxy_key</span><span class="p">)</span>
+<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>  </div>
+  <p>It does the same thing (prints all available workflows) using both BioBlend and BioBlend.objects. What differences can you see?</p>
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The output of the classic BioBlend code is provided as JSON, which the user can continue to manipulate themselves. The BioBlend.objects code provides the same information, but in the format of a Python object. This has various properties which the user can access, using for example <code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">id</code>.</p>
+
+    <p>You can view <a href="https://github.com/galaxyproject/bioblend/tree/main/docs/examples">numerous examples of both here</a>.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-note-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+  <p>BioBlend also provides methods for interacting with the Galaxy <a href="https://galaxyproject.org/toolshed/">ToolShed</a> and <a href="https://galaxyproject.org/cloudman/">Cloudman</a>. However, this tutorial focuses on the part of BioBlend which provides access to the Galaxy API.</p>
+</blockquote>
+
+<h1 id="communicating-with-the-galaxy-api">Communicating with the Galaxy API</h1>
+
+<p>We will make some manual requests to get a better feel for the Galaxy API. But first we need a valid API key in order to communicate with the Galaxy server through the API.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-getting-your-api-key"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-your-api-key" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Getting your API key</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>A quick way to get an API key is to create a new user on our local Galaxy server. Navigate to the Galaxy base directory and execute the <a href="https://github.com/galaxyproject/galaxy/blob/dev/run.sh">run.sh</a> script. This starts the Galaxy server.</p>   <ol>   <li>In your browser, open your Galaxy homepage</li>   <li>Log in, or register a new account, if it’s the first time you’re logging in</li>   <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>   <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>   <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>In the following examples we make use of a simple networking tool named <a href="https://curl.se">curl</a>. Each command is listed together with the corresponding BioBlend and BioBlend.objects code.</p>
+
+<p>We assume basic familiarity with HTTP request methods. For an overview, see the Mozilla Developer Network <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">documentation</a>.</p>
+
+<p>Now, open a terminal window and let’s make a few manual requests! In each case, the corresponding BioBlend and BioBlend.objects code is also provided for comparison.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-making-requests-to-the-api"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Making requests to the API</div>
+  <ol>
+    <li>
+      <p><strong>GET request</strong></p>
+
+      <p>This is a simplest type of request. We request data from a specific URL, but we do not provide any further information apart from our API key. In this example we request a listing of all our invocations.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-curl"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: curl</div>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="nt">-H</span> <span class="s1">'x-api-key: &lt;API_KEY&gt;'</span> <span class="s1">'localhost:8080/api/invocations'</span>
+</code></pre></div>        </div>
+
+        <p>The <code class="language-plaintext highlighter-rouge">-X</code> flag specifies the HTTP method of our request. In this case we are making a GET request. GET is the default method, so we could also simply omit it here.</p>
+
+        <p>The <code class="language-plaintext highlighter-rouge">-H</code> flag is used to specify HTTP headers. We authenticate our requests by specifying our API key in the <code class="language-plaintext highlighter-rouge">x-api-key</code> header.</p>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-example-json-response"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: Example JSON response</div>
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[{</span>
+    <span class="dl">'</span><span class="s1">history_id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2f94e8ae9edff68a</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">df7a1f0c02a5b08e</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">model_class</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">WorkflowInvocation</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">state</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">new</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">update_time</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2015-10-31T22:00:22</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">uuid</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">c8aa2b1c-801a-11e5-a9e5-8ca98228593c</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">workflow_id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">03501d7626bd192f</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">}]</span>
+</code></pre></div>        </div>
+
+        <p>The above response would mean that our user has only invoked a workflow once. The workflow’s encoded ID is listed (<code class="language-plaintext highlighter-rouge">workflow_id</code>), as well as the encoded ID of the history containing this workflow (<code class="language-plaintext highlighter-rouge">history_id</code>), and the ID of the invocation itself (<code class="language-plaintext highlighter-rouge">id</code>). The state <code class="language-plaintext highlighter-rouge">new</code> indicates that the request to invoke this workflow is still pending and that the invocation has not been scheduled yet.</p>
+      </blockquote>
+
+      <p>BioBlend code:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="sh">'</span><span class="s">http://localhost:8080</span><span class="sh">'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_invocations</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>BioBlend.objects code:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">obj_gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="sh">'</span><span class="s">http://localhost:8080</span><span class="sh">'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">previews</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">preview</span> <span class="ow">in</span> <span class="n">previews</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">preview</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>GET request with query parameters</strong></p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-curl-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: curl</div>
+        <p>In this example we include two query parameters in our request, <code class="language-plaintext highlighter-rouge">limit</code> and <code class="language-plaintext highlighter-rouge">include_terminal</code>.</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="nt">-H</span> <span class="s1">'x-api-key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     <span class="s1">'localhost:8080/api/invocations?limit=5&amp;include_terminal=False'</span>
+</code></pre></div>        </div>
+
+        <p>With <code class="language-plaintext highlighter-rouge">limit=5</code> we limit the result to at most 5 invocations. With <code class="language-plaintext highlighter-rouge">include_terminal=False</code> we indicate that invocations in a terminal state should be excluded from the results.</p>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-example-json-response-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: Example JSON response</div>
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[]</span>
+</code></pre></div>        </div>
+
+        <p>The above response would mean that there are no workflows in a non-terminal state - any workflows which have been invoked have been successfully scheduled.</p>
+      </blockquote>
+
+      <p>BioBlend code:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_invocations</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>BioBlend.objects code:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">invocation</span> <span class="ow">in</span> <span class="n">invs</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>POST request with a payload</strong></p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-curl-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: curl</div>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'x-api-key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{"name":"MyNewHistory"}'</span> <span class="se">\</span>
+    <span class="s1">'localhost:8080/api/histories'</span>
+</code></pre></div>        </div>
+
+        <p>This creates a new history with the name ‘MyNewHistory’.</p>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-example-json-response-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: Example JSON response</div>
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">'</span><span class="s1">update_time</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2021-05-24T13:04:05.393590</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">user_id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">e9376175b7f708de</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MyNewHistory</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">genome_build</span><span class="dl">'</span><span class="p">:</span> <span class="nx">None</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">username_and_slug</span><span class="dl">'</span><span class="p">:</span> <span class="nx">None</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">deleted</span><span class="dl">'</span><span class="p">:</span> <span class="nx">False</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">published</span><span class="dl">'</span><span class="p">:</span> <span class="nx">False</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">slug</span><span class="dl">'</span><span class="p">:</span> <span class="nx">None</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">model_class</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">History</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">state</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">new</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">464411b81613694d</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">:</span> <span class="nx">True</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">annotation</span><span class="dl">'</span><span class="p">:</span> <span class="nx">None</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">importable</span><span class="dl">'</span><span class="p">:</span> <span class="nx">False</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">state_ids</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span><span class="dl">'</span><span class="s1">new</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">upload</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">queued</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">running</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">ok</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">discarded</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">paused</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">setting_metadata</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="dl">'</span><span class="s1">failed_metadata</span><span class="dl">'</span><span class="p">:</span> <span class="p">[]},</span>
+<span class="dl">'</span><span class="s1">create_time</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2021-05-24T13:04:05.393579</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">purged</span><span class="dl">'</span><span class="p">:</span> <span class="nx">False</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">tags</span><span class="dl">'</span><span class="p">:</span> <span class="p">[],</span>
+<span class="dl">'</span><span class="s1">contents_url</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/api/histories/464411b81613694d/contents</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">size</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">state_details</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span><span class="dl">'</span><span class="s1">new</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">upload</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">queued</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">running</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">ok</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">discarded</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">paused</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">setting_metadata</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="dl">'</span><span class="s1">failed_metadata</span><span class="dl">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="dl">'</span><span class="s1">url</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/api/histories/464411b81613694d</span><span class="dl">'</span><span class="p">}</span>
+</code></pre></div>        </div>
+
+        <p>The response contains some basic information about the newly created history, including the <code class="language-plaintext highlighter-rouge">history_id</code>, which we would need for further API calls.</p>
+      </blockquote>
+
+      <p>BioBlend code:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="sh">'</span><span class="s">MyNewHistory</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>BioBlend.objects code:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="sh">'</span><span class="s">MyNewHistory</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-encoded-and-non-encoded-ids-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-encoded-and-non-encoded-ids-in-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Encoded and non-encoded IDs in Galaxy</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>While making the API calls now, we encountered various IDs - for example, we created a history with ID <code class="language-plaintext highlighter-rouge">464411b81613694d</code>. How do Galaxy IDs work?</p>
+
+  <p>The Galaxy server assigns a numeric (integer) ID to every entity, which serves as its unique identifier. (The exception are tools, which have a predefined string ID specified in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html#attributes">XML wrapper</a> defining the tool.) For example, each workflow, invocation, history and dataset is assigned a unique ID. If you access the Galaxy database directly, using a tool such as <a href="https://github.com/usegalaxy-eu/gxadmin">gxadmin</a>, these integers are the IDs that you will see.</p>
+
+  <p>However, these IDs are not (or should not be!) exposed through the API. The Galaxy server encodes the numeric IDs into hexadecimal strings before sending them to external API clients. These are referred to as encoded IDs. BioBlend only deals with these encoded IDs.</p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-params-versus-payload-what-s-the-difference"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-params-versus-payload-what-s-the-difference" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Params versus payload: what's the difference?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>In BioBlend, the <code class="language-plaintext highlighter-rouge">Client._get()</code> helper method is used for GET requests. It takes a <code class="language-plaintext highlighter-rouge">params</code> argument. The <code class="language-plaintext highlighter-rouge">Client._post()</code> and <code class="language-plaintext highlighter-rouge">Client._put()</code> helper methods make POST and PUT requests respectively. They expect a <code class="language-plaintext highlighter-rouge">payload</code> argument. In this section we briefly explain the difference.</p>
+
+  <p>An HTTP request is comprised of (1) a request line, (2) headers with metadata, (3) an empty line and (4) an optional message body. The HTTP GET method uses query parameters to specify which resource should be retrieved from the server. These parameters are included in the request line as part of the URL. The HTTP POST and PUT methods create or update resources. This data is specified in the payload, which is included in the message body of the request.</p>
+
+  <p>We can see the difference using <a href="https://curl.se">curl</a> and <a href="https://nmap.org/ncat/">ncat</a>.</p>
+
+  <p>Open a terminal and run the <code class="language-plaintext highlighter-rouge">ncat</code> command in listen mode on port 8080. The loop will print out any incoming requests; each request is separated by a line containing <code class="language-plaintext highlighter-rouge">---</code>.</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while </span>ncat <span class="nt">--listen</span> 8080<span class="p">;</span> <span class="k">do </span><span class="nb">printf</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">---</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>  </div>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-note-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+    <p>The <code class="language-plaintext highlighter-rouge">ncat</code> command is a low-level networking tool that does not respond to any incoming connections. Since HTTP is done over <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a>, the <code class="language-plaintext highlighter-rouge">curl</code> command will hang expecting a response. Simply press <kbd>CTRL</kbd> + <kbd>C</kbd> to terminate the <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
+  </blockquote>
+
+  <h4 id="parameters">Parameters</h4>
+
+  <p>Open a second terminal and send a GET request with a query parameter:</p>
+
+  <blockquote class="code-in">
+    <div class="box-title code-in-title" id="code-in-curl-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: curl</div>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET localhost:8080/?message<span class="o">=</span>Hello
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <div class="box-title code-out-title" id="code-out-ncat"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: ncat</div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /?message=Hello HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.76.1
+Accept: */*
+
+
+</code></pre></div>    </div>
+
+    <p>The two blank lines indicate that the payload is empty.</p>
+  </blockquote>
+
+  <h4 id="payload">Payload</h4>
+
+  <p>Send a POST request with the payload ‘My name is curl’.</p>
+
+  <blockquote class="code-in">
+    <div class="box-title code-in-title" id="code-in-curl-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Code In: curl</div>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'My name is curl'</span> localhost:8080
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <div class="box-title code-out-title" id="code-out-ncat-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out: ncat</div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST / HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.76.1
+Accept: */*
+Content-Length: 15
+Content-Type: application/x-www-form-urlencoded
+
+My name is curl
+</code></pre></div>    </div>
+
+    <p>The message body now contains our payload.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="creating-a-simple-bioblend-method">Creating a simple BioBlend method</h1>
+
+<p>As an introduction to BioBlend development, we will extend the BioBlend <code class="language-plaintext highlighter-rouge">ToolsClient</code> class by adding a new method named <code class="language-plaintext highlighter-rouge">uninstall_dependencies()</code>. This method will send a request to the Galaxy server to uninstall any dependencies for the specified tool.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-note-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+  <p>This example is based on the pull request “<a href="https://github.com/galaxyproject/bioblend/pull/390">Improving Tools API coverage</a>” in the BioBlend repository.</p>
+</blockquote>
+
+<h2 id="identifying-the-relevant-galaxy-endpoint">Identifying the relevant Galaxy endpoint</h2>
+
+<p>We should check the Galaxy controller to verify whether this functionality is already implemented in the Galaxy API. Let’s check the <code class="language-plaintext highlighter-rouge">dev</code> version of Galaxy. Our method interacts with the tools API, so let’s check the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/api/tools.py">api/tools.py</a> file.</p>
+
+<p>As it turns out, a corresponding <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/tools.py#L293"><code class="language-plaintext highlighter-rouge">uninstall_dependencies()</code></a> endpoint method is already available in the Galaxy <code class="language-plaintext highlighter-rouge">dev</code> branch. Lucky us! If this was not the case, then we would have first had to implement the endpoint in Galaxy, before writing a BioBlend method to interact with it.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-the-method-and-a-simple-test"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Creating the method and a simple test</div>
+  <ol>
+    <li>
+      <p><strong>Constructing the correct method signature</strong></p>
+
+      <p>Let’s look at the signature of the endpoint method:</p>
+
+      <p><strong>File <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/tools.py#L293">api/tools.py</a>, line 291</strong>:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">GalaxyWebTransaction</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+</code></pre></div>      </div>
+      <p>The <code class="language-plaintext highlighter-rouge">GalaxyWebTransaction</code> is an object which represents our API request. It is internal to the Galaxy server. We do not specify it as a parameter in BioBlend.</p>
+
+      <p>We can see that it also expects an <code class="language-plaintext highlighter-rouge">id</code> parameter, which is the tool ID. The <code class="language-plaintext highlighter-rouge">kwds</code> argument indicates that the endpoint might accept additional keyword arguments as well.</p>
+
+      <p>Let’s check the method documentation:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
+DELETE /api/tools/{tool_id}/dependencies
+Attempts to uninstall requirements via the dependency resolver
+
+parameters:
+
+    index:
+        index of dependency resolver to use when installing dependency.
+        Defaults to using the highest ranking resolver
+
+    resolver_type:
+        Use the dependency resolver of this resolver_type to install
+        dependency
+</span><span class="sh">"""</span>
+</code></pre></div>      </div>
+      <p>The endpoint expects a DELETE request at URL <code class="language-plaintext highlighter-rouge">/api/tools/{tool_id}/dependencies</code>. The <code class="language-plaintext highlighter-rouge">id</code> parameter in the method signature corresponds to the variable <code class="language-plaintext highlighter-rouge">{tool_id}</code> present in the endpoint URL.</p>
+
+      <p>There are two additional parameters: <code class="language-plaintext highlighter-rouge">index</code> and <code class="language-plaintext highlighter-rouge">resolver_type</code>. These parameters specify how the server should resolve the tool dependencies. For an average API user these options are probably too specific as they require knowledge of the resolvers used by the Galaxy server back end. We will skip these parameters for this example.</p>
+
+      <p>Lastly, we need to find out what the endpoint returns. Unfortunately the return type is not listed in the method documentation. It is a reality that various parts of the Galaxy API lack complete documentation, although this is being worked on.</p>
+
+      <p>Let’s look at the return statement of the endpoint:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">tool</span><span class="p">.</span><span class="n">tool_requirements_status</span>
+</code></pre></div>      </div>
+      <p>Here the tool API controller calls the <code class="language-plaintext highlighter-rouge">tool_requirements_status</code> property of the <code class="language-plaintext highlighter-rouge">Tool</code> class instance, which represents the tool corresponding to the <code class="language-plaintext highlighter-rouge">id</code> parameter. Let’s also check the definition of this property.</p>
+
+      <p><strong>File <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/tools/__init__.py#L1833">tools/__init__.py</a>, line 1833</strong>:</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tool_requirements_status</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Return a list of dictionaries for all tool dependencies with their
+    associated status
+    </span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_view</span><span class="p">.</span><span class="nf">get_requirements_status</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">self</span><span class="p">.</span><span class="nb">id</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">tool_requirements</span><span class="p">},</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">installed_tool_dependencies</span>
+    <span class="p">)</span>
+</code></pre></div>      </div>
+      <p>The documentation of this method mentions that it returns a list of dictionaries for all tool dependencies with their associated status. Now we know the return type of the endpoint method!</p>
+
+      <p>Our BioBlend method will receive this list of dictionaries encoded as JSON in the server response. It will parse the JSON and return the list. Thus, the signature of our new <code class="language-plaintext highlighter-rouge">uninstall_dependencies()</code> method will be as follows:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</code></pre></div>      </div>
+
+      <p>The <code class="language-plaintext highlighter-rouge">self</code> parameter corresponds to the <code class="language-plaintext highlighter-rouge">ToolsClient</code> instance. The parameter <code class="language-plaintext highlighter-rouge">tool_id</code> corresponds to the encoded ID for a given tool. This ID will be substituted in place of <code class="language-plaintext highlighter-rouge">{tool_id}</code> in the request URL.</p>
+    </li>
+    <li>
+      <p><strong>Adding the method body</strong></p>
+
+      <p>Our method is part of the <code class="language-plaintext highlighter-rouge">ToolsClient</code> class. This means that our method has access to all its helper methods.
+Let’s recall that the endpoint expects a DELETE request at URL <code class="language-plaintext highlighter-rouge">/api/tools/{tool_id}/dependencies</code>.</p>
+
+      <p>To translate this into BioBlend source code, we do the following:</p>
+
+      <ul>
+        <li>
+          <p>We use the <code class="language-plaintext highlighter-rouge">self._make_url()</code> helper method to construct a valid URL with the supplied <code class="language-plaintext highlighter-rouge">tool_id</code> parameter. Finally, we need to append <code class="language-plaintext highlighter-rouge">'/dependencies'</code> for our endpoint.</p>
+
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">/dependencies</span><span class="sh">'</span>
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p>BioBlend clients also include helper methods for making requests of various types. In this case we want to make a DELETE request, so we use the <code class="language-plaintext highlighter-rouge">self._delete()</code> helper method with our constructed URL as argument. These helper methods are inherited from the <code class="language-plaintext highlighter-rouge">Client</code> class located at <a href="https://github.com/galaxyproject/bioblend/blob/v0.16.0/bioblend/galaxy/client.py#L19">bioblend/galaxy/client.py</a>.</p>
+        </li>
+      </ul>
+
+      <p>The <code class="language-plaintext highlighter-rouge">_delete()</code> method also expects a <code class="language-plaintext highlighter-rouge">payload</code> argument. Our payload will be empty (<code class="language-plaintext highlighter-rouge">{}</code>), since we use <code class="language-plaintext highlighter-rouge">tool_id</code> only to construct the URL and there are no additional parameters to pass. This helper method automatically parses the JSON response into a Python object, so we can directly return its result.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Adding the docstring</strong></p>
+
+      <p>We should document the method and its parameter for the user.</p>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
+Uninstall dependencies for a given tool via a resolver.
+
+:type tool_id: str
+:param tool_id: id of the requested tool
+
+:rtype: list of dicts
+:return: Tool requirement statuses
+</span><span class="sh">"""</span>
+</code></pre></div>      </div>
+
+      <p>This is the docstring format used in BioBlend. At the top we provide a short general description of the method. Then we document each parameter with its type and a short description. The return value of the method is documented last. After the PR is merged, the docstring will be rendered as part of the <a href="https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html">BioBlend documentation</a>.</p>
+    </li>
+    <li>
+      <p><strong>Checking Galaxy version compatibility</strong></p>
+
+      <p>In case certain versions of Galaxy do not support our method’s functionality, we should append a note to the method’s docstring.</p>
+
+      <p><strong>Example</strong>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.. note::
+    This method is only supported by Galaxy 19.09 or later.
+</code></pre></div>      </div>
+
+      <p>Previously we made sure that the <code class="language-plaintext highlighter-rouge">dev</code> version of Galaxy supported our method. Let’s now check if older versions of Galaxy also support it. At the time of writing, Galaxy 17.09 is the earliest version supported by BioBlend, so it makes sense to check it first.</p>
+
+      <p>It turns out that Galaxy 17.09 also <a href="https://github.com/galaxyproject/galaxy/blob/v17.09/lib/galaxy/webapps/galaxy/api/tools.py#L159">supports</a> our method! It’s safe to assume that all later versions do as well, and thus we do not need to add a note.</p>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-determining-the-galaxy-version-from-within-bioblend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-determining-the-galaxy-version-from-within-bioblend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Determining the Galaxy version from within BioBlend</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>In certain situations it might be useful to determine the version of the Galaxy server from BioBlend. We can determine the version using the <code class="language-plaintext highlighter-rouge">self.gi.config.get_version()</code> method.</p>
+
+        <p><strong>Example</strong>:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get_version</span><span class="p">()[</span><span class="sh">'</span><span class="s">version_major</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sh">'</span><span class="s">21.01</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Newer version of Galaxy!</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Older version of Galaxy!</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div>        </div>
+        <p>An example where this is useful is the <a href="https://github.com/galaxyproject/bioblend/blob/v0.16.0/bioblend/galaxy/dataset_collections/__init__.py#L125"><code class="language-plaintext highlighter-rouge">download_dataset_collection()</code></a> method. It downloads a dataset collection as an archive file. Early versions of Galaxy return a ‘tar.gz’ archive. Later versions return a ‘zip’ archive. The BioBlend method uses the Galaxy version to determine the archive type.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Putting it all together</strong></p>
+
+      <p>In the end, our new method should look something like this:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">
+    Uninstall dependencies for a given tool via a resolver.
+
+    :type tool_id: str
+    :param tool_id: id of the requested tool
+
+    :rtype: list of dicts
+    :return: Tool requirement statuses
+    </span><span class="sh">"""</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">/dependencies</span><span class="sh">'</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Writing a test for our new method</strong></p>
+
+      <p>It is best to keep BioBlend tests simple. We need to check that we get an expected response, but testing minute details is unnecessary, since those are the responsibility of the Galaxy server itself.<br /></p>
+
+      <p>Therefore, let’s check that, when run on a given tool ID, the returned status indicates that the dependencies are null. We can reuse a tool ID from an existent test method. Let’s take <code class="language-plaintext highlighter-rouge">CONVERTER_fasta_to_bowtie_color_index</code>, which has only one dependency.</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_tool_dependency_uninstall</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="n">statuses</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">uninstall_dependencies</span><span class="p">(</span>
+         <span class="sh">'</span><span class="s">CONVERTER_fasta_to_bowtie_color_index</span><span class="sh">'</span>
+    <span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">'</span><span class="s">model_class</span><span class="sh">'</span><span class="p">],</span> <span class="sh">'</span><span class="s">NullDependency</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-skip-tests-with-the-test-util-skip-unless-galaxy-decorator"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-skip-tests-with-the-test-util-skip-unless-galaxy-decorator" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Skip tests with the `@test_util.skip_unless_galaxy` decorator</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>On our local machine we normally test our changes against a single version of Galaxy, for example <code class="language-plaintext highlighter-rouge">dev</code>. However, GitHub Actions continuous integration runs the BioBlend tests against all supported versions of Galaxy.</p>
+
+        <p>At the time of writing BioBlend supports Galaxy 17.09 and later. However, certain functionality might not be available in all these versions. For example, <code class="language-plaintext highlighter-rouge">download_dataset_collection</code> is only supported by Galaxy 18.01 and later. We don’t want to run tests specific to this functionality on earlier versions of Galaxy. They would simply fail. We can skip a test for specific versions of Galaxy by adding the <code class="language-plaintext highlighter-rouge">@test_util.skip_unless_galaxy</code> decorator above the test method in question.</p>
+
+        <p><strong>Example</strong>:</p>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@test_util.skip_unless_galaxy</span><span class="p">(</span><span class="sh">'</span><span class="s">release_19.09</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_some_functionality</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+</code></pre></div>        </div>
+        <p>This test will only be run against Galaxy 19.09 and later.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-galaxy-api-parameter-formats"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-galaxy-api-parameter-formats" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Galaxy API parameter formats</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Implementing a BioBlend method often requires knowledge about the parameters which are accepted by the corresponding Galaxy API endpoint. At the time of writing there are a few different formats in which endpoints might accept their input parameters.</p>
+
+  <h4 id="direct-parameters">Direct parameters</h4>
+  <p>A parameter can be specified explicitly in the signature of the endpoint method.</p>
+
+  <p><strong>Example</strong>:</p>
+
+  <p>In the histories API <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/histories.py#L384"><code class="language-plaintext highlighter-rouge">delete()</code></a> endpoint method, the <code class="language-plaintext highlighter-rouge">id</code> parameter is specified explicitly.</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
+</code></pre></div>  </div>
+
+  <h4 id="keyword-parameters">Keyword parameters</h4>
+
+  <p>Other parameters might get passed to the endpoint as an element of <code class="language-plaintext highlighter-rouge">kwd</code>. If the documentation of the endpoint is lacking, these keyword parameters can be difficult to identify.</p>
+
+  <h4 id="the-q-and-qv-format">The <code class="language-plaintext highlighter-rouge">q</code> and <code class="language-plaintext highlighter-rouge">qv</code> format</h4>
+
+  <p>Filtering parameters might also be expected as pairs of <code class="language-plaintext highlighter-rouge">q</code> and <code class="language-plaintext highlighter-rouge">qv</code> values. These are then parsed into filters by the Galaxy server.</p>
+
+  <p>The general format is <code class="language-plaintext highlighter-rouge">q={filter}-{operation}</code> and <code class="language-plaintext highlighter-rouge">qv={value}</code>. The accepted values for these parameters must be identified in order to construct valid <code class="language-plaintext highlighter-rouge">q</code> and <code class="language-plaintext highlighter-rouge">qv</code> pairs.</p>
+
+  <p><strong>Example</strong>:</p>
+
+  <p>The Datasets API <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L54"><code class="language-plaintext highlighter-rouge">index()</code> method</a> uses this format. The <code class="language-plaintext highlighter-rouge">q</code> and <code class="language-plaintext highlighter-rouge">qv</code> parameters are passed to the endpoint as part of <code class="language-plaintext highlighter-rouge">kwd</code>. They are not used in the endpoint itself, but rather implicitly passed into the <code class="language-plaintext highlighter-rouge">self.parse_filter_params()</code> helper method as part of <code class="language-plaintext highlighter-rouge">kwd</code>. See <a href="https://github.com/galaxyproject/bioblend/blob/v0.16.0/bioblend/galaxy/datasets/__init__.py#L146">the corresponding method</a> of the <code class="language-plaintext highlighter-rouge">DatasetClient</code> to get a feeling how this can be handled in BioBlend.</p>
+
+</blockquote>
+
+<h1 id="running-the-bioblend-tests">Running the BioBlend tests</h1>
+
+<p>Finally, we should run our test to make sure that it passes. This would indicate that our method works correctly. After testing we will be ready to push our changes to GitHub and open a pull request!</p>
+
+<p>This section outlines two approaches for running BioBlend tests: A simple approach that should suffice for basic testing, and a more involved approach that speeds up testing.</p>
+
+<p>It makes sense to test our method against the most recent changes of Galaxy, so let’s use Galaxy <code class="language-plaintext highlighter-rouge">dev</code>.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-note-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+  <p>On our local machine we generally only test against Galaxy <code class="language-plaintext highlighter-rouge">dev</code>, so it might happen that tests on GitHub still fail because there tests are run against all supported Galaxy versions. When this happens we simply need to update our changes to fix those errors as well, and we might need to check out older Galaxy versions for debugging locally.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-using-the-run-bioblend-tests-sh-script"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Using the `run_bioblend_tests.sh` script</div>
+
+  <p>This script is provided in the repository. It will lint the Python code and run the BioBlend tests. It works well for running all BioBlend tests at once, or for small tests that require little to no debugging or experimentation.</p>
+
+  <p>Since BioBlend requires a Galaxy server, we must specify the path to the Galaxy server directory:</p>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">-g &lt;galaxy_path&gt;</code></li>
+  </ul>
+
+  <p>Two useful optional parameters:</p>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">-e &lt;python_version&gt;</code></li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-t &lt;path_to_test&gt;</code></p>
+
+      <p>We can specify a subset of tests to run by supplying this argument. This is specified in <a href="https://pytest.org/">pytest</a> format. See the <a href="https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run">documentation</a> for more information.</p>
+    </li>
+  </ul>
+
+  <p><strong>Examples</strong>:</p>
+
+  <p>Let’s assume that our galaxy directory is located at <code class="language-plaintext highlighter-rouge">../galaxy</code>.</p>
+
+  <p>Then this command runs all BioBlend tests:</p>
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_bioblend_tests <span class="nt">-g</span> ../galaxy <span class="nt">-e</span> py39
+</code></pre></div>  </div>
+  <p>And this command runs only the test named <code class="language-plaintext highlighter-rouge">test_get_jobs</code>:</p>
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_bioblend_tests.sh <span class="se">\</span>
+    <span class="nt">-g</span> ../galaxy <span class="se">\</span>
+    <span class="nt">-e</span> py39 <span class="se">\</span>
+    <span class="nt">-t</span> tests/TestGalaxyJobs.py::TestGalaxyJobs::test_get_jobs
+</code></pre></div>  </div>
+  <p><strong>Downside of the <code class="language-plaintext highlighter-rouge">run_bioblend_tests.sh</code> script</strong>:</p>
+
+  <p>The script starts and stops a new instance of the Galaxy server every time it is run. This makes it robust. However, it also means we have to wait for the server to start up every time. This makes it painful to debug more complicated tests.</p>
+</blockquote>
+
+<h2 id="running-the-tests-directly">Running the tests directly</h2>
+
+<p>We can speed up our test environment by controlling the Galaxy server and the BioBlend tests directly. The initial setup will be more involved, but this way we can keep the server running in the background while we do our testing.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-caveat"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Caveat</div>
+
+  <p>When the Galaxy server is not reset between test runs, tests that implicitly depend on a clean server state might start failing after the first run.</p>
+
+  <p>For example, let’s assume there is only a single test that creates a new history and checks that the total number of histories is equal to 1. This test will pass for a new Galaxy server because no histories exist yet. However, the next run there would be two histories and thus the test would fail.</p>
+
+  <p>Although this is generally not a big issue, it is something to watch out for. There are a few BioBlend tests that will fail in this manner. Most of these tests measure an array length property that increases with every run and therefore fail after the first run.</p>
+
+  <p>It is preferable to write tests that are robust in this regard!</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-starting-the-galaxy-server-with-a-custom-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Starting the Galaxy server with a custom configuration</div>
+
+  <p>Open a terminal in the Galaxy base directory and execute the following commands:</p>
+
+  <ol>
+    <li>
+      <p><strong>Declare an API key of our choosing to use for testing</strong></p>
+
+      <p>We will include this key in the Galaxy server configuration. The server will then accept incoming requests that use this key.</p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">API_KEY</span><span class="o">=</span>LetMeIn
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Create a temporary directory</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TEMP_DIR</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span>
+<span class="nb">echo</span> <span class="s2">"Galaxy directory: </span><span class="nv">$TEMP_DIR</span><span class="s2">"</span>
+</code></pre></div>      </div>
+
+      <p>The temporary directory will contain useful information for debugging tests, such as the ‘main.log’ file and the ‘universe.sqlite’ database.</p>
+    </li>
+    <li>
+      <p><strong>Export environment variables required by the Galaxy server</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">SKIP_GALAXY_CLIENT_BUILD</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">GALAXY_LOG_FILE</span><span class="o">=</span><span class="nv">$TEMP_DIR</span>/main.log
+<span class="nb">export </span><span class="nv">GALAXY_CONFIG_FILE</span><span class="o">=</span><span class="nv">$TEMP_DIR</span>/test_galaxy.ini
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Copy a sample tool configuration</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>config/tool_conf.xml.sample <span class="nv">$TEMP_DIR</span>/tool_conf.xml.sample
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Declare the desired logging level</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LOG_LEVEL</span><span class="o">=</span>DEBUG
+</code></pre></div>      </div>
+
+      <p>The available logging levels can be found in the <a href="https://docs.python.org/3/library/logging.html#logging-levels">documentation</a> of the Python <a href="https://docs.python.org/3/library/logging.html">logging</a> library.</p>
+    </li>
+    <li>
+      <p><strong>Create the Galaxy configuration file</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh"> &gt; </span><span class="nv">$GALAXY_CONFIG_FILE</span><span class="sh">
+[server:main]
+
+use = egg:Paste#http
+port = 8080
+
+[app:main]
+
+log_level = </span><span class="nv">$LOG_LEVEL</span><span class="sh">
+paste.app_factory = galaxy.web.buildapp:app_factory
+database_connection = sqlite:///</span><span class="nv">$TEMP_DIR</span><span class="sh">/universe.sqlite?isolation_level=IMMEDIATE
+file_path = </span><span class="nv">$TEMP_DIR</span><span class="sh">/files
+new_file_path = </span><span class="nv">$TEMP_DIR</span><span class="sh">/tmp
+tool_config_file = </span><span class="nv">$TEMP_DIR</span><span class="sh">/tool_conf.xml.sample
+conda_auto_init = True
+job_working_directory = </span><span class="nv">$TEMP_DIR</span><span class="sh">/jobs_directory
+allow_library_path_paste = True
+admin_users = test@test.test
+allow_user_deletion = True
+allow_user_dataset_purge = True
+enable_beta_workflow_modules = True
+master_api_key = </span><span class="nv">$API_KEY</span><span class="sh">
+enable_quotas = True
+cleanup_job = onsuccess
+</span><span class="no">EOF
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Start the Galaxy server</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run.sh
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Now we have a Galaxy server running with our specified configuration. We can run tests against this server in a separate terminal.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-running-the-tests"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Running the tests</div>
+
+  <p>Navigate to the BioBlend base directory and execute the following commands:</p>
+
+  <ol>
+    <li>
+      <p><strong>Declare the same API key we used for the Galaxy server</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">API_KEY</span><span class="o">=</span>LetMeIn
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Export environment variables required by BioBlend</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">BIOBLEND_GALAXY_API_KEY</span><span class="o">=</span><span class="nv">$API_KEY</span>
+<span class="nb">export </span><span class="nv">BIOBLEND_GALAXY_URL</span><span class="o">=</span>http://localhost:8080/
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Activate the virtual environment</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> &lt;GALAXY_DIRECTORY&gt;/.venv/bin/activate
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Declare the desired test logging level</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LOG_LEVEL</span><span class="o">=</span>WARNING
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Run the desired BioBlend test(s)</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># selection format: tests/&lt;file&gt;::&lt;module&gt;::&lt;test&gt;</span>
+pytest <span class="nt">--override-ini</span> <span class="nv">log_cli_level</span><span class="o">=</span><span class="nv">$LOG_LEVEL</span> <span class="se">\</span>
+    tests/TestGalaxyWorkflows.py::TestGalaxyWorkflows::test_show_versions
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Lint our code to detect bad practices and potential errors</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tox <span class="nt">-e</span> lint
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Leave the virtual environment when we are done testing</strong></p>
+
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deactivate
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>You may find your tests do not pass straight away. In this case, you need to identify the issue and modify the code to fix it. This might take several iterations.</p>
+
+<p>Once tests are passing, the final step would be to <a href="https://github.com/galaxyproject/bioblend/compare">open a PR</a> at the BioBlend GitHub repository! This will trigger automatic tests and after some time your new code will be reviewed by the BioBlend maintainers. After any concerns are addressed and all tests are passing, your PR will be merged into the <code class="language-plaintext highlighter-rouge">main</code> branch and incorporated into the next BioBlend release.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We covered the basics of BioBlend development. We also touched briefly on some key concepts relating to the Galaxy API and the structure of the Galaxy back-end code.</p>
+
+<p>Compared to Galaxy, BioBlend is a smaller project with limited complexity. Changes are generally not very hard to implement, which makes it a good candidate for contributions from those not yet familiar with Galaxy in its entirety.</p>
+
+<p>Good luck!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>BioBlend is a Python library that provides methods for easy interaction with the Galaxy API.</p>
+</li>
+                        
+                        <li><p>Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy development.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/dev/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Sloggett2013">Sloggett, C., N. Goonasekera, and E. Afgan, 2013 <b>BioBlend: automating pipeline analyses within Galaxy and CloudMan</b>. Bioinformatics 29: 1685–1686. <a href="https://doi.org/10.1093/bioinformatics/btt199">10.1093/bioinformatics/btt199</a></li>
+<li id="Leo2014">Leo, S., L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo <i>et al.</i>, 2014 <b>BioBlend.objects: metacomputing with Galaxy</b>. Bioinformatics 30: 2816–2817. <a href="https://doi.org/10.1093/bioinformatics/btu386">10.1093/bioinformatics/btu386</a></li>
+<li id="Afgan2018">Afgan, E., D. Baker, B. Batut, M. van den Beek, D. Bouvier <i>et al.</i>, 2018 <b>The Galaxy platform for accessible,  reproducible and collaborative biomedical analyses: 2018 update</b>. Nucleic Acids Research 46: W537–W544. <a href="https://doi.org/10.1093/nar/gky379">10.1093/nar/gky379</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>API</dt>
+                    <dd>Application Programming Interface</dd>
+                    
+                    <dt>HDA</dt>
+                    <dd>History Dataset Association</dd>
+                    
+                    <dt>HDCA</dt>
+                    <dd>History Dataset Collection Association</dd>
+                    
+                    <dt>LDA</dt>
+                    <dd>Library Dataset Association</dd>
+                    
+                    <dt>LDCA</dt>
+                    <dd>Library Dataset Collection Association</dd>
+                    
+                    <dt>PR</dt>
+                    <dd>Pull Request</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/bioblend-dev"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/bioblend-dev">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Erik Schill, Simon Bray,  <b>Contributing to BioBlend as a developer (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{dev-bioblend-dev,
+author = "Erik Schill and Simon Bray",
+	title = "Contributing to BioBlend as a developer (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00112">gxy.io/GTN:T00112</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/bioblend-dev/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/dev/tutorials/bioblend-dev/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,5031 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/maintainer.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-12-19 14:39:45 +0000"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/maintainer.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/maintainer.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+<h1>Foundations of Data Science — Editorial Board Home</h1>
+
+This is a new, experimental "Editorial Board Home" for a given topic. It is intended to provide a single place for maintainers and editorial board members to find out key information about their topic and identify action items.
+
+<h2>Editorial Board</h2>
+
+
+
+
+
+<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
+    Yvan Le Bras</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
+    Fotis E. Psomopoulos</a>
+
+
+<h2>Action Items</h2>
+
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Item</th>
+			<th>Status</th>
+			<th>Why you should do this</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Summary</td>
+			<td> Done ✅ </td>
+			<td>Provide a sufficiently detailed summary of the topic to let learners know what they're learning about in this topic.</td>
+		</tr>
+		<tr>
+			<td>Sufficient Editorial Board Members</td>
+			<td> Done ✅ (5 members)</td>
+			<td>Having multiple people sharing the burden of being responsible for a specific topic can reduce board member burn-out in the long term.</td>
+		</tr>
+		<tr>
+			<td>Enable Subtopics</td>
+			<td> Done ✅ </td>
+			<td>Subtopics help organize the content and make it easier to navigate.</td>
+		</tr>
+		<tr>
+			<td>Annotate Funders</td>
+			<td> Done ✅ (4 funders)</td>
+			<td>By annotating the funders of your topic's materials, you make it easier to write your grant reports later</td>
+		</tr>
+		<tr>
+			<td>Learning Pathway CTA</td>
+			<td> Pending ❌ </td>
+			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
+		</tr>
+		<tr>
+			<td>Review Feedback Received</td>
+			<td> Ongoing 🔁 </td>
+			<td> Review all <a href="https://training.galaxyproject.org/feedback#topic-foundations-of-data-science" >feedback received for the Foundations of Data Science topic</a> and create GitHub issues or PRs where needed. </td>
+		</tr>
+		<tr>
+			<td>Review open Pull Requests</td>
+			<td> Ongoing 🔁 </td>
+			<td> View all <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+is%3Aopen+label%3Adata-science" >open PRs in the Foundations of Data Science topic</a> and review, comment and merge!</td>
+		</tr>
+		<tr>
+			<td>Review open GitHub Issues</td>
+			<td> Ongoing 🔁 </td>
+			<td> View all <a href="https://github.com/galaxyproject/training-material/issues?q=is%3Aissue%20state%3Aopen%20label%3Adata-science" >open issues related to the Foundations of Data Science topic</a> and comment, fix, or ask others for help!</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<h2>Topic Materials</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th scope="col">Material</th>
+			<th scope="col">Contributions v2 <a href="/training-material/topics/contributing/faqs/new-contributions.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Pre-requisites <a href="/training-material/topics/contributing/faqs/why-prerequisites.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Follow up trainings</th>
+			<th scope="col">Data on Zenodo</th>
+			<th scope="col">Notebook</th>
+			<th scope="col">Server Compatibility</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics-viz-r/tutorial.html">Data visualisation Olympics - Visualization in R</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-data-manipulation-olympics-viz-r-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics-sql/tutorial.html">Data Manipulation Olympics - SQL</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-data-manipulation-olympics-sql-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics-jq/tutorial.html">Data Manipulation Olympics - JQ</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-data-manipulation-olympics-jq-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">Data Manipulation Olympics</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#introduction-data-manipulation-olympics-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/cli-advanced/tutorial.html">Advanced CLI in Galaxy</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-cli-advanced-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/cli-bashcrawl/tutorial.html">CLI Educational Game - Bashcrawl</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-cli-bashcrawl-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.html">CLI basics</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-cli-basics-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html">Introduction to Python</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-basics-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html">Python - Warm-up for statistics and machine learning</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-warmup-stat-ml-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html">Advanced Python</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-advanced-np-pd-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-plotting/tutorial.html">Plotting in Python</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-plotting-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-math/tutorial.html">Python - Math</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-math-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-functions/tutorial.html">Python - Functions</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-functions-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-types/tutorial.html">Python - Basic Types & Type Conversion</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-types-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-iterables/tutorial.html">Python - Lists & Strings & Dictionaries</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-iterables-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-flow/tutorial.html">Python - Flow Control</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-flow-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-loops/tutorial.html">Python - Loops</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-loops-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-files/tutorial.html">Python - Files & CSV</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-files-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-exceptions/tutorial.html">Python - Try & Except</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-exceptions-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-basics-recap/tutorial.html">Python - Introductory Graduation</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-basics-recap-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-conda/tutorial.html">Conda Environments For Software Development</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-conda-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-argparse/tutorial.html">Python - Argparse</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-argparse-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-testing/tutorial.html">Python - Testing</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-testing-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-typing/tutorial.html">Python - Type annotations</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-typing-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-venv/tutorial.html">Virtual Environments For Software Development</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-venv-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-glob/tutorial.html">Python - Globbing</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-glob-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-subprocess/tutorial.html">Python - Subprocess</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-subprocess-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-linting/tutorial.html">Python - Coding Style</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-linting-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/python-multiprocessing/tutorial.html">Python - Multiprocessing</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-python-multiprocessing-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/r-basics/tutorial.html">R basics in Galaxy</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-r-basics-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/r-advanced/tutorial.html">Advanced R in Galaxy</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-r-advanced-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/r-dplyr/tutorial.html">dplyr & tidyverse for data processing</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-r-dplyr-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/sql-advanced/tutorial.html">Advanced SQL</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-sql-advanced-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/sql-basic/tutorial.html">Introduction to SQL</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-sql-basic-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/sql-game/tutorial.html">SQL Educational Game - Murder Mystery</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-sql-game-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/sql-python/tutorial.html">SQL with Python</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-sql-python-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/sql-r/tutorial.html">SQL with R</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-sql-r-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/snakemake/tutorial.html">Make & Snakemake</a></th>
+			<td> ❌ </td>
+			<td> ✅  </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-snakemake-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture1/tutorial.html">A (very) brief history of genomics</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture1-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">Introduction to sequencing with Python (part one)</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture2-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">Introduction to sequencing with Python (part two)</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture3-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">Introduction to sequencing with Python (part three)</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture4-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture5/tutorial.html">Introduction to sequencing with Python (part four)</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture5-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture6/tutorial.html">Data manipulation with Pandas</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture6-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/gnmx-lecture7/tutorial.html">Versioning your code and data with git</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-gnmx-lecture7-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/git-cli/tutorial.html">Basics of using Git from the Command Line</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-git-cli-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/online-resources-gene/tutorial.html">Learning about one gene across biological resources and formats</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-online-resources-gene-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html">One protein along the UniProt page</a></th>
+			<td> ✅ </td>
+			<td> ✅  </td>
+			<td></td>
+			<td> ❌ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-online-resources-protein-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/bash-variant-calling/tutorial.html">Variant Calling Workflow</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-bash-variant-calling-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/data-science/tutorials/bash-git/tutorial.html">Version Control with Git</a></th>
+			<td> ✅ </td>
+			<td></td>
+			<td></td>
+			<td> ✅ </td>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#data-science-bash-git-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+	</tbody>
+</table>
+
+<h2>Topic Workflows</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th>Material</th>
+			<th>Workflow</th>
+
+			<th>Updated</th>
+			<th>Version</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	
+
+	
+
+	
+
+	
+		<tr>
+			<td><a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">Data Manipulation Olympics</a></td>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/workflows/data_manipulation_olympics_with_exercises.html">GTN Tutorial: Data manipulation Olympics - all steps and exercises</a></td>
+			<td>Oct 31, 2026 </td>
+			<td>1 </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	</tbody>
+</table>
+
+
+
+<div id="data-science-data-manipulation-olympics-viz-r-compat" class="modal" tabindex="-1" aria-labelledby="data-science-data-manipulation-olympics-viz-r-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-data-manipulation-olympics-viz-r-label">Current Server Compatibility table for "Data visualisation Olympics - Visualization in R"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-data-manipulation-olympics-sql-compat" class="modal" tabindex="-1" aria-labelledby="data-science-data-manipulation-olympics-sql-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-data-manipulation-olympics-sql-label">Current Server Compatibility table for "Data Manipulation Olympics - SQL"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-data-manipulation-olympics-jq-compat" class="modal" tabindex="-1" aria-labelledby="data-science-data-manipulation-olympics-jq-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-data-manipulation-olympics-jq-label">Current Server Compatibility table for "Data Manipulation Olympics - JQ"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="introduction-data-manipulation-olympics-compat" class="modal" tabindex="-1" aria-labelledby="introduction-data-manipulation-olympics-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="introduction-data-manipulation-olympics-label">Current Server Compatibility table for "Data Manipulation Olympics"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">Count1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Cut1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Filter1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Grouping1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Remove beginning1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">Show beginning1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">cat1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">join1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">tabular_to_csv</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4</th>
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.6
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.6
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</th>
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</th>
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.1
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6</th>
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.0, 
+						
+						2.1, 
+						
+						2.1+galaxy0, 
+						
+						1.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.6
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.0
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1</th>
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.0.3
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.0.3
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</th>
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.9+galaxy0, 
+						
+						1.8+galaxy0, 
+						
+						1.0.6
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.1.0+galaxy2
+						
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2</th>
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.9+galaxy0, 
+						
+						1.8+galaxy0, 
+						
+						1.0.6
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.1.0+galaxy2
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">upload1</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">wc_gnu</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_cat}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_compute}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_count}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_cut_advanced}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_cut_columns}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_datamash}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_filter}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_join}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_paste}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_remove_beginning}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_remove_columns_by_header}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_replace_text_column}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_replace_text_line}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_select_first}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_sort}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_split}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_unique}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">{{version_wc}}</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-cli-advanced-compat" class="modal" tabindex="-1" aria-labelledby="data-science-cli-advanced-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-cli-advanced-label">Current Server Compatibility table for "Advanced CLI in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-cli-bashcrawl-compat" class="modal" tabindex="-1" aria-labelledby="data-science-cli-bashcrawl-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-cli-bashcrawl-label">Current Server Compatibility table for "CLI Educational Game - Bashcrawl"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-cli-basics-compat" class="modal" tabindex="-1" aria-labelledby="data-science-cli-basics-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-cli-basics-label">Current Server Compatibility table for "CLI basics"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-basics-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-basics-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-basics-label">Current Server Compatibility table for "Introduction to Python"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-warmup-stat-ml-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-warmup-stat-ml-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-warmup-stat-ml-label">Current Server Compatibility table for "Python - Warm-up for statistics and machine learning"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-advanced-np-pd-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-advanced-np-pd-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-advanced-np-pd-label">Current Server Compatibility table for "Advanced Python"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-plotting-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-plotting-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-plotting-label">Current Server Compatibility table for "Plotting in Python"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-math-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-math-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-math-label">Current Server Compatibility table for "Python - Math"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-functions-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-functions-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-functions-label">Current Server Compatibility table for "Python - Functions"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-types-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-types-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-types-label">Current Server Compatibility table for "Python - Basic Types & Type Conversion"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-iterables-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-iterables-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-iterables-label">Current Server Compatibility table for "Python - Lists & Strings & Dictionaries"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-flow-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-flow-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-flow-label">Current Server Compatibility table for "Python - Flow Control"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-loops-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-loops-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-loops-label">Current Server Compatibility table for "Python - Loops"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-files-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-files-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-files-label">Current Server Compatibility table for "Python - Files & CSV"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-exceptions-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-exceptions-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-exceptions-label">Current Server Compatibility table for "Python - Try & Except"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-basics-recap-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-basics-recap-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-basics-recap-label">Current Server Compatibility table for "Python - Introductory Graduation"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-conda-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-conda-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-conda-label">Current Server Compatibility table for "Conda Environments For Software Development"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-argparse-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-argparse-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-argparse-label">Current Server Compatibility table for "Python - Argparse"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-testing-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-testing-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-testing-label">Current Server Compatibility table for "Python - Testing"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-typing-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-typing-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-typing-label">Current Server Compatibility table for "Python - Type annotations"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-venv-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-venv-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-venv-label">Current Server Compatibility table for "Virtual Environments For Software Development"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-glob-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-glob-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-glob-label">Current Server Compatibility table for "Python - Globbing"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-subprocess-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-subprocess-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-subprocess-label">Current Server Compatibility table for "Python - Subprocess"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-linting-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-linting-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-linting-label">Current Server Compatibility table for "Python - Coding Style"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-python-multiprocessing-compat" class="modal" tabindex="-1" aria-labelledby="data-science-python-multiprocessing-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-python-multiprocessing-label">Current Server Compatibility table for "Python - Multiprocessing"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-r-basics-compat" class="modal" tabindex="-1" aria-labelledby="data-science-r-basics-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-r-basics-label">Current Server Compatibility table for "R basics in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_rstudio</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-r-advanced-compat" class="modal" tabindex="-1" aria-labelledby="data-science-r-advanced-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-r-advanced-label">Current Server Compatibility table for "Advanced R in Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_rstudio</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-r-dplyr-compat" class="modal" tabindex="-1" aria-labelledby="data-science-r-dplyr-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-r-dplyr-label">Current Server Compatibility table for "dplyr & tidyverse for data processing"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-sql-advanced-compat" class="modal" tabindex="-1" aria-labelledby="data-science-sql-advanced-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-sql-advanced-label">Current Server Compatibility table for "Advanced SQL"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-sql-basic-compat" class="modal" tabindex="-1" aria-labelledby="data-science-sql-basic-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-sql-basic-label">Current Server Compatibility table for "Introduction to SQL"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-sql-game-compat" class="modal" tabindex="-1" aria-labelledby="data-science-sql-game-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-sql-game-label">Current Server Compatibility table for "SQL Educational Game - Murder Mystery"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-sql-python-compat" class="modal" tabindex="-1" aria-labelledby="data-science-sql-python-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-sql-python-label">Current Server Compatibility table for "SQL with Python"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-sql-r-compat" class="modal" tabindex="-1" aria-labelledby="data-science-sql-r-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-sql-r-label">Current Server Compatibility table for "SQL with R"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-snakemake-compat" class="modal" tabindex="-1" aria-labelledby="data-science-snakemake-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-snakemake-label">Current Server Compatibility table for "Make & Snakemake"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture1-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture1-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture1-label">Current Server Compatibility table for "A (very) brief history of genomics"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture2-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture2-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture2-label">Current Server Compatibility table for "Introduction to sequencing with Python (part one)"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture3-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture3-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture3-label">Current Server Compatibility table for "Introduction to sequencing with Python (part two)"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture4-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture4-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture4-label">Current Server Compatibility table for "Introduction to sequencing with Python (part three)"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture5-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture5-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture5-label">Current Server Compatibility table for "Introduction to sequencing with Python (part four)"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture6-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture6-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture6-label">Current Server Compatibility table for "Data manipulation with Pandas"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-gnmx-lecture7-compat" class="modal" tabindex="-1" aria-labelledby="data-science-gnmx-lecture7-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-gnmx-lecture7-label">Current Server Compatibility table for "Versioning your code and data with git"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-git-cli-compat" class="modal" tabindex="-1" aria-labelledby="data-science-git-cli-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-git-cli-label">Current Server Compatibility table for "Basics of using Git from the Command Line"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-online-resources-gene-compat" class="modal" tabindex="-1" aria-labelledby="data-science-online-resources-gene-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-online-resources-gene-label">Current Server Compatibility table for "Learning about one gene across biological resources and formats"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2</th>
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.16.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.10.1+galaxy2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						2.10.1+galaxy0
+						
+					</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-online-resources-protein-compat" class="modal" tabindex="-1" aria-labelledby="data-science-online-resources-protein-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-online-resources-protein-label">Current Server Compatibility table for "One protein along the UniProt page"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-bash-variant-calling-compat" class="modal" tabindex="-1" aria-labelledby="data-science-bash-variant-calling-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-bash-variant-calling-label">Current Server Compatibility table for "Variant Calling Workflow"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="data-science-bash-git-compat" class="modal" tabindex="-1" aria-labelledby="data-science-bash-git-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="data-science-bash-git-label">Current Server Compatibility table for "Version Control with Git"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2026-10-31 00:22:42 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				Galaxy Europe
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				Galaxy Main (US)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				Galaxy Australia
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr">
+				Galaxy France
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ch">
+				Galaxy Switzerland
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.ca">
+				Galaxy Canada
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be">
+				Galaxy Belgium
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no">
+				Galaxy Norway
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">interactive_tool_rstudio</th>
+			
+				
+					<td class="local">
+						built-in
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+td.exact, td.local {
+	background-color: var(--feedback-color);
+	color: black;
+}
+td.inexact {
+	background-color: var(--solution-color);
+	color: black;
+}
+
+/* https://adrianroselli.com/2020/01/fixed-table-headers.html */
+
+table.compat th[scope=row] {
+  background-color: var(--color-background);
+}
+
+table.scroll-header th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-background);
+}
+table.scroll-row th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: end;
+}
+</style>
+
+
+<h2>Your topic's Workflow Testing Results</h2>
+
+Coming Soon™
+
+<h2>Learning Pathways using materials from this Topic</h2>
+
+
+
+
+<div class="pathwaylist row">
+
+  
+    
+
+
+
+
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/intro-to-r-and-ml.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">From R to Machine Learning; an introductory course</h5>
+        <p class="card-text">
+          This learning path aims to teach you the basics of Machine Learning using R.
+Initially you will learn how to code in R within the Galaxy platform, gaining some
+familiarity into how to wrangle and analyze data. Then, you will be guided through
+the various types of Machine Learning techniques, developing some simple models using R.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff2ce; --color-darker: #f9d600; --color-dimmed: #ffe483;">beginner</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #e0d200; --color-darker: #c7bb00; --color-dimmed: #d3c700;">statistics</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f9fc00; --color-darker: #dddf00; --color-dimmed: #ebed00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+
+    
+    
+  
+    
+
+
+
+
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/ml-using-python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/shared/images/elixir.png" alt="ELIXIR logo" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Artificial Intelligence and Machine Learning in Life Sciences using Python</h5>
+        <p class="card-text">
+          Artificial intelligence (AI) has permeated our lives, transforming how we live and work. Over the past few years, a rapid and disruptive acceleration of progress in AI has occurred, driven by significant advances in widespread data availability, computing power and machine learning. Remarkable strides were made in particular in the development of foundation models - AI models trained on extensive...
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f2fd00; --color-darker: #d7e100; --color-dimmed: #e4ef00;">elixir</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #75dcff; --color-darker: #00c8f2; --color-dimmed: #22d4ff;">ai</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #b7cfff; --color-darker: #8fb9ff; --color-dimmed: #a4c4ff;">ml</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/python.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introductory Python</h5>
+        <p class="card-text">
+          This is an introductory course of Python, as it was taught in Avans Hogeschool in the Netherlands.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #bbceff; --color-darker: #97b7ff; --color-dimmed: #aac3ff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fbb9ff; --color-darker: #f992ff; --color-dimmed: #faa6ff;">real-course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f9fc00; --color-darker: #dddf00; --color-dimmed: #ebed00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+  <div class="pathwayitem col-md-4">
+    <a href="/training-material/learning-pathways/sql.html">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      
+      <img class="pathwaycover card-img-top" src="/training-material/assets/images/GTNLogo1000.png" alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" loading="lazy">
+      
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Introductory SQL</h5>
+        <p class="card-text">
+          This is an introductory course of SQL, as it was taught in Avans Hogeschool in the Netherlands.
+
+        </p>
+      </div>
+      <div class="card-footer">
+
+        
+
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #bbceff; --color-darker: #97b7ff; --color-dimmed: #aac3ff;">python</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #fbb9ff; --color-darker: #f992ff; --color-dimmed: #faa6ff;">real-course</span>
+        
+        <span class="label label-default tutorial_tag" style="--color-primary: #f9fc00; --color-darker: #dddf00; --color-dimmed: #ebed00;">data-science</span>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+    
+    
+  
+
+</div>
+
+<details>
+	<summary>Statistics for your Learning Pathways</summary>
+
+	<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7Elearning-pathways/data-driven-biology.html|learning-pathways/intro-to-r-and-ml.html|learning-pathways/io1.html|learning-pathways/io2.html|learning-pathways/ml-using-python.html|learning-pathways/python.html|learning-pathways/sql.html&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+	<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+	<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>
+</details>
+
+<h2>Events using materials from this Topic</h2>
+
+TODO once this is merged:
+https://github.com/galaxyproject/training-material/pull/4963
+
+<h2 id="statistics-for-your-materials">Statistics For Your Materials</h2>
+
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E%2Ftopics%2Fdata-science%2F&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/maintainer.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/data-science/maintainer.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,18 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nElectropheresis-Gel.jpg"]
+  1[label="Convert coordinates to label map"]
+  2[label="Convert image format"]
+  0 -> 2 [label="output"]
+  3[label="Extract image features"]
+  1 -> 3 [label="output"]
+  4[label="Show image info"]
+  2 -> 4 [label="output"]
+  5[label="Split image along axes"]
+  2 -> 5 [label="output"]
+  6[label="QuPath"]
+  2 -> 6 [label="output"]
+  kecf5b53495d340d0af1d28480b447188[color=lightseagreen,label="Output\noutputs"]
+  6 -> kecf5b53495d340d0af1d28480b447188
+}

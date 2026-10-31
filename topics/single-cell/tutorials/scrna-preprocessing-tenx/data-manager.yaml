@@ -1,0 +1,18 @@
+# configuration for fetch and index genomes
+---
+data_managers:
+    # Data manager ID
+    - id: url to data manager on ToolShed
+      # tool parameters, nested parameters should be specified using a pipe (|)
+      params:
+          - 'param1': '{{ item }}'
+          - 'param2': 'value'
+      # Items refer to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
+      # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
+      items:
+          - item1
+          - item2
+      # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
+      data_table_reload:
+          - all_fasta
+          - __dbkeys__

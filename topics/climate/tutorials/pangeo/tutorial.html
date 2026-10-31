@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools / Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools / Earth Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-09-23 07:25:04 +0000">
+<meta name="DC.creator" content="Anne Fouilloux"><meta name="description" content="Learn to access, analyze, and visualize Earth data using Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Earth Data Science / Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools / Hands-on: Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools">
+        <meta property="og:description" content="Learn to access, analyze, and visualize Earth data using Galaxy.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/climate/tutorials/pangeo/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-09-23 07:25:04 +0000",
+  "datePublished": "2022-02-18 23:27:51 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:T00044",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Earth Data Science",
+    "description": "Learn to access, analyze, and visualize Earth data using Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+  },
+  "abstract": "[Pangeo](https://pangeo.io/) is a project that effectively began in 2016 with a workshop at Columbia University. The mission for Pangeo developed at that workshop is still valid nowadays:",
+  "learningResourceType": "e-learning",
+  "name": "Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools",
+  "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html",
+  "version": 8,
+  "timeRequired": "PT1H",
+  "teaches": "- Understand what Pangeo and Xarray are\n- Learn to get metadata information using Xarray Galaxy Tools\n- Learn to select data\n- Learn to visualize geographical data on a map\n- Learn to filter, make reduction operations (mean, max, min)\n- Learn to resample my data",
+  "keywords": [
+    "Earth Data Science",
+    "pangeo"
+  ],
+  "description": "## Abstract\n\n[Pangeo](https://pangeo.io/) is a project that effectively began in 2016 with a workshop at Columbia University. The mission for Pangeo developed at that workshop is still valid nowadays:\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What Xarray Galaxy Tools can I use in Galaxy and what for?\n - What is an Xarray?\n - How do I use Xarray in Galaxy?\n - How to get metadata information?\n - How to make a selection?\n - How to visualize?\n - How to filter?\n - How to make reduction operations (mean, max, min)?\n - How to resample my data?\n\n\n## Learning Objectives\n\n- Understand what Pangeo and Xarray are\n- Learn to get metadata information using Xarray Galaxy Tools\n- Learn to select data\n- Learn to visualize geographical data on a map\n- Learn to filter, make reduction operations (mean, max, min)\n- Learn to resample my data\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "name": "Anne Fouilloux",
+      "image": "https://avatars.githubusercontent.com/annefou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1784-2920",
+      "@id": "https://orcid.org/0000-0002-1784-2920"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/",
+      "name": "Anne Fouilloux",
+      "image": "https://avatars.githubusercontent.com/annefou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1784-2920",
+      "@id": "https://orcid.org/0000-0002-1784-2920"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mnhn/",
+          "name": "Muséum national d'Histoire naturelle",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.mnhn.fr/fr"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/dataterra/",
+          "name": "DATA TERRA",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.data-terra.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moorev/",
+          "name": "MOOREV",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://moorev.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fnso2019/",
+          "name": "OpenMetaPaper",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ouvrirlascience.fr/national-fund-for-open-science/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "@id": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Earth Data Science",
+      "description": "Learn to access, analyze, and visualize Earth data using Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/gemini",
+      "name": "GEMINI"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/5805953",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Earth Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Earth Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/pangeo/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/pangeo/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-climate">
+    <h1 data-toc-skip>Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools</h1>
+
+    
+
+
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
+    Anne Fouilloux</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-badge-small contributor-annefou"><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-badge-small contributor-yvanlebras"><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What Xarray Galaxy Tools can I use in Galaxy and what for?</p>
+</li>
+        
+        <li><p>What is an Xarray?</p>
+</li>
+        
+        <li><p>How do I use Xarray in Galaxy?</p>
+</li>
+        
+        <li><p>How to get metadata information?</p>
+</li>
+        
+        <li><p>How to make a selection?</p>
+</li>
+        
+        <li><p>How to visualize?</p>
+</li>
+        
+        <li><p>How to filter?</p>
+</li>
+        
+        <li><p>How to make reduction operations (mean, max, min)?</p>
+</li>
+        
+        <li><p>How to resample my data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand what Pangeo and Xarray are</p>
+</li>
+        
+        <li><p>Learn to get metadata information using Xarray Galaxy Tools</p>
+</li>
+        
+        <li><p>Learn to select data</p>
+</li>
+        
+        <li><p>Learn to visualize geographical data on a map</p>
+</li>
+        
+        <li><p>Learn to filter, make reduction operations (mean, max, min)</p>
+</li>
+        
+        <li><p>Learn to resample my data</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/climate/tutorials/pangeo/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/5805953">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/climate/tutorials/pangeo/workflows/" title="Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/climate/tutorials/pangeo/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/climate/tutorials/pangeo/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/climate/tutorials/pangeo/recordings/index.html#tutorial-recording-3-march-2022" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2022) - 1h20m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/climate/tutorials/pangeo/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			Galaxy Europe <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			Galaxy Main (US) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be" title="">
+			Galaxy Belgium <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.ca" title="">
+			Galaxy Canada
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+
+        <div><strong><i class="fas fa-robot" aria-hidden="true"></i> AI Policy:</strong> All GTN tutorials are human authored in accordance with our <a href="/training-material/AI-policy.html">AI Policy </a> . </div>
+        
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00044">https://gxy.io/GTN:T00044</a> </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> <a href="https://github.com/galaxyproject/training-material/commits/main/topics/climate/tutorials/pangeo/tutorial.md">8</a></div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><a href="https://pangeo.io/">Pangeo</a> is a project that effectively began in 2016 with a workshop at Columbia University. The mission for Pangeo developed at that workshop is still valid nowadays:</p>
+
+<p><em>Our mission is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.</em></p>
+
+<p>In this tutorial, you will learn how to manipulate <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> data files using <a href="https://xarray.pydata.org/en/stable/">Xarray</a> Galaxy Tools.  NetCDF stands for <strong>network Common Data Form</strong> and is one of the most popular file format in climate science. It is used for storing multidimensional scientific data variables such as temperature or humidity, and metadata can be added to facilitate sharing of netCDF data. netCDF is widely used outside the Climate Science community and each community has its own set of conventions, especially for metadata. The <a href="https://cfconventions.org/">Climate and Forecast metadata convention</a>, also called CF-convention is used by the Climate community and is designed to promote the processing and sharing of netCDF files.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-xarray-and-earth-science"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Xarray and Earth Science</div>
+  <p>Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the <a href="https://cfconventions.org/">CF-Convention</a>. However, some Galaxy Tools also work for non Earth Science datasets, and if needed current Xarray Galaxy Tools could be extended to accommodate new usage.</p>
+</blockquote>
+
+<p>In this tutorial, we will be using data from <a href="https://ads.atmosphere.copernicus.eu/">Copernicus Atmosphere Monitoring Service</a> (CAMS).</p>
+
+<p>CAMS produces daily <a href="https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview">European air quality forecasts</a> over Europe at a resolution of 0.1 degrees (which corresponds approximately to 10km). 
+It is produced from an ensemble of nine air quality forecasting models across Europe: the nine models can be combined together and the spread between these models are used to provide an extimate of the forecast uncertainty. The analysis combines model data with observations provided by the <a href="https://www.eea.europa.eu/">European Environment Agency</a> (EEA).</p>
+
+<p>Several variables are generated and we will be using PM2.5 (<a href="https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter">Particle Matter &lt; 2.5 μm</a>) 4 days forecast from December, 22 2021. Particle Matter &lt; 2.5 μm (PM2.5) are fine particules that remain suspended for a long time and exposure to high concentration of PM2.5 (yearly mean values greater than 25 µg/m3) can have multiple short term and long term health impacts such as eye irritation, asthma and chronic bronchitis. Information on air quality standards in Europe can be found at the <a href="https://ec.europa.eu/environment/air/quality/standards.htm">European Commission’s air quality standards webpage</a>.
+The dataset we will be using in this tutorial is very small and there is no need to parallelize our data analysis. Parallel data analysis with Pangeo is not covered in this tutorial.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#create-a-history" id="markdown-toc-create-a-history">Create a history</a>    <ol>
+      <li><a href="#upload-cams-pm25-data" id="markdown-toc-upload-cams-pm25-data">Upload CAMS PM2.5 data</a></li>
+    </ol>
+  </li>
+  <li><a href="#understanding-our-dataset" id="markdown-toc-understanding-our-dataset">Understanding our dataset</a>    <ol>
+      <li><a href="#get-metadata" id="markdown-toc-get-metadata">Get metadata</a></li>
+    </ol>
+  </li>
+  <li><a href="#plotting-our-dataset-on-a-geographical-map" id="markdown-toc-plotting-our-dataset-on-a-geographical-map">Plotting our dataset on a geographical map</a></li>
+  <li><a href="#select--subset-from-coordinates" id="markdown-toc-select--subset-from-coordinates">Select / Subset from coordinates</a></li>
+  <li><a href="#masking-with-where-statement" id="markdown-toc-masking-with-where-statement">Masking with Where statement</a></li>
+  <li><a href="#from-xarray-to-tabular-data" id="markdown-toc-from-xarray-to-tabular-data">From Xarray to Tabular Data</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="create-a-history">Create a history</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create history</div>
+
+  <ol>
+    <li>
+      <p>Make sure you start from an empty analysis history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. For instance, you can choose <strong>Pangeo 101 for everyone - Xarray</strong> as the name of your new history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="upload-cams-pm25-data">Upload CAMS PM2.5 data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/5805953">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">climate</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5805953/files/CAMS-PM2_5-20211222.netcdf
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/datasets_import_via_link.gif" alt="Galaxy upload link" style="width:75%; display:block; margin:auto;" /></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>If needed rename the datasets to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">netcdf</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add a tag corresponding to ads (for Atmosphere Data Service)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="understanding-our-dataset">Understanding our dataset</h1>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-information-about-cams-pm2-5-forecast-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-information-about-cams-pm2-5-forecast-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More information about CAMS PM2.5 forecast datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Our CAMS PM2.5 forecast dataset is in <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> format. You could find the same dataset in different formats such as <a href="https://en.wikipedia.org/wiki/GRIB">GRIdded Binary or General Regularly-distributed Information in Binary form (GRIB)</a> or <a href="https://en.wikipedia.org/wiki/GeoTIFF">geoTIFF</a>. The same Xarray Tools can be used with these other data formats. More information about this particular data set can be found on the <a href="https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview">CAMS European air quality forecast webpage</a>. As mentioned earlier, we use netCDF data format because it is the most popular among climate scientists.</p>
+</blockquote>
+
+<p>To understand what is contained in our dataset, we will first use Xarray metadata Galaxy Tool. That will give us all the metadata information about the dataset.</p>
+
+<h2 id="get-metadata">Get metadata</h2>
+
+<h3 id="global-metadata-information">Global metadata information</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: netCDF dataset with Xarray metadata Galaxy Tool</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="NetCDF xarray Metadata Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Metadata Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.15.1)</span> with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the two generated outputs:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Metadata infos</code> is a <code class="language-plaintext highlighter-rouge">tabular</code> providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools.</li>
+        <li>The second file <code class="language-plaintext highlighter-rouge">info file</code> provide a summary of the <strong>Xarray Dataset</strong> contained in your netCDF file.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>In <code class="language-plaintext highlighter-rouge">info file</code> output file, we can identify 4 different sections:</p>
+<ol>
+  <li><strong>Dimensions</strong>: name of dimensions and corresponding number of elements;</li>
+  <li><strong>Coordinates</strong>: contains coordinate arrays (longitude, latitude, level and time) with their values.</li>
+  <li><strong>Data variables</strong>: contains all the variables available in the dataset. Here, we only have one variable. For each variable, we get information on its shape and values.</li>
+  <li><strong>Global Attributes</strong>: at this level, we get the global attributes of the dataset. Each attribute has a name and a value.</li>
+</ol>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-cam-pm2-5-dataset"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: CAM PM2.5 Dataset</div>
+
+  <p>What is the name of the variable for Particle matter &lt; 2.5 μm and its physical units?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Information about variable names and units can be found in <strong>info file</strong> that was generated by Xarray metadata Galaxy Tool.
+        <ul>
+          <li>Variable name: <code class="language-plaintext highlighter-rouge">mass_concentration_of_pm2p5_ambient_aerosol_in_air</code></li>
+          <li>Units: <code class="language-plaintext highlighter-rouge">µg/m3</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xarray.Dataset <span class="o">{</span>
+dimensions:
+	latitude <span class="o">=</span> 400 <span class="p">;</span>
+	level <span class="o">=</span> 1 <span class="p">;</span>
+	longitude <span class="o">=</span> 700 <span class="p">;</span>
+	<span class="nb">time</span> <span class="o">=</span> 97 <span class="p">;</span>
+
+variables:
+	float32 longitude<span class="o">(</span>longitude<span class="o">)</span> <span class="p">;</span>
+		longitude:long_name <span class="o">=</span> longitude <span class="p">;</span>
+		longitude:units <span class="o">=</span> degrees_east <span class="p">;</span>
+	float32 latitude<span class="o">(</span>latitude<span class="o">)</span> <span class="p">;</span>
+		latitude:long_name <span class="o">=</span> latitude <span class="p">;</span>
+		latitude:units <span class="o">=</span> degrees_north <span class="p">;</span>
+	float32 level<span class="o">(</span>level<span class="o">)</span> <span class="p">;</span>
+		level:long_name <span class="o">=</span> level <span class="p">;</span>
+		level:units <span class="o">=</span> m <span class="p">;</span>
+	timedelta64[ns] <span class="nb">time</span><span class="o">(</span><span class="nb">time</span><span class="o">)</span> <span class="p">;</span>
+		<span class="nb">time</span>:long_name <span class="o">=</span> FORECAST <span class="nb">time </span>from 20211222 <span class="p">;</span>
+	float32 pm2p5_conc<span class="o">(</span><span class="nb">time</span>, level, latitude, longitude<span class="o">)</span> <span class="p">;</span>
+		pm2p5_conc:species <span class="o">=</span> PM2.5 Aerosol <span class="p">;</span>
+		pm2p5_conc:units <span class="o">=</span> µg/m3 <span class="p">;</span>
+		pm2p5_conc:value <span class="o">=</span> hourly values <span class="p">;</span>
+		pm2p5_conc:standard_name <span class="o">=</span> mass_concentration_of_pm2p5_ambient_aerosol_in_air <span class="p">;</span>
+
+// global attributes:
+	:title <span class="o">=</span> PM25 Air Pollutant FORECAST at the Surface <span class="p">;</span>
+	:institution <span class="o">=</span> Data produced by Meteo France <span class="p">;</span>
+	:source <span class="o">=</span> Data from ENSEMBLE model <span class="p">;</span>
+	:history <span class="o">=</span> Model ENSEMBLE FORECAST <span class="p">;</span>
+	:FORECAST <span class="o">=</span> Europe, 20211222+[0H_96H] <span class="p">;</span>
+	:summary <span class="o">=</span> ENSEMBLE model hourly FORECAST of PM25 concentration at the Surface from 20211222+[0H_96H] on Europe <span class="p">;</span>
+	:project <span class="o">=</span> MACC-RAQ <span class="o">(</span>http://macc-raq.gmes-atmosphere.eu<span class="o">)</span> <span class="p">;</span>
+<span class="o">}</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h3 id="coordinates-information">Coordinates information</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-coordinate-information-with-xarray-coordinate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get Coordinate information with Xarray Coordinate</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0" title="NetCDF xarray Coordinate Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Coordinate Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+      </ul>
+    </li>
+    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the 5 generated outputs:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">latitude</code>: a tabular file containing all the latitude values of our Xarray dataset;</li>
+        <li><code class="language-plaintext highlighter-rouge">longitude</code>: a tabular file containing all the longitudes values;</li>
+        <li><code class="language-plaintext highlighter-rouge">level</code>: this file contains information on all the different levels (here, we have surface data so level=0 meter);</li>
+        <li><code class="language-plaintext highlighter-rouge">time</code>: this tabular file contains all the forecast times. In our case, these are relative to December 22, 2021;</li>
+        <li><code class="language-plaintext highlighter-rouge">version</code>: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+        <p>This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-understanding-pm2-5-forecast-coordinates"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Understanding PM2.5 forecast coordinates</div>
+
+  <ol>
+    <li>What is the unit of the <code class="language-plaintext highlighter-rouge">time</code> coordinate?</li>
+    <li>What is the frequency of PM2.5 forecasts?</li>
+    <li>What is the range of values for latitudes and longitudes?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">info file</code> tells us that <code class="language-plaintext highlighter-rouge">time</code> is coded as <code class="language-plaintext highlighter-rouge">timedelta64[ns]</code> e.g. as differences in times (here in nanoseconds). Here the reference time is December 22, 2021. If we look at the tabular file named <code class="language-plaintext highlighter-rouge">time</code> (generated by <code class="language-plaintext highlighter-rouge">NetCDF xarray Coordinate Info</code>), we see that these times are automatically converted to human readable time format when printed:</li>
+    </ol>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0	0 days 00:00:00
+1	0 days 01:00:00
+2	0 days 02:00:00
+3	0 days 03:00:00
+4	0 days 04:00:00
+</code></pre></div>      </div>
+    </blockquote>
+    <p>This tells us that we have hourly forecast data. The last forecast time is <code class="language-plaintext highlighter-rouge">4 days 00:00:00</code> which means that the last forecast is in 4 days at 00:00 UTC (from December 22, 2021).</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="plotting-our-dataset-on-a-geographical-map">Plotting our dataset on a geographical map</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-map-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Map plot</div>
+  <p>We will use Xarray mapplot Galaxy Tool to plot PM2.5 on December 22, 2021.</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="NetCDF xarray map plotting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray map plotting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><em>“Choose the variable to plot”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+        <li><em>“Name of latitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+        <li><em>“Name of longitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+        <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of time values”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+            <li><em>“Choose the times to plot”</em>: <code class="language-plaintext highlighter-rouge">0 days 00:00:00</code></li>
+          </ul>
+        </li>
+        <li><em>“Shift longitudes [0,360] –&gt; [-180,180]”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)”</em>: <code class="language-plaintext highlighter-rouge">0,35</code></li>
+        <li><em>“Add country borders with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+        <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
+        <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p><img src="../../images/PM2_5_galaxy_20211222-00UTC.png" alt="CAMS PM2.5 December, 22th 2021 at 00:00 UTC. " width="2000" height="1000" loading="lazy" /></p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-why-shifting-longitudes"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why shifting longitudes?</div>
+
+    <p>Longitudes are coded from 0 to 360 degrees. As we do not have global data but only covering Europe, we need to shift longitudes so that <code class="language-plaintext highlighter-rouge">NetCDF xarray map plotting</code> can plot properly our dataset.</p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-visualize-and-compare"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Visualize and Compare</div>
+
+  <p>Make a plot to Visualize the forecast for December, 24th 2021 at 12:00 UTC. Do you see any obvious differences with the plot from December 22, 2021 at 00:00 UTC?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index. We reuse the same <code class="language-plaintext highlighter-rouge">NetCDF xarray map plotting</code> with a different selection for time:</p>
+
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="NetCDF xarray map plotting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray map plotting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:</p>
+    <ul>
+      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222.netcdf</code></li>
+      <li><em>“Choose the variable to plot”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+      <li><em>“Name of latitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+      <li><em>“Name of longitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+      <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of time values”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+          <li><em>“Choose the times to plot”</em>: <code class="language-plaintext highlighter-rouge">2 days 12:00:00</code></li>
+        </ul>
+      </li>
+      <li><em>“Shift longitudes [0,360] –&gt; [-180,180]”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      <li><em>“Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)”</em>: <code class="language-plaintext highlighter-rouge">0,35</code></li>
+      <li><em>“Add country borders with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+      <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+      <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
+      <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code>
+  <img src="../../images/PM2_5_galaxy_20211224-12UTC.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="2000" height="1000" loading="lazy" /></li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<h1 id="select--subset-from-coordinates">Select / Subset from coordinates</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-netcdf-xarray-operations-manipulate-xarray-from-netcdf-and-save-back-to-netcdf"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0" title="NetCDF xarray operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><em>“Choose the variable to extract”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+        <li>In <em>“additional filter”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+              <ul>
+                <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+                <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                  <ul>
+                    <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">0 days 00:00:00</code></li>
+                    <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">1 days 00:00:00</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output dataset to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc0-23h.netcdf</code></li>
+    <li>Add a tag corresponding to <code class="language-plaintext highlighter-rouge">0-23h</code> (do not forget to add <code class="language-plaintext highlighter-rouge">#</code> in front of the tag)</li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0" title="NetCDF xarray Coordinate Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Coordinate Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc0-23h.netcdf</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Check the generated outputs and in particular <code class="language-plaintext highlighter-rouge">time</code>. We see that the tabular file <code class="language-plaintext highlighter-rouge">time</code> only contains <strong>24</strong> lines with times from <code class="language-plaintext highlighter-rouge">0 days 00:00:00</code> to <code class="language-plaintext highlighter-rouge">0 days 23:00:00</code></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-slice-i-threshold2-i-not-included-in-selection"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: slice <i>threshold2</i> not included in selection</div>
+
+        <p>You may have noticed already but when selecting a range with <code class="language-plaintext highlighter-rouge">slice</code> the upper limit (here <code class="language-plaintext highlighter-rouge">1 days 00:00:00</code>) is not included.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-pm2-5-over-italy-region"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy region</div>
+
+  <p>Using a selection and making plots of PM2.5 over Italy (latitudes: 43.N, 40.N and longitudes: 11.E,15.E), can you tell us if the forecasted PM2.5 will increase or decrease during the next 24 hours between 10:00 UTC and 17:00 UTC? Over which town in Italy do you see high values?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0" title="NetCDF xarray operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222.netcdf</code></li>
+          <li><em>“Choose the variable to extract”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+          <li>In <em>“additional filter”</em>:</li>
+        </ul>
+        <ul>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+            <ul>
+              <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+              <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                <ul>
+                  <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">0 days 10:00:00</code></li>
+                  <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">0 days 18:00:00</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+            <ul>
+              <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+              <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                <ul>
+                  <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">43.05</code></li>
+                  <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">40.05</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+            <ul>
+              <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+              <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                <ul>
+                  <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">11.05</code></li>
+                  <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">15.05</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename the output dataset to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+      <li>Add a tag corresponding to <code class="language-plaintext highlighter-rouge">0-23h-Italy</code></li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="NetCDF xarray Metadata Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Metadata Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.15.1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0" title="NetCDF xarray Coordinate Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Coordinate Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="NetCDF xarray map plotting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray map plotting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+          <li><em>“Choose the variable to plot”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+          <li><em>“Name of latitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+          <li><em>“Name of longitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+          <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of time values”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+          <li><em>“Choose the times to plot”</em>: <strong>Tick Select all</strong></li>
+          <li><em>“Shift longitudes [0,360] –&gt; [-180,180]”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Range of values for plotting e.g. minimum value abd maximum value (minval,maxval) (optional)”</em>: <code class="language-plaintext highlighter-rouge">0,35</code></li>
+          <li><em>“Add country borders with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+          <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+          <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
+          <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1" title="Image Montage tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Image Montage</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.31+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Images”</em>: <code class="language-plaintext highlighter-rouge">Map plots</code></li>
+          <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>”# of images wide”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021. " width="8000" height="2000" loading="lazy" /></p>
+
+    <p>From the plot there is no obvious trend over this entire region of Italy. However, we clearly see that PM2.5 is always higher over Naples and tends to spread in the South-East direction by the end of the day (on that particular date).</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-latitude-slice-43-05-40-05-and-not-latitude-slice-40-05-43-05"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`</div>
+  <p>Why did we slice latitudes with <code class="language-plaintext highlighter-rouge">latitude=slice(43.05, 40.05)</code> and not <code class="language-plaintext highlighter-rouge">latitude=slice(40.05, 43.05)</code>?</p>
+  <ul>
+    <li>because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
+decreasing order for CAMS.</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="masking-with-where-statement">Masking with Where statement</h1>
+
+<ul>
+  <li>Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use <code class="language-plaintext highlighter-rouge">where</code>.</li>
+  <li>For instance, we may want to only keep PM2.5 if values are greater than a chosen threshold.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-where-pm2-5-is-greater-than-30-μm-m-sup-3-sup"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup></div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="NetCDF xarray map plotting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray map plotting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+        <li><em>“Choose the variable to plot”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+        <li><em>“Name of latitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+        <li><em>“Name of longitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+        <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of time values”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+        <li><em>“Choose the times to plot”</em>: <code class="language-plaintext highlighter-rouge">0 days 10:00:00</code></li>
+        <li><em>“Shift longitudes [0,360] –&gt; [-180,180]”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)”</em>: <code class="language-plaintext highlighter-rouge">0,35</code></li>
+        <li><em>“Do not plot values below this threshold (optional)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+        <li><em>“Add country borders with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+        <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
+        <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code>
+   <img src="../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png" alt="CAMS PM2.5 Italy 10:00  December 22, 2021. " width="2000" height="1000" loading="lazy" />
+Now we clearly see that values of PM2.5 &gt;  30 μm.m<sup>-3</sup> are only found over Naples on December 22, 10:00 UTC.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-pm2-5-over-italy-over-30-μm-m-sup-3-sup"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy over 30 μm.m<sup>-3</sup></div>
+
+  <p>Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed
+30 μm.m<sup>-3</sup> 
+between 10:00 UTC and 17:00 UTC on december 22, 2021?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="NetCDF xarray map plotting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray map plotting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf</code></li>
+          <li><em>“Choose the variable to plot”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+          <li><em>“Name of latitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+          <li><em>“Name of longitude coordinate”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+          <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of time values”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+              <li><em>“Choose the times to plot”</em>: <strong>Tick Select all</strong></li>
+            </ul>
+          </li>
+          <li><em>“Shift longitudes [0,360] –&gt; [-180,180]”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)”</em>: <code class="language-plaintext highlighter-rouge">0,35</code></li>
+          <li><em>“Do not plot values below this threshold (optional)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+          <li><em>“Add country borders with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+          <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+          <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
+          <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1" title="Image Montage tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Image Montage</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.31+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Images”</em>: Browse the dataset and manually select all images (png files)</li>
+          <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>”# of images wide”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 &gt; 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;. " width="8000" height="2000" loading="lazy" />
+Using thresholds, we can clearly identify areas if anywhere there are “high” values of PM2.5. On that particular day there are a few pixels where PM2.5 values exceed 30 μm.m<sup>-3</sup>.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="from-xarray-to-tabular-data">From Xarray to Tabular Data</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-xarray-selection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Xarray selection</div>
+
+  <p>We will select a single location: Naples (40.8518° N, 14.2681° E) and select the grid point that is closest to Naples.</p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0" title="NetCDF xarray operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from CAMS-PM2_5-20211222.netcdf</code></li>
+        <li><em>“Choose the variable to extract”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+        <li>In <em>“additional filter”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+              <ul>
+                <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">latitude</code></li>
+                <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                  <ul>
+                    <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">40.95</code></li>
+                    <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">40.85</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert additional filter”</em>
+              <ul>
+                <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">longitude</code></li>
+                <li><em>“Comparator”</em>: <code class="language-plaintext highlighter-rouge">slice(threshold1,threshold2)</code>
+                  <ul>
+                    <li><em>“Choose the start value for slice”</em>: <code class="language-plaintext highlighter-rouge">14.25</code></li>
+                    <li><em>“Choose the end value for slice”</em>: <code class="language-plaintext highlighter-rouge">14.35</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output dataset to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples.netcdf</code></li>
+    <li>Add a tag corresponding to <code class="language-plaintext highlighter-rouge">Naples</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1" title="NetCDF xarray Selection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Selection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.15.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples.netcdf</code></li>
+        <li><em>“Choose the variable to extract”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+        <li><em>“Source of coordinates”</em>: <code class="language-plaintext highlighter-rouge">Manually enter coordinates</code>
+          <ul>
+            <li><em>“Geographical area”</em>: <code class="language-plaintext highlighter-rouge">Whole available region</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Select Time series”</em>:
+          <ul>
+            <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output dataset to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples.tabular</code></li>
+    <li>
+      <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97 but we only print the first 5 lines.</p>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Code Out</div>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nb">time	</span>level	latitude	longitude	pm2p5_conc
+	0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
+	1	0 days 01:00:00.000000000	0.0	40.95000076293945	14.25	23.5767
+	2	0 days 02:00:00.000000000	0.0	40.95000076293945	14.25	21.383186
+	3	0 days 03:00:00.000000000	0.0	40.95000076293945	14.25	20.04839
+	4	0 days 04:00:00.000000000	0.0	40.95000076293945	14.25	18.347801
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-pm2-5-at-naples-over-the-4-forecasted-days"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 at Naples over the 4 forecasted days</div>
+
+  <p>From a qualitative point of view, can you say if PM2.5 may increase or decrease over the 4 forecasted days?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:</p>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2" title="Scatterplot with ggplot2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scatterplot with ggplot2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples.tabular</code></li>
+          <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+          <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Forecast time (hour) from December, 22 2021</code></li>
+          <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Particule Matter &lt; 2.5 μm.m-3</code></li>
+          <li>In <em>“Advanced Options”</em>:</li>
+        </ul>
+        <ul>
+          <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Lines only </code></li>
+          <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">User defined point options</code>
+            <ul>
+              <li><em>“Transparency of points (On a scale of 0-1; 0=transparent, 1=default)”</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
+            </ul>
+          </li>
+          <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">No thanks - just plot the data as one group</code></li>
+          <li><em>“Axis title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+          <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+          <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
+          <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code>
+ <img src="../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png" alt="CAMS PM2.5 Naples. " width="2100" height="2100" loading="lazy" /></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples.tabular</code></li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+          <li>In <em>“Check”</em>:</li>
+        </ul>
+        <ul>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+            <ul>
+              <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">0 days</code></li>
+              <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">20211222</code></li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+            <ul>
+              <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">1 days</code></li>
+              <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">20211223</code></li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+            <ul>
+              <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">2 days</code></li>
+              <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">20211224</code></li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+            <ul>
+              <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">3 days</code></li>
+              <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">20211225</code></li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+            <ul>
+              <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">4 days</code></li>
+              <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">20211226</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename your dataset to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222_Naples_with_dates.tabular</code></li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1" title="climate stripes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>climate stripes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
+        <ul>
+          <li><em>“column name to use for plotting”</em>: <code class="language-plaintext highlighter-rouge">pm2p5_conc</code></li>
+          <li><em>“plot title”</em>: <code class="language-plaintext highlighter-rouge">PM2.5 4 days forecast from December 22 2021 over Naples</code></li>
+          <li>In <em>“Advanced Options”</em>:</li>
+        </ul>
+        <ul>
+          <li><em>“column name to use for x-axis”</em>: <code class="language-plaintext highlighter-rouge">time</code></li>
+          <li><em>“format for input date/time column”</em>: <code class="language-plaintext highlighter-rouge">%Y%m%d %H:%M:%S.%f</code></li>
+          <li><em>“format for plotting dates on the x-axis”</em>: <code class="language-plaintext highlighter-rouge">%d %b %H hours</code></li>
+          <li><em>”“</em>: <code class="language-plaintext highlighter-rouge">winter</code>
+ <img src="../../images/PM2_5_galaxy_20211222_Naples_stripes.png" alt="CAMS PM2.5 Naples Stripes. " width="1000" height="200" loading="lazy" />
+From December 24, 2021 at 00:00 UTC and onwards, PM2-5 concentration are much lower than at the beginning. This is bothe visible on the 1D plot and stripes.</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! In this tutorial, Xarray Galaxy Tools have been introduced and we learned to use these tools on a real dataset from Copernicus Atmosphere Monitoring Service. We encourage you to try with your own datasets.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Xarray Tools in Galaxy</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/climate/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/pangeo"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/pangeo">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Anne Fouilloux,  <b>Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{climate-pangeo,
+author = "Anne Fouilloux",
+	title = "Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: graphicsmagick_image_montage
+  owner: bgruening
+  revisions: a0f01c777820
+  tool_panel_section_label: Convert Formats
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: climate_stripes
+  owner: climate
+  revisions: c6f2435d680b
+  tool_panel_section_label: Climate Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_coords_info
+  owner: ecology
+  revisions: 6015f30a7258
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_mapplot
+  owner: ecology
+  revisions: d7479b6dfbe8
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_metadata_info
+  owner: ecology
+  revisions: e8650cdf092f
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_netcdf2netcdf
+  owner: ecology
+  revisions: 1a91e551f3a9
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_select
+  owner: ecology
+  revisions: 6baac361495b
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: regex_find_replace
+  owner: galaxyp
+  revisions: ae8c4b2488e7
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ggplot2_point
+  owner: iuc
+  revisions: e3a675da7fd0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+					<li><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00044">gxy.io/GTN:T00044</a></li>
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/pangeo/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/climate/tutorials/pangeo/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

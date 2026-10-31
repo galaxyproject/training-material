@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Proteomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/community.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-12-19 14:39:45 +0000"><meta name="description" content="Training material for proteomics workflows in Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Proteomics">
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<h6 class="dropdown-header">Get Support</h6>
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/proteomics/faqs/" title="Check our FAQs for the Proteomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/community.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/proteomics/community.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">GTN Policies</h6>
+        <a class="dropdown-item" href="/training-material/accessibility.html"/>Accessibility Guarantee</a>
+	<a class="dropdown-item" href="/training-material/AI-policy.html"/>Generative AI Policy</a>
+	<a class="dropdown-item" href="https://galaxyproject.org/community/coc/">Code of Conduct</a>
+	<a class="dropdown-item" href="/training-material/SECURITY.html"/>Security Policy</a>
+
+	<a class="dropdown-item" href="/training-material/editorial-board.html"/>Editorial Board</a>
+	<a class="dropdown-item" href="/training-material/licenses.html"/>License Overview</a>
+	<a class="dropdown-item" href="/training-material/references.html"/>References</a>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+<h1>Proteomics — Community Home</h1>
+
+This is a new, experimental "Community Home" for a given topic. It is intended to highlight community contributions over the years to a topic!
+
+
+<style>
+:root {--stat-box-color-news: hsl(40, 100%, 85%);--stat-box-color-events: hsl(80, 100%, 85%);--stat-box-color-learning-pathways: hsl(120, 100%, 85%);--stat-box-color-tutorials: hsl(160, 100%, 85%);--stat-box-color-slides: hsl(200, 100%, 85%);--stat-box-color-recordings: hsl(240, 100%, 85%);--stat-box-color-faqs: hsl(280, 100%, 85%);--stat-box-color-workflows: hsl(320, 100%, 85%);--stat-box-color-grants: hsl(360, 100%, 85%);--stat-box-color-organisations: hsl(400, 100%, 85%);--stat-box-color-contributors: hsl(440, 100%, 85%);}
+</style>
+
+
+
+
+<div class="row">
+	<div class="col-md-6">
+		<figure>
+			<canvas id="materials-over-time" height="250"></canvas>
+			<figcaption>Materials Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="contributors-over-time" height="250"></canvas>
+			<figcaption>Contributors Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="workflows-over-time" height="250"></canvas>
+			<figcaption>Workflows Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="other-over-time" height="250"></canvas>
+			<figcaption>Other Contributions Over Time</figcaption>
+		</figure>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2026 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/2026-05-18-galaxy-academy.html">Galaxy Training Academy 2026</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2025 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">9</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/2025-09-24-wokshop-graz.html">From data to discovery - Galaxy workshop at University of Graz</a></li>
+				
+				<li><a href="/training-material/events/2025-05-12-galaxy-academy-2025.html">Galaxy Training Academy 2025</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/multiGSEA-tutorial/tutorial.html">Multiomics data analysis using MultiGSEA</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/bioconductor-scp/tutorial.html">Single Cell Proteomics data analysis with bioconductor-scp</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-predicting-hla-binding/tutorial.html">Neoantigen 5a: Predicting HLA Binding</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-hla-binding-novel-peptides/tutorial.html">Neoantigen 5b: IEDB binding Validated Neopeptides</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/tutorial.html">Neoantigen 1b: Non-Reference-Database-Generation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/tutorial.html">Neoantigen 4: Variant Annotation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-fragpipe-discovery/tutorial.html">Neoantigen 2: Database merge and FragPipe discovery</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-fusion-database-generation/tutorial.html">Neoantigen 1a: Fusion-Database-Generation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/neoantigen-peptide-verification/tutorial.html">Neoantigen 3: PepQuery2 Verification</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">MultiGSEA</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@KristinaGomoryova</a></li>
+				
+				<li><a href="/training-material">@dadrasarmin</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2024 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-events);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Events
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-learning-pathways);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Learning Pathways
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+				
+
+				<h3>Events</h3>
+				<ul>
+				
+				<li><a href="/training-material/events/galaxy-academy-2024.html">Galaxy Training Academy 2024</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Learning Pathways</h3>
+				<ul>
+				
+				<li><a href="/training-material/learning-pathways/proteogenomics.html">Proteogenomics</a></li>
+				
+				<li><a href="/training-material/learning-pathways/clinical-metaproteomics.html">Clinical metaproteomics workflows within Galaxy</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/clinical-mp-5-data-interpretation/tutorial.html">Clinical Metaproteomics 5: Data Interpretation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">Clinical Metaproteomics 3: Verification</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/clinical-mp-1-database-generation/tutorial.html">Clinical Metaproteomics 1: Database-Generation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html">Clinical Metaproteomics 4: Quantitation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">Clinical Metaproteomics 2: Discovery</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of Clinical Metaproteomics 5: Data Interpretation</a></li>
+				
+				<li><a href="/training-material">Recording of Clinical Metaproteomics 3: Verification</a></li>
+				
+				<li><a href="/training-material">Recording of Clinical Metaproteomics 1: Database-Generation</a></li>
+				
+				<li><a href="/training-material">Recording of Clinical Metaproteomics 4: Quantitation</a></li>
+				
+				<li><a href="/training-material">Recording of Clinical Metaproteomics 2: Discovery</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">WF5_Data_Interpretation_Worklow</a></li>
+				
+				<li><a href="/training-material">WF4_Quantitation_Workflow</a></li>
+				
+				<li><a href="/training-material">WF3_VERIFICATION_WORKFLOW</a></li>
+				
+				<li><a href="/training-material">WF2_Discovery-Workflow</a></li>
+				
+				<li><a href="/training-material">WF1_Database_Generation_Workflow</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@tStehling</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2023 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@katherine-d21</a></li>
+				
+				<li><a href="/training-material">@dechendb</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2022 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">26</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/variant_mapping_file.html">Why do we have a variant mapping file when it is not being used in the workflow?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/search_gui.html">How many search engines can you use in SearchGUI?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_variants.html">What kind of variants are seen in the output?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_querytabular.html">The workflows contain several Query tabular for text manipulation, is there a tutorial for that?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_own_data.html">Can I use these workflows on datasets generated from our laboratory?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_example_histories.html">Example histories for the proteogenomics tutorials</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/mvp.html">In the MVP platform, is it possible to view the genomic location of all the peptides?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/chromosome_names.html">Why do we change the chromosome names in the Ensembl GTF to match the UCSC genome reference?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/alignment_tools.html">Is it possible to replace the existing alignment tools such as HISAT and Freebayes with other tools?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html">Does MaxQuant in Galaxy support TMT, iTRAQ, etc.?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/stats.html">MSStats: what does ‘compare groups = yes’ mean? And the comparison matrix to define the contrast between the 2 groups?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/shotgun.html">How many proteins can be identified and quantified in shotgun proteomics?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/faqs/resources.html">Additional resources to learn more about proteomic data analysis</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/quantitation_default.html">For the “quantitation method” what is the default if I just leave it as “None”? Label free?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/outputs.html">Does MaxQuant give as output possibility the PSMs and PEPs?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html">What does it mean to normalize the LFQ intensities?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html">If you use a mqpar file, can you include modifications that are not in the Galaxy version? For instance, propionamide (Cys alkylation by acrylamide).</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/merge_database.html">Do you need to merge the databases? Because you can select multiple fasta files in MaxQuant.</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html">When can you use (or cannot use) Match between runs in MaxQuant?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/gene_ontology.html">What is Gene Ontology (GO)?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/enrichment.html">What is the principle of an enrichment analysis?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/contaminants.html">Do we need a contaminant FASTA for MQ in galaxy?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/build_error.html">The Build tissue-specific expression dataset tool (step one) exits with an error code.</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html">What is the advantage of breaking down protein to peptides before mass spec?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/encyclopedia/faqs/without_spectral_library.html">Can EncyclopeDIA be run on a DIA-MS dataset without a spectral library?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/encyclopedia/faqs/advantages.html">What advantages does a Chromatogram Library have over a DDA-generated library or predicted spectral library?</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2021 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-recordings);">
+					
+					<div class="title">8</div>
+					<div class="subtitle">
+					Recordings
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-faqs);">
+					
+					<div class="title">13</div>
+					<div class="subtitle">
+					Faqs
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">5</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html">MaxQuant and MSstats for the analysis of TMT data</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/encyclopedia/tutorial.html">EncyclopeDIA</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">MaxQuant and MSstats for the analysis of label-free data</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">Peptide Library Data Analysis</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html">Machine Learning Modeling of Anticancer Peptides</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Recordings</h3>
+				<ul>
+				
+				<li><a href="/training-material">Recording of EncyclopeDIA</a></li>
+				
+				<li><a href="/training-material">Recording of Introduction to proteomics, protein identification, quantification and statistical modelling</a></li>
+				
+				<li><a href="/training-material">Recording of Annotating a protein list identified by LC-MS/MS experiments</a></li>
+				
+				<li><a href="/training-material">Recording of MaxQuant and MSstats for the analysis of label-free data</a></li>
+				
+				<li><a href="/training-material">Recording of Metaproteomics tutorial</a></li>
+				
+				<li><a href="/training-material">Recording of Proteogenomics 1: Database Creation</a></li>
+				
+				<li><a href="/training-material">Recording of Proteogenomics 2: Database Search</a></li>
+				
+				<li><a href="/training-material">Recording of Proteogenomics 3: Novel peptide analysis</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Faqs</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/studying_microbiome_state.html">What other methods are available to study the functional state of the microbiome within Galaxy?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_strategies.html">I have a really large search database, what search strategies do you recommend for searching my mass spectrometry dataset?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_algorithms.html">Which search algorithms are recommended for searching the metaproteomics data?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/reusing_workflows.html">Can I use these workflows on datasets generated from our laboratory?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/functional_analysis_tools.html">Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/determine_taxonomic_composition.html">What software tools are available to determine taxonomic composition from mass spectrometry data?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/converting_FASTA.html">I have FASTQ files from metagenomics or metatranscriptomics datasets? How can I convert them into a protein FASTA file for metaproteomics searches?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/convert_to_MGF.html">How does one convert RAW files to MGF peak lists within Galaxy?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/comparing_measurement.html">How does one compare metaproteomics measurements from two experimental conditions?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/faqs/tools_versions.html">Which version of SearchGUI and PeptideShaker shall I use for this tutorial?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html">Which isobaric labeled quantification methods does MaxQuant in Galaxy support?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html">Including custom modifications into MaxQuant in Galaxy?</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_collection.html">Do I need to create collections to run MaxQuant analysis or can I use single sample inputs?</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">MaxQuant MSstatsTMT Training</a></li>
+				
+				<li><a href="/training-material">EncyclopeDIA-GTN</a></li>
+				
+				<li><a href="/training-material">Proteomics: MaxQuant and MSstats for the analysis of label-free data</a></li>
+				
+				<li><a href="/training-material">Copy of PeptideDataAnalysis (imported from uploaded file)</a></li>
+				
+				<li><a href="/training-material">PeptideML</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@KlemensFroehlich</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2020 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">7</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">8</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">DIA Analysis using OpenSwathWorkflow</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html">Library Generation for DIA Analysis</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html">Statistical analysis of DIA data</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html">metaQuantome 3: Taxonomy</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaquantome-function/tutorial.html">metaQuantome 2: Function</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">metaQuantome 1: Data creation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">Label-free data analysis using MaxQuant</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">DIA_lib_OSW</a></li>
+				
+				<li><a href="/training-material">DIA_Analysis_OSW</a></li>
+				
+				<li><a href="/training-material">DIA_analysis_MSstats</a></li>
+				
+				<li><a href="/training-material">DIA_analysis_MSstats</a></li>
+				
+				<li><a href="/training-material">metaquantome-taxonomy-workflow</a></li>
+				
+				<li><a href="/training-material">metaquantome-function-worklow</a></li>
+				
+				<li><a href="/training-material">metaQuantome_datacreation_workflow</a></li>
+				
+				<li><a href="/training-material">Proteomics: MaxQuant workflow</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@jaidevjoshi83</a></li>
+				
+				<li><a href="/training-material">@hechth</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2019 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">2</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">9</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html">Annotating a protein list identified by LC-MS/MS experiments</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/biomarker_selection/tutorial.html">Biomarker candidate identification</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">ProteoRE ProteomeAnnotation Tutorial (release 2.0)</a></li>
+				
+				<li><a href="/training-material">'Proteome Annotation'</a></li>
+				
+				<li><a href="/training-material">'Biomarkers4Paris' Workflow</a></li>
+				
+				<li><a href="/training-material">MS Imaging Loading Exploring Data</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@emmaleith</a></li>
+				
+				<li><a href="/training-material">@mariecrane</a></li>
+				
+				<li><a href="/training-material">@yvandenb</a></li>
+				
+				<li><a href="/training-material">@vloux</a></li>
+				
+				<li><a href="/training-material">@pravs3683</a></li>
+				
+				<li><a href="/training-material">@davidchristiany</a></li>
+				
+				<li><a href="/training-material">@combesf</a></li>
+				
+				<li><a href="/training-material">@matthias313</a></li>
+				
+				<li><a href="/training-material">@njall</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2018 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">3</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">4</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">Mass spectrometry imaging: Loading and exploring MSI data</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">Proteogenomics 1: Database Creation</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">Proteogenomics 2: Database Search</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html">Proteogenomics 3: Novel peptide analysis</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">GTN Proteogemics3 Novel Peptide Analysis</a></li>
+				
+				<li><a href="/training-material">Proteogenomics 2: Database Search</a></li>
+				
+				<li><a href="/training-material">Proteogenomics 1: Database Creation</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@jraysajulga</a></li>
+				
+				<li><a href="/training-material">@foellmelanie</a></li>
+				
+				<li><a href="/training-material">@blankenberg</a></li>
+				
+				<li><a href="/training-material">@subinamehta</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2017 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
+					
+					<div class="title">7</div>
+					<div class="subtitle">
+					Tutorials
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-slides);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Slides
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
+					
+					<div class="title">10</div>
+					<div class="subtitle">
+					Workflows
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-organisations);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Organisations
+					</div>
+				</div>
+			</div>
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-contributors);">
+					
+					<div class="title">16</div>
+					<div class="subtitle">
+					Contributors
+					</div>
+				</div>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Tutorials</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">Peptide and Protein ID using OpenMS tools</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html">Metaproteomics tutorial</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">Peptide and Protein ID using SearchGUI and PeptideShaker</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">Peptide and Protein Quantification via Stable Isotope Labelling (SIL)</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html">Label-free versus Labelled - How to Choose Your Quantitation Method</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling</a></li>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/ntails/tutorial.html">Detection and quantitation of N-termini (degradomics) via N-TAILS</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Slides</h3>
+				<ul>
+				
+				<li><a href="/training-material/topics/proteomics/tutorials/introduction/slides.html">Introduction to proteomics, protein identification, quantification and statistical modelling</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Workflows</h3>
+				<ul>
+				
+				<li><a href="/training-material">Peptide And Protein ID Via OMS Using Two Search Engines</a></li>
+				
+				<li><a href="/training-material">Proteomics: Peptide and Protein ID using OpenMS</a></li>
+				
+				<li><a href="/training-material">Metaproteomics_GTN</a></li>
+				
+				<li><a href="/training-material">Proteomics: Peptide and Protein Quantification via stable istobe labeling</a></li>
+				
+				<li><a href="/training-material">ProteinID SG PS Tutorial WF datasetCollection</a></li>
+				
+				<li><a href="/training-material">Peptide And Protein ID Tutorial</a></li>
+				
+				<li><a href="/training-material">Secreted Proteins Via GO Annotation And WoLF PSORT For shCTSB Paper</a></li>
+				
+				<li><a href="/training-material">Tails Triple Dimethyl OpenMS2.1</a></li>
+				
+				<li><a href="/training-material">Proteomics: database handling including mycoplasma</a></li>
+				
+				<li><a href="/training-material">Proteomics: database handling</a></li>
+				
+				</ul>
+				
+			
+				
+			
+				
+				
+
+				<h3>Organisations</h3>
+				<ul>
+				
+				<li><a href="/training-material">@elixir-europe</a></li>
+				
+				</ul>
+				
+			
+				
+				
+
+				<h3>Contributors</h3>
+				<ul>
+				
+				<li><a href="/training-material">@willdurand</a></li>
+				
+				<li><a href="/training-material">@timothygriffin</a></li>
+				
+				<li><a href="/training-material">@stortebecker</a></li>
+				
+				<li><a href="/training-material">@shiltemann</a></li>
+				
+				<li><a href="/training-material">@pratikdjagtap</a></li>
+				
+				<li><a href="/training-material">@pavanvidem</a></li>
+				
+				<li><a href="/training-material">@nsoranzo</a></li>
+				
+				<li><a href="/training-material">@nekrut</a></li>
+				
+				<li><a href="/training-material">@martenson</a></li>
+				
+				<li><a href="/training-material">@jj-umn</a></li>
+				
+				<li><a href="/training-material">@hexylena</a></li>
+				
+				<li><a href="/training-material">@delphine-l</a></li>
+				
+				<li><a href="/training-material">@blankclemens</a></li>
+				
+				<li><a href="/training-material">@bgruening</a></li>
+				
+				<li><a href="/training-material">@bernt-matthias</a></li>
+				
+				<li><a href="/training-material">@bebatut</a></li>
+				
+				</ul>
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">2015 Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-organisations);">
+					
+					<div class="title">1</div>
+					<div class="subtitle">
+					Organisations
+					</div>
+				</div>
+			</div>
+			
+		
+			
+		
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				
+
+				<h3>Organisations</h3>
+				<ul>
+				
+				<li><a href="/training-material">@deNBI</a></li>
+				
+				</ul>
+				
+			
+				
+			
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<h2>Cumulative Data as CSV</h2>
+<pre>
+year,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026
+news,
+events,0,0,0,0,0,0,0,0,0,1,3,4
+learning-pathways,0,0,0,0,0,0,0,0,0,2,2,2
+tutorials,0,0,7,11,13,20,25,25,25,30,39,39
+slides,0,0,1,1,1,1,1,1,1,1,1,1
+recordings,0,0,0,0,0,0,8,8,8,13,13,13
+faqs,0,0,0,0,0,0,13,39,39,39,39,39
+workflows,0,0,10,13,17,25,30,30,30,35,36,36
+grants,
+organisations,1,1,2,2,2,2,2,2,2,2,2,2
+contributors,0,0,16,20,29,31,32,32,34,35,37,37
+
+
+</pre>
+
+
+
+
+<style>
+.stat-box {
+	text-align: center;
+	border: 2px solid var(--border);
+	margin: 0.25em;
+	padding: 0.5em;
+	background: var(--stat-box-color);
+}
+.col-md-8 .row .col-md-12 h3:first-child {
+	margin-top: 0;
+}
+
+body[data-brightness="dark"] .stat-box {
+	background: none;
+	border: 2px solid var(--stat-box-color);
+}
+
+figure {
+	margin: 0.25em;
+	padding: 0.25em;
+
+	figcaption {
+		text-align: center;
+	}
+}
+
+.stat-box .title {
+	font-size: 300%;
+	font-weight: 900;
+}
+.year {
+	font-size: 500%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+<!-- use chart.js for graphs -->
+<script src="/training-material/assets/js/Chart.bundle.js"></script>
+
+<script>
+const style = getComputedStyle(document.body);
+const totals = {"events":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"},{"y":4,"x":"2026-01-01"}],"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":10,"x":"2017-01-01"},{"y":13,"x":"2018-01-01"},{"y":17,"x":"2019-01-01"},{"y":25,"x":"2020-01-01"},{"y":30,"x":"2021-01-01"},{"y":30,"x":"2022-01-01"},{"y":30,"x":"2023-01-01"},{"y":35,"x":"2024-01-01"},{"y":36,"x":"2025-01-01"},{"y":36,"x":"2026-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":7,"x":"2017-01-01"},{"y":11,"x":"2018-01-01"},{"y":13,"x":"2019-01-01"},{"y":20,"x":"2020-01-01"},{"y":25,"x":"2021-01-01"},{"y":25,"x":"2022-01-01"},{"y":25,"x":"2023-01-01"},{"y":30,"x":"2024-01-01"},{"y":39,"x":"2025-01-01"},{"y":39,"x":"2026-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":16,"x":"2017-01-01"},{"y":20,"x":"2018-01-01"},{"y":29,"x":"2019-01-01"},{"y":31,"x":"2020-01-01"},{"y":32,"x":"2021-01-01"},{"y":32,"x":"2022-01-01"},{"y":34,"x":"2023-01-01"},{"y":35,"x":"2024-01-01"},{"y":37,"x":"2025-01-01"},{"y":37,"x":"2026-01-01"}],"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}],"recordings":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":8,"x":"2021-01-01"},{"y":8,"x":"2022-01-01"},{"y":8,"x":"2023-01-01"},{"y":13,"x":"2024-01-01"},{"y":13,"x":"2025-01-01"},{"y":13,"x":"2026-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":13,"x":"2021-01-01"},{"y":39,"x":"2022-01-01"},{"y":39,"x":"2023-01-01"},{"y":39,"x":"2024-01-01"},{"y":39,"x":"2025-01-01"},{"y":39,"x":"2026-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":1,"x":"2025-01-01"},{"y":1,"x":"2026-01-01"}],"organisations":[{"y":1,"x":"2015-01-01"},{"y":1,"x":"2016-01-01"},{"y":2,"x":"2017-01-01"},{"y":2,"x":"2018-01-01"},{"y":2,"x":"2019-01-01"},{"y":2,"x":"2020-01-01"},{"y":2,"x":"2021-01-01"},{"y":2,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}]};
+
+const options = {
+	scales: {
+		yAxes: [{
+			ticks: {
+				beginAtZero: true
+			}
+		}],
+		xAxes: [{
+			type: 'time',
+			time: {
+				displayFormats:{month:'YYYY'},
+				unit: 'year',
+				distribution: 'linear'
+			}
+		}]
+	},
+	legend: {
+		display: true
+	},
+}
+
+function getStyleDarker(type, darker){
+	if (darker) {
+		return style.getPropertyValue(`--stat-box-color-${type}`).replaceAll('85%', '50%');
+	} else {
+		return style.getPropertyValue(`--stat-box-color-${type}`);
+	}
+}
+
+
+new Chart('materials-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.slides,
+				label: 'Slides',
+				borderColor: getStyleDarker("slides", true),
+				backgroundColor: getStyleDarker("slides", false),
+			},
+			{
+				data: totals.tutorials,
+				label: 'Tutorials',
+				borderColor: getStyleDarker("tutorials", true),
+				backgroundColor: getStyleDarker("tutorials", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('contributors-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.grants,
+				label: 'Grants',
+				borderColor: getStyleDarker("grants", true),
+				backgroundColor: getStyleDarker("grants", false),
+			},
+			{
+				data: totals.organisations,
+				label: 'Organisations',
+				borderColor: getStyleDarker("organisations", true),
+				backgroundColor: getStyleDarker("organisations", false),
+			},
+			{
+				data: totals.contributors,
+				label: 'Contributors',
+				borderColor: getStyleDarker("contributors", true),
+				backgroundColor: getStyleDarker("contributors", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('workflows-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.workflows,
+				label: 'Workflows',
+				borderColor: getStyleDarker("workflows", true),
+				backgroundColor: getStyleDarker("workflows", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('other-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.news,
+				label: 'News',
+				borderColor: getStyleDarker("news", true, true),
+				backgroundColor: getStyleDarker("news", true, false),
+				backgroundColor: getStyleDarker("news", false),
+			},
+			{
+				data: totals.events,
+				label: 'Events',
+				borderColor: getStyleDarker("events", true),
+				backgroundColor: getStyleDarker("events", false),
+			},
+			{
+				data: totals['learning-pathways'],
+				label: 'Learning Pathways',
+				borderColor: getStyleDarker("learning-pathways", true),
+				backgroundColor: getStyleDarker("learning-pathways", false),
+			},
+			{
+				data: totals.recordings,
+				label: 'Recordings',
+				borderColor: getStyleDarker("recordings", true),
+				backgroundColor: getStyleDarker("recordings", false),
+			},
+			{
+				data: totals.faqs,
+				label: 'Faqs',
+				borderColor: getStyleDarker("faqs", true),
+				backgroundColor: getStyleDarker("faqs", false),
+			},
+		]
+	},
+	options: options
+});
+
+
+</script>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Generative AI Policy</a></li>
+					<li><a href="/training-material/AI-policy.html">Security Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training Policy</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/community.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/proteomics/community.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/96c60b6aef9c21566b060421f37a927879f13b5e">96c60b6</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+
+	
+	
+
+    </body>
+</html>

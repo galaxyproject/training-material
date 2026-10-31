@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAssembly to be polished"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nIllumina reads, R1, in fastq.gz format"]
+  2[label="Minimap2 round 1: map reads to assembly"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="Racon round 1: polish assembly"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="alignment_output"]
+  1 -> 3 [label="output"]
+  4[label="Minimap2 round 2: map reads to assembly"]
+  1 -> 4 [label="output"]
+  3 -> 4 [label="consensus"]
+  5[label="Racon round 2: polish assembly"]
+  3 -> 5 [label="consensus"]
+  4 -> 5 [label="alignment_output"]
+  1 -> 5 [label="output"]
+  k594819c3668e4575b9a64459ffacf952[color=lightseagreen,label="Output\nAssembly polished by short reads using Racon"]
+  5 -> k594819c3668e4575b9a64459ffacf952
+}

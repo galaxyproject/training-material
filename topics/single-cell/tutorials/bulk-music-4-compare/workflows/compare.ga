@@ -1,0 +1,653 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow runs 3 comparisons using MuSiC Deconvolution compare: where datasets cell compositions are inferred from a reference containing healthy and diseased cells; where diseased are inferred from disease and healthy from healthy; and where both diseased and healthy are inferred from a healthy reference.",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-8170-8806",
+            "name": "Wendi Bacon"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-4181-2676",
+            "name": "Mehmet Tekman"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "MuSiC-Deconvolution: Compare",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Object - Single cell:T2D"
+                }
+            ],
+            "label": "ESet Object - Single cell:T2D",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.0234375,
+                "top": 87.03125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "16ac774b-2363-4b80-aef3-c931c2e7be39",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Object - Single cell:normal"
+                }
+            ],
+            "label": "ESet Object - Single cell:normal",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.0234375,
+                "top": 194.046875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a12a2c75-60f9-4914-af0f-1e4c90d6232e",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Object - Bulk:normal"
+                }
+            ],
+            "label": "ESet Object - Bulk:normal",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.0234375,
+                "top": 316.0546875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "631202df-1a51-4fac-8ca9-65b8e6959082",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Object - Bulk:T2D"
+                }
+            ],
+            "label": "ESet Object - Bulk:T2D",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.0234375,
+                "top": 438.0390625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e841325f-0707-4ac9-9937-700d1bf5fa03",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Object - Single cell Total"
+                }
+            ],
+            "label": "ESet Object - Single cell Total",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 556.0390625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "676d2c4b-58c3-438b-ae55-e294ee43e377",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Here the T2D bulk sample is inferred from the sc T2D sample, while the normal bulk sample is inferred from the sc normal sample",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "scrna_groups_0|bulk_groups_0|bulk_eset": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "scrna_groups_0|scrna_eset": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "scrna_groups_1|bulk_groups_0|bulk_eset": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "scrna_groups_1|scrna_eset": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "MuSiC Compare: Like with like",
+            "name": "MuSiC Compare",
+            "outputs": [
+                {
+                    "name": "dtables",
+                    "type": "input"
+                },
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "out_heatmulti_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_heatsumm_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 730.265625,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RemoveTagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RemoveTagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RemoveTagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "stats"
+                },
+                "RenameDatasetActiondtables": {
+                    "action_arguments": {
+                        "newname": "MuSiC-like4like-tables"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RenameDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-like4like-plots"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RenameDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-like4like-individualmaps"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "MuSiC-like4like-stats"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                },
+                "TagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#like4like"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "TagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#like4like"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "TagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#like4like"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#like4like"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "4447ed460308",
+                "name": "music_compare",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dendro_setting\": \"None\", \"est_method\": \"MuSiC\", \"filter\": {\"out_list_cells\": \"\", \"out_list_facts\": \"\"}, \"scrna_groups\": [{\"__index__\": 0, \"name\": \"scRNA_set:Normal\", \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"adv\": {\"celltypes_label\": \"Inferred cell type - author labels\", \"samples_label\": \"Individual\", \"celltypes\": \"alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell\"}, \"bulk_groups\": [{\"__index__\": 0, \"name\": \"Bulk_set:Normal\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}]}, {\"__index__\": 1, \"name\": \"scRNA_set:T2D\", \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"adv\": {\"celltypes_label\": \"Inferred cell type - author labels\", \"samples_label\": \"Individual\", \"celltypes\": \"alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell\"}, \"bulk_groups\": [{\"__index__\": 0, \"name\": \"bulk_set:T2D\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}]}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1+galaxy4",
+            "type": "tool",
+            "uuid": "1aa07374-4bd9-4c8a-8e23-8c9c3b7faa78",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "f23ddfe7-40e1-4232-985a-1deae154e13e"
+                },
+                {
+                    "label": null,
+                    "output_name": "dtables",
+                    "uuid": "2a29e3ef-e447-4336-a5e4-c781f21eeeb6"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_heatsumm_pdf",
+                    "uuid": "ba82c5ac-05df-4ded-b6b4-0bac2cc3cc8b"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_heatmulti_pdf",
+                    "uuid": "f7f8627a-7a04-4ec4-8e65-7b4cd65ade13"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Here the T2D bulk sample and the normal sample are separately compared separately against the healthy sc reference only (excluding unhealthy sc reference)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "scrna_groups_0|bulk_groups_0|bulk_eset": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "scrna_groups_0|bulk_groups_1|bulk_eset": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "scrna_groups_0|scrna_eset": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "MuSiC Compare: healthyscref",
+            "name": "MuSiC Compare",
+            "outputs": [
+                {
+                    "name": "dtables",
+                    "type": "input"
+                },
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "out_heatmulti_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_heatsumm_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 992.265625,
+                "top": 211
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RemoveTagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RemoveTagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RemoveTagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "stats"
+                },
+                "RenameDatasetActiondtables": {
+                    "action_arguments": {
+                        "newname": "MuSiC-healthyscref-tables"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RenameDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-healthyscref-plots"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RenameDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-healthyscref-individualmaps"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "MuSiC-healthyscref-stats"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                },
+                "TagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#healthyscref"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "TagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#healthyscref"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "TagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#healthyscref"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#healthyscref"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "4447ed460308",
+                "name": "music_compare",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dendro_setting\": \"None\", \"est_method\": \"MuSiC\", \"filter\": {\"out_list_cells\": \"\", \"out_list_facts\": \"\"}, \"scrna_groups\": [{\"__index__\": 0, \"name\": \"scRNA_set:Normal\", \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"adv\": {\"celltypes_label\": \"Inferred cell type - author labels\", \"samples_label\": \"Individual\", \"celltypes\": \"alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell\"}, \"bulk_groups\": [{\"__index__\": 0, \"name\": \"Bulk_set:Normal\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}, {\"__index__\": 1, \"name\": \"Bulk_set:T2D\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}]}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1+galaxy4",
+            "type": "tool",
+            "uuid": "2d6961e3-6437-4fae-92d1-25695b55d4c4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_heatsumm_pdf",
+                    "uuid": "07325b72-c3f2-403e-bd83-a751603228ef"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_heatmulti_pdf",
+                    "uuid": "b75a92b4-f4eb-4bd6-a895-ba7285e80d65"
+                },
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "693bd310-705d-466b-9c35-1d7803bf16d7"
+                },
+                {
+                    "label": null,
+                    "output_name": "dtables",
+                    "uuid": "e8a7c664-1510-4bc8-bb3a-bde0596dd2fd"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "scrna_groups_0|bulk_groups_0|bulk_eset": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "scrna_groups_0|bulk_groups_1|bulk_eset": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "scrna_groups_0|scrna_eset": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "MuSiC Compare - Altogether",
+            "name": "MuSiC Compare",
+            "outputs": [
+                {
+                    "name": "dtables",
+                    "type": "input"
+                },
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "out_heatmulti_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_heatsumm_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 426.2890625,
+                "top": 203.0390625
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RemoveTagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RemoveTagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RemoveTagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#singlecell,#bulk"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "stats"
+                },
+                "RenameDatasetActiondtables": {
+                    "action_arguments": {
+                        "newname": "MuSiC-combined-tables"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "dtables"
+                },
+                "RenameDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-combined-plots"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "RenameDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "newname": "MuSiC-combined-individualmaps"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "MuSiC-combined-stats"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                },
+                "TagDatasetActiondtables": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "dtables"
+                },
+                "TagDatasetActionout_heatmulti_pdf": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatmulti_pdf"
+                },
+                "TagDatasetActionout_heatsumm_pdf": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_heatsumm_pdf"
+                },
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "4447ed460308",
+                "name": "music_compare",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dendro_setting\": \"None\", \"est_method\": \"MuSiC\", \"filter\": {\"out_list_cells\": \"\", \"out_list_facts\": \"\"}, \"scrna_groups\": [{\"__index__\": 0, \"name\": \"scRNA_set\", \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"adv\": {\"celltypes_label\": \"Inferred cell type - author labels\", \"samples_label\": \"Individual\", \"celltypes\": \"alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell\"}, \"bulk_groups\": [{\"__index__\": 0, \"name\": \"Bulk_healthy\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}, {\"__index__\": 1, \"name\": \"Bulk_disease\", \"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"factor_group\": \"Disease\", \"adv\": {\"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\"}}]}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1+galaxy4",
+            "type": "tool",
+            "uuid": "bcea8743-e92e-4a04-b4da-34ca073ecd52",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "dtables",
+                    "uuid": "812202ce-076d-46fa-8a80-a1f5f4c53a7a"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_heatmulti_pdf",
+                    "uuid": "cd5b8aa7-da07-49ba-8775-8bcbdd900150"
+                },
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "93d46757-18b9-486b-ab59-b8bc1cb5fd7f"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_heatsumm_pdf",
+                    "uuid": "35cfefba-a8e6-49b0-9cef-2a01b038ecb0"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:singlecell",
+        "name:transcriptomics",
+        "name:training"
+    ],
+    "uuid": "e413e0f4-082e-4f55-94b0-d457d0d38cec",
+    "version": 2
+}

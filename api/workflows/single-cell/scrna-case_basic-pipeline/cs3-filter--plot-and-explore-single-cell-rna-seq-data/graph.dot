@@ -1,0 +1,142 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nMito-counted AnnData"]
+  1[label="Inspect AnnData"]
+  0 -> 1 [label="output"]
+  2[label="Scanpy FilterCells"]
+  0 -> 2 [label="output"]
+  k08175d7ff4f4413cad86f59587ff692e[color=lightseagreen,label="Output\nGenes-filtered Object"]
+  2 -> k08175d7ff4f4413cad86f59587ff692e
+  3[label="Plot"]
+  0 -> 3 [label="output"]
+  kbfc499ee630a498b9be6696d9bb78837[color=lightseagreen,label="Output\nScatter - genes x UMIs"]
+  3 -> kbfc499ee630a498b9be6696d9bb78837
+  4[label="Plot"]
+  0 -> 4 [label="output"]
+  kf2c78ef37d314930954c0133cce27a41[color=lightseagreen,label="Output\nScatter - mito x genes"]
+  4 -> kf2c78ef37d314930954c0133cce27a41
+  5[label="Plot"]
+  0 -> 5 [label="output"]
+  k348818e69def41fda3906f8525c57cd8[color=lightseagreen,label="Output\nViolin - genotype - log"]
+  5 -> k348818e69def41fda3906f8525c57cd8
+  6[label="Plot"]
+  0 -> 6 [label="output"]
+  k844f5e7c78c84f288e15cea35ada8fef[color=lightseagreen,label="Output\nViolin - batch - log"]
+  6 -> k844f5e7c78c84f288e15cea35ada8fef
+  7[label="Inspect AnnData"]
+  0 -> 7 [label="output"]
+  8[label="Plot"]
+  0 -> 8 [label="output"]
+  k3b1232c5d16a434d806e79fd77f7c05f[color=lightseagreen,label="Output\nScatter - mito x UMIs"]
+  8 -> k3b1232c5d16a434d806e79fd77f7c05f
+  9[label="Inspect AnnData"]
+  0 -> 9 [label="output"]
+  10[label="Plot"]
+  0 -> 10 [label="output"]
+  ka639cdc0da404df9834823117528b24a[color=lightseagreen,label="Output\nViolin - sex - log"]
+  10 -> ka639cdc0da404df9834823117528b24a
+  11[label="Plot"]
+  2 -> 11 [label="output_h5ad"]
+  k69bf3e4263e24b5b9d635aac9d6b5691[color=lightseagreen,label="Output\nViolin - Filterbygenes"]
+  11 -> k69bf3e4263e24b5b9d635aac9d6b5691
+  12[label="Scanpy FilterCells"]
+  2 -> 12 [label="output_h5ad"]
+  kf378cb4e0a7749d9b92a752dbea4b09a[color=lightseagreen,label="Output\nCounts-filtered Object"]
+  12 -> kf378cb4e0a7749d9b92a752dbea4b09a
+  13[label="Inspect AnnData"]
+  2 -> 13 [label="output_h5ad"]
+  kf9e862dbeb2241248fe00fdcfcfb8393[color=lightseagreen,label="Output\nGeneral - Filterbygenes"]
+  13 -> kf9e862dbeb2241248fe00fdcfcfb8393
+  14[label="Inspect AnnData"]
+  12 -> 14 [label="output_h5ad"]
+  k794f72b5c2c346a0ac15b9f1e94941d2[color=lightseagreen,label="Output\nGeneral - Filterbycounts"]
+  14 -> k794f72b5c2c346a0ac15b9f1e94941d2
+  15[label="Scanpy FilterCells"]
+  12 -> 15 [label="output_h5ad"]
+  kb915da6664354871baa03e494ba73c96[color=lightseagreen,label="Output\nMito-filtered Object"]
+  15 -> kb915da6664354871baa03e494ba73c96
+  16[label="Plot"]
+  12 -> 16 [label="output_h5ad"]
+  k3aef86d7d34d4b24bc97bf8c97d8d2fa[color=lightseagreen,label="Output\nViolin - Filterbycounts"]
+  16 -> k3aef86d7d34d4b24bc97bf8c97d8d2fa
+  17[label="Inspect AnnData"]
+  15 -> 17 [label="output_h5ad"]
+  kcd94a4c656654bdf88ea4f4d41efa893[color=lightseagreen,label="Output\nGeneral - Filterbymito"]
+  17 -> kcd94a4c656654bdf88ea4f4d41efa893
+  18[label="Scanpy FilterGenes"]
+  15 -> 18 [label="output_h5ad"]
+  kee63ef0a98ed45cbb1441154f84ae452[color=lightseagreen,label="Output\nFiltered Object"]
+  18 -> kee63ef0a98ed45cbb1441154f84ae452
+  19[label="Plot"]
+  15 -> 19 [label="output_h5ad"]
+  k7e48a14f08fd45abb613606bf64dcf9d[color=lightseagreen,label="Output\nViolin - Filterbymito"]
+  19 -> k7e48a14f08fd45abb613606bf64dcf9d
+  20[label="Inspect AnnData"]
+  18 -> 20 [label="output_h5ad"]
+  kd59efa9bd0494f0e8bd88ae982a45d0a[color=lightseagreen,label="Output\nGeneral - Filtered object"]
+  20 -> kd59efa9bd0494f0e8bd88ae982a45d0a
+  21[label="Scanpy NormaliseData"]
+  18 -> 21 [label="output_h5ad"]
+  22[label="Scanpy FindVariableGenes"]
+  21 -> 22 [label="output_h5ad"]
+  23[label="Scanpy ScaleData"]
+  22 -> 23 [label="output_h5ad"]
+  24[label="Scanpy RunPCA"]
+  23 -> 24 [label="output_h5ad"]
+  25[label="Plot"]
+  24 -> 25 [label="output_h5ad"]
+  k993dea99990f460abeb946e5c97ee898[color=lightseagreen,label="Output\nPCA Variance"]
+  25 -> k993dea99990f460abeb946e5c97ee898
+  26[label="Scanpy ComputeGraph"]
+  24 -> 26 [label="output_h5ad"]
+  27[label="Scanpy RunTSNE"]
+  26 -> 27 [label="output_h5ad"]
+  28[label="Scanpy RunUMAP"]
+  27 -> 28 [label="output_h5ad"]
+  29[label="Scanpy FindCluster"]
+  28 -> 29 [label="output_h5ad"]
+  30[label="Scanpy FindMarkers"]
+  29 -> 30 [label="output_h5ad"]
+  k308b49614d50442b9bcabbb1992426ba[color=lightseagreen,label="Output\nMarkers - cluster"]
+  30 -> k308b49614d50442b9bcabbb1992426ba
+  k035bbbcefb5748c883d52b0cd0376541[color=lightseagreen,label="Output\nFinal object"]
+  30 -> k035bbbcefb5748c883d52b0cd0376541
+  31[label="Scanpy FindMarkers"]
+  29 -> 31 [label="output_h5ad"]
+  k1705e219192a4f529b2664fcbcd303ea[color=lightseagreen,label="Output\nMarkers - genotype"]
+  31 -> k1705e219192a4f529b2664fcbcd303ea
+  32[label="Scanpy PlotEmbed"]
+  30 -> 32 [label="output_h5ad"]
+  33[label="Scanpy PlotEmbed"]
+  30 -> 33 [label="output_h5ad"]
+  34[label="Manipulate AnnData"]
+  30 -> 34 [label="output_h5ad"]
+  35[label="Scanpy PlotEmbed"]
+  30 -> 35 [label="output_h5ad"]
+  36[label="Inspect AnnData"]
+  30 -> 36 [label="output_h5ad"]
+  37[label="AnnData Operations"]
+  34 -> 37 [label="anndata"]
+  30 -> 37 [label="output_h5ad"]
+  38[label="Join two Datasets"]
+  30 -> 38 [label="output_tsv"]
+  36 -> 38 [label="var"]
+  39[label="Join two Datasets"]
+  31 -> 39 [label="output_tsv"]
+  36 -> 39 [label="var"]
+  40[label="AnnData Operations"]
+  37 -> 40 [label="output_h5ad"]
+  ka6d48df0403f4efca75f9504a960884e[color=lightseagreen,label="Output\nFinal cell annotated object"]
+  40 -> ka6d48df0403f4efca75f9504a960884e
+  41[label="Cut"]
+  38 -> 41 [label="out_file1"]
+  k0ee7f9b6b0654e2693df6e6e2fe458a9[color=lightseagreen,label="Output\nMarkers - cluster - named"]
+  41 -> k0ee7f9b6b0654e2693df6e6e2fe458a9
+  42[label="Cut"]
+  39 -> 42 [label="out_file1"]
+  kfdb88faa9b764edbb89b427c098a473e[color=lightseagreen,label="Output\nMarkers - genotype - named"]
+  42 -> kfdb88faa9b764edbb89b427c098a473e
+  43[label="Scanpy PlotEmbed"]
+  40 -> 43 [label="output_h5ad"]
+}

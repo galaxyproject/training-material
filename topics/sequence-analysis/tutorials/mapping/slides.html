@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mapping</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@96c60b6aef9c21566b060421f37a927879f13b5e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ecb6ae4a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Mapping">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-15 12:19:56 +0000">
+<meta name="DC.creator" content="Joachim Wolff">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Engy Nasr">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+
+        
+        
+        
+        
+        <meta name="description" content="Analyses of sequences">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Mapping">
+        <meta property="og:description" content="Analyses of sequences">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/sequence-analysis/tutorials/mapping/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mapping",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-10-15 12:19:56 +0000",
+  "datePublished": "2016-10-04 14:08:30 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "2020-1-NL01-KA203-064717",
+      "url": "https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+        "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+        "url": "https://www.erasmusplus.nl",
+        "logo": "https://gallantries.github.io/assets/images/gallantries-logo.png"
+      },
+      "startDate": "2020-09-01",
+      "endDate": "2023-09-30"
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:S00081",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Sequence Analysis",
+    "description": "Analyses of sequences",
+    "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+  },
+  "abstract": "# Example NGS pipeline",
+  "learningResourceType": "slides",
+  "name": "Mapping",
+  "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+  "version": 20,
+  "timeRequired": "PT1H",
+  "teaches": "- Understand the basic concept of mapping\n- Learn about factors influencing alignment\n- See a genome browser used to better understand your aligned data",
+  "keywords": [
+    "Sequence Analysis"
+  ],
+  "description": "## Abstract\n\n# Example NGS pipeline\n\n\n## Questions this  will address\n\n - What is mapping (alignment)?\n - What is the BAM format?\n - How can we view aligned sequences?\n\n\n## Learning Objectives\n\n- Understand the basic concept of mapping\n- Learn about factors influencing alignment\n- See a genome browser used to better understand your aligned data\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "name": "Joachim Wolff",
+      "image": "https://avatars.githubusercontent.com/joachimwolff",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/EngyNasr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/EngyNasr/",
+      "name": "Engy Nasr",
+      "image": "https://avatars.githubusercontent.com/EngyNasr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9047-4215",
+      "@id": "https://orcid.org/0000-0001-9047-4215"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "@id": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "@id": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI - German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "MWK - Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "@id": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biofair/",
+          "name": "BioFAIR",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biofair.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/earlham/",
+          "name": "Earlham Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.earlham.ac.uk/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-steers/",
+          "name": "ELIXIR-STEERS",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/steers"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "@id": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/materialvitaldigital/",
+          "name": "MaterialVital-Digital",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.materialdigital.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2068-4695",
+      "@id": "https://orcid.org/0000-0002-2068-4695"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/willdurand/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/willdurand/",
+      "name": "William Durand",
+      "image": "https://avatars.githubusercontent.com/willdurand",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/njall/",
+      "name": "Niall Beard",
+      "image": "https://avatars.githubusercontent.com/njall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Sequence Analysis",
+      "description": "Analyses of sequences",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bamtools",
+      "name": "BamTools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/samtools",
+      "name": "SAMtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/jbrowse",
+      "name": "JBrowse"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1324070",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto" data-baseurl="/training-material">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/sequence-analysis" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+
+# Mapping
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge contributor-joachimwolff"><img src="https://avatars.githubusercontent.com/joachimwolff?s=36" alt="Joachim Wolff avatar" width="36" class="avatar" />
+    Joachim Wolff</a>
+			<li>
+				<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+			<li>
+				<a href="/training-material/hall-of-fame/EngyNasr/" class="contributor-badge contributor-EngyNasr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/EngyNasr?s=36" alt="Engy Nasr avatar" width="36" class="avatar" />
+    Engy Nasr</a>
+			<li>
+				<a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- footnotes -->
+<div class="footnote" style="bottom: 4em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  | <i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:S00081">gxy.io/GTN:S00081</a>
+
+
+
+| <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+
+
+| 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#lecture-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021) - 10m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+
+| Human authored (<a href="/training-material/AI-policy.html">GTN AI Policy</a>)
+</div>
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is mapping (alignment)?
+
+- What is the BAM format?
+
+- How can we view aligned sequences?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the basic concept of mapping
+
+- Learn about factors influencing alignment
+
+- See a genome browser used to better understand your aligned data
+
+
+---
+
+
+# Example NGS pipeline
+
+![High level view of a typical NGS workflow](../../images/mapping/variant_calling_workflow.png)
+
+A high level view of a typical NGS bioinformatics workflow
+
+???
+- Mapping step occurs if a reference genome is available for the organism of interest
+  - else: de-novo assembly
+- Variant calling step is just an example, after mapping can do many steps
+  - Structural Variants / Fusion genes
+  - Differential Gene expression
+  - Alternative Splicing
+  - ..
+
+---
+
+# What is mapping?
+
+.pull-left[
+![Mapping vs assembly](../../images/mapping/mapping_assembly.png)
+]
+
+.pull-right[
+- Short reads must be combined into longer fragments
+
+- **Mapping:** use a reference genome as a guide
+
+- **De-novo assembly:** without reference genome
+]
+
+???
+- Mapping is also referred to as *alignment*
+- Short reads produced by sequencer must be combined into larger contigs
+  - e.g. reconstruct the chromosomes
+  - mapping uses a reference genome as a guide
+  - can subsequently find where our sample differs from reference (variants)
+
+
+- This tutorial only deals with mapping/alignment
+- There are other tutorials available for de-novo assembly
+
+
+
+---
+class: top
+
+# Sequence alignment
+
+- Determine position of short read on the reference genome
+  ```
+  Reference: . . . A A C G C C T T . . .
+
+  Read:            A G G G G C C T T
+  ```
+
+???
+- Consider situation where we must map this (short) read to this (long) reference
+  - e.g. human genome ~ 3.2 billion base pairs
+- We scan the reference genome until we find an area that&apos;s similar to our read
+- This area looks pretty similar, but not quite identical..
+
+---
+class: top
+
+# Sequence alignment
+
+- Determine position of short read on the reference genome
+  ```
+  Reference: . . . A A - C G C C T T . . .              | = match
+  .                | : - : | | | | |                    : = mismatch
+  Read:            A G G G G C C T T                    - = gap
+  ```
+
+???
+But if we introduce gaps and allow for some mismatches in bases, this matches
+up pretty well..
+
+--
+
+- Read could align to multiple places
+  .center[.image-50[![Illustration of multi-mapped read](../../images/mapping/multimap.png)]]
+
+
+- How to handle multi-mapped reads? Depends on tool:
+  - Map to best region (but what is &quot;best&quot;? And what about ties?)
+  - Map to all regions
+  - Map to one region randomly
+  - Discard read
+
+
+- How do we determine *best* region?
+  - Assign ***alignment score*** to every mapping
+
+???
+
+Some reads may map to multiple locations
+ - repeat regions, short reads, highly variable regions, sequencing errors, ..
+
+We want a way to determine *best* alignment if none are perfect matches..
+
+---
+class: top
+
+# Alignment Scoring (basics)
+
+- **Reward** for a match (e.g. +10), **penalty** for a mismatch (e.g. -5)
+- **Penalty** for gaps
+   - *Linear:* every gap same penalty (e.g. -5)
+   - *Affine:* gap open vs gap extend (e.g. -5 and -1)
+
+
+- Different tools use different scoring values (and give different results)
+
+
+.center[
+.image-25[![Screenshot of a sequence scoring game where two sequences are being aligned across the top (GGCTGG and GAGG) and the per-base and cumulative scores from left to right.](../../images/mapping/scoring_example.png)]
+
+**Example** (with affine gap penalty)
+]
+
+???
+- Each locus get scored independently (first row of scores in example)
+- Scores from all loci are added up (cumulative score row)
+- Final score for entire alignment in this example is 19
+
+- These reward and penalty values are just examples and will vary
+
+---
+class: top
+
+# Alignment Scoring (advanced)
+
+- **Base quality**
+    - Mismatch of low-confidence base: lower penalty
+    - Mismatch of high-confidence base: higher penalty
+
+
+- **Transitions vs transversions**
+  - Transitions about 2x as frequent as transversions
+
+
+.center[
+.image-50[ ![Transitions vs transversions](../../images/mapping/ti_tv.png) ]
+.image-25[ ![Example scoring matrix](../../images/mapping/ti_tv_scoring.png) ]
+]
+
+
+- Knowledge about sequencing platform and biases
+  - Optimize for read length, error rate, homopolymer accuracy, etc..
+
+
+.footnote[More information about mapping algorithms: [10.1089/cmb.2012.0022](https://doi.org/10.1089/cmb.2012.0022)]
+
+???
+Many more complexities may be considered, different tools make different choices
+
+Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
+
+**Transitions** are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.
+
+**Transversions** are interchanges of purine for pyrimidine bases, which therefore involve exchange of one-ring and two-ring structures.
+
+![Transitions and transversions](../../images/mapping/transition_transversion.gif)
+
+
+---
+
+# Looks easy but..
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+???
+Suppose we want to map this read (bottom) to this reference sequence (top)
+
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout: fixed; font-size:0.8em&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Maybe like this?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+???
+This is one possibility, is it the only one?
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout:fixed; font-size:0.8em;&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Maybe like this?&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; Or this? &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+???
+This is also a possible alignment. Not easy to say which is better.
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout:fixed; font-size:0.8em&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Maybe like this?&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; Or this? &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Or..? &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+???
+And a third option
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout:fixed; font-size:0.8em&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Maybe like this?&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; Or this? &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Or..? &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; What about this? &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+???
+There is no one right way to do alignment
+  - Hard to say which of these is &quot;better&quot; or &quot;worse&quot;
+  - Just different choices, but all valid
+
+Mapping is a non-trivial problem!
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout:fixed; font-size:0.8em&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;Tool&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Novoalign&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; Ssaha2 &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; BWA &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt; Complete Genomics &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+
+???
+We didn&apos;t just make these up, these real aligners gave these different results
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+&lt;table style=&quot;width:100%; table-layout:fixed; font-size:0.8em&quot;&gt;
+&lt;th&gt;Alignment&lt;/th&gt;&lt;th&gt;Variant calls&lt;/th&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;
+ins T
+del AG
+sub GA -&gt; CT
+&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;
+del C
+sub AG -&gt; TC
+sub GA -&gt; CT
+&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;
+snp C -&gt; T
+del A
+snp G -&gt; C
+sub GA -&gt; CT
+&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;pre&gt;
+AAACAGTGA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;
+del CAGTGA
+ins TCTCT
+&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+
+???
+**Important:** Mapping can affect downstream analysis!
+
+These different mappings led to different variants, and hard to tell they are equivalent.
+
+---
+
+# Try it yourself!
+
+- Lego time! Who wants to volunteer?
+
+- Or try this [online sequence alignment game](http://web.archive.org/web/20200411075748/https://teacheng.illinois.edu/SequenceAlignment/):
+&lt;!-- using webarchive version because game seems broken, once fixed we can update the link back to: http://teacheng.illinois.edu/SequenceAlignment/ --&gt;
+
+.image-75[![Recording of alignment game](../../images/mapping/alignment.gif)]
+
+.footnote[https://tinyurl.com/sequence-alignment]
+
+???
+Can have learners play around with this alignment game now
+
+Or use Lego bricks, each nucleotide a different colour
+
+
+
+---
+
+## Paired-end sequencing
+
+- **Sequencing:** Cut longer fragments of DNA, sequence only the ends
+
+  .center[.image-90[![Paired-end reads](../../images/mapping/pairedend_read.png)]]
+
+- **Mapping:** known distance between reads improves accuracy
+
+  .center[.image-75[![Mapping of paired-end reads](../../images/mapping/pairedend_mapping.png)]]
+
+???
+
+- The fragments are too long to sequence entirely, but we can sequence
+the ends.
+- Then we have the added information of how far apart these two reads must map
+- This improves our mapping
+
+- For example for multi-mapped reads, or repeats (next slide)
+
+
+---
+class: top
+
+## Repeats
+
+- Multi-mapped reads (e.g. because of repeats) may now be resolved
+
+- **Single-end:**
+
+  ![Cartoon with a reference genome and two repeats marked. Two blue boxes representing a single-ended read map equally well to both repeats.](../../images/mapping/repeats_se.png)
+
+???
+In the case of repeats, a single-end read alone would not have be enough
+for unique mapping..
+
+--
+
+- **Paired-end:**
+
+  ![Cartoon with a reference genome and two repeats marked. Now the two blue boxes are linked and one of them is red, representing a forward/reverse pair of a paired-end read. The mapping is no longer ambiguous and you can know which repeat the blue box belongs to, as the red box maps upstream.](../../images/mapping/repeats_pe.png)
+
+???
+But with the additional information provided by
+paired-end protocol (distance to mate), this can now be resolved..
+
+---
+class: top
+
+# InDels (Insertions / Deletions)
+
+- Discordant insert size may indicate insertion or deletion between reads
+
+- **Deletions:** Longer mapping distance than expected
+
+  .image-75[![Deletion between two paired reads](../../images/mapping/pairedend_deletion.png)]
+
+--
+
+- **Insertions:** Shorter mapping distance than expected
+
+  .image-75[![Insertions beteween two paired reads](../../images/mapping/pairedend_insertion.png)]
+
+???
+
+- Unexpected mapping distance between two reads in a pair may indicate a variant.
+
+- Exact location of variant unknown unless more reads covering the area
+  - Only know it it somewhere between the two reads
+
+
+
+**FAQ:** &quot;What about mate-pair sequencing?&quot;
+ - Same concept as paired-end
+ - Much longer distance between ends
+ - Very different library prep
+ - Useful for detection of larger Structural Variations (SVs) / Fusion Genes
+    - longer than expected distance between mates: deletion in sample
+    - shorter than expected distance beetween mates: insertion in sample
+    - unexpected orientation of one mate: inversion in sample
+
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- Sequencer produces two FASTQ files:
+  - **Forward** reads (usually **`_1`** or **`_R1`** in file name)
+  - **Reverse** reads (usually **`_2`** or **`_R2`** in file name)
+
+
+  ![Paired-end reads as two separate FASTQ files](../../images/mapping/pairedend_fastq.png)
+
+
+???
+When you have paired-end data, you will usually get 2 files.
+ - File names identical except for e.g. `_1`/`_2` or `_R1`/`_R2`
+ - First file contains all the forward reads (&quot;left&quot; sides of pairs)
+ - Other file contains all the reverse reads
+
+
+Pairing also visible in read names
+  - `/1` `/2` at end or `1:` and `2:` in read ID
+
+--
+- Sometimes: One **interleaved** (or **interlaced**) FASTQ file
+  - Most tools require 2 separate files
+  - &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; De-interlace tools in Galaxy for conversion
+
+
+???
+Sometimes data can be in a single **interleaved file** (aka **interlaced**)
+ - alternating forward and reverse read
+ - de-interlace tools in Galaxy to convert this to two separate files
+   - because many tools require two separate files
+
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- Order of reads matters!
+  - **`N`&lt;sup&gt;th&lt;/sup&gt;** read in forward file &lt;i class=&quot;fa fa-arrows-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+**`N`&lt;sup&gt;th&lt;/sup&gt;** read in reverse file
+  - Much faster than determining pairing by read names alone
+
+
+- ***Always trim and filter together!***
+
+
+???
+Most tools blindly assume that first read in forward file is paired with first read in reverse file etc
+
+Otherwise too slow
+  - for every read, worst case have to scan all reads in other file
+  - for files with millions of reads, that is millions ^ millions
+
+
+When trimming and filtering, if a read is removed from one file, its mate must be removed from other one too!
+
+**Always trim together in paired-end mode!**
+
+--
+
+.pull-left[
+.red[
+```
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+```
+]
+.orange[
+```
+@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
++
+!&apos;&apos;3((((^^d+))%%%++)(%%%%).1)
+```
+]
+.blue[
+```
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+```
+]
+
+**`mysample_R1.fastq`**
+]
+
+.pull-right[
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.red[
+```
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+```
+]
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.orange[
+```
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+```
+]&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.blue[
+```
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+```
+]
+**`mysample_R2.fastq`**
+]
+
+???
+
+
+- Nth read in forward file belongs in a pair with Nth read in reverse file
+- So red reads in this slide form a pair, orange ones, etc
+
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- Order of reads matters!
+  - **`N`&lt;sup&gt;th&lt;/sup&gt;** read in forward file &lt;i class=&quot;fa fa-arrows-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+**`N`&lt;sup&gt;th&lt;/sup&gt;** read in reverse file
+  - Much faster than determining pairing by read names alone
+
+
+- ***Always trim and filter together!***
+
+.pull-left[
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.red[
+```
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+```
+]
+.left[&lt;i class=&quot;fa fa-cut&quot; style=&quot;width:15%;position:absolute;font-size:5em;&quot;&gt;&lt;/i&gt;]
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.orange[
+```
+@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
++
+!&apos;&apos;3((((^^d+))%%%++)(%%%%).1)
+```
+]
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.blue[
+```
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+```
+]
+
+**`mysample_R1.fastq`**
+]
+.pull-right[
+.red[
+```
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+```
+]
+.orange[
+```
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+```
+]
+.blue[
+```
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+```
+]
+**`mysample_R2.fastq`**
+]
+
+???
+
+- Important to always provide both files to trimming and filtering tools together
+- If a read in one file gets removed (e.g. because it is below quality threshold), but it&apos;s mate is not, the pairing between the two files is no longer correct.
+
+- If one half of pair is trimmed, the other
+ - also removed, or
+ - put into separate &quot;singletons&quot; FASTQ file that some mappers can use
+
+- FAQ:&quot; why not look at read names to determine pairing?&quot;
+  - analysis would be much slower if for every read must scan (max) entire other file for mate, since often millions or reads (for whole-genome sequencing).
+---
+class: top
+
+## Paired-end FASTQ files
+
+- Order of reads matters!
+  - **`N`&lt;sup&gt;th&lt;/sup&gt;** read in forward file &lt;i class=&quot;fa fa-arrows-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+**`N`&lt;sup&gt;th&lt;/sup&gt;** read in reverse file
+  - Much faster than determining pairing by read names alone
+
+
+- ***Always trim and filter together!***
+
+.pull-left[
+&lt;i class=&quot;fa fa-arrows-h&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.red[
+```
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+```
+]
+&lt;i class=&quot;fa fa-frown-o&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.blue[
+```
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+```
+]
+&lt;i class=&quot;fa fa-frown-o&quot; style=&quot;position:absolute;font-size:3em;left:8em;&quot;&gt;&lt;/i&gt;
+.green[
+```
+@PAIR-4 forward
+AAACTTCGTAGGTCCATTTGACAGCGTGCA
++
+6664%!!III^(=%3333^^d^d:#32333
+```
+]
+**`mysample_R1.fastq`**
+]
+.pull-right[
+.red[
+```
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+```
+]
+.orange[
+```
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+```
+]
+.blue[
+```
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+```
+]
+**`mysample_R2.fastq`**
+]
+
+
+
+???
+By cutting the yellow read only from the forward reads file, but leaving the other side of pair in the other file, an incorrect pairing is now assumed by downstream tools
+
+---
+
+## Choosing an Aligner
+
+- Each tool makes **different choices** during alignment
+  - Choice of aligner may **affect downstream results**
+  - Default options may not be best for your data!
+
+
+- Best tool for your data **depends on many factors**
+  - Type of experiment (e.g. DNA, RNA, Bisulphite)
+  - Sequencing platform
+  - Compute resources vs sensitivity
+  - Read characteristics (paired/single end, read length)
+
+
+.center[
+.image-40[![Mapping RNA](../../images/mapping/spliced_mapper.png)]
+]
+.footnote[**Figure:** mapping of RNA-seq reads is different than DNA-seq]
+
+
+???
+Choice of mapper depends on your experiment
+ - Some mappers are good for DNA but not RNA
+ - Some mappers do well in highly rearranged genomes (e.g. cancer), others less so
+ - Some mappers do well on some platforms but worse on others
+   - e.g. Oxford Nanopore with its long reads but high error rates
+
+
+Or other factors
+ - STAR needs a LOT of RAM
+ - Do you need results fast? or accurate? (e.g. medical setting)
+
+
+FAQ: &quot;Why not map RNA reads to the transcriptome?&quot;
+ - you can, and it is done, but then cannot find novel genes or alternative splicing
+
+
+FAQ: &quot;Why not BLAST or BLAT?&quot;
+- optimized for longer sequences
+- not base quality aware
+- too slow
+
+
+---
+
+# Know your data!
+
+
+*“... there is no tool that outperforms all of the others in
+all the tests. Therefore, the end user should clearly
+specify [their] needs in order to choose the tool that
+provides the best results.”* - Hatem et al BMC Bioinformatics 2013, 14:184
+
+
+.footnote[ [DOI: 10.1186/1471-2105-14-184](https://doi.org/10.1186/1471-2105-14-184) ]
+
+???
+
+Know the data you are working with and pick the right mapper and parameters for the job!
+
+Not an easy task..
+
+---
+class: top
+
+## Mapping tools
+
+![Timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)
+
+
+.footnote[60+ different mappers, many comparison papers. Figure from [10.1093/bioinformatics/bts605](https://doi.org/10.1093/bioinformatics/bts605) ]
+
+???
+
+Many different tools available
+
+Different strengths and weaknesses, comparison table in link
+
+---
+class: top
+
+# Mapping tools
+
+
+**Mapping tool**   |   **Uses**   | **Characteristics**
+--- | --- | ---
+HISAT2 | DNA/RNA | Short reads. Based on [GCSA](https://doi.org/10.1109/TCBB.2013.2297101). [Reference](https://www.nature.com/articles/s41587-019-0201-4).
+RNASTAR | RNA | Short reads. Extremely fast. High sensitive and accuracy. Based on Maximal Mappable Prefixes (MMPs). [Reference](https://pubmed.ncbi.nlm.nih.gov/23104886/).
+BWA-MEM2 | DNA | Short reads. Twice as faster as BWA-MEM. Memory efficient. Based on [Burrows-Wheeler](https://academic.oup.com/bioinformatics/article/25/14/1754/225615). [Reference](https://arxiv.org/abs/1907.12931).
+Minimap2 | DNA/RNA | Long reads (PacBio and ONT).  Extremely fast. Based on [DALIGN](https://link.springer.com/chapter/10.1007/978-3-662-44753-6_5) and [MHAP](https://www.nature.com/articles/nbt.3238). [Reference](https://doi.org/10.1093/bioinformatics/bty191).
+Bismark | DNA/RNA | Short reads. Bisulfite treated sequencing. Based on [GCSA](https://doi.org/10.1109/TCBB.2013.2297101). [Reference](https://pubmed.ncbi.nlm.nih.gov/21493656/).
+BBMap | DNA/RNA | Short and long reads (PacBio and ONT). Memory demanding. [Reference](https://bib.irb.hr/datoteka/773708.Josip_Maric_diplomski.pdf).
+Whisper 2 | DNA | Short reads. Indel sensitive. Variant-calling oriented. [Reference](https://academic.oup.com/bioinformatics/article/35/12/2043/5165374).
+S-conLSH | DNA | Long reads (ONT). High sensitivity and accuracy. [Reference](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03918-3).
+
+---
+
+# File Formats
+
+---
+
+# SAM/BAM file format
+
+![Example of SAM file format](../../images/bam_file.png &quot;SAM/BAM file&quot;)
+
+**SAM:** **S**equence **A**lignment **M**ap
+
+**BAM:** Binary (compressed) SAM; not human-readable
+
+---
+
+# SAM/BAM file format
+
+![More detailed view of SAM format](../../images/bam_file_explained.png &quot;SAM/BAM file detail&quot;)
+
+
+- Original read information (from FASTQ) plus mapping information
+  - Position on reference, alignment, quality score, uniqueness, ..
+
+???
+Alignment given in CIGAR string.
+ - in screenshot &quot;37M&quot; means 37 matches
+ - in screenshot &quot;18M2D19M&quot; means 18 matches, then 2 deletions, then 19 matches
+
+---
+class: top
+
+# Genome Browsers
+
+- Visualise aligned reads (BAM files)
+
+![IGV Genome Browser](../../images/mapping/igv_animation.gif)
+
+.footnote[This is [IGV (Integrative Genome Browser)](https://software.broadinstitute.org/software/igv/) DOI: [10.1038/nbt.1754](https://doi.org/10.1038/nbt.1754)]
+
+???
+- Can zoom in and out, drag left and right, explore your sample
+- Zoom in for more information, mismatches, read information
+- Many different genome browsers exist
+
+---
+class: top
+
+# Genome Browsers in Galaxy
+
+- [JBrowse](https://jbrowse.org/) &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; Genome Browser as Galaxy tool
+
+.image-90[![Screenshot of JBrowse in the Galaxy Interface showing transcripts, various box plots, heatmaps, sequencing depth and variation plots.](../../images/mapping/jbrowse.png)]
+
+.footnote[[JBrowse.org](https://jbrowse.org) DOI: [10.1186/s13059-016-0924-1](https://doi.org/10.1186/s13059-016-0924-1)]
+
+???
+
+Jbrowse tool builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.
+
+---
+class: top
+
+# Genome Browsers in Galaxy
+
+- **External Genome Browsers** in Galaxy
+  - BAM datasets in Galaxy have display links
+  - [UCSC Genome Browser](https://genome-euro.ucsc.edu/cgi-bin/hgTracks), [Ensemble](https://www.ensembl.org), [IGV](https://software.broadinstitute.org/software/igv/), [IGB](https://bioviz.org/), [BAM.iobo](https://bam.iobio.io/home)
+
+
+  ![Display application links in Galaxy](../../images/mapping/igv_link.png)
+
+
+- Two different links for **IGV**
+  - **local:**
+     - Start IGV on your machine first
+     - Then click link to automatically load data from Galaxy
+  - **[Reference genome name]** (*&quot;Human hg19&quot;* in screenshot)
+     - Downloads and starts IGV for you
+     - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed on your machine
+
+???
+In the mapping hands-on tutorial you will use JBrowse and IGV
+
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Mapping is not trivial
+
+- There are many mapping tools, best choice depends on your data
+
+- Choice of mapper can affect downstream results
+
+- Know your data!
+
+- Genome browsers can be used to view aligned reads
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge contributor-joachimwolff"><img src="https://avatars.githubusercontent.com/joachimwolff?s=36" alt="Joachim Wolff avatar" width="36" class="avatar" />
+    Joachim Wolff</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/EngyNasr/" class="contributor-badge contributor-EngyNasr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/EngyNasr?s=36" alt="Engy Nasr avatar" width="36" class="avatar" />
+    Engy Nasr</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a>
+			</div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<div class="d-flex">
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-badge-small contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-badge-small contributor-gallardoalba"><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-badge-small contributor-abretaud"><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-badge-small contributor-bgruening"><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-badge-small contributor-shiltemann"><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-badge-small contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-badge-small contributor-bebatut"><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-badge-small contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/willdurand/" class="contributor-badge contributor-badge-small contributor-willdurand"><img src="https://avatars.githubusercontent.com/willdurand?s=36" alt="William Durand avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/njall/" class="contributor-badge contributor-badge-small contributor-njall"><img src="https://avatars.githubusercontent.com/njall?s=36" alt="Niall Beard avatar" width="36" class="avatar" /></a></div>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+	
+
+	<div>
+		<div>
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/gallantries" alt="Logo">
+		
+		</div>
+		<div>
+		
+		</div>
+	</div>
+
+	<div>
+		<div>
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/elixir-europe" alt="Logo">
+		
+		</div>
+		<div>
+		
+		</div>
+	</div>
+
+
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.ecb6ae4a.js'></script>
+        
+    </body>
+</html>
