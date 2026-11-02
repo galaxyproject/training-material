@@ -127,11 +127,8 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.png "<b>Galactic triptych</b>: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. Here you also see the 'Activity bar' that can be turned on and off (Don't see the Activity Bar? See a Tip below).")
+![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.png "<b>Galactic triptych</b>: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. Here you also see the 'Activity bar' on the left.")
 {: .comment}
-
-
-{% snippet faqs/galaxy/activity_bar_how_to_enable.md %}
 
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.

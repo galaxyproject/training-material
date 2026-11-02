@@ -9,7 +9,7 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 
 * Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel ![Select Items button]({% link topics/galaxy-interface/images/historyItemControls.png %})
 * Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %}all the datasets in your history you would like to include{% endif %}
-* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** and choose **Advanced Build List**
+* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** (or **All N selected** if you checked every item) and choose **Advanced Build List**
 
   ![build paired collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
@@ -17,11 +17,13 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 
   ![collection building wizard paired list]({% link topics/galaxy-interface/images/paired_list_selector.png %}){:width="15%"}
 
-* Check and configure auto-pairing. Commonly matepairs have suffix `_1 ` and `_2` or `_R1` and `_R2`. Click on 'Next' at the bottom.
+* Check and configure auto-pairing. Commonly matepairs have suffix `_1` and `_2` or `_R1` and `_R2`. Click on 'Next' at the bottom.
 
   ![edit and build a paired list collection]({% link topics/galaxy-interface/images/paired_list_edit.png %}){:width="15%"}
 
-* Edit the  **List Identifier** as required.
+* Edit the **List Identifier** as required by double-clicking its cell.
 * Enter a name for your collection
 * Click **Build** to build your collection
 * Click on the checkmark icon at the top of your history again
+
+Once the collection is created, the original datasets are hidden (**Hide original elements** is on by default). Click the {% icon galaxy-show-hidden %} hidden items counter at the top of the history panel to show them.
