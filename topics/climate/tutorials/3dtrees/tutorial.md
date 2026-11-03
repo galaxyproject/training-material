@@ -47,7 +47,7 @@ vegetation and ground. The result is a *point cloud*: millions of points, each w
 an elevation. To study single trees, for example their height or crown size, we first have to find
 out which points belong to which tree. This step is called *individual-tree segmentation*.
 
-In this tutorial, you will use the 3Dtrees tools ({% cite Gerberding2026 %}) in Galaxy to prepare
+In this tutorial, you will use the 3Dtrees tools ({% cite VajnaJehle2026 %}) in Galaxy to prepare
 one drone LiDAR point cloud, predict individual trees with SegmentAnyTree (SAT)
 ({% cite Wielgosz2024 %}), and inspect the result in an interactive 3D viewer. The workflow was
 built by the 3Dtrees community, and the data are part of the THEIA data hub.
