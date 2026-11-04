@@ -35,6 +35,7 @@ requirements:
       - interactive-environments
       - tool-generators
 
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - fubar2

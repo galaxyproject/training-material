@@ -15,6 +15,7 @@ time_estimation: 2H
 key_points:
 - A pharmacophore is an abstract description of the molecular features of a bioactive ligand.
 - Pharmacophore-based target prediction is an efficient and cost-effective method.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - aurelienmoumbock

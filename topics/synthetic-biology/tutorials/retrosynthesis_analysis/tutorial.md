@@ -11,6 +11,7 @@ objectives:
 time_estimation: 30M
 key_points:
 - Get heterologous pathways which produce a compound in a chassis
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - guillaume-gricourt

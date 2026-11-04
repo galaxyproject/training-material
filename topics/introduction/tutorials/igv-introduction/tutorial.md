@@ -9,6 +9,7 @@ objectives:
 time_estimation: "2H"
 key_points:
 subtopic: next-steps
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - nekrut

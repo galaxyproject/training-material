@@ -18,6 +18,7 @@ key_points:
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
 subtopic: viz
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - shiltemann

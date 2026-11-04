@@ -27,6 +27,7 @@ requirements:
     tutorials:
       - mass-spectrometry-imaging-loading-exploring-data
 
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - foellmelanie

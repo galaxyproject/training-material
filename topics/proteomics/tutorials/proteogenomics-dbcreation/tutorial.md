@@ -19,6 +19,7 @@ follow_up_training:
       - proteogenomics-dbsearch
       - proteogenomics-novel-peptide-analysis
 
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - subinamehta

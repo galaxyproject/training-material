@@ -30,6 +30,7 @@ key_points:
 - "The Accumulator pattern turns many values into one."
 
 subtopic: python-modular
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - carpentries

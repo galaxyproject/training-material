@@ -10,6 +10,7 @@ objectives:
   - "Learns basic concepts of RNAseq analysis"
 time_estimation: "1h"
 key_points:
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - nekrut

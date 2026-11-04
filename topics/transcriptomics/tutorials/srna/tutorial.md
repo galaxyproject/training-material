@@ -15,6 +15,7 @@ time_estimation: "3h"
 key_points:
   - "Analysis of small RNAs is complex due to the diversity of small RNA subclasses."
   - "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - malloryfreeberg

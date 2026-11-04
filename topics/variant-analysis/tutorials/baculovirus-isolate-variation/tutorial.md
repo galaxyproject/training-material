@@ -25,6 +25,7 @@ key_points:
 - Baculovirus isolates are heterogeneous and show genetic variability.
 - Some SNV positions occur only in certain isolates and are therefore specific to that isolate.
 - SNV specificities can be used as markers to identify isolates and determine mixtures.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - wennj

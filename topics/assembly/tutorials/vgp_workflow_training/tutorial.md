@@ -29,6 +29,7 @@ key_points:
 - 'The assembly can be divided in four main stages: genome profile analysis, HiFi
   long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid
   scaffolding'
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - delphine-l

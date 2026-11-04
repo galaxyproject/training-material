@@ -20,6 +20,7 @@ key_points:
 - The Human Protein Atlas is a valuable resource for annotation and exploration of protein data
 - Conversion between different gene identifiers is sometimes required
 - The Reactome pathway database can be used to browse biological pathways
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - vloux

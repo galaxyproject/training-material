@@ -23,6 +23,7 @@ key_points:
 - AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web
 - It can also be connected to external SPARQL endpoints, such as [neXtProt](https://www.nextprot.org)
 - AskOmics helps to perform complex SPARQL queries without knowing SPARQL, using a user-friendly interface
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - xgaia

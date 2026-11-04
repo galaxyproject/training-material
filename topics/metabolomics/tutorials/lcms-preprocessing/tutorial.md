@@ -16,6 +16,7 @@ key_points:
 - To process untargeted LC-MS metabolomic data preprocessing, you need a large variety of steps and tools.
 - Although main steps are standard, various ways to combine and to set parameters for tools exist, depending on your data.
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - melpetera

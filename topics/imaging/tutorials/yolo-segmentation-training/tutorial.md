@@ -17,6 +17,7 @@ key_points:
 - Image preprocessing (e.g., histogram equalization) can enhance model performance but may not be necessary for all datasets
 - The accuracy and consistency of human annotations directly impact the quality of the trained YOLO model.
 - Training metrics, the output of the YOLO training tool, are essential for evaluating model performance and guiding improvements.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - sunyi000

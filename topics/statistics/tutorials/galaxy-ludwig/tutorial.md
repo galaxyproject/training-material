@@ -14,6 +14,7 @@ time_estimation: 40M
 key_points:
 - Use Galaxy-Ludwig Experiment to solve an image classification problem
 - Using CNN on MNIST dataset. 
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - paulocilasjr

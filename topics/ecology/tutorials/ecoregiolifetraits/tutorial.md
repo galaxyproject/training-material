@@ -16,6 +16,7 @@ objectives:
 time_estimation: 2h
 key_points:
 - You can reuse an existing ecoregionalization workflow developped for species occurences for life traits data
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - jeanlecras

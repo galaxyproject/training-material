@@ -15,6 +15,7 @@ time_estimation: "3h"
 key_points:
   - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
   - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - nekrut

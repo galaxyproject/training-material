@@ -20,6 +20,7 @@ requirements:
     tutorials:
       - collections
       - upload-rules
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - jmchilton

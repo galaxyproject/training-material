@@ -25,6 +25,7 @@ follow_up_training:
     tutorials:
       - RNN
 time_estimation: 2H
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - kxk302

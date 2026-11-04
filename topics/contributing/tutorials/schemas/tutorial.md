@@ -6,6 +6,7 @@ objectives:
 - Know where to find all of the available metadata, so you can reference it later.
 title: "GTN Metadata"
 time_estimation: "10m"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

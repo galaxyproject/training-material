@@ -18,6 +18,7 @@ key_points:
 - The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature
 tags:
 - interactive-tools
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - mgramm1

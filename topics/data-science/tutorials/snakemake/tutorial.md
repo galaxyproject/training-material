@@ -29,6 +29,7 @@ key_points:
 - Snakemake also provides very easy access to paralellisation without complexity.
 - But it is more complex than using Galaxy
 subtopic: sciwms
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

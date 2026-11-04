@@ -27,6 +27,7 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - chrisbarnettster

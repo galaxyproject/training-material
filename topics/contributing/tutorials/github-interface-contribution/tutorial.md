@@ -14,6 +14,7 @@ key_points:
   - "You can't add or push directly to the `main` branch, so you need to create a pull request"
   - "1 pull request = 1 branch"
   - "The pull request is the foundation of the collaborative development of the training material"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - bebatut

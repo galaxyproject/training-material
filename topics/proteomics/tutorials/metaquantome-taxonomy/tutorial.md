@@ -14,6 +14,7 @@ time_estimation: "1h"
 key_points:
   - "All the inputs should have one column in common i.e. peptides."
   - "Learning different tools such as Unipept, MEGAN, MetaGOmics etc. for taxonomic annotation of peptides will benefit."
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - subinamehta

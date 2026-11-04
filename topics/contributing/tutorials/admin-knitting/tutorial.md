@@ -12,6 +12,7 @@ key_points:
   - "Learn to rebase now, if you haven't yet"
   - "git am is not fun"
   - "If you have issues, ping me."
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

@@ -20,6 +20,7 @@ key_points:
   - Automate all the things!
   - Especially regular tasks you might forget to do
   - Automatically run Ansible to ensure machines are in compliance
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

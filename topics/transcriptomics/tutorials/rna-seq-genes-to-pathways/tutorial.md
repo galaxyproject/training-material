@@ -15,6 +15,7 @@ key_points:
   - "fgsea can be used to identify enriched gene sets, such as the MSigDB collections, and generate barcode plots"
   - "EGSEA can be used to identify enriched gene sets, such as MSigDB and KEGG, generating visualisations that include heatmaps and KEGG pathway diagrams"
   - "Multiple methods can be used to help identify differentially expressed pathways and to visualise results"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - mblue9

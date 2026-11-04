@@ -9,6 +9,7 @@ objectives:
  - Learn to implement new API functionality within Galaxy
  - Learn to extend the Galaxy user interface with VueJS components
 time_estimation: "3H"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - jmchilton

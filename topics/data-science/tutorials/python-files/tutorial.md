@@ -24,6 +24,7 @@ key_points:
 - Use a `with` block to open a file.
 
 subtopic: python-modular
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

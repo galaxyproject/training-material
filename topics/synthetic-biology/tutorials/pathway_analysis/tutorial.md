@@ -11,6 +11,7 @@ objectives:
 - Compute the global score for the previous annotated pathways.
 - Rank the computed heterologous pathways depending on their score.
 time_estimation: 20M
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - kenza12

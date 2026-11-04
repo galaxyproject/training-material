@@ -40,6 +40,7 @@ key_points:
   and acquiring skills in effective troubleshooting and error handling.
 - Efficiently querying Beacons for variants involves mastering diverse querying methods, leveraging MongoDB's capabilities to enhance search precision,
   and emphasizing the necessity for precise and efficient queries within Beacon structures.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - khaled196

@@ -21,6 +21,7 @@ level: Intermediate
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - abretaud

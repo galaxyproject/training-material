@@ -18,6 +18,7 @@ time_estimation: 3H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - abretaud

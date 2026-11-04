@@ -22,6 +22,7 @@ key_points:
   class imbalance.
 - Confirm the robustness of the model by evaluating its performance metrics including
   accuracy, ROC-AUC, and F1-score.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - khaivandangusf2210

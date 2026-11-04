@@ -11,6 +11,7 @@ objectives:
 time_estimation: 1H
 key_points:
 - Check your data and results for mistakes afterward !!!! This procedure is useful but not perfect
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - colineroyaux

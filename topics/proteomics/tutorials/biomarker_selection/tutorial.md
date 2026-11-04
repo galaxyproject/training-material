@@ -18,6 +18,7 @@ time_estimation: 3H
 key_points:
 - Public proteomics databases are useful resources for annotation of biomarker candidates
 
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - combesf

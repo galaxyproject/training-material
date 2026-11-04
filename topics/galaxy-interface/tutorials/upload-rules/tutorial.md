@@ -27,6 +27,7 @@ follow_up_training:
     topic_name: galaxy-interface
     tutorials:
       - upload-rules-advanced
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - jmchilton

@@ -22,6 +22,7 @@ key_points:
   upload and run.
 - Data quality can materially affect multimodal prediction performance and benchmark
   comparability.
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - paulocilasjr

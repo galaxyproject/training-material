@@ -13,6 +13,7 @@ time_estimation: "30m"
 key_points:
 - Stock deployment of production Galaxy components on Kubernetes is simple
 - Helm chart allows easy configuration changes
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - pcm32

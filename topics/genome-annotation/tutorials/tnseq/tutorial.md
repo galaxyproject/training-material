@@ -22,6 +22,7 @@ key_points:
 - "The saturation of the library must be sufficient so that every gene must have been impacted at least once"
 - "Be sure you have removed every transposon sequence before starting your analysis"
 - "Verify the results manually do separate domain essential and essential genes"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - delphine-l

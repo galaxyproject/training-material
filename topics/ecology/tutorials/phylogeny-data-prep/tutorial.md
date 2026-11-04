@@ -29,6 +29,7 @@ tags:
   - data handling
   - functional annotation
   - biodiversity
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - roncoronimiguel

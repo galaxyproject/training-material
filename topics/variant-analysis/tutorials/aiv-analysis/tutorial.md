@@ -24,6 +24,7 @@ key_points:
 - An alternative to *de-novo* assembly can be mapping to a dynamically chosen reference genome
 - Variant calling and consensus genome construction can follow workflows used also for other viral sequence data 
 - Standard phylogenetic tools can be used to find relationships between influenza samples but should be used on a per-segment basis
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - wm75

@@ -20,6 +20,7 @@ requirements:
     topic_name: proteomics
     tutorials:
       - DIA_lib_OSW
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - matthias313

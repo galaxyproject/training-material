@@ -9,6 +9,7 @@ objectives:
 time_estimation: "10m"
 key_points:
   - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - bebatut

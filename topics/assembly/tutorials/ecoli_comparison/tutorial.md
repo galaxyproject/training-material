@@ -33,6 +33,7 @@ key_points:
   - "We learned how to use Galaxy's rule-based collection builder"
   - "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons"
   - "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
+#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - nekrut
