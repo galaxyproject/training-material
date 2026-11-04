@@ -25,9 +25,9 @@ requirements:
 tags:
 - covid19
 - one-health
-contributors:
-- simonbray
-
+contributions:
+  authorship:
+    - simonbray
 ---
 
 

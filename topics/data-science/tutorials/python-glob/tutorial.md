@@ -16,11 +16,11 @@ time_estimation:  15M
 key_points:
 - If your data is ordering dependent, sort your globs!
 subtopic: python-modular
-contributors:
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 11
 notebook:
   language: python

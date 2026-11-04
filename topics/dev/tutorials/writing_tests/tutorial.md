@@ -16,9 +16,10 @@ key_points:
   - Refactor the code under test if that's needed to make it testable
   - Move redundant setup code into fixtures
   - Use test doubles (mocks, stubs, etc.) sparingly
-contributors:
-  - jdavcs
-  - jmchilton
+contributions:
+  authorship:
+    - jdavcs
+    - jmchilton
 requirements:
   - type: none
     title: "Familiarity with basic Git commands"

@@ -24,9 +24,10 @@ key_points:
   - Telegraf can run arbitrary commands like `gxadmin`, which provides influx formatted output
   - InfluxDB can collect metrics from Telegraf
   - Use Grafana to visualise these metrics, and monitor their values
-contributors:
-  - hexylena
-  - tomasvondrak
+contributions:
+  authorship:
+    - hexylena
+    - tomasvondrak
 requirements:
   - type: "internal"
     topic_name: admin

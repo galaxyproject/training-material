@@ -29,10 +29,10 @@ tags:
   - data handling
   - functional annotation
   - biodiversity
-contributors:
-- roncoronimiguel
-- brigidagallone
-
+contributions:
+  authorship:
+    - roncoronimiguel
+    - brigidagallone
 subtopic: ecologyanalysis
 ---
 

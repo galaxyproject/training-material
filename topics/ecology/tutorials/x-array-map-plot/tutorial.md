@@ -24,9 +24,9 @@ key_points:
 - NetCDF xarray map plotting colormaps
 tags:
   - pangeo
-contributors:
-- Quickbeasts51429
-
+contributions:
+  authorship:
+    - Quickbeasts51429
 subtopic: ecologyviz
 ---
 

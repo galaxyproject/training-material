@@ -18,10 +18,11 @@ time_estimation: 1H
 key_points:
 - Use the Galaxy Tabular Learner to reconstruct a LORIS-style model (LLR6) from the same cohort and predictor set described by Chang et al. (2024).
 - Validate model fidelity and robustness by comparing discrimination, calibration, and threshold-dependent performance from the Tabular Learner report against the metrics reported for LORIS LLR6 in Chang et al. (2024).
-contributors:
-- paulocilasjr
-- qchiujunhao
-- jgoecks
+contributions:
+  authorship:
+    - paulocilasjr
+    - qchiujunhao
+    - jgoecks
 tags:
 - LORIS Score Model
 - Machine Learning

@@ -29,13 +29,14 @@ key_points:
 - 'The assembly can be divided in four main stages: genome profile analysis, HiFi
   long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid
   scaffolding'
-contributors:
-- delphine-l
-- astrovsky01
-- gallardoalba
-- pickettbd
-- abueg
-- nekrut
+contributions:
+  authorship:
+    - delphine-l
+    - astrovsky01
+    - gallardoalba
+    - pickettbd
+    - abueg
+    - nekrut
 abbreviations:
   primary assembly: homozygous regions of the genome plus one set of alleles for the
     heterozygous loci

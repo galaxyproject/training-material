@@ -30,15 +30,6 @@ key_points:
   - "GxITs are heavily dependant on container technologies like Docker"
   - "If a tool is containerized, it can be integrated rapidly into Galaxy as a GxIT"
   - "In theory, any containerized web application can be wrapped as a GxIT"
-contributors:
-  - eancelet
-  - yvanlebras
-  - neoformit
-  - Lain-inrae
-  - abretaud
-  - paulzierep
-  # editing
-  - hexylena
 contributions:
   authorship:
   - eancelet
@@ -622,7 +613,7 @@ We have demonstrated how to pass an input file to the Docker container. But what
 
 The JupyterLab environment that we will wrap in this tutorial is a simple JupyterLab tool which
 allows the user to upload data in a Jupyter environment, manipulate notebooks, and download
-outputs. 
+outputs.
 
 Our example JupyterLab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) .
 But you can also check another implementation of [JupyterLabs](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
@@ -727,7 +718,7 @@ RUN conda config --add channels conda-forge && \
 ```
 With those packages installed, you have the bases to have a functional environment in your JupyterLab AND be able to link your JupyterLab to the Galaxy history with the package `bioblend galaxy-ie-helpers`.
 
-Then you can add the package specific to the environment you want to have in your JupyterLab for instance 
+Then you can add the package specific to the environment you want to have in your JupyterLab for instance
 
 ```
     # specific sentinel, openeo packages
@@ -1000,7 +991,7 @@ our new Docker container as a Galaxy tool.
 > >         ## provide all rights to copied files
 > >         jupyter lab --allow-root --no-browser &&
 > >         cp ./*.ipynb '$jupyter_notebook' &&
-> >         
+> >
 > >         cd outputs/ &&
 > >         sleep 2 &&
 > >         for file in *; do mv "\$file" "\$file.\${file\#\#*.}"; done
@@ -1015,7 +1006,7 @@ our new Docker container as a Galaxy tool.
 > >             jupyter lab --allow-root --no-browser --NotebookApp.shutdown_button=True &&
 > >         #end if
 > >         cp './${noteboook_name}.ipynb' '$jupyter_notebook' &&
-> >         
+> >
 > >         cd outputs/ &&
 > >         sleep 2 &&
 > >         for file in *; do mv "\$file" "\$file.\${file\#\#*.}"; done
@@ -1054,9 +1045,9 @@ our new Docker container as a Galaxy tool.
 > >     </tests>
 > >     <help>
 > > This tool contains sample Jupyter notebooks for the Copernicus Data Space Ecosystem. Notebooks are grouped per kernel: sentinelhub, openeo and geo. To know more https:/github.com/eu-cdse/notebook-samples
-> > 
+> >
 > > To have more example notebooks produced by th OpenEO community that you can use in this jupyterlab go there https://github.com/Open-EO/openeo-community-examples/tree/main
-> > 
+> >
 > >     </help>
 > >     <citations>
 > >        <citation type="bibtex">
@@ -1066,7 +1057,7 @@ our new Docker container as a Galaxy tool.
 > >         year = {2023},
 > >         note = {https://github.com/eu-cdse}
 > >         </citation>
-> > 	</citations>    
+> > 	</citations>
 > > </tool>
 > > ```
 > > {% endraw  %}
@@ -1079,8 +1070,8 @@ our new Docker container as a Galaxy tool.
 >     ln -sf '$file' './jupyter/data/${cleaned_name}' &&
 > #end for
 > ```
-> AND to get your output in your history data 
-> 
+> AND to get your output in your history data
+>
 > ```
 > <collection name="output_collection" type="list" label="Copernicus outputs collection">
 >     <discover_datasets pattern="__designation_and_ext__" directory="jupyter/outputs" visible="true"/>

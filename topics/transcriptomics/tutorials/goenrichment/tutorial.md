@@ -13,9 +13,10 @@ key_points:
   - "The goenrichment tool can be used to perform GO Enrichment analysis"
   - "One needs to be careful when chosing the background population"
   - "There are several methods to simplify the output of the GO Enrichment analysis"
-contributors:
-  - igcbioinformatics
-  - mblue9
+contributions:
+  authorship:
+    - igcbioinformatics
+    - mblue9
 ---
 
 

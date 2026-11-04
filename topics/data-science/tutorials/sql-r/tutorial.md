@@ -30,11 +30,11 @@ key_points:
 - "Queries should be written using parameter substitution, not string formatting."
 - "R has multiple helper functions to make working with databases easier."
 
-contributors:
-- carpentries
-- hexylena
-- avans-atgm
-
+contributions:
+  authorship:
+    - carpentries
+    - hexylena
+    - avans-atgm
 subtopic: sql
 
 notebook:

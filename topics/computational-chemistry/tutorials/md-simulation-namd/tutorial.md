@@ -27,11 +27,11 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
-contributors:
-- chrisbarnettster
-- tsenapathi
-- simonbray
-
+contributions:
+  authorship:
+    - chrisbarnettster
+    - tsenapathi
+    - simonbray
 ---
 
 In this tutorial we will perform a simulation with the popular [NAMD](http://www.ks.uiuc.edu/Research/namd/) molecular dynamics software. Please note NAMD tools are not currently available on a public Galaxy server due to licensing issues. If you are interested in following this tutorial, you will need to download the [BRIDGE docker container](https://github.com/scientificomputing/BRIDGE) and [download NAMD](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD) yourself.

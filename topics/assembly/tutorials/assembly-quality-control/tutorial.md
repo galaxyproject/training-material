@@ -17,13 +17,13 @@ level: Intermediate
 key_points:
 - Quast, BUSCO and Merqury make it easy to assess the quality of an assembly
 - Post-processing can be necessary (purging, scaffolding) before annotation
-contributors:
-- abretaud
-- alexcorm
-- r1corre
-- lleroi
-- stephanierobin
-
+contributions:
+  authorship:
+    - abretaud
+    - alexcorm
+    - r1corre
+    - lleroi
+    - stephanierobin
 follow_up_training:
  - type: internal
    topic_name: genome-annotation

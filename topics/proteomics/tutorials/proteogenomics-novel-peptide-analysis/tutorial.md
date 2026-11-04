@@ -20,13 +20,14 @@ follow_up_training:
       - proteogenomics-dbcreation
       - proteogenomics-dbsearch
 
-contributors:
-  - subinamehta
-  - timothygriffin
-  - pratikdjagtap
-  - jraysajulga
-  - jj-umn
-  - pravs3683
+contributions:
+  authorship:
+    - subinamehta
+    - timothygriffin
+    - pratikdjagtap
+    - jraysajulga
+    - jj-umn
+    - pravs3683
 subtopic: multi-omics
 tags: [proteogenomics]
 

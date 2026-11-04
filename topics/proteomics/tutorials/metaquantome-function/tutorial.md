@@ -15,13 +15,14 @@ key_points:
   - "All the inputs should have one column in common i.e. peptides."
   - "Functional annotation can be performed using GO terms and EC numbers"
   - "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
-contributors:
-  - subinamehta
-  - timothygriffin
-  - pratikdjagtap
-  - emmaleith
-  - mariecrane
-  - pravs3683
+contributions:
+  authorship:
+    - subinamehta
+    - timothygriffin
+    - pratikdjagtap
+    - emmaleith
+    - mariecrane
+    - pravs3683
 follow_up_training:
   - type: "internal"
     topic_name: proteomics

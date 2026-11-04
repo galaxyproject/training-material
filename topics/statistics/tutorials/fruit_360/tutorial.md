@@ -15,9 +15,9 @@ requirements:
     tutorials:
       - CNN
 time_estimation: 2H
-contributors:
-- kxk302
-
+contributions:
+  authorship:
+    - kxk302
 recordings:
 - captioners:
   - kxk302
