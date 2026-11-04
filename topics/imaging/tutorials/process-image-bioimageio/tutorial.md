@@ -95,7 +95,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts *bound
 
 > <comment-title> Reusing a bioimaging model on satellite imagery </comment-title>
 >
-> In the Earth-observation path we apply this **same** nucleus-segmentation model — without any retraining — to a satellite image. This is a cross-discipline experiment from the [OSCARS-FIESTA](https://fiesta.eu) project. Why does it work? Lakes and ponds strongly absorb near-infrared (NIR) light, so in an *inverted* NIR band they appear as **bright blobs on a dark background** — morphologically much like the bright nuclei the model was trained on. The model has never seen a satellite image, yet it can delineate the water bodies. Our example is a field of **thermokarst ponds** on the Arctic Coastal Plain of Alaska.
+> In the Earth-observation path we apply this **same** nucleus-segmentation model — without any retraining — to a satellite image. This is a cross-discipline experiment from the [OSCARS-FIESTA](https://oscars-project.eu/projects/fair-image-analysis-across-sciences) project. Why does it work? Lakes and ponds strongly absorb near-infrared (NIR) light, so in an *inverted* NIR band they appear as **bright blobs on a dark background** — morphologically much like the bright nuclei the model was trained on. The model has never seen a satellite image, yet it can delineate the water bodies. Our example is a field of **thermokarst ponds** on the Arctic Coastal Plain of Alaska.
 {: .comment}
 
 </div>

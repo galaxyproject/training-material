@@ -8,11 +8,12 @@ questions:
  - Is there any ready-to-use example?
 objectives:
 time_estimation: "10M"
-contributors:
- - bebatut
- - shiltemann
- - gmauro
- - hexylena
+contributions:
+  authorship:
+    - bebatut
+    - shiltemann
+    - gmauro
+    - hexylena
 key_points:
  - It is possible to couple an external data resource with a Galaxy server
  - The external data resource is accessed through his native interface

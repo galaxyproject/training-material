@@ -27,3 +27,5 @@ The code behind the infrastructure is licensed under the [MIT License](LICENSE.m
 ## Acknowledgment and Funding
 
 We would like to thank all contributors, especially those mentioned in the [Contributors list](https://training.galaxyproject.org/training-material/hall-of-fame), the Galaxy community for their constant support, and our funding partners listed in [the GTN](https://training.galaxyproject.org/#acknowledgment-and-funding)
+
+The Galaxy Training Material is an approved de.NBI service. Please help us improve by taking our [short user survey](https://www.surveymonkey.de/r/denbi-service?sc=rbc&tool=gtn).

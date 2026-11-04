@@ -25,9 +25,9 @@ follow_up_training:
     tutorials:
       - RNN
 time_estimation: 2H
-contributors:
-- kxk302
-
+contributions:
+  authorship:
+    - kxk302
 recordings:
 - captioners:
   - kxk302

@@ -22,9 +22,9 @@ follow_up_training:
     tutorials:
       - analysis-md-simulations
       - htmd-analysis
-contributors:
-  - simonbray
-
+contributions:
+  authorship:
+    - simonbray
 ---
 
 

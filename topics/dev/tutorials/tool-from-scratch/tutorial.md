@@ -20,12 +20,13 @@ key_points:
   - Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo
   - Anyone can write and deploy a tool wrapper!
 subtopic: tooldev
-contributors:
-  - astrovsky01
-  - davebx
-  - bernt-matthias
-  - lissandrakruse
 
+contributions:
+  authorship:
+    - astrovsky01
+    - davebx
+    - bernt-matthias
+    - lissandrakruse
 
 recordings:
 - captioners:

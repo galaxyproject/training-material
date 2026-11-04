@@ -18,11 +18,11 @@ key_points:
 - The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature
 tags:
 - interactive-tools
-contributors:
-- mgramm1
-- dlalgroup
-- blankenberg
-
+contributions:
+  authorship:
+    - mgramm1
+    - dlalgroup
+    - blankenberg
 ---
 
 

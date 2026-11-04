@@ -10,8 +10,9 @@ objectives:
   - "Learns basic concepts of RNAseq analysis"
 time_estimation: "1h"
 key_points:
-contributors:
-  - nekrut
+contributions:
+  authorship:
+    - nekrut
 ---
 
 # RNAseq: Reference-based

@@ -19,9 +19,9 @@ objectives:
   - "Create input files for genetic map building software"
 time_estimation: "8h"
 key_points:
-contributors:
-  - yvanlebras
-
+contributions:
+  authorship:
+    - yvanlebras
 subtopic: ecologyanalysis
 ---
 

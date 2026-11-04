@@ -22,10 +22,11 @@ key_points:
 - finally lets you cleanup your temporary files, if you created some.
 
 subtopic: python-modular
-contributors:
-  - hexylena
-  - dirowa
-  - bazante1
+contributions:
+  authorship:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 8
 notebook:
   language: python

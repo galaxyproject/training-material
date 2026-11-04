@@ -18,9 +18,10 @@ key_points:
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
 subtopic: viz
-contributors:
-  - shiltemann
-  - yhoogstrate
+contributions:
+  authorship:
+    - shiltemann
+    - yhoogstrate
 ---
 
 Visualizations may be very helpful in understanding data better. There is a whole

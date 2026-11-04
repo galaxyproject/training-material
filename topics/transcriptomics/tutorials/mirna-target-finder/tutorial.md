@@ -23,12 +23,11 @@ key_points:
 - MiRDeep2 in combination with the PmiREN database allows to quantify miRNA expression in plants
 - The use of the Salmon tool and the AtRTD2 transcriptome allows rapid and accurate quantification of transcripts in _Arabidopsis_
 - The combination of differential expression analysis and the TargetFinder tool is an effective strategy for the identification of miRNA target genes
-contributors:
-- gallardoalba
-- pavanvidem
-- beatrizserrano
-
-
+contributions:
+  authorship:
+    - gallardoalba
+    - pavanvidem
+    - beatrizserrano
 recordings:
 - captioners:
   - gallardoalba

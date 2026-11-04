@@ -27,9 +27,10 @@ follow_up_training:
     topic_name: galaxy-interface
     tutorials:
       - upload-rules-advanced
-contributors:
-  - jmchilton
-  - hexylena
+contributions:
+  authorship:
+    - jmchilton
+    - hexylena
 subtopic: upload
 
 recordings:

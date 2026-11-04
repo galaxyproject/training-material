@@ -11,8 +11,9 @@ objectives:
 time_estimation: 30M
 key_points:
 - You can locate gene of interest in unannotated genomes and compare its structure across multiple species
-contributors:
-- nekrut
+contributions:
+  authorship:
+    - nekrut
 tags:
 - evolution
 - annotation

@@ -29,11 +29,12 @@ key_points:
 - Snakemake also provides very easy access to paralellisation without complexity.
 - But it is more complex than using Galaxy
 subtopic: sciwms
-contributors:
-  - hexylena
-  - bazante1
-  - dirowa
-  - avans-atgm
+contributions:
+  authorship:
+    - hexylena
+    - bazante1
+    - dirowa
+    - avans-atgm
 abbreviations:
   SciWMS: Scientific Workflow Management System
   DAG: Directed Acyclic Graph

@@ -13,8 +13,9 @@ time_estimation: 1H
 key_points:
 - MitoHifi generates the assembly and annotation of the Mitochondrial Genome using
   a reference sequence.
-contributors:
-- delphine-l
+contributions:
+  authorship:
+    - delphine-l
 tags:
   - biodiversity
 edam_ontology:

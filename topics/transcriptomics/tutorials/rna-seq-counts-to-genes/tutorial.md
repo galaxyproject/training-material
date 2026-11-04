@@ -21,15 +21,16 @@ key_points:
   - "The limma-voom tool can be used to perform differential expression and output useful plots"
   - "Multiple comparisons can be input and compared"
   - "Results can be interactively explored with limma-voom via Glimma"
-contributors:
-  - mblue9
-  - bphipson
-  - JovMaksimovic
-  - annatrigos
-  - mritchie
-  - hdashnow
-  - Shians
-  - charitylaw
+contributions:
+  authorship:
+    - mblue9
+    - bphipson
+    - JovMaksimovic
+    - annatrigos
+    - mritchie
+    - hdashnow
+    - Shians
+    - charitylaw
 requirements:
     -
         type: "internal"

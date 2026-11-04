@@ -11,9 +11,9 @@ objectives:
 time_estimation: 1H
 key_points:
 - Check your data and results for mistakes afterward !!!! This procedure is useful but not perfect
-contributors:
-- colineroyaux
-
+contributions:
+  authorship:
+    - colineroyaux
 ---
 
 

@@ -16,12 +16,12 @@ key_points:
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
 subtopic: getting-started
 priority: 3
-contributors:
-  - bebatut
-  - hexylena
-  - shiltemann
-  - lldelisle
-
+contributions:
+  authorship:
+    - bebatut
+    - hexylena
+    - shiltemann
+    - lldelisle
 recordings:
 - captioners:
   - EngyNasr

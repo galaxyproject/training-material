@@ -14,12 +14,13 @@ key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
   - "Learning the basics of SQL queries can pay off"
-contributors:
-  - timothygriffin
-  - pratikdjagtap
-  - jj-umn
-  - blankclemens
-  - subinamehta
+contributions:
+  authorship:
+    - timothygriffin
+    - pratikdjagtap
+    - jj-umn
+    - blankclemens
+    - subinamehta
 subtopic: multi-omics
 tags: [microgalaxy]
 edam_ontology:

@@ -16,9 +16,10 @@ objectives:
 time_estimation: "30m"
 key_points:
 - Use Workflow Parameters to make your Workflows more versatile
-contributors:
-- mvdbeek
-- hexylena
+contributions:
+  authorship:
+    - mvdbeek
+    - hexylena
 level: Intermediate
 subtopic: workflows
 

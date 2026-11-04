@@ -12,9 +12,10 @@ objectives:
   - Assessment of best ML algorithm in predicting anticancer peptide
 time_estimation: '30m'
 
-contributors:
-  - jaidevjoshi83
-  - blankenberg
+contributions:
+  authorship:
+    - jaidevjoshi83
+    - blankenberg
 subtopic: property-prediction
 tags: [ML, cancer]
 ---

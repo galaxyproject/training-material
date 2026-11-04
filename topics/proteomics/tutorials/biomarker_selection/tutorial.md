@@ -18,12 +18,12 @@ time_estimation: 3H
 key_points:
 - Public proteomics databases are useful resources for annotation of biomarker candidates
 
-contributors:
-- combesf
-- davidchristiany
-- vloux
-- yvandenb
-
+contributions:
+  authorship:
+    - combesf
+    - davidchristiany
+    - vloux
+    - yvandenb
 subtopic: post-process
 tags: [DDA, human]
 ---

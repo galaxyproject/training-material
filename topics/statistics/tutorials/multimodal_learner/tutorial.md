@@ -22,12 +22,13 @@ key_points:
   upload and run.
 - Data quality can materially affect multimodal prediction performance and benchmark
   comparability.
-contributors:
-- paulocilasjr
-- khaivandangusf2210
-- afpybus
-- qchiujunhao
-- jgoecks
+contributions:
+  authorship:
+    - paulocilasjr
+    - khaivandangusf2210
+    - afpybus
+    - qchiujunhao
+    - jgoecks
 tags:
 - Multimodal Learning
 - GLEAM

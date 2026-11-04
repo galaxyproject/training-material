@@ -18,9 +18,10 @@ key_points:
 - Flexynesis provides a structured framework for multi-modal data integration with rigorous evaluation procedures
 - Unsupervised feature learning can reveal biologically meaningful cellular populations and relationships
 - Low-dimensional embeddings from VAEs can be used for clustering, visualization, and biological interpretation
-contributors:
-- Nilchia
-- bgruening
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

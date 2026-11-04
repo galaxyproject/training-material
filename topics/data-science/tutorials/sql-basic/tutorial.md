@@ -51,13 +51,13 @@ key_points:
 - "Almost all operations on NULL produce NULL."
 - "Queries can test for NULLs using IS NULL and IS NOT NULL."
 
-contributors:
-- carpentries
-- hexylena
-- dirowa
-- bazante1
-- avans-atgm
-
+contributions:
+  authorship:
+    - carpentries
+    - hexylena
+    - dirowa
+    - bazante1
+    - avans-atgm
 subtopic: sql
 
 notebook:
