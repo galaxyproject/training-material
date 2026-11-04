@@ -27,6 +27,7 @@ key_points:
 - "`not` can be used to invert the condition"
 
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

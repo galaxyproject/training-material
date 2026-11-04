@@ -13,6 +13,7 @@ objectives:
 time_estimation: 3H
 key_points:
 - MaxQuant in combination with MSstatsTMT enables quantitative analysis of TMT data.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - KlemensFroehlich

@@ -14,6 +14,7 @@ time_estimation: 1H
 key_points:
 - cBioportal is a repository for accessible and interpretable cancer genomic data
 - Flexynesis comprehensive tool can be used to make data ready for integration.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - Nilchia

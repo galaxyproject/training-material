@@ -24,6 +24,7 @@ key_points:
 - Efficient Querying for CNVs focuses on accurate data retrieval and precise query formulation using the Beacon2 tool.
 - Hands-On Application provides practical experience in querying Beacons, ensuring data integrity, and troubleshooting queries.
 - Recognizing the Importance of CNVs highlights the role of CNVs in genetic variation and their relevance in research using Beacon databases.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - khaled196

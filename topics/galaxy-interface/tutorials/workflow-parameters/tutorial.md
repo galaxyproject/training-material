@@ -16,6 +16,7 @@ objectives:
 time_estimation: "30m"
 key_points:
 - Use Workflow Parameters to make your Workflows more versatile
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - mvdbeek

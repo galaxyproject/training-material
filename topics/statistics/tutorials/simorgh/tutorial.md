@@ -13,6 +13,7 @@ time_estimation: 1H
 key_points:
 - Protein structures are dynamic, and leveraging structural ensembles can improve binding site predictions.
 - SIMORGH uses deep learning to aggregate information from diverse protein states, reducing bias toward a single conformation.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - Nilchia

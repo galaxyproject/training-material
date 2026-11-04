@@ -21,6 +21,7 @@ key_points:
   - "The limma-voom tool can be used to perform differential expression and output useful plots"
   - "Multiple comparisons can be input and compared"
   - "Results can be interactively explored with limma-voom via Glimma"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - mblue9

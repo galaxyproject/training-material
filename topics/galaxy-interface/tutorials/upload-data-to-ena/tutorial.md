@@ -34,6 +34,7 @@ requirements:
 
 tags:
   - covid19
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - roncoronimiguel

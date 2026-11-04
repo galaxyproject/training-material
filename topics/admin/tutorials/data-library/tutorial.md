@@ -14,6 +14,7 @@ objectives:
 time_estimation: "30m"
 key_points:
 - Data libraries are a great way to share data with groups of users
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

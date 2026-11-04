@@ -15,6 +15,7 @@ time_estimation: "60m"
 key_points:
   - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

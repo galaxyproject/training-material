@@ -17,6 +17,7 @@ tags:
  - ncbi
  - covid19
 subtopic: upload
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - jontrow

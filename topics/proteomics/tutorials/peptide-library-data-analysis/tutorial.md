@@ -9,6 +9,7 @@ objectives:
   - Calculate descriptors
   - Quantitative analysis of peptide sequence properties
 time_estimation: '20m'
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - jaidevjoshi83

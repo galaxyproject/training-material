@@ -19,6 +19,7 @@ key_points:
   - "Every kind of data can be encoded into high-dimensional vectors"
   - "A vector-symbolic architecture is composed of vectors and a limited set of arithmetic operators"
   - "Classification models build according to the hyperdimensional computing paradigm can scale on datasets with massive amounts of features and data points"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - cumbof

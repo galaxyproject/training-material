@@ -25,6 +25,7 @@ requirements:
 tags:
 - covid19
 - one-health
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - simonbray

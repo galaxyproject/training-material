@@ -45,6 +45,7 @@ follow_up_training:
     tutorials:
       - tool-generators-advanced
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - fubar2

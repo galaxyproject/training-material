@@ -25,6 +25,7 @@ follow_up_training:
     tutorials:
       - RNN
 time_estimation: 2H
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - kxk302

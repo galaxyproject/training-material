@@ -12,6 +12,7 @@ objectives:
   - Assessment of best ML algorithm in predicting anticancer peptide
 time_estimation: '30m'
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - jaidevjoshi83

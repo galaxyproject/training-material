@@ -15,6 +15,7 @@ key_points:
   - "All the inputs should have one column in common i.e. peptides."
   - "Functional annotation can be performed using GO terms and EC numbers"
   - "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - subinamehta

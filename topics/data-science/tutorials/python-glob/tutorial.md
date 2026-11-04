@@ -16,6 +16,7 @@ time_estimation:  15M
 key_points:
 - If your data is ordering dependent, sort your globs!
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

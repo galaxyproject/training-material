@@ -30,6 +30,7 @@ key_points:
   - "GxITs are heavily dependant on container technologies like Docker"
   - "If a tool is containerized, it can be integrated rapidly into Galaxy as a GxIT"
   - "In theory, any containerized web application can be wrapped as a GxIT"
+#TODO: describe roles of conributors
 contributions:
   authorship:
   - eancelet

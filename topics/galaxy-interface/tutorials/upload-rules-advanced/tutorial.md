@@ -20,6 +20,7 @@ requirements:
     tutorials:
       - collections
       - upload-rules
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - jmchilton

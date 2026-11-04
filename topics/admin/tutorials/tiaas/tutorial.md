@@ -12,6 +12,7 @@ objectives:
 time_estimation: "30m"
 key_points:
   - TIaaS is an additional service you can deploy which can help you provide a better service to your users
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

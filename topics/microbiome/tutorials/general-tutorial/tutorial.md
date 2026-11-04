@@ -18,6 +18,7 @@ key_points:
   - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
   - "The tools used to analyze amplicon and shotgun data are different, except for the visualisation"
   - "Metagenomics data analyses are complex and time-consuming"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - shiltemann

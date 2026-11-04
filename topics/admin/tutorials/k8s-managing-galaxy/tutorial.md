@@ -18,6 +18,7 @@ key_points:
 - Scaling is a simple matter of changing the number of replicas.
 - K8S enables zero downtime upgrades and sets the stage for continuous
   delivery
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - nuwang

@@ -27,6 +27,7 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - md-simulation-namd
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - chrisbarnettster

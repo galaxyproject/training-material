@@ -21,6 +21,7 @@ requirements:
     tutorials:
       - DIA_lib_OSW
       - DIA_Analysis_OSW
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - matthias313

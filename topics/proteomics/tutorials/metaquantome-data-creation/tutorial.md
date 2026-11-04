@@ -15,6 +15,7 @@ key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
   - "Learning the basics of SQL queries can pay off"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - subinamehta

@@ -15,6 +15,7 @@ key_points:
   - "Freebayes calls variant using haplotype windows"
   - "SNPEff allows functional annotation of variants"
   - "Gemini is a flexible system for analyzing variation patterns"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - nekrut

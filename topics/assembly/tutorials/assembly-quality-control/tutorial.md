@@ -17,6 +17,7 @@ level: Intermediate
 key_points:
 - Quast, BUSCO and Merqury make it easy to assess the quality of an assembly
 - Post-processing can be necessary (purging, scaffolding) before annotation
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - abretaud

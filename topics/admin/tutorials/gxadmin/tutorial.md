@@ -14,6 +14,7 @@ time_estimation: "30m"
 key_points:
   - gxadmin is a tool to run common database queries useful for Galaxy admins
   - new queries are welcome and easy to contribute
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

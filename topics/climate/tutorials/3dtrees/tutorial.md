@@ -24,6 +24,7 @@ key_points:
 - LiDAR records the 3D structure of vegetation and terrain
 - SegmentAnyTree separates vegetation from non-vegetation points and assigns an ID to each predicted tree
 - Visual inspection can reveal obvious problems but is not a quantitative accuracy assessment
+#TODO: describe roles of conributors
 contributions:
   authorship:
   - kgerb

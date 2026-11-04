@@ -19,6 +19,7 @@ objectives:
   - "Create input files for genetic map building software"
 time_estimation: "8h"
 key_points:
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - yvanlebras

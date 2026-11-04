@@ -20,6 +20,7 @@ follow_up_training:
       - proteogenomics-dbcreation
       - proteogenomics-dbsearch
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - subinamehta

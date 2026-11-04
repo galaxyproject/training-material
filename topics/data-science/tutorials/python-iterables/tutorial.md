@@ -26,6 +26,7 @@ key_points:
 - "Indexing beyond the end of the collection is an error."
 
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

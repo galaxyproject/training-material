@@ -25,6 +25,7 @@ requirements:
     tutorials:
       - galaxy-intro-101
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - estebanpw

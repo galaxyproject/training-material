@@ -9,6 +9,7 @@ objectives:
 time_estimation: "2H"
 key_points:
 subtopic: next-steps
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - nekrut

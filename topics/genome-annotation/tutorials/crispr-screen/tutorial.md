@@ -13,6 +13,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - CRISPR screen data can be analysed using MAGeCK and standard read quality tools
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - mblue9

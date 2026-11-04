@@ -17,6 +17,7 @@ key_points:
 - Gene cluster prediction that can be performed for any assembly or genome of microorganisms (procaryotes and fungi).
 - Bridging of gene annotation and cheminformatics.
 - Usage of custom script to bridge workflow steps.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - paulzierep

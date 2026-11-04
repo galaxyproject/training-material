@@ -37,6 +37,7 @@ requirements:
 tags:
   - covid19
   - biodiversity
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - wm75

@@ -17,6 +17,7 @@ key_points:
   - Ephemeris can be used to automatically install these requirements to an existing Galaxy
   - Convenience scripts are provided in the training material repository allow for easy installation
   - Docker images can easily be created per topic
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - shiltemann

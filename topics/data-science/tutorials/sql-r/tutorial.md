@@ -30,6 +30,7 @@ key_points:
 - "Queries should be written using parameter substitution, not string formatting."
 - "R has multiple helper functions to make working with databases easier."
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

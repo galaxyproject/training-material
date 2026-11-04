@@ -51,6 +51,7 @@ key_points:
 - "Almost all operations on NULL produce NULL."
 - "Queries can test for NULLs using IS NULL and IS NOT NULL."
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

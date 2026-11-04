@@ -29,6 +29,7 @@ tags:
   - data handling
   - functional annotation
   - biodiversity
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - roncoronimiguel

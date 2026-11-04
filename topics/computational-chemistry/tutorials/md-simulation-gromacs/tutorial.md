@@ -22,6 +22,7 @@ follow_up_training:
     tutorials:
       - analysis-md-simulations
       - htmd-analysis
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - simonbray

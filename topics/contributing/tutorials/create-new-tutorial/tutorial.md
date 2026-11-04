@@ -16,6 +16,7 @@ key_points:
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
 subtopic: getting-started
 priority: 3
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - bebatut

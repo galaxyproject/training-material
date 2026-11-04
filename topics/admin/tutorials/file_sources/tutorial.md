@@ -14,6 +14,7 @@ tags:
   - "earth-system"
   - "ocean"
   - "data"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - Marie59

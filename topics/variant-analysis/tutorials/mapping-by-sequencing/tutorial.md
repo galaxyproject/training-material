@@ -15,6 +15,7 @@ time_estimation: "2h"
 key_points:
   - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
   - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - wm75

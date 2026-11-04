@@ -27,6 +27,7 @@ requirements:
     tutorials:
       - mass-spectrometry-imaging-loading-exploring-data
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - foellmelanie

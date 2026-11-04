@@ -21,6 +21,7 @@ key_points:
   - "The Interval-Wise Testing detects statistically significant differences between pairs of genomic regions"
   - "The Interval-Wise Testing corrects p-values taking into consideration the ordered nature of measurements along the genome"
   - "Locations and scales do not need to be specified at the outset, indeed IWTomics permits to detect them"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - marziacremona

@@ -17,6 +17,7 @@ key_points:
     - "Visualizing the pinpointed subnetwork helps us understand the result better"
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - ChaoZhang123

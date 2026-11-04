@@ -24,6 +24,7 @@ requirements:
     tutorials:
       - ansible
       - terraform
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

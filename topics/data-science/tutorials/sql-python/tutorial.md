@@ -25,6 +25,7 @@ key_points:
 - "Programs can read query results in batches or all at once."
 - "Queries should be written using parameter substitution, not string formatting."
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

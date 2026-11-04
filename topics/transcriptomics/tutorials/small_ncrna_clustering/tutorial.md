@@ -15,6 +15,7 @@ time_estimation: 1H
 key_points:
 - Small non-coding RNA read profiles are often associate with function
 - Clusters of read profiles correlate with the ncRNA classes
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - pavanvidem

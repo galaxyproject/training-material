@@ -14,6 +14,7 @@ time_estimation: 1H
 key_points:
 - MaxQuant, diapysef and OpenSwath tools enable the generation of spectral libraries from DDA data
 - Generated spectral libraries can be used for the analysis of DIA data
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - matthias313

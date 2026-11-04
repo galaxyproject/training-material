@@ -17,6 +17,7 @@ key_points:
 - With SearchToLib, Chromatogram Libraries can be created
 - Learning conversion of file types using msconvert
 subtopic: id-quant
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - emmaleith

@@ -9,6 +9,7 @@ objectives:
 time_estimation: "15m"
 key_points:
   - "Quizzes are helpful for both self-directed learning, and ensuring that in synchronous classes, students are all following the material"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

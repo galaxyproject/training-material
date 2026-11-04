@@ -19,6 +19,7 @@ follow_up_training:
       - proteogenomics-dbsearch
       - proteogenomics-novel-peptide-analysis
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - subinamehta

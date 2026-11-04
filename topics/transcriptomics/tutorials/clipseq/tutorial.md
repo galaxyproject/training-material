@@ -20,6 +20,7 @@ key_points:
   - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
   - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
   - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - heylf

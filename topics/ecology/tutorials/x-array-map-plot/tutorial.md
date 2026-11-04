@@ -24,6 +24,7 @@ key_points:
 - NetCDF xarray map plotting colormaps
 tags:
   - pangeo
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - Quickbeasts51429

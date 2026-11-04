@@ -29,6 +29,7 @@ requirements:
       - collections
 tags:
   - covid19
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - wm75

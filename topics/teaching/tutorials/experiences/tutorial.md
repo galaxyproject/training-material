@@ -12,6 +12,7 @@ objectives:
   - Learn how others teach using Galaxy
 key_points:
   - Every instructor has their prefered way to teach using Galaxy
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - bebatut

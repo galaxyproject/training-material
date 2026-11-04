@@ -15,6 +15,7 @@ key_points:
   - Live coding forces the instructor to slow down.
   - Coding-along gives learners continuous practice and feedback.\
   - Mistakes made during participatory live coding are valuable learning opportunities.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - bebatut

@@ -28,6 +28,7 @@ time_estimation:  1H30M
 key_points: []
 
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

@@ -21,6 +21,7 @@ key_points:
   - "If you find a bug in a code block that is not covered by a test, before you fix the bug, write a test exposing the bug; run the test to ensure it fails; then fix the bug; then run the test again to ensure it passes."
   - "Write useful and property formatted commit messages."
   - "Pdb is your friend."
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - assuntad23

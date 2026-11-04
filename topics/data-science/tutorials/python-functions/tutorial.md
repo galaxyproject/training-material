@@ -29,6 +29,7 @@ key_points:
 - Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - carpentries

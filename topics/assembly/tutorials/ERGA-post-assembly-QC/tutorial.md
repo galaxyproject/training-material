@@ -16,6 +16,7 @@ key_points:
 - 'The ERGA post-assembly pipeline consists of three main steps: Genome assembly decontamination
   and overview with BlobToolKit, providing analysis information and statistics, and
   Hi-C scaffolding.'
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - GitFab93

@@ -13,6 +13,7 @@ subtopic: writing
 key_points:
   - "Thanks to the GTN, videos are easy to add"
   - "Be mindful of your captions. Short sentences are good!"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

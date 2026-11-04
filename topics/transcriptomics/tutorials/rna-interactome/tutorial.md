@@ -16,6 +16,7 @@ time_estimation: 2H
 key_points:
 - Choosing the correct alignment parameters is one of the imporatant factor in the analysis.
 - For poorly annotated organisms use reference genome instead of trascriptome.
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - pavanvidem

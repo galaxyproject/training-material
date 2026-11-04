@@ -20,6 +20,7 @@ key_points:
   - "This significantly simplifies the analysis."
   - "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results."
   - "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - nekrut

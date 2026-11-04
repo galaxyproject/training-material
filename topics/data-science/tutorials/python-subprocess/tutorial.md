@@ -21,6 +21,7 @@ key_points:
 - 👍Use `subprocess.check_output()` if you want the output
 - Use `.decode('utf-8')` to read the output of `check_output()`
 subtopic: python-modular
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - hexylena

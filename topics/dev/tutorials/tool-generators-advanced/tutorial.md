@@ -35,6 +35,7 @@ requirements:
       - interactive-environments
       - tool-generators
 
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - fubar2

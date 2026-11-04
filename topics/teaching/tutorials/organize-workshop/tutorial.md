@@ -13,6 +13,7 @@ time_estimation: 3H
 key_points:
 - Running a workshop is not easy, there are many things to remember
 - This document is a non-exhaustive list, please add to it!
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - bebatut

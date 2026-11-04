@@ -14,6 +14,7 @@ time_estimation: 2H
 key_points:
 - We learned to use MinION Nanopore data for analyzing the health status of the soil
 - We preprocessed Nanopore sequences in order to improve their quality
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - gallardoalba

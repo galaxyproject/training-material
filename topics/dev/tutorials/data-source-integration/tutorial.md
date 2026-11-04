@@ -8,6 +8,7 @@ questions:
  - Is there any ready-to-use example?
 objectives:
 time_estimation: "10M"
+#TODO: describe roles of conributors
 contributions:
   authorship:
     - bebatut
