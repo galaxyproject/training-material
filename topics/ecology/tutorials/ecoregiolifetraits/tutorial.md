@@ -21,9 +21,8 @@ contributions:
     - jeanlecras
     - PaulineSGN
     - yvanlebras
-contributions:
   funding:
-  - pndb
+    - pndb
 tags:
   - biodiversity
   - ecoregions
