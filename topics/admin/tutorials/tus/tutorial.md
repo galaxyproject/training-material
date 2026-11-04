@@ -10,10 +10,11 @@ objectives:
 time_estimation: "30M"
 key_points:
   - Use TUS to make uploads more efficient, especially for large uploads over unstable connections.
-contributors:
-  - mvdbeek
-  - hexylena
-  - lldelisle
+contributions:
+  authorship:
+    - mvdbeek
+    - hexylena
+    - lldelisle
 subtopic: features
 requirements:
   - type: "internal"

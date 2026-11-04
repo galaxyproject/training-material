@@ -25,11 +25,11 @@ key_points:
 - "Programs can read query results in batches or all at once."
 - "Queries should be written using parameter substitution, not string formatting."
 
-contributors:
-- carpentries
-- hexylena
-- avans-atgm
-
+contributions:
+  authorship:
+    - carpentries
+    - hexylena
+    - avans-atgm
 subtopic: sql
 
 notebook:

@@ -1,0 +1,482 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Single-file 3Dtrees workflow from the GTN tutorial: standardize one LAS/LAZ point cloud, create overview images, tile and subsample, segment trees with SegmentAnyTree, transfer the predictions back to the original points and build a Potree viewer.",
+    "comments": [
+        {
+            "child_steps": [
+                1
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Standardization"
+            },
+            "id": 0,
+            "position": [
+                252.8,
+                387.2
+            ],
+            "size": [
+                383,
+                725
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                4,
+                5
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Instance Segmentation by SegmentAnyTree"
+            },
+            "id": 1,
+            "position": [
+                689.4,
+                0
+            ],
+            "size": [
+                1089.2,
+                761.7
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                3
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Thumbnail generation"
+            },
+            "id": 2,
+            "position": [
+                900.4,
+                916.4
+            ],
+            "size": [
+                363.7,
+                287.4
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6
+            ],
+            "color": "red",
+            "data": {
+                "title": "Point cloud visualization by Potree"
+            },
+            "id": 3,
+            "position": [
+                1880.5,
+                652.7
+            ],
+            "size": [
+                569,
+                348
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0002-5001-2571",
+            "name": "Kilian Gerberding"
+        },
+        {
+            "class": "Organization",
+            "name": "3Dtrees.earth Team",
+            "url": "https://3dtrees.earth/"
+        }
+    ],
+    "format-version": "0.1",
+    "help": "If any questions / errors arise - please reach out to kilian@3dtrees.earth. Cheers :)",
+    "license": "CC-BY-4.0",
+    "name": "3Dtrees: From LiDAR point clouds to individual trees",
+    "readme": "Single-file 3Dtrees workflow from the GTN tutorial: standardize one LAS/LAZ point cloud, create overview images, tile and subsample, segment trees with SegmentAnyTree, transfer the predictions back to the original points and build a Potree viewer.",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "One point cloud with datatype laz, e.g. Strip-20210804-150144_D.las from doi:10.15454/DMYWPB (the Standardization tool only offers laz datasets)",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "One LAS/LAZ point cloud",
+                    "name": "Point cloud (LAS/LAZ)"
+                }
+            ],
+            "label": "Point cloud (LAS/LAZ)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 737.6673915354276
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"laz\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "915bec7a-69fe-4b93-a4e5-557b165d0acb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Check header, bounds, density and CRS, and write a standardized LAZ file",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "mode|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool 3DTrees: LAS/LAZ Standardization",
+                    "name": "mode"
+                }
+            ],
+            "label": "Standardization",
+            "name": "3DTrees: LAS/LAZ Standardization",
+            "outputs": [
+                {
+                    "name": "pc_standardized",
+                    "type": "laz"
+                },
+                {
+                    "name": "metadata_json",
+                    "type": "json"
+                },
+                {
+                    "name": "convex_hull",
+                    "type": "geojson"
+                }
+            ],
+            "position": {
+                "left": 357.93651347528635,
+                "top": 518.2932776824164
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_standardization/3dtrees_standardization/1.2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e36c4b5d5cd9",
+                "name": "3dtrees_standardization",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mode\": {\"task\": \"single_file\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"min_density\": \"10\", \"removeable_attributes\": \"\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.1+galaxy0",
+            "type": "tool",
+            "uuid": "2e1c9a22-bcc9-4390-8eb8-f87036a9520e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "standardized",
+                    "output_name": "pc_standardized",
+                    "uuid": "83d15133-429b-4530-92a6-b4375659c96a"
+                },
+                {
+                    "label": "metadata",
+                    "output_name": "metadata_json",
+                    "uuid": "dd737f4c-d36f-4e8a-924b-9c4a93dfe3fb"
+                },
+                {
+                    "label": "convex_hull",
+                    "output_name": "convex_hull",
+                    "uuid": "ee84fd37-a142-4313-ade6-170efc14298c"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Tile (skipped below the size threshold) and subsample to 10 cm voxels for SegmentAnyTree",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "operation|input_files": {
+                    "id": 1,
+                    "output_name": "pc_standardized"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool 3DTrees: SmartTile",
+                    "name": "operation"
+                }
+            ],
+            "label": "SmartTile: tile and subsample",
+            "name": "3DTrees: SmartTile",
+            "outputs": [
+                {
+                    "name": "output_tiles_1",
+                    "type": "input"
+                },
+                {
+                    "name": "output_png",
+                    "type": "png"
+                },
+                {
+                    "name": "tile_bounds_json",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 790.8266169983949,
+                "top": 73.6
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b3279a32a87b",
+                "name": "3dtrees_smart_tile",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operation\": {\"task\": \"tile\", \"__current_case__\": 0, \"input_files\": {\"__class__\": \"ConnectedValue\"}, \"instances\": {\"mode\": \"spatial\", \"__current_case__\": 0, \"subsampling_method\": \"center-of-mass\"}, \"tile_length\": \"300\", \"tile_buffer\": \"20\", \"tiling_threshold\": \"10000.0\", \"tile_outputs\": [{\"__index__\": 0, \"resolution\": {\"mode\": \"subsampled\", \"__current_case__\": 0, \"resolution_cm\": \"10\"}, \"format\": \"laz\"}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.4.1+galaxy0",
+            "type": "tool",
+            "uuid": "8e6fdf58-61b2-4b95-9e5f-e4f2f5a12901",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "tiling_preview",
+                    "output_name": "output_png",
+                    "uuid": "23a23ea1-11e8-4fd8-a146-a3c346aa3c87"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "Generate overview images from standardized point clouds",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_overviews/3dtrees_overviews/1.2.0+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "pc_standardized"
+                }
+            },
+            "inputs": [],
+            "label": "Overviews",
+            "name": "3Dtrees: Overviews",
+            "outputs": [
+                {
+                    "name": "top_views",
+                    "type": "input"
+                },
+                {
+                    "name": "section_views",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 979.7309900841045,
+                "top": 1003.8100647167762
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_overviews/3dtrees_overviews/1.2.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "049c348797e9",
+                "name": "3dtrees_overviews",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"camera_distance\": \"35.0\", \"cmap\": \"viridis\", \"image_height\": \"768\", \"image_width\": \"1024\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"max_total_points\": \"40000000\", \"section_width\": \"10\", \"top_views_deg\": \"180\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.0+galaxy1",
+            "type": "tool",
+            "uuid": "73d1842a-92d7-4ec2-a962-443fe7d9e050",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "top_views",
+                    "output_name": "top_views",
+                    "uuid": "106bb3bb-3c02-4278-b940-8bedf2e62625"
+                },
+                {
+                    "label": "section_views",
+                    "output_name": "section_views",
+                    "uuid": "e1c3b905-0f92-4682-b4dc-62d0b0924492"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Predict vegetation/non-vegetation classes (PredSemantic_SAT) and tree instances (PredInstance_SAT)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.3+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output_tiles_1"
+                }
+            },
+            "inputs": [],
+            "label": "SegmentAnyTree",
+            "name": "3Dtrees: SegmentAnyTree",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "zip"
+                }
+            ],
+            "position": {
+                "left": 1150.826616998395,
+                "top": 93.6
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_segmentanytree/3dtrees_segmentanytree/1.2.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2428651639f8",
+                "name": "3dtrees_segmentanytree",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"log_file\": false, \"predinstance_name\": \"PredInstance_SAT\", \"predsemantic_name\": \"PredSemantic_SAT\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "10fd22df-089e-40cb-b5f6-0145e44c1762",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "segmented",
+                    "output_name": "output",
+                    "uuid": "1fc91bea-39cf-4988-8f26-a57b7e9658ce"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Remove buffer duplicates, join trees cut by tile borders and transfer the predictions to every point of the standardized original",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "operation|input_segmented": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "operation|tile_bounds_json": {
+                    "id": 2,
+                    "output_name": "tile_bounds_json"
+                },
+                "operation|target|original_files": {
+                    "id": 1,
+                    "output_name": "pc_standardized"
+                }
+            },
+            "inputs": [],
+            "label": "SmartTile: filter / merge and remap",
+            "name": "3DTrees: SmartTile",
+            "outputs": [
+                {
+                    "name": "output_merge_tiles",
+                    "type": "input"
+                },
+                {
+                    "name": "output_originals_with_dims",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1516.8630000851006,
+                "top": 77.00022291105593
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_smart_tile/3dtrees_smart_tile/2.4.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b3279a32a87b",
+                "name": "3dtrees_smart_tile",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operation\": {\"task\": \"merge\", \"__current_case__\": 1, \"input_segmented\": {\"__class__\": \"ConnectedValue\"}, \"segmented_resolution_cm\": \"10\", \"model\": {\"type\": \"standard\", \"__current_case__\": 0, \"instance_dimension\": \"PredInstance_SAT\"}, \"tile_bounds_json\": {\"__class__\": \"ConnectedValue\"}, \"target\": {\"type\": \"original\", \"__current_case__\": 2, \"original_files\": {\"__class__\": \"ConnectedValue\"}}, \"advanced\": {\"filter_anchor\": \"centroid\", \"cross_tile_matching\": {\"enabled\": \"True\", \"__current_case__\": 0, \"overlap_threshold\": \"0.3\"}, \"small_cluster_reassignment\": {\"enabled\": \"False\", \"__current_case__\": 1}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.4.1+galaxy0",
+            "type": "tool",
+            "uuid": "d3d0154e-8dcf-432e-8704-7c3d11d838b4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "originals_with_predictions",
+                    "output_name": "output_originals_with_dims",
+                    "uuid": "485e2984-0a2c-47e5-8275-98a533701d29"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Convert to Potree, colour neighbouring trees differently and generate an interactive viewer",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_potree/3dtrees_potree/1.2.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output_originals_with_dims"
+                }
+            },
+            "inputs": [],
+            "label": "Potree",
+            "name": "3Dtrees: Potree Converter",
+            "outputs": [
+                {
+                    "name": "viewer_html",
+                    "type": "html"
+                },
+                {
+                    "name": "potree_output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2055.860903042735,
+                "top": 763.0038118202746
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/3dtrees_potree/3dtrees_potree/1.2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0c99fafe841d",
+                "name": "3dtrees_potree",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"generate_page\": true, \"encoding\": \"BROTLI\", \"method\": \"poisson\", \"chunk_method\": \"LASZIP\", \"attributes\": null, \"grid_size\": \"0\", \"keep_chunks\": false, \"no_chunking\": false, \"no_indexing\": false, \"special_coloring\": {\"enabled\": \"true\", \"__current_case__\": 0, \"palette\": \"candy\", \"n_colors\": \"10\", \"n_neighbors\": \"10\", \"instance_attributes\": \"PredInstance_SAT\", \"ground_id\": \"0\", \"ground_color\": \"#808080\", \"sidecar_json\": true}, \"title\": null, \"numthreads\": \"10\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.2.1+galaxy0",
+            "type": "tool",
+            "uuid": "67421710-adc1-474e-8afb-1acee5e07c80",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "potree_viewer",
+                    "output_name": "viewer_html",
+                    "uuid": "103bc632-ed3a-4e66-996b-5df8614063a7"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "3DTrees",
+        "PointCloud",
+        "GalaxyEU",
+        "Standardization",
+        "Overviews",
+        "Segmentation",
+        "Potree"
+    ],
+    "uuid": "2100ad0a-4f77-4e36-8427-29da6e57ff2e",
+    "version": 5,
+    "release": "0.2"
+}

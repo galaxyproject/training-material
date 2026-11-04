@@ -6,7 +6,7 @@ redirect_from:
   - /topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Using dataset collections"
-zenodo_link: "https://doi.org/10.5281/zenodo.5119008"
+zenodo_link: 'https://zenodo.org/record/5119008'
 tags:
 - collections
 level: Intermediate
@@ -20,9 +20,9 @@ key_points:
   - "This significantly simplifies the analysis."
   - "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results."
   - "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
-contributors:
-  - nekrut
-
+contributions:
+  authorship:
+    - nekrut
 subtopic: manage
 
 recordings:

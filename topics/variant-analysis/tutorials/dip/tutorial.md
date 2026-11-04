@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Calling variants in diploid systems"
 subtopic: introduction
-zenodo_link: "https://doi.org/10.5281/zenodo.60520"
+zenodo_link: 'https://zenodo.org/record/60520'
 questions:
   - "How to find variable sites in diploid genomes?"
 objectives:
@@ -15,10 +15,11 @@ key_points:
   - "Freebayes calls variant using haplotype windows"
   - "SNPEff allows functional annotation of variants"
   - "Gemini is a flexible system for analyzing variation patterns"
-contributors:
-  - nekrut
-  - nsoranzo
-  - khaled196
+contributions:
+  authorship:
+    - nekrut
+    - nsoranzo
+    - khaled196
 ---
 
 Today we hear a lot about personalized medicine. Yet the *personalization* is defined by the genetic make up of the individual. In this tutorial we will discuss how this information can be uncovered from the genomic sequencing data.

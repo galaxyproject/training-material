@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Machine Learning Modeling of Anticancer Peptides
-zenodo_link: "https://doi.org/10.5281/zenodo.4111092"
+zenodo_link: 'https://zenodo.org/record/4111092'
 level: Intermediate
 questions:
   - Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?
@@ -12,9 +12,10 @@ objectives:
   - Assessment of best ML algorithm in predicting anticancer peptide
 time_estimation: '30m'
 
-contributors:
-  - jaidevjoshi83
-  - blankenberg
+contributions:
+  authorship:
+    - jaidevjoshi83
+    - blankenberg
 subtopic: property-prediction
 tags: [ML, cancer]
 ---

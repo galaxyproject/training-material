@@ -27,12 +27,12 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
-contributors:
-  - chrisbarnettster
-  - tsenapathi
-  - simonbray
-  - nagoue
-
+contributions:
+  authorship:
+    - chrisbarnettster
+    - tsenapathi
+    - simonbray
+    - nagoue
 ---
 
 

@@ -619,8 +619,17 @@ module Jekyll
         location.fetch('postcode', nil)
       ].compact
 
+      # openstreetmap does not always deal well with the name field if it doesnt match exactly what it has
+      loc2 = [
+        location.fetch('address', nil),
+        location.fetch('postcode', nil),
+        location.fetch('city', nil),
+        location.fetch('country', nil)
+      ].compact
+
+
       if loc.length > 1
-        "<a href=\"#{url}#{loc.join(', ')}\">#{loc.join(', ')}</a>"
+        "<a href=\"#{url}#{loc2.join(', ')}\">#{loc.join(', ')}</a>"
       else
         # Just e.g. the name
         loc.join(', ')
@@ -650,7 +659,7 @@ module Jekyll
       #   #region: # optional
       #   postcode: 912NM
       loc = [
-        location.fetch('name', nil),
+        #location.fetch('name', nil),
         location.fetch('address', nil),
         location.fetch('city', nil),
         location.fetch('region', nil),

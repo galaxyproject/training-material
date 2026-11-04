@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Trio Analysis using Synthetic Datasets from RD-Connect GPAP
 subtopic: human-genetics-cancer
-zenodo_link: 'https://doi.org/10.5281/zenodo.6483454'
+zenodo_link: 'https://zenodo.org/record/6483454'
 questions:
 - How do you import data from the EGA?
 - How to download files with HTSGET in Galaxy?
@@ -18,11 +18,12 @@ key_points:
 - Downloading whole datasets with HTSGET is safe and easy with Galaxy.
 - Regex is a usefull tool for pre-processing VCF files.
 - Variant annotations allows us to strictly filter VCFs to find the causative variant.
-contributors:
-- JasperO98
-- wm75
-- hexylena
-- shiltemann
+contributions:
+  authorship:
+    - JasperO98
+    - wm75
+    - hexylena
+    - shiltemann
 level: Advanced
 tags:
 - cyoa

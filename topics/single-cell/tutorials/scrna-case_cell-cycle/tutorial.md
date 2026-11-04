@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Removing the effects of the cell cycle
-zenodo_link: https://zenodo.org/record/7311628/
+zenodo_link: 'https://zenodo.org/record/7311628'
 answer_histories:
   - label: "UseGalaxy.eu"
     history: https://singlecell.usegalaxy.eu/u/videmp/h/cell-cycle-regression-workflow

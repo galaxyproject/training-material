@@ -17,7 +17,7 @@ For all of the possible repositories, you should fill the following fields:
 - In the `Name` section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets.
 - Optionally, you can provide a `Description` for this repository. This is a note for yourself.
 
-{% include _includes/cyoa-choices.html option1="Onedata" option2="Amazon Web Services Private Bucket" option3="Amazon Web Services Public Bucket" option4="Azure Blob" option5="Dropbox" option6="eLabFTW" option7="An FTP Server" option8="Export to Google Drive" option9="InvenioRDM" option10="S3 Compatible Storage with Credentials" option11="WebDAV" option12="Zenodo" option13="RSpace" default="Onedata" text="Select the repository you like to add to your Galaxy account." disambiguation="BYOD" %}
+{% include _includes/cyoa-choices.html option1="Onedata" option2="Amazon Web Services Private Bucket" option3="Amazon Web Services Public Bucket" option4="Azure Blob" option5="Dropbox" option6="eLabFTW" option7="An FTP Server" option8="Export to Google Drive" option9="InvenioRDM" option10="S3 Compatible Storage with Credentials" option11="WebDAV" option12="Zenodo" option13="RSpace" option14="openBIS" default="Onedata" text="Select the repository you like to add to your Galaxy account." disambiguation="BYOD" %}
 
 <div class="Onedata" markdown="1">
 If you have an [Onedata](https://onedata.org/) account, you can use this repository to import and/or export your data directly from and to Onedata. The minimal supported Onezone version is 21.02.4. More information on Onedata can be found on [Onedata's website](https://onedata.org/#/home).
@@ -124,6 +124,13 @@ In some cases, you may need to activate some features on your ownCloud or nextCl
 - Add the RSpace instance endpoint e.g.: https://community.researchspace.com
 - Add the `RSpace API Key`. You get it on the RSpace server, when you click on profile, then on regenerate key. Store it you will not see it again.
 - Click `Create`.
+</div>
+
+<div class="openBIS" markdown="1">
+Connect to openBIS using your instance's base URL and a Personal Access Token.
+Enable `Writable` to export results to AFS; existing openBIS DataSets are read-only.
+See [Connecting openBIS and Galaxy](https://galaxyproject.org/news/2026-09-11-openbis-integration/)
+for setup instructions and screencasts demonstrating file import and export.
 </div>
 
 > <tip-title>What can you do after you connected a repository</tip-title>

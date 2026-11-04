@@ -17,9 +17,10 @@ key_points:
   - Ephemeris can be used to automatically install these requirements to an existing Galaxy
   - Convenience scripts are provided in the training material repository allow for easy installation
   - Docker images can easily be created per topic
-contributors:
-  - shiltemann
-  - bebatut
+contributions:
+  authorship:
+    - shiltemann
+    - bebatut
 ---
 
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.

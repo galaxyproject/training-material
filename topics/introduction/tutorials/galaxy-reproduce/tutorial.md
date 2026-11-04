@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "How to reproduce published Galaxy analyses"
-zenodo_link: https://zenodo.org/record/1319069
+zenodo_link: 'https://zenodo.org/record/1319069'
 level: Introductory
 questions:
   - "How to reproduce published Galaxy results (workflows and histories)"

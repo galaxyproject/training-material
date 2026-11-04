@@ -9,9 +9,10 @@ objectives:
  - Learn to implement new API functionality within Galaxy
  - Learn to extend the Galaxy user interface with VueJS components
 time_estimation: "3H"
-contributors:
- - jmchilton
- - jdavcs
+contributions:
+  authorship:
+    - jmchilton
+    - jdavcs
 key_points:
  - Galaxy database interactions are mitigated via SQLAlchemy code in lib/galaxy/model.
  - Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.

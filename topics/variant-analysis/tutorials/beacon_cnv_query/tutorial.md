@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Querying the University of Bradford GDC Beacon Database for Copy Number Variants (CNVs)"
-zenodo_link: 'https://zenodo.org/records/10658688'
+zenodo_link: 'https://zenodo.org/record/10658688'
 subtopic: 'data-management'
 priority: 1
 questions:
@@ -24,10 +24,11 @@ key_points:
 - Efficient Querying for CNVs focuses on accurate data retrieval and precise query formulation using the Beacon2 tool.
 - Hands-On Application provides practical experience in querying Beacons, ensuring data integrity, and troubleshooting queries.
 - Recognizing the Importance of CNVs highlights the role of CNVs in genetic variation and their relevance in research using Beacon databases.
-contributors:
-- khaled196
-- kkamieniecka
-- poterlowicz-lab
+contributions:
+  authorship:
+    - khaled196
+    - kkamieniecka
+    - poterlowicz-lab
 ---
 
 

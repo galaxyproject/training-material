@@ -20,9 +20,10 @@ requirements:
     tutorials:
       - collections
       - upload-rules
-contributors:
-  - jmchilton
-  - hexylena
+contributions:
+  authorship:
+    - jmchilton
+    - hexylena
 subtopic: upload
 
 recordings:

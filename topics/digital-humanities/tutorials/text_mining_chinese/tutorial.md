@@ -5,7 +5,7 @@ redirect_from:
 
 title: Text-Mining Differences in Chinese Newspaper Articles
 level: Intermediate
-zenodo_link: https://doi.org/10.5281/zenodo.14899614
+zenodo_link: 'https://zenodo.org/record/14899614'
 questions:
   - How can I automatically compare two Chinese newspaper articles?
   - What characters were censored in a Chinese newspaper published in Hong Kong in the 1930s?

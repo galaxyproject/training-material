@@ -13,12 +13,13 @@ time_estimation: "30m"
 key_points:
 - Stock deployment of production Galaxy components on Kubernetes is simple
 - Helm chart allows easy configuration changes
-contributors:
-  - pcm32
-  - afgane
-  - nuwang
-  - almahmoud
-  - jdavcs
+contributions:
+  authorship:
+    - pcm32
+    - afgane
+    - nuwang
+    - almahmoud
+    - jdavcs
 tags:
   - kubernetes
 subtopic: cloud
@@ -226,7 +227,7 @@ on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG].
 [PV]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 [CSI]: https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/
 [GxyDocs]: https://galaxyproject.org/admin/#configuration
-[CVMFS]: https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html
+[CVMFS]: {% link topics/admin/tutorials/cvmfs/tutorial.md %}
 [BioContainers]: https://biocontainers.pro/#/
 [Namespace]: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [reclaim policy]: https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/

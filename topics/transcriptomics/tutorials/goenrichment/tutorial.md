@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "GO Enrichment Analysis"
-zenodo_link: "https://zenodo.org/record/2565417"
+zenodo_link: 'https://zenodo.org/record/2565417'
 questions:
   - "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
 objectives:
@@ -13,9 +13,10 @@ key_points:
   - "The goenrichment tool can be used to perform GO Enrichment analysis"
   - "One needs to be careful when chosing the background population"
   - "There are several methods to simplify the output of the GO Enrichment analysis"
-contributors:
-  - igcbioinformatics
-  - mblue9
+contributions:
+  authorship:
+    - igcbioinformatics
+    - mblue9
 ---
 
 

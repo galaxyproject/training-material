@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Interval-Wise Testing for omics data"
-zenodo_link: "https://doi.org/10.5281/zenodo.5589610"
+zenodo_link: 'https://zenodo.org/record/5589610'
 questions:
   - "How to visualize high-resolution omics data in different groups of genomic regions?"
   - "How to evaluate differences in high-resolution omics data between groups of genomic regions?"
@@ -21,10 +21,10 @@ key_points:
   - "The Interval-Wise Testing detects statistically significant differences between pairs of genomic regions"
   - "The Interval-Wise Testing corrects p-values taking into consideration the ordered nature of measurements along the genome"
   - "Locations and scales do not need to be specified at the outset, indeed IWTomics permits to detect them"
-contributors:
-  - marziacremona
-  - cumbof
-
+contributions:
+  authorship:
+    - marziacremona
+    - cumbof
 ---
 
 

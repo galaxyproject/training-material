@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Essential genes detection with Transposon insertion sequencing"
-zenodo_link: "https://doi.org/10.5281/zenodo.2579335"
+zenodo_link: 'https://zenodo.org/record/2579335'
 tags:
   - bacteria
   - tnseq
@@ -22,9 +22,10 @@ key_points:
 - "The saturation of the library must be sufficient so that every gene must have been impacted at least once"
 - "Be sure you have removed every transposon sequence before starting your analysis"
 - "Verify the results manually do separate domain essential and essential genes"
-contributors:
-  - delphine-l
-  - bebatut
+contributions:
+  authorship:
+    - delphine-l
+    - bebatut
 subtopic: prokaryote
 edam_ontology:
 - topic_0622 # Genomics

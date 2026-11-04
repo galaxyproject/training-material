@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Metabarcoding/eDNA through Obitools
-zenodo_link: https://zenodo.org/record/5932108
+zenodo_link: 'https://zenodo.org/record/5932108'
 questions:
 - how to analyze DNA metabarcoding / eDNA data produced on Illumina sequencers using the OBITools?
 objectives:

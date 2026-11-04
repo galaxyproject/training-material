@@ -27,11 +27,11 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - md-simulation-namd
-contributors:
-  - chrisbarnettster
-  - simonbray
-  - nagoue
-
+contributions:
+  authorship:
+    - chrisbarnettster
+    - simonbray
+    - nagoue
 ---
 
 In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located in [Running molecular dynamics simulations using NAMD]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.

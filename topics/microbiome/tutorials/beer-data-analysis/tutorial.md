@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Identification of the micro-organisms in a beer using Nanopore sequencing
-zenodo_link: https://doi.org/10.5281/zenodo.7093173
+zenodo_link: 'https://zenodo.org/record/7093173'
 level: Introductory
 questions:
 - How can yeast strains in a beer sample be identified?

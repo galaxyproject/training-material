@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CLIP-Seq data analysis from pre-processing to motif detection
-zenodo_link: https://zenodo.org/record/1327423
+zenodo_link: 'https://zenodo.org/record/1327423'
 questions:
   - How is raw CLIP-Seq data processed and analysed?
   - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?
@@ -20,10 +20,11 @@ key_points:
   - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
   - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
   - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
-contributors:
-  - heylf
-  - dmaticzka
-  - bebatut
+contributions:
+  authorship:
+    - heylf
+    - dmaticzka
+    - bebatut
 ---
 
 

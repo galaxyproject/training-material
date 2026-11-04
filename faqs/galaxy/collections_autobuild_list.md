@@ -8,7 +8,7 @@ contributors: [Marie59]
 
 * Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel (**letter a**) ![Select Items button]({% link topics/climate/images/bgc_calib/collection_emptyhist.png %})
 * Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %} all the datasets in your history you would like to include (**letter b**){% endif %}
-* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected (see letter b below)** and choose **Auto build List**
+* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** (or **All N selected** if you checked every item; see letter b below) and choose **Auto build List**
 
   ![Collection building with autobuild]({% link topics/climate/images/bgc_calib/build_collection.png %}){:width="15%"}
 
@@ -20,4 +20,4 @@ contributors: [Marie59]
 * Click **Build** to build your collection (**letter e**)
 * Click on the checkmark icon at the top of your history again (first **letter a**)
 
-Once the collection is created, all files turn green. You can limit visible files using the eye icons in the history panel.
+Once the collection is created, the original datasets are hidden (**Hide original elements** is on by default). Click the {% icon galaxy-show-hidden %} hidden items counter at the top of the history panel to show them.

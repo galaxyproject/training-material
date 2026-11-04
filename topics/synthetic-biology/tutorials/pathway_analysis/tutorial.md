@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Evaluating and ranking a set of pathways based on multiple metrics
-zenodo_link: https://zenodo.org/record/6628296
+zenodo_link: 'https://zenodo.org/record/6628296'
 questions:
 - How to evaluate a set of heterologous pathways ?
 objectives:
@@ -11,14 +11,14 @@ objectives:
 - Compute the global score for the previous annotated pathways.
 - Rank the computed heterologous pathways depending on their score.
 time_estimation: 20M
-contributors:
-- kenza12
-- tduigou
-- breakthewall
-- guillaume-gricourt
-- ioanagry
-- jfaulon
-
+contributions:
+  authorship:
+    - kenza12
+    - tduigou
+    - breakthewall
+    - guillaume-gricourt
+    - ioanagry
+    - jfaulon
 recordings:
 - captioners:
   - kenza12

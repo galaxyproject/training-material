@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Mapeo
-zenodo_link: https://doi.org/10.5281/zenodo.1324070
+zenodo_link: 'https://zenodo.org/record/1324070'
 questions:
 - ¿Qué es el mapeo?
 - ¿Qué dos cosas son cruciales para un mapeo correcto?

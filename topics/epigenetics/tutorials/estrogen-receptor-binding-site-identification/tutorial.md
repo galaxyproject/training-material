@@ -4,7 +4,7 @@ redirect_from:
   - /topics/chip-seq/tutorials/estrogen-receptor-binding-site-identification/tutorial
 
 title: "Identification of the binding sites of the Estrogen receptor"
-zenodo_link: "https://doi.org/10.5281/zenodo.892432"
+zenodo_link: 'https://zenodo.org/record/892432'
 draft: true
 tags:
   - ChIP-seq

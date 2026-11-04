@@ -15,8 +15,9 @@ key_points:
   - Infrastructure is available for running Galaxy trainings for free from UseGalaxy.*
   - This can be easier than setting up a local Galaxy and may have more resources available
   - But have a backup plan
-contributors:
-  - hexylena
+contributions:
+  authorship:
+    - hexylena
 tags:
   - cyoa
 ---

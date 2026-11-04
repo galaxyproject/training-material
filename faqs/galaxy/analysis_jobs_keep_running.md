@@ -17,4 +17,4 @@ No, you don't! You can safely:
 
 and your jobs will keep running in the background! Whenever you next visit Galaxy, you can check if your jobs are still running or completed.
 
-**However**, this is not true for uploading data from your computer. You must wait for uploading a dataset *from your computer* to finish. (Uploading via URL is not affected by this, if you're uploading from URL you can close your computer.)
+**However**, this is not true for uploading data from your computer. You must wait for uploading a dataset *from your computer* to finish; while an upload is still in progress, your browser asks you to confirm before leaving the page. (Uploading via URL is not affected by this, if you're uploading from URL you can close your computer.)

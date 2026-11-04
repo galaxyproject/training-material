@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Training Custom YOLO Models for Segmentation of Bioimages
 level: Intermediate
 subtopic: advanced
-zenodo_link: https://zenodo.org/records/16096782
+zenodo_link: 'https://zenodo.org/record/16096782'
 questions:
 - Why use YOLO for segmentation in bioimage analysis?
 - How can I train and use a custom YOLO model for segmentation tasks using Galaxy?
@@ -17,9 +17,10 @@ key_points:
 - Image preprocessing (e.g., histogram equalization) can enhance model performance but may not be necessary for all datasets
 - The accuracy and consistency of human annotations directly impact the quality of the trained YOLO model.
 - Training metrics, the output of the YOLO training tool, are essential for evaluating model performance and guiding improvements.
-contributors:
-- sunyi000 
-- maulakhan
+contributions:
+  authorship:
+    - sunyi000
+    - maulakhan
 tags: 
   - Image segmentation
   - Image annotation

@@ -19,11 +19,11 @@ key_points:
 - Did you forget how a particular module or function works? Try `help()`
 
 subtopic: python-modular
-contributors:
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 1
 notebook:
   language: python

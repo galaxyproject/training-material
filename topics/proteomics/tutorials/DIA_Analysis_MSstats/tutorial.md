@@ -21,9 +21,10 @@ requirements:
     tutorials:
       - DIA_lib_OSW
       - DIA_Analysis_OSW
-contributors:
-- matthias313
-- foellmelanie
+contributions:
+  authorship:
+    - matthias313
+    - foellmelanie
 subtopic: post-process
 tags: [DIA]
 

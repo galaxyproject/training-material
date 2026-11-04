@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Unsupervised Analysis of Bone Marrow Cells with Flexynesis
-zenodo_link: 'https://zenodo.org/records/16287482'
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How can we identify distinct cell populations in bone marrow single-cell data without prior labels?
 - What cellular patterns and relationships can be discovered through unsupervised deep learning approaches?
@@ -18,9 +18,10 @@ key_points:
 - Flexynesis provides a structured framework for multi-modal data integration with rigorous evaluation procedures
 - Unsupervised feature learning can reveal biologically meaningful cellular populations and relationships
 - Low-dimensional embeddings from VAEs can be used for clustering, visualization, and biological interpretation
-contributors:
-- Nilchia
-- bgruening
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 level: Intermediate
 title: Galaxy Tabular Learner - Building a Model using Chowell clinical data
-zenodo_link: https://zenodo.org/records/13885908
+zenodo_link: 'https://zenodo.org/record/13885908'
 questions:
 - How can the Tabular Learner in Galaxy be used to reconstruct the LORIS LLR6 logistic regression model described by Chang et al. (2024) using the same dataset and predictor set?
 - How should the decision-threshold parameter be configured in Tabular Learner (default versus optimized, and the selection criterion) to align predictions with the intended clinical operating point?
@@ -18,10 +18,11 @@ time_estimation: 1H
 key_points:
 - Use the Galaxy Tabular Learner to reconstruct a LORIS-style model (LLR6) from the same cohort and predictor set described by Chang et al. (2024).
 - Validate model fidelity and robustness by comparing discrimination, calibration, and threshold-dependent performance from the Tabular Learner report against the metrics reported for LORIS LLR6 in Chang et al. (2024).
-contributors:
-- paulocilasjr
-- qchiujunhao
-- jgoecks
+contributions:
+  authorship:
+    - paulocilasjr
+    - qchiujunhao
+    - jgoecks
 tags:
 - LORIS Score Model
 - Machine Learning

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CRISPR screen analysis
-zenodo_link: https://zenodo.org/record/5750854
+zenodo_link: 'https://zenodo.org/record/5750854'
 questions:
 - What are the steps to process CRISPR screen data?
 - How to identify essential genes across experimental conditions?
@@ -13,10 +13,11 @@ objectives:
 time_estimation: 2H
 key_points:
 - CRISPR screen data can be analysed using MAGeCK and standard read quality tools
-contributors:
-- mblue9
-- kenjifujihara
-- twishigulati
+contributions:
+  authorship:
+    - mblue9
+    - kenjifujihara
+    - twishigulati
 tags:
 - genome editing
 - CRISPR
