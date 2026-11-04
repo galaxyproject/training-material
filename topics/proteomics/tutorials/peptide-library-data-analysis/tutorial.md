@@ -9,9 +9,10 @@ objectives:
   - Calculate descriptors
   - Quantitative analysis of peptide sequence properties
 time_estimation: '20m'
-contributors:
-   - jaidevjoshi83
-   - blankenberg
+contributions:
+  authorship:
+    - jaidevjoshi83
+    - blankenberg
 subtopic: property-prediction
 tags: []
 ---

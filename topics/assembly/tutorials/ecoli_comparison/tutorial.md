@@ -33,10 +33,11 @@ key_points:
   - "We learned how to use Galaxy's rule-based collection builder"
   - "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons"
   - "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
-contributors:
-  - nekrut
-  - delphine-l
-  - hexylena
+contributions:
+  authorship:
+    - nekrut
+    - delphine-l
+    - hexylena
 ---
 
 In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.

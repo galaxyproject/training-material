@@ -17,9 +17,10 @@ time_estimation: 2H
 key_points:
 - Multi-modal data integration improves survival prediction accuracy compared to single data types
 - Deep learning approaches can effectively handle high-dimensional genomic data for survival analysis
-contributors:
-- Nilchia
-- bgruening
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

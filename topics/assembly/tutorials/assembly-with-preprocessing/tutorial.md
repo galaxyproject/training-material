@@ -37,9 +37,9 @@ requirements:
 tags:
   - covid19
   - biodiversity
-contributors:
-  - wm75
-
+contributions:
+  authorship:
+    - wm75
 recordings:
 - captioners:
   - mtekman

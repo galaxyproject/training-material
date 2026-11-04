@@ -12,9 +12,10 @@ objectives:
 time_estimation: "30m"
 key_points:
   - TIaaS is an additional service you can deploy which can help you provide a better service to your users
-contributors:
-  - hexylena
-  - shiltemann
+contributions:
+  authorship:
+    - hexylena
+    - shiltemann
 subtopic: features
 tags:
   - ansible

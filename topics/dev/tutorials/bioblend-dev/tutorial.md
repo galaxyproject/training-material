@@ -26,10 +26,10 @@ key_points:
     - "BioBlend is a Python library that provides methods for easy interaction with the Galaxy API."
     - "Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy development."
 subtopic: api
-contributors:
+contributions:
+  authorship:
     - rikeshi
     - simonbray
-
 abbreviations:
     LDA: Library Dataset Association
     HDA: History Dataset Association

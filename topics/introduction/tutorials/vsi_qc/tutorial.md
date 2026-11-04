@@ -14,8 +14,9 @@ key_points:
   - 'Galaxy is an excellent tool for quickly QCing your data'
 subtopic: core
 priority: 10
-contributors:
-  - nekrut
+contributions:
+  authorship:
+    - nekrut
 draft: true
 
 ---

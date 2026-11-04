@@ -17,9 +17,10 @@ key_points:
   - "Nucleotide variants in haploid systems may have any frequency between 0 and 1."
   - "Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias."
   - "FreeBayes can be effectively used to call variants in haploid systems."
-contributors:
-  - nekrut
-  - astrovsky01
+contributions:
+  authorship:
+    - nekrut
+    - astrovsky01
 edam_ontology:
 - topic_0622 # Genomics
 - topic_0196 # Sequence assembly

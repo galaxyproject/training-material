@@ -18,11 +18,12 @@ key_points:
 - Downloading whole datasets with HTSGET is safe and easy with Galaxy.
 - Regex is a usefull tool for pre-processing VCF files.
 - Variant annotations allows us to strictly filter VCFs to find the causative variant.
-contributors:
-- JasperO98
-- wm75
-- hexylena
-- shiltemann
+contributions:
+  authorship:
+    - JasperO98
+    - wm75
+    - hexylena
+    - shiltemann
 level: Advanced
 tags:
 - cyoa

@@ -19,9 +19,10 @@ key_points:
   - "Nanopore sequencing is useful for reconstruction of genomes"
   - "Antimicrobial resistance genes are detectable after fast assembly"
   - "The CARD database is a useful resource describing antibiotic resistance genes"
-contributors:
-  - willemdek11
-  - shiltemann
+contributions:
+  authorship:
+    - willemdek11
+    - shiltemann
 subtopic: metabarcoding
 tags:
   - nanopore

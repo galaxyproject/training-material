@@ -13,9 +13,10 @@ time_estimation: 3H
 key_points:
 - Running a workshop is not easy, there are many things to remember
 - This document is a non-exhaustive list, please add to it!
-contributors:
-- bebatut
-- hexylena
+contributions:
+  authorship:
+    - bebatut
+    - hexylena
 ---
 
 These recommendations are highly inspired from the one by [The Carpentries](https://docs.carpentries.org/topic_folders/hosts_instructors/index.html)

@@ -19,9 +19,9 @@ key_points:
   - "Every kind of data can be encoded into high-dimensional vectors"
   - "A vector-symbolic architecture is composed of vectors and a limited set of arithmetic operators"
   - "Classification models build according to the hyperdimensional computing paradigm can scale on datasets with massive amounts of features and data points"
-contributors:
-  - cumbof
-
+contributions:
+  authorship:
+    - cumbof
 ---
 
 `chopin2` ({% cite Cumbo2020 %}) implements a domain-agnostic supervised classification method based on the hyperdimensional (HD) computing paradigm. It is an open-source tool and its code is available on GitHub at [https://github.com/cumbof/chopin2](https://github.com/cumbof/chopin2).

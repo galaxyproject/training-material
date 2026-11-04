@@ -11,10 +11,11 @@ time_estimation: "30m"
 key_points:
 - The distributed object store configuration allows you to easily expand that storage that is attached to your Galaxy.
 - You can move data around without affecting users.
-contributors:
-  - natefoo
-  - hexylena
-  - gmauro
+contributions:
+  authorship:
+    - natefoo
+    - hexylena
+    - gmauro
 subtopic: data
 tags:
   - ansible

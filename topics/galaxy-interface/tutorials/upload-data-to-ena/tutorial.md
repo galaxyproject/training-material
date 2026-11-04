@@ -34,11 +34,11 @@ requirements:
 
 tags:
   - covid19
-contributors:
-- roncoronimiguel
-- bedroesb
-- B0r1sD
-
+contributions:
+  authorship:
+    - roncoronimiguel
+    - bedroesb
+    - B0r1sD
 ---
 
 

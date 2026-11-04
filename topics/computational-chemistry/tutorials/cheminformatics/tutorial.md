@@ -16,8 +16,9 @@ key_points:
 - Docking allows 'virtual screening' of drug candidates
 - Molecular fingerprints encode features into a bitstring
 - The ChemicalToolbox contains many tools for cheminformatics analysis
-contributors:
-- simonbray
+contributions:
+  authorship:
+    - simonbray
 tags:
 - computational-chemistry
 ---

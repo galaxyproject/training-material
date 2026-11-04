@@ -15,9 +15,10 @@ time_estimation: 2H
 key_points:
 - Flexynesis learns biologically meaningful latent spaces
 - BRCA subtypes can be distinguished using learned features
-contributors:
-- Nilchia
-- bgruening
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

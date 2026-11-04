@@ -20,9 +20,10 @@ requirements:
     topic_name: proteomics
     tutorials:
       - DIA_lib_OSW
-contributors:
-- matthias313
-- foellmelanie
+contributions:
+  authorship:
+    - matthias313
+    - foellmelanie
 subtopic: id-quant
 tags: [DIA]
 

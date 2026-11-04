@@ -45,10 +45,10 @@ follow_up_training:
     tutorials:
       - tool-generators-advanced
 
-contributors:
-  - fubar2
-  - hexylena
-
+contributions:
+  authorship:
+    - fubar2
+    - hexylena
 recordings:
 - captioners:
   - fubar2

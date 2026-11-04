@@ -15,14 +15,14 @@ key_points:
 - Knowing the reaction is not sufficient to implement a pathway, one needs to find out which enzyme is capable of catalyzing the reactions. For this, Selenzyme is used to search for enzymes using reactions as query. As a result, UniProt IDs of enzymes are stored as annotation in SBML files.
 - Expressing pathways into cells involved not only gene encoding enzymes, but also additional genetic parts such as libraries of promoter(s), RBSs, terminators, ... From these, multiple combinations of parts are possible, and each one could produce different results. Several methods exist to assemble genetic parts together into plasmids, the BASIC Assembly approach is one of them. The BasicDesign tool generates combinations of the genetic parts that are compliant with the BASIC Assembly patterns.
 - Automatizing the construction of compound producing strains necessitate to translate protocols into instructions that could be understable by lab robots. To do this, DNA-Bot reads the list of constructs and the DNA parts information and generates python instructions for the automated build of the genetic constructs using OpenTrons liquid handling robots.
-contributors:
-- kenza12
-- tduigou
-- breakthewall
-- guillaume-gricourt
-- ioanagry
-- jfaulon
-
+contributions:
+  authorship:
+    - kenza12
+    - tduigou
+    - breakthewall
+    - guillaume-gricourt
+    - ioanagry
+    - jfaulon
 recordings:
 - captioners:
   - kenza12

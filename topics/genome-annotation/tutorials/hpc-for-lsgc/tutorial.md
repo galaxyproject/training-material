@@ -25,9 +25,9 @@ requirements:
     tutorials:
       - galaxy-intro-101
 
-contributors:
-- estebanpw
-
+contributions:
+  authorship:
+    - estebanpw
 tags:
   - plants
   - prokaryote

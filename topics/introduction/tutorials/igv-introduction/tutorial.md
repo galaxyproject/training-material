@@ -9,10 +9,11 @@ objectives:
 time_estimation: "2H"
 key_points:
 subtopic: next-steps
-contributors:
-  - nekrut
-  - joachimwolff
-  - pajanne
+contributions:
+  authorship:
+    - nekrut
+    - joachimwolff
+    - pajanne
 ---
 
 # Using the Integrative Genomics Viewer

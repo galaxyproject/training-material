@@ -14,8 +14,9 @@ key_points:
   - "The RStudio interactive tool can be used to run R inside Galaxy"
 tags:
   - interactive-tools
-contributors:
-  - mblue9
+contributions:
+  authorship:
+    - mblue9
 requirements:
     -
         type: "internal"

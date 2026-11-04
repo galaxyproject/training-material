@@ -17,9 +17,10 @@ tags:
  - ncbi
  - covid19
 subtopic: upload
-contributors:
-  - jontrow
-  - RareSeas
+contributions:
+  authorship:
+    - jontrow
+    - RareSeas
 requirements:
   -
     type: "internal"
