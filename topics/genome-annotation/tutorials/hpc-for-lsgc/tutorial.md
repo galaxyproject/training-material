@@ -25,7 +25,6 @@ requirements:
     tutorials:
       - galaxy-intro-101
 
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - estebanpw

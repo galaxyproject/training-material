@@ -18,7 +18,6 @@ objectives:
 time_estimation: 30m
 key_points:
 - Creating powerful workflows is easy in the Workflow Editor
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - mvdbeek

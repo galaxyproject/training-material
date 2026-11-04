@@ -21,7 +21,6 @@ key_points:
   - "You can perform your analysis manually once, then automatically extract the recipe for repeating this analysis on other datasets"
   - "Workflows capture all the tools and parameter settings needed to perform an analysis"
   - "Workflows can be edited or created from scratch using the workflow editor"
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - tnabtaf

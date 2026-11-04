@@ -37,7 +37,6 @@ requirements:
 tags:
   - covid19
   - biodiversity
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - wm75

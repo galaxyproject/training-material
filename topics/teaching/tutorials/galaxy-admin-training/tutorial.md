@@ -24,7 +24,6 @@ requirements:
     tutorials:
       - ansible
       - terraform
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

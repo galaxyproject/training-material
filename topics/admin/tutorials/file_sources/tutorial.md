@@ -14,7 +14,6 @@ tags:
   - "earth-system"
   - "ocean"
   - "data"
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - Marie59

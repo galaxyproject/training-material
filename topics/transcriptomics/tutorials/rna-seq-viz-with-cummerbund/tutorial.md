@@ -17,7 +17,6 @@ key_points:
   - "Extract information from a SQLite CuffDiff database"
   - "Filter and sort results to highlight differential expressed genes of interest"
   - "Generate publication-ready visualizations of RNA-Seq analysis results"
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - bagnacan
