@@ -12,12 +12,14 @@ objectives:
 time_estimation: "30m"
 key_points:
 - Remote auth is not complex to set up and can help you meet institutional requirements
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - natefoo
     - nsoranzo
     - hexylena
+  editing:
+    - martenson
+    - mvdbeek
 subtopic: features
 tags:
   - authentication
