@@ -29,10 +29,10 @@ key_points:
 - Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - carpentries
+  editing:
     - hexylena
     - dirowa
     - bazante1

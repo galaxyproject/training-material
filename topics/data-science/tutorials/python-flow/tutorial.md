@@ -27,10 +27,10 @@ key_points:
 - "`not` can be used to invert the condition"
 
 subtopic: python-modular
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - carpentries
+  editing:
     - hexylena
     - dirowa
     - bazante1

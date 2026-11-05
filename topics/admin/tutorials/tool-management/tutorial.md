@@ -14,7 +14,6 @@ key_points:
   - Ephemeris and automation help with the tool management on Galaxy
   - There are tool management best practices you can learn from
   - Do not manage your Galaxy tools manually
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - martenson

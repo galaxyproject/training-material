@@ -26,10 +26,10 @@ key_points:
 - "Indexing beyond the end of the collection is an error."
 
 subtopic: python-modular
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - carpentries
+  editing:
     - hexylena
     - dirowa
     - bazante1
