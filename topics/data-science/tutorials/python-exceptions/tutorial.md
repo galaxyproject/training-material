@@ -22,7 +22,6 @@ key_points:
 - finally lets you cleanup your temporary files, if you created some.
 
 subtopic: python-modular
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena

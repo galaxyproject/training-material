@@ -19,7 +19,6 @@ key_points:
 - Did you forget how a particular module or function works? Try `help()`
 
 subtopic: python-modular
-#TODO: please check contribution roles roles below and remove this line if done
 contributions:
   authorship:
     - hexylena
