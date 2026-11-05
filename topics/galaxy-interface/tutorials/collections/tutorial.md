@@ -23,6 +23,12 @@ key_points:
 contributions:
   authorship:
     - nekrut
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
+
 subtopic: manage
 
 recordings:
@@ -44,7 +50,7 @@ recordings:
 
 ---
 
-{% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}
+{% snippet faqs/gtn/galaxy_tested_with.md version="26.1" %}
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
@@ -65,9 +71,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
 > <hands-on-title>Set format to `fastqsanger.gz`</hands-on-title>
-> The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.
+> The above datasets are in `fastqsanger.gz` format. Galaxy is fairly good at correctly identifying the datatype/format for imported/uploaded datasets. However, if Galaxy does not default to the correct datatype, this can be set manually. Another option available is to specify the datatype when uploading/importing the datasets. The {% icon tip %} **Tip** sections below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it can be difficult to guess them automatically.
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>
+> {% snippet faqs/galaxy/datasets_change_datatype.md format="fastqsanger.gz" %}
 >
 > {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
@@ -88,38 +96,65 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 # Creating a paired dataset collection
 
-You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually.
+You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g. start four mapping jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually.
 
-This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with.
+This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus, instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with.
 
-Because our data is *paired* we need to create a hierarchical collection called **Paired Dataset Collection** or **Paired Collection**. In such collection there are two layers. The first layer corresponds to individual samples (e.g., `M117-bl`). The second layer represent `forward` and `reverse` reads corresponding to each sample:
+Because our data is *paired* we need to create a hierarchical collection called a **Paired Dataset Collection** or **Paired Collection**. In such collections there are two layers. The first layer corresponds to individual samples (e.g. `M117-bl`). The second layer represent `forward` and `reverse` reads corresponding to each sample:
 
 
 ![paired collection](../../images/collections/paired_collection.svg "The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.")
 
 
-To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy's history menu. Fig. 2 below shows this process.
+## Selecting Datasets and Building a Collection
 
+To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button {% icon galaxy-selector %} of Galaxy's history menu. Figure 2 below shows this process.
 
+![selecting multiple datasets for list builder](../../images/collections/collections_select_datasets_build.gif  "Selecting multiple datasets and creating a paired collection using the list builder.")
 
-![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif  "Selecting multiple datasets and creating a paired collection.")
+After selecting the datasets to be included in the collection, there are two options for building the collection: (1) **Auto Build List** and (2) **Advanced Build List**. In the above figure, the **Advanced Build List** option was selected, which opens the Galaxy collection builder at the first step which shows all the collection builder options. In this case Galaxy has automatically identified that the selected datasets are paired-end as the dataset names contain the text `_1` or `_2` and has selected the **List of Paired Datasets** option. The selected option is indicated by the box outlined in dark blue. If the selected datasets are not recognised as paired-end by Galaxy, then the **Flat List** option will be selected by default.
 
+> <comment-title>Using Auto Build List</comment-title>
+>
+> If using the **Auto Build List** option after selecting datasets, the collection builder will determine if the selected datasets are best suited for the **Flat List** or **List of Paired Datasets** option based on the dataset names. If all datasets have a paired-end indicators (e.g. `_F` and `_R`, `_1` and `_2`, or `.1` and `.2`) and Galaxy is able to match up pairs of datasets with identical names only differing by the paired-end indicator then Galaxy will select **List of Paired Datasets**. Alternatively, if there are no paired-end indicators identified then Galaxy will select **Flat List**. Figure 3 below shows the **Auto Build List** functionality.
+>
+> ![selecting multiple datasets for list autobuilder](../../images/collections/collections_select_datasets_autobuild.gif  "Selecting multiple datasets and creating a paired collection using the list autobuilder.")
+> 
+{: .comment}
 
+> <comment-title>A Note on Galaxy Terminology</comment-title>
+>
+> Within Galaxy the terms "Collection" and "List" are used interchangeably.
+> 
+{: .comment}
 
+> <comment-title>Collection/List Builder</comment-title>
+>
+> There are six options for creating collections available through the Galaxy **List Builder**:
+> - **Flat List**: This option creates a simple flat list of files. If your data isn't nested and does not contained paired datasets, this is the the option to choose.
+> - **List of Paired Datasets**: This option creates a list of paired datasets (e.g., paired-end data from Illumina and ElementBio), use this option if all of your data should be paired off.
+> - **Rule Builder**: The rule builder allows building arbitrarily nested collections of data with reproducible metadata parsing and other advanced features.
+> - **Mixed List of Paired and Unpaired Datasets**: For studies that have a mix of paired and unpaired data, this may be the right choice. Existing tools and workflows may have to be updated to allow this modality though.
+> - **Nested List of Datasets**: A nested list of datasets. This type of collection is a list where each element is in turn a list of datasets. The outer list identifier might group samples together by condition, sample type, etc..
+> - **Nested List of Dataset Pairs**: A nested list of datasets. This type of collection is a list where each element is in turn a list of pairs of datasets.
+>
+> The most commonly used options are **Flat List** and **List of Paired Datasets**.
+> 
+{: .comment}
 
-The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Filters** link (see animation in Fig. 3). The interface will change into its unpaired state.
+After selecting the type of **List Builder**, in this instance the **List of Paired Datasets**, click **Next** at the bottom of the page to progress to the **Auto Pairing** page. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. The paired datasets are shown under **Auto-matched Pairs**. Let's however pretend that this did not happen. Delete the text in the two **Filter text** text boxes (free text boxes pre-filled with `_1` and `_2`). The interface will change into its unpaired state (all datasets will be listed under **Un-matched Datasets**).
 
-Here datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter text** text box and `_2` in the right. You will see that the dataset collection wizard will automatically filter lists on each side of the interface. Now you can either click **Auto pair** if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing **Pair these datasets** button separating each pair.
+Here datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in the dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter text** text box and `_2` in the right. You will see that the dataset collection builder will automatically pair the datasets once both filters are set. Once all datasets have been assigned to a pair, click on **Next** at the bottom of the page to progress to the **Builder** page.
 
-Now it is time to name the collection: type `M117-collection` in **Name** text box and create the collection by clicking **Create collection**. A new item will appear in the history.
+The **Builder** page again shows the datasets to be assigned to each pair and the corresponding *List Identifier* that will be used in the created collection (this will generally be the base of the dataset name, i.e. without the paired-end indicator). There are also options to remove the extensions from the dataset names (e.g. `.fq.gz`) and to hide the original dataset elements in the history, which are both toggled on by default. The new collection must be given a name before it can be created. Type `M117-collection` in the **Name** text box and create the collection by clicking **Build**. A new collection item will appear in the history and the original `.fq.gz` datasets will be hidden. This process is demonstrated below in Figure 4.
 
+![using collection wizard](../../images/collections/collections_create_collection.gif "Working with collection wizard. The text above this figure explains each step.")
 
-![using collection wizard](../../images/collections/using_collection_wizard.gif "Working with collection wizard. Text above this figure explains each step.")
+## Viewing Datasets in a Paired-end Collection
 
+Clicking on collection will expand it to show four pairs it contains. Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets. Expanding these further will enable one to see individual datasets, as shown below in Figure 5.
 
-Clicking on collection will expand it to show four pairs it contains (panel **B**). Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets (panel **C**). Expanding these further will enable one to see individual datasets (panel **D**).
-
-![expanding collection](../../images/collections/expanding_collection.gif "To look what is inside a collection, just click on it.")
+![expanding collection](../../images/collections/collections_viewing_datasets.gif "To look what is inside a collection, just click on it.")
 
 # Processing data organized as a collection
 
@@ -137,7 +172,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 
 ## Mapping reads
 
-**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing `BWA MEM` in the search box at the top left corner of Galaxy interface).
+{% tool Map with BWA-MEM %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing `BWA MEM` in the search box at the top left corner of Galaxy interface).
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
@@ -151,26 +186,24 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > The interface should look like this:
 >
->
 > ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png "Tool interface")
->
 >
 >    - Click **Run Tool** button
 >
 {: .hands_on}
 
-You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually generate four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
+You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually generate four separate {% tool Map with BWA-MEM %} jobs. In the end this {% tool Map with BWA-MEM %} run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because {% tool Map with BWA-MEM %} takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
 
 ![bwa_memCollection_ABC](../../images/collections/collection_expansion.svg)
 
 ## Calling variants
 
-After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets.
+After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool {% tool Call variants with LoFreq %} will take a collection of BAM datasets (the one produced by {% tool Map with BWA-MEM %}), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets.
 
 > <hands-on-title>Call variants  </hands-on-title>
 >
 > Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of **BWA-MEM** {% icon tool %})
+>    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of {% tool Map with BWA-MEM %})
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `chrM.fa.gz (as fasta)` (Input dataset)
 >    - *"Call variants across"*: `Whole reference`
@@ -190,13 +223,13 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 
 ## Create table of variants using **SnpSift Extract Fields**
 
-We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with `SNPSift`: a tool specifically designed for manipulation of tab-delimited data.
+We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with {% tool SnpSift %}: a tool specifically designed for manipulation of tab-delimited data.
 
 
 > <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `Call variants on collection...` (output of **Call variants with lofreq** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `Call variants on collection...` (output of {% tool Call variants with LoFreq %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4`
 >    - *"One effect per line"*: `Yes`
 >
@@ -217,14 +250,14 @@ As a result of this operation we now have a collection of four tab delimited fil
 
 ## Collapse data into a single dataset
 
-We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
+We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset with {% tool Collapse Collection %}. For more information about collapsing collections see this video:
 
 {% include _includes/youtube.html id="ypuFZ1RKMIY" title="Collapsing collections" %}
 
 > <hands-on-title>Collapse a collection</hands-on-title>
 >
 > Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %} with the following parameters:
->    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `SnpSift Extract Fields ...` (output of **SnpSift Extract Fields** {% icon tool %})
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `SnpSift Extract Fields ...` (output of {% tool SnpSift Extract Fields %})
 >    - "*Keep one header line*": `Yes`
 >    - "*Prepend File name*": `Yes`
 >    - "*Where to add dataset name*": `Same line and each line in dataset`
@@ -279,7 +312,7 @@ We will have a single dataset as the output:
 
 > <code-out-title>A single dataset</code-out-title>
 >
->then the **Collapse Collection** {% icon tool %} will produce this:
+>then the {% tool Collapse Collection %} will produce this:
 >
 >```
 >M117-bl.fq   chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
@@ -306,7 +339,7 @@ From there you can import histories to make them your own.
 
 # Collection operations
 
-In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by `BWA-MEM`. Varinat calling by `lofreq` and field extraction with `SnpEff` maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.
+In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by {% tool Map with BWA-MEM %}. Varinat calling by {% tool Call variants with LoFreq %} and field extraction with {% tool SnpSift %} maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.
 
 ![Collection lifecycle](../../images/collections/collection_lifecycle.svg "Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example. ")
 
@@ -322,13 +355,13 @@ Let's look at these categories in more detail:
 
 ### Extract dataset
 
-{% icon tool %} **Extract dataset** extracts datasets from a collection based on either position or identifier.
+{% tool Extract dataset %} extracts datasets from a collection based on either position or identifier.
 
 The tool allow extracting datasets based on position (**The first dataset** and **Select by index** options) or name (**Select belement identifier** option). This tool effectively collapses the inner-most collection into a dataset. For nested collections (e.g a list of lists of lists: outer:middle:inner, extracting the inner dataset element) a new list is created where the selected element takes the position of the inner-most collection (so outer:middle, where middle is not a collection but the inner dataset element).
 
 ### Filter empty
 
-{% icon tool %} **Filter empty** removes empty elements from a collection.
+{% tool Filter empty %} removes empty elements from a collection.
 
 This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when downstream tools require datasets to have content.
 
@@ -336,7 +369,7 @@ This tool takes a dataset collection and filters out (removes) empty datasets. T
 
 ### Filter failed datasets
 
-{% icon tool %} **Filter failed datasets** removes datasets in error (red) from a collection.
+{% tool Filter failed datasets %} removes datasets in error (red) from a collection.
 
 This tool takes a dataset collection and filters out (removes) datasets in the failed (red) state. This is useful for continuing a multi-sample analysis when one or more of the samples fails at some point.
 
@@ -344,7 +377,7 @@ This tool takes a dataset collection and filters out (removes) datasets in the f
 
 ### Build list
 
-{% icon tool %} **Build list** creates a new list collection from individual datasets or collections.
+{% tool Build list %} creates a new list collection from individual datasets or collections.
 
 This tool combines individual datasets or collections into a new collection. The simplest scenario is building a new colection from individual datasets (case **A** in the image below). You can merge a collection with individual dataset(s). In this case (see **B** in the image below) the individual dataset(s) will be merged with each element of the input collection to create a nested collection. Finally, two or more collection can be merged together creating a nested collection (case **C** in the image below).
 
@@ -352,7 +385,7 @@ This tool combines individual datasets or collections into a new collection. The
 
 ### Filter collection
 
-{% icon tool %} **Filter collection** removes elements from a collection using a list supplied in a file.
+{% tool Filter collections %} removes elements from a collection using a list supplied in a file.
 
 This tools allow filtering elements from a data collection.  It takes an input collection and a text file with names (i.e. identifiers). The tool behaviour is controlled by **How should the elements to remove be determined?** drop-down. It has the following options:
 
@@ -414,7 +447,7 @@ the tool will return two collections:
 
 ### Relabel identifiers
 
-{% icon tool %}  **Relabel identifiers** changes identifiers of datasets within a collection using identifiers from a supplied file.
+{% tool Relabel identifiers %} changes identifiers of datasets within a collection using identifiers from a supplied file.
 
 New identifiers can be supplied as either a simple list or a tab-delimited file mapping old identifier to the new ones. This is controlled using **How should the new identifiers be specified?** drop-down:
 
@@ -474,7 +507,7 @@ the tool will return:
 
 ### Sort collection
 
-{% icon tool %} **Sort collection** sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
+{% tool Sort collection %} sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
 
 #### Numeric sort
 
@@ -520,9 +553,9 @@ the output will predictably look like this:
              [Mule176]
 ```
 
-### Tag collection
+### Tag elements
 
-{% icon tool %}  **Tag collection** adds tags (including name: and group: tags) to collection elements.
+{% tool Tag elements %} adds tags (including name: and group: tags) to collection elements.
 
 The relationship between element names and tags is specified in a two column tab-delimited file. This file may contain less entries than elements in the collection. In that case only matching list identifiers will be tagged.
 
@@ -540,7 +573,7 @@ More about tags
 
 ### Flatten collection
 
-{% icon tool %} **Flatten collection** collapses nested collection into a simple list.
+{% tool Flatten collection %} collapses nested collection into a simple list.
 
 This tool takes nested collections such as a list of lists or a list of dataset pairs and produces a flat list from the inputs. It effectively "flattens" the hierarchy. The collection identifiers are merged together (using `_` as default) to create new collection identifiers in the flattened result:
 
@@ -548,7 +581,7 @@ This tool takes nested collections such as a list of lists or a list of dataset 
 
 ### Merge collections
 
-{% icon tool %}  **Merge collections** takes two or more collections and creates a single collection from them.
+{% tool Merge collections %} takes two or more collections and creates a single collection from them.
 
 By default the tool assumes that collections that are being merged have unique dataset names. If it not the case only one (the first) of the datasets with a repeated name will be included in the merged collection. For example, suppose you have two collections. Each has two datasets named "A" and "B":
 ```
@@ -701,7 +734,7 @@ This option will simply trigger an error.
 
 ### Zip collection
 
-{% icon tool %} **Zip collection** takes two collections and creates a paired collection from them.
+{% tool Zip collection %} takes two collections and creates a paired collection from them.
 
 If you have one collection containing only forward reads and one containing only reverse, this tools will "zip" them together into a simple paired collection. For example, given two collections with `forward` and `reverse` reads they can be "zipped" into a single paired collection:
 
@@ -709,7 +742,7 @@ If you have one collection containing only forward reads and one containing only
 
 ### Unzip collection
 
-{% icon tool %} **Unzip collection** takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets).
+{% tool Unzip collection %} takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets).
 
 Given a paired collection of forward and reverse reads this tool will "unzip" it into two collections containing forward and reverse reads, respectively:
 
@@ -719,7 +752,7 @@ Given a paired collection of forward and reverse reads this tool will "unzip" it
 
 ### Column join
 
-{% icon tool %} **Column join** merges elements of a collection on a given column.
+{% tool Column join %} merges elements of a collection on a given column.
 
 If you have a collection with three elements (image below), merging it on the first column will first produce a union on values found in the first column of each elements and then paste elements having the same value side-by-side:
 
@@ -727,7 +760,7 @@ If you have a collection with three elements (image below), merging it on the fi
 
 ### Collapse collection
 
-{% icon tool %} **Collapse collection** merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial). **A** = `Same line and each line in dataset`; **B** = `Same line and only once per dataset`; **C** =  `Line above`
+{% tool Collapse collection %} merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial). **A** = `Same line and each line in dataset`; **B** = `Same line and only once per dataset`; **C** =  `Line above`
 
 ![Collapse collection](../../images/collections/collapse_collection.svg)
 
