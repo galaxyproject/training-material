@@ -19,7 +19,7 @@ key_points:
   - "Multiple datasets can be combined in a collection."
   - "This significantly simplifies the analysis."
   - "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results."
-  - "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
+  - "There are a variety of **Collection operation** tools allowing to perform a variety of transformations."
 contributions:
   authorship:
     - nekrut
@@ -118,7 +118,7 @@ After selecting the datasets to be included in the collection, there are two opt
 >
 > If using the **Auto Build List** option after selecting datasets, the collection builder will determine if the selected datasets are best suited for the **Flat List** or **List of Paired Datasets** option based on the dataset names. If all datasets have a paired-end indicators (e.g. `_F` and `_R`, `_1` and `_2`, or `.1` and `.2`) and Galaxy is able to match up pairs of datasets with identical names only differing by the paired-end indicator then Galaxy will select **List of Paired Datasets**. Alternatively, if there are no paired-end indicators identified then Galaxy will select **Flat List**. Figure 3 below shows the **Auto Build List** functionality.
 >
-> ![selecting multiple datasets for list autobuilder](../../images/collections/collections_select_datasets_autobuild.gif  "Selecting multiple datasets and creating a paired collection using the list autobuilder.")
+> ![selecting multiple datasets for list autobuilder](../../images/collections/collections_select_datasets_autobuild.gif  "Selecting multiple datasets and creating a paired collection using the list auto builder.")
 > 
 {: .comment}
 
@@ -144,17 +144,17 @@ After selecting the datasets to be included in the collection, there are two opt
 
 After selecting the type of **List Builder**, in this instance the **List of Paired Datasets**, click **Next** at the bottom of the page to progress to the **Auto Pairing** page. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. The paired datasets are shown under **Auto-matched Pairs**. Let's however pretend that this did not happen. Delete the text in the two **Filter text** text boxes (free text boxes pre-filled with `_1` and `_2`). The interface will change into its unpaired state (all datasets will be listed under **Un-matched Datasets**).
 
-Here datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in the dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter text** text box and `_2` in the right. You will see that the dataset collection builder will automatically pair the datasets once both filters are set. Once all datasets have been assigned to a pair, click on **Next** at the bottom of the page to progress to the **Builder** page.
+Here datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in the dataset collection builder to pair our datasets.  Type `_1` in the left **Filter text** text box and `_2` in the right. You will see that the dataset collection builder will automatically pair the datasets once both filters are set. Once all datasets have been assigned to a pair, click on **Next** at the bottom of the page to progress to the **Builder** page.
 
 The **Builder** page again shows the datasets to be assigned to each pair and the corresponding *List Identifier* that will be used in the created collection (this will generally be the base of the dataset name, i.e. without the paired-end indicator). There are also options to remove the extensions from the dataset names (e.g. `.fq.gz`) and to hide the original dataset elements in the history, which are both toggled on by default. The new collection must be given a name before it can be created. Type `M117-collection` in the **Name** text box and create the collection by clicking **Build**. A new collection item will appear in the history and the original `.fq.gz` datasets will be hidden. This process is demonstrated below in Figure 4.
 
-![using collection wizard](../../images/collections/collections_create_collection.gif "Working with collection wizard. The text above this figure explains each step.")
+![using collection builder](../../images/collections/collections_create_collection.gif "Working with the collection builder. The text above this figure explains each step.")
 
 ## Viewing Datasets in a Paired-end Collection
 
 Clicking on collection will expand it to show four pairs it contains. Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets. Expanding these further will enable one to see individual datasets, as shown below in Figure 5.
 
-![expanding collection](../../images/collections/collections_viewing_datasets.gif "To look what is inside a collection, just click on it.")
+![expanding collection](../../images/collections/collections_viewing_datasets.gif "To look at what is inside a collection, just click on it.")
 
 # Processing data organized as a collection
 
