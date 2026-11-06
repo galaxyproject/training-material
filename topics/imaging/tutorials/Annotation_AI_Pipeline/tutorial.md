@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: AI pipeline for annotating marine species (Project Moorev - Marine)
-zenodo_link: https://doi.org/10.5281/zenodo.20639741
+zenodo_link: 'https://zenodo.org/record/20639741'
 questions:
 - How can we use artificial intelligence to annotate images of marine species?
 - How can we check and correct these annotations?

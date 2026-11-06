@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Prepare Data from CbioPortal for Flexynesis Integration
-zenodo_link: https://zenodo.org/records/16287482
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How to download data from cBioPortal?
 - How to prepare omics data for Flexynesis integration.
@@ -14,10 +14,12 @@ time_estimation: 1H
 key_points:
 - cBioportal is a repository for accessible and interpretable cancer genomic data
 - Flexynesis comprehensive tool can be used to make data ready for integration.
-contributors:
-- Nilchia
-- plushz
-- bgruening
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - Nilchia
+    - plushz
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

@@ -45,10 +45,11 @@ follow_up_training:
     tutorials:
       - tool-generators-advanced
 
-contributors:
-  - fubar2
-  - hexylena
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - fubar2
+    - hexylena
 recordings:
 - captioners:
   - fubar2

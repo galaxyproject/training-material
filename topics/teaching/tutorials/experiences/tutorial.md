@@ -12,9 +12,11 @@ objectives:
   - Learn how others teach using Galaxy
 key_points:
   - Every instructor has their prefered way to teach using Galaxy
-contributors:
-  - bebatut
-  - fpsom
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - bebatut
+    - fpsom
 ---
 
 We all teach in different ways, share your training philosophy and help other instructors find the way that is best for them!

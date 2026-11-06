@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Object tracking using CellProfiler
 level: Intermediate
 subtopic: analyses
-zenodo_link: https://doi.org/10.5281/zenodo.4567084
+zenodo_link: 'https://zenodo.org/record/4567084'
 requirements:
   -
     type: "internal"
@@ -31,6 +31,7 @@ contributions:
     - annefou
   funding:
     - oscars
+    - fiesta
 
 tags:
   - Isolated object tracking
@@ -83,7 +84,7 @@ The **same** CellProfiler tracking pipeline can be applied to time series from v
 
 > <comment-title> Tracking atmospheric rivers with a cell-tracking pipeline </comment-title>
 >
-> In the Earth-observation path we reuse this **same** CellProfiler object-tracking pipeline — built to follow dividing nuclei — to detect and track **atmospheric rivers**: long, narrow filaments of intense water-vapour transport in the atmosphere (the "rivers in the sky" that deliver much of the world's extreme rainfall). This is a cross-discipline experiment from the [OSCARS-FIESTA](https://fiesta.eu) project. Why does it work? An atmospheric river is a **bright, elongated filament on a dark background** in a map of vertically integrated vapour transport (IVT) — morphologically much like the bright nuclei the pipeline was built for. A river that intensifies, drifts and splits over time is the climate-science analogue of a dividing nucleus, so the same *segment-then-link-by-overlap* approach tracks it. The preprocessing notebooks, the full Galaxy run provenance, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-cellprofiler-eo).
+> In the Earth-observation path we reuse this **same** CellProfiler object-tracking pipeline — built to follow dividing nuclei — to detect and track **atmospheric rivers**: long, narrow filaments of intense water-vapour transport in the atmosphere (the "rivers in the sky" that deliver much of the world's extreme rainfall). This is a cross-discipline experiment from the [OSCARS-FIESTA](https://oscars-project.eu/projects/fair-image-analysis-across-sciences) project. Why does it work? An atmospheric river is a **bright, elongated filament on a dark background** in a map of vertically integrated vapour transport (IVT) — morphologically much like the bright nuclei the pipeline was built for. A river that intensifies, drifts and splits over time is the climate-science analogue of a dividing nucleus, so the same *segment-then-link-by-overlap* approach tracks it. The preprocessing notebooks, the full Galaxy run provenance, and a citable archive are in the [OSCARS-FIESTA example repository](https://github.com/annefou/fiesta-galaxy-cellprofiler-eo).
 {: .comment}
 
 </div>

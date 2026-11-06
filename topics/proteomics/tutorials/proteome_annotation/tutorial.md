@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Annotating a protein list identified by LC-MS/MS experiments
 
-zenodo_link: "https://zenodo.org/record/3405119"
+zenodo_link: 'https://zenodo.org/record/3405119'
 
 questions:
 - How to filter out technical contaminants?
@@ -20,12 +20,13 @@ key_points:
 - The Human Protein Atlas is a valuable resource for annotation and exploration of protein data
 - Conversion between different gene identifiers is sometimes required
 - The Reactome pathway database can be used to browse biological pathways
-contributors:
-- vloux
-- combesf
-- davidchristiany
-- yvandenb
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - vloux
+    - combesf
+    - davidchristiany
+    - yvandenb
 subtopic: post-process
 tags: [DDA, human]
 

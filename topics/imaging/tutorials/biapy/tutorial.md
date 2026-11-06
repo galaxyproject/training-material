@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Execute a BiaPy workflow in Galaxy"
-zenodo_link: https://zenodo.org/records/10973241
+zenodo_link: 'https://zenodo.org/record/10973241'
 level: Intermediate
 subtopic: advanced
 questions:

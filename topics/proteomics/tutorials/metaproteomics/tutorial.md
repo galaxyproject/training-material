@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-zenodo_link: "https://doi.org/10.5281/zenodo.839701"
+zenodo_link: 'https://zenodo.org/record/839701'
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
   - "How can I perform taxonomy analysis and visualize metaproteomics data?"
@@ -14,12 +14,14 @@ key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
   - "Learning the basics of SQL queries can pay off"
-contributors:
-  - timothygriffin
-  - pratikdjagtap
-  - jj-umn
-  - blankclemens
-  - subinamehta
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - timothygriffin
+    - pratikdjagtap
+    - jj-umn
+    - blankclemens
+    - subinamehta
 subtopic: multi-omics
 tags: [microgalaxy]
 edam_ontology:

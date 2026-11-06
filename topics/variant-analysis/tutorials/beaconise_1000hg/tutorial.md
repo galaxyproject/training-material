@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons"
-zenodo_link: 'https://zenodo.org/records/10658688'
+zenodo_link: 'https://zenodo.org/record/10658688'
 subtopic: 'data-management'
 priority: 2
 questions:
@@ -40,10 +40,12 @@ key_points:
   and acquiring skills in effective troubleshooting and error handling.
 - Efficiently querying Beacons for variants involves mastering diverse querying methods, leveraging MongoDB's capabilities to enhance search precision,
   and emphasizing the necessity for precise and efficient queries within Beacon structures.
-contributors:
-- khaled196
-- kkamieniecka
-- poterlowicz-lab
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - khaled196
+    - kkamieniecka
+    - poterlowicz-lab
 ---
 
 

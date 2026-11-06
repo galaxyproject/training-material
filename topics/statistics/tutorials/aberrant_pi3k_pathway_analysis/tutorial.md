@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis'
-zenodo_link: https://zenodo.org/record/4306639
+zenodo_link: 'https://zenodo.org/record/4306639'
 questions:
 - How to predict aberrant pathway activity in The Cancer Genome Atlas (TCGA) using
   Machine learning approaches?
@@ -15,9 +15,11 @@ key_points:
 - Machine learning based Aberrant pathway activity analysis can distinguish normal and tumor samples. Also can identify transcriptomic signature of tumors associated with oncogene or tumor suppressor gene mutations.
 - Correlations from classifier predictions and pharmacological responses determine drug sensitivity among cancer cell lines and can be useful in improving personalized medicine approaches.
 - Classifier models generated from the suite-papaa can identify potential biomarkers with in the transcriptomic signature of tumors.
-contributors:
-- nvk747
-- blankenberg
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - nvk747
+    - blankenberg
 tags:
 - Machine learning
 - Pan-cancer

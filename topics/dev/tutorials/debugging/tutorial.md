@@ -21,10 +21,12 @@ key_points:
   - "If you find a bug in a code block that is not covered by a test, before you fix the bug, write a test exposing the bug; run the test to ensure it fails; then fix the bug; then run the test again to ensure it passes."
   - "Write useful and property formatted commit messages."
   - "Pdb is your friend."
-contributors:
-  - assuntad23
-  - jdavcs
-  - jmchilton
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - assuntad23
+    - jdavcs
+    - jmchilton
 requirements:
   - type: none
     title: "Familiarity with basic Git commands"

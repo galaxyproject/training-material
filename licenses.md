@@ -1,11 +1,14 @@
 ---
-layout: page
-title: Licenses
+layout: doc
+title: GTN Licenses
 ---
 
 # Image Credits
 
-Our default avatar is from https://thenounproject.com/icon/users-1926333/ available under CC-BY
+Our default avatar is from https://thenounproject.com/icon/users-1926333/ available under CC-BY.
+
+Many schematic images used to add clarity in our user interface come from [Undraw](https://undraw.co/)
+
 
 # Fonts
 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Analyse HeLa fluorescence siRNA screen"
-zenodo_link: https://zenodo.org/record/3362976
+zenodo_link: 'https://zenodo.org/record/3362976'
 level: Intermediate
 subtopic: analyses
 questions:

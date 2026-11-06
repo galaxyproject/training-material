@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 draft: true
 
 title: Secondary metabolite discovery
-zenodo_link: https://zenodo.org/records/10652998
+zenodo_link: 'https://zenodo.org/record/10652998'
 questions:
 - How to discover secondary metabolites produced by microorganisms ?
 - How to identify the discovered secondary metabolites in compound libraries ?
@@ -17,9 +17,9 @@ key_points:
 - Gene cluster prediction that can be performed for any assembly or genome of microorganisms (procaryotes and fungi).
 - Bridging of gene annotation and cheminformatics.
 - Usage of custom script to bridge workflow steps.
-contributors:
-- paulzierep
-
+contributions:
+  authorship:
+    - paulzierep
 ---
 
 Genome mining is an important source for various bio-active compounds such as antibiotics and fungicides ({% cite adamek_mining_2017 %}).

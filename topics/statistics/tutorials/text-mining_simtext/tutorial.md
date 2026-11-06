@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Text-mining with the SimText toolset
-zenodo_link: https://doi.org/10.5281/zenodo.4638516
+zenodo_link: 'https://zenodo.org/record/4638516'
 questions:
 - How can I automatically collect PubMed data for a set of biomedical entities such as genes?
 - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?
@@ -18,11 +18,12 @@ key_points:
 - The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature
 tags:
 - interactive-tools
-contributors:
-- mgramm1
-- dlalgroup
-- blankenberg
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - mgramm1
+    - dlalgroup
+    - blankenberg
 ---
 
 

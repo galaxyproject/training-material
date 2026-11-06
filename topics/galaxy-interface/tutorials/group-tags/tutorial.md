@@ -14,8 +14,9 @@ objectives:
 time_estimation: 10m
 key_points:
 - Group tags allow complex analyses without reshaping or unhiding datasets in a collection
-contributors:
-- mvdbeek
+contributions:
+  authorship:
+    - mvdbeek
 subtopic: manage
 ---
 

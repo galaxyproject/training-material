@@ -20,9 +20,11 @@ requirements:
     tutorials:
       - collections
       - upload-rules
-contributors:
-  - jmchilton
-  - hexylena
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - jmchilton
+    - hexylena
 subtopic: upload
 
 recordings:

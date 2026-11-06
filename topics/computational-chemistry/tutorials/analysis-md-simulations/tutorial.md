@@ -27,12 +27,13 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
-contributors:
-  - chrisbarnettster
-  - tsenapathi
-  - simonbray
-  - nagoue
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - chrisbarnettster
+    - tsenapathi
+    - simonbray
+    - nagoue
 ---
 
 

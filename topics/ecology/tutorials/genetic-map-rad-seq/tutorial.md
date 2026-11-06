@@ -4,7 +4,7 @@ redirect_from:
   - /topics/sequence-analysis/tutorials/genetic-map-rad-seq/tutorial
 
 title: "RAD-Seq to construct genetic maps"
-zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
+zenodo_link: 'https://zenodo.org/record/1219888'
 tags:
   - RAD-seq
   - genetic composition EBV class
@@ -19,9 +19,9 @@ objectives:
   - "Create input files for genetic map building software"
 time_estimation: "8h"
 key_points:
-contributors:
-  - yvanlebras
-
+contributions:
+  authorship:
+    - yvanlebras
 subtopic: ecologyanalysis
 ---
 

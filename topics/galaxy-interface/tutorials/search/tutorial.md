@@ -14,9 +14,11 @@ time_estimation: "5m"
 key_points:
   - Searching is easy and powerful
   - It will help you manage large histories with complex analyses
-contributors:
-  - hexylena
-  - nekrut
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - hexylena
+    - nekrut
 subtopic: histories
 ---
 

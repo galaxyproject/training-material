@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "metaQuantome 1: Data creation"
-zenodo_link: "https://doi.org/10.5281/zenodo.4037137"
+zenodo_link: 'https://zenodo.org/record/4037137'
 level: Intermediate
 questions:
  - "How do I perform functional and taxonomy analysis on metaproteomics data?"
@@ -15,13 +15,14 @@ key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
   - "Learning the basics of SQL queries can pay off"
-contributors:
-  - subinamehta
-  - timothygriffin
-  - pratikdjagtap
-  - emmaleith
-  - mariecrane
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - subinamehta
+    - timothygriffin
+    - pratikdjagtap
+    - emmaleith
+    - mariecrane
 follow_up_training:
 
     -

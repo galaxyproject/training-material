@@ -4,7 +4,7 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
 title: "Rule Based Uploader"
-zenodo_link: "https://zenodo.org/records/3263975"
+zenodo_link: 'https://zenodo.org/record/3263975'
 level: Intermediate
 questions:
   - "How to use the rule based uploader to create complex collections"
@@ -27,9 +27,11 @@ follow_up_training:
     topic_name: galaxy-interface
     tutorials:
       - upload-rules-advanced
-contributors:
-  - jmchilton
-  - hexylena
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - jmchilton
+    - hexylena
 subtopic: upload
 
 recordings:

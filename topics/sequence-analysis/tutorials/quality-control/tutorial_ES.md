@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Control de calidad
-zenodo_link: https://zenodo.org/records/61771
+zenodo_link: 'https://zenodo.org/record/61771'
 questions:
 - ¿Cómo hacer controles de calidad sobre datos NGS?
 - ¿Cuáles son los parámetros de calidad a comprobar para un conjunto de datos? 

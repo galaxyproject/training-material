@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Mass spectrometry imaging: Examining the spatial distribution of analytes'
-zenodo_link: https://zenodo.org/record/484496
+zenodo_link: 'https://zenodo.org/record/484496'
 level: Introductory
 questions:
 - What is the typical mass range of VOCs?

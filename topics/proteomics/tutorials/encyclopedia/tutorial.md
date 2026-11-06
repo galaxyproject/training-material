@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: 'https://doi.org/10.5281/zenodo.13505774'
+zenodo_link: 'https://zenodo.org/record/13505774'
 tags: [DIA]
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
@@ -17,15 +17,14 @@ key_points:
 - With SearchToLib, Chromatogram Libraries can be created
 - Learning conversion of file types using msconvert
 subtopic: id-quant
-contributors:
-- emmaleith
-- subinamehta
-- jj-umn
-- pratikdjagtap
-- timothygriffin
-
-
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - emmaleith
+    - subinamehta
+    - jj-umn
+    - pratikdjagtap
+    - timothygriffin
 recordings:
 - captioners:
   - mtekman

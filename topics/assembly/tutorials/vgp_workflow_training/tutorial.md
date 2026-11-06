@@ -1,8 +1,10 @@
 ---
 layout: tutorial_hands_on
-title: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C
-  data
+title: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data
+
+subtopic: pacbio-assembly
 zenodo_link: https://zenodo.org/record/5887339
+
 level: Intermediate
 tags:
 - pacbio
@@ -27,13 +29,15 @@ key_points:
 - 'The assembly can be divided in four main stages: genome profile analysis, HiFi
   long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid
   scaffolding'
-contributors:
-- delphine-l
-- astrovsky01
-- gallardoalba
-- pickettbd
-- abueg
-- nekrut
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - delphine-l
+    - astrovsky01
+    - gallardoalba
+    - pickettbd
+    - abueg
+    - nekrut
 abbreviations:
   primary assembly: homozygous regions of the genome plus one set of alleles for the
     heterozygous loci

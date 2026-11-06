@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of Climate Data using  NetCDF xarray Map Plotting
-zenodo_link: "https://doi.org/10.5281/zenodo.6621460"
+zenodo_link: 'https://zenodo.org/record/6621460'
 requirements:
   -
     type: "internal"
@@ -24,9 +24,9 @@ key_points:
 - NetCDF xarray map plotting colormaps
 tags:
   - pangeo
-contributors:
-- Quickbeasts51429
-
+contributions:
+  authorship:
+    - Quickbeasts51429
 subtopic: ecologyviz
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: A short introduction to Galaxy
-zenodo_link: https://doi.org/10.5281/zenodo.582600
+zenodo_link: 'https://zenodo.org/record/582600'
 level: Introductory
 tags:
 - español

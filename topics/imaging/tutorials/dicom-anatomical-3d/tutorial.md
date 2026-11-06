@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Segmentation of Anatomical Structures in Medical 3-D Images"
-zenodo_link: https://zenodo.org/records/18225140
+zenodo_link: 'https://zenodo.org/record/18225140'
 level: Introductory
 subtopic: analyses
 questions:

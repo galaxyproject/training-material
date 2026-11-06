@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Proteogenomics 3: Novel peptide analysis"
-zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+zenodo_link: 'https://zenodo.org/record/1489208'
 level: Intermediate
 questions:
   - "How to verify the spectra of novel proteoforms?"
@@ -20,13 +20,15 @@ follow_up_training:
       - proteogenomics-dbcreation
       - proteogenomics-dbsearch
 
-contributors:
-  - subinamehta
-  - timothygriffin
-  - pratikdjagtap
-  - jraysajulga
-  - jj-umn
-  - pravs3683
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - subinamehta
+    - timothygriffin
+    - pratikdjagtap
+    - jraysajulga
+    - jj-umn
+    - pravs3683
 subtopic: multi-omics
 tags: [proteogenomics]
 

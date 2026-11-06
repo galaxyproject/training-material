@@ -19,7 +19,7 @@ examples:
 <span class="workflow" data-workflow="{{ site.url }}{{ site.baseurl }}{{ include.path | convert_workflow_path_to_trs }}">
   Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
 </span>
-(<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/{{ include.path }}">Download workflow</a>)
+(<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="{{ site.baseurl }}/{{ include.path }}">Download workflow</a>)
 workflow.
 </div>
 
@@ -29,7 +29,7 @@ Click to
 <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url={{ site.url }}{{ site.baseurl }}{{ include.path | convert_workflow_path_to_trs }}">
     Launch <strong>{{ include.title }}</strong> {% icon workflow aria=false %}
 </a>
-(<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/{{ include.path }}">Download workflow</a>)
+(<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="{{ site.baseurl }}/{{ include.path }}">Download workflow</a>)
 
 </div>
 

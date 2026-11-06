@@ -14,8 +14,9 @@ time_estimation: 40m
 key_points:
   - "There are several ways to get data into Galaxy"
   - "you can upload a file by pasting in a web address, you can upload a file from your computer, and you can import an entire history."
-contributors:
-  - bebatut
+contributions:
+  authorship:
+    - bebatut
 ---
 
 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Modeling Breast Cancer Subtypes with Flexynesis
-zenodo_link: https://zenodo.org/records/16287482
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How can we model breast cancer subtypes using transcriptomics and genomic data?
 - What are the key expression patterns that distinguish different BRCA subtypes?
@@ -15,9 +15,11 @@ time_estimation: 2H
 key_points:
 - Flexynesis learns biologically meaningful latent spaces
 - BRCA subtypes can be distinguished using learned features
-contributors:
-- Nilchia
-- bgruening
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

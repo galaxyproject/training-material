@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Antibiotic resistance detection"
-zenodo_link: "https://doi.org/10.5281/zenodo.3247504"
+zenodo_link: 'https://zenodo.org/record/3247504'
 questions:
   - "How do I assemble a genome with Nanopore data?"
   - "How do I get more information about the structure of the genomes?"
@@ -19,9 +19,11 @@ key_points:
   - "Nanopore sequencing is useful for reconstruction of genomes"
   - "Antimicrobial resistance genes are detectable after fast assembly"
   - "The CARD database is a useful resource describing antibiotic resistance genes"
-contributors:
-  - willemdek11
-  - shiltemann
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - willemdek11
+    - shiltemann
 subtopic: metabarcoding
 tags:
   - nanopore

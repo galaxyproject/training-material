@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Proteogenomics 2: Database Search"
-zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+zenodo_link: 'https://zenodo.org/record/1489208'
 level: Intermediate
 questions:
   - "How to identify variant proteoforms in MS data by searching with the customized Protein database?"

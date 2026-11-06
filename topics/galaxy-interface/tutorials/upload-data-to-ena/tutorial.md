@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Submitting sequence data to ENA
-zenodo_link: https://doi.org/10.5281/zenodo.5163611
+zenodo_link: 'https://zenodo.org/record/6912963'
 questions:
 - How do you submit raw sequence reads and assembled genomes to the European Nucleotide Archive?
 objectives:
@@ -34,11 +34,12 @@ requirements:
 
 tags:
   - covid19
-contributors:
-- roncoronimiguel
-- bedroesb
-- B0r1sD
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - roncoronimiguel
+    - bedroesb
+    - B0r1sD
 ---
 
 
@@ -118,7 +119,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 >    - *"Add .fastq (.gz, .bz2) extension to the Galaxy dataset names to match the ones described in the input tables?"*: `No`
 >    - *"Select your sample type"*: `Viral`
 >    - Under "Submission options":
->       - *"Affiliation centre"*: your institution  
+>       - *"Affiliation centre"*: your institution
 >       - *"Submit to ENA test server"*: `yes`
 >       - *"Create test outputs without submitting (meta)data to ENA"*: `no`
 > 2. Fill all metadata boxes and make sure that:
@@ -190,7 +191,7 @@ For this tutorial, we provide you with a pre-filled template and encourage you t
 >    - Give your collection a name
 >    - Click *Create Collection*
 >
-> 3. Inspect the `GTN_tutorial_mock_metadata.xlsx` (filled-in template) file by clicking on the {% icon galaxy-eye %} (eye) icon 
+> 3. Inspect the `GTN_tutorial_mock_metadata.xlsx` (filled-in template) file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
 >    https://github.com/enasequence/webin-cli
 >
@@ -220,7 +221,7 @@ As before, the submission is done to the test server before submitting to the pu
 >    - *"Select input data"*: `Paired dataset collection`
 >    - *"List of paired-end sequencing data files"*: select the collection you made above during data upload
 >    - Under "Submission options":
->       - *"Affiliation centre"*: your institution 
+>       - *"Affiliation centre"*: your institution
 >       - *"Submit to ENA test server?"*: `yes`
 >       - *"Create test outputs without submitting (meta)data to ENA"*: `no`
 >
