@@ -24,7 +24,7 @@ key_points:
 contributions:
     authorship:
     - paulineHans
-    infrastructure: 
+    infrastructure:
     - caroott
     - zimmerD
 tags:
@@ -39,7 +39,9 @@ requirements:
 ---
 
 
-Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis. Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}). Advantages of ProteomIQon include its ability to handle label-free (14N), labelled (15N), and TIMS data. Furthermore, ProteomIQon is a complete pipeline developed by a single group, [CSBiology](https://csbiology.github.io/), ensuring direct compatibility between its individual components. The project is also available on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
+Modern proteomics pursues the principle of completeness, with the aim of identifying and analysing all proteins in a system. A broader definition describes proteomics as the attempt to determine the identity, quantity, structure, and biochemical and cellular functions of all proteins in an organism, tissue, or cell compartment, including their changes depending on location, time, and physiological state ({% cite Lawrence2005 %}). Mass spectrometry is a central analytical technique in proteomics, as it generates the raw data that form the basis of downstream computational analysis.
+
+Processing pipelines such as ProteomIQon take these mass spectrometry data as input and apply a series of bioinformatic analysis steps to identify and quantify peptides and proteins ({% cite Hans2026 %}). Advantages of ProteomIQon include its ability to handle label-free (14N), labelled (15N), and TIMS data. Furthermore, ProteomIQon is a complete pipeline developed by a single group, [CSBiology](https://csbiology.github.io/), ensuring direct compatibility between its individual components. The project is also available on GitHub: [ProteomIQon Project](https://github.com/CSBiology/ProteomIQon).
 
 This beginner friendly training will explain how to work with ProteomIQon's main tools.
 
@@ -65,7 +67,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >
 > This tutorial stops after peptide ion quantification and protein inference. ProteomIQon contains additional tools, including tools for alignment and protein-level quantification, which are outside the scope of this beginner tutorial.
 >
-> The complete toolchain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/). 
+> The complete tool chain can be explored in the [ProteomIQon documentation](https://csbiology.github.io/ProteomIQon/).
 > All files that you need and produce with ProteomIQon you can find on [Zenodo](https://zenodo.org/records/22934182)
 {: .comment}
 
@@ -92,8 +94,8 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 4. Convert the `sample.wiff.tar` file to `mzML` using {% tool [MSConvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.26121.8) %}
->    - {% icon param-file %} *Input unrefined MS data*: the sample.wiff.tar that you just uploaded
->    - {% icon param-toggle %} *Do you agree to the vendor licenses?*: `Yes`
+>    - {% icon param-file %} *"Input unrefined MS data:*: `sample.wiff.tar` file you just uploaded
+>    - {% icon param-toggle %} *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
 >        - *"Apply Peak Picking"*: `Yes`
@@ -109,7 +111,7 @@ This beginner training is based on label-free proteomics data from *Chlamydomona
 
 ## Convert mzML to mzLite
 
-The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an .mzml file, which we can use as input for the next tool. The MzMLToMzLite tool offers a range of optional parameters, you can find a default version of the [MzMlToMzLiteParams.JSON file](https://github.com/CSBiology/ProteomIQon/blob/dev/src/ProteomIQon/defaultParams/mzMLToMzLiteParams.json). To understand the parameters in detail, you find a detailed [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html) here, but for our case we don't need to modify it.
+The {% tool MzMLToMzLite %} tool converts your mzML file to a mzLite file. Why? Because it is a SQLite based storage format. It holds the same spectra and metadata as the mzML, in a form that supports random access to single spectra. Using MSConvert, we now have an `.mzml` file, which we can use as input for the next tool. The {% tool MzMLToMzLite %} tool offers a range of optional parameters; to understand these in detail, you can consult the [documentation](https://csbiology.github.io/ProteomIQon/tools/MzMLToMzLite.html), but for our case we can mostly stick to the default settings.
 
 > <hands-on-title>Convert the mzML file to mzLite</hands-on-title>
 >
@@ -136,7 +138,7 @@ The MzMLToMzLite Tool converts your mzml file to a mzlite file. Why? Because it 
 
 # Creating a peptide database with PeptideDB
 
-If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the **PeptideDB Tool** {% icon tool %} comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
+If you are working with mass spectrometry data and wish to analyse the results from the mass spectrometer (the raw file), you will need a reference. A FASTA file is therefore almost always used. This FASTA file contains the amino acid sequences of the proteins expected to be present in your sample, which can be compared with the measured mass spectra. It includes the whole Proteome of *Chlamydomonas reinhardtii*. To make proper use of this reference, we need to digest it with trypsin *in-silico*. This is where the {% tool PeptideDB %} tool comes in. It gets your FASTA as input and stores the resulting peptides, with their masses and modifications, in a SQLite database.
 
 
 
@@ -186,7 +188,7 @@ If you are working with mass spectrometry data and wish to analyse the results f
 
 # Peptide Spectrum Matching
 
-Now for the first interesting tool, PeptideSpectrumMatching, this tool attempts to identify which peptide corresponds to a measured MS/MS spectrum. To do this, the tool first examines the corresponding precursor from the previous MS1 scan and determines its charge based on the isotope pattern (charge state determination). Using the charge and the measured m/z value, the mass of the peptide can then be calculated.
+Now for the first interesting tool, {% tool PeptideSpectrumMatching %}, this tool attempts to identify which peptide corresponds to a measured MS/MS spectrum. To do this, the tool first examines the corresponding precursor from the previous MS1 scan and determines its charge based on the isotope pattern (charge state determination). Using the charge and the measured m/z value, the mass of the peptide can then be calculated.
 The tool then searches the PeptideDB for all peptides whose mass approximately matches this calculated mass. The permitted deviation is defined via LookUpPPM.
 For each matching peptide, the tool then calculates which fragment ions should theoretically be produced (fragmentation). These theoretical fragments are compared with the actually measured MS2 spectrum.
 The better the theoretical peptide matches the measured spectrum, the higher the score. To this end, ProteomIQon calculates, amongst other things, a SEQUEST-like and an Andromeda-like score, as well as an X!Tandem-like score.
@@ -200,55 +202,57 @@ The current default search settings include a `LookUpPPM` value of `30.0` ppm we
 
 > <hands-on-title>Run PeptideSpectrumMatching</hands-on-title>
 >
+> 1. {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.9+galaxy0) %} with the following parameters:
+>    -  {% icon param-file %} *"Instrument output"*: `sample.mzlite` file
+>    -  {% icon param-file %} *"Peptide database"*: `Chlamy.db` database
+>    -  {% icon param-file %} *"LookUpPPM"*: `30.0`
 >
-> 1. Open {% tool [ProteomIQon PeptideSpectrumMatching](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_peptidespectrummatching/proteomiqon_peptidespectrummatching/0.0.9+galaxy0) %} in Galaxy.
->      
->    > <tip-title>About the PSM Tool</tip-title>
+>    > <warning-title>This step takes a long time! But you can skip it.</warning-title>
 >    >
->    > Currently the PSM Tool runs for 2h, we're working on a faster version, but we recommend downloading the PSM file from Zenodo and skipping the tool altogether. Alternatively, you could let it run during your lunch break or overnight.
+>    > Currently the {% tool PeptideSpectrumMatching (PSM) %} tool runs for 2h, we're working on a faster version, but we recommend downloading the PSM file from Zenodo (via the link below) and skipping this step altogether. Alternatively, you could let it run during your lunch break or overnight.
+>    >
 >    > ```
 >    > https://zenodo.org/records/22934182/files/sample.psm
 >    > ```
 >    >
->    {: .tip}
+>    {: .warning}
 >
-> 2. Select:
->    -  {% icon param-file %} *sample.mzlite file*,
->    -  {% icon param-file %} *Chlamy.db database*,
->    -  {% icon param-file %} *"LookUpPPM"*: `30.0`
-> 3. Run the tool.
-> 4. Rename the output to `sample.psm`.
-> 5. Inspect the tabular output.
+> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.psm`.
+> 3. **Inspect** {% icon galaxy-eye %} the tabular output.
 {: .hands_on}
 
 
 We now understand which input files the tool is getting and what it does, but what are we getting in return? The result is a .psm file with a lot of information, so lets have a look deeper inside.
 
-| Parameter                    | Description                                                                                                      |
-|------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `PSMId`                      | Identifier of the MS/MS spectrum                                                                                 |
-| `GlobalMod`                  | Indicator, if a peptide ion species is labeled or unlabeled                                                      |
-| `PepSequenceID`              | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                  |
-| `ModSequenceID`              | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB|
-| `Label`                      | Target/decoy label: 1 = target, −1 = decoy                                                                       |
-| `ScanNr`                     | Scan identifier, combining the spectrum ID in the raw file with an ascending MS2 ID                              |
-| `ScanTime`                   | Retention time (RT) in minutes of the MS/MS scan                                                                 |
-| `Charge`                     | Precursor ion charge state                                                                                       |
-| `PrecursorMZ`                | Precursor ion mass-to-charge ratio (m/z)                                                                         |
-| `TheoMass`                   | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                             |
-| `AbsDeltaMass`               | Absolute mass deviation between theoretical and measured mass (mass error)                                       |
-| `PeptideLength`              | Peptide length in Amino Acid count                                                                               |
-| `MissCleavages`              | Number of missed cleavages                                                                                       |
-| `SequestScore`               | SEQUEST similarity score (e.g., XCorr) quantifying agreement between theoretical and experimental spectra        |
-| `SequestNormDeltaBestToRest` | Normalized separation of the best SEQUEST score from the remaining candidate scores                              |
-| `SequestNormDeltaNext`       | Normalized separation between the best and second-best SEQUEST scores                                            |
-| `AndroScore`                 | Andromeda score quantifying the match between theoretical and experimental spectra                               |
-| `AndroNormDeltaBestToRest`   | Normalized separation of the best Andromeda score from the remaining candidate scores                            |
-| `AndroNormDeltaNext`         | Normalized separation between the best and second-best Andromeda scores                                          |
-| `XTandemScore`               | XTandem score quantifying the match between theoretical and experimental spectra                                 |
-| `XtandemNormDeltaBestToRest` | Normalized separation of the best XTandem score from the remaining candidate scores                              |
-| `XtandemNormDeltaNext`       | Normalized separation between the best and second-best XTandem scores                                            |
-| `StringSequence`             | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                             |
+> <details-title> Columns in the output file </details-title>
+>
+> | Column Header               | Description                                                                                                       |
+> |------------------------------|------------------------------------------------------------------------------------------------------------------|
+> | `PSMId`                      | Identifier of the MS/MS spectrum                                                                                 |
+> | `GlobalMod`                  | Indicator, if a peptide ion species is labeled or unlabeled                                                      |
+> | `PepSequenceID`              | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                  |
+> | `ModSequenceID`              | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB|
+> | `Label`                      | Target/decoy label: 1 = target, −1 = decoy                                                                       |
+> | `ScanNr`                     | Scan identifier, combining the spectrum ID in the raw file with an ascending MS2 ID                              |
+> | `ScanTime`                   | Retention time (RT) in minutes of the MS/MS scan                                                                 |
+> | `Charge`                     | Precursor ion charge state                                                                                       |
+> | `PrecursorMZ`                | Precursor ion mass-to-charge ratio (m/z)                                                                         |
+> | `TheoMass`                   | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                             |
+> | `AbsDeltaMass`               | Absolute mass deviation between theoretical and measured mass (mass error)                                       |
+> | `PeptideLength`              | Peptide length in Amino Acid count                                                                               |
+> | `MissCleavages`              | Number of missed cleavages                                                                                       |
+> | `SequestScore`               | SEQUEST similarity score (e.g., XCorr) quantifying agreement between theoretical and experimental spectra        |
+> | `SequestNormDeltaBestToRest` | Normalized separation of the best SEQUEST score from the remaining candidate scores                              |
+> | `SequestNormDeltaNext`       | Normalized separation between the best and second-best SEQUEST scores                                            |
+> | `AndroScore`                 | Andromeda score quantifying the match between theoretical and experimental spectra                               |
+> | `AndroNormDeltaBestToRest`   | Normalized separation of the best Andromeda score from the remaining candidate scores                            |
+> | `AndroNormDeltaNext`         | Normalized separation between the best and second-best Andromeda scores                                          |
+> | `XTandemScore`               | XTandem score quantifying the match between theoretical and experimental spectra                                 |
+> | `XtandemNormDeltaBestToRest` | Normalized separation of the best XTandem score from the remaining candidate scores                              |
+> | `XtandemNormDeltaNext`       | Normalized separation between the best and second-best XTandem scores                                            |
+> | `StringSequence`             | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                             |
+>
+{: .details}
 
 > <question-title>Does the highest search score automatically mean that a PSM is reliable?</question-title>
 >
@@ -270,81 +274,80 @@ From the combined score, the tool calculates two important statistical measures:
 - **PEP value (Posterior Error Probability):** an estimate of the probability that an individual PSM is incorrect.
 - **Q-value:** The Q-value is the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
 
-The default estimated-threshold configuration currently uses a Q-value threshold of `0.01`, a PEP threshold of `0.05`, up to `15` iterations, and a minimum increase between iterations of `0.005`. See the [PSMStatistics documentation](https://csbiology.github.io/ProteomIQon/tools/PSMStatistics.html) for details.
-
-| Parameter | Default | Meaning |
-| --- | ---: | --- |
-| `QValueThreshold` | `0.01` | Keep PSMs whose Q-value is below the threshold. |
-| `PepValueThreshold` | `0.05` | Keep PSMs whose PEP value is below the threshold. |
-| `MaxIterations` | `15` | Maximum number of retraining iterations. |
-| `MinimumIncreaseBetweenIterations` | `0.005` | Stop when too few additional confident positives are gained. |
-| `PepValueFittingMethod` | `IRLS` | Method used to fit the PEP curve. |
-| `ParseProteinIDRegexPattern` | `id` | Controls how protein identifiers are parsed from the database headers. |
-| `KeepTemporaryFiles` | `true` | Keeps temporary files generated by the statistical procedure. |
 
 > <hands-on-title>Run PSMStatistics</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PSMStatistics](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.10+galaxy0) %} in Galaxy.
-> 2. Select:
->    - {% icon param-file %} *sample.psm*
->    - {% icon param-file %} *Chlamy.db*
->    - {% icon param-file %} *Parameters*: `keep default settings`
-> 3. Run the tool.
-> 4. Rename the main output to `sample.qpsm`.
-> 5. Inspect the output table
+> 1. {% tool [ProteomIQon PSMStatistics](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmstatistics/proteomiqon_psmstatistics/0.0.10+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"PSM"*: `sample.psm`
+>    - {% icon param-file %} *"Peptide database"*: `Chlamy.db`
+>
+>    > <details-title> About the parameters </details-title>
+>    >
+>    > | Parameter | Default | Meaning |
+>    > | --- | ---: | --- |
+>    > | `Q-Value Threshold` | `0.01` | Keep PSMs whose Q-value is below the threshold. |
+>    > | `Pep-Value Threshold` | `0.05` | Keep PSMs whose PEP value is below the threshold. |
+>    > | `Max Iterations` | `15` | Maximum number of retraining iterations. |
+>    > | `Minimum Increase Between Iterations` | `0.005` | Stop when too few additional confident positives are gained. |
+>    > | `PepValueFittingMethod` | `IRLS` | Method used to fit the PEP curve. |
+>    > | `Parse Protein ID Regex Pattern` | `id` | Controls how protein identifiers are parsed from the database headers. |i
+>    >
+>    > See the [PSMStatistics documentation](https://csbiology.github.io/ProteomIQon/tools/PSMStatistics.html) for details.
+>    >
+>    {: .details}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.qpsm`.
+> 3. **Inspect** {% icon galaxy-eye %} the output table
 {: .hands_on}
 
-The `.qpsm` output retains the identification information and adds statistical confidence measures. The most important columns for this tutorial are:
+The `.qpsm` output retains the identification information and adds statistical confidence measures.
 
-| Parameter                    | Description                                                                                                      |
-|------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `PSMId`                      | Identifier of the MS/MS spectrum                                                                                 |
-| `GlobalMod`                  | Indicator, if a peptide ion species is labeled or unlabeled                                                      |
-| `PepSequenceID`              | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                  |
-| `ModSequenceID`              | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB|
-| `Label`                      | Target/decoy label: 1 = target, −1 = decoy                                                                       |
-| `ScanNr`                     | Scan identifier, combining the spectrum ID in the raw file with an ascending MS2 ID                              |
-| `ScanTime`                   | Retention time (RT) in minutes of the MS/MS scan                                                                 |
-| `Charge`                     | Precursor ion charge state                                                                                       |    
-| `PrecursorMZ`                | Precursor ion mass-to-charge ratio (m/z)                                                                         |
-| `TheoMass`                   | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                             |
-| `AbsDeltaMass`               | Absolute mass deviation between theoretical and measured mass (mass error)                                       |   
-| `PeptideLength`              | Peptide length in Amino Acid count                                                                               | 
-| `MissCleavages`              | Number of missed cleavages                                                                                       |
-| `SequestScore`               | SEQUEST similarity score (e.g., XCorr) quantifying agreement between theoretical and experimental spectra        |
-| `SequestNormDeltaBestToRest` | Normalized separation of the best SEQUEST score from the remaining candidate scores                              |
-| `SequestNormDeltaNext`       | Normalized separation between the best and second-best SEQUEST scores                                            |
-| `AndroScore`                 | Andromeda score quantifying the match between theoretical and experimental spectra                               |
-| `AndroNormDeltaBestToRest`   | Normalized separation of the best Andromeda score from the remaining candidate scores                            |
-| `AndroNormDeltaNext`         | Normalized separation between the best and second-best Andromeda scores                                          |
-| `XTandemScore`               | XTandem score quantifying the match between theoretical and experimental spectra                                 |
-| `XtandemNormDeltaBestToRest` | Normalized separation of the best XTandem score from the remaining candidate scores                              |
-| `XtandemNormDeltaNext`       | Normalized separation between the best and second-best XTandem scores                                            |  
-| `ModelScore`                 | Best score value achieved by iterative model to distinguish between target & decoy                               |
-| `QValue`                     | Q-value (False-Discovery-Rate) based on combined model scores                                                    |
-| `PEPValue`                   | Posterior Error Probability                                                                                      |
-| `StringSequence`             | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                             |
-| `ProteinNames`               | Protein Names out of the PeptideDB                                                                               |
+> <details-title> Columns in the output file </details-title>
+>
+> | Column Header                | Description                                                                                                      |
+> |------------------------------|------------------------------------------------------------------------------------------------------------------|
+> | `PSMId`                      | Identifier of the MS/MS spectrum                                                                                 |
+> | `GlobalMod`                  | Indicator, if a peptide ion species is labeled or unlabeled                                                      |
+> | `PepSequenceID`              | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                  |
+> | `ModSequenceID`              | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB|
+> | `Label`                      | Target/decoy label: 1 = target, −1 = decoy                                                                       |
+> | `ScanNr`                     | Scan identifier, combining the spectrum ID in the raw file with an ascending MS2 ID                              |
+> | `ScanTime`                   | Retention time (RT) in minutes of the MS/MS scan                                                                 |
+> | `Charge`                     | Precursor ion charge state                                                                                       |
+> | `PrecursorMZ`                | Precursor ion mass-to-charge ratio (m/z)                                                                         |
+> | `TheoMass`                   | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                             |
+> | `AbsDeltaMass`               | Absolute mass deviation between theoretical and measured mass (mass error)                                       |
+> | `PeptideLength`              | Peptide length in Amino Acid count                                                                               |
+> | `MissCleavages`              | Number of missed cleavages                                                                                       |
+> | `SequestScore`               | SEQUEST similarity score (e.g., XCorr) quantifying agreement between theoretical and experimental spectra        |
+> | `SequestNormDeltaBestToRest` | Normalized separation of the best SEQUEST score from the remaining candidate scores                              |
+> | `SequestNormDeltaNext`       | Normalized separation between the best and second-best SEQUEST scores                                            |
+> | `AndroScore`                 | Andromeda score quantifying the match between theoretical and experimental spectra                               |
+> | `AndroNormDeltaBestToRest`   | Normalized separation of the best Andromeda score from the remaining candidate scores                            |
+> | `AndroNormDeltaNext`         | Normalized separation between the best and second-best Andromeda scores                                          |
+> | `XTandemScore`               | XTandem score quantifying the match between theoretical and experimental spectra                                 |
+> | `XtandemNormDeltaBestToRest` | Normalized separation of the best XTandem score from the remaining candidate scores                              |
+> | `XtandemNormDeltaNext`       | Normalized separation between the best and second-best XTandem scores                                            |
+> | `ModelScore`                 | Best score value achieved by iterative model to distinguish between target & decoy                               |
+> | `QValue`                     | Q-value (False-Discovery-Rate) based on combined model scores                                                    |
+> | `PEPValue`                   | Posterior Error Probability                                                                                      |
+> | `StringSequence`             | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                             |
+> | `ProteinNames`               | Protein Names out of the PeptideDB                                                                               |
+{: .details}
+
 
 > <question-title>What is the difference between a Q-value and a PEP value?</question-title>
 >
-> Which value is intended to describe the error probability of one individual PSM?
+> 1. Which value is intended to describe the error probability of one individual PSM?
+> 2. What information do decoy peptide candidates provide?
 >
 > > <solution-title></solution-title>
 > >
-> > The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **Q-value** is the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
+> > 1. The **PEP value** describes the estimated probability that an individual PSM is incorrect. The **Q-value** is the estimated false discovery rate of the accepted set of PSMs at a given score threshold.
+> > 2. Decoys provide examples of matches that are expected to be incorrect. Their score distribution can therefore be compared with target matches and used to estimate false discoveries and learn which combinations of search features are characteristic of confident target identifications.
 > {: .solution}
 {: .question}
 
-> <question-title>Why does PSMStatistics need decoy matches?</question-title>
->
-> What information do decoy peptide candidates provide?
->
-> > <solution-title></solution-title>
-> >
-> > Decoys provide examples of matches that are expected to be incorrect. Their score distribution can therefore be compared with target matches and used to estimate false discoveries and learn which combinations of search features are characteristic of confident target identifications.
-> {: .solution}
-{: .question}
 
 # Quantification of identified peptides
 Peptide identification tells us which peptide is likely to have produced an MS/MS spectrum, but it does not by itself estimate how abundant that peptide ion was in the chromatographic run.
@@ -353,80 +356,85 @@ Peptide identification tells us which peptide is likely to have produced an MS/M
 
 Important parameters to run the tool are described in the [PSMBasedQuantification documentation](https://csbiology.github.io/ProteomIQon/tools/PSMBasedQuantification.html).
 
-| Parameter | Meaning |
-| --- | --- |
-| `PerformLabeledQuantification` | Selects label-free or labeled quantification behaviour. |
-| `XicExtraction.ScanTimeWindow` | Defines the retention-time window searched around an identification. |
-| `XicExtraction.MzWindow_Da` | Defines the m/z window used to extract the ion chromatogram. |
-| `XicExtraction.XicProcessing` | Controls chromatographic peak detection, for example the wavelet method. |
-| `TopKPSMs` | Optionally limits how many PSMs per peptide ion contribute to the estimate. |
-| `BaseLineCorrection` | Controls optional background/baseline correction. |
 
 Nice! so we know now which files are needed and what the parameters mean. So let's run the tool in GALAXY
 > <hands-on-title>Run PSMBasedQuantification</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon PSMBasedQuantification](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.12+galaxy0) %} in Galaxy.
-> 2. Select:
->    - {% icon param-file %} *sample.mzlite*
->    - {% icon param-file %} *sample.qpsm*
->    - {% icon param-file %} *Chlamy.db.*
-> 3. Set {% icon param-toggle %} *Perform labeled quantification* to `No`.
-> 4. - {% icon param-file %} *Parameters*: `keep the other default settings`
-> 5. If available in the Galaxy wrapper, enable diagnostic-chart generation for this training run.
-> 6. Run the tool.
-> 7. Rename the main output to `sample.quant`.
+> 1. {% tool [ProteomIQon PSMBasedQuantification](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_psmbasedquantification/proteomiqon_psmbasedquantification/0.0.12+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Instrument output"*: `sample.mzlite`
+>    - {% icon param-file %} *"Scored PSM file"*: `sample.qpsm`
+>    - {% icon param-file %} *"Peptide database"*: `Chlamy.db`
+>    - {% icon param-toggle %} *"Labeling mode"*: `Unlabeled`.
+>
+>    > <details-title> About the parameters </details-title>
+>    >
+>    > | Parameter | Meaning |
+>    > | --- | --- |
+>    > | `PerformLabeledQuantification` | Selects label-free or labeled quantification behaviour. |
+>    > | `XicExtraction.ScanTimeWindow` | Defines the retention-time window searched around an identification. |
+>    > | `XicExtraction.MzWindow_Da` | Defines the m/z window used to extract the ion chromatogram. |
+>    > | `XicExtraction.XicProcessing` | Controls chromatographic peak detection, for example the wavelet method. |
+>    > | `TopKPSMs` | Optionally limits how many PSMs per peptide ion contribute to the estimate. |
+>    > | `BaseLineCorrection` | Controls optional background/baseline correction. |
+>    >
+>    {: .details}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.quant`.
 {: .hands_on}
 
-The resulting file is a .quant file now we look at the output to get a better understanding of what we got. Important output columns include:
+The resulting file is a .quant file now we look at the output to get a better understanding of what we got.
 
-| Parameter                                  | Description                                                                                                                                                      |
-|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `StringSequence`                           | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                                                                             |
-| `GlobalMod`                                | Indicator, if a peptide ion species is labeled or unlabeled                                                                                                      |
-| `Charge`                                   | Precursor ion charge state                                                                                                                                       |
-| `PepSequenceID`                            | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                                                                  |
-| `ModSequenceID`                            | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB                                                |
-| `PrecursorMZ`                              | Precursor ion mass-to-charge ratio (m/z)                                                                                                                         |
-| `MeasuredMass`                             | Measured mass of precursor ions in Dalton                                                                                                                        |
-| `TheoMass`                                 | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                                                                             |
-| `AbsDeltaMass`                             | Absolute mass deviation between theoretical and measured mass (mass error)                                                                                       |
-| `MeanPercolatorScore`                      | The peptide spectrum matches (PSMs) are re-scored based on several parameters. This value corresponds to the average consensus score determined in the process   |
-| `QValue`                                   | Q-value (False-Discovery-Rate) based on combined model scores                                                                                                    |
-| `PEPValue`                                 | Posterior Error Probability                                                                                                                                      |
-| `ProteinNames`                             | Protein Names out of the PeptideDB                                                                                                                               |
-| `QuantMZ_Light`                            | Mass-to-charge ratio from the extracted XIC of the unlabeled peptide ion                                                                                         |
-| `Quant_Light`                              | Peak area from the extracted XIC of the unlabeled peptide ion                                                                                                    |
-| `MeasuredApex_Light`                       | Measured Apex of unlabeled peak                                                                                                                                  |
-| `Seo_Light`                                | Standard Error of Prediction for quantification                                                                                                                  |
-| `Params_Light`                             | Describes the shape of the fitted peak for the unlabeled version of a peptide. Contains information about peak height, estimated peak time, and peak width.      |
-| `Diffrence_SearchRT_FittedRT_Light`        | Difference between the retention time originally determined using PSMs and the retention time calculated from the measured peak                                  |
-| `KLDiv_Observed_Theoretical_Light`         | Describes how well the measured unlabeled isotope pattern matches the theoretically expected pattern.                                                            |
-| `KLDiv_CorrectObserved_Theoretical_Light`  | Corrected Kullback-Leiber divergence of isotopic pattern of unlabeled peptide ion versus the measured pattern                                                    |
-| `QuantMZ_Heavy`                            | Mass-to-charge ratio from the extracted XIC of the labeled peptide ion                                                                                           |
-| `Quant_Heavy`                              | Peak area from the extracted XIC of the labeled peptide ion                                                                                                      |
-| `MeasuredApex_Heavy`                       | Measured Apex of labeled peak                                                                                                                                    |
-| `Seo_Heavy`                                | Standard Error of Prediction of quantification                                                                                                                   |
-| `Params_Heavy`                             | Describes the shape of the fitted peak for the labeled version of a peptide. Contains information about peak height, estimated peak time, and peak width.        |
-| `Diffrence_SearchRT_FittedRT_Heavy`        | Difference between the retention time originally determined using PSMs and the retention time calculated from the measured peak                                  |
-| `KLDiv_Observed_Theoretical_Heavy`         | Describes how well the measured labeled isotope pattern matches the theoretically expected pattern.                                                              |
-| `KLDiv_CorrectObserved_Theoretical_Heavy`  | Corrected Kullback-Leiber divergence of isotopic pattern of labeled peptide ion versus the measured pattern                                                      |
-| `Correlation_Light_Heavy`                  | Correlation calculated based on Pearson between unlabeled and labeled peaks                                                                                      |
-| `QuantificationSource`                     | If spectra are found over Alignments or Peptide Spectrum Matching                                                                                                |
-| `IsotopicPatternMz_Light`                  | M/z-distribution of isotope cluster in spectra for unlabeled peaks                                                                                               |
-| `IsotopicPatternIntensity_Observed_Light`  | Observed intensity distribution of unlabeled isotopic clusters                                                                                                   |
-| `IsotopicPatternIntensity_Corrected_Light` | Corrected intensity distribution of unlabeled isotopic clusters                                                                                                  |
-| `RtTrace_Light`                            | Retention Time Profile of unlabeled peptide ion                                                                                                                  |
-| `IntensityTrace_Observed_Light`            | Intensity trace over for an observed unlabeled isotopic peak cluster                                                                                             |
-| `IntensityTrace_Corrected_Light`           | Corrected intensity trace between an unlabeled peak and a measured isotopic peak cluster                                                                         |
-| `IsotopicPatternMZ_Heavy`                  | M/z-distribution of isotope cluster in spectra for labeled peaks                                                                                                 |
-| `IsotopicPatternIntensity_Observed_Heavy`  | Observed intensity distribution of labeled isotopic clusters                                                                                                     |
-| `IsotopicPatternIntensity_Corrected_Heavy` | Corrected intensity distribution of labeled isotopic clusters                                                                                                    |
-| `RtTrace_Heavy`                            | Retention Time Profile of labeled peptide ion                                                                                                                    |
-| `IntensityTrace_Observed_Heavy`            | Intensity trace for an observed labeled isotopic peak cluster                                                                                                    |
-| `IntensityTrace_Corrected_Heavy`           | Corrected intensity trace between a labeled peak and a measured isotopic peak cluster                                                                            |
-| `AlignmentScore`                           | Actual known alignments compared with the observed alignments                                                                                                    |
-| `AlignmentQValue`                          | Q-value, which is calculated based on the alignment score                                                                                                        |
- 
+> <details-title> Columns in the output file </details-title>
+>
+> | Parameter                                  | Description                                                                                                                                                      |
+> |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> | `StringSequence`                           | Amino Acid sequence (one-letter code) from PeptideDB which matches the psm candidate                                                                             |
+> | `GlobalMod`                                | Indicator, if a peptide ion species is labeled or unlabeled                                                                                                      |
+> | `Charge`                                   | Precursor ion charge state                                                                                                                                       |
+> | `PepSequenceID`                            | Unique identifier of the unmodified peptide sequence, which points to PeptideDB                                                                                  |
+> | `ModSequenceID`                            | Unique identifier of the modified peptide sequence (including PTMs, e.g., methylation), which points to PeptideDB                                                |
+> | `PrecursorMZ`                              | Precursor ion mass-to-charge ratio (m/z)                                                                                                                         |
+> | `MeasuredMass`                             | Measured mass of precursor ions in Dalton                                                                                                                        |
+> | `TheoMass`                                 | Theoretical peptide mass in the spectrum (based on amino acid composition) in Dalton                                                                             |
+> | `AbsDeltaMass`                             | Absolute mass deviation between theoretical and measured mass (mass error)                                                                                       |
+> | `MeanPercolatorScore`                      | The peptide spectrum matches (PSMs) are re-scored based on several parameters. This value corresponds to the average consensus score determined in the process   |
+> | `QValue`                                   | Q-value (False-Discovery-Rate) based on combined model scores                                                                                                    |
+> | `PEPValue`                                 | Posterior Error Probability                                                                                                                                      |
+> | `ProteinNames`                             | Protein Names out of the PeptideDB                                                                                                                               |
+> | `QuantMZ_Light`                            | Mass-to-charge ratio from the extracted XIC of the unlabeled peptide ion                                                                                         |
+> | `Quant_Light`                              | Peak area from the extracted XIC of the unlabeled peptide ion                                                                                                    |
+> | `MeasuredApex_Light`                       | Measured Apex of unlabeled peak                                                                                                                                  |
+> | `Seo_Light`                                | Standard Error of Prediction for quantification                                                                                                                  |
+> | `Params_Light`                             | Describes the shape of the fitted peak for the unlabeled version of a peptide. Contains information about peak height, estimated peak time, and peak width.      |
+> | `Diffrence_SearchRT_FittedRT_Light`        | Difference between the retention time originally determined using PSMs and the retention time calculated from the measured peak                                  |
+> | `KLDiv_Observed_Theoretical_Light`         | Describes how well the measured unlabeled isotope pattern matches the theoretically expected pattern.                                                            |
+> | `KLDiv_CorrectObserved_Theoretical_Light`  | Corrected Kullback-Leiber divergence of isotopic pattern of unlabeled peptide ion versus the measured pattern                                                    |
+> | `QuantMZ_Heavy`                            | Mass-to-charge ratio from the extracted XIC of the labeled peptide ion                                                                                           |
+> | `Quant_Heavy`                              | Peak area from the extracted XIC of the labeled peptide ion                                                                                                      |
+> | `MeasuredApex_Heavy`                       | Measured Apex of labeled peak                                                                                                                                    |
+> | `Seo_Heavy`                                | Standard Error of Prediction of quantification                                                                                                                   |
+> | `Params_Heavy`                             | Describes the shape of the fitted peak for the labeled version of a peptide. Contains information about peak height, estimated peak time, and peak width.        |
+> | `Diffrence_SearchRT_FittedRT_Heavy`        | Difference between the retention time originally determined using PSMs and the retention time calculated from the measured peak                                  |
+> | `KLDiv_Observed_Theoretical_Heavy`         | Describes how well the measured labeled isotope pattern matches the theoretically expected pattern.                                                              |
+> | `KLDiv_CorrectObserved_Theoretical_Heavy`  | Corrected Kullback-Leiber divergence of isotopic pattern of labeled peptide ion versus the measured pattern                                                      |
+> | `Correlation_Light_Heavy`                  | Correlation calculated based on Pearson between unlabeled and labeled peaks                                                                                      |
+> | `QuantificationSource`                     | If spectra are found over Alignments or Peptide Spectrum Matching                                                                                                |
+> | `IsotopicPatternMz_Light`                  | M/z-distribution of isotope cluster in spectra for unlabeled peaks                                                                                               |
+> | `IsotopicPatternIntensity_Observed_Light`  | Observed intensity distribution of unlabeled isotopic clusters                                                                                                   |
+> | `IsotopicPatternIntensity_Corrected_Light` | Corrected intensity distribution of unlabeled isotopic clusters                                                                                                  |
+> | `RtTrace_Light`                            | Retention Time Profile of unlabeled peptide ion                                                                                                                  |
+> | `IntensityTrace_Observed_Light`            | Intensity trace over for an observed unlabeled isotopic peak cluster                                                                                             |
+> | `IntensityTrace_Corrected_Light`           | Corrected intensity trace between an unlabeled peak and a measured isotopic peak cluster                                                                         |
+> | `IsotopicPatternMZ_Heavy`                  | M/z-distribution of isotope cluster in spectra for labeled peaks                                                                                                 |
+> | `IsotopicPatternIntensity_Observed_Heavy`  | Observed intensity distribution of labeled isotopic clusters                                                                                                     |
+> | `IsotopicPatternIntensity_Corrected_Heavy` | Corrected intensity distribution of labeled isotopic clusters                                                                                                    |
+> | `RtTrace_Heavy`                            | Retention Time Profile of labeled peptide ion                                                                                                                    |
+> | `IntensityTrace_Observed_Heavy`            | Intensity trace for an observed labeled isotopic peak cluster                                                                                                    |
+> | `IntensityTrace_Corrected_Heavy`           | Corrected intensity trace between a labeled peak and a measured isotopic peak cluster                                                                            |
+> | `AlignmentScore`                           | Actual known alignments compared with the observed alignments                                                                                                    |
+> | `AlignmentQValue`                          | Q-value, which is calculated based on the alignment score                                                                                                        |
+>
+{: .details}
 
 > <question-title>Which value should be used as the main peptide ion abundance estimate?</question-title>
 >
@@ -453,40 +461,46 @@ Peptide identification does not always translate into a unique protein identific
 
 The current parameters are documented in [ProteinInference](https://csbiology.github.io/ProteomIQon/tools/ProteinInference.html):
 
-| Parameter         | Description                                                                                                                       |   
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `ProteinGroup`    | Protein Identifier Collection                                                                                                     |
-| `PeptideSequence` | List of all peptides assigned to this protein group                                                                               |
-| `Class`           | Peptide Evidence Classes (C1A, C1B, C2A, C2B, C3A, C3B) which define how a peptide has been assigned to its corresponding protein |
-| `TargetScore`     | Target Score calculated based on the individual peptide scores of PSM                                                             |
-| `DecoyScore`      | Decoy Score calculated based on the individual peptide scores of PSM                                                              |
-| `QValue`          | Q-value (False-Discovery-Rate) for every identified protein                                                                       |
-
+> <details-title> Columns in the output file </details-title>
+>
+> | Column Header         | Description                                                                                                                       |
+> |-------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+> | `ProteinGroup`    | Protein Identifier Collection                                                                                                     |
+> | `PeptideSequence` | List of all peptides assigned to this protein group                                                                               |
+> | `Class`           | Peptide Evidence Classes (C1A, C1B, C2A, C2B, C3A, C3B) which define how a peptide has been assigned to its corresponding protein |
+> | `TargetScore`     | Target Score calculated based on the individual peptide scores of PSM                                                             |
+> | `DecoyScore`      | Decoy Score calculated based on the individual peptide scores of PSM                                                              |
+> | `QValue`          | Q-value (False-Discovery-Rate) for every identified protein                                                                       |
+>
+{: .details}
 
 > <hands-on-title>Run ProteinInference</hands-on-title>
 >
-> 1. Open {% tool [ProteomIQon ProteinInference](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.10+galaxy0) %} in Galaxy.
-> 2. Select:
->    - {% icon param-file %} *sample.qpsm*
->    - {% icon param-file %} *Chlamy.db.*
->    - {% icon param-file %} *Parameters*: `keep default settings`
-> 4. Run the tool.
-> 5. Rename the output to `sample.prot`.
-> 6. Inspect the resulting protein groups.
+> 1. {% tool [ProteomIQon ProteinInference](toolshed.g2.bx.psu.edu/repos/galaxyp/proteomiqon_proteininference/proteomiqon_proteininference/0.0.10+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Peptide database"*: `Chlamy.db`
+>    - {% icon param-select %} *"PSM file input mode"*: `Single File`
+>      - {% icon param-file %} *"Scored PSM File"*: `sample.qpsm`
+> 2. **Rename** {% icon galaxy-pencil %} the output to `sample.prot`
+> 3. **Inspect** {% icon galaxy-eye %} the resulting protein groups.
 {: .hands_on}
 
-The `.prot` file contains:
 
-| Column | Description |
-| --- | --- |
-| `ProteinGroup` | Protein identifiers belonging to the inferred group, joined by `;` when several proteins are present. |
-| `PeptideSequence` | Peptide sequences supporting the group in the run. |
-| `Class` | Peptide-evidence class. Its interpretation is most informative when an appropriate GFF3 annotation is supplied. |
-| `TargetScore` | Protein-group score derived from target peptide evidence. |
-| `DecoyScore` | Corresponding score derived from decoy protein evidence. |
-| `QValue` | Protein-level Q-value estimated from target and decoy scoring. |
+> <details-title> Columns in the output file </details-title>
+>
+> The `.prot` file contains:
+>
+> | Column | Description |
+> | --- | --- |
+> | `ProteinGroup` | Protein identifiers belonging to the inferred group, joined by `;` when several proteins are present. |
+> | `PeptideSequence` | Peptide sequences supporting the group in the run. |
+> | `Class` | Peptide-evidence class. Its interpretation is most informative when an appropriate GFF3 annotation is supplied. |
+> | `TargetScore` | Protein-group score derived from target peptide evidence. |
+> | `DecoyScore` | Corresponding score derived from decoy protein evidence. |
+> | `QValue` | Protein-level Q-value estimated from target and decoy scoring. |
+>
+{: .details}
 
-> <question-title>Why can one peptide support more than one protein?</question-title>
+> <question-title> Why can one peptide support more than one protein? </question-title>
 >
 > Two proteins contain exactly the same peptide sequence, and that peptide is confidently identified. Can this peptide alone distinguish which protein was present?
 >
