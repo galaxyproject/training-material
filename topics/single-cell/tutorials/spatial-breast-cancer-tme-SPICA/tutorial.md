@@ -1,0 +1,1322 @@
+---
+layout: tutorial_hands_on
+title: Spatial transcriptomics analysis of the breast cancer tumour microenvironment with Visium
+subtopic: spatial
+level: Advanced
+zenodo_link: https://zenodo.org/records/22676369
+questions:
+- How is a 10x Visium tissue section represented in SpatialData, and what does one observation actually measure?
+- Which quality-control filters change this breast-cancer section, and by how much?
+- What evidence supports carrying one Leiden resolution forward rather than choosing a partition from its UMAP appearance?
+- What do Squidpy spatial statistics, CellTypist reference transfer and LIANA rankings establish about a tumour microenvironment, and what can they not establish?
+objectives:
+- Export the expression table from a Visium SpatialData object and inspect its dimensions
+- Evaluate count- and complexity-based quality-control metrics as distributions and mapped onto the histology
+- Apply spot and gene filters in sequence and quantify what each threshold removes
+- Execute normalisation, feature selection, dimensionality reduction and Leiden clustering on the non-regressed expression branch
+- Justify a Leiden resolution from partition stability and marker evidence rather than from appearance
+- Distinguish the Squidpy spatial-neighbour graph from the Scanpy expression-neighbour graph and interpret centrality, neighbourhood enrichment and Moran's I
+- Appraise CellTypist and LIANA outputs for multicellular capture spots and state what each one does not establish
+time_estimation: 4H
+key_points:
+- A Visium observation is a multicellular capture spot on a fixed grid, not a segmented cell, so a Leiden group is a tissue domain and neither it nor a CellTypist label is automatically a cell identity.
+- Report what each threshold removes. The lower spot filters remove only three observations, while requiring gene detection in at least three spots removes 14,361 rarely detected genes.
+- Regressing out `total_counts` replaces the expression matrix with residuals. Keep it as a QC comparison and keep the non-regressed log-normalised branch for clustering and reference transfer.
+- Choosing a Leiden resolution is a judgement about biology. Compare what each extra split is made of, and reject a resolution that only fragments an already coherent group.
+- Scanpy neighbours connect transcriptionally similar spots; Squidpy neighbours connect physically adjacent spots on the capture grid. The two graphs answer different questions.
+- Neighbourhood enrichment shows non-random adjacency, Moran's I shows spatial autocorrelation, and LIANA ranks expression-compatible ligand-receptor candidates. None of them alone demonstrates signalling.
+requirements:
+-
+    type: "internal"
+    topic_name: introduction
+    tutorials:
+        - galaxy-intro-101
+-
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-preprocessing
+        - scrna-scanpy-pbmc3k
+tags:
+- single-cell
+- spatial-transcriptomics
+- visium
+- breast-cancer
+- 10x
+abbreviations:
+    ST: spatial transcriptomics
+    TME: tumour microenvironment
+    QC: quality control
+    HVG: highly variable gene
+    PCA: principal component analysis
+    UMAP: Uniform Manifold Approximation and Projection
+    LR: ligand-receptor
+    ARI: adjusted Rand index
+    UMI: unique molecular identifier
+    ECM: extracellular matrix
+    CAF: cancer-associated fibroblast
+contributions:
+    authorship:
+        - khaled196
+        - poterlowicz-lab
+    editing:
+        - pavanvidem
+        - Nilchia
+        - mbaardwijk
+gitter: Galaxy-Training-Network/galaxy-single-cell
+---
+
+Breast tumours are mixtures of malignant epithelial cells, fibroblasts, vascular cells and infiltrating immune populations, and the location of those populations can be as informative as their expression state ({% cite Mehraj2021BreastTME %}, {% cite Croizer2024SpatialCAF %}). Spatial transcriptomics (ST) preserves that positional information, making it possible to ask whether expression programmes form coherent territories, meet at interfaces or avoid one another ({% cite Stahl2016SpatialTranscriptomics %}, {% cite Rao2021TissueArchitecture %}). Applied to breast tumours, the same approach has been used to show that regions of one tumour can differ enough to matter clinically ({% cite Wang2024TNBCSpatial %}).
+
+This tutorial uses the 10x Genomics **Human Breast Cancer, Block A Section 1** dataset {% cite TenXBreastCancerBlockA %}. 10x Genomics obtained fresh-frozen invasive ductal carcinoma tissue, cryosectioned it at 10 µm onto a Visium Gene Expression slide and imaged the section with haematoxylin and eosin (H&E) before library preparation. The sample is described as AJCC/UICC Stage Group IIA, ER positive, PR negative and HER2 positive, and the section is annotated as containing **ductal carcinoma *in situ*, lobular carcinoma *in situ* and invasive carcinoma**. This tutorial uses the Space Ranger 1.1.0 release of the dataset, which reports 3,798 spots under tissue and quantifies 36,601 genes.
+
+![Low-resolution haematoxylin and eosin image of the breast cancer tissue section used in this tutorial, showing the square Visium capture area with tissue covering most of the region.](../../images/spatial-breast-cancer-tme-SPICA/tissue_lowres_image.png "The H&E section as captured on the Visium slide. Every measurement in this tutorial comes from a capture spot positioned on this image, which is why results are checked against the histology at each stage.")
+
+The expression table entering this analysis contains **3,798 observations and 36,601 genes**.
+
+The unit of measurement matters throughout this tutorial. A standard Visium observation is a **capture spot**, not a segmented cell. Each spot is 55 µm across with 100 µm between spot centres, arranged on a fixed hexagonal grid, and 10x Genomics describes the resulting resolution as one to ten cells per spot ({% cite TenXVisiumSpotGeometry %}). That is why the biological language below is deliberately conservative: Leiden defines **tissue domains** made of transcriptionally similar spots, CellTypist transfers the closest labels from a single-cell reference, and LIANA ranks expression-compatible ligand-receptor pairs. None of these operations converts a multicellular spot into a known single cell.
+
+> <comment-title>Why this pipeline has no doublet detection and no deconvolution step</comment-title>
+>
+> Two steps that are routine in single-cell tutorials are deliberately absent here, and both omissions follow from the size of a capture spot.
+>
+> **Doublet detection is not applicable.** Tools such as Scrublet look for droplets that accidentally captured two cells, because in droplet-based single-cell RNA-seq a two-cell measurement is a technical artefact ({% cite Wolock2019Scrublet %}). A Visium spot is multicellular *by design*, so flagging multicellular spots would discard valid data rather than clean it.
+>
+> **Deconvolution is not run.** Methods such as cell2location and RCTD estimate the contributions of different cell populations to spatial transcriptomics measurements by using expression signatures derived from a single-cell or single-nucleus reference ({% cite Kleshchevnikov2022Cell2location %}, {% cite Cable2022RCTD %}). An appropriate reference should represent the relevant tissue and cell populations, but it does not necessarily have to come from the same specimen.
+>
+> Deconvolution is a separate analytical task requiring reference selection, compatibility checks and assessment of uncertainty. It is not included in this tutorial. Consequently, the Leiden groups below are interpreted as expression-defined tissue programmes, while CellTypist predictions are treated as closest reference matches rather than estimates of cell-type proportions.
+>
+{: .comment}
+
+Every step below has been run end to end in Galaxy, and the prepared input together with the output of each step is archived on the [Zenodo record]({{ page.zenodo_link }}). The figures and numbers quoted throughout come from those outputs, so you can compare your own results against them as you go.
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# Analysis strategy
+
+![Flow diagram of the breast-cancer Visium analysis, from SpatialData through quality control, filtering, normalisation, PCA, clustering, marker ranking, spatial statistics, reference transfer and ligand-receptor ranking, ending with the processed table returned to SpatialData.](../../images/spatial-breast-cancer-tme-SPICA/spatial_breast_pipeline.png "The main path uses non-regressed log-normalised expression for PCA, transcriptomic neighbours and downstream analysis. The total-count regression branch is an optional PCA/QC comparison only.")
+
+| Analysis stage | Question it answers | Main output |
+| --- | --- | --- |
+| SpatialData input and extraction | How are Visium expression measurements, spot positions and tissue images represented together? | SpatialData object and extracted AnnData table |
+| QC before filtering | How do total counts and detected genes vary across spots, and where are low-information spots located? | Per-spot QC metrics, distribution plots and spatial QC maps |
+| Spot and gene filtering | How do the selected thresholds affect the numbers of spots and genes retained? | Filtered AnnData object and updated matrix dimensions |
+| QC after filtering | How have filtering steps changed the QC distributions and spatial coverage of the tissue? | Recalculated QC metrics, distribution plots and spatial QC maps |
+| Normalisation and HVG selection | How can differences in total counts be adjusted, and which genes are selected as highly variable? | Log-normalised AnnData, HVG annotations and variability plot |
+| PCA and optional regression | How is PCA structure associated with total counts, and what changes after regressing out this covariate? | PCA on non-regressed expression and optional PCA after total-count regression |
+| Expression graph, UMAP and Leiden | Which spots have similar expression profiles, and how do Leiden partitions change with resolution? | Expression-neighbour graph, UMAP embedding and alternative Leiden partitions |
+| Marker gene ranking | Which genes distinguish the selected Leiden groups, and what tissue programmes do they suggest? | Wilcoxon-ranked gene table, marker plots and marker-based interpretation |
+| Squidpy spatial analysis | How are Leiden groups organised across the tissue, and which genes show spatial autocorrelation? | Spatial-neighbour graph, centrality scores, neighbourhood enrichment, Moran's I and gene-expression map |
+| CellTypist reference annotation | Which adult-breast reference profiles most closely match the expression measured in each Visium spot? | Direct reference-label predictions, prediction scores and dot plot |
+| LIANA ligand-receptor analysis | Which ligand-receptor pairs are ranked from expression profiles within and between Leiden groups? | Candidate ligand-receptor rankings stored in `liana_res` |
+| SpatialData output | Where are the selected transcriptomic groups located on the tissue section? | Processed SpatialData object and Leiden-group overlay on the histology |
+
+# Get the data
+
+The tutorial starts from `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`. SpatialData holds the histology image, the Visium spot geometry, the coordinate system relating them and the annotated expression table in a single object, so the alignment between expression and tissue survives every operation applied to it ({% cite Marconato2024SpatialData %}).
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Create a new Galaxy history and name it `Visium breast cancer TME`.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 2. Import the prepared SpatialData object from [Zenodo]({{ page.zenodo_link }}):
+>
+>    ```
+>    {{ page.zenodo_link }}/files/V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Confirm that Galaxy assigns the datatype `spatialdata.zip`.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="spatialdata.zip" %}
+>
+{: .hands_on}
+
+## What the SpatialData object represents
+
+Visium measures expression at printed capture spots rather than at segmented cells. This is the defining difference between sequencing-based spatial transcriptomics and the imaging-based platforms, such as Xenium, MERSCOPE and CosMx, which localise individual transcripts and assign them to cell boundaries drawn from a stain. Imaging-based data therefore arrive as cells with morphology measurements attached, while Visium data arrive as a fixed grid of multicellular areas. The trade-off runs the other way for gene coverage: Visium captures the whole polyadenylated transcriptome, whereas imaging platforms read a targeted panel.
+
+Inside the object, that distinction appears in which elements exist. The capture spots are stored as **shapes**, circles of fixed radius registered to the tissue image, and the table holds the expression matrix and per-spot annotation. There is no labels element, because no segmentation was performed.
+
+> <details-title>Optional: build the SpatialData object from the Space Ranger files</details-title>
+>
+> This tutorial starts from a prepared `.spatialdata.zip` object, so this section is not needed to follow the analysis. It is here because assembling that object is the step most often required when you bring your own Visium data, and the files that went into it are on the same record.
+>
+> Space Ranger writes a `spatial/` folder alongside the count matrix, and **SpatialData IO** reads the two together into a single object. Each input supplies a different part of it:
+>
+> | Space Ranger file | What it contributes |
+> | --- | --- |
+> | `filtered_feature_bc_matrix.h5` | The count matrix, restricted to barcodes Space Ranger judged to be under tissue |
+> | `tissue_positions_list.csv` | Array row and column, and the full-resolution pixel coordinates of every spot |
+> | `scalefactors_json.json` | Spot diameter in full-resolution pixels, and the factors that rescale coordinates onto the downsampled images |
+> | `V1_Breast_Cancer_Block_A_Section_1_image.tif` | The full-resolution H&E image |
+> | `tissue_hires_image.png`, `tissue_lowres_image.png` | Downsampled images used for most plotting |
+>
+> 1. Import the data needed to build the SpatialData object from [Zenodo]({{ page.zenodo_link }}):
+>
+>    ```
+>    {{ page.zenodo_link }}/files/V1_Breast_Cancer_Block_A_Section_1_filtered_feature_bc_matrix.h5
+>    {{ page.zenodo_link }}/files/V1_Breast_Cancer_Block_A_Section_1_image.tif
+>    {{ page.zenodo_link }}/files/tissue_hires_image.png
+>    {{ page.zenodo_link }}/files/tissue_lowres_image.png
+>    {{ page.zenodo_link }}/files/tissue_positions_list.csv
+>    {{ page.zenodo_link }}/files/scalefactors_json.json
+>    ```
+>
+> 2. {% tool [SpatialData IO](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_io/spatialdata_io/0.8.0+galaxy0) %} with the following parameters:
+>    - *"Spatial Technology"*: `10x Genomics Visium`
+>        - *"Dataset identifier"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - {% icon param-file %} *"feature BC matrix (Counts file)"*: `V1_Breast_Cancer_Block_A_Section_1_filtered_feature_bc_matrix.h5`
+>        - {% icon param-file %} *"Scale factors file"*: `scalefactors_json.json`
+>        - {% icon param-file %} *"Full resolution image"*: `V1_Breast_Cancer_Block_A_Section_1_image.tif`
+>        - {% icon param-file %} *"Tissue high resolution image"*: `tissue_hires_image.png`
+>        - {% icon param-file %} *"Tissue low resolution image"*: `tissue_lowres_image.png`
+>        - {% icon param-file %} *"Tissue positions file"*: `tissue_positions_list.csv`
+>
+> Two details are worth knowing before you try this on your own data. The **dataset identifier** becomes the prefix of the image, shapes and coordinate-system names, so every later plotting step refers back to whatever you type here. And the filtered matrix, not the raw one, is the right input: the raw matrix contains all 4,992 printed spots including those outside the tissue, while the filtered matrix contains only the spots Space Ranger placed under tissue.
+>
+> Finally, do not mix files from different Space Ranger versions of the same section. Reprocessing can change which spots are treated as under tissue and which reference annotation was used, so the counts will not match even though the histology is identical.
+>
+{: .details}
+
+# Extract the expression table
+
+The Scanpy tools work on AnnData, the container that pairs an expression matrix with per-observation and per-gene annotation ({% cite Virshup2024AnnData %}), so the first analysis step pulls the `table` element out of the SpatialData object. The object itself stays in the history, because every spatial plot later in this tutorial needs it again.
+
+> <hands-on-title>Export and inspect the AnnData table</hands-on-title>
+>
+> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
+>    - *"Operation"*: `Export the table of a SpatialData object to anndata`
+>        - *"Table name"*: `table`
+>
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `Initial AnnData table`.
+>
+> {% snippet faqs/galaxy/datasets_rename.md name="Initial AnnData table" %}
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Initial AnnData table`
+>    - *"What to inspect?"*: `General information about the object`
+>
+>    Rename the text output `Initial AnnData dimensions`.
+>
+>    > <question-title>Check the dimensions before doing anything else</question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 3798 × 36601
+>    > ```
+>    >
+>    > What do the two numbers mean in a Visium experiment, and why should the first not be called a cell count?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > `n_obs` is the number of capture-spot observations in this prepared table and `n_vars` is the number of genes. A Visium spot covers an area large enough to receive RNA from several cells, so 3,798 observations does not mean 3,798 cells.
+>    > >
+>    > > Checking these dimensions before filtering also provides the denominator for every removal tally later in the tutorial.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+# Quality control before filtering
+
+`total_counts` measures the amount of expression signal recorded for each spot, while `n_genes_by_counts` records how many distinct genes are detected. The `pct_counts_in_top_N_genes` columns show how concentrated the counts are in the most abundant genes. A spot with a small detected-gene set and low total counts may be poorly captured, but low RNA can also reflect a genuine tissue region, which is why the same metrics are inspected both as distributions and on the histology.
+
+No mitochondrial or ribosomal gene set is defined here, and no threshold is applied to either. In single-cell work a high mitochondrial fraction flags a dying cell whose cytoplasmic RNA has leaked away. A Visium spot averages over several cells, so the same measurement no longer isolates a failing cell, and a region of genuinely stressed or hypoxic tumour would be penalised for its biology. The metrics below are all count- and complexity-based for that reason.
+
+> <hands-on-title>Compute QC metrics</hands-on-title>
+>
+> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Initial AnnData table`
+>    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
+>        - *"Name of kind of values in X"*: `counts`
+>        - *"The kind of thing the variables are"*: `genes`
+>        - *"Proportions of top genes to cover"*: `50,100,200,300`
+>        - *"Use 'raw' attribute of input if present"*: `No`
+>        - *"Compute log1p transformed annotations"*: `Yes`
+>
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `QC metrics before filtering`.
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
+>    - *"What to inspect?"*: `General information about the object`
+>
+>
+{: .hands_on}
+
+> <hands-on-title>Optional: read the QC distributions as numbers</hands-on-title>
+>
+> The plots below show the shape of each distribution. If you want the summary values behind them, export the observation table and summarise it.
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `The observation table from the previous` {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} `step` 
+>    - *"Input file has a header line"*: `Yes`
+>    - *"Print header line"*: `Yes`
+>    - In *"Operation to perform on each group"*:
+>        - *"Type"*: `median`, *"On column"*: the `total_counts` column
+>        - *"Type"*: `min`, *"On column"*: the `total_counts` column
+>        - *"Type"*: `max`, *"On column"*: the `total_counts` column
+>
+>    Repeating the same three operations on `n_genes_by_counts` gives the complexity range.
+>
+{: .hands_on}
+
+For this section the median `total_counts` is **20,761.5** and the median `n_genes_by_counts` is **6,026.5**. Both distributions are wide: the minimum total count is 578, and the minimum number of detected genes is 430, the strongest 81,624 counts, and the most complex spot detects 10,153 genes. Those two tails are what the filters in the next section act on, and knowing where they sit is what makes a threshold a decision rather than a guess.
+
+> <hands-on-title>Visualise QC metrics</hands-on-title>
+>
+>
+> 1. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
+>    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
+>        - *"x coordinate"*: `total_counts`
+>        - *"y coordinate"*: `n_genes_by_counts`
+>        - *"Color by"*: `pct_counts_in_top_50_genes`
+> 2. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
+>    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
+>        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
+>            - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts`
+>        - In *"Violin plot attributes"*:
+>            - *"Display keys in multiple panels"*: `Yes`
+>
+>
+{: .hands_on}
+
+![Scatter plot of total counts against detected genes, coloured by the percentage of counts in the 50 most abundant genes.](../../images/spatial-breast-cancer-tme-SPICA/qc_scatter_before_filtering.png "The number of detected genes increases with total counts, although the relationship is nonlinear as additional sequencing captures more transcripts from genes already detected.")
+
+![Violin plots showing detected genes and total counts across Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/qc_violin_before_filtering.png "The distributions reveal variation in sequencing depth and detected-gene complexity across capture spots, including a tail of low-count observations.")
+
+
+
+The distributions show how unusual a spot is, but not where it sits. Before removing the tail, map the same QC fields back onto the section.
+
+> <hands-on-title>Map the QC metrics onto histology</hands-on-title>
+>
+> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
+>    - *"Operation"*: `Import anndata table to a SpatialData object`
+>        - {% icon param-file %} *"annotated data object to add"*: `QC metrics before filtering`
+>        - *"Table name"*: `table_qc`
+>
+> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `The SpatialData object from the previous` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step` 
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `total_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>
+> 3. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `The SpatialData object from the previous` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step` 
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `n_genes_by_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>
+{: .hands_on}
+
+
+![Total counts mapped onto the breast-cancer tissue section.](../../images/spatial-breast-cancer-tme-SPICA/spatial_total_counts_before_filtering.jpg "Spatial distribution of total transcript counts across Visium spots, showing differences in RNA abundance throughout the tissue.")
+
+
+![Detected genes mapped onto the breast-cancer tissue section.](../../images/spatial-breast-cancer-tme-SPICA/spatial_n_genes_by_counts_before_filtering.jpg "Spatial distribution of detected-gene complexity across the section. Regions with higher complexity generally contain more distinct expressed genes.")
+
+
+> <question-title>Interpret the QC output</question-title>
+>
+> 1. Why is `n_genes_by_counts` expected to increase with `total_counts` but not in a perfectly linear way?
+> 2. Why is a spatial map useful before removing a low-count tail?
+> 3. The minimum is 578 counts, while the later count threshold is 1,000. Does that mean every spot below 1,000 is necessarily a technical failure?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. As more transcripts are sampled, an increasing fraction are repeats of genes already detected, so the number of distinct genes does not grow one-for-one with the count total.
+> > 2. A low value can be technical, but it can also correspond to tissue with genuinely low RNA abundance or poor cellularity. A spatial map shows whether low values are scattered or associated with a coherent anatomical region that should be reported.
+> > 3. No. The threshold is a filtering decision made for this dataset, not a biological definition of failure. A spot below it may sit on sparse stroma or on a tear in the section, and the only way to tell is to look at where the removed spots were.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Filtering
+
+Filtering proceeds in two stages: first the spots that carry too little signal to interpret, then the genes that are detected too rarely to contribute. Each step below takes the output of the previous one, and the object is inspected after each stage so that the effect of every threshold is visible rather than assumed.
+
+## Spot filters
+
+> <hands-on-title>Remove spots with very low detected-gene complexity</hands-on-title>
+>
+> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
+>    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
+>        - *"Filter"*: `Minimum number of genes expressed`
+>            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `500`
+>
+>
+{: .hands_on}
+
+The tool label says **cell** because `pp.filter_cells` operates on AnnData observations, and Scanpy's vocabulary comes from single-cell work. Here those observations are Visium spots. Both thresholds are applied before the object is inspected, so the count recorded below is their combined effect.
+
+> <hands-on-title>Remove spots with very low total counts</hands-on-title>
+>
+> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered minimum genes expressed per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
+>        - *"Filter"*: `Minimum number of counts`
+>            - *"Minimum number of counts required for a cell to pass filtering"*: `1000`
+>
+>
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum counts per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - *"What to inspect?"*: `General information about the object`
+>
+>
+>    > <question-title>What did the second threshold add?</question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 3795 × 36601
+>    > ```
+>    >
+>    > How many spots have the two lower filters removed between them, what fraction of the starting observations is that, and why has the gene count not changed?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > Together the two lower filters remove 3,798 − 3,795 = **3 spots**, about **0.08%** of the starting observations, so more than 99.9% are retained. The filters therefore trim a very small tail rather than removing a tissue compartment. The gene count is unchanged because `pp.filter_cells` acts on observations only; nothing about a gene's detection has been tested yet.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+## Gene filters
+
+> <hands-on-title>Remove genes detected in too few spots</hands-on-title>
+>
+> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum counts per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
+>        - *"Filter"*: `Minimum number of cells expressed`
+>            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
+>
+>
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum number of cells expressed from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - *"What to inspect?"*: `General information about the object`
+>
+>
+>    > <question-title>Which gene filter changes the matrix?</question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 3795 × 22240
+>    > ```
+>    >
+>    > How many genes did this filter remove, and why is that number so much larger than the number of spots removed earlier?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > The filter removes **14,361 genes**, approximately 39% of the starting features, while the preceding spot filters remove only three observations. Many genes are detected in fewer than three retained spots, so excluding them reduces the number of sparsely observed features. This does not mean those genes are never expressed in breast tissue.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+The complete filtering path is therefore:
+
+| Checkpoint | Filters applied since the previous row | Dimensions | Spots removed | Genes removed |
+| --- | --- | ---: | ---: | ---: |
+| Initial table | None | 3,798 × 36,601 | – | – |
+| After spot filtering | `min_genes = 500`, `min_counts = 1000` | 3,795 × 36,601 | 3 | 0 |
+| After gene filtering | `min_cells = 3` | 3,795 × 22,240 | 0 | 14,361 |
+
+
+The spot filters remove only **3 of 3,798 spots** (0.08%), retaining almost the entire tissue section. The gene filter removes **14,361 of 36,601 genes** (approximately 39%) because they are detected in fewer than three retained spots. This reduces the number of rarely detected features without removing additional spots. Genes excluded by this threshold are not necessarily absent from breast tissue; their expression may simply be undetected or too sparse in this section.
+
+
+# Quality control after filtering
+
+The filtering itself modifies the matrix; the QC fields should therefore be recalculated on the retained spots and genes rather than carrying the old summaries forward.
+
+> <hands-on-title>Recompute and visualise post-filter QC</hands-on-title>
+>
+> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum number of cells expressed from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
+>        - *"Name of kind of values in X"*: `counts`
+>        - *"The kind of thing the variables are"*: `genes`
+>        - *"Proportions of top genes to cover"*: `50,100,200,300`
+>        - *"Use 'raw' attribute of input if present"*: `No`
+>        - *"Compute log1p transformed annotations"*: `Yes`
+>
+> Rename the generated file `QC metrics after filtering`.
+>
+> 2. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
+>        - *"x coordinate"*: `total_counts`
+>        - *"y coordinate"*: `n_genes_by_counts`
+>        - *"Color by"*: `pct_counts_in_top_50_genes`
+>
+>    Rename the output `Scatter plot after filtering`.
+>
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
+>        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
+>            - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts`
+>        - In *"Violin plot attributes"*:
+>            - *"Display keys in multiple panels"*: `Yes`
+>
+>    Rename the output `Violin plots after filtering`.
+>
+> 4. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
+>    - *"Operation"*: `Import anndata table to a SpatialData object`
+>        - {% icon param-file %} *"annotated data object to add"*: `QC metrics after filtering`
+>        - *"Table name"*: `table_qc_filtered`
+>
+> 5. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `The output of` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step`
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `total_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc_filtered`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>    Rename the output `Spatial Plot total_counts after filtering`.
+>
+> 6. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `The output of` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step`
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `n_genes_by_counts`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_qc_filtered`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>    Rename the output `Spatial Plot n_genes_by_counts after filtering`.
+>
+{: .hands_on}
+
+
+![Scatter plot of total counts against detected genes after filtering.](../../images/spatial-breast-cancer-tme-SPICA/qc_scatter_after_filtering.png "The positive relationship between total counts and detected genes remains after filtering, with low-count and low-complexity observations excluded.")
+
+
+![Violin plots showing detected genes and total counts after filtering.](../../images/spatial-breast-cancer-tme-SPICA/qc_violin_after_filtering.png "The retained spots preserve the broad distributions of sequencing depth and gene complexity, with the lowest-quality observations removed.")
+
+
+![Total counts mapped onto retained Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/spatial_total_counts_after_filtering.jpg "Spatial distribution of total transcript counts after filtering, showing the retained capture spots across the tissue section.")
+
+![Detected genes mapped onto retained Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/spatial_n_genes_by_counts_after_filtering.jpg "Spatial distribution of detected-gene complexity after filtering, illustrating variation in transcriptomic richness across the retained tissue regions.")
+
+
+After filtering, **3,795 spots and 22,240 genes** remain. The median `total_counts` is **20,778**, and the median `n_genes_by_counts` is **6,029**. These values are close to the corresponding pre-filter medians of 20,761.5 and 6,026.5. The QC distributions remain broadly similar because only three spots were removed, while gene filtering reduced the number of rarely detected features.
+
+# Normalisation and feature selection
+
+Count depth differs between spots. `pp.normalize_total` rescales each spot so that its expression sums to the same target, and `pp.log1p` compresses the dynamic range. The validated main branch uses a target sum of **10,000 counts per spot**, which also produces the form of log-normalised expression expected later by CellTypist ({% cite CellTypistDocs %}).
+
+> <hands-on-title>Normalise and log-transform the filtered expression matrix</hands-on-title>
+>
+> 1. {% tool [Scanpy normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
+>        - *"Target sum"*: `10000.0`
+>        - *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
+>
+>
+> 2. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The Normalised h5ad AnnData from the previous` {% tool [Scanpy normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0) %} `step` 
+>    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
+>
+> Rename the generated file `Log-normalised AnnData`.
+>
+{: .hands_on}
+
+Highly variable genes (HVGs) are genes whose between-spot variation is high relative to genes of similar abundance. They are useful for building an embedding around the most informative expression differences rather than letting thousands of nearly uniform genes contribute equal noise.
+
+> <hands-on-title>Identify highly variable genes</hands-on-title>
+>
+> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The Log-normalised AnnData h5ad from the previous` {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} `step` 
+>    - *"Method used for filtering"*: `Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'`
+>        - *"Choose the flavor for identifying highly variable genes"*: `Cell Ranger`
+>            - *"Number of highly-variable genes to keep"*: `3000`
+>        - *"Number of bins for binning the mean gene expression"*: `20`
+>        - *"Inplace subset to highly-variable genes"*: `No`
+>
+> 2. Rename the generated file `AnnData with HVGs`.
+>
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
+>    - *"Method used for plotting"*: `Preprocessing: Plot dispersions versus means for genes, using 'pl.highly_variable_genes'`
+>
+>
+{: .hands_on}
+
+![Mean expression and gene dispersion for highly variable and other genes.](../../images/spatial-breast-cancer-tme-SPICA/hvg_selection_3000_genes.png "Highly variable genes show greater expression variability than other genes with similar mean expression. The selected 3,000 genes provide informative features for dimensionality reduction.")
+
+The object still contains **22,240 genes**; exactly **3,000** are marked as highly variable. `Inplace subset to highly-variable genes = No` is important here: PCA can use the HVG flag without deleting the other genes, so ranked-gene analysis, CellTypist and LIANA still have access to the wider log-normalised expression matrix.
+
+> <question-title>Feature selection is not feature deletion</question-title>
+>
+> If the object still contains 22,240 genes, what does "3,000 HVGs" mean, and why is that distinction important later?
+>
+> > <solution-title></solution-title>
+> >
+> > The 3,000 genes are flagged as highly variable and are the informative feature set used by PCA; the remaining genes stay in the object because subsetting is disabled. A gene does not have to drive PCA to be biologically useful as a marker, reference feature or ligand/receptor partner.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Dimensionality reduction and clustering
+
+{PCA} compresses correlated expression patterns into a smaller set of orthogonal components, and Scanpy reads the `highly_variable` flag set in the previous step so the decomposition is driven by the informative genes ({% cite Wolf2018Scanpy %}). Fifty components are computed here.
+
+The graph built from those components connects spots whose expression profiles are similar, not spots that sit near each other in the section. Scanpy calls this the **expression-neighbour graph** ({% cite Wolf2018Scanpy %}), Leiden partitions it ({% cite Traag2019Leiden %}), and {UMAP} gives a two-dimensional view of it. Keeping that straight matters for every result that follows: two spots on opposite edges of the tissue can be neighbours in this graph, and a group that looks compact on {UMAP} has not thereby been shown to occupy one region of the slide. Squidpy builds a second, genuinely spatial graph later in this tutorial from the Visium coordinates.
+
+> <hands-on-title>Run the main PCA</hands-on-title>
+>
+> 1. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
+>    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
+>        - *"Number of principal components to compute"*: `50`
+>        - *"Change to use different initial states for the optimization"*: `0`
+>        - *"Zero center"*: `Yes`
+>        - *"Data type of the output"*: `float32`
+>
+> 2. Rename the generated file `AnnData with PCA`.
+>
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
+>    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
+>
+> 4. Rename the generated file `PCA before regression AnnData`.
+>
+{: .hands_on}
+
+![PCA before regression, coloured by total counts and detected-gene QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_before_regression.png "Variation in sequencing depth and detected-gene complexity is associated with the distribution of spots in principal-component space, indicating that these covariates contribute to the observed expression structure.")
+
+In this section, `total_counts` correlates with PC1 at approximately **−0.479**, PC2 at **+0.262** and PC3 at **−0.352**. Sequencing depth is therefore associated with variation along several principal components, but these correlations do not establish whether that variation is technical or biological. Differences in cell density, tissue composition and transcriptional activity can also contribute to count-depth variation across a tissue section.
+
+> <details-title>Optional: regress total counts and compare the PCA</details-title>
+>
+> 1. {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with HVGs`
+>    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
+>        - *"Keys for observation annotation on which to regress on"*: `total_counts`
+>
+>
+> 2. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The regressed AnnData h5ad from the previous` {% tool [Scanpy remove confounders](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.11.5+galaxy0) %} `step` 
+>    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'pp.pca'`
+>        - *"Number of principal components to compute"*: `50`
+>        - *"Change to use different initial states for the optimization"*: `0`
+>        - *"Zero center"*: `Yes`
+>        - *"Data type of the output"*: `float32`
+>
+> 3. Rename the generated file `PCA after regression AnnData`.
+>
+> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `PCA after regression AnnData`
+>    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
+>
+> 5. Rename the output `Plot PCA after regression`.
+>
+{: .details}
+
+![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
+
+
+After regression the association between `total_counts` and the early components is effectively zero. That shows the operation did what it was asked to do. It does **not** show that the residualised matrix is the better one to analyse.
+
+> <comment-title>What "removing biological signal" means here</comment-title>
+>
+> Total counts at a spot rise for two different reasons, and `regress_out` cannot distinguish them.
+>
+> The **technical** reason is capture efficiency. Permeabilisation, section thickness and local tissue integrity all vary across a slide, and a spot that released its mRNA less efficiently reports fewer counts for the same underlying biology. Variation of this kind is noise and is worth removing.
+>
+> The **biological** reason is that spots genuinely differ in what they contain. A 55 µm spot over densely packed tumour epithelium holds more cells, and more transcriptionally active ones, than a spot over loose collagen-rich stroma or adipose tissue. Its higher count is a real measurement of the tissue.
+>
+> Because the two contributions are summarised in the same number, regressing it out discards both. In this section the count-depth gradient tracks the boundary between the epithelial and stromal compartments, so a partition computed on residuals risks blurring exactly the distinction the analysis is trying to find. The comparison is therefore kept as a diagnostic, and the non-regressed branch is the one carried forward.
+>
+{: .comment}
+
+> <question-title>Which branch should continue?</question-title>
+>
+> 1. Why is the post-regression PCA useful even though it is not used for the main clustering branch?
+> 2. Why would sending the residualised `.X` to CellTypist be a category error?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. It is a diagnostic comparison: it shows how strongly the early components change when the total-count association is removed. That helps you judge whether depth is influencing the embedding without automatically deciding that every depth-associated component is technical.
+> > 2. CellTypist expects log1p-normalised expression scaled to 10,000 counts per observation ({% cite CellTypistDocs %}). `regress_out` replaces `.X` with residuals that include negative values, so the matrix no longer carries that interpretation and the model would be reading values it was never trained on. CellTypist and the expression-neighbour graph both stay on the non-regressed branch for this reason.
+> >
+> {: .solution}
+>
+{: .question}
+
+## The expression-neighbour graph and UMAP
+
+Two steps follow from the {PCA}. `pp.neighbors` builds the expression-neighbour graph by connecting each spot to its 15 nearest neighbours in {PCA} space, and `tl.umap` embeds that graph in two dimensions for inspection ({% cite Wolf2018Scanpy %}). Both run on `AnnData with PCA`, the non-regressed branch.
+
+Colouring the embedding by the quality-control covariates is the check worth making at this point: if the count-depth gradient dominated the layout entirely, the groups found in the next section would be separating spots by how much signal they carry rather than by what they express.
+
+> <hands-on-title>Compute the neighbourhood graph and UMAP</hands-on-title>
+>
+> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
+>    - *"Method used for inspecting"*: `Compute a neighborhood graph of observations, using 'pp.neighbors'`
+>        - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `15`
+>        - *"Use a hard threshold to restrict the number of neighbors to n_neighbors?"*: `Yes`
+>        - *"Method for computing connectivities"*: `umap (McInnes et al, 2018)`
+>        - *"Distance metric"*: `euclidean`
+>        - *"Numpy random seed"*: `0`
+>
+>  Rename the generated file `Compute a neighborhood graph of observations`.
+>
+> 2. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The AnnData h5ad from the previous` {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} `step` 
+>    - *"Method used"*: `Embed the neighborhood graph using UMAP, using 'tl.umap'`
+>        - *"Minimum distance"*: `0.5`
+>        - *"Spread"*: `1.0`
+>        - *"Random state"*: `0`
+>
+>  Rename the generated file `AnnData with UMAP`.
+>
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
+>
+>    Rename the output `Plot UMAP`.
+>
+{: .hands_on}
+
+![UMAP embedding coloured by total counts and detected-gene QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/umap_qc_covariates.png "The UMAP displays transcriptionally similar spots near one another and reveals how sequencing depth and gene complexity vary across the expression-based embedding.")
+
+## Clustering at three resolutions
+
+Leiden clustering partitions a graph into communities ({% cite Traag2019Leiden %}). The resolution controls how readily larger communities are subdivided. No single resolution is intrinsically correct: the useful question is whether an extra split produces stable and interpretable expression programmes or merely fragments an already coherent group.
+
+The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
+
+> <hands-on-title>Cluster the expression-neighbour graph</hands-on-title>
+>
+> 1. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
+>    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
+>        - *"Coarseness of the clustering"*: `0.4`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_0.4`
+>        - *"Use weights from knn graph?"*: `Yes`
+>        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
+>        - *"Random state"*: `0`
+>
+>
+> 2. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The AnnData from previous` {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} `step` 
+>    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
+>        - *"Coarseness of the clustering"*: `0.8`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_0.8`
+>        - *"Use weights from knn graph?"*: `Yes`
+>        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
+>        - *"Random state"*: `0`
+>
+> 3. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The AnnData from previous` {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} `step` 
+>    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
+>        - *"Coarseness of the clustering"*: `1.2`
+>        - *"Key under which to add the cluster labels"*: `leiden_res_1.2`
+>        - *"Use weights from knn graph?"*: `Yes`
+>        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
+>        - *"Random state"*: `0`
+>
+>  Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`.
+>
+> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden_res_0.4,leiden_res_0.8,leiden_res_1.2`
+>
+>
+{: .hands_on}
+
+![UMAP comparison of Leiden clustering at resolutions 0.4, 0.8 and 1.2.](../../images/spatial-breast-cancer-tme-SPICA/leiden_resolution_comparison.png "Increasing Leiden resolution produces progressively finer partitions, from 9 groups at resolution 0.4 to 11 at 0.8 and 16 at 1.2. These groups represent expression-defined domains of Visium spots rather than individual cell types.")
+
+| Resolution | Number of groups | Largest group | Interpretation |
+| ---: | ---: | ---: | --- |
+| 0.4 | 9 | 1,390 spots | Coarser expression-based partition |
+| 0.8 | 11 | 609 spots | Intermediate partition used for subsequent analyses |
+| 1.2 | 16 | 448 spots | Finer expression-based partition |
+
+The three resolutions produce different partitions of the same expression-neighbour graph. The adjusted Rand index is **0.654** between resolutions 0.4 and 0.8 and **0.704** between 0.8 and 1.2, indicating that changing the resolution changes group membership.
+
+At resolution 0.4, group `0` contains 1,390 spots. Of these, 608 are assigned to group `0`, 556 to group `1` and 194 to group `7` at resolution 0.8, with smaller numbers distributed among other groups. Their marker profiles differ: group `0` is enriched for stromal and extracellular-matrix-associated genes, group `1` for immunoglobulin transcripts, and group `7` for antigen-presentation and myeloid-associated genes.
+
+Resolution 0.8 is retained as an intermediate level of detail for investigating these expression programmes and their spatial distribution. Neither the number of groups nor their separation on UMAP is sufficient to establish distinct cell types.
+
+> <question-title>Choose a resolution from evidence</question-title>
+>
+> Which argument best supports carrying `leiden_res_0.8` forward?
+>
+> A. It produces a fixed number of biologically distinct cell types.
+>
+> B. It provides an intermediate partition in which the large group at resolution 0.4 separates into groups with distinguishable marker-gene programmes, allowing their spatial organisation to be examined.
+>
+> C. Its UMAP panel appears more clearly separated than the other resolutions.
+>
+> > <solution-title></solution-title>
+> >
+> > **B.** Resolution 0.8 distinguishes an extracellular-matrix-associated programme, an immunoglobulin-rich programme and an antigen-presentation-associated programme that were largely combined in one group at resolution 0.4. The adjusted Rand index shows that changing resolution alters group membership, while the marker evidence helps interpret the resulting partitions. Neither UMAP appearance nor group count alone establishes biological validity.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Marker genes
+
+`tl.rank_genes_groups` tests each group against the union of all the others and returns the genes most strongly enriched in it ({% cite Wolf2018Scanpy %}). The Wilcoxon rank-sum test is used here because it makes no assumption about the shape of the expression distribution, and Benjamini-Hochberg correction is applied across the genes tested.
+
+This is the step where a numbered group starts to mean something biological. How far that meaning can be pushed depends on what a group is: 55 µm of tissue holding several cells, so a ranked gene list describes the programme that dominates a domain rather than the contents of a cell.
+
+> <hands-on-title>Rank genes for the selected partition</hands-on-title>
+>
+> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
+>    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
+>        - *"Get ranked genes as a Tabular file?"*: `True`
+>        - *"The key of the observations grouping to consider"*: `leiden_res_0.8`
+>        - *"Use 'raw' attribute of input if present"*: `No`
+>        - *"Comparison"*: `Compare each group to the union of the rest of the group`
+>        - *"Method"*: `Wilcoxon-Rank-Sum`
+>            - *"Correction method"*: `Benjamini-Hochberg`
+>            - *"Use tie correction for 'wilcoxon' scores"*: `No`
+>
+> 2. Rename the AnnData output `AnnData with markers` and the table output `Rank genes for characterizing groups`.
+>
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with markers`
+>    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes, using 'pl.rank_genes_groups'`
+>        - *"Number of genes to show"*: `20`
+>        - *"Font size"*: `8`
+>        - *"Number of panels per row"*: `4`
+>        - *"Share the y-axis across panels"*: `Yes`
+>
+>
+{: .hands_on}
+
+![Top-ranked marker genes for each Leiden group at resolution 0.8.](../../images/spatial-breast-cancer-tme-SPICA/ranked_genes_leiden_0.8.png "Wilcoxon-ranked genes highlight expression programmes that distinguish the 11 Leiden groups. Combinations of enriched genes provide evidence for interpreting the biological characteristics of each tissue domain.")
+
+
+## Annotating the groups
+
+The single-cell and spatial atlas of human breast cancers defines the epithelial, mesenchymal and immune lineages of this tumour type and their marker genes ({% cite Wu2021BreastAtlas %}), and the adult human breast atlas gives the normal-tissue counterpart ({% cite Kumar2023HumanBreastAtlas %}). Integrated single-cell and spatial studies of breast tumours use the same marker vocabulary in a spatial setting ({% cite Janesick2023BreastTME %}). Matching the ranked genes against those references is what turns a group number into a description.
+
+| Group | Spots | Examples among high-ranked genes | Expression programme suggested by the markers | Biological basis |
+| --- | ---: | --- | --- | --- |
+| `0` | 609 | *TIMP1*, *IGFBP7*, *C3*, *DCN*, *BGN*, *SFRP2*, *IGHG1* | Fibroblast- and extracellular-matrix-associated stromal programme with immunoglobulin signal | *DCN*, *BGN* and *SFRP2* support a fibroblast-associated extracellular-matrix programme. *IGHG1* indicates an additional immunoglobulin-associated contribution, consistent with mixed cellular RNA in Visium spots ({% cite Wu2021BreastAtlas %}, {% cite Croizer2024SpatialCAF %}). |
+| `1` | 578 | *IGHG4*, *IGKC*, *IGHG3*, *IGLC2*, *IGHG1* | Immunoglobulin-rich programme compatible with antibody-producing cell contributions | Immunoglobulin heavy- and light-chain transcripts are characteristic of antibody-producing B-lineage cells, particularly plasma cells. Their enrichment does not establish that each spot consists exclusively of plasma cells ({% cite Wu2021BreastAtlas %}). |
+| `2` | 451 | *CXCL14*, *CCND1*, *GFRA1*, *AGR2*, *KRT18*, *KRT8*, *MUC1* | Luminal epithelial-associated programme | *KRT8*, *KRT18* and *MUC1* support luminal epithelial expression, while *AGR2* and *CCND1* are compatible with epithelial secretory and proliferative programmes. These markers alone do not establish malignant identity ({% cite Wu2021BreastAtlas %}, {% cite Kumar2023HumanBreastAtlas %}). |
+| `3` | 436 | *COX6C*, *SLC39A6*, *WFDC2*, *SNCG*, *FASN* | Epithelial-associated programme with metabolic and secretory features | *SLC39A6* and *WFDC2* are associated with epithelial expression, while *FASN* and *COX6C* reflect lipid-metabolic and mitochondrial functions. The combination distinguishes this group without establishing a specific tumour subtype ({% cite Wu2021BreastAtlas %}). |
+| `4` | 425 | *CRISP3*, *SLITRK6*, *IGFBP5*, *VTCN1*, *KRT8* | CRISP3-high epithelial-associated programme | *CRISP3* is strongly enriched in this group, alongside genes associated with epithelial expression and regulation. Its spatially concentrated expression provides additional evidence for a distinct expression-associated tissue region, but not a definitive cell type ({% cite Wu2021BreastAtlas %}). |
+| `5` | 359 | *MGP*, *SERPINA3*, *DSP*, *S100G*, *TFF3*, *TFF1* | TFF-associated epithelial programme with additional mixed expression signals | *TFF1* and *TFF3* support a secretory or hormone-responsive epithelial-associated programme. Other enriched genes indicate that the group should not be assigned a single epithelial subtype solely from its marker ranking ({% cite Wu2021BreastAtlas %}, {% cite Kumar2023HumanBreastAtlas %}). |
+| `6` | 335 | *CPB1*, *IL6ST*, *CFB*, *HLA-B*, *HLA-C*, *TAP1* | CPB1-high programme with antigen-processing-associated expression | *CPB1* distinguishes this expression programme, while *HLA-B*, *HLA-C* and *TAP1* participate in MHC class I antigen presentation. These features do not independently establish the lineage of the contributing cells ({% cite Wu2021BreastAtlas %}, {% cite Kumar2023HumanBreastAtlas %}). |
+| `7` | 214 | *HLA-DRA*, *CD74*, *LYZ*, *HLA-DPA1*, *APOE*, *C1QA* | Antigen-presentation and myeloid-associated programme | *HLA-DRA*, *HLA-DPA1* and *CD74* support MHC class II antigen presentation, while *LYZ*, *APOE* and *C1QA* are compatible with myeloid-associated expression. These markers suggest immune contributions without proving an exclusive macrophage identity ({% cite Wu2021BreastAtlas %}). |
+| `8` | 186 | *S100G*, *HEBP1*, *IFI27*, *IFI6*, *HLA-B* | Interferon-associated programme; precise cellular origin uncertain | *IFI27* and *IFI6* are interferon-responsive genes. Their enrichment supports an interferon-associated expression state, but the marker combination is insufficient to assign a specific breast cell lineage ({% cite Wu2021BreastAtlas %}). |
+| `9` | 161 | *MUC5B*, *PVALB*, *SLC30A8*, *IGFBP2* | Distinct expression programme of uncertain cellular origin | The leading genes do not provide a sufficiently specific and consistent lineage signature for a confident annotation. The group is therefore retained as an expression-defined domain requiring further characterisation. |
+| `10` | 41 | *RPLP1*, *RPL7*, *COL2A1*, *RPL39*, *RPS14* | Ribosomal-protein-enriched programme; biological identity unresolved | Several leading genes encode ribosomal proteins, indicating a distinctive expression programme. Ribosomal enrichment alone does not establish poor data quality: the group's median total counts and detected-gene complexity are comparable to those of the overall section. |
+
+Several Leiden groups show related epithelial-associated programmes. Groups `2`, `3`, `4`, `5` and `6` differ in their highest-ranked genes, including combinations of keratins, secretory-associated genes and antigen-processing genes. Their separation reflects differences in expression profiles, but does not establish distinct malignant subtypes or histological compartments.
+
+Groups `0` and `1` illustrate the mixed nature of Visium measurements. Group `0` combines extracellular-matrix-associated genes with immunoglobulin transcripts, whereas group `1` is particularly enriched for immunoglobulin heavy- and light-chain genes. The rankings are consistent with different contributions from stromal and antibody-producing cell populations, but cannot determine their proportions within individual spots.
+
+Group `7` is characterised by `HLA-DRA`, `CD74`, `LYZ` and other antigen-presentation-associated genes. This supports a myeloid-associated expression programme, although the ranking alone cannot identify all contributing cells or establish a distinct lymphoid structure.
+
+Some groups remain incompletely characterised. Group `9` lacks a sufficiently specific combination of established breast-lineage markers, while group `10` is enriched for ribosomal-protein genes. Group `10` has a median of 6,115 detected genes and 21,682 total counts, so its marker pattern does not by itself indicate poor library complexity. Additional evidence is needed before assigning either group a more specific biological identity.
+
+
+> <comment-title>Why marker-based annotation is weaker on Visium than on single cells</comment-title>
+>
+> In a segmented single-cell experiment, a group whose cells all express *COL1A1* and *DCN* can reasonably be called fibroblasts. On Visium, the same ranking means that spots in that group contain more fibroblast RNA than other spots do. The spot may still contain epithelium, vessels and immune cells alongside the fibroblasts, and that mixture is why group `0` also shows immunoglobulin signal.
+>
+> Recovering actual proportions requires deconvolution against a matched single-cell reference ({% cite Kleshchevnikov2022Cell2location %}, {% cite Cable2022RCTD %}). Without that step, the defensible statement is about which programme dominates a domain, not about which cells are present.
+>
+{: .comment}
+
+> <question-title>Interpret marker genes in multicellular spots</question-title>
+>
+> 1. Group `0` is enriched for extracellular-matrix-associated genes and immunoglobulin transcripts. Why is it inappropriate to assign every spot in this group a single fibroblast identity?
+> 2. Group `10` is enriched for ribosomal-protein genes. What additional evidence should be considered before describing it as a low-quality group?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. A Visium spot can contain RNA from fibroblasts, immune cells, epithelial cells and other populations. Enrichment of fibroblast-associated markers indicates a contribution from that expression programme, not exclusive fibroblast identity.
+> >
+> > 2. Ribosomal enrichment should be considered alongside the number of detected genes, total counts, spatial location and other marker genes. Group `10` has count and detected-gene medians comparable to the overall section, so low complexity is not established by these data.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Spatial statistics with Squidpy
+
+Up to this point, neighbourhood meant **expression similarity**. Squidpy now constructs a separate graph from the Visium coordinates ({% cite Palla2022Squidpy %}).
+
+The settings follow from how the slide is printed. Capture spots sit at fixed positions in a hexagonal lattice, so every interior spot has exactly six immediate neighbours a known distance away. Squidpy exposes this directly: `coord_type = grid` with `n_neighs = 6` and `n_rings = 1` connects each spot to the six that touch it ({% cite Palla2022Squidpy %}).
+
+This is where a sequencing-based analysis diverges structurally from an imaging-based one. Segmented cells occupy irregular positions with no lattice to exploit, so their graph has to be built with `coord_type = generic`, using Delaunay triangulation or a distance cut-off. Using the generic setting on Visium data would discard geometry the slide design already guarantees.
+
+> <comment-title>What `n_rings` controls</comment-title>
+>
+> Increasing `n_rings` extends the graph outwards by whole rings of the lattice: two rings connect each spot to its six immediate neighbours plus the twelve beyond them. A wider graph smooths the statistics that follow, which can help when domains are large and diffuse, but it also blurs boundaries between adjacent domains. One ring keeps the analysis at the finest spatial scale Visium can support.
+>
+{: .comment}
+
+> <hands-on-title>Build the Visium spatial-neighbour graph</hands-on-title>
+>
+> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with markers`
+>    - *"Operation"*: `Create a graph from spatial coordinates (gr.spatial_neighbors)`
+>        - *"Spatial key"*: `spatial`
+>        - *"Coordinate type"*: `grid`
+>        - *"Number of neighbors"*: `6`
+>        - *"Number of rings"*: `1`
+>        - *"Delaunay triangulation"*: `No`
+>        - *"Set diagonal"*: `No`
+>        - *"Key added"*: `spatial`
+>
+>
+{: .hands_on}
+
+The resulting `spatial_connectivities` matrix describes physical adjacency on the capture grid. It does not replace the Scanpy graph used for UMAP and Leiden; both graphs remain in the object for different analyses.
+
+## Spatial centrality measures
+
+Centrality scores summarise how each group sits in the spatial graph: how many neighbours its spots have, and how close they are to the rest of the section ({% cite Palla2022Squidpy %}). They describe arrangement, not importance.
+
+> <hands-on-title>Calculate group-level spatial statistics</hands-on-title>
+>
+> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with spatial neighbours from the previous {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} `step` 
+>    - *"Operation"*: `Compute centrality scores per cluster or cell type (gr.centrality_scores)`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
+>        - *"Connectivity key"*: `spatial_connectivities`
+>
+>
+> 2. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with centrality scores from previous` {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} `step`
+>    - *"Operation"*: `Plot centrality scores (pl.centrality_scores)`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
+>
+>
+> 3. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with centrality scores from previous` {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} `step`
+>    - *"Operation"*: `Compute neighborhood enrichment by permutation test (gr.nhood_enrichment)`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
+>        - *"Connectivity key"*: `spatial_connectivities`
+>        - *"Number of permutations"*: `1000`
+>
+>
+> 4. {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with neighborhood enrichment from previous` {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} `step` 
+>    - *"Operation"*: `Plot neighborhood enrichment (pl.nhood_enrichment)`
+>        - *"Key in adata.obs where clustering is stored"*: `leiden_res_0.8`
+>        - *"Mode"*: `zscore`
+>        - *"Annotate cells"*: `No`
+>        - *"Color map"*: `viridis`
+>
+>
+{: .hands_on}
+
+![Average clustering, closeness centrality and degree centrality across Leiden groups.](../../images/spatial-breast-cancer-tme-SPICA/squidpy_centrality_leiden_0.8.png "Squidpy centrality measures describe the spatial organisation of Leiden groups within the Visium-neighbour graph, including local connectivity and their positions relative to the wider tissue network.")
+
+Group `0` has the highest degree centrality (**0.220**) and closeness centrality (**0.253**). Group `1` also has relatively high values (**0.212** and **0.216**), while group `7` has degree centrality of **0.140** and closeness centrality of **0.190**. These scores reflect how each expression-defined group is positioned within the spatial-neighbour graph. They describe the organisation of the groups across the section, not their biological importance or signalling activity.
+
+## Neighbourhood enrichment
+
+Neighbourhood enrichment asks whether two group labels sit next to each other in the spatial graph more or less often than chance allows. Squidpy counts the observed adjacencies, shuffles the group labels across spots many times, and reports how far the observed count sits from the permuted distribution as a z-score ({% cite Palla2022Squidpy %}). A positive value means the two labels are neighbours more often than expected, a negative value less often.
+
+![Neighbourhood-enrichment heatmap for Leiden groups at resolution 0.8.](../../images/spatial-breast-cancer-tme-SPICA/squidpy_neighbourhood_enrichment.png "Neighbourhood-enrichment z-scores measure whether spots belonging to the same or different Leiden groups occur next to one another more or less frequently than expected under random reassignment of group labels.")
+
+The largest values in this matrix are on the diagonal: every group is adjacent to itself far more often than chance, from **z ≈ 38** for group `9` up to **z ≈ 93** for group `2`. That is the expected signature of spots forming coherent territories rather than being scattered.
+
+Off the diagonal, only three pairs are positive at all. Groups `1`–`9` are the strongest (**z ≈ 14.4**), followed by `0`–`11` (**z ≈ 3.1**) and `0`–`9` (**z ≈ 1.4**). Every other pair is depleted, most strongly `1`–`2` (**z ≈ −21.3**) and `0`–`2` (**z ≈ −20.6**). The reading is that the plasma-cell-rich group `1` and the myofibroblast/perivascular group `9` sit next to each other more often than chance, while the epithelial group `2` avoids both stromal groups. A positive z-score supports **non-random adjacency** between labels; it does not identify a ligand, receptor or signalling direction.
+
+> <question-title>Adjacency is not communication</question-title>
+>
+> Groups `1` and `9` are adjacent more often than expected. Which statement is justified?
+>
+> A. Group `1` sends a signal to group `9`.
+>
+> B. Spots carrying labels `1` and `9` share edges in the Visium spatial graph more often than expected under the permutation null.
+>
+> > <solution-title></solution-title>
+> >
+> > **B.** The enrichment analysis works on labels and physical adjacency. It contains no ligand-receptor model and establishes neither molecular interaction nor causal direction.
+> >
+> {: .solution}
+>
+{: .question}
+
+## Spatially variable genes
+
+Moran's I asks whether expression values for a gene are spatially autocorrelated over the graph: a high positive value means similar expression tends to occur in neighbouring spots. It is a statement about pattern, not mechanism.
+
+> <hands-on-title>Calculate Moran's I</hands-on-title>
+>
+> 1. {% tool [Squidpy](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_graph/squidpy_graph/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"spatial object (in SpatialData or AnnData format)"*: `AnnData with neighborhood enrichment from previous` {% tool [Squidpy Plot](toolshed.g2.bx.psu.edu/repos/iuc/squidpy_plot/squidpy_plot/1.8.1+galaxy0) %} `step`
+>    - *"Operation"*: `Calculate Global Autocorrelation Statistic (Moran’s I or Geary's C) (gr.spatial_autocorr)`
+>        - *"Connectivity key"*: `spatial_connectivities`
+>        - *"Mode"*: `Moran's I`
+>        - *"Attribute"*: `X`
+>        - *"Transformation"*: `Yes`
+>        - *"Number of permutations"*: `1000`
+>        - *"Two tailed"*: `No`
+>        - *"Use raw counts"*: `No`
+>
+> Rename the generated file `AnnData with Moran's I`.
+>
+{: .hands_on}
+
+Genes near the top of the reference ranking include:
+
+| Gene | Moran's I | Reading |
+| --- | ---: | --- |
+| *CRISP3* | 0.727 | Strongly localised expression, matching group `4` |
+| *CPB1* | 0.712 | Secretory epithelial signal confined to group `6` |
+| *IGHG3* | 0.706 | Spatially structured immunoglobulin signal |
+| *IGLC2* | 0.701 | Spatially structured immunoglobulin signal |
+| *ALB* | 0.668 | Spatially patterned expression |
+| *IGHG1* | 0.638 | Spatially structured immunoglobulin signal |
+| *CXCL14* | 0.620 | Spatially patterned chemokine expression |
+| *SLITRK6* | 0.617 | Spatially patterned epithelial signal |
+| *S100G* | 0.615 | Spatially patterned epithelial signal |
+| *C3* | 0.613 | Spatial structure in the stromal programme |
+
+Moran's I is calculated over the 3,000 highly variable genes. Three of the top ten are immunoglobulin chains, which is consistent with the plasma-cell programmes that dominate groups `0` and `1` being concentrated in particular parts of the section rather than spread evenly through the stroma.
+
+### Visual confirmation on the tissue
+
+A high Moran's I indicates that a gene is more spatially structured than random, but the statistic alone does not show what that structure looks like. Plotting a high-scoring gene back onto the section is therefore a necessary check: a gene that is genuinely spatially informative should resolve into a coherent territory or gradient rather than scattered speckle. The plot also helps separate a real biological pattern from an apparent one driven by a handful of very high-expressing spots.
+
+To do this we import the AnnData table carrying the Squidpy results back into the SpatialData object, then colour the capture spots by expression of the gene of interest. The steps below use *CRISP3*, the highest-scoring gene in this section.
+
+> <hands-on-title>Visualise a high-scoring gene on the tissue</hands-on-title>
+>
+> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
+>    - *"Operation"*: `Import anndata table to a SpatialData object`
+>        - {% icon param-file %} *"annotated data object to add"*: `AnnData with Moran's I`
+>        - *"Table name"*: `table_processed`
+>
+>
+> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `SpatialData with Moran's I from the previous` {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} `step` 
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `CRISP3`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_processed`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>        - *"Image format"*: `JPG`
+>
+>
+{: .hands_on}
+
+> <comment-title>Shapes, not labels</comment-title>
+>
+> Visium capture spots are stored in the SpatialData object as **shapes**, that is, circles of fixed radius positioned on the capture grid. They are not a segmentation mask, so there is no labels element to render. Use *"Render Shapes"* for any Visium overlay. In a Xenium analysis, where cells really are segmented, the equivalent overlay would use *"Render Labels"* instead.
+>
+{: .comment}
+
+![CRISP3 expression mapped onto the breast-cancer tissue section.](../../images/spatial-breast-cancer-tme-SPICA/spatial_crisp3_expression.jpg "CRISP3 expression is concentrated toward the lower-right region of the tissue section, illustrating a spatially restricted expression pattern.")
+
+The map also closes a loop with the earlier marker analysis. *CRISP3* is the top-ranked gene for Leiden group `4`, and the region of high *CRISP3* expression here coincides with the part of the section that group `4` occupies in the final cluster overlay. Two independent analyses, one carried out in expression space and one in physical space, point at the same territory. That convergence is stronger evidence for a real tissue domain than either result would be on its own.
+
+> <question-title>Read the statistic and the map together</question-title>
+>
+> 1. *CRISP3* and *C3* both appear in the Moran's I ranking, at 0.727 and 0.613 respectively. What would you expect the two tissue maps to look like relative to one another?
+> 2. A gene returns a low Moran's I but is clearly a strong marker for one Leiden group in the ranked-gene table. Is that a contradiction?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Both should show non-random structure, but *CRISP3* should be the tighter pattern: a higher Moran's I means expression at a spot is more strongly predicted by expression at its neighbours, so the territory should have sharper edges and fewer isolated high spots. *C3* should look more diffuse, spread across a broader stromal area rather than concentrated in one region.
+> > 2. No. The two statistics ask different questions. Ranked genes ask whether expression differs between groups of spots defined in expression space; Moran's I asks whether expression is arranged coherently in physical space. A marker for a group whose spots are scattered across several parts of the section can be highly discriminative and still have low spatial autocorrelation.
+> >
+> {: .solution}
+>
+{: .question}
+
+> <question-title>What does a high Moran's I leave unanswered?</question-title>
+>
+> *CRISP3* has Moran's I ≈ 0.727. Which of the following still requires additional evidence: whether its expression is spatially patterned, why that pattern occurs, or whether the gene causes the neighbouring tissue state?
+>
+> > <solution-title></solution-title>
+> >
+> > The statistic supports the first statement: expression is spatially autocorrelated on this graph. The **cause** of the pattern and any **functional effect** remain unanswered. A spatial statistic does not provide a mechanism.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Cell type annotation with CellTypist
+
+CellTypist was designed to compare query expression profiles with labelled single-cell references ({% cite Xu2023CellTypist %}). The model used here contains cell states from adult human breast tissue ({% cite Kumar2023HumanBreastAtlas %}); the full catalogue of available models is published by the CellTypist developers ({% cite CellTypistModels %}). For this Visium analysis, the appropriate interpretation is therefore **reference-based label transfer**: each mixed spot is assigned the reference profile with the largest score, not proven to be one cell of that type.
+
+The input is `AnnData with Moran's I`, which still carries the **non-regressed**, log1p-normalised expression matrix scaled to 10,000 counts per spot.
+
+> <hands-on-title>Transfer adult-breast reference labels to the spots</hands-on-title>
+>
+> 1. {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input AnnData file"*: `AnnData with Moran's I`
+>    - *"Model source"*: `Use a cached model`
+>        - *"Choose CellTypist model"*: `cell types from the adult human breast (v1)`
+>    - *"Annotation mode"*: `Choose the cell type with the largest score/probability as the final prediction`
+>    - *"Probability threshold"*: `0.5`
+>    - *"Refine the predicted labels by running the majority voting classifier after over-clustering"*: `No`
+>    - *"Generate a dotplot of the predicted cell types"*: `Yes`
+>        - *"Reference column in AnnData.obs for dotplot"*: `leiden_res_0.8`
+>        - *"Prediction to plot"*: `predicted_labels`
+>
+>
+{: .hands_on}
+
+The direct result contains **32 distinct `predicted_labels`** across 3,790 spots. The most frequent are:
+
+| Reference label | Spots | Percentage |
+| --- | ---: | ---: |
+| `plasma_IgG` | 1,833 | 48.36% |
+| `LummHR-SCGB` | 1,136 | 29.97% |
+| `CD8-activated` | 204 | 5.38% |
+| `Fibro-matrix` | 127 | 3.35% |
+| `LummHR-major` | 126 | 3.32% |
+| `Lumsec-prol` | 103 | 2.72% |
+| `Macro-lipo` | 52 | 1.37% |
+
+Two labels account for more than three-quarters of the section, and the median CellTypist confidence across spots is **0.743**. A confidence score describes the classifier's support for its closest reference category; it does not measure how many underlying cells in a Visium spot belong to that category.
+
+![CellTypist reference-label predictions compared with Leiden groups.](../../images/spatial-breast-cancer-tme-SPICA/celltypist_label_transfer.png "Dot size represents the proportion of spots assigned each reference label within a Leiden group, while colour indicates mean prediction probability. These annotations reflect similarity to reference cell profiles rather than definitive cell identities.")
+
+The relationship with the marker evidence is informative in both directions.
+
+Where the two agree, the annotation is strengthened. Group `1`, whose markers are dominated by immunoglobulin chains, matches `plasma_IgG` for **315 of its 596 spots (52.9%)**. Groups `2`, `4` and `5`, all annotated as luminal epithelium from their markers, match `LummHR-SCGB` most often, for 47.0%, 50.7% and 46.5% of their spots. Group `11`, the lymphoid aggregate, matches `CD8-activated` for **7 of its 16 spots (43.8%)** and draws on only four distinct labels in total.
+
+Where they disagree, the disagreement is the lesson. Group `0` carries fibroblast markers alongside immunoglobulin and macrophage signal, yet **412 of its 601 spots (68.6%)** match `plasma_IgG`, with 21 different reference labels appearing across the group. A spot containing a few plasma cells among fibroblasts can be pulled toward `plasma_IgG` because immunoglobulin transcripts are extraordinarily abundant per cell. The classifier reports the closest single profile for a mixture; it does not report the mixture.
+
+> <details-title>Why majority voting is disabled in this tutorial</details-title>
+>
+> Majority voting refines each prediction by taking the most common label among transcriptionally similar neighbours ({% cite Dominguez2022CellTypist %}). On multicellular spots that tends to collapse the result: labels held by a minority of spots are absorbed into their larger neighbours, and the 16-spot lymphoid group is exactly the kind of population that disappears.
+>
+> Those minority signals are much of the point of a tumour microenvironment analysis, so voting is left off here and the direct `predicted_labels` are used instead. The output is noisier and more informative.
+>
+{: .details}
+
+> <question-title>Is a CellTypist label a cell identity?</question-title>
+>
+> Which sentence is better supported by this experiment?
+>
+> A. "This spot is a plasma cell."
+>
+> B. "This spot has its closest reference match to the `plasma_IgG` profile."
+>
+> > <solution-title></solution-title>
+> >
+> > **B.** The measurement is a Visium spot that can contain RNA from several cells. CellTypist reports transcriptional similarity to categories in a single-cell reference. A defensible interpretation combines that result with Leiden markers, spatial position, histology and biological knowledge.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Ligand-receptor rankings with LIANA
+
+LIANA combines ligand-receptor resources and inference methods to rank expression-compatible source-to-target pairs ({% cite Dimitrov2022Liana %}, {% cite Dimitrov2024LianaPlus %}). Here the source and target categories are the **`leiden_res_0.8` groups of Visium spots**, not purified cell populations. That distinction makes the results hypotheses about tissue regions/programmes rather than direct observations of cell-to-cell signalling.
+
+> <hands-on-title>Rank candidate ligand-receptor pairs</hands-on-title>
+>
+> 1. {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `The output of` {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} `step`
+>    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
+>        - *"Group By"*: `leiden_res_0.8`
+>        - *"Interaction source"*: `Use built-in database`
+>            - *"Resource source"*: `Download from LIANA API`
+>            - *"Resource name"*: `consensus`
+>        - *"Expression proportion"*: `0.1`
+>        - *"Minimum number of cells"*: `5`
+>        - *"Subset cell type pairs"*: `Use all possible combinations`
+>        - *"Aggregation method"*: `RobustRankAggregate (rra)`
+>        - *"Consensus options"*: `Default (Specificity and Magnitude)`
+>        - *"Return all ligand-receptor pairs"*: `No`
+>        - *"Results key in adata.uns"*: `liana_res`
+>        - *"Use raw counts"*: `No`
+>        - *"Differential expression method"*: `t-test`
+>        - *"Number of permutations"*: `1000`
+>        - *"Random seed"*: `1337`
+>
+> Rename the generated file `Final LIANA AnnData`.
+>
+{: .hands_on}
+
+The retained `liana_res` table contains **172,351 source/target/LR rows**. The top of the specificity ranking is strikingly coherent:
+
+| Source | Target | Ligand | Receptor | Specificity rank |
+| --- | --- | --- | --- | ---: |
+| `11` | `11` | *CCL19* | *CCR7* | 6.87 × 10⁻¹² |
+| `11` | `9` | *CXCL13* | *ACKR1* | 1.34 × 10⁻¹⁰ |
+| `11` | `11` | *CCL19* | *CXCR3* | 1.46 × 10⁻¹⁰ |
+| `11` | `11` | *FCER2* | *CR2* | 8.08 × 10⁻¹⁰ |
+| `9` | `11` | *CCL21* | *CCR7* | 1.03 × 10⁻⁹ |
+| `11` | `11` | *CD52* | *SIGLEC10* | 1.60 × 10⁻⁹ |
+| `0` | `11` | *C3* | *CD19* | 2.51 × 10⁻⁹ |
+
+Seven of the eight highest-ranked pairs involve group `11`, the 16-spot lymphoid aggregate. The identities of the pairs are consistent with what that structure is: *CCL19* and *CCL21* signalling through *CCR7* is the chemokine axis that recruits and organises T cells in lymphoid tissue, *CXCL13* organises B-cell follicles, and *FCER2*–*CR2* is a follicular dendritic cell and B cell interaction. The group `9` involvement is notable because group `9` is the myofibroblast and perivascular programme, and perivascular cells are a documented source of *CCL21* in breast tumours ({% cite Croizer2024SpatialCAF %}).
+
+A small rank means a pair scores highly under the selected aggregate criterion. It does **not** prove that the ligand reaches the receptor, that the receptor is active, or that the interaction changes a phenotype. What makes this particular result worth following up is that three independent analyses converge on the same 16 spots: the marker ranking called them lymphoid, the neighbourhood enrichment showed them adjacent to group `0` more often than chance, and the ligand-receptor ranking returns the canonical lymphoid-organising chemokines.
+
+> <details-title>Magnitude and specificity rank different things</details-title>
+>
+> Ranking the same table by `magnitude_rank` instead returns an almost entirely different top list, dominated by *HLA-A*–*ERBB2* between many pairs of groups. *HLA-A* is expressed almost everywhere in this section and *ERBB2* is highly expressed in the epithelial groups, so the product of their expression is large for many combinations.
+>
+> That is exactly what magnitude measures: the strength of the signal, irrespective of how selective it is. Specificity asks the opposite question, whether a pair is distinctive to particular groups. A pair that is high on both is the strongest candidate; a pair that is high on magnitude alone usually reflects a ubiquitously expressed partner rather than a targeted interaction.
+>
+{: .details}
+
+> <question-title>Read LIANA together with the spatial graph</question-title>
+>
+> *CCL21*–*CCR7* ranks highly for a `9` → `11` source-target combination, and *CCL19*–*CCR7* for `11` → `11`. What can you conclude?
+>
+> > <solution-title></solution-title>
+> >
+> > That group `11` expresses both the chemokine and its receptor, and that a neighbouring stromal group expresses a second ligand for the same receptor, is **convergent observational evidence** for a self-organising lymphoid structure supported by the surrounding stroma. It is a stronger candidate for follow-up than an expression-only hit between spatially separated groups. It still does not demonstrate direct molecular contact, receptor activation, direction of effect or causality, and with 16 spots the result rests on a small number of observations.
+> >
+> {: .solution}
+>
+{: .question}
+
+> <comment-title>What would make a ligand-receptor candidate worth following up?</comment-title>
+>
+> Look for several independent forms of support: ligand and receptor expression in the relevant source and target groups; a good specificity as well as magnitude ranking; spatial adjacency or a biologically plausible diffusible mechanism; marker genes that independently support the interpretation of the source and target programmes; literature in breast cancer or the relevant tissue context; and replication in another section. Protein-level or perturbation evidence is needed before the language moves from "candidate" to a functional interaction.
+>
+{: .comment}
+
+# Return the processed table to SpatialData
+
+Everything computed so far lives in the AnnData table: quality-control fields, PCA and UMAP coordinates, three Leiden assignments, ranked-gene metadata, the spatial graph and its statistics, CellTypist labels and the LIANA rankings. None of it is yet attached to the tissue. Writing the table back into the SpatialData object restores that link, so each annotation can be drawn on the histology it came from and the object can be shared as a single self-describing unit.
+
+> <hands-on-title>Create the final processed SpatialData object</hands-on-title>
+>
+> 1. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
+>    - *"Operation"*: `Import anndata table to a SpatialData object`
+>        - {% icon param-file %} *"annotated data object to add"*: `Final LIANA AnnData`
+>        - *"Table name"*: `table_processed`
+>
+> 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"SpatialData object"*: `The SpatialData object from the previous` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step`
+>    - In *"Render Images"*:
+>        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
+>    - In *"Render Shapes"*:
+>        - *"Shapes element name"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Color column"*: `leiden_res_0.8`
+>        - *"Scale factor"*: `1.0`
+>        - *"Table name"*: `table_processed`
+>    - In *"Plot Display Parameters"*:
+>        - *"Coordinate system(s)"*: `V1_Breast_Cancer_Block_A_Section_1`
+>        - *"Legend location"*: `Right margin`
+>        - *"Enable colorbars?"*: `Yes`
+>
+>
+{: .hands_on}
+
+![Spatial distribution of the 11 Leiden groups at resolution 0.8, shown as coloured Visium capture spots over the breast-cancer H&E tissue section.](../../images/spatial-breast-cancer-tme-SPICA/plot_spatial_clusters.jpg "The 11 Leiden groups occupy different regions of the breast-cancer tissue section, with several groups forming broad territories and others appearing across multiple regions. Each spot represents a mixed tissue measurement rather than an individual cell.")
+
+The tissue view is the final consistency check. A UMAP group that looked coherent in expression space can now be judged against histology and neighbouring groups. Group territories that are spatially coherent strengthen the interpretation that clustering has captured reproducible tissue programmes, while mixed boundaries are expected where Visium spots collect RNA from more than one cell population.
+
+> <question-title>Integrate all four sources of evidence</question-title>
+>
+> Consider group `11`: marker ranking supports a lymphoid aggregate; CellTypist matches 7 of its 16 spots to `CD8-activated`; neighbourhood enrichment shows non-random adjacency with group `0`; LIANA returns lymphoid-organising chemokines; and the final map shows where those 16 spots sit on the tissue. Which result should be treated as the "ground truth" label?
+>
+> > <solution-title></solution-title>
+> >
+> > None of them is ground truth on its own. The marker genes give direct evidence for the programme enriched in the group, CellTypist provides external reference similarity, Squidpy describes physical arrangement, LIANA proposes expression-compatible interactions, and the histology provides tissue context. Here they agree, which is why the lymphoid interpretation is defensible despite the group's small size. The defensible interpretation is always the one that remains consistent across these forms of evidence while respecting the mixed-cell nature of a Visium spot.
+> >
+> {: .solution}
+>
+{: .question}
+
+# Conclusion
+
+We analysed the **Human Breast Cancer, Block A Section 1** Visium tissue section as a spatial transcriptomics experiment rather than as a single-cell dataset. The prepared expression table began with **3,798 capture spots × 36,601 genes**. Sequential spot and gene filtering retained **3,790 spots × 22,240 genes**: only 8 spots were removed, while the requirement that a gene be detected in at least three spots removed 14,361 rarely detected features.
+
+The filtered expression matrix was normalised to **10,000 counts per spot**, log-transformed and annotated with **3,000 highly variable genes** without subsetting away the remaining genes. The main 50-component PCA was calculated on this non-regressed log-normalised branch and used to build a **15-neighbour expression graph** and UMAP. A separate `regress_out(total_counts)` branch showed that the association of early PCs with total count could be removed, but that residualised matrix was deliberately kept out of CellTypist and the main graph because it no longer represents log-normalised expression.
+
+Leiden resolutions **0.4, 0.8 and 1.2** yielded **9, 12 and 15 groups**. Resolution 0.8 was carried forward because it had the highest weighted modularity (0.783) and the highest PCA-space silhouette (+0.121) of the three, and because the groups it adds are interpretable: a single 1,354-spot group at resolution 0.4 separates into a mixed stromal group, a plasma-cell-dominated group and a myofibroblast and perivascular group, while a 16-spot lymphoid aggregate is resolved ({% cite Wu2021BreastAtlas %}). Resolution 1.2 subdivides further with identical modularity and a slightly lower silhouette.
+
+Squidpy then replaced expression similarity with **physical adjacency on the Visium grid**. Centrality described graph position, neighbourhood enrichment described label adjacency relative to permutation, and Moran's I identified spatially autocorrelated genes such as *CRISP3* (0.727), *CPB1* (0.712) and the immunoglobulin chains *IGHG3* and *IGLC2*. Mapping the highest-scoring gene back onto the section showed *CRISP3* confined to the territory occupied by Leiden group `4`, so the expression-space and physical-space analyses agreed. Those analyses established spatial structure, not a signalling mechanism.
+
+CellTypist supplied **32 direct adult-breast reference matches** with majority voting disabled. The mismatch between some reference labels and group markers is a useful property of the exercise: it demonstrates why a mixed Visium spot should be described as having a **closest reference match**, not as being one particular cell. LIANA then ranked candidate ligand-receptor relationships between the selected Leiden groups, and its strongest specificity hits centred on the 16-spot lymphoid group: *CCL19*–*CCR7*, *CCL21*–*CCR7* from the neighbouring perivascular group, *CXCL13*–*ACKR1* and *FCER2*–*CR2*. Marker genes, neighbourhood enrichment and ligand-receptor ranking therefore converge on the same small structure, which is the strongest result in this analysis. It remains a hypothesis until supported by orthogonal or functional validation.
+
+Finally, the processed AnnData table was returned to the original SpatialData object as `table_processed`, and `leiden_res_0.8` was drawn over the histology. The final object therefore keeps expression-derived groups, reference annotations, spatial statistics and ligand-receptor rankings attached to the tissue coordinates that give them context.
+
+The single limitation to carry forward is the one stated at the outset: every result here describes a 55 µm capture spot holding several cells. The domains recovered are real and their spatial arrangement is measured, but converting them into cell-type proportions would require deconvolution against a matched breast single-cell reference ({% cite Kleshchevnikov2022Cell2location %}, {% cite Cable2022RCTD %}). An imaging-based analysis that segments individual cells, such as the companion Xenium melanoma tutorial, answers that question directly and makes an instructive comparison with the approach followed here.
