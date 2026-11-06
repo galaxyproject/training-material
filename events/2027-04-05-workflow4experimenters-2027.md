@@ -1,7 +1,6 @@
 ---
 layout: event
 google_form_id: 1789990830
-status: wip
 title: Workflow4Experimenters 2027
 description: 'Analyze your data with Galaxy and the Workflow4Metabolomics infrastructure!
   During this one-week-long on-site course (preceded by half-a-week of webinars),
@@ -54,8 +53,8 @@ async: false
 mode: onsite
 
 registration:
-  link: to be opened soon (october)
-  deadline: 2027-02-06
+  link: https://grist.numerique.gouv.fr/o/docs/forms/oFpHdejt6BsbHQUTW2mj7w/55
+  deadline: 2027-01-08
   open: false
 
 location:
@@ -166,7 +165,7 @@ For this new session, we continue with the acclaimed two-step format:
 - From April, 26th to 30th: tutoring on your own data, at [PNRB](https://formation-continue.univ-rennes.fr/pole-sciences-et-ingenierie) ([Rennes University](https://goo.gl/maps/9AN5Kq24mCNBiTwi7), France).
 
 
-**The pre-registration is soon to be opened. As soon as it opens, you will find here the link to the pre-registration form.**
+**The pre-registration is now opened! [Fill in the registration form](https://grist.numerique.gouv.fr/o/docs/forms/oFpHdejt6BsbHQUTW2mj7w/55) before January 8th, 2027.**
 
 Cost is 1300€ for academic and 2500€ for private institution (to cover expenses for trainers, organization, materials and meals); special discount of 100€ is offered for [RFMF](https://www.rfmf.fr/) members 2027.
 
