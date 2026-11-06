@@ -54,8 +54,8 @@ async: false
 mode: onsite
 
 registration:
-  link: to be opened soon (october)
-  deadline: 2027-02-06
+  link: https://grist.numerique.gouv.fr/o/docs/forms/oFpHdejt6BsbHQUTW2mj7w/55
+  deadline: 2027-01-08
   open: false
 
 location:
