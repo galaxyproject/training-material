@@ -1,0 +1,34 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Get PDB file"]
+  1[label="Search in textfiles"]
+  0 -> 1 [label="output"]
+  2[label="GROMACS initial setup"]
+  1 -> 2 [label="output"]
+  3[label="GROMACS structure configuration"]
+  2 -> 3 [label="output2"]
+  4[label="GROMACS solvation and adding ions"]
+  2 -> 4 [label="output1"]
+  3 -> 4 [label="output"]
+  5[label="GROMACS energy minimization"]
+  4 -> 5 [label="output2"]
+  4 -> 5 [label="output1"]
+  6[label="NVT equilibration"]
+  2 -> 6 [label="output3"]
+  4 -> 6 [label="output2"]
+  5 -> 6 [label="output1"]
+  7[label="NPT equilibration"]
+  2 -> 7 [label="output3"]
+  4 -> 7 [label="output2"]
+  6 -> 7 [label="output1"]
+  6 -> 7 [label="output5"]
+  8[label="MD simulation"]
+  4 -> 8 [label="output2"]
+  7 -> 8 [label="output1"]
+  7 -> 8 [label="output5"]
+  k027305f5213b40af8e2bc376d5d2e294[color=lightseagreen,label="Output\nxtc_output"]
+  8 -> k027305f5213b40af8e2bc376d5d2e294
+  ke745fd4cf607421584e4c62587c8c07a[color=lightseagreen,label="Output\ngro_output"]
+  8 -> ke745fd4cf607421584e4c62587c8c07a
+}

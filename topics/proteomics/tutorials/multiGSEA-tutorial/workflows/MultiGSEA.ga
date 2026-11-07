@@ -1,0 +1,244 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-3763-0797",
+            "name": "Matthias Bernt"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "MultiGSEA",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "transcriptome.tsv"
+                }
+            ],
+            "label": "transcriptome.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "435e563a-2cff-4fb4-96bf-d6b3ce6708b4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "proteome.tsv"
+                }
+            ],
+            "label": "proteome.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 120
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b69dfaa6-8989-43a4-b7f3-88e3ee96e622",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metabolome.tsv"
+                }
+            ],
+            "label": "metabolome.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 240
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9dfe7987-1373-4a62-904b-2e9a12303511",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multigsea/multigsea/1.12.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "metabolomics_data|metabolomics": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "proteomics_data|proteomics": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "transcriptomics_data|transcriptomics": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool multiGSEA",
+                    "name": "metabolomics_data"
+                },
+                {
+                    "description": "runtime parameter for tool multiGSEA",
+                    "name": "proteomics_data"
+                },
+                {
+                    "description": "runtime parameter for tool multiGSEA",
+                    "name": "transcriptomics_data"
+                }
+            ],
+            "label": null,
+            "name": "multiGSEA",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 277,
+                "top": 94
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multigsea/multigsea/1.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e48b10ce08b8",
+                "name": "multigsea",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"combine_pvalues\": \"stouffer\", \"databases\": [\"kegg\", \"reactome\"], \"metabolomics_data\": {\"selector\": \"true\", \"__current_case__\": 0, \"metabolomics\": {\"__class__\": \"ConnectedValue\"}, \"metabolome_ids\": \"HMDB\"}, \"organism\": \"hsapiens\", \"padj_method\": \"BH\", \"proteomics_data\": {\"selector\": \"true\", \"__current_case__\": 0, \"proteomics\": {\"__class__\": \"ConnectedValue\"}, \"proteome_ids\": \"SYMBOL\"}, \"transcriptomics_data\": {\"selector\": \"true\", \"__current_case__\": 0, \"transcriptomics\": {\"__class__\": \"ConnectedValue\"}, \"transcriptome_ids\": \"SYMBOL\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "1b6d67a8-9874-4e83-9b13-ca34a1c92487",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 546,
+                "top": 145
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c9<=0.01\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "53b6b42d-0773-4963-9877-72aabadc3b34",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 839,
+                "top": 82
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"case_sensitive\": \"-i\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-G\", \"url_paste\": \" \\\\bamino\\\\b\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "46fdc5cd-7e17-421e-aec3-2f70673e5432",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filtered output",
+                    "output_name": "output",
+                    "uuid": "862ee6ea-d4c2-456c-b755-6d9bafc9ac55"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "Multi-omics"
+    ],
+    "uuid": "3d38e914-f020-446b-8e3d-c65e6ed3b3a8",
+    "version": 1
+}

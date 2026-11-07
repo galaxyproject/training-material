@@ -1,0 +1,174 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSRA accession list"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nClan information file"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nTrimmomatic sliding window number of bases to average across"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nTrimmomatic sliding window average quality"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nPE fastp - Enable base correction"]
+  5[color=lightgreen,label="ℹ️ Input Parameter\nTrimmomatic leading"]
+  6[color=lightgreen,label="ℹ️ Input Parameter\nPE fastp - Qualified quality phred"]
+  7[color=lightgreen,label="ℹ️ Input Parameter\nTrimmomatic trailing"]
+  8[color=lightgreen,label="ℹ️ Input Parameter\nPE fastp - Unqualified percent limit "]
+  9[color=lightgreen,label="ℹ️ Input Parameter\nTrimmomatic min length"]
+  10[color=lightgreen,label="ℹ️ Input Parameter\nPE fastp - Length required"]
+  11[color=lightgreen,label="ℹ️ Input Parameter\nLength filtering minimum size"]
+  12[color=lightgreen,label="ℹ️ Input Parameter\nAmbiguity filtering maximal N percentage threshold to conserve sequences"]
+  13[color=lightgreen,label="ℹ️ Input Parameter\nSSU taxonomic abundance summary table name"]
+  14[color=lightgreen,label="ℹ️ Input Parameter\nSSU phylum level taxonomic abundance summary table name"]
+  15[color=lightgreen,label="ℹ️ Input Parameter\nLSU taxonomic abundance summary table name"]
+  16[color=lightgreen,label="ℹ️ Input Parameter\nLSU phylum level taxonomic abundance summary table name"]
+  17[color=lightgreen,label="ℹ️ Input Parameter\nITSoneDB taxonomic abundance summary table name"]
+  18[color=lightgreen,label="ℹ️ Input Parameter\nITSoneDB phylum level taxonomic abundance summary table name"]
+  19[color=lightgreen,label="ℹ️ Input Parameter\nITS UNITE DB taxonomic abundance summary table name"]
+  20[color=lightgreen,label="ℹ️ Input Parameter\nITS UNITE DB phylum level taxonomic abundance summary table name"]
+  21[label="fastq-dl"]
+  0 -> 21 [label="output"]
+  22[label="Convert compressed file to uncompressed."]
+  21 -> 22 [label="single_end_collection"]
+  23[label="Convert compressed file to uncompressed."]
+  21 -> 23 [label="paired_end_collection"]
+  24[label="Text reformatting"]
+  22 -> 24 [label="output1"]
+  25[label="Text reformatting"]
+  23 -> 25 [label="output1"]
+  26[label="Convert uncompressed file to compressed"]
+  24 -> 26 [label="outfile"]
+  27[label="Convert uncompressed file to compressed"]
+  25 -> 27 [label="outfile"]
+  28[color=lightcoral,label="🛠️ Subworkflow\nMGnify’s amplicon pipeline v5.0 - Quality control SE"]
+  12 -> 28 [label="output"]
+  11 -> 28 [label="output"]
+  26 -> 28 [label="output1"]
+  5 -> 28 [label="output"]
+  9 -> 28 [label="output"]
+  3 -> 28 [label="output"]
+  2 -> 28 [label="output"]
+  7 -> 28 [label="output"]
+  k6f6ecd17f5064c5eb872a1b79620e44c[color=lightseagreen,label="Output\nSingle-end MultiQC report"]
+  28 -> k6f6ecd17f5064c5eb872a1b79620e44c
+  k8cf887ba467f41929eba29cb8c7a5a1a[color=lightseagreen,label="Output\nSingle-end post quality control FASTA files"]
+  28 -> k8cf887ba467f41929eba29cb8c7a5a1a
+  k91c6c565ca5b4f23ba1540ab9378837d[color=lightseagreen,label="Output\nSingle-end MultiQC statistics"]
+  28 -> k91c6c565ca5b4f23ba1540ab9378837d
+  29[color=lightcoral,label="🛠️ Subworkflow\nMGnify’s amplicon pipeline v5.0 - Quality control PE"]
+  12 -> 29 [label="output"]
+  11 -> 29 [label="output"]
+  27 -> 29 [label="output1"]
+  5 -> 29 [label="output"]
+  9 -> 29 [label="output"]
+  3 -> 29 [label="output"]
+  2 -> 29 [label="output"]
+  7 -> 29 [label="output"]
+  4 -> 29 [label="output"]
+  10 -> 29 [label="output"]
+  6 -> 29 [label="output"]
+  8 -> 29 [label="output"]
+  kfd1bad4c912f4fb39dbf44abf4fad5d6[color=lightseagreen,label="Output\nPaired-end MultiQC report"]
+  29 -> kfd1bad4c912f4fb39dbf44abf4fad5d6
+  k2c08c132f9c749b2b4f31ecc424e1254[color=lightseagreen,label="Output\nPaired-end post quality control FASTA files"]
+  29 -> k2c08c132f9c749b2b4f31ecc424e1254
+  k64f4d25d2f9c41d29a05d31e010307f4[color=lightseagreen,label="Output\nPaired-end MultiQC statistics"]
+  29 -> k64f4d25d2f9c41d29a05d31e010307f4
+  30[label="Merge collections"]
+  28 -> 30 [label="Single-end post quality control FASTA files"]
+  29 -> 30 [label="Paired-end post quality control FASTA files"]
+  31[color=lightcoral,label="🛠️ Subworkflow\nMGnify’s amplicon pipeline v5.0 - rRNA prediction"]
+  1 -> 31 [label="output"]
+  30 -> 31 [label="output"]
+  kd1088f049e2f416d9dfc87ab5c3d8652[color=lightseagreen,label="Output\nSSU FASTA files"]
+  31 -> kd1088f049e2f416d9dfc87ab5c3d8652
+  k8af9c3782a91433993eb743376bceb78[color=lightseagreen,label="Output\nSSU OTU tables in HDF5 format (SILVA DB)"]
+  31 -> k8af9c3782a91433993eb743376bceb78
+  k46ede89c7a3c423d9dbb3b75b7faf55d[color=lightseagreen,label="Output\nSSU taxonomic abundance pie charts (SILVA DB)"]
+  31 -> k46ede89c7a3c423d9dbb3b75b7faf55d
+  k36d3f8614728409f9980fd0d3cbe0361[color=lightseagreen,label="Output\nSSU OTU tables in JSON format (SILVA DB)"]
+  31 -> k36d3f8614728409f9980fd0d3cbe0361
+  kc321a9abfc6a47b796a25e169d55012e[color=lightseagreen,label="Output\nLSU taxonomic abundance pie charts (SILVA DB)"]
+  31 -> kc321a9abfc6a47b796a25e169d55012e
+  k51d11ea080144488a0375430f62714ba[color=lightseagreen,label="Output\nLSU OTU tables in HDF5 format (SILVA DB)"]
+  31 -> k51d11ea080144488a0375430f62714ba
+  k0c0f64de8be545178566e3b1fda38458[color=lightseagreen,label="Output\nLSU FASTA files"]
+  31 -> k0c0f64de8be545178566e3b1fda38458
+  k89e4f49b1e0a4bdf98d75a3b99204d3a[color=lightseagreen,label="Output\nLSU OTU tables in JSON format (SILVA DB)"]
+  31 -> k89e4f49b1e0a4bdf98d75a3b99204d3a
+  k73b814b69da147d885ed72d10b2a4314[color=lightseagreen,label="Output\nLSU taxonomic classifications using SILVA DB"]
+  31 -> k73b814b69da147d885ed72d10b2a4314
+  k2ce160a68d194b83a68d1975f60d42fe[color=lightseagreen,label="Output\nLSU and SSU BED regions"]
+  31 -> k2ce160a68d194b83a68d1975f60d42fe
+  k9f6eeabfd2de4c91bf1c167221e0d233[color=lightseagreen,label="Output\nSSU OTU tables (SILVA DB)"]
+  31 -> k9f6eeabfd2de4c91bf1c167221e0d233
+  k5f1081b19df2422b9ba948b4f219f892[color=lightseagreen,label="Output\nSSU taxonomic classifications using SILVA DB"]
+  31 -> k5f1081b19df2422b9ba948b4f219f892
+  kef19d94ec4da4ede842e54104811ac2e[color=lightseagreen,label="Output\nLSU OTU tables (SILVA DB)"]
+  31 -> kef19d94ec4da4ede842e54104811ac2e
+  32[color=lightcoral,label="🛠️ Subworkflow\nMGnify’s amplicon pipeline v5.0 - ITS"]
+  31 -> 32 [label="LSU and SSU BED regions"]
+  30 -> 32 [label="output"]
+  k39a4794a52984206b06dc79b2fb4c423[color=lightseagreen,label="Output\nITS OTU tables in HDF5 format (ITSoneDB)"]
+  32 -> k39a4794a52984206b06dc79b2fb4c423
+  k167efccc737040efb9c2356c637259cd[color=lightseagreen,label="Output\nITS taxonomic abundance pie charts (UNITE DB)"]
+  32 -> k167efccc737040efb9c2356c637259cd
+  k22b09e006c8848948000d8ecebe51cb9[color=lightseagreen,label="Output\nITS taxonomic classifications using ITSoneDB"]
+  32 -> k22b09e006c8848948000d8ecebe51cb9
+  k825fc92e513e46729b038a509b753189[color=lightseagreen,label="Output\nITS OTU tables in JSON format (ITSoneDB)"]
+  32 -> k825fc92e513e46729b038a509b753189
+  ka5342c9163e94aa888ef9ad9ddc0ac05[color=lightseagreen,label="Output\nITS OTU tables in HDF5 format (UNITE DB)"]
+  32 -> ka5342c9163e94aa888ef9ad9ddc0ac05
+  k3e8e45f5c8b94cc0b759d5911e4b0a1f[color=lightseagreen,label="Output\nITS OTU tables in JSON format (UNITE DB)"]
+  32 -> k3e8e45f5c8b94cc0b759d5911e4b0a1f
+  kce1cc3a7d9f143e99a29bf323538f003[color=lightseagreen,label="Output\nITS OTU tables (UNITE DB)"]
+  32 -> kce1cc3a7d9f143e99a29bf323538f003
+  k6d44ec4cddc14d8fa4e6e7da84fca0d0[color=lightseagreen,label="Output\nITS FASTA files"]
+  32 -> k6d44ec4cddc14d8fa4e6e7da84fca0d0
+  k624858b8dde64d8e894e3a32732ce588[color=lightseagreen,label="Output\nITS taxonomic abundance pie charts (ITSoneDB)"]
+  32 -> k624858b8dde64d8e894e3a32732ce588
+  k9cdce277457d4c19823a108876f42463[color=lightseagreen,label="Output\nITS OTU tables (ITSoneDB)"]
+  32 -> k9cdce277457d4c19823a108876f42463
+  k332b291c1b054762b02147cb65ba7673[color=lightseagreen,label="Output\nITS taxonomic classifications using UNITE DB"]
+  32 -> k332b291c1b054762b02147cb65ba7673
+  33[color=lightcoral,label="🛠️ Subworkflow\nMap empty/not empty collection to boolean "]
+  31 -> 33 [label="SSU OTU tables SILVA DB"]
+  34[color=lightcoral,label="🛠️ Subworkflow\nMap empty/not empty collection to boolean "]
+  31 -> 34 [label="LSU OTU tables SILVA DB"]
+  35[color=lightcoral,label="🛠️ Subworkflow\nMap empty/not empty collection to boolean "]
+  32 -> 35 [label="ITS OTU tables ITSoneDB"]
+  36[color=lightcoral,label="🛠️ Subworkflow\nMap empty/not empty collection to boolean "]
+  32 -> 36 [label="ITS OTU tables UNITE DB"]
+  37[color=lightcoral,label="🛠️ Subworkflow\nMGnify amplicon summary tables"]
+  31 -> 37 [label="SSU OTU tables SILVA DB"]
+  14 -> 37 [label="output"]
+  13 -> 37 [label="output"]
+  33 -> 37 [label="boolean_param"]
+  k627a3fc82a614096892dfcebc1a788b4[color=lightseagreen,label="Output\nSSU phylum level taxonomic abundance summary table"]
+  37 -> k627a3fc82a614096892dfcebc1a788b4
+  k8b025e6500714994ab772c10252ba471[color=lightseagreen,label="Output\nSSU taxonomic abundance summary table"]
+  37 -> k8b025e6500714994ab772c10252ba471
+  38[color=lightcoral,label="🛠️ Subworkflow\nMGnify amplicon summary tables"]
+  31 -> 38 [label="LSU OTU tables SILVA DB"]
+  16 -> 38 [label="output"]
+  15 -> 38 [label="output"]
+  34 -> 38 [label="boolean_param"]
+  k11d82afae60a4da2974539b19e3d653a[color=lightseagreen,label="Output\nLSU phylum level taxonomic abundance summary table"]
+  38 -> k11d82afae60a4da2974539b19e3d653a
+  k99c9ae4cf81645699a447884c9c5550e[color=lightseagreen,label="Output\nLSU taxonomic abundance summary table"]
+  38 -> k99c9ae4cf81645699a447884c9c5550e
+  39[color=lightcoral,label="🛠️ Subworkflow\nITSoneDB summary tables"]
+  32 -> 39 [label="ITS OTU tables ITSoneDB"]
+  18 -> 39 [label="output"]
+  17 -> 39 [label="output"]
+  35 -> 39 [label="boolean_param"]
+  k5b61f9971cd1496bb0fdd3a98e130e66[color=lightseagreen,label="Output\nITSoneDB taxonomic abundance summary table"]
+  39 -> k5b61f9971cd1496bb0fdd3a98e130e66
+  kf3080e7183a24cad9ddf9b0f806af898[color=lightseagreen,label="Output\nITSoneDB phylum level taxonomic abundance summary table"]
+  39 -> kf3080e7183a24cad9ddf9b0f806af898
+  40[color=lightcoral,label="🛠️ Subworkflow\nUNITE summary tables"]
+  32 -> 40 [label="ITS OTU tables UNITE DB"]
+  20 -> 40 [label="output"]
+  19 -> 40 [label="output"]
+  36 -> 40 [label="boolean_param"]
+  k5d0937ff5bb2458d9cf685096119c089[color=lightseagreen,label="Output\nITS UNITE DB phylum level taxonomic abundance summary table"]
+  40 -> k5d0937ff5bb2458d9cf685096119c089
+  k84ee23b49c6c4ee2b71a6412be55c1e3[color=lightseagreen,label="Output\nITS UNITE DB taxonomic abundance summary table"]
+  40 -> k84ee23b49c6c4ee2b71a6412be55c1e3
+}

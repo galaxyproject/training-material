@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmutant_R1.fastq"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nmutant_R2.fastq"]
+  2[color=lightblue,label="ℹ️ Input Collection\nInput Paired Reads Collection"]
+  3[label="VelvetOptimiser"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  4[label="velveth"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  5[label="SPAdes"]
+  2 -> 5 [label="output"]
+  kd115d043065d4a169d4a7b3d4acb4f3c[color=lightseagreen,label="Output\nspades_log"]
+  5 -> kd115d043065d4a169d4a7b3d4acb4f3c
+  6[label="Fasta Statistics"]
+  3 -> 6 [label="contigs"]
+  kc88b279ab71045e4a6ed19203271588e[color=lightseagreen,label="Output\nfasta_stats_velvet"]
+  6 -> kc88b279ab71045e4a6ed19203271588e
+  7[label="velvetg"]
+  4 -> 7 [label="outfile"]
+  8[label="Bandage Image"]
+  5 -> 8 [label="out_ags"]
+  9[label="Fasta Statistics"]
+  5 -> 9 [label="out_cn"]
+  k2059b810d96440d9afb92341fec8f5b8[color=lightseagreen,label="Output\nfasta_stats_spades"]
+  9 -> k2059b810d96440d9afb92341fec8f5b8
+  10[label="Bandage Image"]
+  7 -> 10 [label="LastGraph"]
+}

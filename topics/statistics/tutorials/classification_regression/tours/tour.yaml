@@ -1,0 +1,447 @@
+---
+id: classification_regression
+name: Classification and regression
+description: >-
+  In this tutorial we will perform a classification and a regression tasks using
+  Galaxy tools. We will also visualize the results.
+title_default: classification_regression
+steps:
+  - title: Introduction
+    content: >-
+      <a href="https://en.wikipedia.org/wiki/Supervised_learning">Supervised
+      learning</a> methods in machine learning have targets/classes/categories
+      defined in the datasets. These targets can either be discrete values
+      (integers) or real-values (continuous). When the targets are discrete, the
+      learning task is known as classification. These discrete values are called
+      classes or categories. When the targets are real-values, the task becomes
+      regression. Classification is assigning a category to each sample in the
+      dataset. Regression assigns a real-valued output or target to each
+      sample. 
+    backdrop: true
+  - title: Classification
+    content: >-
+      <a
+      href="https://en.wikipedia.org/wiki/Statistical_classification">Classification</a>
+      task assigns a category/class to a sample by learning a decision boundary
+      using a dataset. This dataset is called a training dataset and contains a
+      class/category for each sample. The algorithm which performs this task is
+      called a classifier. The training dataset contains “features” as columns
+      and a mapping between these features and the target is learned for each
+      sample. The performance of mapping is evaluated using test dataset. The
+      test dataset contains only the feature columns and not the target column.
+      The target column is predicted using the mapping learned on the training
+      dataset. In this tutorial, we will use a classifier to train a model using
+      a training dataset, predict the targets for test dataset and visualize the
+      results using plots.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The datasets required for this tutorial contain 9 features of breast
+      cancer which include the thickness of clump, cell-size, cell-shape and so
+      on (<a
+      href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more
+      information</a>). In addition to these features, the training dataset
+      contains one more column as `target`. It has a binary value (0 or 1) for
+      each row. `0` indicates no breast cancer and `1` indicates breast cancer.
+      The test dataset does not contain the `target` column.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Import the following datasets from <a
+      href="https://zenodo.org/record/2579649#.XHep39F7mL4">zenodo</a> and
+      choose the type of data as `tabular`.
+    placement: right
+    textinsert: >-
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_targets.tsv
+
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_test.tsv
+
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train.tsv
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Uploading the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once the files have been uploaded, change their names to `breast-w_train`,
+      `breast-w_targets` and `breast-w_test` respectively by clicking on the
+      `pencil` icon icon next to the relevant history entry.
+    position: left
+  - title: Learn using training data
+    content: >-
+      Using the dataset <code>breast-w_train</code>, <a
+      href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC">SVM</a>
+      (support vector machine) classifier is trained which learns features from
+      the data and maps them to the targets. This mapping is called a trained
+      model. The training step produces a model file of type <code>zip</code>.
+    backdrop: true
+  - title: Train the model
+    element: '#tool-search-query'
+    content: Search for "SVM Classifier (Support vector machine)" tool
+    placement: right
+    textinsert: Support vector machine
+  - title: Train a classifier
+    element: '#tool-search'
+    content: Click on the "SVM Classifier (Support vector machine)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_svm_classifier%2Fsklearn_svm_classifier%2F1.0"]
+        .tool-old-link
+  - title: Train a classifier
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Train a model`</li>
+        <li>"Classifier type": to `Linear Support Vector Classification`</li>
+        <li>"Select input type": to `tabular data`</li>
+        <li>"Training samples dataset": to `breast-w_train`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Choose how to select data by column": to `All columns but by column header name(s)`</li>
+        <li>"Type header name(s)": to `target`</li>
+        <li>"Dataset containing class labels": to `breast-w_train`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Choose how to select data by column": to `Select columns by column header name(s)`</li>
+        <li>"Select target column(s)": to `target`</li>
+      </ul>
+    position: left
+  - title: Predict using test data
+    content: >-
+      The <code>model</code> learned in the previous step can now be used to
+      predict the categories of unseen test (<code>breast-w_test</code>) data.
+      This step assigns a category to each row in <code>breast-w_test</code>
+      dataset.
+    backdrop: true
+  - title: Predict using test data
+    element: '#tool-search-query'
+    content: Search for "SVM Classifier (Support vector machine)" tool
+    placement: right
+    textinsert: Support vector machine
+  - title: Predict using test data
+    element: '#tool-search'
+    content: Click on the "SVM Classifier (Support vector machine)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_svm_classifier%2Fsklearn_svm_classifier%2F1.0"]
+        .tool-old-link
+  - title: Predict using test data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Load a model and predict`</li>
+        <li>"Models": to the output from the previous step</li>
+        <li>"Data (tabular)": to `breast-w_test`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Select the type of prediction": to `Predict class labels`</li>
+      </ul>
+    position: left
+  - title: Predict using test data
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the generated file to <code>predicted_labels</code>.
+    position: left
+  - title: Visualise the prediction
+    content: >-
+      After the training and prediction tasks, we should check whether the
+      predictions are correct. We will use another dataset
+      <code>breast-w_targets</code> for this verification. It is similar to the
+      test dataset (<code>breast-w_test</code>) but contains an extra target
+      column having the true targets of the test data. With the predicted and
+      true targets, the learned model is evaluated to verify how good the
+      predictions are. To visualise these predictions, a plotting tool is used.
+    backdrop: true
+  - title: Check and visualize the predictions
+    element: '#tool-search-query'
+    content: >-
+      Search for "Plot confusion matrix, precision, recall and ROC and AUC
+      curves" tool
+    placement: right
+    textinsert: 'Plot confusion matrix, precision, recall and ROC and AUC curves'
+  - title: Check and visualize the predictions
+    element: '#tool-search'
+    content: >-
+      Click on the "Plot confusion matrix, precision, recall and ROC and AUC
+      curves" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fplotly_ml_performance_plots%2Fplotly_ml_performance_plots%2F0.1"]
+        .tool-old-link
+  - title: Check and visualize the predictions
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select input data file" to `breast-w_targets`</li>
+        <li>"Select predicted data file": to `predicted_labels`</li>
+        <li>"Select trained model": to the trained model</li>
+      </ul>
+    position: left
+  - title: Check and visualize the predictions
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      The tool creates the following three plots:<ul>
+        <li>Confusion matrix of the correctly and incorrectly predicted samples</li>
+        <li>Precision, recall and F1 score</li>
+        <li>Receiver operator characteristics (ROC) and area under ROC (AUC)</li>
+      <ul>
+    position: left
+  - title: Visualise the prediction
+    content: >-
+      By following these steps, we learn how to perform classification and
+      visualise the predictions using Galaxy machine learning and plotting
+      tools. The classes of unseen (test) data are predicted, evaluated against
+      the true classes and visualized to show how good is the classification.
+    backdrop: true
+  - title: Regression
+    content: >-
+      <a href="https://en.wikipedia.org/wiki/Regression_analysis">Regression</a>
+      is also a supervised learning task where target is a real number
+      (continuous) instead of discrete like in classification. The algorithms
+      which are used for regression tasks are called regressors. A regressor
+      learns the mapping between the features of a dataset row and its target
+      value. Inherently, it tries to fit a curve for the targets. This curve can
+      be linear (straight line curve) or non-linear.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The datasets required for this tutorial contain 21 features of <a
+      href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/regression/573_cpu_act">computer
+      system activity</a> which include columns like fork, exec and so on (<a
+      href="https://sci2s.ugr.es/keel/dataset/data/regression/compactiv-names.txt">more
+      information</a>). In addition to these features, the training dataset
+      contains one more column as <code>target</code> which contains a real
+      number for each row. All the values in the datasets are real numbers. The
+      dataset <code>train_data.tabular</code> is used for training a regressor
+      which maps the features to the targets. The test (unseen) dataset
+      <code>test_data.tabular</code> is used to predict a target value for each
+      row. The dataset <code>test_target.tabular</code> is used to evaluate the
+      quality of predictions as it is also the test data along with the true
+      targets. A plotting tool is used to demonstrate the difference between
+      true and predicted targets.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Creating a new history for this part of the tutorial. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Import the following datasets from and choose the type of data as
+      `tabular`.
+    placement: right
+    textinsert: >-
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_data.tabular
+
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_target.tabular
+
+      https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tabular
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Learn from training data
+    content: >-
+      <a
+      href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gradient
+      boosting regressor</a> is used for this task. It is an ensemble based
+      regressor consisting of weak learners (e.g. decision trees). It learns
+      features from training dataset (<code>train_data</code>) and maps all rows
+      to respective targets which are real numbers. The process of mapping gives
+      a trained model.
+    backdrop: true
+  - title: Train the model
+    element: '#tool-search-query'
+    content: Search for "Ensemble methods for classification and regression" tool
+    placement: right
+    textinsert: ensemble methods classification
+  - title: Train a classifier
+    element: '#tool-search'
+    content: >-
+      Click on the "Ensemble methods for classification and regression" tool to
+      open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_ensemble%2Fsklearn_ensemble%2F1.0"]
+        .tool-old-link
+  - title: Train a classifier
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Train a model`<ul>
+          <li>"Select an ensemble method:" to `Gradient Boosting Regressor`<ul>
+            <li>"Select input type:" to `tabular data`<ul>
+              <li>"Training samples dataset:" to `train_data`</li>
+              <li>"Does the dataset contain header:" to `Yes`</li>
+              <li>"Choose how to select data by column:" to `All columns BUT by column header name(s)`<ul>
+                <li>"Type header name(s):" to `target`</li></ul></li>
+              <li>"Dataset containing class labels:" to `train_data`</li>
+              <li>"Does the dataset contain header:" to `Yes`</li>
+              <li>"Choose how to select data by column:" to `Select columns by column header name(s)`<ul>
+                <li>"Type target name(s):" to `target`</li></ul></li></ul></li>
+            </ul></li></ul>
+        </li>
+      </ul>
+    position: left
+  - title: Train a model
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the generated file to <code>model</code>.
+    position: left
+  - title: Predict using test data
+    content: >-
+      Similar to the classification task, the trained model is evaluated on
+      <code>test_data</code> which predicts a target value for each row and the
+      predicted targets are compared to the expected targets.
+    backdrop: true
+  - title: Predict using test data
+    element: '#tool-search-query'
+    content: Search for "Ensemble methods for classification and regression" tool
+    placement: right
+    textinsert: ensemble methods classification
+  - title: Predict using test data
+    element: '#tool-search'
+    content: >-
+      Click on the "Ensemble methods for classification and regression" tool to
+      open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_ensemble%2Fsklearn_ensemble%2F1.0"]
+        .tool-old-link
+  - title: Predict using test data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Load a model and predict`</li>
+        <li>"Models": to the output from the previous step</li>
+        <li>"Data (tabular)": to `test_data`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Select the type of prediction": to `Predict class labels`</li>
+      </ul>
+    position: left
+  - title: Predict using test data
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the generated file to <code>predicted_data</code>.
+    position: left
+  - title: Visualise the prediction
+    content: >-
+      We will evaluate the predictions by comparing them to the expected
+      targets.
+    backdrop: true
+  - title: Check and visualize the predictions
+    element: '#tool-search-query'
+    content: Search for "Plot actual vs predicted curves and residual plots" tool
+    placement: right
+    textinsert: Plot actual vs predicted curves and residual plots
+  - title: Check and visualize the predictions
+    element: '#tool-search'
+    content: >-
+      Click on the "Plot actual vs predicted curves and residual plots" tool to
+      open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fplotly_regression_performance_plots%2Fplotly_regression_performance_plots%2F0.1"]
+        .tool-old-link
+  - title: Check and visualize the predictions
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select input data file" to `test_target`</li>
+        <li>"Select predicted data file": to `predicted_data`</li>
+      </ul>
+    position: left
+  - title: Check and visualize the predictions
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      The tool creates the following plots:<ul>
+        <li>True vs predicted targets curves</li>
+        <li>Scatter plot for true vs. predicted targets</li>
+        <li>Residual plot between residual (predicted - true) and predicted targets</li>
+      <ul>
+    position: left
+  - title: Visualise the prediction
+    content: >-
+      By following these steps, we learn how to perform regression and visualise
+      the predictions using Galaxy machine learning and plotting tools. The
+      features of the training data are mapped to the real-valued targets. This
+      mapping is used to make predictions on an unseen (test) dataset. The
+      quality of predictions is visualised using a plotting tool.
+    backdrop: true
+  - title: Conclusion
+    content: >-
+      We learned how to perform classification and regression using different
+      datasets and machine learning tools in Galaxy and visualized the output in
+      multiple plots. There are many other classifiers and regressors in the
+      Galaxy machine learning suite which can be tried out on these datasets to
+      find how they perform. Different datasets can also be analysed using these
+      classifiers and regressors.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>There is two types of machine learning's supervised approaches, classification and regression.</li>
+        <li>In supervised approaches, the target for each sample is known.</li>
+        <li>For classification and regression tasks, data is divided into training and test sets.</li>
+        <li>Using classification, the categories of rows are learned using the training set and predicted using the test set.</li>
+        <li>Using regression, real-valued targets are learned using the training set and predicted using the test set.</li>
+      </ul>
+    backdrop: true

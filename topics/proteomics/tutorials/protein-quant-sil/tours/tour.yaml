@@ -1,0 +1,707 @@
+﻿---
+id: protein-quant-sil
+name: Peptide and Protein Quantification via Stable Isotope Labelling (SIL)
+description: >-
+  The goal of this tutorial is to deal with protein quantitation via stable
+  isotope labelling (SIL) with the tools of the OpenMS suite.
+title_default: ''
+steps:
+  - title: Introduction
+    content: >-
+      The goal of this tutorial is to deal with protein quantitation via stable
+      isotope labelling (SIL) with the tools of the OpenMS suite.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      To compare protein amounts in different samples from MS/MS data, two
+      different experiment setups exist. Firstly, unmodified proteins can be
+      measured in separate runs at one sample per MS-run. Secondly, proteins of
+      samples to compare can be labelled with small chemical tags, mixed, and
+      measured side-by-side in a single MS-run. There are two types of chemical
+      tags:<ul>
+        <li>Isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: <i>tandem mass tags</i> (TMT) and <i>isobaric tags for relative and absolute quantitation</i> (iTRAQ).</li>
+        <li>Isotopic tags are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen.</li></ul>
+    backdrop: true
+  - title: Introduction
+    content: >-
+      This tutorial deals with protein quantitation via stable isotope labelling
+      (SIL). For isotopic tags, quantitation can be achieved by comparing the
+      intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide,
+      i.e. the intensities of all its isotopic peaks over time, is called a
+      <i>peptide feature</i> (Figure 1a). Incorporation of stable isotopes
+      results in different peptide masses on MS1 level, which give rise to
+      coeluting ion traces in the TIC with a mass difference typical for each
+      different chemical tag (Figure 1b). Figure originally published in <a
+      href="http://www.ncbi.nlm.nih.gov/pubmed/25931027">Nilse et al, 2015</a>.
+
+      <br><br>In this tutorial, we will use tools of the <a
+      href="http://www.openms.org/">OpenMS suite<a/> to identify and quantify
+      peptides and proteins.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      We will use a quantitative comparison of HEK cell lysate as a test
+      dataset. In this experiment, HEK cells were once labelled with light, once
+      with heavy SILAC. Both cultures were lysed simultaneously and the cell
+      lysates were mixed in a certain ratio. A detailed description of the full
+      dataset is available in the <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">PRIDE
+      archive</a>.
+
+      Your objective in this hands-on-tutorial is to find out the correct mixing
+      ratio of the test sample.<br>
+
+      To speed up analysis, the input dataset was filtered to include only those
+      data acquired in second 2000-3000 of the original LC gradient.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: MS1 Feature Detection
+    content: >-
+      MS1 feature detection is a critical step in quantitative workflows. In
+      principle, there are two different ways to define features:<ul>
+        <li>Feature detection solely based upon MS1 data (mzML/raw files) without prior knowledge of peptide identifications (IDs).<ul>
+          <li>Advantage: Feature results can be used to assist in peptide identification.</li>
+          <li>Drawback: Not all peptide identifications can be mapped to features, thus not every identified peptide can be quantified.</li></ul></li>
+        <li>Feature detection based upon peptide IDs.<ul>
+          <li>Advantage: Most peptide IDs trigger a feature detection.</li>
+          <li>Drawback: Feature results cannot be used to improve peptide ID.</li></ul></li>
+      The OpenMS suite provides several tools (FeatureFinders) for MS1 feature
+      detection. For SIL we have to use <b>FeatureFinderMultiplex</b>, which
+      does not take peptide IDs as an input.
+    backdrop: true
+  - title: Uploading the new data
+    content: >-
+      Import the test dataset from <a
+      href="https://zenodo.org/record/1051552">zenodo</a>. The data have been
+      preprocessed during the conversion from the machine raw file. We used
+      background removal on MS1 and MS2 level, and MS2 deisotoping.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here.<br> Load the file into your history from <a
+      href="https://zenodo.org/record/1051552">zenodo</a>.
+    placement: right
+    textinsert: 'https://zenodo.org/record/1051552/files/HEK_SILAC-K6R6_ST905_part.mzml'
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something meaningful, e.g.
+      HEK_SILAC-K6R6_ST905_part<br><br> <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ul>
+    position: left
+  - title: MS1 Feature Detection
+    element: '#tool-search-query'
+    content: Search for "FeatureFinderMultiplex" tool
+    placement: right
+    textinsert: FeatureFinderMultiplex
+  - title: MS1 Feature Detection
+    element: '#tool-search'
+    content: Click on the "FeatureFinderMultiplex" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_featurefindermultiplex%2FFeatureFinderMultiplex%2F2.3.0"]
+        .tool-old-link
+  - title: MS1 Feature Detection
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>the "mzML file" to `LC-MS dataset in centroid or profile mode`</li>
+        <li>"Singles-end reads infile(s)" to `SRR034310.fastq(.gz)`</li>
+        <li>"Labels used for labelling the samples" to `[ ][Arg6,Lys6]`</li>
+        <li>"m/z tolerance for search of peak patterns" to `10`</li>
+        <li>"Maximum number of missed cleavages due to incomplete digestion" to `1`</li>
+      </ul>
+    position: left
+  - title: Peptide and Protein Identification
+    content: >-
+      In this tutorial, peptide identification will be performed using the
+      workflow of the previous <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">Peptide
+      ID Tutorial</a>. <br><br>A common problem in mass spectrometry are
+      misassigned mono-isotopic precursor peaks. Although most search engines
+      allow for some adaptation of the monoisotopic peak, we will instead
+      perform a recalculation of the monoisotopic peaks based on the previously
+      identified features prior to peptide identification. This step facilitates
+      mapping peptide IDs to identified features <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html#mapping-identifications-to-features">later
+      on</a>. To do so, we will use the OpenMS tool
+      <b>HighResPrecursorMassCorrector</b>.
+    backdrop: true
+  - title: Peptide and Protein Identification and Conversion
+    element: '#tool-search-query'
+    content: Search for "HighResPrecursorMassCorrector" tool
+    placement: right
+    textinsert: HighResPrecursorMassCorrector
+  - title: Peptide and Protein Identification and Conversion
+    element: '#tool-search'
+    content: Click on the "HighResPrecursorMassCorrector" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_highresprecursormasscorrector%2FHighResPrecursorMassCorrector%2F2.3.0"]
+        .tool-old-link
+  - title: Peptide and Protein Identification and Conversion
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>the "mzML file" to the input file</li>
+        <li>"Singles-end reads infile(s)" to `SRR034310.fastq(.gz)`</li>
+        <li>"Features used to correct precursor masses" to the output from the previous step</li>
+        <li>"The precursor mass tolerance" to `10`</li>
+      </ul>
+    position: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      Now we need to import the human protein database (including cRAP
+      contaminants and decoys) from <a
+      href="https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta">zenodo</a>.
+      Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> Load the file into your history from <a
+      href="https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta">zenodo</a>.
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: Hit the close button to close this window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Workflow import
+    content: >-
+      Now we should mport the <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">workflow</a>
+      from the tutorial “Protein identification using OpenMS” and modify it.
+    backdrop: true
+  - title: Workflow import
+    element: '#workflow .dropdown a[href$="/workflow"]'
+    content: >-
+      Hit the 'Workflow' button and upload the <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">workflow
+      link</a>.<br>You would also need to modify some things<ul><li>Delete the
+      <b>PeakPickerHiRes</b> node, as the MS2 data of our test dataset are
+      already centroided.</li><li>Connect the `mzML` input directly to the
+      <b>MSGFPlusAdapter</b> node</li><li>Change the <b>MSGFPlusAdapter</b>
+      parameters- add the variable modifications `Label:13C(6) (K)` and
+      `Label:13C(6) (R)`</li></ul>
+    placement: right
+  - title: Running the workflow
+    content: >-
+      You should be able to run the imported workflow, adjusiting the
+      following:<ul>
+        <li>"1: Input: mzML dataset" to the output of <b>HighResPrecursorMassCorrector</b></li>
+        <li>"2: protein FASTA database" to the human FASTA database</li></ul>
+    backdrop: false
+  - title: Mapping Identifications to Features
+    content: >-
+      We now have feature quantifications for MS1 elution peaks, peptide
+      identifications for the MS2 spectra and protein identifications. The next
+      step is to map the MS2-based peptide identifications to the quantified MS1
+      precursor peaks (“peptide features”). This will enable the quantification
+      of identified peptides. For labelled data, it is necessary to map peptide
+      identifications to consensus features (i.e. a pair of one light peptide
+      feature with one matching heavy feature in the correct m/z distance). For
+      <bconsensusXML</b>, IDMapper uses the consensus centroids, not the feature
+      boundaries for mapping. Therefore, the RT tolerance has to be set higher
+      than for mapping to <b>featureXML</b>. A good starting value is half the
+      expected typical retention time. <br><br>Sometimes several peptide
+      identifications are mapped to a feature. The tool <a
+      href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html">IDConflictResolver</a>
+      filters the mapping so that only the identification with the best score is
+      associated to each feature. <br><br>Finally, we will combine the peptide
+      quantifications to protein quantifications.
+    backdrop: true
+  - title: Quant to ID matching
+    element: '#tool-search-query'
+    content: Search for "IDMapper" tool
+    placement: right
+    textinsert: IDMapper
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: Click on the "IDMapper" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idmapper%2FIDMapper%2F2.3.0"]
+        .tool-old-link
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Protein/peptide identifications file" to the output of IDFilter</li>
+        <li>"Feature map/consensus map file" to the `consensusXML` output of FidoAdapter</li>
+        <li>"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features" to `20`</li>
+        <li>"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features" to `10`</li>
+        <li>"Match using RT and m/z of sub-features instead of consensus RT and m/z" to `Yes`</li>
+      </ul>
+    position: left
+  - title: Changing the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Now we need to change the filetype of the <b>IDMapper</b> output:<ul>
+      <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+      <li>Go to 'Datatype' tab and set the type to `consensusXML`</li></ul>
+    position: left
+  - title: Quant to ID matching
+    element: '#tool-search-query'
+    content: Search for "FileFilter" tool
+    placement: right
+    textinsert: FileFilter
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: Click on the "FileFilter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_filefilter%2FFileFilter%2F2.3.0"]
+        .tool-old-link
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Remove unassigned peptide identifications" to `Yes`</li>
+      </ul>
+    position: left
+  - title: Quant to ID matching
+    element: '#tool-search-query'
+    content: Search for "IDConflictResolver" tool
+    placement: right
+    textinsert: IDConflictResolver
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: Click on the "IDConflictResolver" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idconflictresolver%2FIDConflictResolver%2F2.3.0"]
+        .tool-old-link
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: Execute the tool with default parameters.
+    position: left
+  - title: Quant to ID matching
+    element: '#tool-search-query'
+    content: Search for "ProteinQuantifier" tool
+    placement: right
+    textinsert: ProteinQuantifier
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: Click on the "ProteinQuantifier" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_proteinquantifier%2FProteinQuantifier%2F2.3.0"]
+        .tool-old-link
+  - title: Quant to ID matching
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Input file" to the output of IDConflictResolver</li>
+        <li>"Protein inference results […]" to the output of IDFilter</li>
+        <li>"Calculate protein abundance from this number of proteotypic peptides (most abundant first; ‘0’ for all)" to `0`</li>
+        <li>"Include results for proteins with fewer proteotypic peptides than indicated by ‘top’" to 'Yes'</li>
+        <li>"Averaging method used to compute protein abundances from peptide abundances" to 'sum'</li>
+        <li>"Add the log2 ratios of the abundance values to the output" to 'Yes'</li>
+      </ul>
+    position: left
+  - title: Descriptive Statistics and Plotting of Protein Quantitations
+    content: >-
+      <b>ProteinQuantifier</b> produces two output tables: the first one gives
+      information about the quantified proteins, the second one gives
+      information about the quantified peptides. For proteins, we added a
+      log-transformed ratio to the output, which is saved in column 8 of the
+      protein table. The ratio is calculated as <b>log2
+      (abundance2/abundance1)</b>, which is sometimes called the <i>fold change
+      (FC)</i> ratio. <br><br>To get a quick overview of the results, you can
+      calculate basic descriptive statistics and plot the data as a histogram.
+      Comment lines in the beginning of a `tabular` file may sometimes cause
+      errors, therefore we will remove them with the tool <b>Select last
+      (tail)</b>.
+    backdrop: true
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: Execute the tool with default parameters.
+    position: left
+  - title: Descriptive Statistics
+    element: '#tool-search-query'
+    content: Search for "Summary Statistics" tool
+    placement: right
+    textinsert: Summary Statistics
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: Click on the "Summary Statistics" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Summary_Statistics1"] .tool-old-link'
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Summary statistics on" to the ProteinQuantifier protein table output</li>
+        <li>"Protein inference results […]" to the output of IDFilter</li>
+        <li>"Column or expression" to 'c8'</li>
+      </ul>
+    position: left
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: Execute the tool with default parameters.
+    position: left
+  - title: Descriptive Statistics
+    element: '#tool-search-query'
+    content: Search for "Select last" tool
+    placement: right
+    textinsert: Select last
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: Click on the "Select last" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_tail_tool%2F1.1.0"]
+        .tool-old-link
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Text file" to the ProteinQuantifier protein table output</li>
+        <li>"Operation" to `Operation`</li>
+        <li>"Number of lines" to '4'</li>
+      </ul>
+    position: left
+  - title: Descriptive Statistics
+    element: '#tool-search-query'
+    content: Search for "Histogram" tool
+    placement: right
+    textinsert: Histogram
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: Click on the "Histogram" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fdna_filtering%2Fhistogram_rpy%2F1.0.3"]
+        .tool-old-link
+  - title: Descriptive Statistics
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Dataset" to the Select last output</li>
+        <li>"Numerical column for x axis" to `Column: 8`</li>
+        <li>"Number of breaks (bars)" to '20'</li>
+        <li>Set the "Plot title" and "Label for x axis" to something meaningful.</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peptides and proteins were successfully quantified?</li>
+        <li>What might have been the mixing ratio of the input dataset?</li>
+        <li>In the histogram, there is a second local maximum at about FC 0. What might that mean?</li></ul>
+    backdrop: false
+  - title: Evaluation and Optimization of Quantitation Results
+    content: >-
+      Protein quantitation is a multi-step procedure. Many parameters of
+      different steps influence the final results. Therefore, it is recommended
+      to optimize the tool parameters for each dataset and to carefully evaluate
+      quantitation results. While the total number of quantified proteins is a
+      first important parameter for optimization, it is also necessary to
+      visualize the results and check for correct feature finding and ID
+      mapping.<br><br> Galaxy does not provide a tool for proteomics
+      visualization, we recommend to use the OpenMS Viewer <b>TOPPView</b>.
+      Basic TOPPView tutorials are available as <a
+      href="https://www.openms.de/getting-started/command-line-and-visualisations/">videos</a>
+      and a more comprehensive tutorial as <a
+      href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_TOPPView.html">HTML</a>
+      or <a
+      href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/TOPP_tutorial.pdf">PDF</a>.<br><br>
+    backdrop: true
+  - title: Evaluation and Optimization of Quantitation Results
+    content: >-
+      For the optimization of tool parameters, it is recommended not to work
+      with a complete LC-MS/MS run. Instead, we will use <b>FileFilter</b> to
+      extract a small RT-slice of our input dataset, i.e. a fraction of the
+      original dataset that was measured during a short period of time. Reducing
+      the test data reduces the time needed for analysis and facilitates visual
+      examination of the data.
+    backdrop: true
+  - title: Data reduction and visual evaluation with TOPPView
+    content: >-
+      Be aware that only very small parts of your dataset can be checked by
+      visual examination. To minimize biases, try to look at the same areas /
+      features of each result file. Now we will reduce the data and re-run the
+      whole workflow on it.
+    backdrop: true
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search-query'
+    content: Search for "Histogram" tool
+    placement: right
+    textinsert: Histogram
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: Click on the "Histogram" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_filefilter%2FFileFilter%2F2.3.0"]
+        .tool-old-link
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Retention time range to extract" to `2000:2200`</li>
+      </ul>
+    position: left
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#workflow .dropdown a[href$="/workflow"]'
+    content: >-
+      Now you need to run the whole workflow again on the reduced `mzML` file.
+      There are two options: extract a workflow out of your history or import
+      the <a
+      href="http://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.ga">premade
+      workflow</a>.
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search-query'
+    content: Search for "FileFilter" tool
+    placement: right
+    textinsert: FileFilter
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: Click on the "FileFilter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_filefilter%2FFileFilter%2F2.3.0"]
+        .tool-old-link
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Input file" to the IDConflictResolver output</li>
+        <li>"Remove features without annotations" to 'Yes'</li>
+      </ul>
+    position: left
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the FileFilter output to “Annotated features”
+    position: left
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search-query'
+    content: Search for "FileFilter" tool
+    placement: right
+    textinsert: FileFilter
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: Click on the "FileFilter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_filefilter%2FFileFilter%2F2.3.0"]
+        .tool-old-link
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Input file" to the IDConflictResolver output</li>
+        <li>"Remove features with annotations" to 'Yes'</li>
+      </ul>
+    position: left
+  - title: Data reduction and visual evaluation with TOPPView
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the FileFilter output to “Unannotated features”
+    position: left
+  - title: Data reduction and visual evaluation with TOPPView
+    content: >-
+      Now we have all necessary file to run TOPPView. In order to do that you
+      should download the following files to your machine:<ul>
+        <li>Spectra: <b>HighResPrecursorMassCorrector</b> `mzML` output file</li>
+        <li>peptide IDs: <b>IDScoreSwitcher</b> `idXML` output file</li>
+        <li>features: <b>FeatureFinderMultiplex</b> `featureXML` output file</li>
+        <li>consensus features: <b>FileFilter</b> `consensusXML` output files (“Annotated” and “UNannotated” features)</li></ul>
+    backdrop: true
+  - title: Visual evaluation with TOPPView
+    content: |-
+      The following steps are supposed to be run in your local TOPPView:<ul>
+        <li>Open the `mzML` file in TOPPView with<ul>
+          <li>"Open as set" to `new window`</li>
+          <li>"Map view" to `2D`</li>
+          <li>"Low intensity cutoff" to `off`</li></ul></li>
+        <li>Open all other downloaded files in TOPPView with<ul>
+          <li>"Open as" to `new layer`</li></ul></li>
+        <li>Activate the `mzML` layer and click on `Show projections`</li>
+        <li>Activate the `consensusXML` layers and click on `Show consensus feature element positions`</li>
+      <ul>
+    backdrop: true
+  - title: Visual evaluation with TOPPView
+    content: |-
+      You can evaluate your data analysis, by<ul>
+        <li>zooming into a specific region (hold `Ctrl` and use the mouse to zoom)</li>
+        <li>measuring m/z and RT distances (select the `mzML` layer, hold `Shift` and use the mouse to measure)</li>
+        <li>displaying an area in 3D view (`right-click` into the 2D View and select `Switch to 3D view`)</li>
+        <li>switching on and off the display of single layers (`left-click` at the tick-boxes in the window “Layers”)</li>
+      <ul>
+    backdrop: true
+  - title: Check a possible contaminant
+    element: '#tool-search-query'
+    content: Search for "TextExporter" tool
+    placement: right
+    textinsert: TextExporter
+  - title: Check a possible contaminant
+    element: '#tool-search'
+    content: Click on the "TextExporter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_textexporter%2FTextExporter%2F2.3.0"]
+        .tool-old-link
+  - title: Check a possible contaminant
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Input file" to the IDFilter output file</li>
+      </ul>
+    position: left
+  - title: Check a possible contaminant
+    element: '#tool-search-query'
+    content: Search for "Search in textfiles (grep)" tool
+    placement: right
+    textinsert: Search in textfiles (grep)
+  - title: Check a possible contaminant
+    element: '#tool-search'
+    content: Click on the "Search in textfiles (grep)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_grep_tool%2F1.1.1"]
+        .tool-old-link
+  - title: Check a possible contaminant
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Select lines from" to the TextExporter output file</li>
+        <li>"Regular Expression" to the peptide sequence (e.g. `MFLSFPTTK`)</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peptides could not be mapped to MS1 features? (Click on the IDMapper output and look at the tool’s infobox.)</li>
+        <li>How many features could not be mapped to a peptide identification? (Click on the ProteinQuantifier output and look at the tool’s infobox.)</li>
+        <li>Which problems are most prominent in the test dataset?</li></ul>
+    backdrop: false
+  - title: Optimization of Quantitation Results
+    content: >-
+      For optimization, it is critical to modify <b>only one parameter at a
+      time</b>. Also, it is recommended to optimize the tools in the order of
+      their position in the workflow. <br><br>In the test dataset, several
+      peptides were identified, but not quantified. Some of the peptides were
+      even identified in the unlabelled, as well as in the labelled form. To
+      optimize the feature detection, we will relax the parameters of
+      FeatureFinderMultiplex.
+    backdrop: false
+  - title: Optimize Feature Detection
+    element: '#workflow .dropdown a[href$="/workflow"]'
+    content: >-
+      Run the whole workflow again, change the <b>FeatureFinderMultiplex</b>
+      parameter "Range of isotopes per peptide in the sample" from 3:6 to `2:6`
+    placement: right
+  - title: Optimize Feature Detection
+    element: '#workflow .dropdown a[href$="/workflow"]'
+    content: >-
+      Run the whole workflow again, change the
+      <b>HighResPrecursorMassCorrector</b> parameter "Additional retention time
+      tolerance added to feature boundaries" from 0.0 to `10.0`
+    placement: right
+  - title: Optimization of Quantitation Results
+    content: >-
+      When running a workflow, you may send the results to a new history. This
+      helps keeping track of different parameter settings. <br><br>Now you can
+      compare the number of identified proteins, unmatched features and unmapped
+      peptides for each parameter setting and visualize the results with
+      TOPPView to check for correct feature detection and feature-to-peptide
+      mapping.
+    backdrop: true
+  - title: Question
+    content: |-
+      <ul>
+        <li>Which parameter improved the number of quantified proteins?</li></ul>
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces.</li>
+        <li>MS1 features can be used for relative protein quantitation.</li>
+        <li>Quantitations have to be mapped to PSMs.</li>
+        <li>PSM quantitations can be used to calculate protein quantitations.</li>
+        <li>Proper quantitation and mapping needs careful evaluation and optimization.</li>
+      </ul>
+    backdrop: true

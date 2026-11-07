@@ -1,0 +1,61 @@
+- doc: Test for the workflow for Taxonomic-Profiling-and-Visualization-of-Metagenomic-Data
+  job:
+    metadata:
+      class: File
+      location: https://zenodo.org/record/7871630/files/metadata.tabular
+      filetype: tabular
+    raw-reads:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: JP4D
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/7871630/files/JP4D_R1.fastqsanger.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/7871630/files/JP4D_R2.fastqsanger.gz
+      - class: Collection
+        type: paired
+        identifier: JC1A
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/7871630/files/JC1A_R1.fastqsanger.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/7871630/files/JC1A_2.fastqsanger.gz
+  outputs:
+    kraken_report:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'Rhodobacterales'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'Alphaproteobacteria'
+    krakentool_report:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'o__Rhodobacterales'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'o__Rhodobacterales'
+    metaphlan_output:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'UNCLASSIFIED'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'c__Alphaproteobacteria|o__Rhodobacterales'

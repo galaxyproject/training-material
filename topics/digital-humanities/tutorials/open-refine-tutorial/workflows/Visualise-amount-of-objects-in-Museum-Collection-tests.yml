@@ -1,0 +1,21 @@
+- doc: Test outline for Visualise-amount-of-objects-in-Museum-Collection
+  job:
+    Input:
+      class: File
+      path: https://zenodo.org/records/17047254/files/phm_collection_adapted.tsv
+      filetype: tsv
+    stop_words_english:
+      class: File
+      path: https://zenodo.org/records/17047254/files/stopwords-en.txt?download=1
+      filetype: txt
+  outputs:
+    out_file1:
+      asserts:
+        has_size:
+          value: 5920
+          delta: 3000
+    output:
+      asserts:
+        has_size: 
+          value: 29354
+          delta: 5000

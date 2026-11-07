@@ -1,0 +1,956 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This WF applies Flexynesis on BRCA data from Metabric for a classification task",
+    "comments": [
+        {
+            "child_steps": [
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Flexynesis"
+            },
+            "id": 0,
+            "position": [
+                403.6,
+                0
+            ],
+            "size": [
+                1050,
+                1150
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-1329-3044",
+            "name": "Amirhossein Naghsh Nilchi"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Final - Modeling Breast Cancer Subtypes (flexynesis only)",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "training clinical data",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "training clinical data",
+                    "name": "clin_train"
+                }
+            ],
+            "label": "clin_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 4.639640973072347,
+                "top": 33.75536492511087
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "574bfad4-1764-4559-a16a-5647dcd3d187",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "test clinical data",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "test clinical data",
+                    "name": "clin_test"
+                }
+            ],
+            "label": "clin_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 130.43795926547023
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ee7f194e-e0ed-468c-9071-3b983431ca7a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "training omics 1 data",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "training omics 1 data",
+                    "name": "gex_train"
+                }
+            ],
+            "label": "gex_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.0086272384718313,
+                "top": 236.4175859434574
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ed11982e-8901-47aa-be57-47a27df714d5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "test omics 1 data",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "test omics 1 data",
+                    "name": "gex_test"
+                }
+            ],
+            "label": "gex_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.2189651500053174,
+                "top": 334.6365000770845
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c5c12983-268c-42e9-9e15-f26ba95ea2b3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "training omics 2 data",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "training omics 2 data",
+                    "name": "cna_train"
+                }
+            ],
+            "label": "cna_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.2189651500053174,
+                "top": 435.78042212130543
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "116b7045-64c6-444e-bf37-795e231a8ff9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "test omics 2 data",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "test omics 2 data",
+                    "name": "cna_test"
+                }
+            ],
+            "label": "cna_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.2189651500053174,
+                "top": 530.3481182101023
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "49cee9f0-17f6-4676-ad21-35abfcdeec5f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "training_type|omics_0|test_omics": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "training_type|omics_0|train_omics": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "training_type|test_clin": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "training_type|test_omics_main": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "training_type|train_clin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "training_type|train_omics_main": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                }
+            ],
+            "label": " Flexynesis niter1",
+            "name": "Flexynesis",
+            "outputs": [
+                {
+                    "name": "results",
+                    "type": "input"
+                },
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 427.0295313260623,
+                "top": 39.97344104388178
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplots": {
+                    "action_arguments": {
+                        "newname": "niter1 pca embedding plots + pr-curve"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plots"
+                },
+                "RenameDatasetActionresults": {
+                    "action_arguments": {
+                        "newname": "niter1 flexynesis output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "results"
+                },
+                "TagDatasetActionplots": {
+                    "action_arguments": {
+                        "tags": "#1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "plots"
+                },
+                "TagDatasetActionresults": {
+                    "action_arguments": {
+                        "tags": "#1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "results"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d1dc88960179",
+                "name": "flexynesis",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.10+galaxy0",
+            "type": "tool",
+            "uuid": "3ebe33cb-1d11-435a-8219-a33560007725",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "niter1 flexynesis output",
+                    "output_name": "results",
+                    "uuid": "a3d336d0-14da-4688-8f20-9fbe4a3745a5"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "training_type|omics_0|test_omics": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "training_type|omics_0|train_omics": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "training_type|test_clin": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "training_type|test_omics_main": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "training_type|train_clin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "training_type|train_omics_main": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                }
+            ],
+            "label": " Flexynesis niter5",
+            "name": "Flexynesis",
+            "outputs": [
+                {
+                    "name": "results",
+                    "type": "input"
+                },
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 430,
+                "top": 590
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplots": {
+                    "action_arguments": {
+                        "newname": "niter1 pca embedding plots + pr-curve"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plots"
+                },
+                "RenameDatasetActionresults": {
+                    "action_arguments": {
+                        "newname": "niter5 flexynesis output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "results"
+                },
+                "TagDatasetActionplots": {
+                    "action_arguments": {
+                        "tags": "name:5_iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "plots"
+                },
+                "TagDatasetActionresults": {
+                    "action_arguments": {
+                        "tags": "#5_iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "results"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d1dc88960179",
+                "name": "flexynesis",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.10+galaxy0",
+            "type": "tool",
+            "uuid": "fc8e1fc1-32da-4fd1-8c41-ce457722d886",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "niter5 flexynesis output",
+                    "output_name": "results",
+                    "uuid": "d3447b34-1233-4c77-a348-387e5e021782"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract prediction table - niter1",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 685.2474811999323,
+                "top": 135.039194888865
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "job.predicted_labels niter1"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.predicted_labels\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "18060b70-1af2-47ef-b82e-781240d11490",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract test embeddings - niter1",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 683.4624708384865,
+                "top": 279.7232584803365
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "job.embeddings_test niter1"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.embeddings_test\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "00ac5bbb-4b02-440f-a73e-b7fe1f5b53e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract prediction table - niter5",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 684.8014243287647,
+                "top": 656.0626792695139
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "job.predicted_labels niter5"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:5iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.predicted_labels\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "3c20d49f-b2dc-44d0-87f0-bf160c615c4e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract test embeddings - niter5",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 684.5462374559258,
+                "top": 801.5879083356175
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "job.embeddings_test niter5"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:5iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.embeddings_test\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "acb24c8f-75c9-44b2-8621-be260c3e9f41",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 927.9493719577063,
+                "top": 135.09959884797087
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "job.predicted_labels niter1 - unique"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                },
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "name:1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "319604d5-813b-49bc-9e5e-1dc787b9cfba",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 932.8699008291854,
+                "top": 656.7397839907827
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "job.predicted_labels niter5 - unique"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                },
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "name:5iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "60a0b2e6-776b-467c-966a-766084110545",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "plot_conditional|embeddings": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "plot_conditional|labels": {
+                    "id": 12,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": null,
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1159.9875300741373,
+                "top": 133.8912430909493
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_out": {
+                    "action_arguments": {
+                        "newname": "UMAP plot of test embeddings colored by predicted lables"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_out"
+                },
+                "TagDatasetActionplot_out": {
+                    "action_arguments": {
+                        "tags": "flexynesis,name:1iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "plot_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5f69690716cb",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.10+galaxy0",
+            "type": "tool",
+            "uuid": "463b72a8-4624-4c1e-8d20-55a8ef1990ab",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "embedding plot umap - niter1",
+                    "output_name": "plot_out",
+                    "uuid": "a132b519-38f8-4d0a-af84-4343a24a1f7a"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "plot_conditional|embeddings": {
+                    "id": 11,
+                    "output_name": "output"
+                },
+                "plot_conditional|labels": {
+                    "id": 13,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": "UMAP plot on test embeddings",
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1175.9129573564596,
+                "top": 660.4386570232115
+            },
+            "post_job_actions": {
+                "RenameDatasetActionplot_out": {
+                    "action_arguments": {
+                        "newname": "UMAP plot of test embeddings colored by predicted lables"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plot_out"
+                },
+                "TagDatasetActionplot_out": {
+                    "action_arguments": {
+                        "tags": "flexynesis,name:5iter"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "plot_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5f69690716cb",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.10+galaxy0",
+            "type": "tool",
+            "uuid": "3c0ca874-f897-4d55-b4e7-65efadc36248",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "embedding plot umap - niter5",
+                    "output_name": "plot_out",
+                    "uuid": "bd28d5e9-97ed-419e-b4e6-0e31eef2db18"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "flexynesis",
+        "machine_learning",
+        "TABPFN"
+    ],
+    "uuid": "4e77449e-a99a-460a-ac09-17f6adc32107",
+    "version": 7
+}

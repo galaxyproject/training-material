@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nHP3_S9_L001_R1_001.fastq.gz"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nHP3_S9_L001_R2_001.fastq.gz"]
+  2[label="fastp"]
+  0 -> 2 [label="output"]
+  3[label="fastp"]
+  1 -> 3 [label="output"]
+  4[label="FASTQ to FASTA"]
+  2 -> 4 [label="out1"]
+  5[label="FASTQ to FASTA"]
+  3 -> 5 [label="out1"]
+  6[label="NCBI BLAST+ blastn"]
+  4 -> 6 [label="output"]
+  7[label="NCBI BLAST+ blastn"]
+  5 -> 7 [label="output"]
+  8[label="Count"]
+  6 -> 8 [label="output1"]
+  9[label="Count"]
+  7 -> 9 [label="output1"]
+}

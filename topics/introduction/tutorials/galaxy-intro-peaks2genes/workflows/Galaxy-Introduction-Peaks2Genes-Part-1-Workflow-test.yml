@@ -1,0 +1,18 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    Peaks:
+      class: File
+      location: https://zenodo.org/record/1025586/files/GSE37268_mof3.out.hpeak.txt
+      filetype: interval
+    Genes:
+      class: File
+      location: https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
+      filetype: bed
+  outputs:
+    chr_count:
+      asserts:
+        has_text:
+          text: 'chrX'
+        has_text:
+          text: '331'

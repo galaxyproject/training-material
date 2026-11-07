@@ -1,0 +1,37 @@
+- doc: Test outline for Workflow-to-detect-SNV-from-Illumina-sequenced-baculovirus-isolates
+  job: {}
+  outputs:
+    bcftools_call_output:
+      asserts:
+        - that: has_line
+          line: "##contig=<ID=CpGV-M,length=123529>"
+        - that: has_line
+          line: "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSRR31589146\tSRR31589147\tSRR31589148\tSRR31679023"
+    vcf_table:
+      asserts:
+        -  that: has_line
+           line: "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tAC\tAN\tBQBZ\tDP\tDP4\tFS\tIDV\tIMF\tINDEL\tMQ\tMQ0F\tMQBZ\tMQSBZ\tRPBZ\tSCBZ\tSGB\tVDB\tISOLATE\tDP\tDPR\tGT\tPL\tALLELE\tDPR.ALLELE\tREL.ALT\tREL.ALT.0.05"
+        -  that: has_text
+           text: "\tALT1\t"
+        -  that: has_text
+           text: "\tALT2\t"
+        -  that: has_text
+           text: "\tALT3\t"
+    vcf_table_ALT1:
+      asserts:
+        - that: has_line
+          line: "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tAC\tAN\tBQBZ\tDP\tDP4\tFS\tIDV\tIMF\tINDEL\tMQ\tMQ0F\tMQBZ\tMQSBZ\tRPBZ\tSCBZ\tSGB\tVDB\tISOLATE\tDP\tDPR\tGT\tPL\tALLELE\tDPR.ALLELE\tREL.ALT\tREL.ALT.0.05"
+        - that: has_text
+          text: "\tALT1\t"
+        - that: not_has_text
+          text: "\tALT2\t"
+        - that: not_has_text
+          text: "\tALT3\t"
+        - that: has_text_matching
+          expression: "0\\.0+[1-4]\\d+\\t0\\n"
+    vcf_table_ALT1_specificity:
+      asserts:
+        - that: has_line
+          line: "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tAC\tAN\tBQBZ\tDP\tDP4\tFS\tIDV\tIMF\tINDEL\tMQ\tMQ0F\tMQBZ\tMQSBZ\tRPBZ\tSCBZ\tSGB\tVDB\tISOLATE\tDP\tDPR\tGT\tPL\tALLELE\tDPR.ALLELE\tREL.ALT\tREL.ALT.0.05\tSPEC"
+        - that: has_text
+          text: "\tSNV specificity: "

@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSixgill generated protein FASTA File"]
+  1[color=lightblue,label="ℹ️ Input Collection\nDataset Collection of Bering Strait MGF Files"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nGene Ontology Terms Selected"]
+  3[label="Search GUI"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  k7516674ab5aa45b5b2e838c1889ad2e9[color=lightseagreen,label="Output\nSearch GUI on input dataset(s)"]
+  3 -> k7516674ab5aa45b5b2e838c1889ad2e9
+  4[label="Peptide Shaker"]
+  3 -> 4 [label="searchgui_results"]
+  kddfe8d62a7b74e30a84d91c92fc60bd0[color=lightseagreen,label="Output\nPeptide Shaker on input dataset(s): mzidentML file"]
+  4 -> kddfe8d62a7b74e30a84d91c92fc60bd0
+  5[label="Query Tabular Select Peptides"]
+  4 -> 5 [label="output_psm"]
+  6[label="Unipept pept2prot"]
+  5 -> 6 [label="output"]
+  7[label="Unipept lca"]
+  5 -> 7 [label="output"]
+  8[label="Go Pop2Prot DB"]
+  2 -> 8 [label="output"]
+  6 -> 8 [label="output_tsv"]
+  6 -> 8 [label="output_tsv"]
+  4 -> 8 [label="output_psm"]
+  9[label="Genera | PSMs | Peptides"]
+  4 -> 9 [label="output_psm"]
+  7 -> 9 [label="output_tsv"]
+  10[label="GO Terms: Biological Processes"]
+  8 -> 10 [label="sqlitedb"]
+  11[label="GO Terms: Molecular Functions"]
+  8 -> 11 [label="sqlitedb"]
+  12[label="GO Terms: Cellular Localization"]
+  8 -> 12 [label="sqlitedb"]
+}

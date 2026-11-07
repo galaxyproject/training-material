@@ -1,0 +1,45 @@
+---
+- doc: Test for host-removal workflow
+  job:
+    "Input paired fastq ":
+      class: Collection
+      type: list:paired
+      elements:
+        - identifier: SRR24759598
+          class: Pair
+          forward:
+            class: File
+            location: https://zenodo.org/records/17829290/files/SRR24759598_1.fastq.gz
+            filetype: fastqsanger.gz
+          reverse:
+            class: File
+            location: https://zenodo.org/records/17829290/files/SRR24759598_2.fastq.gz
+            filetype: fastqsanger.gz
+        - identifier: SRR24759616
+          class: Pair
+          forward:
+            class: File
+            location: https://zenodo.org/records/17829290/files/SRR24759616_1.fastq.gz
+            filetype: fastqsanger.gz
+          reverse:
+            class: File
+            location: https://zenodo.org/records/17829290/files/SRR24759616_2.fastq.gz
+            filetype: fastqsanger.gz
+
+    "Reference Genome Build In":
+      value: "apiMel3"
+
+  outputs:
+    mapping_stats:
+      asserts:
+        - has_text:
+            text: "overall alignment rate"
+    output_unaligned_reads_l:
+      asserts:
+        - has_size:
+            min: 100
+    output_unaligned_reads_r:
+      asserts:
+        - has_size:
+            min: 100
+

@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput genome"]
+  1[label="FCS-GX screen"]
+  0 -> 1 [label="output"]
+  k9741edf24be645a3980d99b1aea18380[color=lightseagreen,label="Output\nfcs_gx_action_report"]
+  1 -> k9741edf24be645a3980d99b1aea18380
+  kddedd49f8c574e3ea1583d66ce12f05c[color=lightseagreen,label="Output\nfcs_gx_taxonomy_report"]
+  1 -> kddedd49f8c574e3ea1583d66ce12f05c
+  2[label="FCS-GX clean"]
+  1 -> 2 [label="action_report"]
+  0 -> 2 [label="output"]
+  kf3a37b43d3044ec0a023197c9e0ce2e1[color=lightseagreen,label="Output\ngx_contam_fasta"]
+  2 -> kf3a37b43d3044ec0a023197c9e0ce2e1
+  k56716c7cac7f42f7bbef62a36b4d3810[color=lightseagreen,label="Output\ngx_clean_fasta"]
+  2 -> k56716c7cac7f42f7bbef62a36b4d3810
+  3[label="FCS-adaptor screen"]
+  2 -> 3 [label="clean_fasta"]
+  k6a4baf4680b04a96b8649201fc80cdb7[color=lightseagreen,label="Output\nfcs_adaptor_report"]
+  3 -> k6a4baf4680b04a96b8649201fc80cdb7
+  k1cad7ab4a817436c9a63fd4e3c6b4bbb[color=lightseagreen,label="Output\nadaptor_clean_fasta"]
+  3 -> k1cad7ab4a817436c9a63fd4e3c6b4bbb
+  4[label="FCS-adaptor clean"]
+  3 -> 4 [label="adaptor_report"]
+  2 -> 4 [label="clean_fasta"]
+  k0da685707490408786c8739522e1a776[color=lightseagreen,label="Output\nadaptor_contam_fasta"]
+  4 -> k0da685707490408786c8739522e1a776
+  k4985eb0730b04872ab8352ffeb619900[color=lightseagreen,label="Output\nfinal_clean_fasta"]
+  4 -> k4985eb0730b04872ab8352ffeb619900
+}

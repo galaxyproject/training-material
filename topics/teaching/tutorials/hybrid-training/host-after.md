@@ -1,0 +1,3 @@
+- Collect and send to organizer the participant feedback form
+- Transcript the sticky notes and send them to organizer
+- Ask helpers to fill the helper feedback form

@@ -1,0 +1,36 @@
+- doc: Test for Voronoi-segmentation tutorial
+  job:
+    Image:
+      class: File
+      location: https://zenodo.org/records/15388809
+      filetype: tiff
+    Seeds:
+      class: File
+      location: https://zenodo.org/records/15388853
+      filetype: tiff
+  outputs:
+    Single channel image:
+      location: https://zenodo.org/records/15389546
+    label map:
+      location: https://zenodo.org/records/15389556
+    multi-channel image:
+      location: https://zenodo.org/records/15389567
+    Smoothed image:
+      location: https://zenodo.org/records/15389574
+    tesselation:
+      location: https://zenodo.org/records/15389585
+    mask:
+      location: https://zenodo.org/records/15389590
+    object count:
+      location: https://zenodo.org/records/15389599
+      asserts:
+        - has_text:
+            text: "425"
+    image features:
+      location: https://zenodo.org/records/15389607
+    segmentation:
+      location: https://zenodo.org/records/15389616
+    colorized label map:
+      location: https://zenodo.org/records/15389622
+    segmented image:
+      location: https://zenodo.org/records/15389630

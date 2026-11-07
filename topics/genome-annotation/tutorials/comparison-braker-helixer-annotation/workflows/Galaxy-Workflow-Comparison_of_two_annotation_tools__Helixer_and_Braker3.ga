@@ -1,0 +1,940 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "The idea of this workflow is to compare annotation with two annotation tools that differ in their approach and operation.",
+    "comments": [
+        {
+            "child_steps": [
+                10,
+                11
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Evalutation - Predicted proteins frome Braker3 annotation"
+            },
+            "id": 7,
+            "position": [
+                1410,
+                940
+            ],
+            "size": [
+                470,
+                560.4
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                3
+            ],
+            "color": "red",
+            "data": {
+                "title": "Helixer annotation"
+            },
+            "id": 0,
+            "position": [
+                430,
+                280
+            ],
+            "size": [
+                240,
+                183
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                5
+            ],
+            "color": "black",
+            "data": {
+                "title": "Preticted proteins from Helixer annotation"
+            },
+            "id": 2,
+            "position": [
+                860,
+                170
+            ],
+            "size": [
+                250,
+                350
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                0,
+                1,
+                2
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Inputs"
+            },
+            "id": 1,
+            "position": [
+                0,
+                640
+            ],
+            "size": [
+                240,
+                362.2
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                4
+            ],
+            "color": "red",
+            "data": {
+                "title": "Braker3 annotation"
+            },
+            "id": 3,
+            "position": [
+                580,
+                890
+            ],
+            "size": [
+                240,
+                376.8
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                7
+            ],
+            "color": "black",
+            "data": {
+                "title": "Preticted proteins from Braker3 annotation"
+            },
+            "id": 6,
+            "position": [
+                1000,
+                970
+            ],
+            "size": [
+                250,
+                330
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                8,
+                9
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Evaluation - Predicted protein from Helixer annotation"
+            },
+            "id": 5,
+            "position": [
+                1320,
+                0
+            ],
+            "size": [
+                470,
+                560.4
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Visualization"
+            },
+            "id": 4,
+            "position": [
+                930,
+                590
+            ],
+            "size": [
+                240,
+                316
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "email": "mailto:romane.libouban@irisa.fr",
+            "identifier": "https://orcid.org/0009-0001-4920-9951",
+            "name": "Romane Libouban"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "release": "0.1",
+    "name": "Comparison of two annotation tools: Helixer and Braker3",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Input dataset containing genomic sequences in FASTA format",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input dataset containing genomic sequences in FASTA format",
+                    "name": "Genome sequence"
+                }
+            ],
+            "label": "Genome sequence",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 680
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e267e1df-03ae-4b70-98ce-65ea177a172e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Alignments from RNA-seq",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Alignments from RNA-seq",
+                    "name": "Alignments from RNA-seq"
+                }
+            ],
+            "label": "Alignments from RNA-seq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 790
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "33387b24-8588-499f-aed6-b1865957406b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Protein sequences",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Protein sequences",
+                    "name": "Protein sequences"
+                }
+            ],
+            "label": "Protein sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 900
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3e402730-625a-4fb5-9dc1-415d8fbabdea",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Helixer tool for genomic annotation",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/genouest/helixer/helixer/0.3.3+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Helixer",
+                    "name": "input_model"
+                }
+            ],
+            "label": "Helixer",
+            "name": "Helixer",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 450.0333251953125,
+                "top": 320.03398071289064
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/genouest/helixer/helixer/0.3.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "c2fc4ac35199",
+                "name": "helixer",
+                "owner": "genouest",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"input_model\": {\"__class__\": \"RuntimeValue\"}, \"lineages\": \"land_plant\", \"option_overlap\": {\"use_overlap\": \"true\", \"__current_case__\": 0, \"overlap_offset\": null, \"overlap_core_length\": null}, \"post_processing\": {\"window_size\": \"100\", \"edge_threshold\": \"0.1\", \"peak_threshold\": \"0.8\", \"min_coding_length\": \"100\"}, \"size\": \"8\", \"species\": null, \"subsequence_length\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.3+galaxy1",
+            "type": "tool",
+            "uuid": "f60cf54d-31f2-4395-bb55-4916828cd211",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "helixer output",
+                    "output_name": "output",
+                    "uuid": "fe43bcd6-5f99-4fd3-b184-2d6bfb340030"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Braker3 is an automated bioinformatics tool that uses RNA-seq and protein data to annotate genomes.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/genouest/braker3/braker3/3.0.8+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "evidences|bam": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "evidences|prot_seq": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "genome": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "advanced"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "advanced"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "genome"
+                }
+            ],
+            "label": "Braker3",
+            "name": "BRAKER3",
+            "outputs": [
+                {
+                    "name": "output_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 600,
+                "top": 930
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/genouest/braker3/braker3/3.0.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a9b0b926e133",
+                "name": "braker3",
+                "owner": "genouest",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"filterOutShort\": false, \"eval\": {\"__class__\": \"RuntimeValue\"}, \"eval_pseudo\": {\"__class__\": \"RuntimeValue\"}, \"alternatives_from_evidence\": true}, \"augustus\": {\"crf\": false, \"rounds\": \"5\", \"AUGUSTUS_ab_initio\": false, \"keepCrf\": false}, \"dev\": {\"splice_sites\": null, \"min_contig\": null, \"gc_probability\": \"0.001\", \"gm_max_intergenic\": null, \"downsampling_lambda\": \"2\"}, \"evidences\": {\"bam\": {\"__class__\": \"RuntimeValue\"}, \"prot_seq\": {\"__class__\": \"RuntimeValue\"}}, \"genemark\": {\"fungus\": false}, \"genome\": {\"__class__\": \"RuntimeValue\"}, \"output_format\": \"gff3\", \"softmasking\": true, \"species\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.8+galaxy0",
+            "type": "tool",
+            "uuid": "51121968-9456-4ab0-b797-1f40d9985c82",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Converts GFF files to other formats, such as FASTA",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "reference_genome|genome_fasta": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "chr_replace"
+                },
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "Gffread Helixer annotation",
+            "name": "gffread",
+            "outputs": [
+                {
+                    "name": "output_pep",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 890,
+                "top": 240
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_pep": {
+                    "action_arguments": {
+                        "newname": "predicted proteins Helixer annotation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_pep"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3e436657dcd0",
+                "name": "gffread",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chr_replace\": {\"__class__\": \"RuntimeValue\"}, \"decode_url\": false, \"expose\": false, \"filtering\": null, \"full_gff_attribute_preservation\": false, \"gffs\": {\"gff_fmt\": \"none\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"maxintron\": null, \"merging\": {\"merge_sel\": \"none\", \"__current_case__\": 0}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 2, \"genome_fasta\": {\"__class__\": \"ConnectedValue\"}, \"ref_filtering\": null, \"fa_outputs\": [\"-y pep.fa\"]}, \"region\": {\"region_filter\": \"none\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "00d60c74-1ed5-4529-aa82-8745b50205b7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "predicted proteins Helixer annotation",
+                    "output_name": "output_pep",
+                    "uuid": "2a62bf04-f621-43d5-9e47-4e8b31c32dca"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "JBrowse",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "reference_genome|genome": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "track_groups_1|data_tracks_0|data_format|annotation": {
+                    "id": 4,
+                    "output_name": "output_gff"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool JBrowse",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "JBrowse",
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 950.0133447248181,
+                "top": 629.9967480789329
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6e57ff585c0",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"gencode\": \"1\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": true, \"aboutDescription\": \"\", \"show_tracklist\": true, \"show_nav\": true, \"show_overview\": true, \"show_menu\": true, \"hideGenomeOptions\": false}, \"plugins\": {\"BlastView\": true, \"ComboTrackSelector\": false, \"GCContent\": false}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Helixer annotation\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}, {\"__index__\": 1, \"category\": \"Braker3 annotation\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
+            "type": "tool",
+            "uuid": "04807fae-95f6-49c1-893e-76932a79cdf9",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "19976896-9df1-45e4-9c96-89e24ae6e596"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "Converts GFF files to other formats, such as FASTA",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output_gff"
+                },
+                "reference_genome|genome_fasta": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "chr_replace"
+                },
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "Gffread Braker3 annotation",
+            "name": "gffread",
+            "outputs": [
+                {
+                    "name": "output_pep",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1030,
+                "top": 1030
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_pep": {
+                    "action_arguments": {
+                        "newname": "predicted proteins Braker3 annotation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_pep"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3e436657dcd0",
+                "name": "gffread",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chr_replace\": {\"__class__\": \"RuntimeValue\"}, \"decode_url\": false, \"expose\": false, \"filtering\": null, \"full_gff_attribute_preservation\": false, \"gffs\": {\"gff_fmt\": \"none\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"maxintron\": null, \"merging\": {\"merge_sel\": \"none\", \"__current_case__\": 0}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 2, \"genome_fasta\": {\"__class__\": \"ConnectedValue\"}, \"ref_filtering\": null, \"fa_outputs\": [\"-y pep.fa\"]}, \"region\": {\"region_filter\": \"none\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "a61d72ae-5cb5-47c3-9de4-73d037f56d04",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "predicted proteins Braker3 annotation",
+                    "output_name": "output_pep",
+                    "uuid": "15b92c57-fd89-4b7a-a3af-d0e0a3fbc6bf"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "Completeness assessment of the genome using the Busco tool",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output_pep"
+                }
+            },
+            "inputs": [],
+            "label": "Busco on predicted proteins from Helixer annotation",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                },
+                {
+                    "name": "busco_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 1340,
+                "top": 40
+            },
+            "post_job_actions": {
+                "RenameDatasetActionbusco_gff": {
+                    "action_arguments": {
+                        "newname": "busco gff predicted proteins Helixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_gff"
+                },
+                "RenameDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "newname": "busco missing predicted proteins Helixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "RenameDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "newname": "busco sum predicted proteins Helixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "RenameDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "newname": "busco table predicted proteins Helixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "RenameDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "newname": "busco gff predicted proteins Helixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e5c372c91e46",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"prot\", \"__current_case__\": 2}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"lineage_conditional\": {\"selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"all+2024-03-21-114020\"}, \"outputs\": [\"short_summary\", \"image\", \"gff\", \"missing\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "51dcc6a4-ff87-4a98-98fa-de00ce54325f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "busco gff predicted proteins Helixer",
+                    "output_name": "busco_gff",
+                    "uuid": "9840f766-bbf6-4174-a2b8-2a399064d852"
+                },
+                {
+                    "label": "busco image predicted proteins Helixer",
+                    "output_name": "summary_image",
+                    "uuid": "5a659e48-a36f-4304-9513-006aea416a2e"
+                },
+                {
+                    "label": "busco missing predicted proteins Helixer",
+                    "output_name": "busco_missing",
+                    "uuid": "bebdac0d-c353-49a8-a043-9687c4896c17"
+                },
+                {
+                    "label": "busco table predicted proteins Helixer",
+                    "output_name": "busco_table",
+                    "uuid": "4e1ca88a-74b9-40d4-b63a-461aece6e3b5"
+                },
+                {
+                    "label": "busco sum predicted proteins Helixer",
+                    "output_name": "busco_sum",
+                    "uuid": "790c995e-fb86-4935-83e1-9a5dcbf8bf85"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "OMArk",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.1+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output_pep"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool OMArk",
+                    "name": "input_iso"
+                }
+            ],
+            "label": "OMArk on predicted proteins from Helixer annotation",
+            "name": "OMArk",
+            "outputs": [
+                {
+                    "name": "omark_detail_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "omark_sum",
+                    "type": "sum"
+                }
+            ],
+            "position": {
+                "left": 1570,
+                "top": 230
+            },
+            "post_job_actions": {
+                "RenameDatasetActionomark_detail_sum": {
+                    "action_arguments": {
+                        "newname": "omark detail sum Helixer annotation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "omark_detail_sum"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ceb52582a5b1",
+                "name": "omark",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"database\": \"LUCA-v2.0.0.h5\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input_iso\": {\"__class__\": \"RuntimeValue\"}, \"omark_mode\": false, \"outputs\": \"detail_sum\", \"r\": null, \"t\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.1+galaxy0",
+            "type": "tool",
+            "uuid": "75e1dde7-5d60-4092-af57-cd7b065145e2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "omark detail sum Helixer annotation",
+                    "output_name": "omark_detail_sum",
+                    "uuid": "462d5c32-3784-4c33-83d5-74da40b7276f"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "OMArk",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.1+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_pep"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool OMArk",
+                    "name": "input_iso"
+                }
+            ],
+            "label": "OMArk on predicted proteins from Braker3 annotation",
+            "name": "OMArk",
+            "outputs": [
+                {
+                    "name": "omark_detail_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "omark_sum",
+                    "type": "sum"
+                }
+            ],
+            "position": {
+                "left": 1430,
+                "top": 980
+            },
+            "post_job_actions": {
+                "RenameDatasetActionomark_detail_sum": {
+                    "action_arguments": {
+                        "newname": "omark detail sum Braker3 annotation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "omark_detail_sum"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ceb52582a5b1",
+                "name": "omark",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"database\": \"LUCA-v2.0.0.h5\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input_iso\": {\"__class__\": \"RuntimeValue\"}, \"omark_mode\": false, \"outputs\": \"detail_sum\", \"r\": null, \"t\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.1+galaxy0",
+            "type": "tool",
+            "uuid": "6059caab-ce56-40f9-9bdd-8e6c110eecec",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "omark sum",
+                    "output_name": "omark_sum",
+                    "uuid": "d1eb0367-c708-4794-a256-81dac775776a"
+                },
+                {
+                    "label": "omark detail sum Braker3 annotation",
+                    "output_name": "omark_detail_sum",
+                    "uuid": "5177eeba-2521-40fc-a9d0-eaabc03639e5"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "Completeness assessment of the genome using the Busco tool",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_pep"
+                }
+            },
+            "inputs": [],
+            "label": "Busco on predicted proteins from Braker3 annotation",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                },
+                {
+                    "name": "busco_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 1660,
+                "top": 980
+            },
+            "post_job_actions": {
+                "RenameDatasetActionbusco_gff": {
+                    "action_arguments": {
+                        "newname": "busco gff predicted proteins Braker3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_gff"
+                },
+                "RenameDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "newname": "busco missing predicted proteins Braker3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "RenameDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "newname": "busco sum predicted proteins Braker3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "RenameDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "newname": "busco table predicted proteins Braker3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "RenameDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "newname": "busco image predicted proteins Braker3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e5c372c91e46",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"prot\", \"__current_case__\": 2}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"lineage_conditional\": {\"selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"all+2024-03-21-114020\"}, \"outputs\": [\"short_summary\", \"image\", \"gff\", \"missing\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.8.0+galaxy0",
+            "type": "tool",
+            "uuid": "7095db98-ef0f-47c4-bb09-8b72213ee2c8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "busco image predicted proteins Braker3",
+                    "output_name": "summary_image",
+                    "uuid": "37700d39-563f-4add-8b89-e046ff5daa87"
+                },
+                {
+                    "label": "busco gff predicted proteins Braker3",
+                    "output_name": "busco_gff",
+                    "uuid": "b5b8115d-008f-4f59-966e-0906d8dd7c1d"
+                },
+                {
+                    "label": "busco sum predicted proteins Braker3",
+                    "output_name": "busco_sum",
+                    "uuid": "52cf5cb7-1b61-461d-9361-9674c4431c72"
+                },
+                {
+                    "label": "busco table predicted proteins Braker3",
+                    "output_name": "busco_table",
+                    "uuid": "874c74bc-3417-4b03-b4c5-5547f952cabb"
+                },
+                {
+                    "label": "busco missing predicted proteins Braker3",
+                    "output_name": "busco_missing",
+                    "uuid": "37c86320-3f6f-4f20-a135-019772ec8db0"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "braker3",
+        "helixer",
+        "genomeannotation",
+        "busco",
+        "jbrowse"
+    ],
+    "uuid": "f8ba0751-09c5-4611-b4b8-6827a44cd7c7",
+    "version": 1
+}

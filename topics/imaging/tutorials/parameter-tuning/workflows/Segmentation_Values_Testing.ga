@@ -1,0 +1,429 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Workflow to assess nuclei segmentation by applying different Gaussian filtering values during image pre-processing.",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                0,
+                2
+            ],
+            "color": "red",
+            "data": {
+                "title": "User Inpur"
+            },
+            "id": 0,
+            "position": [
+                0,
+                101.82566135461036
+            ],
+            "size": [
+                249.3,
+                457.9
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-2104-9519",
+            "name": "Riccardo Massei"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Segmentation_Values_Testing",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Upload an image or provide a dataset to initiate the image segmentation process.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload an image or provide a dataset to initiate the image segmentation process.",
+                    "name": "Image to segment"
+                }
+            ],
+            "label": "Image to segment",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 29.353044999219044,
+                "top": 141.86174924479707
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9a1c8130-9dca-40e2-933e-63a140c66c0f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Input a series of sigma values as tabular file",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input a series of sigma values as tabular file",
+                    "name": "Sigma Values"
+                }
+            ],
+            "label": "Sigma Values",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 23.8,
+                "top": 294.72566135461034
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d1a1d79c-61a9-4642-9f58-a39982794686",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Input the ground truth image",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input the ground truth image",
+                    "name": "Ground Truth Image"
+                }
+            ],
+            "label": "Ground Truth Image",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20.03485424850747,
+                "top": 457.58305989964686
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2ebd8b38-4236-47ac-83bf-48dbeec26818",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split by group",
+            "outputs": [
+                {
+                    "name": "split_output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 323.8,
+                "top": 294.72566135461034
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6",
+            "tool_shed_repository": {
+                "changeset_revision": "ff2a81aa3f08",
+                "name": "split_file_on_column",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"column\": \"1\", \"include_header\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6",
+            "type": "tool",
+            "uuid": "168c2f12-0635-4634-af9b-d83cfa88093d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "param_value_from_file",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "split_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Parse parameter value",
+            "outputs": [
+                {
+                    "name": "float_param",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 623.8,
+                "top": 294.72566135461034
+            },
+            "post_job_actions": {},
+            "tool_id": "param_value_from_file",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"float\", \"remove_newlines\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "a37a8c13-ff69-4cb5-b30b-9c46dd7573ec",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "filter|size": {
+                    "id": 4,
+                    "output_name": "float_param"
+                },
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter 2-D image",
+                    "name": "filter"
+                }
+            ],
+            "label": null,
+            "name": "Filter 2-D image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 358.2751667418894,
+                "top": 48.197639805422064
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "d51310ab328a",
+                "name": "2d_simple_filter",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter\": {\"filter_type\": \"gaussian\", \"__current_case__\": 0, \"size\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.12.0+galaxy1",
+            "type": "tool",
+            "uuid": "f15f9e3b-5044-42c1-aca4-be0f0aa5bafb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Perform histogram equalization",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 613.2941427245634,
+                "top": 93.182103623816
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b1c2c210813c",
+                "name": "2d_histogram_equalization",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"h_type\": \"clahe\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy0",
+            "type": "tool",
+            "uuid": "5b5f41a1-76b2-4800-a771-21c7995d57cc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 858.6737868628513,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "699a5e9146b3",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"threshold\": \"0\", \"block_size\": \"0\", \"offset\": \"0.0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy3",
+            "type": "tool",
+            "uuid": "0f1e7dab-4020-4ed8-9960-a9ed39644409",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/segmetrics/ip_segmetrics/1.4.0-2",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_gt": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input_seg": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compute image segmentation and object detection performance measures",
+                    "name": "input_gt"
+                },
+                {
+                    "description": "runtime parameter for tool Compute image segmentation and object detection performance measures",
+                    "name": "input_seg"
+                }
+            ],
+            "label": null,
+            "name": "Compute image segmentation and object detection performance measures",
+            "outputs": [
+                {
+                    "name": "results",
+                    "type": "tsv"
+                }
+            ],
+            "position": {
+                "left": 933.755103688648,
+                "top": 385.58111844337657
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/segmetrics/ip_segmetrics/1.4.0-2",
+            "tool_shed_repository": {
+                "changeset_revision": "ac55e2f4d9e3",
+                "name": "segmetrics",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_gt\": {\"__class__\": \"RuntimeValue\"}, \"input_seg\": {\"__class__\": \"RuntimeValue\"}, \"is_gt_unique\": false, \"is_seg_unique\": false, \"measures\": [{\"__index__\": 0, \"measure_type\": {\"measure_type_selector\": \"Dice\", \"__current_case__\": 0, \"aggregation\": \"\"}}, {\"__index__\": 1, \"measure_type\": {\"measure_type_selector\": \"JaccardCoefficient\", \"__current_case__\": 2, \"aggregation\": \"\"}}, {\"__index__\": 2, \"measure_type\": {\"measure_type_selector\": \"RandIndex\", \"__current_case__\": 4, \"aggregation\": \"\"}}], \"unzip\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.0-2",
+            "type": "tool",
+            "uuid": "fea122ab-7cb9-4d0d-a4cf-4464f8e58ecf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_list": {
+                    "id": 8,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1222.5124275351172,
+                "top": 348.62959459255296
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": true, \"__current_case__\": 0, \"place_name\": \"same_once\"}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "1de3d625-bf4b-4493-9d44-29c52225d9b8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "54631b7f-9caa-476a-a194-1b8a862e12b6"
+                }
+            ]
+        }
+    },
+    "tags": ["imaging"],
+    "uuid": "8131f259-8340-4a03-8ebf-feb4d44768e1",
+    "version": 22
+}

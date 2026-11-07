@@ -1,0 +1,19 @@
+- doc: Test outline for tree-building.ga
+  job:
+    Input FASTA Sequence File:
+      class: File
+      location: https://zenodo.org/records/10415242/files/anolis-raw.fst
+      filetype: fasta
+  outputs:
+    outputAlignment:
+      asserts:
+        has_text:
+          text: '(('
+    output:
+      asserts:
+        has_text:
+          text: '(('
+    treefile:
+      asserts:
+        has_text:
+          text: '(('

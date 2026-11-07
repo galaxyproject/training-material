@@ -1,0 +1,65 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nGenome sequence"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nAlignments from RNA-seq"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nProtein sequences"]
+  3[label="Helixer"]
+  0 -> 3 [label="output"]
+  kfe43bcd65f994fd3b1842d6bfb340030[color=lightseagreen,label="Output\nhelixer output"]
+  3 -> kfe43bcd65f994fd3b1842d6bfb340030
+  4[label="Braker3"]
+  1 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  5[label="Gffread Helixer annotation"]
+  3 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  k2a62bf04f62143d59e474e8b31c32dca[color=lightseagreen,label="Output\npredicted proteins Helixer annotation"]
+  5 -> k2a62bf04f62143d59e474e8b31c32dca
+  6[label="JBrowse"]
+  0 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  4 -> 6 [label="output_gff"]
+  k199768969df145e49c9689e24ae6e596[color=lightseagreen,label="Output\noutput"]
+  6 -> k199768969df145e49c9689e24ae6e596
+  7[label="Gffread Braker3 annotation"]
+  4 -> 7 [label="output_gff"]
+  0 -> 7 [label="output"]
+  k15b92c57fd894b7aa3afd0e0a3fbc6bf[color=lightseagreen,label="Output\npredicted proteins Braker3 annotation"]
+  7 -> k15b92c57fd894b7aa3afd0e0a3fbc6bf
+  8[label="Busco on predicted proteins from Helixer annotation"]
+  5 -> 8 [label="output_pep"]
+  k9840f766bbf64174a2b82a399064d852[color=lightseagreen,label="Output\nbusco gff predicted proteins Helixer"]
+  8 -> k9840f766bbf64174a2b82a399064d852
+  k5a659e48a36f43049513006aea416a2e[color=lightseagreen,label="Output\nbusco image predicted proteins Helixer"]
+  8 -> k5a659e48a36f43049513006aea416a2e
+  kbebdac0dc35349a8a0439687c4896c17[color=lightseagreen,label="Output\nbusco missing predicted proteins Helixer"]
+  8 -> kbebdac0dc35349a8a0439687c4896c17
+  k4e1ca88a74b940d4b63a461aece6e3b5[color=lightseagreen,label="Output\nbusco table predicted proteins Helixer"]
+  8 -> k4e1ca88a74b940d4b63a461aece6e3b5
+  k790c995efb86493583e19a5dcbf8bf85[color=lightseagreen,label="Output\nbusco sum predicted proteins Helixer"]
+  8 -> k790c995efb86493583e19a5dcbf8bf85
+  9[label="OMArk on predicted proteins from Helixer annotation"]
+  5 -> 9 [label="output_pep"]
+  k462d5c3237844c3383d574da40b7276f[color=lightseagreen,label="Output\nomark detail sum Helixer annotation"]
+  9 -> k462d5c3237844c3383d574da40b7276f
+  10[label="OMArk on predicted proteins from Braker3 annotation"]
+  7 -> 10 [label="output_pep"]
+  kd1eb0367c7084794a25681dac775776a[color=lightseagreen,label="Output\nomark sum"]
+  10 -> kd1eb0367c7084794a25681dac775776a
+  k5177eeba252140fca9d0eaabc03639e5[color=lightseagreen,label="Output\nomark detail sum Braker3 annotation"]
+  10 -> k5177eeba252140fca9d0eaabc03639e5
+  11[label="Busco on predicted proteins from Braker3 annotation"]
+  7 -> 11 [label="output_pep"]
+  k37700d39563f4add8b89e046ff5daa87[color=lightseagreen,label="Output\nbusco image predicted proteins Braker3"]
+  11 -> k37700d39563f4add8b89e046ff5daa87
+  kb5b8115d008f4f59966e0906d8dd7c1d[color=lightseagreen,label="Output\nbusco gff predicted proteins Braker3"]
+  11 -> kb5b8115d008f4f59966e0906d8dd7c1d
+  k52cf5cb71b61461d93619674c4431c72[color=lightseagreen,label="Output\nbusco sum predicted proteins Braker3"]
+  11 -> k52cf5cb71b61461d93619674c4431c72
+  k874c74bc34174b03b4c55547f952cabb[color=lightseagreen,label="Output\nbusco table predicted proteins Braker3"]
+  11 -> k874c74bc34174b03b4c55547f952cabb
+  k37c863203f6f4f20a135019772ec8db0[color=lightseagreen,label="Output\nbusco missing predicted proteins Braker3"]
+  11 -> k37c863203f6f4f20a135019772ec8db0
+}

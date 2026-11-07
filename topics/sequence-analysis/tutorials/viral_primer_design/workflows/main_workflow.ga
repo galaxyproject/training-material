@@ -1,0 +1,185 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Primer design of related virus gene sequences.",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-9464-6640",
+            "name": "Wolfgang Maier"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "AGPL-3.0-or-later",
+    "name": "Primer design of a virus family (imported from uploaded file)",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Dataset consists of different virus gene sequences.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Dataset consists of different virus gene sequences.",
+                    "name": "Input virus gene sequences"
+                }
+            ],
+            "label": "Input virus gene sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 51.78980741724817
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d18fa437-3955-4de7-80d6-8dc0a3ddb842",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Multiple alignment of various virus genomes of dataset input",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input|batches_0|inputs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Multiple alignment",
+            "name": "MAFFT",
+            "outputs": [
+                {
+                    "name": "outputAlignment",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 355.16668701171875,
+                "top": 33.189801313732545
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "1233363389c1",
+                "name": "mafft",
+                "owner": "rnateam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"anysymbol\": false, \"datatype_selection\": {\"datatype\": \"\", \"__current_case__\": 0}, \"flavour\": {\"type\": \"mafft-fftns\", \"__current_case__\": 2}, \"input\": {\"mapping\": \"implicit\", \"__current_case__\": 0, \"batches\": [{\"__index__\": 0, \"inputs\": {\"__class__\": \"RuntimeValue\"}}]}, \"outputFormat\": \"\", \"reorder\": false, \"treeout\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "7.526+galaxy1",
+            "type": "tool",
+            "uuid": "e96ae462-f1e2-4af1-9e99-b24e321fbd33",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "outputAlignment",
+                    "output_name": "outputAlignment",
+                    "uuid": "759daedf-eac7-4200-a83e-5a4b005d068c"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Design of primer with multiple alignment from MAFFT.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "alignment": {
+                    "id": 1,
+                    "output_name": "outputAlignment"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool varVAMP",
+                    "name": "alignment"
+                }
+            ],
+            "label": "Primer design",
+            "name": "varVAMP",
+            "outputs": [
+                {
+                    "name": "varvamp_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "primer_seqs",
+                    "type": "fasta"
+                },
+                {
+                    "name": "primers_bed",
+                    "type": "bed"
+                },
+                {
+                    "name": "amplicons_bed",
+                    "type": "bed"
+                },
+                {
+                    "name": "primers_details",
+                    "type": "tabular"
+                },
+                {
+                    "name": "ambiguous_consensus",
+                    "type": "fasta"
+                },
+                {
+                    "name": "amplicon_plot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "per_base_mismatches",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 820.4002638606635,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c1f08498cd74",
+                "name": "varvamp",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment\": {\"__class__\": \"RuntimeValue\"}, \"mode\": {\"m_select\": \"single\", \"__current_case__\": 0, \"name\": \"AMPLICON\", \"main_params\": {\"specify_how\": \"set_n_ambig\", \"__current_case__\": 0, \"n_ambig\": \"2\"}, \"opt_length\": \"600\", \"max_length\": \"1000\", \"filter_blast_hits\": {\"choice\": \"no\", \"__current_case__\": 0}, \"limit_report\": {\"choice\": \"no\", \"__current_case__\": 0}, \"advanced_config\": {\"customize\": \"no\", \"__current_case__\": 0}, \"scheme_outputs\": [\"primer_seqs\", \"primer_binding_sites\", \"amplicon_sites\", \"primer_details\"], \"aln_cons_outputs\": \"ambiguous_consensus\", \"plot_outputs\": [\"amplicon_plot\", \"per_base_mismatches\"], \"misc_outputs\": null}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.2+galaxy0",
+            "type": "tool",
+            "uuid": "eb747c11-2201-4fc2-85e1-97a9e9f66527",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "varvamp_log",
+                    "output_name": "varvamp_log",
+                    "uuid": "029f5ab6-1ded-4867-8bac-6c20e6b0de52"
+                },
+                {
+                    "label": "primers_bed",
+                    "output_name": "primers_bed",
+                    "uuid": "97c5a307-ef91-4eab-a7b3-4ad497a82fcc"
+                },
+                {
+                    "label": "primer_seqs",
+                    "output_name": "primer_seqs",
+                    "uuid": "032a54ac-d133-42a5-a7b8-943861051e4b"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:Sequenceanalysis"
+    ],
+    "uuid": "19407616-fc2a-4495-9622-08176015f789",
+    "version": 1
+}

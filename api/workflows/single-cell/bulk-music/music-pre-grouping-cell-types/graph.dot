@@ -1,0 +1,30 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nscRNA Assay Tabular"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nscRNA Phenotype Tabular"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nBulk RNA Assay Tabular"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nBulk RNA Phenotype Tabular"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nepith.markers"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nimmune.markers"]
+  6[label="Construct Expression Set Object"]
+  0 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  7[label="Construct Expression Set Object"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  8[label="MuSiC Deconvolution"]
+  7 -> 8 [label="out_rds"]
+  6 -> 8 [label="out_rds"]
+  k9c4e9980be474095b1165c6874329f63[color=lightseagreen,label="Output\nout_pdf"]
+  8 -> k9c4e9980be474095b1165c6874329f63
+  9[label="MuSiC Deconvolution"]
+  7 -> 9 [label="out_rds"]
+  4 -> 9 [label="output"]
+  5 -> 9 [label="output"]
+  6 -> 9 [label="out_rds"]
+  k3935b7f2a4224ad8bbe265615865174b[color=lightseagreen,label="Output\nout_tab"]
+  9 -> k3935b7f2a4224ad8bbe265615865174b
+  ka002d52f22534763852e6fe3ef90d352[color=lightseagreen,label="Output\nout_pdf"]
+  9 -> ka002d52f22534763852e6fe3ef90d352
+}

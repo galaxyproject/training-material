@@ -1,0 +1,371 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "An example how ISCC codes can be used to verify image analysis steps",
+    "comments": [],
+    "creator": [
+        {
+            "address": "m.w.paul@lacdr.leidenuniv.nl",
+            "class": "Person",
+            "identifier": "0000-0002-7990-6010",
+            "name": "Maarten W. Paul"
+        }
+    ],
+    "format-version": "0.1",
+    "help": "This workflow can be used to verify whether an image analysis process can be reproduced by comparing the segmentation result of a previous and new workflow in galaxy.",
+    "license": "Apache-2.0",
+    "logo_url": "https://iscc.io/wp-content/uploads/2024/04/ISCC-Logo-Text.png",
+    "name": "ISCC - image analysis workflow example",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Input segmented image\n```galaxy\nvisualization(visualization_id=tiffviewer, input=\"segmented image\")\n```\n## Output segmented image\n```galaxy\nvisualization(visualization_id=tiffviewer, output=\"otsu_segmented\")\n```\n\r\n```galaxy\nhistory_dataset_display(output=\"ISCC-code\")\n```\r\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Select an original image that will be processed",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select an original image that will be processed",
+                    "name": "original_image"
+                }
+            ],
+            "label": "original_image",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 12.390435949454591
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9272f5a9-4750-4b8b-8adf-3275aaebc5c4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Select the channel to segment",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select the channel to segment",
+                    "name": "Channel selection"
+                }
+            ],
+            "label": "Channel selection",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 3.3454899435205627,
+                "top": 143.7065903507769
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 0, \"validators\": [{\"min\": null, \"max\": null, \"negate\": false, \"type\": \"in_range\"}], \"parameter_type\": \"integer\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "d43ea856-91a2-4acf-9415-f238685cd539",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Select an image segmentation result",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select an image segmentation result",
+                    "name": "segmented image"
+                }
+            ],
+            "label": "segmented image",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 47.707955243803084,
+                "top": 265.20710159886863
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cd37a4d9-d1ca-442b-bf92-d97fb200c5b9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "As the example image contains multiple channels ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split image along axes",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 248.7079552438031,
+                "top": 3.557107702384278
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "390943df8a35",
+                "name": "split_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"axis\": \"C\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"squeeze\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.3.5+galaxy0",
+            "type": "tool",
+            "uuid": "9745a416-00ea-49f1-aa57-7e4eea8eca5a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum/iscc_sum/0.1.0+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Generate ISCC-CODE",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 309.7079552438031,
+                "top": 244.85709549535304
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum/iscc_sum/0.1.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "7d2c95a58897",
+                "name": "iscc_sum",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0+galaxy1",
+            "type": "tool",
+            "uuid": "5ab2e5d6-5c39-453a-88d7-80a063b51b1d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "which|index": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Extract dataset",
+                    "name": "which"
+                }
+            ],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 483.7079552438031,
+                "top": 0.5571077023842781
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tiff"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_index\", \"__current_case__\": 2, \"index\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "b4f9d5a8-0e07-45d1-a7c3-b563bd29b03a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "param_value_from_file",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Parse parameter value",
+            "outputs": [
+                {
+                    "name": "text_param",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 579.6413048531781,
+                "top": 226.35709549535304
+            },
+            "post_job_actions": {},
+            "tool_id": "param_value_from_file",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"text\", \"remove_newlines\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "752d7270-0e90-4a46-8537-ae3898c24d27",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Otsu",
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 750.2519926890734,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "50fa6150e340",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"threshold1\": \"0\", \"threshold2\": \"\", \"block_size\": \"0\", \"offset\": \"0.0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.0+galaxy0",
+            "type": "tool",
+            "uuid": "6a8fc23d-c32e-4d88-920b-7067b34bfd48",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "otsu_segmented",
+                    "output_name": "output",
+                    "uuid": "33221213-66f9-453f-b2a3-d69fcdaa7eb3"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "expected_code": {
+                    "id": 6,
+                    "output_name": "text_param"
+                },
+                "input_file": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Verify ISCC-CODE",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1018.358525120562,
+                "top": 124.84907607852331
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fe0c92fe6f66",
+                "name": "iscc_sum_verify",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"expected_code\": {\"__class__\": \"ConnectedValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0+galaxy1",
+            "type": "tool",
+            "uuid": "e5deb531-d73b-471c-9842-bf77becd4133",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "ISCC-code",
+                    "output_name": "output_file",
+                    "uuid": "4edb3676-7cb6-4c65-a497-09d71fb8caa9"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging",
+        "bioimaging"
+    ],
+    "uuid": "db7c936f-0801-4d13-8ea3-474e0d7ce266",
+    "version": 3
+}

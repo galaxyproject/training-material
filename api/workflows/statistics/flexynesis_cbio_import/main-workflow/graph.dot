@@ -1,0 +1,33 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Flexynesis cBioPortal import"]
+  1[label="extract expression data"]
+  0 -> 1 [label="data"]
+  2[label="extract mutation data 2"]
+  0 -> 2 [label="data"]
+  3[label="extract clinical data"]
+  0 -> 3 [label="data"]
+  4[label="remove duplicate genes from expression data"]
+  1 -> 4 [label="output"]
+  5[label="remove comment lines from mutation data"]
+  2 -> 5 [label="output"]
+  6[label="remove comment lines from clinical data"]
+  3 -> 6 [label="output"]
+  7[label="remove ENTREZ gene ids from expression data"]
+  4 -> 7 [label="outfile"]
+  8[label="remove index column from mutation data"]
+  5 -> 8 [label="table"]
+  9[label="remove index column from clinical data"]
+  6 -> 9 [label="table"]
+  10[label="Binarize mutation data"]
+  8 -> 10 [label="output"]
+  11[label="Flexynesis utils"]
+  9 -> 11 [label="output"]
+  7 -> 11 [label="output"]
+  10 -> 11 [label="util_out"]
+  ka34a9c3255d04ea7b52cc7446ba56439[color=lightseagreen,label="Output\ntest data"]
+  11 -> ka34a9c3255d04ea7b52cc7446ba56439
+  k6a451d6f692040dab77fe1926514a498[color=lightseagreen,label="Output\ntrain data"]
+  11 -> k6a451d6f692040dab77fe1926514a498
+}

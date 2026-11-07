@@ -1,0 +1,390 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "DIA MSstats Training export tabular",
+    "format-version": "0.1",
+    "name": "DIA_analysis_MSstats",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "PyProphet export tabular"
+                }
+            ],
+            "label": "PyProphet export tabular",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 298.94485783397704,
+                "height": 109.33332824707031,
+                "left": 94.64912127731438,
+                "right": 360.6491212773144,
+                "top": 189.6115295869067,
+                "width": 266,
+                "x": 94.64912127731438,
+                "y": 189.6115295869067
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ccdce674-490b-493c-a03b-786c9e9ec472",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "771735fa-1a49-429d-b602-b5cd4b90a78b"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Comparison matrix"
+                }
+            ],
+            "label": "Comparison matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 400.3483566628363,
+                "height": 109.33332824707031,
+                "left": 97.53132296684093,
+                "right": 363.53132296684095,
+                "top": 291.015028415766,
+                "width": 266,
+                "x": 97.53132296684093,
+                "y": 291.015028415766
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9773176c-aeef-4430-9c9d-5c276bfd13bb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "dcc7e278-b396-463e-9275-b669bb71ae30"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Sample annot MSstats"
+                }
+            ],
+            "label": "Sample annot MSstats",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 501.86464433024696,
+                "height": 109.33332824707031,
+                "left": 98.42104804246945,
+                "right": 364.42104804246947,
+                "top": 392.53131608317665,
+                "width": 266,
+                "x": 98.42104804246945,
+                "y": 392.53131608317665
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b0cf95a5-fca3-45ea-88df-37b06948099c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "489e9abe-be00-44c1-89e8-643eaecb75dd"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "group|comparison_matrix": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input|annotation": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input|evidence": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MSstats",
+            "outputs": [
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "processed_data",
+                    "type": "tabular"
+                },
+                {
+                    "name": "qcplot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "quant_group_matrix",
+                    "type": "tabular"
+                },
+                {
+                    "name": "comparison_result",
+                    "type": "tabular"
+                },
+                {
+                    "name": "fittedmodel",
+                    "type": "txt"
+                },
+                {
+                    "name": "volcanoplot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "comparisonplot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 803.8629044841107,
+                "height": 732.0333251953125,
+                "left": 406.11526374530075,
+                "right": 672.1152637453008,
+                "top": 71.82957928879816,
+                "width": 266,
+                "x": 406.11526374530075,
+                "y": 71.82957928879816
+            },
+            "post_job_actions": {
+                "HideDatasetActionfittedmodel": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fittedmodel"
+                },
+                "HideDatasetActionlog": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log"
+                },
+                "HideDatasetActionquant_group_matrix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "quant_group_matrix"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "52ac6fde9a5b",
+                "name": "msstats",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dp_options\": {\"logTrans\": \"2\", \"norm\": {\"normalization\": \"equalizeMedians\", \"__current_case__\": 0}, \"fillIncompleteRows\": \"true\", \"features\": {\"featureSubset\": \"all\", \"__current_case__\": 0}, \"summarize\": {\"summaryMethod\": \"TMP\", \"__current_case__\": 0, \"MBimpute\": \"true\", \"remove50missing\": \"false\"}, \"censoredInt\": \"NA\", \"cutoffCensored\": \"minFeature\", \"maxQuantileforCensored\": \"0.999\"}, \"group\": {\"group_comparison\": \"yes\", \"__current_case__\": 1, \"comparison_matrix\": {\"__class__\": \"ConnectedValue\"}, \"select_outputs\": [\"fittedmodel\", \"comparison_result\", \"volcanoplot\", \"comparisonplot\"]}, \"input\": {\"input_src\": \"OpenSWATH\", \"__current_case__\": 2, \"evidence\": {\"__class__\": \"ConnectedValue\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"input_options\": {\"filter_with_mscore\": \"true\", \"mscore_cutoff\": \"0.01\", \"useUniquePeptide\": \"true\", \"fewMeasurements\": \"remove\", \"summaryforMultipleRows\": \"max\", \"removeProtein_with1Feature\": \"false\"}}, \"selected_outputs\": [\"log\", \"processed_data\", \"qcplot\", \"quant_group_matrix\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.20.1.0",
+            "type": "tool",
+            "uuid": "810a6c7a-a171-44db-aadf-917c32e31d78",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "processed_data",
+                    "uuid": "15fd08bb-7103-4f19-9998-38709822e2d2"
+                },
+                {
+                    "label": null,
+                    "output_name": "comparisonplot",
+                    "uuid": "dfeb77e1-05b5-4236-96e9-694a7a969b70"
+                },
+                {
+                    "label": null,
+                    "output_name": "volcanoplot",
+                    "uuid": "a369af4d-082b-4549-9417-1af61291e166"
+                },
+                {
+                    "label": null,
+                    "output_name": "comparison_result",
+                    "uuid": "1b702487-ba66-4987-8f7d-5e624f90efac"
+                },
+                {
+                    "label": null,
+                    "output_name": "qcplot",
+                    "uuid": "5ddda783-dfb8-4c06-ae95-2f26df51ac64"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "comparison_result"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 329.3259474675458,
+                "height": 123.95001220703125,
+                "left": 664.0476312852443,
+                "right": 930.0476312852443,
+                "top": 205.37593526051455,
+                "width": 266,
+                "x": 664.0476312852443,
+                "y": 205.37593526051455
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"(ECOLI)|(logFC)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "0d3aefe9-d49e-4a5e-96b0-d2a93c164b5a",
+            "workflow_outputs": [
+                {
+                    "label": "Select_Ecoli",
+                    "output_name": "out_file1",
+                    "uuid": "0de65b2c-f62c-4068-8ac0-466e419d495b"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 458.83722566303453,
+                "height": 123.95001220703125,
+                "left": 888.0450944255168,
+                "right": 1154.0450944255167,
+                "top": 334.8872134560033,
+                "width": 266,
+                "x": 888.0450944255168,
+                "y": 334.8872134560033
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c7!='NA'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "22227f86-1d56-4e67-b76e-9fcdb409741e",
+            "workflow_outputs": [
+                {
+                    "label": "Filter_Ecoli",
+                    "output_name": "out_file1",
+                    "uuid": "197e8a45-392f-4981-8684-2c8326af4528"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Histogram",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 382.0702885219029,
+                "height": 123.94999694824219,
+                "left": 1130.7142673578476,
+                "right": 1396.7142673578476,
+                "top": 258.1202915736607,
+                "width": 266,
+                "x": 1130.7142673578476,
+                "y": 258.1202915736607
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"breaks\": \"25\", \"density\": \"true\", \"frequency\": \"false\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"numerical_column\": \"3\", \"title\": \"Distribution of Ecoli Protein log FC values\", \"xlab\": \"log2 Fold Change\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "dc481c56-b123-48ec-bc5c-81411c3a7a9f",
+            "workflow_outputs": [
+                {
+                    "label": "Histogram_Ecoli",
+                    "output_name": "out_file1",
+                    "uuid": "04c6287d-fd0d-4780-99b6-cf52ee18e06f"
+                }
+            ]
+        }
+    },
+    "tags": ["proteomics"],
+    "uuid": "2ef0e6f6-311b-462b-a4c5-03009554bf93",
+    "version": 2
+}

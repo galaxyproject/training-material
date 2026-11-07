@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput dataset"]
+  1[color=lightblue,label="ℹ️ Input Collection\nInput dataset collection"]
+  2[label="PeakPickerHiRes"]
+  1 -> 2 [label="output"]
+  3[label="FileConverter"]
+  2 -> 3 [label="param_out"]
+  4[label="Search GUI"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="param_out"]
+  5[label="Peptide Shaker"]
+  4 -> 5 [label="searchgui_results"]
+  6[label="Select"]
+  5 -> 6 [label="output_proteins"]
+  7[label="Select"]
+  5 -> 7 [label="output_proteins"]
+  8[label="Select"]
+  7 -> 8 [label="out_file1"]
+}

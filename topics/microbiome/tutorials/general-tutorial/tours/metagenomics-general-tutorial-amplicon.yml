@@ -1,0 +1,591 @@
+---
+id: metagenomics-general-tutorial-amplicon
+name: Analyses of metagenomics data - Amplicon data analyses
+description: >-
+  In this tour, we will use mothur tool suite to analyze amplicon datasets from
+  soil samples.
+title_default: metagenomics-general-tutorial-amplicon
+steps:
+  - title: Analyses of metagenomics data - Amplicon data analyses
+    content: >-
+      In this tour, we will use mothur tool suite to analyze amplicon datasets
+      from soil samples.
+    backdrop: true
+  - title: Create a new history
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Upload the input data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: 'We need now to upload the input data. So, open the upload box'
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Upload the input data
+    element: '#btn-new'
+    content: >-
+      Our input datasets are available online on <a
+      href="https://zenodo.org/record/815875">Zenodo</a>. To import them, click
+      on "Paste/Fetch data"
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Upload the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the two input files: SRR531818_pampa.fasta and
+      SRR651839_anguil.fasta.<br><br> You can extract this information from <a
+      href="https://zenodo.org/record/815875">Zenodo</a> with right click on the
+      interesting dataset and then "Copy Link Address"
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+      https://zenodo.org/record/815875/files/SRR651839_anguil.fasta
+  - title: Upload the input data
+    element: '#btn-start'
+    content: Click on "Start" to upload the data into your Galaxy history.
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Upload the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them<br><br> For each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol>
+    position: left
+  - title: Preparing the datasets
+    content: >-
+      Our datasets are now in our history. We want to perform a multisample
+      analysis with mothur. In order to do so, we will merge all reads into a
+      single file, and create a group file, indicating which reads belong to
+      which samples.
+    backdrop: true
+  - title: Prepare multisample analysis
+    element: '#tool-search-query'
+    content: Search for the "Merge.files" tool
+    placement: right
+  - title: Prepare multisample analysis
+    element: '#tool-search'
+    content: Click on the "Merge.files" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_merge_files%2Fmothur_merge_files%2F1.36.1.0"]
+  - title: Prepare multisample analysis
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"Merge" to "fasta files"</li>
+        <li>"Inputs" to the two sample fasta files</li>
+      </ul>
+    position: left
+  - title: Prepare multisample analysis
+    element: '#tool-search-query'
+    content: Search for the "make.group" tool and click on the "Make.group" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_group%2Fmothur_make_group%2F1.36.1.0"]
+  - title: Prepare multisample analysis
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Method" to "Manually specify fasta files and group names"</li>
+        <li>"Additional": Add two elements to this repeat: Pampa sample fasta file, with group name "pampa" and Anguil sample fasta file, with group name "anguil"</li>
+      </ul>
+    position: left
+  - title: Prepare multisample analysis
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Have a look at the group file by clicking on the eye icon.<br> It is a
+      very simple file, it contains two columns, first contains the read names,
+      second the group (sample) name, in our case "pampa" or "anguil".
+    position: left
+  - title: Optimization of files for computation
+    content: >-
+      Because we are sequencing many of the same organisms, we anticipate that
+      many of our sequences are duplicates of each other. Because it's
+      computationally wasteful to align the same thing a bazillion times, we'll
+      unique our sequences using the "Unique.seqs" command
+    backdrop: true
+  - title: Remove duplicate sequences
+    element: '#tool-search-query'
+    content: Search for the "Unique.seq" tool and click on the "Unique.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
+  - title: Remove duplicate sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the merged fasta file</li>
+      </ul>
+    position: left
+  - title: Remove duplicate sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      This "Unique.seqs" tool outputs two files, one is a fasta file containing
+      only the unique sequences, and a names files. The names file consists of
+      two columns, the first contains the sequence names for each of the unique
+      sequences, and the second column contains all other sequence names that
+      are identical to the representative sequence in the first column.<br><br>
+      How many sequences were unique? How many duplicates were removed?
+    position: left
+  - title: Count sequences
+    element: '#tool-search-query'
+    content: Search for the "count.seqs" tool and click on the "Count.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_seqs%2Fmothur_count_seqs%2F1.36.1.0"]
+  - title: Count sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"name" to the name file from "Unique.seqs"</li>
+        <li>"Use a group file" to "yes"</li>
+        <li>"group" to the group file from "Make.group"</li>
+        <li>selection of the two groups</li>
+      </ul>
+    position: left
+  - title: Count sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The "Count.seqs" file keeps track of the number of sequences represented
+      by each unique representative across multiple samples. We will pass this
+      file to many of the following tools to be used or updated as needed.
+    position: left
+  - title: Quality Control
+    content: >-
+      The first step in any analysis should be to check and improve the quality
+      of our data.<br><br> For more information on the topic of quality control,
+      please see our training materials <a
+      href="https://training.galaxyproject.org/training-material/topics/sequence-analysis">here</a>.
+    backdrop: true
+  - title: Summarize data
+    element: '#tool-search-query'
+    content: 'First, let’s get a feel of our data. Search "Summary.seqs" and open it'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
+  - title: Summarize data
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" parameter to the fasta from "Unique.seqs"</li>
+        <li>"count" to count table from "Count.seqs"</li>
+      </ul>
+    position: left
+  - title: Summarize data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The "summary" output files give information per read. The "logfile"
+      outputs also contain some summary statistics<br><br> This tells us that we
+      have a total of 19,502 unique sequences, representing 20,000 total
+      sequences that vary in length between 80 and 275 bases. Also, note that at
+      least some of our sequences had some ambiguous base calls. Furthermore, at
+      least one read had a homopolymer stretch of 31 bases, this is likely an
+      error so we would like to filter such reads out as well.<br> If you are
+      thinking that 20,000 is an oddly round number, you are correct, we
+      downsampled the original datasets to 10,000 reads per sample for this
+      tutorial to reduce the amount of time the analysis steps will take.
+    position: left
+  - title: Filter reads based on quality and length
+    element: '#tool-search-query'
+    content: >-
+      We can now filter our dataset on length, base quality, and maximum
+      homopolymer length using the "Screen.seqs" tool.<br> Search and open the
+      "Screen.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
+  - title: Filter reads based on quality and length
+    element: '#center-panel'
+    content: >-
+      Execute the tool with <ul> <li>"fasta" to the fasta file from
+      "Unique.seqs"</li> <li>"minlength" parameter to 225</li> <li>"maxlength"
+      parameter to 275</li> <li>"maxambig" parameter to 0</li> <li>"maxhomop"
+      parameter to 8</li> <li>"count" to the count file from "Count.seqs"</li>
+      </ul>
+    placement: left
+  - title: Summarize data
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      How many reads were removed in this screening step?
+      <br>Hint: run the "Summary.seqs" tool again
+    position: left
+  - title: Sequence Alignment
+    content: >-
+      Aligning our sequences to a reference helps improve OTU assignment [<a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/23018771">Schloss et. al.</a>],
+      so we will now align our sequences to the Silva reference database.
+    backdrop: true
+  - title: Import the reference database
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      We need now to import the reference database using the upload window via
+      the links
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+      - '#btn-new'
+  - title: Import the reference database
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the reference database: silva.v4.fasta from <a
+      href="https://zenodo.org/record/815875">Zenodo</a>, start the upload and
+      close the window<br> We recommend you to rename the dataset
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/silva.v4.fasta
+    postclick:
+      - '#btn-start'
+      - '#btn-close'
+  - title: Align sequences
+    element: '#tool-search-query'
+    content: Search and open the "Align.seqs" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_align_seqs%2Fmothur_align_seqs%2F1.36.1.0"]
+  - title: Align sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the "good.fasta" output from "Screen.seqs"</li>
+        <li>"reference" to the "silva.v4.fasta" reference file (after selecting "Your history" for "Select Reference Template from")</li>
+        <li>"flip" to "Yes"</li>
+      </ul>
+    placement: left
+  - title: Align sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: 'This step may take a few minutes, please be patient.'
+    position: left
+  - title: Align sequences
+    element: '#tool-search-query'
+    content: Search and open the "Summary.seqs" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
+  - title: Align sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the aligned output from "Align.seqs"</li>
+        <li>"count" parameter to "count_table" output from "Screen.seqs"</li>
+      </ul>
+    placement: left
+  - title: Align sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      To get an idea of the quality of the alignment, we can view the log output
+      from the summary step<br><br> <ul>
+        <li>How many sequences have been aligned?</li>
+        <li>Between which positions most of the reads are aligned to this references?</li>
+      </ul>
+    position: left
+  - title: Remove poorly aligned sequences
+    element: '#tool-search-query'
+    content: >-
+      To make sure that everything overlaps the same region we’ll re-run
+      Screen.seqs to get sequences that start at or before position 3,080 and
+      end at or after position 13,424.<br><br> Search and open the "Screen.seqs"
+      tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
+  - title: Remove poorly aligned sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the aligned fasta file</li>
+        <li>"start" to 3080</li>
+        <li>"end" to 13424</li>
+        <li>"count" to the group file created by the previous run of "Screen.seqs"</li>
+      </ul>
+    placement: left
+  - title: Remove poorly aligned sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: How many sequences were removed in this step?
+    placement: left
+  - title: Filter sequences
+    element: '#tool-search-query'
+    content: >-
+      Now we know our sequences overlap the same alignment coordinates, we want
+      to make sure they only overlap that region. So we'll filter the sequences
+      to remove the overhangs at both ends. In addition, there are many columns
+      in the alignment that only contain gap characters (i.e. "."). These can be
+      pulled out without losing any information. We'll do all this with
+      "Filter.seqs".<br><br> Search and open the "Filter.seqs" tool'
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_filter_seqs%2Fmothur_filter_seqs%2F1.36.1.0"]
+  - title: Filter sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to "good.fasta" output from "Screen.seqs"</li>
+        <li>"vertical" to "Yes"</li>
+        <li>"trump" to "."</li>
+      </ul>
+    placement: left
+  - title: Extraction of taxonomic information
+    content: >-
+      The main questions when analyzing amplicon data are: Which micro-organisms
+      are present in an environmental samples? And in which proportion? What is
+      the structure of the community of the micro-organisms?<br><br> The idea is
+      to take the sequences and assign them to a taxon. To do that, we group (or
+      cluster) sequences based on their similarity to define Operational
+      Taxonomic Units (OTUs); groups of similar sequences that can be treated as
+      a single “genus” or “species” (depending on the clustering threshold)
+    backdrop: true
+  - title: Perform preliminary clustering of sequences and remove undesired sequences
+    element: '#tool-search-query'
+    content: >-
+      The first thing we want to do is to further de-noise our sequences, by
+      pre-clustering the sequences using the "Pre.cluster" command, allowing for
+      up to 2 differences between sequences. This command will split the
+      sequences by group and then sort them by abundance and go from most
+      abundant to least and identify sequences that differ no more than 2
+      nucleotides from on another. If this is the case, then they get merged. We
+      generally recommend allowing 1 difference for every 100 basepairs of
+      sequence.<br><br> Search and open the "Pre.cluster" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_pre_cluster%2Fmothur_pre_cluster%2F1.36.1.0"]
+  - title: Perform preliminary clustering of sequences and remove undesired sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the fasta output from the last "Filter.seqs" run</li>
+        <li>"name file or count table" to the count table from the last "Screen.seqs" step</li>
+        <li>"diffs" to 2</li>
+      </ul>
+    placement: left
+  - title: Perform preliminary clustering of sequences and remove undesired sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      How many unique sequences are we left with after this clustering of highly
+      similar sequences?
+    placement: left
+  - title: Import the training dataset
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      We would like to classify the sequences using a training set. We must
+      import it
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+      - '#btn-new'
+  - title: Import the training dataset
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the reference datasets: "trainset16_022016.pds.fasta"
+      and "trainset16_022016.pds.tax" from <a
+      href="https://zenodo.org/record/815875">Zenodo</a>, start the upload and
+      close the window<br> We recommend you to rename the dataset
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/trainset16_022016.pds.fasta
+      https://zenodo.org/record/815875/files/trainset16_022016.pds.tax
+    postclick:
+      - '#btn-start'
+      - '#btn-close'
+  - title: Classify the sequences
+    element: '#tool-search-query'
+    content: Search and open the "Classify.seqs" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_seqs%2Fmothur_classify_seqs%2F1.36.1.0"]
+  - title: Classify the sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the fasta output from "Pre.cluster"</li>
+        <li>"reference" to "trainset16_022016.pds.fasta" from your history</li>
+        <li>"taxonomy" to "trainset16_022016.pds.tax" from your history</li>
+        <li>"cutoff" to 80</li>
+        <li>"count" to the count table from "Pre.cluster"</li>
+      </ul>
+    placement: left
+  - title: Classify the sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      This step may take a couple of minutes, now may be a good time to grab a
+      cup of tea<br><br> Have a look at the taxonomy output. You will see that
+      every read now has a classification.
+    placement: left
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: >-
+      The next step is then to use this information to know the abundance of the
+      different found taxons.<br><br> Search and open the "Cluster.split" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster_split%2Fmothur_cluster_split%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Split by" to "Classification using fasta"</li>
+        <li>"fasta" to the fasta output from "Pre.cluster"</li>
+        <li>"taxonomy" to the taxonomy output from "Classify.seqs"</li>
+        <li>"count" to the count table output from "Pre.cluster"</li>
+        <li>"cutoff" to 0.15</li>
+      </ul>
+    placement: left
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: >-
+      Next we want to know how many sequences are in each OTU from each group
+      and we can do this using the "Make.shared" command. Here we tell mothur
+      that we’re really only interested in the 0.03 cutoff level<br><br> Search
+      and open the "Make.shared" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_shared%2Fmothur_make_shared%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Select input type" to OTU list</li>
+        <li>"list" to list output from "Cluster.split"</li>
+        <li>"count" to the count table from "Pre.cluster"</li>
+        <li>"label" to 0.03</li>
+      </ul>
+    placement: left
+  - title: Cluster our data into OTUs
+    element: '#tool-search-query'
+    content: >-
+      We probably also want to know the taxonomy for each of our OTUs. We can
+      get the consensus taxonomy for each OTU using the "Classify.otu"
+      command.<br><br> Search and open the "Classify.otu" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_otu%2Fmothur_classify_otu%2F1.36.1.0"]
+  - title: Cluster our data into OTUs
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"list" to list output from "Cluster.split"</li>
+        <li>"count" to the count table from "Pre.cluster"</li>
+        <li>"taxonomy" to the taxonomy output from "Classify.seqs"</li>
+        <li>"label" to 0.03</li>
+      </ul>
+    placement: left
+  - title: Cluster our data into OTUs
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      How many OTUs with taxonomic assignation are found for the Anguil sample?
+      And for the Pampa sample?
+    placement: left
+  - title: Visualization
+    content: >-
+      We have now determined our OTUs and classified them, but looking at a long
+      text file is not very informative.
+    backdrop: true
+  - title: Krona
+    element: '#tool-search-query'
+    content: >-
+      Let's visualize our data using Krona.<br><br> Search and open the
+      "Visualize with Krona" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsaskia-hiltemann%2Fkrona_text%2Fkrona-text%2F1"]
+  - title: Krona
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Input file" to taxonomy output from "Classify.otu" (collection)</li>
+        <li>"Set Is this output from mothur?" to "Yes"</li>
+      </ul>
+    placement: left
+  - title: Krona
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Click on the collection name to open it and then on the eye icon to view
+      the KRONA output
+    placement: left
+  - title: Krona
+    element: '#center-panel'
+    content: >-
+      The result is an HTML file with an interactive visualization.<br>
+
+      Try clicking on one of the rings in the image or playing around with some
+      of the settings.
+    placement: left
+  - title: Per-sample Krona plots
+    element: '#tool-search-query'
+    content: >-
+      This produced a single plot for both your samples, but what if you want to
+      compare the two samples?<br><br> Search and open the "Classify.otu" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_otu%2Fmothur_classify_otu%2F1.36.1.0"]
+  - title: Per-sample Krona plots
+    element: '#center-panel'
+    content: >-
+      Execute the tool with the same parameters as before, but see if you can
+      find settings that will give you per-sample taxonomy data
+  - title: Per-sample Krona plots
+    element: '#tool-search-query'
+    content: 'Search, open and execute the "Visualize with Krona" tool'
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsaskia-hiltemann%2Fkrona_text%2Fkrona-text%2F1"]
+  - title: Per-sample Krona plots
+    element: '.history-right-panel .list-items > *:first'
+    content: Compare the generated visualizations per sample to the general one
+    placement: left
+  - title: Visualization of the community structure with Phinch
+    element: '#tool-search-query'
+    content: >-
+      To further explore the community structure, we can visualize it with
+      dedicated tools such as Phinch. We need first to generate a BIOM file<br>
+      Search, open and execute the "Make.biom" tool
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_biom%2Fmothur_make_biom%2F1.36.1.0"]
+  - title: Visualization of the community structure with Phinch
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"shared" to "Make.shared" output</li>
+        <li>"constaxonomy” to taxonomy output" from the first run of "classify.otu" (collection)</li>
+      </ul>
+    placement: left
+  - title: Visualization of the community structure with Phinch
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The Galaxy project runs an instance of Phinch, and if you look at the
+      output BIOM file, you will see a link to view the file at Phinch<br> Click
+      on the icon<br> It will lead you to the Phinch website, which will
+      automatically load in your file, and where you can have several interactive
+      visualisations.
+    placement: left
+  - title: Analyses of metagenomics data - Amplicon data analyses
+    content: >-
+      Once we have information about the community structure (OTUs with
+      taxonomic structure), we can do more analysis on it: estimation of the
+      diversity of micro-organism, comparison of diversity between samples,
+      analysis of populations, … We will not go into detail of such analyses here but you
+      follow our tutorials on amplicon data analyses to learn about them.
+    backdrop: true

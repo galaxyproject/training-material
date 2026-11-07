@@ -1,0 +1,1111 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Binning workflows that uses abundance information and performs binning of metagenomic contigs using 4 different binners as well as bin refinement.",
+    "comments": [
+        {
+            "color": "orange",
+            "data": {
+                "text": "# Bin refinement"
+            },
+            "id": 5,
+            "position": [
+                2404.7906885054667,
+                1141.6
+            ],
+            "size": [
+                1271,
+                1458
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "none",
+            "data": {
+                "text": "# CONCOCT\n"
+            },
+            "id": 0,
+            "position": [
+                680.4906885054666,
+                0
+            ],
+            "size": [
+                1713,
+                597
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "lime",
+            "data": {
+                "text": "# Mapping"
+            },
+            "id": 1,
+            "position": [
+                11.290688505466562,
+                1078.1999999999998
+            ],
+            "size": [
+                692,
+                415
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "red",
+            "data": {
+                "text": "# MetaBAT2\n"
+            },
+            "id": 2,
+            "position": [
+                1496.8906885054666,
+                656.9
+            ],
+            "size": [
+                541,
+                404
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "pink",
+            "data": {
+                "text": "# MaxBin2"
+            },
+            "id": 3,
+            "position": [
+                1533.5906885054667,
+                1150.1999999999998
+            ],
+            "size": [
+                587,
+                490
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "lime",
+            "data": {
+                "text": "# SemiBin"
+            },
+            "id": 4,
+            "position": [
+                1089.8906885054666,
+                1704.6999999999998
+            ],
+            "size": [
+                887,
+                532
+            ],
+            "type": "markdown"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-2982-388X",
+            "name": "Paul Zierep"
+        }
+    ],
+    "format-version": "0.1",
+    "help": "",
+    "license": "MIT",
+    "name": "Metagenomic Binning",
+    "readme": "",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Samples grouped for co-assembly. For individual assembly use same reads as `Trimmed reads input`. The tool fastq_groupmerge can be used to perform the grouping.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Samples grouped for co-assembly. For individual assembly use same reads as `Trimmed reads input`. The tool fastq_groupmerge can be used to perform the grouping.",
+                    "name": "Trimmed reads"
+                }
+            ],
+            "label": "Trimmed reads",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 896.6187286877193
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "dd8faa6e-3f29-4fa2-befb-38ef4a7832b5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "CONCOCT requires the read length for coverage. Best use fastQC to estimate the mean value.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "CONCOCT requires the read length for coverage. Best use fastQC to estimate the mean value.",
+                    "name": "Read length (CONCOCT)"
+                }
+            ],
+            "label": "Read length (CONCOCT)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1097.0837390044621,
+                "top": 41.539782924321685
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 100, \"validators\": [{\"min\": null, \"max\": null, \"negate\": false, \"type\": \"in_range\"}], \"parameter_type\": \"integer\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "30109f1d-816b-4f85-a0b3-e54506ae32ae",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "This workflow allows using a custom assembly as input. If provided, select `custom assembly` as Assembler.\nProvide one assembly for each group of trimmed input reads.",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "This workflow allows using a custom assembly as input. If provided, select `custom assembly` as Assembler.\nProvide one assembly for each group of trimmed input reads.",
+                    "name": "Assemblies"
+                }
+            ],
+            "label": "Assemblies",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 248.96247766826204,
+                "top": 1670.8582741820105
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "e2f5ad16-674f-4687-94a4-a5e55680440a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Environment for the built-in model (SemiBin), options are: human_gut, dog_gut, ocean, soil, cat_gut, human_oral, mouse_gut, pig_gut, built_environment, wastewater, chicken_caecum, global",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Environment for the built-in model (SemiBin), options are: human_gut, dog_gut, ocean, soil, cat_gut, human_oral, mouse_gut, pig_gut, built_environment, wastewater, chicken_caecum, global",
+                    "name": "Environment for the built-in model (SemiBin)"
+                }
+            ],
+            "label": "Environment for the built-in model (SemiBin)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1139.1165875728577,
+                "top": 2094.707949827118
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": \"global\", \"multiple\": false, \"validators\": [], \"restrictions\": [\"global\", \"human_gut\", \"dog_gut\", \"ocean\", \"soil\", \"cat_gut\", \"human_oral\", \"mouse_gut\", \"pig_gut\", \"built_environment\", \"wastewater\", \"chicken_caecum\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "86fc3246-f756-49ce-b196-ffa358e5ac41",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_cut_up_fasta/concoct_cut_up_fasta/1.1.0+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_fasta": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CONCOCT: Cut up contigs",
+            "outputs": [
+                {
+                    "name": "output_fasta",
+                    "type": "fasta"
+                },
+                {
+                    "name": "output_bed",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "left": 749.6942143874219,
+                "top": 224.77559328535233
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_cut_up_fasta/concoct_cut_up_fasta/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "4d8bc5dd9e95",
+                "name": "concoct_cut_up_fasta",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"bedfile\": true, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"chunk_size\": \"10000\", \"input_fasta\": {\"__class__\": \"ConnectedValue\"}, \"input_fasta|__identifier__\": \"ERR2231567.fastqsanger\", \"merge_last\": true, \"overlap_size\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "3d11cf76-8a00-4aab-8cee-14647ad02165",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "reference_genome|own_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "library"
+                },
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                },
+                {
+                    "name": "mapping_stats",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 170.4540358517052,
+                "top": 1189.3571323702458
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f76cbb84d67f",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"library\": {\"type\": \"paired_collection\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false, \"paired_options\": {\"paired_options_selector\": \"no\", \"__current_case__\": 1}}, \"own_file|__identifier__\": \"ERR2231567.fastqsanger\", \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 1, \"own_file\": {\"__class__\": \"ConnectedValue\"}}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.4+galaxy0",
+            "type": "tool",
+            "uuid": "e41a21d2-91c7-42e3-8072-e254280733ab",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.7",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools sort",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 425.0155087709174,
+                "top": 1226.3643944120972
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.7",
+            "tool_shed_repository": {
+                "changeset_revision": "f2f2650aeade",
+                "name": "samtools_sort",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input1|__identifier__\": \"ERR2231567.fastqsanger\", \"minhash\": false, \"prim_key_cond\": {\"prim_key_select\": \"\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.7",
+            "type": "tool",
+            "uuid": "863d5ee6-9eb0-4ac7-a634-9e258807f8cb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_coverage_table/concoct_coverage_table/1.1.0+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "bedfile": {
+                    "id": 4,
+                    "output_name": "output_bed"
+                },
+                "mode|bamfile": {
+                    "id": 6,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool CONCOCT: Generate the input coverage table",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "CONCOCT: Generate the input coverage table",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1135.7679978931717,
+                "top": 217.73566551102363
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_coverage_table/concoct_coverage_table/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "fd31cd168efc",
+                "name": "concoct_coverage_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"bedfile\": {\"__class__\": \"ConnectedValue\"}, \"bedfile|__identifier__\": \"ERR2231567.fastqsanger\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"mode\": {\"type\": \"individual\", \"__current_case__\": 0, \"bamfile\": {\"__class__\": \"ConnectedValue\"}}, \"mode|bamfile|__identifier__\": \"ERR2231567.fastqsanger\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "11dcb0bb-7626-4c97-a15c-0366194f1cea",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metabat2_jgi_summarize_bam_contig_depths/metabat2_jgi_summarize_bam_contig_depths/2.17+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "mode|bam_indiv_input": {
+                    "id": 6,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Calculate contig depths",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "Calculate contig depths",
+            "outputs": [
+                {
+                    "name": "outputDepth",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 896.6290086604289,
+                "top": 924.5426879033071
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metabat2_jgi_summarize_bam_contig_depths/metabat2_jgi_summarize_bam_contig_depths/2.17+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "00e3b4ef7e0c",
+                "name": "metabat2_jgi_summarize_bam_contig_depths",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced\": {\"percentIdentity\": \"97\", \"output_paired_contigs\": false, \"noIntraDepthVariance\": false, \"showDepth\": false, \"minMapQual\": \"0\", \"weightMapQual\": \"0.0\", \"includeEdgeBases\": false, \"maxEdgeBases\": \"75\"}, \"bam_indiv_input|__identifier__\": \"ERR2231567.fastqsanger\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"mode\": {\"type\": \"individual\", \"__current_case__\": 0, \"bam_indiv_input\": {\"__class__\": \"ConnectedValue\"}, \"use_reference_cond\": {\"use_reference\": \"no\", \"__current_case__\": 0}}, \"shredding\": {\"shredLength\": \"16000\", \"shredDepth\": \"5\", \"minContigLength\": \"1\", \"minContigDepth\": \"0.0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.17+galaxy0",
+            "type": "tool",
+            "uuid": "99aabfaa-9e98-45e2-83f7-3009b959603d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/semibin/semibin/2.1.0+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "mode|environment": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "mode|input_bam": {
+                    "id": 6,
+                    "output_name": "output1"
+                },
+                "mode|input_fasta": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SemiBin",
+                    "name": "mode"
+                },
+                {
+                    "description": "runtime parameter for tool SemiBin",
+                    "name": "mode"
+                },
+                {
+                    "description": "runtime parameter for tool SemiBin",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "SemiBin",
+            "outputs": [
+                {
+                    "name": "output_bins",
+                    "type": "input"
+                },
+                {
+                    "name": "single_data",
+                    "type": "csv"
+                },
+                {
+                    "name": "single_data_split",
+                    "type": "csv"
+                },
+                {
+                    "name": "single_cov",
+                    "type": "csv"
+                },
+                {
+                    "name": "single_split_cov",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1644.2381997196558,
+                "top": 1785.1442996053324
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutput_bins": {
+                    "action_arguments": {
+                        "tags": "sample-bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output_bins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/semibin/semibin/2.1.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "afee33334a63",
+                "name": "semibin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annot\": {\"ml_threshold\": null}, \"bin\": {\"max_node\": \"1.0\", \"max_edges\": \"200\", \"minfasta_kbs\": \"200\"}, \"extra_output\": [\"data\", \"coverage\"], \"min_len\": {\"method\": \"automatic\", \"__current_case__\": 0}, \"mode\": {\"select\": \"single\", \"__current_case__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}, \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"ref\": {\"select\": \"ml\", \"__current_case__\": 2}, \"environment\": {\"__class__\": \"ConnectedValue\"}}, \"orf_finder\": \"fast-naive\", \"random_seed\": \"0\", \"training\": {\"epoches\": \"20\", \"batch_size\": \"2048\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0+galaxy1",
+            "type": "tool",
+            "uuid": "6fd5ada8-8884-4988-a895-a6c41172022d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct/concoct/1.1.0+galaxy2",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "advanced|read_length": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "composition_file": {
+                    "id": 4,
+                    "output_name": "output_fasta"
+                },
+                "coverage_file": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool CONCOCT",
+                    "name": "advanced"
+                }
+            ],
+            "label": null,
+            "name": "CONCOCT",
+            "outputs": [
+                {
+                    "name": "output_clustering",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_pca_components",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_pca_transformed",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1516.0490446249091,
+                "top": 184.3040223201906
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct/concoct/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "eae7ee167917",
+                "name": "concoct",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"clusters\": \"400\", \"kmer_length\": \"4\", \"length_threshold\": \"1000\", \"read_length\": {\"__class__\": \"ConnectedValue\"}, \"total_percentage_pca\": \"90\", \"seed\": \"1\", \"iterations\": \"500\", \"no_cov_normalization\": false}, \"composition_file\": {\"__class__\": \"ConnectedValue\"}, \"coverage_file\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"no_total_coverage\": false, \"converge_out\": false, \"log\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "f4094547-c644-4657-a908-25e789703384",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metabat2/metabat2/2.17+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "advanced|base_coverage_depth_cond|abdFile": {
+                    "id": 8,
+                    "output_name": "outputDepth"
+                },
+                "inFile": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MetaBAT2",
+            "outputs": [
+                {
+                    "name": "bins",
+                    "type": "input"
+                },
+                {
+                    "name": "lowDepth",
+                    "type": "fasta"
+                },
+                {
+                    "name": "tooShort",
+                    "type": "fasta"
+                },
+                {
+                    "name": "unbinned",
+                    "type": "fasta"
+                },
+                {
+                    "name": "process_log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1755.1233348021783,
+                "top": 667.814925017154
+            },
+            "post_job_actions": {
+                "TagDatasetActionbins": {
+                    "action_arguments": {
+                        "tags": "sample-bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metabat2/metabat2/2.17+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f375b4f6ef57",
+                "name": "metabat2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced\": {\"base_coverage_depth_cond\": {\"base_coverage_depth\": \"yes\", \"__current_case__\": 1, \"abdFile\": {\"__class__\": \"ConnectedValue\"}, \"cvExt\": null}, \"minContig\": \"1500\", \"maxP\": \"95\", \"minS\": \"60\", \"maxEdges\": \"200\", \"pTNF\": \"0\", \"noAdd\": false, \"minCV\": \"1.0\", \"minCVSum\": \"1.0\", \"seed\": \"0\"}, \"advanced|abdFile|__identifier__\": \"ERR2231567.fastqsanger\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inFile\": {\"__class__\": \"ConnectedValue\"}, \"inFile|__identifier__\": \"ERR2231567.fastqsanger\", \"out\": {\"minClsSize\": \"200000\", \"onlyLabel\": false, \"saveCls\": false, \"extra_outputs\": [\"lowDepth\", \"tooShort\", \"unbinned\", \"log\"]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.17+galaxy0",
+            "type": "tool",
+            "uuid": "12715693-dcaa-4097-bd1e-61bfaa0fbe42",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/mbernt/maxbin2/maxbin2/2.2.7+galaxy6",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "assembly|inputs|abund": {
+                    "id": 8,
+                    "output_name": "outputDepth"
+                },
+                "contig": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxBin2",
+            "outputs": [
+                {
+                    "name": "bins",
+                    "type": "input"
+                },
+                {
+                    "name": "markers",
+                    "type": "input"
+                },
+                {
+                    "name": "noclass",
+                    "type": "fasta"
+                },
+                {
+                    "name": "toshort",
+                    "type": "fasta"
+                },
+                {
+                    "name": "summary",
+                    "type": "tabular"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "marker",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1670.4872771406842,
+                "top": 1205.5486143537003
+            },
+            "post_job_actions": {
+                "TagDatasetActionbins": {
+                    "action_arguments": {
+                        "tags": "sample-bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/mbernt/maxbin2/maxbin2/2.2.7+galaxy6",
+            "tool_shed_repository": {
+                "changeset_revision": "0917b2d6010d",
+                "name": "maxbin2",
+                "owner": "mbernt",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"min_contig_length\": \"1000\", \"max_iteration\": \"50\", \"prob_threshold\": \"0.5\"}, \"assembly\": {\"type\": \"individual\", \"__current_case__\": 0, \"inputs\": {\"type\": \"abund\", \"__current_case__\": 1, \"abund\": {\"__class__\": \"ConnectedValue\"}}}, \"contig\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"plotmarker\": true, \"marker\": true, \"markers\": true, \"log\": true, \"markerset\": \"107\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.7+galaxy6",
+            "type": "tool",
+            "uuid": "c3282b9b-30ec-4e23-9859-5931275f7fdf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "inputs": {
+                    "id": 9,
+                    "output_name": "output_bins"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Converts genome bins in fasta format",
+            "outputs": [
+                {
+                    "name": "contigs2bin",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2805.967292429587,
+                "top": 1922.7528899355289
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fb2bed0eb02f",
+                "name": "fasta_to_contig2bin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.7+galaxy1",
+            "type": "tool",
+            "uuid": "9a7aa4f6-b60b-4415-a1a4-73cf829ec2c3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_merge_cut_up_clustering/concoct_merge_cut_up_clustering/1.1.0+galaxy2",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "cutup_clustering_result": {
+                    "id": 10,
+                    "output_name": "output_clustering"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CONCOCT: Merge cut clusters",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1812.6886863992684,
+                "top": 330.66525053302036
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_merge_cut_up_clustering/concoct_merge_cut_up_clustering/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "20ccec4a2c38",
+                "name": "concoct_merge_cut_up_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cutup_clustering_result\": {\"__class__\": \"ConnectedValue\"}, \"cutup_clustering_result|__identifier__\": \"ERR2231567.fastqsanger\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "d7c52e93-16f4-4071-b47a-e6a0c3feaf6e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "inputs": {
+                    "id": 11,
+                    "output_name": "bins"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Converts genome bins in fasta format",
+            "outputs": [
+                {
+                    "name": "contigs2bin",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2792.8906885054666,
+                "top": 1238.8
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fb2bed0eb02f",
+                "name": "fasta_to_contig2bin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.7+galaxy1",
+            "type": "tool",
+            "uuid": "aca0d099-2011-42db-9cac-d0eed8750ec8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "inputs": {
+                    "id": 12,
+                    "output_name": "bins"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Converts genome bins in fasta format",
+            "outputs": [
+                {
+                    "name": "contigs2bin",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2766.4841273841676,
+                "top": 1687.649001081842
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fb2bed0eb02f",
+                "name": "fasta_to_contig2bin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.7+galaxy1",
+            "type": "tool",
+            "uuid": "e7e5c640-78f8-4af4-b589-75cea9f5a7fa",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_extract_fasta_bins/concoct_extract_fasta_bins/1.1.0+galaxy2",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "cluster_file": {
+                    "id": 14,
+                    "output_name": "output"
+                },
+                "fasta_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CONCOCT: Extract a fasta file",
+            "outputs": [
+                {
+                    "name": "bins",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2144.664315483395,
+                "top": 278.4488665876612
+            },
+            "post_job_actions": {
+                "TagDatasetActionbins": {
+                    "action_arguments": {
+                        "tags": "sample-bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/concoct_extract_fasta_bins/concoct_extract_fasta_bins/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "8b1b09fcd8b7",
+                "name": "concoct_extract_fasta_bins",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cluster_file\": {\"__class__\": \"ConnectedValue\"}, \"cluster_file|__identifier__\": \"ERR2231567.fastqsanger\", \"fasta_file\": {\"__class__\": \"ConnectedValue\"}, \"fasta_file|__identifier__\": \"ERR2231567.fastqsanger\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "5e80f512-bda6-49a4-9294-d80a12c4209b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "inputs": {
+                    "id": 17,
+                    "output_name": "bins"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Converts genome bins in fasta format",
+            "outputs": [
+                {
+                    "name": "contigs2bin",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2801.2970664511176,
+                "top": 1485.5000932902894
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_to_contig2bin/Fasta_to_Contig2Bin/1.1.7+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fb2bed0eb02f",
+                "name": "fasta_to_contig2bin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.7+galaxy1",
+            "type": "tool",
+            "uuid": "024263f9-774c-46f0-9ed1-7dbc733a3e45",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "__BUILD_LIST__",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "datasets_0|input": {
+                    "id": 18,
+                    "output_name": "contigs2bin"
+                },
+                "datasets_1|input": {
+                    "id": 15,
+                    "output_name": "contigs2bin"
+                },
+                "datasets_2|input": {
+                    "id": 16,
+                    "output_name": "contigs2bin"
+                },
+                "datasets_3|input": {
+                    "id": 13,
+                    "output_name": "contigs2bin"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Build list",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3142.8906885054666,
+                "top": 1608.8
+            },
+            "post_job_actions": {},
+            "tool_id": "__BUILD_LIST__",
+            "tool_state": "{\"datasets\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"idx\", \"__current_case__\": 0}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"idx\", \"__current_case__\": 0}}, {\"__index__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"idx\", \"__current_case__\": 0}}, {\"__index__\": 3, \"input\": {\"__class__\": \"ConnectedValue\"}, \"id_cond\": {\"id_select\": \"idx\", \"__current_case__\": 0}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "111a0da7-0ea8-488c-bcc1-cd40bffdd03f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/binette/binette/1.2.0+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "contig2bin_tables": {
+                    "id": 19,
+                    "output_name": "output"
+                },
+                "contigs": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Binette",
+                    "name": "proteins"
+                }
+            ],
+            "label": null,
+            "name": "Binette",
+            "outputs": [
+                {
+                    "name": "bins",
+                    "type": "input"
+                },
+                {
+                    "name": "quality",
+                    "type": "input"
+                },
+                {
+                    "name": "final",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3160.031508556423,
+                "top": 2104.2689073130805
+            },
+            "post_job_actions": {
+                "TagDatasetActionbins": {
+                    "action_arguments": {
+                        "tags": "refined-sample-bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/binette/binette/1.2.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "37ab2cfedac4",
+                "name": "binette",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contamination_weight\": {\"__class__\": \"ConnectedValue\"}, \"contig2bin_tables\": {\"__class__\": \"ConnectedValue\"}, \"contigs\": {\"__class__\": \"ConnectedValue\"}, \"database_type\": {\"is_select\": \"cached\", \"__current_case__\": 1, \"datamanager\": \"1.0.2\"}, \"min_completeness\": {\"__class__\": \"ConnectedValue\"}, \"proteins\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0+galaxy0",
+            "type": "tool",
+            "uuid": "c2645ba2-7568-43ab-8eb0-4095fb6a4f45",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": ["microbiome", "microgalaxy", "binning"],
+    "uuid": "b949eaf7-bf7c-4284-b0b8-fb7a94737de1",
+    "version": 6
+}

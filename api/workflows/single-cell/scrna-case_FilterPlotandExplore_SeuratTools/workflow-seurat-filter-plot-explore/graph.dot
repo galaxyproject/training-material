@@ -1,0 +1,44 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="EBI SCXA Data Retrieval"]
+  ka5a4504c013b4b878ef2643a3e1804bb[color=lightseagreen,label="Output\nmatrix_mtx"]
+  0 -> ka5a4504c013b4b878ef2643a3e1804bb
+  kb4ce8ebe421f4259b8223ac79c5f9817[color=lightseagreen,label="Output\ngenes_tsv"]
+  0 -> kb4ce8ebe421f4259b8223ac79c5f9817
+  k83aed9596dce411586dd7b2d2eeceb00[color=lightseagreen,label="Output\ndesign_tsv"]
+  0 -> k83aed9596dce411586dd7b2d2eeceb00
+  kca12560bca8344478096acbd51760079[color=lightseagreen,label="Output\nbarcode_tsv"]
+  0 -> kca12560bca8344478096acbd51760079
+  1[label="Seurat Read10x"]
+  0 -> 1 [label="barcode_tsv"]
+  0 -> 1 [label="genes_tsv"]
+  0 -> 1 [label="matrix_mtx"]
+  0 -> 1 [label="design_tsv"]
+  2[label="Plot"]
+  1 -> 2 [label="rds_seurat_file"]
+  3[label="Seurat FilterCells"]
+  1 -> 3 [label="rds_seurat_file"]
+  4[label="Seurat NormaliseData"]
+  3 -> 4 [label="rds_seurat_file"]
+  5[label="Seurat FindVariableGenes"]
+  4 -> 5 [label="rds_seurat_file"]
+  6[label="Seurat ScaleData"]
+  5 -> 6 [label="output_tab"]
+  5 -> 6 [label="rds_seurat_file"]
+  7[label="Seurat RunPCA"]
+  6 -> 7 [label="rds_seurat_file"]
+  5 -> 7 [label="output_tab"]
+  8[label="Seurat FindNeighbours"]
+  7 -> 8 [label="rds_seurat_file"]
+  9[label="Seurat FindClusters"]
+  8 -> 9 [label="rds_seurat_file"]
+  kac5e668c341b4887867c0ba165d2a874[color=lightseagreen,label="Output\nrds_seurat_clusters"]
+  9 -> kac5e668c341b4887867c0ba165d2a874
+  10[label="Seurat UMAP"]
+  9 -> 10 [label="rds_seurat_file"]
+  k831e32ad773b417c8b7e4b7ca0e12488[color=lightseagreen,label="Output\nrds_seurat_umap"]
+  10 -> k831e32ad773b417c8b7e4b7ca0e12488
+  11[label="Plot"]
+  10 -> 11 [label="rds_seurat_file"]
+}

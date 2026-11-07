@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nMTB single-end BAMs"]
+  1[color=lightblue,label="ℹ️ Input Collection\nMTB paired-end BAMs"]
+  2[label="Merge collections"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[label="Samtools view BAM > SAM"]
+  2 -> 3 [label="output"]
+  kaa2200279d104328b2c2e4d139d5d5bd[color=lightseagreen,label="Output\nSamtools view on input dataset(s): filtered alignments"]
+  3 -> kaa2200279d104328b2c2e4d139d5d5bd
+  4[label="Sed MTB_anc to Chromosome"]
+  3 -> 4 [label="outputsam"]
+  5[label="Samtools view SAM > BAM"]
+  4 -> 5 [label="output"]
+  6[label="TB-profiler"]
+  5 -> 6 [label="outputsam"]
+  7[label="Get drug resistance profile"]
+  6 -> 7 [label="output_txt"]
+  8[label="Add Sample Name"]
+  7 -> 8 [label="output"]
+  9[label="Concatenate DR profiles in a single table"]
+  8 -> 9 [label="output"]
+  10[label="Cleanup the table"]
+  9 -> 10 [label="out_file1"]
+}

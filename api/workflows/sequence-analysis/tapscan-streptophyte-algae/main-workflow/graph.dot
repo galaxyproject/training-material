@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  1[label="TAPScan Classify"]
+  0 -> 1 [label="output"]
+  2[label="Filter"]
+  1 -> 2 [label="taps_detected"]
+  3[label="Cut"]
+  2 -> 3 [label="out_file1"]
+  4[label="Remove beginning"]
+  3 -> 4 [label="out_file1"]
+  5[label="Filter FASTA"]
+  4 -> 5 [label="out_file1"]
+  0 -> 5 [label="output"]
+  6[label="MAFFT"]
+  5 -> 6 [label="output"]
+  7[label="trimAl"]
+  6 -> 7 [label="outputAlignment"]
+  8[label="Quicktree"]
+  7 -> 8 [label="trimmed_output"]
+  9[label="ETE tree viewer"]
+  7 -> 9 [label="trimmed_output"]
+  8 -> 9 [label="output_file"]
+}

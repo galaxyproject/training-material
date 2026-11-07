@@ -1,0 +1,71 @@
+- doc: Test outline for End-to-end-EI+-mass-spectra-prediction-workflow-using-QCxMS
+  job:
+    Input Molecules with SMILES and NAME without a header.:
+      class: File
+      path: test-data/Input Molecules with SMILES and NAME without a header..tabular
+      filetype: tabular
+    Number of conformers to generate: '1'
+    Optimization Levels: crude
+    QC Method: xtb2
+  outputs:
+    conformer_output:
+      path: test-data/conformer_output.sdf
+    optimized output:
+      element_tests:
+        molecule1:
+          path: test-data/optimized output_molecule1.xyz
+        molecule2:
+          path: test-data/optimized output_molecule2.xyz
+    MSP output:
+      element_tests:
+        molecule1:
+          path: test-data/MSP output_molecule1.msp
+        molecule2:
+          path: test-data/MSP output_molecule2.msp
+    XYZ output:
+      element_tests:
+        molecule1:
+          path: test-data/XYZ output_molecule1.xyz
+        molecule2:
+          path: test-data/XYZ output_molecule2.xyz
+    '[.in] output':
+      element_tests:
+        molecule1:
+          elements:
+            TMP.1_qcxms:
+              path: test-data/[.in] output_TMP.1_qcxms.txt
+        molecule2:
+          elements:
+            TMP.2_qcxms:
+              path: test-data/[.in] output_TMP.2_qcxms.txt
+    '[.start] output':
+      element_tests:
+        molecule1:
+          elements:
+            TMP.1_qcxms:
+              path: test-data/[.start] output_TMP.1_qcxms.txt
+        molecule2:
+          elements:
+            TMP.2_qcxms:
+              path: test-data/[.start] output_TMP.2_qcxms.txt
+    '[.xyz] output':
+      element_tests:
+        molecule1:
+          elements:
+            TMP.1_start:
+              path: test-data/[.xyz] output_TMP.1_start.txt
+        molecule2:
+          elements:
+            TMP.2_start:
+              path: test-data/[.xyz] output_TMP.2_start.txt
+    res output:
+      element_tests:
+        molecule1:
+          elements:
+            TMP.1_qcxms:
+              path: test-data/res output_TMP.1_qcxms.txt
+        molecule2:
+          elements:
+            TMP.2_qcxms:
+              path: test-data/res output_TMP.2_qcxms.txt
+            

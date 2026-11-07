@@ -1,0 +1,205 @@
+---
+id: machinelearning
+name: Basics of machine learning
+description: >-
+  In this tutorial we will use a machine learning module implemented as a Galaxy
+  tool.
+title_default: machinelearning
+steps:
+  - title: Introduction
+    content: >-
+      <a href="https://en.wikipedia.org/wiki/Machine_learning">Machine
+      learning</a> uses the techniques from statistics, mathematics and computer
+      science to make computer programs learn from data. It is one of the most
+      popular fields of computer science and finds applications in multiple
+      streams of data analysis like <a
+      href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a>,
+      <a
+      href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>,
+      <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>,
+      <a
+      href="https://en.wikipedia.org/wiki/Dimensionality_reduction">dimensionality
+      reduction</a>, <a
+      href="https://en.wikipedia.org/wiki/Density_estimation">density
+      estimation</a> and many more. Some real-life applications are spam
+      filtering, medical diagnosis, autonomous driving, recommendation systems,
+      facial recognition, stock prices prediction and many more. The following
+      image shows a basic flow of any machine learning task. A user has data and
+      it is given to a machine learning algorithm for analysis.
+    backdrop: true
+  - title: Different types of machine learning
+    content: >-
+      There are multiple ways in which machine learning can be used to perform
+      data analysis. They depend on the nature of data and the kind of data
+      analysis. The following image shows the most popular ones. In <a
+      href="https://en.wikipedia.org/wiki/Supervised_learning">supervised
+      learning</a> techniques, the categories of data records are known
+      beforehand. But in <a
+      href="https://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised
+      learning</a>, the categories of data records are not known.
+    backdrop: true
+  - title: Supervised learning
+    content: >-
+      The complete data is divided into training and test sets. The training set
+      is used by a classifier to learn features. It results in a trained model
+      and its robustness (of learning) is evaluated using the test set (unseen
+      by the classifier during the training).
+    backdrop: true
+  - title: Introduction
+    content: >-
+      This tutorial shows how to use a machine learning module implemented as a
+      Galaxy tool. The data used in this tutorial is available at <a
+      href="https://zenodo.org/record/1468039#.W8zyxBRoSAo">Zenodo</a>.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The datasets required for this tutorial contain 9 features of breast
+      cancer which include the thickness of clump, cell-size, cell-shape and so
+      on (<a
+      href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more
+      information</a>). In addition to these features, the training dataset
+      contains one more column as `target`. It has a binary value (0 or 1) for
+      each row. `0` indicates no breast cancer and `1` indicates breast cancer.
+      The test dataset does not contain the `target` column.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Import the following datasets from <a
+      href="https://zenodo.org/record/1468039#.W8zyxBRoSAo">zenodo</a> and
+      choose the type of data as `tabular`.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1401230/files/breast-w_train.tsv
+      https://zenodo.org/record/1401230/files/breast-w_test.tsv
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Uploading the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once the files have been uploaded, change their names to `breast-w_train`
+      and `breast-w_test` respectively by clicking on the `pencil` icon icon
+      next to the relevant history entry.
+    position: left
+  - title: Train a classifier
+    content: >-
+      In this step, <b>SVM (Support vector machine)</b> classifier is trained
+      using `breast-w_train` dataset. The last column of this dataset assigns a
+      category for each row. The classifier learns a mapping between each row
+      and its category. This mapping is called a trained model. It is used to
+      predict the categories of unseen data (`breast-w_test`).
+    backdrop: true
+  - title: Train a classifier
+    element: '#tool-search-query'
+    content: Search for "SVM Classifier (Support vector machine)" tool
+    placement: right
+    textinsert: Support vector machine
+  - title: Train a classifier
+    element: '#tool-search'
+    content: Click on the "SVM Classifier (Support vector machine)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_svm_classifier%2Fsklearn_svm_classifier%2F1.0"]
+        .tool-old-link
+  - title: Train a classifier
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Train a model`</li>
+        <li>"Classifier type": to `Linear Support Vector Classification`</li>
+        <li>"Select input type": to `tabular data`</li>
+        <li>"Training samples dataset": to `breast-w_train`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Choose how to select data by column": to `All columns but by column header name(s)`</li>
+        <li>"Type header name(s)": to `target`</li>
+        <li>"Dataset containing class labels": to `breast-w_train`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Choose how to select data by column": to `Select columns by column header name(s)`</li>
+        <li>"Select target column(s)": to `target`</li>
+      </ul>
+    position: left
+  - title: Predict using a trained model
+    content: >-
+      The previous step produces a model file of type `zip`. The trained model
+      is used to predict the categories of each row in `breast-w_test` dataset. 
+    backdrop: true
+  - title: Predict using a trained model
+    element: '#tool-search-query'
+    content: Search for "SVM Classifier (Support vector machine)" tool
+    placement: right
+    textinsert: Support vector machine
+  - title: Predict using a trained model
+    element: '#tool-search'
+    content: Click on the "SVM Classifier (Support vector machine)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsklearn_svm_classifier%2Fsklearn_svm_classifier%2F1.0"]
+        .tool-old-link
+  - title: Predict using a trained model
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select a Classification Task" to `Load a model and predict`</li>
+        <li>"Models": to `the output from the previous step`</li>
+        <li>"Data (tabular)": to `breast-w_test`</li>
+        <li>"Does the dataset contain header": to `Yes`</li>
+        <li>"Select the type of prediction": to `Predict class labels`</li>
+      </ul>
+    position: left
+  - title: See predictions
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The last column of the predicted dataset shows the category of each row. A
+      row either gets `0` (no breast cancer) or `1` (breast cancer) as its
+      predicted category.
+    position: left
+  - title: Additional resources
+    content: >-
+      Read more about machine learning using scikit-learn <A
+      href="http://scikit-learn.org/stable/">here</a>.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Machine learning algorithms learn features from data.</li>
+        <li>It is used for multiple tasks like classification, regression, clustering and so on.</li>
+        <li>Multiple learning tasks can be performed using Galaxy's machine learning tools.</li>
+        <li>For the classification and regression tasks, data is divided into training and test sets.</li>
+        <li>Each sample/record in the training data has a category/class/label.</li>
+        <li>A machine learning algorithm learns features from the training data and do predictions on the test data.</li>
+      </ul>
+    backdrop: true

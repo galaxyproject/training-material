@@ -1,0 +1,33 @@
+SYSTEM:
+    NUM_CPUS: -1
+    NUM_WORKERS: 2
+
+PROBLEM:
+    TYPE: INSTANCE_SEG          
+    NDIM: 3D                   
+    INSTANCE_SEG:
+        DATA_CHANNELS: BCM              
+        DATA_REMOVE_BEFORE_MW: True    
+        DATA_REMOVE_SMALL_OBJ_BEFORE: 5
+
+DATA: 
+    PATCH_SIZE: (80, 80, 80, 1)
+    TEST:                                                                                                               
+        PATH: /data/dfranco/datasets/instance_seg_paper/CartoCell/validation/raw
+        GT_PATH: /data/dfranco/datasets/instance_seg_paper/CartoCell/validation/label
+        IN_MEMORY: True         
+        LOAD_GT: True           
+        PADDING: (16,16,16)     
+    REFLECT_TO_COMPLETE_SHAPE: True
+
+TRAIN:
+    ENABLE: False
+MODEL:
+    SOURCE: bmz
+    BMZ:
+        SOURCE_MODEL_ID: 'venomous-swan'
+
+TEST:
+    ENABLE: True      
+    POST_PROCESSING:
+        VORONOI_ON_MASK: True  

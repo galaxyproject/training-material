@@ -1,0 +1,25 @@
+---
+- doc: Test the Viral primer design workflow
+  job:
+    'Input dataset':
+      location: https://raw.githubusercontent.com/jonas-fuchs/ViralPrimerSchemes/79db0cc128079d770f2282b68a6e28142fd77473/input_alignments/polio1.aln
+      class: File
+      filetype: fasta
+  outputs:
+    varvamp_log:
+      asserts:
+        - that: "has_text"
+          text: "MODE = single"
+        - that: "has_text"
+          text: "Result:	 6 amplicons."
+    primers_bed:
+      asserts:
+        - that: "has_text"
+          text: "AMPLICON_ambiguous_consensus	124	146	AMPLICON_0_LEFT	1	+	AGTACCACCACGAACAAGCACT"
+        - that: "has_n_lines"
+          n: 12
+    primer_seqs:
+      asserts:
+        - that: "has_text"
+          text: "TGATTRCTACCAGGGGTGTTCA"
+

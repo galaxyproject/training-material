@@ -1,0 +1,14 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Argo data access"]
+  1[label="NetCDF xarray Coordinate Info"]
+  0 -> 1 [label="output_argo"]
+  2[label="NetCDF xarray Metadata Info"]
+  0 -> 2 [label="output_argo"]
+  3[label="NetCDF timeseries Extractor"]
+  0 -> 3 [label="output_argo"]
+  2 -> 3 [label="output"]
+  4[label="ODV"]
+  3 -> 4 [label="timeseries_tabular"]
+}

@@ -1,0 +1,14 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput paired fastq "]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nReference Genome Build In"]
+  2[label="Bowtie2"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[label="Zip collections"]
+  2 -> 3 [label="output_unaligned_reads_l"]
+  2 -> 3 [label="output_unaligned_reads_r"]
+  4[label="MultiQC"]
+  2 -> 4 [label="mapping_stats"]
+}

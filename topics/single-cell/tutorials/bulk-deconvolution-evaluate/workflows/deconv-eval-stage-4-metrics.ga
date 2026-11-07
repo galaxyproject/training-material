@@ -1,0 +1,763 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                3,
+                5,
+                7
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Compute mean predictions"
+            },
+            "id": 0,
+            "position": [
+                274.2942996890197,
+                234.89999999999998
+            ],
+            "size": [
+                960.7,
+                230.1
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Pearson Correlation"
+            },
+            "id": 2,
+            "position": [
+                1282.9942996890195,
+                230.89999999999998
+            ],
+            "size": [
+                1423,
+                194
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                4,
+                6,
+                8
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "RMSE"
+            },
+            "id": 1,
+            "position": [
+                1290.0942996890199,
+                0
+            ],
+            "size": [
+                1009.8,
+                193.5
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0008-9422-6380",
+            "name": "Morgan Howells"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Music Stage 4 - Compute metrics",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Tabular dataset with row and column headers\nRows = cell types\nColumns = ACTUAL followed by INFERRED\nNumbers = cell proportions",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Tabular dataset with row and column headers\nRows = cell types\nColumns = ACTUAL followed by INFERRED\nNumbers = cell proportions",
+                    "name": "Cell Proportions"
+                }
+            ],
+            "label": "Cell Proportions",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 40.227098634546735
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "15eab763-91bf-46bb-9d8c-39f0838db5df",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "Compute mean",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 294.3214882807069,
+                "top": 331.8979394126718
+            },
+            "post_job_actions": {
+                "HideDatasetActiontable": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3bf5661c0280",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"ignore_nas\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_row_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"matrixapply\", \"__current_case__\": 3, \"matrixapply_func\": {\"vector_op\": \"custom\", \"__current_case__\": 0, \"custom_func\": \"np.mean(vec)\"}, \"dimension\": \"0\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy0",
+            "type": "tool",
+            "uuid": "608c84a5-409a-4576-95e2-0fd87a97527f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "This computes (actual-expected)^2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Compute squared error",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1310.1403114290538,
+                "top": 48.359480304208205
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6595517c2dd8",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"expressions\": [{\"__index__\": 0, \"cond\": \"pow((c2-c3),2)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}, \"new_column_name\": \"RSME_p1\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "f71f504b-b04b-4338-8b77-0de7c71b9a78",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "Remove duplicate",
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 528.8584919563043,
+                "top": 327.4180657651557
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "ddf17f1c-bb5c-430e-87b9-3dfcc6544a83",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Takes the (actual-inferred)^2 column alone",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Cut RMSE column",
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1567.7462488456417,
+                "top": 39.99290059767014
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Squared Error"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c4\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "05e16375-876a-4174-9758-21486c097160",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Squared Error",
+                    "output_name": "out_file1",
+                    "uuid": "f7eb526c-9055-46fd-8787-bb44b61018aa"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 779.4555781559967,
+                "top": 274.90632740125545
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Paste1",
+            "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "49fb862c-456f-4d45-8c8d-409bb2687850",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "Average error values",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1827.729847350446,
+                "top": 51.13436536865862
+            },
+            "post_job_actions": {
+                "HideDatasetActiontable": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3bf5661c0280",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"ignore_nas\"], \"precision\": \"4\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"matrixapply\", \"__current_case__\": 3, \"matrixapply_func\": {\"vector_op\": \"mean\", \"__current_case__\": 6}, \"dimension\": \"0\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy0",
+            "type": "tool",
+            "uuid": "2f5595ea-62c3-48e3-8242-14b680ea2360",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Add mean column",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1015.0699198441283,
+                "top": 316.39936706903825
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"{\\n    if ($NF != \\\"\\\") {\\n        last = $NF\\n    } else {\\n        $NF = last\\n    }\\n    print\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "4f71a522-3a23-4b49-b0b7-60394939e734",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "Finally we take the square root of the number to get the RSME",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "Square root error",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2079.9296121376447,
+                "top": 46.283631546923345
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "RMSE score"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6595517c2dd8",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"sqrt(c1)\", \"add_column\": {\"mode\": \"R\", \"__current_case__\": 2, \"pos\": \"1\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "4d5ba3b1-d576-4df5-aadc-38dce824f384",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Compute differences",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1302.8785787249262,
+                "top": 270.9747141621124
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "aff5135563c6",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"c2-c4\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}, {\"__index__\": 1, \"cond\": \"c3-c4\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}, {\"__index__\": 2, \"cond\": \"pow(c5, 2)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}, {\"__index__\": 3, \"cond\": \"pow(c6, 2)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}, {\"__index__\": 4, \"cond\": \"c5*c6\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "d7cb4739-f3f7-4fe6-a398-1385bf95fc89",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1537.7413305085643,
+                "top": 274.463598028633
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c7,c8,c9\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "bf0d9e4b-3c15-45bd-93ae-631e5e381d86",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "Sum rows",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1775.9669779311103,
+                "top": 273.7970136025135
+            },
+            "post_job_actions": {
+                "HideDatasetActiontable": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3bf5661c0280",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"ignore_nas\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": null, \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"matrixapply\", \"__current_case__\": 3, \"matrixapply_func\": {\"vector_op\": \"sum\", \"__current_case__\": 3}, \"dimension\": \"0\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy0",
+            "type": "tool",
+            "uuid": "ca6b9888-bc08-46cf-9b4b-200d503d8edc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "in_file": {
+                    "id": 11,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Transpose",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2011.8843830036753,
+                "top": 274.0249893517372
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a513e3fbb4c5",
+                "name": "datamash_transpose",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8+galaxy1",
+            "type": "tool",
+            "uuid": "888ca713-bb5a-4094-9ab7-e9c0c9c7dc08",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": "Final Pearson correlation",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2250.7297214130617,
+                "top": 272.12774280634903
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "aff5135563c6",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"c3/sqrt(c1*c2)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "63ae97d0-8f41-4a08-97e2-a1504852c7be",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Cut Pearson column",
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2485.919503078627,
+                "top": 271.430832664332
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Pearson Correlation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c4\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "fa0ba30d-7826-48f1-9325-960b4f0c778b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Pearson Correlation",
+                    "output_name": "out_file1",
+                    "uuid": "73db7d72-1eab-483f-b9c3-547b317821be"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:deconv-eval"
+    ],
+    "uuid": "009c84f5-d318-46a4-a6f1-2996351e8310",
+    "version": 29
+}

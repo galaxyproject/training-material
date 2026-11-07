@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\niris"]
+  1[label="Convert CSV to tabular"]
+  0 -> 1 [label="output"]
+  2[label="Datamash"]
+  1 -> 2 [label="tabular"]
+  kaa7ef38ba3bf42449a16c555c882a1c1[color=lightseagreen,label="Output\ndatamash_output"]
+  2 -> kaa7ef38ba3bf42449a16c555c882a1c1
+  3[label="Remove beginning"]
+  1 -> 3 [label="tabular"]
+  4[label="Cut"]
+  3 -> 4 [label="out_file1"]
+  5[label="Group"]
+  3 -> 5 [label="out_file1"]
+  keac5f08f90274e37b3d2fac33520a321[color=lightseagreen,label="Output\ngroup1"]
+  5 -> keac5f08f90274e37b3d2fac33520a321
+  6[label="Group"]
+  3 -> 6 [label="out_file1"]
+  k90fba08452b5482aaf11df5828edbd5c[color=lightseagreen,label="Output\ngroup2"]
+  6 -> k90fba08452b5482aaf11df5828edbd5c
+  7[label="Scatterplot w ggplot2"]
+  3 -> 7 [label="out_file1"]
+  8[label="Scatterplot w ggplot2"]
+  3 -> 8 [label="out_file1"]
+  9[label="Unique"]
+  4 -> 9 [label="out_file1"]
+  kec39c0adeb2647d6b9a7c2e5ffa043c6[color=lightseagreen,label="Output\nunique_output"]
+  9 -> kec39c0adeb2647d6b9a7c2e5ffa043c6
+}

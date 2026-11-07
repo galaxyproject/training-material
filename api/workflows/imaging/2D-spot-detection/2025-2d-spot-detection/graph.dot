@@ -1,0 +1,24 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nIDR IDs"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nChannel to analyze"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nz-stack"]
+  3[label="Download IDR/OMERO"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Unzip"]
+  3 -> 4 [label="output_tar"]
+  5[label="IDR Image IDs"]
+  4 -> 5 [label="unzipped"]
+  6[label="Perform 2-D spot detection"]
+  5 -> 6 [label="output"]
+  7[label="Convert point coordinates to label map"]
+  6 -> 7 [label="fn_out"]
+  8[label="Overlay images"]
+  5 -> 8 [label="output"]
+  7 -> 8 [label="output"]
+  kf3538bf00dc64237a2adbdf539b01c70[color=lightseagreen,label="Output\nout_png"]
+  8 -> kf3538bf00dc64237a2adbdf539b01c70
+}

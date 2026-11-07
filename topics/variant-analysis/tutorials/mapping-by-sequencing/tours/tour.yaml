@@ -1,0 +1,477 @@
+﻿---
+id: mapping-by-sequencing
+name: Mapping and molecular identification of phenotype-causing mutations
+description: >-
+  In this tutorial we are going to use several of the MiModD tools to map and
+  identify a point mutation in an Arabidopsis thaliana strain from whole-genome
+  sequencing data.
+title_default: mapping-by-sequencing
+steps:
+  - title: Introduction
+    content: >-
+      In this tutorial we are going to use several of the MiModD tools to map
+      and identify a point mutation in an Arabidopsis thaliana strain from
+      whole-genome sequencing data.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In order to map and identify phenotype-causing mutations efficiently from
+      a single experiment, modern genetic research aims at combining classical
+      genetic mapping concepts with the power of next-generation-sequencing.<br>
+      <br>After having obtained, e.g., from a forward genetic screen, a mutant
+      strain of an organism with a particular phenotype, the classical approach
+      towards identification of the underlying causative mutation would be
+      to<ul>
+        <li>perform mapping crosses to probe for linkage between the unknown mutation and selected markers with known location on the genome in order to determine the approximate genomic region that the mutation resides in, then</li>
+        <li>sequence candidate DNA stretches in this region to identify the precise nature of the mutation.</li></ul>
+    backdrop: true
+  - title: Introduction
+    content: >-
+      Modern approaches, in contrast, use just one set of genome-wide sequencing
+      data obtained from mapping-cross progeny and suitable parent strains to
+      simultaneously<ul>
+        <li>discover available marker mutations for linkage analysis,</li>
+        <li>map the causative mutation using these markers, and</li>
+        <li>identify candidate mutations.</li></ul>
+      <br>Since it uses sequencing data already at the mapping step, this
+      process is called <b>mapping-by-sequencing</b>.<br> Since genome-wide
+      sequencing will often reveal a few hundreds to many thousands of marker
+      variants that should be considered together in the linkage analysis,
+      mapping-by-sequencing data is typically analyzed with dedicated
+      computational tools. For Galaxy, the <b>MiModD</b> suite of tools offers
+      efficient and flexible analysis workflows compatible with a variety of
+      mapping-by-sequencing approaches.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this tutorial we are going to use several of these tools to map and
+      identify a point mutation in an <i>Arabidopsis thaliana</i> strain from
+      whole-genome sequencing data. This will demonstrate one particular kind of
+      linkage analysis supported by <b>MiModD</b> called <i>Variant Allele
+      Frequency Mapping</i>.
+    backdrop: true
+  - title: Variant Allele Frequency Mapping
+    content: >-
+      Variant allele frequency mapping analyzes marker variant inheritance
+      patterns in pooled F2 recombinants selected for the mutation to be
+      mapped.<br> For mapping the causative mutation, additional variants are
+      introduced through a cross to a mapping strain and F2 progeny is selected
+      for the mutant phenotype. While each individuum in the F2 generation
+      carries its uniquely recombined variant pattern, this phenotypic selection
+      will work against mapping strain variants in the vicinity of the causative
+      variant. Hence, when the recombined DNA from phenotypic F2 progeny gets
+      pooled and sequenced, the causative variant can be found by looking for a
+      region for which all sequenced reads support variant alleles found in the
+      original mutant line, rather than mapping strain variant alleles.
+    backdrop: true
+  - title: Data Preparation
+    content: >-
+      In this tutorial we are going to (re-)identify the recessive causative
+      mutation in a late-flowering mutant line of <i>Arabidopsis thaliana</i>.
+      <br>For your convenience, the sequenced reads from both datasets have
+      already been mapped (using <b>Bowtie2</b>) to the <i>A. thaliana Col</i>
+      reference genome (version TAIR10) so the two datasets take the form of BAM
+      files with the mapping results (see the tutorial on <a
+      href="http://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">NGS
+      data mapping</a> if you do not know what this means).
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Create a new history for this exercise. Click on this button and then
+      "Create New"
+    placement: left
+  - title: Importing data via links
+    content: 'Import files from <a href="https://zenodo.org/record/1098034"> Zenodo</a>.'
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: The corresponding links should be provided in this field
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1098034/files/Ler_mapping_strain.bam
+      https://zenodo.org/record/1098034/files/outcrossed_F2.bam
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and add genome info
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to something more meaningful<ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+        <li>As the "Database/Build" select `Arabidopsis thaliana TAIR10`</li>
+      </ul>
+    position: left
+  - title: Joint Variant Calling and Extraction
+    content: >-
+      A hallmark of all mapping-by-sequencing analyses is that one would like to
+      follow the fate of variants through genetic crosses. In this tutorial, for
+      example, we would like to determine, for every marker variant provided by
+      the Ler background, at what frequency it got inherited by the outcrossed
+      F2 pool. For such analyses to work reliably, it is best to call variants
+      jointly for all relevant samples because this allows the variant caller to
+      give us per-sample variant call statistics for all sites at which any
+      sample is found to have a non-wt genotype. In our case, this means that
+      the variant caller will report any variants it finds for the Ler
+      background sample along with the call statistics for the outcrossed F2
+      pool at that same site - even if the variant allele contributes very
+      little to the pool and would, thus, have been disregarded in a standard
+      single-sample analysis. <br><br>Here, we are using the <b>MiModD Variant
+      Calling</b> tool for joint variant calling for our two samples. This tool
+      outputs variant call statistics across all sites and all samples in the
+      compact binary BCF format. We can then use the <b>MiModD Extract Variant
+      Sites</b> tool to extract sites, for which at least one sample appears to
+      have a non-wt genotype, and report them in VCF format.
+    backdrop: true
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search-query'
+    content: Search for 'MiModD Variant Calling' tool.
+    placement: right
+    textinsert: MiModD Variant Calling
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search'
+    content: Click on the 'MiModD Variant Calling' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_varcall%2F0.1.8_1"]
+        .tool-old-link
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"Will you select a reference genome from your history or use a
+      built-in genome?" to `Use a built-in genome`</li>
+
+      <li>"reference genome" to 'Arabidopsis thaliana (TAIR10)'</li>
+
+      <li>"Aligned reads input datasets" to the two BAM datasets representing
+      the two samples</li>
+
+      </ul>
+    position: right
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search-query'
+    content: Search for 'MiModD Extract Variant Sites' tool.
+    placement: right
+    textinsert: MiModD Extract Variant Sites
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search'
+    content: Click on the 'MiModD Extract Variant Sites' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_varextract%2F0.1.8_1"]
+        .tool-old-link
+  - title: Joint Variant Calling and Extraction
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"BCF input file" to the BCF dataset generated in the previous
+      step</li>
+
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Approximately how many variants did get extracted?</li>
+        <li>Does this number surprise you?</li>
+      </ul>
+    backdrop: false
+  - title: Linkage Analysis
+    content: >-
+      The extracted variants dataset obtained in the previous step contains
+      information about thousands of sites that can be used as markers to map
+      the causative mutation in the F2 pool. We will now analyze the data with
+      the <b>MiModD NacreousMap</b> tool in <b>Variant Allele Frequency</b>
+      mapping mode to identify these markers and look for linkage between them
+      and the causative mutation.
+    backdrop: true
+  - title: Linkage Analysis with one set of parentally contributed markers
+    element: '#tool-search-query'
+    content: Search for 'MiModD NacreousMap' tool.
+    placement: right
+    textinsert: MiModD NacreousMap
+  - title: Linkage Analysis with one set of parentally contributed markers
+    element: '#tool-search'
+    content: Click on the 'MiModD NacreousMap' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_map%2F0.1.8_1"]
+        .tool-old-link
+  - title: Linkage Analysis with one set of parentally contributed markers
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"type of mapping analysis to perform" to 'Variant Allele Frequency
+      Mapping'</li>
+
+      <li>"data source to use" to `VCF file of variants`</li>
+
+      <li>"input file with variants to analyze" to your extracted variants VCF
+      dataset obtained in the previous step</li>
+
+      <li>"mapping sample name" to 'outcrossed F2'</li>
+
+      <li>leave "name of the related parent sample" empty</li>
+
+      <li>"name of the unrelated parent sample" to 'Ler'</li>
+
+      </ul>
+    position: right
+  - title: Linkage Analysis with one set of parentally contributed markers
+    content: >-
+      With these settings, we base the linkage analysis on crossed-in variants
+      only, i.e., the tool will look for variants, for which the <i>Ler</i>
+      sample appears homozygous mutant, and determine the contribution of each
+      such variant allele to the recombinant pool highlighting regions of low
+      contribution, i.e., with suspected linkage to the causative variant, in
+      its output.
+    backdrop: true
+  - title: Linkage Analysis with one set of parentally contributed markers
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Two datasets have been generated, one with linkage tables for each
+      chromosome in the A. thaliana genome, one with graphical representations
+      of the data.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Have a look at the linkage plots dataset generated by the tool run. In which interval on which chromosome would you expect the causative mutation?</li>
+        <li>Are the per-marker scatter plots and the histogram plots in agreement?</li>
+        <li>What about those 'No markers found!' messages (you saw them, right?) that the tool printed?</li>
+      </ul>
+    backdrop: false
+  - title: Identifying Candidate Mutations
+    content: >-
+      With the mapping results obtained we can now try to get a list of
+      candidates for the causative mutation. Here is what we know about this
+      mutation so far:<ul>
+        <li>The F2 recombinant pool should appear homozygous mutant for it.</li>
+        This is because the F2 recombinants got selected based on the phenotype of the recessive mutation so we can assume that all individuals in the pool were homozygous for it.
+        <li>The 'Ler' strain should not carry it.</li>
+        <li>It should reside in the genomic region identified in the previous step.</li></ul>
+    backdrop: false
+  - title: Variant Filtering
+    element: '#tool-search-query'
+    content: Search for 'MiModD VCF Filter' tool.
+    placement: right
+    textinsert: MiModD VCF Filter
+  - title: Variant Filtering
+    element: '#tool-search'
+    content: Click on the 'MiModD VCF Filter' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_vcf_filter%2F0.1.8_1"]
+        .tool-old-link
+  - title: Variant Filtering
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"VCF input file" to the extracted variants dataset from your
+      history</li>
+
+      <li>Click on "Insert Sample-specific Filter"<ul>
+
+      <li>"sample" to `outcrossed F2`</li>
+
+      <li>"genotype pattern(s) for the inclusion of variants" to
+      '1/1'</li></ul></li>
+
+      <li>Click on "Insert Sample-specific Filter"<ul>
+
+      <li>"sample" to `Ler`</li>
+
+      <li>"genotype pattern(s) for the inclusion of variants" to
+      '0/0'</li></ul></li>
+
+      <li>Click on "Region Filter"<ul>
+
+      <li>"Chromosome" to `chr2`</li>
+
+      <li>"Region Start" to '18000000'</li>
+
+      <li>"Region End" to '19000000'</li></ul></li>
+
+      </ul>
+    position: right
+  - title: Variant Filtering
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Running the job yields a new VCF dataset with variants that passed all
+      filters.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many variants passed the filters?</li>
+        <li>How many variants would you have to consider as candidates if you did not have any mapping information?</li>
+      </ul>
+    backdrop: false
+  - title: Variant Filtering
+    content: >-
+      Not all of the retained variants are equally likely candidates for being
+      the causative mutation. Since the input datasets consist of reads from
+      whole-genome sequencing, as opposed to exome sequencing, some of the
+      variants may fall in intergenic regions or introns where they are unlikely
+      to cause a phenotype. Other variants may fall in coding regions, but may
+      be silent on the protein level. Hence, we can prioritize our candidate
+      variants after annotating them with predicted functional effects.
+    backdrop: true
+  - title: Variant Annotation
+    element: '#tool-search-query'
+    content: >-
+      Search for 'SnpEff Download' tool to download genome database
+      'athalianaTair10'.
+    placement: right
+    textinsert: SnpEff Download
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: Click on the 'SnpEff Download' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff_download%2F4.3r.1"]
+        .tool-old-link
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"Select the genome version you want to download (e.g. GRCh38.86,
+      GRCh37.75, hg38, or GRCm38.86)" to `athalianaTair10`</li>
+
+      </ul>
+    position: right
+  - title: Variant Annotation
+    element: '#tool-search-query'
+    content: Search for 'SnpEff Variant effect and annotation' tool.
+    placement: right
+    textinsert: SnpEff Variant
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: Click on the 'SnpEff Variant effect and annotation' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff%2F4.3r.1"]
+        .tool-old-link
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"Sequence changes (SNPs, MNPs, InDels)" to your filtered VCF
+      dataset</li>
+
+      <li>"Genome source" to 'Reference genome from your history'</li>
+
+      <li>"SnpEff4.1 Genome Data" to your just downloaded genome dataset</li>
+
+      <li>"Annotation options" to `Use 'EFF' field compatible with older
+      versions (instead of 'ANN')`</li>
+
+      </ul>
+    position: right
+  - title: Variant Filtering
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Running this job will produce another VCF dataset with the functional
+      annotation data added to its INFO column. Inspecting this dataset is not
+      particularly convenient, but you can turn it into a more user-friendly
+      report next.
+    position: left
+  - title: Variant Annotation
+    element: '#tool-search-query'
+    content: Search for 'MiModD Report Variants' tool.
+    placement: right
+    textinsert: MiModD Report Variants
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: Click on the 'MiModD Report Variants' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_varreport%2F0.1.8_1"]
+        .tool-old-link
+  - title: Variant Annotation
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"The VCF input with the variants to be reported" to the annotated
+      variants dataset generated by SnpEff</li>
+
+      <li>"Format to use for the report" to 'HTML'</li>
+
+      <li>"Species" to 'A. thaliana'</li>
+
+      </ul>
+    position: right
+  - title: Questions
+    content: >-
+      The published confirmed mutations in the mutant line are
+      <i>chr2:18,774,111 C→T</i> and <i>chr2:18,808,927 C→T</i>. The latter was
+      shown through follow-up experiments to be the causative variant.
+
+      <ul>
+        <li>What are the functional effects of these two mutations according to the report?</li>
+        <li>What biological functions are described for the two genes? How do these relate to the phenotype of our mutant line?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      Mapping-by-sequencing can greatly speed up and facilitate the molecular
+      identification of mutations recovered from mutagenesis screens. The method
+      makes extensive use of cross-sample comparison of variants and profits
+      strongly from joint variant calling to generate reliable and manageable
+      variant information. A combination of variant linkage analysis and
+      filtering often results in very small lists of candidate variants that can
+      then be confirmed through further experimental work. Importantly, the
+      selection of biological samples for sequencing determines the meaningful
+      variant comparisons that can be made in the bioinformatical analysis so it
+      is important to understand the essence of the analysis method before the
+      preparation of any biological samples.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Mapping-by-sequencing is a powerful method for the molecular identification of mutations</li>
+        <li>The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy</li>
+      </ul>
+    backdrop: true

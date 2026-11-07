@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput dataset for CLM-FATES"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCLM-FATES restart file"]
+  2[label="CTSM/FATES-EMERALD"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="Extract Dataset"]
+  2 -> 3 [label="history_files"]
+  kdebf2e31dbea46d58644586c9731cdbe[color=lightseagreen,label="Output\ninput dataset(s) (extracted element)"]
+  3 -> kdebf2e31dbea46d58644586c9731cdbe
+  4[label="NetCDF xarray Metadata Info"]
+  3 -> 4 [label="output"]
+  5[label="NetCDF xarray Selection"]
+  3 -> 5 [label="output"]
+  4 -> 5 [label="output"]
+  6[label="Replace"]
+  5 -> 6 [label="simpleoutput"]
+  7[label="Scatterplot with ggplot2"]
+  6 -> 7 [label="outfile"]
+}

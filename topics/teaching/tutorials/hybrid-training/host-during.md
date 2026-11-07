@@ -1,0 +1,9 @@
+- Ensure that the room is set up with all necessary materials and equipment.
+- Arrange drinks and snacks for each break
+- Be inclusive
+- Distribute 2 sticky notes (one of each color) per participants
+- Make the first presentation
+    - Remind the Code of Conduct when starting
+    - Indicate restroom location
+- Collect sticky notes (one for good thing., one for things to improve) at the end of each day. [Minute Cards](https://carpentries.github.io/instructor-training/06-feedback/#minute-cards)
+- Print the certificates

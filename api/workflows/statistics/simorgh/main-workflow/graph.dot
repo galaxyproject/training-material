@@ -1,0 +1,76 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Compose text parameter value"]
+  1[label="Compose text parameter value"]
+  2[label="Compose text parameter value"]
+  3[label="Compose text parameter value"]
+  4[label="Compose text parameter value"]
+  5[label="Get PDB file"]
+  6[label="Get PDB file"]
+  7[color=lightgreen,label="ℹ️ Input Parameter\nI certify that I am NOT using this tool for commercial purposes."]
+  8[label="Create text file"]
+  0 -> 8 [label="out1"]
+  1 -> 8 [label="out1"]
+  2 -> 8 [label="out1"]
+  3 -> 8 [label="out1"]
+  4 -> 8 [label="out1"]
+  9[label="PDBFixer"]
+  5 -> 9 [label="output"]
+  10[label="PDBFixer"]
+  6 -> 10 [label="output"]
+  11[label="Replace Text"]
+  8 -> 11 [label="outfile"]
+  12[label="Text reformatting"]
+  9 -> 12 [label="output"]
+  13[label="Text reformatting"]
+  10 -> 13 [label="output"]
+  14[label="Colabfold MSA"]
+  11 -> 14 [label="outfile"]
+  15[label="SIMORGH"]
+  12 -> 15 [label="outfile"]
+  7 -> 15 [label="output"]
+  k98192b3a6b1a41fe896c545f481e7236[color=lightseagreen,label="Output\nviz_out_apo"]
+  15 -> k98192b3a6b1a41fe896c545f481e7236
+  kd64fa573c93042f8acf86a395e56e8f4[color=lightseagreen,label="Output\npdb_out_apo_multi"]
+  15 -> kd64fa573c93042f8acf86a395e56e8f4
+  16[label="SIMORGH"]
+  12 -> 16 [label="outfile"]
+  7 -> 16 [label="output"]
+  ka2180ecf683a4d9b9ff42350ea0e1769[color=lightseagreen,label="Output\npdb_out_apo_single"]
+  16 -> ka2180ecf683a4d9b9ff42350ea0e1769
+  k0b0dff93bb3c4279a6485f905f8f705e[color=lightseagreen,label="Output\nviz_out_apo_single"]
+  16 -> k0b0dff93bb3c4279a6485f905f8f705e
+  17[label="SIMORGH"]
+  13 -> 17 [label="outfile"]
+  7 -> 17 [label="output"]
+  k66dfb77ed280483084a643ffa177c39f[color=lightseagreen,label="Output\npdb_out_holo_multi"]
+  17 -> k66dfb77ed280483084a643ffa177c39f
+  k094ae5d17c524fe2a8e39fcbd4bb4402[color=lightseagreen,label="Output\nviz_out_holo"]
+  17 -> k094ae5d17c524fe2a8e39fcbd4bb4402
+  18[label="SIMORGH"]
+  13 -> 18 [label="outfile"]
+  7 -> 18 [label="output"]
+  k8c8aa6016ccf474e894994c2a9a4f05f[color=lightseagreen,label="Output\npdb_out_holo_single"]
+  18 -> k8c8aa6016ccf474e894994c2a9a4f05f
+  kcb3aaa62d5a9428bae69b2db76e4056c[color=lightseagreen,label="Output\nviz_out_holo_single"]
+  18 -> kcb3aaa62d5a9428bae69b2db76e4056c
+  19[label="Colabfold Alphafold"]
+  14 -> 19 [label="output"]
+  20[label="Extract dataset"]
+  19 -> 20 [label="pdb"]
+  21[label="SIMORGH"]
+  20 -> 21 [label="output"]
+  7 -> 21 [label="output"]
+  k2e4f02cee6f24e35aedbeeb4c95197bc[color=lightseagreen,label="Output\npdb_out_colabfold_multi"]
+  21 -> k2e4f02cee6f24e35aedbeeb4c95197bc
+  k03e6b954dddc4fecb7397d76f3553b86[color=lightseagreen,label="Output\nviz_out_colab"]
+  21 -> k03e6b954dddc4fecb7397d76f3553b86
+  22[label="SIMORGH"]
+  20 -> 22 [label="output"]
+  7 -> 22 [label="output"]
+  k2d59231aff614a639277215064291bbc[color=lightseagreen,label="Output\npdb_out_colabfold_single"]
+  22 -> k2d59231aff614a639277215064291bbc
+  k37c50dfbfaa046f791dafaff9e12165d[color=lightseagreen,label="Output\nviz_out_colabfold_single"]
+  22 -> k37c50dfbfaa046f791dafaff9e12165d
+}

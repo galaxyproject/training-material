@@ -1,0 +1,95 @@
+- doc: Test outline for Whole-transcriptome-analysis-of-Arabidopsis-thaliana
+  job:
+    miRNA_stem-loop_seq.fasta:
+      class: File
+      location: https://zenodo.org/record/4710649/files/miRNA_stem-loop_seq.fasta
+      filetype: fasta
+    miRNA_DESeq2_results_complete_dataset:
+      class: File
+      location: https://zenodo.org/record/4663389/files/miRNA_DESeq2_results_complete_dataset.tabular
+      filetype: tabular
+    mature_miRNA_AT.fasta:
+      class: File
+      location: https://zenodo.org/record/4710649/files/mature_miRNA_AT.fasta
+      filetype: fasta
+    star_miRNA_seq.fasta:
+      class: File
+      location: https://zenodo.org/record/4710649/files/star_miRNA_seq.fasta
+      filetype: fasta
+    mRNA_DESeq2_results_complete_dataset.tabular:
+      class: File
+      location: https://zenodo.org/record/4663389/files/mRNA_DESeq2_results_complete_dataset.tabular
+      filetype: tabular
+    transcriptome.fasta:
+      class: File
+      location: https://zenodo.org/record/4710649/files/transcriptome_AtRTD2_12April2016.fasta.gz
+      filetype: fasta.gz
+    annotation_AtRTD2.gtf:
+      class: File
+      location: https://zenodo.org/record/4710649/files/annotation_AtRTD2_19April2016.gtf.gz
+      filetype: gtf.gz
+    Control miRNA:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: SRR11611349
+        location: https://zenodo.org/record/4710649/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz
+      - class: File
+        identifier: SRR11611350
+        location: https://zenodo.org/record/4710649/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz
+      - class: File
+        identifier: SRR11611351
+        location: https://zenodo.org/record/4710649/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz
+    BR treated miRNA:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: SRR11611352
+        location: https://zenodo.org/record/4710649/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz
+      - class: File
+        identifier: SRR11611353
+        location: https://zenodo.org/record/4710649/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz
+      - class: File
+        identifier: SRR11611354
+        location: https://zenodo.org/record/4710649/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz
+    BR treated mRNA:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: SRR1019438
+        location: https://zenodo.org/record/4710649/files/SRR1019438_RNASEQ_BL.fastqsanger.gz
+      - class: File
+        identifier: SRR1019439
+        location: https://zenodo.org/record/4710649/files/SRR1019439_RNASEQ_BL.fastqsanger.gz
+    Control mRNA:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: SRR1019436
+        location: https://zenodo.org/record/4710649/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz
+      - class: File
+        identifier: SRR1019437
+        location: https://zenodo.org/record/4710649/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz
+  outputs:
+    DESeq2 results subsample mRNA:
+        asserts:
+            has_n_lines:
+                n: 33681
+            has_line:
+                line: "AT4G14130\t969.501294444603\t-2.57404472911\t0.166053142684104\t-15.501331004658\t3.39779651460338e-54\t1.93742357262685e-50"
+    DESeq2 results subsample miRNA:
+        asserts:
+            has_n_lines:
+                n: 442
+            has_line:
+                line: "Ath-miR156g\t1.30190940671645\t0.018481032838505\t0.0641047865116956\t0.28829411724401\t0.773121609850347\t0.975250971807399"
+    TargetFinder output:
+        asserts:
+            has_n_lines:
+                n: 442
+            has_line:
+                line: "Ath-miR395f\tAT5G10180_P1 gene=AT5G10180 CDS=209-2242\t252\t272\t+\t3\tAAGUUCUCCCAAACACUUCAA\t :::.:.::::::::::::: \tCUCAGGGGGGUUUGUGAAGUC"

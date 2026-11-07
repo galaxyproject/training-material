@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput Paired End Collection"]
+  1[label="fastp"]
+  0 -> 1 [label="output"]
+  k33eb25c09f2f4cbf8646db053deec7a4[color=lightseagreen,label="Output\nfastp_json"]
+  1 -> k33eb25c09f2f4cbf8646db053deec7a4
+  2[label="Falco"]
+  0 -> 2 [label="output"]
+  3[label="Shovill"]
+  1 -> 3 [label="output_paired_coll"]
+  k225015a77ccc4d68a8680e826069dfca[color=lightseagreen,label="Output\nshovill_log"]
+  3 -> k225015a77ccc4d68a8680e826069dfca
+  4[label="Quast"]
+  3 -> 4 [label="contigs"]
+  k2c7b1b247ac548429d14be65e433e787[color=lightseagreen,label="Output\nquast_output"]
+  4 -> k2c7b1b247ac548429d14be65e433e787
+  5[label="Bandage Image"]
+  3 -> 5 [label="contigs_graph"]
+  6[label="Bandage Info"]
+  3 -> 6 [label="contigs_graph"]
+  k99656c96011a4ce0bb5b8ee1e4541eb1[color=lightseagreen,label="Output\nbandage_info_output"]
+  6 -> k99656c96011a4ce0bb5b8ee1e4541eb1
+}

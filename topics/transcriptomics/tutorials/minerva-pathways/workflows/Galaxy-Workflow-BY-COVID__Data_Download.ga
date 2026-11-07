@@ -1,0 +1,205 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Downloads data from NCBI assuming the correct data input format. (I.e. it should be two columns, with a header, Run and Group, where Run is an SRR identifier.)",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9760-8992",
+            "name": "Helena Rasche"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "AGPL-3.0-or-later",
+    "name": "BY-COVID: Data Download",
+    "steps": {
+        "0": {
+            "annotation": "This should be a two column sample table that looks like:\n\n```\nRun\tGroup\nSRR16681566\thealthy\nSRR16681565\thealthy\nSRR16681564\thealthy\n```",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "This should be a two column sample table that looks like:\n\n```\nRun\tGroup\nSRR16681566\thealthy\nSRR16681565\thealthy\nSRR16681564\thealthy\n```",
+                    "name": "Sample Table"
+                }
+            ],
+            "label": "Sample Table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 6
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0db27234-a5f7-4177-8de5-f461765a00b8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 280,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "078accd8-6164-4e40-9c54-650034f5e91f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": false, \"pattern\": \"Run\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "7e6b8476-bf1d-4fbf-ab55-b6ee872d528b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.8+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input|file_list": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Faster Download and Extract Reads in FASTQ",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Faster Download and Extract Reads in FASTQ",
+            "outputs": [
+                {
+                    "name": "list_paired",
+                    "type": "input"
+                },
+                {
+                    "name": "output_collection",
+                    "type": "input"
+                },
+                {
+                    "name": "output_collection_other",
+                    "type": "input"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 840,
+                "top": 6
+            },
+            "post_job_actions": {
+                "HideDatasetActionlist_paired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "list_paired"
+                },
+                "HideDatasetActionlog": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log"
+                },
+                "HideDatasetActionoutput_collection_other": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_collection_other"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.8+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e407b9da183a",
+                "name": "sra_tools",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"seq_defline\": \"@$sn/$ri\", \"minlen\": null, \"split\": \"--split-3\", \"skip_technical\": true}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"input_select\": \"file_list\", \"__current_case__\": 2, \"file_list\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.8+galaxy1",
+            "type": "tool",
+            "uuid": "4e6c90ae-68d6-4e80-b63a-8c5b5adff338",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output_collection",
+                    "output_name": "output_collection",
+                    "uuid": "b7c7e59d-6a78-41af-ae59-e52fcc1fe2f6"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:BY-COVID"
+    ],
+    "uuid": "c7c92451-c1f4-4319-830a-667020d04f6c",
+    "version": 7
+}
