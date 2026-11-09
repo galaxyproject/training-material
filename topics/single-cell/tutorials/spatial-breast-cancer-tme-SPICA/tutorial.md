@@ -1200,7 +1200,7 @@ LIANA combines ligand-receptor resources and inference methods to rank expressio
 > <hands-on-title>Rank candidate ligand-receptor pairs</hands-on-title>
 >
 > 1. {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The output of` {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} `step`
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Moran's I`
 >    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
 >        - *"Group By"*: `leiden_res_0.8`
 >        - *"Interaction source"*: `Use built-in database`
