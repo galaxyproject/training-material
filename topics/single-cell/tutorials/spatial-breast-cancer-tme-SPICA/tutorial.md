@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Spatial transcriptomics analysis of the breast cancer tumour microenvironment with Visium
 subtopic: spatial
 level: Advanced
-zenodo_link: https://zenodo.org/records/22676369
+zenodo_link: https://zenodo.org/records/24084413
 questions:
 - How is a 10x Visium tissue section represented in SpatialData, and what does one observation actually measure?
 - Which quality-control filters change this breast-cancer section, and by how much?
@@ -19,12 +19,13 @@ objectives:
 - Appraise CellTypist and LIANA outputs for multicellular capture spots and state what each one does not establish
 time_estimation: 4H
 key_points:
-- A Visium observation is a multicellular capture spot on a fixed grid, not a segmented cell, so a Leiden group is a tissue domain and neither it nor a CellTypist label is automatically a cell identity.
-- Report what each threshold removes. The lower spot filters remove only three observations, while requiring gene detection in at least three spots removes 14,361 rarely detected genes.
-- Regressing out `total_counts` replaces the expression matrix with residuals. Keep it as a QC comparison and keep the non-regressed log-normalised branch for clustering and reference transfer.
-- Choosing a Leiden resolution is a judgement about biology. Compare what each extra split is made of, and reject a resolution that only fragments an already coherent group.
-- Scanpy neighbours connect transcriptionally similar spots; Squidpy neighbours connect physically adjacent spots on the capture grid. The two graphs answer different questions.
-- Neighbourhood enrichment shows non-random adjacency, Moran's I shows spatial autocorrelation, and LIANA ranks expression-compatible ligand-receptor candidates. None of them alone demonstrates signalling.
+- A standard Visium observation represents a multicellular capture spot rather than a segmented cell. Each observation measures RNA collected from a defined area of tissue, so its expression profile may contain contributions from several cell populations.
+- Quality-control thresholds must be assessed against both expression distributions and tissue morphology. In this section, the two lower spot filters remove only three observations, while requiring gene detection in at least three spots removes 14,361 rarely detected genes.
+- Normalisation and highly variable gene selection prepare the expression matrix for dimensionality reduction. Regressing out `total_counts` creates a residualised expression matrix, which is retained as a diagnostic comparison rather than used for the main clustering and reference-annotation analyses.
+- Leiden clustering identifies groups of transcriptionally similar spots from the Scanpy expression-neighbour graph. These groups are not automatically distinct cell types or spatially continuous tissue domains.
+- Leiden resolution should be evaluated using changes in group membership and marker-gene programmes. Adjusted Rand indices and marker rankings help assess the consequences of different resolutions, but neither establishes a uniquely correct biological partition.
+- Scanpy expression neighbours represent transcriptomic similarity, whereas Squidpy spatial neighbours represent adjacency on the Visium capture grid. Centrality, neighbourhood enrichment and Moran's I describe different aspects of spatial organisation.
+- Marker-gene rankings identify expression programmes associated with Leiden groups. CellTypist transfers reference labels to mixed spot profiles, while LIANA prioritises candidate ligand-receptor interactions. These methods provide complementary evidence but do not independently establish cellular composition, direct signalling or causal interactions.
 requirements:
 -
     type: "internal"
@@ -78,7 +79,13 @@ This tutorial uses the 10x Genomics **Human Breast Cancer, Block A Section 1** d
 
 The expression table entering this analysis contains **3,798 observations and 36,601 genes**.
 
-The unit of measurement matters throughout this tutorial. A standard Visium observation is a **capture spot**, not a segmented cell. Each spot is 55 µm across with 100 µm between spot centres, arranged on a fixed hexagonal grid, and 10x Genomics describes the resulting resolution as one to ten cells per spot ({% cite TenXVisiumSpotGeometry %}). That is why the biological language below is deliberately conservative: Leiden defines **tissue domains** made of transcriptionally similar spots, CellTypist transfers the closest labels from a single-cell reference, and LIANA ranks expression-compatible ligand-receptor pairs. None of these operations converts a multicellular spot into a known single cell.
+
+The unit of measurement matters throughout this tutorial. In the original 10x Genomics Visium Gene Expression platform, each observation represents a **capture spot rather than a segmented cell**. The spots are 55 µm in diameter, with 100 µm between their centres, and are arranged in a fixed hexagonal lattice. Depending on the cellular density and tissue architecture, a spot may capture RNA from approximately one to ten cells, although the number and composition vary between tissue regions ({% cite TenXVisiumSpotGeometry %}). Consequently, the expression profile of an individual spot can contain transcripts from several cell populations.
+
+This distinction shapes how the results should be interpreted. **Leiden clustering groups spots according to transcriptional similarity**, using the expression-neighbour graph constructed by Scanpy. A Leiden group therefore represents an **expression-defined group of capture spots**, not necessarily a single cell type or a spatially continuous tissue compartment. Whether its members occupy coherent regions, occur at tissue interfaces or are distributed across the section must be investigated using their spatial coordinates and the histological image ({% cite Wolf2018Scanpy %}, {% cite Palla2022Squidpy %}).
+
+The same caution applies to downstream annotation and interaction analysis. CellTypist compares each mixed spot expression profile with labelled single-cell references and assigns the closest reference category; this does not reveal the proportions or exact identities of the cells contributing RNA to that spot ({% cite Xu2023CellTypist %}). LIANA uses expression associated with the selected Leiden groups to prioritise candidate ligand-receptor relationships, but these rankings do not demonstrate direct cellular contact, receptor activation or functional signalling ({% cite Dimitrov2022Liana %}). Throughout this tutorial, biological interpretations are therefore based on the combined evidence from marker genes, spatial organisation, reference annotations and tissue morphology, while recognising the multicellular resolution of Visium.
+
 
 > <comment-title>Why this pipeline has no doublet detection and no deconvolution step</comment-title>
 >
@@ -92,7 +99,9 @@ The unit of measurement matters throughout this tutorial. A standard Visium obse
 >
 {: .comment}
 
-Every step below has been run end to end in Galaxy, and the prepared input together with the output of each step is archived on the [Zenodo record]({{ page.zenodo_link }}). The figures and numbers quoted throughout come from those outputs, so you can compare your own results against them as you go.
+
+The prepared SpatialData input and supporting analysis outputs are available from the [Zenodo record]({{ page.zenodo_link }}). A [reference Galaxy history](https://usegalaxy.eu/u/khaled196/h/spatial-transcriptomics-analysis-of-the-breast-cancer-tumour-microenvironment-with-visium-1) provides a worked example of the analysis. Throughout the tutorial, reported dimensions, quality-control summaries, marker-gene rankings and spatial statistics provide checkpoints for interpreting the results generated at each stage. Comparing these outputs with the reference analysis helps assess reproducibility while keeping the biological interpretation grounded in the observed data.
+
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
