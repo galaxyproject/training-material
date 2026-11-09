@@ -55,6 +55,10 @@ abbreviations:
     UMI: unique molecular identifier
     ECM: extracellular matrix
     CAF: cancer-associated fibroblast
+answer_histories:
+  - label: "UseGalaxy.eu – Breast Cancer Visium Spatial Transcriptomics Analysis"
+    history: https://usegalaxy.eu/u/khaled196/h/spatial-transcriptomics-analysis-of-the-breast-cancer-tumour-microenvironment-with-visium-1
+    date: 2026-11-09
 contributions:
     authorship:
         - khaled196
