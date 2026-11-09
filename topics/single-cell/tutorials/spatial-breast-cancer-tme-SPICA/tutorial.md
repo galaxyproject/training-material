@@ -270,29 +270,65 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"What to inspect?"*: `General information about the object`
 >
->
 {: .hands_on}
+
 
 > <hands-on-title>Optional: read the QC distributions as numbers</hands-on-title>
 >
-> The plots below show the shape of each distribution. If you want the summary values behind them, export the observation table and summarise it.
+> The scatter and violin plots show the distributions of sequencing depth and detected-gene complexity across spots. To obtain the numerical summaries behind these plots, export the observation annotations and calculate the minimum, median and maximum values for the two QC metrics.
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics before filtering`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
-> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `The observation table from the previous` {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} `step` 
->    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `Yes`
->    - In *"Operation to perform on each group"*:
->        - *"Type"*: `median`, *"On column"*: the `total_counts` column
->        - *"Type"*: `min`, *"On column"*: the `total_counts` column
->        - *"Type"*: `max`, *"On column"*: the `total_counts` column
+>    This exports one row per capture spot, including `total_counts` and `n_genes_by_counts`.
 >
->    Repeating the same three operations on `n_genes_by_counts` gives the complexity range.
+> 2. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - In *"Database Table"*:
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the observation table from the previous {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} step
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `obs`
+>            - *"Use first line as column names"*: `Yes`
+>    - *"SQL Query to generate tabular output"*:
+>
+>      ```sql
+>      SELECT * FROM (
+>      WITH ranked AS (
+>          SELECT CAST(total_counts AS REAL) AS total_counts,
+>                 CAST(n_genes_by_counts AS REAL) AS n_genes_by_counts,
+>                 ROW_NUMBER() OVER (
+>                     ORDER BY CAST(total_counts AS REAL)
+>                 ) AS r_counts,
+>                 ROW_NUMBER() OVER (
+>                     ORDER BY CAST(n_genes_by_counts AS REAL)
+>                 ) AS r_genes,
+>                 COUNT(*) OVER () AS n
+>          FROM obs
+>      )
+>      SELECT COUNT(*) AS spots,
+>             MIN(total_counts) AS min_total_counts,
+>             (SELECT AVG(total_counts)
+>              FROM ranked
+>              WHERE r_counts IN ((n+1)/2, (n+2)/2)
+>             ) AS median_total_counts,
+>             MAX(total_counts) AS max_total_counts,
+>             MIN(n_genes_by_counts) AS min_n_genes_by_counts,
+>             (SELECT AVG(n_genes_by_counts)
+>              FROM ranked
+>              WHERE r_genes IN ((n+1)/2, (n+2)/2)
+>             ) AS median_n_genes_by_counts,
+>             MAX(n_genes_by_counts) AS max_n_genes_by_counts
+>      FROM ranked
+>      ) AS evidence_results;
+>      ```
+>
+>    - *"include query result column headers"*: `Yes`
+>        - *"Prefix character for column_header line"*: `#`
+>
+> The output contains one summary row for the section. Compare the medians with the minimum and maximum values before choosing quality-control thresholds. A low count or detected-gene value may indicate reduced capture efficiency, but it may also reflect a tissue region with low RNA abundance or cellularity.
 >
 {: .hands_on}
+
 
 For this section the median `total_counts` is **20,761.5** and the median `n_genes_by_counts` is **6,026.5**. Both distributions are wide: the minimum total count is 578, and the minimum number of detected genes is 430, the strongest 81,624 counts, and the most complex spot detects 10,153 genes. Those two tails are what the filters in the next section act on, and knowing where they sit is what makes a threshold a decision rather than a guess.
 
@@ -411,14 +447,14 @@ The tool label says **cell** because `pp.filter_cells` operates on AnnData obser
 > <hands-on-title>Remove spots with very low total counts</hands-on-title>
 >
 > 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The filtered minimum genes expressed per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered AnnData output from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of counts`
 >            - *"Minimum number of counts required for a cell to pass filtering"*: `1000`
 >
 >
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum counts per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered AnnData output from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
 >    - *"What to inspect?"*: `General information about the object`
 >
 >
@@ -445,14 +481,14 @@ The tool label says **cell** because `pp.filter_cells` operates on AnnData obser
 > <hands-on-title>Remove genes detected in too few spots</hands-on-title>
 >
 > 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum counts per spot from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered AnnData output from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
 >
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum number of cells expressed from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered AnnData output from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
 >    - *"What to inspect?"*: `General information about the object`
 >
 >
@@ -493,7 +529,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 > <hands-on-title>Recompute and visualise post-filter QC</hands-on-title>
 >
 > 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `The filterd minimum number of cells expressed from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `The filtered AnnData output from the previous` {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.11.5+galaxy0) %} `step` 
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >        - *"Name of kind of values in X"*: `counts`
 >        - *"The kind of thing the variables are"*: `genes`
@@ -501,18 +537,17 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Use 'raw' attribute of input if present"*: `No`
 >        - *"Compute log1p transformed annotations"*: `Yes`
 >
-> Rename the generated file `QC metrics after filtering`.
+> 2. Rename the generated file `QC metrics after filtering`.
 >
-> 2. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"x coordinate"*: `total_counts`
 >        - *"y coordinate"*: `n_genes_by_counts`
 >        - *"Color by"*: `pct_counts_in_top_50_genes`
 >
->    Rename the output `Scatter plot after filtering`.
 >
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -520,15 +555,14 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - In *"Violin plot attributes"*:
 >            - *"Display keys in multiple panels"*: `Yes`
 >
->    Rename the output `Violin plots after filtering`.
 >
-> 4. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
+> 5. {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `V1_Breast_Cancer_Block_A_Section_1.spatialdata.zip`
 >    - *"Operation"*: `Import anndata table to a SpatialData object`
 >        - {% icon param-file %} *"annotated data object to add"*: `QC metrics after filtering`
 >        - *"Table name"*: `table_qc_filtered`
 >
-> 5. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+> 6. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `The output of` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step`
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
@@ -543,9 +577,8 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Enable colorbars?"*: `Yes`
 >        - *"Image format"*: `JPG`
 >
->    Rename the output `Spatial Plot total_counts after filtering`.
 >
-> 6. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
+> 7. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SpatialData object"*: `The output of` {% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %} `step`
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
@@ -560,7 +593,6 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >        - *"Enable colorbars?"*: `Yes`
 >        - *"Image format"*: `JPG`
 >
->    Rename the output `Spatial Plot n_genes_by_counts after filtering`.
 >
 {: .hands_on}
 
@@ -659,7 +691,6 @@ The graph built from those components connects spots whose expression profiles a
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
 >
-> 4. Rename the generated file `PCA before regression AnnData`.
 >
 {: .hands_on}
 
@@ -742,7 +773,6 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 >        - *"Distance metric"*: `euclidean`
 >        - *"Numpy random seed"*: `0`
 >
->  Rename the generated file `Compute a neighborhood graph of observations`.
 >
 > 2. {% tool [Scanpy cluster, embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `The AnnData h5ad from the previous` {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.11.5+galaxy0) %} `step` 
@@ -758,7 +788,6 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
 >
->    Rename the output `Plot UMAP`.
 >
 {: .hands_on}
 
@@ -1007,21 +1036,21 @@ Neighbourhood enrichment asks whether two group labels sit next to each other in
 
 ![Neighbourhood-enrichment heatmap for Leiden groups at resolution 0.8.](../../images/spatial-breast-cancer-tme-SPICA/squidpy_neighbourhood_enrichment.png "Neighbourhood-enrichment z-scores measure whether spots belonging to the same or different Leiden groups occur next to one another more or less frequently than expected under random reassignment of group labels.")
 
-The largest values in this matrix are on the diagonal: every group is adjacent to itself far more often than chance, from **z ≈ 38** for group `9` up to **z ≈ 93** for group `2`. That is the expected signature of spots forming coherent territories rather than being scattered.
+The diagonal values show strong within-group spatial enrichment. For example, group `4` has a diagonal z-score of approximately **+97.97**, while group `7` has a diagonal z-score of approximately **+36.23**. These positive values indicate that spots assigned to the same Leiden group occur next to one another more frequently than expected under random reassignment of the group labels.
 
-Off the diagonal, only three pairs are positive at all. Groups `1`–`9` are the strongest (**z ≈ 14.4**), followed by `0`–`11` (**z ≈ 3.1**) and `0`–`9` (**z ≈ 1.4**). Every other pair is depleted, most strongly `1`–`2` (**z ≈ −21.3**) and `0`–`2` (**z ≈ −20.6**). The reading is that the plasma-cell-rich group `1` and the myofibroblast/perivascular group `9` sit next to each other more often than chance, while the epithelial group `2` avoids both stromal groups. A positive z-score supports **non-random adjacency** between labels; it does not identify a ligand, receptor or signalling direction.
+Off the diagonal, groups `6`–`7` show positive enrichment (**z ≈ +6.31**), as do groups `0`–`1` (**z ≈ +3.79**). The value for `0`–`7` is much smaller (**z ≈ +0.29**) and should not be interpreted as strong enrichment. In contrast, adjacency between groups `1`–`2` (**z ≈ −22.06**) and `0`–`2` (**z ≈ −19.99**) is strongly depleted. These results describe the physical arrangement of expression-defined groups across the Visium grid. Positive enrichment supports non-random adjacency between group labels; it does not establish direct molecular communication or signalling direction.
 
 > <question-title>Adjacency is not communication</question-title>
 >
-> Groups `1` and `9` are adjacent more often than expected. Which statement is justified?
+> Groups `6` and `7` are adjacent more often than expected. Which statement is justified?
 >
-> A. Group `1` sends a signal to group `9`.
+> A. Group `6` sends a signal to group `7`.
 >
-> B. Spots carrying labels `1` and `9` share edges in the Visium spatial graph more often than expected under the permutation null.
+> B. Spots carrying labels `6` and `7` share edges in the Visium spatial graph more often than expected under the permutation null.
 >
 > > <solution-title></solution-title>
 > >
-> > **B.** The enrichment analysis works on labels and physical adjacency. It contains no ligand-receptor model and establishes neither molecular interaction nor causal direction.
+> > **B.** The enrichment analysis works on group labels and physical adjacency. It contains no ligand-receptor model and establishes neither molecular interaction nor causal direction.
 > >
 > {: .solution}
 >
@@ -1156,35 +1185,126 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 >
 {: .hands_on}
 
-The direct result contains **32 distinct `predicted_labels`** across 3,790 spots. The most frequent are:
+
+
+> <hands-on-title>Optional: check the CellTypist label counts and confidence</hands-on-title>
+>
+> The direct predictions can be summarised numerically to check how often each reference label is assigned and how those assignments vary between Leiden groups.
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: the annotated AnnData output from the previous {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy2) %} step
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+>    This exports the per-spot reference predictions, including `predicted_labels`, `conf_score` and `leiden_res_0.8`.
+>
+> 2. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - In *"Database Table"*:
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the observation table from the previous {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} step
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `obs`
+>            - *"Use first line as column names"*: `Yes`
+>    - *"SQL Query to generate tabular output"*:
+>
+>      ```sql
+>      SELECT CAST(predicted_labels AS TEXT) AS predicted_label,
+>             COUNT(*) AS spots,
+>             ROUND(100.0 * COUNT(*) /
+>                   (SELECT COUNT(*) FROM obs), 2) AS pct_spots
+>      FROM obs
+>      GROUP BY predicted_labels
+>      ORDER BY spots DESC, predicted_label;
+>      ```
+>
+>    - *"include query result column headers"*: `Yes`
+>        - *"Prefix character for column_header line"*: `#`
+>
+>    This produces the reference-label counts and percentages for the table below.
+>
+> 3. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the same input observation table and table name `obs`, using the following SQL query:
+>
+>    ```sql
+>    SELECT * FROM (
+>    WITH ranked AS (
+>        SELECT CAST(conf_score AS REAL) AS confidence,
+>               ROW_NUMBER() OVER (
+>                   ORDER BY CAST(conf_score AS REAL)
+>               ) AS rn,
+>               COUNT(*) OVER () AS n
+>        FROM obs
+>        WHERE conf_score IS NOT NULL
+>    )
+>    SELECT COUNT(*) AS spots_with_confidence,
+>           MIN(confidence) AS min_confidence,
+>           (SELECT AVG(confidence)
+>            FROM ranked
+>            WHERE rn IN ((n+1)/2, (n+2)/2)
+>           ) AS median_confidence,
+>           MAX(confidence) AS max_confidence
+>    FROM ranked
+>    ) AS evidence_results;
+>    ```
+>
+>    Set *"include query result column headers"* to `Yes` with prefix `#`.
+>
+> 4. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the same input observation table and table name `obs`, using the following SQL query:
+>
+>    ```sql
+>    SELECT CAST(o."leiden_res_0.8" AS TEXT) AS leiden_group,
+>           CAST(o.predicted_labels AS TEXT) AS predicted_label,
+>           COUNT(*) AS spots,
+>           ROUND(
+>               100.0 * COUNT(*) /
+>               (SELECT COUNT(*)
+>                FROM obs AS q
+>                WHERE q."leiden_res_0.8" =
+>                      o."leiden_res_0.8"),
+>               2
+>           ) AS pct_within_group
+>    FROM obs AS o
+>    GROUP BY o."leiden_res_0.8", o.predicted_labels
+>    ORDER BY CAST(o."leiden_res_0.8" AS INTEGER),
+>             spots DESC;
+>    ```
+>
+>    Set *"include query result column headers"* to `Yes` with prefix `#`.
+>
+>    The output shows how many spots in each Leiden group receive each reference label. Use these values to compare CellTypist predictions with the marker-gene interpretation.
+>
+{: .hands_on}
+
+
+The direct result contains **32 distinct `predicted_labels`** across **3,795 spots**. The most frequent labels are shown below.
 
 | Reference label | Spots | Percentage |
 | --- | ---: | ---: |
-| `plasma_IgG` | 1,833 | 48.36% |
-| `LummHR-SCGB` | 1,136 | 29.97% |
+| `plasma_IgG` | 1,836 | 48.38% |
+| `LummHR-SCGB` | 1,137 | 29.96% |
 | `CD8-activated` | 204 | 5.38% |
 | `Fibro-matrix` | 127 | 3.35% |
 | `LummHR-major` | 126 | 3.32% |
-| `Lumsec-prol` | 103 | 2.72% |
+| `Lumsec-prol` | 104 | 2.74% |
 | `Macro-lipo` | 52 | 1.37% |
 
-Two labels account for more than three-quarters of the section, and the median CellTypist confidence across spots is **0.743**. A confidence score describes the classifier's support for its closest reference category; it does not measure how many underlying cells in a Visium spot belong to that category.
+The two most frequent labels account for **78.34%** of spots, and the median CellTypist confidence across spots is **0.743**. The confidence score reflects the classifier's support for its closest reference match to the combined RNA profile of a spot.
+
 
 ![CellTypist reference-label predictions compared with Leiden groups.](../../images/spatial-breast-cancer-tme-SPICA/celltypist_label_transfer.png "Dot size represents the proportion of spots assigned each reference label within a Leiden group, while colour indicates mean prediction probability. These annotations reflect similarity to reference cell profiles rather than definitive cell identities.")
 
 The relationship with the marker evidence is informative in both directions.
 
-Where the two agree, the annotation is strengthened. Group `1`, whose markers are dominated by immunoglobulin chains, matches `plasma_IgG` for **315 of its 596 spots (52.9%)**. Groups `2`, `4` and `5`, all annotated as luminal epithelium from their markers, match `LummHR-SCGB` most often, for 47.0%, 50.7% and 46.5% of their spots. Group `11`, the lymphoid aggregate, matches `CD8-activated` for **7 of its 16 spots (43.8%)** and draws on only four distinct labels in total.
 
-Where they disagree, the disagreement is the lesson. Group `0` carries fibroblast markers alongside immunoglobulin and macrophage signal, yet **412 of its 601 spots (68.6%)** match `plasma_IgG`, with 21 different reference labels appearing across the group. A spot containing a few plasma cells among fibroblasts can be pulled toward `plasma_IgG` because immunoglobulin transcripts are extraordinarily abundant per cell. The classifier reports the closest single profile for a mixture; it does not report the mixture.
+Where the two agree, the reference matches support the marker-based interpretation. Group `1`, whose markers are dominated by immunoglobulin chains, matches `plasma_IgG` for **313 of its 578 spots (54.15%)**. Groups `2`, `4` and `5` have epithelial-associated marker programmes, and `LummHR-SCGB` is their most frequent reference match, accounting for **210 of 451 spots (46.56%)**, **216 of 425 spots (50.82%)** and **167 of 359 spots (46.52%)**, respectively. You can check these values in the optional cross-tabulation above.
+
+Where they disagree, the disagreement is the lesson. Group `0` carries fibroblast- and extracellular-matrix-associated markers alongside immunoglobulin expression. Its most frequent reference match is `plasma_IgG`, assigned to **404 of 609 spots (66.34%)**, and **29 distinct reference labels** appear across the group. Abundant immunoglobulin transcripts can influence the closest reference match for a mixed spot. The percentage describes how many spots received the label.
 
 > <details-title>Why majority voting is disabled in this tutorial</details-title>
 >
-> Majority voting refines each prediction by taking the most common label among transcriptionally similar neighbours ({% cite Dominguez2022CellTypist %}). On multicellular spots that tends to collapse the result: labels held by a minority of spots are absorbed into their larger neighbours, and the 16-spot lymphoid group is exactly the kind of population that disappears.
+> Majority voting refines the direct predictions using the most common reference label within transcriptionally similar subclusters ({% cite Dominguez2022CellTypist %}). For multicellular Visium spots, this can suppress minority reference signals and make mixed expression profiles appear more uniform than they are.
 >
-> Those minority signals are much of the point of a tumour microenvironment analysis, so voting is left off here and the direct `predicted_labels` are used instead. The output is noisier and more informative.
+> Those minority signals may be informative in a tumour microenvironment analysis, so majority voting is left off here and the direct `predicted_labels` are used instead. The resulting annotations preserve variation in reference similarity across spots, but still do not identify their individual constituent cells.
 >
 {: .details}
+
 
 > <question-title>Is a CellTypist label a cell identity?</question-title>
 >
@@ -1320,11 +1440,12 @@ The tissue view is the final consistency check. A UMAP group that looked coheren
 
 # Conclusion
 
-We analysed the **Human Breast Cancer, Block A Section 1** Visium tissue section as a spatial transcriptomics experiment rather than as a single-cell dataset. The prepared expression table began with **3,798 capture spots × 36,601 genes**. Sequential spot and gene filtering retained **3,790 spots × 22,240 genes**: only 8 spots were removed, while the requirement that a gene be detected in at least three spots removed 14,361 rarely detected features.
+We analysed the **Human Breast Cancer, Block A Section 1** Visium tissue section as a spatial transcriptomics experiment rather than as a single-cell dataset. The prepared expression table began with **3,798 capture spots × 36,601 genes**. Sequential spot and gene filtering retained **3,795 spots × 22,240 genes**: only 3 spots were removed, while the requirement that a gene be detected in at least three spots removed 14,361 rarely detected features.
 
 The filtered expression matrix was normalised to **10,000 counts per spot**, log-transformed and annotated with **3,000 highly variable genes** without subsetting away the remaining genes. The main 50-component PCA was calculated on this non-regressed log-normalised branch and used to build a **15-neighbour expression graph** and UMAP. A separate `regress_out(total_counts)` branch showed that the association of early PCs with total count could be removed, but that residualised matrix was deliberately kept out of CellTypist and the main graph because it no longer represents log-normalised expression.
 
-Leiden resolutions **0.4, 0.8 and 1.2** yielded **9, 12 and 15 groups**. Resolution 0.8 was carried forward because it had the highest weighted modularity (0.783) and the highest PCA-space silhouette (+0.121) of the three, and because the groups it adds are interpretable: a single 1,354-spot group at resolution 0.4 separates into a mixed stromal group, a plasma-cell-dominated group and a myofibroblast and perivascular group, while a 16-spot lymphoid aggregate is resolved ({% cite Wu2021BreastAtlas %}). Resolution 1.2 subdivides further with identical modularity and a slightly lower silhouette.
+
+Leiden resolutions **0.4, 0.8 and 1.2** yielded **9, 11 and 16 groups**, respectively. Resolution 0.8 was carried forward as an intermediate partition supported by changes in group membership and marker-gene interpretation, rather than UMAP appearance alone. The adjusted Rand index was **0.654** between resolutions 0.4 and 0.8, and **0.704** between 0.8 and 1.2. At resolution 0.4, group `0` contained **1,390 spots**, of which 608, 556 and 194 were assigned to groups `0`, `1` and `7`, respectively, at resolution 0.8. Their marker rankings suggest stromal and extracellular-matrix-associated, immunoglobulin-rich, and antigen-presentation/myeloid-associated expression programmes, respectively ({% cite Wu2021BreastAtlas %}). This provides a biological rationale for examining the intermediate partition while recognising that the Leiden groups are expression-defined groups of multicellular Visium spots, not necessarily distinct cell types.
 
 Squidpy then replaced expression similarity with **physical adjacency on the Visium grid**. Centrality described graph position, neighbourhood enrichment described label adjacency relative to permutation, and Moran's I identified spatially autocorrelated genes such as *CRISP3* (0.727), *CPB1* (0.712) and the immunoglobulin chains *IGHG3* and *IGLC2*. Mapping the highest-scoring gene back onto the section showed *CRISP3* confined to the territory occupied by Leiden group `4`, so the expression-space and physical-space analyses agreed. Those analyses established spatial structure, not a signalling mechanism.
 
