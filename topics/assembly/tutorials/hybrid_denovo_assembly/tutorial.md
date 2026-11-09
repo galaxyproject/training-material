@@ -12,17 +12,19 @@ tags:
   - genomics
 questions:
   - How do long- and short-read assembly methods differ?
+  - What tools can be used for assessing the quality of an assembled genome?
 objectives:
-  - Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly
-  - Become familiar with genome assembly and polishing programs
-  - Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent
+  - Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly.
+  - Become familiar with genome assembly and polishing programs.
+  - Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent.
   - Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!
 time_estimation: 2h
 key_points:
-  - Performing de novo genome assembly with a combination of long and short reads results in a high quality genome
-  - There are multiple methods for performing hybrid de novo assembly
-  - One option is to assemble the long reads using `Flye` and then polish with the short reads using `Pilon`
-  - Alternatively, `Unicycler` creates an assembly graph from the short reads and then untangles the graph with the long reads
+  - Performing de novo genome assembly with a combination of long and short reads results in a high quality genome.
+  - There are multiple methods for performing hybrid de novo assembly.
+  - One option is to assemble the long reads using {% tool Flye %} and then polish with the short reads using **Pilon**.
+  - Alternatively, **Unicycler** creates an assembly graph from the short reads and then untangles the graph with the long reads.
+  - The tools **Busco** and **Quast** can be used to assess the quality of an assembled genome.
 contributions:
   authorship:
     - GraceAHall
@@ -84,13 +86,7 @@ Genomic DNA is prepared for sequencing by fragmenting/shearing: multiple copies 
 
 Note: Nanopore sequencing - there is usually no need to shear the genomic DNA as specialist methods are used to minimise shearing during DNA preparation. For Nanopore sequencing, the longer the DNA fragments, the better!
 
-# Nanopore draft assembly, Illumina polishing
-
-In this section, you will use `Flye` to create a draft genome assembly from Nanopore reads. We will perform assembly, then assess the quality of our assembly using two tools: `Quast` and `Busco`.
-
-![workflow diagram for hybrid assembly starting with nanopore read](../../images/denovo_assembly/nanopore_illumina_hybrid_assembly.png)
-
-## Upload data
+# Upload data
 
 Let's start with uploading the data.
 
@@ -122,16 +118,21 @@ Let's start with uploading the data.
 >
 {: .hands_on}
 
+# Nanopore draft assembly, Illumina polishing
+
+In this section, you will use {% tool Flye %} to create a draft genome assembly from Nanopore reads. We will perform assembly, then assess the quality of our assembly using two tools: {% tool Quast %} and {% tool Busco %}.
+
+![workflow diagram for hybrid assembly starting with nanopore read](../../images/denovo_assembly/nanopore_illumina_hybrid_assembly.png)
+
 
 ## A baseline for "high-quality" assemblies
 
 To begin, we will identify what a high-quality assembly looks like.
 
 When running assembly tools, we want to check the quality of assemblies we produce.
-It is paramount that genome assemblies are high-quality for them to be useful. To get a baseline for what is considered a "high-quality" assembly, we will first run a common assembly QC tool - `Busco` - on a published genome similar to the organism we are working with today.
+It is paramount that genome assemblies are high-quality for them to be useful. To get a baseline for what is considered a "high-quality" assembly, we will first run a common assembly QC tool - {% tool Busco %} - on a published genome similar to the organism we are working with today.
 
-In your imported files, you should see a `reference_genome.fasta` item.
-This is the published genome we will compare against.
+In your imported files, you should see a `reference_genome.fasta` item. This is the published genome we will compare against.
 
 ### QC with Busco
 
@@ -139,10 +140,7 @@ BUSCO analysis uses the presence, absence, or fragmentation of key genes in an a
 
 BUSCO genes are specifically selected for each taxonomic clade, and represent a group of genes that each organism in the clade is expected to possess. At higher clades, 'housekeeping genes' are the only members, while at more refined taxa such as order or family, lineage-specific genes can also be used.
 
-We expect the reference genome to have all of these genes. When running `Busco`, we expect it to find most (if not all) of these in the assembly.
-
-Find and select the `Busco` tool in the tools panel using the search bar.
-In this tutorial, we know our organism is within the 'Bacillales' order.
+We expect the reference genome to have all of these genes. When running {% tool Busco %}, we expect it to find most (if not all) of these in the assembly. In this tutorial, we know our organism is within the 'Bacillales' order.
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
@@ -155,7 +153,7 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 >      -  *"Lineage"*: `Bacillales`
 >    - *"Which outputs should be generated"*: `Short summary text`
 >
-> 2. ***Rename*** the `short summary` output to `Busco on Reference`.
+> 2. **Rename** {% icon galaxy-pencil %} the `short summary` output to `Busco on Reference`.
 >
 > 3. View the `Busco on Reference` output:
 >    - It may look something like this:
@@ -169,9 +167,9 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 >
 > > <solution-title></solution-title>
 > >
-> > - It seems that `Busco` could find almost all expected genes in the reference genome assembly.
+> > - It seems that {% tool Busco %} could find almost all expected genes in the reference genome assembly.
 > > - By looking at the results, we see that we have 449 / 450 Complete BUSCOs, and one Fragmented BUSCO.
-> > - This will form the baseline for the `Busco` QC results expected of a high-quality genome assembly.
+> > - This will form the baseline for the {% tool Busco %} QC results expected of a high-quality genome assembly.
 > > - From here, we will use our input DNA sequence data to assemble the genome of the sequenced organism, and will compare the QC results to that of the published `reference_genome.fasta` assembly.
 > >
 > {: .solution}
@@ -179,9 +177,11 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 {: .question}
 
 > <comment-title>BUSCO Databases</comment-title>
+>
 > - The available lineages and number of BUSCO genes that will be compared in a chosen lineage will depend on the selected BUSCO database.
 > - For example, for the `Bacillales` lineage used in this tutorial, the `All odb10 2026-03-19-213122` database contains 450 BUSCO genes, while the `All odb12 2026-03-20-145944` database contains 429 BUSCO genes. The `Busco v5 Lineage Datasets` database does not include BUSCO genes for the `Bacillales` lineage.
 > - Care should always be taken to select a BUSCO database that contains the lineage of interest and use a consistent database when comparing BUSCO results.
+> 
 {: .comment}
 
 
@@ -189,21 +189,18 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 
 Our first assembly will use the long-read data to create a draft genome, then the short-read data to "polish" (improve) the draft into a better assembly.
 
-We will start by using a long-read assembly tool called `Flye` to create an assembly using the Nanopore long-read data.
-
-Search for `Flye` in the tools panel search bar and select the tool.
+We will start by using a long-read assembly tool called {% tool Flye %} to create an assembly using the Nanopore long-read data.
 
 > <hands-on-title>Run Flye</hands-on-title>
 >
 > 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.6+galaxy0) %}:
 >    - *"Input reads"*: `nanopore_reads.fastq`
 >    - Leave all other parameters as default
->    - Scroll down and run Flye by clicking the blue `Run tool` button at the bottom of the page.
 >
 > 2. View output:
->    - `Flye` produces a number of outputs. We only need the 'consensus' fasta file. You can delete the other outputs.
+>    - {% tool Flye %} produces a number of outputs. We only need the 'consensus' fasta file. You can delete the other outputs.
 >
-> 3. ***Rename*** the `Flye on data XX: consensus` output to `Flye: Assembly`
+> 3. **Rename** {% icon galaxy-pencil %} the `Flye on data XX: consensus` output to `Flye: Assembly`
 >
 {: .hands_on}
 
@@ -225,7 +222,7 @@ We need to check if our assembly is good quality or not. It is paramount that ge
 >      -  *"Lineage"*: `Bacillales`
 >    - *"Which outputs should be generated"*: `Short summary text`
 >
-> 2. ***Rename*** the `short summary` output to `Busco on Flye: Assembly`.
+> 2. **Rename** {% icon galaxy-pencil %} the `short summary` output to `Busco on Flye: Assembly`.
 >
 > 3. View the `Busco on Flye: Assembly` output:
 >    - It may look something like this:
@@ -251,11 +248,9 @@ We need to check if our assembly is good quality or not. It is paramount that ge
 
 ### Quast
 
-Aside from `Busco`, we can use another method to perform assembly QC. `Quast` allows us to compare two assemblies to determine their similarity.
+Aside from {% tool Busco %}, we can use another method to perform assembly QC. {% tool Quast %} allows us to compare two assemblies to determine their similarity.
 
-Although the organism we sequenced may be different, we can use `Quast` to compare our assembly with the provided reference genome to see how similar they are on the individual base level.
-
-Search for the `Quast` tool in the tools panel.
+Although the organism we sequenced may be different, we can use {% tool Quast %} to compare our assembly with the provided reference genome to see how similar they are on the individual base level.
 
 > <hands-on-title>Run Quast</hands-on-title>
 >
@@ -268,7 +263,7 @@ Search for the `Quast` tool in the tools panel.
 >      - *"Reference genome"*: `reference_genome.fasta`
 >    - *"Output files"*: Select `HTML reports`, `Tabular reports`
 >
-> 2. ***Rename*** the `tabular report` output to `Quast on Flye: Assembly`.
+> 2. **Rename** {% icon galaxy-pencil %} the `tabular report` output to `Quast on Flye: Assembly`.
 >
 > 3. View output:
 >    - `Quast` will produce a HTML report summarising it's results.
@@ -288,7 +283,7 @@ Search for the `Quast` tool in the tools panel.
 >
 > > <solution-title></solution-title>
 > >
-> > - From the output of `Quast`, our draft assembly seems to have good coverage and not too many contigs.
+> > - From the output of {% tool Quast %}, our draft assembly seems to have good coverage and not too many contigs.
 > > - Unfortunately, the mismatch / indel rate is quite high.
 > > - Although we don't expect our organism to be ***identical*** to the supplied reference, we would expect fewer mismatches and indels, as the provided reference genome is ***very*** similar to organism which was sequenced.
 > >
@@ -301,13 +296,11 @@ Search for the `Quast` tool in the tools panel.
 
 We should be able improve our draft assembly with the Illumina reads available and correct some of these errors.
 
-This process involves two steps. We will first align the Illumina reads to our draft assembly, then supply the mapping information to `Pilon`, which will use this alignment information to error-correct our assembly.
+This process involves two steps. We will first align the Illumina reads to our draft assembly, then supply the mapping information to {% tool Pilon %}, which will use this alignment information to error-correct our assembly.
 
-Illumina reads have much higher per-base accuracy than Nanopore reads. We will map the Illumina reads to our draft assembly using a short-read aligner called `BWA-MEM`. Then we can give `Pilon` this alignment file to polish our draft assembly.
+Illumina reads have much higher per-base accuracy than Nanopore reads. We will map the Illumina reads to our draft assembly using a short-read aligner called {% tool Map with BWA-MEM %}. Then we can give {% tool Pilon %} this alignment file to polish our draft assembly.
 
 ### Map Illumina reads to draft assembly
-
-Search for `Map with BWA-MEM` in the tools panel.
 
 > <hands-on-title>Map with BWA-MEM</hands-on-title>
 >
@@ -320,16 +313,13 @@ Search for `Map with BWA-MEM` in the tools panel.
 >
 > 2. View output:
 >    - The output will be a BAM file (Binary Alignment Map). This is tabular data recording information about how reads were aligned to the draft assembly.
->    - We can now use this output BAM file as an input to `Pilon`.
+>    - We can now use this output BAM file as an input to {% tool Pilon %}.
 >
-> 3. ***Rename*** the output to `Flye: Short read alignments`
+> 3. **Rename** {% icon galaxy-pencil %} the output to `Flye: Short read alignments`
 >
 {: .hands_on}
 
-
 ### Polish assembly with Pilon
-
-Search for `Pilon` in the tools panel.
 
 > <hands-on-title>Run Pilon</hands-on-title>
 >
@@ -341,31 +331,29 @@ Search for `Pilon` in the tools panel.
 >    - *"Variant calling mode"*: `No`
 >
 > 2. View output:
->    - `Pilon` gives a single output file - the polished assembly.
+>    - {% tool Pilon %} gives a single output file - the polished assembly.
 >
-> 3. ***Rename*** the output to `Flye: Polished assembly`
+> 3. **Rename** {% icon galaxy-pencil %} the output to `Flye: Polished assembly`
 >
 {: .hands_on}
 
-
-
 ### Compare draft and polished assemblies
 
-We are now interested to see how much `Pilon` improved our draft assembly.
+We are now interested to see how much {% tool Pilon %} improved our draft assembly.
 
 > <hands-on-title>Run Quast</hands-on-title>
 >
-> Run `Quast` as before with the new `Flye: Polished assembly` data
+> Run {% tool Quast %} as before with the new `Flye: Polished assembly` data
 >
-> 1. Select the history item for our initial `Quast` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Quast` job.
+> 1. Select the history item for our initial {% tool Quast %} job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous {% tool Quast %} job.
 >
 > 2. Change the *"Contigs/scaffolds file"* input to `Flye: Polished assembly`.
 >
-> 3. Click the `Run Tool` button to submit the job.
+> 3. Click the **Run Tool** button to submit the job.
 >
-> 4. ***Rename*** the `tabular report` output to `Quast on Flye: Polished assembly`.
+> 4. **Rename** {% icon galaxy-pencil %} the `tabular report` output to `Quast on Flye: Polished assembly`.
 >
-> 5. After `Quast` has finished, open the HTML report.
+> 5. After {% tool Quast %} has finished, open the HTML report.
 >    - Make note of `# mismatches per 100 kbp` and `# indels per 100 kbp`.
 >
 {: .hands_on}
@@ -384,17 +372,17 @@ We are now interested to see how much `Pilon` improved our draft assembly.
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
-> Run `Busco` as before with the new `Flye: Polished assembly` data
+> Run {% tool Busco %} as before with the new `Flye: Polished assembly` data
 >
-> 1. Select the history item for our initial `Busco` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Busco` job.
+> 1. Select the history item for our initial {% tool Busco %} job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous {% tool Busco %} job.
 >
 > 2. Change the *"Sequences to analyse"* input to `Flye: Polished assembly`.
 >
-> 3. Click the `Run Tool` button to submit the job.
+> 3. Click the **Run Tool** button to submit the job.
 >
-> 4. ***Rename*** the `short summary` output to `Busco on Flye: Polished assembly`.
+> 4. **Rename** {% icon galaxy-pencil %} the `short summary` output to `Busco on Flye: Polished assembly`.
 >
-> 5. After `Busco` has finished, open the `Busco on Flye: Polished assembly` output.
+> 5. After {% tool Busco %} has finished, open the `Busco on Flye: Polished assembly` output.
 >
 {: .hands_on}
 
@@ -415,7 +403,7 @@ We are now interested to see how much `Pilon` improved our draft assembly.
 
 All going well, the polished assembly should be much higher quality than our draft.
 
-The per-base accuracy of our assembly contigs should have markedly improved. This is reflected in the lower mismatches and indels per 100kbp reported by `Quast`, and the higher number of complete BUSCO genes. Our contiguity and coverage (as measured by the genome fraction (%) statistic reported by `Quast`) may not show the same level of improvement, as the polishing step is mainly aimed at improving per-base contig accuracy.
+The per-base accuracy of our assembly contigs should have markedly improved. This is reflected in the lower mismatches and indels per 100kbp reported by {% tool Quast %}, and the higher number of complete BUSCO genes. Our contiguity and coverage (as measured by the genome fraction (%) statistic reported by {% tool Quast %}) may not show the same level of improvement, as the polishing step is mainly aimed at improving per-base contig accuracy.
 
 Our next step is to use a purpose-built hybrid de novo assembly tool, and compare its performance with our sequential draft + polishing approach.
 
@@ -440,7 +428,7 @@ Our next step is to use a purpose-built hybrid de novo assembly tool, and compar
 >
 > > <solution-title></solution-title>
 > >
-> > Illumina reads have higher per-base accuracy than Nanopore. Illumina reads were aligned to the draft assembly, then `Pilon` used this alignment information to improve locations with errors in the assembly.
+> > Illumina reads have higher per-base accuracy than Nanopore. Illumina reads were aligned to the draft assembly, then {% tool Pilon %} used this alignment information to improve locations with errors in the assembly.
 > >
 > {: .solution}
 >
@@ -448,11 +436,11 @@ Our next step is to use a purpose-built hybrid de novo assembly tool, and compar
 
 > <question-title></question-title>
 >
-> How does `Quast` inform on assembly quality?
+> How does {% tool Quast %} inform on assembly quality?
 >
 > > <solution-title></solution-title>
 > >
-> > `Quast` shows summary information about the assembly contigs. If a reference genome is given, it informs the genome fraction (how much of the reference is covered by the assembly), if any genomic regions appear duplicated, and error information including the rate of mismatches and indels.
+> > {% tool Quast %} shows summary information about the assembly contigs. If a reference genome is given, it informs the genome fraction (how much of the reference is covered by the assembly), if any genomic regions appear duplicated, and error information including the rate of mismatches and indels.
 > >
 > {: .solution}
 >
@@ -460,11 +448,11 @@ Our next step is to use a purpose-built hybrid de novo assembly tool, and compar
 
 > <question-title></question-title>
 >
-> How does `Busco` inform on assembly quality?
+> How does {% tool Busco %} inform on assembly quality?
 >
 > > <solution-title></solution-title>
 > >
-> > `Busco` does not use a reference genome to compare. It attempts to locate key genes which should be present in the assembly, and reports whether it could/could not find those genes. If a key gene is found, it reports whether the gene was fragmented (errors) or complete.
+> > {% tool Busco %} does not use a reference genome to compare. It attempts to locate key genes which should be present in the assembly, and reports whether it could/could not find those genes. If a key gene is found, it reports whether the gene was fragmented (errors) or complete.
 > >
 > {: .solution}
 >
@@ -472,23 +460,19 @@ Our next step is to use a purpose-built hybrid de novo assembly tool, and compar
 
 
 
-## Purpose-built hybrid assembly tool - Unicycler
+# Purpose-built hybrid assembly tool - Unicycler
 
-In this section, we will use a purpose-built tool called `Unicycler` to perform hybrid assembly.
+In this section, we will use a purpose-built tool called {% tool Unicycler %} to perform hybrid assembly.
 
-`Unicycler` uses our Nanopore and Illumina read sets together as input, and returns an assembly. Once we have created the assembly, we will assess its quality using `Quast` and `Busco` and compare with our previous polished assembly. We will also perform BUSCO analysis on the supplied reference genome itself, to record a baseline for our theoretical best `Busco` report.
+{% tool Unicycler %} uses our Nanopore and Illumina read sets together as input, and returns an assembly. Once we have created the assembly, we will assess its quality using {% tool Quast %} and {% tool Busco %} and compare with our previous polished assembly. We will also perform BUSCO analysis on the supplied reference genome itself, to record a baseline for our theoretical best {% tool Busco %} report.
 
 ![workflow diagram for hybrid assembly using unicycler](../../images/denovo_assembly/unicycler_hybrid_assembly.png)
 
-### Hybrid de novo assembly with Unicycler
+## Hybrid de novo assembly with Unicycler
 
-`Unicycler` performs assembly in the opposite manner to our previous approach. Illumina reads are used to create an assembly graph, then Nanopore reads are used to disentangle problems in the graph. The Nanopore reads serve to bridge Illumina contigs, and to reveal how the contigs are arranged sequentially in the genome.
+{% tool Unicycler %} performs assembly in the opposite manner to our previous approach. Illumina reads are used to create an assembly graph, then Nanopore reads are used to disentangle problems in the graph. The Nanopore reads serve to bridge Illumina contigs, and to reveal how the contigs are arranged sequentially in the genome.
 
-### Run Unicycler
-
-Find `Unicycler` in the tools panel. It is listed as `Create assemblies with Unicycler`
-
-Run `Unicycler` using the Nanopore and Illumina read sets.
+{% tool Unicycler %} is listed in the Tool Panel as {% tool Create assemblies with Unicycler %}. We will now run {% tool Unicycler %} using both the Nanopore and Illumina read sets.
 
 > <hands-on-title>Run Unicycler</hands-on-title>
 >
@@ -499,45 +483,42 @@ Run `Unicycler` using the Nanopore and Illumina read sets.
 >    - *"Select long reads. If there are no long reads, leave this empty"*: `nanopore_reads.fastq`
 >
 > 2. View Output
->    - `Unicycler` will output three files
+>    - {% tool Unicycler %} will output three files
 >       - The assembly
 >       - An assembly graph
 >       - SPAdes graphs
 >    - We are interested in the `Final Assembly` output, which is the assembly as a `fasta` file.
 >
-> 3. ***Rename*** the `Final Assembly` output to `Unicycler: Assembly`.
+> 3. **Rename** {% icon galaxy-pencil %} the `Final Assembly` output to `Unicycler: Assembly`.
 >
 > > <comment-title></comment-title>
 > >
-> > If `nanopore_reads.fastq` does not appear in the dropdown list, its datatype needs to be changed.
+> > If `nanopore_reads.fastq` does not appear in the dropdown list, **Change** {% icon galaxy-pencil %} the datatype to `fastqsanger`.
 > >
-> > - Click the pencil {% icon galaxy-pencil %} icon next to `nanopore_reads.fastq` in the history panel.
-> > - Then select the `Datatypes` tab.
-> > - For the parameter `New Type`: `fastqsanger`
-> > - Leave all else default and execute the program.
+> > {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 > >
 > {: .comment}
 >
 {: .hands_on}
 
 
-### Comparing Unicycler assembly to Nanopore + Illumina polished assembly
+## Comparing Unicycler assembly to Nanopore + Illumina polished assembly
 
-`Busco` and `Quast` can be used again to assess our `Unicycler` assembly. As a purpose-built tool, it generally produces much better assemblies than our sequential approach. This is reflected as (`Quast`) a lower number of contigs, lower mismatches and indels per 100kb, and (`Busco`) greater number of BUSCO genes complete.
+{% tool Busco %} and {% tool Quast %} can be used again to assess our {% tool Unicycler %} assembly. As a purpose-built tool, it generally produces much better assemblies than our sequential approach. This is reflected as ({% tool Quast %}) a lower number of contigs, lower mismatches and indels per 100kb, and ({% tool Busco %}) greater number of BUSCO genes complete.
 
 > <hands-on-title>Run Quast</hands-on-title>
 >
-> Run `Quast` as before with the new `Unicycler: Assembly` data
+> Run {% tool Quast %} as before with the new `Unicycler: Assembly` data
 >
-> 1. Select the history item for our initial `Quast` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Quast` job.
+> 1. Select the history item for our initial {% tool Quast %} job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous {% tool Quast %} job.
 >
 > 2. Change the *"Contigs/scaffolds file"* input to `Unicycler: Assembly`.
 >
-> 3. Click the `Run Tool` button to submit the job.
+> 3. Click the **Run Tool** button to submit the job.
 >
-> 4. ***Rename*** the `tabular report` output to `Quast on Unicycler: Assembly`.
+> 4. **Rename** {% icon galaxy-pencil %} the `tabular report` output to `Quast on Unicycler: Assembly`.
 >
-> 5. At time of writing, these were the `Quast` results:
+> 5. At time of writing, these were the {% tool Quast %} results:
 >
 > ![output quast report for unicycler assembly](../../images/denovo_assembly/quast_unicycler_assembly.png)
 >
@@ -545,23 +526,23 @@ Run `Unicycler` using the Nanopore and Illumina read sets.
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
-> Run `Busco` as before with the new `Unicycler: Assembly` data
+> Run {% tool Busco %} as before with the new `Unicycler: Assembly` data
 >
-> 1. Select the history item for our initial `Busco` job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous `Busco` job.
+> 1. Select the history item for our initial {% tool Busco %} job, then click the rerun {% icon dataset-rerun %} button. This will load the settings used for the previous {% tool Busco %} job.
 >
 > 2. Change the *"Sequences to analyse"* input to `Unicycler: Assembly`.
 >
-> 3. Click the `Run Tool` button to submit the job.
+> 3. Click the **Run Tool** button to submit the job.
 >
-> 4. ***Rename*** the `short summary` output to `Busco on Unicycler: Assembly`.
+> 4. **Rename** {% icon galaxy-pencil %} the `short summary` output to `Busco on Unicycler: Assembly`.
 >
-> 5. At time of writing, these were the `Busco` results:
+> 5. At time of writing, these were the {% tool Busco %} results:
 >
 > ![output busco report for unicycler assembly](../../images/denovo_assembly/busco_unicycler_assembly.png)
 >
 {: .hands_on}
 
-We can now create an aggregate summary report from all of our `Quast` and `Busco` outputs using `MultiQC`, which enables us to easily compare the quality of our genome assemblies.
+We can now create an aggregate summary report from all of our {% tool Quast %} and {% tool Busco %} outputs using {% tool MultiQC %}, which enables us to easily compare the quality of our genome assemblies.
 
 > <hands-on-title>Run MultiQC</hands-on-title>
 >
@@ -574,13 +555,13 @@ We can now create an aggregate summary report from all of our `Quast` and `Busco
 >      - *"Which tool was used generate logs?"*: `QUAST`
 >      - *"Output of Quast"*: `Quast on Fly: Assembly`, `Quast on Fly: Polished assembly`, `Quast on Unicycler: Assembly`
 >
-> 2. View the `Webpage` output from `MultiQC`:
+> 2. View the `Webpage` output from {% tool MultiQC %}:
 >    - At time of writing, these were the results.
->      - The number of BUSCOs identified in each assembly by `Busco`:
+>      - The number of BUSCOs identified in each assembly by {% tool Busco %}:
 >        ![buscos identified in each assembly](../../images/denovo_assembly/busco_plot_bacillales_odb10.png)
->      - A table of `Quast` statistics for each assembly:
+>      - A table of {% tool Quast %} statistics for each assembly:
 >        ![table of quast statistics](../../images/denovo_assembly/quast_table_statistics.png)
->      - The number of contigs identified in each assembly by `Quast`:
+>      - The number of contigs identified in each assembly by {% tool Quast %}:
 >        ![number of contigs in each assembly](../../images/denovo_assembly/quast_num_contigs.png)
 >
 {: .hands_on}
@@ -588,13 +569,13 @@ We can now create an aggregate summary report from all of our `Quast` and `Busco
 
 > <question-title></question-title>
 >
-> How does the `Unicycler` assembly compare with the previous assembly produced using `Flye` + `Pilon`?
+> How does the {% tool Unicycler %} assembly compare with the previous assembly produced using {% tool Flye %} + {% tool Pilon %}?
 >
 > > <solution-title></solution-title>
 > >
-> > It seems that the `Unicycler` assembly is much better than the `Flye` + `Pilon` polishing assembly, and produces the same report as the reference genome. Awesome! Looks like this is pretty good.
+> > It seems that the {% tool Unicycler %} assembly is much better than the {% tool Flye %} + {% tool Pilon %} polishing assembly, and produces the same report as the reference genome. Awesome! Looks like this is pretty good.
 > >
-> > The `Unicycler` assembly has:
+> > The {% tool Unicycler %} assembly has:
 > >
 > > - A very high Genome fraction (coverage of the reference genome)
 > > - Very few mismatches and indels per 100 kbp
@@ -605,18 +586,18 @@ We can now create an aggregate summary report from all of our `Quast` and `Busco
 {: .question}
 
 
-These results indicate that our `Unicycler` assembly is high quality, and the organism is extremely similar to the organism of the reference genome.
+These results indicate that our {% tool Unicycler %} assembly is high quality, and the organism is extremely similar to the organism of the reference genome.
 
 To improve our assembly further to be publishable "complete" quality, we would want to reduce the number of contigs (ideally to a single contig). If the organism has plasmids, we would expect a handfull of contigs, likely below 10.
 
 To do this, the best course of action would be to generate more long-read data.
 
 
-### Section Questions
+## Section Questions
 
 > <question-title></question-title>
 >
-> Why did we select `Paired` for our Illumina reads in the `Unicycler` tool?
+> Why did we select `Paired` for our Illumina reads in the {% tool Unicycler %} tool?
 >
 > > <solution-title></solution-title>
 > >
@@ -628,7 +609,7 @@ To do this, the best course of action would be to generate more long-read data.
 
 > <question-title></question-title>
 >
-> Does `Unicycler` begin by using the long or short reads?
+> Does {% tool Unicycler %} begin by using the long or short reads?
 >
 > > <solution-title></solution-title>
 > >
@@ -640,11 +621,11 @@ To do this, the best course of action would be to generate more long-read data.
 
 > <question-title></question-title>
 >
-> How does `Unicycler` use long reads to improve its assembly graph?
+> How does {% tool Unicycler %} use long reads to improve its assembly graph?
 >
 > > <solution-title></solution-title>
 > >
-> > The assembly graph produced by short reads has tangled regions. When we don't know how sections of the genome are arranged, tangled regions appear in the graph. `Unicycler` uses Nanopore reads which overlap these tangled regions to resolve the proper structure of the genome.
+> > The assembly graph produced by short reads has tangled regions. When we don't know how sections of the genome are arranged, tangled regions appear in the graph. {% tool Unicycler %} uses Nanopore reads which overlap these tangled regions to resolve the proper structure of the genome.
 > >
 > {: .solution}
 >
@@ -657,9 +638,9 @@ We have covered two methods for hybrid de novo assembly. The combination of long
 
 To further improve our assembly, extra Nanopore read data may provide the most benefit. At 50x coverage (200Mb), we may achieve a single, or few contig assembly with high per-base accuracy.
 
-In this tutorial, we had a reference genome for a closely related organism, which we could use when assessing the quality of our draft genome assemblies. Without access to a reference genome, `Quast` will produce fewer metrics for assessing the assembled genome quality. In this situation, you can look at the number of contigs in the assembled genome, the minimum number of contigs that produce 50\% and 90\% of the bases in the assembly and the GC\% content. For good quality assemblies, the total and minimum number (50\% and 90\%) of contigs should be small and the GC\% content should be near 50\%.
+In this tutorial, we had a reference genome for a closely related organism, which we could use when assessing the quality of our draft genome assemblies. Without access to a reference genome, {% tool Quast %} will produce fewer metrics for assessing the assembled genome quality. In this situation, you can look at the number of contigs in the assembled genome, the minimum number of contigs that produce 50% and 90% of the bases in the assembly and the GC% content. For good quality assemblies, the total and minimum number (50% and 90%) of contigs should be small and the GC% content should be near 50%.
 
-The development of new purpose-built tools for hybrid de novo assembly like `Unicycler` have improved the quality of assemblies we can produce. These tools are of great importance and while they already produce great results, they will continue to improve over time.
+The development of new purpose-built tools for hybrid de novo assembly like {% tool Unicycler %} have improved the quality of assemblies we can produce. These tools are of great importance and while they already produce great results, they will continue to improve over time.
 
 -------------------------------
 ## Additional reading
