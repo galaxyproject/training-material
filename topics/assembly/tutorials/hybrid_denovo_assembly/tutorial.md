@@ -196,7 +196,6 @@ We will start by using a long-read assembly tool called {% tool Flye %} to creat
 > 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.6+galaxy0) %}:
 >    - *"Input reads"*: `nanopore_reads.fastq`
 >    - Leave all other parameters as default
->    - Scroll down and run Flye by clicking the blue `Run tool` button at the bottom of the page.
 >
 > 2. View output:
 >    - {% tool Flye %} produces a number of outputs. We only need the 'consensus' fasta file. You can delete the other outputs.
