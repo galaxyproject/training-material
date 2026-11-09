@@ -639,7 +639,7 @@ We have covered two methods for hybrid de novo assembly. The combination of long
 
 To further improve our assembly, extra Nanopore read data may provide the most benefit. At 50x coverage (200Mb), we may achieve a single, or few contig assembly with high per-base accuracy.
 
-In this tutorial, we had a reference genome for a closely related organism, which we could use when assessing the quality of our draft genome assemblies. Without access to a reference genome, {% tool Quast %} will produce fewer metrics for assessing the assembled genome quality. In this situation, you can look at the number of contigs in the assembled genome, the minimum number of contigs that produce 50\% and 90\% of the bases in the assembly and the GC\% content. For good quality assemblies, the total and minimum number (50\% and 90\%) of contigs should be small and the GC\% content should be near 50\%.
+In this tutorial, we had a reference genome for a closely related organism, which we could use when assessing the quality of our draft genome assemblies. Without access to a reference genome, {% tool Quast %} will produce fewer metrics for assessing the assembled genome quality. In this situation, you can look at the number of contigs in the assembled genome, the minimum number of contigs that produce 50% and 90% of the bases in the assembly and the GC% content. For good quality assemblies, the total and minimum number (50% and 90%) of contigs should be small and the GC% content should be near 50%.
 
 The development of new purpose-built tools for hybrid de novo assembly like {% tool Unicycler %} have improved the quality of assemblies we can produce. These tools are of great importance and while they already produce great results, they will continue to improve over time.
 
