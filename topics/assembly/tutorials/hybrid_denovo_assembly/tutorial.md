@@ -22,9 +22,9 @@ time_estimation: 2h
 key_points:
   - Performing de novo genome assembly with a combination of long and short reads results in a high quality genome.
   - There are multiple methods for performing hybrid de novo assembly.
-  - One option is to assemble the long reads using {% tool Flye %} and then polish with the short reads using {% tool Pilon %}.
-  - Alternatively, {% tool Unicycler %} creates an assembly graph from the short reads and then untangles the graph with the long reads.
-  - The tools {% tool Busco %} and {% tool Quast %} can be used to assess the quality of an assembled genome.
+  - One option is to assemble the long reads using {% tool Flye %} and then polish with the short reads using **Pilon**.
+  - Alternatively, **Unicycler** creates an assembly graph from the short reads and then untangles the graph with the long reads.
+  - The tools **Busco** and **Quast** can be used to assess the quality of an assembled genome.
 contributions:
   authorship:
     - GraceAHall
@@ -132,8 +132,7 @@ To begin, we will identify what a high-quality assembly looks like.
 When running assembly tools, we want to check the quality of assemblies we produce.
 It is paramount that genome assemblies are high-quality for them to be useful. To get a baseline for what is considered a "high-quality" assembly, we will first run a common assembly QC tool - {% tool Busco %} - on a published genome similar to the organism we are working with today.
 
-In your imported files, you should see a `reference_genome.fasta` item.
-This is the published genome we will compare against.
+In your imported files, you should see a `reference_genome.fasta` item. This is the published genome we will compare against.
 
 ### QC with Busco
 
@@ -141,10 +140,7 @@ BUSCO analysis uses the presence, absence, or fragmentation of key genes in an a
 
 BUSCO genes are specifically selected for each taxonomic clade, and represent a group of genes that each organism in the clade is expected to possess. At higher clades, 'housekeeping genes' are the only members, while at more refined taxa such as order or family, lineage-specific genes can also be used.
 
-We expect the reference genome to have all of these genes. When running {% tool Busco %}, we expect it to find most (if not all) of these in the assembly.
-
-Find and select the {% tool Busco %} tool in the tools panel using the search bar.
-In this tutorial, we know our organism is within the 'Bacillales' order.
+We expect the reference genome to have all of these genes. When running {% tool Busco %}, we expect it to find most (if not all) of these in the assembly. In this tutorial, we know our organism is within the 'Bacillales' order.
 
 > <hands-on-title>Run Busco</hands-on-title>
 >
@@ -181,9 +177,11 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 {: .question}
 
 > <comment-title>BUSCO Databases</comment-title>
+>
 > - The available lineages and number of BUSCO genes that will be compared in a chosen lineage will depend on the selected BUSCO database.
 > - For example, for the `Bacillales` lineage used in this tutorial, the `All odb10 2026-03-19-213122` database contains 450 BUSCO genes, while the `All odb12 2026-03-20-145944` database contains 429 BUSCO genes. The `Busco v5 Lineage Datasets` database does not include BUSCO genes for the `Bacillales` lineage.
 > - Care should always be taken to select a BUSCO database that contains the lineage of interest and use a consistent database when comparing BUSCO results.
+> 
 {: .comment}
 
 
@@ -192,8 +190,6 @@ In this tutorial, we know our organism is within the 'Bacillales' order.
 Our first assembly will use the long-read data to create a draft genome, then the short-read data to "polish" (improve) the draft into a better assembly.
 
 We will start by using a long-read assembly tool called {% tool Flye %} to create an assembly using the Nanopore long-read data.
-
-Search for {% tool Flye %} in the tools panel search bar and select the tool.
 
 > <hands-on-title>Run Flye</hands-on-title>
 >
@@ -257,8 +253,6 @@ Aside from {% tool Busco %}, we can use another method to perform assembly QC. {
 
 Although the organism we sequenced may be different, we can use {% tool Quast %} to compare our assembly with the provided reference genome to see how similar they are on the individual base level.
 
-Search for the {% tool Quast %} tool in the tools panel.
-
 > <hands-on-title>Run Quast</hands-on-title>
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.3.0+galaxy0) %}:
@@ -309,8 +303,6 @@ Illumina reads have much higher per-base accuracy than Nanopore reads. We will m
 
 ### Map Illumina reads to draft assembly
 
-Search for {% tool Map with BWA-MEM %} in the tools panel.
-
 > <hands-on-title>Map with BWA-MEM</hands-on-title>
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.19) %}:
@@ -328,10 +320,7 @@ Search for {% tool Map with BWA-MEM %} in the tools panel.
 >
 {: .hands_on}
 
-
 ### Polish assembly with Pilon
-
-Search for {% tool Pilon %} in the tools panel.
 
 > <hands-on-title>Run Pilon</hands-on-title>
 >
@@ -348,8 +337,6 @@ Search for {% tool Pilon %} in the tools panel.
 > 3. **Rename** {% icon galaxy-pencil %} the output to `Flye: Polished assembly`
 >
 {: .hands_on}
-
-
 
 ### Compare draft and polished assemblies
 
@@ -486,7 +473,7 @@ In this section, we will use a purpose-built tool called {% tool Unicycler %} to
 
 {% tool Unicycler %} performs assembly in the opposite manner to our previous approach. Illumina reads are used to create an assembly graph, then Nanopore reads are used to disentangle problems in the graph. The Nanopore reads serve to bridge Illumina contigs, and to reveal how the contigs are arranged sequentially in the genome.
 
-Find {% tool Unicycler %} in the tools panel. It is listed as {% tool `Create assemblies with Unicycler` %}. Run {% tool Unicycler %} using the Nanopore and Illumina read sets.
+{% tool Unicycler %} is listed in the Tool Panel as {% tool Create assemblies with Unicycler %}. We will now run {% tool Unicycler %} using both the Nanopore and Illumina read sets.
 
 > <hands-on-title>Run Unicycler</hands-on-title>
 >
