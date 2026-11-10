@@ -117,7 +117,7 @@ The curation information must be stored in the files called `*_status.tsv`
 > 2. Open `recipes_status.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a bioconda recipie.
 >
->    You can also just review some tools. 
+>    You can also just review some recipies. 
 > 1. Add `TRUE` to the `keep` column if the recipie should be kept, and `FALSE` if not.
 > 3. Export the new table as TSV.
 > 4. Submit the TSV as `recipes_status.tsv` in your community folder.
@@ -139,7 +139,7 @@ We recommend collaborative work be done with a cloud-based system such as a Goog
 > 2. Open `workflows_status.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a workflow.
 >
->    You can also just review some tools. 
+>    You can also just review some workflows. 
 > 1. Add `TRUE` to the `To keep` column if the recipie should be kept, and `FALSE` if not.
 > 3. Export the new table as TSV.
 > 4. Submit the TSV as `workflows_status.tsv` in your community folder.
