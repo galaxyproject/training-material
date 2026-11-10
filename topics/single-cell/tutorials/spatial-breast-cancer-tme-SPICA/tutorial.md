@@ -1428,7 +1428,8 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 >
 >    The output shows how many spots in each Leiden group receive each reference label. Use these values to compare CellTypist predictions with the marker-gene interpretation.
 >
-<details-title>
+>
+{: .details}
 
 
 The direct result contains **32 distinct `predicted_labels`** across **3,795 spots**. The most frequent labels are shown below.
