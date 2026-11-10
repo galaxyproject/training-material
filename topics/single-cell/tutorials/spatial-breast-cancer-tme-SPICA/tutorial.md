@@ -814,7 +814,7 @@ After regression the association between `total_counts` and the early components
 >
 > The **biological** reason is that spots genuinely differ in what they contain. A 55 µm spot over densely packed tumour epithelium holds more cells, and more transcriptionally active ones, than a spot over loose collagen-rich stroma or adipose tissue. Its higher count is a real measurement of the tissue.
 >
-> Because the two contributions are summarised in the same number, regressing it out discards both. In this section the count-depth gradient tracks the boundary between the epithelial and stromal compartments, so a partition computed on residuals risks blurring exactly the distinction the analysis is trying to find. The comparison is therefore kept as a diagnostic, and the non-regressed branch is the one carried forward.
+> `regress_out(total_counts)` removes the fitted linear association between each gene's expression and total counts. If total counts vary with tissue composition, the adjustment can also reduce biological variation. Here the regression serves as a sensitivity check for PCA, and the non-regressed matrix is used for downstream analysis.
 >
 {: .comment}
 
@@ -1152,7 +1152,7 @@ The resulting `spatial_connectivities` matrix describes physical adjacency on th
 
 ## Spatial centrality measures
 
-Centrality scores summarise how each group sits in the spatial graph: how many neighbours its spots have, and how close they are to the rest of the section ({% cite Palla2022Squidpy %}). They describe arrangement, not importance.
+Squidpy calculates centrality for each Leiden group on the spatial graph. Degree centrality is the fraction of spots outside the group that share an edge with at least one group member. Closeness centrality describes how close the group is to the other spots along paths in the graph ({% cite Palla2022Squidpy %}).
 
 > <hands-on-title>Calculate group-level spatial statistics</hands-on-title>
 >
