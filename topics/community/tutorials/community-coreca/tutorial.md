@@ -113,7 +113,7 @@ The curation information must be stored in the files called `*_status.tsv`
 
 > <hands-on-title>Review Bioconda recipies in your community folder</hands-on-title>
 >
-> 1. Download the `recipes_status.tsv` file located in `communities/<community-name>/bioconda/recipes_status.tsv`
+> 1. Download the `recipes_status.tsv` file located in `communities/<community-name>/bioconda/`
 > 2. Open `recipes_status.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a bioconda recipie.
 >
@@ -135,7 +135,7 @@ We recommend collaborative work be done with a cloud-based system such as a Goog
 
 > <hands-on-title>Review workflows in your community folder</hands-on-title>
 >
-> 1. Download the `workflows_status.tsv` file located in `communities/<community-name>/workflowhub/workflows_status.tsv`
+> 1. Download the `workflows_status.tsv` file located in `communities/<community-name>/workflowhub/`
 > 2. Open `workflows_status.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a workflow.
 >
