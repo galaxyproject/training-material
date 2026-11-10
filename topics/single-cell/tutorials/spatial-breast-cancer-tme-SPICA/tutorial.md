@@ -272,7 +272,7 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >
 {: .hands_on}
 
-> <details-title>Optional: read the QC distributions as numbers</hands-on-title>
+> <details-title>Optional: read the QC distributions as numbers</details-title>
 >
 > The scatter and violin plots show the distributions of sequencing depth and detected-gene complexity across spots. To obtain the numerical summaries behind these plots, export the observation annotations and calculate the minimum, median and maximum values for the two QC metrics.
 >
@@ -606,7 +606,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 
 ![Detected genes mapped onto retained Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/spatial_n_genes_by_counts_after_filtering.jpg "Spatial distribution of detected-gene complexity after filtering, illustrating variation in transcriptomic richness across the retained tissue regions.")
 
-> <details-title>Optional: check QC summaries after filtering</hands-on-title>
+> <details-title>Optional: check QC summaries after filtering</details-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
@@ -745,7 +745,7 @@ In this section, `total_counts` correlates with PC1 at approximately **−0.479*
 
 ![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
 
-> <details-title>Optional: measure the association between total counts and PCA</hands-on-title>
+> <details-title>Optional: measure the association between total counts and PCA</details-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
@@ -917,7 +917,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 
 ![UMAP comparison of Leiden clustering at resolutions 0.4, 0.8 and 1.2.](../../images/spatial-breast-cancer-tme-SPICA/leiden_resolution_comparison.png "Increasing Leiden resolution produces progressively finer partitions, from 9 groups at resolution 0.4 to 11 at 0.8 and 16 at 1.2. These groups represent expression-defined domains of Visium spots rather than individual cell types.")
 
-> <details-title>Optional: compare Leiden group membership across resolutions</hands-on-title>
+> <details-title>Optional: compare Leiden group membership across resolutions</details-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
@@ -1347,7 +1347,7 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 
 
 
-> <details-title>Optional: check the CellTypist label counts and confidence</hands-on-title>
+> <details-title>Optional: check the CellTypist label counts and confidence</details-title>
 >
 > The direct predictions can be summarised numerically to check how often each reference label is assigned and how those assignments vary between Leiden groups.
 >
