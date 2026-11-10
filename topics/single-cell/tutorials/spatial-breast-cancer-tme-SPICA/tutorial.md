@@ -38,6 +38,11 @@ requirements:
     tutorials:
         - scrna-preprocessing
         - scrna-scanpy-pbmc3k
+-    
+    type: "internal"
+    topic_name: data-science
+    tutorials:
+        - sql-basic
 tags:
 - single-cell
 - spatial-transcriptomics
