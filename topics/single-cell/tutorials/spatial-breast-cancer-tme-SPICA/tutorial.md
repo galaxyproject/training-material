@@ -43,6 +43,7 @@ requirements:
     topic_name: data-science
     tutorials:
         - sql-basic
+        - sql-advanced
 tags:
 - single-cell
 - spatial-transcriptomics
