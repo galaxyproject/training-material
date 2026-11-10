@@ -225,7 +225,6 @@ The Scanpy tools work on AnnData, the container that pairs an expression matrix 
 >    - {% icon param-file %} *"Annotated data matrix"*: `Initial AnnData table`
 >    - *"What to inspect?"*: `General information about the object`
 >
->    Rename the text output `Initial AnnData dimensions`.
 >
 >    > <question-title>Check the dimensions before doing anything else</question-title>
 >    >
@@ -645,7 +644,7 @@ Count depth differs between spots. `pp.normalize_total` rescales each spot so th
 >    - {% icon param-file %} *"Annotated data matrix"*: `The Normalised h5ad AnnData from the previous` {% tool [Scanpy normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.11.5+galaxy0) %} `step` 
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
 >
-> Rename the generated file `Log-normalised AnnData`.
+> 3. Rename the generated file `Log-normalised AnnData`.
 >
 {: .hands_on}
 
@@ -856,9 +855,9 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 >        - *"Spread"*: `1.0`
 >        - *"Random state"*: `0`
 >
->  Rename the generated file `AnnData with UMAP`.
+> 3. Rename the generated file `AnnData with UMAP`.
 >
-> 3. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with UMAP`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
@@ -905,9 +904,9 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 >        - *"How many iterations of the Leiden clustering algorithm to perform"*: `2`
 >        - *"Random state"*: `0`
 >
->  Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`.
+> 5. Rename the generated file `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`.
 >
-> 4. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
+> 6. {% tool [Scanpy plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.11.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden_res_0.4,leiden_res_0.8,leiden_res_1.2`
