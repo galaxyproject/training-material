@@ -607,6 +607,25 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 
 ![Detected genes mapped onto retained Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/spatial_n_genes_by_counts_after_filtering.jpg "Spatial distribution of detected-gene complexity after filtering, illustrating variation in transcriptomic richness across the retained tissue regions.")
 
+> <hands-on-title>Optional: check QC summaries after filtering</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+> 2. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - Add an entry under *"Database Table"*.
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the observations table from step 1
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `obs`
+>            - *"Use first line as column names"*: `Yes`
+>    - *"SQL Query to generate tabular output"*: use the same SQL query as in **Optional: read the QC distributions as numbers**.
+>    - *"include query result column headers"*: `Yes`
+>        - *"Prefix character for column_header line"*: `#`
+>
+> Compare the spot count and the medians of `total_counts` and `n_genes_by_counts` with the pre-filter summary.
+>
+{: .hands_on}
 
 After filtering, **3,795 spots and 22,240 genes** remain. The median `total_counts` is **20,778**, and the median `n_genes_by_counts` is **6,029**. These values are close to the corresponding pre-filter medians of 20,761.5 and 6,026.5. The QC distributions remain broadly similar because only three spots were removed, while gene filtering reduced the number of rarely detected features.
 
@@ -727,6 +746,63 @@ In this section, `total_counts` correlates with PC1 at approximately **−0.479*
 
 ![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
 
+> <hands-on-title>Optional: measure the association between total counts and PCA</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
+>    - *"What to inspect?"*: `Multi-dimensional observations annotation (obsm)`
+>        - *"Which annotation to inspect for the observations?"*: `PCA coordinates (X_pca)`
+>
+> 3. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - Add an entry under *"Database Table"*.
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the observations table from step 1
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `obs`
+>            - *"Use first line as column names"*: `Yes`
+>    - Add an entry under *"Database Table"*.
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the PCA coordinates from step 2
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `pcs`
+>            - *"Use first line as column names"*: `Yes`
+>    - *"SQL Query to generate tabular output"*:
+>
+>       ```sql
+>       SELECT * FROM (
+>       WITH j AS (
+>         SELECT CAST(o.total_counts AS REAL) AS counts,
+>                CAST(p."0" AS REAL) AS pc1,
+>                CAST(p."1" AS REAL) AS pc2,
+>                CAST(p."2" AS REAL) AS pc3
+>         FROM obs AS o JOIN pcs AS p ON o.rowid = p.rowid
+>       ),
+>       centered AS (
+>         SELECT *,
+>                AVG(counts) OVER () AS m_counts,
+>                AVG(pc1) OVER () AS m_pc1,
+>                AVG(pc2) OVER () AS m_pc2,
+>                AVG(pc3) OVER () AS m_pc3
+>         FROM j
+>       )
+>       SELECT COUNT(*) AS spots,
+>              SUM((counts-m_counts)*(pc1-m_pc1)) / SQRT(SUM((counts-m_counts)*(counts-m_counts))*SUM((pc1-m_pc1)*(pc1-m_pc1))) AS total_counts_vs_pc1,
+>              SUM((counts-m_counts)*(pc2-m_pc2)) / SQRT(SUM((counts-m_counts)*(counts-m_counts))*SUM((pc2-m_pc2)*(pc2-m_pc2))) AS total_counts_vs_pc2,
+>              SUM((counts-m_counts)*(pc3-m_pc3)) / SQRT(SUM((counts-m_counts)*(counts-m_counts))*SUM((pc3-m_pc3)*(pc3-m_pc3))) AS total_counts_vs_pc3
+>       FROM centered
+>       ) AS evidence_results;
+>       ```
+>
+>    - *"include query result column headers"*: `Yes`
+>        - *"Prefix character for column_header line"*: `#`
+>
+>    The query joins the tables by row position and calculates the Pearson correlation of `total_counts` with each of the first three components. Use the exports in their original row order.
+>
+> 4. If you ran the regression comparison, repeat step 2 using `PCA after regression AnnData`. Repeat step 3 with the new PCA coordinates as `pcs` and the observations table from step 1 as `obs`. Compare the three correlations before and after regression.
+>
+{: .hands_on}
 
 After regression the association between `total_counts` and the early components is effectively zero. That shows the operation did what it was asked to do. It does **not** show that the residualised matrix is the better one to analyse.
 
@@ -793,6 +869,7 @@ Colouring the embedding by the quality-control covariates is the check worth mak
 
 ![UMAP embedding coloured by total counts and detected-gene QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/umap_qc_covariates.png "The UMAP displays transcriptionally similar spots near one another and reveals how sequencing depth and gene complexity vary across the expression-based embedding.")
 
+
 ## Clustering at three resolutions
 
 Leiden clustering partitions a graph into communities ({% cite Traag2019Leiden %}). The resolution controls how readily larger communities are subdivided. No single resolution is intrinsically correct: the useful question is whether an extra split produces stable and interpretable expression programmes or merely fragments an already coherent group.
@@ -840,6 +917,91 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 {: .hands_on}
 
 ![UMAP comparison of Leiden clustering at resolutions 0.4, 0.8 and 1.2.](../../images/spatial-breast-cancer-tme-SPICA/leiden_resolution_comparison.png "Increasing Leiden resolution produces progressively finer partitions, from 9 groups at resolution 0.4 to 11 at 0.8 and 16 at 1.2. These groups represent expression-defined domains of Visium spots rather than individual cell types.")
+
+> <hands-on-title>Optional: compare Leiden group membership across resolutions</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+> 2. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - Add an entry under *"Database Table"*.
+>        - {% icon param-file %} *"Tabular Dataset for Table"*: the observations table from step 1
+>        - In *"Table Options"*:
+>            - *"Specify Name for Table"*: `obs`
+>            - *"Use first line as column names"*: `Yes`
+>    - *"SQL Query to generate tabular output"*: run one query per job using the four queries below.
+>    - *"include query result column headers"*: `Yes`
+>        - *"Prefix character for column_header line"*: `#`
+>
+>    **Group sizes at the three resolutions**
+>
+>    ```sql
+>    SELECT * FROM (
+>    WITH sizes AS (
+>     SELECT '0.4' AS resolution, CAST("leiden_res_0.4" AS TEXT) AS leiden_group, COUNT(*) AS spots FROM obs GROUP BY "leiden_res_0.4"
+>     UNION ALL
+>     SELECT '0.8', CAST("leiden_res_0.8" AS TEXT), COUNT(*) FROM obs GROUP BY "leiden_res_0.8"
+>     UNION ALL
+>     SELECT '1.2', CAST("leiden_res_1.2" AS TEXT), COUNT(*) FROM obs GROUP BY "leiden_res_1.2"
+>    )
+>    SELECT resolution, leiden_group, spots,
+>     ROUND(100.0*spots/(SELECT COUNT(*) FROM obs),2) AS pct_spots
+>    FROM sizes ORDER BY CAST(resolution AS REAL), CAST(leiden_group AS INTEGER)
+>    ) AS evidence_results;
+>    ```
+>
+>    **Adjusted Rand index between successive resolutions**
+>
+>    ```sql
+>    SELECT * FROM (
+>    WITH labels AS (
+>     SELECT '0.4_vs_0.8' AS comparison,
+>            CAST("leiden_res_0.4" AS TEXT) AS a,
+>            CAST("leiden_res_0.8" AS TEXT) AS b FROM obs
+>     UNION ALL
+>     SELECT '0.8_vs_1.2', CAST("leiden_res_0.8" AS TEXT),CAST("leiden_res_1.2" AS TEXT) FROM obs
+>    ),
+>     pair_counts AS (SELECT comparison,a,b,COUNT(*) AS nij FROM labels GROUP BY comparison,a,b),
+>     a_counts AS (SELECT comparison,a,SUM(nij) AS ni FROM pair_counts GROUP BY comparison,a),
+>     b_counts AS (SELECT comparison,b,SUM(nij) AS nj FROM pair_counts GROUP BY comparison,b),
+>     term_joint AS (SELECT comparison,SUM(1.0*nij*(nij-1)/2.0) AS same_pairs FROM pair_counts GROUP BY comparison),
+>     term_a AS (SELECT comparison,SUM(1.0*ni*(ni-1)/2.0) AS row_pairs,SUM(ni) AS n FROM a_counts GROUP BY comparison),
+>     term_b AS (SELECT comparison,SUM(1.0*nj*(nj-1)/2.0) AS col_pairs FROM b_counts GROUP BY comparison),
+>     terms AS (SELECT j.comparison,a.n,j.same_pairs,a.row_pairs,b.col_pairs,
+>      (a.row_pairs*b.col_pairs)/(1.0*a.n*(a.n-1)/2.0) AS expected_pairs
+>     FROM term_joint j JOIN term_a a USING(comparison) JOIN term_b b USING(comparison))
+>    SELECT comparison,n AS spots,
+>     (same_pairs-expected_pairs) / (0.5*(row_pairs+col_pairs)-expected_pairs) AS adjusted_rand_index
+>    FROM terms ORDER BY comparison
+>    ) AS evidence_results;
+>    ```
+>
+>    **Spot counts by group at resolutions 0.4 and 0.8**
+>
+>    ```sql
+>    SELECT CAST("leiden_res_0.4" AS TEXT) AS group_0_4,
+>     CAST("leiden_res_0.8" AS TEXT) AS group_0_8,
+>     COUNT(*) AS spots
+>    FROM obs
+>    GROUP BY "leiden_res_0.4", "leiden_res_0.8"
+>    ORDER BY CAST("leiden_res_0.4" AS INTEGER), spots DESC;
+>    ```
+>
+>    **Spot counts by group at resolutions 0.8 and 1.2**
+>
+>    ```sql
+>    SELECT CAST("leiden_res_0.8" AS TEXT) AS group_0_8,
+>           CAST("leiden_res_1.2" AS TEXT) AS group_1_2,
+>           COUNT(*) AS spots
+>    FROM obs
+>    GROUP BY "leiden_res_0.8", "leiden_res_1.2"
+>    ORDER BY CAST("leiden_res_0.8" AS INTEGER), spots DESC;
+>    ```
+>
+> Use the group-size output to compare the partitions. The adjusted Rand index summarises agreement after accounting for chance. The two group-membership tables show which spots were assigned together at one resolution and split across groups at the next.
+>
+{: .hands_on}
 
 | Resolution | Number of groups | Largest group | Interpretation |
 | ---: | ---: | ---: | --- |
@@ -1077,22 +1239,22 @@ Moran's I asks whether expression values for a gene are spatially autocorrelated
 >
 {: .hands_on}
 
-Genes near the top of the reference ranking include:
+The ten highest-ranked genes in the reference run are shown below.
 
 | Gene | Moran's I | Reading |
 | --- | ---: | --- |
-| *CRISP3* | 0.727 | Strongly localised expression, matching group `4` |
-| *CPB1* | 0.712 | Secretory epithelial signal confined to group `6` |
+| *CRISP3* | 0.729 | Highest mean expression in group `4` |
+| *CPB1* | 0.712 | Highest mean expression in group `6` |
 | *IGHG3* | 0.706 | Spatially structured immunoglobulin signal |
-| *IGLC2* | 0.701 | Spatially structured immunoglobulin signal |
+| *IGLC2* | 0.702 | Spatially structured immunoglobulin signal |
 | *ALB* | 0.668 | Spatially patterned expression |
 | *IGHG1* | 0.638 | Spatially structured immunoglobulin signal |
 | *CXCL14* | 0.620 | Spatially patterned chemokine expression |
-| *SLITRK6* | 0.617 | Spatially patterned epithelial signal |
-| *S100G* | 0.615 | Spatially patterned epithelial signal |
-| *C3* | 0.613 | Spatial structure in the stromal programme |
+| *SLITRK6* | 0.619 | Spatially patterned epithelial-associated expression |
+| *S100G* | 0.616 | Spatially patterned expression |
+| *C3* | 0.614 | Spatially structured complement signal |
 
-Moran's I is calculated over the 3,000 highly variable genes. Three of the top ten are immunoglobulin chains, which is consistent with the plasma-cell programmes that dominate groups `0` and `1` being concentrated in particular parts of the section rather than spread evenly through the stroma.
+Moran's I was calculated for the 3,000 highly variable genes. Three immunoglobulin genes appear in the top ten, indicating spatial structure in immunoglobulin-associated expression across this section.
 
 ### Visual confirmation on the tissue
 
@@ -1110,7 +1272,7 @@ To do this we import the AnnData table carrying the Squidpy results back into th
 >
 >
 > 2. {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"SpatialData object"*: `SpatialData with Moran's I from the previous` {% tool [SpatialData Plot](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_plot/spatialdata_plot/0.8.0+galaxy0) %} `step` 
+>    - {% icon param-file %} *"SpatialData object"*: the SpatialData output from step 1 ({% tool [SpatialData Operations](toolshed.g2.bx.psu.edu/repos/iuc/spatialdata_operation/spatialdata_operation/0.8.0+galaxy0) %})
 >    - In *"Render Images"*:
 >        - *"Image element name"*: `V1_Breast_Cancer_Block_A_Section_1_hires_image`
 >    - In *"Render Shapes"*:
@@ -1135,16 +1297,17 @@ To do this we import the AnnData table carrying the Squidpy results back into th
 
 ![CRISP3 expression mapped onto the breast-cancer tissue section.](../../images/spatial-breast-cancer-tme-SPICA/spatial_crisp3_expression.jpg "CRISP3 expression is concentrated toward the lower-right region of the tissue section, illustrating a spatially restricted expression pattern.")
 
-The map also closes a loop with the earlier marker analysis. *CRISP3* is the top-ranked gene for Leiden group `4`, and the region of high *CRISP3* expression here coincides with the part of the section that group `4` occupies in the final cluster overlay. Two independent analyses, one carried out in expression space and one in physical space, point at the same territory. That convergence is stronger evidence for a real tissue domain than either result would be on its own.
+*CRISP3* was the top-ranked marker for Leiden group `4`, which had the highest mean expression of the gene. The map shows where high-expression spots occur across the tissue. The strongest signal is concentrated in the region occupied by group `4`, with lower expression also detected in other groups.
 
 > <question-title>Read the statistic and the map together</question-title>
 >
-> 1. *CRISP3* and *C3* both appear in the Moran's I ranking, at 0.727 and 0.613 respectively. What would you expect the two tissue maps to look like relative to one another?
+> 1. *CRISP3* and *C3* have Moran's I values of 0.729 and 0.614, respectively. What does the difference tell you, and what would you need to inspect on the tissue maps?
+>
 > 2. A gene returns a low Moran's I but is clearly a strong marker for one Leiden group in the ranked-gene table. Is that a contradiction?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Both should show non-random structure, but *CRISP3* should be the tighter pattern: a higher Moran's I means expression at a spot is more strongly predicted by expression at its neighbours, so the territory should have sharper edges and fewer isolated high spots. *C3* should look more diffuse, spread across a broader stromal area rather than concentrated in one region.
+> > 1. *CRISP3* has stronger positive spatial autocorrelation on this graph. Compare the tissue maps to see where high expression occurs and how much of the section it covers
 > > 2. No. The two statistics ask different questions. Ranked genes ask whether expression differs between groups of spots defined in expression space; Moran's I asks whether expression is arranged coherently in physical space. A marker for a group whose spots are scattered across several parts of the section can be highly discriminative and still have low spatial autocorrelation.
 > >
 > {: .solution}
@@ -1153,7 +1316,7 @@ The map also closes a loop with the earlier marker analysis. *CRISP3* is the top
 
 > <question-title>What does a high Moran's I leave unanswered?</question-title>
 >
-> *CRISP3* has Moran's I ≈ 0.727. Which of the following still requires additional evidence: whether its expression is spatially patterned, why that pattern occurs, or whether the gene causes the neighbouring tissue state?
+> *CRISP3* has Moran's I ≈ 0.729. Which of the following still requires additional evidence: whether its expression is spatially patterned, why that pattern occurs, or whether the gene causes the neighbouring tissue state?
 >
 > > <solution-title></solution-title>
 > >
@@ -1171,17 +1334,15 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 
 > <hands-on-title>Transfer adult-breast reference labels to the spots</hands-on-title>
 >
-> 1. {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy1) %} with the following parameters:
+> 1. {% tool [CellTypist](toolshed.g2.bx.psu.edu/repos/iuc/celltypist/celltypist/1.7.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input AnnData file"*: `AnnData with Moran's I`
->    - *"Model source"*: `Use a cached model`
+>    - *"Select model from"*: `Cached`
 >        - *"Choose CellTypist model"*: `cell types from the adult human breast (v1)`
 >    - *"Annotation mode"*: `Choose the cell type with the largest score/probability as the final prediction`
->    - *"Probability threshold"*: `0.5`
 >    - *"Refine the predicted labels by running the majority voting classifier after over-clustering"*: `No`
 >    - *"Generate a dotplot of the predicted cell types"*: `Yes`
 >        - *"Reference column in AnnData.obs for dotplot"*: `leiden_res_0.8`
->        - *"Prediction to plot"*: `predicted_labels`
->
+>        - *"Prediction label in AnnData.obs for dotplot"*: `predicted_labels`
 >
 {: .hands_on}
 
@@ -1328,60 +1489,53 @@ LIANA combines ligand-receptor resources and inference methods to rank expressio
 
 > <hands-on-title>Rank candidate ligand-receptor pairs</hands-on-title>
 >
-> 1. {% tool [Liana methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Liana Methods](toolshed.g2.bx.psu.edu/repos/iuc/liana_methods/liana_methods/1.7.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Moran's I`
 >    - *"Method for ligand-receptor inference"*: `Aggregate ligand-receptor scores from multiple methods (rank_aggregate)`
 >        - *"Group By"*: `leiden_res_0.8`
 >        - *"Interaction source"*: `Use built-in database`
 >            - *"Resource source"*: `Download from LIANA API`
->            - *"Resource name"*: `consensus`
->        - *"Expression proportion"*: `0.1`
->        - *"Minimum number of cells"*: `5`
->        - *"Subset cell type pairs"*: `Use all possible combinations`
+>                - *"Ligand-receptor database"*: `consensus - Combined databases (recommended)`
+>        - *"Minimum expression proportion"*: `0.1`
 >        - *"Aggregation method"*: `RobustRankAggregate (rra)`
 >        - *"Consensus options"*: `Default (Specificity and Magnitude)`
->        - *"Return all ligand-receptor pairs"*: `No`
+>        - *"Return all interactions"*: `No`
 >        - *"Results key in adata.uns"*: `liana_res`
 >        - *"Use raw counts"*: `No`
->        - *"Differential expression method"*: `t-test`
->        - *"Number of permutations"*: `1000`
->        - *"Random seed"*: `1337`
 >
-> Rename the generated file `Final LIANA AnnData`.
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `Final LIANA AnnData`.
 >
 {: .hands_on}
 
-The retained `liana_res` table contains **172,351 source/target/LR rows**. The top of the specificity ranking is strikingly coherent:
+The retained `liana_res` table contains **141,756 rows**. Each row represents a ligand–receptor pair for a particular source and target group. The seven highest-ranked results by specificity are shown below.
 
 | Source | Target | Ligand | Receptor | Specificity rank |
 | --- | --- | --- | --- | ---: |
-| `11` | `11` | *CCL19* | *CCR7* | 6.87 × 10⁻¹² |
-| `11` | `9` | *CXCL13* | *ACKR1* | 1.34 × 10⁻¹⁰ |
-| `11` | `11` | *CCL19* | *CXCR3* | 1.46 × 10⁻¹⁰ |
-| `11` | `11` | *FCER2* | *CR2* | 8.08 × 10⁻¹⁰ |
-| `9` | `11` | *CCL21* | *CCR7* | 1.03 × 10⁻⁹ |
-| `11` | `11` | *CD52* | *SIGLEC10* | 1.60 × 10⁻⁹ |
-| `0` | `11` | *C3* | *CD19* | 2.51 × 10⁻⁹ |
+| `10` | `7` | *PIP* | *CD4* | 2.28 × 10⁻⁹ |
+| `5` | `5` | *ALB* | *LRP2* | 6.13 × 10⁻⁹ |
+| `10` | `0` | *PIP* | *CD4* | 7.47 × 10⁻⁹ |
+| `0` | `6` | *IGHG1_IGLC1* | *FCGR3B* | 1.97 × 10⁻⁸ |
+| `0` | `7` | *C3* | *CD19* | 4.83 × 10⁻⁸ |
+| `5` | `8` | *ALB* | *LRP2* | 5.42 × 10⁻⁸ |
+| `10` | `6` | *PIP* | *NPTN* | 5.58 × 10⁻⁸ |
 
-Seven of the eight highest-ranked pairs involve group `11`, the 16-spot lymphoid aggregate. The identities of the pairs are consistent with what that structure is: *CCL19* and *CCL21* signalling through *CCR7* is the chemokine axis that recruits and organises T cells in lymphoid tissue, *CXCL13* organises B-cell follicles, and *FCER2*–*CR2* is a follicular dendritic cell and B cell interaction. The group `9` involvement is notable because group `9` is the myofibroblast and perivascular programme, and perivascular cells are a documented source of *CCL21* in breast tumours ({% cite Croizer2024SpatialCAF %}).
-
-A small rank means a pair scores highly under the selected aggregate criterion. It does **not** prove that the ligand reaches the receptor, that the receptor is active, or that the interaction changes a phenotype. What makes this particular result worth following up is that three independent analyses converge on the same 16 spots: the marker ranking called them lymphoid, the neighbourhood enrichment showed them adjacent to group `0` more often than chance, and the ligand-receptor ranking returns the canonical lymphoid-organising chemokines.
+Smaller values indicate a higher ranking. *PIP*–*CD4* from group `10` to group `7` ranks first by specificity, yet spots in those groups share spatial edges less often than expected under the permutation null (**z ≈ −2.94**). LIANA ranks candidates from group-level expression. The spatial graph adds separate evidence about whether the groups tend to be neighbours.
 
 > <details-title>Magnitude and specificity rank different things</details-title>
 >
-> Ranking the same table by `magnitude_rank` instead returns an almost entirely different top list, dominated by *HLA-A*–*ERBB2* between many pairs of groups. *HLA-A* is expressed almost everywhere in this section and *ERBB2* is highly expressed in the epithelial groups, so the product of their expression is large for many combinations.
+> Sorting by `magnitude_rank` puts *HLA-A*–*ERBB2* at the top for several source–target combinations. Its two highest-ranked combinations are `8` → `6` (**4.48 × 10⁻¹⁰**) and `7` → `6` (**4.03 × 10⁻⁹**).
 >
-> That is exactly what magnitude measures: the strength of the signal, irrespective of how selective it is. Specificity asks the opposite question, whether a pair is distinctive to particular groups. A pair that is high on both is the strongest candidate; a pair that is high on magnitude alone usually reflects a ubiquitously expressed partner rather than a targeted interaction.
+> Magnitude ranks candidates by the strength of their expression-based scores. Specificity ranks them by how selectively the scores favour particular source and target groups. Smaller values indicate a higher ranking in either column.
 >
 {: .details}
 
 > <question-title>Read LIANA together with the spatial graph</question-title>
 >
-> *CCL21*–*CCR7* ranks highly for a `9` → `11` source-target combination, and *CCL19*–*CCR7* for `11` → `11`. What can you conclude?
+> *HLA-A*–*ERBB2* ranks first by magnitude for `8` → `6` and second for `7` → `6`. Which combination has more support from the spatial graph for a hypothesis that depends on the groups being neighbours?
 >
 > > <solution-title></solution-title>
 > >
-> > That group `11` expresses both the chemokine and its receptor, and that a neighbouring stromal group expresses a second ligand for the same receptor, is **convergent observational evidence** for a self-organising lymphoid structure supported by the surrounding stroma. It is a stronger candidate for follow-up than an expression-only hit between spatially separated groups. It still does not demonstrate direct molecular contact, receptor activation, direction of effect or causality, and with 16 spots the result rests on a small number of observations.
+> > Groups `7` and `6` share spatial edges more often than expected (**z ≈ +6.31**), whereas groups `8` and `6` share fewer than expected (**z ≈ −10.61**). The `7` → `6` candidate therefore has more support from the neighbourhood graph. The graph measures adjacency between spot groups. Testing signalling direction, receptor activation or a functional effect would require additional evidence.
 > >
 > {: .solution}
 >
@@ -1426,13 +1580,15 @@ Everything computed so far lives in the AnnData table: quality-control fields, P
 
 The tissue view is the final consistency check. A UMAP group that looked coherent in expression space can now be judged against histology and neighbouring groups. Group territories that are spatially coherent strengthen the interpretation that clustering has captured reproducible tissue programmes, while mixed boundaries are expected where Visium spots collect RNA from more than one cell population.
 
-> <question-title>Integrate all four sources of evidence</question-title>
+> <question-title>Interpret group 7 across the analyses</question-title>
 >
-> Consider group `11`: marker ranking supports a lymphoid aggregate; CellTypist matches 7 of its 16 spots to `CD8-activated`; neighbourhood enrichment shows non-random adjacency with group `0`; LIANA returns lymphoid-organising chemokines; and the final map shows where those 16 spots sit on the tissue. Which result should be treated as the "ground truth" label?
+> Group `7` has high-ranking markers such as *HLA-DRA*, *CD74* and *LYZ*, which support an antigen-presentation and myeloid-associated expression programme. Its most frequent CellTypist match is `plasma_IgG`, assigned to **120 of 214 spots (56.07%)**. Squidpy shows that groups `7` and `6` are neighbours more often than expected (**z ≈ +6.31**), and LIANA ranks *HLA-A*–*ERBB2* second by magnitude for `7` → `6`. The final map shows where the spots lie on the tissue.
+>
+> How can the marker programme and the CellTypist result both describe group `7`? What do the other results add?
 >
 > > <solution-title></solution-title>
 > >
-> > None of them is ground truth on its own. The marker genes give direct evidence for the programme enriched in the group, CellTypist provides external reference similarity, Squidpy describes physical arrangement, LIANA proposes expression-compatible interactions, and the histology provides tissue context. Here they agree, which is why the lymphoid interpretation is defensible despite the group's small size. The defensible interpretation is always the one that remains consistent across these forms of evidence while respecting the mixed-cell nature of a Visium spot.
+> > The marker ranking describes genes enriched across group `7`. CellTypist assigns each spot the closest reference match to its mixed expression profile, so the two results can capture different signals from the same spots. Squidpy describes how often groups `7` and `6` are neighbours, while the histology map shows where those spots are located. LIANA adds an expression-based candidate for follow-up. Establishing the cellular composition of the spots or testing whether the candidate mediates signalling would require additional evidence ({% cite Dimitrov2024LianaPlus %}).
 > >
 > {: .solution}
 >
@@ -1447,10 +1603,10 @@ The filtered expression matrix was normalised to **10,000 counts per spot**, log
 
 Leiden resolutions **0.4, 0.8 and 1.2** yielded **9, 11 and 16 groups**, respectively. Resolution 0.8 was carried forward as an intermediate partition supported by changes in group membership and marker-gene interpretation, rather than UMAP appearance alone. The adjusted Rand index was **0.654** between resolutions 0.4 and 0.8, and **0.704** between 0.8 and 1.2. At resolution 0.4, group `0` contained **1,390 spots**, of which 608, 556 and 194 were assigned to groups `0`, `1` and `7`, respectively, at resolution 0.8. Their marker rankings suggest stromal and extracellular-matrix-associated, immunoglobulin-rich, and antigen-presentation/myeloid-associated expression programmes, respectively ({% cite Wu2021BreastAtlas %}). This provides a biological rationale for examining the intermediate partition while recognising that the Leiden groups are expression-defined groups of multicellular Visium spots, not necessarily distinct cell types.
 
-Squidpy then replaced expression similarity with **physical adjacency on the Visium grid**. Centrality described graph position, neighbourhood enrichment described label adjacency relative to permutation, and Moran's I identified spatially autocorrelated genes such as *CRISP3* (0.727), *CPB1* (0.712) and the immunoglobulin chains *IGHG3* and *IGLC2*. Mapping the highest-scoring gene back onto the section showed *CRISP3* confined to the territory occupied by Leiden group `4`, so the expression-space and physical-space analyses agreed. Those analyses established spatial structure, not a signalling mechanism.
+Squidpy used physical adjacency on the Visium grid to describe spatial organisation. Centrality described graph position, neighbourhood enrichment compared observed adjacency with shuffled group labels, and Moran's I identified spatially autocorrelated genes such as *CRISP3* (0.729) and *CPB1* (0.712). The tissue map showed where *CRISP3* expression was concentrated, consistent with its enrichment in Leiden group `4`.
 
-CellTypist supplied **32 direct adult-breast reference matches** with majority voting disabled. The mismatch between some reference labels and group markers is a useful property of the exercise: it demonstrates why a mixed Visium spot should be described as having a **closest reference match**, not as being one particular cell. LIANA then ranked candidate ligand-receptor relationships between the selected Leiden groups, and its strongest specificity hits centred on the 16-spot lymphoid group: *CCL19*–*CCR7*, *CCL21*–*CCR7* from the neighbouring perivascular group, *CXCL13*–*ACKR1* and *FCER2*–*CR2*. Marker genes, neighbourhood enrichment and ligand-receptor ranking therefore converge on the same small structure, which is the strongest result in this analysis. It remains a hypothesis until supported by orthogonal or functional validation.
+CellTypist assigned each of the **3,795 spots** its closest adult-breast reference label, yielding **32 distinct labels**. The reference matches summarised expression at the spot level, while the marker rankings described expression programmes across Leiden groups. LIANA then ranked **141,756** combinations of ligand–receptor pairs and source and target groups. *PIP*–*CD4* from group `10` to group `7` ranked first by specificity, even though those groups shared fewer spatial edges than expected under permutation (**z ≈ −2.94**). Comparing the LIANA rankings with the spatial graph helps identify which candidates have both expression and neighbourhood support for follow-up ({% cite Dimitrov2024LianaPlus %}).
 
 Finally, the processed AnnData table was returned to the original SpatialData object as `table_processed`, and `leiden_res_0.8` was drawn over the histology. The final object therefore keeps expression-derived groups, reference annotations, spatial statistics and ligand-receptor rankings attached to the tissue coordinates that give them context.
 
-The single limitation to carry forward is the one stated at the outset: every result here describes a 55 µm capture spot holding several cells. The domains recovered are real and their spatial arrangement is measured, but converting them into cell-type proportions would require deconvolution against a matched breast single-cell reference ({% cite Kleshchevnikov2022Cell2location %}, {% cite Cable2022RCTD %}). An imaging-based analysis that segments individual cells, such as the companion Xenium melanoma tutorial, answers that question directly and makes an instructive comparison with the approach followed here.
+This analysis maps expression-defined groups of Visium capture spots. A spot can contain RNA from several cells, and methods such as cell2location and RCTD use suitable reference expression profiles to estimate cell-type contributions within spots ({% cite Kleshchevnikov2022Cell2location %}, {% cite Cable2022RCTD %}). The [companion Xenium melanoma tutorial](https://gxy.io/GTN:T00592) works at the level of segmented cells, where transcript assignment depends on the inferred cell boundaries.
