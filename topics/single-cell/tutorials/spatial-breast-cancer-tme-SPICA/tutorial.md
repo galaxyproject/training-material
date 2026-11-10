@@ -738,11 +738,10 @@ In this section, `total_counts` correlates with PC1 at approximately **−0.479*
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `log1p_total_counts,log1p_n_genes_by_counts,total_counts`
 >
-> 5. Rename the output `Plot PCA after regression`.
+>
+> ![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
 >
 {: .details}
-
-![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
 
 > <details-title>Optional: measure the association between total counts and PCA</details-title>
 >
