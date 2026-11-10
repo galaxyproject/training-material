@@ -272,8 +272,7 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >
 {: .hands_on}
 
-
-> <hands-on-title>Optional: read the QC distributions as numbers</hands-on-title>
+> <details-title>Optional: read the QC distributions as numbers</hands-on-title>
 >
 > The scatter and violin plots show the distributions of sequencing depth and detected-gene complexity across spots. To obtain the numerical summaries behind these plots, export the observation annotations and calculate the minimum, median and maximum values for the two QC metrics.
 >
@@ -327,7 +326,7 @@ No mitochondrial or ribosomal gene set is defined here, and no threshold is appl
 >
 > The output contains one summary row for the section. Compare the medians with the minimum and maximum values before choosing quality-control thresholds. A low count or detected-gene value may indicate reduced capture efficiency, but it may also reflect a tissue region with low RNA abundance or cellularity.
 >
-{: .hands_on}
+{: .details}
 
 
 For this section the median `total_counts` is **20,761.5** and the median `n_genes_by_counts` is **6,026.5**. Both distributions are wide: the minimum total count is 578, and the minimum number of detected genes is 430, the strongest 81,624 counts, and the most complex spot detects 10,153 genes. Those two tails are what the filters in the next section act on, and knowing where they sit is what makes a threshold a decision rather than a guess.
@@ -607,7 +606,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 
 ![Detected genes mapped onto retained Visium spots.](../../images/spatial-breast-cancer-tme-SPICA/spatial_n_genes_by_counts_after_filtering.jpg "Spatial distribution of detected-gene complexity after filtering, illustrating variation in transcriptomic richness across the retained tissue regions.")
 
-> <hands-on-title>Optional: check QC summaries after filtering</hands-on-title>
+> <details-title>Optional: check QC summaries after filtering</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `QC metrics after filtering`
@@ -625,7 +624,7 @@ The filtering itself modifies the matrix; the QC fields should therefore be reca
 >
 > Compare the spot count and the medians of `total_counts` and `n_genes_by_counts` with the pre-filter summary.
 >
-{: .hands_on}
+{: .details}
 
 After filtering, **3,795 spots and 22,240 genes** remain. The median `total_counts` is **20,778**, and the median `n_genes_by_counts` is **6,029**. These values are close to the corresponding pre-filter medians of 20,761.5 and 6,026.5. The QC distributions remain broadly similar because only three spots were removed, while gene filtering reduced the number of rarely detected features.
 
@@ -746,7 +745,7 @@ In this section, `total_counts` correlates with PC1 at approximately **−0.479*
 
 ![PCA after regression of total counts, coloured by QC metrics.](../../images/spatial-breast-cancer-tme-SPICA/pca_qc_after_regression.png "Principal-component structure after regressing out total counts. The distribution illustrates how accounting for sequencing depth changes the representation of expression variation.")
 
-> <hands-on-title>Optional: measure the association between total counts and PCA</hands-on-title>
+> <details-title>Optional: measure the association between total counts and PCA</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with PCA`
@@ -802,7 +801,7 @@ In this section, `total_counts` correlates with PC1 at approximately **−0.479*
 >
 > 4. If you ran the regression comparison, repeat step 2 using `PCA after regression AnnData`. Repeat step 3 with the new PCA coordinates as `pcs` and the observations table from step 1 as `obs`. Compare the three correlations before and after regression.
 >
-{: .hands_on}
+{: .details}
 
 After regression the association between `total_counts` and the early components is effectively zero. That shows the operation did what it was asked to do. It does **not** show that the residualised matrix is the better one to analyse.
 
@@ -918,7 +917,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 
 ![UMAP comparison of Leiden clustering at resolutions 0.4, 0.8 and 1.2.](../../images/spatial-breast-cancer-tme-SPICA/leiden_resolution_comparison.png "Increasing Leiden resolution produces progressively finer partitions, from 9 groups at resolution 0.4 to 11 at 0.8 and 16 at 1.2. These groups represent expression-defined domains of Visium spots rather than individual cell types.")
 
-> <hands-on-title>Optional: compare Leiden group membership across resolutions</hands-on-title>
+> <details-title>Optional: compare Leiden group membership across resolutions</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.13.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData with Leiden comparison 0.4 and 0.8 and 1.2`
@@ -1001,7 +1000,7 @@ The learner-facing comparison is deliberately limited to **0.4, 0.8 and 1.2**.
 >
 > Use the group-size output to compare the partitions. The adjusted Rand index summarises agreement after accounting for chance. The two group-membership tables show which spots were assigned together at one resolution and split across groups at the next.
 >
-{: .hands_on}
+{: .details}
 
 | Resolution | Number of groups | Largest group | Interpretation |
 | ---: | ---: | ---: | --- |
@@ -1348,7 +1347,7 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 
 
 
-> <hands-on-title>Optional: check the CellTypist label counts and confidence</hands-on-title>
+> <details-title>Optional: check the CellTypist label counts and confidence</hands-on-title>
 >
 > The direct predictions can be summarised numerically to check how often each reference label is assigned and how those assignments vary between Leiden groups.
 >
@@ -1431,7 +1430,7 @@ The input is `AnnData with Moran's I`, which still carries the **non-regressed**
 >
 >    The output shows how many spots in each Leiden group receive each reference label. Use these values to compare CellTypist predictions with the marker-gene interpretation.
 >
-{: .hands_on}
+<details-title>
 
 
 The direct result contains **32 distinct `predicted_labels`** across **3,795 spots**. The most frequent labels are shown below.
