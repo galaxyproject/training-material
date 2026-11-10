@@ -86,7 +86,6 @@ The generation of a CoReCa mostly rely on a list of keywords (EDAM terms and ope
 >        - ITS
 >        - OTU
 >    ```
-{: .hands_on}
 > 3. Click on **Commit changes** at the top
 > 4. Fill in the commit message with something like `Add EDAM categories for community <community-name>`
 > 3. Click on `Create a new branch for this commit and start a pull request`
