@@ -64,8 +64,8 @@ abbreviations:
     CAF: cancer-associated fibroblast
 answer_histories:
   - label: "UseGalaxy.eu – Breast Cancer Visium Spatial Transcriptomics Analysis"
-    history: https://usegalaxy.eu/u/khaled196/h/spatial-transcriptomics-analysis-of-the-breast-cancer-tumour-microenvironment-with-visium-1
-    date: 2026-11-09
+    history: https://usegalaxy.eu/u/khaled_jumah/h/full-v1-breast-cancer-block-a-section-1-workflow-imported-from-uploaded-file
+    date: 2026-11-11
 contributions:
     authorship:
         - khaled196
